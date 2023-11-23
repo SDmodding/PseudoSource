@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_Events__()
 
   v0 = UFG::qStringHash32("Events", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_Events, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_Events__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_Events__);
 }
 
 // File Line: 52
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_FaceAdjustment__()
 
   v0 = UFG::qStringHash32("FaceAdjustment", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_FaceAdjustment, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_FaceAdjustment__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_FaceAdjustment__);
 }
 
 // File Line: 53
@@ -28,7 +28,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_CopPoints__()
 
   v0 = UFG::qStringHash32("CopPoints", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_CopPoints, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_CopPoints__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_CopPoints__);
 }
 
 // File Line: 54
@@ -39,7 +39,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_TriadPoints__()
 
   v0 = UFG::qStringHash32("TriadPoints", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_TriadPoints, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_TriadPoints__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_TriadPoints__);
 }
 
 // File Line: 55
@@ -50,7 +50,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_XPFlasherCaption__()
 
   v0 = UFG::qStringHash32("XPFlasherCaption", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_XPFlasherCaption, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_XPFlasherCaption__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_XPFlasherCaption__);
 }
 
 // File Line: 56
@@ -61,7 +61,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_MultiplierReduction__()
 
   v0 = UFG::qStringHash32("MultiplierReduction", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_MultiplierReduction, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierReduction__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierReduction__);
 }
 
 // File Line: 57
@@ -72,7 +72,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_MultiplierResetTimer__()
 
   v0 = UFG::qStringHash32("MultiplierResetTimer", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_MultiplierResetTimer, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierResetTimer__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierResetTimer__);
 }
 
 // File Line: 58
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_MultiplierSlowMode__()
 
   v0 = UFG::qStringHash32("MultiplierSlowMode", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_MultiplierSlowMode, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierSlowMode__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MultiplierSlowMode__);
 }
 
 // File Line: 59
@@ -94,7 +94,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_MeterCooldownStartsAfter_
 
   v0 = UFG::qStringHash32("MeterCooldownStartsAfter", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_MeterCooldownStartsAfter, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MeterCooldownStartsAfter__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MeterCooldownStartsAfter__);
 }
 
 // File Line: 60
@@ -105,7 +105,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_MeterCooldownRatePerSecon
 
   v0 = UFG::qStringHash32("MeterCooldownDrainRatePerSecond", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_MeterCooldownRatePerSecond, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MeterCooldownRatePerSecond__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_MeterCooldownRatePerSecond__);
 }
 
 // File Line: 61
@@ -116,7 +116,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_ActivatedMeterCooldownRat
 
   v0 = UFG::qStringHash32("ActivatedMeterCooldownDrainRatePerSecond", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_ActivatedMeterCooldownRatePerSecond, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_ActivatedMeterCooldownRatePerSecond__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_ActivatedMeterCooldownRatePerSecond__);
 }
 
 // File Line: 62
@@ -127,7 +127,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_Disabled__()
 
   v0 = UFG::qStringHash32("Disabled", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_Disabled, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_Disabled__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_Disabled__);
 }
 
 // File Line: 63
@@ -138,7 +138,7 @@ __int64 UFG::_dynamic_initializer_for__FaceEventSymbol_AdjustmentType__()
 
   v0 = UFG::qStringHash32("AdjustmentType", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FaceEventSymbol_AdjustmentType, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_AdjustmentType__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceEventSymbol_AdjustmentType__);
 }
 
 // File Line: 67
@@ -153,17 +153,17 @@ void __fastcall UFG::ScoreAffector::Reset(UFG::ScoreAffector *this)
 // RVA: 0x556DC0
 float __fastcall UFG::ScoreAffector::Trigger(UFG::ScoreAffector *this)
 {
-  float v1; // xmm3_4
+  float mCurrentMultiplier; // xmm3_4
   float v2; // xmm0_4
   float v3; // xmm2_4
-  float v4; // xmm0_4
+  float mMultiplierResetTimer; // xmm0_4
   float v5; // xmm1_4
   float result; // xmm0_4
 
-  v1 = this->mCurrentMultiplier;
+  mCurrentMultiplier = this->mCurrentMultiplier;
   this->mIsActive = 1;
   this->mTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
-  v2 = v1 - this->mMultiplierReduction;
+  v2 = mCurrentMultiplier - this->mMultiplierReduction;
   if ( v2 <= 0.0 )
   {
     v2 = 0.0;
@@ -173,17 +173,17 @@ float __fastcall UFG::ScoreAffector::Trigger(UFG::ScoreAffector *this)
   if ( v2 < 2.0 )
 LABEL_5:
     v3 = v2;
-  v4 = this->mMultiplierResetTimer;
+  mMultiplierResetTimer = this->mMultiplierResetTimer;
   this->mCurrentMultiplier = v3;
-  if ( v4 <= 0.0 )
+  if ( mMultiplierResetTimer <= 0.0 )
   {
     this->mMultiplierReplenishRate = 1.0;
-    result = v1;
+    return mCurrentMultiplier;
   }
   else
   {
-    v5 = (float)(1.0 - v3) / v4;
-    result = v1;
+    v5 = (float)(1.0 - v3) / mMultiplierResetTimer;
+    result = mCurrentMultiplier;
     this->mMultiplierReplenishRate = v5;
   }
   return result;
@@ -195,12 +195,12 @@ float __fastcall UFG::ScoreAffector::Update(UFG::ScoreAffector *this, float delt
 {
   float v2; // xmm0_4
   float result; // xmm0_4
-  float v4; // xmm3_4
+  float mMultiplierResetTimer; // xmm3_4
   float v5; // xmm1_4
   float v6; // xmm2_4
 
   v2 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(this->mTimestamp));
-  if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
+  if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
     v2 = v2 + 1.8446744e19;
   result = v2 * 0.001;
   if ( !this->mIsActive )
@@ -209,8 +209,8 @@ float __fastcall UFG::ScoreAffector::Update(UFG::ScoreAffector *this, float delt
     this->mCurrentMultiplier = 1.0;
     return result;
   }
-  v4 = this->mMultiplierResetTimer;
-  if ( result >= v4 )
+  mMultiplierResetTimer = this->mMultiplierResetTimer;
+  if ( result >= mMultiplierResetTimer )
   {
     this->mCurrentMultiplier = 1.0;
     goto LABEL_12;
@@ -230,7 +230,7 @@ float __fastcall UFG::ScoreAffector::Update(UFG::ScoreAffector *this, float delt
 LABEL_11:
   this->mCurrentMultiplier = v6;
 LABEL_12:
-  if ( result >= v4 )
+  if ( result >= mMultiplierResetTimer )
     this->mIsActive = 0;
   return result;
 }
@@ -239,12 +239,12 @@ LABEL_12:
 // RVA: 0x1543E40
 __int64 dynamic_initializer_for__UFG::FaceMeterComponent::s_FaceMeterComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::FaceMeterComponent::s_FaceMeterComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::FaceMeterComponent::s_FaceMeterComponentList__);
 }
 
 // File Line: 139
 // RVA: 0x5326B0
-signed __int64 __fastcall UFG::FaceMeterComponent::GetTypeSize(UFG::FaceMeterComponent *this)
+__int64 __fastcall UFG::FaceMeterComponent::GetTypeSize(UFG::FaceMeterComponent *this)
 {
   return 8672i64;
 }
@@ -253,72 +253,63 @@ signed __int64 __fastcall UFG::FaceMeterComponent::GetTypeSize(UFG::FaceMeterCom
 // RVA: 0x5171C0
 void __fastcall UFG::FaceMeterComponent::FaceMeterComponent(UFG::FaceMeterComponent *this, unsigned int name_uid)
 {
-  UFG::FaceMeterComponent *v2; // rsi
-  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v3; // rbx
-  signed __int64 v4; // rdi
-  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v5; // rax
-  signed __int64 v6; // rax
+  __int64 v3; // rdi
+  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *mPrev; // rax
+  float *p_mCurrentMultiplier; // rax
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v3 = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable;
-  v4 = 107i64;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent>;
+  this->mNext = &this->UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable;
+  v3 = 107i64;
   `eh vector constructor iterator(
-    v2->mAffectors,
+    this->mAffectors,
     0x50ui64,
     107,
     (void (__fastcall *)(void *))UFG::ScoreAffector::ScoreAffector);
-  v2->mLastActionPerformedTimestamp = 0i64;
-  *(_WORD *)&v2->mFaceMeterEnabled = 1;
-  UFG::PropertySetHandle::PropertySetHandle(&v2->mProperties);
-  v5 = UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev;
-  UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&v2->mPrev;
-  v3->mPrev = v5;
-  v2->mNext = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&UFG::FaceMeterComponent::s_FaceMeterComponentList;
-  UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&v2->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::FaceMeterComponent::_FaceMeterComponentTypeUID,
-    "FaceMeterComponent");
-  v6 = (signed __int64)&v2->mAffectors[0].mCurrentMultiplier;
+  this->mLastActionPerformedTimestamp = 0i64;
+  *(_WORD *)&this->mFaceMeterEnabled = 1;
+  UFG::PropertySetHandle::PropertySetHandle(&this->mProperties);
+  mPrev = UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev;
+  UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&UFG::FaceMeterComponent::s_FaceMeterComponentList;
+  UFG::FaceMeterComponent::s_FaceMeterComponentList.mNode.mPrev = &this->UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent>;
+  UFG::SimComponent::AddType(this, UFG::FaceMeterComponent::_FaceMeterComponentTypeUID, "FaceMeterComponent");
+  p_mCurrentMultiplier = &this->mAffectors[0].mCurrentMultiplier;
   do
   {
-    *(_BYTE *)(v6 + 28) = 0;
-    *(_DWORD *)v6 = 1065353216;
-    v6 += 80i64;
-    --v4;
+    *((_BYTE *)p_mCurrentMultiplier + 28) = 0;
+    *p_mCurrentMultiplier = 1.0;
+    p_mCurrentMultiplier += 20;
+    --v3;
   }
-  while ( v4 );
+  while ( v3 );
 }
 
 // File Line: 161
 // RVA: 0x51B670
 void __fastcall UFG::FaceMeterComponent::~FaceMeterComponent(UFG::FaceMeterComponent *this)
 {
-  UFG::FaceMeterComponent *v1; // rdi
   UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v2; // rbx
-  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v3; // rcx
-  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v4; // rax
+  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *mPrev; // rcx
+  UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *mNext; // rax
   UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v5; // rcx
   UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v6; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable;
   if ( this == UFG::FaceMeterComponent::s_FaceMeterComponentpCurrentIterator )
     UFG::FaceMeterComponent::s_FaceMeterComponentpCurrentIterator = (UFG::FaceMeterComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::PropertySetHandle::~PropertySetHandle(&v1->mProperties);
+  UFG::PropertySetHandle::~PropertySetHandle(&this->mProperties);
   `eh vector destructor iterator(
-    v1->mAffectors,
+    this->mAffectors,
     0x50ui64,
     107,
     (void (__fastcall *)(void *))UFG::ScoreAffector::~ScoreAffector);
@@ -328,7 +319,7 @@ void __fastcall UFG::FaceMeterComponent::~FaceMeterComponent(UFG::FaceMeterCompo
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 167
@@ -339,26 +330,23 @@ __int64 UFG::_dynamic_initializer_for__gsymDefaultFacesystemEvents__()
 
   v0 = UFG::qStringHash32("default-facesystem-events", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsymDefaultFacesystemEvents, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsymDefaultFacesystemEvents__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsymDefaultFacesystemEvents__);
 }
 
 // File Line: 170
 // RVA: 0x53DD50
 void __fastcall UFG::FaceMeterComponent::OnAttach(UFG::FaceMeterComponent *this, UFG::SimObject *pObject)
 {
-  UFG::FaceMeterComponent *v2; // rbx
-  UFG::qPropertySet *v3; // rax
-  hkSeekableStreamReader *v4; // [rsp+30h] [rbp-18h]
-  void (__fastcall *v5)(UFG::FaceMeterComponent *, UFG::Event *); // [rsp+38h] [rbp-10h]
+  UFG::qPropertySet *PropertySet; // rax
+  fastdelegate::FastDelegate1<UFG::Event *,void> v4; // [rsp+30h] [rbp-18h] BYREF
 
-  v2 = this;
-  v3 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&UFG::gsymDefaultFacesystemEvents.mUID);
-  UFG::PropertySetHandle::SetPropSet(&v2->mProperties, v3);
-  v4 = Assembly::GetRCX(v2);
-  v5 = UFG::FaceMeterComponent::HandleGameStatEvent;
+  PropertySet = UFG::PropertySetManager::GetPropertySet(&UFG::gsymDefaultFacesystemEvents);
+  UFG::PropertySetHandle::SetPropSet(&this->mProperties, PropertySet);
+  v4.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
+  v4.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::FaceMeterComponent::HandleGameStatEvent;
   UFG::EventDispatcher::Register(
     &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v4,
+    &v4,
     UFG::gGameStatEventChannel.mUID,
     UFG::gGameStatEventChannel.mName,
     0);
@@ -368,63 +356,57 @@ void __fastcall UFG::FaceMeterComponent::OnAttach(UFG::FaceMeterComponent *this,
 // RVA: 0x540420
 void __fastcall UFG::FaceMeterComponent::OnDetach(UFG::FaceMeterComponent *this)
 {
-  UFG::FaceMeterComponent *v1; // rbx
-  hkSeekableStreamReader *v2; // [rsp+20h] [rbp-18h]
-  void (__fastcall *v3)(UFG::FaceMeterComponent *, UFG::Event *); // [rsp+28h] [rbp-10h]
+  fastdelegate::FastDelegate1<UFG::Event *,void> v2; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this;
   UFG::PropertySetHandle::Null(&this->mProperties);
-  v3 = UFG::FaceMeterComponent::HandleGameStatEvent;
-  v2 = Assembly::GetRCX(v1);
-  UFG::EventDispatcher::UnRegister(
-    &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v2,
-    UFG::gGameStatEventChannel.mUID);
+  v2.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::FaceMeterComponent::HandleGameStatEvent;
+  v2.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
+  UFG::EventDispatcher::UnRegister(&UFG::EventDispatcher::mInstance, &v2, UFG::gGameStatEventChannel.mUID);
 }
 
 // File Line: 189
 // RVA: 0x563BA0
 void __fastcall UFG::FaceMeterComponent::_HandleInVehicleReplenish(UFG::FaceMeterComponent *this, float deltaTime)
 {
-  UFG::SimObject *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
-  unsigned int v5; // er8
-  unsigned int v6; // er9
-  signed __int64 v7; // rdx
-  unsigned int v8; // er8
-  unsigned int v9; // er9
-  unsigned int v10; // er8
-  unsigned int v11; // er9
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfType; // rax
+  unsigned int v5; // r8d
+  unsigned int v6; // r9d
+  __int64 v7; // rdx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  unsigned int v10; // r8d
+  unsigned int v11; // r9d
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rbx
   UFG::PhysicsMoverInterface *v16; // rcx
 
-  v2 = this->m_pSimObject;
-  if ( !v2 )
+  m_pSimObject = this->m_pSimObject;
+  if ( !m_pSimObject )
     return;
-  v3 = v2->m_Flags;
-  if ( !((v3 >> 14) & 1) )
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) == 0 )
   {
-    if ( (v3 & 0x8000u) == 0 )
+    if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v8 = (unsigned int)v2[1].vfptr;
-        v9 = v2->m_Components.size;
-        if ( v8 < v9 )
+        vfptr = (unsigned int)m_pSimObject[1].vfptr;
+        size = m_pSimObject->m_Components.size;
+        if ( vfptr < size )
         {
-          v7 = (signed __int64)&v2->m_Components.p[v8];
+          v7 = (__int64)&m_pSimObject->m_Components.p[vfptr];
           while ( (*(_DWORD *)(v7 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF )
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v8;
+            ++vfptr;
             v7 += 16i64;
-            if ( v8 >= v9 )
+            if ( vfptr >= size )
             {
-              v4 = 0i64;
+              ComponentOfType = 0i64;
               goto LABEL_27;
             }
           }
@@ -433,24 +415,24 @@ void __fastcall UFG::FaceMeterComponent::_HandleInVehicleReplenish(UFG::FaceMete
       }
       else
       {
-        if ( !((v3 >> 12) & 1) )
+        if ( (m_Flags & 0x1000) == 0 )
         {
-          v4 = UFG::SimObject::GetComponentOfType(v2, UFG::CharacterOccupantComponent::_TypeUID);
+          ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CharacterOccupantComponent::_TypeUID);
           goto LABEL_27;
         }
-        v10 = (unsigned int)v2[1].vfptr;
-        v11 = v2->m_Components.size;
+        v10 = (unsigned int)m_pSimObject[1].vfptr;
+        v11 = m_pSimObject->m_Components.size;
         if ( v10 < v11 )
         {
-          v7 = (signed __int64)&v2->m_Components.p[v10];
+          v7 = (__int64)&m_pSimObject->m_Components.p[v10];
           while ( (*(_DWORD *)(v7 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF )
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF) != 0 )
           {
             ++v10;
             v7 += 16i64;
             if ( v10 >= v11 )
             {
-              v4 = 0i64;
+              ComponentOfType = 0i64;
               goto LABEL_27;
             }
           }
@@ -460,13 +442,13 @@ void __fastcall UFG::FaceMeterComponent::_HandleInVehicleReplenish(UFG::FaceMete
     }
     else
     {
-      v5 = (unsigned int)v2[1].vfptr;
-      v6 = v2->m_Components.size;
+      v5 = (unsigned int)m_pSimObject[1].vfptr;
+      v6 = m_pSimObject->m_Components.size;
       if ( v5 < v6 )
       {
-        v7 = (signed __int64)&v2->m_Components.p[v5];
+        v7 = (__int64)&m_pSimObject->m_Components.p[v5];
         while ( (*(_DWORD *)(v7 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-             || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF )
+             || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v7 + 8) & 0x1FFFFFF) != 0 )
         {
           ++v5;
           v7 += 16i64;
@@ -474,30 +456,30 @@ void __fastcall UFG::FaceMeterComponent::_HandleInVehicleReplenish(UFG::FaceMete
             goto LABEL_10;
         }
 LABEL_11:
-        v4 = *(UFG::SimComponent **)v7;
+        ComponentOfType = *(UFG::SimComponent **)v7;
         goto LABEL_27;
       }
     }
 LABEL_10:
-    v4 = 0i64;
+    ComponentOfType = 0i64;
     goto LABEL_27;
   }
-  v4 = v2->m_Components.p[44].m_pComponent;
+  ComponentOfType = m_pSimObject->m_Components.p[44].m_pComponent;
 LABEL_27:
-  if ( v4 )
+  if ( ComponentOfType )
   {
-    v12 = v4[1].m_BoundComponentHandles.mNode.mPrev;
-    if ( v12 )
+    mPrev = ComponentOfType[1].m_BoundComponentHandles.mNode.mPrev;
+    if ( mPrev )
     {
-      v13 = v12[2].mNext;
-      if ( v13 )
+      mNext = mPrev[2].mNext;
+      if ( mNext )
       {
-        v14 = v13[6].mNext;
+        v14 = mNext[6].mNext;
         v15 = v14[3].mPrev;
         if ( v15 )
         {
-          if ( !((UFG::SimObjectVehiclePropertiesComponent::_TypeUID ^ LODWORD(v15[1].mNext)) & 0xFE000000)
-            && !(UFG::SimObjectVehiclePropertiesComponent::_TypeUID & ~LODWORD(v15[1].mNext) & 0x1FFFFFF) )
+          if ( ((UFG::SimObjectVehiclePropertiesComponent::_TypeUID ^ LODWORD(v15[1].mNext)) & 0xFE000000) == 0
+            && (UFG::SimObjectVehiclePropertiesComponent::_TypeUID & ~LODWORD(v15[1].mNext) & 0x1FFFFFF) == 0 )
           {
             v16 = (UFG::PhysicsMoverInterface *)v14[34].mPrev;
             if ( v16 )
@@ -516,19 +498,14 @@ LABEL_27:
 
 // File Line: 215
 // RVA: 0x54C900
-void __fastcall UFG::FaceMeterComponent::SetFaceMeterActivated(UFG::FaceMeterComponent *this, const bool bFaceMeterActivated)
+void __fastcall UFG::FaceMeterComponent::SetFaceMeterActivated(UFG::FaceMeterComponent *this, bool bFaceMeterActivated)
 {
-  UFG::qWiseSymbol result; // [rsp+58h] [rbp+10h]
+  UFG::qWiseSymbol result; // [rsp+58h] [rbp+10h] BYREF
 
   this->mFaceMeterActivated = bFaceMeterActivated;
   UFG::qWiseSymbol::create_from_string(&result, "play_face_meter_enter");
   if ( UFG::HudAudio::m_instance )
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-      result.mUID,
-      0i64,
-      0,
-      0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, result.mUID, 0i64, 0, 0i64);
   _((AMD_HD3D *)result.mUID);
 }
 
@@ -536,38 +513,36 @@ void __fastcall UFG::FaceMeterComponent::SetFaceMeterActivated(UFG::FaceMeterCom
 // RVA: 0x55B1A0
 void __fastcall UFG::FaceMeterComponent::Update(UFG::FaceMeterComponent *this, float deltaTime)
 {
-  UFG::FaceMeterComponent *v2; // rdi
-  UFG::ScoreAffector *v3; // rbx
-  signed __int64 v4; // rsi
+  UFG::ScoreAffector *mAffectors; // rbx
+  __int64 v4; // rsi
   float *v5; // rax
   UFG::GameStatTracker *v6; // rax
-  signed __int64 v7; // rax
+  signed __int64 mLastActionPerformedTimestamp; // rax
   float v8; // xmm0_4
   float v9; // xmm6_4
-  __int128 v10; // xmm7
+  float v10; // xmm7_4
   UFG::GameStatTracker *v11; // rax
-  float v12; // xmm6_4
-  UFG::qWiseSymbol result; // [rsp+80h] [rbp+8h]
+  float Stat; // xmm6_4
+  float v13; // xmm7_4
+  UFG::qWiseSymbol result; // [rsp+80h] [rbp+8h] BYREF
 
-  v2 = this;
   if ( this->mFaceMeterEnabled && NISManager::GetInstance()->mState == STATE_INVALID )
   {
-    UFG::FaceMeterComponent::_HandleInVehicleReplenish(v2, deltaTime);
-    v3 = v2->mAffectors;
+    UFG::FaceMeterComponent::_HandleInVehicleReplenish(this, deltaTime);
+    mAffectors = this->mAffectors;
     v4 = 107i64;
     do
     {
-      UFG::ScoreAffector::Update(v3, deltaTime);
-      ++v3;
+      UFG::ScoreAffector::Update(mAffectors++, deltaTime);
       --v4;
     }
     while ( v4 );
-    if ( v2->mFaceMeterActivated )
+    if ( this->mFaceMeterActivated )
     {
-      UFG::PropertySetHandle::Bind(&v2->mProperties);
+      UFG::PropertySetHandle::Bind(&this->mProperties);
       v5 = UFG::qPropertySet::Get<float>(
-             v2->mProperties.mpPropSet,
-             (UFG::qSymbol *)&FaceEventSymbol_ActivatedMeterCooldownRatePerSecond.mUID,
+             this->mProperties.mpPropSet,
+             (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_ActivatedMeterCooldownRatePerSecond,
              DEPTH_RECURSE);
       UFG::GameStatAction::Player::ClampAndApplyDeltaCombatMeter(
         COERCE_FLOAT(COERCE_UNSIGNED_INT(*v5 * deltaTime) ^ _xmm[0]),
@@ -575,44 +550,39 @@ void __fastcall UFG::FaceMeterComponent::Update(UFG::FaceMeterComponent *this, f
       v6 = UFG::GameStatTracker::Instance();
       if ( UFG::GameStatTracker::GetStat(v6, Face) <= 0.0 )
       {
-        v2->mFaceMeterActivated = 0;
+        this->mFaceMeterActivated = 0;
         UFG::qWiseSymbol::create_from_string(&result, "play_face_meter_exit");
         if ( UFG::HudAudio::m_instance )
-          UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-            result.mUID,
-            0i64,
-            0,
-            0i64);
+          UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, result.mUID, 0i64, 0, 0i64);
         _((AMD_HD3D *)result.mUID);
       }
     }
     else
     {
-      v7 = v2->mLastActionPerformedTimestamp;
-      if ( v7 )
+      mLastActionPerformedTimestamp = this->mLastActionPerformedTimestamp;
+      if ( mLastActionPerformedTimestamp )
       {
-        v8 = (float)(signed int)v7;
-        if ( v7 < 0 )
+        v8 = (float)(int)mLastActionPerformedTimestamp;
+        if ( mLastActionPerformedTimestamp < 0 )
           v8 = v8 + 1.8446744e19;
         v9 = UFG::Metrics::msInstance.mSimTime_Temp - v8;
-        UFG::PropertySetHandle::Bind(&v2->mProperties);
+        UFG::PropertySetHandle::Bind(&this->mProperties);
         if ( v9 > *UFG::qPropertySet::Get<float>(
-                     v2->mProperties.mpPropSet,
-                     (UFG::qSymbol *)&FaceEventSymbol_MeterCooldownStartsAfter.mUID,
+                     this->mProperties.mpPropSet,
+                     (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_MeterCooldownStartsAfter,
                      DEPTH_RECURSE) )
         {
-          UFG::PropertySetHandle::Bind(&v2->mProperties);
-          v10 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                                   v2->mProperties.mpPropSet,
-                                   (UFG::qSymbol *)&FaceEventSymbol_MeterCooldownRatePerSecond.mUID,
-                                   DEPTH_RECURSE);
+          UFG::PropertySetHandle::Bind(&this->mProperties);
+          v10 = *UFG::qPropertySet::Get<float>(
+                   this->mProperties.mpPropSet,
+                   (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_MeterCooldownRatePerSecond,
+                   DEPTH_RECURSE);
           v11 = UFG::GameStatTracker::Instance();
-          v12 = UFG::GameStatTracker::GetStat(v11, Face);
-          *(float *)&v10 = *(float *)&v10 * deltaTime;
-          UFG::GameStatAction::Player::ClampAndApplyDeltaCombatMeter(COERCE_FLOAT(v10 ^ _xmm[0]), 0);
-          if ( v12 <= *(float *)&v10 )
-            v2->mLastActionPerformedTimestamp = 0i64;
+          Stat = UFG::GameStatTracker::GetStat(v11, Face);
+          v13 = v10 * deltaTime;
+          UFG::GameStatAction::Player::ClampAndApplyDeltaCombatMeter(COERCE_FLOAT(LODWORD(v13) ^ _xmm[0]), 0);
+          if ( Stat <= v13 )
+            this->mLastActionPerformedTimestamp = 0i64;
         }
       }
     }
@@ -623,19 +593,17 @@ void __fastcall UFG::FaceMeterComponent::Update(UFG::FaceMeterComponent *this, f
 // RVA: 0x549660
 void __fastcall UFG::FaceMeterComponent::Reset(UFG::FaceMeterComponent *this)
 {
-  UFG::FaceMeterComponent *v1; // rbx
-  char *v2; // rax
-  signed __int64 v3; // rdx
-  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h]
+  float *p_mCurrentMultiplier; // rax
+  __int64 v3; // rdx
+  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = (char *)&this->mAffectors[0].mCurrentMultiplier;
+  p_mCurrentMultiplier = &this->mAffectors[0].mCurrentMultiplier;
   v3 = 107i64;
   do
   {
-    v2[28] = 0;
-    *(_DWORD *)v2 = 1065353216;
-    v2 += 80;
+    *((_BYTE *)p_mCurrentMultiplier + 28) = 0;
+    *p_mCurrentMultiplier = 1.0;
+    p_mCurrentMultiplier += 20;
     --v3;
   }
   while ( v3 );
@@ -643,66 +611,59 @@ void __fastcall UFG::FaceMeterComponent::Reset(UFG::FaceMeterComponent *this)
   this->mFaceMeterActivated = 0;
   UFG::qWiseSymbol::create_from_string(&result, "play_face_meter_exit");
   if ( UFG::HudAudio::m_instance )
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-      result.mUID,
-      0i64,
-      0,
-      0i64);
-  v1->mFaceMeterEnabled = 1;
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, result.mUID, 0i64, 0, 0i64);
+  this->mFaceMeterEnabled = 1;
   _((AMD_HD3D *)result.mUID);
 }
 
 // File Line: 348
 // RVA: 0x521E80
-__int64 __fastcall UFG::FaceMeterComponent::ApplyEvent(UFG::FaceMeterComponent *this, UFG::FaceEventParameters *parameters)
+__int64 __fastcall UFG::FaceMeterComponent::ApplyEvent(
+        UFG::FaceMeterComponent *this,
+        UFG::FaceEventParameters *parameters)
 {
-  UFG::FaceEventParameters *v2; // rsi
-  int v3; // edx
+  int mType; // edx
   unsigned __int8 v4; // bl
-  UFG::FaceMeterComponent *v5; // rdi
   int v6; // edx
   UFG::GameStatTracker *v7; // rax
-  int v8; // eax
-  unsigned __int8 v9; // al
+  int Faction; // eax
   UFG::GameStatTracker *v10; // rax
   int v11; // eax
-  UFG::qPropertySet *v12; // r8
+  UFG::qPropertySet *mpPropertySet; // r8
 
-  v2 = parameters;
-  v3 = parameters->mType;
+  mType = parameters->mType;
   v4 = 0;
-  v5 = this;
-  if ( v3 <= 107 )
+  if ( mType <= 107 )
   {
-    v12 = v2->mpPropertySet;
-    if ( v2->mIsApply )
-      v9 = UFG::FaceMeterComponent::_ApplyEvent(this, (UFG::GameStatEventType)v3, v12);
+    mpPropertySet = parameters->mpPropertySet;
+    if ( parameters->mIsApply )
+      return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(this, (UFG::GameStatEventType)mType, mpPropertySet);
     else
-      v9 = UFG::FaceMeterComponent::_UnapplyEvent(this, (UFG::GameStatEventType)v3, v12);
-    return v9;
+      return UFG::FaceMeterComponent::_UnapplyEvent(this, (UFG::GameStatEventType)mType, mpPropertySet);
   }
-  v6 = v3 - 108;
+  v6 = mType - 108;
   if ( v6 )
   {
     if ( v6 == 1 )
     {
       v7 = UFG::FactionInterface::Get();
-      v8 = UFG::FactionInterface::GetFaction(&v7->mFactionInterface, v2->mpSimObject);
-      if ( v8 == 3 )
-        return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(v5, GameStatEvent_FSR_MurderCop);
-      if ( (unsigned int)(v8 - 16) <= 1 )
-        return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(v5, GameStatEvent_FSR_MurderCivilian);
+      Faction = UFG::FactionInterface::GetFaction(
+                  &v7->mFactionInterface,
+                  (UFG::SimObjectCVBase *)parameters->mpSimObject);
+      if ( Faction == 3 )
+        return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(this, GameStatEvent_FSR_MurderCop);
+      if ( (unsigned int)(Faction - 16) <= 1 )
+        return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(this, GameStatEvent_FSR_MurderCivilian);
     }
   }
   else
   {
     v10 = UFG::FactionInterface::Get();
-    v11 = UFG::FactionInterface::GetFaction(&v10->mFactionInterface, v2->mpSimObject);
+    v11 = UFG::FactionInterface::GetFaction(&v10->mFactionInterface, (UFG::SimObjectCVBase *)parameters->mpSimObject);
     if ( v11 == 3 )
-      return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(v5, GameStatEvent_FSR_DamageCop);
+      return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(this, GameStatEvent_FSR_DamageCop);
     if ( (unsigned int)(v11 - 16) <= 1 )
-      return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(v5, GameStatEvent_FSR_DamageCivilian);
+      return (unsigned __int8)UFG::FaceMeterComponent::_ApplyEvent(this, GameStatEvent_FSR_DamageCivilian);
   }
   return v4;
 }
@@ -711,83 +672,81 @@ __int64 __fastcall UFG::FaceMeterComponent::ApplyEvent(UFG::FaceMeterComponent *
 // RVA: 0x534200
 void __fastcall UFG::FaceMeterComponent::HandleGameStatEvent(UFG::FaceMeterComponent *this, UFG::Event *e)
 {
-  signed int v2; // er14
-  UFG::SimObjectCharacter *v3; // rbp
-  UFG::FaceMeterComponent *v4; // r15
-  char v5; // si
-  UFG::SimObjectCharacter *v6; // rdi
-  unsigned __int16 v7; // cx
-  UFG::SimComponent *v8; // rbx
-  unsigned int v9; // edx
-  unsigned int v10; // er8
-  signed __int64 v11; // rbx
+  signed int vfptr; // r14d
+  UFG::SimObjectCharacter *mPrev; // rbp
+  bool v5; // si
+  UFG::SimObjectCharacter *Target; // rdi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rbx
+  unsigned int mComponentTableEntryCount; // edx
+  unsigned int size; // r8d
+  __int64 v11; // rbx
   unsigned int v12; // edx
-  unsigned int v13; // er8
+  unsigned int v13; // r8d
   unsigned __int64 v14; // rax
-  signed __int64 v15; // rcx
-  bool pIsAmbient; // [rsp+58h] [rbp+10h]
-  bool pIsCop; // [rsp+60h] [rbp+18h]
+  __int64 v15; // rcx
+  bool pIsAmbient; // [rsp+58h] [rbp+10h] BYREF
+  bool pIsCop; // [rsp+60h] [rbp+18h] BYREF
 
-  v2 = (signed int)e[1].vfptr;
-  v3 = (UFG::SimObjectCharacter *)e[1].mPrev;
-  v4 = this;
+  vfptr = (signed int)e[1].vfptr;
+  mPrev = (UFG::SimObjectCharacter *)e[1].mPrev;
   v5 = 1;
-  v6 = (UFG::SimObjectCharacter *)UFG::getTarget((UFG::SimObject *)&v3->vfptr, eTARGET_TYPE_GRAPPLE);
-  UFG::GameStatAction::Player::HandleGameStatEvent((UFG::SimObject *)&v3->vfptr, (UFG::SimObject *)&v6->vfptr, v2);
-  if ( v6 == LocalPlayer || !v6 )
+  Target = (UFG::SimObjectCharacter *)UFG::getTarget(mPrev, eTARGET_TYPE_GRAPPLE);
+  UFG::GameStatAction::Player::HandleGameStatEvent(mPrev, Target, vfptr);
+  if ( Target == LocalPlayer || !Target )
   {
-    v6 = v3;
-    if ( !v3 )
-      goto LABEL_31;
+    Target = mPrev;
+    if ( !mPrev )
+      goto LABEL_29;
   }
-  v7 = v6->m_Flags;
-  if ( !((v7 >> 14) & 1) )
+  m_Flags = Target->m_Flags;
+  if ( (m_Flags & 0x4000) == 0 )
   {
-    if ( (v7 & 0x8000u) != 0 )
+    if ( m_Flags < 0 )
     {
-      v8 = v6->m_Components.p[6].m_pComponent;
+      m_pComponent = Target->m_Components.p[6].m_pComponent;
       goto LABEL_24;
     }
-    if ( (v7 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v9 = v6->mComponentTableEntryCount;
-      v10 = v6->m_Components.size;
-      if ( v9 < v10 )
+      mComponentTableEntryCount = Target->mComponentTableEntryCount;
+      size = Target->m_Components.size;
+      if ( mComponentTableEntryCount < size )
       {
-        v11 = (signed __int64)&v6->m_Components.p[v9];
+        v11 = (__int64)&Target->m_Components.p[mComponentTableEntryCount];
         while ( (*(_DWORD *)(v11 + 8) & 0xFE000000) != (UFG::HealthComponent::_TypeUID & 0xFE000000)
-             || UFG::HealthComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF )
+             || (UFG::HealthComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF) != 0 )
         {
-          ++v9;
+          ++mComponentTableEntryCount;
           v11 += 16i64;
-          if ( v9 >= v10 )
+          if ( mComponentTableEntryCount >= size )
             goto LABEL_14;
         }
 LABEL_15:
-        v8 = *(UFG::SimComponent **)v11;
+        m_pComponent = *(UFG::SimComponent **)v11;
         goto LABEL_24;
       }
     }
     else
     {
-      if ( !((v7 >> 12) & 1) )
+      if ( (m_Flags & 0x1000) == 0 )
       {
-        v8 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::HealthComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(Target, UFG::HealthComponent::_TypeUID);
         goto LABEL_24;
       }
-      v12 = v6->mComponentTableEntryCount;
-      v13 = v6->m_Components.size;
+      v12 = Target->mComponentTableEntryCount;
+      v13 = Target->m_Components.size;
       if ( v12 < v13 )
       {
-        v11 = (signed __int64)&v6->m_Components.p[v12];
+        v11 = (__int64)&Target->m_Components.p[v12];
         while ( (*(_DWORD *)(v11 + 8) & 0xFE000000) != (UFG::HealthComponent::_TypeUID & 0xFE000000)
-             || UFG::HealthComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF )
+             || (UFG::HealthComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF) != 0 )
         {
           ++v12;
           v11 += 16i64;
           if ( v12 >= v13 )
           {
-            v8 = 0i64;
+            m_pComponent = 0i64;
             goto LABEL_24;
           }
         }
@@ -795,112 +754,121 @@ LABEL_15:
       }
     }
 LABEL_14:
-    v8 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_24;
   }
-  v8 = v6->m_Components.p[6].m_pComponent;
+  m_pComponent = Target->m_Components.p[6].m_pComponent;
 LABEL_24:
   pIsCop = 0;
   pIsAmbient = 0;
-  UFG::GameStatAction::MissionScoring::DeduceFaction((UFG::SimObject *)&v6->vfptr, &pIsCop, &pIsAmbient);
-  v5 = 1;
-  if ( pIsAmbient )
-    v5 = 0;
-  if ( v8
-    && (BYTE5(v8[1].m_BoundComponentHandles.mNode.mPrev)
-     || !BYTE6(v8[1].m_BoundComponentHandles.mNode.mPrev)
-     || BYTE1(v8[1].m_BoundComponentHandles.mNode.mNext)) )
+  UFG::GameStatAction::MissionScoring::DeduceFaction(Target, &pIsCop, &pIsAmbient);
+  v5 = !pIsAmbient;
+  if ( m_pComponent
+    && (BYTE5(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev)
+     || !BYTE6(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev)
+     || BYTE1(m_pComponent[1].m_BoundComponentHandles.mNode.mNext)) )
   {
     v5 = 0;
   }
-LABEL_31:
-  if ( v3 == LocalPlayer
-    || (v14 = (unsigned int)(v2 - 34), (unsigned int)v14 > 0x35)
+LABEL_29:
+  if ( mPrev == LocalPlayer
+    || (v14 = (unsigned int)(vfptr - 34), (unsigned int)v14 > 0x35)
     || (v15 = 0x25000000001001i64, !_bittest64(&v15, v14)) )
   {
-    if ( v5 == 1 )
-      UFG::FaceMeterComponent::_ApplyEvent(v4, (UFG::GameStatEventType)v2);
+    if ( v5 )
+      UFG::FaceMeterComponent::_ApplyEvent(this, (UFG::GameStatEventType)vfptr);
   }
 }
 
 // File Line: 515
 // RVA: 0x563DC0
-char __fastcall UFG::FaceMeterComponent::_UnapplyEvent(UFG::FaceMeterComponent *this, UFG::GameStatEventType eventType, UFG::qPropertySet *pPropertySet)
+char __fastcall UFG::FaceMeterComponent::_UnapplyEvent(
+        UFG::FaceMeterComponent *this,
+        int eventType,
+        UFG::qPropertySet *pPropertySet)
 {
-  char *v3; // rbx
+  UFG::ScoreAffector *v3; // rbx
 
-  if ( !pPropertySet || (signed int)eventType >= 107 )
+  if ( !pPropertySet || eventType >= 107 )
     return 0;
-  v3 = (char *)this + 80 * ((signed int)eventType + 1i64);
-  if ( *UFG::qPropertySet::Get<bool>(pPropertySet, (UFG::qSymbol *)&FaceEventSymbol_Disabled.mUID, DEPTH_RECURSE) )
+  v3 = &this->mAffectors[eventType];
+  if ( *UFG::qPropertySet::Get<bool>(
+          pPropertySet,
+          (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_Disabled,
+          DEPTH_RECURSE) )
     return 0;
-  v3[32] = 0;
-  *((_QWORD *)v3 + 3) = UFG::Metrics::msInstance.mSimTimeMSec;
+  v3->mIsActive = 0;
+  v3->mTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
   return 1;
 }
 
 // File Line: 544
 // RVA: 0x563840
-char __fastcall UFG::FaceMeterComponent::_ApplyEvent(UFG::FaceMeterComponent *this, UFG::GameStatEventType eventType, UFG::qPropertySet *pPropertySet)
+char __fastcall UFG::FaceMeterComponent::_ApplyEvent(
+        UFG::FaceMeterComponent *this,
+        int eventType,
+        UFG::qPropertySet *pPropertySet)
 {
-  UFG::qPropertySet *v3; // rsi
   __int64 v4; // rdi
-  UFG::FaceMeterComponent *v5; // rbp
-  float *v6; // rbx
+  UFG::ScoreAffector *v6; // rbx
   UFG::qSymbol *v7; // rax
   UFG::qStaticSymbol *v8; // rcx
   float v9; // xmm7_4
   float *v10; // rax
   float *v11; // rcx
   float v12; // xmm6_4
-  float v13; // xmm9_4
+  float mCurrentMultiplier; // xmm9_4
   float v14; // xmm0_4
   float v15; // xmm1_4
-  float v16; // xmm2_4
+  float mMultiplierResetTimer; // xmm2_4
   char *v17; // r15
   float v18; // xmm1_4
-  __int128 v19; // xmm1
+  float v19; // xmm1_4
   UFG::GameStatTracker *v20; // rax
   __int64 v21; // rax
   int v22; // edx
-  UFG::qString v24; // [rsp+38h] [rbp-90h]
-  UFG::qSymbol faceadjustmenttype; // [rsp+E0h] [rbp+18h]
-  int v26; // [rsp+E8h] [rbp+20h]
+  UFG::qString v24; // [rsp+38h] [rbp-90h] BYREF
+  UFG::qSymbol faceadjustmenttype; // [rsp+E0h] [rbp+18h] BYREF
+  int v26; // [rsp+E8h] [rbp+20h] BYREF
 
-  v3 = pPropertySet;
   v4 = eventType;
-  v5 = this;
   if ( pPropertySet )
   {
-    if ( (signed int)eventType < 107 )
+    if ( eventType < 107 )
     {
-      v6 = (float *)((char *)this + 80 * ((signed int)eventType + 1i64));
-      if ( !*UFG::qPropertySet::Get<bool>(pPropertySet, (UFG::qSymbol *)&FaceEventSymbol_Disabled.mUID, DEPTH_RECURSE) )
+      v6 = &this->mAffectors[eventType];
+      if ( !*UFG::qPropertySet::Get<bool>(
+               pPropertySet,
+               (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_Disabled,
+               DEPTH_RECURSE) )
       {
         v7 = UFG::qPropertySet::Get<UFG::qSymbol>(
-               v3,
-               (UFG::qSymbol *)&FaceEventSymbol_AdjustmentType.mUID,
+               pPropertySet,
+               (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_AdjustmentType,
                DEPTH_RECURSE);
         v8 = &qSymbol_Any;
         if ( v7 )
           v8 = (UFG::qStaticSymbol *)v7;
         faceadjustmenttype.mUID = v8->mUID;
-        *v6 = *UFG::qPropertySet::Get<float>(v3, (UFG::qSymbol *)&FaceEventSymbol_FaceAdjustment.mUID, DEPTH_RECURSE);
-        v6[3] = *UFG::qPropertySet::Get<float>(
-                   v3,
-                   (UFG::qSymbol *)&FaceEventSymbol_MultiplierReduction.mUID,
-                   DEPTH_RECURSE);
-        v6[4] = *UFG::qPropertySet::Get<float>(
-                   v3,
-                   (UFG::qSymbol *)&FaceEventSymbol_MultiplierResetTimer.mUID,
-                   DEPTH_RECURSE);
+        v6->mPoints = *UFG::qPropertySet::Get<float>(
+                         pPropertySet,
+                         (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_FaceAdjustment,
+                         DEPTH_RECURSE);
+        v6->mMultiplierReduction = *UFG::qPropertySet::Get<float>(
+                                      pPropertySet,
+                                      (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_MultiplierReduction,
+                                      DEPTH_RECURSE);
+        v6->mMultiplierResetTimer = *UFG::qPropertySet::Get<float>(
+                                       pPropertySet,
+                                       (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_MultiplierResetTimer,
+                                       DEPTH_RECURSE);
         v9 = *(float *)&FLOAT_1_0;
         if ( UFG::Metrics::IsTimeScaled(&UFG::Metrics::msInstance) )
         {
           v26 = 1065353216;
           v10 = UFG::qPropertySet::Get<float>(
-                  v3,
-                  (UFG::qSymbol *)&FaceEventSymbol_MultiplierSlowMode.mUID,
+                  pPropertySet,
+                  (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_MultiplierSlowMode,
                   DEPTH_RECURSE);
           v11 = (float *)&v26;
           if ( v10 )
@@ -912,11 +880,11 @@ char __fastcall UFG::FaceMeterComponent::_ApplyEvent(UFG::FaceMeterComponent *th
           v12 = *(float *)&FLOAT_1_0;
         }
         UFG::GameStatAction::Player::RegisterSuccessFaceEvent(&faceadjustmenttype);
-        v5->mLastActionPerformedTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
-        v13 = v6[1];
-        *((_BYTE *)v6 + 32) = 1;
-        *((_QWORD *)v6 + 3) = UFG::Metrics::msInstance.mSimTimeMSec;
-        v14 = v13 - v6[3];
+        this->mLastActionPerformedTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+        mCurrentMultiplier = v6->mCurrentMultiplier;
+        v6->mIsActive = 1;
+        v6->mTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+        v14 = mCurrentMultiplier - v6->mMultiplierReduction;
         if ( v14 <= 0.0 )
         {
           v14 = 0.0;
@@ -927,39 +895,42 @@ char __fastcall UFG::FaceMeterComponent::_ApplyEvent(UFG::FaceMeterComponent *th
           if ( v14 >= 2.0 )
           {
 LABEL_16:
-            v6[1] = v15;
-            v16 = v6[4];
-            if ( v16 <= 0.0 )
-              v6[2] = 1.0;
+            v6->mCurrentMultiplier = v15;
+            mMultiplierResetTimer = v6->mMultiplierResetTimer;
+            if ( mMultiplierResetTimer <= 0.0 )
+              v6->mMultiplierReplenishRate = 1.0;
             else
-              v6[2] = (float)(1.0 - v15) / v16;
+              v6->mMultiplierReplenishRate = (float)(1.0 - v15) / mMultiplierResetTimer;
             v17 = UFG::qPropertySet::Get<char const *>(
-                    v3,
-                    (UFG::qSymbol *)&FaceEventSymbol_XPFlasherCaption.mUID,
+                    pPropertySet,
+                    (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_XPFlasherCaption,
                     DEPTH_RECURSE);
-            v18 = *UFG::qPropertySet::Get<float>(v3, (UFG::qSymbol *)&FaceEventSymbol_CopPoints.mUID, DEPTH_RECURSE);
+            v18 = *UFG::qPropertySet::Get<float>(
+                     pPropertySet,
+                     (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_CopPoints,
+                     DEPTH_RECURSE);
             if ( v18 < 0.0 )
               UFG::GameStatAction::MissionScoring::LogCopEvent(
                 COP_FSR_MOVES,
-                (signed int)(float)(v13 * v18),
-                &customWorldMapCaption);
-            v19 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                                     v3,
-                                     (UFG::qSymbol *)&FaceEventSymbol_TriadPoints.mUID,
-                                     DEPTH_RECURSE);
-            if ( *(float *)&v19 > 0.0 )
+                (int)(float)(mCurrentMultiplier * v18),
+                &customCaption);
+            v19 = *UFG::qPropertySet::Get<float>(
+                     pPropertySet,
+                     (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_TriadPoints,
+                     DEPTH_RECURSE);
+            if ( v19 > 0.0 )
               UFG::GameStatAction::MissionScoring::LogTriadEvent(
                 TRIAD_FSR_MOVES,
-                (signed int)(float)(v13 * *(float *)&v19),
+                (int)(float)(mCurrentMultiplier * v19),
                 v17);
-            if ( UFG::IsAnyLocalPlayer(v5->m_pSimObject) )
+            if ( UFG::IsAnyLocalPlayer((UFG::SimObjectCharacter *)this->m_pSimObject) )
               v9 = UFG::PlayerBuffTracker::GetFaceMeterEarnedMultiplier() + 1.0;
             v20 = UFG::GameStatTracker::Instance();
             if ( UFG::GameStatTracker::GetStat(v20, PlayerFaceMeterBuff_Activated) < 0.0 )
               UFG::GameStatAction::Player::ClampAndApplyDeltaCombatMeter(
-                (float)((float)(v12 * *v6) * v13) * v9,
+                (float)((float)(v12 * v6->mPoints) * mCurrentMultiplier) * v9,
                 faceadjustmenttype.mUID);
-            UFG::qString::qString(&v24, "%d %s", (unsigned int)(signed int)*v6, UFG::GameStatEventStrings[v4]);
+            UFG::qString::qString(&v24, "%d %s", (unsigned int)(int)v6->mPoints, UFG::GameStatEventStrings[v4]);
             UFG::qString::Set(
               &UFG::UIHKScreenHud::CombatMeter->mDebugFaceEventCaption,
               *(const char **)(v21 + 24),
@@ -1003,97 +974,90 @@ LABEL_16:
 // RVA: 0x563750
 char __fastcall UFG::FaceMeterComponent::_ApplyEvent(UFG::FaceMeterComponent *this, UFG::GameStatEventType eventType)
 {
-  UFG::GameStatEventType v2; // er14
-  UFG::FaceMeterComponent *v3; // r13
   UFG::qSymbol *v5; // r15
   UFG::qPropertySet *v6; // rdi
   UFG::qPropertyList *v7; // rax
   UFG::qPropertyList *v8; // rbp
-  unsigned int v9; // esi
+  unsigned int mNumElements; // esi
   unsigned int v10; // ebx
-  char *v11; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v12; // rcx
 
-  v2 = eventType;
-  v3 = this;
-  if ( eventType == 107 )
+  if ( eventType == GameStatEvent_Max )
     return 0;
   v5 = UFG::GameStatEventSymbols[eventType];
   v6 = 0i64;
   UFG::PropertySetHandle::Bind(&this->mProperties);
   v7 = UFG::qPropertySet::Get<UFG::qPropertyList>(
-         v3->mProperties.mpPropSet,
-         (UFG::qSymbol *)&FaceEventSymbol_Events.mUID,
+         this->mProperties.mpPropSet,
+         (UFG::qArray<unsigned long,0> *)&FaceEventSymbol_Events,
          DEPTH_RECURSE);
   v8 = v7;
   if ( v7 )
   {
-    v9 = v7->mNumElements;
+    mNumElements = v7->mNumElements;
     v10 = 0;
-    if ( v9 )
+    if ( mNumElements )
     {
       while ( 1 )
       {
-        v11 = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v10);
-        if ( v11 && *(_QWORD *)v11 )
-          v12 = (UFG::qPropertySet *)&v11[*(_QWORD *)v11];
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v10);
+        if ( ValuePtr && *(_QWORD *)ValuePtr )
+          v12 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
         else
           v12 = 0i64;
         if ( v5->mUID == v12->mName.mUID )
           break;
-        if ( ++v10 >= v9 )
-          return UFG::FaceMeterComponent::_ApplyEvent(v3, v2, v6);
+        if ( ++v10 >= mNumElements )
+          return UFG::FaceMeterComponent::_ApplyEvent(this, eventType, v6);
       }
       v6 = v12;
     }
   }
-  return UFG::FaceMeterComponent::_ApplyEvent(v3, v2, v6);
+  return UFG::FaceMeterComponent::_ApplyEvent(this, eventType, v6);
 }
 
 // File Line: 667
 // RVA: 0x535660
 bool __fastcall UFG::FaceMeterComponent::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rax
-  UFG::qPropertySet *v2; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
 
-  v1 = pSceneObj;
-  v2 = pSceneObj->mpWritableProperties;
-  if ( !v2 )
-    v2 = v1->mpConstProperties;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   return UFG::qPropertySet::GetParentFromName(
-           v2,
-           (UFG::qSymbol *)&SimSymX_propset_componentFaceMeter.mUID,
+           mpWritableProperties,
+           (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentFaceMeter,
            DEPTH_RECURSE) != 0i64;
 }
 
 // File Line: 673
 // RVA: 0x544F40
-UFG::SimComponent *__fastcall UFG::FaceMeterComponent::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
+UFG::FaceMeterComponent *__fastcall UFG::FaceMeterComponent::PropertiesOnActivate(
+        UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rdi
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v3; // rax
   UFG::SimComponent *v4; // rax
   UFG::SimComponent *v5; // rbx
-  UFG::SimObjectModifier v7; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v7; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = pSceneObj;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = UFG::qMemoryPool::Allocate(v2, 0x21E0ui64, "FaceMeterComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x21E0ui64, "FaceMeterComponent", 0i64, 1u);
   if ( v3 )
   {
-    UFG::FaceMeterComponent::FaceMeterComponent((UFG::FaceMeterComponent *)v3, v1->m_NameUID);
+    UFG::FaceMeterComponent::FaceMeterComponent((UFG::FaceMeterComponent *)v3, pSceneObj->m_NameUID);
     v5 = v4;
   }
   else
   {
     v5 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v7, v1->m_pSimObject, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v7, pSceneObj->m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v7, v5, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v7);
   UFG::SimObjectModifier::~SimObjectModifier(&v7);
-  return v5;
+  return (UFG::FaceMeterComponent *)v5;
 }
 

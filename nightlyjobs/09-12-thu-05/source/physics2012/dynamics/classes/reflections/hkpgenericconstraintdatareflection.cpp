@@ -28,23 +28,26 @@ hkClass *__fastcall hkpGenericConstraintData::staticClass()
 
 // File Line: 67
 // RVA: 0xD4F4B0
-void __fastcall finishLoadedObjecthkpGenericConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpGenericConstraintData(
+        hkpGenericConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpGenericConstraintData::hkpGenericConstraintData);
+  if ( p )
+    hkpGenericConstraintData::hkpGenericConstraintData(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xD4F4D0
-void __fastcall cleanupLoadedObjecthkpGenericConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpGenericConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xD4F4E0
 hkBaseObjectVtbl *__fastcall getVtablehkpGenericConstraintData()
 {
-  hkpGenericConstraintData v1; // [rsp+20h] [rbp-98h]
+  hkpGenericConstraintData v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkpGenericConstraintData::hkpGenericConstraintData(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpGenericConstraintDataTypeInfo__()
   hkpGenericConstraintDataTypeInfo.m_typeName = "hkpGenericConstraintData";
   hkpGenericConstraintDataTypeInfo.m_vtable = result;
   hkpGenericConstraintDataTypeInfo.m_scopedName = "!hkpGenericConstraintData";
-  hkpGenericConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpGenericConstraintData;
-  hkpGenericConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpGenericConstraintData;
+  hkpGenericConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpGenericConstraintData;
+  hkpGenericConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpGenericConstraintData;
   return result;
 }
 

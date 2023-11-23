@@ -2,65 +2,59 @@
 // RVA: 0xD17E30
 void __fastcall hkpMeshShape::hkpMeshShape(hkpMeshShape *this, float radius, int numBitsForSubpartIndex)
 {
-  int v3; // edi
-  hkpMeshShape *v4; // rbx
-
-  v3 = numBitsForSubpartIndex;
-  v4 = this;
-  hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, TRIANGLE_COLLECTION, COLLECTION_MESH_SHAPE);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
-  v4->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
-  v4->m_subparts.m_capacityAndFlags = 2147483648;
-  v4->m_subparts.m_data = 0i64;
-  v4->m_subparts.m_size = 0;
-  v4->m_weldingInfo.m_data = 0i64;
-  v4->m_weldingInfo.m_size = 0;
-  v4->m_weldingInfo.m_capacityAndFlags = 2147483648;
-  v4->m_scaling.m_quad = _mm_shuffle_ps(*(__m128 *)_xmm, _mm_unpackhi_ps(*(__m128 *)_xmm, v4->m_scaling.m_quad), 196);
-  v4->m_radius = radius;
-  v4->m_weldingType.m_storage = 6;
-  v4->m_numBitsForSubpartIndex = v3;
+  hkpShapeCollection::hkpShapeCollection(this, TRIANGLE_COLLECTION, COLLECTION_MESH_SHAPE);
+  this->hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
+  this->hkpShapeCollection::hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
+  this->m_subparts.m_capacityAndFlags = 0x80000000;
+  this->m_subparts.m_data = 0i64;
+  this->m_subparts.m_size = 0;
+  this->m_weldingInfo.m_data = 0i64;
+  this->m_weldingInfo.m_size = 0;
+  this->m_weldingInfo.m_capacityAndFlags = 0x80000000;
+  this->m_scaling.m_quad = _mm_shuffle_ps(
+                             *(__m128 *)_xmm,
+                             _mm_unpackhi_ps(*(__m128 *)_xmm, this->m_scaling.m_quad),
+                             196);
+  this->m_radius = radius;
+  this->m_weldingType.m_storage = 6;
+  this->m_numBitsForSubpartIndex = numBitsForSubpartIndex;
 }
 
 // File Line: 44
 // RVA: 0xD17ED0
 void __fastcall hkpMeshShape::hkpMeshShape(hkpMeshShape *this, hkFinishLoadedObjectFlag flag)
 {
-  hkpMeshShape *v2; // rbx
   int v3; // ecx
   __int64 v4; // rdx
-  hkpMeshShape::Subpart *v5; // rax
-  int v6; // [rsp+38h] [rbp+10h]
+  hkpMeshShape::Subpart *m_data; // rax
 
-  v6 = flag.m_finishing;
-  v2 = this;
-  hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
-  if ( v6 )
+  hkpShapeCollection::hkpShapeCollection(this, flag);
+  this->hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
+  this->hkpShapeCollection::hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
+  if ( flag.m_finishing )
   {
     v3 = 0;
-    if ( v2->m_subparts.m_size > 0 )
+    if ( this->m_subparts.m_size > 0 )
     {
       v4 = 0i64;
       do
       {
-        v5 = v2->m_subparts.m_data;
-        if ( !v5[v4].m_materialIndexStridingType.m_storage )
-          v5[v4].m_materialIndexStridingType.m_storage = 1;
+        m_data = this->m_subparts.m_data;
+        if ( !m_data[v4].m_materialIndexStridingType.m_storage )
+          m_data[v4].m_materialIndexStridingType.m_storage = 1;
         ++v3;
         ++v4;
       }
-      while ( v3 < v2->m_subparts.m_size );
+      while ( v3 < this->m_subparts.m_size );
     }
-    v2->m_type.m_storage = 27;
-    v2->m_collectionType.m_storage = 5;
+    this->m_type.m_storage = 27;
+    this->m_collectionType.m_storage = 5;
   }
 }
 
 // File Line: 62
 // RVA: 0xD17F50
-void __fastcall hkpMeshShape::setWeldingInfo(hkpMeshShape *this, unsigned int key, __int16 weldingInfo)
+void __fastcall hkpMeshShape::setWeldingInfo(hkpMeshShape *this, unsigned int key, unsigned __int16 weldingInfo)
 {
   this->m_weldingInfo.m_data[(key & (0xFFFFFFFF >> this->m_numBitsForSubpartIndex))
                            + this->m_subparts.m_data[key >> (32 - LOBYTE(this->m_numBitsForSubpartIndex))].m_triangleOffset] = weldingInfo;
@@ -70,62 +64,59 @@ void __fastcall hkpMeshShape::setWeldingInfo(hkpMeshShape *this, unsigned int ke
 // RVA: 0xD17FA0
 void __fastcall hkpMeshShape::initWeldingInfo(hkpMeshShape *this, hkpWeldingUtility::WeldingType weldingType)
 {
-  hkpMeshShape *v2; // rdi
   int v3; // ecx
   int v4; // ebx
-  hkpMeshShape::Subpart *v5; // rdx
+  hkpMeshShape::Subpart *m_data; // rdx
   __int64 v6; // rax
-  signed __int64 v7; // r14
+  hkArray<unsigned short,hkContainerHeapAllocator> *p_m_weldingInfo; // r14
   int v8; // eax
   int v9; // eax
-  int v10; // er9
-  __int64 v11; // rdx
-  _WORD *v12; // rdi
+  int v10; // r9d
+  __int64 m_size; // rdx
+  unsigned __int16 *v12; // rdi
   __int64 v13; // rcx
-  int v14; // er8
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int m_capacityAndFlags; // r8d
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = this;
   this->m_weldingType.m_storage = weldingType;
-  if ( weldingType == 6 )
+  if ( weldingType == WELDING_TYPE_NONE )
   {
-    v14 = this->m_weldingInfo.m_capacityAndFlags;
+    m_capacityAndFlags = this->m_weldingInfo.m_capacityAndFlags;
     this->m_weldingInfo.m_size = 0;
-    if ( v14 >= 0 )
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         this->m_weldingInfo.m_data,
-        2 * (v14 & 0x3FFFFFFF));
-    v2->m_weldingInfo.m_data = 0i64;
-    v2->m_weldingInfo.m_capacityAndFlags = 2147483648;
+        2 * (m_capacityAndFlags & 0x3FFFFFFF));
+    this->m_weldingInfo.m_data = 0i64;
+    this->m_weldingInfo.m_capacityAndFlags = 0x80000000;
   }
   else
   {
     v3 = 0;
     v4 = 0;
-    if ( v2->m_subparts.m_size > 0 )
+    if ( this->m_subparts.m_size > 0 )
     {
-      v5 = v2->m_subparts.m_data;
+      m_data = this->m_subparts.m_data;
       v6 = 0i64;
       do
       {
-        v5[v6].m_triangleOffset = v4;
-        v5 = v2->m_subparts.m_data;
+        m_data[v6].m_triangleOffset = v4;
+        m_data = this->m_subparts.m_data;
         ++v3;
-        v4 += v5[v6].m_numTriangles;
-        ++v6;
+        v4 += m_data[v6++].m_numTriangles;
       }
-      while ( v3 < v2->m_subparts.m_size );
+      while ( v3 < this->m_subparts.m_size );
     }
-    v7 = (signed __int64)&v2->m_weldingInfo;
-    if ( (v2->m_weldingInfo.m_capacityAndFlags & 0x3FFFFFFF) < v4 )
+    p_m_weldingInfo = &this->m_weldingInfo;
+    if ( (this->m_weldingInfo.m_capacityAndFlags & 0x3FFFFFFF) < v4 )
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v2->m_weldingInfo,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_weldingInfo.m_data,
         v4,
         2);
-    v8 = v2->m_weldingInfo.m_capacityAndFlags & 0x3FFFFFFF;
+    v8 = this->m_weldingInfo.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v8 < v4 )
     {
       v9 = 2 * v8;
@@ -134,24 +125,23 @@ void __fastcall hkpMeshShape::initWeldingInfo(hkpMeshShape *this, hkpWeldingUtil
         v10 = v9;
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v2->m_weldingInfo,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_weldingInfo.m_data,
         v10,
         2);
     }
-    v11 = v2->m_weldingInfo.m_size;
-    v12 = (_WORD *)(*(_QWORD *)v7 + 2 * v11);
-    v13 = v4 - (signed int)v11;
-    if ( v4 - (signed int)v11 > 0 )
+    m_size = this->m_weldingInfo.m_size;
+    v12 = &p_m_weldingInfo->m_data[m_size];
+    v13 = v4 - (int)m_size;
+    if ( v4 - (int)m_size > 0 )
     {
       while ( v13 )
       {
-        *v12 = 0;
-        ++v12;
+        *v12++ = 0;
         --v13;
       }
     }
-    *(_DWORD *)(v7 + 8) = v4;
+    p_m_weldingInfo->m_size = v4;
   }
 }
 
@@ -159,54 +149,52 @@ void __fastcall hkpMeshShape::initWeldingInfo(hkpMeshShape *this, hkpWeldingUtil
 // RVA: 0xD181F0
 unsigned int __fastcall hkpMeshShape::getFirstKey(hkpMeshShape *this)
 {
-  hkpMeshShape *v1; // rbx
   unsigned int result; // eax
   hkVector4f *v3; // rax
-  hkSimdFloat32 tolerance; // [rsp+20h] [rbp-218h]
-  char v5; // [rsp+30h] [rbp-208h]
+  hkSimdFloat32 tolerance; // [rsp+20h] [rbp-218h] BYREF
+  char v5[520]; // [rsp+30h] [rbp-208h] BYREF
 
-  v1 = this;
   if ( !this->m_scaling.m_quad.m128_i32[0] )
     return -1;
-  v3 = (hkVector4f *)((__int64 (__fastcall *)(hkpMeshShape *, _QWORD, char *))this->vfptr[2].__first_virtual_table_function__)(
+  v3 = (hkVector4f *)((__int64 (__fastcall *)(hkpMeshShape *, _QWORD, char *))this->hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr[2].__first_virtual_table_function__)(
                        this,
                        0i64,
-                       &v5);
+                       v5);
   tolerance.m_real = _mm_shuffle_ps(
                        (__m128)LODWORD(hkDefaultTriangleDegeneracyTolerance),
                        (__m128)LODWORD(hkDefaultTriangleDegeneracyTolerance),
                        0);
   result = hkcdTriangleUtil::isDegenerate(v3 + 3, v3 + 4, v3 + 5, &tolerance);
   if ( result )
-    result = ((__int64 (__fastcall *)(hkpMeshShape *, _QWORD))v1->vfptr[1].__first_virtual_table_function__)(v1, 0i64);
+    return ((__int64 (__fastcall *)(hkpMeshShape *, _QWORD))this->hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr[1].__first_virtual_table_function__)(
+             this,
+             0i64);
   return result;
 }
 
 // File Line: 123
 // RVA: 0xD18280
-signed __int64 __fastcall hkpMeshShape::getNextKey(hkpMeshShape *this, unsigned int initialKey)
+__int64 __fastcall hkpMeshShape::getNextKey(hkpMeshShape *this, unsigned int initialKey)
 {
-  hkpMeshShape *v2; // r14
   __int64 v3; // rdi
   unsigned int v4; // ebx
-  signed __int64 v5; // rsi
+  __int64 v5; // rsi
   unsigned int v6; // ebp
   hkVector4f *v7; // rax
-  hkSimdFloat32 tolerance; // [rsp+20h] [rbp-228h]
-  char v10; // [rsp+30h] [rbp-218h]
+  hkSimdFloat32 tolerance; // [rsp+20h] [rbp-228h] BYREF
+  char v10[536]; // [rsp+30h] [rbp-218h] BYREF
 
-  v2 = this;
-  v3 = initialKey >> (32 - LOBYTE(this->vfptr));
-  v4 = initialKey & (0xFFFFFFFF >> LODWORD(this->vfptr));
+  v3 = initialKey >> (32 - LOBYTE(this->hkpShapeCollection::hkpShapeContainer::vfptr));
+  v4 = initialKey & (0xFFFFFFFF >> LODWORD(this->hkpShapeCollection::hkpShapeContainer::vfptr));
   v5 = 80 * v3;
-  while ( (signed int)++v4 < *(_DWORD *)(*(_QWORD *)&v2->m_disableWelding.m_bool + v5 + 36) )
+  while ( (signed int)++v4 < *(_DWORD *)(*(_QWORD *)&this->m_disableWelding.m_bool + v5 + 36) )
   {
 LABEL_5:
-    v6 = v4 | ((_DWORD)v3 << (32 - LOBYTE(v2->vfptr)));
-    v7 = (hkVector4f *)((__int64 (__fastcall *)(hkpMeshShape *, _QWORD, char *))v2->vfptr[2].__first_virtual_table_function__)(
-                         v2,
-                         v4 | ((_DWORD)v3 << (32 - LOBYTE(v2->vfptr))),
-                         &v10);
+    v6 = v4 | ((_DWORD)v3 << (32 - LOBYTE(this->hkpShapeCollection::hkpShapeContainer::vfptr)));
+    v7 = (hkVector4f *)((__int64 (__fastcall *)(hkpMeshShape *, _QWORD, char *))this->hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr[2].__first_virtual_table_function__)(
+                         this,
+                         v6,
+                         v10);
     tolerance.m_real = _mm_shuffle_ps(
                          (__m128)LODWORD(hkDefaultTriangleDegeneracyTolerance),
                          (__m128)LODWORD(hkDefaultTriangleDegeneracyTolerance),
@@ -216,7 +204,7 @@ LABEL_5:
   }
   LODWORD(v3) = v3 + 1;
   v5 += 80i64;
-  if ( (unsigned int)v3 < v2->m_scaling.m_quad.m128_i32[0] )
+  if ( (unsigned int)v3 < this->m_scaling.m_quad.m128_i32[0] )
   {
     v4 = 0;
     goto LABEL_5;
@@ -228,11 +216,9 @@ LABEL_5:
 // RVA: 0xD18360
 hkpShape *__fastcall hkpMeshShape::getChildShape(hkpMeshShape *this, unsigned int key, char (*buffer)[512])
 {
-  hkpMeshShape *v3; // rdi
-  int v4; // ecx
-  char (*v5)[512]; // r10
+  int vfptr; // ecx
   unsigned int v6; // ebx
-  signed __int64 v7; // r11
+  __int64 v7; // r11
   int v8; // edx
   _DWORD *v9; // r9
   __int64 v10; // r8
@@ -245,18 +231,16 @@ hkpShape *__fastcall hkpMeshShape::getChildShape(hkpMeshShape *this, unsigned in
   __m128 v17; // xmm3
   __m128 v18; // xmm4
   __int16 v19; // cx
-  int v20; // xmm0_4
-  unsigned __int8 v21; // al
+  int m_data_high; // xmm0_4
+  unsigned __int8 m_data; // al
 
-  v3 = this;
-  v4 = (int)this->vfptr;
-  v5 = buffer;
-  v6 = key & (0xFFFFFFFF >> v4);
-  v7 = *(_QWORD *)&v3->m_disableWelding.m_bool + 80i64 * (signed int)(key >> (32 - v4));
+  vfptr = (int)this->hkpShapeCollection::hkpShapeContainer::vfptr;
+  v6 = key & (0xFFFFFFFF >> vfptr);
+  v7 = *(_QWORD *)&this->m_disableWelding.m_bool + 80i64 * (int)(key >> (32 - vfptr));
   v8 = *(_DWORD *)(v7 + 8);
   v9 = (_DWORD *)(*(_QWORD *)(v7 + 16) + v6 * *(_DWORD *)(v7 + 28));
   v10 = *(_QWORD *)v7;
-  v11 = (signed int)(v6 & *(_DWORD *)(v7 + 32));
+  v11 = (int)(v6 & *(_DWORD *)(v7 + 32));
   if ( *(_BYTE *)(v7 + 24) == 1 )
   {
     v12 = v8 * *(unsigned __int16 *)v9;
@@ -269,7 +253,7 @@ hkpShape *__fastcall hkpMeshShape::getChildShape(hkpMeshShape *this, unsigned in
     v13 = (unsigned int)(v8 * v9[v11 + 1]);
     v14 = (unsigned int)(v8 * v9[(v11 ^ 1) + 1]);
   }
-  v15 = *(__m128 *)&v3->m_type.m_storage;
+  v15 = *(__m128 *)&this->m_type.m_storage;
   v16 = _mm_mul_ps(
           (__m128)_mm_srli_si128(
                     _mm_slli_si128(
@@ -297,59 +281,59 @@ hkpShape *__fastcall hkpMeshShape::getChildShape(hkpMeshShape *this, unsigned in
                       4),
                     4),
           v15);
-  if ( v3->m_numBitsForSubpartIndex )
-    v19 = *(_WORD *)(v3->m_scaling.m_quad.m128_u64[1] + 2i64 * (signed int)(v6 + *(_DWORD *)(v7 + 72)));
+  if ( this->m_numBitsForSubpartIndex )
+    v19 = *(_WORD *)(this->m_scaling.m_quad.m128_u64[1] + 2i64 * (int)(v6 + *(_DWORD *)(v7 + 72)));
   else
     v19 = 0;
-  if ( v5 )
+  if ( buffer )
   {
-    v20 = HIDWORD(v3->m_subparts.m_data);
-    v21 = (unsigned __int8)v3->m_subparts.m_data;
-    *(_DWORD *)&(*v5)[8] = 0x1FFFF;
-    *(_DWORD *)&(*v5)[16] = 1026;
-    *(_QWORD *)&(*v5)[24] = 0i64;
-    *(_DWORD *)&(*v5)[32] = v20;
-    *(_WORD *)&(*v5)[40] = v19;
-    *(_WORD *)&(*v5)[42] = v21;
-    *(_OWORD *)&(*v5)[96] = 0i64;
-    *(_QWORD *)v5 = &hkpTriangleShape::`vftable;
+    m_data_high = HIDWORD(this->m_subparts.m_data);
+    m_data = (unsigned __int8)this->m_subparts.m_data;
+    *(_DWORD *)&(*buffer)[8] = 0x1FFFF;
+    *(_DWORD *)&(*buffer)[16] = 1026;
+    *(_QWORD *)&(*buffer)[24] = 0i64;
+    *(_DWORD *)&(*buffer)[32] = m_data_high;
+    *(_WORD *)&(*buffer)[40] = v19;
+    *(_WORD *)&(*buffer)[42] = m_data;
+    *(_OWORD *)&(*buffer)[96] = 0i64;
+    *(_QWORD *)buffer = &hkpTriangleShape::`vftable;
   }
   else
   {
-    v5 = 0i64;
+    buffer = 0i64;
   }
-  *(__m128 *)&(*v5)[48] = v16;
-  *(__m128 *)&(*v5)[64] = v17;
-  *(__m128 *)&(*v5)[80] = v18;
-  return (hkpShape *)v5;
+  *(__m128 *)&(*buffer)[48] = v16;
+  *(__m128 *)&(*buffer)[64] = v17;
+  *(__m128 *)&(*buffer)[80] = v18;
+  return (hkpShape *)*buffer;
 }
 
 // File Line: 230
 // RVA: 0xD18500
 __int64 __fastcall hkpMeshShape::getCollisionFilterInfo(hkpMeshShape *this, unsigned int key)
 {
-  int v2; // er10
-  signed __int64 v3; // r9
+  int vfptr; // r10d
+  __int64 v3; // r9
   __int64 v4; // r8
   __int64 v5; // rax
   int v6; // ecx
   unsigned int *v7; // rcx
-  __int64 result; // rax
 
-  v2 = (int)this->vfptr;
-  v3 = 80i64 * (signed int)(key >> (32 - v2)) + *(_QWORD *)&this->m_disableWelding.m_bool;
+  vfptr = (int)this->hkpShapeCollection::hkpShapeContainer::vfptr;
+  v3 = 80i64 * (int)(key >> (32 - vfptr)) + *(_QWORD *)&this->m_disableWelding.m_bool;
   v4 = *(_QWORD *)(v3 + 40);
   if ( v4
-    && ((v5 = *(_DWORD *)(v3 + 48) * (key & (0xFFFFFFFF >> v2)), *(_BYTE *)(v3 + 25) != 1) ? (v6 = *(unsigned __int16 *)(v5 + v4)) : (v6 = *(unsigned __int8 *)(v5 + v4)),
-        v6 != -1 && (v7 = (unsigned int *)(*(_QWORD *)(v3 + 56) + v6 * *(_DWORD *)(v3 + 64))) != 0i64) )
+    && ((v5 = *(_DWORD *)(v3 + 48) * (key & (0xFFFFFFFF >> vfptr)), *(_BYTE *)(v3 + 25) != 1)
+      ? (v6 = *(unsigned __int16 *)(v5 + v4))
+      : (v6 = *(unsigned __int8 *)(v5 + v4)),
+        (v7 = (unsigned int *)(*(_QWORD *)(v3 + 56) + v6 * *(_DWORD *)(v3 + 64))) != 0i64) )
   {
-    result = *v7;
+    return *v7;
   }
   else
   {
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 246
@@ -383,78 +367,69 @@ void __fastcall meshShape_addToAabb(hkAabb *aabb, hkTransformf *localToWorld, co
 // RVA: 0xD18570
 void __fastcall hkpMeshShape::getAabb(hkpMeshShape *this, hkTransformf *localToWorld, float tolerance, hkAabb *out)
 {
-  int v4; // er12
-  hkAabb *v5; // rbp
-  hkTransformf *v6; // r13
-  hkpMeshShape *v7; // r14
+  int v4; // r12d
   __int64 v8; // r10
-  hkpMeshShape::Subpart *v9; // r11
+  hkpMeshShape::Subpart *m_data; // r11
   int i; // esi
-  int v11; // ecx
-  const float *v12; // rdx
+  int m_vertexStriding; // ecx
+  const float *m_vertexBase; // rdx
   int v13; // eax
   unsigned __int16 *v14; // r8
   __int64 v15; // rbx
   __int64 v16; // rdi
-  bool v17; // cf
-  _DWORD *v18; // r9
-  const float *v19; // rdi
-  hkTransformf *v20; // rdx
-  hkAabb *v21; // rcx
-  const float *v22; // rax
-  hkTransformf *v23; // rdx
-  hkAabb *v24; // rcx
-  __m128 v25; // xmm2
-  __m128 v26; // xmm1
+  _DWORD *v17; // r9
+  const float *v18; // rdi
+  hkTransformf *v19; // rdx
+  hkAabb *v20; // rcx
+  const float *v21; // rax
+  hkTransformf *v22; // rdx
+  hkAabb *v23; // rcx
+  __m128 v24; // xmm2
+  hkVector4f v25; // xmm1
 
   v4 = 0;
-  v5 = out;
   out->m_min = (hkVector4f)xmmword_141A712A0;
-  v6 = localToWorld;
-  v7 = this;
   out->m_max = (hkVector4f)xmmword_141A712F0;
   if ( this->m_subparts.m_size > 0 )
   {
     v8 = 0i64;
     do
     {
-      v9 = v7->m_subparts.m_data;
-      for ( i = 0; i < v9[v8].m_numTriangles; ++i )
+      m_data = this->m_subparts.m_data;
+      for ( i = 0; i < m_data[v8].m_numTriangles; ++i )
       {
-        v11 = v9[v8].m_vertexStriding;
-        v12 = v9[v8].m_vertexBase;
-        v13 = i * v9[v8].m_indexStriding;
-        if ( v9[v8].m_stridingType.m_storage == 1 )
+        m_vertexStriding = m_data[v8].m_vertexStriding;
+        m_vertexBase = m_data[v8].m_vertexBase;
+        v13 = i * m_data[v8].m_indexStriding;
+        if ( m_data[v8].m_stridingType.m_storage == 1 )
         {
-          v14 = (unsigned __int16 *)((char *)v9[v8].m_indexBase + v13);
-          v15 = v11 * *v14;
-          v16 = v11 * v14[1];
-          v17 = v11 * (unsigned __int64)v14[2] >> 32 != 0;
+          v14 = (unsigned __int16 *)((char *)m_data[v8].m_indexBase + v13);
+          v15 = m_vertexStriding * *v14;
+          v16 = m_vertexStriding * v14[1];
         }
         else
         {
-          v18 = (char *)v9[v8].m_indexBase + v13;
-          v15 = (unsigned int)(v11 * *v18);
-          v16 = (unsigned int)(v11 * v18[1]);
-          v17 = (unsigned __int64)(v11 * (signed __int64)(signed int)v18[2]) >> 32 != 0;
+          v17 = (char *)m_data[v8].m_indexBase + v13;
+          v15 = (unsigned int)(m_vertexStriding * *v17);
+          v16 = (unsigned int)(m_vertexStriding * v17[1]);
         }
-        v19 = (const float *)((char *)v12 + v16);
-        meshShape_addToAabb(v5, v6, (const float *)((char *)v12 + v15), &v7->m_scaling);
-        meshShape_addToAabb(v21, v20, v19, &v7->m_scaling);
-        meshShape_addToAabb(v24, v23, v22, &v7->m_scaling);
+        v18 = (const float *)((char *)m_vertexBase + v16);
+        meshShape_addToAabb(out, localToWorld, (const float *)((char *)m_vertexBase + v15), &this->m_scaling);
+        meshShape_addToAabb(v20, v19, v18, &this->m_scaling);
+        meshShape_addToAabb(v23, v22, v21, &this->m_scaling);
       }
       ++v4;
       ++v8;
     }
-    while ( v4 < v7->m_subparts.m_size );
+    while ( v4 < this->m_subparts.m_size );
   }
-  v25 = _mm_shuffle_ps(
-          (__m128)COERCE_UNSIGNED_INT(tolerance + v7->m_radius),
-          (__m128)COERCE_UNSIGNED_INT(tolerance + v7->m_radius),
+  v24 = _mm_shuffle_ps(
+          (__m128)COERCE_UNSIGNED_INT(tolerance + this->m_radius),
+          (__m128)COERCE_UNSIGNED_INT(tolerance + this->m_radius),
           0);
-  v26 = _mm_add_ps(v5->m_max.m_quad, v25);
-  v5->m_min.m_quad = _mm_sub_ps(v5->m_min.m_quad, v25);
-  v5->m_max.m_quad = v26;
+  v25.m_quad = _mm_add_ps(out->m_max.m_quad, v24);
+  out->m_min.m_quad = _mm_sub_ps(out->m_min.m_quad, v24);
+  out->m_max = (hkVector4f)v25.m_quad;
 }
 
 // File Line: 313
@@ -475,17 +450,15 @@ void __fastcall hkpMeshShape::assertSubpartValidity(hkpMeshShape *this, hkpMeshS
 // RVA: 0xD180E0
 void __fastcall hkpMeshShape::addSubpart(hkpMeshShape *this, hkpMeshShape::Subpart *part)
 {
-  signed int *v2; // rbx
-  hkpMeshShape::Subpart *v3; // rdi
-  signed __int64 v4; // rcx
-  __int64 v5; // rcx
-  signed __int64 v6; // rdx
+  hkArray<hkpMeshShape::Subpart,hkContainerHeapAllocator> *p_m_subparts; // rbx
+  __int64 v4; // rcx
+  __int64 m_size; // rcx
+  __int64 v6; // rdx
 
-  v2 = (signed int *)&this->m_subparts;
-  v3 = part;
+  p_m_subparts = &this->m_subparts;
   if ( this->m_subparts.m_size == (this->m_subparts.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 80);
-  v4 = *(_QWORD *)v2 + 80i64 * v2[2];
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_subparts->m_data, 80);
+  v4 = (__int64)&p_m_subparts->m_data[p_m_subparts->m_size];
   if ( v4 )
   {
     *(_BYTE *)(v4 + 25) = 1;
@@ -497,19 +470,19 @@ void __fastcall hkpMeshShape::addSubpart(hkpMeshShape *this, hkpMeshShape::Subpa
     *(_DWORD *)(v4 + 32) = 0;
     *(_DWORD *)(v4 + 72) = -1;
   }
-  v5 = v2[2];
-  v2[2] = v5 + 1;
-  v6 = *(_QWORD *)v2 + 80 * v5;
-  *(_QWORD *)v6 = v3->m_vertexBase;
-  *(_QWORD *)(v6 + 8) = *(_QWORD *)&v3->m_vertexStriding;
-  *(_QWORD *)(v6 + 16) = v3->m_indexBase;
-  *(_QWORD *)(v6 + 24) = *(_QWORD *)&v3->m_stridingType.m_storage;
-  *(_QWORD *)(v6 + 32) = *(_QWORD *)&v3->m_flipAlternateTriangles;
-  *(_QWORD *)(v6 + 40) = v3->m_materialIndexBase;
-  *(_QWORD *)(v6 + 48) = *(_QWORD *)&v3->m_materialIndexStriding;
-  *(_QWORD *)(v6 + 56) = v3->m_materialBase;
-  *(_QWORD *)(v6 + 64) = *(_QWORD *)&v3->m_materialStriding;
-  *(_QWORD *)(v6 + 72) = *(_QWORD *)&v3->m_triangleOffset;
+  m_size = p_m_subparts->m_size;
+  p_m_subparts->m_size = m_size + 1;
+  v6 = (__int64)&p_m_subparts->m_data[m_size];
+  *(_QWORD *)v6 = part->m_vertexBase;
+  *(_QWORD *)(v6 + 8) = *(_QWORD *)&part->m_vertexStriding;
+  *(_QWORD *)(v6 + 16) = part->m_indexBase;
+  *(_QWORD *)(v6 + 24) = *(_QWORD *)&part->m_stridingType.m_storage;
+  *(_QWORD *)(v6 + 32) = *(_QWORD *)&part->m_flipAlternateTriangles;
+  *(_QWORD *)(v6 + 40) = part->m_materialIndexBase;
+  *(_QWORD *)(v6 + 48) = *(_QWORD *)&part->m_materialIndexStriding;
+  *(_QWORD *)(v6 + 56) = part->m_materialBase;
+  *(_QWORD *)(v6 + 64) = *(_QWORD *)&part->m_materialStriding;
+  *(_QWORD *)(v6 + 72) = *(_QWORD *)&part->m_triangleOffset;
   if ( !*(_QWORD *)(v6 + 40) )
   {
     *(_DWORD *)(v6 + 68) = 1;

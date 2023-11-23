@@ -2,8 +2,8 @@
 // RVA: 0x48A30
 void NoiseManager::Init(void)
 {
-  _DWORD *v0; // rax
-  signed __int64 v1; // rdx
+  __int64 v0; // rax
+  __int64 v1; // rdx
   int v2; // ecx
   int v3; // ecx
   int v4; // ecx
@@ -13,19 +13,19 @@ void NoiseManager::Init(void)
   v1 = 64i64;
   do
   {
-    v2 = v0[1350601732];
-    v0 += 4;
-    v0[1350882856] = v2;
-    v0[1350883112] = v2;
-    v3 = v0[1350601729];
-    v0[1350882857] = v3;
-    v0[1350883113] = v3;
-    v4 = v0[1350601730];
-    v0[1350882858] = v4;
-    v0[1350883114] = v4;
-    v5 = v0[1350601731];
-    v0[1350882859] = v5;
-    v0[1350883115] = v5;
+    v2 = permutation[v0];
+    v0 += 4i64;
+    LODWORD(UFG::ColourCubeMgr::mActiveColourCubes.mWeight[v0 + 3]) = v2;
+    p[v0 + 252] = v2;
+    v3 = *(_DWORD *)&algn_142023004[v0 * 4];
+    *(_DWORD *)&algn_1421358A4[v0 * 4] = v3;
+    p[v0 + 253] = v3;
+    v4 = *(_DWORD *)&algn_142023004[v0 * 4 + 4];
+    *(_DWORD *)&algn_1421358A4[v0 * 4 + 4] = v4;
+    p[v0 + 254] = v4;
+    v5 = *(_DWORD *)&algn_142023004[v0 * 4 + 8];
+    *(_DWORD *)&algn_1421358A4[v0 * 4 + 8] = v5;
+    p[v0 + 255] = v5;
     --v1;
   }
   while ( v1 );

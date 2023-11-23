@@ -1,8 +1,8 @@
 // File Line: 49
 // RVA: 0x12D1FA4
-signed __int64 __fastcall set_error_mode(int em)
+__int64 __fastcall set_error_mode(int em)
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   if ( em >= 0 )
   {

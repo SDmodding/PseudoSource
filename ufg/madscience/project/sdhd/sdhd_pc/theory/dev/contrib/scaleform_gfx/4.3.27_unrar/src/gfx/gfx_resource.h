@@ -1,6 +1,7 @@
 // File Line: 243
 // RVA: 0x8A50A0
-void __fastcall Scaleform::GFx::ResourceKey::KeyInterface::~KeyInterface(Scaleform::GFx::ResourceKey::KeyInterface *this)
+void __fastcall Scaleform::GFx::ResourceKey::KeyInterface::~KeyInterface(
+        Scaleform::GFx::ResourceKey::KeyInterface *this)
 {
   this->vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::ResourceKey::KeyInterface::`vftable;
 }
@@ -9,13 +10,11 @@ void __fastcall Scaleform::GFx::ResourceKey::KeyInterface::~KeyInterface(Scalefo
 // RVA: 0x6D2550
 void __fastcall Scaleform::GFx::ResourceData::~ResourceData(Scaleform::GFx::ResourceKey *this)
 {
-  Scaleform::GFx::ResourceKey *v1; // rdx
-  Scaleform::GFx::ResourceKey::KeyInterface *v2; // rcx
+  Scaleform::GFx::ResourceKey::KeyInterface *pKeyInterface; // rcx
 
-  v1 = this;
-  v2 = this->pKeyInterface;
-  if ( v2 )
-    v2->vfptr->Release(v2, v1->hKeyData);
+  pKeyInterface = this->pKeyInterface;
+  if ( pKeyInterface )
+    pKeyInterface->vfptr->Release(pKeyInterface, this->hKeyData);
 }
 
 // File Line: 381
@@ -27,13 +26,12 @@ void __fastcall Scaleform::GFx::Resource::~Resource(Scaleform::GFx::Resource *th
 
 // File Line: 442
 // RVA: 0x6EFC60
-Scaleform::GFx::ResourceKey *__fastcall Scaleform::GFx::Resource::GetKey(Scaleform::GFx::Resource *this, Scaleform::GFx::ResourceKey *result)
+AK::DSP::MultiChannelBiquadFilter<8>::Memories *__fastcall Scaleform::GFx::Resource::GetKey(
+        Scaleform::GFx::Resource *this,
+        AK::DSP::MultiChannelBiquadFilter<8>::Memories *result)
 {
-  Scaleform::GFx::ResourceKey *v2; // rbx
-
-  v2 = result;
-  AK::DSP::MultiChannelBiquadFilter<8>::Memories::Memories((AK::DSP::MultiChannelBiquadFilter<8>::Memories *)result);
-  return v2;
+  AK::DSP::MultiChannelBiquadFilter<8>::Memories::Memories(result);
+  return result;
 }
 
 // File Line: 473
@@ -47,24 +45,24 @@ void __fastcall Scaleform::GFx::ResourceReport::~ResourceReport(Scaleform::GFx::
 // RVA: 0x8A32D0
 void __fastcall Scaleform::GFx::ResourceLib::BindHandle::~BindHandle(Scaleform::GFx::ResourceLib::BindHandle *this)
 {
-  Scaleform::GFx::Resource *v1; // rbx
-  Scaleform::GFx::ResourceLibBase *v2; // rcx
+  Scaleform::GFx::Resource *pResource; // rbx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
-  if ( this->State == 1 )
+  if ( this->State == RS_Available )
   {
-    v1 = this->pResource;
-    if ( !_InterlockedDecrement(&v1->RefCount.Value) )
+    pResource = this->pResource;
+    if ( !_InterlockedDecrement(&pResource->RefCount.Value) )
     {
-      v2 = v1->pLib;
-      if ( v2 )
+      pLib = pResource->pLib;
+      if ( pLib )
       {
-        v2->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, (unsigned int)v1);
-        v1->pLib = 0i64;
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)pResource);
+        pResource->pLib = 0i64;
       }
-      v1->vfptr->__vecDelDtor(v1, 1u);
+      pResource->vfptr->__vecDelDtor(pResource, 1u);
     }
   }
-  else if ( this->State >= 2 )
+  else if ( this->State >= RS_WaitingResolve )
   {
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)this->pResource);
   }
@@ -72,103 +70,94 @@ void __fastcall Scaleform::GFx::ResourceLib::BindHandle::~BindHandle(Scaleform::
 
 // File Line: 811
 // RVA: 0x8A9200
-bool __fastcall Scaleform::GFx::ResourceWeakLib::ResourceNode::operator==(Scaleform::GFx::ResourceWeakLib::ResourceNode *this, Scaleform::GFx::ResourceKey *k)
+char __fastcall Scaleform::GFx::ResourceWeakLib::ResourceNode::operator==(
+        Scaleform::GFx::ResourceWeakLib::ResourceNode *this,
+        Scaleform::GFx::ResourceKey *k)
 {
-  Scaleform::GFx::ResourceKey *v2; // rbx
   _QWORD *v3; // rax
-  __int64 v4; // rbx
-  bool result; // al
-  Scaleform::GFx::ResourceLib::ResourceSlot *v6; // rdx
-  Scaleform::GFx::ResourceKey::KeyInterface *v7; // rcx
-  __int64 v8; // [rsp+28h] [rbp-20h]
-  __int64 v9; // [rsp+30h] [rbp-18h]
+  char v4; // bl
+  Scaleform::GFx::ResourceLib::ResourceSlot *pResolver; // rdx
+  Scaleform::GFx::ResourceKey::KeyInterface *pKeyInterface; // rcx
+  __int64 v8[4]; // [rsp+28h] [rbp-20h] BYREF
 
-  v2 = k;
   if ( this->Type )
   {
-    v6 = this->pResolver;
-    v7 = v6->Key.pKeyInterface;
-    if ( v7 && v2->pKeyInterface )
-      result = v7->vfptr->KeyEquals(v7, v6->Key.hKeyData, v2);
-    else
-      result = 0;
+    pResolver = this->pResolver;
+    pKeyInterface = pResolver->Key.pKeyInterface;
+    return pKeyInterface
+        && k->pKeyInterface
+        && pKeyInterface->vfptr->KeyEquals(pKeyInterface, pResolver->Key.hKeyData, k);
   }
   else
   {
-    v3 = (_QWORD *)this->pResolver->vfptr[1].__vecDelDtor(
-                     (Scaleform::RefCountImplCore *)this->pResolver,
-                     (unsigned int)&v8);
-    if ( *v3 && v2->pKeyInterface )
-      v4 = (*(unsigned __int8 (__fastcall **)(_QWORD, _QWORD, Scaleform::GFx::ResourceKey *))(*(_QWORD *)*v3 + 40i64))(
+    v3 = this->pResolver->vfptr[1].__vecDelDtor(this->pResolver, v8);
+    if ( *v3 && k->pKeyInterface )
+      v4 = (*(__int64 (__fastcall **)(_QWORD, _QWORD, Scaleform::GFx::ResourceKey *))(*(_QWORD *)*v3 + 40i64))(
              *v3,
              v3[1],
-             v2);
+             k);
     else
-      LOBYTE(v4) = 0;
-    if ( v8 )
-      (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v8 + 16i64))(v8, v9);
-    result = v4;
+      v4 = 0;
+    if ( v8[0] )
+      (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v8[0] + 16i64))(v8[0], v8[1]);
+    return v4;
   }
-  return result;
 }
 
 // File Line: 827
 // RVA: 0x8A9BB0
-__int64 __fastcall Scaleform::GFx::ResourceWeakLib::ResourceNode::HashOp::operator()(Scaleform::GFx::ResourceWeakLib::ResourceNode::HashOp *this, Scaleform::GFx::ResourceWeakLib::ResourceNode *node)
+__int64 __fastcall Scaleform::GFx::ResourceWeakLib::ResourceNode::HashOp::operator()(
+        Scaleform::GFx::ResourceWeakLib::ResourceNode::HashOp *this,
+        Scaleform::GFx::ResourceWeakLib::ResourceNode *node)
 {
   __int64 v2; // rbp
   __int64 *v3; // rsi
   char v4; // bl
-  __int64 v5; // r15
+  __int64 hKeyData; // r15
   __int64 v6; // r14
-  Scaleform::GFx::ResourceLib::ResourceSlot *v7; // rbx
-  Scaleform::GFx::ResourceKey::KeyInterface *v8; // rcx
+  Scaleform::GFx::ResourceLib::ResourceSlot *pResolver; // rbx
+  Scaleform::GFx::ResourceKey::KeyInterface *pKeyInterface; // rcx
   __int64 v9; // rdi
   __int64 v10; // rsi
-  Scaleform::GFx::ResourceKey::KeyInterface *v12; // [rsp+30h] [rbp-48h]
-  void *v13; // [rsp+38h] [rbp-40h]
-  __int64 v14; // [rsp+40h] [rbp-38h]
-  __int64 v15; // [rsp+48h] [rbp-30h]
-  __int64 v16; // [rsp+50h] [rbp-28h]
-  __int64 v17; // [rsp+58h] [rbp-20h]
+  __int64 v12; // [rsp+30h] [rbp-48h] BYREF
+  __int64 v13; // [rsp+38h] [rbp-40h]
+  __int64 v14[4]; // [rsp+40h] [rbp-38h] BYREF
 
   v2 = 0i64;
   if ( node->Type )
   {
-    v7 = node->pResolver;
-    v8 = v7->Key.pKeyInterface;
-    if ( v8 )
-      v8->vfptr->AddRef(v8, v7->Key.hKeyData);
-    v6 = (__int64)v7->Key.pKeyInterface;
-    v12 = v7->Key.pKeyInterface;
-    v5 = (__int64)v7->Key.hKeyData;
-    v13 = v7->Key.hKeyData;
-    v3 = (__int64 *)&v12;
+    pResolver = node->pResolver;
+    pKeyInterface = pResolver->Key.pKeyInterface;
+    if ( pKeyInterface )
+      pKeyInterface->vfptr->AddRef(pKeyInterface, pResolver->Key.hKeyData);
+    v6 = (__int64)pResolver->Key.pKeyInterface;
+    v12 = v6;
+    hKeyData = (__int64)pResolver->Key.hKeyData;
+    v13 = hKeyData;
+    v3 = &v12;
     v4 = 2;
   }
   else
   {
-    v3 = (__int64 *)node->pResolver->vfptr[1].__vecDelDtor(
-                      (Scaleform::RefCountImplCore *)node->pResolver,
-                      (unsigned int)&v14);
+    v3 = (__int64 *)node->pResolver->vfptr[1].__vecDelDtor(node->pResolver, v14);
     v4 = 1;
-    v5 = (__int64)v13;
-    v6 = (__int64)v12;
+    hKeyData = v13;
+    v6 = v12;
   }
   if ( *v3 )
     (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)*v3 + 8i64))(*v3, v3[1]);
   v9 = *v3;
-  v16 = *v3;
+  v14[2] = *v3;
   v10 = v3[1];
-  v17 = v10;
-  if ( v4 & 2 )
+  v14[3] = v10;
+  if ( (v4 & 2) != 0 )
   {
-    v4 &= 0xFDu;
+    v4 &= ~2u;
     if ( v6 )
-      (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v6 + 16i64))(v6, v5);
+      (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v6 + 16i64))(v6, hKeyData);
   }
-  if ( v4 & 1 && v14 )
-    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v14 + 16i64))(v14, v15);
+  if ( (v4 & 1) != 0 && v14[0] )
+    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v14[0] + 16i64))(v14[0], v14[1]);
   if ( v9 )
     v2 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v9 + 32i64))(v9, v10);
   if ( v9 )

@@ -28,17 +28,17 @@ hkClass *__fastcall hkReferencedObject::staticClass()
 
 // File Line: 65
 // RVA: 0xC54E40
-void __fastcall finishLoadedObjecthkReferencedObject(void *p, int finishing)
+void __fastcall finishLoadedObjecthkReferencedObject(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkReferencedObject::`vftable;
+    *p = &hkReferencedObject::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xC54E60
-void __fastcall cleanupLoadedObjecthkReferencedObject(void *p)
+void __fastcall cleanupLoadedObjecthkReferencedObject(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkReferencedObjectTypeInfo__()
   hkReferencedObjectTypeInfo.m_typeName = "hkReferencedObject";
   hkReferencedObjectTypeInfo.m_vtable = result;
   hkReferencedObjectTypeInfo.m_scopedName = "!hkReferencedObject";
-  hkReferencedObjectTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkReferencedObject;
-  hkReferencedObjectTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkReferencedObject;
+  hkReferencedObjectTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkReferencedObject;
+  hkReferencedObjectTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkReferencedObject;
   return result;
 }
 

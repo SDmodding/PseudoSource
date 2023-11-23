@@ -1,10 +1,10 @@
 // File Line: 44
 // RVA: 0x12BC38C
-signed __int64 __fastcall remove(const char *path)
+__int64 __fastcall remove(const char *path)
 {
   unsigned __int16 *v1; // rbx
   unsigned int v3; // ebx
-  unsigned __int16 *outPath; // [rsp+30h] [rbp+8h]
+  unsigned __int16 *outPath; // [rsp+30h] [rbp+8h] BYREF
 
   v1 = 0i64;
   outPath = 0i64;
@@ -21,23 +21,24 @@ signed __int64 __fastcall remove(const char *path)
 
 // File Line: 67
 // RVA: 0x12BD398
-signed __int64 __fastcall wremove(const wchar_t *path)
+__int64 __fastcall wremove(const wchar_t *path)
 {
-  unsigned int v1; // eax
+  unsigned int LastError; // eax
 
   if ( DeleteFileW(path) )
-    v1 = 0;
+    LastError = 0;
   else
-    v1 = GetLastError();
-  if ( !v1 )
+    LastError = GetLastError();
+  if ( !LastError )
     return 0i64;
-  dosmaperr(v1);
+  dosmaperr(LastError);
   return 0xFFFFFFFFi64;
 }
 
 // File Line: 89
 // RVA: 0x12BD3C8
-signed __int64 __fastcall wunlink(const wchar_t *path)
+// attributes: thunk
+__int64 __fastcall wunlink(const wchar_t *path)
 {
   return wremove(path);
 }

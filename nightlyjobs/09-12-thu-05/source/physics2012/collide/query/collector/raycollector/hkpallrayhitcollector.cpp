@@ -1,22 +1,21 @@
 // File Line: 14
 // RVA: 0xD08E90
-void __fastcall hkpAllRayHitCollector::addRayHit(hkpAllRayHitCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfo)
+void __fastcall hkpAllRayHitCollector::addRayHit(
+        hkpAllRayHitCollector *this,
+        hkpCdBody *cdBody,
+        hkpShapeRayCastCollectorOutput *hitInfo)
 {
-  signed int *v3; // rbx
-  hkpShapeRayCastCollectorOutput *v4; // rbp
-  hkpCdBody *v5; // rsi
-  signed __int64 v6; // rcx
-  __int64 v7; // rcx
-  signed __int64 v8; // rdi
-  hkpCdBody *v9; // rax
+  hkInplaceArray<hkpWorldRayCastOutput,8,hkContainerHeapAllocator> *p_m_hits; // rbx
+  __int64 v6; // rcx
+  __int64 m_size; // rcx
+  hkVector4f *p_m_normal; // rdi
+  hkpCdBody *m_parent; // rax
   hkpCdBody *v10; // rcx
 
-  v3 = (signed int *)&this->m_hits;
-  v4 = hitInfo;
-  v5 = cdBody;
+  p_m_hits = &this->m_hits;
   if ( this->m_hits.m_size == (this->m_hits.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 96);
-  v6 = *(_QWORD *)v3 + 96i64 * v3[2];
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_hits->m_data, 96);
+  v6 = (__int64)&p_m_hits->m_data[p_m_hits->m_size];
   if ( v6 )
   {
     *(_DWORD *)(v6 + 16) = 1065353216;
@@ -25,29 +24,29 @@ void __fastcall hkpAllRayHitCollector::addRayHit(hkpAllRayHitCollector *this, hk
     *(_DWORD *)(v6 + 32) = -1;
     *(_QWORD *)(v6 + 80) = 0i64;
   }
-  v7 = v3[2];
-  v3[2] = v7 + 1;
-  v8 = *(_QWORD *)v3 + 96 * v7;
-  *(hkVector4f *)v8 = v4->m_normal;
-  *(float *)(v8 + 16) = v4->m_hitFraction;
-  *(_DWORD *)(v8 + 20) = v4->m_extraInfo;
-  *(_DWORD *)(v8 + 24) = v4->m_pad[0];
-  *(_DWORD *)(v8 + 28) = v4->m_pad[1];
-  hkpRayHitCollector::shapeKeysFromCdBody((unsigned int *)(v8 + 32), 8, v5);
-  v9 = v5->m_parent;
-  if ( v9 )
+  m_size = p_m_hits->m_size;
+  p_m_hits->m_size = m_size + 1;
+  p_m_normal = &p_m_hits->m_data[m_size].m_normal;
+  *p_m_normal = hitInfo->m_normal;
+  p_m_normal[1].m_quad.m128_i32[0] = LODWORD(hitInfo->m_hitFraction);
+  p_m_normal[1].m_quad.m128_i32[1] = hitInfo->m_extraInfo;
+  p_m_normal[1].m_quad.m128_i32[2] = hitInfo->m_pad[0];
+  p_m_normal[1].m_quad.m128_i32[3] = hitInfo->m_pad[1];
+  hkpRayHitCollector::shapeKeysFromCdBody((unsigned int *)&p_m_normal[2], 8, cdBody);
+  m_parent = cdBody->m_parent;
+  if ( m_parent )
   {
     do
     {
-      v10 = v9;
-      v9 = v9->m_parent;
+      v10 = m_parent;
+      m_parent = m_parent->m_parent;
     }
-    while ( v9 );
-    *(_QWORD *)(v8 + 80) = v10;
+    while ( m_parent );
+    p_m_normal[5].m_quad.m128_u64[0] = (unsigned __int64)v10;
   }
   else
   {
-    *(_QWORD *)(v8 + 80) = v5;
+    p_m_normal[5].m_quad.m128_u64[0] = (unsigned __int64)cdBody;
   }
 }
 
@@ -55,14 +54,14 @@ void __fastcall hkpAllRayHitCollector::addRayHit(hkpAllRayHitCollector *this, hk
 // RVA: 0xD08E60
 void __fastcall hkpAllRayHitCollector::sortHits(hkpAllRayHitCollector *this)
 {
-  int v1; // er8
+  int m_size; // r8d
 
-  v1 = this->m_hits.m_size;
-  if ( v1 > 1 )
+  m_size = this->m_hits.m_size;
+  if ( m_size > 1 )
     hkAlgorithm::quickSortRecursive<hkpWorldRayCastOutput,hkAlgorithm::less<hkpWorldRayCastOutput>>(
       this->m_hits.m_data,
       0,
-      v1 - 1,
+      m_size - 1,
       0);
 }
 

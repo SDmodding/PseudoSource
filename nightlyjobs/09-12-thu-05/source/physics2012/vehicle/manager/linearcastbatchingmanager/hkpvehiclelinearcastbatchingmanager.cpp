@@ -1,46 +1,45 @@
 // File Line: 21
 // RVA: 0xE2EF20
-void __fastcall hkpVehicleLinearCastBatchingManager::getTotalNumCommands(hkpVehicleLinearCastBatchingManager *this, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles, int *numCommands, int *numWheels)
+void __fastcall hkpVehicleLinearCastBatchingManager::getTotalNumCommands(
+        hkpVehicleLinearCastBatchingManager *this,
+        hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles,
+        int *numCommands,
+        int *numWheels)
 {
   int v4; // ebx
-  int *v5; // r14
-  int *v6; // r15
-  hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v7; // rsi
   __int64 v8; // rdi
-  int v9; // eax
+  hkpVehicleWheelCollide *m_wheelCollide; // rcx
 
   v4 = 0;
-  v5 = numWheels;
-  v6 = numCommands;
   *numCommands = 0;
   *numWheels = 0;
-  v7 = activeVehicles;
   if ( activeVehicles->m_size > 0 )
   {
     v8 = 0i64;
     do
     {
-      v9 = ((__int64 (*)(void))v7->m_data[v8]->m_wheelCollide->vfptr[6].__vecDelDtor)();
+      m_wheelCollide = activeVehicles->m_data[v8]->m_wheelCollide;
       ++v4;
       ++v8;
-      *v6 += v9;
-      *v5 += (unsigned __int8)v7->m_data[v8 - 1]->m_data->m_numWheels;
+      *numCommands += ((__int64 (__fastcall *)(hkpVehicleWheelCollide *))m_wheelCollide->vfptr[6].__vecDelDtor)(m_wheelCollide);
+      *numWheels += (unsigned __int8)activeVehicles->m_data[v8 - 1]->m_data->m_numWheels;
     }
-    while ( v4 < v7->m_size );
+    while ( v4 < activeVehicles->m_size );
   }
 }
 
 // File Line: 34
 // RVA: 0xE2E9C0
-__int64 __fastcall hkpVehicleLinearCastBatchingManager::getBufferSize(hkpVehicleLinearCastBatchingManager *this, int numJobs, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
+__int64 __fastcall hkpVehicleLinearCastBatchingManager::getBufferSize(
+        hkpVehicleLinearCastBatchingManager *this,
+        int numJobs,
+        hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
 {
-  int v3; // ebx
-  int numWheels; // [rsp+38h] [rbp+10h]
-  int numCommands; // [rsp+48h] [rbp+20h]
+  int numWheels; // [rsp+38h] [rbp+10h] BYREF
+  int numCommands; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = numJobs;
   hkpVehicleLinearCastBatchingManager::getTotalNumCommands(this, activeVehicles, &numCommands, &numWheels);
-  return ((16 * v3 + 15) & 0xFFFFFFF0)
+  return ((16 * numJobs + 15) & 0xFFFFFFF0)
        + (((numCommands << 6) + 15) & 0xFFFFFFF0)
        + ((112 * numWheels + 15) & 0xFFFFFFF0)
        + ((80 * numCommands + 15) & 0xFFFFFFF0);
@@ -48,39 +47,47 @@ __int64 __fastcall hkpVehicleLinearCastBatchingManager::getBufferSize(hkpVehicle
 
 // File Line: 50
 // RVA: 0xE2EFB0
-void __fastcall hkpVehicleLinearCastBatchingManager::getLinearCastBatchFromBuffer(hkpVehicleLinearCastBatchingManager *this, void *buffer, int numJobs, hkpVehicleLinearCastBatchingManager::LinearCastBatch *batchOut, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
+void __fastcall hkpVehicleLinearCastBatchingManager::getLinearCastBatchFromBuffer(
+        hkpVehicleLinearCastBatchingManager *this,
+        hkpCollidable *buffer,
+        int numJobs,
+        hkpVehicleLinearCastBatchingManager::LinearCastBatch *batchOut,
+        hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
 {
-  hkpCollidable *v5; // rbx
-  hkpVehicleLinearCastBatchingManager::LinearCastBatch *v6; // rdi
   int v7; // ecx
   int v8; // eax
-  unsigned __int64 v9; // rbx
-  unsigned __int64 v10; // rbx
-  int numWheels; // [rsp+38h] [rbp+10h]
-  int numCommands; // [rsp+48h] [rbp+20h]
+  hkpPairLinearCastCommand *v9; // rbx
+  hkpRootCdPoint *v10; // rbx
+  int numWheels; // [rsp+38h] [rbp+10h] BYREF
+  int numCommands; // [rsp+48h] [rbp+20h] BYREF
 
-  v5 = (hkpCollidable *)buffer;
-  v6 = batchOut;
   hkpVehicleLinearCastBatchingManager::getTotalNumCommands(this, activeVehicles, &numCommands, &numWheels);
   v7 = numCommands;
   v8 = 112 * numWheels + 15;
-  v6->m_collidableStorage = v5;
-  v9 = (unsigned __int64)v5 + (v8 & 0xFFFFFFFFFFFFFFF0ui64);
-  v6->m_commandStorage = (hkpPairLinearCastCommand *)v9;
-  v10 = ((80 * v7 + 15) & 0xFFFFFFFFFFFFFFF0ui64) + v9;
-  v6->m_outputStorage = (hkpRootCdPoint *)v10;
-  v6->m_jobHeaders = (hkpCollisionQueryJobHeader *)(v10 + (((v7 << 6) + 15) & 0xFFFFFFFFFFFFFFF0ui64));
+  batchOut->m_collidableStorage = buffer;
+  v9 = (hkpPairLinearCastCommand *)((char *)buffer + (v8 & 0xFFFFFFFFFFFFFFF0ui64));
+  batchOut->m_commandStorage = v9;
+  v10 = (hkpRootCdPoint *)((char *)v9 + ((80 * v7 + 15) & 0xFFFFFFFFFFFFFFF0ui64));
+  batchOut->m_outputStorage = v10;
+  batchOut->m_jobHeaders = (hkpCollisionQueryJobHeader *)((char *)v10 + (((v7 << 6) + 15) & 0xFFFFFFFFFFFFFFF0ui64));
 }
 
 // File Line: 73
 // RVA: 0xE2EA30
-__int64 __fastcall hkpVehicleLinearCastBatchingManager::buildAndAddCastJobs(hkpVehicleLinearCastBatchingManager *this, hkpWorld *world, int filterSize, int numJobs, hkJobQueue *jobQueue, hkSemaphore *semaphore, void *buffer, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
+__int64 __fastcall hkpVehicleLinearCastBatchingManager::buildAndAddCastJobs(
+        hkpVehicleLinearCastBatchingManager *this,
+        hkpWorld *world,
+        int filterSize,
+        int numJobs,
+        hkJobQueue *jobQueue,
+        hkSemaphore *semaphore,
+        void *buffer,
+        hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
 {
-  hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v8; // r13
-  __int64 v9; // rbx
-  hkpPairLinearCastCommand *v10; // rcx
-  hkpCollidable *v11; // r14
-  hkpRootCdPoint *v12; // r12
+  __int64 m_size; // rbx
+  hkpPairLinearCastCommand *m_commandStorage; // rcx
+  hkpCollidable *m_collidableStorage; // r14
+  hkpRootCdPoint *m_outputStorage; // r12
   int v13; // esi
   __int64 v14; // rdi
   hkpPairLinearCastCommand *v15; // r15
@@ -88,77 +95,73 @@ __int64 __fastcall hkpVehicleLinearCastBatchingManager::buildAndAddCastJobs(hkpV
   int v17; // eax
   int v18; // edi
   int v20; // eax
-  hkpCollisionQueryJobHeader *v21; // rsi
-  int v22; // er14
+  hkpCollisionQueryJobHeader *m_jobHeaders; // rsi
+  int v22; // r14d
   int v23; // edx
-  int i; // er13
-  hkpProcessCollisionInput *v25; // rax
+  int i; // r13d
+  hkpProcessCollisionInput *m_collisionInput; // rax
   int v26; // ebx
   __int64 v27; // [rsp+30h] [rbp-89h]
-  hkpCollisionFilter *v28; // [rsp+38h] [rbp-81h]
-  hkpVehicleLinearCastBatchingManager::LinearCastBatch batchOut; // [rsp+40h] [rbp-79h]
-  hkpPairLinearCastJob v30; // [rsp+60h] [rbp-59h]
-  hkpWorld *v31; // [rsp+108h] [rbp+4Fh]
-  int v32; // [rsp+118h] [rbp+5Fh]
+  hkpCollisionFilter *m_collisionFilter; // [rsp+38h] [rbp-81h]
+  hkpVehicleLinearCastBatchingManager::LinearCastBatch batchOut; // [rsp+40h] [rbp-79h] BYREF
+  hkpPairLinearCastJob v30; // [rsp+60h] [rbp-59h] BYREF
   int v33; // [rsp+118h] [rbp+5Fh]
   hkpPairLinearCastCommand *activeVehiclesa; // [rsp+138h] [rbp+7Fh]
 
-  v32 = numJobs;
-  v31 = world;
-  v8 = activeVehicles;
-  v9 = activeVehicles->m_size;
-  v28 = world->m_collisionFilter;
+  m_size = activeVehicles->m_size;
+  m_collisionFilter = world->m_collisionFilter;
   hkpVehicleLinearCastBatchingManager::getLinearCastBatchFromBuffer(this, buffer, numJobs, &batchOut, activeVehicles);
-  v10 = batchOut.m_commandStorage;
-  v11 = batchOut.m_collidableStorage;
-  v12 = batchOut.m_outputStorage;
+  m_commandStorage = batchOut.m_commandStorage;
+  m_collidableStorage = batchOut.m_collidableStorage;
+  m_outputStorage = batchOut.m_outputStorage;
   v13 = 0;
   v14 = 0i64;
   activeVehiclesa = batchOut.m_commandStorage;
   v15 = batchOut.m_commandStorage;
-  v27 = v9;
-  if ( (signed int)v9 > 0 )
+  v27 = m_size;
+  if ( (int)m_size > 0 )
   {
     do
     {
-      v16 = v8->m_data[v14];
+      v16 = activeVehicles->m_data[v14];
       v17 = ((__int64 (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, hkpCollisionFilter *, hkpCollidable *, hkpPairLinearCastCommand *, hkpRootCdPoint *))v16->m_wheelCollide->vfptr[7].__vecDelDtor)(
               v16->m_wheelCollide,
-              v8->m_data[v14++],
-              v28,
-              v11,
+              v16,
+              m_collisionFilter,
+              m_collidableStorage,
               v15,
-              v12);
+              m_outputStorage);
+      ++v14;
       v13 += v17;
       v15 += v17;
-      v11 += (unsigned __int8)v16->m_data->m_numWheels;
-      v12 += v17;
+      m_collidableStorage += (unsigned __int8)v16->m_data->m_numWheels;
+      m_outputStorage += v17;
     }
     while ( v14 < v27 );
-    v10 = batchOut.m_commandStorage;
+    m_commandStorage = batchOut.m_commandStorage;
   }
   v18 = v13;
-  if ( v32 < v13 )
-    v18 = v32;
+  if ( numJobs < v13 )
+    v18 = numJobs;
   if ( !v18 )
     return 0i64;
   v20 = v13;
-  v21 = batchOut.m_jobHeaders;
+  m_jobHeaders = batchOut.m_jobHeaders;
   v22 = 0;
   v23 = v20 % v18;
   v33 = v20 % v18;
-  for ( i = v20 / v18; v22 < v18; activeVehiclesa += v26 )
+  for ( i = v20 / v18; v22 < v18; activeVehiclesa = m_commandStorage )
   {
     v30.m_size = 96;
-    v25 = v31->m_collisionInput;
-    v30.m_commandArray = v10;
-    v30.m_collisionInput = v25;
+    m_collisionInput = world->m_collisionInput;
+    v30.m_commandArray = m_commandStorage;
+    v30.m_collisionInput = m_collisionInput;
     *(_WORD *)&v30.m_jobSubType = 515;
     v26 = i + (v22 < v23);
     v30.m_jobSpuType.m_storage = 2;
     v30.m_threadAffinity = -1;
     v30.m_jobDoneFlag = 0i64;
-    v30.m_sharedJobHeaderOnPpu = v21;
+    v30.m_sharedJobHeaderOnPpu = m_jobHeaders;
     v30.m_tolerance = 0.0;
     v30.m_numCommandsPerTask = 128;
     v30.m_semaphore = semaphore;
@@ -166,12 +169,12 @@ __int64 __fastcall hkpVehicleLinearCastBatchingManager::buildAndAddCastJobs(hkpV
     v30.m_maxExtraPenetration = 0.00000011920929;
     v30.m_iterativeLinearCastEarlyOutDistance = 0.0099999998;
     v30.m_iterativeLinearCastMaxIterations = 10;
-    v21->m_openJobs = (v26 - 1) / 128 + 1;
+    m_jobHeaders->m_openJobs = (v26 - 1) / 128 + 1;
     hkpPairLinearCastJob::setRunsOnSpuOrPpu(&v30);
-    hkJobQueue::addJob(jobQueue, (hkJob *)&v30.m_jobSubType, JOB_LOW_PRIORITY);
+    hkJobQueue::addJob(jobQueue, &v30, JOB_LOW_PRIORITY);
     ++v22;
-    ++v21;
-    v10 = &activeVehiclesa[v26];
+    ++m_jobHeaders;
+    m_commandStorage = &activeVehiclesa[v26];
     v23 = v33;
   }
   return (unsigned int)v18;
@@ -179,111 +182,113 @@ __int64 __fastcall hkpVehicleLinearCastBatchingManager::buildAndAddCastJobs(hkpV
 
 // File Line: 157
 // RVA: 0xE2EC30
-void __usercall hkpVehicleLinearCastBatchingManager::stepVehiclesUsingCastResults(hkpVehicleLinearCastBatchingManager *this@<rcx>, hkStepInfo *updatedStepInfo@<rdx>, int numJobs@<r8d>, void *buffer@<r9>, hkStepInfo *a5@<rbx>, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *a6@<rdi>, hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
+void __fastcall hkpVehicleLinearCastBatchingManager::stepVehiclesUsingCastResults(
+        hkpVehicleLinearCastBatchingManager *this,
+        hkStepInfo *updatedStepInfo,
+        int numJobs,
+        void *buffer,
+        hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *activeVehicles)
 {
+  hkStepInfo *v5; // rbx
+  hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v6; // rdi
   hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v7; // rsi
-  __int64 v8; // rbx
-  hkpPairLinearCastCommand *v9; // r12
-  hkLifoAllocator *v10; // rax
-  hkpVehicleWheelCollide::CollisionDetectionWheelOutput *v11; // rdi
-  unsigned __int64 v12; // rcx
-  signed int v13; // ecx
+  __int64 m_size; // rbx
+  hkpPairLinearCastCommand *m_commandStorage; // r12
+  hkLifoAllocator *Value; // rax
+  hkpVehicleWheelCollide::CollisionDetectionWheelOutput *m_cur; // rdi
+  hkpVehicleWheelCollide::CollisionDetectionWheelOutput *v12; // rcx
+  int v13; // ecx
   __int64 v14; // r13
   int v15; // ecx
   hkpVehicleInstance *v16; // r14
-  int v17; // er15
-  int v18; // er9
+  int m_numWheels; // r15d
+  int v18; // r9d
   unsigned __int8 v19; // si
   hkpVehicleWheelCollide *i; // rbx
   __int64 v21; // rax
-  hkBaseObjectVtbl *v22; // r10
-  signed __int64 v23; // rdi
+  hkBaseObjectVtbl *vfptr; // r10
+  __int64 v23; // rdi
   int v24; // eax
   signed int v25; // ebx
   hkLifoAllocator *v26; // rax
-  int v27; // er8
-  hkResult result; // [rsp+28h] [rbp-21h]
+  int v27; // r8d
+  hkResult result; // [rsp+28h] [rbp-21h] BYREF
   __int64 v29; // [rsp+30h] [rbp-19h]
-  hkpVehicleWheelCollide::CollisionDetectionWheelOutput *array; // [rsp+38h] [rbp-11h]
+  hkpVehicleWheelCollide::CollisionDetectionWheelOutput *array; // [rsp+38h] [rbp-11h] BYREF
   int v31; // [rsp+40h] [rbp-9h]
   int v32; // [rsp+44h] [rbp-5h]
   void *p; // [rsp+48h] [rbp-1h]
   int v34; // [rsp+50h] [rbp+7h]
-  hkpVehicleLinearCastBatchingManager::LinearCastBatch batchOut; // [rsp+58h] [rbp+Fh]
+  hkpVehicleLinearCastBatchingManager::LinearCastBatch batchOut; // [rsp+58h] [rbp+Fh] BYREF
   hkStepInfo *stepInfo; // [rsp+B0h] [rbp+67h]
   hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v37; // [rsp+C8h] [rbp+7Fh]
   hkArray<hkpVehicleInstance *,hkContainerHeapAllocator> *v38; // [rsp+C8h] [rbp+7Fh]
 
-  stepInfo = a5;
+  stepInfo = v5;
   v7 = v37;
-  v8 = v37->m_size;
-  v38 = a6;
+  m_size = v37->m_size;
+  v38 = v6;
   hkpVehicleLinearCastBatchingManager::getLinearCastBatchFromBuffer(this, buffer, numJobs, &batchOut, v7);
-  v9 = batchOut.m_commandStorage;
+  m_commandStorage = batchOut.m_commandStorage;
   array = 0i64;
   v31 = 0;
-  v32 = 2147483648;
+  v32 = 0x80000000;
   v34 = 16;
-  v10 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v11 = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)v10->m_cur;
-  v12 = (unsigned __int64)&v11[16];
-  if ( v10->m_slabSize < 1536 || (void *)v12 > v10->m_end )
-    v11 = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)hkLifoAllocator::allocateFromNewSlab(v10, 1536);
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)Value->m_cur;
+  v12 = m_cur + 16;
+  if ( Value->m_slabSize < 1536 || v12 > Value->m_end )
+    m_cur = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)hkLifoAllocator::allocateFromNewSlab(Value, 1536);
   else
-    v10->m_cur = (void *)v12;
+    Value->m_cur = v12;
   v13 = -2147483632;
-  array = v11;
-  p = v11;
+  array = m_cur;
+  p = m_cur;
   v14 = 0i64;
-  v29 = v8;
+  v29 = m_size;
   v32 = -2147483632;
-  if ( (signed int)v8 <= 0 )
-    goto LABEL_29;
+  if ( (int)m_size <= 0 )
+    goto LABEL_19;
   while ( 1 )
   {
     v15 = v13 & 0x3FFFFFFF;
     v16 = v7->m_data[v14];
-    v17 = (unsigned __int8)v16->m_data->m_numWheels;
-    if ( v15 >= v17 )
+    m_numWheels = (unsigned __int8)v16->m_data->m_numWheels;
+    if ( v15 >= m_numWheels )
     {
-      result.m_enum = 0;
+      result.m_enum = HK_SUCCESS;
     }
     else
     {
       v18 = (unsigned __int8)v16->m_data->m_numWheels;
-      if ( v17 < 2 * v15 )
+      if ( m_numWheels < 2 * v15 )
         v18 = 2 * v15;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v18, 96);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v18, 96);
     }
     v19 = 0;
-    v31 = v17;
-    for ( i = v16->m_wheelCollide; v19 < v17; v9 += v24 )
+    v31 = m_numWheels;
+    for ( i = v16->m_wheelCollide; v19 < m_numWheels; m_commandStorage += v24 )
     {
       v21 = ((__int64 (__fastcall *)(hkpVehicleWheelCollide *, _QWORD, hkpPairLinearCastCommand *))i->vfptr[7].__first_virtual_table_function__)(
               i,
               v19,
-              v9);
-      v22 = i->vfptr;
+              m_commandStorage);
+      vfptr = i->vfptr;
+      v23 = v19;
       if ( v21 )
-      {
-        v23 = v19;
-        ((void (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, _QWORD, __int64, hkpVehicleWheelCollide::CollisionDetectionWheelOutput *, _QWORD))v22[8].__first_virtual_table_function__)(
+        ((void (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, _QWORD, __int64, hkpVehicleWheelCollide::CollisionDetectionWheelOutput *, hkResultEnum))vfptr[8].__first_virtual_table_function__)(
           i,
           v16,
           v19,
           v21,
           &array[v23],
-          *(_QWORD *)&result.m_enum);
-      }
+          result.m_enum);
       else
-      {
-        v23 = v19;
-        ((void (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, _QWORD, hkpVehicleWheelCollide::CollisionDetectionWheelOutput *))v22[9].__vecDelDtor)(
+        ((void (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, _QWORD, hkpVehicleWheelCollide::CollisionDetectionWheelOutput *))vfptr[9].__vecDelDtor)(
           i,
           v16,
           v19,
           &array[v23]);
-      }
       ((void (__fastcall *)(hkpVehicleWheelCollide *, hkpVehicleInstance *, _QWORD, hkpVehicleWheelCollide::CollisionDetectionWheelOutput *))i->vfptr[5].__first_virtual_table_function__)(
         i,
         v16,
@@ -299,22 +304,19 @@ void __usercall hkpVehicleLinearCastBatchingManager::stepVehiclesUsingCastResult
       break;
     v13 = v32;
   }
-  v11 = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)p;
+  m_cur = (hkpVehicleWheelCollide::CollisionDetectionWheelOutput *)p;
   if ( p == array )
-LABEL_29:
+LABEL_19:
     v31 = 0;
   v25 = (96 * v34 + 127) & 0xFFFFFF80;
   v26 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v27 = (v25 + 15) & 0xFFFFFFF0;
-  if ( v25 > v26->m_slabSize || (char *)v11 + v27 != v26->m_cur || v26->m_firstNonLifoEnd == v11 )
-    hkLifoAllocator::slowBlockFree(v26, v11, v27);
+  if ( v25 > v26->m_slabSize || (char *)m_cur + v27 != v26->m_cur || v26->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v26, (char *)m_cur, v27);
   else
-    v26->m_cur = v11;
+    v26->m_cur = m_cur;
   v31 = 0;
   if ( v32 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      96 * (v32 & 0x3FFFFFFF));
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 96 * (v32 & 0x3FFFFFFF));
 }
 

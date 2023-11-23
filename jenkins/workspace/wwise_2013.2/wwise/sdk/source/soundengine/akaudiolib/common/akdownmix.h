@@ -1,15 +1,18 @@
 // File Line: 35
 // RVA: 0xA98040
-void __fastcall AkDownmix::ComputeVolumes(AkSpeakerVolumes *in_volumes, unsigned int in_uOutputConfig, float *out_fOutputVolumes)
+void __fastcall AkDownmix::ComputeVolumes(
+        AkSpeakerVolumes *in_volumes,
+        unsigned int in_uOutputConfig,
+        float *out_fOutputVolumes)
 {
-  unsigned int v3; // edx
+  int v3; // edx
   int v4; // edx
   float v5; // xmm3_4
   float v6; // xmm1_4
   float v7; // xmm2_4
   float v8; // xmm2_4
   float v9; // xmm0_4
-  unsigned int v10; // edx
+  int v10; // edx
   int v11; // edx
 
   if ( in_uOutputConfig > 0x33 )

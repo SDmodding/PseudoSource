@@ -1,119 +1,113 @@
 // File Line: 30
 // RVA: 0xAEBD30
-void __fastcall AkPitchShifterDSPProcess(AkAudioBuffer *io_pBuffer, AkPitchShifterFXInfo *io_FXInfo, float *in_pfBufferStorage, void *pTwoPassStorage)
+void __fastcall AkPitchShifterDSPProcess(
+        AkAudioBuffer *io_pBuffer,
+        AkPitchShifterFXInfo *io_FXInfo,
+        float *in_pfBufferStorage,
+        void *pTwoPassStorage)
 {
-  AkAudioBuffer *v4; // r12
-  AkPitchShifterFXInfo *v5; // rbx
-  unsigned __int16 v6; // ax
+  unsigned __int16 uValidFrames; // ax
   unsigned int v7; // edx
-  unsigned int in_uNumFrames; // er14
-  unsigned int v9; // eax
-  unsigned int in_uChanIndex; // er13
-  unsigned int v11; // er15
-  signed int v12; // ebp
-  signed int v13; // edi
-  float *v14; // rsi
-  float v15; // xmm2_4
+  unsigned int in_uNumFrames; // r14d
+  unsigned int uChannelMask; // eax
+  unsigned int in_uChanIndex; // r13d
+  unsigned int v11; // r15d
+  int v12; // ebp
+  int v13; // edi
+  float *LFE; // rsi
+  float fDryLevel; // xmm2_4
   float v16; // xmm1_4
   unsigned int v17; // [rsp+40h] [rbp-48h]
   unsigned int v18; // [rsp+90h] [rbp+8h]
-  int v19; // [rsp+98h] [rbp+10h]
-  float *out_pfOutBuf; // [rsp+A0h] [rbp+18h]
+  unsigned int v19; // [rsp+98h] [rbp+10h]
 
-  out_pfOutBuf = in_pfBufferStorage;
-  v4 = io_pBuffer;
-  v5 = io_FXInfo;
   AkFXTailHandler::HandleTail(&io_FXInfo->FXTailHandler, io_pBuffer, io_FXInfo->uTailLength);
-  v6 = v4->uValidFrames;
-  if ( v6 )
+  uValidFrames = io_pBuffer->uValidFrames;
+  if ( uValidFrames )
   {
     v7 = 0;
-    in_uNumFrames = v6;
-    v9 = v4->uChannelMask;
+    in_uNumFrames = uValidFrames;
+    uChannelMask = io_pBuffer->uChannelMask;
     v19 = 0;
     v18 = 0;
-    v17 = v9;
+    v17 = uChannelMask;
     in_uChanIndex = 0;
-    v11 = v4->uChannelMask;
+    v11 = uChannelMask;
     v12 = 1;
-    if ( v9 )
+    while ( v11 )
     {
-      do
+      v13 = v12;
+      v12 = __ROL4__(v12, 1);
+      if ( (v13 & uChannelMask) != 0 )
       {
-        v13 = v12;
-        v12 = __ROL4__(v12, 1);
-        if ( v13 & v9 )
+        if ( (v13 & 8) != 0 )
         {
-          if ( v13 & 8 )
-          {
-            v14 = AkAudioBuffer::GetLFE(v4);
-          }
-          else
-          {
-            v14 = (float *)((char *)v4->pData + 4 * v7 * (unsigned __int64)v4->uMaxFrames);
-            v19 = v7 + 1;
-          }
-          if ( v5->uNumProcessedChannels && v13 & v5->eProcessChannelMask )
-          {
-            AK::DSP::AkDelayPitchShift::ProcessChannel(
-              &v5->PitchShifter,
-              v14,
-              out_pfOutBuf,
+          LFE = AkAudioBuffer::GetLFE(io_pBuffer);
+        }
+        else
+        {
+          LFE = (float *)((char *)io_pBuffer->pData + 4 * v7 * (unsigned __int64)io_pBuffer->uMaxFrames);
+          v19 = v7 + 1;
+        }
+        if ( io_FXInfo->uNumProcessedChannels && (v13 & io_FXInfo->eProcessChannelMask) != 0 )
+        {
+          AK::DSP::AkDelayPitchShift::ProcessChannel(
+            &io_FXInfo->PitchShifter,
+            LFE,
+            in_pfBufferStorage,
+            in_uNumFrames,
+            in_uChanIndex);
+          if ( io_FXInfo->Params.Voice.Filter.eFilterType )
+            AK::DSP::MultiChannelBiquadFilter<8>::ProcessChannel(
+              &io_FXInfo->Filter,
+              in_pfBufferStorage,
               in_uNumFrames,
               in_uChanIndex);
-            if ( v5->Params.Voice.Filter.eFilterType )
-              AK::DSP::MultiChannelBiquadFilter<8>::ProcessChannel(
-                &v5->Filter,
-                out_pfOutBuf,
-                in_uNumFrames,
-                in_uChanIndex);
-            ++in_uChanIndex;
-          }
-          if ( v5->Params.bSyncDry )
-          {
-            DSP::CDelayLight::ProcessBuffer(
-              (DSP::CDelayLight *)((char *)v5 + 8 * (v18 + 2i64 * v18 + 49)),
-              v14,
-              in_uNumFrames);
-            ++v18;
-          }
-          if ( v5->uNumProcessedChannels && v13 & v5->eProcessChannelMask )
-          {
-            DSP::Mix2Interp(
-              v14,
-              out_pfOutBuf,
-              v5->PrevParams.fDryLevel,
-              v5->Params.fDryLevel,
-              v5->PrevParams.fWetLevel,
-              v5->Params.fWetLevel,
-              in_uNumFrames);
-          }
-          else
-          {
-            v15 = v5->Params.fDryLevel;
-            v16 = v5->PrevParams.fDryLevel;
-            if ( v15 == v16 )
-              AK::DSP::ApplyGain_3(v14, v16, in_uNumFrames);
-            else
-              AK::DSP::ApplyGainRamp_1(v14, v16, v15, in_uNumFrames);
-          }
-          v7 = v19;
-          v9 = v17;
-          v11 &= ~v13;
+          ++in_uChanIndex;
         }
+        if ( io_FXInfo->Params.bSyncDry )
+        {
+          DSP::CDelayLight::ProcessBuffer(
+            (DSP::CDelayLight *)((char *)io_FXInfo->DryDelay + 16 * v18 + 8 * v18),
+            LFE,
+            in_uNumFrames);
+          ++v18;
+        }
+        if ( io_FXInfo->uNumProcessedChannels && (v13 & io_FXInfo->eProcessChannelMask) != 0 )
+        {
+          DSP::Mix2Interp(
+            LFE,
+            in_pfBufferStorage,
+            io_FXInfo->PrevParams.fDryLevel,
+            io_FXInfo->Params.fDryLevel,
+            io_FXInfo->PrevParams.fWetLevel,
+            io_FXInfo->Params.fWetLevel,
+            in_uNumFrames);
+        }
+        else
+        {
+          fDryLevel = io_FXInfo->Params.fDryLevel;
+          v16 = io_FXInfo->PrevParams.fDryLevel;
+          if ( fDryLevel == v16 )
+            AK::DSP::ApplyGain_3(LFE, v16, in_uNumFrames);
+          else
+            AK::DSP::ApplyGainRamp_1(LFE, v16, fDryLevel, in_uNumFrames);
+        }
+        v7 = v19;
+        uChannelMask = v17;
+        v11 &= ~v13;
       }
-      while ( v11 );
     }
-    v5->PrevParams.Voice.Filter.eFilterType = v5->Params.Voice.Filter.eFilterType;
-    v5->PrevParams.Voice.Filter.fFilterGain = v5->Params.Voice.Filter.fFilterGain;
-    v5->PrevParams.Voice.Filter.fFilterFrequency = v5->Params.Voice.Filter.fFilterFrequency;
-    v5->PrevParams.Voice.Filter.fFilterQFactor = v5->Params.Voice.Filter.fFilterQFactor;
-    v5->PrevParams.Voice.fPitchFactor = v5->Params.Voice.fPitchFactor;
-    v5->PrevParams.Voice.fGain = v5->Params.Voice.fGain;
-    v5->PrevParams.fDryLevel = v5->Params.fDryLevel;
-    v5->PrevParams.fWetLevel = v5->Params.fWetLevel;
-    v5->PrevParams.fDelayTime = v5->Params.fDelayTime;
-    *(_DWORD *)&v5->PrevParams.bProcessLFE = *(_DWORD *)&v5->Params.bProcessLFE;
+    io_FXInfo->PrevParams.Voice.Filter.eFilterType = io_FXInfo->Params.Voice.Filter.eFilterType;
+    io_FXInfo->PrevParams.Voice.Filter.fFilterGain = io_FXInfo->Params.Voice.Filter.fFilterGain;
+    io_FXInfo->PrevParams.Voice.Filter.fFilterFrequency = io_FXInfo->Params.Voice.Filter.fFilterFrequency;
+    io_FXInfo->PrevParams.Voice.Filter.fFilterQFactor = io_FXInfo->Params.Voice.Filter.fFilterQFactor;
+    io_FXInfo->PrevParams.Voice.fPitchFactor = io_FXInfo->Params.Voice.fPitchFactor;
+    io_FXInfo->PrevParams.eInputType = io_FXInfo->Params.eInputType;
+    io_FXInfo->PrevParams.fDryLevel = io_FXInfo->Params.fDryLevel;
+    io_FXInfo->PrevParams.fWetLevel = io_FXInfo->Params.fWetLevel;
+    io_FXInfo->PrevParams.fDelayTime = io_FXInfo->Params.fDelayTime;
+    *(_DWORD *)&io_FXInfo->PrevParams.bProcessLFE = *(_DWORD *)&io_FXInfo->Params.bProcessLFE;
   }
 }
 

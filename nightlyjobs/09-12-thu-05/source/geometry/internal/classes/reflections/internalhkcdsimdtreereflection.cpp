@@ -77,27 +77,25 @@ void __fastcall finishLoadedObjecthkcdSimdTree(void *p, int finishing)
 
 // File Line: 136
 // RVA: 0xC8E650
-void __fastcall cleanupLoadedObjecthkcdSimdTree(void *p)
+void __fastcall cleanupLoadedObjecthkcdSimdTree(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       112 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 

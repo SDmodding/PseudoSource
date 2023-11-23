@@ -2,54 +2,53 @@
 // RVA: 0xA67FE0
 void __fastcall CAkVPLNode::VirtualOn(CAkVPLNode *this, __int64 eBehavior)
 {
-  CAkVPLNode *v2; // rcx
+  CAkVPLNode *m_pInput; // rcx
 
-  v2 = this->m_pInput;
-  if ( v2 )
-    v2->vfptr->VirtualOn(v2, (AkVirtualQueueBehavior)eBehavior);
+  m_pInput = this->m_pInput;
+  if ( m_pInput )
+    m_pInput->vfptr->VirtualOn(m_pInput, (AkVirtualQueueBehavior)eBehavior);
 }
 
 // File Line: 46
 // RVA: 0xA67FC0
 __int64 __fastcall CAkVPLNode::VirtualOff(CAkVPLNode *this, __int64 eBehavior, __int64 in_bUseSourceOffset)
 {
-  CAkVPLNode *v3; // rcx
-  __int64 result; // rax
+  CAkVPLNode *m_pInput; // rcx
 
-  v3 = this->m_pInput;
-  if ( v3 )
-    result = v3->vfptr->VirtualOff(v3, (AkVirtualQueueBehavior)eBehavior, in_bUseSourceOffset);
+  m_pInput = this->m_pInput;
+  if ( m_pInput )
+    return ((__int64 (__fastcall *)(CAkVPLNode *, __int64, __int64))m_pInput->vfptr->VirtualOff)(
+             m_pInput,
+             eBehavior,
+             in_bUseSourceOffset);
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 47
 // RVA: 0xA672B0
 __int64 __fastcall CAkVPLNode::Seek(CAkVPLNode *this)
 {
-  CAkVPLNode *v1; // rcx
-  __int64 result; // rax
+  CAkVPLNode *m_pInput; // rcx
 
-  v1 = this->m_pInput;
-  if ( v1 )
-    result = ((__int64 (*)(void))v1->vfptr->Seek)();
+  m_pInput = this->m_pInput;
+  if ( m_pInput )
+    return ((__int64 (__fastcall *)(CAkVPLNode *))m_pInput->vfptr->Seek)(m_pInput);
   else
-    result = 2i64;
-  return result;
+    return 2i64;
 }
 
 // File Line: 48
 // RVA: 0xA668C0
 float __fastcall CAkVPLNode::GetPitch(CAkVPLNode *this)
 {
-  CAkVPLNode *v1; // rcx
+  CAkVPLNode *m_pInput; // rcx
   float result; // xmm0_4
 
-  v1 = this->m_pInput;
-  if ( !v1 )
+  m_pInput = this->m_pInput;
+  if ( !m_pInput )
     return *(float *)&FLOAT_1_0;
-  ((void (*)(void))v1->vfptr->GetPitch)();
+  m_pInput->vfptr->GetPitch(m_pInput);
   return result;
 }
 

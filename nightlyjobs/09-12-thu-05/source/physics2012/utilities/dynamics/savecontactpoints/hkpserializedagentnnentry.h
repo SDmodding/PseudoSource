@@ -19,19 +19,19 @@ void __fastcall hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry(hkpSerializ
   *(_QWORD *)&this->m_atom.m_info.m_data[2] = 0i64;
   this->m_propertiesStream.m_data = 0i64;
   this->m_propertiesStream.m_size = 0;
-  this->m_propertiesStream.m_capacityAndFlags = 2147483648;
+  this->m_propertiesStream.m_capacityAndFlags = 0x80000000;
   this->m_contactPoints.m_data = 0i64;
   this->m_contactPoints.m_size = 0;
-  this->m_contactPoints.m_capacityAndFlags = 2147483648;
+  this->m_contactPoints.m_capacityAndFlags = 0x80000000;
   this->m_cpIdMgr.m_data = 0i64;
   this->m_cpIdMgr.m_size = 0;
-  this->m_cpIdMgr.m_capacityAndFlags = 2147483648;
+  this->m_cpIdMgr.m_capacityAndFlags = 0x80000000;
   this->m_trackInfo.m_sectors.m_data = 0i64;
   this->m_trackInfo.m_sectors.m_size = 0;
-  this->m_trackInfo.m_sectors.m_capacityAndFlags = 2147483648;
+  this->m_trackInfo.m_sectors.m_capacityAndFlags = 0x80000000;
   this->m_trackInfo.m_subTracks.m_data = 0i64;
   this->m_trackInfo.m_subTracks.m_size = 0;
-  this->m_trackInfo.m_subTracks.m_capacityAndFlags = 2147483648;
+  this->m_trackInfo.m_subTracks.m_capacityAndFlags = 0x80000000;
   *(_DWORD *)this->m_endianCheckBuffer = 259;
   this->m_version = 1;
 }

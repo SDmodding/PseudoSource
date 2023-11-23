@@ -6,7 +6,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymRegionComponentPropertyName__
 
   v0 = UFG::qStringHash32("default-component-Region", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymRegionComponentPropertyName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymRegionComponentPropertyName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymRegionComponentPropertyName__);
 }
 
 // File Line: 15
@@ -17,7 +17,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymInterestPointLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-InterestPoint", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymInterestPointLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymInterestPointLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymInterestPointLogicalName__);
 }
 
 // File Line: 16
@@ -28,7 +28,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSpawnPointLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-SpawnPoint", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSpawnPointLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSpawnPointLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSpawnPointLogicalName__);
 }
 
 // File Line: 17
@@ -39,7 +39,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSpawnRegionLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-SpawnRegion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSpawnRegionLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSpawnRegionLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSpawnRegionLogicalName__);
 }
 
 // File Line: 18
@@ -50,7 +50,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymTriggerRegionLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-TriggerRegion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymTriggerRegionLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymTriggerRegionLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymTriggerRegionLogicalName__);
 }
 
 // File Line: 19
@@ -61,7 +61,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymCombatRegionLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-CombatRegion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymCombatRegionLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymCombatRegionLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymCombatRegionLogicalName__);
 }
 
 // File Line: 20
@@ -72,7 +72,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymStartRegionLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-StartRegion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymStartRegionLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymStartRegionLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymStartRegionLogicalName__);
 }
 
 // File Line: 21
@@ -83,7 +83,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymPrefabLogicalName__()
 
   v0 = UFG::qStringHash32("object-logical-Prefab", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymPrefabLogicalName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefabLogicalName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefabLogicalName__);
 }
 
 // File Line: 22
@@ -94,6 +94,6 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymInterestPointComponentPropert
 
   v0 = UFG::qStringHash32("default-component-InterestPoint", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymInterestPointComponentPropertyName, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymInterestPointComponentPropertyName__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymInterestPointComponentPropertyName__);
 }
 

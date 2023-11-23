@@ -4,7 +4,7 @@ void __cdecl RTC_Initialize()
 {
   void (**i)(void); // rbx
 
-  for ( i = (void (**)(void))_rtc_izz; i < (void (**)(void))_rtc_izz; ++i )
+  for ( i = (void (**)(void))_rtc_izz; i < _rtc_izz; ++i )
   {
     if ( *i )
       (*i)();
@@ -17,7 +17,7 @@ void __cdecl RTC_Terminate()
 {
   void (**i)(void); // rbx
 
-  for ( i = (void (**)(void))_rtc_tzz; i < (void (**)(void))_rtc_tzz; ++i )
+  for ( i = (void (**)(void))_rtc_tzz; i < _rtc_tzz; ++i )
   {
     if ( *i )
       (*i)();

@@ -56,30 +56,30 @@ hkClass *__fastcall hkLocalFrameGroup::staticClass()
 
 // File Line: 91
 // RVA: 0xC54810
-void __fastcall finishLoadedObjecthkLocalFrameGroup(void *p, int finishing)
+void __fastcall finishLoadedObjecthkLocalFrameGroup(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 16);
+    v2 = p + 2;
     v2[-2].m_stringAndFlag = (const char *)&hkLocalFrameGroup::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 97
 // RVA: 0xC54840
-void __fastcall cleanupLoadedObjecthkLocalFrameGroup(void *p)
+void __fastcall cleanupLoadedObjecthkLocalFrameGroup(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 101
 // RVA: 0xC54850
 void **__fastcall getVtablehkLocalFrameGroup()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-18h]
+  hkStringPtr v1; // [rsp+30h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkLocalFrameGroup::`vftable;
@@ -96,8 +96,8 @@ void **dynamic_initializer_for__hkLocalFrameGroupTypeInfo__()
   hkLocalFrameGroupTypeInfo.m_typeName = "hkLocalFrameGroup";
   hkLocalFrameGroupTypeInfo.m_vtable = result;
   hkLocalFrameGroupTypeInfo.m_scopedName = "!hkLocalFrameGroup";
-  hkLocalFrameGroupTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkLocalFrameGroup;
-  hkLocalFrameGroupTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkLocalFrameGroup;
+  hkLocalFrameGroupTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkLocalFrameGroup;
+  hkLocalFrameGroupTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkLocalFrameGroup;
   return result;
 }
 
@@ -119,7 +119,7 @@ void dynamic_initializer_for__hkSimpleLocalFrameClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 156
@@ -131,30 +131,30 @@ hkClass *__fastcall hkSimpleLocalFrame::staticClass()
 
 // File Line: 163
 // RVA: 0xC54880
-void __fastcall finishLoadedObjecthkSimpleLocalFrame(void *p, int finishing)
+void __fastcall finishLoadedObjecthkSimpleLocalFrame(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 112);
+    v2 = p + 14;
     v2[-14].m_stringAndFlag = (const char *)&hkSimpleLocalFrame::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 169
 // RVA: 0xC548B0
-void __fastcall cleanupLoadedObjecthkSimpleLocalFrame(void *p)
+void __fastcall cleanupLoadedObjecthkSimpleLocalFrame(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 173
 // RVA: 0xC548C0
 void **__fastcall getVtablehkSimpleLocalFrame()
 {
-  hkStringPtr v1; // [rsp+90h] [rbp-18h]
+  hkStringPtr v1; // [rsp+90h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkSimpleLocalFrame::`vftable;
@@ -171,8 +171,8 @@ void **dynamic_initializer_for__hkSimpleLocalFrameTypeInfo__()
   hkSimpleLocalFrameTypeInfo.m_typeName = "hkSimpleLocalFrame";
   hkSimpleLocalFrameTypeInfo.m_vtable = result;
   hkSimpleLocalFrameTypeInfo.m_scopedName = "!hkSimpleLocalFrame";
-  hkSimpleLocalFrameTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkSimpleLocalFrame;
-  hkSimpleLocalFrameTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkSimpleLocalFrame;
+  hkSimpleLocalFrameTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkSimpleLocalFrame;
+  hkSimpleLocalFrameTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkSimpleLocalFrame;
   return result;
 }
 

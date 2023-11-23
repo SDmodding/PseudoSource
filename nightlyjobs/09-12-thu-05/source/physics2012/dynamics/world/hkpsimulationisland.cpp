@@ -30,11 +30,11 @@ void __fastcall hkpSimulationIsland::hkpSimulationIsland(hkpSimulationIsland *th
   this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable;
   this->m_dirtyListIndex = -1;
   this->m_multiThreadCheck.m_threadId = -15;
-  this->m_multiThreadCheck.m_markCount = -32768;
+  this->m_multiThreadCheck.m_markCount = 0x8000;
   *(_QWORD *)&this->m_timeSinceLastHighFrequencyCheck = 0i64;
   this->m_actions.m_data = 0i64;
   this->m_actions.m_size = 0;
-  this->m_actions.m_capacityAndFlags = 2147483648;
+  this->m_actions.m_capacityAndFlags = 0x80000000;
   this->m_timeOfDeactivation = -10.0;
   this->m_entities.m_size = 0;
   this->m_entities.m_capacityAndFlags = -2147483647;
@@ -60,67 +60,60 @@ void __fastcall hkpSimulationIsland::hkpSimulationIsland(hkpSimulationIsland *th
 // RVA: 0xD82800
 void __fastcall hkpSimulationIsland::~hkpSimulationIsland(hkpSimulationIsland *this)
 {
-  hkpSimulationIsland *v1; // rbx
-  int v2; // er8
-  int v3; // er8
-  int v4; // er8
-  int v5; // er8
+  int m_capacityAndFlags; // r8d
+  int v3; // r8d
+  int v4; // r8d
+  int v5; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable;
-  v2 = this->m_narrowphaseAgentTrack.m_sectors.m_capacityAndFlags;
+  m_capacityAndFlags = this->m_narrowphaseAgentTrack.m_sectors.m_capacityAndFlags;
   this->m_narrowphaseAgentTrack.m_sectors.m_size = 0;
-  if ( v2 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_narrowphaseAgentTrack.m_sectors.m_data,
-      8 * v2);
-  v1->m_narrowphaseAgentTrack.m_sectors.m_data = 0i64;
-  v1->m_narrowphaseAgentTrack.m_sectors.m_capacityAndFlags = 2147483648;
-  v3 = v1->m_midphaseAgentTrack.m_sectors.m_capacityAndFlags;
-  v1->m_midphaseAgentTrack.m_sectors.m_size = 0;
+      8 * m_capacityAndFlags);
+  this->m_narrowphaseAgentTrack.m_sectors.m_data = 0i64;
+  this->m_narrowphaseAgentTrack.m_sectors.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_midphaseAgentTrack.m_sectors.m_capacityAndFlags;
+  this->m_midphaseAgentTrack.m_sectors.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_midphaseAgentTrack.m_sectors.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_midphaseAgentTrack.m_sectors.m_data,
       8 * v3);
-  v1->m_midphaseAgentTrack.m_sectors.m_data = 0i64;
-  v1->m_midphaseAgentTrack.m_sectors.m_capacityAndFlags = 2147483648;
-  v4 = v1->m_entities.m_capacityAndFlags;
-  v1->m_entities.m_size = 0;
+  this->m_midphaseAgentTrack.m_sectors.m_data = 0i64;
+  this->m_midphaseAgentTrack.m_sectors.m_capacityAndFlags = 0x80000000;
+  v4 = this->m_entities.m_capacityAndFlags;
+  this->m_entities.m_size = 0;
   if ( v4 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_entities.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_entities.m_data,
       8 * v4);
-  v1->m_entities.m_data = 0i64;
-  v1->m_entities.m_capacityAndFlags = 2147483648;
-  v5 = v1->m_actions.m_capacityAndFlags;
-  v1->m_actions.m_size = 0;
+  this->m_entities.m_data = 0i64;
+  this->m_entities.m_capacityAndFlags = 0x80000000;
+  v5 = this->m_actions.m_capacityAndFlags;
+  this->m_actions.m_size = 0;
   if ( v5 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_actions.m_data,
-      8 * v5);
-  v1->m_actions.m_data = 0i64;
-  v1->m_actions.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, this->m_actions.m_data, 8 * v5);
+  this->m_actions.m_data = 0i64;
+  this->m_actions.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 117
 // RVA: 0xD82930
 void __fastcall hkpSimulationIsland::internalAddEntity(hkpSimulationIsland *this, hkpEntity *entity)
 {
-  hkInplaceArray<hkpEntity *,1,hkContainerHeapAllocator> *v2; // rbx
-  hkpEntity *v3; // rdi
+  hkInplaceArray<hkpEntity *,1,hkContainerHeapAllocator> *p_m_entities; // rbx
 
   entity->m_simulationIsland = this;
-  v2 = &this->m_entities;
+  p_m_entities = &this->m_entities;
   entity->m_storageIndex = this->m_entities.m_size;
-  v3 = entity;
   if ( this->m_entities.m_size == (this->m_entities.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_entities->m_data, 8);
+  p_m_entities->m_data[p_m_entities->m_size++] = entity;
 }
 
 // File Line: 129
@@ -132,7 +125,7 @@ void __fastcall hkpSimulationIsland::internalRemoveEntity(hkpSimulationIsland *t
   --this->m_entities.m_size;
   entity->m_simulationIsland = 0i64;
   entity->m_storageIndex = -1;
-  *((_BYTE *)this + 49) &= 0xFDu;
+  *((_BYTE *)this + 49) &= ~2u;
   *((_BYTE *)this + 49) |= 1u;
 }
 
@@ -140,147 +133,132 @@ void __fastcall hkpSimulationIsland::internalRemoveEntity(hkpSimulationIsland *t
 // RVA: 0xD82A50
 void __fastcall hkpSimulationIsland::addAction(hkpSimulationIsland *this, hkpAction *act)
 {
-  hkpAction *v2; // rdi
-  hkpSimulationIsland *v3; // rsi
-
-  v2 = act;
-  v3 = this;
   if ( this->m_actions.m_size == (this->m_actions.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &this->m_actions, 8);
-  v3->m_actions.m_data[v3->m_actions.m_size++] = v2;
-  v2->m_island = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_actions.m_data, 8);
+  this->m_actions.m_data[this->m_actions.m_size++] = act;
+  act->m_island = this;
 }
 
 // File Line: 167
 // RVA: 0xD82AC0
 void __fastcall hkpSimulationIsland::removeAction(hkpSimulationIsland *this, hkpAction *act)
 {
-  hkpSimulationIsland *v2; // r10
-  __int64 v3; // rcx
-  signed int v4; // er9
+  __int64 m_size; // rcx
+  int v4; // r9d
   __int64 v5; // r8
-  hkpAction **v6; // rax
+  hkpAction **m_data; // rax
 
-  v2 = this;
-  v3 = this->m_actions.m_size;
+  m_size = this->m_actions.m_size;
   v4 = 0;
   v5 = 0i64;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v4 = -1;
   }
   else
   {
-    v6 = v2->m_actions.m_data;
-    while ( *v6 != act )
+    m_data = this->m_actions.m_data;
+    while ( *m_data != act )
     {
       ++v5;
       ++v4;
-      ++v6;
-      if ( v5 >= v3 )
+      ++m_data;
+      if ( v5 >= m_size )
         goto LABEL_5;
     }
   }
-  v2->m_actions.m_data[v4] = 0i64;
+  this->m_actions.m_data[v4] = 0i64;
   act->m_island = 0i64;
-  *((_BYTE *)v2 + 49) &= 0xDDu;
-  *((_BYTE *)v2 + 49) |= 0x11u;
+  *((_BYTE *)this + 49) &= 0xDDu;
+  *((_BYTE *)this + 49) |= 0x11u;
 }
 
 // File Line: 182
 // RVA: 0xD82620
 _BOOL8 __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this)
 {
-  int v1; // edi
-  hkpSimulationIsland *v2; // rbx
-  hkLifoAllocator *v3; // rax
-  int *v4; // r9
+  int m_size; // edi
+  hkLifoAllocator *Value; // rax
+  int *m_cur; // r9
   int v5; // edx
   char *v6; // r8
-  int v7; // er8
-  bool v8; // al
-  int *v9; // rdi
+  int v7; // r8d
+  bool isFullyConnected; // al
+  int *m_storage; // rdi
   bool v10; // si
   signed int v11; // ebx
   hkLifoAllocator *v12; // rax
-  int v13; // er8
-  _BOOL8 result; // rax
-  hkFixedArray<int> parents; // [rsp+20h] [rbp-38h]
-  hkUnionFind checkConnectivityOut; // [rsp+30h] [rbp-28h]
+  int v13; // r8d
+  hkFixedArray<int> parents; // [rsp+20h] [rbp-38h] BYREF
+  hkUnionFind checkConnectivityOut; // [rsp+30h] [rbp-28h] BYREF
 
-  v1 = this->m_entities.m_size;
-  v2 = this;
-  v3 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v4 = (int *)v3->m_cur;
-  v5 = (4 * v1 + 127) & 0xFFFFFF80;
-  v6 = (char *)v4 + v5;
-  if ( v5 > v3->m_slabSize || v6 > v3->m_end )
-    v4 = (int *)hkLifoAllocator::allocateFromNewSlab(v3, v5);
+  m_size = this->m_entities.m_size;
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (int *)Value->m_cur;
+  v5 = (4 * m_size + 127) & 0xFFFFFF80;
+  v6 = (char *)m_cur + v5;
+  if ( v5 > Value->m_slabSize || v6 > Value->m_end )
+    m_cur = (int *)hkLifoAllocator::allocateFromNewSlab(Value, v5);
   else
-    v3->m_cur = v6;
-  v7 = v2->m_entities.m_size;
-  parents.m_data.m_storage = v4;
-  parents.m_size.m_storage = v1;
+    Value->m_cur = v6;
+  v7 = this->m_entities.m_size;
+  parents.m_data.m_storage = m_cur;
+  parents.m_size.m_storage = m_size;
   hkUnionFind::hkUnionFind(&checkConnectivityOut, &parents, v7);
-  v8 = hkpSimulationIsland::isFullyConnected(v2, &checkConnectivityOut);
-  v9 = parents.m_data.m_storage;
-  v10 = v8;
+  isFullyConnected = hkpSimulationIsland::isFullyConnected(this, &checkConnectivityOut);
+  m_storage = parents.m_data.m_storage;
+  v10 = isFullyConnected;
   v11 = (4 * parents.m_size.m_storage + 127) & 0xFFFFFF80;
   v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v13 = (v11 + 15) & 0xFFFFFFF0;
-  if ( v11 > v12->m_slabSize || (char *)v9 + v13 != v12->m_cur || v12->m_firstNonLifoEnd == v9 )
+  if ( v11 > v12->m_slabSize || (char *)m_storage + v13 != v12->m_cur || v12->m_firstNonLifoEnd == m_storage )
   {
-    hkLifoAllocator::slowBlockFree(v12, v9, v13);
-    result = v10;
+    hkLifoAllocator::slowBlockFree(v12, (char *)m_storage, v13);
+    return v10;
   }
   else
   {
-    v12->m_cur = v9;
-    result = v10;
+    v12->m_cur = m_storage;
+    return v10;
   }
-  return result;
 }
 
 // File Line: 195
 // RVA: 0xD82B20
 bool __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this, hkUnionFind *checkConnectivityOut)
 {
-  hkUnionFind *v2; // r14
-  hkpSimulationIsland *v3; // r13
   int v4; // ebp
   __int64 v5; // r15
   int v6; // ebx
   hkpEntity *v7; // rsi
   __int64 v8; // rdi
-  hkpLinkedCollidable *v9; // rcx
-  hkpLinkedCollidable *v10; // rax
+  hkpLinkedCollidable *m_partner; // rcx
+  char *v10; // rax
   int v11; // ebp
   __int64 v12; // r15
-  signed int v13; // edi
+  int v13; // edi
   hkpEntity *v14; // rsi
   __int64 v15; // rbx
-  hkConstraintInternal *v16; // rax
+  hkConstraintInternal *m_data; // rax
   hkpEntity *v17; // rdx
   hkpEntity *v18; // rcx
   char *v19; // rdx
-  signed int v20; // er8
+  int v20; // r8d
   int v21; // ebp
   __int64 v22; // r15
   hkpAction **v23; // rax
   int v24; // ecx
   int v25; // ebx
-  signed __int64 v26; // rsi
-  signed __int64 v27; // rdi
-  signed __int64 v28; // rsi
+  __int64 v26; // rsi
+  __int64 v27; // rdi
+  __int64 v28; // rsi
   __int64 v29; // rax
-  char *v31; // [rsp+20h] [rbp-88h]
+  char *v31; // [rsp+20h] [rbp-88h] BYREF
   int v32; // [rsp+28h] [rbp-80h]
   int v33; // [rsp+2Ch] [rbp-7Ch]
-  char v34; // [rsp+30h] [rbp-78h]
+  char v34[80]; // [rsp+30h] [rbp-78h] BYREF
 
-  v2 = checkConnectivityOut;
-  v3 = this;
   checkConnectivityOut->m_isCollapsed = 0;
   v4 = 0;
   if ( this->m_entities.m_size > 0 )
@@ -289,18 +267,18 @@ bool __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this,
     do
     {
       v6 = 0;
-      v7 = v3->m_entities.m_data[v5];
+      v7 = this->m_entities.m_data[v5];
       if ( v7->m_collidable.m_collisionEntries.m_size > 0 )
       {
         v8 = 0i64;
         do
         {
-          v9 = v7->m_collidable.m_collisionEntries.m_data[v8].m_partner;
-          v10 = (hkpLinkedCollidable *)((char *)v9 + v9->m_ownerOffset);
-          if ( LOBYTE(v10[2].m_boundingVolumeData.m_childShapeKeys) != 5 )
+          m_partner = v7->m_collidable.m_collisionEntries.m_data[v8].m_partner;
+          v10 = (char *)m_partner + m_partner->m_ownerOffset;
+          if ( v10[352] != 5 )
           {
-            hkUnionFind::addEdge(v2, v4, WORD2(v10[1].m_collisionEntries.m_data));
-            if ( *v2->m_parents->m_data.m_storage == -v2->m_numNodes )
+            hkUnionFind::addEdge(checkConnectivityOut, v4, *((unsigned __int16 *)v10 + 122));
+            if ( *checkConnectivityOut->m_parents->m_data.m_storage == -checkConnectivityOut->m_numNodes )
               return 1;
           }
           ++v6;
@@ -311,30 +289,30 @@ bool __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this,
       ++v4;
       ++v5;
     }
-    while ( v4 < v3->m_entities.m_size );
+    while ( v4 < this->m_entities.m_size );
   }
   v11 = 0;
-  if ( v3->m_entities.m_size > 0 )
+  if ( this->m_entities.m_size > 0 )
   {
     v12 = 0i64;
     do
     {
       v13 = 0;
-      v14 = v3->m_entities.m_data[v12];
-      if ( v14->m_constraintsMaster.m_size > 0u )
+      v14 = this->m_entities.m_data[v12];
+      if ( v14->m_constraintsMaster.m_size )
       {
         v15 = 0i64;
         do
         {
-          v16 = v14->m_constraintsMaster.m_data;
-          v17 = v16[v15].m_entities[0];
+          m_data = v14->m_constraintsMaster.m_data;
+          v17 = m_data[v15].m_entities[0];
           if ( v17->m_motion.m_type.m_storage != 5 )
           {
-            v18 = v16[v15].m_entities[1];
+            v18 = m_data[v15].m_entities[1];
             if ( v18->m_motion.m_type.m_storage != 5 )
             {
-              hkUnionFind::addEdge(v2, v17->m_storageIndex, v18->m_storageIndex);
-              if ( *v2->m_parents->m_data.m_storage == -v2->m_numNodes )
+              hkUnionFind::addEdge(checkConnectivityOut, v17->m_storageIndex, v18->m_storageIndex);
+              if ( *checkConnectivityOut->m_parents->m_data.m_storage == -checkConnectivityOut->m_numNodes )
                 return 1;
             }
           }
@@ -346,24 +324,24 @@ bool __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this,
       ++v11;
       ++v12;
     }
-    while ( v11 < v3->m_entities.m_size );
+    while ( v11 < this->m_entities.m_size );
   }
-  v19 = &v34;
+  v19 = v34;
   v20 = -2147483638;
   v32 = 0;
   v21 = 0;
-  v31 = &v34;
+  v31 = v34;
   v33 = -2147483638;
-  if ( v3->m_actions.m_size <= 0 )
+  if ( this->m_actions.m_size <= 0 )
     goto LABEL_34;
   v22 = 0i64;
   while ( 1 )
   {
-    v23 = v3->m_actions.m_data;
+    v23 = this->m_actions.m_data;
     if ( v23[v22] )
     {
       v32 = 0;
-      v23[v22]->vfptr[2].__vecDelDtor((hkBaseObject *)&v23[v22]->vfptr, (unsigned int)&v31);
+      v23[v22]->vfptr[2].__vecDelDtor(v23[v22], (unsigned int)&v31);
       v24 = v32;
       v19 = v31;
       v25 = 0;
@@ -385,17 +363,14 @@ bool __fastcall hkpSimulationIsland::isFullyConnected(hkpSimulationIsland *this,
 LABEL_32:
     ++v21;
     ++v22;
-    if ( v21 >= v3->m_actions.m_size )
+    if ( v21 >= this->m_actions.m_size )
     {
       v20 = v33;
 LABEL_34:
       v32 = 0;
       if ( v20 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v19,
-          8 * v20);
-      return *v2->m_parents->m_data.m_storage == -v2->m_numNodes;
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v19, 8 * v20);
+      return *checkConnectivityOut->m_parents->m_data.m_storage == -checkConnectivityOut->m_numNodes;
     }
   }
   v28 = 8 * v26;
@@ -410,8 +385,11 @@ LABEL_31:
     if ( v25 >= v24 )
       goto LABEL_32;
   }
-  hkUnionFind::addEdge(v2, *(unsigned __int16 *)(*(_QWORD *)&v19[8 * v27] + 244i64), *(unsigned __int16 *)(v29 + 244));
-  if ( *v2->m_parents->m_data.m_storage != -v2->m_numNodes )
+  hkUnionFind::addEdge(
+    checkConnectivityOut,
+    *(unsigned __int16 *)(*(_QWORD *)&v19[8 * v27] + 244i64),
+    *(unsigned __int16 *)(v29 + 244));
+  if ( *checkConnectivityOut->m_parents->m_data.m_storage != -checkConnectivityOut->m_numNodes )
   {
     v24 = v32;
     v19 = v31;
@@ -419,10 +397,7 @@ LABEL_31:
   }
   v32 = 0;
   if ( v33 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v31,
-      8 * v33);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v31, 8 * v33);
   return 1;
 }
 
@@ -435,21 +410,28 @@ void __fastcall hkpSimulationIsland::isValid(hkpSimulationIsland *this)
 
 // File Line: 589
 // RVA: 0xD82A00
-void __fastcall hkpSimulationIsland::addConstraintToCriticalLockedIsland(hkpSimulationIsland *this, hkpConstraintInstance *constraint)
+void __fastcall hkpSimulationIsland::addConstraintToCriticalLockedIsland(
+        hkpSimulationIsland *this,
+        hkpConstraintInstance *constraint)
 {
   hkpWorldOperationUtil::addConstraintToCriticalLockedIsland(constraint->m_entities[0]->m_world, constraint);
 }
 
 // File Line: 594
 // RVA: 0xD82A20
-void __fastcall hkpSimulationIsland::removeConstraintFromCriticalLockedIsland(hkpSimulationIsland *this, hkpConstraintInstance *constraint)
+void __fastcall hkpSimulationIsland::removeConstraintFromCriticalLockedIsland(
+        hkpSimulationIsland *this,
+        hkpConstraintInstance *constraint)
 {
   hkpWorldOperationUtil::removeConstraintFromCriticalLockedIsland(constraint->m_entities[0]->m_world, constraint);
 }
 
 // File Line: 599
 // RVA: 0xD82A40
-void __fastcall hkpSimulationIsland::addCallbackRequest(hkpSimulationIsland *this, hkpConstraintInstance *constraint, int request)
+void __fastcall hkpSimulationIsland::addCallbackRequest(
+        hkpSimulationIsland *this,
+        hkpConstraintInstance *constraint,
+        char request)
 {
   constraint->m_internal->m_callbackRequest |= request;
 }
@@ -458,12 +440,12 @@ void __fastcall hkpSimulationIsland::addCallbackRequest(hkpSimulationIsland *thi
 // RVA: 0xD82E30
 void __fastcall hkpSimulationIsland::mergeConstraintInfo(hkpSimulationIsland *this, hkpSimulationIsland *other)
 {
-  int v2; // er8
+  int m_maxSizeOfSchema; // r8d
 
-  v2 = other->m_constraintInfo.m_maxSizeOfSchema;
-  if ( this->m_constraintInfo.m_maxSizeOfSchema > v2 )
-    v2 = this->m_constraintInfo.m_maxSizeOfSchema;
-  this->m_constraintInfo.m_maxSizeOfSchema = v2;
+  m_maxSizeOfSchema = other->m_constraintInfo.m_maxSizeOfSchema;
+  if ( this->m_constraintInfo.m_maxSizeOfSchema > m_maxSizeOfSchema )
+    m_maxSizeOfSchema = this->m_constraintInfo.m_maxSizeOfSchema;
+  this->m_constraintInfo.m_maxSizeOfSchema = m_maxSizeOfSchema;
   this->m_constraintInfo.m_sizeOfSchemas += other->m_constraintInfo.m_sizeOfSchemas;
   this->m_constraintInfo.m_numSolverResults += other->m_constraintInfo.m_numSolverResults;
   this->m_constraintInfo.m_numSolverElemTemps += other->m_constraintInfo.m_numSolverElemTemps;

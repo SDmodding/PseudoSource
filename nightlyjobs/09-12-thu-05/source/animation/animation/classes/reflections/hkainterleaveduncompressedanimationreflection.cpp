@@ -28,17 +28,17 @@ hkClass *__fastcall hkaInterleavedUncompressedAnimation::staticClass()
 
 // File Line: 66
 // RVA: 0xB1D590
-void __fastcall finishLoadedObjecthkaInterleavedUncompressedAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaInterleavedUncompressedAnimation(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaInterleavedUncompressedAnimation::`vftable;
+    *p = &hkaInterleavedUncompressedAnimation::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xB1D5B0
-void __fastcall cleanupLoadedObjecthkaInterleavedUncompressedAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkaInterleavedUncompressedAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaInterleavedUncompressedAnimationTypeInfo__()
   hkaInterleavedUncompressedAnimationTypeInfo.m_typeName = "hkaInterleavedUncompressedAnimation";
   hkaInterleavedUncompressedAnimationTypeInfo.m_vtable = result;
   hkaInterleavedUncompressedAnimationTypeInfo.m_scopedName = "!hkaInterleavedUncompressedAnimation";
-  hkaInterleavedUncompressedAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaInterleavedUncompressedAnimation;
-  hkaInterleavedUncompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaInterleavedUncompressedAnimation;
+  hkaInterleavedUncompressedAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaInterleavedUncompressedAnimation;
+  hkaInterleavedUncompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaInterleavedUncompressedAnimation;
   return result;
 }
 

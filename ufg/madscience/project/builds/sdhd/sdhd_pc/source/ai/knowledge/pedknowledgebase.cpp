@@ -7,71 +7,60 @@ __int64 dynamic_initializer_for__UFG::PedKnowledgeBase::ms_defaultKnowledgeRecor
   UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord.m_uLastLOSTest = 0i64;
   UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord.m_uLastPathTest = 0i64;
   *((_BYTE *)&UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord + 48) = *((_BYTE *)&UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord
-                                                                       + 48) & 0xFC | 4;
-  return atexit(dynamic_atexit_destructor_for__UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord__);
+                                                                       + 48) & 0xF8 | 4;
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::PedKnowledgeBase::ms_defaultKnowledgeRecord__);
 }
 
 // File Line: 89
 // RVA: 0x391870
 void __fastcall UFG::PedKnowledgeBase::Update(UFG::PedKnowledgeBase *this, float fDeltaTime)
 {
-  UFG::PedKnowledgeBase *v2; // rsi
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
   UFG::ActiveAIEntityComponent *v5; // rax
-  UFG::SimComponent *v6; // rbx
-  unsigned int v7; // er14
+  UFG::TransformNodeComponent *m_pSimComponent; // rbx
+  unsigned int size; // r14d
   UFG::qVector3 *v8; // r15
   unsigned int v9; // ebx
   __int64 v10; // rdi
   UFG::PedKnowledgeRecord *v11; // rbp
   float fPriority; // xmm0_4
 
-  v2 = this;
   if ( this->m_bEnabled )
   {
-    v3 = (UFG::SimObjectCVBase *)this->m_pParentSimObject.m_pPointer;
-    if ( v3 )
+    m_pPointer = (UFG::SimObjectCVBase *)this->m_pParentSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
-      {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
-      }
-      else if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-          v5 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-        else
-          v5 = (UFG::ActiveAIEntityComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                                   UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(m_pPointer);
       else
-      {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
-      }
+        v5 = (UFG::ActiveAIEntityComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                m_pPointer,
+                                                UFG::ActiveAIEntityComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                m_pPointer,
+                                                UFG::ActiveAIEntityComponent::_TypeUID));
       if ( v5 )
       {
-        v6 = v5->m_pTransformNodeComponent.m_pSimComponent;
-        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v5->m_pTransformNodeComponent.m_pSimComponent);
-        v7 = v2->m_aHostilePedRecords.size;
-        v8 = (UFG::qVector3 *)&v6[2].m_BoundComponentHandles;
+        m_pSimComponent = (UFG::TransformNodeComponent *)v5->m_pTransformNodeComponent.m_pSimComponent;
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimComponent);
+        size = this->m_aHostilePedRecords.size;
+        v8 = (UFG::qVector3 *)&m_pSimComponent->mWorldTransform.v3;
         v9 = 0;
-        if ( v7 )
+        if ( size )
         {
           v10 = 0i64;
           do
           {
-            v11 = &v2->m_aHostilePedRecords.p[v10];
+            v11 = &this->m_aHostilePedRecords.p[v10];
             if ( v11->pSimObject.m_pPointer )
             {
-              fPriority = UFG::PedKnowledgeBase::GetLineOfSightPriority(v2, v8, &v2->m_aHostilePedRecords.p[v10]);
+              fPriority = UFG::PedKnowledgeBase::GetLineOfSightPriority(this, v8, &this->m_aHostilePedRecords.p[v10]);
               UFG::PedKnowledgeLOSSystem::AddTest(
                 UFG::PedKnowledgeLOSSystem::ms_pInstance,
-                v2->m_pParentSimObject.m_pPointer,
+                this->m_pParentSimObject.m_pPointer,
                 v11->pSimObject.m_pPointer,
                 v9,
                 fPriority);
@@ -79,7 +68,7 @@ void __fastcall UFG::PedKnowledgeBase::Update(UFG::PedKnowledgeBase *this, float
             ++v9;
             ++v10;
           }
-          while ( v9 < v7 );
+          while ( v9 < size );
         }
       }
     }
@@ -88,45 +77,45 @@ void __fastcall UFG::PedKnowledgeBase::Update(UFG::PedKnowledgeBase *this, float
 
 // File Line: 117
 // RVA: 0x340B90
-void __fastcall UFG::PedKnowledgeBase::AddRecordForHostile(UFG::PedKnowledgeBase *this, UFG::SimObject *pNewHostile)
+void __fastcall UFG::PedKnowledgeBase::AddRecordForHostile(
+        UFG::PedKnowledgeBase *this,
+        UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *pNewHostile)
 {
-  __int64 v2; // rbp
-  UFG::qArray<UFG::PedKnowledgeRecord,15> *v3; // rbx
-  UFG::SimObject *v4; // rdi
+  __int64 size; // rbp
+  UFG::qArray<UFG::PedKnowledgeRecord,15> *p_m_aHostilePedRecords; // rbx
   unsigned int v5; // esi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *p_pSimObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
 
-  v2 = this->m_aHostilePedRecords.size;
-  v3 = &this->m_aHostilePedRecords;
-  v4 = pNewHostile;
-  v5 = v2 + 1;
-  if ( (unsigned int)(v2 + 1) > this->m_aHostilePedRecords.capacity )
+  size = this->m_aHostilePedRecords.size;
+  p_m_aHostilePedRecords = &this->m_aHostilePedRecords;
+  v5 = size + 1;
+  if ( (unsigned int)(size + 1) > this->m_aHostilePedRecords.capacity )
     UFG::qArray<UFG::PedKnowledgeRecord,15>::Reallocate(
       &this->m_aHostilePedRecords,
       15 * (v5 / 0xF + (v5 != 15 * (v5 / 0xF))),
       "qArray.Add");
-  v3->size = v5;
-  v6 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->p[v2].pSimObject.mPrev;
-  if ( v6[1].mPrev )
+  p_m_aHostilePedRecords->size = v5;
+  p_pSimObject = &p_m_aHostilePedRecords->p[size].pSimObject;
+  if ( p_pSimObject[1].mPrev )
   {
-    v7 = v6->mPrev;
-    v8 = v6->mNext;
-    v7->mNext = v8;
-    v8->mPrev = v7;
-    v6->mPrev = v6;
-    v6->mNext = v6;
+    mPrev = p_pSimObject->mPrev;
+    mNext = p_pSimObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_pSimObject->mPrev = p_pSimObject;
+    p_pSimObject->mNext = p_pSimObject;
   }
-  v6[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v4;
-  if ( v4 )
+  p_pSimObject[1].mPrev = pNewHostile;
+  if ( pNewHostile )
   {
-    v9 = v4->m_SafePointerList.mNode.mPrev;
-    v9->mNext = v6;
-    v6->mPrev = v9;
-    v6->mNext = &v4->m_SafePointerList.mNode;
-    v4->m_SafePointerList.mNode.mPrev = v6;
+    v9 = pNewHostile->mNext;
+    v9->mNext = p_pSimObject;
+    p_pSimObject->mPrev = v9;
+    p_pSimObject->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&pNewHostile->mNext;
+    pNewHostile->mNext = p_pSimObject;
   }
 }
 
@@ -134,9 +123,8 @@ void __fastcall UFG::PedKnowledgeBase::AddRecordForHostile(UFG::PedKnowledgeBase
 // RVA: 0x380350
 void __fastcall UFG::PedKnowledgeBase::RefreshHostileList(UFG::PedKnowledgeBase *this, float fDeltaTime)
 {
-  UFG::PedKnowledgeBase *v2; // rdi
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
   UFG::ActiveAIEntityComponent *v5; // rax
   UFG::ActiveAIEntityComponent *v6; // r13
   UFG::NearbyCharacterManager *v7; // r8
@@ -146,81 +134,70 @@ void __fastcall UFG::PedKnowledgeBase::RefreshHostileList(UFG::PedKnowledgeBase 
   _QWORD *v11; // rdx
   __int64 *v12; // rcx
   __int64 *v13; // rax
-  UFG::NearbyCharacterManager *v14; // rcx
+  UFG::NearbyCharacterManager *mNext; // rcx
   __int64 *v15; // rdx
-  __int64 **v16; // rax
-  __int64 v17; // r14
-  signed __int64 i; // rbx
-  __int64 v19; // rsi
-  UFG::AttackRightsComponent *v20; // r15
-  unsigned int v21; // ebx
-  __int64 *v22; // rsi
-  UFG::SimObject *v23; // rdx
-  unsigned int v24; // ecx
-  UFG::SimObject **v25; // rax
-  __int64 v26; // r9
-  signed __int64 v27; // r11
-  UFG::PedKnowledgeRecord *v28; // rcx
-  signed __int64 v29; // r8
-  signed __int64 v30; // rdx
-  __int64 v31; // r10
-  __int64 v32; // rcx
-  _QWORD *v33; // rax
-  __int64 v34; // rax
-  char v35; // cl
-  unsigned int v36; // eax
-  __int64 j; // rax
-  _QWORD *v38; // rdx
-  __int64 v39; // rcx
-  _QWORD *v40; // rax
-  __int64 *v41; // rcx
-  __int64 **v42; // rax
-  __int64 v43; // [rsp+0h] [rbp-D8h]
-  __int64 v44; // [rsp+10h] [rbp-C8h]
-  __int64 *v45; // [rsp+20h] [rbp-B8h]
-  __int64 **v46; // [rsp+28h] [rbp-B0h]
-  __int64 v47; // [rsp+30h] [rbp-A8h]
-  char dest[24]; // [rsp+40h] [rbp-98h]
-  __int64 v49[69]; // [rsp+58h] [rbp-80h]
+  __int64 v16; // r14
+  __int64 i; // rbx
+  __int64 v18; // rsi
+  UFG::AttackRightsComponent *v19; // r15
+  unsigned int size; // ebx
+  __int64 *v21; // rsi
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v22; // rdx
+  unsigned int v23; // ecx
+  UFG::SimObject **p_m_pPointer; // rax
+  __int64 v25; // r9
+  __int64 v26; // r11
+  UFG::PedKnowledgeRecord *p; // rcx
+  UFG::PedKnowledgeRecord *v28; // r8
+  UFG::PedKnowledgeRecord *v29; // rdx
+  UFG::SimObject *v30; // r10
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v32; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v33; // rax
+  char v34; // cl
+  unsigned int v35; // eax
+  __int64 **j; // rax
+  _QWORD *v37; // rdx
+  __int64 *v38; // rcx
+  __int64 *v39; // rax
+  __int64 *v40; // rcx
+  __int64 **v41; // rax
+  __int64 v42; // [rsp+0h] [rbp-D8h] BYREF
+  _BYTE v43[16]; // [rsp+10h] [rbp-C8h] BYREF
+  __int64 *v44; // [rsp+20h] [rbp-B8h] BYREF
+  __int64 **v45; // [rsp+28h] [rbp-B0h]
+  __int64 v46; // [rsp+30h] [rbp-A8h]
+  char dest[24]; // [rsp+40h] [rbp-98h] BYREF
+  __int64 v48[69]; // [rsp+58h] [rbp-80h] BYREF
 
-  v47 = -2i64;
-  v2 = this;
+  v46 = -2i64;
   if ( this->m_bEnabled )
   {
-    v3 = (UFG::SimObjectCVBase *)this->m_pParentSimObject.m_pPointer;
-    if ( v3 )
+    m_pPointer = (UFG::SimObjectCVBase *)this->m_pParentSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
-      {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
-      }
-      else if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-          v5 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-        else
-          v5 = (UFG::ActiveAIEntityComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                                   UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(m_pPointer);
       else
-      {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
-      }
+        v5 = (UFG::ActiveAIEntityComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                m_pPointer,
+                                                UFG::ActiveAIEntityComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                m_pPointer,
+                                                UFG::ActiveAIEntityComponent::_TypeUID));
       v6 = v5;
       if ( v5 )
       {
         UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v5->m_pTransformNodeComponent.m_pSimComponent);
-        v45 = (__int64 *)&v45;
-        v46 = &v45;
+        v44 = (__int64 *)&v44;
+        v45 = &v44;
         v7 = UFG::NearbyCharacterManager::s_pInstance;
-        v8 = &v45;
-        v9 = (__int64 **)&v44;
-        v10 = (__int64 **)(&v43 + 2);
-        if ( &v44 != (__int64 *)v10 )
+        v8 = &v44;
+        v9 = (__int64 **)v43;
+        v10 = (__int64 **)(&v42 + 2);
+        if ( v43 != (_BYTE *)v10 )
         {
           do
           {
@@ -231,137 +208,136 @@ void __fastcall UFG::PedKnowledgeBase::RefreshHostileList(UFG::PedKnowledgeBase 
             *v13 = (__int64)v12;
             *v11 = v11;
             v11[1] = v11;
-            v8 = v46;
-            v9 = v46 - 2;
+            v8 = v45;
+            v9 = v45 - 2;
           }
-          while ( v46 - 2 != v10 );
+          while ( v45 - 2 != v10 );
         }
-        v14 = (UFG::NearbyCharacterManager *)v7->m_Characters[0].mNode.mNext;
-        if ( v14 != v7 )
+        mNext = (UFG::NearbyCharacterManager *)v7->m_Characters[0].mNode.mNext;
+        if ( mNext != v7 )
         {
-          v15 = v45;
+          v15 = v44;
           do
           {
-            v16 = (__int64 **)&v14->m_Characters[1];
-            v15[1] = (__int64)&v14->m_Characters[1];
-            *v16 = v15;
-            v16[1] = (__int64 *)&v45;
-            v15 = (__int64 *)&v14->m_Characters[1];
-            v45 = (__int64 *)&v14->m_Characters[1];
-            v14 = (UFG::NearbyCharacterManager *)v14->m_Characters[0].mNode.mNext;
+            v15[1] = (__int64)&mNext->m_Characters[1];
+            mNext->m_Characters[1].mNode.mPrev = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterMasterList> *)v15;
+            mNext->m_Characters[1].mNode.mNext = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterMasterList> *)&v44;
+            v15 = (__int64 *)&mNext->m_Characters[1];
+            v44 = (__int64 *)&mNext->m_Characters[1];
+            mNext = (UFG::NearbyCharacterManager *)mNext->m_Characters[0].mNode.mNext;
           }
-          while ( v14 != v7 );
-          v8 = v46;
+          while ( mNext != v7 );
+          v8 = v45;
         }
-        v17 = 0i64;
-        for ( i = (signed __int64)(v8 - 2); (__int64 **)i != v10; i = *(_QWORD *)(i + 24) - 16i64 )
+        v16 = 0i64;
+        for ( i = (__int64)(v8 - 2); (__int64 **)i != v10; i = *(_QWORD *)(i + 24) - 16i64 )
         {
-          v19 = *(_QWORD *)(i + 48);
-          if ( v19 )
+          v18 = *(_QWORD *)(i + 48);
+          if ( v18 )
           {
-            v20 = *(UFG::AttackRightsComponent **)(v19 + 328);
-            if ( UFG::ActiveAIEntityComponent::IsEnemyOfMine(v6, *(UFG::AttackRightsComponent **)(v19 + 328))
-              && v20
-              && UFG::ActiveAIEntityComponent::CanBeEngagedShared(v6, v20) )
+            v19 = *(UFG::AttackRightsComponent **)(v18 + 328);
+            if ( UFG::ActiveAIEntityComponent::IsEnemyOfMine(v6, v19)
+              && v19
+              && UFG::ActiveAIEntityComponent::CanBeEngagedShared(v6, v19) )
             {
-              v49[v17] = *(_QWORD *)(v19 + 40);
-              v17 = (unsigned int)(v17 + 1);
+              v48[v16] = *(_QWORD *)(v18 + 40);
+              v16 = (unsigned int)(v16 + 1);
             }
           }
         }
         UFG::qMemSet(dest, 0, 0x40u);
-        v21 = v2->m_aHostilePedRecords.size;
-        if ( (_DWORD)v17 )
+        size = this->m_aHostilePedRecords.size;
+        if ( (_DWORD)v16 )
         {
-          v22 = v49;
+          v21 = v48;
           do
           {
-            v23 = (UFG::SimObject *)*v22;
-            v24 = 0;
-            if ( v21 )
+            v22 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)*v21;
+            v23 = 0;
+            if ( size )
             {
-              v25 = &v2->m_aHostilePedRecords.p->pSimObject.m_pPointer;
-              while ( v23 != *v25 )
+              p_m_pPointer = &this->m_aHostilePedRecords.p->pSimObject.m_pPointer;
+              while ( v22 != (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)*p_m_pPointer )
               {
-                ++v24;
-                v25 += 7;
-                if ( v24 >= v21 )
-                  goto LABEL_34;
+                ++v23;
+                p_m_pPointer += 7;
+                if ( v23 >= size )
+                  goto LABEL_32;
               }
-              dest[v24] = 1;
+              dest[v23] = 1;
             }
             else
             {
-LABEL_34:
-              UFG::PedKnowledgeBase::AddRecordForHostile(v2, v23);
+LABEL_32:
+              UFG::PedKnowledgeBase::AddRecordForHostile(this, v22);
             }
-            ++v22;
-            --v17;
+            ++v21;
+            --v16;
           }
-          while ( v17 );
+          while ( v16 );
         }
-        v26 = (signed int)(v21 - 1);
-        if ( (signed int)(v21 - 1) >= 0 )
+        v25 = (int)(size - 1);
+        if ( (int)(size - 1) >= 0 )
         {
-          v27 = (signed int)(v21 - 1);
+          v26 = (int)(size - 1);
           do
           {
-            if ( !dest[v26] )
+            if ( !dest[v25] )
             {
-              v28 = v2->m_aHostilePedRecords.p;
-              v29 = (signed __int64)&v28[v2->m_aHostilePedRecords.size - 1];
-              v30 = (signed __int64)&v28[v27];
-              v31 = *(_QWORD *)(v29 + 16);
-              if ( v28[v27].pSimObject.m_pPointer )
+              p = this->m_aHostilePedRecords.p;
+              v28 = &p[this->m_aHostilePedRecords.size - 1];
+              v29 = &p[v26];
+              v30 = v28->pSimObject.m_pPointer;
+              if ( p[v26].pSimObject.m_pPointer )
               {
-                v32 = *(_QWORD *)v30;
-                v33 = *(_QWORD **)(v30 + 8);
-                *(_QWORD *)(v32 + 8) = v33;
-                *v33 = v32;
-                *(_QWORD *)v30 = v30;
-                *(_QWORD *)(v30 + 8) = v30;
+                mPrev = v29->pSimObject.mPrev;
+                v32 = v29->pSimObject.mNext;
+                mPrev->mNext = v32;
+                v32->mPrev = mPrev;
+                v29->pSimObject.mPrev = &v29->pSimObject;
+                v29->pSimObject.mNext = &v29->pSimObject;
               }
-              *(_QWORD *)(v30 + 16) = v31;
-              if ( v31 )
+              v29->pSimObject.m_pPointer = v30;
+              if ( v30 )
               {
-                v34 = *(_QWORD *)(v31 + 8);
-                *(_QWORD *)(v34 + 8) = v30;
-                *(_QWORD *)v30 = v34;
-                *(_QWORD *)(v30 + 8) = v31 + 8;
-                *(_QWORD *)(v31 + 8) = v30;
+                v33 = v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+                v33->mNext = &v29->pSimObject;
+                v29->pSimObject.mPrev = v33;
+                v29->pSimObject.mNext = &v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+                v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = &v29->pSimObject;
               }
-              *(_QWORD *)(v30 + 24) = *(_QWORD *)(v29 + 24);
-              *(_QWORD *)(v30 + 32) = *(_QWORD *)(v29 + 32);
-              *(_QWORD *)(v30 + 40) = *(_QWORD *)(v29 + 40);
-              *(_BYTE *)(v30 + 48) ^= (*(_BYTE *)(v29 + 48) ^ *(_BYTE *)(v30 + 48)) & 1;
-              v35 = *(_BYTE *)(v30 + 48) ^ (*(_BYTE *)(v29 + 48) ^ *(_BYTE *)(v30 + 48)) & 2;
-              *(_BYTE *)(v30 + 48) = v35;
-              *(_BYTE *)(v30 + 48) = v35 ^ (*(_BYTE *)(v29 + 48) ^ v35) & 4;
-              v36 = v2->m_aHostilePedRecords.size;
-              if ( v36 > 1 )
-                v2->m_aHostilePedRecords.size = v36 - 1;
+              v29->m_uLastTimeSeen = v28->m_uLastTimeSeen;
+              v29->m_uLastLOSTest = v28->m_uLastLOSTest;
+              v29->m_uLastPathTest = v28->m_uLastPathTest;
+              *((_BYTE *)v29 + 48) ^= (*((_BYTE *)v28 + 48) ^ *((_BYTE *)v29 + 48)) & 1;
+              v34 = *((_BYTE *)v29 + 48) ^ (*((_BYTE *)v28 + 48) ^ *((_BYTE *)v29 + 48)) & 2;
+              *((_BYTE *)v29 + 48) = v34;
+              *((_BYTE *)v29 + 48) = v34 ^ (*((_BYTE *)v28 + 48) ^ v34) & 4;
+              v35 = this->m_aHostilePedRecords.size;
+              if ( v35 > 1 )
+                this->m_aHostilePedRecords.size = v35 - 1;
               else
-                v2->m_aHostilePedRecords.size = 0;
+                this->m_aHostilePedRecords.size = 0;
             }
-            --v27;
             --v26;
+            --v25;
           }
-          while ( v26 >= 0 );
+          while ( v25 >= 0 );
         }
-        for ( j = (__int64)(v46 - 2); v46 - 2 != v10; j = (__int64)(v46 - 2) )
+        for ( j = v45 - 2; v45 - 2 != v10; j = v45 - 2 )
         {
-          v38 = (_QWORD *)(j + 16);
-          v39 = *(_QWORD *)(j + 16);
-          v40 = *(_QWORD **)(j + 24);
-          *(_QWORD *)(v39 + 8) = v40;
-          *v40 = v39;
-          *v38 = v38;
-          v38[1] = v38;
+          v37 = j + 2;
+          v38 = j[2];
+          v39 = j[3];
+          v38[1] = (__int64)v39;
+          *v39 = (__int64)v38;
+          *v37 = v37;
+          v37[1] = v37;
         }
+        v40 = v44;
         v41 = v45;
-        v42 = v46;
-        v45[1] = (__int64)v46;
-        *v42 = v41;
+        v44[1] = (__int64)v45;
+        *v41 = v40;
       }
     }
   }
@@ -371,84 +347,71 @@ LABEL_34:
 // RVA: 0x379160
 void __fastcall UFG::PedKnowledgeBase::OnAttach(UFG::PedKnowledgeBase *this, UFG::SimObject *pParentSimObj)
 {
-  UFG::PedKnowledgeBase *v2; // rdi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
-  UFG::PedKnowledgeRecord *v6; // rcx
-  char *v7; // rbx
-  UFG::PedKnowledgeBase *v8; // [rsp+20h] [rbp-18h]
-  void (__fastcall *v9)(UFG::PedKnowledgeBase *, float); // [rsp+28h] [rbp-10h]
+  UFG::PedKnowledgeRecord *p; // rcx
+  void *v7; // rbx
+  fastdelegate::FastDelegate1<float,void> v8; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this;
   if ( this->m_pParentSimObject.m_pPointer )
   {
-    v3 = this->m_pParentSimObject.mPrev;
-    v4 = this->m_pParentSimObject.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    this->m_pParentSimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
-    this->m_pParentSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
+    mPrev = this->m_pParentSimObject.mPrev;
+    mNext = this->m_pParentSimObject.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->m_pParentSimObject.mPrev = &this->m_pParentSimObject;
+    this->m_pParentSimObject.mNext = &this->m_pParentSimObject;
   }
   this->m_pParentSimObject.m_pPointer = pParentSimObj;
   if ( pParentSimObj )
   {
-    v5 = pParentSimObj->m_SafePointerList.mNode.mPrev;
-    v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
+    v5 = pParentSimObj->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v5->mNext = &this->m_pParentSimObject;
     this->m_pParentSimObject.mPrev = v5;
-    this->m_pParentSimObject.mNext = &pParentSimObj->m_SafePointerList.mNode;
-    pParentSimObj->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
+    this->m_pParentSimObject.mNext = &pParentSimObj->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pParentSimObj->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = &this->m_pParentSimObject;
   }
-  v9 = UFG::PedKnowledgeBase::RefreshHostileList;
-  v8 = this;
-  UFG::TicketBoothManager::Register(
-    UFG::TicketBoothManager::mpSingleton,
-    TICKETBOOTH_KNOWLEDGEBASE_REFRESHHOSTILES,
-    &this->m_ticketRefreshHostiles,
-    (fastdelegate::FastDelegate1<float,void> *)&v8);
-  v8 = v2;
-  v9 = UFG::PedKnowledgeBase::Update;
-  UFG::TicketBoothManager::Register(
-    UFG::TicketBoothManager::mpSingleton,
-    TICKETBOOTH_KNOWLEDGEBASE_UPDATE,
-    &v2->m_ticketUpdate,
-    (fastdelegate::FastDelegate1<float,void> *)&v8);
-  v2->m_bEnabled = 1;
-  v6 = v2->m_aHostilePedRecords.p;
-  if ( v6 )
+  v8.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::PedKnowledgeBase::RefreshHostileList;
+  v8.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)this;
+  UFG::TicketBoothManager::Register(UFG::TicketBoothManager::mpSingleton, 6, &this->m_ticketRefreshHostiles, &v8);
+  v8.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)this;
+  v8.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::PedKnowledgeBase::Update;
+  UFG::TicketBoothManager::Register(UFG::TicketBoothManager::mpSingleton, 7, &this->m_ticketUpdate, &v8);
+  this->m_bEnabled = 1;
+  p = this->m_aHostilePedRecords.p;
+  if ( p )
   {
-    v7 = (char *)&v6[-1] + 48;
+    v7 = (char *)&p[-1] + 48;
     `eh vector destructor iterator(
-      v6,
+      p,
       0x38ui64,
-      *((_DWORD *)&v6[-1] + 12),
+      *((_DWORD *)&p[-1] + 12),
       (void (__fastcall *)(void *))UFG::InterestPointUseDetails::~InterestPointUseDetails);
     operator delete[](v7);
   }
-  v2->m_aHostilePedRecords.p = 0i64;
-  *(_QWORD *)&v2->m_aHostilePedRecords.size = 0i64;
-  UFG::PedKnowledgeBase::RefreshHostileList(v2, 0.0);
+  this->m_aHostilePedRecords.p = 0i64;
+  *(_QWORD *)&this->m_aHostilePedRecords.size = 0i64;
+  UFG::PedKnowledgeBase::RefreshHostileList(this, 0.0);
 }
 
 // File Line: 214
 // RVA: 0x37B000
 void __fastcall UFG::PedKnowledgeBase::OnDetach(UFG::PedKnowledgeBase *this)
 {
-  UFG::PedKnowledgeBase *v1; // rdi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rax
-  UFG::PedKnowledgeRecord *v4; // rcx
-  char *v5; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::PedKnowledgeRecord *p; // rcx
+  void *v5; // rbx
 
-  v1 = this;
   if ( this->m_pParentSimObject.m_pPointer )
   {
-    v2 = this->m_pParentSimObject.mPrev;
-    v3 = this->m_pParentSimObject.mNext;
-    v2->mNext = v3;
-    v3->mPrev = v2;
-    this->m_pParentSimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
-    this->m_pParentSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->m_pParentSimObject.mPrev;
+    mPrev = this->m_pParentSimObject.mPrev;
+    mNext = this->m_pParentSimObject.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->m_pParentSimObject.mPrev = &this->m_pParentSimObject;
+    this->m_pParentSimObject.mNext = &this->m_pParentSimObject;
   }
   this->m_pParentSimObject.m_pPointer = 0i64;
   UFG::TicketBoothManager::Unregister(
@@ -458,51 +421,52 @@ void __fastcall UFG::PedKnowledgeBase::OnDetach(UFG::PedKnowledgeBase *this)
   UFG::TicketBoothManager::Unregister(
     UFG::TicketBoothManager::mpSingleton,
     TICKETBOOTH_KNOWLEDGEBASE_UPDATE,
-    &v1->m_ticketUpdate);
-  v4 = v1->m_aHostilePedRecords.p;
-  if ( v4 )
+    &this->m_ticketUpdate);
+  p = this->m_aHostilePedRecords.p;
+  if ( p )
   {
-    v5 = (char *)&v4[-1] + 48;
+    v5 = (char *)&p[-1] + 48;
     `eh vector destructor iterator(
-      v4,
+      p,
       0x38ui64,
-      *((_DWORD *)&v4[-1] + 12),
+      *((_DWORD *)&p[-1] + 12),
       (void (__fastcall *)(void *))UFG::InterestPointUseDetails::~InterestPointUseDetails);
     operator delete[](v5);
   }
-  v1->m_aHostilePedRecords.p = 0i64;
-  *(_QWORD *)&v1->m_aHostilePedRecords.size = 0i64;
+  this->m_aHostilePedRecords.p = 0i64;
+  *(_QWORD *)&this->m_aHostilePedRecords.size = 0i64;
 }
 
 // File Line: 225
 // RVA: 0x360AD0
-float __fastcall UFG::PedKnowledgeBase::GetLineOfSightPriority(UFG::PedKnowledgeBase *this, UFG::qVector3 *vMyPos, UFG::PedKnowledgeRecord *pedKnowledgeRecord)
+float __fastcall UFG::PedKnowledgeBase::GetLineOfSightPriority(
+        UFG::PedKnowledgeBase *this,
+        UFG::qVector3 *vMyPos,
+        UFG::PedKnowledgeRecord *pedKnowledgeRecord)
 {
-  UFG::TransformNodeComponent *v3; // rbx
-  UFG::PedKnowledgeRecord *v4; // rdi
-  UFG::qVector3 *v5; // rsi
-  __m128 v6; // xmm2
+  UFG::TransformNodeComponent *m_pPointer; // rbx
+  __m128 y_low; // xmm2
   float v7; // xmm3_4
   float v8; // xmm1_4
   float v9; // xmm0_4
 
-  v3 = (UFG::TransformNodeComponent *)pedKnowledgeRecord->pSimObject.m_pPointer;
-  v4 = pedKnowledgeRecord;
-  v5 = vMyPos;
-  if ( v3 )
-    v3 = (UFG::TransformNodeComponent *)v3->mChildren.mNode.mNext;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v6 = (__m128)LODWORD(v5->y);
+  m_pPointer = (UFG::TransformNodeComponent *)pedKnowledgeRecord->pSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (UFG::TransformNodeComponent *)m_pPointer->mChildren.mNode.mNext;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pPointer);
+  y_low = (__m128)LODWORD(vMyPos->y);
   v7 = FLOAT_0_0099999998;
-  v6.m128_f32[0] = (float)((float)((float)(v6.m128_f32[0] - v3->mWorldTransform.v3.y)
-                                 * (float)(v6.m128_f32[0] - v3->mWorldTransform.v3.y))
-                         + (float)((float)(v5->x - v3->mWorldTransform.v3.x) * (float)(v5->x - v3->mWorldTransform.v3.x)))
-                 + (float)((float)(v5->z - v3->mWorldTransform.v3.z) * (float)(v5->z - v3->mWorldTransform.v3.z));
-  LODWORD(v8) = (unsigned __int128)_mm_sqrt_ps(v6);
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - m_pPointer->mWorldTransform.v3.y)
+                                    * (float)(y_low.m128_f32[0] - m_pPointer->mWorldTransform.v3.y))
+                            + (float)((float)(vMyPos->x - m_pPointer->mWorldTransform.v3.x)
+                                    * (float)(vMyPos->x - m_pPointer->mWorldTransform.v3.x)))
+                    + (float)((float)(vMyPos->z - m_pPointer->mWorldTransform.v3.z)
+                            * (float)(vMyPos->z - m_pPointer->mWorldTransform.v3.z));
+  v8 = _mm_sqrt_ps(y_low).m128_f32[0];
   if ( v8 >= 0.0099999998 )
     v7 = v8;
-  v9 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(v4->m_uLastLOSTest));
-  if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - v4->m_uLastLOSTest) < 0 )
+  v9 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(pedKnowledgeRecord->m_uLastLOSTest));
+  if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - pedKnowledgeRecord->m_uLastLOSTest) < 0 )
     v9 = v9 + 1.8446744e19;
   return (float)((float)(v9 * 0.001) * UFG::PedKnowledgeBase::ms_fTimePriority)
        + (float)((float)(1.0 / v7) * UFG::PedKnowledgeBase::ms_fDistancePriority);

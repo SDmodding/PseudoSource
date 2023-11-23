@@ -14,10 +14,13 @@ unsigned __int64 __fastcall CAkInsertFXContext::GetGameObjectID(CAkInsertFXConte
 
 // File Line: 118
 // RVA: 0xA85260
-void __fastcall CAkInsertFXContext::GetPositioningType(CAkInsertFXContext *this, AkPannerType *out_ePanner, AkPositionSourceType *out_ePosSource)
+void __fastcall CAkInsertFXContext::GetPositioningType(
+        CAkInsertFXContext *this,
+        AkPannerType *out_ePanner,
+        AkPositionSourceType *out_ePosSource)
 {
   *out_ePanner = *((_BYTE *)this->m_pContext + 371) & 3;
-  *out_ePosSource = ((unsigned int)*((unsigned __int8 *)this->m_pContext + 371) >> 2) & 3;
+  *out_ePosSource = (*((unsigned __int8 *)this->m_pContext + 371) >> 2) & 3;
 }
 
 // File Line: 120
@@ -29,31 +32,32 @@ __int64 __fastcall CAkInsertFXContext::GetNumEmitterListenerPairs(CAkInsertFXCon
 
 // File Line: 125
 // RVA: 0xA84E20
-signed __int64 __fastcall CAkInsertFXContext::GetEmitterListenerPair(CAkInsertFXContext *this, unsigned int in_uIndex, AkEmitterListenerPair *out_emitterListenerPair)
+__int64 __fastcall CAkInsertFXContext::GetEmitterListenerPair(
+        CAkInsertFXContext *this,
+        unsigned int in_uIndex,
+        AkEmitterListenerPair *out_emitterListenerPair)
 {
   return CAkPBI::GetEmitterListenerPair(this->m_pContext, in_uIndex, out_emitterListenerPair);
 }
 
 // File Line: 127
 // RVA: 0xA84F70
-signed __int64 __fastcall CAkInsertFXContext::GetNumGameObjectPositions(CAkInsertFXContext *this)
+__int64 __fastcall CAkInsertFXContext::GetNumGameObjectPositions(CAkInsertFXContext *this)
 {
-  CAkRegisteredObj *v1; // rcx
-  signed __int64 result; // rax
+  CAkRegisteredObj *m_pGameObj; // rcx
 
-  v1 = this->m_pContext->m_pGameObj;
-  if ( *((_BYTE *)&v1->m_PosKeep.0 + 11) & 7 )
-    result = v1->m_PosKeep.m_uNumPos;
+  m_pGameObj = this->m_pContext->m_pGameObj;
+  if ( (*((_BYTE *)&m_pGameObj->m_PosKeep.AkSoundPositionRef + 11) & 7) != 0 )
+    return m_pGameObj->m_PosKeep.m_uNumPos;
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 129
 // RVA: 0xA84E60
 __int64 __fastcall CAkInsertFXContext::GetGameObjectMultiPositionType(CAkInsertFXContext *this)
 {
-  return *((_BYTE *)&this->m_pContext->m_pGameObj->m_PosKeep.0 + 11) & 7;
+  return *((_BYTE *)&this->m_pContext->m_pGameObj->m_PosKeep.AkSoundPositionRef + 11) & 7;
 }
 
 // File Line: 131
@@ -65,7 +69,10 @@ float __fastcall CAkInsertFXContext::GetGameObjectScaling(CAkInsertFXContext *th
 
 // File Line: 136
 // RVA: 0xA84EA0
-signed __int64 __fastcall CAkInsertFXContext::GetGameObjectPosition(CAkInsertFXContext *this, unsigned int in_uIndex, AkSoundPosition *out_position)
+__int64 __fastcall CAkInsertFXContext::GetGameObjectPosition(
+        CAkInsertFXContext *this,
+        unsigned int in_uIndex,
+        AkSoundPosition *out_position)
 {
   return CAkPBI::GetGameObjectPosition(this->m_pContext, in_uIndex, out_position);
 }
@@ -79,24 +86,30 @@ __int64 __fastcall CAkInsertFXContext::GetListenerMask(CAkInsertFXContext *this)
 
 // File Line: 143
 // RVA: 0xA84F00
-signed __int64 __fastcall CAkInsertFXContext::GetListenerData(CAkInsertFXContext *this, unsigned int in_uListenerMask, AkListener *out_listener)
+__int64 __fastcall CAkInsertFXContext::GetListenerData(
+        CAkInsertFXContext *this,
+        char in_uListenerMask,
+        AkListener *out_listener)
 {
   return CAkPBI::GetListenerData(this->m_pContext, in_uListenerMask, out_listener);
 }
 
 // File Line: 170
 // RVA: 0xA84F40
-signed __int64 __fastcall CAkBusFXContext::GetMaxBufferLength(CAkSourceFXContext *this)
+__int64 __fastcall CAkBusFXContext::GetMaxBufferLength(CAkSourceFXContext *this)
 {
   return 1024i64;
 }
 
 // File Line: 196
 // RVA: 0xA85250
-void __fastcall CAkBusFXContext::GetPositioningType(CAkBusFXContext *this, AkPannerType *out_ePanner, AkPositionSourceType *out_ePosSource)
+void __fastcall CAkBusFXContext::GetPositioningType(
+        CAkBusFXContext *this,
+        AkPannerType *out_ePanner,
+        AkPositionSourceType *out_ePosSource)
 {
-  *out_ePanner = 0;
-  *out_ePosSource = 0;
+  *out_ePanner = Ak2D;
+  *out_ePosSource = AkUserDef;
 }
 
 // File Line: 279
@@ -115,10 +128,13 @@ unsigned __int64 __fastcall CAkSourceFXContext::GetGameObjectID(CAkSourceFXConte
 
 // File Line: 283
 // RVA: 0xA85290
-void __fastcall CAkSourceFXContext::GetPositioningType(CAkSourceFXContext *this, AkPannerType *out_ePanner, AkPositionSourceType *out_ePosSource)
+void __fastcall CAkSourceFXContext::GetPositioningType(
+        CAkSourceFXContext *this,
+        AkPannerType *out_ePanner,
+        AkPositionSourceType *out_ePosSource)
 {
   *out_ePanner = *((_BYTE *)this->m_pContext + 371) & 3;
-  *out_ePosSource = ((unsigned int)*((unsigned __int8 *)this->m_pContext + 371) >> 2) & 3;
+  *out_ePosSource = (*((unsigned __int8 *)this->m_pContext + 371) >> 2) & 3;
 }
 
 // File Line: 285
@@ -130,31 +146,32 @@ __int64 __fastcall CAkSourceFXContext::GetNumEmitterListenerPairs(CAkSourceFXCon
 
 // File Line: 290
 // RVA: 0xA84E30
-signed __int64 __fastcall CAkSourceFXContext::GetEmitterListenerPair(CAkSourceFXContext *this, unsigned int in_uIndex, AkEmitterListenerPair *out_emitterListenerPair)
+__int64 __fastcall CAkSourceFXContext::GetEmitterListenerPair(
+        CAkSourceFXContext *this,
+        unsigned int in_uIndex,
+        AkEmitterListenerPair *out_emitterListenerPair)
 {
   return CAkPBI::GetEmitterListenerPair(this->m_pContext, in_uIndex, out_emitterListenerPair);
 }
 
 // File Line: 292
 // RVA: 0xA84F90
-signed __int64 __fastcall CAkSourceFXContext::GetNumGameObjectPositions(CAkSourceFXContext *this)
+__int64 __fastcall CAkSourceFXContext::GetNumGameObjectPositions(CAkSourceFXContext *this)
 {
-  CAkRegisteredObj *v1; // rcx
-  signed __int64 result; // rax
+  CAkRegisteredObj *m_pGameObj; // rcx
 
-  v1 = this->m_pContext->m_pGameObj;
-  if ( *((_BYTE *)&v1->m_PosKeep.0 + 11) & 7 )
-    result = v1->m_PosKeep.m_uNumPos;
+  m_pGameObj = this->m_pContext->m_pGameObj;
+  if ( (*((_BYTE *)&m_pGameObj->m_PosKeep.AkSoundPositionRef + 11) & 7) != 0 )
+    return m_pGameObj->m_PosKeep.m_uNumPos;
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 294
 // RVA: 0xA84E80
 __int64 __fastcall CAkSourceFXContext::GetGameObjectMultiPositionType(CAkSourceFXContext *this)
 {
-  return *((_BYTE *)&this->m_pContext->m_pGameObj->m_PosKeep.0 + 11) & 7;
+  return *((_BYTE *)&this->m_pContext->m_pGameObj->m_PosKeep.AkSoundPositionRef + 11) & 7;
 }
 
 // File Line: 296
@@ -166,7 +183,10 @@ float __fastcall CAkSourceFXContext::GetGameObjectScaling(CAkSourceFXContext *th
 
 // File Line: 301
 // RVA: 0xA84EB0
-signed __int64 __fastcall CAkSourceFXContext::GetGameObjectPosition(CAkSourceFXContext *this, unsigned int in_uIndex, AkSoundPosition *out_position)
+__int64 __fastcall CAkSourceFXContext::GetGameObjectPosition(
+        CAkSourceFXContext *this,
+        unsigned int in_uIndex,
+        AkSoundPosition *out_position)
 {
   return CAkPBI::GetGameObjectPosition(this->m_pContext, in_uIndex, out_position);
 }
@@ -180,7 +200,10 @@ __int64 __fastcall CAkSourceFXContext::GetListenerMask(CAkSourceFXContext *this)
 
 // File Line: 308
 // RVA: 0xA84F10
-signed __int64 __fastcall CAkSourceFXContext::GetListenerData(CAkSourceFXContext *this, unsigned int in_uListenerMask, AkListener *out_listener)
+__int64 __fastcall CAkSourceFXContext::GetListenerData(
+        CAkSourceFXContext *this,
+        char in_uListenerMask,
+        AkListener *out_listener)
 {
   return CAkPBI::GetListenerData(this->m_pContext, in_uListenerMask, out_listener);
 }

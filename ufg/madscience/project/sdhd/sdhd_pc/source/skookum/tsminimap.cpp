@@ -3,30 +3,74 @@
 void UFG::TSMinimap::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+  ASymbol rebindh; // [rsp+20h] [rbp-18h]
+  ASymbol rebindi; // [rsp+20h] [rbp-18h]
+  ASymbol rebindj; // [rsp+20h] [rbp-18h]
+  ASymbol rebindk; // [rsp+20h] [rbp-18h]
+  ASymbol rebindl; // [rsp+20h] [rbp-18h]
+  ASymbol rebindm; // [rsp+20h] [rbp-18h]
+  ASymbol rebindn; // [rsp+20h] [rbp-18h]
+  ASymbol rebindo; // [rsp+20h] [rbp-18h]
+  ASymbol rebindp; // [rsp+20h] [rbp-18h]
+  ASymbol rebindq; // [rsp+20h] [rbp-18h]
+  ASymbol rebindr; // [rsp+20h] [rbp-18h]
+  ASymbol rebinds; // [rsp+20h] [rbp-18h]
+  ASymbol rebindt; // [rsp+20h] [rbp-18h]
+  ASymbol rebindu; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("Minimap");
-  SSClass::register_method_func(v0, "add_blip_xy", UFG::TSMinimap::MthdC_add_blip_xy, 1, 0);
-  SSClass::register_method_func(v0, "remove_blip", UFG::TSMinimap::MthdC_remove_blip, 1, 0);
-  SSClass::register_method_func(v0, "show_blip_range", UFG::TSMinimap::MthdC_show_blip_range, 1, 0);
-  SSClass::register_method_func(v0, "show_blip_donut_range", UFG::TSMinimap::MthdC_show_blip_donut_range, 1, 0);
-  SSClass::register_method_func(v0, "set_blip_range", UFG::TSMinimap::MthdC_set_blip_range, 1, 0);
-  SSClass::register_method_func(v0, "hide_blip_range", UFG::TSMinimap::MthdC_hide_blip_range, 1, 0);
-  SSClass::register_method_func(v0, "ping_blip", UFG::TSMinimap::MthdC_ping_blip, 1, 0);
-  SSClass::register_method_func(v0, "stop_pinging", UFG::TSMinimap::MthdC_stop_pinging, 1, 0);
-  SSClass::register_method_func(v0, "set_blip_type_visible", UFG::TSMinimap::MthdC_set_blip_type_visible, 1, 0);
-  SSClass::register_method_func(v0, "get_zoom", UFG::TSMinimap::MthdC_get_zoom, 1, 0);
-  SSClass::register_method_func(v0, "lock_zoom", UFG::TSMinimap::MthdC_lock_zoom, 1, 0);
-  SSClass::register_method_func(v0, "unlock_zoom", UFG::TSMinimap::MthdC_unlock_zoom, 1, 0);
-  SSClass::register_method_func(v0, "get_gps_path_length", UFG::TSMinimap::MthdC_get_gps_path_length, 1, 0);
-  SSClass::register_method_func(v0, "set_gps_active", UFG::TSMinimap::MthdC_set_gps_active, 1, 0);
-  SSClass::register_method_func(v0, "set_gps_visible", UFG::TSMinimap::MthdC_set_gps_visible, 1, 0);
-  SSClass::register_method_func(v0, "ping", UFG::TSMinimap::MthdC_ping, 1, 0);
-  SSClass::register_method_func(v0, "force_interior_map", UFG::TSMinimap::MthdC_force_interior_map, 1, 0);
-  SSClass::register_method_func(v0, "set_gps_ignore_alley", UFG::TSMinimap::MthdC_set_gps_ignore_alley, 1, 0);
-  SSClass::register_method_func(v0, "map_lines_add", UFG::TSMinimap::MthdC_map_lines_add, 1, 0);
-  SSClass::register_method_func(v0, "map_lines_add_list", UFG::TSMinimap::MthdC_map_lines_add_list, 1, 0);
-  SSClass::register_method_func(v0, "map_lines_add_strip", UFG::TSMinimap::MthdC_map_lines_add_strip, 1, 0);
-  SSClass::register_method_func(v0, "map_lines_clear", UFG::TSMinimap::MthdC_map_lines_clear, 1, 0);
+  SSClass::register_method_func(v0, "add_blip_xy", UFG::TSMinimap::MthdC_add_blip_xy, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "remove_blip", UFG::TSMinimap::MthdC_remove_blip, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "show_blip_range", UFG::TSMinimap::MthdC_show_blip_range, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "show_blip_donut_range", UFG::TSMinimap::MthdC_show_blip_donut_range, 1, rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_blip_range", UFG::TSMinimap::MthdC_set_blip_range, 1, rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
+  SSClass::register_method_func(v0, "hide_blip_range", UFG::TSMinimap::MthdC_hide_blip_range, 1, rebinde);
+  LOBYTE(rebindf.i_uid) = 0;
+  SSClass::register_method_func(v0, "ping_blip", UFG::TSMinimap::MthdC_ping_blip, 1, rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
+  SSClass::register_method_func(v0, "stop_pinging", UFG::TSMinimap::MthdC_stop_pinging, 1, rebindg);
+  LOBYTE(rebindh.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_blip_type_visible", UFG::TSMinimap::MthdC_set_blip_type_visible, 1, rebindh);
+  LOBYTE(rebindi.i_uid) = 0;
+  SSClass::register_method_func(v0, "get_zoom", UFG::TSMinimap::MthdC_get_zoom, 1, rebindi);
+  LOBYTE(rebindj.i_uid) = 0;
+  SSClass::register_method_func(v0, "lock_zoom", UFG::TSMinimap::MthdC_lock_zoom, 1, rebindj);
+  LOBYTE(rebindk.i_uid) = 0;
+  SSClass::register_method_func(v0, "unlock_zoom", UFG::TSMinimap::MthdC_unlock_zoom, 1, rebindk);
+  LOBYTE(rebindl.i_uid) = 0;
+  SSClass::register_method_func(v0, "get_gps_path_length", UFG::TSMinimap::MthdC_get_gps_path_length, 1, rebindl);
+  LOBYTE(rebindm.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_gps_active", UFG::TSMinimap::MthdC_set_gps_active, 1, rebindm);
+  LOBYTE(rebindn.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_gps_visible", UFG::TSMinimap::MthdC_set_gps_visible, 1, rebindn);
+  LOBYTE(rebindo.i_uid) = 0;
+  SSClass::register_method_func(v0, "ping", UFG::TSMinimap::MthdC_ping, 1, rebindo);
+  LOBYTE(rebindp.i_uid) = 0;
+  SSClass::register_method_func(v0, "force_interior_map", UFG::TSMinimap::MthdC_force_interior_map, 1, rebindp);
+  LOBYTE(rebindq.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_gps_ignore_alley", UFG::TSMinimap::MthdC_set_gps_ignore_alley, 1, rebindq);
+  LOBYTE(rebindr.i_uid) = 0;
+  SSClass::register_method_func(v0, "map_lines_add", UFG::TSMinimap::MthdC_map_lines_add, 1, rebindr);
+  LOBYTE(rebinds.i_uid) = 0;
+  SSClass::register_method_func(v0, "map_lines_add_list", UFG::TSMinimap::MthdC_map_lines_add_list, 1, rebinds);
+  LOBYTE(rebindt.i_uid) = 0;
+  SSClass::register_method_func(v0, "map_lines_add_strip", UFG::TSMinimap::MthdC_map_lines_add_strip, 1, rebindt);
+  LOBYTE(rebindu.i_uid) = 0;
+  SSClass::register_method_func(v0, "map_lines_clear", UFG::TSMinimap::MthdC_map_lines_clear, 1, rebindu);
 }
 
 // File Line: 89
@@ -34,59 +78,54 @@ void UFG::TSMinimap::BindAtomics(void)
 void __fastcall UFG::TSMinimap::MthdC_add_blip_xy(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::UIMapBlipManager *v2; // rbx
-  SSInvokedMethod *v3; // rdi
-  unsigned int v4; // edx
-  SSInstance *v5; // rax
-  SSClass *v6; // r8
-  SSData **v7; // r8
-  float *v8; // r11
-  SSInstance *v9; // rdi
-  SSInstance *v10; // rsi
-  bool v11; // bp
-  UFG::UIMapBlip *v12; // rax
-  UFG::qSymbol result; // [rsp+50h] [rbp+18h]
+  unsigned int mUID; // edx
+  SSInstance *i_data_p; // rax
+  SSClass *i_class_p; // r8
+  SSData **i_array_p; // r8
+  SSInstance *v8; // rdi
+  SSInstance *v9; // rsi
+  bool v10; // bp
+  UFG::UIMapBlip *Icon; // rax
+  UFG::qSymbol result; // [rsp+50h] [rbp+18h] BYREF
 
   v2 = UFG::UIHKScreenHud::mIconManager;
-  v3 = pScope;
   if ( UFG::UIHKScreenHud::mIconManager )
   {
-    v4 = UFG::gNullQSymbol.mUID;
-    v5 = (*pScope->i_data.i_array_p)->i_data_p;
-    if ( v5 )
+    mUID = UFG::gNullQSymbol.mUID;
+    i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+    if ( i_data_p )
     {
-      v6 = v5->i_class_p;
-      if ( v6 == SSBrain::c_symbol_class_p )
+      i_class_p = i_data_p->i_class_p;
+      if ( i_class_p == SSBrain::c_symbol_class_p )
       {
-        v4 = v5->i_user_data;
+        mUID = i_data_p->i_user_data;
       }
-      else if ( v6 == SSBrain::c_string_class_p )
+      else if ( i_class_p == SSBrain::c_string_class_p )
       {
-        v4 = UFG::qSymbol::create_from_string(&result, *(const char **)v5->i_user_data)->mUID;
+        mUID = UFG::qSymbol::create_from_string(&result, *(const char **)i_data_p->i_user_data)->mUID;
       }
     }
-    v7 = v3->i_data.i_array_p;
-    v9 = v7[5]->i_data_p;
-    v10 = v7[6]->i_data_p;
-    v11 = v7[4]->i_data_p->i_user_data != 0;
-    if ( v4 != -1
-      && v7[1]->i_data_p != (SSInstance *)-32i64
-      && v7[2]->i_data_p != (SSInstance *)-32i64
-      && v7[3]->i_data_p != (SSInstance *)-32i64 )
+    i_array_p = pScope->i_data.i_array_p;
+    v8 = i_array_p[5]->i_data_p;
+    v9 = i_array_p[6]->i_data_p;
+    v10 = i_array_p[4]->i_data_p->i_user_data != 0;
+    if ( mUID != -1
+      && i_array_p[1]->i_data_p != (SSInstance *)-32i64
+      && i_array_p[2]->i_data_p != (SSInstance *)-32i64
+      && i_array_p[3]->i_data_p != (SSInstance *)-32i64 )
     {
-      v8 = (float *)&v7[3]->i_data_p->i_user_data;
-      v12 = UFG::UIMapBlipManager::CreateIcon(
-              v2,
-              v4,
-              *(const char **)v7[1]->i_data_p->i_user_data,
-              *(float *)&v7[2]->i_data_p->i_user_data,
-              *v8,
-              *v8);
-      if ( v12 )
+      Icon = UFG::UIMapBlipManager::CreateIcon(
+               v2,
+               mUID,
+               *(const char **)i_array_p[1]->i_data_p->i_user_data,
+               *(float *)&i_array_p[2]->i_data_p->i_user_data,
+               *(float *)&i_array_p[3]->i_data_p->i_user_data);
+      if ( Icon )
       {
-        v12->mHasAltitude = 0;
-        v12->mUseCustomFilterDistance = v11;
-        v12->mCustomFilterDistance = *(float *)&v9->i_user_data;
-        UFG::UIMapBlip::SetWorldMapCaption(v12, *(const char **)v10->i_user_data);
+        Icon->mHasAltitude = 0;
+        Icon->mUseCustomFilterDistance = v10;
+        Icon->mCustomFilterDistance = *(float *)&v8->i_user_data;
+        UFG::UIMapBlip::SetWorldMapCaption(Icon, *(const char **)v9->i_user_data);
       }
     }
   }
@@ -106,16 +145,14 @@ void __fastcall UFG::TSMinimap::MthdC_remove_blip(SSInvokedMethod *pScope, SSIns
 // RVA: 0x4E8A20
 void __fastcall UFG::TSMinimap::MthdC_get_zoom(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  float v3; // xmm6_4
-  UFG::UIHKScreenHud *v4; // rax
+  float Zoom; // xmm6_4
+  UFG::UIHKScreenHud *Instance; // rax
 
-  v2 = ppResult;
-  v3 = 0.0;
-  v4 = UFG::UIHKScreenHud::getInstance();
-  if ( v4 )
-    v3 = UFG::UITiledMapWidget::GetZoom(&v4->Minimap);
-  *v2 = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(v3));
+  Zoom = 0.0;
+  Instance = UFG::UIHKScreenHud::getInstance();
+  if ( Instance )
+    Zoom = UFG::UITiledMapWidget::GetZoom(&Instance->Minimap);
+  *ppResult = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(Zoom));
 }
 
 // File Line: 169
@@ -128,6 +165,7 @@ void __fastcall UFG::TSMinimap::MthdC_lock_zoom(SSInvokedMethod *pScope, SSInsta
 
 // File Line: 180
 // RVA: 0x4F2BF0
+// attributes: thunk
 void __fastcall UFG::TSMinimap::MthdC_unlock_zoom(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::UITiledMapZoomCalc::UnlockScale();
@@ -137,22 +175,22 @@ void __fastcall UFG::TSMinimap::MthdC_unlock_zoom(SSInvokedMethod *pScope, SSIns
 // RVA: 0x4EFF10
 void __fastcall UFG::TSMinimap::MthdC_show_blip_range(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
+  SSData **i_array_p; // r8
   SSData *v3; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[2];
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64
-    && v2[1]->i_data_p != (SSInstance *)-32i64
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = i_array_p[2];
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64
+    && i_array_p[1]->i_data_p != (SSInstance *)-32i64
     && v3->i_data_p != (SSInstance *)-32i64 )
   {
     if ( UFG::UIHKScreenHud::mIconManager )
       UFG::UIMapBlipManager::AddIconRadius(
         UFG::UIHKScreenHud::mIconManager,
-        (*v2)->i_data_p->i_user_data,
-        *(float *)&v2[1]->i_data_p->i_user_data,
+        (*i_array_p)->i_data_p->i_user_data,
+        *(float *)&i_array_p[1]->i_data_p->i_user_data,
         v3->i_data_p->i_user_data,
-        *(float *)&v2[3]->i_data_p->i_user_data);
+        *(float *)&i_array_p[3]->i_data_p->i_user_data);
   }
 }
 
@@ -160,24 +198,24 @@ void __fastcall UFG::TSMinimap::MthdC_show_blip_range(SSInvokedMethod *pScope, S
 // RVA: 0x4EFE80
 void __fastcall UFG::TSMinimap::MthdC_show_blip_donut_range(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   SSData *v3; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[4];
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64
-    && v2[1]->i_data_p != (SSInstance *)-32i64
-    && v2[2]->i_data_p != (SSInstance *)-32i64
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = i_array_p[4];
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64
+    && i_array_p[1]->i_data_p != (SSInstance *)-32i64
+    && i_array_p[2]->i_data_p != (SSInstance *)-32i64
     && v3->i_data_p != (SSInstance *)-32i64
-    && v2[3]->i_data_p != (SSInstance *)-32i64 )
+    && i_array_p[3]->i_data_p != (SSInstance *)-32i64 )
   {
     if ( UFG::UIHKScreenHud::mIconManager )
       UFG::UIMapBlipManager::AddIconDonutRadius(
         UFG::UIHKScreenHud::mIconManager,
-        (*v2)->i_data_p->i_user_data,
-        *(float *)&v2[1]->i_data_p->i_user_data,
-        *(float *)&v2[2]->i_data_p->i_user_data,
-        v2[3]->i_data_p->i_user_data,
+        (*i_array_p)->i_data_p->i_user_data,
+        *(float *)&i_array_p[1]->i_data_p->i_user_data,
+        *(float *)&i_array_p[2]->i_data_p->i_user_data,
+        i_array_p[3]->i_data_p->i_user_data,
         v3->i_data_p->i_user_data);
   }
 }
@@ -199,22 +237,22 @@ void __fastcall UFG::TSMinimap::MthdC_hide_blip_range(SSInvokedMethod *pScope, S
 // RVA: 0x4ED380
 void __fastcall UFG::TSMinimap::MthdC_set_blip_range(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
+  SSData **i_array_p; // r8
   SSData *v3; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[2];
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64
-    && v2[1]->i_data_p != (SSInstance *)-32i64
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = i_array_p[2];
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64
+    && i_array_p[1]->i_data_p != (SSInstance *)-32i64
     && v3->i_data_p != (SSInstance *)-32i64 )
   {
     if ( UFG::UIHKScreenHud::mIconManager )
       UFG::UIMapBlipManager::ChangeIconRadius(
         UFG::UIHKScreenHud::mIconManager,
-        (*v2)->i_data_p->i_user_data,
-        *(float *)&v2[1]->i_data_p->i_user_data,
+        (*i_array_p)->i_data_p->i_user_data,
+        *(float *)&i_array_p[1]->i_data_p->i_user_data,
         v3->i_data_p->i_user_data,
-        *(float *)&v2[3]->i_data_p->i_user_data);
+        *(float *)&i_array_p[3]->i_data_p->i_user_data);
   }
 }
 
@@ -222,51 +260,49 @@ void __fastcall UFG::TSMinimap::MthdC_set_blip_range(SSInvokedMethod *pScope, SS
 // RVA: 0x4EB220
 void __fastcall UFG::TSMinimap::MthdC_ping_blip(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rsi
-  SSActor *v3; // rbx
-  SSClass *v4; // rdi
+  SSActor *i_data_p; // rbx
+  SSClass *i_class_p; // rdi
   unsigned int v5; // edi
   UFG::SimObject *v6; // rcx
-  UFG::HudComponent *v7; // rax
+  UFG::HudComponent *ComponentOfType; // rax
   UFG::BasePhysicsSystem *v8; // rbx
-  unsigned int v9; // eax
-  UFG::qBaseTreeRB *v10; // rax
+  unsigned int BlipGuid; // eax
+  UFG::qBaseTreeRB *CollisionModel; // rax
   UFG::UIMapBlip *v11; // rbx
 
-  v2 = pScope;
-  v3 = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v3 )
+  i_data_p = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
     goto LABEL_6;
-  v4 = v3->i_class_p;
-  if ( !v4->vfptr->is_actor_class((SSClassDescBase *)&v4->vfptr) )
+  i_class_p = i_data_p->i_class_p;
+  if ( !i_class_p->vfptr->is_actor_class(i_class_p) )
   {
-    if ( v4 == SSBrain::c_symbol_class_p && LODWORD(v3->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(i_data_p->i_user_data) != -1 )
     {
-      v3 = SSActor::find((ASymbol *)&v3->i_user_data);
+      i_data_p = SSActor::find((ASymbol *)&i_data_p->i_user_data);
       goto LABEL_7;
     }
 LABEL_6:
-    v3 = 0i64;
+    i_data_p = 0i64;
   }
 LABEL_7:
-  v5 = *(_DWORD *)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64) + 32i64);
-  if ( v3 )
+  v5 = *(_DWORD *)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64) + 32i64);
+  if ( i_data_p )
   {
-    v6 = *(UFG::SimObject **)&v3[1].i_icoroutines_to_update.i_count;
+    v6 = *(UFG::SimObject **)&i_data_p[1].i_icoroutines_to_update.i_count;
     if ( v6 )
     {
-      v7 = (UFG::HudComponent *)UFG::SimObject::GetComponentOfType(v6, UFG::HudComponent::_TypeUID);
+      ComponentOfType = (UFG::HudComponent *)UFG::SimObject::GetComponentOfType(v6, UFG::HudComponent::_TypeUID);
       v8 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
       if ( UFG::UIHKScreenHud::mIconManager )
       {
-        if ( v7 )
+        if ( ComponentOfType )
         {
-          v9 = UFG::HudComponent::GetBlipGuid(v7);
-          v10 = UFG::BasePhysicsSystem::GetCollisionModel(v8, v9);
-          v11 = (UFG::UIMapBlip *)v10;
-          if ( v10 )
+          BlipGuid = UFG::HudComponent::GetBlipGuid(ComponentOfType);
+          CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v8, BlipGuid);
+          v11 = (UFG::UIMapBlip *)CollisionModel;
+          if ( CollisionModel )
           {
-            UFG::UIMapBlip::SetBlinkMaxTimes((UFG::UIMapBlip *)v10, v5);
+            UFG::UIMapBlip::SetBlinkMaxTimes((UFG::UIMapBlip *)CollisionModel, v5);
             UFG::UIMapBlip::Blink(v11);
           }
         }
@@ -279,39 +315,41 @@ LABEL_7:
 // RVA: 0x4F2750
 void __fastcall UFG::TSMinimap::MthdC_stop_pinging(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSActor *v2; // rbx
-  SSClass *v3; // rdi
+  SSActor *i_data_p; // rbx
+  SSClass *i_class_p; // rdi
   UFG::SimObject *v4; // rcx
-  UFG::HudComponent *v5; // rax
+  UFG::HudComponent *ComponentOfType; // rax
   UFG::BasePhysicsSystem *v6; // rbx
-  unsigned int v7; // eax
-  UFG::qBaseTreeRB *v8; // rax
+  unsigned int BlipGuid; // eax
+  UFG::qBaseTreeRB *CollisionModel; // rax
 
-  v2 = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
-  if ( v2 )
+  i_data_p = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
+  if ( i_data_p )
   {
-    v3 = v2->i_class_p;
-    if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))v3->vfptr->is_actor_class)(v2->i_class_p, ppResult) )
+    i_class_p = i_data_p->i_class_p;
+    if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))i_class_p->vfptr->is_actor_class)(
+            i_class_p,
+            ppResult) )
     {
-      if ( v3 != SSBrain::c_symbol_class_p || LODWORD(v2->i_user_data) == -1 )
+      if ( i_class_p != SSBrain::c_symbol_class_p || LODWORD(i_data_p->i_user_data) == -1 )
         return;
-      v2 = SSActor::find((ASymbol *)&v2->i_user_data);
+      i_data_p = SSActor::find((ASymbol *)&i_data_p->i_user_data);
     }
-    if ( v2 )
+    if ( i_data_p )
     {
-      v4 = *(UFG::SimObject **)&v2[1].i_icoroutines_to_update.i_count;
+      v4 = *(UFG::SimObject **)&i_data_p[1].i_icoroutines_to_update.i_count;
       if ( v4 )
       {
-        v5 = (UFG::HudComponent *)UFG::SimObject::GetComponentOfType(v4, UFG::HudComponent::_TypeUID);
+        ComponentOfType = (UFG::HudComponent *)UFG::SimObject::GetComponentOfType(v4, UFG::HudComponent::_TypeUID);
         v6 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
         if ( UFG::UIHKScreenHud::mIconManager )
         {
-          if ( v5 )
+          if ( ComponentOfType )
           {
-            v7 = UFG::HudComponent::GetBlipGuid(v5);
-            v8 = UFG::BasePhysicsSystem::GetCollisionModel(v6, v7);
-            if ( v8 )
-              UFG::UIMapBlip::StopBlink((UFG::UIMapBlip *)v8);
+            BlipGuid = UFG::HudComponent::GetBlipGuid(ComponentOfType);
+            CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v6, BlipGuid);
+            if ( CollisionModel )
+              UFG::UIMapBlip::StopBlink((UFG::UIMapBlip *)CollisionModel);
           }
         }
       }
@@ -323,46 +361,44 @@ void __fastcall UFG::TSMinimap::MthdC_stop_pinging(SSInvokedMethod *pScope, SSIn
 // RVA: 0x4ED3F0
 void __fastcall UFG::TSMinimap::MthdC_set_blip_type_visible(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   bool v3; // bl
-  UFG::UIMapBlipTypeManager *v4; // rax
-  UFG::qSymbolUC result; // [rsp+30h] [rbp+8h]
+  UFG::UIMapBlipTypeManager *Instance; // rax
+  UFG::qSymbolUC result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[1]->i_data_p->i_user_data != 0;
-  UFG::qSymbolUC::create_from_string(&result, *(const char **)(*v2)->i_data_p->i_user_data);
-  v4 = UFG::UIMapBlipTypeManager::getInstance();
-  UFG::UIMapBlipTypeManager::GetType(v4, &result)->IsVisible = v3;
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = i_array_p[1]->i_data_p->i_user_data != 0;
+  UFG::qSymbolUC::create_from_string(&result, *(const char **)(*i_array_p)->i_data_p->i_user_data);
+  Instance = UFG::UIMapBlipTypeManager::getInstance();
+  UFG::UIMapBlipTypeManager::GetType(Instance, &result)->IsVisible = v3;
 }
 
 // File Line: 331
 // RVA: 0x4E7940
 void __fastcall UFG::TSMinimap::MthdC_get_gps_path_length(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  float v3; // xmm0_4
+  float PathLength; // xmm0_4
 
-  v2 = ppResult;
-  v3 = 0.0;
+  PathLength = 0.0;
   if ( UFG::UIHKScreenHud::GPS )
-    v3 = UFG::UITiledMapGPS::GetPathLength(UFG::UIHKScreenHud::GPS);
-  *v2 = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(v3));
+    PathLength = UFG::UITiledMapGPS::GetPathLength(UFG::UIHKScreenHud::GPS);
+  *ppResult = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(PathLength));
 }
 
 // File Line: 341
 // RVA: 0x4EDEC0
 void __fastcall UFG::TSMinimap::MthdC_set_gps_active(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  UFG::qVector3 *v3; // rbx
+  SSData **i_array_p; // rdx
+  UFG::qVector3 *i_user_data; // rbx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (UFG::qVector3 *)v2[1]->i_data_p->i_user_data;
-  UFG::UITiledMapGPS::SetActive(UFG::UIHKScreenHud::GPS, (*v2)->i_data_p->i_user_data != 0);
-  if ( v3 && (-9999.0 != v3->x || -9999.0 != v3->y) )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = (UFG::qVector3 *)i_array_p[1]->i_data_p->i_user_data;
+  UFG::UITiledMapGPS::SetActive(UFG::UIHKScreenHud::GPS, (*i_array_p)->i_data_p->i_user_data != 0);
+  if ( i_user_data && (-9999.0 != i_user_data->x || -9999.0 != i_user_data->y) )
   {
     UFG::UITiledMapWidget::SetGPSLineColor(&UFG::UITiledMapWidget::DefaultGPSLineColor);
-    UFG::UITiledMapGPS::SetDestination(UFG::UIHKScreenHud::GPS, v3, 0);
+    UFG::UITiledMapGPS::SetDestination(UFG::UIHKScreenHud::GPS, i_user_data, 0);
   }
 }
 
@@ -375,6 +411,7 @@ void __fastcall UFG::TSMinimap::MthdC_set_gps_visible(SSInvokedMethod *pScope, S
 
 // File Line: 367
 // RVA: 0x4EB210
+// attributes: thunk
 void __fastcall UFG::TSMinimap::MthdC_ping(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::UIHKScreenHud::PingMinimap();
@@ -391,22 +428,22 @@ void __fastcall UFG::TSMinimap::MthdC_force_interior_map(SSInvokedMethod *pScope
 // RVA: 0x4EADA0
 void __fastcall UFG::TSMinimap::MthdC_map_lines_add(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  float *v3; // r8
+  SSData **i_array_p; // rdx
+  float *i_user_data; // r8
   float *v4; // rax
   float v5; // xmm1_4
   float v6; // xmm0_4
-  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h]
+  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (float *)(*v2)->i_data_p->i_user_data;
-  v4 = (float *)v2[1]->i_data_p->i_user_data;
-  if ( v3 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = (float *)(*i_array_p)->i_data_p->i_user_data;
+  v4 = (float *)i_array_p[1]->i_data_p->i_user_data;
+  if ( i_user_data )
   {
     if ( v4 )
     {
-      v5 = v3[1];
-      line.start.x = *v3;
+      v5 = i_user_data[1];
+      line.start.x = *i_user_data;
       line.start.y = v5;
       v6 = v4[1];
       line.end.x = *v4;
@@ -421,20 +458,20 @@ void __fastcall UFG::TSMinimap::MthdC_map_lines_add(SSInvokedMethod *pScope, SSI
 // RVA: 0x4EAE20
 void __fastcall UFG::TSMinimap::MthdC_map_lines_add_list(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  unsigned __int64 v2; // rcx
+  unsigned __int64 i_user_data; // rcx
   _QWORD *v3; // rbx
   __int64 v4; // rdi
   float *v5; // rcx
   float *v6; // rdx
   float v7; // xmm1_4
   float v8; // xmm0_4
-  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h]
+  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v3 = *(_QWORD **)(v2 + 8);
-  if ( *(_DWORD *)v2 != 1 )
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  v3 = *(_QWORD **)(i_user_data + 8);
+  if ( *(_DWORD *)i_user_data != 1 )
   {
-    v4 = ((unsigned int)(*(_DWORD *)v2 - 2) >> 1) + 1;
+    v4 = ((unsigned int)(*(_DWORD *)i_user_data - 2) >> 1) + 1;
     do
     {
       v5 = *(float **)(*v3 + 32i64);
@@ -458,21 +495,21 @@ void __fastcall UFG::TSMinimap::MthdC_map_lines_add_list(SSInvokedMethod *pScope
 // RVA: 0x4EAEC0
 void __fastcall UFG::TSMinimap::MthdC_map_lines_add_strip(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  unsigned __int64 v2; // rcx
+  unsigned __int64 i_user_data; // rcx
   unsigned int v3; // edx
   __int64 v4; // rdi
   float *v5; // rbx
-  signed __int64 v6; // rdi
+  __int64 v6; // rdi
   __int64 v7; // rsi
   float v8; // xmm0_4
   float v9; // xmm1_4
   float v10; // xmm0_4
-  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h]
+  UFG::UIHKMapLine line; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v3 = *(_DWORD *)v2;
-  v4 = *(_QWORD *)(v2 + 8);
-  if ( *(_DWORD *)v2 >= 1u )
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  v3 = *(_DWORD *)i_user_data;
+  v4 = *(_QWORD *)(i_user_data + 8);
+  if ( *(_DWORD *)i_user_data )
   {
     v5 = *(float **)(*(_QWORD *)v4 + 32i64);
     if ( v3 > 1 )

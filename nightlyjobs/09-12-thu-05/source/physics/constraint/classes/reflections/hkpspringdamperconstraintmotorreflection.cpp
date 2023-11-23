@@ -28,17 +28,17 @@ hkClass *__fastcall hkpSpringDamperConstraintMotor::staticClass()
 
 // File Line: 63
 // RVA: 0xD44670
-void __fastcall finishLoadedObjecthkpSpringDamperConstraintMotor(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSpringDamperConstraintMotor(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSpringDamperConstraintMotor::`vftable;
+    *p = &hkpSpringDamperConstraintMotor::`vftable;
 }
 
 // File Line: 69
 // RVA: 0xD44690
-void __fastcall cleanupLoadedObjecthkpSpringDamperConstraintMotor(void *p)
+void __fastcall cleanupLoadedObjecthkpSpringDamperConstraintMotor(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpSpringDamperConstraintMotorTypeInfo__()
   hkpSpringDamperConstraintMotorTypeInfo.m_typeName = "hkpSpringDamperConstraintMotor";
   hkpSpringDamperConstraintMotorTypeInfo.m_vtable = result;
   hkpSpringDamperConstraintMotorTypeInfo.m_scopedName = "!hkpSpringDamperConstraintMotor";
-  hkpSpringDamperConstraintMotorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSpringDamperConstraintMotor;
-  hkpSpringDamperConstraintMotorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSpringDamperConstraintMotor;
+  hkpSpringDamperConstraintMotorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSpringDamperConstraintMotor;
+  hkpSpringDamperConstraintMotorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSpringDamperConstraintMotor;
   return result;
 }
 

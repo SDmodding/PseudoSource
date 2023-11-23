@@ -69,7 +69,7 @@ void dynamic_initializer_for__hkpSetupStabilizationAtomClass__()
     &hkpSetupStabilizationAtom_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 215
@@ -111,7 +111,7 @@ void dynamic_initializer_for__hkp3dAngConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 268
@@ -153,7 +153,7 @@ void dynamic_initializer_for__hkpDeformableLinConstraintAtomClass__()
     &hkpDeformableLinConstraintAtom_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 346
@@ -195,7 +195,7 @@ void dynamic_initializer_for__hkpDeformableAngConstraintAtomClass__()
     &hkpDeformableAngConstraintAtom_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 424
@@ -248,7 +248,7 @@ void dynamic_initializer_for__hkpBallSocketConstraintAtomClass__()
     &hkpBallSocketConstraintAtom_Default,
     0i64,
     0,
-    5u);
+    5);
 }
 
 // File Line: 504
@@ -290,7 +290,7 @@ void dynamic_initializer_for__hkpStiffSpringConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 558
@@ -889,7 +889,7 @@ void dynamic_initializer_for__hkpAngMotorConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 1420
@@ -901,13 +901,13 @@ hkClass *__fastcall hkpAngMotorConstraintAtom::staticClass()
 
 // File Line: 1427
 // RVA: 0xD44DD0
-void __fastcall finishLoadedObjecthkpAngMotorConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpAngMotorConstraintAtom(_WORD *p, int finishing)
 {
   if ( p )
   {
-    *((_WORD *)p + 2) = -1;
-    *((_WORD *)p + 3) = -1;
-    *((_WORD *)p + 4) = -1;
+    p[2] = -1;
+    p[3] = -1;
+    p[4] = -1;
   }
 }
 
@@ -936,7 +936,7 @@ void dynamic_initializer_for__hkpRagdollMotorConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 1477
@@ -948,12 +948,12 @@ hkClass *__fastcall hkpRagdollMotorConstraintAtom::staticClass()
 
 // File Line: 1484
 // RVA: 0xD44E00
-void __fastcall finishLoadedObjecthkpRagdollMotorConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpRagdollMotorConstraintAtom(_WORD *p, int finishing)
 {
   if ( p )
   {
-    *((_WORD *)p + 2) = -1;
-    *((_WORD *)p + 3) = -1;
+    p[2] = -1;
+    p[3] = -1;
   }
 }
 
@@ -1078,14 +1078,14 @@ hkClass *__fastcall hkpWheelFrictionConstraintAtom::staticClass()
 
 // File Line: 1662
 // RVA: 0xD44E70
-void __fastcall finishLoadedObjecthkpWheelFrictionConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWheelFrictionConstraintAtom(char *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
     {
-      *(_QWORD *)((char *)p + 20) = 0i64;
-      *(_QWORD *)((char *)p + 28) = 0i64;
+      *(_QWORD *)(p + 20) = 0i64;
+      *(_QWORD *)(p + 28) = 0i64;
     }
   }
 }
@@ -1115,7 +1115,7 @@ void dynamic_initializer_for__hkpLinMotorConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 1713
@@ -1127,12 +1127,12 @@ hkClass *__fastcall hkpLinMotorConstraintAtom::staticClass()
 
 // File Line: 1720
 // RVA: 0xD44EA0
-void __fastcall finishLoadedObjecthkpLinMotorConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLinMotorConstraintAtom(_WORD *p, int finishing)
 {
   if ( p )
   {
-    *((_WORD *)p + 2) = -1;
-    *((_WORD *)p + 3) = -1;
+    p[2] = -1;
+    p[3] = -1;
   }
 }
 

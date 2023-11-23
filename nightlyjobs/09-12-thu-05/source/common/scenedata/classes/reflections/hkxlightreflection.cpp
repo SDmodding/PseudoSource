@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxLightClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 82
@@ -39,17 +39,17 @@ hkClass *__fastcall hkxLight::staticClass()
 
 // File Line: 89
 // RVA: 0xE320E0
-void __fastcall finishLoadedObjecthkxLight(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxLight(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxLight::`vftable;
+    *p = &hkxLight::`vftable;
 }
 
 // File Line: 95
 // RVA: 0xE32100
-void __fastcall cleanupLoadedObjecthkxLight(void *p)
+void __fastcall cleanupLoadedObjecthkxLight(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 99
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkxLightTypeInfo__()
   hkxLightTypeInfo.m_typeName = "hkxLight";
   hkxLightTypeInfo.m_vtable = result;
   hkxLightTypeInfo.m_scopedName = "!hkxLight";
-  hkxLightTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxLight;
-  hkxLightTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxLight;
+  hkxLightTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxLight;
+  hkxLightTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxLight;
   return result;
 }
 

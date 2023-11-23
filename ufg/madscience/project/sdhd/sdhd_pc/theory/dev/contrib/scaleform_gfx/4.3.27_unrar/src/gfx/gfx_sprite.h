@@ -9,7 +9,7 @@ Scaleform::GFx::TimelineDef *__fastcall Scaleform::GFx::Sprite::GetCharacterDef(
 // RVA: 0x8E2F10
 __int64 __fastcall Scaleform::GFx::Sprite::HasLooped(Scaleform::GFx::Sprite *this)
 {
-  return ((unsigned int)(unsigned __int8)this->Flags >> 1) & 1;
+  return ((unsigned __int8)this->Flags >> 1) & 1;
 }
 
 // File Line: 274
@@ -28,7 +28,11 @@ Scaleform::GFx::Sprite *__fastcall Scaleform::GFx::Sprite::GetHitAreaHolder(Scal
 
 // File Line: 288
 // RVA: 0x8DAA80
-__int64 __fastcall Scaleform::GFx::Sprite::GetLabeledFrame(Scaleform::GFx::Sprite *this, const char *label, unsigned int *frameNumber, __int64 translateNumbers)
+__int64 __fastcall Scaleform::GFx::Sprite::GetLabeledFrame(
+        Scaleform::GFx::Sprite *this,
+        const char *label,
+        unsigned int *frameNumber,
+        __int64 translateNumbers)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::TimelineDef *, const char *, unsigned int *, __int64))this->pDef.pObject->vfptr[3].GetKey)(
            this->pDef.pObject,
@@ -39,14 +43,11 @@ __int64 __fastcall Scaleform::GFx::Sprite::GetLabeledFrame(Scaleform::GFx::Sprit
 
 // File Line: 294
 // RVA: 0x8DC130
-signed __int64 __fastcall Scaleform::GFx::Sprite::GetPlayState(Scaleform::GFx::Sprite *this)
+__int64 __fastcall Scaleform::GFx::Sprite::GetPlayState(Scaleform::GFx::Sprite *this)
 {
-  signed __int64 result; // rax
-
-  if ( (this->Flags >> 11) & 1 )
-    result = (unsigned int)this->PlayStatePriv;
+  if ( (this->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Flags & 0x800) != 0 )
+    return (unsigned int)this->PlayStatePriv;
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 

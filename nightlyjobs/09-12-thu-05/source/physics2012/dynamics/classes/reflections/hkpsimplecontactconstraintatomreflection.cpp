@@ -28,9 +28,12 @@ hkClass *__fastcall hkpSimpleContactConstraintAtom::staticClass()
 
 // File Line: 72
 // RVA: 0xD51500
-void __fastcall finishLoadedObjecthkpSimpleContactConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSimpleContactConstraintAtom(
+        hkpSimpleContactConstraintAtom *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom);
+  if ( p )
+    hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(p, finishing);
 }
 
 // File Line: 78

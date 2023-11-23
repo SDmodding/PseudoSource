@@ -2,7 +2,7 @@
 // RVA: 0x1470090
 __int64 dynamic_initializer_for__UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList__);
 }
 
 // File Line: 38
@@ -14,105 +14,94 @@ UFG::ComponentIDDesc *__fastcall UFG::DynamicSceneryInstance::GetDesc(UFG::Dynam
 
 // File Line: 42
 // RVA: 0x22F3D0
-void __fastcall UFG::DynamicSceneryInstance::DynamicSceneryInstance(UFG::DynamicSceneryInstance *this, unsigned int instance_name_uid, unsigned int model_name_uid, unsigned int tag_uid)
+void __fastcall UFG::DynamicSceneryInstance::DynamicSceneryInstance(
+        UFG::DynamicSceneryInstance *this,
+        unsigned int instance_name_uid,
+        unsigned int model_name_uid,
+        unsigned int tag_uid)
 {
-  unsigned int v4; // ebp
-  unsigned int v5; // er12
-  unsigned int v6; // esi
-  UFG::DynamicSceneryInstance *v7; // r14
-  UFG::qList<Render::Decal,Render::Decal,0,0> *v8; // rax
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v9; // rbx
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v10; // rax
-  signed int v11; // ecx
-  UFG::qResourceInventory *v12; // rax
-  UFG::qResourceWarehouse *v13; // rax
-  signed __int64 v14; // rsi
-  __m128 v15; // xmm3
-  CullManager *v16; // rax
+  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *mPrev; // rax
+  signed int mFrameCount; // ecx
+  UFG::qResourceInventory *Inventory; // rax
+  UFG::qResourceWarehouse *v11; // rax
+  UFG::qVector4 v12; // xmm3
+  CullManager *v13; // rax
+  CullInfo *mCullInfo; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
   CullInfo *v17; // rax
   float v18; // xmm1_4
   float v19; // xmm2_4
-  CullInfo *v20; // rax
-  float v21; // xmm1_4
-  float v22; // xmm2_4
 
-  v4 = tag_uid;
-  v5 = model_name_uid;
-  v6 = instance_name_uid;
-  v7 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
-  v8 = &this->mAttachedDecals;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, instance_name_uid);
-  v9 = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&v7->mPrev;
-  v9->mPrev = v9;
-  v9->mNext = v9;
-  v7->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v7->mModelHandle.mPrev);
-  v10 = UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev;
-  UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev->mNext = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&v7->mPrev;
-  v9->mPrev = v10;
-  v7->mNext = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList;
-  UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&v7->mPrev;
+  this->Render::IDecalScenery::vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
+  this->mAttachedDecals.mNode.Render::IDecalScenery::mPrev = &this->mAttachedDecals.mNode;
+  this->mAttachedDecals.mNode.mNext = &this->mAttachedDecals.mNode;
+  UFG::SimComponent::SimComponent(&this->UFG::SimComponent, instance_name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance>;
+  this->mNext = &this->UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance>;
+  this->Render::IDecalScenery::vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
+  UFG::qResourceHandle::qResourceHandle(&this->mModelHandle);
+  mPrev = UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev;
+  UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList;
+  UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev = &this->UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v7->vfptr,
+    &this->UFG::SimComponent,
     UFG::DynamicSceneryInstance::_DynamicSceneryInstanceTypeUID,
     "DynamicSceneryInstance");
-  v7->mNameUID = v6;
-  v7->mTagUID = v4;
-  v7->mHidden = 0;
-  v7->mSelfIlluminationOverride = 1.0;
-  v7->mForceTransparencyState = -1;
-  v11 = Illusion::gEngine.mFrameCount;
+  this->mNameUID = instance_name_uid;
+  this->mTagUID = tag_uid;
+  this->mHidden = 0;
+  this->mSelfIlluminationOverride = 1.0;
+  this->mForceTransparencyState = -1;
+  mFrameCount = Illusion::gEngine.mFrameCount;
   if ( Render::TransparencySystem::msEnabled )
-    v7->mTransparencyState[0] = 0;
+    this->mTransparencyState[0] = 0;
   else
-    v7->mTransparencyState[0] = Render::TransparencySystem::msOpaqueIndex;
-  v7->mTransparencyState[1] = Render::TransparencySystem::msOpaqueIndex;
-  v7->mTransparencyState[2] = v11 + v11 / 255;
-  v12 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    this->mTransparencyState[0] = Render::TransparencySystem::msOpaqueIndex;
+  this->mTransparencyState[1] = Render::TransparencySystem::msOpaqueIndex;
+  this->mTransparencyState[2] = mFrameCount + mFrameCount / 255;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
-    v13 = UFG::qResourceWarehouse::Instance();
-    v12 = UFG::qResourceWarehouse::GetInventory(v13, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v12;
+    v11 = UFG::qResourceWarehouse::Instance();
+    Inventory = UFG::qResourceWarehouse::GetInventory(v11, 0xA2ADCD77);
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v7->mModelHandle.mPrev, 0xA2ADCD77, v5, v12);
-  v14 = (signed __int64)&v7->mLocalWorld;
-  v15 = 0i64;
-  v15.m128_f32[0] = (float)1;
-  *(__m128 *)v14 = v15;
-  *(__m128 *)(v14 + 16) = _mm_shuffle_ps(v15, v15, 81);
-  *(__m128 *)(v14 + 32) = _mm_shuffle_ps(v15, v15, 69);
-  *(__m128 *)(v14 + 48) = _mm_shuffle_ps(v15, v15, 21);
-  v16 = CullManager::Instance();
-  CullManager::AllocPersistentCullInfo(v16, &v7->mCullResults, &v7->mCullInfo, 0i64, 0i64, 0i64);
-  v7->mCullInfo->mpLocalWorld = &v7->mLocalWorld.v0.x;
-  v17 = v7->mCullInfo;
+  UFG::qResourceHandle::Init(&this->mModelHandle, 0xA2ADCD77, model_name_uid, Inventory);
+  v12 = 0i64;
+  v12.x = (float)1;
+  this->mLocalWorld.v0 = v12;
+  this->mLocalWorld.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 81);
+  this->mLocalWorld.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 69);
+  this->mLocalWorld.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 21);
+  v13 = CullManager::Instance();
+  CullManager::AllocPersistentCullInfo(v13, &this->mCullResults, &this->mCullInfo, 0i64, 0i64, 0i64);
+  this->mCullInfo->mpLocalWorld = &this->mLocalWorld.v0.x;
+  mCullInfo = this->mCullInfo;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  mCullInfo->mAABBMin[0] = UFG::qVector3::msZero.x;
+  mCullInfo->mAABBMin[1] = y;
+  mCullInfo->mAABBMin[2] = z;
+  v17 = this->mCullInfo;
   v18 = UFG::qVector3::msZero.y;
   v19 = UFG::qVector3::msZero.z;
-  v17->mAABBMin[0] = UFG::qVector3::msZero.x;
-  v17->mAABBMin[1] = v18;
-  v17->mAABBMin[2] = v19;
-  v20 = v7->mCullInfo;
-  v21 = UFG::qVector3::msZero.y;
-  v22 = UFG::qVector3::msZero.z;
-  v20->mAABBMax[0] = UFG::qVector3::msZero.x;
-  v20->mAABBMax[1] = v21;
-  v20->mAABBMax[2] = v22;
+  v17->mAABBMax[0] = UFG::qVector3::msZero.x;
+  v17->mAABBMax[1] = v18;
+  v17->mAABBMax[2] = v19;
 }
 
 // File Line: 71
 // RVA: 0x22FA80
 void __fastcall UFG::DynamicSceneryInstance::~DynamicSceneryInstance(UFG::DynamicSceneryInstance *this)
 {
-  UFG::DynamicSceneryInstance *v1; // rbx
   UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v2; // rdi
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v3; // rcx
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v4; // rax
-  UFG::qResourceInventory *v5; // rax
+  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *mPrev; // rcx
+  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *mNext; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v6; // rax
   CullManager *v7; // rax
   UFG::qResourceInventory *v8; // rax
@@ -120,29 +109,28 @@ void __fastcall UFG::DynamicSceneryInstance::~DynamicSceneryInstance(UFG::Dynami
   UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v10; // rdx
   UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v11; // rax
 
-  v1 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
+  this->Render::IDecalScenery::vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
   if ( this == UFG::DynamicSceneryInstance::s_DynamicSceneryInstancepCurrentIterator )
     UFG::DynamicSceneryInstance::s_DynamicSceneryInstancepCurrentIterator = (UFG::DynamicSceneryInstance *)&this->mPrev[-6].mNext;
-  v2 = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
-    v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v5;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelHandle.mPrev, v5);
-  Render::IDecalScenery::RemoveAttachedDecals((Render::IDecalScenery *)&v1->vfptr, 0xFFFFFFFF);
+  UFG::qResourceHandle::Close(&this->mModelHandle, Inventory);
+  Render::IDecalScenery::RemoveAttachedDecals(this, 0xFFFFFFFF);
   v7 = CullManager::Instance();
-  CullManager::FreePersistentCullInfo(v7, v1->mCullResults, v1->mCullInfo);
+  CullManager::FreePersistentCullInfo(v7, this->mCullResults, this->mCullInfo);
   v8 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
@@ -150,16 +138,16 @@ void __fastcall UFG::DynamicSceneryInstance::~DynamicSceneryInstance(UFG::Dynami
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xA2ADCD77);
     `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v8;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelHandle.mPrev, v8);
-  UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mModelHandle.mPrev);
+  UFG::qResourceHandle::Close(&this->mModelHandle, v8);
+  UFG::qResourceHandle::~qResourceHandle(&this->mModelHandle);
   v10 = v2->mPrev;
   v11 = v2->mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
-  Render::IDecalScenery::~IDecalScenery((Render::IDecalScenery *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(&this->UFG::SimComponent);
+  Render::IDecalScenery::~IDecalScenery(this);
 }
 
 // File Line: 101
@@ -180,12 +168,12 @@ _BOOL8 __fastcall UFG::DynamicSceneryInstance::HasFadedOut(UFG::DynamicSceneryIn
 // RVA: 0x231900
 void __fastcall UFG::DynamicSceneryInstance::ForceVisible(UFG::DynamicSceneryInstance *this)
 {
-  signed int v1; // er8
+  signed int mFrameCount; // r8d
 
-  v1 = Illusion::gEngine.mFrameCount;
+  mFrameCount = Illusion::gEngine.mFrameCount;
   this->mTransparencyState[0] = Render::TransparencySystem::msOpaqueIndex;
   this->mTransparencyState[1] = Render::TransparencySystem::msOpaqueIndex;
-  this->mTransparencyState[2] = v1 + v1 / 255;
+  this->mTransparencyState[2] = mFrameCount + mFrameCount / 255;
   this->mForceTransparencyState = Render::TransparencySystem::msOpaqueIndex;
 }
 
@@ -193,85 +181,69 @@ void __fastcall UFG::DynamicSceneryInstance::ForceVisible(UFG::DynamicSceneryIns
 // RVA: 0x230FE0
 void __fastcall UFG::DynamicSceneryInstance::Draw(UFG::DynamicSceneryInstance *this, Render::View *view)
 {
-  Render::View *v2; // rsi
-  UFG::DynamicSceneryInstance *v3; // rdi
-  CullResults *v4; // rdx
-  __int64 v5; // rcx
+  CullResults *mCullResults; // rdx
+  __int64 mCullIndex; // rcx
   unsigned __int64 v6; // r8
   BOOL v7; // ebp
   BOOL v8; // eax
   int *v9; // rcx
   CullResults *v10; // rax
   bool v11; // cf
-  signed int v12; // er11
-  __int16 v13; // ax
-  int v14; // er10
-  int v15; // er9
+  int v12; // r11d
+  __int16 mForceTransparencyState; // ax
+  int v14; // r10d
+  int v15; // r9d
   int v16; // ebx
   int v17; // eax
-  Render::ViewSettings *v18; // rdx
-  int v19; // xmm0_4
-  int v20; // xmm0_4
-  Illusion::SubmitContext *v21; // rax
-  UFG::qResourceData *v22; // rax
-  int v23; // xmm1_4
-  int v24; // xmm2_4
-  int v25; // xmm1_4
-  int v26; // xmm2_4
-  AMD_HD3D *v27; // rax
-  CullResults *v28; // r8
-  void *v29; // rax
-  void *v30; // rbx
-  Illusion::StateValues *v31; // rax
-  int v32; // [rsp+40h] [rbp-38h]
-  int v33; // [rsp+44h] [rbp-34h]
-  int v34; // [rsp+48h] [rbp-30h]
-  int v35; // [rsp+4Ch] [rbp-2Ch]
-  int v36; // [rsp+50h] [rbp-28h]
-  int v37; // [rsp+54h] [rbp-24h]
-  float distance_from_near_plane; // [rsp+90h] [rbp+18h]
-  int v39; // [rsp+98h] [rbp+20h]
-  int v40; // [rsp+9Ch] [rbp+24h]
+  Render::ViewSettings *mSettings; // rdx
+  float v19; // xmm0_4
+  float v20; // xmm0_4
+  Illusion::SubmitContext *mSubmitContext; // rax
+  AMD_HD3D *v22; // rax
+  void *v23; // rax
+  void *v24; // rbx
+  Illusion::StateValues *StateValues; // rax
+  float distance_from_near_plane; // [rsp+90h] [rbp+18h] BYREF
+  float v27; // [rsp+98h] [rbp+20h] BYREF
+  float v28; // [rsp+9Ch] [rbp+24h]
 
-  v2 = view;
-  v3 = this;
   if ( !gDrawScenery || this->mHidden || !this->mModelHandle.mData )
     return;
-  v4 = this->mCullResults;
-  if ( v4 && (v5 = v2->mSettings->mCullIndex, (_DWORD)v5 != -1) )
+  mCullResults = this->mCullResults;
+  if ( !mCullResults || (mCullIndex = view->mSettings->mCullIndex, (_DWORD)mCullIndex == -1) )
   {
+    v8 = Render::View::IsInView(view, &this->mModelHandle, &this->mLocalWorld, &distance_from_near_plane);
     v6 = 0i64;
-    v7 = 0;
-    if ( (signed int)v5 >= 0 )
-      LOBYTE(v7) = v4->mViewResult[v5] > 1u;
+    v7 = !v8;
   }
   else
   {
-    v8 = Render::View::IsInView(v2, &v3->mModelHandle, &v3->mLocalWorld, &distance_from_near_plane);
     v6 = 0i64;
-    v7 = v8 == 0;
+    v7 = 0;
+    if ( (int)mCullIndex >= 0 )
+      LOBYTE(v7) = mCullResults->mViewResult[mCullIndex] > 1u;
   }
   v9 = 0i64;
-  if ( v2->mSettings->mCullIndex )
+  if ( view->mSettings->mCullIndex )
     goto LABEL_35;
-  v10 = v3->mCullResults;
+  v10 = this->mCullResults;
   if ( v10 )
   {
-    v11 = (float)(v2->mSettings->mCullPixelDensityThreshold * 1.0700001) < v10->mPixelCoverage[0];
+    v11 = (float)(view->mSettings->mCullPixelDensityThreshold * 1.0700001) < v10->mPixelCoverage[0];
     v12 = Render::TransparencySystem::msOpaqueIndex;
-    v13 = v3->mForceTransparencyState;
+    mForceTransparencyState = this->mForceTransparencyState;
     v14 = Render::TransparencySystem::msOpaqueIndex;
     if ( !v11 )
       v14 = 0;
-    if ( v13 != -1 )
-      v14 = v13;
-    v15 = (unsigned __int8)v3->mTransparencyState[0];
-    v16 = (signed int)Render::TransparencySystem::msTransparencyFrameCounter % 255;
-    v17 = (signed int)Render::TransparencySystem::msTransparencyFrameCounter % 255
-        - ((unsigned __int8)v3->mTransparencyState[2] + 1) % 255;
+    if ( mForceTransparencyState != -1 )
+      v14 = mForceTransparencyState;
+    v15 = (unsigned __int8)this->mTransparencyState[0];
+    v16 = (int)Render::TransparencySystem::msTransparencyFrameCounter % 255;
+    v17 = (int)Render::TransparencySystem::msTransparencyFrameCounter % 255
+        - ((unsigned __int8)this->mTransparencyState[2] + 1) % 255;
     if ( v17 < 0 )
-      v17 = ((unsigned __int8)v3->mTransparencyState[2] + 1) % 255
-          - (signed int)Render::TransparencySystem::msTransparencyFrameCounter % 255;
+      v17 = ((unsigned __int8)this->mTransparencyState[2] + 1) % 255
+          - (int)Render::TransparencySystem::msTransparencyFrameCounter % 255;
     if ( v17 <= 0 )
     {
       if ( v15 >= v14 )
@@ -288,71 +260,52 @@ void __fastcall UFG::DynamicSceneryInstance::Draw(UFG::DynamicSceneryInstance *t
     {
       v15 = v14;
     }
-    v3->mTransparencyState[1] = v14;
-    v3->mTransparencyState[2] = v16;
+    this->mTransparencyState[1] = v14;
+    this->mTransparencyState[2] = v16;
     if ( v15 > 0 )
       LODWORD(v6) = v15;
-    if ( (signed int)v6 < v12 )
+    if ( (int)v6 < v12 )
       LOBYTE(v12) = v6;
-    v3->mTransparencyState[0] = v12;
+    this->mTransparencyState[0] = v12;
     if ( (_BYTE)v12 )
     {
-      v18 = v2->mSettings;
-      v6 = *(_QWORD *)v3->mTransparencyState;
-      if ( v2->mSettings->mCullIndex >= 6 )
-        v19 = 0;
+      mSettings = view->mSettings;
+      v6 = *(_QWORD *)this->mTransparencyState;
+      if ( view->mSettings->mCullIndex >= 6 )
+        v19 = 0.0;
       else
-        v19 = LODWORD(v3->mCullResults->mDistance[v2->mSettings->mCullIndex]);
-      v39 = v19;
-      if ( v18->mCullIndex >= 6 )
-        v20 = (signed int)FLOAT_1_0;
+        v19 = this->mCullResults->mDistance[view->mSettings->mCullIndex];
+      v27 = v19;
+      if ( mSettings->mCullIndex >= 6 )
+        v20 = *(float *)&FLOAT_1_0;
       else
-        v20 = LODWORD(v3->mCullResults->mPixelCoverage[v18->mCullIndex]);
-      v40 = v20;
-      v9 = &v39;
+        v20 = this->mCullResults->mPixelCoverage[mSettings->mCullIndex];
+      v28 = v20;
+      v9 = (int *)&v27;
 LABEL_35:
-      v21 = v2->mSubmitContext;
-      v21[1].vfptr = (Illusion::SubmitContextVtbl *)v9;
-      v21[1].mStateValues.mSetValueMask.mFlags[0] = v6;
-      if ( gDrawDynamicCullResults && !v2->mSettings->mCullIndex )
+      mSubmitContext = view->mSubmitContext;
+      mSubmitContext[1].vfptr = (Illusion::SubmitContextVtbl *)v9;
+      mSubmitContext[1].mStateValues.mSetValueMask.mFlags[0] = v6;
+      if ( gDrawDynamicCullResults && !view->mSettings->mCullIndex )
       {
-        v22 = v3->mModelHandle.mData;
-        v23 = HIDWORD(v22[1].mNode.mChild[1]);
-        v24 = v22[1].mNode.mUID;
-        v32 = (int)v22[1].mNode.mChild[1];
-        v33 = v23;
-        v34 = v24;
-        v25 = HIDWORD(v22[1].mNode.mParent);
-        v26 = (int)v22[1].mNode.mChild[0];
-        v35 = (int)v22[1].mNode.mParent;
-        v36 = v25;
-        v37 = v26;
-        v27 = (AMD_HD3D *)CullManager::Instance();
-        v28 = v3->mCullResults;
-        _(v27);
+        v22 = (AMD_HD3D *)CullManager::Instance();
+        _(v22);
       }
       if ( !v7 )
       {
-        if ( !v2->mSettings->mCullIndex )
+        if ( !view->mSettings->mCullIndex )
         {
-          v29 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x40u, 0x10u);
-          *(float *)v29 = UFG::qColour::White.r;
-          v30 = v29;
-          *((_DWORD *)v29 + 1) = LODWORD(UFG::qColour::White.g);
-          *((_DWORD *)v29 + 2) = LODWORD(UFG::qColour::White.b);
-          *((_DWORD *)v29 + 3) = LODWORD(UFG::qColour::White.a);
-          *((_DWORD *)v29 + 4) = LODWORD(UFG::qColour::White.r);
-          *((_DWORD *)v29 + 5) = LODWORD(UFG::qColour::White.g);
-          *((_DWORD *)v29 + 6) = LODWORD(UFG::qColour::White.b);
-          *((_DWORD *)v29 + 7) = LODWORD(UFG::qColour::White.a);
-          *((_DWORD *)v29 + 7) = LODWORD(v3->mSelfIlluminationOverride);
-          v31 = Render::View::GetStateValues(v2);
-          v31->mSetValueMask.mFlags[0] |= 0x400000000ui64;
-          v31->mParamValues[34] = v30;
+          v23 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x40u, 0x10u);
+          *(UFG::qColour *)v23 = UFG::qColour::White;
+          v24 = v23;
+          *((UFG::qColour *)v23 + 1) = UFG::qColour::White;
+          *((_DWORD *)v23 + 7) = LODWORD(this->mSelfIlluminationOverride);
+          StateValues = Render::View::GetStateValues(view);
+          StateValues->mSetValueMask.mFlags[0] |= 0x400000000ui64;
+          StateValues->mParamValues[34] = v24;
         }
-        SubmitRenderModel(v2, (Illusion::Model *)v3->mModelHandle.mData, &v3->mLocalWorld);
+        SubmitRenderModel(view, (Illusion::Model *)this->mModelHandle.mData, &this->mLocalWorld);
       }
-      return;
     }
   }
 }
@@ -361,19 +314,17 @@ LABEL_35:
 // RVA: 0x2313B0
 void __fastcall UFG::DynamicSceneryInstance::DrawAll(Render::View *view)
 {
-  Render::View *v1; // rsi
-  UFG::DynamicSceneryInstance *v2; // rcx
+  UFG::DynamicSceneryInstance *p_mNext; // rcx
   UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *v3; // rbx
 
-  v1 = view;
-  v2 = (UFG::DynamicSceneryInstance *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext;
+  p_mNext = (UFG::DynamicSceneryInstance *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext;
   if ( &UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext != (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> **)((char *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList - 88) )
   {
     do
     {
-      v3 = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&v2->mNext[-6].mNext;
-      UFG::DynamicSceneryInstance::Draw(v2, v1);
-      v2 = (UFG::DynamicSceneryInstance *)v3;
+      v3 = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&p_mNext->mNext[-6].mNext;
+      UFG::DynamicSceneryInstance::Draw(p_mNext, view);
+      p_mNext = (UFG::DynamicSceneryInstance *)v3;
     }
     while ( v3 != (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)((char *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList
                                                                                             - 88) );
@@ -384,54 +335,55 @@ void __fastcall UFG::DynamicSceneryInstance::DrawAll(Render::View *view)
 // RVA: 0x2357E0
 void __fastcall UFG::DynamicSceneryInstance::UpdateCullInfo(UFG::DynamicSceneryInstance *this)
 {
-  UFG::qResourceData *v1; // r8
-  UFG::DynamicSceneryInstance *v2; // rbx
-  CullInfo *v3; // rdx
+  UFG::qResourceData *mData; // r8
+  CullInfo *mCullInfo; // rdx
   float v4; // xmm0_4
   float v5; // xmm1_4
   CullInfo *v6; // rcx
   float v7; // xmm0_4
-  unsigned int v8; // xmm1_4
+  unsigned int mUID; // xmm1_4
 
-  v1 = this->mModelHandle.mData;
-  v2 = this;
-  if ( v1 )
+  mData = this->mModelHandle.mData;
+  if ( mData )
   {
     if ( !this->mHidden )
     {
-      v3 = this->mCullInfo;
-      v4 = *((float *)&v1[1].mNode.mParent + 1);
-      v5 = *(float *)v1[1].mNode.mChild;
-      v3->mAABBMin[0] = *(float *)&v1[1].mNode.mParent;
-      v3->mAABBMin[1] = v4;
-      v3->mAABBMin[2] = v5;
+      mCullInfo = this->mCullInfo;
+      v4 = *((float *)&mData[1].mNode.mParent + 1);
+      v5 = *(float *)mData[1].mNode.mChild;
+      mCullInfo->mAABBMin[0] = *(float *)&mData[1].mNode.mParent;
+      mCullInfo->mAABBMin[1] = v4;
+      mCullInfo->mAABBMin[2] = v5;
       v6 = this->mCullInfo;
-      v7 = *((float *)&v1[1].mNode.mChild[1] + 1);
-      v8 = v1[1].mNode.mUID;
-      v6->mAABBMax[0] = *(float *)&v1[1].mNode.mChild[1];
+      v7 = *((float *)&mData[1].mNode.mChild[1] + 1);
+      mUID = mData[1].mNode.mUID;
+      v6->mAABBMax[0] = *(float *)&mData[1].mNode.mChild[1];
       v6->mAABBMax[1] = v7;
-      LODWORD(v6->mAABBMax[2]) = v8;
-      v2->mCullInfo->mPixelScaleBias = CullManager::Instance()->mPixelDensityDynamicBias;
+      LODWORD(v6->mAABBMax[2]) = mUID;
+      this->mCullInfo->mPixelScaleBias = CullManager::Instance()->mPixelDensityDynamicBias;
     }
   }
 }
 
 // File Line: 416
 // RVA: 0x232DA0
-char __fastcall UFG::DynamicSceneryInstance::GetTransform(UFG::DynamicSceneryInstance *this, Render::Decal *decal, UFG::qMatrix44 *mat)
+char __fastcall UFG::DynamicSceneryInstance::GetTransform(
+        UFG::DynamicSceneryInstance *this,
+        Render::Decal *decal,
+        UFG::qMatrix44 *mat)
 {
   char result; // al
-  CullResults *v4; // rax
+  CullResults *mCullResults; // rax
   UFG::qVector4 v5; // xmm3
   UFG::qVector4 v6; // xmm2
   UFG::qVector4 v7; // xmm1
 
   if ( this->mHidden )
     return 0;
-  v4 = this->mCullResults;
-  if ( v4 )
+  mCullResults = this->mCullResults;
+  if ( mCullResults )
   {
-    if ( v4->mViewResult[0] > 1u )
+    if ( mCullResults->mViewResult[0] > 1u )
       return 0;
   }
   v5 = this->mLocalWorld.v1;
@@ -449,12 +401,10 @@ char __fastcall UFG::DynamicSceneryInstance::GetTransform(UFG::DynamicSceneryIns
 // RVA: 0x2351A0
 void __fastcall UFG::TestDynamicSceneryForDecals(Render::DecalClipRequest *request, UFG::qBox *projBox)
 {
-  UFG::qBox *v2; // rdi
-  UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *v3; // rbx
-  Render::DecalClipRequest *v4; // rbp
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v5; // r14
+  UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *p_mNext; // rbx
+  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *mNext; // r14
   UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *v6; // rsi
-  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v7; // rax
+  UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *mPrev; // rax
   UFG::qMatrix44 *v8; // rcx
   float v9; // xmm1_4
   float v10; // xmm2_4
@@ -464,41 +414,39 @@ void __fastcall UFG::TestDynamicSceneryForDecals(Render::DecalClipRequest *reque
   UFG::qVector4 v14; // xmm2
   UFG::qVector4 v15; // xmm1
   UFG::qVector4 v16; // xmm0
-  UFG::qResourceInventory *v17; // rax
-  unsigned int v18; // er12
+  UFG::qResourceInventory *Inventory; // rax
+  unsigned int v18; // r12d
   UFG::qResourceWarehouse *v19; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *v20; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *p_mComponentPtr; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v21; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v22; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v23; // rax
-  UFG::qVector3 min; // [rsp+20h] [rbp-88h]
-  UFG::qVector3 max; // [rsp+30h] [rbp-78h]
-  UFG::qMatrix44 m; // [rsp+40h] [rbp-68h]
+  UFG::qVector3 min; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qVector3 max; // [rsp+30h] [rbp-78h] BYREF
+  UFG::qMatrix44 m; // [rsp+40h] [rbp-68h] BYREF
 
-  v2 = projBox;
-  v3 = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext;
-  v4 = request;
+  p_mNext = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext;
   if ( &UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mNext[-6].mNext != (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> **)((char *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList - 88) )
   {
     do
     {
-      v5 = v3[9].mNode.mNext;
-      v6 = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&v3[6].mNode.mPrev[-6].mNext;
-      if ( v5 && !LOWORD(v3[6].mNode.mNext) )
+      mNext = p_mNext[9].mNode.mNext;
+      v6 = (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)&p_mNext[6].mNode.mPrev[-6].mNext;
+      if ( mNext && !LOWORD(p_mNext[6].mNode.mNext) )
       {
-        v7 = v3[7].mNode.mPrev;
+        mPrev = p_mNext[7].mNode.mPrev;
         v8 = &UFG::qMatrix44::msIdentity;
-        v9 = *((float *)&v7->mPrev + 1);
-        v10 = *(float *)&v7->mNext;
-        min.x = *(float *)&v7->mPrev;
+        v9 = *((float *)&mPrev->mPrev + 1);
+        v10 = *(float *)&mPrev->mNext;
+        min.x = *(float *)&mPrev->mPrev;
         min.y = v9;
         min.z = v10;
-        v11 = *((float *)&v7[1].mPrev + 1);
-        v12 = *(float *)&v7[1].mNext;
-        max.x = *(float *)&v7[1].mPrev;
+        v11 = *((float *)&mPrev[1].mPrev + 1);
+        v12 = *(float *)&mPrev[1].mNext;
+        max.x = *(float *)&mPrev[1].mPrev;
         max.y = v11;
         max.z = v12;
-        v13 = (UFG::qMatrix44 *)v7[3].mNext;
+        v13 = (UFG::qMatrix44 *)mPrev[3].mNext;
         if ( v13 )
           v8 = v13;
         v14 = v8->v2;
@@ -509,51 +457,51 @@ void __fastcall UFG::TestDynamicSceneryForDecals(Render::DecalClipRequest *reque
         m.v0 = v16;
         m.v3 = v15;
         TransformAABB(&m, &min, &max);
-        if ( min.x <= v2->mMax.x
-          && max.x >= v2->mMin.x
-          && min.y <= v2->mMax.y
-          && max.y >= v2->mMin.y
-          && min.z <= v2->mMax.z
-          && max.z >= v2->mMin.z )
+        if ( min.x <= projBox->mMax.x
+          && max.x >= projBox->mMin.x
+          && min.y <= projBox->mMax.y
+          && max.y >= projBox->mMin.y
+          && min.z <= projBox->mMax.z
+          && max.z >= projBox->mMin.z )
         {
-          v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
-          v18 = (unsigned int)v5[1].mNext;
+          Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+          v18 = (unsigned int)mNext[1].mNext;
           if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v19 = UFG::qResourceWarehouse::Instance();
-            v17 = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
+            Inventory = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
           }
-          UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mModelProxy.mModelHandle.mPrev, 0xA2ADCD77, v18, v17);
-          v4->mModelProxy.mRModel = 0i64;
-          v20 = &v4->mComponentPtr;
-          v4->mLocalToWorld.v0 = (UFG::qVector4)v3[11];
-          v4->mLocalToWorld.v1 = (UFG::qVector4)v3[12];
-          v4->mLocalToWorld.v2 = (UFG::qVector4)v3[13];
-          v4->mLocalToWorld.v3 = (UFG::qVector4)v3[14];
-          if ( v4->mComponentPtr.m_pPointer )
+          UFG::qResourceHandle::Init(&request->mModelProxy.mModelHandle, 0xA2ADCD77, v18, Inventory);
+          request->mModelProxy.mRModel = 0i64;
+          p_mComponentPtr = &request->mComponentPtr;
+          request->mLocalToWorld.v0 = (UFG::qVector4)p_mNext[11];
+          request->mLocalToWorld.v1 = (UFG::qVector4)p_mNext[12];
+          request->mLocalToWorld.v2 = (UFG::qVector4)p_mNext[13];
+          request->mLocalToWorld.v3 = (UFG::qVector4)p_mNext[14];
+          if ( request->mComponentPtr.m_pPointer )
           {
-            v21 = v20->mPrev;
-            v22 = v4->mComponentPtr.mNext;
+            v21 = p_mComponentPtr->mPrev;
+            v22 = request->mComponentPtr.mNext;
             v21->mNext = v22;
             v22->mPrev = v21;
-            v20->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v20->mPrev;
-            v4->mComponentPtr.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mComponentPtr.mPrev;
+            p_mComponentPtr->mPrev = p_mComponentPtr;
+            request->mComponentPtr.mNext = &request->mComponentPtr;
           }
-          v4->mComponentPtr.m_pPointer = (UFG::SimComponent *)&v3[1].mNode.mNext;
-          if ( v3 != (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)-24i64 )
+          request->mComponentPtr.m_pPointer = (UFG::SimComponent *)&p_mNext[1].mNode.mNext;
+          if ( p_mNext != (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)-24i64 )
           {
-            v23 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v3[2].mNode.mPrev;
-            v23->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v20->mPrev;
-            v20->mPrev = v23;
-            v4->mComponentPtr.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3[2];
-            v3[2].mNode.mPrev = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)v20;
+            v23 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)p_mNext[2].mNode.mPrev;
+            v23->mNext = p_mComponentPtr;
+            p_mComponentPtr->mPrev = v23;
+            request->mComponentPtr.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&p_mNext[2];
+            p_mNext[2].mNode.mPrev = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)p_mComponentPtr;
           }
-          v4->mScenery = (Render::IDecalScenery *)v3;
-          Render::DecalManager::AddClipQueue(&Render::gDecalManager, v4);
+          request->mScenery = (Render::IDecalScenery *)p_mNext;
+          Render::DecalManager::AddClipQueue(&Render::gDecalManager, request);
         }
       }
-      v3 = v6;
+      p_mNext = v6;
     }
     while ( v6 != (UFG::qList<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance,1,0> *)((char *)&UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList
                                                                                             - 88) );

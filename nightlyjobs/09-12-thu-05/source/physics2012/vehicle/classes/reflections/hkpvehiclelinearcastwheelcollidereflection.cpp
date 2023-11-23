@@ -63,26 +63,26 @@ hkClass *__fastcall hkpVehicleLinearCastWheelCollide::staticClass()
 
 // File Line: 120
 // RVA: 0xE25B40
-void __fastcall finishLoadedObjecthkpVehicleLinearCastWheelCollide(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleLinearCastWheelCollide(_BYTE *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpVehicleWheelCollide::`vftable;
     if ( finishing )
-      *((_BYTE *)p + 17) = 0;
+      p[17] = 0;
     *(_QWORD *)p = &hkpVehicleLinearCastWheelCollide::`vftable;
     *((_QWORD *)p + 6) = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
     *((_QWORD *)p + 8) = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
     if ( finishing )
-      *((_BYTE *)p + 17) = 2;
+      p[17] = 2;
   }
 }
 
 // File Line: 126
 // RVA: 0xE25B90
-void __fastcall cleanupLoadedObjecthkpVehicleLinearCastWheelCollide(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleLinearCastWheelCollide(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 130
@@ -103,8 +103,8 @@ void **dynamic_initializer_for__hkpVehicleLinearCastWheelCollideTypeInfo__()
   hkpVehicleLinearCastWheelCollideTypeInfo.m_typeName = "hkpVehicleLinearCastWheelCollide";
   hkpVehicleLinearCastWheelCollideTypeInfo.m_vtable = result;
   hkpVehicleLinearCastWheelCollideTypeInfo.m_scopedName = "!hkpVehicleLinearCastWheelCollide";
-  hkpVehicleLinearCastWheelCollideTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleLinearCastWheelCollide;
-  hkpVehicleLinearCastWheelCollideTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleLinearCastWheelCollide;
+  hkpVehicleLinearCastWheelCollideTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleLinearCastWheelCollide;
+  hkpVehicleLinearCastWheelCollideTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleLinearCastWheelCollide;
   return result;
 }
 

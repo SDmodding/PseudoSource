@@ -100,7 +100,7 @@ void dynamic_initializer_for__hkMemoryResourceHandleExternalLinkClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 154
@@ -112,29 +112,23 @@ hkClass *__fastcall hkMemoryResourceHandle::ExternalLink::staticClass()
 
 // File Line: 161
 // RVA: 0xE39030
-void __fastcall finishLoadedObjecthkMemoryResourceHandleExternalLink(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMemoryResourceHandleExternalLink(
+        hkStringPtr *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  hkStringPtr *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (hkStringPtr *)p;
-    hkStringPtr::hkStringPtr((hkStringPtr *)p, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v3 + 1, (hkFinishLoadedObjectFlag)v2);
+    hkStringPtr::hkStringPtr(p, finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
   }
 }
 
 // File Line: 167
 // RVA: 0xE39070
-void __fastcall cleanupLoadedObjecthkMemoryResourceHandleExternalLink(void *p)
+void __fastcall cleanupLoadedObjecthkMemoryResourceHandleExternalLink(hkStringPtr *p)
 {
-  hkStringPtr *v1; // rbx
-
-  v1 = (hkStringPtr *)p;
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
-  hkStringPtr::~hkStringPtr(v1);
+  hkStringPtr::~hkStringPtr(p + 1);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 205
@@ -155,7 +149,7 @@ void dynamic_initializer_for__hkMemoryResourceHandleClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 208
@@ -167,23 +161,24 @@ hkClass *__fastcall hkMemoryResourceHandle::staticClass()
 
 // File Line: 215
 // RVA: 0xE390A0
-void __fastcall finishLoadedObjecthkMemoryResourceHandle(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMemoryResourceHandle(hkMemoryResourceHandle *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkMemoryResourceHandle::hkMemoryResourceHandle);
+  if ( p )
+    hkMemoryResourceHandle::hkMemoryResourceHandle(p, finishing);
 }
 
 // File Line: 221
 // RVA: 0xE390C0
-void __fastcall cleanupLoadedObjecthkMemoryResourceHandle(void *p)
+void __fastcall cleanupLoadedObjecthkMemoryResourceHandle(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 225
 // RVA: 0xE390D0
 hkBaseObjectVtbl *__fastcall getVtablehkMemoryResourceHandle()
 {
-  hkMemoryResourceHandle v1; // [rsp+20h] [rbp-38h]
+  hkMemoryResourceHandle v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkMemoryResourceHandle::hkMemoryResourceHandle(&v1, 0);
   return v1.vfptr;
@@ -200,8 +195,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkMemoryResourceHandleTypeInfo__()
   hkMemoryResourceHandleTypeInfo.m_typeName = "hkMemoryResourceHandle";
   hkMemoryResourceHandleTypeInfo.m_vtable = result;
   hkMemoryResourceHandleTypeInfo.m_scopedName = "!hkMemoryResourceHandle";
-  hkMemoryResourceHandleTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkMemoryResourceHandle;
-  hkMemoryResourceHandleTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkMemoryResourceHandle;
+  hkMemoryResourceHandleTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkMemoryResourceHandle;
+  hkMemoryResourceHandleTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkMemoryResourceHandle;
   return result;
 }
 
@@ -223,7 +218,7 @@ void dynamic_initializer_for__hkMemoryResourceContainerClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 278
@@ -235,23 +230,26 @@ hkClass *__fastcall hkMemoryResourceContainer::staticClass()
 
 // File Line: 285
 // RVA: 0xE390F0
-void __fastcall finishLoadedObjecthkMemoryResourceContainer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMemoryResourceContainer(
+        hkMemoryResourceContainer *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkMemoryResourceContainer::hkMemoryResourceContainer);
+  if ( p )
+    hkMemoryResourceContainer::hkMemoryResourceContainer(p, finishing);
 }
 
 // File Line: 291
 // RVA: 0xE39110
-void __fastcall cleanupLoadedObjecthkMemoryResourceContainer(void *p)
+void __fastcall cleanupLoadedObjecthkMemoryResourceContainer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 295
 // RVA: 0xE39120
 hkBaseObjectVtbl *__fastcall getVtablehkMemoryResourceContainer()
 {
-  hkMemoryResourceContainer v1; // [rsp+20h] [rbp-48h]
+  hkMemoryResourceContainer v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkMemoryResourceContainer::hkMemoryResourceContainer(&v1, 0);
   return v1.vfptr;
@@ -268,8 +266,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkMemoryResourceContainerTypeInfo__()
   hkMemoryResourceContainerTypeInfo.m_typeName = "hkMemoryResourceContainer";
   hkMemoryResourceContainerTypeInfo.m_vtable = result;
   hkMemoryResourceContainerTypeInfo.m_scopedName = "!hkMemoryResourceContainer";
-  hkMemoryResourceContainerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkMemoryResourceContainer;
-  hkMemoryResourceContainerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkMemoryResourceContainer;
+  hkMemoryResourceContainerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkMemoryResourceContainer;
+  hkMemoryResourceContainerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkMemoryResourceContainer;
   return result;
 }
 

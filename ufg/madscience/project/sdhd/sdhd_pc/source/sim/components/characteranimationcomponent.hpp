@@ -24,28 +24,23 @@ UFG::ComponentIDDesc *__fastcall UFG::CharacterAnimationComponent::AccessCompone
 
 // File Line: 101
 // RVA: 0x57DFD0
-void __fastcall UFG::ActiveAIEntityComponent::operator delete(void *ptr, unsigned __int64 size)
+void __fastcall UFG::ActiveAIEntityComponent::operator delete(char *ptr, unsigned __int64 size)
 {
-  void *v2; // rbx
-  UFG::qMemoryPool *v3; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
 
-  v2 = ptr;
-  v3 = UFG::GetSimulationMemoryPool();
-  UFG::qMemoryPool::Free(v3, v2);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  UFG::qMemoryPool::Free(SimulationMemoryPool, ptr);
 }
 
 // File Line: 139
 // RVA: 0x57EBA0
 UFG::ComponentIDDesc *__fastcall UFG::LightGroupComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::LightGroupComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::LightGroupComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::LightGroupComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::LightGroupComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::LightGroupComponent::_DescInit = 1;
     UFG::LightGroupComponent::_TypeUID = UFG::LightGroupComponent::_TypeIDesc.mChildBitMask | (UFG::LightGroupComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::LightGroupComponent::_LightGroupComponentTypeUID = UFG::LightGroupComponent::_TypeIDesc.mChildBitMask | (UFG::LightGroupComponent::_TypeIDesc.mBaseTypeIndex << 25);
@@ -59,20 +54,20 @@ UFG::ComponentIDDesc *__fastcall UFG::LightGroupAnimationComponent::AccessCompon
 {
   UFG::ComponentIDDesc *v0; // rax
   int v1; // edx
-  _DWORD v3[6]; // [rsp+20h] [rbp-18h]
+  int v3; // [rsp+20h] [rbp-18h]
 
   if ( !UFG::LightGroupAnimationComponent::_DescInit )
   {
     v0 = UFG::BaseAnimationComponent::AccessComponentDesc();
     ++UFG::BaseAnimationComponent::_TypeIDesc.mChildren;
     v1 = v0->mChildBitMask | (1 << SLOBYTE(UFG::BaseAnimationComponent::_TypeIDesc.mChildren));
-    LOWORD(v3[0]) = v0->mBaseTypeIndex;
-    *(_DWORD *)&UFG::LightGroupAnimationComponent::_TypeIDesc.mBaseTypeIndex = v3[0];
+    LOWORD(v3) = v0->mBaseTypeIndex;
+    *(_DWORD *)&UFG::LightGroupAnimationComponent::_TypeIDesc.mBaseTypeIndex = v3;
     UFG::LightGroupAnimationComponent::_TypeIDesc.mChildBitMask = v1;
     UFG::LightGroupAnimationComponent::_TypeIDesc.mChildren = 0;
     UFG::LightGroupAnimationComponent::_DescInit = 1;
-    UFG::LightGroupAnimationComponent::_TypeUID = v1 | (LOWORD(v3[0]) << 25);
-    UFG::LightGroupAnimationComponent::_LightGroupAnimationComponentTypeUID = v1 | (LOWORD(v3[0]) << 25);
+    UFG::LightGroupAnimationComponent::_TypeUID = v1 | ((unsigned __int16)v3 << 25);
+    UFG::LightGroupAnimationComponent::_LightGroupAnimationComponentTypeUID = v1 | ((unsigned __int16)v3 << 25);
   }
   return &UFG::LightGroupAnimationComponent::_TypeIDesc;
 }

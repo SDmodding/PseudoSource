@@ -2,30 +2,25 @@
 // RVA: 0xEEB044
 void __fastcall OSuite::Statistics::Statistics(OSuite::Statistics *this, int movingAverageSize)
 {
-  OSuite::Statistics *v2; // rbx
-
   this->maSize = movingAverageSize;
-  v2 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable;
   this->maData = (float *)OSuite::ZObject::m_allocator->vfptr->malloc(
                             OSuite::ZObject::m_allocator,
                             4i64 * movingAverageSize,
                             0i64);
-  OSuite::Statistics::Reset(v2);
+  OSuite::Statistics::Reset(this);
 }
 
 // File Line: 15
 // RVA: 0xEEB088
 void __fastcall OSuite::Statistics::~Statistics(OSuite::Statistics *this)
 {
-  OSuite::Statistics *v1; // rbx
-  float *v2; // rdx
+  float *maData; // rdx
 
-  v1 = this;
-  v2 = this->maData;
+  maData = this->maData;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable;
-  OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, v2);
-  v1->maData = 0i64;
+  OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, maData);
+  this->maData = 0i64;
 }
 
 // File Line: 21
@@ -42,8 +37,7 @@ void __fastcall OSuite::Statistics::Reset(OSuite::Statistics *this)
     do
     {
       ++v1;
-      this->maData[v2] = 0.0;
-      ++v2;
+      this->maData[v2++] = 0.0;
     }
     while ( v1 < this->maSize );
   }
@@ -57,34 +51,31 @@ void __fastcall OSuite::Statistics::Reset(OSuite::Statistics *this)
 // RVA: 0xEEB0E8
 void __fastcall OSuite::Statistics::AddDeltaValue(OSuite::Statistics *this, float value)
 {
-  float v2; // xmm2_4
-  float *v3; // rax
+  float *maData; // rax
   __int64 v4; // r8
-  bool v5; // cf
-  bool v6; // zf
-  float v7; // xmm0_4
-  float v8; // xmm1_4
+  bool v5; // cc
+  float v6; // xmm0_4
+  float v7; // xmm1_4
 
-  v2 = value;
-  v3 = this->maData;
+  maData = this->maData;
   v4 = this->count % this->maSize;
-  this->maTotal = this->maTotal - v3[v4];
-  v3[v4] = value;
-  v5 = value < this->max;
-  v6 = value == this->max;
-  v7 = value + this->total;
-  v8 = value + this->maTotal;
-  this->total = v7;
-  this->maTotal = v8;
-  if ( !v5 && !v6 || !this->count )
-    this->max = v2;
-  if ( this->min > v2 || !this->count )
-    this->min = v2;
+  this->maTotal = this->maTotal - maData[v4];
+  maData[v4] = value;
+  v5 = value <= this->max;
+  v6 = value + this->total;
+  v7 = value + this->maTotal;
+  this->total = v6;
+  this->maTotal = v7;
+  if ( !v5 || !this->count )
+    this->max = value;
+  if ( this->min > value || !this->count )
+    this->min = value;
   ++this->count;
 }
 
 // File Line: 44
 // RVA: 0xEEB150
+// attributes: thunk
 void __fastcall OSuite::Statistics::AddValue(OSuite::Statistics *this, float value)
 {
   OSuite::Statistics::AddDeltaValue(this, value);
@@ -94,13 +85,10 @@ void __fastcall OSuite::Statistics::AddValue(OSuite::Statistics *this, float val
 // RVA: 0xEEB158
 float __fastcall OSuite::Statistics::GetAverage(OSuite::Statistics *this)
 {
-  float result; // xmm0_4
-
   if ( this->count )
-    result = this->total / (float)this->count;
+    return this->total / (float)this->count;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 82

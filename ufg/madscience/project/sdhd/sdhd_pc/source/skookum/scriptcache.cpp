@@ -3,20 +3,17 @@
 __int64 UFG::ScriptCache::_dynamic_initializer_for__smScripts__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::ScriptCache::smScripts.mTree);
-  return atexit(UFG::ScriptCache::_dynamic_atexit_destructor_for__smScripts__);
+  return atexit((int (__fastcall *)())UFG::ScriptCache::_dynamic_atexit_destructor_for__smScripts__);
 }
 
 // File Line: 105
 // RVA: 0x4E16C0
 SSCode *__fastcall UFG::ScriptCache::GetScriptCode(UFG::ScriptCache::Script *script)
 {
-  SSCode *result; // rax
-
   if ( script )
-    result = script->mpScriptCode;
+    return script->mpScriptCode;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 110
@@ -29,195 +26,190 @@ void __fastcall UFG::ScriptCache::ReleaseScript(UFG::ScriptCache::Script *script
 
 // File Line: 118
 // RVA: 0x4E1350
-UFG::qBaseTreeRB *__fastcall UFG::ScriptCache::GetScript(const char *scriptContents, const char *classScope, const char *defaultScope, const char *dbg_name)
+UFG::qBaseTreeRB *__fastcall UFG::ScriptCache::GetScript(
+        char *scriptContents,
+        const char *classScope,
+        const char *defaultScope,
+        const char *dbg_name)
 {
-  const char *v4; // r15
-  const char *v5; // rdi
-  const char *v6; // rbx
-  const char *v7; // r14
   SSClass *v8; // rsi
   AString *v9; // rax
-  AStringRef *v10; // rbx
+  AStringRef *i_str_ref_p; // rbx
   bool v11; // zf
-  AObjReusePool<AStringRef> *v12; // rax
-  AObjBlock<AStringRef> *v13; // rcx
-  unsigned __int64 v14; // rdx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v15; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v16; // rcx
-  unsigned int v17; // edi
-  UFG::qBaseTreeRB *v18; // rbx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  unsigned int i_cstr_p; // edi
+  UFG::qBaseTreeRB *Next; // rbx
   SSCode *v19; // r14
   UFG::allocator::free_link *v20; // rax
   AString *v21; // rax
-  unsigned int result_pos; // ST1C_4
-  AStringRef *v23; // rdi
-  AObjReusePool<AStringRef> *v24; // rax
-  AObjBlock<AStringRef> *v25; // rcx
-  unsigned __int64 v26; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v27; // rcx
-  AStringRef *v28; // rdi
-  AObjReusePool<AStringRef> *v29; // rax
-  AObjBlock<AStringRef> *v30; // rcx
-  unsigned __int64 v31; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v32; // rcx
-  AObjReusePool<AStringRef> *v33; // rax
-  AObjBlock<AStringRef> *v34; // rcx
-  unsigned __int64 v35; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v36; // rcx
-  AString result; // [rsp+30h] [rbp-69h]
-  SSParser result_start; // [rsp+38h] [rbp-61h]
-  AStringRef *retaddr; // [rsp+118h] [rbp+7Fh]
+  AStringRef *v22; // rdi
+  AObjReusePool<AStringRef> *v23; // rax
+  AObjBlock<AStringRef> *v24; // rcx
+  unsigned __int64 v25; // rdx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_pool; // rcx
+  AStringRef *v27; // rdi
+  AObjReusePool<AStringRef> *v28; // rax
+  AObjBlock<AStringRef> *v29; // rcx
+  unsigned __int64 v30; // rdx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v31; // rcx
+  AObjReusePool<AStringRef> *v32; // rax
+  AObjBlock<AStringRef> *v33; // rcx
+  unsigned __int64 v34; // rdx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v35; // rcx
+  unsigned int result_pos; // [rsp+1Ch] [rbp-7Dh]
+  AString result; // [rsp+30h] [rbp-69h] BYREF
+  SSParser result_start; // [rsp+38h] [rbp-61h] BYREF
+  AString retaddr; // [rsp+118h] [rbp+7Fh] BYREF
 
-  v4 = dbg_name;
-  v5 = defaultScope;
-  v6 = classScope;
-  v7 = scriptContents;
   v8 = SSBrain::get_class(classScope);
   if ( !v8 )
   {
-    v9 = a_str_format(&result, "%s is not a valid class, will assume its scope is %x", v6, v5);
-    SSDebug::print_error(v9, AErrLevel_error);
-    v10 = result.i_str_ref_p;
-    v11 = result.i_str_ref_p->i_ref_count == 1;
-    --v10->i_ref_count;
+    v9 = a_str_format(&result, "%s is not a valid class, will assume its scope is %x", classScope, defaultScope);
+    SSDebug::print_error(v9, 3);
+    i_str_ref_p = result.i_str_ref_p;
+    v11 = result.i_str_ref_p->i_ref_count-- == 1;
     if ( v11 )
     {
-      if ( v10->i_deallocate )
-        AMemory::c_free_func(v10->i_cstr_p);
-      v12 = AStringRef::get_pool();
-      v13 = v12->i_block_p;
-      v14 = (unsigned __int64)v13->i_objects_a;
-      if ( (unsigned __int64)v10 < v14
-        || (v15 = (unsigned __int64)v10 < v14 + 24i64 * v13->i_size, v16 = &v12->i_pool, !v15) )
+      if ( i_str_ref_p->i_deallocate )
+        AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)i_str_ref_p < i_objects_a
+        || (v15 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size,
+            p_i_exp_pool = &pool->i_pool,
+            !v15) )
       {
-        v16 = &v12->i_exp_pool;
+        p_i_exp_pool = &pool->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v16, v10);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
     }
-    v8 = SSBrain::get_class(v5);
+    v8 = SSBrain::get_class(defaultScope);
   }
-  if ( retaddr )
-    v17 = (unsigned int)retaddr->i_cstr_p;
+  if ( retaddr.i_str_ref_p )
+    i_cstr_p = (unsigned int)retaddr.i_str_ref_p->i_cstr_p;
   else
-    v17 = UFG::qStringHash32(v7, 0xFFFFFFFF);
-  if ( !v17 )
+    i_cstr_p = UFG::qStringHash32(scriptContents, 0xFFFFFFFF);
+  if ( !i_cstr_p )
   {
 LABEL_19:
-    v18 = 0i64;
+    Next = 0i64;
     goto LABEL_20;
   }
-  v18 = UFG::qBaseTreeRB::Get(&UFG::ScriptCache::smScripts.mTree, v17);
-  if ( v18 )
+  Next = UFG::qBaseTreeRB::Get(&UFG::ScriptCache::smScripts.mTree, i_cstr_p);
+  if ( Next )
   {
-    while ( v18->mRoot.mUID == v17 )
+    while ( Next->mRoot.mUID == i_cstr_p )
     {
-      if ( (SSClass *)v18->mNULL.mChild[1] == v8 )
+      if ( (SSClass *)Next->mNULL.mChild[1] == v8 )
         goto LABEL_50;
-      v18 = UFG::qBaseTreeRB::GetNext(&UFG::ScriptCache::smScripts.mTree, &v18->mRoot);
-      if ( !v18 )
+      Next = UFG::qBaseTreeRB::GetNext(&UFG::ScriptCache::smScripts.mTree, &Next->mRoot);
+      if ( !Next )
         goto LABEL_20;
     }
     goto LABEL_19;
   }
 LABEL_20:
-  if ( !v7 || !*v7 )
+  if ( !scriptContents || !*scriptContents )
     return 0i64;
-  retaddr = AStringRef::get_empty();
-  ++retaddr->i_ref_count;
-  UFG::SkookumMgr::ConstructCodeBlockFromScript((AString *)&retaddr, v7);
-  SSParser::SSParser(&result_start, (AString *)&retaddr);
-  SSParser::set_class_scope(&result_start, (SSClassUnaryBase *)&v8->vfptr);
+  retaddr.i_str_ref_p = AStringRef::get_empty();
+  ++retaddr.i_str_ref_p->i_ref_count;
+  UFG::SkookumMgr::ConstructCodeBlockFromScript(&retaddr, scriptContents);
+  SSParser::SSParser(&result_start, &retaddr);
+  SSParser::set_class_scope(&result_start, v8);
   LODWORD(result_start.i_str_ref_p) = 0;
   *(AStringRef **)((char *)&result_start.i_str_ref_p + 4) = (AStringRef *)1;
   v19 = SSParser::parse_code_block(&result_start, (SSParser::Args *)&result_start, SSInvokeTime_any, ResultDesired_true);
   if ( v19 )
   {
     v20 = UFG::qMalloc(0x38ui64, "ScriptCache::Script", 0i64);
-    v18 = (UFG::qBaseTreeRB *)v20;
+    Next = (UFG::qBaseTreeRB *)v20;
     result.i_str_ref_p = (AStringRef *)v20;
     if ( v20 )
     {
       v20->mNext = 0i64;
       v20[1].mNext = 0i64;
       v20[2].mNext = 0i64;
-      LODWORD(v20[3].mNext) = v17;
+      LODWORD(v20[3].mNext) = i_cstr_p;
       LODWORD(v20[4].mNext) = 0;
       v20[5].mNext = 0i64;
       v20[6].mNext = 0i64;
     }
     else
     {
-      v18 = 0i64;
+      Next = 0i64;
     }
-    v18->mNULL.mChild[1] = (UFG::qBaseNodeRB *)v8;
-    v18->mNULL.mChild[0] = (UFG::qBaseNodeRB *)v19;
-    UFG::qBaseTreeRB::Add(&UFG::ScriptCache::smScripts.mTree, &v18->mRoot);
+    Next->mNULL.mChild[1] = (UFG::qBaseNodeRB *)v8;
+    Next->mNULL.mChild[0] = (UFG::qBaseNodeRB *)v19;
+    UFG::qBaseTreeRB::Add(&UFG::ScriptCache::smScripts.mTree, &Next->mRoot);
   }
   else
   {
-    v21 = a_str_format(&result, "SkookumTrack in Node %s\n", v4);
+    v21 = a_str_format(&result, "SkookumTrack in Node %s\n", dbg_name);
     SSDebug::print_error(
       (SSParser::eResult)result_start.i_flags.i_flagset,
       v21,
-      (AString *)&retaddr,
+      &retaddr,
       result_pos,
       (unsigned int)result_start.i_str_ref_p,
       0);
-    v23 = result.i_str_ref_p;
-    v11 = result.i_str_ref_p->i_ref_count == 1;
-    --v23->i_ref_count;
+    v22 = result.i_str_ref_p;
+    v11 = result.i_str_ref_p->i_ref_count-- == 1;
     if ( v11 )
     {
-      if ( v23->i_deallocate )
-        AMemory::c_free_func(v23->i_cstr_p);
-      v24 = AStringRef::get_pool();
-      v25 = v24->i_block_p;
-      v26 = (unsigned __int64)v25->i_objects_a;
-      if ( (unsigned __int64)v23 < v26
-        || (v15 = (unsigned __int64)v23 < v26 + 24i64 * v25->i_size, v27 = &v24->i_pool, !v15) )
+      if ( v22->i_deallocate )
+        AMemory::c_free_func(v22->i_cstr_p);
+      v23 = AStringRef::get_pool();
+      v24 = v23->i_block_p;
+      v25 = (unsigned __int64)v24->i_objects_a;
+      if ( (unsigned __int64)v22 < v25
+        || (v15 = (unsigned __int64)v22 < v25 + 24i64 * v24->i_size, p_i_pool = &v23->i_pool, !v15) )
       {
-        v27 = &v24->i_exp_pool;
+        p_i_pool = &v23->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v27, v23);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_pool, v22);
     }
-    UFG::qPrintf("Skookum code in %s failed to parse: %s", v4, retaddr->i_cstr_p);
+    UFG::qPrintf("Skookum code in %s failed to parse: %s", dbg_name, retaddr.i_str_ref_p->i_cstr_p);
   }
   SSTypeContext::~SSTypeContext(&result_start.i_context);
-  v28 = result_start.i_str_ref_p;
-  v11 = result_start.i_str_ref_p->i_ref_count == 1;
-  --v28->i_ref_count;
+  v27 = result_start.i_str_ref_p;
+  v11 = result_start.i_str_ref_p->i_ref_count-- == 1;
   if ( v11 )
   {
-    if ( v28->i_deallocate )
-      AMemory::c_free_func(v28->i_cstr_p);
-    v29 = AStringRef::get_pool();
-    v30 = v29->i_block_p;
-    v31 = (unsigned __int64)v30->i_objects_a;
-    if ( (unsigned __int64)v28 < v31
-      || (v15 = (unsigned __int64)v28 < v31 + 24i64 * v30->i_size, v32 = &v29->i_pool, !v15) )
+    if ( v27->i_deallocate )
+      AMemory::c_free_func(v27->i_cstr_p);
+    v28 = AStringRef::get_pool();
+    v29 = v28->i_block_p;
+    v30 = (unsigned __int64)v29->i_objects_a;
+    if ( (unsigned __int64)v27 < v30
+      || (v15 = (unsigned __int64)v27 < v30 + 24i64 * v29->i_size, v31 = &v28->i_pool, !v15) )
     {
-      v32 = &v29->i_exp_pool;
+      v31 = &v28->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v32, v28);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v31, v27);
   }
-  v11 = retaddr->i_ref_count-- == 1;
+  v11 = retaddr.i_str_ref_p->i_ref_count-- == 1;
   if ( v11 )
   {
-    if ( retaddr->i_deallocate )
-      AMemory::c_free_func(retaddr->i_cstr_p);
-    v33 = AStringRef::get_pool();
-    v34 = v33->i_block_p;
-    v35 = (unsigned __int64)v34->i_objects_a;
-    if ( (unsigned __int64)retaddr < v35
-      || (v15 = (unsigned __int64)retaddr < v35 + 24i64 * v34->i_size, v36 = &v33->i_pool, !v15) )
+    if ( retaddr.i_str_ref_p->i_deallocate )
+      AMemory::c_free_func(retaddr.i_str_ref_p->i_cstr_p);
+    v32 = AStringRef::get_pool();
+    v33 = v32->i_block_p;
+    v34 = (unsigned __int64)v33->i_objects_a;
+    if ( (unsigned __int64)retaddr.i_str_ref_p < v34
+      || (v15 = (unsigned __int64)retaddr.i_str_ref_p < v34 + 24i64 * v33->i_size, v35 = &v32->i_pool, !v15) )
     {
-      v36 = &v33->i_exp_pool;
+      v35 = &v32->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v36, retaddr);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v35, retaddr.i_str_ref_p);
   }
-  if ( v18 )
+  if ( Next )
 LABEL_50:
-    ++LODWORD(v18->mNULL.mParent);
-  return v18;
+    ++LODWORD(Next->mNULL.mParent);
+  return Next;
 }
 

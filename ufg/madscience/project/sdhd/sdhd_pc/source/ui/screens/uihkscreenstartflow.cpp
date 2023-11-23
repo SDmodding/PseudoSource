@@ -2,11 +2,8 @@
 // RVA: 0x5C7780
 void __fastcall UFG::UIHKScreenStartFlow::UIHKScreenStartFlow(UFG::UIHKScreenStartFlow *this)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v1; // rax
-
-  v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -14,7 +11,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UIHKScreenStartFlow(UFG::UIHKScreenSta
   this->mScreenUID = -1;
   *(_QWORD *)&this->mControllerMask = 15i64;
   *(_QWORD *)&this->mPriority = 0i64;
-  this->mDimToApplyType = 0;
+  this->mDimToApplyType = eDIM_INVALID;
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
@@ -27,45 +24,41 @@ void __fastcall UFG::UIHKScreenStartFlow::UIHKScreenStartFlow(UFG::UIHKScreenSta
 // RVA: 0x5CCCD0
 void __fastcall UFG::UIHKScreenStartFlow::~UIHKScreenStartFlow(UFG::UIHKScreenStartFlow *this)
 {
-  UFG::UIHKScreenStartFlow *v1; // rbx
   UFG::UIHKScreenGlobalOverlay *v2; // rax
-  UFG::UIHKHelpBarWidget *v3; // rdi
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rdi
   unsigned int v4; // eax
   UFG::UIScreenTextureManager *v5; // rax
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStartFlow::`vftable;
   v2 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v2 = &gGlobalOverlaySentinel;
-  v3 = &v2->HelpBar;
+  p_HelpBar = &v2->HelpBar;
   v4 = UFG::qStringHash32("UIHKScreenStartFlow", 0xFFFFFFFF);
-  UFG::UIHKHelpBarWidget::Hide(v3, v4);
+  UFG::UIHKHelpBarWidget::Hide(p_HelpBar, v4);
   v5 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v5, "StartFlowScreen");
-  UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
+  UFG::UIScreen::~UIScreen(this);
 }
 
 // File Line: 65
 // RVA: 0x636940
 void __fastcall UFG::UIHKScreenStartFlow::init(UFG::UIHKScreenStartFlow *this, UFG::UICommandData *data)
 {
-  UFG::UIHKScreenStartFlow *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rax
+  Scaleform::GFx::Movie *MovieSafe; // rax
   Scaleform::GFx::Movie *v4; // rdi
 
-  v2 = this;
-  UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
-  v2->mState = 0;
-  v3 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&v2->vfptr);
-  v4 = v3;
-  if ( v3 )
+  UFG::UIScreen::init(this, data);
+  this->mState = STATE_INIT;
+  MovieSafe = UFG::UIScreen::getMovieSafe(this);
+  v4 = MovieSafe;
+  if ( MovieSafe )
   {
-    UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(v2, v3);
-    UFG::UIHKScreenStartFlow::InitScreen(v2, v4);
-    UFG::UIHKScreenStartFlow::SetHeaderText(v2, v4);
-    UFG::UIHKScreenStartFlow::SetNewGameSlotText(v2, v4);
-    UFG::UIHKScreenStartFlow::UpdateHelpbar(v2);
+    UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(this, MovieSafe);
+    UFG::UIHKScreenStartFlow::InitScreen(this, v4);
+    UFG::UIHKScreenStartFlow::SetHeaderText(this, v4);
+    UFG::UIHKScreenStartFlow::SetNewGameSlotText(this, v4);
+    UFG::UIHKScreenStartFlow::UpdateHelpbar(this);
   }
 }
 
@@ -73,71 +66,62 @@ void __fastcall UFG::UIHKScreenStartFlow::init(UFG::UIHKScreenStartFlow *this, U
 // RVA: 0x640150
 void __fastcall UFG::UIHKScreenStartFlow::update(UFG::UIHKScreenStartFlow *this, float elapsed)
 {
-  UFG::UIHKScreenStartFlow *v2; // rbx
   __int32 v3; // ecx
   float v4; // xmm0_4
 
-  v2 = this;
   v3 = this->mState - 2;
   if ( v3 )
   {
     if ( v3 == 1 )
     {
-      v4 = elapsed + v2->mLoadTimeElapsed;
-      v2->mLoadTimeElapsed = v4;
+      v4 = elapsed + this->mLoadTimeElapsed;
+      this->mLoadTimeElapsed = v4;
       if ( v4 > 2.0 )
       {
-        UFG::UIScreenManagerBase::queuePopScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v2->mPopupDialogScreenUID);
-        UFG::UIScreenManagerBase::queuePopScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v2->mScreenUID);
-        v2->mState = 7;
+        UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mPopupDialogScreenUID);
+        UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mScreenUID);
+        this->mState = NUM_CALIBRATION_STATES|STATE_UISCALE;
       }
     }
   }
   else
   {
-    v2->mLoadTimeElapsed = elapsed + v2->mLoadTimeElapsed;
+    this->mLoadTimeElapsed = elapsed + this->mLoadTimeElapsed;
   }
-  UFG::UIScreen::update((UFG::UIScreen *)&v2->vfptr, elapsed);
+  UFG::UIScreen::update(this, elapsed);
 }
 
 // File Line: 125
 // RVA: 0x62CDF0
-char __fastcall UFG::UIHKScreenStartFlow::handleMessage(UFG::UIHKScreenStartFlow *this, unsigned int msgId, UFG::UIMessage *msg)
+char __fastcall UFG::UIHKScreenStartFlow::handleMessage(
+        UFG::UIHKScreenStartFlow *this,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
   char v3; // bl
-  UFG::UIMessage *v4; // rbp
-  unsigned int v5; // esi
-  UFG::UIHKScreenStartFlow *v6; // rdi
   __int32 v8; // ecx
-  int v9; // ecx
-  int v10; // ecx
-  int v11; // ecx
-  Scaleform::GFx::Movie *v12; // rax
-  unsigned int v13; // ebx
+  __int32 v9; // ecx
+  __int32 v10; // ecx
+  __int32 v11; // ecx
+  Scaleform::GFx::Movie *MovieSafe; // rax
+  __int32 v13; // ebx
   UFG::GameSaveLoad *v14; // rax
-  UFG::UIScreen *v15; // rax
+  UFG::UIScreen *Overlay; // rax
   UFG::UIHKScreenGlobalOverlay *v16; // rcx
   UFG::UIScreenManager *v17; // rbx
-  unsigned int v18; // eax
+  unsigned int ScreenUID; // eax
   UFG::UI *v19; // rcx
 
   v3 = 0;
-  v4 = msg;
-  v5 = msgId;
-  v6 = this;
   if ( !this->mRenderable->m_movie.pObject )
     return 0;
   v8 = this->mState - 1;
   if ( !v8 )
   {
     if ( msgId != -339696135 )
-      return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
-    UFG::UIHKScreenStartFlow::OnHeaderFileLoadComplete(v6);
-    ++v6->mInputEnabled;
+      return UFG::UIScreen::handleMessage(this, msgId, msg);
+    UFG::UIHKScreenStartFlow::OnHeaderFileLoadComplete(this);
+    ++this->mInputEnabled;
     goto LABEL_46;
   }
   v9 = v8 - 1;
@@ -146,35 +130,27 @@ char __fastcall UFG::UIHKScreenStartFlow::handleMessage(UFG::UIHKScreenStartFlow
     if ( msgId == 1552074461 )
     {
       v17 = UFG::UIScreenManager::s_instance;
-      v18 = UFG::UIScreenManagerBase::getScreenUID(
-              (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-              "MainMenu");
-      UFG::UIScreenManagerBase::queueMessage((UFG::UIScreenManagerBase *)&v17->vfptr, UI_HASH_LOAD_COMPLETE_20, v18);
+      ScreenUID = UFG::UIScreenManagerBase::getScreenUID(UFG::UIScreenManager::s_instance, "MainMenu");
+      UFG::UIScreenManagerBase::queueMessage(v17, UI_HASH_LOAD_COMPLETE_20, ScreenUID);
       UFG::UI::HandleGameCheckpointRestore(v19);
-      if ( v6->mLoadTimeElapsed <= 2.0 )
+      if ( this->mLoadTimeElapsed <= 2.0 )
       {
-        v6->mState = 3;
+        this->mState = STATE_UISCALE;
       }
       else
       {
-        UFG::UIScreenManagerBase::queuePopScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v6->mPopupDialogScreenUID);
-        UFG::UIScreenManagerBase::queuePopScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v6->mScreenUID);
-        v6->mState = 7;
+        UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mPopupDialogScreenUID);
+        UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mScreenUID);
+        this->mState = NUM_CALIBRATION_STATES|STATE_UISCALE;
       }
-      return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+      return UFG::UIScreen::handleMessage(this, msgId, msg);
     }
     if ( msgId != 1323471633 )
-      return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
-    UFG::UIScreenManagerBase::queuePopScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      0xFFFFFFFF);
+      return UFG::UIScreen::handleMessage(this, msgId, msg);
+    UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, 0xFFFFFFFF);
 LABEL_46:
-    v6->mState = 4;
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+    this->mState = NUM_CALIBRATION_STATES;
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   v10 = v9 - 2;
   if ( !v10 )
@@ -189,383 +165,340 @@ LABEL_46:
       || msgId == UI_HASH_BUTTON_ACCEPT_PRESSED_30
       || msgId == UI_HASH_BUTTON_BUTTON1_PRESSED_30 )
     {
-      v3 = UFG::UIHKScreenStartFlow::HandleUserInput(v6, msgId);
+      v3 = UFG::UIHKScreenStartFlow::HandleUserInput(this, msgId);
     }
-    v15 = UFG::UIScreenManagerBase::getOverlay(
-            (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-            "GlobalOverlay");
-    if ( v15 )
+    Overlay = UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "GlobalOverlay");
+    if ( Overlay )
     {
       v16 = UFG::UIHKScreenGlobalOverlay::mThis;
       if ( !UFG::UIHKScreenGlobalOverlay::mThis )
         v16 = &gGlobalOverlaySentinel;
-      UFG::UIHKHelpBarWidget::HandleMessage(&v16->HelpBar, v15, v5, v4);
+      UFG::UIHKHelpBarWidget::HandleMessage(&v16->HelpBar, Overlay, msgId, msg);
     }
-    if ( v5 == UI_HASH_MOUSE_MOVE_30 )
+    if ( msgId == UI_HASH_MOUSE_MOVE_30 )
     {
       UFG::UIHKScreenUpgrades::Flash_HandleMouseMove(
-        (UFG::UIHKScreenUpgrades *)v6,
-        (float)SLODWORD(v4[1].vfptr),
-        (float)SHIDWORD(v4[1].vfptr));
-      UFG::UIHKScreenStartFlow::UpdateHelpbar(v6);
+        (UFG::UIHKScreenUpgrades *)this,
+        (float)SLODWORD(msg[1].vfptr),
+        (float)SHIDWORD(msg[1].vfptr));
+      UFG::UIHKScreenStartFlow::UpdateHelpbar(this);
     }
-    else if ( v5 == UI_HASH_MOUSE_BUTTON_LEFT_PRESSED_30 )
+    else if ( msgId == UI_HASH_MOUSE_BUTTON_LEFT_PRESSED_30 )
     {
       UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(
-        (UFG::UIHKScreenUpgrades *)v6,
-        (float)SLODWORD(v4[1].vfptr),
-        (float)SHIDWORD(v4[1].vfptr));
+        (UFG::UIHKScreenUpgrades *)this,
+        (float)SLODWORD(msg[1].vfptr),
+        (float)SHIDWORD(msg[1].vfptr));
     }
     if ( v3 )
       return v3;
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   v11 = v10 - 1;
   if ( v11 )
   {
     if ( v11 == 1 && msgId == UI_HASH_DELETE_GAME_COMPLETE_20 )
     {
-      v6->mState = 4;
-      v12 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&v6->vfptr);
-      if ( v12 )
-        UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(v6, v12);
-      UFG::UIScreenManagerBase::queuePopScreen(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v6->mPopupDialogScreenUID);
+      this->mState = NUM_CALIBRATION_STATES;
+      MovieSafe = UFG::UIScreen::getMovieSafe(this);
+      if ( MovieSafe )
+        UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(this, MovieSafe);
+      UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mPopupDialogScreenUID);
     }
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   if ( msgId == UI_HASH_DIALOG_YES_30 )
   {
-    v13 = (unsigned __int64)UFG::UIHKScreenStartFlow::GetSelectedSlot(v6) - 1;
-    if ( v13 == v6->mAutoSaveSlotIndex )
+    v13 = UFG::UIHKScreenStartFlow::GetSelectedSlot(this) - 1;
+    if ( v13 == this->mAutoSaveSlotIndex )
       v13 = 4;
     v14 = UFG::GameSaveLoad::Instance();
     UFG::GameSaveLoad::DeleteGameData(v14, v13);
-    v6->mState = 6;
-    v6->mPopupDialogScreenUID = UFG::UIScreenDialogBox::createZeroButtonDialog(
-                                  (UFG::UIScreen *)&v6->vfptr,
-                                  &customWorldMapCaption,
-                                  "$DELETING_SAVE_DATA",
-                                  0,
-                                  "DialogBox");
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+    this->mState = NUM_CALIBRATION_STATES|STATE_VOLUME;
+    this->mPopupDialogScreenUID = UFG::UIScreenDialogBox::createZeroButtonDialog(
+                                    this,
+                                    &customCaption,
+                                    "$DELETING_SAVE_DATA",
+                                    0,
+                                    "DialogBox");
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   if ( msgId == UI_HASH_DIALOG_NO_30 )
     goto LABEL_46;
-  return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v6->vfptr, v5, v4);
+  return UFG::UIScreen::handleMessage(this, msgId, msg);
 }
 
 // File Line: 313
 // RVA: 0x5ED610
 void __fastcall UFG::UIHKScreenStartFlow::InitScreen(UFG::UIHKScreenStartFlow *this, Scaleform::GFx::Movie *movie)
 {
-  Scaleform::GFx::Movie *v2; // rsi
-  UFG::UIHKScreenStartFlow *v3; // rbx
   hkMemoryResourceContainer *v4; // rax
-  int v5; // eax
+  int StartingPos; // eax
   int v6; // edi
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = movie;
-  v3 = this;
   pargs.pObjectInterface = 0i64;
-  pargs.Type = 0;
+  pargs.Type = VT_Undefined;
   v4 = (hkMemoryResourceContainer *)UFG::GameSaveLoad::Instance();
-  v5 = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos(v4);
-  v6 = v5 + 2;
-  v3->mAutoSaveSlotIndex = v5;
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  StartingPos = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos(v4);
+  v6 = StartingPos + 2;
+  this->mAutoSaveSlotIndex = StartingPos;
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 5;
+  pargs.Type = VT_Number;
   pargs.mValue.NValue = (double)v6;
-  Scaleform::GFx::Movie::Invoke(v2, "init", 0i64, &pargs, 1u);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+  Scaleform::GFx::Movie::Invoke(movie, "init", 0i64, &pargs, 1u);
+  if ( (pargs.Type & 0x40) != 0 )
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
 }
 
 // File Line: 322
 // RVA: 0x6060F0
 void __fastcall UFG::UIHKScreenStartFlow::SetHeaderText(UFG::UIHKScreenStartFlow *this, Scaleform::GFx::Movie *movie)
 {
-  Scaleform::GFx::Movie *v2; // rdi
   UFG::ProgressionTracker *v3; // rax
   UFG::ProgressionTracker *v4; // rax
-  UFG::qPropertySet *v5; // rbx
+  UFG::qPropertySet *GameFlowProperties; // rbx
   unsigned int v6; // eax
-  UFG::qSymbol *v7; // rax
+  UFG::qArray<unsigned long,0> *v7; // rax
   char *v8; // rax
   const char *v9; // rbx
   unsigned int v10; // eax
-  UFG::UIGfxTranslator *v11; // rcx
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
-  UFG::qSymbol flowId; // [rsp+90h] [rbp+18h]
-  UFG::qWiseSymbol result; // [rsp+98h] [rbp+20h]
+  UFG::UIGfxTranslator *m_translator; // rcx
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
+  UFG::qArray<unsigned long,0> flowId; // [rsp+90h] [rbp+18h] BYREF
 
-  v2 = movie;
   v3 = UFG::ProgressionTracker::Instance();
-  flowId.mUID = UFG::ProgressionTracker::GetActiveFlow(v3)->mUID;
+  flowId.size = UFG::ProgressionTracker::GetActiveFlow(v3)->mUID;
   v4 = UFG::ProgressionTracker::Instance();
-  v5 = UFG::ProgressionTracker::GetGameFlowProperties(v4, &flowId);
-  if ( v5 )
+  GameFlowProperties = UFG::ProgressionTracker::GetGameFlowProperties(v4, &flowId);
+  if ( GameFlowProperties )
   {
     v6 = UFG::qStringHash32("Title", 0xFFFFFFFF);
-    v7 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, v6);
-    v8 = UFG::qPropertySet::Get<char const *>(v5, v7, DEPTH_RECURSE);
+    v7 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&flowId.p, v6);
+    v8 = UFG::qPropertySet::Get<char const *>(GameFlowProperties, v7, DEPTH_RECURSE);
     v9 = v8;
     if ( v8 )
     {
       if ( *v8 == 36 )
         v9 = v8 + 1;
-      v10 = UFG::qStringHashUpper32(v9, 0xFFFFFFFF);
-      v11 = UFG::UIScreenManager::s_instance->m_translator;
-      if ( !v11 || (v8 = (char *)v11->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v11->vfptr, v10)) == 0i64 )
+      v10 = UFG::qStringHashUpper32(v9, -1);
+      m_translator = UFG::UIScreenManager::s_instance->m_translator;
+      if ( !m_translator || (v8 = (char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v10)) == 0i64 )
         v8 = (char *)v9;
     }
     pargs.pObjectInterface = 0i64;
-    pargs.Type = 6;
-    *(_QWORD *)&pargs.mValue.NValue = v8;
-    Scaleform::GFx::Movie::Invoke(v2, "SetHeaderText", 0i64, &pargs, 1u);
-    if ( ((unsigned int)pargs.Type >> 6) & 1 )
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    pargs.Type = VT_String;
+    pargs.mValue.pString = v8;
+    Scaleform::GFx::Movie::Invoke(movie, "SetHeaderText", 0i64, &pargs, 1u);
+    if ( (pargs.Type & 0x40) != 0 )
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
         pargs.pObjectInterface,
         &pargs,
-        *(_QWORD *)&pargs.mValue.NValue);
+        pargs.mValue);
   }
 }
 
 // File Line: 338
 // RVA: 0x606410
-void __fastcall UFG::UIHKScreenStartFlow::SetNewGameSlotText(UFG::UIHKScreenStartFlow *this, Scaleform::GFx::Movie *movie)
+void __fastcall UFG::UIHKScreenStartFlow::SetNewGameSlotText(
+        UFG::UIHKScreenStartFlow *this,
+        Scaleform::GFx::Movie *movie)
 {
-  Scaleform::GFx::Movie *v2; // rbx
   unsigned int v3; // eax
-  UFG::UIGfxTranslator *v4; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
   const char *v5; // rax
-  char v6; // [rsp+28h] [rbp-79h]
+  char v6[16]; // [rsp+28h] [rbp-79h] BYREF
   __int64 v7; // [rsp+38h] [rbp-69h]
-  unsigned int v8; // [rsp+40h] [rbp-61h]
+  int v8; // [rsp+40h] [rbp-61h]
   char *v9; // [rsp+48h] [rbp-59h]
   __int64 v10; // [rsp+50h] [rbp-51h]
-  char ptr; // [rsp+58h] [rbp-49h]
-  __int64 v12; // [rsp+60h] [rbp-41h]
-  __int64 v13; // [rsp+68h] [rbp-39h]
-  unsigned int v14; // [rsp+70h] [rbp-31h]
-  __int64 v15; // [rsp+78h] [rbp-29h]
-  char v16; // [rsp+88h] [rbp-19h]
-  __int64 v17; // [rsp+98h] [rbp-9h]
-  unsigned int v18; // [rsp+A0h] [rbp-1h]
-  char *v19; // [rsp+A8h] [rbp+7h]
-  __int64 v20; // [rsp+B0h] [rbp+Fh]
-  char v21; // [rsp+B8h] [rbp+17h]
-  __int64 v22; // [rsp+C8h] [rbp+27h]
-  unsigned int v23; // [rsp+D0h] [rbp+2Fh]
-  char *v24; // [rsp+D8h] [rbp+37h]
-  __int64 v25; // [rsp+E0h] [rbp+3Fh]
-  __int64 v26; // [rsp+E8h] [rbp+47h]
+  Scaleform::GFx::Value ptr; // [rsp+58h] [rbp-49h] BYREF
+  char v12[16]; // [rsp+88h] [rbp-19h] BYREF
+  __int64 v13; // [rsp+98h] [rbp-9h]
+  int v14; // [rsp+A0h] [rbp-1h]
+  char *v15; // [rsp+A8h] [rbp+7h]
+  __int64 v16; // [rsp+B0h] [rbp+Fh]
+  char v17[16]; // [rsp+B8h] [rbp+17h] BYREF
+  __int64 v18; // [rsp+C8h] [rbp+27h]
+  int v19; // [rsp+D0h] [rbp+2Fh]
+  char *v20; // [rsp+D8h] [rbp+37h]
+  __int64 v21; // [rsp+E0h] [rbp+3Fh]
+  __int64 v22; // [rsp+E8h] [rbp+47h]
 
-  v26 = -2i64;
-  v2 = movie;
-  `eh vector constructor iterator(&v12, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  if ( (v14 >> 6) & 1 )
+  v22 = -2i64;
+  `eh vector constructor iterator(&ptr.8, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  if ( (ptr.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v13 + 16i64))(v13, &ptr, v15);
-    v13 = 0i64;
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+      ptr.pObjectInterface,
+      &ptr,
+      ptr.mValue);
+    ptr.pObjectInterface = 0i64;
   }
-  v14 = 5;
-  v15 = 0i64;
+  ptr.Type = VT_Number;
+  ptr.mValue.pString = 0i64;
   v7 = 0i64;
   v8 = 6;
-  v9 = &customWorldMapCaption;
-  if ( (v18 >> 6) & 1 )
+  v9 = &customCaption;
+  if ( (v14 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v17 + 16i64))(v17, &v16, v19);
-    v17 = 0i64;
+    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v13 + 16i64))(v13, v12, v15);
+    v13 = 0i64;
   }
-  v18 = v8;
-  v19 = v9;
-  v20 = v10;
-  if ( (v8 >> 6) & 1 )
-  {
-    v17 = v7;
-    (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v7 + 8i64))(v7, &v16);
-  }
-  if ( (v8 >> 6) & 1 )
-  {
-    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v7 + 16i64))(v7, &v6, v9);
-    v7 = 0i64;
-  }
+  v14 = v8;
+  v15 = v9;
+  v16 = v10;
   v8 = 0;
-  v3 = UFG::qStringHashUpper32("START_NEW_GAME", 0xFFFFFFFF);
-  v4 = UFG::UIScreenManager::s_instance->m_translator;
-  if ( !v4 || (v5 = (const char *)v4->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, v3)) == 0i64 )
+  v3 = UFG::qStringHashUpper32("START_NEW_GAME", -1);
+  m_translator = UFG::UIScreenManager::s_instance->m_translator;
+  if ( !m_translator || (v5 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v3)) == 0i64 )
     v5 = "START_NEW_GAME";
   v7 = 0i64;
   v8 = 6;
   v9 = (char *)v5;
-  if ( (v23 >> 6) & 1 )
+  if ( (v19 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v22 + 16i64))(v22, &v21, v24);
-    v22 = 0i64;
+    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v18 + 16i64))(v18, v17, v20);
+    v18 = 0i64;
   }
-  v23 = v8;
-  v24 = v9;
-  v25 = v10;
-  if ( (v8 >> 6) & 1 )
+  v19 = v8;
+  v20 = v9;
+  v21 = v10;
+  if ( (v8 & 0x40) != 0 )
   {
-    v22 = v7;
-    (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v7 + 8i64))(v7, &v21);
+    v18 = v7;
+    (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v7 + 8i64))(v7, v17);
   }
-  if ( (v8 >> 6) & 1 )
+  if ( (v8 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v7 + 16i64))(v7, &v6, v9);
+    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v7 + 16i64))(v7, v6, v9);
     v7 = 0i64;
   }
   v8 = 0;
-  Scaleform::GFx::Movie::Invoke(v2, "SetSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
+  Scaleform::GFx::Movie::Invoke(movie, "SetSlot", 0i64, &ptr, 3u);
   `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 348
 // RVA: 0x6070F0
-void __fastcall UFG::UIHKScreenStartFlow::SetSaveFileSlotText(UFG::UIHKScreenStartFlow *this, Scaleform::GFx::Movie *movie, int slotNum, const char *date)
+void __fastcall UFG::UIHKScreenStartFlow::SetSaveFileSlotText(
+        UFG::UIHKScreenStartFlow *this,
+        Scaleform::GFx::Movie *movie,
+        int slotNum,
+        const char *date,
+        const char *fileText)
 {
-  const char *v4; // rbx
-  int v5; // edi
-  Scaleform::GFx::Movie *v6; // rsi
-  const char *v7; // rbx
-  __int64 v8; // rax
-  __int64 v9; // rdx
-  UFG::UIGfxTranslator *v10; // rcx
-  unsigned int v11; // [rsp+30h] [rbp-79h]
-  __int64 v12; // [rsp+38h] [rbp-71h]
-  __int64 v13; // [rsp+40h] [rbp-69h]
-  char ptr; // [rsp+48h] [rbp-61h]
-  __int64 v15; // [rsp+58h] [rbp-51h]
-  unsigned int v16; // [rsp+60h] [rbp-49h]
-  double v17; // [rsp+68h] [rbp-41h]
-  char v18; // [rsp+78h] [rbp-31h]
-  __int64 v19; // [rsp+88h] [rbp-21h]
-  unsigned int v20; // [rsp+90h] [rbp-19h]
-  __int64 v21; // [rsp+98h] [rbp-11h]
-  __int64 v22; // [rsp+A0h] [rbp-9h]
-  char v23; // [rsp+A8h] [rbp-1h]
-  __int64 v24; // [rsp+B8h] [rbp+Fh]
-  unsigned int v25; // [rsp+C0h] [rbp+17h]
-  __int64 v26; // [rsp+C8h] [rbp+1Fh]
-  __int64 v27; // [rsp+D0h] [rbp+27h]
-  __int64 v28; // [rsp+D8h] [rbp+2Fh]
-  char *str; // [rsp+128h] [rbp+7Fh]
+  const char *v8; // rbx
+  const char *v9; // rax
+  __int64 v10; // rdx
+  UFG::UIGfxTranslator *m_translator; // rcx
+  int v12[4]; // [rsp+30h] [rbp-91h] BYREF
+  __int64 v13; // [rsp+40h] [rbp-81h]
+  int ptr; // [rsp+48h] [rbp-79h]
+  const char *v15; // [rsp+50h] [rbp-71h]
+  __int64 v16; // [rsp+58h] [rbp-69h]
+  Scaleform::GFx::Value v17; // [rsp+60h] [rbp-61h] BYREF
+  int v18[4]; // [rsp+90h] [rbp-31h] BYREF
+  __int64 v19; // [rsp+A0h] [rbp-21h]
+  int v20; // [rsp+A8h] [rbp-19h]
+  const char *v21; // [rsp+B0h] [rbp-11h]
+  __int64 v22; // [rsp+B8h] [rbp-9h]
+  int v23[4]; // [rsp+C0h] [rbp-1h] BYREF
+  __int64 v24; // [rsp+D0h] [rbp+Fh]
+  __int64 v25; // [rsp+D8h] [rbp+17h]
+  const char *v26; // [rsp+E0h] [rbp+1Fh]
+  __int64 v27; // [rsp+E8h] [rbp+27h]
+  __int64 v28; // [rsp+F0h] [rbp+2Fh]
 
   v28 = -2i64;
-  v4 = date;
-  v5 = slotNum;
-  v6 = movie;
-  `eh vector constructor iterator(&v16, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  if ( (v16 >> 6) & 1 )
+  `eh vector constructor iterator(&v17, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  if ( (v17.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v15 + 16i64))(
-      v15,
-      &ptr,
-      COERCE_DOUBLE(*(_QWORD *)&v17));
-    v15 = 0i64;
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&v17.pObjectInterface->vfptr->gap8[8])(
+      v17.pObjectInterface,
+      &v17,
+      v17.mValue);
+    v17.pObjectInterface = 0i64;
   }
-  v16 = 5;
-  v17 = (double)(v5 + 1);
+  v17.Type = VT_Number;
+  v17.mValue.NValue = (double)(slotNum + 1);
   v13 = 0i64;
-  v11 = 6;
-  v12 = (__int64)v4;
-  if ( (v20 >> 6) & 1 )
+  ptr = 6;
+  v15 = date;
+  if ( (v20 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v19 + 16i64))(v19, &v18, v21);
+    (*(void (__fastcall **)(__int64, int *, const char *))(*(_QWORD *)v19 + 16i64))(v19, v18, v21);
     v19 = 0i64;
   }
-  v20 = v11;
-  v21 = v12;
-  v22 = v13;
-  if ( (v11 >> 6) & 1 )
+  v20 = ptr;
+  v21 = v15;
+  v22 = v16;
+  ptr = 0;
+  v8 = fileText;
+  if ( fileText )
   {
-    v19 = v13;
-    (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v13 + 8i64))(v13, &v18);
-  }
-  if ( (v11 >> 6) & 1 )
-  {
-    (*(void (__fastcall **)(__int64, unsigned int *, __int64))(*(_QWORD *)v13 + 16i64))(v13, &v11, v12);
-    v13 = 0i64;
-  }
-  v11 = 0;
-  v7 = str;
-  if ( str )
-  {
-    if ( *str == 36 )
-      v7 = str + 1;
-    v9 = (unsigned int)UFG::qStringHashUpper32(v7, 0xFFFFFFFF);
-    v10 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( !v10 || (v8 = (__int64)v10->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v10->vfptr, v9)) == 0 )
-      v8 = (__int64)v7;
+    if ( *fileText == 36 )
+      v8 = fileText + 1;
+    v10 = (unsigned int)UFG::qStringHashUpper32(v8, -1);
+    m_translator = UFG::UIScreenManager::s_instance->m_translator;
+    if ( !m_translator || (v9 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v10)) == 0i64 )
+      v9 = v8;
   }
   else
   {
-    v8 = 0i64;
+    v9 = 0i64;
   }
   v13 = 0i64;
-  v11 = 6;
-  v12 = v8;
-  if ( (v25 >> 6) & 1 )
+  ptr = 6;
+  v15 = v9;
+  if ( (v25 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v24 + 16i64))(v24, &v23, v26);
+    (*(void (__fastcall **)(__int64, int *, const char *))(*(_QWORD *)v24 + 16i64))(v24, v23, v26);
     v24 = 0i64;
   }
-  v25 = v11;
-  v26 = v12;
-  v27 = v13;
-  if ( (v11 >> 6) & 1 )
+  LODWORD(v25) = ptr;
+  v26 = v15;
+  v27 = v16;
+  if ( (ptr & 0x40) != 0 )
   {
     v24 = v13;
-    (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v13 + 8i64))(v13, &v23);
+    (*(void (__fastcall **)(__int64, int *))(*(_QWORD *)v13 + 8i64))(v13, v23);
   }
-  if ( (v11 >> 6) & 1 )
+  if ( (ptr & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, unsigned int *, __int64))(*(_QWORD *)v13 + 16i64))(v13, &v11, v12);
+    (*(void (__fastcall **)(__int64, int *, const char *))(*(_QWORD *)v13 + 16i64))(v13, v12, v15);
     v13 = 0i64;
   }
-  v11 = 0;
-  Scaleform::GFx::Movie::Invoke(v6, "SetSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  ptr = 0;
+  Scaleform::GFx::Movie::Invoke(movie, "SetSlot", 0i64, &v17, 3u);
+  `eh vector destructor iterator(&v17, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 358
 // RVA: 0x6121B0
-void __fastcall UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(UFG::UIHKScreenStartFlow *this, Scaleform::GFx::Movie *movie)
+void __fastcall UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(
+        UFG::UIHKScreenStartFlow *this,
+        Scaleform::GFx::Movie *movie)
 {
-  Scaleform::GFx::Movie *v2; // rbp
-  UFG::UIHKScreenStartFlow *v3; // rsi
   UFG::GameSaveLoad *v4; // rax
   hkMemoryResourceContainer *v5; // rax
   int v6; // ebx
   __int64 v7; // rdi
-  UFG::GameSaveLoad *v8; // rax
-  __int128 v9; // ST50_16
-  __int128 v10; // ST60_16
-  __int128 v11; // xmm0
-  __int128 v12; // ST80_16
-  int v13; // ecx
-  UFG::qString *v14; // rax
+  UFG::qString *DateString; // rax
   __m128i systemTime; // [rsp+40h] [rbp-98h]
-  UFG::qString result; // [rsp+90h] [rbp-48h]
+  UFG::qString result; // [rsp+90h] [rbp-48h] BYREF
 
-  v2 = movie;
-  v3 = this;
-  this->mState = 1;
+  this->mState = STATE_BRIGHTNESS;
   v4 = UFG::GameSaveLoad::Instance();
   UFG::GameSaveLoad::LoadAllHeaders(v4);
   v5 = (hkMemoryResourceContainer *)UFG::GameSaveLoad::Instance();
@@ -574,22 +507,16 @@ void __fastcall UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(UFG::UIHKScree
   v7 = 0i64;
   do
   {
-    v8 = UFG::GameSaveLoad::Instance();
-    systemTime = *(__m128i *)&v8->m_GameSlotHeaderInfo[v7].m_State;
-    v9 = *(_OWORD *)v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID;
-    v10 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[16];
-    v11 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[32];
-    v12 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[48];
-    v13 = _mm_cvtsi128_si32(systemTime);
-    if ( v13 && v13 == 1 )
+    systemTime = *(__m128i *)&UFG::GameSaveLoad::Instance()->m_GameSlotHeaderInfo[v7].m_State;
+    if ( _mm_cvtsi128_si32(systemTime) == 1 )
     {
-      v14 = UFG::UI::GetDateString(&result, systemTime.m128i_u64[1], 1);
-      UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v3, v2, v6, v14->mData);
+      DateString = UFG::UI::GetDateString(&result, systemTime.m128i_u64[1], 1);
+      UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, movie, v6, DateString->mData, "$COMMON_LOADING_UPPERCASE");
       UFG::qString::~qString(&result);
     }
     else
     {
-      UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v3, v2, v6, &customWorldMapCaption);
+      UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, movie, v6, &customCaption, &customCaption);
     }
     ++v6;
     ++v7;
@@ -601,10 +528,9 @@ void __fastcall UFG::UIHKScreenStartFlow::StartSaveFileHeaderLoad(UFG::UIHKScree
 // RVA: 0x5F2B40
 void __fastcall UFG::UIHKScreenStartFlow::OnHeaderFileLoadComplete(UFG::UIHKScreenStartFlow *this)
 {
-  UFG::UIHKScreenStartFlow *v1; // rbx
-  Scaleform::GFx::Movie *v2; // rsi
+  Scaleform::GFx::Movie *MovieSafe; // rsi
   hkMemoryResourceContainer *v3; // rax
-  int v4; // eax
+  int StartingPos; // eax
   int v5; // edi
   __int64 v6; // r14
   __int64 v7; // rbp
@@ -612,47 +538,44 @@ void __fastcall UFG::UIHKScreenStartFlow::OnHeaderFileLoadComplete(UFG::UIHKScre
   int v9; // ecx
   int v10; // ecx
   int v11; // ecx
-  int v12; // ecx
-  const char *v13; // r9
-  UFG::qString *v14; // rax
-  UFG::GameSaveLoad *v15; // rax
+  const char *v12; // r9
+  UFG::qString *DateString; // rax
+  UFG::GameSaveLoad *v14; // rax
+  int v15; // ecx
   int v16; // ecx
   int v17; // ecx
-  int v18; // ecx
-  int v19; // ecx
-  const char *v20; // r9
-  UFG::qString *v21; // rax
-  UFG::qString result; // [rsp+38h] [rbp-F0h]
+  const char *v18; // r9
+  UFG::qString *v19; // rax
+  UFG::qString result; // [rsp+38h] [rbp-F0h] BYREF
   unsigned __int64 systemTime[2]; // [rsp+60h] [rbp-C8h]
-  char v24[16]; // [rsp+70h] [rbp-B8h]
-  __int128 v25; // [rsp+80h] [rbp-A8h]
-  __int128 v26; // [rsp+90h] [rbp-98h]
-  __int128 v27; // [rsp+A0h] [rbp-88h]
-  unsigned __int64 v28[2]; // [rsp+B0h] [rbp-78h]
-  char v29[16]; // [rsp+C0h] [rbp-68h]
-  __int128 v30; // [rsp+D0h] [rbp-58h]
-  __int128 v31; // [rsp+E0h] [rbp-48h]
-  __int128 v32; // [rsp+F0h] [rbp-38h]
+  char v22[16]; // [rsp+70h] [rbp-B8h] BYREF
+  __int128 v23; // [rsp+80h] [rbp-A8h]
+  __int128 v24; // [rsp+90h] [rbp-98h]
+  __int128 v25; // [rsp+A0h] [rbp-88h]
+  unsigned __int64 v26[2]; // [rsp+B0h] [rbp-78h]
+  char v27[16]; // [rsp+C0h] [rbp-68h]
+  __int128 v28; // [rsp+D0h] [rbp-58h]
+  __int128 v29; // [rsp+E0h] [rbp-48h]
+  __int128 v30; // [rsp+F0h] [rbp-38h]
 
-  v1 = this;
-  v2 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
-  if ( v2 )
+  MovieSafe = UFG::UIScreen::getMovieSafe(this);
+  if ( MovieSafe )
   {
     v3 = (hkMemoryResourceContainer *)UFG::GameSaveLoad::Instance();
-    v4 = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos(v3);
+    StartingPos = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos(v3);
     v5 = 0;
-    v6 = v4;
-    if ( v4 > 0 )
+    v6 = StartingPos;
+    if ( StartingPos > 0 )
     {
       v7 = 0i64;
       while ( 1 )
       {
         v8 = UFG::GameSaveLoad::Instance();
         *(_OWORD *)systemTime = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_State;
-        *(_OWORD *)v24 = *(_OWORD *)v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID;
-        v25 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[16];
-        v26 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[32];
-        v27 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[48];
+        *(_OWORD *)v22 = *(_OWORD *)v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID;
+        v23 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[16];
+        v24 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[32];
+        v25 = *(_OWORD *)&v8->m_GameSlotHeaderInfo[v7].m_szLastMissionStringID[48];
         v9 = _mm_cvtsi128_si32(*(__m128i *)systemTime);
         if ( !v9 )
           break;
@@ -662,55 +585,53 @@ void __fastcall UFG::UIHKScreenStartFlow::OnHeaderFileLoadComplete(UFG::UIHKScre
         v11 = v10 - 1;
         if ( !v11 )
           break;
-        v12 = v11 - 1;
-        if ( !v12 || v12 != 1 )
+        if ( v11 != 2 )
         {
-          v13 = "$SAVELOAD_EMPTY_DATE";
-LABEL_12:
-          UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v1, v2, v5, v13);
-          goto LABEL_13;
+          v12 = "$SAVELOAD_EMPTY_DATE";
+LABEL_11:
+          UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, MovieSafe, v5, v12);
+          goto LABEL_12;
         }
-        UFG::qPrintf("XXX name of the save is  %s", v24);
-        v14 = UFG::UI::GetDateString(&result, systemTime[1], 1);
-        UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v1, v2, v5, v14->mData);
+        UFG::qPrintf("XXX name of the save is  %s", v22);
+        DateString = UFG::UI::GetDateString(&result, systemTime[1], 1);
+        UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, MovieSafe, v5, DateString->mData);
         UFG::qString::~qString(&result);
-LABEL_13:
+LABEL_12:
         ++v5;
         ++v7;
         if ( !--v6 )
-          goto LABEL_14;
+          goto LABEL_13;
       }
-      v13 = &customWorldMapCaption;
-      goto LABEL_12;
+      v12 = &customCaption;
+      goto LABEL_11;
     }
-LABEL_14:
-    v15 = UFG::GameSaveLoad::Instance();
-    *(_OWORD *)v28 = *(_OWORD *)&v15->m_GameSlotHeaderInfo[4].m_State;
-    *(_OWORD *)v29 = *(_OWORD *)v15->m_GameSlotHeaderInfo[4].m_szLastMissionStringID;
-    v30 = *(_OWORD *)&v15->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[16];
-    v31 = *(_OWORD *)&v15->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[32];
-    v32 = *(_OWORD *)&v15->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[48];
-    v16 = _mm_cvtsi128_si32(*(__m128i *)v28);
-    if ( v16 && (v17 = v16 - 2) != 0 && (v18 = v17 - 1) != 0 )
+LABEL_13:
+    v14 = UFG::GameSaveLoad::Instance();
+    *(_OWORD *)v26 = *(_OWORD *)&v14->m_GameSlotHeaderInfo[4].m_State;
+    *(_OWORD *)v27 = *(_OWORD *)v14->m_GameSlotHeaderInfo[4].m_szLastMissionStringID;
+    v28 = *(_OWORD *)&v14->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[16];
+    v29 = *(_OWORD *)&v14->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[32];
+    v30 = *(_OWORD *)&v14->m_GameSlotHeaderInfo[4].m_szLastMissionStringID[48];
+    v15 = _mm_cvtsi128_si32(*(__m128i *)v26);
+    if ( v15 && (v16 = v15 - 2) != 0 && (v17 = v16 - 1) != 0 )
     {
-      v19 = v18 - 1;
-      if ( v19 && v19 == 1 )
+      if ( v17 == 2 )
       {
-        v21 = UFG::UI::GetDateString(&result, v28[1], 1);
-        UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v1, v2, v1->mAutoSaveSlotIndex, v21->mData);
+        v19 = UFG::UI::GetDateString(&result, v26[1], 1);
+        UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, MovieSafe, this->mAutoSaveSlotIndex, v19->mData);
         UFG::qString::~qString(&result);
-LABEL_23:
-        UFG::UIHKScreenStartFlow::UpdateHelpbar(v1);
+LABEL_21:
+        UFG::UIHKScreenStartFlow::UpdateHelpbar(this);
         return;
       }
-      v20 = "$SAVELOAD_EMPTY_DATE";
+      v18 = "$SAVELOAD_EMPTY_DATE";
     }
     else
     {
-      v20 = &customWorldMapCaption;
+      v18 = &customCaption;
     }
-    UFG::UIHKScreenStartFlow::SetSaveFileSlotText(v1, v2, v1->mAutoSaveSlotIndex, v20);
-    goto LABEL_23;
+    UFG::UIHKScreenStartFlow::SetSaveFileSlotText(this, MovieSafe, this->mAutoSaveSlotIndex, v18);
+    goto LABEL_21;
   }
 }
 
@@ -718,192 +639,140 @@ LABEL_23:
 // RVA: 0x5EC390
 __int64 __fastcall UFG::UIHKScreenStartFlow::HandleUserInput(UFG::UIHKScreenStartFlow *this, int messageId)
 {
-  int v2; // ebx
-  UFG::UIHKScreenStartFlow *v3; // rdi
   unsigned __int8 v4; // si
-  Scaleform::GFx::Movie *v5; // rbp
-  int v6; // eax
+  Scaleform::GFx::Movie *MovieSafe; // rbp
+  int SelectedSlot; // eax
   UFG::UIScreenManager *v7; // rbx
   unsigned int v8; // eax
-  int v9; // ebp
-  UFG::GameSaveLoad *v10; // rax
-  __int128 v11; // ST40_16
-  __int128 v12; // ST50_16
-  __int128 v13; // xmm0
-  __int128 v14; // ST70_16
-  UFG::UIScreenManager *v15; // rbx
-  unsigned int v16; // eax
-  UFG::GameSaveLoad *v17; // rax
-  int v18; // eax
-  signed int v19; // ebx
-  UFG::GameSaveLoad *v20; // rax
-  __int128 v21; // ST40_16
-  __int128 v22; // ST50_16
-  __int128 v23; // xmm0
-  __int128 v24; // ST70_16
-  const char *v25; // rdx
+  UFG::GameSaveLoad::eGameSlotNum v9; // ebp
+  UFG::UIScreenManager *v10; // rbx
+  unsigned int ScreenUID; // eax
+  UFG::GameSaveLoad *v12; // rax
+  int ZeroButtonDialog; // eax
+  int v14; // ebx
+  const char *v15; // rdx
 
-  v2 = messageId;
-  v3 = this;
   v4 = 0;
-  v5 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
-  if ( !v5 )
+  MovieSafe = UFG::UIScreen::getMovieSafe(this);
+  if ( !MovieSafe )
     return v4;
   v4 = 1;
-  if ( v2 == UI_HASH_DPAD_DOWN_PRESSED_30 || v2 == UI_HASH_DPAD_DOWN_REPEAT_30 || v2 == UI_HASH_THUMBSTICK_LEFT_DOWN_30 )
+  if ( messageId == UI_HASH_DPAD_DOWN_PRESSED_30
+    || messageId == UI_HASH_DPAD_DOWN_REPEAT_30
+    || messageId == UI_HASH_THUMBSTICK_LEFT_DOWN_30 )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xEDB4A8C7,
-        0i64,
-        0,
-        0i64);
-    v25 = "ScrollDown";
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
+    v15 = "ScrollDown";
     goto LABEL_34;
   }
-  if ( v2 == UI_HASH_DPAD_UP_PRESSED_30 || v2 == UI_HASH_DPAD_UP_REPEAT_30 || v2 == UI_HASH_THUMBSTICK_LEFT_UP_30 )
+  if ( messageId == UI_HASH_DPAD_UP_PRESSED_30
+    || messageId == UI_HASH_DPAD_UP_REPEAT_30
+    || messageId == UI_HASH_THUMBSTICK_LEFT_UP_30 )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xEDB4A8C7,
-        0i64,
-        0,
-        0i64);
-    v25 = "ScrollUp";
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
+    v15 = "ScrollUp";
 LABEL_34:
-    Scaleform::GFx::Movie::Invoke(v5, v25, 0i64, 0i64, 0);
-    UFG::UIHKScreenStartFlow::UpdateHelpbar(v3);
+    Scaleform::GFx::Movie::Invoke(MovieSafe, v15, 0i64, 0i64, 0);
+    UFG::UIHKScreenStartFlow::UpdateHelpbar(this);
     return v4;
   }
-  if ( v2 == UI_HASH_BUTTON_BACK_PRESSED_30 )
+  if ( messageId == UI_HASH_BUTTON_BACK_PRESSED_30 )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xA4E5BFBD,
-        0i64,
-        0,
-        0i64);
-    UFG::UIScreenManagerBase::queuePopScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v3->mScreenUID);
-    v3->mState = 7;
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xA4E5BFBD, 0i64, 0, 0i64);
+    UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, this->mScreenUID);
+    this->mState = NUM_CALIBRATION_STATES|STATE_UISCALE;
     return v4;
   }
-  if ( v2 == UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
+  if ( messageId == UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
   {
-    v6 = UFG::UIHKScreenStartFlow::GetSelectedSlot(v3);
-    if ( v6 != -1 )
+    SelectedSlot = UFG::UIHKScreenStartFlow::GetSelectedSlot(this);
+    if ( SelectedSlot != -1 )
     {
-      if ( v6 )
+      if ( SelectedSlot )
       {
-        v9 = v6 - 1;
-        if ( v6 - 1 == v3->mAutoSaveSlotIndex )
-          v9 = 4;
-        v10 = UFG::GameSaveLoad::Instance();
-        v11 = *(_OWORD *)v10->m_GameSlotHeaderInfo[v9].m_szLastMissionStringID;
-        v12 = *(_OWORD *)&v10->m_GameSlotHeaderInfo[v9].m_szLastMissionStringID[16];
-        v13 = *(_OWORD *)&v10->m_GameSlotHeaderInfo[v9].m_szLastMissionStringID[32];
-        v14 = *(_OWORD *)&v10->m_GameSlotHeaderInfo[v9].m_szLastMissionStringID[48];
-        if ( _mm_cvtsi128_si32(*(__m128i *)&v10->m_GameSlotHeaderInfo[v9].m_State) == 5 )
+        v9 = SelectedSlot - 1;
+        if ( SelectedSlot - 1 == this->mAutoSaveSlotIndex )
+          v9 = GAMESLOT_AUTOSAVE;
+        if ( _mm_cvtsi128_si32(*(__m128i *)&UFG::GameSaveLoad::Instance()->m_GameSlotHeaderInfo[v9].m_State) == 5 )
         {
-          v15 = UFG::UIScreenManager::s_instance;
-          v16 = UFG::UIScreenManagerBase::getScreenUID(
-                  (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-                  "MainMenu");
-          UFG::UIScreenManagerBase::queueMessage((UFG::UIScreenManagerBase *)&v15->vfptr, UI_HASH_LOAD_SAVEGAME_20, v16);
-          v17 = UFG::GameSaveLoad::Instance();
-          UFG::GameSaveLoad::LoadGameSlot(v17, (UFG::GameSaveLoad::eGameSlotNum)v9);
-          v18 = UFG::UIScreenDialogBox::createZeroButtonDialog(
-                  (UFG::UIScreen *)&v3->vfptr,
-                  &customWorldMapCaption,
-                  "$LOADING_POPUP",
-                  0,
-                  "DialogBox");
-          *(_QWORD *)&v3->mState = 2i64;
-          v3->mPopupDialogScreenUID = v18;
+          v10 = UFG::UIScreenManager::s_instance;
+          ScreenUID = UFG::UIScreenManagerBase::getScreenUID(UFG::UIScreenManager::s_instance, "MainMenu");
+          UFG::UIScreenManagerBase::queueMessage(v10, UI_HASH_LOAD_SAVEGAME_20, ScreenUID);
+          v12 = UFG::GameSaveLoad::Instance();
+          UFG::GameSaveLoad::LoadGameSlot(v12, v9);
+          ZeroButtonDialog = UFG::UIScreenDialogBox::createZeroButtonDialog(
+                               this,
+                               &customCaption,
+                               "$LOADING_POPUP",
+                               0,
+                               "DialogBox");
+          *(_QWORD *)&this->mState = 2i64;
+          this->mPopupDialogScreenUID = ZeroButtonDialog;
         }
       }
       else
       {
         v7 = UFG::UIScreenManager::s_instance;
-        v8 = UFG::UIScreenManagerBase::getScreenUID(
-               (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-               "MainMenu");
-        UFG::UIScreenManagerBase::queueMessage((UFG::UIScreenManagerBase *)&v7->vfptr, UI_HASH_LOAD_FREEROAM_20, v8);
+        v8 = UFG::UIScreenManagerBase::getScreenUID(UFG::UIScreenManager::s_instance, "MainMenu");
+        UFG::UIScreenManagerBase::queueMessage(v7, UI_HASH_LOAD_FREEROAM_20, v8);
       }
       return v4;
     }
   }
   else
   {
-    if ( v2 != UI_HASH_BUTTON_BUTTON1_PRESSED_30 )
+    if ( messageId != UI_HASH_BUTTON_BUTTON1_PRESSED_30 )
       return 0;
-    v19 = (unsigned __int64)UFG::UIHKScreenStartFlow::GetSelectedSlot(v3) - 1;
-    if ( v19 == v3->mAutoSaveSlotIndex )
-      v19 = 4;
-    v20 = UFG::GameSaveLoad::Instance();
-    v21 = *(_OWORD *)v20->m_GameSlotHeaderInfo[v19].m_szLastMissionStringID;
-    v22 = *(_OWORD *)&v20->m_GameSlotHeaderInfo[v19].m_szLastMissionStringID[16];
-    v23 = *(_OWORD *)&v20->m_GameSlotHeaderInfo[v19].m_szLastMissionStringID[32];
-    v24 = *(_OWORD *)&v20->m_GameSlotHeaderInfo[v19].m_szLastMissionStringID[48];
-    if ( _mm_cvtsi128_si32(*(__m128i *)&v20->m_GameSlotHeaderInfo[v19].m_State) == 5 )
+    v14 = UFG::UIHKScreenStartFlow::GetSelectedSlot(this) - 1;
+    if ( v14 == this->mAutoSaveSlotIndex )
+      v14 = 4;
+    if ( _mm_cvtsi128_si32(*(__m128i *)&UFG::GameSaveLoad::Instance()->m_GameSlotHeaderInfo[v14].m_State) == 5 )
     {
-      UFG::UIScreenDialogBox::createYesNoDialog(
-        (UFG::UIScreen *)&v3->vfptr,
-        &customWorldMapCaption,
-        "$COMMON_TRC_DELETE_SAVE_FILE",
-        0,
-        1);
-      v3->mState = 5;
+      UFG::UIScreenDialogBox::createYesNoDialog(this, &customCaption, "$COMMON_TRC_DELETE_SAVE_FILE", 0, 1);
+      this->mState = NUM_CALIBRATION_STATES|STATE_BRIGHTNESS;
       return v4;
     }
   }
   if ( UFG::HudAudio::m_instance )
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-      0xA4E5BFBD,
-      0i64,
-      0,
-      0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xA4E5BFBD, 0i64, 0, 0i64);
   return v4;
 }
 
 // File Line: 632
 // RVA: 0x5E9200
-signed __int64 __fastcall UFG::UIHKScreenStartFlow::GetSelectedSlot(UFG::UIHKScreenStartFlow *this)
+__int64 __fastcall UFG::UIHKScreenStartFlow::GetSelectedSlot(UFG::UIHKScreenStartFlow *this)
 {
-  Scaleform::GFx::Movie *v1; // rax
-  unsigned int v2; // ebx
-  Scaleform::GFx::Value presult; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Movie *MovieSafe; // rax
+  unsigned int NValue; // ebx
+  Scaleform::GFx::Value presult; // [rsp+38h] [rbp-40h] BYREF
 
-  v1 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
-  if ( !v1 )
+  MovieSafe = UFG::UIScreen::getMovieSafe(this);
+  if ( !MovieSafe )
     return 0xFFFFFFFFi64;
   presult.pObjectInterface = 0i64;
-  presult.Type = 0;
-  Scaleform::GFx::Movie::Invoke(v1, "GetSelectedSlot", &presult, 0i64, 0);
-  v2 = (signed int)presult.mValue.NValue;
-  if ( ((unsigned int)presult.Type >> 6) & 1 )
+  presult.Type = VT_Undefined;
+  Scaleform::GFx::Movie::Invoke(MovieSafe, "GetSelectedSlot", &presult, 0i64, 0);
+  NValue = (int)presult.mValue.NValue;
+  if ( (presult.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&presult.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&presult.pObjectInterface->vfptr->gap8[8])(
       presult.pObjectInterface,
       &presult,
-      *(_QWORD *)&presult.mValue.NValue);
+      presult.mValue);
     presult.pObjectInterface = 0i64;
   }
-  presult.Type = 0;
-  return v2;
+  presult.Type = VT_Undefined;
+  return NValue;
 }
 
 // File Line: 656
 // RVA: 0x61ABE0
 void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow *this)
 {
-  UFG::UIHKScreenStartFlow *v1; // rdi
-  int v2; // ebx
+  int SelectedSlot; // ebx
   UFG::UIHKScreenGlobalOverlay *v3; // rax
   UFG::UIHKHelpBarWidget *v4; // r15
   int v5; // esi
@@ -913,26 +782,25 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
   UFG::GameSaveLoad *v9; // rax
   __m128i v10; // xmm2
   UFG::UIHKScreenGlobalOverlay *v11; // rax
-  UFG::UIHKHelpBarWidget *v12; // r15
-  unsigned int v13; // er14
+  UFG::UIHKHelpBarWidget *p_HelpBar; // r15
+  unsigned int v13; // r14d
   int v14; // esi
   unsigned int v15; // edi
   unsigned int v16; // ebx
   UFG::UIHKHelpBarWidget *v17; // r15
   unsigned int v18; // edi
   unsigned int v19; // ebx
-  UFG::UIHKHelpBarData data; // [rsp+30h] [rbp-B8h]
+  UFG::UIHKHelpBarData data; // [rsp+30h] [rbp-B8h] BYREF
   __int128 v21; // [rsp+278h] [rbp+190h]
   __int128 v22; // [rsp+288h] [rbp+1A0h]
   __int128 v23; // [rsp+298h] [rbp+1B0h]
   __int128 v24; // [rsp+2A8h] [rbp+1C0h]
 
-  v1 = this;
-  v2 = UFG::UIHKScreenStartFlow::GetSelectedSlot(this);
-  if ( v2 )
+  SelectedSlot = UFG::UIHKScreenStartFlow::GetSelectedSlot(this);
+  if ( SelectedSlot )
   {
-    v8 = v2 - 1;
-    if ( v8 == v1->mAutoSaveSlotIndex )
+    v8 = SelectedSlot - 1;
+    if ( v8 == this->mAutoSaveSlotIndex )
       v8 = 4;
     v9 = UFG::GameSaveLoad::Instance();
     v10 = *(__m128i *)&v9->m_GameSlotHeaderInfo[v8].m_State;
@@ -945,7 +813,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
     {
       if ( !UFG::UIHKScreenGlobalOverlay::mThis )
         v11 = &gGlobalOverlaySentinel;
-      v12 = &v11->HelpBar;
+      p_HelpBar = &v11->HelpBar;
       v13 = UI_HASH_BUTTON_BUTTON1_PRESSED_30;
       v14 = UI_HASH_BUTTON_BACK_PRESSED_30;
       v15 = UI_HASH_BUTTON_ACCEPT_PRESSED_30;
@@ -953,20 +821,20 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
       UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
       data.id = v16;
       *(_QWORD *)&data.priority = 0i64;
-      _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
+      *(__m128i *)data.Buttons = _mm_load_si128((const __m128i *)&_xmm);
       *(_QWORD *)&data.Buttons[4] = 0i64;
       UFG::qString::Set(data.Captions, "$SAVELOAD_LOAD_GAME");
-      UFG::qString::Set((UFG::qString *)((char *)data.Captions + 16), "$COMMON_BACK_UPPERCASE");
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 16), "$SAVELOAD_DELETE_GAME");
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 16), &customWorldMapCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[0].mMagic, "$COMMON_BACK_UPPERCASE");
+      UFG::qString::Set((UFG::qString *)&data.Captions[1].mMagic, "$SAVELOAD_DELETE_GAME");
+      UFG::qString::Set((UFG::qString *)&data.Captions[2].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[3].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[4].mMagic, &customCaption);
       data.Icons[5].mMagic = v15;
       data.Icons[5].mLength = v14;
       LODWORD(data.Icons[5].mData) = v13;
       *(char **)((char *)&data.Icons[5].mData + 4) = 0i64;
       data.Icons[5].mStringHashUpper32 = 0;
-      UFG::UIHKHelpBarWidget::Show(v12, &data);
+      UFG::UIHKHelpBarWidget::Show(p_HelpBar, &data);
       UFG::qString::~qString((UFG::qString *)data.MessageIds);
       `eh vector destructor iterator(
         &data.Captions[5].mMagic,
@@ -984,17 +852,16 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
       UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
       data.id = v19;
       *(_QWORD *)&data.priority = 0i64;
-      _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
+      *(__m128i *)data.Buttons = _mm_load_si128((const __m128i *)&_xmm);
       *(_QWORD *)&data.Buttons[4] = 0i64;
       UFG::qString::Set(data.Captions, "$COMMON_BACK_UPPERCASE");
-      UFG::qString::Set((UFG::qString *)((char *)data.Captions + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 16), &customWorldMapCaption);
-      UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 16), &customWorldMapCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[0].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[1].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[2].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[3].mMagic, &customCaption);
+      UFG::qString::Set((UFG::qString *)&data.Captions[4].mMagic, &customCaption);
       data.Icons[5].mMagic = v18;
-      *(_OWORD *)&data.Icons[5].mLength = 0ui64;
-      data.Icons[5].mStringHashUpper32 = 0;
+      memset(&data.Icons[5].mLength, 0, 20);
       UFG::UIHKHelpBarWidget::Show(v17, &data);
       UFG::qString::~qString((UFG::qString *)data.MessageIds);
       `eh vector destructor iterator(
@@ -1016,14 +883,14 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
     UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
     data.id = v7;
     *(_QWORD *)&data.priority = 0i64;
-    _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
+    *(__m128i *)data.Buttons = _mm_load_si128((const __m128i *)&_xmm);
     *(_QWORD *)&data.Buttons[4] = 0i64;
     UFG::qString::Set(data.Captions, "$START_NEW_GAME_SHORT");
-    UFG::qString::Set((UFG::qString *)((char *)data.Captions + 16), "$COMMON_BACK_UPPERCASE");
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 16), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 16), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 16), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 16), &customWorldMapCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[0].mMagic, "$COMMON_BACK_UPPERCASE");
+    UFG::qString::Set((UFG::qString *)&data.Captions[1].mMagic, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[2].mMagic, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[3].mMagic, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[4].mMagic, &customCaption);
     data.Icons[5].mMagic = v6;
     data.Icons[5].mLength = v5;
     data.Icons[5].mData = 0i64;

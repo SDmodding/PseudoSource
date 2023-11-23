@@ -1,19 +1,20 @@
 // File Line: 31
 // RVA: 0xD959D0
-__int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *jobInOut)
+__int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJob(
+        hkpMtThreadStructure *tl,
+        hkJobQueue *jobQueue,
+        hkJobQueue::JobQueueEntry *jobInOut)
 {
   __int128 v3; // xmm0
   __int128 v4; // xmm1
   __int64 v5; // rsi
-  hkJobQueue::JobQueueEntry *v6; // r15
-  hkJobQueue *v7; // r12
   __int128 v8; // xmm0
   __int128 v9; // xmm1
   hkSimdFloat32 v10; // xmm0
   __int128 v11; // xmm1
   __int128 v12; // xmm0
   __int128 v13; // xmm1
-  _QWORD *v14; // rax
+  _QWORD *Value; // rax
   unsigned __int64 v15; // rcx
   _QWORD *v16; // r8
   unsigned __int64 v17; // rax
@@ -31,17 +32,14 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJo
   _QWORD *v29; // rcx
   _QWORD *v30; // r8
   unsigned __int64 v31; // rax
-  signed __int64 v32; // rcx
-  __int64 v34; // [rsp+20h] [rbp-C8h]
-  __int64 v35; // [rsp+28h] [rbp-C0h]
-  hkpConstraintQueryIn in; // [rsp+40h] [rbp-A8h]
+  _QWORD *v32; // rcx
+  __int64 v34[4]; // [rsp+20h] [rbp-C8h] BYREF
+  hkpConstraintQueryIn in; // [rsp+40h] [rbp-A8h] BYREF
 
   v3 = *(_OWORD *)&tl->m_constraintQueryIn.m_subStepDeltaTime.m_storage;
   v4 = *(_OWORD *)&tl->m_constraintQueryIn.m_frameInvDeltaTime.m_storage;
   v5 = *(_QWORD *)&jobInOut->m_data[16];
-  v34 = 0i64;
-  v6 = jobInOut;
-  v7 = jobQueue;
+  v34[0] = 0i64;
   *(_OWORD *)&in.m_subStepDeltaTime.m_storage = v3;
   v8 = *(_OWORD *)&tl->m_constraintQueryIn.m_rhsFactor.m_storage;
   *(_OWORD *)&in.m_frameInvDeltaTime.m_storage = v4;
@@ -57,12 +55,12 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJo
   v13 = *(_OWORD *)&tl->m_constraintQueryIn.m_constraintInstance.m_storage;
   *(_OWORD *)&in.m_accumulatorAIndex.m_storage = v12;
   *(_OWORD *)&in.m_constraintInstance.m_storage = v13;
-  if ( *(_DWORD *)(v5 + 176) > 0 )
+  if ( *(int *)(v5 + 176) > 0 )
   {
-    v14 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v15 = v14[1];
-    v16 = v14;
-    if ( v15 < v14[3] )
+    Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v15 = Value[1];
+    v16 = Value;
+    if ( v15 < Value[3] )
     {
       *(_QWORD *)v15 = "LtIntegrate";
       *(_QWORD *)(v15 + 16) = "StConstraintCallbacks";
@@ -71,21 +69,21 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJo
       v16[1] = v15 + 24;
     }
     v18 = 0;
-    if ( *(_DWORD *)(v5 + 176) > 0 )
+    if ( *(int *)(v5 + 176) > 0 )
     {
       v19 = 0i64;
       do
       {
         v20 = *(_QWORD *)(v19 + *(_QWORD *)(v5 + 168));
         in.m_constraintInstance.m_storage = *(hkpConstraintInstance **)v20;
-        v35 = *(_QWORD *)(v20 + 48);
+        v34[1] = *(_QWORD *)(v20 + 48);
         in.m_bodyA.m_storage = (hkpVelocityAccumulator *)(*(_QWORD *)(v5 + 64)
                                                         + *(unsigned int *)(*(_QWORD *)(v20 + 8) + 240i64));
         in.m_bodyB.m_storage = (hkpVelocityAccumulator *)(*(_QWORD *)(v5 + 64)
                                                         + *(unsigned int *)(*(_QWORD *)(v20 + 16) + 240i64));
         in.m_transformA.m_storage = *(hkTransformf **)(*(_QWORD *)(*(_QWORD *)v20 + 40i64) + 48i64);
         in.m_transformB.m_storage = *(hkTransformf **)(*(_QWORD *)(*(_QWORD *)v20 + 48i64) + 48i64);
-        if ( *(_BYTE *)(v20 + 34) & 9 )
+        if ( (*(_BYTE *)(v20 + 34) & 9) != 0 )
         {
           v21 = *(_QWORD *)(v20 + 24);
           for ( i = *(_QWORD *)(*(_QWORD *)v20 + 32i64); *(_WORD *)v21 >= 0x1Eu; v21 = *(_QWORD *)(v21 + 24) )
@@ -103,12 +101,12 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJo
             *(_WORD *)(v24 + 40) = *(_WORD *)(v23 + 16);
           }
         }
-        if ( *(_BYTE *)(v20 + 34) & 4 )
+        if ( (*(_BYTE *)(v20 + 34) & 4) != 0 )
           (*(void (__fastcall **)(_QWORD, hkpConstraintQueryIn *, __int64 *))(**(_QWORD **)(*(_QWORD *)v20 + 24i64)
                                                                             + 176i64))(
             *(_QWORD *)(*(_QWORD *)v20 + 24i64),
             &in,
-            &v34);
+            v34);
         ++v18;
         v19 += 16i64;
       }
@@ -127,11 +125,11 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJo
     {
       *v29 = "lt";
       v31 = __rdtsc();
-      v32 = (signed __int64)(v29 + 2);
-      *(_DWORD *)(v32 - 8) = v31;
+      v32 = v29 + 2;
+      *((_DWORD *)v32 - 2) = v31;
       v30[1] = v32;
     }
   }
-  return hkJobQueue::finishJobAndGetNextJob(v7, v6, v6, 0);
+  return hkJobQueue::finishJobAndGetNextJob(jobQueue, jobInOut, jobInOut, WAIT_FOR_NEXT_JOB);
 }
 

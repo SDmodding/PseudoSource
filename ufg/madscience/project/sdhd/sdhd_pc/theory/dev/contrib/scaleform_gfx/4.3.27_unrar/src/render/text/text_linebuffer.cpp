@@ -1,23 +1,22 @@
 // File Line: 26
 // RVA: 0x957CD0
-Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::TextLineAllocator::AllocLine(Scaleform::Render::Text::LineBuffer::TextLineAllocator *this, unsigned int size, Scaleform::Render::Text::LineBuffer::LineType lineType)
+Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::TextLineAllocator::AllocLine(
+        Scaleform::Render::Text::LineBuffer::TextLineAllocator *this,
+        unsigned int size,
+        Scaleform::Render::Text::LineBuffer::LineType lineType)
 {
-  unsigned int v3; // ebx
-  Scaleform::Render::Text::LineBuffer::LineType v4; // edi
   Scaleform::Render::Text::LineBuffer::Line *result; // rax
   unsigned int v6; // ecx
 
-  v3 = size;
-  v4 = lineType;
   result = (Scaleform::Render::Text::LineBuffer::Line *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                                           Scaleform::Memory::pGlobalHeap,
                                                           this,
                                                           size,
                                                           0i64);
   result->MemSize &= 0xF8000000;
-  result->MemSize |= v3 & 0x7FFFFFF;
+  result->MemSize |= size & 0x7FFFFFF;
   v6 = result->MemSize & 0x7FFFFFF;
-  if ( v4 )
+  if ( lineType )
   {
     result->MemSize = v6 | 0x40000000;
     *(_QWORD *)&result->Data32.GlyphsCount = 0i64;
@@ -38,44 +37,42 @@ Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::L
 
 // File Line: 48
 // RVA: 0x9A8210
-void __fastcall Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(Scaleform::Render::Text::LineBuffer::GlyphEntry *pglyphs, unsigned int n, Scaleform::Render::Text::LineBuffer::FormatDataEntry *pnextFormatData)
+void __fastcall Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(
+        Scaleform::Render::Text::LineBuffer::GlyphEntry *pglyphs,
+        unsigned int n,
+        Scaleform::Render::Text::LineBuffer::FormatDataEntry *pnextFormatData)
 {
-  Scaleform::Render::Text::LineBuffer::FormatDataEntry *v3; // rbx
-  unsigned __int16 *v4; // rdi
+  unsigned __int16 *p_Flags; // rdi
   __int64 v5; // rsi
-  Scaleform::Render::Text::FontHandle *v6; // rcx
+  Scaleform::Render::Text::FontHandle *pFont; // rcx
   Scaleform::Render::Text::FontHandle *v7; // rcx
-  bool v8; // zf
 
   if ( n )
   {
-    v3 = pnextFormatData;
-    v4 = &pglyphs->Flags;
+    p_Flags = &pglyphs->Flags;
     v5 = n;
     do
     {
-      if ( (*v4 >> 14) & 1 )
+      if ( (*p_Flags & 0x4000) != 0 )
       {
-        if ( (*v4 >> 13) & 1 )
+        if ( (*p_Flags & 0x2000) != 0 )
         {
-          v6 = v3->pFont;
-          if ( !_InterlockedDecrement(&v3->pFont->RefCount) && v6 )
-            v6->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, 1u);
-          ++v3;
+          pFont = pnextFormatData->pFont;
+          if ( !_InterlockedDecrement(&pnextFormatData->pFont->RefCount) && pFont )
+            pFont->vfptr->__vecDelDtor(pFont, 1u);
+          ++pnextFormatData;
         }
-        if ( (*v4 >> 12) & 1 )
-          ++v3;
-        if ( (*v4 >> 11) & 1 )
+        if ( (*p_Flags & 0x1000) != 0 )
+          ++pnextFormatData;
+        if ( (*p_Flags & 0x800) != 0 )
         {
-          v7 = v3->pFont;
-          v8 = v3->pFont->RefCount == 1;
-          --v7->RefCount;
-          if ( v8 )
-            v7->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, 1u);
-          ++v3;
+          v7 = pnextFormatData->pFont;
+          if ( pnextFormatData->pFont->RefCount-- == 1 )
+            v7->vfptr->__vecDelDtor(v7, 1u);
+          ++pnextFormatData;
         }
       }
-      v4 += 4;
+      p_Flags += 4;
       --v5;
     }
     while ( v5 );
@@ -84,179 +81,172 @@ void __fastcall Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(Scaleform
 
 // File Line: 75
 // RVA: 0x9ABA90
-void __fastcall Scaleform::Render::Text::LineBuffer::GlyphInserter::ResetTo(Scaleform::Render::Text::LineBuffer::GlyphInserter *this, Scaleform::Render::Text::LineBuffer::GlyphInserter *savedPos)
+void __fastcall Scaleform::Render::Text::LineBuffer::GlyphInserter::ResetTo(
+        Scaleform::Render::Text::LineBuffer::GlyphInserter *this,
+        Scaleform::Render::Text::LineBuffer::GlyphInserter *savedPos)
 {
-  Scaleform::Render::Text::LineBuffer::GlyphInserter *v2; // rdi
-  __int64 v3; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphInserter *v4; // rbx
+  __int64 GlyphIndex; // rcx
   unsigned int v5; // edx
 
-  v2 = this;
-  v3 = savedPos->GlyphIndex;
-  v4 = savedPos;
-  v5 = v2->GlyphIndex;
-  if ( (unsigned int)v3 < v5 && v2->GlyphsCount )
+  GlyphIndex = savedPos->GlyphIndex;
+  v5 = this->GlyphIndex;
+  if ( (unsigned int)GlyphIndex < v5 && this->GlyphsCount )
     Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(
-      &v4->pGlyphs[v3],
-      v5 - v3,
-      &v4->pNextFormatData[v4->FormatDataIndex]);
-  v2->pGlyphs = v4->pGlyphs;
-  v2->pNextFormatData = v4->pNextFormatData;
-  v2->GlyphIndex = v4->GlyphIndex;
-  v2->GlyphsCount = v4->GlyphsCount;
-  v2->FormatDataIndex = v4->FormatDataIndex;
+      &savedPos->pGlyphs[GlyphIndex],
+      v5 - GlyphIndex,
+      &savedPos->pNextFormatData[savedPos->FormatDataIndex]);
+  this->pGlyphs = savedPos->pGlyphs;
+  this->pNextFormatData = savedPos->pNextFormatData;
+  this->GlyphIndex = savedPos->GlyphIndex;
+  this->GlyphsCount = savedPos->GlyphsCount;
+  this->FormatDataIndex = savedPos->FormatDataIndex;
 }
 
 // File Line: 92
 // RVA: 0x94EF60
-void __fastcall Scaleform::Render::Text::LineBuffer::GlyphIterator::operator++(Scaleform::Render::Text::LineBuffer::GlyphIterator *this)
+void __fastcall Scaleform::Render::Text::LineBuffer::GlyphIterator::operator++(
+        Scaleform::Render::Text::LineBuffer::GlyphIterator *this)
 {
-  Scaleform::Render::Text::LineBuffer::GlyphIterator *v1; // rbx
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v2; // rcx
-  __int64 v3; // rax
-  unsigned __int64 v4; // rdx
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rcx
+  __int64 Delta; // rax
+  unsigned __int64 CurAdjStartPos; // rdx
 
-  v1 = this;
-  v2 = this->pGlyphs;
-  if ( v2 && v2 < v1->pEndGlyphs )
+  pGlyphs = this->pGlyphs;
+  if ( pGlyphs && pGlyphs < this->pEndGlyphs )
   {
-    if ( !v1->Delta )
-      v1->Delta = (unsigned int)v2->LenAndFontSize >> 12;
-    v1->pGlyphs = v2 + 1;
-    if ( v2[1].LenAndFontSize & 0xF000 )
+    if ( !this->Delta )
+      this->Delta = pGlyphs->LenAndFontSize >> 12;
+    this->pGlyphs = pGlyphs + 1;
+    if ( (pGlyphs[1].LenAndFontSize & 0xF000) != 0 )
     {
-      v3 = v1->Delta;
-      if ( (_DWORD)v3 )
+      Delta = this->Delta;
+      if ( (_DWORD)Delta )
       {
-        v4 = v1->HighlighterIter.CurAdjStartPos;
-        if ( v4 < v1->HighlighterIter.NumGlyphs )
+        CurAdjStartPos = this->HighlighterIter.CurAdjStartPos;
+        if ( CurAdjStartPos < this->HighlighterIter.NumGlyphs )
         {
-          if ( (_DWORD)v3 )
-          {
-            v1->HighlighterIter.CurAdjStartPos = v4 + v3;
-            Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v1->HighlighterIter);
-          }
-          v1->Delta = 0;
+          this->HighlighterIter.CurAdjStartPos = CurAdjStartPos + Delta;
+          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&this->HighlighterIter);
+          this->Delta = 0;
         }
       }
     }
-    Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(v1);
+    Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(this);
   }
 }
 
 // File Line: 108
 // RVA: 0x9BDE40
-void __fastcall Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(Scaleform::Render::Text::LineBuffer::GlyphIterator *this)
+void __fastcall Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(
+        Scaleform::Render::Text::LineBuffer::GlyphIterator *this)
 {
-  Scaleform::Render::Text::LineBuffer::GlyphIterator *v1; // rbx
-  Scaleform::Render::Text::ImageDesc *v2; // rcx
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
   bool v3; // zf
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v4; // rax
-  unsigned __int16 v5; // cx
-  Scaleform::Render::Text::FontHandle *v6; // rdi
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rax
+  unsigned __int16 Flags; // cx
+  Scaleform::Render::Text::FontHandle *pFont; // rdi
   Scaleform::Render::Text::FontHandle *v7; // rcx
   Scaleform::Render::Text::LineBuffer::GlyphEntry *v8; // rdx
-  Scaleform::Render::Text::LineBuffer::FormatDataEntry *v9; // rcx
-  unsigned int v10; // eax
-  Scaleform::Render::Text::ImageDesc *v11; // rdi
+  Scaleform::Render::Text::LineBuffer::FormatDataEntry *pNextFormatData; // rcx
+  unsigned int ColorV; // eax
+  Scaleform::Render::Text::ImageDesc *pImage; // rdi
   Scaleform::Render::Text::ImageDesc *v12; // rcx
   Scaleform::Render::Text::LineBuffer::GlyphEntry *v13; // rcx
   unsigned int v14; // eax
   char v15; // al
-  unsigned int v16; // eax
+  unsigned int Raw; // eax
   unsigned int v17; // eax
 
-  v1 = this;
-  v2 = this->pImage.pObject;
-  if ( v2 )
+  pObject = this->pImage.pObject;
+  if ( pObject )
   {
-    v3 = v2->RefCount-- == 1;
+    v3 = pObject->RefCount-- == 1;
     if ( v3 )
-      v2->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, 1u);
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v1->pImage.pObject = 0i64;
-  v4 = v1->pGlyphs;
-  if ( v1->pGlyphs && v4 < v1->pEndGlyphs )
+  this->pImage.pObject = 0i64;
+  pGlyphs = this->pGlyphs;
+  if ( this->pGlyphs && pGlyphs < this->pEndGlyphs )
   {
-    v5 = v4->Flags;
-    if ( (v5 >> 14) & 1 )
+    Flags = pGlyphs->Flags;
+    if ( (Flags & 0x4000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
+      if ( (Flags & 0x2000) != 0 )
       {
-        v6 = v1->pNextFormatData->pFont;
-        if ( v6 )
-          _InterlockedExchangeAdd(&v6->RefCount, 1u);
-        v7 = v1->pFontHandle.pObject;
-        if ( v7 && !_InterlockedDecrement(&v7->RefCount) && v7 )
-          v7->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, 1u);
-        v1->pFontHandle.pObject = v6;
-        ++v1->pNextFormatData;
+        pFont = this->pNextFormatData->pFont;
+        if ( pFont )
+          _InterlockedExchangeAdd(&pFont->RefCount, 1u);
+        v7 = this->pFontHandle.pObject;
+        if ( v7 && !_InterlockedDecrement(&v7->RefCount) )
+          v7->vfptr->__vecDelDtor(v7, 1u);
+        this->pFontHandle.pObject = pFont;
+        ++this->pNextFormatData;
       }
-      v8 = v1->pGlyphs;
-      if ( (v1->pGlyphs->Flags >> 12) & 1 )
+      v8 = this->pGlyphs;
+      if ( (this->pGlyphs->Flags & 0x1000) != 0 )
       {
-        v9 = v1->pNextFormatData;
-        v10 = (unsigned int)v9->pFont;
-        v1->ColorV = (unsigned int)v9->pFont;
-        v1->OrigColor = v10;
-        v1->pNextFormatData = v9 + 1;
+        pNextFormatData = this->pNextFormatData;
+        ColorV = pNextFormatData->ColorV;
+        this->ColorV = pNextFormatData->ColorV;
+        this->OrigColor = ColorV;
+        this->pNextFormatData = pNextFormatData + 1;
       }
-      if ( (v8->Flags >> 11) & 1 )
+      if ( (v8->Flags & 0x800) != 0 )
       {
-        v11 = v1->pNextFormatData->pImage;
-        if ( v11 )
-          ++v11->RefCount;
-        v12 = v1->pImage.pObject;
+        pImage = this->pNextFormatData->pImage;
+        if ( pImage )
+          ++pImage->RefCount;
+        v12 = this->pImage.pObject;
         if ( v12 )
         {
           v3 = v12->RefCount-- == 1;
           if ( v3 )
-            v12->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v12->vfptr, 1u);
+            v12->vfptr->__vecDelDtor(v12, 1u);
         }
-        v1->pImage.pObject = v11;
-        ++v1->pNextFormatData;
+        this->pImage.pObject = pImage;
+        ++this->pNextFormatData;
       }
     }
-    v13 = v1->pGlyphs;
-    if ( (v1->pGlyphs->Flags >> 10) & 1 )
+    v13 = this->pGlyphs;
+    if ( (this->pGlyphs->Flags & 0x400) != 0 )
     {
-      v14 = v1->ColorV;
-      v1->UnderlineStyle = 1;
-      v1->UnderlineColor = v14;
+      v14 = this->ColorV;
+      this->UnderlineStyle = Underline_Single;
+      this->UnderlineColor = v14;
     }
     else
     {
-      v1->UnderlineStyle = 0;
+      this->UnderlineStyle = Underline_None;
     }
-    if ( v1->HighlighterIter.CurAdjStartPos >= v1->HighlighterIter.NumGlyphs )
+    if ( this->HighlighterIter.CurAdjStartPos >= this->HighlighterIter.NumGlyphs )
     {
-      v1->SelectionColor = 0;
-      if ( (v13->Flags >> 10) & 1 )
+      this->SelectionColor = 0;
+      if ( (v13->Flags & 0x400) != 0 )
       {
-        v17 = v1->ColorV;
-        v1->UnderlineStyle = 1;
-        v1->UnderlineColor = v17;
+        v17 = this->ColorV;
+        this->UnderlineStyle = Underline_Single;
+        this->UnderlineColor = v17;
       }
     }
     else
     {
-      v1->ColorV = v1->OrigColor;
-      if ( v13->LenAndFontSize & 0xF000 || (LOBYTE(v13->Flags) >> 3) & 1 )
+      this->ColorV = this->OrigColor;
+      if ( (v13->LenAndFontSize & 0xF000) != 0 || (v13->Flags & 8) != 0 )
       {
-        if ( v1->HighlighterIter.CurDesc.Info.Flags & 0x10 )
-          v1->ColorV = v1->HighlighterIter.CurDesc.Info.TextColor.Raw;
-        v15 = v1->HighlighterIter.CurDesc.Info.Flags;
-        if ( v15 & 7 )
-          v1->UnderlineStyle = v15 & 7;
-        if ( v1->HighlighterIter.CurDesc.Info.Flags & 0x20 )
-          v16 = v1->HighlighterIter.CurDesc.Info.UnderlineColor.Raw;
+        if ( (this->HighlighterIter.CurDesc.Info.Flags & 0x10) != 0 )
+          this->ColorV = this->HighlighterIter.CurDesc.Info.TextColor.Raw;
+        v15 = this->HighlighterIter.CurDesc.Info.Flags;
+        if ( (v15 & 7) != 0 )
+          this->UnderlineStyle = v15 & 7;
+        if ( (this->HighlighterIter.CurDesc.Info.Flags & 0x20) != 0 )
+          Raw = this->HighlighterIter.CurDesc.Info.UnderlineColor.Raw;
         else
-          v16 = v1->ColorV;
-        v1->UnderlineColor = v16;
-        if ( v1->HighlighterIter.CurDesc.Info.Flags & 8 )
-          v1->SelectionColor = v1->HighlighterIter.CurDesc.Info.BackgroundColor.Raw;
+          Raw = this->ColorV;
+        this->UnderlineColor = Raw;
+        if ( (this->HighlighterIter.CurDesc.Info.Flags & 8) != 0 )
+          this->SelectionColor = this->HighlighterIter.CurDesc.Info.BackgroundColor.Raw;
         else
-          v1->SelectionColor = 0;
+          this->SelectionColor = 0;
       }
     }
   }
@@ -264,66 +254,63 @@ void __fastcall Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(S
 
 // File Line: 174
 // RVA: 0x984AF0
-Scaleform::Render::Text::LineBuffer::FormatDataEntry *__fastcall Scaleform::Render::Text::LineBuffer::Line::GetFormatData(Scaleform::Render::Text::LineBuffer::Line *this)
+Scaleform::Render::Text::LineBuffer::FormatDataEntry *__fastcall Scaleform::Render::Text::LineBuffer::Line::GetFormatData(
+        Scaleform::Render::Text::LineBuffer::Line *this)
 {
   char *v1; // rdx
-  Scaleform::Render::Text::LineBuffer::FormatDataEntry *result; // rax
 
   v1 = &this->Data8.Leading + 1;
   if ( (this->MemSize & 0x80000000) == 0 )
     v1 = (char *)&this->Data8 + 38;
   if ( (this->MemSize & 0x80000000) == 0 )
-    result = (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v1[8 * this->Data32.GlyphsCount
-                                                                                          + 7] & 0xFFFFFFFFFFFFFFF8ui64);
+    return (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v1[8 * this->Data32.GlyphsCount
+                                                                                        + 7] & 0xFFFFFFFFFFFFFFF8ui64);
   else
-    result = (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v1[8
-                                                                                          * (unsigned __int8)this->Data8.GlyphsCount
-                                                                                          + 7] & 0xFFFFFFFFFFFFFFF8ui64);
-  return result;
+    return (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v1[8
+                                                                                        * (unsigned __int8)this->Data8.GlyphsCount
+                                                                                        + 7] & 0xFFFFFFFFFFFFFFF8ui64);
 }
 
 // File Line: 183
 // RVA: 0x9A7990
 void __fastcall Scaleform::Render::Text::LineBuffer::Line::Release(Scaleform::Render::Text::LineBuffer::Line *this)
 {
-  Scaleform::Render::Text::LineBuffer::Line *v1; // rbx
-  unsigned int v2; // ecx
+  signed int MemSize; // ecx
   Scaleform::Render::Text::LineBuffer::GlyphEntry *v3; // r9
   bool v4; // cl
-  unsigned int v5; // edx
-  signed __int64 v6; // r8
+  unsigned int GlyphsCount; // edx
+  char *v6; // r8
   __int64 v7; // rax
 
-  v1 = this;
-  v2 = this->MemSize;
-  if ( (v2 >> 30) & 1 )
+  MemSize = this->MemSize;
+  if ( (MemSize & 0x40000000) != 0 )
   {
-    v3 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)(&v1->Data8.Leading + 1);
-    v4 = (v2 & 0x80000000) != 0;
+    v3 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)(&this->Data8.Leading + 1);
+    v4 = MemSize < 0;
     if ( !v4 )
-      v3 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)((char *)&v1->Data8 + 38);
+      v3 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)((char *)&this->Data8 + 38);
     if ( v4 )
-      v5 = (unsigned __int8)v1->Data8.GlyphsCount;
+      GlyphsCount = (unsigned __int8)this->Data8.GlyphsCount;
     else
-      v5 = v1->Data32.GlyphsCount;
-    v6 = (signed __int64)(&v1->Data8.Leading + 1);
+      GlyphsCount = this->Data32.GlyphsCount;
+    v6 = &this->Data8.Leading + 1;
     if ( v4 )
     {
-      v7 = (unsigned __int8)v1->Data8.GlyphsCount;
+      v7 = (unsigned __int8)this->Data8.GlyphsCount;
     }
     else
     {
-      v7 = v1->Data32.GlyphsCount;
-      v6 = (signed __int64)&v1->Data8 + 38;
+      v7 = this->Data32.GlyphsCount;
+      v6 = (char *)&this->Data8 + 38;
     }
     Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(
       v3,
-      v5,
-      (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((v6 + 8 * v7 + 7) & 0xFFFFFFFFFFFFFFF8ui64));
-    if ( (v1->MemSize & 0x80000000) == 0 )
-      v1->Data32.GlyphsCount = 0;
+      GlyphsCount,
+      (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v6[8 * v7 + 7] & 0xFFFFFFFFFFFFFFF8ui64));
+    if ( (this->MemSize & 0x80000000) == 0 )
+      this->Data32.GlyphsCount = 0;
     else
-      v1->Data8.GlyphsCount = 0;
+      this->Data8.GlyphsCount = 0;
   }
 }
 
@@ -347,42 +334,39 @@ void __fastcall Scaleform::Render::Text::LineBuffer::LineBuffer(Scaleform::Rende
 // RVA: 0x94B1A0
 void __fastcall Scaleform::Render::Text::LineBuffer::~LineBuffer(Scaleform::Render::Text::LineBuffer *this)
 {
-  Scaleform::Render::Text::LineBuffer *v1; // rbx
-
-  v1 = this;
   this->Geom.Flags |= 1u;
   Scaleform::Render::Text::LineBuffer::RemoveLines(this, 0, this->Lines.Data.Size);
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->Lines.Data.Data);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Lines.Data.Data);
 }
 
 // File Line: 231
 // RVA: 0x988660
-Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::GetLine(Scaleform::Render::Text::LineBuffer *this, unsigned int lineIdx)
+Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::GetLine(
+        Scaleform::Render::Text::LineBuffer *this,
+        unsigned int lineIdx)
 {
-  Scaleform::Render::Text::LineBuffer::Line *result; // rax
-
   if ( lineIdx < this->Lines.Data.Size )
-    result = this->Lines.Data.Data[lineIdx];
+    return this->Lines.Data.Data[lineIdx];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 257
 // RVA: 0x995540
-Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::InsertNewLine(Scaleform::Render::Text::LineBuffer *this, unsigned int lineIdx, unsigned int glyphCount, unsigned int formatDataElementsCount, Scaleform::Render::Text::LineBuffer::LineType lineType)
+Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::LineBuffer::InsertNewLine(
+        Scaleform::Render::Text::LineBuffer *this,
+        unsigned int lineIdx,
+        unsigned int glyphCount,
+        unsigned int formatDataElementsCount,
+        Scaleform::Render::Text::LineBuffer::LineType lineType)
 {
-  unsigned int v5; // esi
-  Scaleform::ArrayData<Scaleform::GFx::AS2::Value *,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value *,2>,Scaleform::ArrayDefaultPolicy> *v6; // rdi
-  signed int v7; // eax
+  int v7; // eax
   unsigned __int64 v8; // rbp
   Scaleform::Render::Text::LineBuffer::Line *result; // rax
   Scaleform::Render::Text::LineBuffer::Line *v10; // rbx
-  unsigned __int64 v11; // r8
+  unsigned __int64 Size; // r8
   Scaleform::Render::Text::LineBuffer::Line **v12; // rcx
 
-  v5 = glyphCount;
-  v6 = (Scaleform::ArrayData<Scaleform::GFx::AS2::Value *,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value *,2>,Scaleform::ArrayDefaultPolicy> *)this;
   v7 = 38;
   if ( lineType == Line8 )
     v7 = 26;
@@ -395,141 +379,138 @@ Scaleform::Render::Text::LineBuffer::Line *__fastcall Scaleform::Render::Text::L
   if ( result )
   {
     if ( (result->MemSize & 0x80000000) == 0 )
-      result->Data32.GlyphsCount = v5;
+      result->Data32.GlyphsCount = glyphCount;
     else
-      result->Data8.GlyphsCount = v5;
+      result->Data8.GlyphsCount = glyphCount;
     Scaleform::ArrayData<Scaleform::GFx::AS2::PagedStack<Scaleform::Ptr<Scaleform::GFx::AS2::FunctionObject>,32>::Page *,Scaleform::AllocatorLH<Scaleform::GFx::AS2::PagedStack<Scaleform::Ptr<Scaleform::GFx::AS2::FunctionObject>,32>::Page *,2>,Scaleform::ArrayDefaultPolicy>::Resize(
-      v6,
-      v6->Size + 1);
-    v11 = v6->Size;
-    if ( v8 < v11 - 1 )
-      memmove(&v6->Data[v8 + 1], &v6->Data[v8], 8 * (v11 - v8) - 8);
-    v12 = (Scaleform::Render::Text::LineBuffer::Line **)&v6->Data[v8];
+      (Scaleform::ArrayData<Scaleform::GFx::AS2::Value *,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value *,2>,Scaleform::ArrayDefaultPolicy> *)this,
+      this->Lines.Data.Size + 1);
+    Size = this->Lines.Data.Size;
+    if ( v8 < Size - 1 )
+      memmove(&this->Lines.Data.Data[v8 + 1], &this->Lines.Data.Data[v8], 8 * (Size - v8) - 8);
+    v12 = &this->Lines.Data.Data[v8];
     if ( v12 )
       *v12 = v10;
-    result = v10;
+    return v10;
   }
   return result;
 }
 
 // File Line: 268
 // RVA: 0x9A9E70
-void __fastcall Scaleform::Render::Text::LineBuffer::RemoveLines(Scaleform::Render::Text::LineBuffer *this, unsigned int lineIdx, unsigned int num)
+void __fastcall Scaleform::Render::Text::LineBuffer::RemoveLines(
+        Scaleform::Render::Text::LineBuffer *this,
+        int lineIdx,
+        unsigned int num)
 {
   unsigned int v3; // ebp
   __int64 v4; // r12
-  Scaleform::Render::Text::LineBuffer *v5; // rbx
-  unsigned int v6; // edi
+  int v6; // edi
   __int64 v7; // r15
   Scaleform::Render::Text::LineBuffer::Line *v8; // r14
-  unsigned __int64 v9; // r8
+  unsigned __int64 Size; // r8
 
   v3 = 0;
-  v4 = lineIdx;
-  v5 = this;
+  v4 = (unsigned int)lineIdx;
   v6 = lineIdx;
   v7 = num;
   if ( num )
   {
     do
     {
-      if ( !v5 || v6 >= v5->Lines.Data.Size || (v6 & 0x80000000) != 0 )
+      if ( !this || (unsigned int)v6 >= this->Lines.Data.Size || v6 < 0 )
         break;
-      v8 = v5->Lines.Data.Data[v6];
+      v8 = this->Lines.Data.Data[v6];
       if ( v8 )
       {
-        Scaleform::Render::Text::LineBuffer::Line::Release(v5->Lines.Data.Data[v6]);
+        Scaleform::Render::Text::LineBuffer::Line::Release(this->Lines.Data.Data[v6]);
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v8);
       }
-      if ( v6 < v5->Lines.Data.Size )
+      if ( (unsigned int)v6 < this->Lines.Data.Size )
         ++v6;
       ++v3;
     }
     while ( v3 < (unsigned int)v7 );
   }
-  v9 = v5->Lines.Data.Size;
-  if ( v9 == v7 )
+  Size = this->Lines.Data.Size;
+  if ( Size == v7 )
   {
-    if ( v9 && v5->Lines.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+    if ( Size && (this->Lines.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
     {
-      if ( v5->Lines.Data.Data )
+      if ( this->Lines.Data.Data )
       {
         ((void (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::LineBuffer::Line **, unsigned __int64, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
           Scaleform::Memory::pGlobalHeap,
-          v5->Lines.Data.Data,
-          v9,
+          this->Lines.Data.Data,
+          Size,
           v4);
-        v5->Lines.Data.Data = 0i64;
+        this->Lines.Data.Data = 0i64;
       }
-      v5->Lines.Data.Policy.Capacity = 0i64;
+      this->Lines.Data.Policy.Capacity = 0i64;
     }
-    v5->Lines.Data.Size = 0i64;
+    this->Lines.Data.Size = 0i64;
   }
   else
   {
-    memmove(&v5->Lines.Data.Data[v4], &v5->Lines.Data.Data[v4 + v7], 8 * (v9 - v4 - v7));
-    v5->Lines.Data.Size -= v7;
+    memmove(&this->Lines.Data.Data[v4], &this->Lines.Data.Data[v4] + v7, 8 * (Size - v4 - v7));
+    this->Lines.Data.Size -= v7;
   }
 }
 
 // File Line: 278
 // RVA: 0x98EB80
-__int64 __fastcall Scaleform::Render::Text::LineBuffer::GetVScrollOffsetInFixp(Scaleform::Render::Text::LineBuffer *this)
+__int64 __fastcall Scaleform::Render::Text::LineBuffer::GetVScrollOffsetInFixp(
+        Scaleform::Render::Text::LineBuffer *this)
 {
-  unsigned __int64 v1; // rax
-  unsigned __int64 v2; // rdx
-  Scaleform::Render::Text::LineBuffer::Line **v3; // rdx
-  Scaleform::Render::Text::LineBuffer::Line *v4; // rcx
-  Scaleform::Render::Text::LineBuffer::Line *v5; // rdx
-  unsigned int v6; // et1
-  unsigned int v7; // et1
+  unsigned __int64 FirstVisibleLinePos; // rax
+  unsigned __int64 Size; // rdx
 
-  v1 = this->Geom.FirstVisibleLinePos;
-  if ( !(_DWORD)v1 )
+  FirstVisibleLinePos = this->Geom.FirstVisibleLinePos;
+  if ( (_DWORD)FirstVisibleLinePos
+    && (Size = this->Lines.Data.Size, FirstVisibleLinePos < Size)
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && Size )
+  {
+    return (unsigned int)(this->Lines.Data.Data[FirstVisibleLinePos]->Data32.OffsetY
+                        - (*this->Lines.Data.Data)->Data32.OffsetY);
+  }
+  else
+  {
     return 0i64;
-  v2 = this->Lines.Data.Size;
-  if ( v1 >= v2 || (v1 & 0x80000000) != 0i64 || !v2 )
-    return 0i64;
-  v3 = this->Lines.Data.Data;
-  v4 = this->Lines.Data.Data[v1];
-  v5 = *v3;
-  v6 = v4->MemSize;
-  v7 = v5->MemSize;
-  return (unsigned int)(v4->Data32.OffsetY - v5->Data32.OffsetY);
+  }
 }
 
 // File Line: 322
 // RVA: 0x97A760
-Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Text::LineBuffer::FindLineByTextPos(Scaleform::Render::Text::LineBuffer *this, Scaleform::Render::Text::LineBuffer::Iterator *result, unsigned __int64 textPos)
+Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Text::LineBuffer::FindLineByTextPos(
+        Scaleform::Render::Text::LineBuffer *this,
+        Scaleform::Render::Text::LineBuffer::Iterator *result,
+        unsigned __int64 textPos)
 {
-  unsigned __int64 v3; // rbx
-  Scaleform::Render::Text::LineBuffer *v4; // rsi
-  signed __int64 v5; // r9
-  signed __int64 v6; // r11
-  Scaleform::Render::Text::LineBuffer::Line **v7; // r14
-  signed __int64 v8; // rdi
+  __int64 Size; // r9
+  __int64 v6; // r11
+  Scaleform::Render::Text::LineBuffer::Line **Data; // r14
+  __int64 v8; // rdi
   Scaleform::Render::Text::LineBuffer::Line *v9; // rax
-  signed int v10; // ecx
-  unsigned int v11; // er8
+  int v10; // ecx
+  unsigned int TextLength; // r8d
   Scaleform::Render::Text::LineBuffer::Line *v12; // r8
   unsigned int v13; // ecx
-  unsigned int v14; // eax
-  unsigned __int8 v15; // al
+  unsigned int TextPosAndLength_high; // eax
+  char Flags; // al
   Scaleform::Render::Text::LineBuffer::Iterator *v16; // rax
 
-  v3 = textPos;
-  v4 = this;
   if ( !this->Lines.Data.Size )
-    goto LABEL_30;
-  v5 = this->Lines.Data.Size;
+    goto LABEL_27;
+  Size = this->Lines.Data.Size;
   v6 = 0i64;
-  if ( v5 > 0 )
+  if ( Size > 0 )
   {
-    v7 = this->Lines.Data.Data;
+    Data = this->Lines.Data.Data;
     do
     {
-      v8 = (v5 >> 1) + v6;
-      v9 = v7[v8];
+      v8 = (Size >> 1) + v6;
+      v9 = Data[v8];
       v10 = v9->Data32.TextPos;
       if ( (v9->MemSize & 0x80000000) != 0 )
       {
@@ -537,24 +518,26 @@ Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Tex
         if ( v10 == 0xFFFFFF )
           v10 = -1;
       }
-      if ( (signed int)v3 >= v10
-        && ((v9->MemSize & 0x80000000) == 0 ? (v11 = v9->Data32.TextLength) : (v11 = HIBYTE(v9->Data8.TextPosAndLength)),
-            (signed int)v3 < (signed int)(v11 + v10))
-        || v10 - (signed int)v3 >= 0 )
+      if ( (int)textPos >= v10
+        && ((v9->MemSize & 0x80000000) == 0
+          ? (TextLength = v9->Data32.TextLength)
+          : (TextLength = HIBYTE(v9->Data8.TextPosAndLength)),
+            (int)textPos < (int)(TextLength + v10))
+        || v10 - (int)textPos >= 0 )
       {
-        v5 >>= 1;
+        Size >>= 1;
       }
       else
       {
         v6 = v8 + 1;
-        v5 += -1 - (v5 >> 1);
+        Size += -1 - (Size >> 1);
       }
     }
-    while ( v5 > 0 );
+    while ( Size > 0 );
   }
-  if ( v6 == v4->Lines.Data.Size )
+  if ( v6 == this->Lines.Data.Size )
     LODWORD(v6) = v6 - 1;
-  v12 = v4->Lines.Data.Data[(unsigned int)v6];
+  v12 = this->Lines.Data.Data[(unsigned int)v6];
   v13 = v12->Data32.TextPos;
   if ( (v12->MemSize & 0x80000000) != 0 )
   {
@@ -562,21 +545,23 @@ Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Tex
     if ( v13 == 0xFFFFFF )
       v13 = -1;
   }
-  if ( v3 >= v13
-    && ((v12->MemSize & 0x80000000) == 0 ? (v14 = v12->Data32.TextLength) : (v14 = HIBYTE(v12->Data8.TextPosAndLength)),
-        v3 <= v14 + v13) )
+  if ( textPos >= v13
+    && ((v12->MemSize & 0x80000000) == 0
+      ? (TextPosAndLength_high = v12->Data32.TextLength)
+      : (TextPosAndLength_high = HIBYTE(v12->Data8.TextPosAndLength)),
+        textPos <= TextPosAndLength_high + v13) )
   {
-    v15 = v4->Geom.Flags;
-    result->pLineBuffer = v4;
+    Flags = this->Geom.Flags;
+    result->pLineBuffer = this;
     result->CurrentPos = v6;
     result->YOffset = 0.0;
     result->pHighlight = 0i64;
-    result->StaticText = (v15 >> 2) & 1;
-    v16 = result;
+    result->StaticText = (Flags & 4) != 0;
+    return result;
   }
   else
   {
-LABEL_30:
+LABEL_27:
     result->pLineBuffer = 0i64;
     *(_QWORD *)&result->CurrentPos = 0i64;
     result->StaticText = 0;
@@ -588,135 +573,129 @@ LABEL_30:
 
 // File Line: 337
 // RVA: 0x97A5F0
-Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(Scaleform::Render::Text::LineBuffer *this, Scaleform::Render::Text::LineBuffer::Iterator *result, float yoff)
+Scaleform::Render::Text::LineBuffer::Iterator *__fastcall Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(
+        Scaleform::Render::Text::LineBuffer *this,
+        Scaleform::Render::Text::LineBuffer::Iterator *result,
+        float yoff)
 {
-  float v3; // xmm3_4
-  Scaleform::Render::Text::LineBuffer *v4; // rdi
-  signed __int64 v5; // r8
-  signed __int64 v6; // r11
-  Scaleform::Render::Text::LineBuffer::Line **v7; // r14
-  signed __int64 v8; // rbx
+  __int64 Size; // r8
+  __int64 v6; // r11
+  Scaleform::Render::Text::LineBuffer::Line **Data; // r14
+  __int64 v8; // rbx
   Scaleform::Render::Text::LineBuffer::Line *v9; // rax
-  float v10; // xmm2_4
-  signed int v11; // er9
-  signed int v12; // ecx
+  float OffsetY; // xmm2_4
+  int Height; // r9d
+  int Leading; // ecx
   Scaleform::Render::Text::LineBuffer::Line *v13; // r8
-  unsigned int v14; // er9
+  unsigned int v14; // r9d
   int v15; // eax
-  unsigned __int8 v16; // al
-  Scaleform::Render::Text::LineBuffer::Iterator *v17; // rax
+  char Flags; // al
 
-  v3 = yoff;
-  v4 = this;
   if ( !this->Lines.Data.Size )
-    goto LABEL_30;
-  v5 = this->Lines.Data.Size;
+    goto LABEL_27;
+  Size = this->Lines.Data.Size;
   v6 = 0i64;
-  if ( v5 > 0 )
+  if ( Size > 0 )
   {
-    v7 = this->Lines.Data.Data;
+    Data = this->Lines.Data.Data;
     do
     {
-      v8 = (v5 >> 1) + v6;
-      v9 = v7[v8];
-      v10 = (float)v7[v8]->Data32.OffsetY;
-      if ( v3 >= v10
-        && ((v9->MemSize & 0x80000000) == 0 ? (v11 = v9->Data32.Height) : (v11 = v9->Data8.Height),
-            (v9->MemSize & 0x80000000) == 0 ? (v12 = v9->Data32.Leading) : (v12 = v9->Data8.Leading),
-            v3 < (float)((float)((float)v11 + v10) + (float)v12))
-        || (signed int)(float)(v10 - v3) >= 0 )
+      v8 = (Size >> 1) + v6;
+      v9 = Data[v8];
+      OffsetY = (float)v9->Data32.OffsetY;
+      if ( yoff >= OffsetY
+        && ((v9->MemSize & 0x80000000) == 0 ? (Height = v9->Data32.Height) : (Height = v9->Data8.Height),
+            (v9->MemSize & 0x80000000) == 0 ? (Leading = v9->Data32.Leading) : (Leading = v9->Data8.Leading),
+            yoff < (float)((float)((float)Height + OffsetY) + (float)Leading))
+        || (int)(float)(OffsetY - yoff) >= 0 )
       {
-        v5 >>= 1;
+        Size >>= 1;
       }
       else
       {
         v6 = v8 + 1;
-        v5 += -1 - (v5 >> 1);
+        Size += -1 - (Size >> 1);
       }
     }
-    while ( v5 > 0 );
+    while ( Size > 0 );
   }
-  if ( v6 == v4->Lines.Data.Size )
+  if ( v6 == this->Lines.Data.Size )
     LODWORD(v6) = v6 - 1;
-  v13 = v4->Lines.Data.Data[(unsigned int)v6];
-  if ( v3 >= (float)v4->Lines.Data.Data[(unsigned int)v6]->Data32.OffsetY
+  v13 = this->Lines.Data.Data[(unsigned int)v6];
+  if ( yoff >= (float)v13->Data32.OffsetY
     && ((v13->MemSize & 0x80000000) == 0 ? (v14 = v13->Data32.Height) : (v14 = v13->Data8.Height),
         (v13->MemSize & 0x80000000) == 0 ? (v15 = v13->Data32.Leading) : (v15 = v13->Data8.Leading),
-        v3 < (float)(signed int)(v13->Data32.OffsetY + v14 + v15)) )
+        yoff < (float)(int)(v13->Data32.OffsetY + v14 + v15)) )
   {
-    v16 = v4->Geom.Flags;
-    result->pLineBuffer = v4;
+    Flags = this->Geom.Flags;
+    result->pLineBuffer = this;
     result->CurrentPos = v6;
     result->YOffset = 0.0;
     result->pHighlight = 0i64;
-    result->StaticText = (v16 >> 2) & 1;
-    v17 = result;
+    result->StaticText = (Flags & 4) != 0;
+    return result;
   }
   else
   {
-LABEL_30:
+LABEL_27:
     result->pLineBuffer = 0i64;
     *(_QWORD *)&result->CurrentPos = 0i64;
     result->StaticText = 0;
     result->pHighlight = 0i64;
-    v17 = result;
+    return result;
   }
-  return v17;
 }
 
 // File Line: 382
 // RVA: 0x997AA0
-_BOOL8 __fastcall Scaleform::Render::Text::LineBuffer::IsLineVisible(Scaleform::Render::Text::LineBuffer *this, unsigned int lineIndex, float yOffset)
+_BOOL8 __fastcall Scaleform::Render::Text::LineBuffer::IsLineVisible(
+        Scaleform::Render::Text::LineBuffer *this,
+        unsigned int lineIndex,
+        float yOffset)
 {
   Scaleform::Render::Text::LineBuffer::Line *v3; // r9
-  unsigned int v4; // eax
-  unsigned int v5; // et1
-  unsigned int v7; // eax
+  unsigned int FirstVisibleLinePos; // eax
+  int v6; // eax
 
   v3 = this->Lines.Data.Data[lineIndex];
-  v4 = this->Geom.FirstVisibleLinePos;
-  if ( lineIndex != v4 )
-    return lineIndex > v4
-        && ((v3->MemSize & 0x80000000) == 0 ? (v7 = v3->Data32.Height) : (v7 = v3->Data8.Height),
-            (float)((float)(signed int)(v3->Data32.OffsetY + v7) + yOffset) <= (float)((float)(this->Geom.VisibleRect.y2
-                                                                                             - this->Geom.VisibleRect.y1)
-                                                                                     + 20.0));
-  v5 = v3->MemSize;
-  return (float)((float)(this->Geom.VisibleRect.y2 - this->Geom.VisibleRect.y1) + 20.0) >= (float)((float)v3->Data32.OffsetY
-                                                                                                 + yOffset);
+  FirstVisibleLinePos = this->Geom.FirstVisibleLinePos;
+  if ( lineIndex == FirstVisibleLinePos )
+    return (float)((float)(this->Geom.VisibleRect.y2 - this->Geom.VisibleRect.y1) + 20.0) >= (float)((float)v3->Data32.OffsetY + yOffset);
+  if ( lineIndex <= FirstVisibleLinePos )
+    return 0i64;
+  v6 = (v3->MemSize & 0x80000000) == 0 ? v3->Data32.Height : v3->Data8.Height;
+  return (float)((float)(v3->Data32.OffsetY + v6) + yOffset) <= (float)((float)(this->Geom.VisibleRect.y2
+                                                                              - this->Geom.VisibleRect.y1)
+                                                                      + 20.0);
 }
 
 // File Line: 396
 // RVA: 0x997BA0
-bool __fastcall Scaleform::Render::Text::LineBuffer::IsPartiallyVisible(Scaleform::Render::Text::LineBuffer *this, float yOffset)
+bool __fastcall Scaleform::Render::Text::LineBuffer::IsPartiallyVisible(
+        Scaleform::Render::Text::LineBuffer *this,
+        float yOffset)
 {
-  unsigned int v2; // eax
-  float v3; // xmm3_4
+  unsigned int FirstVisibleLinePos; // eax
   Scaleform::Render::Text::LineBuffer::Line *v4; // r8
-  unsigned int v5; // edx
-  unsigned int v6; // edx
-  signed int v7; // edx
+  int v7; // edx
   float v8; // xmm1_4
   float v9; // xmm0_4
   bool result; // al
 
-  v2 = this->Geom.FirstVisibleLinePos;
-  v3 = yOffset;
+  FirstVisibleLinePos = this->Geom.FirstVisibleLinePos;
   result = 0;
-  if ( v2 < LODWORD(this->Lines.Data.Size) )
+  if ( FirstVisibleLinePos < LODWORD(this->Lines.Data.Size) )
   {
-    v4 = this->Lines.Data.Data[v2];
-    v5 = (v4->MemSize & 0x80000000) == 0 ? v4->Data32.Width : v4->Data8.Width;
-    if ( v5 )
+    v4 = this->Lines.Data.Data[FirstVisibleLinePos];
+    if ( (v4->MemSize & 0x80000000) == 0 ? v4->Data32.Width : v4->Data8.Width )
     {
-      v6 = (v4->MemSize & 0x80000000) == 0 ? v4->Data32.Height : v4->Data8.Height;
-      if ( v6 )
+      if ( (v4->MemSize & 0x80000000) == 0 ? v4->Data32.Height : v4->Data8.Height )
       {
         v7 = (v4->MemSize & 0x80000000) == 0 ? v4->Data32.Height : v4->Data8.Height;
         v8 = (float)(this->Geom.VisibleRect.y2 - this->Geom.VisibleRect.y1) + 20.0;
-        v9 = (float)v4->Data32.OffsetY + v3;
+        v9 = (float)v4->Data32.OffsetY + yOffset;
         if ( v9 <= v8 && (float)(v9 + (float)v7) > v8 )
-          result = 1;
+          return 1;
       }
     }
   }
@@ -725,68 +704,66 @@ bool __fastcall Scaleform::Render::Text::LineBuffer::IsPartiallyVisible(Scalefor
 
 // File Line: 424
 // RVA: 0x9AD830
-void __fastcall Scaleform::Render::Text::LineBuffer::Scale(Scaleform::Render::Text::LineBuffer *this, float scaleFactor)
+void __fastcall Scaleform::Render::Text::LineBuffer::Scale(
+        Scaleform::Render::Text::LineBuffer *this,
+        float scaleFactor)
 {
-  float v2; // xmm6_4
-  Scaleform::Render::Text::LineBuffer *v3; // rbx
-  unsigned int v4; // edi
+  int v4; // edi
   Scaleform::Render::Text::LineBuffer::Line *v5; // rcx
   bool v6; // al
-  signed int v7; // edx
+  int Leading; // edx
   float v8; // xmm1_4
-  signed int v9; // edx
+  int Width; // edx
   float v10; // xmm2_4
-  signed int v11; // edx
+  int Height; // edx
   float v12; // xmm0_4
-  signed int v13; // edx
-  signed int v14; // edx
-  signed int v15; // er8
-  signed int v16; // eax
-  signed int v17; // eax
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v18; // rcx
-  int v19; // eax
-  signed int v20; // eax
-  unsigned __int16 v21; // r8
-  unsigned __int16 v22; // dx
+  int v13; // edx
+  int v14; // edx
+  int v15; // r8d
+  int BaseLineOffset; // eax
+  int v17; // eax
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rcx
+  int Advance; // eax
+  int v20; // eax
+  unsigned __int16 LenAndFontSize; // r8
+  unsigned __int16 Flags; // dx
   float v23; // xmm1_4
   float v24; // xmm1_4
-  signed int v25; // er9
+  int v25; // r9d
   unsigned __int16 v26; // dx
   __int16 v27; // ax
-  unsigned int v28; // eax
-  Scaleform::Render::Text::ImageDesc *v29; // rcx
+  unsigned int Delta; // eax
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
   Scaleform::Render::Text::FontHandle *v30; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-108h]
+  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-108h] BYREF
 
-  v2 = scaleFactor;
-  v3 = this;
   v4 = 0;
-  while ( v3 && v4 < v3->Lines.Data.Size && (v4 & 0x80000000) == 0 )
+  while ( this && (unsigned int)v4 < this->Lines.Data.Size && v4 >= 0 )
   {
-    v5 = v3->Lines.Data.Data[v4];
+    v5 = this->Lines.Data.Data[v4];
     v6 = (v5->MemSize & 0x80000000) != 0;
     if ( (v5->MemSize & 0x80000000) == 0 )
-      v7 = v5->Data32.Leading;
+      Leading = v5->Data32.Leading;
     else
-      v7 = v5->Data8.Leading;
-    v8 = (float)v7 * v2;
+      Leading = v5->Data8.Leading;
+    v8 = (float)Leading * scaleFactor;
     if ( (v5->MemSize & 0x80000000) == 0 )
-      v9 = v5->Data32.Width;
+      Width = v5->Data32.Width;
     else
-      v9 = v5->Data8.Width;
-    v10 = (float)v9 * v2;
+      Width = v5->Data8.Width;
+    v10 = (float)Width * scaleFactor;
     if ( (v5->MemSize & 0x80000000) == 0 )
-      v11 = v5->Data32.Height;
+      Height = v5->Data32.Height;
     else
-      v11 = v5->Data8.Height;
-    v12 = (float)v11 * v2;
-    v13 = (signed int)v8;
+      Height = v5->Data8.Height;
+    v12 = (float)Height * scaleFactor;
+    v13 = (int)v8;
     if ( (v5->MemSize & 0x80000000) == 0 )
       v5->Data32.Leading = v13;
     else
       v5->Data8.Leading = v13;
-    v14 = (signed int)v12;
-    v15 = (signed int)v10;
+    v14 = (int)v12;
+    v15 = (int)v10;
     if ( v6 )
     {
       v5->Data8.Width = v15;
@@ -798,298 +775,287 @@ void __fastcall Scaleform::Render::Text::LineBuffer::Scale(Scaleform::Render::Te
       v5->Data32.Height = v14;
     }
     if ( (v5->MemSize & 0x80000000) == 0 )
-      v16 = v5->Data32.BaseLineOffset;
+      BaseLineOffset = v5->Data32.BaseLineOffset;
     else
-      v16 = v5->Data8.BaseLineOffset;
-    v17 = (signed int)(float)((float)v16 * v2);
+      BaseLineOffset = v5->Data8.BaseLineOffset;
+    v17 = (int)(float)((float)BaseLineOffset * scaleFactor);
     if ( (v5->MemSize & 0x80000000) == 0 )
       v5->Data32.BaseLineOffset = v17;
     else
       v5->Data8.BaseLineOffset = v17;
-    v5->Data32.OffsetX = (signed int)(float)((float)v5->Data32.OffsetX * v2);
-    v5->Data32.OffsetY = (signed int)(float)((float)v5->Data32.OffsetY * v2);
+    v5->Data32.OffsetX = (int)(float)((float)v5->Data32.OffsetX * scaleFactor);
+    v5->Data32.OffsetY = (int)(float)((float)v5->Data32.OffsetY * scaleFactor);
     Scaleform::Render::Text::LineBuffer::Line::Begin(v5, &result);
 LABEL_27:
-    v18 = result.pGlyphs;
-    while ( v18 && v18 < result.pEndGlyphs )
+    pGlyphs = result.pGlyphs;
+    while ( pGlyphs && pGlyphs < result.pEndGlyphs )
     {
-      v19 = v18->Advance;
-      if ( (LOBYTE(v18->Flags) >> 6) & 1 )
-        v19 = -v19;
-      v20 = (signed int)(float)((float)v19 * v2);
+      Advance = pGlyphs->Advance;
+      if ( (pGlyphs->Flags & 0x40) != 0 )
+        Advance = -Advance;
+      v20 = (int)(float)((float)Advance * scaleFactor);
       if ( v20 < 0 )
       {
-        LOWORD(v20) = abs(v20);
-        v18->Flags |= 0x40u;
+        LOWORD(v20) = abs32(v20);
+        pGlyphs->Flags |= 0x40u;
       }
       else
       {
-        v18->Flags &= 0xFFBFu;
+        pGlyphs->Flags &= ~0x40u;
       }
-      v18->Advance = v20;
-      v21 = v18->LenAndFontSize;
-      v22 = v18->Flags;
-      v23 = (float)(v18->LenAndFontSize & 0xFFF);
-      if ( v22 & 0x10 )
+      pGlyphs->Advance = v20;
+      LenAndFontSize = pGlyphs->LenAndFontSize;
+      Flags = pGlyphs->Flags;
+      v23 = (float)(LenAndFontSize & 0xFFF);
+      if ( (Flags & 0x10) != 0 )
         v23 = v23 * 0.0625;
-      v24 = v23 * v2;
-      if ( v24 < 256.0 && (v25 = (signed int)(float)(v24 * 16.0), v25 & 0xF) )
+      v24 = v23 * scaleFactor;
+      if ( v24 < 256.0 && (v25 = (int)(float)(v24 * 16.0), (v25 & 0xF) != 0) )
       {
-        v26 = v22 | 0x10;
-        v27 = v25 ^ v21;
+        v26 = Flags | 0x10;
+        v27 = v25 ^ LenAndFontSize;
       }
       else
       {
-        v26 = v22 & 0xFFEF;
-        v27 = v21 ^ (signed int)v24;
+        v26 = Flags & 0xFFEF;
+        v27 = LenAndFontSize ^ (int)v24;
       }
-      v18->LenAndFontSize = v21 ^ v27 & 0xFFF;
-      v18->Flags = v26;
-      v18 = result.pGlyphs;
+      pGlyphs->LenAndFontSize = LenAndFontSize ^ v27 & 0xFFF;
+      pGlyphs->Flags = v26;
+      pGlyphs = result.pGlyphs;
       if ( !result.pGlyphs )
         break;
       if ( result.pGlyphs < result.pEndGlyphs )
       {
-        v28 = result.Delta;
+        Delta = result.Delta;
         if ( !result.Delta )
         {
-          v28 = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
-          result.Delta = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
+          Delta = result.pGlyphs->LenAndFontSize >> 12;
+          result.Delta = Delta;
         }
         ++result.pGlyphs;
-        if ( result.pGlyphs->LenAndFontSize & 0xF000
-          && v28
+        if ( (result.pGlyphs->LenAndFontSize & 0xF000) != 0
+          && Delta
           && result.HighlighterIter.CurAdjStartPos < result.HighlighterIter.NumGlyphs )
         {
-          if ( v28 )
-          {
-            result.HighlighterIter.CurAdjStartPos += v28;
-            Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
-          }
+          result.HighlighterIter.CurAdjStartPos += Delta;
+          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
           result.Delta = 0;
         }
         Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&result);
         goto LABEL_27;
       }
     }
-    v29 = result.pImage.pObject;
+    pObject = result.pImage.pObject;
     if ( result.pImage.pObject )
     {
       --result.pImage.pObject->RefCount;
-      if ( !v29->RefCount )
-        v29->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v29->vfptr, 1u);
+      if ( !pObject->RefCount )
+        pObject->vfptr->__vecDelDtor(pObject, 1u);
     }
     v30 = result.pFontHandle.pObject;
     if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v30 )
-      v30->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v30->vfptr, 1u);
-    if ( v4 < v3->Lines.Data.Size )
+      v30->vfptr->__vecDelDtor(v30, 1u);
+    if ( (unsigned int)v4 < this->Lines.Data.Size )
       ++v4;
   }
-  v3->Geom.Flags |= 1u;
+  this->Geom.Flags |= 1u;
 }
 
 // File Line: 553
 // RVA: 0x969B50
-void __fastcall Scaleform::Render::Text::LineBuffer::CreateVisibleTextLayout(Scaleform::Render::Text::LineBuffer *this, Scaleform::Render::TextLayout::Builder *bld, Scaleform::Render::Text::Highlighter *phighlighter, Scaleform::Render::TextFieldParam *textFieldParam)
+void __fastcall Scaleform::Render::Text::LineBuffer::CreateVisibleTextLayout(
+        Scaleform::Render::Text::LineBuffer *this,
+        Scaleform::Render::TextLayout::Builder *bld,
+        Scaleform::Render::Text::Highlighter *phighlighter,
+        Scaleform::Render::TextFieldParam *textFieldParam)
 {
   Scaleform::Render::Text::Highlighter *v4; // rsi
-  Scaleform::Render::TextLayout::Builder *v5; // r12
   Scaleform::Render::Text::LineBuffer *v6; // r13
-  int v7; // er10
-  unsigned __int64 v8; // rbx
-  unsigned __int64 v9; // rax
-  Scaleform::Render::Text::LineBuffer::Line **v10; // rdx
-  Scaleform::Render::Text::LineBuffer::Line *v11; // rcx
-  unsigned int v12; // et1
-  unsigned int v13; // et1
-  float v14; // xmm9_4
-  char v15; // r14
-  unsigned __int64 v16; // rcx
-  unsigned __int64 v17; // rdx
-  char *v18; // rax
-  unsigned int v19; // edi
-  float v20; // xmm7_4
-  float v21; // xmm8_4
-  char v22; // al
-  float v23; // xmm2_4
-  float v24; // xmm1_4
-  float v25; // xmm0_4
-  float v26; // xmm6_4
-  Scaleform::Render::Text::LineBuffer::Line *v27; // rcx
-  unsigned int v28; // eax
-  unsigned int v29; // et1
-  unsigned int v30; // eax
-  Scaleform::Render::Text::LineBuffer::Line *v31; // r15
-  float v32; // xmm10_4
-  signed int v33; // eax
-  char v34; // r9
-  int v35; // er14
-  Scaleform::Render::Text::HighlightInfo::UnderlineStyle v36; // esi
-  unsigned int v37; // ebx
-  float v38; // xmm15_4
-  signed int v39; // ecx
-  signed int v40; // eax
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v41; // rcx
-  int v42; // xmm13_4
-  float v43; // xmm11_4
-  int v44; // xmm14_4
-  float v45; // xmm12_4
-  unsigned __int16 *v46; // r12
-  unsigned __int16 v47; // dx
-  int v48; // er11
-  unsigned int v49; // er10
-  float v50; // xmm9_4
-  unsigned int v51; // er15
-  float v52; // xmm9_4
-  float v53; // xmm6_4
-  Scaleform::Render::Font *v54; // r9
-  float v55; // xmm0_4
-  float v56; // xmm6_4
-  char *v57; // rsi
-  signed int v58; // er12
-  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v59; // r13
-  char v60; // al
-  float v61; // xmm3_4
-  float v62; // xmm1_4
-  float v63; // xmm2_4
-  Scaleform::Render::TextLayout::Builder *v64; // rcx
-  Scaleform::Render::Image *v65; // rdx
-  __m128 v66; // xmm1
-  __m128 v67; // xmm5
-  signed int v68; // er15
-  unsigned int v69; // esi
-  char *v70; // rdi
-  signed int v71; // er12
-  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v72; // r13
-  Scaleform::Render::Font *v73; // r13
-  signed int v74; // edi
-  float v75; // xmm7_4
-  bool v76; // r12
-  signed __int16 v77; // ax
-  Scaleform::LogMessageId *v78; // rbx
-  signed int v79; // edi
+  int v7; // r10d
+  unsigned __int64 FirstVisibleLinePos; // rbx
+  unsigned __int64 Size; // rax
+  float v10; // xmm9_4
+  bool v11; // r14
+  unsigned __int64 v12; // rcx
+  unsigned __int64 v13; // rdx
+  char *p_Flags; // rax
+  unsigned int v15; // edi
+  float ScreenWidth; // xmm7_4
+  float v17; // xmm8_4
+  char Flags; // al
+  float y2; // xmm2_4
+  float x2; // xmm1_4
+  float y1; // xmm0_4
+  float v22; // xmm6_4
+  Scaleform::Render::Text::LineBuffer::Line *v23; // rcx
+  unsigned int v24; // eax
+  int v25; // eax
+  Scaleform::Render::Text::LineBuffer::Line *v26; // r15
+  float v27; // xmm10_4
+  int BaseLineOffset; // eax
+  char v29; // r9
+  int v30; // r14d
+  Scaleform::Render::Text::HighlightInfo::UnderlineStyle UnderlineStyle; // esi
+  unsigned int UnderlineColor; // ebx
+  float v33; // xmm15_4
+  int Height; // ecx
+  int v35; // eax
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rcx
+  int v37; // xmm13_4
+  float v38; // xmm11_4
+  int v39; // xmm14_4
+  float v40; // xmm12_4
+  unsigned __int16 *v41; // r12
+  unsigned __int16 v42; // dx
+  int Advance; // r11d
+  unsigned int Index; // r10d
+  float v45; // xmm9_4
+  unsigned int SelectionColor; // r15d
+  float v47; // xmm9_4
+  float v48; // xmm6_4
+  Scaleform::Render::Font *v49; // r9
+  float v50; // xmm6_4
+  char *v51; // rsi
+  int v52; // r12d
+  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *p_Data; // r13
+  char v54; // al
+  float x1; // xmm3_4
+  float v56; // xmm0_4
+  float v57; // xmm1_4
+  float v58; // xmm0_4
+  float v59; // xmm2_4
+  Scaleform::Render::TextLayout::Builder *v60; // rcx
+  Scaleform::RefCountImpl *v61; // rdx
+  __m128 v62; // xmm1
+  __m128 v63; // xmm5
+  int v64; // r15d
+  unsigned int ColorV; // esi
+  char *v66; // rdi
+  int v67; // r12d
+  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v68; // r13
+  Scaleform::Render::Font *v69; // r13
+  int v70; // edi
+  float v71; // xmm7_4
+  bool v72; // r12
+  __int16 v73; // ax
+  Scaleform::LogMessageId *p_id; // rbx
+  int v75; // edi
+  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v76; // r12
+  __int16 v77; // ax
+  char *v78; // rbx
+  int v79; // edi
   Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v80; // r12
-  signed __int16 v81; // ax
-  char *v82; // rbx
-  signed int v83; // edi
-  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v84; // r12
-  int v85; // ebx
-  __int128 v86; // xmm8
-  float v87; // xmm7_4
-  float v88; // xmm6_4
-  float v89; // xmm8_4
-  float v90; // xmm1_4
-  char *v91; // rbx
-  signed int v92; // edi
-  Scaleform::Render::TextLayout::Builder *v93; // r14
-  char v94; // dl
-  char v95; // cl
-  char v96; // al
-  char *v97; // rbx
-  signed int v98; // edi
-  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v99; // r14
-  unsigned int v100; // eax
-  signed __int16 v101; // cx
-  float v102; // xmm15_4
-  char *v103; // rbx
-  signed int v104; // esi
-  float v105; // xmm0_4
-  char *v106; // rbx
-  signed int v107; // esi
-  Scaleform::Render::Text::ImageDesc *v108; // rcx
-  Scaleform::Render::Text::FontHandle *v109; // rcx
-  _QWORD *v110; // rsi
-  char v111; // [rsp+30h] [rbp-90h]
-  bool v112; // [rsp+31h] [rbp-8Fh]
-  char v113; // [rsp+32h] [rbp-8Eh]
-  char v114; // [rsp+33h] [rbp-8Dh]
-  signed int v115; // [rsp+34h] [rbp-8Ch]
-  signed int v116; // [rsp+38h] [rbp-88h]
-  Scaleform::Render::Text::HighlightInfo::UnderlineStyle v117; // [rsp+3Ch] [rbp-84h]
-  char val[4]; // [rsp+40h] [rbp-80h]
-  float v119; // [rsp+44h] [rbp-7Ch]
-  float v120; // [rsp+48h] [rbp-78h]
-  int v121; // [rsp+4Ch] [rbp-74h]
-  Scaleform::Render::Text::LineBuffer::Line *v122; // [rsp+50h] [rbp-70h]
-  char v123[2]; // [rsp+58h] [rbp-68h]
-  __int16 v124; // [rsp+5Ah] [rbp-66h]
-  float v125; // [rsp+5Ch] [rbp-64h]
-  char v126[4]; // [rsp+60h] [rbp-60h]
-  float v127; // [rsp+64h] [rbp-5Ch]
-  unsigned __int16 *v128; // [rsp+68h] [rbp-58h]
-  Scaleform::LogMessageId id; // [rsp+70h] [rbp-50h]
-  float v130; // [rsp+74h] [rbp-4Ch]
+  int v81; // ebx
+  float v82; // xmm8_4
+  float v83; // xmm7_4
+  float v84; // xmm6_4
+  float v85; // xmm8_4
+  float v86; // xmm1_4
+  char *v87; // rbx
+  int v88; // edi
+  Scaleform::Render::TextLayout::Builder *v89; // r14
+  char v90; // dl
+  bool v91; // cl
+  char v92; // al
+  char *v93; // rbx
+  int v94; // edi
+  Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2> *v95; // r14
+  unsigned int Delta; // eax
+  __int16 v97; // cx
+  float v98; // xmm15_4
+  char *v99; // rbx
+  int v100; // esi
+  float v101; // xmm0_4
+  char *v102; // rbx
+  int v103; // esi
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *v105; // rcx
+  Scaleform::Render::FontCacheHandle **v106; // rsi
+  char v107; // [rsp+30h] [rbp-90h]
+  bool v108; // [rsp+31h] [rbp-8Fh]
+  char v109; // [rsp+32h] [rbp-8Eh]
+  bool v110; // [rsp+33h] [rbp-8Dh]
+  int v111; // [rsp+34h] [rbp-8Ch]
+  int v112; // [rsp+38h] [rbp-88h]
+  Scaleform::Render::Text::HighlightInfo::UnderlineStyle v113; // [rsp+3Ch] [rbp-84h]
+  char val[4]; // [rsp+40h] [rbp-80h] BYREF
+  float v115; // [rsp+44h] [rbp-7Ch]
+  int v116; // [rsp+48h] [rbp-78h]
+  int v117; // [rsp+4Ch] [rbp-74h]
+  Scaleform::Render::Text::LineBuffer::Line *v118; // [rsp+50h] [rbp-70h]
+  char v119[2]; // [rsp+58h] [rbp-68h] BYREF
+  __int16 v120; // [rsp+5Ah] [rbp-66h]
+  float v121; // [rsp+5Ch] [rbp-64h]
+  char v122[4]; // [rsp+60h] [rbp-60h] BYREF
+  float v123; // [rsp+64h] [rbp-5Ch]
+  unsigned __int16 *v124; // [rsp+68h] [rbp-58h]
+  Scaleform::LogMessageId id; // [rsp+70h] [rbp-50h] BYREF
+  float v126; // [rsp+74h] [rbp-4Ch]
   Scaleform::Render::Font *f; // [rsp+78h] [rbp-48h]
-  unsigned int v132; // [rsp+80h] [rbp-40h]
-  char v133[2]; // [rsp+88h] [rbp-38h]
-  __int16 v134; // [rsp+8Ah] [rbp-36h]
-  float v135; // [rsp+8Ch] [rbp-34h]
-  float v136; // [rsp+90h] [rbp-30h]
-  float v137; // [rsp+94h] [rbp-2Ch]
-  unsigned int v138; // [rsp+98h] [rbp-28h]
-  Scaleform::Render::Font *v139; // [rsp+A0h] [rbp-20h]
-  char v140[4]; // [rsp+A8h] [rbp-18h]
-  int v141; // [rsp+ACh] [rbp-14h]
-  float v142; // [rsp+B0h] [rbp-10h]
-  int v143; // [rsp+B4h] [rbp-Ch]
-  float v144; // [rsp+B8h] [rbp-8h]
-  int v145; // [rsp+BCh] [rbp-4h]
-  char v146[4]; // [rsp+C0h] [rbp+0h]
-  int v147; // [rsp+C4h] [rbp+4h]
-  float v148; // [rsp+C8h] [rbp+8h]
-  int v149; // [rsp+CCh] [rbp+Ch]
-  float v150; // [rsp+D0h] [rbp+10h]
-  int v151; // [rsp+D4h] [rbp+14h]
-  Scaleform::Render::Text::ImageDesc *v152; // [rsp+D8h] [rbp+18h]
-  __int128 v153; // [rsp+E0h] [rbp+20h]
-  unsigned __int64 v154; // [rsp+F0h] [rbp+30h]
-  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+100h] [rbp+40h]
-  __int64 v156; // [rsp+1A0h] [rbp+E0h]
-  __int128 v157; // [rsp+1B0h] [rbp+F0h]
-  Scaleform::Render::Text::LineBuffer *v158; // [rsp+2B0h] [rbp+1F0h]
-  Scaleform::Render::TextLayout::Builder *v159; // [rsp+2B8h] [rbp+1F8h]
-  Scaleform::Render::Text::Highlighter *v160; // [rsp+2C0h] [rbp+200h]
-  _QWORD *v161; // [rsp+2C8h] [rbp+208h]
+  unsigned int v128; // [rsp+80h] [rbp-40h]
+  char v129[2]; // [rsp+88h] [rbp-38h] BYREF
+  __int16 v130; // [rsp+8Ah] [rbp-36h]
+  float v131; // [rsp+8Ch] [rbp-34h]
+  float v132; // [rsp+90h] [rbp-30h]
+  float v133; // [rsp+94h] [rbp-2Ch]
+  unsigned int v134; // [rsp+98h] [rbp-28h]
+  Scaleform::Render::Font *v135; // [rsp+A0h] [rbp-20h]
+  char v136[4]; // [rsp+A8h] [rbp-18h] BYREF
+  int v137; // [rsp+ACh] [rbp-14h]
+  float v138; // [rsp+B0h] [rbp-10h]
+  int v139; // [rsp+B4h] [rbp-Ch]
+  float v140; // [rsp+B8h] [rbp-8h]
+  int v141; // [rsp+BCh] [rbp-4h]
+  char v142[4]; // [rsp+C0h] [rbp+0h] BYREF
+  int v143; // [rsp+C4h] [rbp+4h]
+  float v144; // [rsp+C8h] [rbp+8h]
+  int v145; // [rsp+CCh] [rbp+Ch]
+  float v146; // [rsp+D0h] [rbp+10h]
+  int v147; // [rsp+D4h] [rbp+14h]
+  Scaleform::Render::Text::ImageDesc *v148; // [rsp+D8h] [rbp+18h]
+  __int128 v149; // [rsp+E0h] [rbp+20h]
+  unsigned __int64 v150; // [rsp+F0h] [rbp+30h]
+  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+100h] [rbp+40h] BYREF
+  __int64 v152; // [rsp+1A0h] [rbp+E0h]
+  __int128 v153[15]; // [rsp+1B0h] [rbp+F0h] BYREF
+  Scaleform::Render::Text::LineBuffer *v154; // [rsp+2B0h] [rbp+1F0h]
+  Scaleform::Render::TextLayout::Builder *v155; // [rsp+2B8h] [rbp+1F8h]
+  Scaleform::Render::Text::Highlighter *v156; // [rsp+2C0h] [rbp+200h]
+  Scaleform::Render::FontCacheHandle **v157; // [rsp+2C8h] [rbp+208h]
 
-  v156 = -2i64;
+  v152 = -2i64;
   v4 = phighlighter;
-  v5 = bld;
   v6 = this;
   v7 = 0;
-  v8 = this->Geom.FirstVisibleLinePos;
-  v121 = v8;
-  if ( (_DWORD)v8 )
+  FirstVisibleLinePos = this->Geom.FirstVisibleLinePos;
+  v117 = FirstVisibleLinePos;
+  if ( (_DWORD)FirstVisibleLinePos )
   {
-    v9 = this->Lines.Data.Size;
-    if ( v8 < v9 && (v8 & 0x80000000) == 0i64 && v9 )
-    {
-      v10 = this->Lines.Data.Data;
-      v11 = this->Lines.Data.Data[v8];
-      v12 = v11->MemSize;
-      v13 = (*v10)->MemSize;
-      v7 = v11->Data32.OffsetY - (*v10)->Data32.OffsetY;
-    }
+    Size = this->Lines.Data.Size;
+    if ( FirstVisibleLinePos < Size && (FirstVisibleLinePos & 0x80000000) == 0i64 && Size )
+      v7 = this->Lines.Data.Data[FirstVisibleLinePos]->Data32.OffsetY - (*this->Lines.Data.Data)->Data32.OffsetY;
   }
-  LODWORD(v14) = COERCE_UNSIGNED_INT((float)v7) ^ _xmm[0];
-  HIDWORD(v122) = COERCE_UNSIGNED_INT((float)v7) ^ _xmm[0];
-  v15 = ((unsigned __int8)v6->Geom.Flags >> 2) & 1;
-  v114 = ((unsigned __int8)v6->Geom.Flags >> 2) & 1;
-  v157 = 0i64;
+  LODWORD(v10) = COERCE_UNSIGNED_INT((float)v7) ^ _xmm[0];
+  *((float *)&v118 + 1) = v10;
+  v11 = (this->Geom.Flags & 4) != 0;
+  v110 = v11;
+  v153[0] = 0i64;
   if ( phighlighter )
   {
     if ( !phighlighter->HasUnderline )
     {
       phighlighter->HasUnderline = -1;
-      v16 = 0i64;
-      v17 = phighlighter->Highlighters.Data.Size;
-      if ( v17 )
+      v12 = 0i64;
+      v13 = phighlighter->Highlighters.Data.Size;
+      if ( v13 )
       {
-        v18 = &phighlighter->Highlighters.Data.Data->Info.Flags;
-        while ( !(*v18 & 7) )
+        p_Flags = &phighlighter->Highlighters.Data.Data->Info.Flags;
+        while ( (*p_Flags & 7) == 0 )
         {
-          ++v16;
-          v18 += 64;
-          if ( v16 >= v17 )
+          ++v12;
+          p_Flags += 64;
+          if ( v12 >= v13 )
             goto LABEL_14;
         }
         phighlighter->HasUnderline = 1;
@@ -1097,630 +1063,615 @@ void __fastcall Scaleform::Render::Text::LineBuffer::CreateVisibleTextLayout(Sca
     }
   }
 LABEL_14:
-  v19 = 0;
-  v139 = 0i64;
-  v20 = 0.0;
-  v21 = 0.0;
-  v22 = v6->Geom.Flags;
-  if ( v22 & 4 || v22 & 0x20 || !Scaleform::Render::Text::LineBuffer::IsPartiallyVisible(v6, v14) )
+  v15 = 0;
+  v135 = 0i64;
+  ScreenWidth = 0.0;
+  v17 = 0.0;
+  Flags = v6->Geom.Flags;
+  if ( (Flags & 4) != 0 || (Flags & 0x20) != 0 || !Scaleform::Render::Text::LineBuffer::IsPartiallyVisible(v6, v10) )
   {
-    v113 = 0;
+    v109 = 0;
   }
   else
   {
-    v23 = v6->Geom.VisibleRect.y2;
-    v24 = v6->Geom.VisibleRect.x2;
-    v25 = v6->Geom.VisibleRect.y1;
-    v5->ClipBox.x1 = v6->Geom.VisibleRect.x1;
-    v5->ClipBox.y1 = v25;
-    v5->ClipBox.x2 = v24;
-    v5->ClipBox.y2 = v23;
-    v113 = 1;
+    y2 = v6->Geom.VisibleRect.y2;
+    x2 = v6->Geom.VisibleRect.x2;
+    y1 = v6->Geom.VisibleRect.y1;
+    bld->ClipBox.x1 = v6->Geom.VisibleRect.x1;
+    bld->ClipBox.y1 = y1;
+    bld->ClipBox.x2 = x2;
+    bld->ClipBox.y2 = y2;
+    v109 = 1;
   }
-  v26 = FLOAT_20_0;
+  v22 = FLOAT_20_0;
 LABEL_20:
-  v154 = (unsigned int)v8;
-  if ( (unsigned int)v8 < v6->Lines.Data.Size && (v8 & 0x80000000) == 0i64 )
+  v150 = (unsigned int)FirstVisibleLinePos;
+  if ( (unsigned int)FirstVisibleLinePos < v6->Lines.Data.Size && (FirstVisibleLinePos & 0x80000000) == 0i64 )
   {
-    if ( !v15 )
+    if ( !v11 )
     {
-      v27 = v6->Lines.Data.Data[(unsigned int)v8];
-      v28 = v6->Geom.FirstVisibleLinePos;
-      if ( (_DWORD)v8 == v28 )
+      v23 = v6->Lines.Data.Data[(unsigned int)FirstVisibleLinePos];
+      v24 = v6->Geom.FirstVisibleLinePos;
+      if ( (_DWORD)FirstVisibleLinePos == v24 )
       {
-        v29 = v27->MemSize;
-        if ( (float)((float)(v6->Geom.VisibleRect.y2 - v6->Geom.VisibleRect.y1) + v26) < (float)((float)v27->Data32.OffsetY
-                                                                                               + v14) )
-          goto LABEL_184;
+        if ( (float)((float)(v6->Geom.VisibleRect.y2 - v6->Geom.VisibleRect.y1) + v22) < (float)((float)v23->Data32.OffsetY
+                                                                                               + v10) )
+          goto LABEL_180;
       }
       else
       {
-        if ( (unsigned int)v8 <= v28 )
-          goto LABEL_184;
-        v30 = (v27->MemSize & 0x80000000) == 0 ? v27->Data32.Height : v27->Data8.Height;
-        if ( (float)((float)(signed int)(v27->Data32.OffsetY + v30) + v14) > (float)((float)(v6->Geom.VisibleRect.y2
-                                                                                           - v6->Geom.VisibleRect.y1)
-                                                                                   + v26) )
-          goto LABEL_184;
+        if ( (unsigned int)FirstVisibleLinePos <= v24 )
+          goto LABEL_180;
+        v25 = (v23->MemSize & 0x80000000) == 0 ? v23->Data32.Height : v23->Data8.Height;
+        if ( (float)((float)(v23->Data32.OffsetY + v25) + v10) > (float)((float)(v6->Geom.VisibleRect.y2
+                                                                               - v6->Geom.VisibleRect.y1)
+                                                                       + v22) )
+          goto LABEL_180;
       }
     }
-    v31 = v6->Lines.Data.Data[(unsigned int)v8];
-    v122 = v31;
-    v32 = (float)v31->Data32.OffsetX + v6->Geom.VisibleRect.x1;
-    if ( (v31->MemSize & 0x80000000) == 0 )
-      v33 = v31->Data32.BaseLineOffset;
+    v26 = v6->Lines.Data.Data[(unsigned int)FirstVisibleLinePos];
+    v118 = v26;
+    v27 = (float)v26->Data32.OffsetX + v6->Geom.VisibleRect.x1;
+    if ( (v26->MemSize & 0x80000000) == 0 )
+      BaseLineOffset = v26->Data32.BaseLineOffset;
     else
-      v33 = v31->Data8.BaseLineOffset;
-    *(float *)val = (float)((float)v31->Data32.OffsetY + v6->Geom.VisibleRect.y1) + (float)((float)v33 + v14);
-    Scaleform::Render::Text::LineBuffer::Line::Begin(v31, &result, v4);
-    v34 = 1;
-    v111 = 1;
-    v35 = 0;
-    v153 = 0i64;
-    v36 = 0;
-    v117 = 0;
-    v37 = 0;
-    v116 = 0;
-    v38 = 0.0;
-    v119 = 0.0;
-    if ( (v31->MemSize & 0x80000000) == 0 )
-      v39 = v31->Data32.Height;
+      BaseLineOffset = v26->Data8.BaseLineOffset;
+    *(float *)val = (float)((float)v26->Data32.OffsetY + v6->Geom.VisibleRect.y1) + (float)((float)BaseLineOffset + v10);
+    Scaleform::Render::Text::LineBuffer::Line::Begin(v26, &result, v4);
+    v29 = 1;
+    v107 = 1;
+    v30 = 0;
+    v149 = 0i64;
+    UnderlineStyle = Underline_None;
+    v113 = Underline_None;
+    UnderlineColor = 0;
+    v112 = 0;
+    v33 = 0.0;
+    v115 = 0.0;
+    if ( (v26->MemSize & 0x80000000) == 0 )
+      Height = v26->Data32.Height;
     else
-      v39 = v31->Data8.Height;
-    if ( (v31->MemSize & 0x80000000) == 0 )
-      v40 = v31->Data32.BaseLineOffset;
+      Height = v26->Data8.Height;
+    if ( (v26->MemSize & 0x80000000) == 0 )
+      v35 = v26->Data32.BaseLineOffset;
     else
-      v40 = v31->Data8.BaseLineOffset;
-    v120 = (float)v39 - (float)v40;
-    v41 = result.pGlyphs;
-    v42 = SHIDWORD(v153);
-    v43 = *((float *)&v153 + 2);
-    v44 = SDWORD1(v153);
-    v45 = *(float *)&v153;
+      v35 = v26->Data8.BaseLineOffset;
+    *(float *)&v116 = (float)Height - (float)v35;
+    pGlyphs = result.pGlyphs;
+    v37 = SHIDWORD(v149);
+    v38 = *((float *)&v149 + 2);
+    v39 = SDWORD1(v149);
+    v40 = *(float *)&v149;
     while ( 1 )
     {
-      if ( !v41 || v41 >= result.pEndGlyphs )
+      if ( !pGlyphs || pGlyphs >= result.pEndGlyphs )
       {
-LABEL_160:
-        if ( v37 )
+LABEL_156:
+        if ( UnderlineColor )
         {
-          switch ( v36 )
+          switch ( UnderlineStyle )
           {
-            case 2:
-              v101 = 1;
+            case Underline_Thick:
+              v97 = 1;
               break;
-            case 3:
-              v101 = 2;
+            case Underline_Dotted:
+              v97 = 2;
               break;
-            case 4:
-              v101 = 3;
+            case Underline_DottedThick:
+              v97 = 3;
               break;
-            case 5:
-              v101 = 4;
+            case Underline_DitheredSingle:
+              v97 = 4;
               break;
-            case 6:
-              v101 = 5;
+            case Underline_DitheredThick:
+              v97 = 5;
               break;
             default:
-              v101 = 0;
+              v97 = 0;
               break;
           }
-          v102 = v38 - (float)(signed int)v6->Geom.HScrollOffset;
-          *(_WORD *)v123 = 6;
-          v124 = v101;
-          v125 = v102;
-          *(float *)v126 = (float)(v120 * 0.5) + v119;
-          v127 = (float)v116;
-          LODWORD(v128) = v37;
-          v103 = v123;
-          v104 = 20;
-          v5 = v159;
+          v98 = v33 - (float)(int)v6->Geom.HScrollOffset;
+          *(_WORD *)v119 = 6;
+          v120 = v97;
+          v121 = v98;
+          *(float *)v122 = (float)(*(float *)&v116 * 0.5) + v115;
+          v123 = (float)v112;
+          LODWORD(v124) = UnderlineColor;
+          v99 = v119;
+          v100 = 20;
+          bld = v155;
           do
           {
-            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&v5->Data, v103++);
-            --v104;
+            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&bld->Data, v99++);
+            --v100;
           }
-          while ( v104 );
+          while ( v100 );
         }
         else
         {
-          v5 = v159;
+          bld = v155;
         }
-        if ( v35 )
+        if ( v30 )
         {
-          LODWORD(v105) = COERCE_UNSIGNED_INT((float)(signed int)v6->Geom.HScrollOffset) ^ _xmm[0];
-          *(_DWORD *)v140 = 5;
-          v141 = v35;
-          v142 = v45 + v105;
-          v143 = v44;
-          v144 = v43 + v105;
-          v145 = v42;
-          v106 = v140;
-          v107 = 24;
+          LODWORD(v101) = COERCE_UNSIGNED_INT((float)(int)v6->Geom.HScrollOffset) ^ _xmm[0];
+          *(_DWORD *)v136 = 5;
+          v137 = v30;
+          v138 = v40 + v101;
+          v139 = v39;
+          v140 = v38 + v101;
+          v141 = v37;
+          v102 = v136;
+          v103 = 24;
           do
           {
-            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&v5->Data, v106++);
-            --v107;
+            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&bld->Data, v102++);
+            --v103;
           }
-          while ( v107 );
+          while ( v103 );
         }
-        v108 = result.pImage.pObject;
+        pObject = result.pImage.pObject;
         if ( result.pImage.pObject )
         {
           --result.pImage.pObject->RefCount;
-          if ( !v108->RefCount )
-            v108->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v108->vfptr, 1u);
+          if ( !pObject->RefCount )
+            pObject->vfptr->__vecDelDtor(pObject, 1u);
         }
-        v109 = result.pFontHandle.pObject;
-        if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v109 )
-          v109->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v109->vfptr, 1u);
-        v14 = *((float *)&v122 + 1);
-        LODWORD(v8) = v121;
-        v4 = v160;
-        v15 = v114;
-        if ( v154 < v6->Lines.Data.Size )
-          LODWORD(v8) = v121++ + 1;
+        v105 = result.pFontHandle.pObject;
+        if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v105 )
+          v105->vfptr->__vecDelDtor(v105, 1u);
+        v10 = *((float *)&v118 + 1);
+        LODWORD(FirstVisibleLinePos) = v117;
+        v4 = v156;
+        v11 = v110;
+        if ( v150 < v6->Lines.Data.Size )
+          LODWORD(FirstVisibleLinePos) = ++v117;
         goto LABEL_20;
       }
-      v46 = &v41->Flags;
-      v128 = &v41->Flags;
-      v47 = v41->Flags;
-      v48 = v41->Advance;
-      if ( ((unsigned __int8)v47 >> 6) & 1 )
-        v48 = -v48;
-      v115 = v48;
-      if ( v41->Index >= 0xFFFFu )
-        v49 = -1;
+      v41 = &pGlyphs->Flags;
+      v124 = &pGlyphs->Flags;
+      v42 = pGlyphs->Flags;
+      Advance = pGlyphs->Advance;
+      if ( (v42 & 0x40) != 0 )
+        Advance = -Advance;
+      v111 = Advance;
+      if ( pGlyphs->Index == 0xFFFF )
+        Index = -1;
       else
-        v49 = v41->Index;
-      LODWORD(v122) = v49;
-      v152 = 0i64;
+        Index = pGlyphs->Index;
+      LODWORD(v118) = Index;
+      v148 = 0i64;
       f = 0i64;
-      v50 = FLOAT_N1_0;
-      v51 = result.SelectionColor;
+      v45 = FLOAT_N1_0;
+      SelectionColor = result.SelectionColor;
       if ( result.pImage.pObject )
       {
-        v152 = result.pImage.pObject;
-        v20 = result.pImage.pObject->ScreenWidth;
+        v148 = result.pImage.pObject;
+        ScreenWidth = result.pImage.pObject->ScreenWidth;
       }
       else
       {
-        v52 = (float)(v41->LenAndFontSize & 0xFFF);
-        if ( v47 & 0x10 )
-          v52 = v52 * 0.0625;
-        v50 = v52 * v26;
-        v53 = v50 * 0.0009765625;
+        v47 = (float)(pGlyphs->LenAndFontSize & 0xFFF);
+        if ( (v42 & 0x10) != 0 )
+          v47 = v47 * 0.0625;
+        v45 = v47 * v22;
+        v48 = v45 * 0.0009765625;
         if ( result.pFontHandle.pObject )
-          v54 = result.pFontHandle.pObject->pFont.pObject;
+          v49 = result.pFontHandle.pObject->pFont.pObject;
         else
-          v54 = 0i64;
-        f = v54;
-        if ( !(v6->Geom.Flags & 4) )
+          v49 = 0i64;
+        f = v49;
+        if ( (v6->Geom.Flags & 4) == 0 )
         {
-          if ( v49 == -1 )
+          if ( Index == -1 )
           {
-            v20 = (float)v48 * v53;
+            ScreenWidth = (float)Advance * v48;
           }
           else
           {
-            v20 = v53
-                * *(float *)(((__int64 (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))v54->vfptr[7].__vecDelDtor)(
-                               v54,
-                               v49,
-                               &v157)
-                           + 8);
-            v41 = result.pGlyphs;
+            ScreenWidth = v48
+                        * *(float *)(((__int64 (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))v49->vfptr[7].__vecDelDtor)(
+                                       v49,
+                                       Index,
+                                       v153)
+                                   + 8);
+            pGlyphs = result.pGlyphs;
           }
         }
-        v34 = v111;
+        v29 = v107;
       }
-      v55 = (float)(signed int)v6->Geom.HScrollOffset;
-      v56 = v32 - v55;
-      if ( !(v6->Geom.Flags & 4) )
+      v50 = v27 - (float)(int)v6->Geom.HScrollOffset;
+      if ( (v6->Geom.Flags & 4) == 0 )
       {
-        v55 = v56 + v20;
-        if ( (float)(v56 + v20) <= v6->Geom.VisibleRect.x1 )
-          goto LABEL_146;
-        if ( (signed int)v56 >= (signed int)v6->Geom.VisibleRect.x2 )
+        if ( (float)(v50 + ScreenWidth) <= v6->Geom.VisibleRect.x1 )
+          goto LABEL_144;
+        if ( (int)v50 >= (int)v6->Geom.VisibleRect.x2 )
         {
-          v26 = FLOAT_20_0;
-          v20 = 0.0;
-          goto LABEL_160;
+          v22 = FLOAT_20_0;
+          ScreenWidth = 0.0;
+          goto LABEL_156;
         }
       }
-      v112 = result.UnderlineStyle != 0;
-      if ( v34 )
+      v108 = result.UnderlineStyle != Underline_None;
+      if ( v29 )
       {
         *(_DWORD *)val = 3;
-        v119 = v56;
-        LODWORD(v55) = 3;
-        LODWORD(v120) = 3;
-        v57 = val;
-        v58 = 12;
-        v59 = &v159->Data;
+        v115 = v50;
+        v116 = 3;
+        v51 = val;
+        v52 = 12;
+        p_Data = &v155->Data;
         do
         {
-          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v59, v57++);
-          --v58;
+          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(p_Data, v51++);
+          --v52;
         }
-        while ( v58 );
-        v111 = 0;
-        v36 = v117;
-        v46 = v128;
-        v6 = v158;
+        while ( v52 );
+        v107 = 0;
+        UnderlineStyle = v113;
+        v41 = v124;
+        v6 = v154;
       }
-      if ( (*v46 >> 9) & 1
-        || v113
-        || (v60 = v6->Geom.Flags, v60 & 4)
-        || v60 & 0x20
-        || ((v61 = v6->Geom.VisibleRect.x1, v56 >= v61) || (float)(v56 + v20) <= v61)
-        && ((v55 = v6->Geom.VisibleRect.x2, v56 >= v55) || (float)(v56 + v20) <= v55) )
+      if ( (*v41 & 0x200) != 0
+        || v109
+        || (v54 = v6->Geom.Flags, (v54 & 4) != 0)
+        || (v54 & 0x20) != 0
+        || ((x1 = v6->Geom.VisibleRect.x1, v50 >= x1) || (float)(v50 + ScreenWidth) <= x1)
+        && ((v56 = v6->Geom.VisibleRect.x2, v50 >= v56) || (float)(v50 + ScreenWidth) <= v56) )
       {
-        v64 = v159;
+        v60 = v155;
       }
       else
       {
-        v62 = v6->Geom.VisibleRect.x2;
-        v55 = v6->Geom.VisibleRect.y1 + -40.0;
-        v63 = v6->Geom.VisibleRect.y2 + 40.0;
-        v64 = v159;
-        v159->ClipBox.x1 = v61;
-        v64->ClipBox.y1 = v55;
-        v64->ClipBox.x2 = v62;
-        v64->ClipBox.y2 = v63;
-        v113 = 1;
+        v57 = v6->Geom.VisibleRect.x2;
+        v58 = v6->Geom.VisibleRect.y1 + -40.0;
+        v59 = v6->Geom.VisibleRect.y2 + 40.0;
+        v60 = v155;
+        v155->ClipBox.x1 = x1;
+        v60->ClipBox.y1 = v58;
+        v60->ClipBox.x2 = v57;
+        v60->ClipBox.y2 = v59;
+        v109 = 1;
       }
-      if ( !v152 )
+      if ( !v148 )
         break;
-      v65 = v152->pImage.pObject;
-      if ( !v65 )
+      v61 = (Scaleform::RefCountImpl *)v148->pImage.pObject;
+      if ( !v61 )
       {
         id.Id = 135168;
         Scaleform::LogDebugMessage((Scaleform::LogMessageId)&id, "An image in TextLayout is NULL");
-        v41 = result.pGlyphs;
-LABEL_146:
-        v68 = v115;
-        goto LABEL_147;
+        pGlyphs = result.pGlyphs;
+LABEL_144:
+        v64 = v111;
+        goto LABEL_145;
       }
-      v66 = (__m128)LODWORD(v152->Matrix.M[0][1]);
-      v67 = (__m128)LODWORD(v152->Matrix.M[0][0]);
-      v68 = v115;
-      v66.m128_f32[0] = (float)(v66.m128_f32[0] * v66.m128_f32[0])
-                      + (float)(v152->Matrix.M[1][1] * v152->Matrix.M[1][1]);
-      v67.m128_f32[0] = (float)(v67.m128_f32[0] * v67.m128_f32[0])
-                      + (float)(v152->Matrix.M[1][0] * v152->Matrix.M[1][0]);
+      v62 = (__m128)LODWORD(v148->Matrix.M[0][1]);
+      v63 = (__m128)LODWORD(v148->Matrix.M[0][0]);
+      v64 = v111;
+      v62.m128_f32[0] = (float)(v62.m128_f32[0] * v62.m128_f32[0])
+                      + (float)(v148->Matrix.M[1][1] * v148->Matrix.M[1][1]);
+      v63.m128_f32[0] = (float)(v63.m128_f32[0] * v63.m128_f32[0])
+                      + (float)(v148->Matrix.M[1][0] * v148->Matrix.M[1][0]);
       Scaleform::Render::TextLayout::Builder::AddImage(
-        v64,
-        v65,
-        COERCE_FLOAT(_mm_sqrt_ps(v67)),
-        COERCE_FLOAT(_mm_sqrt_ps(v66)),
-        v152->BaseLineY,
-        (float)v115);
-      v41 = result.pGlyphs;
-LABEL_147:
-      if ( v41 && v41 < result.pEndGlyphs )
+        v60,
+        v61,
+        _mm_sqrt_ps(v63).m128_f32[0],
+        _mm_sqrt_ps(v62).m128_f32[0],
+        v148->BaseLineY,
+        (float)v111);
+      pGlyphs = result.pGlyphs;
+LABEL_145:
+      if ( pGlyphs && pGlyphs < result.pEndGlyphs )
       {
-        v100 = result.Delta;
+        Delta = result.Delta;
         if ( !result.Delta )
         {
-          v100 = (unsigned int)v41->LenAndFontSize >> 12;
-          result.Delta = (unsigned int)v41->LenAndFontSize >> 12;
+          Delta = pGlyphs->LenAndFontSize >> 12;
+          result.Delta = Delta;
         }
-        result.pGlyphs = v41 + 1;
-        if ( v41[1].LenAndFontSize & 0xF000
-          && v100
+        result.pGlyphs = pGlyphs + 1;
+        if ( (pGlyphs[1].LenAndFontSize & 0xF000) != 0
+          && Delta
           && result.HighlighterIter.CurAdjStartPos < result.HighlighterIter.NumGlyphs )
         {
-          if ( v100 )
-          {
-            result.HighlighterIter.CurAdjStartPos += v100;
-            Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
-          }
+          result.HighlighterIter.CurAdjStartPos += Delta;
+          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
           result.Delta = 0;
         }
         Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&result);
-        v41 = result.pGlyphs;
+        pGlyphs = result.pGlyphs;
       }
-      v32 = v32 + (float)v68;
-      v26 = FLOAT_20_0;
-      v20 = 0.0;
-      v6 = v158;
-      v34 = v111;
+      v27 = v27 + (float)v64;
+      v22 = FLOAT_20_0;
+      ScreenWidth = 0.0;
+      v6 = v154;
+      v29 = v107;
     }
-    v69 = result.ColorV;
-    if ( result.ColorV != v19 )
+    ColorV = result.ColorV;
+    if ( result.ColorV != v15 )
     {
-      *(_DWORD *)v126 = 1;
-      v127 = *(float *)&result.ColorV;
-      v70 = v126;
-      v71 = 8;
-      v72 = &v64->Data;
+      *(_DWORD *)v122 = 1;
+      v123 = *(float *)&result.ColorV;
+      v66 = v122;
+      v67 = 8;
+      v68 = &v60->Data;
       do
       {
-        Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v72, v70++);
-        --v71;
+        Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v68, v66++);
+        --v67;
       }
-      while ( v71 );
-      v46 = v128;
+      while ( v67 );
+      v41 = v124;
     }
-    v73 = f;
-    if ( f != v139 || v50 != v21 )
+    v69 = f;
+    if ( f != v135 || v45 != v17 )
     {
-      Scaleform::Render::TextLayout::Builder::ChangeFont(v159, f, v50, v55);
-      Scaleform::Render::TextLayout::Builder::AddRefCntData(
-        v159,
-        (Scaleform::RefCountImpl *)&result.pFontHandle.pObject->vfptr);
+      Scaleform::Render::TextLayout::Builder::ChangeFont(v155, f, v45);
+      Scaleform::Render::TextLayout::Builder::AddRefCntData(v155, result.pFontHandle.pObject);
     }
-    if ( *((_BYTE *)v46 + 1) & 1 )
+    if ( (*((_BYTE *)v41 + 1) & 1) != 0 )
     {
-      if ( v37 )
+      if ( UnderlineColor )
       {
-        switch ( v117 )
+        switch ( v113 )
         {
-          case 2:
-            v81 = 1;
-            break;
-          case 3:
-            v81 = 2;
-            break;
-          case 4:
-            v81 = 3;
-            break;
-          case 5:
-            v81 = 4;
-            break;
-          case 6:
-            v81 = 5;
-            break;
-          default:
-            v81 = 0;
-            break;
-        }
-        *(_WORD *)v133 = 6;
-        v134 = v81;
-        v135 = v38 - (float)(signed int)v158->Geom.HScrollOffset;
-        v136 = (float)(v120 * 0.5) + v119;
-        v137 = (float)v116;
-        v138 = v37;
-        v82 = v133;
-        v83 = 20;
-        v84 = &v159->Data;
-        do
-        {
-          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v84, v82++);
-          --v83;
-        }
-        while ( v83 );
-      }
-      v116 = 0;
-      v76 = 0;
-      v75 = *(float *)val;
-      v74 = v115;
-    }
-    else if ( v37 != result.UnderlineColor || v117 != result.UnderlineStyle )
-    {
-      if ( v37 )
-      {
-        switch ( v117 )
-        {
-          case 2:
+          case Underline_Thick:
             v77 = 1;
             break;
-          case 3:
+          case Underline_Dotted:
             v77 = 2;
             break;
-          case 4:
+          case Underline_DottedThick:
             v77 = 3;
             break;
-          case 5:
+          case Underline_DitheredSingle:
             v77 = 4;
             break;
-          case 6:
+          case Underline_DitheredThick:
             v77 = 5;
             break;
           default:
             v77 = 0;
             break;
         }
-        LOWORD(id.Id) = 6;
-        HIWORD(id.Id) = v77;
-        v130 = v38 - (float)(signed int)v158->Geom.HScrollOffset;
-        *(float *)&f = (float)(v120 * 0.5) + v119;
-        *((float *)&f + 1) = (float)v116;
-        v132 = v37;
-        v78 = &id;
+        *(_WORD *)v129 = 6;
+        v130 = v77;
+        v131 = v33 - (float)(int)v154->Geom.HScrollOffset;
+        v132 = (float)(*(float *)&v116 * 0.5) + v115;
+        v133 = (float)v112;
+        v134 = UnderlineColor;
+        v78 = v129;
         v79 = 20;
-        v80 = &v159->Data;
+        v80 = &v155->Data;
         do
         {
-          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v80, (const char *)v78);
-          v78 = (Scaleform::LogMessageId *)((char *)v78 + 1);
+          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v80, v78++);
           --v79;
         }
         while ( v79 );
       }
-      v38 = v32;
-      v75 = *(float *)val;
-      v119 = *(float *)val;
-      v74 = v115;
-      v116 = v115;
-      v76 = v112;
+      v112 = 0;
+      v72 = 0;
+      v71 = *(float *)val;
+      v70 = v111;
+    }
+    else if ( UnderlineColor == result.UnderlineColor && v113 == result.UnderlineStyle )
+    {
+      v70 = v111;
+      v71 = *(float *)val;
+      v72 = v108;
+      if ( result.UnderlineColor )
+        v112 += v111;
     }
     else
     {
-      v74 = v115;
-      v75 = *(float *)val;
-      v76 = v112;
-      if ( result.UnderlineColor )
-        v116 += v115;
-    }
-    if ( result.SelectionColor || v35 )
-    {
-      v85 = Scaleform::Render::Text::LineBuffer::Line::GetHeight(v122);
-      v86 = COERCE_UNSIGNED_INT((float)(Scaleform::Render::Text::LineBuffer::Line::GetNonNegLeading(v122) + v85));
-      v87 = v75 - Scaleform::Render::Text::LineBuffer::Line::GetAscent(v122);
-      v88 = (float)v74 + v32;
-      v89 = *(float *)&v86 + v87;
-      if ( v51 == v35 )
+      if ( UnderlineColor )
       {
-        if ( !v51 )
+        switch ( v113 )
+        {
+          case Underline_Thick:
+            v73 = 1;
+            break;
+          case Underline_Dotted:
+            v73 = 2;
+            break;
+          case Underline_DottedThick:
+            v73 = 3;
+            break;
+          case Underline_DitheredSingle:
+            v73 = 4;
+            break;
+          case Underline_DitheredThick:
+            v73 = 5;
+            break;
+          default:
+            v73 = 0;
+            break;
+        }
+        LOWORD(id.Id) = 6;
+        HIWORD(id.Id) = v73;
+        v126 = v33 - (float)(int)v154->Geom.HScrollOffset;
+        *(float *)&f = (float)(*(float *)&v116 * 0.5) + v115;
+        *((float *)&f + 1) = (float)v112;
+        v128 = UnderlineColor;
+        p_id = &id;
+        v75 = 20;
+        v76 = &v155->Data;
+        do
+        {
+          Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v76, (const char *)p_id);
+          p_id = (Scaleform::LogMessageId *)((char *)p_id + 1);
+          --v75;
+        }
+        while ( v75 );
+      }
+      v33 = v27;
+      v71 = *(float *)val;
+      v115 = *(float *)val;
+      v70 = v111;
+      v112 = v111;
+      v72 = v108;
+    }
+    if ( result.SelectionColor || v30 )
+    {
+      v81 = Scaleform::Render::Text::LineBuffer::Line::GetHeight(v118);
+      v82 = (float)(Scaleform::Render::Text::LineBuffer::Line::GetNonNegLeading(v118) + v81);
+      v83 = v71 - Scaleform::Render::Text::LineBuffer::Line::GetAscent(v118);
+      v84 = (float)v70 + v27;
+      v85 = v82 + v83;
+      if ( SelectionColor == v30 )
+      {
+        if ( !SelectionColor )
           goto LABEL_132;
-        if ( v45 > v32 )
-          v45 = v32;
-        if ( v43 <= v88 )
-          v43 = (float)v74 + v32;
-        if ( *(float *)&v44 > v87 )
-          *(float *)&v44 = v87;
-        if ( *(float *)&v42 > v89 )
+        if ( v40 > v27 )
+          v40 = v27;
+        if ( v38 <= v84 )
+          v38 = (float)v70 + v27;
+        if ( *(float *)&v39 > v83 )
+          *(float *)&v39 = v83;
+        if ( *(float *)&v37 > v85 )
           goto LABEL_132;
       }
       else
       {
-        if ( v35 )
+        if ( v30 )
         {
-          LODWORD(v90) = COERCE_UNSIGNED_INT((float)(signed int)v158->Geom.HScrollOffset) ^ _xmm[0];
-          *(_DWORD *)v146 = 5;
-          v147 = v35;
-          v148 = v90 + v45;
-          v149 = v44;
-          v150 = v90 + v43;
-          v151 = v42;
-          v91 = v146;
-          v92 = 24;
-          v93 = v159;
+          LODWORD(v86) = COERCE_UNSIGNED_INT((float)(int)v154->Geom.HScrollOffset) ^ _xmm[0];
+          *(_DWORD *)v142 = 5;
+          v143 = v30;
+          v144 = v86 + v40;
+          v145 = v39;
+          v146 = v86 + v38;
+          v147 = v37;
+          v87 = v142;
+          v88 = 24;
+          v89 = v155;
           do
           {
-            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&v93->Data, v91++);
-            --v92;
+            Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&v89->Data, v87++);
+            --v88;
           }
-          while ( v92 );
-          v74 = v115;
+          while ( v88 );
+          v70 = v111;
         }
-        v45 = v32;
-        *(float *)&v44 = v87;
-        v43 = v88;
+        v40 = v27;
+        *(float *)&v39 = v83;
+        v38 = v84;
       }
-      *(float *)&v42 = v89;
+      *(float *)&v37 = v85;
     }
 LABEL_132:
     if ( result.pFontHandle.pObject )
     {
-      v94 = result.pFontHandle.pObject->OverridenFontFlags & 1;
-      v95 = (result.pFontHandle.pObject->OverridenFontFlags >> 1) & 1;
+      v90 = result.pFontHandle.pObject->OverridenFontFlags & 1;
+      v91 = (result.pFontHandle.pObject->OverridenFontFlags & 2) != 0;
     }
     else
     {
-      v94 = 0;
-      v95 = 0;
+      v90 = 0;
+      v91 = 0;
     }
-    v96 = 0;
-    if ( (*v128 >> 9) & 1 )
-      v96 = 1;
-    if ( v95 )
-      v96 |= 2u;
-    if ( v94 )
-      v96 |= 4u;
-    v123[0] = 0;
-    v123[1] = v96;
-    v124 = (signed __int16)v122;
-    v125 = (float)v74;
-    v97 = v123;
-    v98 = 8;
-    v99 = &v159->Data;
+    v92 = (*v124 & 0x200) != 0;
+    if ( v91 )
+      v92 |= 2u;
+    if ( v90 )
+      v92 |= 4u;
+    v119[0] = 0;
+    v119[1] = v92;
+    v120 = (__int16)v118;
+    v121 = (float)v70;
+    v93 = v119;
+    v94 = 8;
+    v95 = &v155->Data;
     do
     {
-      Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v99, v97++);
-      --v98;
+      Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(v95, v93++);
+      --v94;
     }
-    while ( v98 );
-    v19 = v69;
-    v139 = v73;
-    v21 = v50;
-    v35 = v51;
-    v41 = result.pGlyphs;
-    v68 = v115;
-    if ( v76 )
+    while ( v94 );
+    v15 = ColorV;
+    v135 = v69;
+    v17 = v45;
+    v30 = SelectionColor;
+    pGlyphs = result.pGlyphs;
+    v64 = v111;
+    if ( v72 )
     {
-      v37 = result.UnderlineColor;
-      v36 = result.UnderlineStyle;
-      v117 = result.UnderlineStyle;
+      UnderlineColor = result.UnderlineColor;
+      UnderlineStyle = result.UnderlineStyle;
+      v113 = result.UnderlineStyle;
     }
     else
     {
-      v37 = 0;
-      v36 = 0;
-      v117 = 0;
+      UnderlineColor = 0;
+      UnderlineStyle = Underline_None;
+      v113 = Underline_None;
     }
-    goto LABEL_147;
+    goto LABEL_145;
   }
-LABEL_184:
-  v110 = v161;
-  v5->Param.TextParam.pFont = (Scaleform::Render::FontCacheHandle *)*v161;
-  *(_QWORD *)&v5->Param.TextParam.GlyphIndex = v110[1];
-  *(_QWORD *)&v5->Param.TextParam.BlurY = v110[2];
-  v5->Param.ShadowParam.pFont = (Scaleform::Render::FontCacheHandle *)v110[3];
-  *(_QWORD *)&v5->Param.ShadowParam.GlyphIndex = v110[4];
-  *(_QWORD *)&v5->Param.ShadowParam.BlurY = v110[5];
-  *(_QWORD *)&v5->Param.ShadowColor = v110[6];
-  *(_QWORD *)&v5->Param.ShadowOffsetY = v110[7];
+LABEL_180:
+  v106 = v157;
+  bld->Param.TextParam.pFont = *v157;
+  *(_QWORD *)&bld->Param.TextParam.GlyphIndex = v106[1];
+  *(_QWORD *)&bld->Param.TextParam.BlurY = v106[2];
+  bld->Param.ShadowParam.pFont = v106[3];
+  *(_QWORD *)&bld->Param.ShadowParam.GlyphIndex = v106[4];
+  *(_QWORD *)&bld->Param.ShadowParam.BlurY = v106[5];
+  *(_QWORD *)&bld->Param.ShadowColor = v106[6];
+  *(_QWORD *)&bld->Param.ShadowOffsetY = v106[7];
 }
 
 // File Line: 795
 // RVA: 0x979680
-Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::LineBuffer::FindFirstFontInfo(Scaleform::Render::Text::LineBuffer *this)
+Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::LineBuffer::FindFirstFontInfo(
+        Scaleform::Render::Text::LineBuffer *this)
 {
-  Scaleform::Render::Text::LineBuffer *v1; // r14
   unsigned __int64 v2; // rdi
-  unsigned __int64 v3; // rsi
-  unsigned int v4; // eax
+  unsigned __int64 Size; // rsi
+  unsigned int Delta; // eax
   Scaleform::Render::Text::ImageDesc *v5; // rcx
   Scaleform::Render::Text::FontHandle *v6; // rcx
-  Scaleform::Render::Text::FontHandle *v7; // rdi
+  Scaleform::Render::Text::FontHandle *pObject; // rdi
   Scaleform::Render::Text::ImageDesc *v8; // rcx
   Scaleform::Render::Text::FontHandle *v9; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-B8h]
+  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-B8h] BYREF
 
-  v1 = this;
   v2 = 0i64;
-  v3 = this->Lines.Data.Size;
-  if ( v3 )
+  Size = this->Lines.Data.Size;
+  if ( Size )
   {
     do
     {
-      Scaleform::Render::Text::LineBuffer::Line::Begin(v1->Lines.Data.Data[v2], &result);
+      Scaleform::Render::Text::LineBuffer::Line::Begin(this->Lines.Data.Data[v2], &result);
       while ( result.pGlyphs && result.pGlyphs < result.pEndGlyphs )
       {
-        if ( (result.pGlyphs->Flags >> 13) & 1 )
+        if ( (result.pGlyphs->Flags & 0x2000) != 0 )
         {
-          v7 = result.pFontHandle.pObject;
+          pObject = result.pFontHandle.pObject;
           v8 = result.pImage.pObject;
           if ( result.pImage.pObject )
           {
             --result.pImage.pObject->RefCount;
             if ( !v8->RefCount )
-              v8->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v8->vfptr, 1u);
+              v8->vfptr->__vecDelDtor(v8, 1u);
           }
           v9 = result.pFontHandle.pObject;
           if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v9 )
-            v9->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v9->vfptr, 1u);
-          return v7;
+            v9->vfptr->__vecDelDtor(v9, 1u);
+          return pObject;
         }
-        v4 = result.Delta;
+        Delta = result.Delta;
         if ( !result.Delta )
         {
-          v4 = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
-          result.Delta = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
+          Delta = result.pGlyphs->LenAndFontSize >> 12;
+          result.Delta = Delta;
         }
         ++result.pGlyphs;
-        if ( result.pGlyphs->LenAndFontSize & 0xF000
-          && v4
+        if ( (result.pGlyphs->LenAndFontSize & 0xF000) != 0
+          && Delta
           && result.HighlighterIter.CurAdjStartPos < result.HighlighterIter.NumGlyphs )
         {
-          if ( v4 )
-          {
-            result.HighlighterIter.CurAdjStartPos += v4;
-            Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
-          }
+          result.HighlighterIter.CurAdjStartPos += Delta;
+          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
           result.Delta = 0;
         }
         Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&result);
@@ -1730,35 +1681,36 @@ Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::LineBuf
       {
         --result.pImage.pObject->RefCount;
         if ( !v5->RefCount )
-          v5->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, 1u);
+          v5->vfptr->__vecDelDtor(v5, 1u);
       }
       v6 = result.pFontHandle.pObject;
       if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v6 )
-        v6->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, 1u);
+        v6->vfptr->__vecDelDtor(v6, 1u);
       ++v2;
     }
-    while ( v2 < v3 );
+    while ( v2 < Size );
   }
   return 0i64;
 }
 
 // File Line: 813
 // RVA: 0x998B60
-void __fastcall Scaleform::Render::Text::LoadTextFieldParamFromTextFilter(Scaleform::Render::TextFieldParam *params, Scaleform::Render::Text::TextFilter *filter)
+void __fastcall Scaleform::Render::Text::LoadTextFieldParamFromTextFilter(
+        Scaleform::Render::TextFieldParam *params,
+        Scaleform::Render::Text::TextFilter *filter)
 {
-  params->TextParam.BlurX = (signed int)(float)((float)(filter->BlurX * 16.0) + 0.5);
-  params->TextParam.BlurY = (signed int)(float)((float)(filter->BlurY * 16.0) + 0.5);
+  params->TextParam.BlurX = (int)(float)((float)(filter->BlurX * 16.0) + 0.5);
+  params->TextParam.BlurY = (int)(float)((float)(filter->BlurY * 16.0) + 0.5);
   params->TextParam.Flags = 128;
-  params->TextParam.BlurStrength = (signed int)(float)((float)(filter->BlurStrength * 16.0) + 0.5);
-  if ( !(filter->ShadowFlags & 1) )
+  params->TextParam.BlurStrength = (int)(float)((float)(filter->BlurStrength * 16.0) + 0.5);
+  if ( (filter->ShadowFlags & 1) == 0 )
   {
     params->ShadowParam.Flags = filter->ShadowFlags & 0xFFFE;
-    params->ShadowParam.BlurX = (signed int)(float)((float)(filter->ShadowParams.BlurX * 16.0) + 0.5);
-    params->ShadowParam.BlurY = (signed int)(float)((float)(filter->ShadowParams.BlurX * 16.0) + 0.5);
-    params->ShadowParam.BlurStrength = (signed int)(float)((float)(filter->ShadowParams.Strength * 16.0) + 0.5);
+    params->ShadowParam.BlurX = (int)(float)((float)(filter->ShadowParams.BlurX * 16.0) + 0.5);
+    params->ShadowParam.BlurY = (int)(float)((float)(filter->ShadowParams.BlurX * 16.0) + 0.5);
+    params->ShadowParam.BlurStrength = (int)(float)((float)(filter->ShadowParams.Strength * 16.0) + 0.5);
     params->ShadowColor = filter->ShadowParams.Colors[0].Raw;
-    params->ShadowOffsetX = filter->ShadowParams.Offset.x;
-    params->ShadowOffsetY = filter->ShadowParams.Offset.y;
+    *(Scaleform::Render::Point<float> *)&params->ShadowOffsetX = filter->ShadowParams.Offset;
   }
 }
 

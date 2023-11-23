@@ -2,21 +2,19 @@
 // RVA: 0x410400
 void __fastcall UFG::GameStateChangeLocation::OnEnter(UFG::GameStateChangeLocation *this, float deltaSeconds)
 {
-  UFG::GameStateChangeLocation *v2; // rbx
   UFG::ProgressionTracker *v3; // rax
-  signed __int64 v4; // rdi
+  UFG::SceneSettings *p_mPendingSceneSettingsLocal; // rdi
   UFG::ProgressionTracker *v5; // rax
-  UFG::TiDo *v6; // rax
+  UFG::TiDo *Instance; // rax
   UFG::TiDo *v7; // rax
-  UFG::qWiseSymbol result; // [rsp+50h] [rbp+18h]
-  UFG::qWiseSymbol source; // [rsp+58h] [rbp+20h]
+  UFG::qWiseSymbol result; // [rsp+50h] [rbp+18h] BYREF
+  UFG::qWiseSymbol source; // [rsp+58h] [rbp+20h] BYREF
 
-  v2 = this;
   v3 = UFG::ProgressionTracker::Instance();
   if ( !v3->mbPendingSceneSettingsValid
-    || (v4 = (signed __int64)&v3->mPendingSceneSettingsLocal, v3 == (UFG::ProgressionTracker *)-5648i64) )
+    || (p_mPendingSceneSettingsLocal = &v3->mPendingSceneSettingsLocal, v3 == (UFG::ProgressionTracker *)-5648i64) )
   {
-    v2->mSavedAmbientSpawningSetting = UFG::PedSpawnManager::msAmbientSpawningEnable;
+    this->mSavedAmbientSpawningSetting = UFG::PedSpawnManager::msAmbientSpawningEnable;
     UFG::PedSpawnManager::msAmbientSpawningEnable = 0;
     UFG::PedSpawnManager::msCheckStatusMode = 1;
     goto LABEL_15;
@@ -25,37 +23,37 @@ void __fastcall UFG::GameStateChangeLocation::OnEnter(UFG::GameStateChangeLocati
   UFG::ProgressionTracker::SetResourceFreezeMode(v5, 1);
   UFG::StreamFileWrapper::SetQueueMode(QUEUE_MODE_SEEK_MINIMIZE);
   _((AMD_HD3D *)1);
-  if ( !*(_BYTE *)(v4 + 53) )
+  if ( !p_mPendingSceneSettingsLocal->mShowCurtains )
   {
 LABEL_15:
-    v2->mLoadStage = 1;
+    this->mLoadStage = eLS_APPLY_CHANGES;
     return;
   }
   UFG::qWiseSymbol::create_from_string(&result, "loadstart");
-  v2->mLoadStage = 0;
+  this->mLoadStage = eLS_WAIT_FOR_CURTAINS;
   UFG::qWiseSymbol::create_from_string(&source, "loadfinish");
   UFG::qWiseSymbol::operator=(&stru_14207B268, &source);
-  if ( unk_14207B260 != 1 )
+  if ( byte_14207B260 != 1 )
   {
     UFG::qWiseSymbol::operator=(&stru_14207B264, &result);
-    if ( unk_14207B26C )
+    if ( (_BYTE)word_14207B26C )
     {
-      if ( unk_14207B260 && (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+      if ( byte_14207B260 && UFG::TiDo::GetIsInstantiated() )
       {
-        v6 = UFG::TiDo::GetInstance();
-        v6->vfptr->LoadingGameEnd(v6, &stru_14207B268);
+        Instance = UFG::TiDo::GetInstance();
+        Instance->vfptr->LoadingGameEnd(Instance, &stru_14207B268);
       }
-      if ( unk_14207B26C )
+      if ( (_BYTE)word_14207B26C )
       {
         UFG::qWiseSymbol::operator=(&stru_14207B264, &result);
-        if ( (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+        if ( UFG::TiDo::GetIsInstantiated() )
         {
           v7 = UFG::TiDo::GetInstance();
           v7->vfptr->LoadingGameStart(v7, &stru_14207B264);
         }
       }
     }
-    unk_14207B260 = 1;
+    byte_14207B260 = 1;
   }
   UFG::UIHK_NISOverlay::ShowCurtains(0.0, 1);
   _((AMD_HD3D *)source.mUID);
@@ -67,19 +65,19 @@ LABEL_15:
 void __fastcall UFG::GameStateChangeLocation::OnExit(UFG::GameStateChangeLocation *this, float deltaSeconds)
 {
   UFG::ProgressionTracker *v2; // rax
-  signed __int64 v3; // rax
+  UFG::SceneSettings *p_mPendingSceneSettingsLocal; // rax
   UFG::ProgressionTracker *v4; // rax
 
   UFG::WheeledVehicleManager::OnChangeLocationFinished(UFG::WheeledVehicleManager::m_Instance);
   v2 = UFG::ProgressionTracker::Instance();
   if ( v2->mbPendingSceneSettingsValid )
   {
-    v3 = (signed __int64)&v2->mPendingSceneSettingsLocal;
-    if ( v3 )
+    p_mPendingSceneSettingsLocal = &v2->mPendingSceneSettingsLocal;
+    if ( p_mPendingSceneSettingsLocal )
     {
-      if ( *(_BYTE *)(v3 + 54) )
+      if ( p_mPendingSceneSettingsLocal->mHideCurtains )
       {
-        ((void (__fastcall *)(UFG::TiDo *, signed __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
+        ((void (__fastcall *)(UFG::TiDo *, __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
           UFG::TiDo::m_pInstance,
           4i64);
         UFG::UIHK_NISOverlay::HideCurtains(1.0, 0);
@@ -106,17 +104,16 @@ void __fastcall UFG::GameStateChangeLocation::OnPreUpdate(UFG::GameStateRestoreC
 // RVA: 0x411DA0
 void __fastcall UFG::GameStateChangeLocation::OnUpdate(UFG::GameStateChangeLocation *this, float deltaSeconds)
 {
-  UFG::GameStateChangeLocation *v2; // rdi
   UFG::ProgressionTracker *v3; // rax
-  int v4; // ebx
+  int BytesRemainingToLoad; // ebx
   UFG::ObjectResourceManager *v5; // rax
   int v6; // ebx
   UFG::PartDatabase *v7; // rax
-  unsigned int v8; // ebx
+  int v8; // ebx
   int v9; // eax
-  UFG::TriggerUpdateContext *v10; // rax
-  UFG::GeographicalLayerManager *v11; // rax
-  UFG::qVector3 *v12; // rbx
+  UFG::TriggerUpdateContext *TriggerUpdateContext; // rax
+  UFG::GeographicalLayerManager *Instance; // rax
+  UFG::qVector3 *LayerLoadPosition; // rbx
   UFG::GeographicalLayerManager *v13; // rax
   UFG::PropSpawnManager *v14; // rax
   UFG::ObjectResourceManager *v15; // rax
@@ -133,57 +130,56 @@ void __fastcall UFG::GameStateChangeLocation::OnUpdate(UFG::GameStateChangeLocat
   UFG::ObjectResourceManager *v26; // rax
   UFG::PartDatabase *v27; // rax
   UFG::ProgressionTracker *v28; // rax
-  signed __int64 v29; // rcx
-  bool v30; // al
-  char v31; // al
-  bool v32; // al
-  UFG::SimObjectCharacter *v33; // rax
+  UFG::SceneSettings *p_mPendingSceneSettingsLocal; // rcx
+  bool mEnableAmbientPedsOnEnd; // al
+  bool v31; // al
+  bool mSavedAmbientSpawningSetting; // al
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   AMD_HD3D *v34; // rcx
-  UFG::TransformNodeComponent *v35; // rbx
-  int v36; // eax
-  UFG::qVector3 velocity; // [rsp+40h] [rbp-68h]
-  UFG::qVector3 v38; // [rsp+50h] [rbp-58h]
-  UFG::TriggerUpdateContext result; // [rsp+60h] [rbp-48h]
-  UFG::TriggerUpdateContext v40; // [rsp+78h] [rbp-30h]
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  int CurrentState; // eax
+  UFG::qVector3 velocity; // [rsp+40h] [rbp-68h] BYREF
+  UFG::qVector3 v38; // [rsp+50h] [rbp-58h] BYREF
+  UFG::TriggerUpdateContext result; // [rsp+60h] [rbp-48h] BYREF
+  UFG::TriggerUpdateContext v40; // [rsp+78h] [rbp-30h] BYREF
 
-  v2 = this;
   switch ( this->mLoadStage )
   {
-    case 0:
+    case eLS_WAIT_FOR_CURTAINS:
       if ( UFG::UIHK_NISOverlay::IsCurtainStable() )
-        v2->mLoadStage = 1;
+        this->mLoadStage = eLS_APPLY_CHANGES;
       goto LABEL_29;
-    case 1:
+    case eLS_APPLY_CHANGES:
       UFG::SectionChooser::EnableStreamsUpdate(1);
       v3 = UFG::ProgressionTracker::Instance();
       if ( v3->mbPendingSceneSettingsValid && v3 != (UFG::ProgressionTracker *)-5648i64 )
-        UFG::GameStateChangeLocation::ApplyChanges(v2, deltaSeconds);
-      v2->mLoadStage = 2;
+        UFG::GameStateChangeLocation::ApplyChanges(this, deltaSeconds);
+      this->mLoadStage = eLS_SETLOADING_HINT;
       goto LABEL_29;
-    case 2:
-      v4 = UFG::SectionChooser::GetBytesRemainingToLoad();
+    case eLS_SETLOADING_HINT:
+      BytesRemainingToLoad = UFG::SectionChooser::GetBytesRemainingToLoad();
       v5 = UFG::ObjectResourceManager::Instance();
-      v6 = (unsigned __int64)UFG::ObjectResourceManager::GetBytesRemainingToLoad(v5) + v4;
+      v6 = UFG::ObjectResourceManager::GetBytesRemainingToLoad(v5) + BytesRemainingToLoad;
       v7 = UFG::PartDatabase::Instance();
       v8 = UFG::PartDatabase::GetBytesRemainingToLoad(v7) + v6;
       v9 = UFG::SoundBankManager::GetBytesRemainingToLoad();
       UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v9 + v8);
-      v2->mLoadStage = 3;
+      this->mLoadStage = eLS_LOCATION_PENDING;
       goto LABEL_29;
-    case 3:
-      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 4u) && UFG::UpdateRigs(0x64u) )
-        v2->mLoadStage = 4;
+    case eLS_LOCATION_PENDING:
+      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 4) && UFG::UpdateRigs(0x64u) )
+        this->mLoadStage = eLS_LAYERS_PENDING;
       goto LABEL_29;
-    case 4:
-      v10 = UFG::GetTriggerUpdateContext(&result);
-      UFG::TriggerRegion::UpdateAll(v10);
-      v11 = UFG::GeographicalLayerManager::GetInstance();
-      UFG::GeographicalLayerManager::ClearDeactivationTimers(v11);
-      v12 = UFG::GetLayerLoadPosition(&velocity);
+    case eLS_LAYERS_PENDING:
+      TriggerUpdateContext = UFG::GetTriggerUpdateContext(&result);
+      UFG::TriggerRegion::UpdateAll(TriggerUpdateContext);
+      Instance = UFG::GeographicalLayerManager::GetInstance();
+      UFG::GeographicalLayerManager::ClearDeactivationTimers(Instance);
+      LayerLoadPosition = UFG::GetLayerLoadPosition(&velocity);
       v13 = UFG::GeographicalLayerManager::GetInstance();
-      LOBYTE(v12) = UFG::GeographicalLayerManager::Update(v13, deltaSeconds, v12);
-      LOBYTE(v12) = UFG::IncrementalActivateManager::Flush() | (unsigned __int8)v12;
-      LOBYTE(v12) = UFG::WheeledVehicleManager::UpdateTrafficSet(UFG::WheeledVehicleManager::m_Instance) | (unsigned __int8)v12;
+      LOBYTE(LayerLoadPosition) = UFG::GeographicalLayerManager::Update(v13, deltaSeconds, LayerLoadPosition);
+      LOBYTE(LayerLoadPosition) = UFG::IncrementalActivateManager::Flush() | (unsigned __int8)LayerLoadPosition;
+      LOBYTE(LayerLoadPosition) = UFG::WheeledVehicleManager::UpdateTrafficSet(UFG::WheeledVehicleManager::m_Instance) | (unsigned __int8)LayerLoadPosition;
       UFG::PedSpawnManager::Update(UFG::gpPedSpawnManager, deltaSeconds);
       v14 = UFG::PropSpawnManager::GetInstance();
       UFG::PropSpawnManager::Update(v14);
@@ -192,7 +188,7 @@ void __fastcall UFG::GameStateChangeLocation::OnUpdate(UFG::GameStateChangeLocat
       v16 = UFG::PartDatabase::Instance();
       UFG::PartDatabase::Update(v16, deltaSeconds);
       UFG::StoreMeshHelper::Update();
-      if ( !(_BYTE)v12 )
+      if ( !(_BYTE)LayerLoadPosition )
       {
         v17 = UFG::ObjectResourceManager::Instance();
         UFG::ObjectResourceManager::PopulateAmbience(v17);
@@ -200,10 +196,10 @@ void __fastcall UFG::GameStateChangeLocation::OnUpdate(UFG::GameStateChangeLocat
         v19 = UFG::ObjectResourceManager::GetBytesRemainingToLoad(v18);
         v20 = UFG::SoundBankManager::GetBytesRemainingToLoad();
         UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v20 + v19);
-        v2->mLoadStage = 5;
+        this->mLoadStage = eLS_CHARACTER_AND_VEHICLE_RESOURCE_PENDING;
       }
       goto LABEL_29;
-    case 5:
+    case eLS_CHARACTER_AND_VEHICLE_RESOURCE_PENDING:
       v21 = UFG::GetTriggerUpdateContext(&v40);
       UFG::TriggerRegion::UpdateAll(v21);
       v22 = UFG::GeographicalLayerManager::GetInstance();
@@ -221,72 +217,72 @@ void __fastcall UFG::GameStateChangeLocation::OnUpdate(UFG::GameStateChangeLocat
       v27 = UFG::PartDatabase::Instance();
       UFG::PartDatabase::Update(v27, deltaSeconds);
       UFG::StoreMeshHelper::Update();
-      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3u)
+      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3)
         && UFG::SoundBankManager::AreAllImportantBankLoadsComplete()
         && !UFG::StoreMeshHelper::SwapInProgress() )
       {
-        v2->mLoadStage = 6;
+        this->mLoadStage = eLS_APPLY_SPAWN_SETTINGS;
       }
       goto LABEL_29;
-    case 6:
+    case eLS_APPLY_SPAWN_SETTINGS:
       v28 = UFG::ProgressionTracker::Instance();
-      if ( v28->mbPendingSceneSettingsValid
-        && (v29 = (signed __int64)&v28->mPendingSceneSettingsLocal, v28 != (UFG::ProgressionTracker *)-5648i64) )
+      if ( !v28->mbPendingSceneSettingsValid
+        || (p_mPendingSceneSettingsLocal = &v28->mPendingSceneSettingsLocal, v28 == (UFG::ProgressionTracker *)-5648i64) )
       {
-        if ( sAmbientPedEnableLocked )
-          goto LABEL_24;
-        v30 = v28->mPendingSceneSettingsLocal.mEnableAmbientPedsOnEnd;
+        mSavedAmbientSpawningSetting = this->mSavedAmbientSpawningSetting;
         UFG::PedSpawnManager::msCheckStatusMode = 1;
-        UFG::PedSpawnManager::msAmbientSpawningEnable = v30;
-        v31 = *(_BYTE *)(v29 + 58);
+        UFG::PedSpawnManager::msAmbientSpawningEnable = mSavedAmbientSpawningSetting;
+        v31 = this->mSavedAmbientSpawningSetting;
       }
       else
       {
-        v32 = v2->mSavedAmbientSpawningSetting;
+        if ( sAmbientPedEnableLocked )
+          goto LABEL_24;
+        mEnableAmbientPedsOnEnd = v28->mPendingSceneSettingsLocal.mEnableAmbientPedsOnEnd;
         UFG::PedSpawnManager::msCheckStatusMode = 1;
-        UFG::PedSpawnManager::msAmbientSpawningEnable = v32;
-        v31 = v2->mSavedAmbientSpawningSetting;
+        UFG::PedSpawnManager::msAmbientSpawningEnable = mEnableAmbientPedsOnEnd;
+        v31 = p_mPendingSceneSettingsLocal->mEnableAmbientPedsOnEnd;
       }
       UFG::PedSpawnManager::msAmbientStatusCheckEnable = v31;
 LABEL_24:
       UFG::PedSpawnManager::msScriptedStatusCheckEnable = 1;
       UFG::PedSpawnManager::RestoreAllScriptedToFullyActive(UFG::gpPedSpawnManager);
-      v2->mLoadStage = 7;
+      this->mLoadStage = eLS_WAIT_FOR_SPAWNER;
 LABEL_29:
-      if ( v2->mLoadStage > 1 )
+      if ( this->mLoadStage > eLS_APPLY_CHANGES )
       {
-        v33 = UFG::GetLocalPlayer();
-        if ( v33 )
+        LocalPlayer = UFG::GetLocalPlayer();
+        if ( LocalPlayer )
         {
-          v35 = v33->m_pTransformNodeComponent;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v33->m_pTransformNodeComponent);
-          UFG::TransformNodeComponent::UpdateWorldTransform(v35);
+          m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
           *(_QWORD *)&velocity.x = 0i64;
           velocity.z = 0.0;
-          v36 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+          CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
           UFG::SectionChooser::AddPOV(
-            (UFG::qVector3 *)&v35->mWorldTransform.v3,
-            (UFG::qVector3 *)&v35->mWorldTransform,
-            (UFG::qVector3 *)&v35->mWorldTransform,
+            (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3,
+            (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform,
+            (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform,
             &velocity,
             deltaSeconds,
             0i64,
-            7u,
-            v36 == uidGameStateInGame_3);
+            7,
+            CurrentState == uidGameStateInGame_3);
         }
         UFG::UpdateCamera(deltaSeconds, v34);
       }
       return;
-    case 7:
+    case eLS_WAIT_FOR_SPAWNER:
       UFG::PedSpawnManager::Update(UFG::gpPedSpawnManager, deltaSeconds);
       if ( !UFG::PedSpawnManager::SpawnsQueued() )
-        v2->mLoadStage = 8;
+        this->mLoadStage = eLS_WAIT_FOR_POI_ANIMATIONS;
       goto LABEL_29;
-    case 8:
-      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3u) )
+    case eLS_WAIT_FOR_POI_ANIMATIONS:
+      if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3) )
       {
         UFG::FlowController::RequestSetNewState(&UFG::gFlowController, uidGameStateInGame_3);
-        v2->mLoadStage = 9;
+        this->mLoadStage = eLS_EXIT;
       }
       goto LABEL_29;
     default:
@@ -296,7 +292,9 @@ LABEL_29:
 
 // File Line: 304
 // RVA: 0x411420
-void __fastcall UFG::GameStateRestoreCheckpoint::OnPostUpdate(UFG::GameStateRestoreCheckpoint *this, float deltaSeconds)
+void __fastcall UFG::GameStateRestoreCheckpoint::OnPostUpdate(
+        UFG::GameStateRestoreCheckpoint *this,
+        float deltaSeconds)
 {
   UFG::LoadingLogic::OnPostUpdate(&UFG::gLoadingLogic, deltaSeconds);
 }
@@ -307,66 +305,66 @@ void __fastcall UFG::GameStateChangeLocation::ApplyChanges(UFG::GameStateChangeL
 {
   UFG::ProgressionTracker *v2; // rax
   UFG::Event *v3; // rsi
-  signed __int64 v4; // rdi
-  UFG::qSymbol *v5; // rcx
-  UFG::qBaseTreeRB *v6; // rax
-  UFG::qVector4 *v7; // rbx
+  UFG::SceneSettings *p_mPendingSceneSettingsLocal; // rdi
+  UFG::qSymbol *p_mTeleportMarker; // rcx
+  UFG::qBaseTreeRB *Named; // rax
+  UFG::TransformNodeComponent *mParent; // rbx
   UFG::qVector4 v8; // xmm2
   UFG::qVector4 v9; // xmm1
   UFG::qVector4 v10; // xmm0
-  float v11; // xmm1_4
-  float v12; // xmm2_4
-  UFG::SimObjectCharacter *v13; // rbx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::SimObjectCharacter *LocalPlayer; // rbx
   UFG::allocator::free_link *v14; // rax
   UFG::Event *v15; // rax
-  UFG::SimComponent *v16; // rax
+  UFG::SimComponent *m_pComponent; // rax
   UFG::ProgressionTracker *v17; // rax
   UFG::ProgressionTracker *v18; // rax
-  UFG::TimeOfDayManager *v19; // rax
+  UFG::TimeOfDayManager *Instance; // rax
   UFG::TimeOfDayManager *v20; // rbx
-  float v21; // xmm1_4
+  float mTimeOverrideInSeconds; // xmm1_4
   float v22; // xmm1_4
-  float v23; // xmm1_4
+  float mWeatherOverrideIntensity; // xmm1_4
   float v24; // xmm0_4
-  float v25; // xmm1_4
+  float mWeatherOverrideWetness; // xmm1_4
   UFG::ProgressionTracker *v26; // rax
-  UFG::qMatrix44 worldXform; // [rsp+38h] [rbp+7h]
+  UFG::qMatrix44 worldXform; // [rsp+38h] [rbp+7h] BYREF
 
   v2 = UFG::ProgressionTracker::Instance();
   v3 = 0i64;
-  v4 = (signed __int64)&v2->mPendingSceneSettingsLocal;
+  p_mPendingSceneSettingsLocal = &v2->mPendingSceneSettingsLocal;
   if ( !v2->mbPendingSceneSettingsValid )
-    v4 = 0i64;
+    p_mPendingSceneSettingsLocal = 0i64;
   worldXform = UFG::qMatrix44::msIdentity;
-  v5 = (UFG::qSymbol *)(v4 + 112);
-  if ( *(_DWORD *)(v4 + 112) == -1 )
+  p_mTeleportMarker = &p_mPendingSceneSettingsLocal->mTeleportMarker;
+  if ( p_mPendingSceneSettingsLocal->mTeleportMarker.mUID == -1 )
   {
-    if ( !*(_BYTE *)(v4 + 121) )
+    if ( !p_mPendingSceneSettingsLocal->mHasTeleportPositionInternal )
       goto LABEL_22;
-    v11 = *(float *)(v4 + 128);
-    v12 = *(float *)(v4 + 132);
-    worldXform.v3.x = *(float *)(v4 + 124);
-    worldXform.v3.y = v11;
-    worldXform.v3.z = v12;
+    y = p_mPendingSceneSettingsLocal->mTeleportPositionInternal.y;
+    z = p_mPendingSceneSettingsLocal->mTeleportPositionInternal.z;
+    worldXform.v3.x = p_mPendingSceneSettingsLocal->mTeleportPositionInternal.x;
+    worldXform.v3.y = y;
+    worldXform.v3.z = z;
     worldXform.v3.w = 1.0;
   }
   else
   {
-    v6 = UFG::MarkerBase::GetNamed(v5);
-    if ( !v6 )
+    Named = UFG::MarkerBase::GetNamed(p_mTeleportMarker);
+    if ( !Named )
       goto LABEL_22;
-    v7 = (UFG::qVector4 *)v6[1].mNULL.mParent;
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v6[1].mNULL.mParent);
-    v8 = v7[9];
-    v9 = v7[10];
-    v10 = v7[11];
-    worldXform.v0 = v7[8];
+    mParent = (UFG::TransformNodeComponent *)Named[1].mNULL.mParent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(mParent);
+    v8 = mParent->mWorldTransform.v1;
+    v9 = mParent->mWorldTransform.v2;
+    v10 = mParent->mWorldTransform.v3;
+    worldXform.v0 = mParent->mWorldTransform.v0;
     worldXform.v1 = v8;
     worldXform.v2 = v9;
     worldXform.v3 = v10;
   }
-  v13 = UFG::GetLocalPlayer();
-  if ( v13 )
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer )
   {
     v14 = UFG::qMalloc(0x90ui64, "NISManager", 0i64);
     if ( v14 )
@@ -374,94 +372,95 @@ void __fastcall UFG::GameStateChangeLocation::ApplyChanges(UFG::GameStateChangeL
       UFG::TeleportEvent::TeleportEvent(
         (UFG::TeleportEvent *)v14,
         &worldXform,
-        v13->mNode.mUID,
+        LocalPlayer->mNode.mUID,
         0,
         UFG::TeleportEvent::m_Name,
         0);
       v3 = v15;
     }
     UFG::EventDispatcher::DispatchEvent(&UFG::EventDispatcher::mInstance, v3);
-    v5 = (UFG::qSymbol *)v13->m_Flags;
-    if ( ((unsigned __int16)v5 >> 14) & 1 )
+    p_mTeleportMarker = (UFG::qSymbol *)LocalPlayer->m_Flags;
+    if ( ((unsigned __int16)p_mTeleportMarker & 0x4000) != 0 )
     {
-      v16 = v13->m_Components.p[7].m_pComponent;
+      m_pComponent = LocalPlayer->m_Components.p[7].m_pComponent;
     }
-    else if ( (signed __int16)v5 >= 0 )
+    else if ( (__int16)p_mTeleportMarker >= 0 )
     {
-      if ( ((unsigned __int16)v5 >> 13) & 1 )
+      if ( ((unsigned __int16)p_mTeleportMarker & 0x2000) != 0 )
       {
-        v16 = v13->m_Components.p[6].m_pComponent;
+        m_pComponent = LocalPlayer->m_Components.p[6].m_pComponent;
       }
-      else if ( ((unsigned __int16)v5 >> 12) & 1 )
+      else if ( ((unsigned __int16)p_mTeleportMarker & 0x1000) != 0 )
       {
-        v16 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v13->vfptr,
-                UFG::ActionTreeComponent::_TypeUID);
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(LocalPlayer, UFG::ActionTreeComponent::_TypeUID);
       }
       else
       {
-        v16 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v13->vfptr, UFG::ActionTreeComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(LocalPlayer, UFG::ActionTreeComponent::_TypeUID);
       }
     }
     else
     {
-      v16 = v13->m_Components.p[7].m_pComponent;
+      m_pComponent = LocalPlayer->m_Components.p[7].m_pComponent;
     }
-    if ( v16 )
-      ActionController::Stop((ActionController *)&v16[3]);
+    if ( m_pComponent )
+      ActionController::Stop((ActionController *)&m_pComponent[3]);
   }
 LABEL_22:
-  if ( *(_DWORD *)(v4 + 116) != -1 )
+  if ( p_mPendingSceneSettingsLocal->mVehicleTeleportMarker.mUID != -1 )
   {
     v17 = UFG::ProgressionTracker::Instance();
-    UFG::ProgressionTracker::TeleportVehicle(v17, (UFG::SceneSettings *)v4);
+    UFG::ProgressionTracker::TeleportVehicle(v17, p_mPendingSceneSettingsLocal);
   }
-  if ( *(_BYTE *)(v4 + 120) )
+  if ( p_mPendingSceneSettingsLocal->mVehicleDestroy )
   {
     v18 = UFG::ProgressionTracker::Instance();
     UFG::ProgressionTracker::DestroyVehicle(v18);
   }
-  UFG::UpdateCamera(1.0, (AMD_HD3D *)v5);
-  v19 = UFG::TimeOfDayManager::GetInstance();
-  v20 = v19;
-  v21 = *(float *)(v4 + 44);
-  if ( v21 >= 0.0 )
-    UFG::TimeOfDayManager::SetTime(v19, v21, 0);
-  if ( *(_BYTE *)(v4 + 48) )
+  UFG::UpdateCamera(1.0, (AMD_HD3D *)p_mTeleportMarker);
+  Instance = UFG::TimeOfDayManager::GetInstance();
+  v20 = Instance;
+  mTimeOverrideInSeconds = p_mPendingSceneSettingsLocal->mTimeOverrideInSeconds;
+  if ( mTimeOverrideInSeconds >= 0.0 )
+    UFG::TimeOfDayManager::SetTime(Instance, mTimeOverrideInSeconds, 0);
+  if ( p_mPendingSceneSettingsLocal->mTimeOverrideLockSet )
   {
-    if ( *(_BYTE *)(v4 + 50) )
+    if ( p_mPendingSceneSettingsLocal->mTimeOverrideLock )
       v22 = 0.0;
     else
       v22 = FLOAT_40_0;
     TimePlotPoint::SetTimeValue(v20, v22);
   }
-  v23 = *(float *)(v4 + 32);
-  if ( v23 >= 0.0 )
+  mWeatherOverrideIntensity = p_mPendingSceneSettingsLocal->mWeatherOverrideIntensity;
+  if ( mWeatherOverrideIntensity >= 0.0 )
   {
-    if ( v23 <= 0.0 )
+    if ( mWeatherOverrideIntensity <= 0.0 )
     {
-      v23 = 0.0;
+      mWeatherOverrideIntensity = 0.0;
     }
     else
     {
       v24 = FLOAT_2_0;
-      if ( v23 >= 2.0 )
+      if ( mWeatherOverrideIntensity >= 2.0 )
         goto LABEL_39;
     }
-    v24 = v23;
+    v24 = mWeatherOverrideIntensity;
 LABEL_39:
     v20->m_WeatherState = v24;
     v20->m_WeatherTarget = v24;
     v20->m_NextWeatherTarget = v24;
   }
-  if ( *(_BYTE *)(v4 + 49) )
-    UFG::TimeOfDayManager::LockWeather(v20, *(_BYTE *)(v4 + 40));
-  v25 = *(float *)(v4 + 36);
-  if ( v25 >= 0.0 )
-    UFG::TimeOfDayManager::SetSurfaceWetnessOverride(v20, v25, "GameStateChangeLocation::ApplyChanges");
-  if ( *(_BYTE *)(v4 + 51) && !sAmbientPedEnableLocked )
+  if ( p_mPendingSceneSettingsLocal->mWeatherOverrideLockSet )
+    UFG::TimeOfDayManager::LockWeather(v20, p_mPendingSceneSettingsLocal->mWeatherOverrideLock);
+  mWeatherOverrideWetness = p_mPendingSceneSettingsLocal->mWeatherOverrideWetness;
+  if ( mWeatherOverrideWetness >= 0.0 )
+    UFG::TimeOfDayManager::SetSurfaceWetnessOverride(
+      v20,
+      mWeatherOverrideWetness,
+      "GameStateChangeLocation::ApplyChanges");
+  if ( p_mPendingSceneSettingsLocal->mResetAmbientPeds && !sAmbientPedEnableLocked )
   {
-    if ( *(_BYTE *)(v4 + 0x3A) )
+    if ( p_mPendingSceneSettingsLocal->mEnableAmbientPedsOnEnd )
     {
       UFG::PedSpawnManager::msResourcesSuspended = 0;
       UFG::ObjectResourceManager::Instance()->mEntityStates[0].mUpdateRequired = 1;
@@ -476,7 +475,9 @@ LABEL_39:
       UFG::ObjectResourceManager::Instance()->mEntityStates[0].mUpdateRequired = 1;
     }
   }
-  UFG::WheeledVehicleManager::EnableTrafficSystem(UFG::WheeledVehicleManager::m_Instance, *(_BYTE *)(v4 + 62));
+  UFG::WheeledVehicleManager::EnableTrafficSystem(
+    UFG::WheeledVehicleManager::m_Instance,
+    p_mPendingSceneSettingsLocal->mEnableTrafficOnEnd);
   UFG::GeographicalLayerManager::GetInstance()->mAllowImmediateActivation = 1;
   v26 = UFG::ProgressionTracker::Instance();
   UFG::ProgressionTracker::SetResourceFreezeMode(v26, 0);

@@ -28,23 +28,24 @@ hkClass *__fastcall hkpBoxShape::staticClass()
 
 // File Line: 62
 // RVA: 0xCEB2F0
-void __fastcall finishLoadedObjecthkpBoxShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBoxShape(hkpBoxShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBoxShape::hkpBoxShape);
+  if ( p )
+    hkpBoxShape::hkpBoxShape(p, finishing);
 }
 
 // File Line: 68
 // RVA: 0xCEB310
-void __fastcall cleanupLoadedObjecthkpBoxShape(void *p)
+void __fastcall cleanupLoadedObjecthkpBoxShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
 // RVA: 0xCEB320
 hkBaseObjectVtbl *__fastcall getVtablehkpBoxShape()
 {
-  hkpBoxShape v1; // [rsp+20h] [rbp-48h]
+  hkpBoxShape v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpBoxShape::hkpBoxShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBoxShapeTypeInfo__()
   hkpBoxShapeTypeInfo.m_typeName = "hkpBoxShape";
   hkpBoxShapeTypeInfo.m_vtable = result;
   hkpBoxShapeTypeInfo.m_scopedName = "!hkpBoxShape";
-  hkpBoxShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBoxShape;
-  hkpBoxShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBoxShape;
+  hkpBoxShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBoxShape;
+  hkpBoxShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBoxShape;
   return result;
 }
 

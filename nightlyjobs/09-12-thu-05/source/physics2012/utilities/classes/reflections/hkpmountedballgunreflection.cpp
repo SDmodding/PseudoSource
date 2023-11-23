@@ -28,23 +28,24 @@ hkClass *__fastcall hkpMountedBallGun::staticClass()
 
 // File Line: 94
 // RVA: 0xE0B160
-void __fastcall finishLoadedObjecthkpMountedBallGun(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMountedBallGun(hkpMountedBallGun *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpMountedBallGun::hkpMountedBallGun);
+  if ( p )
+    hkpMountedBallGun::hkpMountedBallGun(p, finishing);
 }
 
 // File Line: 100
 // RVA: 0xE0B180
-void __fastcall cleanupLoadedObjecthkpMountedBallGun(void *p)
+void __fastcall cleanupLoadedObjecthkpMountedBallGun(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 104
 // RVA: 0xE0B190
 hkBaseObjectVtbl *__fastcall getVtablehkpMountedBallGun()
 {
-  hkpMountedBallGun v1; // [rsp+20h] [rbp-88h]
+  hkpMountedBallGun v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpMountedBallGun::hkpMountedBallGun(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpMountedBallGunTypeInfo__()
   hkpMountedBallGunTypeInfo.m_typeName = "hkpMountedBallGun";
   hkpMountedBallGunTypeInfo.m_vtable = result;
   hkpMountedBallGunTypeInfo.m_scopedName = "!hkpMountedBallGun";
-  hkpMountedBallGunTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMountedBallGun;
-  hkpMountedBallGunTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMountedBallGun;
+  hkpMountedBallGunTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMountedBallGun;
+  hkpMountedBallGunTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMountedBallGun;
   return result;
 }
 

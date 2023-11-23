@@ -2,7 +2,7 @@
 // RVA: 0x15C230
 void __fastcall GrainFileHeader::Fixup(GrainFileHeader *this, char *data)
 {
-  int v2; // er10
+  int v2; // r10d
   float *v3; // rdx
   float v4; // eax
   __int64 v5; // r8
@@ -33,7 +33,7 @@ void __fastcall GrainFileHeader::Fixup(GrainFileHeader *this, char *data)
 
 // File Line: 67
 // RVA: 0x15C2A0
-signed __int64 __fastcall GrainFileHeader::GetGrainFileHeader(GrainFileHeader *this, char *data)
+__int64 __fastcall GrainFileHeader::GetGrainFileHeader(GrainFileHeader *this, char *data)
 {
   *(_DWORD *)this->ID = *(_DWORD *)data;
   this->SampleRate = *((_DWORD *)data + 1);

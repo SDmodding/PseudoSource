@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPhysicsBodySilhouetteGeneratorBaseClass__()
     &hkaiPhysicsBodySilhouetteGeneratorBase_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 76

@@ -28,17 +28,17 @@ hkClass *__fastcall hkpLinearParametricCurve::staticClass()
 
 // File Line: 69
 // RVA: 0xD43D30
-void __fastcall finishLoadedObjecthkpLinearParametricCurve(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLinearParametricCurve(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpLinearParametricCurve::`vftable;
+    *p = &hkpLinearParametricCurve::`vftable;
 }
 
 // File Line: 75
 // RVA: 0xD43D50
-void __fastcall cleanupLoadedObjecthkpLinearParametricCurve(void *p)
+void __fastcall cleanupLoadedObjecthkpLinearParametricCurve(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpLinearParametricCurveTypeInfo__()
   hkpLinearParametricCurveTypeInfo.m_typeName = "hkpLinearParametricCurve";
   hkpLinearParametricCurveTypeInfo.m_vtable = result;
   hkpLinearParametricCurveTypeInfo.m_scopedName = "!hkpLinearParametricCurve";
-  hkpLinearParametricCurveTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpLinearParametricCurve;
-  hkpLinearParametricCurveTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpLinearParametricCurve;
+  hkpLinearParametricCurveTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpLinearParametricCurve;
+  hkpLinearParametricCurveTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpLinearParametricCurve;
   return result;
 }
 

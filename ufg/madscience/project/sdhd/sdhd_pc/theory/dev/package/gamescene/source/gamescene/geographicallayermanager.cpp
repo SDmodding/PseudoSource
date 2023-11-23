@@ -17,14 +17,14 @@ void dynamic_initializer_for__gLayer_OutFrustum_ActDistSqrd__()
 __int64 UFG::_dynamic_initializer_for__gLayerTrapName__()
 {
   UFG::qString::qString(&UFG::gLayerTrapName, "none");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gLayerTrapName__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gLayerTrapName__);
 }
 
 // File Line: 115
 // RVA: 0x23D820
 UFG::GeographicalLayerManager *__fastcall UFG::GeographicalLayerManager::GetInstance()
 {
-  if ( !(_S1_28 & 1) )
+  if ( (_S1_28 & 1) == 0 )
   {
     _S1_28 |= 1u;
     sInstance_0.mActiveLayers.mNode.mPrev = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&sInstance_0;
@@ -60,14 +60,14 @@ UFG::qSymbol *__fastcall UFG::GeographicalLayerManager::GetActiveCategory()
 // RVA: 0x23A230
 void __fastcall UFG::GeographicalLayerManager::ClearDeactivationTimers(UFG::GeographicalLayerManager *this)
 {
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v1; // rax
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **v2; // rcx
-  signed __int64 i; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mNext; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **p_mNext; // rcx
+  __int64 i; // rax
 
-  v1 = this->mActiveLayers.mNode.mNext;
-  v2 = &this[-1].mInactiveLayers.mNode.mNext;
-  for ( i = (signed __int64)&v1[-2];
-        (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **)i != v2;
+  mNext = this->mActiveLayers.mNode.mNext;
+  p_mNext = &this[-1].mInactiveLayers.mNode.mNext;
+  for ( i = (__int64)&mNext[-2];
+        (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **)i != p_mNext;
         i = *(_QWORD *)(i + 40) - 32i64 )
   {
     *(_DWORD *)(i + 104) = 0;
@@ -76,230 +76,225 @@ void __fastcall UFG::GeographicalLayerManager::ClearDeactivationTimers(UFG::Geog
 
 // File Line: 180
 // RVA: 0x245D40
-void __fastcall UFG::GeographicalLayerManager::TrackLayer(UFG::GeographicalLayerManager *this, UFG::SceneLayer *pSceneLayer)
+void __fastcall UFG::GeographicalLayerManager::TrackLayer(
+        UFG::GeographicalLayerManager *this,
+        UFG::SceneLayer *pSceneLayer)
 {
-  UFG::SceneLayer *v2; // r8
-  UFG::GeographicalLayerManager *v3; // rdx
-  unsigned int v4; // ecx
+  unsigned int mFlags; // ecx
   bool v5; // zf
   UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v6; // rcx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v7; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mPrev; // rax
 
-  v2 = pSceneLayer;
-  v3 = this;
-  v4 = v2->mFlags;
-  if ( !((v2->mFlags >> 15) & 1) )
+  mFlags = pSceneLayer->mFlags;
+  if ( (mFlags & 0x8000) == 0 )
   {
-    if ( (v4 >> 7) & 1 )
+    if ( (mFlags & 0x80) != 0 )
     {
-      v5 = ((v4 >> 1) & 1) == 0;
-      v6 = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&v2->mPrev;
+      v5 = (mFlags & 2) == 0;
+      v6 = &pSceneLayer->UFG::qNode<UFG::SceneLayer,UFG::SceneLayer>;
       if ( v5 )
-        v3 = (UFG::GeographicalLayerManager *)((char *)v3 + 16);
+        this = (UFG::GeographicalLayerManager *)((char *)this + 16);
     }
     else
     {
-      v3 = (UFG::GeographicalLayerManager *)((char *)v3 + 32);
-      v6 = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&v2->mPrev;
+      this = (UFG::GeographicalLayerManager *)((char *)this + 32);
+      v6 = &pSceneLayer->UFG::qNode<UFG::SceneLayer,UFG::SceneLayer>;
     }
-    v7 = v3->mActiveLayers.mNode.mPrev;
-    v7->mNext = v6;
-    v6->mPrev = v7;
-    v6->mNext = &v3->mActiveLayers.mNode;
-    v3->mActiveLayers.mNode.mPrev = v6;
-    v2->mFlags |= 0x8000u;
+    mPrev = this->mActiveLayers.mNode.mPrev;
+    mPrev->mNext = v6;
+    v6->mPrev = mPrev;
+    v6->mNext = &this->mActiveLayers.mNode;
+    this->mActiveLayers.mNode.mPrev = v6;
+    pSceneLayer->mFlags |= 0x8000u;
   }
 }
 
 // File Line: 266
 // RVA: 0x245960
-__int64 __fastcall UFG::GeographicalLayerManager::TestForActivateOnList(UFG::GeographicalLayerManager *this, UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *list, bool isActiveList, UFG::qVector3 *testPos)
+__int64 __fastcall UFG::GeographicalLayerManager::TestForActivateOnList(
+        UFG::GeographicalLayerManager *this,
+        UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *list,
+        unsigned __int8 isActiveList,
+        UFG::qVector3 *testPos)
 {
-  UFG::qVector3 *v4; // r12
-  bool v5; // r13
+  unsigned __int8 v5; // r13
   UFG::GeographicalLayerManager *v6; // rbx
   UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v7; // r14
   char *v8; // rax
   UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v9; // r8
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v10; // rdx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v11; // rcx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v12; // rax
-  unsigned int v13; // ecx
-  bool v14; // zf
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v15; // rcx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v16; // rax
-  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *v17; // rdx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v18; // rax
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v19; // rcx
-  __int64 v20; // rdi
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v21; // rbx
-  UFG::SceneLayerResource *v22; // rbx
-  UFG::allocator::free_link *v23; // rax
-  UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *v24; // rcx
-  UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *v25; // rax
-  unsigned int v26; // eax
-  __int64 v27; // rsi
-  __int64 v28; // rbp
-  __int64 v29; // rax
-  signed __int64 v30; // rcx
-  signed __int64 v31; // rax
-  __int64 v32; // rcx
-  UFG::qPropertySet *v33; // rdi
-  UFG::qMemoryPool *v34; // rax
-  UFG::SceneObjectProperties *v35; // rax
-  UFG::allocator::free_link *v36; // rax
-  UFG::Event *v37; // rdx
-  unsigned int v38; // ecx
-  UFG::allocator::free_link *v39; // rax
-  char v41; // [rsp+30h] [rbp-58h]
-  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *v42; // [rsp+38h] [rbp-50h]
-  __int64 v43; // [rsp+40h] [rbp-48h]
-  void *v44; // [rsp+48h] [rbp-40h]
-  UFG::GeographicalLayerManager *v45; // [rsp+90h] [rbp+8h]
-  unsigned __int8 v46; // [rsp+98h] [rbp+10h]
-  bool v47; // [rsp+A0h] [rbp+18h]
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v10; // rcx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v11; // rax
+  int v12; // ecx
+  bool v13; // zf
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v14; // rcx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v15; // rax
+  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *p_mInactiveLayers; // rdx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v17; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mNext; // rcx
+  char v19; // di
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v20; // rbx
+  UFG::SceneLayerResource *p_mNext; // rbx
+  UFG::allocator::free_link *v22; // rax
+  UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *v23; // rcx
+  UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *mPrev; // rax
+  unsigned int mPropertySetCount; // eax
+  __int64 v26; // rsi
+  __int64 v27; // rbp
+  __int64 mOffset; // rax
+  char *v29; // rcx
+  char *v30; // rax
+  __int64 v31; // rcx
+  UFG::qPropertySet *v32; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::SceneObjectProperties *v34; // rax
+  UFG::allocator::free_link *v35; // rax
+  UFG::Event *v36; // rdx
+  unsigned int mUID; // ecx
+  UFG::allocator::free_link *v38; // rax
+  UFG::PropertyModificationCallbackSupress v40; // [rsp+30h] [rbp-58h] BYREF
+  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *v41; // [rsp+38h] [rbp-50h]
+  __int64 v42; // [rsp+40h] [rbp-48h]
+  void *v43; // [rsp+48h] [rbp-40h]
+  unsigned __int8 v45; // [rsp+98h] [rbp+10h]
 
-  v47 = isActiveList;
-  v45 = this;
-  v43 = -2i64;
-  v4 = testPos;
+  v42 = -2i64;
   v5 = isActiveList;
   v6 = this;
-  v46 = 0;
+  v45 = 0;
   v7 = list->mNode.mPrev - 2;
-  v42 = list - 2;
+  v41 = list - 2;
   if ( v7 != (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&list[-2] )
   {
     while ( 1 )
     {
-      if ( ((LODWORD(v7[3].mPrev) >> 1) & 1) == v5 )
+      if ( (((__int64)v7[3].mPrev & 2) != 0) == v5 )
       {
-        v19 = v7[4].mNext;
-        if ( v19 )
-          v20 = ((unsigned __int8 (__fastcall *)(UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *, UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *, UFG::qVector3 *, bool))v19->mPrev[1].mPrev)(
-                  v19,
+        mNext = v7[4].mNext;
+        if ( mNext )
+          v19 = ((__int64 (__fastcall *)(UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *, UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *, UFG::qVector3 *, _QWORD))mNext->mPrev[1].mPrev)(
+                  mNext,
                   v7,
-                  v4,
+                  testPos,
                   v5);
         else
-          LOBYTE(v20) = 0;
-        if ( (_BYTE)v20 != v5 )
+          v19 = 0;
+        if ( v19 != v5 )
         {
-          v21 = v7[2].mNext;
-          UFG::SceneLayer::EnableActivate((UFG::SceneLayer *)v7, v5 == 0, 0, 0);
-          v7 = v21 - 2;
-          v46 = 1;
+          v20 = v7[2].mNext;
+          UFG::SceneLayer::EnableActivate((UFG::SceneLayer *)v7, v5 == 0, NON_PERSISTENT, 0);
+          v7 = v20 - 2;
+          v45 = 1;
         }
         if ( v5 )
         {
-          if ( (_BYTE)v20 )
+          if ( v19 )
           {
-            v22 = (UFG::SceneLayerResource *)&v7[4].mPrev[-6].mNext;
-            if ( v22 != (UFG::SceneLayerResource *)&v7[-2] )
+            p_mNext = (UFG::SceneLayerResource *)&v7[4].mPrev[-6].mNext;
+            if ( p_mNext != (UFG::SceneLayerResource *)&v7[-2] )
             {
               do
               {
                 if ( !UFG::SceneLayer::sbManageSubLayerActivation
-                  || (v22->mFlags >> 2) & 1
-                  || UFG::SceneLayerResource::IsGeoInFrustrum(v22)
-                  || UFG::SceneLayerResource::IsGeoClose(v22, v4, gLayer_OutFrustum_ActDistSqrd) )
+                  || (p_mNext->mFlags & 4) != 0
+                  || UFG::SceneLayerResource::IsGeoInFrustrum(p_mNext)
+                  || UFG::SceneLayerResource::IsGeoClose(p_mNext, testPos, gLayer_OutFrustum_ActDistSqrd) )
                 {
-                  if ( !(v22->mFlags & 8) )
+                  if ( (p_mNext->mFlags & 8) == 0 )
                   {
-                    UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v41);
-                    if ( !UFG::gIncrementalActivateManager_Active || (v22->mFlags >> 2) & 1 )
+                    UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(&v40);
+                    if ( !UFG::gIncrementalActivateManager_Active || (p_mNext->mFlags & 4) != 0 )
                     {
-                      v26 = v22->mPropertySetCount;
-                      if ( v26 )
+                      mPropertySetCount = p_mNext->mPropertySetCount;
+                      if ( mPropertySetCount )
                       {
-                        v27 = 0i64;
-                        v28 = v26;
+                        v26 = 0i64;
+                        v27 = mPropertySetCount;
                         do
                         {
-                          v29 = v22->mPropertySets.mOffset;
-                          if ( v29 )
-                            v30 = (signed __int64)&v22->mPropertySets + v29;
+                          mOffset = p_mNext->mPropertySets.mOffset;
+                          if ( mOffset )
+                            v29 = (char *)&p_mNext->mPropertySets + mOffset;
                           else
-                            v30 = 0i64;
-                          v31 = v27 + v30;
-                          v32 = *(_QWORD *)(v27 + v30);
-                          if ( v32 )
-                            v33 = (UFG::qPropertySet *)(v32 + v31);
+                            v29 = 0i64;
+                          v30 = &v29[v26];
+                          v31 = *(_QWORD *)&v29[v26];
+                          if ( v31 )
+                            v32 = (UFG::qPropertySet *)&v30[v31];
                           else
-                            v33 = 0i64;
-                          v34 = UFG::GetSimulationMemoryPool();
-                          v35 = (UFG::SceneObjectProperties *)UFG::qMemoryPool::Allocate(
-                                                                v34,
+                            v32 = 0i64;
+                          SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+                          v34 = (UFG::SceneObjectProperties *)UFG::qMemoryPool::Allocate(
+                                                                SimulationMemoryPool,
                                                                 0xA8ui64,
                                                                 "SceneObjectProperties-Layer",
                                                                 0i64,
                                                                 1u);
-                          v44 = v35;
-                          if ( v35 )
-                            UFG::SceneObjectProperties::SceneObjectProperties(v35, v33, v22);
-                          if ( !v35->mpParent )
-                            UFG::SceneObjectProperties::Activate(v35, 1u, 0i64, 0i64);
-                          v27 += 8i64;
-                          --v28;
+                          v43 = v34;
+                          if ( v34 )
+                            UFG::SceneObjectProperties::SceneObjectProperties(v34, v32, p_mNext);
+                          if ( !v34->mpParent )
+                            UFG::SceneObjectProperties::Activate(v34, 1u, 0i64, 0i64);
+                          v26 += 8i64;
+                          --v27;
                         }
-                        while ( v28 );
+                        while ( v27 );
                       }
-                      v36 = UFG::qMalloc(0x38ui64, "layerActivatedEvent", 0i64);
-                      v37 = (UFG::Event *)v36;
-                      v44 = v36;
-                      if ( v36 )
+                      v35 = UFG::qMalloc(0x38ui64, "layerActivatedEvent", 0i64);
+                      v36 = (UFG::Event *)v35;
+                      v43 = v35;
+                      if ( v35 )
                       {
-                        v38 = UFG::gSceneLayerActivatedChannel.mUID;
-                        v39 = v36 + 1;
-                        v39->mNext = v39;
-                        v39[1].mNext = v39;
-                        v37->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
-                        v37->m_EventUID = v38;
-                        v37->m_NamePTR = 0i64;
+                        mUID = UFG::gSceneLayerActivatedChannel.mUID;
+                        v38 = v35 + 1;
+                        v38->mNext = v38;
+                        v38[1].mNext = v38;
+                        v36->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
+                        v36->m_EventUID = mUID;
+                        v36->m_NamePTR = 0i64;
                       }
                       else
                       {
-                        v37 = 0i64;
+                        v36 = 0i64;
                       }
-                      UFG::EventDispatcher::QueueEvent(&UFG::EventDispatcher::mInstance, v37);
+                      UFG::EventDispatcher::QueueEvent(&UFG::EventDispatcher::mInstance, v36);
                     }
                     else
                     {
-                      v23 = UFG::qMalloc(0x20ui64, "ActivatingLayer", 0i64);
-                      v24 = (UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *)v23;
-                      v44 = v23;
-                      if ( v23 )
+                      v22 = UFG::qMalloc(0x20ui64, "ActivatingLayer", 0i64);
+                      v23 = (UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *)v22;
+                      v43 = v22;
+                      if ( v22 )
                       {
-                        v23->mNext = v23;
-                        v23[1].mNext = v23;
-                        v23[2].mNext = (UFG::allocator::free_link *)v22;
-                        LODWORD(v23[3].mNext) = 0;
+                        v22->mNext = v22;
+                        v22[1].mNext = v22;
+                        v22[2].mNext = (UFG::allocator::free_link *)p_mNext;
+                        LODWORD(v22[3].mNext) = 0;
                       }
                       else
                       {
-                        v24 = 0i64;
+                        v23 = 0i64;
                       }
-                      v25 = UFG::smActivatingLayers.mNode.mPrev;
-                      UFG::smActivatingLayers.mNode.mPrev->mNext = v24;
-                      v24->mPrev = v25;
-                      v24->mNext = (UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *)&UFG::smActivatingLayers;
-                      UFG::smActivatingLayers.mNode.mPrev = v24;
+                      mPrev = UFG::smActivatingLayers.mNode.mPrev;
+                      UFG::smActivatingLayers.mNode.mPrev->mNext = v23;
+                      v23->mPrev = mPrev;
+                      v23->mNext = (UFG::qNode<UFG::ActivatingLayer,UFG::ActivatingLayer> *)&UFG::smActivatingLayers;
+                      UFG::smActivatingLayers.mNode.mPrev = v23;
                     }
-                    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v41);
-                    v22->mFlags |= 8u;
+                    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(&v40);
+                    p_mNext->mFlags |= 8u;
                   }
                 }
-                else if ( v22->mFlags & 8
-                       && !UFG::SceneLayerResource::IsGeoClose(v22, v4, gLayer_InFrustum_ActDistSqrd)
-                       && v22->mFlags & 8 )
+                else if ( (p_mNext->mFlags & 8) != 0
+                       && !UFG::SceneLayerResource::IsGeoClose(p_mNext, testPos, gLayer_InFrustum_ActDistSqrd)
+                       && (p_mNext->mFlags & 8) != 0 )
                 {
-                  UFG::IncrementalActivateManager::Deactivate(v22, 0);
-                  v22->mFlags &= 0xFFFFFFF7;
+                  UFG::IncrementalActivateManager::Deactivate(p_mNext, 0);
+                  p_mNext->mFlags &= ~8u;
                 }
-                v22 = (UFG::SceneLayerResource *)&v22->mNext[-6].mNext;
+                p_mNext = (UFG::SceneLayerResource *)&p_mNext->mNext[-6].mNext;
               }
-              while ( v22 != (UFG::SceneLayerResource *)&v7[-2] );
-              v5 = v47;
+              while ( p_mNext != (UFG::SceneLayerResource *)&v7[-2] );
+              v5 = isActiveList;
             }
           }
         }
@@ -311,52 +306,51 @@ __int64 __fastcall UFG::GeographicalLayerManager::TestForActivateOnList(UFG::Geo
         v8);
       v9 = v7;
       v7 = v7[2].mNext - 2;
-      if ( (LODWORD(v9[3].mPrev) >> 15) & 1 )
+      if ( ((__int64)v9[3].mPrev & 0x8000) != 0 )
       {
-        v10 = v9 + 2;
-        v11 = v9[2].mPrev;
-        v12 = v9[2].mNext;
-        v11->mNext = v12;
-        v12->mPrev = v11;
-        v10->mPrev = v10;
-        v10->mNext = v10;
+        v10 = v9[2].mPrev;
+        v11 = v9[2].mNext;
+        v10->mNext = v11;
+        v11->mPrev = v10;
+        v9[2].mPrev = v9 + 2;
+        v9[2].mNext = v9 + 2;
       }
-      v13 = (unsigned int)v9[3].mPrev;
-      if ( !((LODWORD(v9[3].mPrev) >> 15) & 1) )
+      v12 = (int)v9[3].mPrev;
+      if ( (v12 & 0x8000) == 0 )
         break;
 LABEL_56:
       v7 = v7[2].mPrev - 2;
-      v6 = v45;
-      if ( v7 == (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)v42 )
-        return v46;
+      v6 = this;
+      if ( v7 == (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)v41 )
+        return v45;
     }
-    if ( (v13 >> 7) & 1 )
+    if ( (v12 & 0x80) != 0 )
     {
-      v14 = ((v13 >> 1) & 1) == 0;
-      v15 = v9 + 2;
-      if ( !v14 )
+      v13 = (v12 & 2) == 0;
+      v14 = v9 + 2;
+      if ( !v13 )
       {
-        v16 = v6->mActiveLayers.mNode.mPrev;
-        v16->mNext = v15;
-        v15->mPrev = v16;
+        v15 = v6->mActiveLayers.mNode.mPrev;
+        v15->mNext = v14;
+        v14->mPrev = v15;
         v9[2].mNext = &v6->mActiveLayers.mNode;
-        v6->mActiveLayers.mNode.mPrev = v15;
+        v6->mActiveLayers.mNode.mPrev = v14;
 LABEL_12:
         LODWORD(v9[3].mPrev) |= 0x8000u;
         goto LABEL_56;
       }
-      v17 = &v6->mInactiveLayers;
+      p_mInactiveLayers = &v6->mInactiveLayers;
     }
     else
     {
-      v17 = &v6->mDisabledLayers;
-      v15 = v9 + 2;
+      p_mInactiveLayers = &v6->mDisabledLayers;
+      v14 = v9 + 2;
     }
-    v18 = v17->mNode.mPrev;
-    v18->mNext = v15;
-    v15->mPrev = v18;
-    v15->mNext = &v17->mNode;
-    v17->mNode.mPrev = v15;
+    v17 = p_mInactiveLayers->mNode.mPrev;
+    v17->mNext = v14;
+    v14->mPrev = v17;
+    v14->mNext = &p_mInactiveLayers->mNode;
+    p_mInactiveLayers->mNode.mPrev = v14;
     goto LABEL_12;
   }
   return 0i64;
@@ -366,113 +360,108 @@ LABEL_12:
 // RVA: 0x23ACD0
 void __fastcall UFG::GeographicalLayerManager::DeactivateActiveGeoLayers(UFG::GeographicalLayerManager *this)
 {
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v1; // rbp
-  UFG::GeographicalLayerManager *v2; // rdi
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *p_mNext; // rbp
   UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v3; // rbx
   char *v4; // rax
-  signed __int64 v5; // rsi
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v6; // rcx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v7; // rax
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v8; // rdx
-  unsigned int v9; // ecx
-  bool v10; // zf
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v11; // rcx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v12; // rax
-  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *v13; // rdx
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v14; // rax
+  __int64 v5; // rsi
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mPrev; // rcx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mNext; // rax
+  int v8; // ecx
+  bool v9; // zf
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v10; // rcx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v11; // rax
+  UFG::qList<UFG::SceneLayer,UFG::SceneLayer,1,0> *p_mInactiveLayers; // rdx
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v13; // rax
 
-  v1 = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)((char *)&this[-1].mInactiveLayers.mNode + 8);
-  v2 = this;
+  p_mNext = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&this[-1].mInactiveLayers.mNode.mNext;
   v3 = this->mActiveLayers.mNode.mPrev - 2;
   if ( v3 != (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)&this[-1].mInactiveLayers.mNode.mNext )
   {
     while ( 1 )
     {
-      if ( (LODWORD(v3[3].mPrev) >> 1) & 1 )
+      if ( ((__int64)v3[3].mPrev & 2) != 0 )
       {
-        v5 = (signed __int64)&v3[2].mNext[-2];
-        UFG::SceneLayer::EnableActivate((UFG::SceneLayer *)v3, 0, 0, 0);
+        v5 = (__int64)&v3[2].mNext[-2];
+        UFG::SceneLayer::EnableActivate((UFG::SceneLayer *)v3, 0, NON_PERSISTENT, 0);
         goto LABEL_13;
       }
       v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[1].mNext);
       UFG::qPrintf("WARNING: Geographical layer %s was alread deactivated outside of the geo managers control\n", v4);
-      v5 = (signed __int64)&v3[2].mNext[-2];
-      if ( (LODWORD(v3[3].mPrev) >> 15) & 1 )
+      v5 = (__int64)&v3[2].mNext[-2];
+      if ( ((__int64)v3[3].mPrev & 0x8000) != 0 )
       {
-        v6 = v3[2].mPrev;
-        v7 = v3[2].mNext;
-        v8 = v3 + 2;
-        v6->mNext = v7;
-        v7->mPrev = v6;
-        v8->mPrev = v8;
-        v8->mNext = v8;
+        mPrev = v3[2].mPrev;
+        mNext = v3[2].mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        v3[2].mPrev = v3 + 2;
+        v3[2].mNext = v3 + 2;
       }
-      v9 = (unsigned int)v3[3].mPrev;
-      if ( (LODWORD(v3[3].mPrev) >> 15) & 1 )
+      v8 = (int)v3[3].mPrev;
+      if ( (v8 & 0x8000) != 0 )
         goto LABEL_13;
-      if ( !((v9 >> 7) & 1) )
+      if ( (v8 & 0x80) == 0 )
         break;
-      v10 = ((v9 >> 1) & 1) == 0;
-      v11 = v3 + 2;
-      if ( v10 )
+      v9 = (v8 & 2) == 0;
+      v10 = v3 + 2;
+      if ( v9 )
       {
-        v13 = &v2->mInactiveLayers;
+        p_mInactiveLayers = &this->mInactiveLayers;
 LABEL_11:
-        v14 = v13->mNode.mPrev;
-        v14->mNext = v11;
-        v11->mPrev = v14;
-        v11->mNext = &v13->mNode;
-        v13->mNode.mPrev = v11;
+        v13 = p_mInactiveLayers->mNode.mPrev;
+        v13->mNext = v10;
+        v10->mPrev = v13;
+        v10->mNext = &p_mInactiveLayers->mNode;
+        p_mInactiveLayers->mNode.mPrev = v10;
         LODWORD(v3[3].mPrev) |= 0x8000u;
         goto LABEL_13;
       }
-      v12 = v2->mActiveLayers.mNode.mPrev;
-      v12->mNext = v11;
-      v11->mPrev = v12;
-      v3[2].mNext = &v2->mActiveLayers.mNode;
-      v2->mActiveLayers.mNode.mPrev = v11;
+      v11 = this->mActiveLayers.mNode.mPrev;
+      v11->mNext = v10;
+      v10->mPrev = v11;
+      v3[2].mNext = &this->mActiveLayers.mNode;
+      this->mActiveLayers.mNode.mPrev = v10;
       LODWORD(v3[3].mPrev) |= 0x8000u;
 LABEL_13:
       v3 = (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *)(*(_QWORD *)(v5 + 32) - 32i64);
-      if ( v3 == v1 )
+      if ( v3 == p_mNext )
         return;
     }
-    v13 = &v2->mDisabledLayers;
-    v11 = v3 + 2;
+    p_mInactiveLayers = &this->mDisabledLayers;
+    v10 = v3 + 2;
     goto LABEL_11;
   }
 }
 
 // File Line: 424
 // RVA: 0x246550
-char __fastcall UFG::GeographicalLayerManager::Update(UFG::GeographicalLayerManager *this, float deltaTime, UFG::qVector3 *testPos)
+char __fastcall UFG::GeographicalLayerManager::Update(
+        UFG::GeographicalLayerManager *this,
+        float deltaTime,
+        UFG::qVector3 *testPos)
 {
-  UFG::qVector3 *v3; // rsi
-  UFG::GeographicalLayerManager *v4; // rdi
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *v5; // rax
-  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **v6; // rcx
-  signed __int64 i; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> *mNext; // rax
+  UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **p_mNext; // rcx
+  __int64 i; // rax
   char v8; // bl
   char v9; // al
   char v10; // bl
 
-  v3 = testPos;
-  v4 = this;
   if ( !this->mUpdateEnabled )
     return 0;
   if ( gImmediateAlways )
     this->mAllowImmediateActivation = 1;
-  v5 = this->mActiveLayers.mNode.mNext;
-  v6 = &this[-1].mInactiveLayers.mNode.mNext;
-  for ( i = (signed __int64)&v5[-2];
-        (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **)i != v6;
+  mNext = this->mActiveLayers.mNode.mNext;
+  p_mNext = &this[-1].mInactiveLayers.mNode.mNext;
+  for ( i = (__int64)&mNext[-2];
+        (UFG::qNode<UFG::SceneLayer,UFG::SceneLayer> **)i != p_mNext;
         i = *(_QWORD *)(i + 40) - 32i64 )
   {
     *(float *)(i + 104) = *(float *)(i + 104) - deltaTime;
   }
-  v8 = UFG::GeographicalLayerManager::TestForActivateOnList(v4, &v4->mActiveLayers, 1, testPos);
-  v9 = UFG::GeographicalLayerManager::TestForActivateOnList(v4, &v4->mInactiveLayers, 0, v3);
-  v4->mAllowImmediateActivation = 0;
+  v8 = UFG::GeographicalLayerManager::TestForActivateOnList(this, &this->mActiveLayers, 1u, testPos);
+  v9 = UFG::GeographicalLayerManager::TestForActivateOnList(this, &this->mInactiveLayers, 0, testPos);
+  this->mAllowImmediateActivation = 0;
   v10 = v9 | v8;
   UFG::IncrementalActivateManager::Service(deltaTime);
   return v10;

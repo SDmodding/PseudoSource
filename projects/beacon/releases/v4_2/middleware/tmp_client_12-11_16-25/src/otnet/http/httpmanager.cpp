@@ -2,14 +2,12 @@
 // RVA: 0xECE76C
 void __fastcall OSuite::ZHttpManager::ZHttpManager(OSuite::ZHttpManager *this)
 {
-  OSuite::ZHttpManager *v1; // rdi
   OSuite::ZHttpConnectionManager *v2; // rax
   OSuite::ZHttpRequestManager *v3; // rbx
   OSuite::ZHttpConnectionManager *v4; // rax
   OSuite::ZHttpRequestManager *v5; // rax
   OSuite::ZHttpRequestManager *v6; // rax
 
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable;
   v2 = (OSuite::ZHttpConnectionManager *)OSuite::ZObject::operator new(0x40ui64);
   v3 = 0i64;
@@ -23,7 +21,7 @@ void __fastcall OSuite::ZHttpManager::ZHttpManager(OSuite::ZHttpManager *this)
   {
     v4 = 0i64;
   }
-  v1->m_httpConnectionManager = v4;
+  this->m_httpConnectionManager = v4;
   v5 = (OSuite::ZHttpRequestManager *)OSuite::ZObject::operator new(0x80ui64);
   if ( v5 )
   {
@@ -35,24 +33,22 @@ void __fastcall OSuite::ZHttpManager::ZHttpManager(OSuite::ZHttpManager *this)
     OSuite::ZHttpRequestManager::ZHttpRequestManager(v5);
     v3 = v6;
   }
-  v1->m_httpRequestManager = v3;
+  this->m_httpRequestManager = v3;
 }
 
 // File Line: 15
 // RVA: 0xECE7F0
 void __fastcall OSuite::ZHttpManager::~ZHttpManager(OSuite::ZHttpManager *this)
 {
-  OSuite::ZHttpManager *v1; // rbx
-  OSuite::ZHttpRequestManager *v2; // rcx
-  OSuite::ZHttpConnectionManager *v3; // rcx
+  OSuite::ZHttpRequestManager *m_httpRequestManager; // rcx
+  OSuite::ZHttpConnectionManager *m_httpConnectionManager; // rcx
 
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable;
-  v2 = this->m_httpRequestManager;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);
-  v3 = v1->m_httpConnectionManager;
-  if ( v3 )
-    v3->vfptr->__vecDelDtor((OSuite::ZObject *)&v3->vfptr, 1u);
+  m_httpRequestManager = this->m_httpRequestManager;
+  if ( m_httpRequestManager )
+    m_httpRequestManager->vfptr->__vecDelDtor(m_httpRequestManager, 1u);
+  m_httpConnectionManager = this->m_httpConnectionManager;
+  if ( m_httpConnectionManager )
+    m_httpConnectionManager->vfptr->__vecDelDtor(m_httpConnectionManager, 1u);
 }
 

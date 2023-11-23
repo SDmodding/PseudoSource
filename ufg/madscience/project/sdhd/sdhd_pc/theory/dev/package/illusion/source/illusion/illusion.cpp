@@ -2,16 +2,13 @@
 // RVA: 0x1457D30
 __int64 Illusion::_dynamic_initializer_for__gDefaultMemoryStreamer__()
 {
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gDefaultMemoryStreamer__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gDefaultMemoryStreamer__);
 }
 
 // File Line: 143
 // RVA: 0x927F0
 void __fastcall Illusion::Engine::Init(Illusion::Engine *this)
 {
-  Illusion::Engine *v1; // rbx
-
-  v1 = this;
   *(_QWORD *)&this->mFrameCount = 3i64;
   this->MemoryStreamer = &Illusion::gDefaultMemoryStreamer;
   this->FrameMemory = 0i64;
@@ -22,14 +19,15 @@ void __fastcall Illusion::Engine::Init(Illusion::Engine *this)
   this->FrameIndexMemory = 0i64;
   Illusion::StateSystem::Init(&Illusion::gStateSystem);
   Illusion::RenderQueueSystem::Init();
-  _((AMD_HD3D *)v1);
+  _((AMD_HD3D *)this);
 }
 
 // File Line: 177
 // RVA: 0x95B60
+// attributes: thunk
 void __fastcall Illusion::Engine::WaitUntilSafeToDelete(Illusion::Engine *this)
 {
-  Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)this);
+  Illusion::IEnginePlat::WaitUntilGPUDone(this);
 }
 
 // File Line: 184
@@ -53,6 +51,7 @@ void __fastcall Illusion::Engine::EndFrame(Illusion::Engine *this)
 
 // File Line: 212
 // RVA: 0x95600
+// attributes: thunk
 void __fastcall Illusion::Engine::RenderThreadProcessDeleteQueue(Illusion::Engine *this)
 {
   Illusion::Factory::ProcessWaitDeleteQueueAll();

@@ -15,7 +15,9 @@ float __fastcall UFG::NavModuleLocal::GetTurningRadius(UFG::NavModuleLocal *this
 
 // File Line: 53
 // RVA: 0xF0E60
-void __fastcall UFG::NavModuleLocal::SetCollisionAvoidanceType(UFG::NavModuleLocal *this, UFG::eCollisionAvoidanceType type)
+void __fastcall UFG::NavModuleLocal::SetCollisionAvoidanceType(
+        UFG::NavModuleLocal *this,
+        UFG::eCollisionAvoidanceType type)
 {
   this->m_avoidanceType = type;
 }

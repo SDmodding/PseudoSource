@@ -11,15 +11,13 @@ void __fastcall Illusion::ShaderConstBufInfo::ShaderConstBufInfo(Illusion::Shade
 // RVA: 0xA16610
 void __fastcall Illusion::ShaderConstBufInfo::~ShaderConstBufInfo(Illusion::ShaderConstBufInfo *this)
 {
-  Illusion::ShaderConstBufInfo *v1; // rbx
-  Illusion::ShaderConstBufInfo::VarInfo *v2; // rcx
+  Illusion::ShaderConstBufInfo::VarInfo *mVarInfo; // rcx
 
-  v1 = this;
-  v2 = this->mVarInfo;
-  if ( v2 )
+  mVarInfo = this->mVarInfo;
+  if ( mVarInfo )
   {
-    operator delete[](v2);
-    v1->mVarInfo = 0i64;
+    operator delete[](mVarInfo);
+    this->mVarInfo = 0i64;
   }
 }
 

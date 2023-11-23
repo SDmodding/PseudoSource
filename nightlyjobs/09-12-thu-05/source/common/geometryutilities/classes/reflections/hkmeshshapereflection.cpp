@@ -56,7 +56,7 @@ void dynamic_initializer_for__hkMeshSectionClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 123
@@ -103,7 +103,7 @@ void dynamic_initializer_for__hkMeshSectionCinfoClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 176

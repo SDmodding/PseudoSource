@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiDefaultAstarEdgeFilterClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 56
@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiDefaultAstarEdgeFilter::staticClass()
 
 // File Line: 63
 // RVA: 0xBB6500
-void __fastcall finishLoadedObjecthkaiDefaultAstarEdgeFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDefaultAstarEdgeFilter(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDefaultAstarEdgeFilter::`vftable;
+    *p = &hkaiDefaultAstarEdgeFilter::`vftable;
 }
 
 // File Line: 69
 // RVA: 0xBB6520
-void __fastcall cleanupLoadedObjecthkaiDefaultAstarEdgeFilter(void *p)
+void __fastcall cleanupLoadedObjecthkaiDefaultAstarEdgeFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiDefaultAstarEdgeFilterTypeInfo__()
   hkaiDefaultAstarEdgeFilterTypeInfo.m_typeName = "hkaiDefaultAstarEdgeFilter";
   hkaiDefaultAstarEdgeFilterTypeInfo.m_vtable = result;
   hkaiDefaultAstarEdgeFilterTypeInfo.m_scopedName = "!hkaiDefaultAstarEdgeFilter";
-  hkaiDefaultAstarEdgeFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDefaultAstarEdgeFilter;
-  hkaiDefaultAstarEdgeFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDefaultAstarEdgeFilter;
+  hkaiDefaultAstarEdgeFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDefaultAstarEdgeFilter;
+  hkaiDefaultAstarEdgeFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDefaultAstarEdgeFilter;
   return result;
 }
 

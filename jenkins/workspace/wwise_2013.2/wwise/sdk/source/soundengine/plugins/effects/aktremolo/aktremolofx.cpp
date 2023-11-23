@@ -4,7 +4,7 @@ void __fastcall CreateTremoloFX(AK::IAkPluginMemAlloc *in_pAllocator)
 {
   CAkTremoloFX *v1; // rax
 
-  v1 = (CAkTremoloFX *)in_pAllocator->vfptr->Malloc(in_pAllocator, 312ui64);
+  v1 = (CAkTremoloFX *)in_pAllocator->vfptr->Malloc(in_pAllocator, 312i64);
   if ( v1 )
     CAkTremoloFX::CAkTremoloFX(v1);
 }
@@ -64,52 +64,39 @@ void __fastcall CAkTremoloFX::~CAkTremoloFX(CAkTremoloFX *this)
 
 // File Line: 52
 // RVA: 0xAF2D10
-signed __int64 __fastcall CAkTremoloFX::Init(CAkTremoloFX *this, AK::IAkPluginMemAlloc *in_pAllocator, AK::IAkEffectPluginContext *in_pFXCtx, AK::IAkPluginParam *in_pParams, AkAudioFormat *in_rFormat)
+__int64 __fastcall CAkTremoloFX::Init(
+        CAkTremoloFX *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        AK::IAkEffectPluginContext *in_pFXCtx,
+        CAkTremoloFXParams *in_pParams,
+        AkAudioFormat *in_rFormat)
 {
-  AK::IAkPluginMemAlloc *v5; // rbx
-  CAkTremoloFX *v6; // rdi
-  unsigned int v7; // eax
+  unsigned int uSampleRate; // eax
   int v8; // edx
 
-  this->m_pSharedParams = (CAkTremoloFXParams *)in_pParams;
-  v5 = in_pAllocator;
-  this->m_FXInfo.Params.RTPC.fModDepth = *(float *)&in_pParams[1].vfptr;
-  v6 = this;
-  this->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform = HIDWORD(in_pParams[1].vfptr);
-  this->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency = *(float *)&in_pParams[2].vfptr;
-  this->m_FXInfo.Params.RTPC.modParams.lfoParams.fSmooth = *((float *)&in_pParams[2].vfptr + 1);
-  this->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM = *(float *)&in_pParams[3].vfptr;
-  this->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseOffset = *((float *)&in_pParams[3].vfptr + 1);
-  this->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread = *(float *)&in_pParams[4].vfptr;
-  this->m_FXInfo.Params.RTPC.modParams.phaseParams.ePhaseMode = HIDWORD(in_pParams[4].vfptr);
-  this->m_FXInfo.Params.RTPC.fOutputGain = *(float *)&in_pParams[5].vfptr;
-  *(_DWORD *)&this->m_FXInfo.Params.RTPC.bHasChanged = HIDWORD(in_pParams[5].vfptr);
-  *(_DWORD *)&this->m_FXInfo.Params.NonRTPC.bProcessCenter = in_pParams[6].vfptr;
-  CAkTremoloFXParams::SetDirty((CAkTremoloFXParams *)in_pParams, 0);
-  v6->m_FXInfo.PrevParams.RTPC.fModDepth = v6->m_FXInfo.Params.RTPC.fModDepth;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.eWaveform = v6->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fFrequency = v6->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fSmooth = v6->m_FXInfo.Params.RTPC.modParams.lfoParams.fSmooth;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fPWM = v6->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseOffset = v6->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseOffset;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseSpread = v6->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread;
-  v6->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.ePhaseMode = v6->m_FXInfo.Params.RTPC.modParams.phaseParams.ePhaseMode;
-  v6->m_FXInfo.PrevParams.RTPC.fOutputGain = v6->m_FXInfo.Params.RTPC.fOutputGain;
-  *(_DWORD *)&v6->m_FXInfo.PrevParams.RTPC.bHasChanged = *(_DWORD *)&v6->m_FXInfo.Params.RTPC.bHasChanged;
-  *(_DWORD *)&v6->m_FXInfo.PrevParams.NonRTPC.bProcessCenter = *(_DWORD *)&v6->m_FXInfo.Params.NonRTPC.bProcessCenter;
-  v7 = in_rFormat->uSampleRate;
-  v6->m_pAllocator = v5;
-  v6->m_FXInfo.uSampleRate = v7;
+  this->m_pSharedParams = in_pParams;
+  this->m_FXInfo.Params.RTPC.fModDepth = in_pParams->m_Params.RTPC.fModDepth;
+  this->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform = in_pParams->m_Params.RTPC.modParams.lfoParams.eWaveform;
+  *(AK::IAkPluginParam *)&this->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency = *(AK::IAkPluginParam *)&in_pParams->m_Params.RTPC.modParams.lfoParams.fFrequency;
+  *(AK::IAkPluginParam *)&this->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM = *(AK::IAkPluginParam *)&in_pParams->m_Params.RTPC.modParams.lfoParams.fPWM;
+  *(AK::IAkPluginParam *)&this->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread = *(AK::IAkPluginParam *)&in_pParams->m_Params.RTPC.modParams.phaseParams.fPhaseSpread;
+  *(AK::IAkPluginParam *)&this->m_FXInfo.Params.RTPC.fOutputGain = *(AK::IAkPluginParam *)&in_pParams->m_Params.RTPC.fOutputGain;
+  *(_DWORD *)&this->m_FXInfo.Params.NonRTPC.bProcessCenter = *(_DWORD *)&in_pParams->m_Params.NonRTPC.bProcessCenter;
+  CAkTremoloFXParams::SetDirty(in_pParams, 0);
+  this->m_FXInfo.PrevParams = this->m_FXInfo.Params;
+  uSampleRate = in_rFormat->uSampleRate;
+  this->m_pAllocator = in_pAllocator;
+  this->m_FXInfo.uSampleRate = uSampleRate;
   v8 = *((_DWORD *)in_rFormat + 1) & 0x3FFFF;
-  if ( !v6->m_FXInfo.Params.NonRTPC.bProcessCenter && (*((_BYTE *)in_rFormat + 4) & 7) == 7 )
+  if ( !this->m_FXInfo.Params.NonRTPC.bProcessCenter && (*((_BYTE *)in_rFormat + 4) & 7) == 7 )
     v8 = *((_DWORD *)in_rFormat + 1) & 0x3FFFB;
-  if ( !v6->m_FXInfo.Params.NonRTPC.bProcessLFE )
-    v8 &= 0xFFFFFFF7;
+  if ( !this->m_FXInfo.Params.NonRTPC.bProcessLFE )
+    v8 &= ~8u;
   DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy>::Setup(
-    (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&v6->m_lfo,
+    (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&this->m_lfo,
     v8,
-    v6->m_FXInfo.uSampleRate,
-    &v6->m_FXInfo.Params.RTPC.modParams);
+    this->m_FXInfo.uSampleRate,
+    &this->m_FXInfo.Params.RTPC.modParams);
   return 1i64;
 }
 
@@ -118,9 +105,9 @@ signed __int64 __fastcall CAkTremoloFX::Init(CAkTremoloFX *this, AK::IAkPluginMe
 void __fastcall CAkTremoloFX::SetupLFO(CAkTremoloFX *this, unsigned int in_uChannelMask)
 {
   if ( !this->m_FXInfo.Params.NonRTPC.bProcessCenter && (in_uChannelMask & 7) == 7 )
-    in_uChannelMask &= 0xFFFFFFFB;
+    in_uChannelMask &= ~4u;
   if ( !this->m_FXInfo.Params.NonRTPC.bProcessLFE )
-    in_uChannelMask &= 0xFFFFFFF7;
+    in_uChannelMask &= ~8u;
   DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy>::Setup(
     (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&this->m_lfo,
     in_uChannelMask,
@@ -130,26 +117,21 @@ void __fastcall CAkTremoloFX::SetupLFO(CAkTremoloFX *this, unsigned int in_uChan
 
 // File Line: 85
 // RVA: 0xAF2E20
-signed __int64 __fastcall CAkTremoloFX::Term(CAkTremoloFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkTremoloFX::Term(CAkTremoloFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rdi
-  CAkTremoloFX *v3; // rbx
-
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this )
   {
-    this->vfptr->__vecDelDtor((AK::IAkPlugin *)this, 0);
-    v2->vfptr->Free(v2, v3);
+    this->vfptr->__vecDelDtor(this, 0i64);
+    in_pAllocator->vfptr->Free(in_pAllocator, this);
   }
   return 1i64;
 }
 
 // File Line: 93
 // RVA: 0xAF2E70
-signed __int64 __fastcall CAkTremoloFX::GetPluginInfo(CAkTremoloFX *this, AkPluginInfo *out_rPluginInfo)
+__int64 __fastcall CAkTremoloFX::GetPluginInfo(CAkTremoloFX *this, AkPluginInfo *out_rPluginInfo)
 {
-  out_rPluginInfo->eType = 3;
+  out_rPluginInfo->eType = AkPluginTypeEffect;
   *(_WORD *)&out_rPluginInfo->bIsInPlace = 1;
   return 1i64;
 }
@@ -158,25 +140,23 @@ signed __int64 __fastcall CAkTremoloFX::GetPluginInfo(CAkTremoloFX *this, AkPlug
 // RVA: 0xAF3130
 void __fastcall CAkTremoloFX::LiveParametersUpdate(CAkTremoloFX *this, AkAudioBuffer *io_pBuffer)
 {
-  CAkTremoloFX *v2; // r8
-  bool v3; // cl
-  unsigned int v4; // edx
+  bool bProcessLFE; // cl
+  unsigned int uChannelMask; // edx
 
-  v2 = this;
-  v3 = this->m_FXInfo.Params.NonRTPC.bProcessLFE;
-  if ( v2->m_FXInfo.PrevParams.NonRTPC.bProcessLFE != v3
-    || v2->m_FXInfo.PrevParams.NonRTPC.bProcessCenter != v2->m_FXInfo.Params.NonRTPC.bProcessCenter )
+  bProcessLFE = this->m_FXInfo.Params.NonRTPC.bProcessLFE;
+  if ( this->m_FXInfo.PrevParams.NonRTPC.bProcessLFE != bProcessLFE
+    || this->m_FXInfo.PrevParams.NonRTPC.bProcessCenter != this->m_FXInfo.Params.NonRTPC.bProcessCenter )
   {
-    v4 = io_pBuffer->uChannelMask;
-    if ( !v2->m_FXInfo.Params.NonRTPC.bProcessCenter && (v4 & 7) == 7 )
-      v4 &= 0xFFFFFFFB;
-    if ( !v3 )
-      v4 &= 0xFFFFFFF7;
+    uChannelMask = io_pBuffer->uChannelMask;
+    if ( !this->m_FXInfo.Params.NonRTPC.bProcessCenter && (uChannelMask & 7) == 7 )
+      uChannelMask &= ~4u;
+    if ( !bProcessLFE )
+      uChannelMask &= ~8u;
     DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy>::Setup(
-      (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&v2->m_lfo,
-      v4,
-      v2->m_FXInfo.uSampleRate,
-      &v2->m_FXInfo.Params.RTPC.modParams);
+      (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&this->m_lfo,
+      uChannelMask,
+      this->m_FXInfo.uSampleRate,
+      &this->m_FXInfo.Params.RTPC.modParams);
   }
 }
 
@@ -194,97 +174,79 @@ void __fastcall CAkTremoloFX::RTPCParametersUpdate(CAkTremoloFX *this)
 // RVA: 0xAF2E90
 void __fastcall CAkTremoloFX::Execute(CAkTremoloFX *this, AkAudioBuffer *io_pBuffer)
 {
-  AkAudioBuffer *v2; // r14
-  CAkTremoloFX *v3; // rbx
-  CAkTremoloFXParams *v4; // rcx
-  bool v5; // cl
-  unsigned int v6; // edx
+  CAkTremoloFXParams *m_pSharedParams; // rcx
+  bool bProcessLFE; // cl
+  unsigned int uChannelMask; // edx
   unsigned int v7; // ecx
   bool v8; // bp
-  signed int v9; // er15
-  float v10; // xmm7_4
-  float v11; // xmm8_4
+  signed int uValidFrames; // r15d
+  float fOutputGain; // xmm7_4
+  float fModDepth; // xmm8_4
   __int64 v12; // rdi
   unsigned int v13; // esi
   float in_fPrevAmp; // xmm9_4
   float in_fPWM; // xmm10_4
   float i; // xmm6_4
-  float *v17; // rax
-  __int64 v18; // rcx
-  TremoloOutputPolicy in_rParams; // [rsp+B0h] [rbp+8h]
+  float *pData; // rax
+  __int64 uMaxFrames; // rcx
+  TremoloOutputPolicy in_rParams; // [rsp+B0h] [rbp+8h] BYREF
 
-  v2 = io_pBuffer;
-  v3 = this;
   if ( this->m_lfo.m_uNumChannels )
   {
-    v4 = this->m_pSharedParams;
-    v3->m_FXInfo.Params.RTPC.fModDepth = v4->m_Params.RTPC.fModDepth;
-    v3->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform = v4->m_Params.RTPC.modParams.lfoParams.eWaveform;
-    v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency = v4->m_Params.RTPC.modParams.lfoParams.fFrequency;
-    v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fSmooth = v4->m_Params.RTPC.modParams.lfoParams.fSmooth;
-    v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM = v4->m_Params.RTPC.modParams.lfoParams.fPWM;
-    v3->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseOffset = v4->m_Params.RTPC.modParams.phaseParams.fPhaseOffset;
-    v3->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread = v4->m_Params.RTPC.modParams.phaseParams.fPhaseSpread;
-    v3->m_FXInfo.Params.RTPC.modParams.phaseParams.ePhaseMode = v4->m_Params.RTPC.modParams.phaseParams.ePhaseMode;
-    v3->m_FXInfo.Params.RTPC.fOutputGain = v4->m_Params.RTPC.fOutputGain;
-    *(_DWORD *)&v3->m_FXInfo.Params.RTPC.bHasChanged = *(_DWORD *)&v4->m_Params.RTPC.bHasChanged;
-    *(_DWORD *)&v3->m_FXInfo.Params.NonRTPC.bProcessCenter = *(_DWORD *)&v4->m_Params.NonRTPC.bProcessCenter;
-    CAkTremoloFXParams::SetDirty(v4, 0);
-    if ( v3->m_FXInfo.Params.NonRTPC.bHasChanged )
+    m_pSharedParams = this->m_pSharedParams;
+    this->m_FXInfo.Params = m_pSharedParams->m_Params;
+    CAkTremoloFXParams::SetDirty(m_pSharedParams, 0);
+    if ( this->m_FXInfo.Params.NonRTPC.bHasChanged )
     {
-      v5 = v3->m_FXInfo.Params.NonRTPC.bProcessLFE;
-      if ( v3->m_FXInfo.PrevParams.NonRTPC.bProcessLFE != v5
-        || v3->m_FXInfo.PrevParams.NonRTPC.bProcessCenter != v3->m_FXInfo.Params.NonRTPC.bProcessCenter )
+      bProcessLFE = this->m_FXInfo.Params.NonRTPC.bProcessLFE;
+      if ( this->m_FXInfo.PrevParams.NonRTPC.bProcessLFE != bProcessLFE
+        || this->m_FXInfo.PrevParams.NonRTPC.bProcessCenter != this->m_FXInfo.Params.NonRTPC.bProcessCenter )
       {
-        v6 = v2->uChannelMask;
-        if ( !v3->m_FXInfo.Params.NonRTPC.bProcessCenter && (v6 & 7) == 7 )
-          v6 &= 0xFFFFFFFB;
-        if ( !v5 )
-          v6 &= 0xFFFFFFF7;
+        uChannelMask = io_pBuffer->uChannelMask;
+        if ( !this->m_FXInfo.Params.NonRTPC.bProcessCenter && (uChannelMask & 7) == 7 )
+          uChannelMask &= ~4u;
+        if ( !bProcessLFE )
+          uChannelMask &= ~8u;
         DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy>::Setup(
-          (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&v3->m_lfo,
-          v6,
-          v3->m_FXInfo.uSampleRate,
-          &v3->m_FXInfo.Params.RTPC.modParams);
+          (DSP::MultiChannelLFO<DSP::Bipolar,FlangerOutputPolicy> *)&this->m_lfo,
+          uChannelMask,
+          this->m_FXInfo.uSampleRate,
+          &this->m_FXInfo.Params.RTPC.modParams);
       }
     }
-    if ( v3->m_FXInfo.Params.RTPC.bHasChanged )
+    if ( this->m_FXInfo.Params.RTPC.bHasChanged )
       DSP::MultiChannelLFO<DSP::Unipolar,TremoloOutputPolicy>::SetParams(
-        &v3->m_lfo,
-        v3->m_FXInfo.uSampleRate,
-        &v3->m_FXInfo.Params.RTPC.modParams.lfoParams);
-    v7 = v2->uChannelMask;
-    if ( !v3->m_FXInfo.Params.NonRTPC.bProcessLFE )
-      v7 &= 0xFFFFFFF7;
-    v8 = !v3->m_FXInfo.Params.NonRTPC.bProcessCenter && (v7 & 7) == 7;
-    v9 = v2->uValidFrames;
-    v10 = v3->m_FXInfo.Params.RTPC.fOutputGain;
-    v11 = v3->m_FXInfo.Params.RTPC.fModDepth;
+        &this->m_lfo,
+        this->m_FXInfo.uSampleRate,
+        &this->m_FXInfo.Params.RTPC.modParams.lfoParams);
+    v7 = io_pBuffer->uChannelMask;
+    if ( !this->m_FXInfo.Params.NonRTPC.bProcessLFE )
+      v7 &= ~8u;
+    v8 = !this->m_FXInfo.Params.NonRTPC.bProcessCenter && (v7 & 7) == 7;
+    uValidFrames = io_pBuffer->uValidFrames;
+    fOutputGain = this->m_FXInfo.Params.RTPC.fOutputGain;
+    fModDepth = this->m_FXInfo.Params.RTPC.fModDepth;
     v12 = 0i64;
     v13 = 0;
-    in_fPrevAmp = v3->m_FXInfo.PrevParams.RTPC.fModDepth;
-    in_fPWM = v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM;
-    for ( i = (float)(v3->m_FXInfo.Params.RTPC.fOutputGain - v3->m_FXInfo.PrevParams.RTPC.fOutputGain) / (float)v9;
-          v7;
-          v7 &= v7 - 1 )
-    {
+    in_fPrevAmp = this->m_FXInfo.PrevParams.RTPC.fModDepth;
+    in_fPWM = this->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM;
+    for ( i = (float)(fOutputGain - this->m_FXInfo.PrevParams.RTPC.fOutputGain) / (float)uValidFrames; v7; v7 &= v7 - 1 )
       ++v13;
-    }
     if ( v13 )
     {
       do
       {
         if ( !v8 || (_DWORD)v12 != 2 )
         {
-          v17 = (float *)v2->pData;
-          v18 = v2->uMaxFrames;
-          in_rParams.fGain = v10;
+          pData = (float *)io_pBuffer->pData;
+          uMaxFrames = io_pBuffer->uMaxFrames;
+          in_rParams.fGain = fOutputGain;
           in_rParams.fGainInc = i;
           DSP::MonoLFO<DSP::Unipolar,TremoloOutputPolicy>::ProduceBuffer(
-            &v3->m_lfo.m_arLfo[v12],
-            &v17[(unsigned int)v12 * v18],
-            v9,
-            v11,
+            &this->m_lfo.m_arLfo[v12],
+            &pData[(unsigned int)v12 * uMaxFrames],
+            uValidFrames,
+            fModDepth,
             in_fPrevAmp,
             in_fPWM,
             &in_rParams);
@@ -293,23 +255,23 @@ void __fastcall CAkTremoloFX::Execute(CAkTremoloFX *this, AkAudioBuffer *io_pBuf
       }
       while ( (unsigned int)v12 < v13 );
     }
-    v3->m_FXInfo.PrevParams.RTPC.fModDepth = v3->m_FXInfo.Params.RTPC.fModDepth;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.eWaveform = v3->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fFrequency = v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fSmooth = v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fSmooth;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fPWM = v3->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseOffset = v3->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseOffset;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseSpread = v3->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread;
-    v3->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.ePhaseMode = v3->m_FXInfo.Params.RTPC.modParams.phaseParams.ePhaseMode;
-    v3->m_FXInfo.PrevParams.RTPC.fOutputGain = v3->m_FXInfo.Params.RTPC.fOutputGain;
-    *(_DWORD *)&v3->m_FXInfo.PrevParams.RTPC.bHasChanged = *(_DWORD *)&v3->m_FXInfo.Params.RTPC.bHasChanged;
-    *(_DWORD *)&v3->m_FXInfo.PrevParams.NonRTPC.bProcessCenter = *(_DWORD *)&v3->m_FXInfo.Params.NonRTPC.bProcessCenter;
+    this->m_FXInfo.PrevParams.RTPC.fModDepth = this->m_FXInfo.Params.RTPC.fModDepth;
+    this->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.eWaveform = this->m_FXInfo.Params.RTPC.modParams.lfoParams.eWaveform;
+    this->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fFrequency = this->m_FXInfo.Params.RTPC.modParams.lfoParams.fFrequency;
+    this->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fSmooth = this->m_FXInfo.Params.RTPC.modParams.lfoParams.fSmooth;
+    this->m_FXInfo.PrevParams.RTPC.modParams.lfoParams.fPWM = this->m_FXInfo.Params.RTPC.modParams.lfoParams.fPWM;
+    this->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseOffset = this->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseOffset;
+    this->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.fPhaseSpread = this->m_FXInfo.Params.RTPC.modParams.phaseParams.fPhaseSpread;
+    this->m_FXInfo.PrevParams.RTPC.modParams.phaseParams.ePhaseMode = this->m_FXInfo.Params.RTPC.modParams.phaseParams.ePhaseMode;
+    this->m_FXInfo.PrevParams.RTPC.fOutputGain = this->m_FXInfo.Params.RTPC.fOutputGain;
+    *(_DWORD *)&this->m_FXInfo.PrevParams.RTPC.bHasChanged = *(_DWORD *)&this->m_FXInfo.Params.RTPC.bHasChanged;
+    *(_DWORD *)&this->m_FXInfo.PrevParams.NonRTPC.bProcessCenter = *(_DWORD *)&this->m_FXInfo.Params.NonRTPC.bProcessCenter;
   }
 }
 
 // File Line: 212
 // RVA: 0xAF2E60
-signed __int64 __fastcall CAkTremoloFX::Reset(CAkTremoloFX *this)
+__int64 __fastcall CAkTremoloFX::Reset(CAkTremoloFX *this)
 {
   return 1i64;
 }

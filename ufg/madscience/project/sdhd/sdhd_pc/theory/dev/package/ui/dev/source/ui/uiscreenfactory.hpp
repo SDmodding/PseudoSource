@@ -7,32 +7,33 @@ void __fastcall UFG::UIScreenFactoryBase::~UIScreenFactoryBase(UFG::UIScreenFact
 
 // File Line: 46
 // RVA: 0x5C3570
-UFG::allocator::free_link *__fastcall UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList>::create(UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList> *this)
+UFG::allocator::free_link *__fastcall UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList>::create(
+        UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList> *this)
 {
   UFG::allocator::free_link *result; // rax
-  UFG::allocator::free_link *v2; // rcx
-  UFG::allocator::free_link *v3; // rax
+  UFG::UIScreen *v2; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v3; // rax
 
   result = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x90ui64, "UIScreenFactoryWrapper", 0i64, 1u);
-  v2 = result;
+  v2 = (UFG::UIScreen *)result;
   if ( result )
   {
-    v3 = result + 1;
+    v3 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&result[1];
+    v3->mPrev = v3;
     v3->mNext = v3;
-    v3[1].mNext = v3;
-    v2->mNext = (UFG::allocator::free_link *)&UFG::UIScreen::`vftable;
-    LODWORD(v2[11].mNext) = 0;
-    v2[12].mNext = 0i64;
-    v2[13].mNext = 0i64;
-    LODWORD(v2[14].mNext) = -1;
-    *(UFG::allocator::free_link **)((char *)&v2[14].mNext + 4) = (UFG::allocator::free_link *)15;
-    *(UFG::allocator::free_link **)((char *)&v2[15].mNext + 4) = 0i64;
-    HIDWORD(v2[16].mNext) = 0;
-    v2[17].mNext = (UFG::allocator::free_link *)1120403456;
-    LOBYTE(v2[3].mNext) = 0;
-    --LODWORD(v2[15].mNext);
-    v2->mNext = (UFG::allocator::free_link *)&UFG::UIHKScreenScriptableList::`vftable;
-    result = v2;
+    v2->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
+    v2->m_screenNameHash = 0;
+    v2->mRenderable = 0i64;
+    v2->mLoadThread = 0i64;
+    v2->mScreenUID = -1;
+    *(_QWORD *)&v2->mControllerMask = 15i64;
+    *(_QWORD *)&v2->mPriority = 0i64;
+    v2->mDimToApplyType = eDIM_INVALID;
+    *(_QWORD *)&v2->mCurDimValue = 1120403456i64;
+    v2->m_screenName[0] = 0;
+    --v2->mInputEnabled;
+    v2->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenScriptableList::`vftable;
+    return (UFG::allocator::free_link *)v2;
   }
   return result;
 }

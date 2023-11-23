@@ -1,25 +1,19 @@
 // File Line: 132
 // RVA: 0xA3FF60
-LRESULT __fastcall KeyboardFilterHook(int nCode, unsigned __int64 wParam, __int64 lParam)
+LRESULT __fastcall KeyboardFilterHook(int nCode, WPARAM wParam, LPARAM lParam)
 {
-  __int64 v3; // rbx
   bool v4; // r8
-  unsigned __int64 v5; // r14
-  int v6; // ebp
   char v7; // di
   bool v8; // si
 
-  v3 = lParam;
   v4 = 0;
-  v5 = wParam;
-  v6 = nCode;
   if ( !UFG::InputSystem::msApplicationHasFocus )
-    return CallNextHookEx(0i64, v6, v5, v3);
+    return CallNextHookEx(0i64, nCode, wParam, lParam);
   if ( UFG::InputSystem::msPCKeyboardSwapMode == 1 )
-    return CallNextHookEx(0i64, v6, v5, v3);
+    return CallNextHookEx(0i64, nCode, wParam, lParam);
   v7 = 0;
   if ( nCode )
-    return CallNextHookEx(0i64, v6, v5, v3);
+    return CallNextHookEx(0i64, nCode, wParam, lParam);
   if ( wParam != 256 )
   {
     if ( wParam == 257 )
@@ -33,20 +27,20 @@ LRESULT __fastcall KeyboardFilterHook(int nCode, unsigned __int64 wParam, __int6
   }
   v7 = 1;
 LABEL_10:
-  v8 = *(_DWORD *)v3 == 32 && *(_BYTE *)(v3 + 8) & 0x20;
-  v4 = *(_DWORD *)v3 == 27 && (*(_BYTE *)(v3 + 8) & 0x20 || GetKeyState(17) < 0)
-    || (unsigned int)(*(_DWORD *)v3 - 91) <= 1;
+  v8 = *(_DWORD *)lParam == 32 && (*(_BYTE *)(lParam + 8) & 0x20) != 0;
+  v4 = *(_DWORD *)lParam == 27 && ((*(_BYTE *)(lParam + 8) & 0x20) != 0 || GetKeyState(17) < 0)
+    || (unsigned int)(*(_DWORD *)lParam - 91) <= 1;
   if ( v8 )
   {
     gSpaceBarState = v7 != 0;
     return 1i64;
   }
-  if ( (unsigned int)(*(_DWORD *)v3 - 91) <= 1 && *(_DWORD *)(v3 + 8) == 129 )
-    return CallNextHookEx(0i64, v6, v5, v3);
+  if ( (unsigned int)(*(_DWORD *)lParam - 91) <= 1 && *(_DWORD *)(lParam + 8) == 129 )
+    return CallNextHookEx(0i64, nCode, wParam, lParam);
 LABEL_25:
   if ( v4 )
     return 1i64;
-  return CallNextHookEx(0i64, v6, v5, v3);
+  return CallNextHookEx(0i64, nCode, wParam, lParam);
 }
 
 // File Line: 210
@@ -69,23 +63,21 @@ void __fastcall InstallKeyboardHook(bool install)
 // RVA: 0xA40320
 void pcPushState(void)
 {
-  unsigned int v0; // eax
-  unsigned int v1; // ebx
-  UFG::GameState *v2; // rax
-  bool v3; // al
-  char v4; // cl
+  unsigned int CurrentState; // ebx
+  UFG::GameState *GameStateObj; // rax
+  bool v2; // al
+  char v3; // cl
 
   gGovernMaxFrameRate = 0;
-  v0 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
-  v1 = v0;
-  v2 = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, v0);
-  if ( v2 && v1 == uidGameStateInGame_14 )
+  CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+  GameStateObj = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, CurrentState);
+  if ( GameStateObj && CurrentState == uidGameStateInGame_14 )
   {
-    v3 = v2->vfptr->ModeIsSet(v2, eGSM_PAUSED);
-    v4 = gGovernMaxFrameRate;
-    if ( v3 )
-      v4 = 1;
-    gGovernMaxFrameRate = v4;
+    v2 = GameStateObj->vfptr->ModeIsSet(GameStateObj, eGSM_PAUSED);
+    v3 = gGovernMaxFrameRate;
+    if ( v2 )
+      v3 = 1;
+    gGovernMaxFrameRate = v3;
   }
   else
   {
@@ -97,13 +89,13 @@ void pcPushState(void)
 // RVA: 0xA40080
 void MainLoop(void)
 {
-  __int64 v0; // rbp
+  bool v0; // bp
   int v1; // edi
-  signed int v2; // esi
-  unsigned __int64 v3; // r14
+  int v2; // esi
+  unsigned __int64 Ticks; // r14
   __int64 v4; // rcx
   unsigned __int64 v5; // rax
-  float v6; // xmm0_4
+  float TickTime; // xmm0_4
   float v7; // xmm6_4
   bool v8; // bl
   int v9; // edx
@@ -114,38 +106,37 @@ void MainLoop(void)
   int v14; // eax
   int v15; // ecx
   int v16; // eax
-  unsigned int v17; // eax
-  bool v18; // bl
-  unsigned int v19; // eax
-  unsigned int v20; // ebx
-  UFG::GameState *v21; // rax
-  signed __int64 v22; // rcx
-  bool v23; // al
-  int dest[8]; // [rsp+20h] [rbp-C8h]
-  Render::RenderOutputParams outSettings; // [rsp+40h] [rbp-A8h]
+  unsigned int SystemElapsedMSecs; // eax
+  bool updated; // bl
+  unsigned int CurrentState; // ebx
+  UFG::GameState *GameStateObj; // rax
+  bool v21; // al
+  char v22; // cl
+  int dest[8]; // [rsp+20h] [rbp-C8h] BYREF
+  Render::RenderOutputParams outSettings; // [rsp+40h] [rbp-A8h] BYREF
 
-  LOBYTE(v0) = 1;
+  v0 = 1;
   v1 = 0;
   v2 = 0;
-  v3 = UFG::qGetTicks();
+  Ticks = UFG::qGetTicks();
   UFG::qMemSet(dest, 0, 0x20u);
   do
   {
     SteamIntegration::Update(v4);
     v5 = UFG::qGetTicks();
-    v6 = UFG::qGetTickTime(v3, v5);
-    v7 = v6;
-    v3 = UFG::qGetTicks();
-    v8 = NISManager::GetInstance()->mState != 0;
+    TickTime = UFG::qGetTickTime(Ticks, v5);
+    v7 = TickTime;
+    Ticks = UFG::qGetTicks();
+    v8 = NISManager::GetInstance()->mState != STATE_INVALID;
     Render::RenderOutputParams::RenderOutputParams(&outSettings);
     Render::GetCurrentDisplaySettings(&outSettings);
-    if ( outSettings.mTimeStepSmoothingFrames < 2 || v6 <= 0.0000099999997 )
+    if ( outSettings.mTimeStepSmoothingFrames < 2 || TickTime <= 0.0000099999997 )
     {
       v2 = 0;
     }
     else
     {
-      *(float *)&dest[v1] = v6;
+      *(float *)&dest[v1] = TickTime;
       v1 = (v1 + 1) % 8;
       if ( ++v2 >= 8 )
       {
@@ -180,7 +171,8 @@ void MainLoop(void)
           v15 = v1 - v9 + 8;
           do
           {
-            v16 = v15++ % 8;
+            v16 = v15 % 8;
+            ++v15;
             --v9;
             v10 = v10 + *(float *)&dest[v16];
           }
@@ -190,25 +182,23 @@ void MainLoop(void)
       v7 = v10 / (float)v2;
     }
 LABEL_17:
-    v17 = UFG::qGetSystemElapsedMSecs();
-    UFG::Metrics::UpdateAll(v17, v7, 1, v8);
-    v18 = Render::UpdateGameSystems(UFG::Metrics::msRealTimeDelta_Accurate);
+    SystemElapsedMSecs = UFG::qGetSystemElapsedMSecs();
+    UFG::Metrics::UpdateAll(SystemElapsedMSecs, v7, 1, v8);
+    updated = Render::UpdateGameSystems(UFG::Metrics::msRealTimeDelta_Accurate);
     UFG::BenchmarkHelper::Update(&UFG::BenchmarkHelper::gBenchmarkHelper);
-    if ( v18 )
+    if ( updated )
     {
       gGovernMaxFrameRate = 0;
-      v19 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
-      v20 = v19;
-      v21 = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, v19);
-      v22 = (signed __int64)v21;
-      if ( v21 )
+      CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+      GameStateObj = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, CurrentState);
+      if ( GameStateObj )
       {
-        if ( v20 == uidGameStateInGame_14 )
+        if ( CurrentState == uidGameStateInGame_14 )
         {
-          v23 = v21->vfptr->ModeIsSet(v21, eGSM_PAUSED);
+          v21 = GameStateObj->vfptr->ModeIsSet(GameStateObj, eGSM_PAUSED);
           v22 = gGovernMaxFrameRate;
-          if ( v23 )
-            v22 = 1i64;
+          if ( v21 )
+            v22 = 1;
           gGovernMaxFrameRate = v22;
         }
         else
@@ -220,11 +210,11 @@ LABEL_17:
       {
         gGovernMaxFrameRate = 1;
       }
-      v0 = (unsigned __int8)Render::RenderFrame(UFG::Metrics::msRealTimeDelta_Accurate, (Render *)v22);
+      v0 = Render::RenderFrame(UFG::Metrics::msRealTimeDelta_Accurate);
     }
-    if ( !(_BYTE)v0 )
+    if ( !v0 )
       break;
-    v4 = (unsigned __int8)gGameQuitEvent;
+    v4 = gGameQuitEvent;
   }
   while ( !gGameQuitEvent );
 }
@@ -241,71 +231,66 @@ void __fastcall SteamAPITextHook(int nSeverity, const char *pchDebugText)
 __int64 dynamic_initializer_for__m_ExeName__()
 {
   UFG::qString::qString(&m_ExeName);
-  return atexit(dynamic_atexit_destructor_for__m_ExeName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__m_ExeName__);
 }
 
 // File Line: 572
 // RVA: 0xA403A0
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-  float v4; // xmm0_4
-  int v5; // er14
-  HINSTANCE v6; // r15
-  const char *v7; // rax
-  UFG::qString *v8; // rax
-  int v9; // eax
-  char v10; // dl
-  HANDLE v11; // rsi
-  HANDLE v18; // rax
-  UFG::qString *v19; // rax
-  hkpEntity *v20; // rdx
-  hkEntitySelectorAll *v21; // rcx
-  __int64 v22; // rcx
-  UFG::qString result; // [rsp+50h] [rbp-488h]
-  UFG::qString v24; // [rsp+78h] [rbp-460h]
-  UFG::qString v25; // [rsp+A0h] [rbp-438h]
-  char format; // [rsp+D0h] [rbp-408h]
+  const char *CommandLineA; // rax
+  UFG::qString *FilenameWithoutExtension; // rax
+  int v8; // eax
+  char v9; // dl
+  HANDLE MutexA; // rsi
+  HANDLE CurrentProcess; // rax
+  UFG::qString *FilePath; // rax
+  hkpEntity *v19; // rdx
+  hkEntitySelectorAll *v20; // rcx
+  __int64 v21; // rcx
+  UFG::qString result; // [rsp+50h] [rbp-488h] BYREF
+  UFG::qString v23; // [rsp+78h] [rbp-460h] BYREF
+  UFG::qString v24; // [rsp+A0h] [rbp-438h] BYREF
+  char format[1024]; // [rsp+D0h] [rbp-408h] BYREF
 
-  v5 = nShowCmd;
-  v6 = hInstance;
-  v7 = GetCommandLineA();
-  UFG::qString::qString(&v24, v7);
-  v8 = UFG::qString::GetFilenameWithoutExtension(&v24, &result);
-  UFG::qString::Set(&m_ExeName, v8->mData, v8->mLength, 0i64, 0);
+  CommandLineA = GetCommandLineA();
+  UFG::qString::qString(&v23, CommandLineA);
+  FilenameWithoutExtension = UFG::qString::GetFilenameWithoutExtension(&v23, &result);
+  UFG::qString::Set(&m_ExeName, FilenameWithoutExtension->mData, FilenameWithoutExtension->mLength, 0i64, 0);
   UFG::qString::~qString(&result);
   SystemParametersInfoA(0x3Au, 8u, &g_StartupStickyKeys, 0);
   SystemParametersInfoA(0x34u, 8u, &g_StartupToggleKeys, 0);
   SystemParametersInfoA(0x32u, 0x18u, &g_StartupFilterKeys, 0);
-  v9 = UFG::qString::find(&v24, "-benchmark");
-  v10 = gAutoBenchmarkMode;
-  if ( v9 != UFG::qString::npos )
-    v10 = 1;
-  gAutoBenchmarkMode = v10;
-  v11 = CreateMutexA(0i64, 0, "UFG_GameMutex_SD2");
+  v8 = UFG::qString::find(&v23, "-benchmark");
+  v9 = gAutoBenchmarkMode;
+  if ( v8 != UFG::qString::npos )
+    v9 = 1;
+  gAutoBenchmarkMode = v9;
+  MutexA = CreateMutexA(0i64, 0, "UFG_GameMutex_SD2");
   if ( GetLastError() == 183 )
   {
-    CloseHandle(v11);
+    CloseHandle(MutexA);
     exit(1);
   }
   _RAX = 1i64;
   __asm { cpuid; Get CPU ID }
-  if ( _bittest((const signed int *)&_RDX, 0x1Au) )
+  if ( (_RDX & 0x4000000) != 0 )
   {
-    v18 = GetCurrentProcess();
-    if ( (unsigned int)GetModuleFileNameExA_0(v18, 0i64, &format, 1024i64) )
+    CurrentProcess = GetCurrentProcess();
+    if ( (unsigned int)GetModuleFileNameExA_0(CurrentProcess, 0i64, format, 1024i64) )
     {
-      UFG::qString::qString(&result, &format);
-      v19 = UFG::qString::GetFilePath(&result, &v25);
-      UFG::qSetDirectory(v19->mData);
-      UFG::qString::~qString(&v25);
+      UFG::qString::qString(&result, format);
+      FilePath = UFG::qString::GetFilePath(&result, &v24);
+      UFG::qSetDirectory(FilePath->mData);
+      UFG::qString::~qString(&v24);
       UFG::qString::~qString(&result);
     }
-    gInstance = v6;
-    gCmdShow = v5;
+    gInstance = hInstance;
+    gCmdShow = nShowCmd;
     if ( !SteamIntegration::InitAPI(SteamAPITextHook, (void (__fastcall *)())_, 0) )
       exit(1);
     pcPushState();
-    InitGameSystems(v21, v20, v4);
+    InitGameSystems(v20, v19);
     MainLoop();
     if ( hhkLowLevelKybd )
     {
@@ -315,11 +300,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
     UFG::AllowAccessibilityShortcutKeys(1);
     CloseGameSystems();
     CloseRenderEngine();
-    SteamIntegration::CloseAPI(v22);
-    CloseHandle(v11);
+    SteamIntegration::CloseAPI(v21);
+    CloseHandle(MutexA);
     exit(1);
   }
-  UFG::qString::~qString(&v24);
+  UFG::qString::~qString(&v23);
   return 1;
 }
 

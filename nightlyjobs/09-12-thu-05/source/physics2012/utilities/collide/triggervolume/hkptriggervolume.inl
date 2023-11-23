@@ -1,24 +1,18 @@
 // File Line: 20
 // RVA: 0xE1BC20
-void __fastcall hkpTriggerVolume::addEvent(hkpTriggerVolume *this, hkpRigidBody *body, hkpTriggerVolume::Operation m_operation)
+void __fastcall hkpTriggerVolume::addEvent(hkpTriggerVolume *this, hkpRigidBody *body, int m_operation)
 {
-  hkpTriggerVolume::Operation v3; // ebp
-  hkpRigidBody *v4; // rsi
-  hkpTriggerVolume *v5; // rdi
-  __int64 v6; // rdx
-  signed __int64 v7; // r8
+  __int64 m_size; // rdx
+  hkpTriggerVolume::EventInfo *v7; // r8
 
-  v3 = m_operation;
-  v4 = body;
-  v5 = this;
   if ( this->m_eventQueue.m_size == (this->m_eventQueue.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &this->m_eventQueue, 24);
-  v6 = v5->m_eventQueue.m_size;
-  v7 = (signed __int64)&v5->m_eventQueue.m_data[v6];
-  v5->m_eventQueue.m_size = v6 + 1;
-  *(_QWORD *)(v7 + 8) = v4;
-  *(_DWORD *)(v7 + 16) = v3;
-  *(_QWORD *)v7 = v5->m_sequenceNumber++ | ((unsigned __int64)v4->m_uid << 32);
-  hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_eventQueue.m_data, 24);
+  m_size = this->m_eventQueue.m_size;
+  v7 = &this->m_eventQueue.m_data[m_size];
+  this->m_eventQueue.m_size = m_size + 1;
+  v7->m_body = body;
+  v7->m_operation.m_storage = m_operation;
+  v7->m_sortValue = this->m_sequenceNumber++ | ((unsigned __int64)body->m_uid << 32);
+  hkReferencedObject::addReference(body);
 }
 

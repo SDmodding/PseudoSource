@@ -2,24 +2,22 @@
 // RVA: 0x12B34E0
 char *__cdecl strncpy(char *Dest, const char *Source, size_t Count)
 {
-  char *v3; // r11
   signed __int64 v4; // rcx
   bool v5; // zf
-  char *result; // rax
   unsigned __int64 v7; // rax
-  bool v8; // cf
+  bool v8; // cc
   unsigned __int64 v9; // rax
   unsigned __int64 v10; // rax
   unsigned int v11; // eax
-  char *v12; // rcx
+  const char *v12; // rcx
+  bool v13; // cf
   size_t i; // r8
-  unsigned __int64 v14; // r8
+  unsigned __int64 v15; // r8
 
-  v3 = Dest;
   if ( !Count )
-    return v3;
+    return Dest;
   v4 = Dest - Source;
-  if ( (unsigned __int8)Source & 7 )
+  if ( ((unsigned __int8)Source & 7) != 0 )
   {
     while ( 1 )
     {
@@ -29,49 +27,49 @@ char *__cdecl strncpy(char *Dest, const char *Source, size_t Count)
         break;
       ++Source;
       if ( !--Count )
-        return v3;
-      if ( !((unsigned __int8)Source & 7) )
+        return Dest;
+      if ( ((unsigned __int8)Source & 7) == 0 )
         goto LABEL_9;
     }
 filler:
-    v12 = (char *)&Source[v4];
+    v12 = &Source[v4];
     if ( Count >= 0x10 )
     {
-      while ( (unsigned __int8)v12 & 7 )
+      while ( ((unsigned __int8)v12 & 7) != 0 )
       {
         *++v12 = 0;
         --Count;
       }
-      v8 = Count < 0x20;
-      for ( i = Count - 32; !v8; i -= 32i64 )
+      v13 = Count < 0x20;
+      for ( i = Count - 32; !v13; i -= 32i64 )
       {
         *(_QWORD *)v12 = 0i64;
         *((_QWORD *)v12 + 1) = 0i64;
         *((_QWORD *)v12 + 2) = 0i64;
         *((_QWORD *)v12 + 3) = 0i64;
         v12 += 32;
-        v8 = i < 0x20;
+        v13 = i < 0x20;
       }
-      v14 = i + 32;
+      v15 = i + 32;
       while ( 1 )
       {
-        v8 = v14 < 8;
-        v14 -= 8i64;
-        if ( v8 )
+        v13 = v15 < 8;
+        v15 -= 8i64;
+        if ( v13 )
           break;
         *(_QWORD *)v12 = 0i64;
         v12 += 8;
       }
-      Count = v14 + 8;
+      Count = v15 + 8;
     }
     while ( 1 )
     {
-      v8 = Count-- < 1;
-      if ( v8 )
+      v13 = Count-- == 0;
+      if ( v13 )
         break;
       *v12++ = 0;
     }
-    result = v3;
+    return Dest;
   }
   else
   {
@@ -81,9 +79,9 @@ LABEL_9:
       while ( 1 )
       {
         v7 = *(_QWORD *)Source;
-        v8 = Count < 8;
+        v8 = Count <= 8;
         Count -= 8i64;
-        if ( v8 || Count == 0 || ((v7 + 9151031864016699135i64) ^ ~v7) & 0x8101010101010100ui64 )
+        if ( v8 || (((v7 + 0x7EFEFEFEFEFEFEFFi64) ^ ~v7) & 0x8101010101010100ui64) != 0 )
           break;
         *(_QWORD *)&Source[v4] = v7;
         Source += 8;
@@ -129,7 +127,7 @@ LABEL_9:
       ++Source;
       if ( !--Count )
         break;
-      v11 = (unsigned int)v10 >> 16;
+      v11 = WORD1(v10);
       Source[v4] = v11;
       if ( !(_BYTE)v11 )
         goto filler;
@@ -143,8 +141,7 @@ LABEL_9:
       --Count;
     }
     while ( Count );
-    result = v3;
+    return Dest;
   }
-  return result;
 }
 

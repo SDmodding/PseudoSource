@@ -1,21 +1,25 @@
 // File Line: 322
 // RVA: 0x962640
-void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Matrix4x4<float>>::Construct(void *p, Scaleform::Render::Matrix4x4<float> *source)
+void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Matrix4x4<float>>::Construct(
+        Scaleform::Render::Matrix4x4<float> *p,
+        Scaleform::Render::Matrix4x4<float> *source)
 {
   if ( p )
-    *(Scaleform::Render::Matrix4x4<float> *)p = *source;
+    *p = *source;
 }
 
 // File Line: 334
 // RVA: 0x8BDAB0
-void __fastcall Scaleform::ConstructorMov<Scaleform::Render::TextureGlyph>::ConstructArray(void *p, unsigned __int64 count)
+void __fastcall Scaleform::ConstructorMov<Scaleform::Render::TextureGlyph>::ConstructArray(
+        _DWORD *p,
+        unsigned __int64 count)
 {
   for ( ; count; --count )
   {
     if ( p )
     {
       *(_QWORD *)p = &Scaleform::RefCountImplCore::`vftable;
-      *((_DWORD *)p + 2) = 1;
+      p[2] = 1;
       *(_QWORD *)p = &Scaleform::RefCountImpl::`vftable;
       *(_QWORD *)p = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
       *(_QWORD *)p = &Scaleform::RefCountBase<Scaleform::Render::TextureGlyph,2>::`vftable;
@@ -23,64 +27,65 @@ void __fastcall Scaleform::ConstructorMov<Scaleform::Render::TextureGlyph>::Cons
       *((_QWORD *)p + 2) = 0i64;
       *((_QWORD *)p + 4) = 0i64;
       *((_QWORD *)p + 5) = 0i64;
-      *((_DWORD *)p + 14) = -1;
+      p[14] = -1;
     }
-    p = (char *)p + 64;
+    p += 16;
   }
 }
 
 // File Line: 348
 // RVA: 0x7B96C0
-void __fastcall Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::ConstructArray(void *p, unsigned __int64 count, Scaleform::GFx::AS3::Value *psource)
+void __fastcall Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::ConstructArray(
+        _QWORD *p,
+        unsigned __int64 count,
+        Scaleform::GFx::AS3::Value *psource)
 {
   unsigned __int64 v3; // r10
-  _QWORD *v4; // r9
-  _QWORD *v5; // rax
-  int v6; // ecx
-  __int64 v7; // rdx
+  Scaleform::GFx::AS3::Value::VU *p_value; // rax
+  int VInt; // edx
+  Scaleform::GFx::AS3::Value::V2U v7; // rdx
 
   if ( count )
   {
     v3 = count;
-    v4 = p;
-    v5 = (_QWORD *)&psource->value.VNumber;
+    p_value = &psource->value;
     do
     {
-      if ( v4 )
+      if ( p )
       {
-        *(_DWORD *)v4 = *((_DWORD *)v5 - 4);
-        v4[1] = *(v5 - 1);
-        v4[2] = *v5;
-        v4[3] = v5[1];
-        v6 = *(_DWORD *)(v5 - 2) & 0x1F;
-        if ( v6 > 9 )
+        *(_DWORD *)p = p_value[-1].VS._1.VInt;
+        p[1] = p_value[-1].VS._2.VObj;
+        p[2] = p_value->VS._1.VStr;
+        p[3] = p_value->VS._2.VObj;
+        VInt = p_value[-1].VS._1.VInt;
+        if ( (VInt & 0x1Fu) > 9 )
         {
-          if ( (*((_DWORD *)v5 - 4) >> 9) & 1 )
+          if ( (VInt & 0x200) != 0 )
           {
-            ++*(_DWORD *)*(v5 - 1);
+            ++LODWORD(p_value[-1].VS._2.VObj->vfptr);
           }
-          else if ( v6 == 10 )
+          else if ( (p_value[-1].VS._1.VInt & 0x1F) == 10 )
           {
-            ++*(_DWORD *)(*v5 + 24i64);
+            ++p_value->VS._1.VStr->RefCount;
           }
-          else if ( v6 > 10 )
+          else if ( (p_value[-1].VS._1.VInt & 0x1Fu) > 0xA )
           {
-            if ( v6 <= 15 )
+            if ( (p_value[-1].VS._1.VInt & 0x1Fu) <= 0xF )
             {
-              if ( *v5 )
-                *(_DWORD *)(*v5 + 32i64) = (*(_DWORD *)(*v5 + 32i64) + 1) & 0x8FBFFFFF;
+              if ( p_value->VS._1.VStr )
+                p_value->VS._1.VStr->Size = (p_value->VS._1.VStr->Size + 1) & 0x8FBFFFFF;
             }
-            else if ( v6 <= 17 )
+            else if ( (p_value[-1].VS._1.VInt & 0x1Fu) <= 0x11 )
             {
-              v7 = v5[1];
-              if ( v7 )
-                *(_DWORD *)(v7 + 32) = (*(_DWORD *)(v7 + 32) + 1) & 0x8FBFFFFF;
+              v7.VObj = (Scaleform::GFx::AS3::Object *)p_value->VS._2;
+              if ( v7.VObj )
+                v7.VObj->RefCount = (v7.VObj->RefCount + 1) & 0x8FBFFFFF;
             }
           }
         }
       }
-      v5 += 4;
-      v4 += 4;
+      p_value += 2;
+      p += 4;
       --v3;
     }
     while ( v3 );
@@ -89,11 +94,13 @@ void __fastcall Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::Construct
 
 // File Line: 361
 // RVA: 0x6E22D0
-void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Text::DocView::ImageSubstitutor::Element>::DestructArray(Scaleform::Render::Text::DocView::ImageSubstitutor::Element *p, unsigned __int64 count)
+void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Text::DocView::ImageSubstitutor::Element>::DestructArray(
+        Scaleform::Render::Text::DocView::ImageSubstitutor::Element *p,
+        unsigned __int64 count)
 {
   unsigned __int64 v2; // rdi
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v3; // rbx
-  Scaleform::RefCountNTSImpl *v4; // rcx
+  Scaleform::RefCountNTSImpl *pObject; // rcx
 
   if ( count )
   {
@@ -101,9 +108,9 @@ void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Text::DocView::Imag
     v3 = &p[count - 1];
     do
     {
-      v4 = (Scaleform::RefCountNTSImpl *)&v3->pImageDesc.pObject->vfptr;
-      if ( v4 )
-        Scaleform::RefCountNTSImpl::Release(v4);
+      pObject = v3->pImageDesc.pObject;
+      if ( pObject )
+        Scaleform::RefCountNTSImpl::Release(pObject);
       --v3;
       --v2;
     }
@@ -113,40 +120,37 @@ void __fastcall Scaleform::ConstructorMov<Scaleform::Render::Text::DocView::Imag
 
 // File Line: 395
 // RVA: 0x6DEFA0
-void __fastcall Scaleform::ConstructorCPP<Scaleform::GFx::Value>::Construct(void *p, Scaleform::GFx::Value *source)
+void __fastcall Scaleform::ConstructorCPP<Scaleform::GFx::Value>::Construct(_QWORD *p, Scaleform::GFx::Value *source)
 {
-  Scaleform::GFx::Value *v2; // r8
-  _QWORD *v3; // rdx
-  Scaleform::GFx::Value::ObjectInterface *v4; // rcx
+  Scaleform::GFx::Value::ObjectInterface *pObjectInterface; // rcx
 
-  v2 = source;
-  v3 = p;
   if ( p )
   {
-    *((_QWORD *)p + 2) = 0i64;
-    *((_DWORD *)p + 6) = v2->Type;
-    *((_QWORD *)p + 4) = *(_QWORD *)&v2->mValue.NValue;
-    *((_QWORD *)p + 5) = v2->DataAux;
-    if ( ((unsigned int)v2->Type >> 6) & 1 )
+    p[2] = 0i64;
+    *((_DWORD *)p + 6) = source->Type;
+    p[4] = source->mValue.pString;
+    p[5] = source->DataAux;
+    if ( (source->Type & 0x40) != 0 )
     {
-      v4 = v2->pObjectInterface;
-      v3[2] = v4;
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD *, _QWORD))v4->vfptr->gap8)(
-        v4,
-        v3,
-        v3[4]);
+      pObjectInterface = source->pObjectInterface;
+      p[2] = pObjectInterface;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD *, _QWORD))pObjectInterface->vfptr->gap8)(
+        pObjectInterface,
+        p,
+        p[4]);
     }
   }
 }
 
 // File Line: 434
 // RVA: 0x7C42E0
-void __fastcall Scaleform::ConstructorCPP<Scaleform::GFx::AS3::Instances::fl_display::MovieClip::FrameScript::Descr>::DestructArray(Scaleform::GFx::AS3::Instances::fl_display::MovieClip::FrameScript::Descr *p, unsigned __int64 count)
+void __fastcall Scaleform::ConstructorCPP<Scaleform::GFx::AS3::Instances::fl_display::MovieClip::FrameScript::Descr>::DestructArray(
+        Scaleform::GFx::AS3::Instances::fl_display::MovieClip::FrameScript::Descr *p,
+        unsigned __int64 count)
 {
   unsigned __int64 v2; // rdi
   Scaleform::GFx::AS3::Instances::fl_display::MovieClip::FrameScript::Descr *v3; // rbx
-  Scaleform::GFx::AS3::WeakProxy *v4; // rdx
-  bool v5; // zf
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
 
   if ( count )
   {
@@ -156,14 +160,13 @@ void __fastcall Scaleform::ConstructorCPP<Scaleform::GFx::AS3::Instances::fl_dis
     {
       if ( (v3->Method.Flags & 0x1F) > 9 )
       {
-        if ( (v3->Method.Flags >> 9) & 1 )
+        if ( (v3->Method.Flags & 0x200) != 0 )
         {
-          v4 = v3->Method.Bonus.pWeakProxy;
-          v5 = v4->RefCount-- == 1;
-          if ( v5 )
-            ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          pWeakProxy = v3->Method.Bonus.pWeakProxy;
+          if ( pWeakProxy->RefCount-- == 1 )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
           v3->Method.Bonus.pWeakProxy = 0i64;
-          v3->Method.value.VNumber = 0.0;
+          v3->Method.value.VS._1.VStr = 0i64;
           v3->Method.value.VS._2.VObj = 0i64;
           v3->Method.Flags &= 0xFFFFFDE0;
         }

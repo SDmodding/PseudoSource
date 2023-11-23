@@ -17,76 +17,76 @@ void __fastcall Scaleform::Render::VertexPath::Clear(Scaleform::Render::VertexPa
 // RVA: 0x955010
 void __fastcall Scaleform::Render::VertexPath::AddVertex(Scaleform::Render::VertexPath *this, float x, float y)
 {
-  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *v3; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *p_Vertices; // rbx
   unsigned __int64 v4; // rdi
 
-  v3 = &this->Vertices;
+  p_Vertices = &this->Vertices;
   v4 = this->Vertices.Size >> 4;
   if ( v4 >= this->Vertices.NumPages )
     Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(&this->Vertices, v4);
-  v3->Pages[v4][v3->Size & 0xF] = (Scaleform::Render::VertexBasic)__PAIR__(LODWORD(y), LODWORD(x));
-  ++v3->Size;
+  p_Vertices->Pages[v4][p_Vertices->Size & 0xF] = (Scaleform::Render::VertexBasic)__PAIR64__(LODWORD(y), LODWORD(x));
+  ++p_Vertices->Size;
 }
 
 // File Line: 34
 // RVA: 0x961750
 void __fastcall Scaleform::Render::VertexPath::ClosePath(Scaleform::Render::VertexPath *this)
 {
-  __int64 v1; // rbx
-  Scaleform::Render::VertexBasic **v2; // r10
-  unsigned __int64 v3; // rsi
-  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *v4; // rdi
-  Scaleform::Render::VertexBasic **v5; // r14
-  unsigned __int64 v6; // rsi
-  __int64 v7; // rbx
-  Scaleform::Render::VertexBasic *v8; // r14
+  __int64 LastVertex; // rbx
+  Scaleform::Render::VertexBasic **Pages; // r10
+  unsigned __int64 Size; // rsi
+  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *p_Vertices; // rdi
+  unsigned __int64 v5; // rsi
+  __int64 v6; // rbx
+  Scaleform::Render::VertexBasic *v7; // r14
 
-  v1 = this->LastVertex;
-  if ( this->Vertices.Size - v1 > 2 )
+  LastVertex = this->LastVertex;
+  if ( this->Vertices.Size - LastVertex > 2 )
   {
-    v2 = this->Vertices.Pages;
-    v3 = this->Vertices.Size;
-    v4 = &this->Vertices;
-    v5 = this->Vertices.Pages;
-    if ( v2[(v3 - 1) >> 4][((_BYTE)v3 - 1) & 0xF].x != v5[(unsigned __int64)(unsigned int)v1 >> 4][v1 & 0xF].x
-      || v2[(v3 - 1) >> 4][((_BYTE)v3 - 1) & 0xF].y != v5[(unsigned __int64)(unsigned int)v1 >> 4][v1 & 0xF].y )
+    Pages = this->Vertices.Pages;
+    Size = this->Vertices.Size;
+    p_Vertices = &this->Vertices;
+    if ( Pages[(Size - 1) >> 4][((_BYTE)Size - 1) & 0xF].x != Pages[(unsigned __int64)(unsigned int)LastVertex >> 4][LastVertex & 0xF].x
+      || Pages[(Size - 1) >> 4][((_BYTE)Size - 1) & 0xF].y != Pages[(unsigned __int64)(unsigned int)LastVertex >> 4][LastVertex & 0xF].y )
     {
-      v6 = v3 >> 4;
-      v7 = v1 & 0xF;
-      v8 = v5[(unsigned __int64)this->LastVertex >> 4];
-      if ( v6 >= this->Vertices.NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v4, v6);
-      v4->Pages[v6][v4->Size & 0xF] = v8[v7];
-      ++v4->Size;
+      v5 = Size >> 4;
+      v6 = LastVertex & 0xF;
+      v7 = Pages[(unsigned __int64)this->LastVertex >> 4];
+      if ( v5 >= this->Vertices.NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(p_Vertices, v5);
+      p_Vertices->Pages[v5][p_Vertices->Size & 0xF] = v7[v6];
+      ++p_Vertices->Size;
     }
   }
 }
 
 // File Line: 44
 // RVA: 0x979380
-void __fastcall Scaleform::Render::VertexPath::FinalizePath(Scaleform::Render::VertexPath *this, unsigned int __formal, unsigned int a3, bool a4)
+void __fastcall Scaleform::Render::VertexPath::FinalizePath(
+        Scaleform::Render::VertexPath *this,
+        unsigned int __formal,
+        unsigned int a3,
+        bool a4)
 {
-  Scaleform::Render::VertexPath *v4; // rbx
-  unsigned __int64 v5; // rcx
+  unsigned __int64 LastVertex; // rcx
   unsigned __int64 v6; // rsi
   Scaleform::Render::PathBasic v7; // [rsp+30h] [rbp+8h]
 
-  v4 = this;
-  v5 = this->LastVertex;
-  if ( v4->Vertices.Size - v5 >= 3 )
+  LastVertex = this->LastVertex;
+  if ( this->Vertices.Size - LastVertex >= 3 )
   {
-    v6 = v4->Paths.Size >> 2;
-    v7.Start = v5;
-    v7.Count = LODWORD(v4->Vertices.Size) - v5;
-    if ( v6 >= v4->Paths.NumPages )
-      Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4>::allocPage(&v4->Paths, v6);
-    v4->Paths.Pages[v6][v4->Paths.Size & 3] = v7;
-    ++v4->Paths.Size;
-    v4->LastVertex = v4->Vertices.Size;
+    v6 = this->Paths.Size >> 2;
+    v7.Start = LastVertex;
+    v7.Count = LODWORD(this->Vertices.Size) - LastVertex;
+    if ( v6 >= this->Paths.NumPages )
+      Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4>::allocPage(&this->Paths, v6);
+    this->Paths.Pages[v6][this->Paths.Size & 3] = v7;
+    ++this->Paths.Size;
+    this->LastVertex = this->Vertices.Size;
   }
-  else if ( v5 < v4->Vertices.Size )
+  else if ( LastVertex < this->Vertices.Size )
   {
-    v4->Vertices.Size = v5;
+    this->Vertices.Size = LastVertex;
   }
 }
 

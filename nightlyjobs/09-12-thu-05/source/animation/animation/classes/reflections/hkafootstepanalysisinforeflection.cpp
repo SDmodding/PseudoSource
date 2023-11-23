@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaFootstepAnalysisInfoClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 70
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaFootstepAnalysisInfo::staticClass()
 
 // File Line: 77
 // RVA: 0xB1D480
-void __fastcall finishLoadedObjecthkaFootstepAnalysisInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaFootstepAnalysisInfo(
+        hkaFootstepAnalysisInfo *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo);
+  if ( p )
+    hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo(p, finishing);
 }
 
 // File Line: 83
 // RVA: 0xB1D4A0
-void __fastcall cleanupLoadedObjecthkaFootstepAnalysisInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaFootstepAnalysisInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 87
 // RVA: 0xB1D4B0
 hkBaseObjectVtbl *__fastcall getVtablehkaFootstepAnalysisInfo()
 {
-  hkaFootstepAnalysisInfo v1; // [rsp+20h] [rbp-D8h]
+  hkaFootstepAnalysisInfo v1; // [rsp+20h] [rbp-D8h] BYREF
 
   hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaFootstepAnalysisInfoTypeInfo__()
   hkaFootstepAnalysisInfoTypeInfo.m_typeName = "hkaFootstepAnalysisInfo";
   hkaFootstepAnalysisInfoTypeInfo.m_vtable = result;
   hkaFootstepAnalysisInfoTypeInfo.m_scopedName = "!hkaFootstepAnalysisInfo";
-  hkaFootstepAnalysisInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaFootstepAnalysisInfo;
-  hkaFootstepAnalysisInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaFootstepAnalysisInfo;
+  hkaFootstepAnalysisInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaFootstepAnalysisInfo;
+  hkaFootstepAnalysisInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaFootstepAnalysisInfo;
   return result;
 }
 
@@ -84,7 +87,7 @@ void dynamic_initializer_for__hkaFootstepAnalysisInfoContainerClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 138
@@ -96,17 +99,17 @@ hkClass *__fastcall hkaFootstepAnalysisInfoContainer::staticClass()
 
 // File Line: 145
 // RVA: 0xB1D4E0
-void __fastcall finishLoadedObjecthkaFootstepAnalysisInfoContainer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaFootstepAnalysisInfoContainer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaFootstepAnalysisInfoContainer::`vftable;
+    *p = &hkaFootstepAnalysisInfoContainer::`vftable;
 }
 
 // File Line: 151
 // RVA: 0xB1D500
-void __fastcall cleanupLoadedObjecthkaFootstepAnalysisInfoContainer(void *p)
+void __fastcall cleanupLoadedObjecthkaFootstepAnalysisInfoContainer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 155
@@ -127,8 +130,8 @@ void **dynamic_initializer_for__hkaFootstepAnalysisInfoContainerTypeInfo__()
   hkaFootstepAnalysisInfoContainerTypeInfo.m_typeName = "hkaFootstepAnalysisInfoContainer";
   hkaFootstepAnalysisInfoContainerTypeInfo.m_vtable = result;
   hkaFootstepAnalysisInfoContainerTypeInfo.m_scopedName = "!hkaFootstepAnalysisInfoContainer";
-  hkaFootstepAnalysisInfoContainerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaFootstepAnalysisInfoContainer;
-  hkaFootstepAnalysisInfoContainerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaFootstepAnalysisInfoContainer;
+  hkaFootstepAnalysisInfoContainerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaFootstepAnalysisInfoContainer;
+  hkaFootstepAnalysisInfoContainerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaFootstepAnalysisInfoContainer;
   return result;
 }
 

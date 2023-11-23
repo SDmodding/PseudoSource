@@ -1,6 +1,9 @@
 // File Line: 34
 // RVA: 0x594BD0
-void __fastcall UFG::SurfaceBankNode::operator delete(void *in_pMemAddress, unsigned __int64 in_size, unsigned int in_dwFreeType)
+void __fastcall UFG::SurfaceBankNode::operator delete(
+        char *in_pMemAddress,
+        unsigned __int64 in_size,
+        unsigned int in_dwFreeType)
 {
   UFG::qMemoryPool::Free(&g_AudioMemoryPool, in_pMemAddress);
 }
@@ -9,38 +12,40 @@ void __fastcall UFG::SurfaceBankNode::operator delete(void *in_pMemAddress, unsi
 // RVA: 0x5940E0
 void __fastcall UFG::AudioUIScreen::~AudioUIScreen(UFG::AudioUIScreen *this)
 {
-  Render::Skinning *v1; // rdi
-  Render::SkinningCacheNode *v2; // rax
-  Illusion::Buffer **v3; // rbx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
+  Render::Skinning *p_mInputList; // rdi
+  Render::SkinningCacheNode *Head; // rax
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNode; // rdx
 
   this->vfptr = (UFG::AudioUIScreenVtbl *)&UFG::AudioUIScreen::`vftable;
-  v1 = (Render::Skinning *)&this->mInputList;
+  p_mInputList = (Render::Skinning *)&this->mInputList;
   if ( this->mInputList.mTree.mCount )
   {
     while ( 1 )
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v1->mSkinnedVertexBuffers);
-      if ( !v2 )
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_mInputList->mSkinnedVertexBuffers);
+      if ( !Head )
         break;
-      v3 = &v2[-1].mCachedBufferPtr;
-      if ( v2 == (Render::SkinningCacheNode *)8 )
+      p_mCachedBufferPtr = &Head[-1].mCachedBufferPtr;
+      if ( Head == (Render::SkinningCacheNode *)8 )
         goto LABEL_6;
-      v4 = &v2->mNode;
+      p_mNode = &Head->mNode;
 LABEL_7:
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mSkinnedVertexBuffers.mTree, v4);
-      if ( v3 )
-        ((void (__fastcall *)(Illusion::Buffer **, signed __int64))(*v3)->mNode.mParent)(v3, 1i64);
-      if ( !v1->mSkinnedVertexBuffers.mTree.mCount )
+      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&p_mInputList->mSkinnedVertexBuffers.mTree, p_mNode);
+      if ( p_mCachedBufferPtr )
+        ((void (__fastcall *)(Illusion::Buffer **, __int64))(*p_mCachedBufferPtr)->mNode.mParent)(
+          p_mCachedBufferPtr,
+          1i64);
+      if ( !p_mInputList->mSkinnedVertexBuffers.mTree.mCount )
         goto LABEL_10;
     }
-    v3 = 0i64;
+    p_mCachedBufferPtr = 0i64;
 LABEL_6:
-    v4 = 0i64;
+    p_mNode = 0i64;
     goto LABEL_7;
   }
 LABEL_10:
-  UFG::qTreeRB<UFG::BankNode,UFG::BankNode,1>::DeleteAll((UFG::qTreeRB<UFG::DialogEvent,UFG::DialogEvent,1> *)v1);
-  UFG::qBaseTreeRB::~qBaseTreeRB(v1);
+  UFG::qTreeRB<UFG::BankNode,UFG::BankNode,1>::DeleteAll((UFG::qTreeRB<UFG::DialogEvent,UFG::DialogEvent,1> *)p_mInputList);
+  UFG::qBaseTreeRB::~qBaseTreeRB(p_mInputList);
 }
 

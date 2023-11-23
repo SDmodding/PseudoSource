@@ -2,61 +2,54 @@
 // RVA: 0x59CD00
 UFG::qSharedString *__fastcall UFG::GameSlice::GetAudioName(UFG::GameSlice *this, UFG::qSharedString *result)
 {
-  UFG::qSharedString *v2; // rsi
-  UFG::GameSlice *v3; // rbp
-  UFG::qSharedString *v4; // rdi
+  UFG::qSharedString *p_mAudioOverride; // rdi
   UFG::qSharedStringData *v5; // rbx
 
-  v2 = result;
-  v3 = this;
-  v4 = &this->mAudioOverride;
+  p_mAudioOverride = &this->mAudioOverride;
   v5 = (UFG::qSharedStringData *)(this->mAudioOverride.mText - 48);
   if ( v5 == UFG::qSharedStringData::GetEmptyString() )
-    v4 = &v3->mName;
-  UFG::qSharedString::qSharedString(v2, v4);
-  return v2;
+    p_mAudioOverride = &this->mName;
+  UFG::qSharedString::qSharedString(result, p_mAudioOverride);
+  return result;
 }
 
 // File Line: 314
 // RVA: 0x4ABF00
 _BOOL8 __fastcall UFG::GameSlice::IsDeferredRestartIfInsideRegion(UFG::GameSlice *this)
 {
-  _BOOL8 result; // rax
-
   if ( this->mpParent )
-    result = UFG::GameSlice::IsDeferredRestartIfInsideRegion(this->mpParent);
+    return UFG::GameSlice::IsDeferredRestartIfInsideRegion(this->mpParent);
   else
-    result = this->mDeferRestartIfInsideRegion != 0;
-  return result;
+    return this->mDeferRestartIfInsideRegion != 0;
 }
 
 // File Line: 341
 // RVA: 0x4BD0A0
 void __fastcall UFG::GameSlice::SetRestoreVehicle(UFG::GameSlice *this, UFG::SimObject *vehicle)
 {
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v2; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpRestoredVehicle; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
 
-  v2 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mpRestoredVehicle.mPrev;
+  p_mpRestoredVehicle = &this->mpRestoredVehicle;
   if ( this->mpRestoredVehicle.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = v2;
-    v2->mNext = v2;
+    mPrev = p_mpRestoredVehicle->mPrev;
+    mNext = p_mpRestoredVehicle->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpRestoredVehicle->mPrev = p_mpRestoredVehicle;
+    p_mpRestoredVehicle->mNext = p_mpRestoredVehicle;
   }
-  v2[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)vehicle;
+  p_mpRestoredVehicle->m_pPointer = vehicle;
   if ( vehicle )
   {
-    v5 = vehicle->m_SafePointerList.mNode.mPrev;
-    v5->mNext = v2;
-    v2->mPrev = v5;
-    v2->mNext = &vehicle->m_SafePointerList.mNode;
-    vehicle->m_SafePointerList.mNode.mPrev = v2;
+    v5 = vehicle->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v5->mNext = p_mpRestoredVehicle;
+    p_mpRestoredVehicle->mPrev = v5;
+    p_mpRestoredVehicle->mNext = &vehicle->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    vehicle->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mpRestoredVehicle;
   }
 }
 

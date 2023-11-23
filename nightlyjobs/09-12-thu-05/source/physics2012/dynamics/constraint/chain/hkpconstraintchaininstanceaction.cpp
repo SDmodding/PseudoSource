@@ -1,64 +1,70 @@
 // File Line: 16
 // RVA: 0xD789B0
-void __fastcall hkpConstraintChainInstanceAction::applyAction(hkpConstraintChainInstanceAction *this, hkStepInfo *stepInfo)
+void __fastcall hkpConstraintChainInstanceAction::applyAction(
+        hkpConstraintChainInstanceAction *this,
+        hkStepInfo *stepInfo)
 {
   ;
 }
 
 // File Line: 22
 // RVA: 0xD789C0
-hkpAction *__fastcall hkpConstraintChainInstanceAction::clone(hkpConstraintChainInstanceAction *this, hkArray<hkpEntity *,hkContainerHeapAllocator> *newEntities, hkArray<hkpPhantom *,hkContainerHeapAllocator> *newPhantoms)
+hkpAction *__fastcall hkpConstraintChainInstanceAction::clone(
+        hkpConstraintChainInstanceAction *this,
+        hkArray<hkpEntity *,hkContainerHeapAllocator> *newEntities,
+        hkArray<hkpPhantom *,hkContainerHeapAllocator> *newPhantoms)
 {
   return 0i64;
 }
 
 // File Line: 28
 // RVA: 0xD789D0
-void __fastcall hkpConstraintChainInstanceAction::entityRemovedCallback(hkpConstraintChainInstanceAction *this, hkpEntity *entity)
+void __fastcall hkpConstraintChainInstanceAction::entityRemovedCallback(
+        hkpConstraintChainInstanceAction *this,
+        hkpEntity *entity)
 {
-  this->m_constraintInstance->vfptr[2].__vecDelDtor((hkBaseObject *)this->m_constraintInstance, (unsigned int)entity);
+  this->m_constraintInstance->vfptr[2].__vecDelDtor(this->m_constraintInstance, (unsigned int)entity);
 }
 
 // File Line: 36
 // RVA: 0xD789F0
-void __fastcall hkpConstraintChainInstanceAction::getEntities(hkpConstraintChainInstanceAction *this, hkArray<hkpEntity *,hkContainerHeapAllocator> *entitiesOut)
+void __fastcall hkpConstraintChainInstanceAction::getEntities(
+        hkpConstraintChainInstanceAction *this,
+        hkArray<hkpEntity *,hkContainerHeapAllocator> *entitiesOut)
 {
-  hkpConstraintChainInstance *v2; // rbx
-  hkArray<hkpEntity *,hkContainerHeapAllocator> *v3; // rdi
-  __int64 v4; // rcx
-  hkpEntity **v5; // rax
+  hkpConstraintChainInstance *m_constraintInstance; // rbx
+  __int64 m_size; // rcx
+  hkpEntity **m_data; // rax
   __int64 v6; // rdx
-  char *v7; // r8
+  signed __int64 v7; // r8
   hkpEntity *v8; // rcx
-  int v9; // [rsp+30h] [rbp+8h]
+  int v9; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->m_constraintInstance;
-  v3 = entitiesOut;
-  if ( (entitiesOut->m_capacityAndFlags & 0x3FFFFFFF) < v2->m_chainedEntities.m_size )
+  m_constraintInstance = this->m_constraintInstance;
+  if ( (entitiesOut->m_capacityAndFlags & 0x3FFFFFFF) < m_constraintInstance->m_chainedEntities.m_size )
   {
     if ( entitiesOut->m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         entitiesOut->m_data,
         8 * entitiesOut->m_capacityAndFlags);
-    v9 = 8 * v2->m_chainedEntities.m_size;
-    v3->m_data = (hkpEntity **)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                 (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                 &v9);
-    v3->m_capacityAndFlags = v9 / 8;
+    v9 = 8 * m_constraintInstance->m_chainedEntities.m_size;
+    entitiesOut->m_data = (hkpEntity **)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                          &hkContainerHeapAllocator::s_alloc,
+                                          &v9);
+    entitiesOut->m_capacityAndFlags = v9 / 8;
   }
-  v4 = v2->m_chainedEntities.m_size;
-  v5 = v3->m_data;
-  v3->m_size = v4;
-  v6 = v4;
-  if ( (signed int)v4 > 0 )
+  m_size = m_constraintInstance->m_chainedEntities.m_size;
+  m_data = entitiesOut->m_data;
+  entitiesOut->m_size = m_size;
+  v6 = m_size;
+  if ( (int)m_size > 0 )
   {
-    v7 = (char *)((char *)v2->m_chainedEntities.m_data - (char *)v5);
+    v7 = (char *)m_constraintInstance->m_chainedEntities.m_data - (char *)m_data;
     do
     {
-      v8 = *(hkpEntity **)((char *)v5 + (_QWORD)v7);
-      ++v5;
-      *(v5 - 1) = v8;
+      v8 = *(hkpEntity **)((char *)m_data++ + v7);
+      *(m_data - 1) = v8;
       --v6;
     }
     while ( v6 );

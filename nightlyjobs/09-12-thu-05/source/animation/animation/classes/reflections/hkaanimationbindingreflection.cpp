@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaAnimationBindingClass__()
     &hkaAnimationBinding_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 98
@@ -39,30 +39,30 @@ hkClass *__fastcall hkaAnimationBinding::staticClass()
 
 // File Line: 105
 // RVA: 0xB1CCA0
-void __fastcall finishLoadedObjecthkaAnimationBinding(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaAnimationBinding(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 16);
+    v2 = p + 2;
     v2[-2].m_stringAndFlag = (const char *)&hkaAnimationBinding::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 111
 // RVA: 0xB1CCD0
-void __fastcall cleanupLoadedObjecthkaAnimationBinding(void *p)
+void __fastcall cleanupLoadedObjecthkaAnimationBinding(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 115
 // RVA: 0xB1CCE0
 void **__fastcall getVtablehkaAnimationBinding()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-58h]
+  hkStringPtr v1; // [rsp+30h] [rbp-58h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkaAnimationBinding::`vftable;
@@ -79,8 +79,8 @@ void **dynamic_initializer_for__hkaAnimationBindingTypeInfo__()
   hkaAnimationBindingTypeInfo.m_typeName = "hkaAnimationBinding";
   hkaAnimationBindingTypeInfo.m_vtable = result;
   hkaAnimationBindingTypeInfo.m_scopedName = "!hkaAnimationBinding";
-  hkaAnimationBindingTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaAnimationBinding;
-  hkaAnimationBindingTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaAnimationBinding;
+  hkaAnimationBindingTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaAnimationBinding;
+  hkaAnimationBindingTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaAnimationBinding;
   return result;
 }
 

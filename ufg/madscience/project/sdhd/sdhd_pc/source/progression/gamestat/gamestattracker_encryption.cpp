@@ -1,23 +1,26 @@
 // File Line: 96
 // RVA: 0x4AD050
-bool __fastcall UFG::GameStatTracker::IsValidBuffer(UFG::GameStatTracker *this, unsigned __int64 timestamp, unsigned int headerSize, char *buffer, unsigned int bufferSize)
+bool __fastcall UFG::GameStatTracker::IsValidBuffer(
+        UFG::GameStatTracker *this,
+        unsigned __int64 timestamp,
+        unsigned int headerSize,
+        char *buffer,
+        unsigned int bufferSize)
 {
-  char *v5; // r14
   char i; // r10
-  unsigned int v7; // er9
+  unsigned int v7; // r9d
   char v8; // si
   char *v9; // r11
   unsigned int v10; // edi
-  unsigned int v11; // er8
+  unsigned int v11; // r8d
   char v12; // dl
   char v13; // dl
 
-  v5 = buffer;
   for ( i = 0; timestamp; timestamp &= timestamp - 1 )
     ++i;
   v7 = -1;
   v8 = 0;
-  v9 = &v5[headerSize];
+  v9 = &buffer[headerSize];
   v10 = 0;
   v11 = bufferSize - headerSize - 4;
   if ( v11 )
@@ -33,15 +36,19 @@ bool __fastcall UFG::GameStatTracker::IsValidBuffer(UFG::GameStatTracker *this, 
     }
     while ( v10 < v11 );
   }
-  return *(_DWORD *)&v5[bufferSize - 4] == v7;
+  return *(_DWORD *)&buffer[bufferSize - 4] == v7;
 }
 
 // File Line: 123
 // RVA: 0x4B93F0
-void __fastcall UFG::GameStatTracker::Scramble(UFG::GameStatTracker *this, unsigned __int64 timestamp, unsigned int headerSize, char *buffer, unsigned int bufferSize)
+void __fastcall UFG::GameStatTracker::Scramble(
+        UFG::GameStatTracker *this,
+        unsigned __int64 timestamp,
+        unsigned int headerSize,
+        char *buffer,
+        unsigned int bufferSize)
 {
-  unsigned int v5; // er11
-  unsigned int v6; // edi
+  unsigned int v5; // r11d
   char i; // r10
   char *v8; // r8
   char v9; // bl
@@ -50,12 +57,11 @@ void __fastcall UFG::GameStatTracker::Scramble(UFG::GameStatTracker *this, unsig
   char v12; // cl
 
   v5 = 0;
-  v6 = headerSize;
   for ( i = 0; timestamp; timestamp &= timestamp - 1 )
     ++i;
   v8 = &buffer[headerSize];
   v9 = 0;
-  if ( bufferSize - v6 != 4 )
+  if ( bufferSize - headerSize != 4 )
   {
     do
     {
@@ -66,28 +72,31 @@ void __fastcall UFG::GameStatTracker::Scramble(UFG::GameStatTracker *this, unsig
       ++v5;
       *(v8 - 1) = v10 ^ v12;
     }
-    while ( v5 < bufferSize - v6 - 4 );
+    while ( v5 < bufferSize - headerSize - 4 );
   }
 }
 
 // File Line: 140
 // RVA: 0x49ABA0
-void __fastcall UFG::GameStatTracker::Descramble(UFG::GameStatTracker *this, unsigned __int64 timestamp, unsigned int headerSize, char *buffer, unsigned int bufferSize)
+void __fastcall UFG::GameStatTracker::Descramble(
+        UFG::GameStatTracker *this,
+        unsigned __int64 timestamp,
+        unsigned int headerSize,
+        char *buffer,
+        unsigned int bufferSize)
 {
-  unsigned int v5; // er11
-  unsigned int v6; // ebx
+  unsigned int v5; // r11d
   char i; // r10
   char *v8; // rdx
   char v9; // r8
   char v10; // cl
 
   v5 = 0;
-  v6 = headerSize;
   for ( i = 0; timestamp; timestamp &= timestamp - 1 )
     ++i;
   v8 = &buffer[headerSize];
   v9 = 0;
-  if ( bufferSize - v6 != 4 )
+  if ( bufferSize - headerSize != 4 )
   {
     do
     {
@@ -97,7 +106,7 @@ void __fastcall UFG::GameStatTracker::Descramble(UFG::GameStatTracker *this, uns
       *(v8 - 1) ^= v10;
       v9 += *(v8 - 1);
     }
-    while ( v5 < bufferSize - v6 - 4 );
+    while ( v5 < bufferSize - headerSize - 4 );
   }
 }
 

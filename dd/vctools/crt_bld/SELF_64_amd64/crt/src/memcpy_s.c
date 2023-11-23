@@ -1,29 +1,23 @@
 // File Line: 47
 // RVA: 0x12B2AD0
-signed __int64 __fastcall memcpy_s(void *dst, unsigned __int64 sizeInBytes, const void *src, unsigned __int64 count)
+__int64 __fastcall memcpy_s(void *dst, size_t sizeInBytes, const void *src, size_t count)
 {
-  unsigned __int64 v4; // rbx
-  const void *v5; // rsi
-  unsigned __int64 v6; // rdi
   int *v8; // rax
   unsigned int v9; // ebx
 
-  v4 = count;
-  v5 = src;
-  v6 = sizeInBytes;
   if ( !count )
     return 0i64;
   if ( !dst )
-    goto LABEL_15;
+    goto LABEL_4;
   if ( src && sizeInBytes >= count )
   {
     memmove(dst, src, count);
     return 0i64;
   }
   memset(dst, 0, sizeInBytes);
-  if ( !v5 )
+  if ( !src )
   {
-LABEL_15:
+LABEL_4:
     v8 = errno();
     v9 = 22;
 LABEL_5:
@@ -31,7 +25,7 @@ LABEL_5:
     invalid_parameter_noinfo();
     return v9;
   }
-  if ( v6 < v4 )
+  if ( sizeInBytes < count )
   {
     v8 = errno();
     v9 = 34;

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPhysics2012ShapeVolumeClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 63
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiPhysics2012ShapeVolume::staticClass()
 
 // File Line: 70
 // RVA: 0xC2E430
-void __fastcall finishLoadedObjecthkaiPhysics2012ShapeVolume(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPhysics2012ShapeVolume(
+        hkaiPhysics2012ShapeVolume *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume);
+  if ( p )
+    hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(p, finishing);
 }
 
 // File Line: 76
 // RVA: 0xC2E450
-void __fastcall cleanupLoadedObjecthkaiPhysics2012ShapeVolume(void *p)
+void __fastcall cleanupLoadedObjecthkaiPhysics2012ShapeVolume(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 80
 // RVA: 0xC2E460
 hkBaseObjectVtbl *__fastcall getVtablehkaiPhysics2012ShapeVolume()
 {
-  hkaiPhysics2012ShapeVolume v1; // [rsp+20h] [rbp-98h]
+  hkaiPhysics2012ShapeVolume v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiPhysics2012ShapeVolumeTypeInfo__(
   hkaiPhysics2012ShapeVolumeTypeInfo.m_typeName = "hkaiPhysics2012ShapeVolume";
   hkaiPhysics2012ShapeVolumeTypeInfo.m_vtable = result;
   hkaiPhysics2012ShapeVolumeTypeInfo.m_scopedName = "!hkaiPhysics2012ShapeVolume";
-  hkaiPhysics2012ShapeVolumeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPhysics2012ShapeVolume;
-  hkaiPhysics2012ShapeVolumeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPhysics2012ShapeVolume;
+  hkaiPhysics2012ShapeVolumeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPhysics2012ShapeVolume;
+  hkaiPhysics2012ShapeVolumeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPhysics2012ShapeVolume;
   return result;
 }
 

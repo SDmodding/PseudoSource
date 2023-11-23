@@ -1,15 +1,14 @@
 // File Line: 18
 // RVA: 0xC45400
-void __fastcall hkaiPathRequestViewer::hkaiPathRequestViewer(hkaiPathRequestViewer *this, hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
+void __fastcall hkaiPathRequestViewer::hkaiPathRequestViewer(
+        hkaiPathRequestViewer *this,
+        hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
 {
-  hkaiPathRequestViewer *v2; // rbx
-
-  v2 = this;
-  hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
-  v2->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
+  hkaiViewerBase::hkaiViewerBase(this, contexts);
+  this->hkaiViewerBase::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
+  this->hkaiViewerBase::hkProcess::vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
+  this->hkaiViewerBase::hkaiViewerContextWorldListener::vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
 }
 
 // File Line: 22
@@ -17,61 +16,59 @@ void __fastcall hkaiPathRequestViewer::hkaiPathRequestViewer(hkaiPathRequestView
 void __fastcall hkaiPathRequestViewer::~hkaiPathRequestViewer(hkaiPathRequestViewer *this)
 {
   int v1; // edi
-  hkaiPathRequestViewer *v2; // rbx
   __int64 v3; // rsi
-  hkaiViewerContext *v4; // rdx
+  hkaiViewerContext *m_pntr; // rdx
 
   v1 = 0;
-  v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
-  this->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
+  this->hkaiViewerBase::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
+  this->hkaiViewerBase::hkProcess::vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
+  this->hkaiViewerBase::hkaiViewerContextWorldListener::vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
     do
     {
-      v4 = v2->m_context.m_pntr;
-      if ( v1 >= v4->m_worlds.m_size )
+      m_pntr = this->m_context.m_pntr;
+      if ( v1 >= m_pntr->m_worlds.m_size )
         break;
-      hkaiPathRequestViewer::worldRemovedCallback((hkaiPathRequestViewer *)((char *)v2 + 64), v4->m_worlds.m_data[v3]);
+      hkaiPathRequestViewer::worldRemovedCallback(
+        (hkaiPathRequestViewer *)&this->hkaiViewerContextWorldListener,
+        m_pntr->m_worlds.m_data[v3]);
       ++v1;
       ++v3;
     }
-    while ( v2->m_context.m_pntr );
+    while ( this->m_context.m_pntr );
   }
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
-  hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
+  hkaiViewerBase::~hkaiViewerBase(this);
 }
 
 // File Line: 30
 // RVA: 0xC45220
 void __fastcall hkaiPathRequestViewer::init(hkaiPathRequestViewer *this)
 {
-  hkProcessHandler *v1; // rax
+  hkProcessHandler *m_processHandler; // rax
   int v2; // ebx
-  hkaiPathRequestViewer *v3; // rsi
   __int64 v4; // rdi
 
-  v1 = this->m_processHandler;
+  m_processHandler = this->m_processHandler;
   v2 = 0;
-  v3 = this;
-  if ( v1 )
+  if ( m_processHandler )
   {
     v4 = 0i64;
     do
     {
-      if ( v2 >= SLODWORD(v1[22].vfptr) )
+      if ( v2 >= SLODWORD(m_processHandler[22].vfptr) )
         break;
-      ((void (__fastcall *)(hkDebugDisplayHandler **, _QWORD))v3->m_displayHandler[1].vfptr)(
-        &v3->m_displayHandler,
-        *(void *(__fastcall **)(hkProcessHandler *, unsigned int))((char *)&v1[21].vfptr->__vecDelDtor + v4));
-      v1 = v3->m_processHandler;
+      ((void (__fastcall *)(hkDebugDisplayHandler **, _QWORD))this->m_displayHandler[1].vfptr)(
+        &this->m_displayHandler,
+        *(void *(__fastcall **)(hkProcessHandler *, unsigned int))((char *)&m_processHandler[21].vfptr->__vecDelDtor + v4));
+      m_processHandler = this->m_processHandler;
       ++v2;
       v4 += 8i64;
     }
-    while ( v1 );
+    while ( m_processHandler );
   }
 }
 
@@ -82,7 +79,7 @@ void __fastcall hkaiPathRequestViewer::worldAddedCallback(hkaiPathRequestViewer 
   if ( this == (hkaiPathRequestViewer *)64 )
     hkaiWorld::addListener(w, 0i64);
   else
-    hkaiWorld::addListener(w, (hkaiWorld::Listener *)&this->vfptr);
+    hkaiWorld::addListener(w, (hkaiWorld::Listener *)&this->hkProcess);
 }
 
 // File Line: 43
@@ -92,7 +89,7 @@ void __fastcall hkaiPathRequestViewer::worldRemovedCallback(hkaiPathRequestViewe
   if ( this == (hkaiPathRequestViewer *)64 )
     hkaiWorld::removeListener(w, 0i64);
   else
-    hkaiWorld::removeListener(w, (hkaiWorld::Listener *)&this->vfptr);
+    hkaiWorld::removeListener(w, (hkaiWorld::Listener *)&this->hkProcess);
 }
 
 // File Line: 51
@@ -109,75 +106,61 @@ void hkaiPathRequestViewer::registerViewer(void)
 // RVA: 0xC451C0
 hkProcess *__fastcall hkaiPathRequestViewer::create(hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
 {
-  hkArray<hkProcessContext *,hkContainerHeapAllocator> *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkaiPathRequestViewer *v3; // rax
   __int64 v4; // rax
-  hkProcess *result; // rax
 
-  v1 = contexts;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkaiPathRequestViewer *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 88i64);
-  if ( v3 && (hkaiPathRequestViewer::hkaiPathRequestViewer(v3, v1), v4) )
-    result = (hkProcess *)(v4 + 16);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkaiPathRequestViewer *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 88i64);
+  if ( v3 && (hkaiPathRequestViewer::hkaiPathRequestViewer(v3, contexts), v4) )
+    return (hkProcess *)(v4 + 16);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 61
 // RVA: 0xC45290
-void __fastcall hkaiPathRequestViewer::pathRequestProcessedCallback(hkaiPathRequestViewer *this, hkaiNavMeshPathRequestInfo *request)
+void __fastcall hkaiPathRequestViewer::pathRequestProcessedCallback(
+        hkaiPathRequestViewer *this,
+        hkaiNavMeshPathRequestInfo *request)
 {
-  hkaiPathRequestViewer *v2; // rsi
-  hkaiNavMeshPathRequestInfo *v3; // rdi
-  hkaiPathfindingUtil::FindPathInput *v4; // rbx
+  hkaiPathfindingUtil::FindPathInput *m_pntr; // rbx
   hkaiPathfindingUtil::FindPathOutput *v5; // rdx
-  char v6; // al
+  char m_storage; // al
   int i; // edi
-  hkDebugDisplayHandler *displayHandler; // [rsp+20h] [rbp-38h]
-  __int64 tag; // [rsp+28h] [rbp-30h]
-  _QWORD displayOffset[5]; // [rsp+30h] [rbp-28h]
-  char v11; // [rsp+60h] [rbp+8h]
+  char v8; // [rsp+60h] [rbp+8h] BYREF
 
-  v2 = this;
-  v3 = request;
   hkRemoteObjectProcess::sendObject(
     (hkDisplaySerializeOStream *)this[-1].m_displayHandler,
-    (hkReferencedObject *)&request->vfptr,
+    request,
     SEND_OBJECT_TAGFILE);
-  v4 = v3->m_input.m_pntr;
-  if ( v4 )
+  m_pntr = request->m_input.m_pntr;
+  if ( m_pntr )
   {
-    v5 = v3->m_output.m_pntr;
+    v5 = request->m_output.m_pntr;
     if ( v5 )
     {
-      v6 = v5->m_outputParameters.m_status.m_storage;
-      if ( v6 == 2 )
+      m_storage = v5->m_outputParameters.m_status.m_storage;
+      if ( m_storage == 2 )
       {
-        for ( i = 0; i < v4->m_goalPoints.m_size; ++i )
-        {
-          LODWORD(displayOffset[0]) = hkaiPathRequestViewer::m_tag;
-          LODWORD(tag) = 0;
-          LODWORD(displayHandler) = hkColor::YELLOW;
-          ((void (__fastcall *)(hkProcessHandler *, char *, hkVector4f *, hkVector4f *, hkDebugDisplayHandler *, __int64, _QWORD))v2[-1].m_processHandler->vfptr[1].createProcess)(
-            v2[-1].m_processHandler,
-            &v11,
-            &v4->m_startPoint,
-            &v4->m_goalPoints.m_data[i],
-            displayHandler,
-            tag,
-            displayOffset[0]);
-        }
+        for ( i = 0; i < m_pntr->m_goalPoints.m_size; ++i )
+          ((void (__fastcall *)(hkProcessHandler *, char *, hkVector4f *, hkVector4f *, const unsigned int, _DWORD, int))this[-1].m_processHandler->hkaiViewerBase::hkProcess::vfptr[1].createProcess)(
+            this[-1].m_processHandler,
+            &v8,
+            &m_pntr->m_startPoint,
+            &m_pntr->m_goalPoints.m_data[i],
+            hkColor::YELLOW,
+            0,
+            hkaiPathRequestViewer::m_tag);
       }
-      else if ( v6 != 5 )
+      else if ( m_storage != 5 )
       {
         hkaiNavMeshDebugUtils::_drawPathWithRadius(
-          v4,
+          m_pntr,
           v5,
           hkColor::CYAN,
           hkColor::ORANGE,
-          (hkDebugDisplayHandler *)v2[-1].m_processHandler,
+          (hkDebugDisplayHandler *)this[-1].m_processHandler,
           hkaiPathRequestViewer::m_tag,
           0.001);
       }
@@ -187,11 +170,13 @@ void __fastcall hkaiPathRequestViewer::pathRequestProcessedCallback(hkaiPathRequ
 
 // File Line: 84
 // RVA: 0xC45380
-void __fastcall hkaiPathRequestViewer::pathRequestProcessedCallback(hkaiPathRequestViewer *this, hkaiNavVolumePathRequestInfo *request)
+void __fastcall hkaiPathRequestViewer::pathRequestProcessedCallback(
+        hkaiPathRequestViewer *this,
+        hkaiNavVolumePathRequestInfo *request)
 {
   hkRemoteObjectProcess::sendObject(
     (hkDisplaySerializeOStream *)this[-1].m_displayHandler,
-    (hkReferencedObject *)&request->vfptr,
+    request,
     SEND_OBJECT_TAGFILE);
 }
 

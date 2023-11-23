@@ -39,17 +39,17 @@ hkClass *__fastcall hkaiSilhouetteRecorder::ReplayEvent::staticClass()
 
 // File Line: 97
 // RVA: 0xC3DE20
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderReplayEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderReplayEvent(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::ReplayEvent::`vftable;
+    *p = &hkaiSilhouetteRecorder::ReplayEvent::`vftable;
 }
 
 // File Line: 103
 // RVA: 0xC3DE40
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderReplayEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderReplayEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 107
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkaiSilhouetteRecorderReplayEventTypeInfo__()
   hkaiSilhouetteRecorderReplayEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderReplayEvent";
   hkaiSilhouetteRecorderReplayEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderReplayEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::ReplayEvent";
-  hkaiSilhouetteRecorderReplayEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderReplayEvent;
-  hkaiSilhouetteRecorderReplayEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderReplayEvent;
+  hkaiSilhouetteRecorderReplayEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderReplayEvent;
+  hkaiSilhouetteRecorderReplayEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderReplayEvent;
   return result;
 }
 
@@ -93,7 +93,7 @@ void dynamic_initializer_for__hkaiSilhouetteRecorderWorldConnectedEventClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 158
@@ -105,23 +105,26 @@ hkClass *__fastcall hkaiSilhouetteRecorder::WorldConnectedEvent::staticClass()
 
 // File Line: 165
 // RVA: 0xC3DE60
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent(
+        hkaiSilhouetteRecorder::WorldConnectedEvent *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent);
+  if ( p )
+    hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent(p, finishing);
 }
 
 // File Line: 171
 // RVA: 0xC3DE80
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 175
 // RVA: 0xC3DE90
 hkBaseObjectVtbl *__fastcall getVtablehkaiSilhouetteRecorderWorldConnectedEvent()
 {
-  hkaiSilhouetteRecorder::WorldConnectedEvent v1; // [rsp+20h] [rbp-28h]
+  hkaiSilhouetteRecorder::WorldConnectedEvent v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent(&v1, 0);
   return v1.vfptr;
@@ -138,8 +141,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiSilhouetteRecorderWorldConnectedE
   hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderWorldConnectedEvent";
   hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::WorldConnectedEvent";
-  hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent;
-  hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent;
+  hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent;
+  hkaiSilhouetteRecorderWorldConnectedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderWorldConnectedEvent;
   return result;
 }
 
@@ -161,7 +164,7 @@ void dynamic_initializer_for__hkaiSilhouetteRecorderInstanceLoadedEventClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 228
@@ -173,23 +176,26 @@ hkClass *__fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::staticClass()
 
 // File Line: 235
 // RVA: 0xC3DEB0
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent(
+        hkaiSilhouetteRecorder::InstanceLoadedEvent *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent);
+  if ( p )
+    hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent(p, finishing);
 }
 
 // File Line: 241
 // RVA: 0xC3DED0
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 245
 // RVA: 0xC3DEE0
 hkBaseObjectVtbl *__fastcall getVtablehkaiSilhouetteRecorderInstanceLoadedEvent()
 {
-  hkaiSilhouetteRecorder::InstanceLoadedEvent v1; // [rsp+20h] [rbp-38h]
+  hkaiSilhouetteRecorder::InstanceLoadedEvent v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent(&v1, 0);
   return v1.vfptr;
@@ -206,8 +212,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiSilhouetteRecorderInstanceLoadedE
   hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderInstanceLoadedEvent";
   hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::InstanceLoadedEvent";
-  hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent;
-  hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent;
+  hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent;
+  hkaiSilhouetteRecorderInstanceLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderInstanceLoadedEvent;
   return result;
 }
 
@@ -240,7 +246,7 @@ void dynamic_initializer_for__hkaiSilhouetteRecorderSilhouettesSteppedEventClass
     &hkaiSilhouetteRecorderSilhouettesSteppedEvent_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 321
@@ -252,23 +258,27 @@ hkClass *__fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::staticClass
 
 // File Line: 328
 // RVA: 0xC3DF00
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent(
+        hkaiSilhouetteRecorder::SilhouettesSteppedEvent *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesSteppedEvent);
+  if ( p )
+    hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesSteppedEvent(p, finishing);
 }
 
 // File Line: 334
 // RVA: 0xC3DF20
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent(
+        void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 338
 // RVA: 0xC3DF30
 hkBaseObjectVtbl *__fastcall getVtablehkaiSilhouetteRecorderSilhouettesSteppedEvent()
 {
-  hkaiSilhouetteRecorder::SilhouettesSteppedEvent v1; // [rsp+20h] [rbp-78h]
+  hkaiSilhouetteRecorder::SilhouettesSteppedEvent v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesSteppedEvent(&v1, 0);
   return v1.vfptr;
@@ -285,8 +295,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiSilhouetteRecorderSilhouettesStep
   hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderSilhouettesSteppedEvent";
   hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::SilhouettesSteppedEvent";
-  hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent;
-  hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent;
+  hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent;
+  hkaiSilhouetteRecorderSilhouettesSteppedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderSilhouettesSteppedEvent;
   return result;
 }
 
@@ -320,17 +330,17 @@ hkClass *__fastcall hkaiSilhouetteRecorder::InstanceUnloadedEvent::staticClass()
 
 // File Line: 396
 // RVA: 0xC3DF60
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable;
+    *p = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable;
 }
 
 // File Line: 402
 // RVA: 0xC3DF80
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 406
@@ -351,8 +361,8 @@ void **dynamic_initializer_for__hkaiSilhouetteRecorderInstanceUnloadedEventTypeI
   hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderInstanceUnloadedEvent";
   hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::InstanceUnloadedEvent";
-  hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent;
-  hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent;
+  hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent;
+  hkaiSilhouetteRecorderInstanceUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent;
   return result;
 }
 
@@ -374,7 +384,7 @@ void dynamic_initializer_for__hkaiSilhouetteRecorderVolumeLoadedEventClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 458
@@ -386,23 +396,26 @@ hkClass *__fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::staticClass()
 
 // File Line: 465
 // RVA: 0xC3DFA0
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent(
+        hkaiSilhouetteRecorder::VolumeLoadedEvent *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent);
+  if ( p )
+    hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent(p, finishing);
 }
 
 // File Line: 471
 // RVA: 0xC3DFC0
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 475
 // RVA: 0xC3DFD0
 hkBaseObjectVtbl *__fastcall getVtablehkaiSilhouetteRecorderVolumeLoadedEvent()
 {
-  hkaiSilhouetteRecorder::VolumeLoadedEvent v1; // [rsp+20h] [rbp-38h]
+  hkaiSilhouetteRecorder::VolumeLoadedEvent v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent(&v1, 0);
   return v1.vfptr;
@@ -419,8 +432,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiSilhouetteRecorderVolumeLoadedEve
   hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderVolumeLoadedEvent";
   hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::VolumeLoadedEvent";
-  hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent;
-  hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent;
+  hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent;
+  hkaiSilhouetteRecorderVolumeLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderVolumeLoadedEvent;
   return result;
 }
 
@@ -454,17 +467,17 @@ hkClass *__fastcall hkaiSilhouetteRecorder::VolumeUnloadedEvent::staticClass()
 
 // File Line: 533
 // RVA: 0xC3DFF0
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable;
+    *p = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable;
 }
 
 // File Line: 539
 // RVA: 0xC3E010
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 543
@@ -485,8 +498,8 @@ void **dynamic_initializer_for__hkaiSilhouetteRecorderVolumeUnloadedEventTypeInf
   hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderVolumeUnloadedEvent";
   hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::VolumeUnloadedEvent";
-  hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent;
-  hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent;
+  hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent;
+  hkaiSilhouetteRecorderVolumeUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent;
   return result;
 }
 
@@ -508,7 +521,7 @@ void dynamic_initializer_for__hkaiSilhouetteRecorderGraphLoadedEventClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 594
@@ -520,23 +533,26 @@ hkClass *__fastcall hkaiSilhouetteRecorder::GraphLoadedEvent::staticClass()
 
 // File Line: 601
 // RVA: 0xC3E030
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent(
+        hkaiSilhouetteRecorder::GraphLoadedEvent *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent);
+  if ( p )
+    hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent(p, finishing);
 }
 
 // File Line: 607
 // RVA: 0xC3E050
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 611
 // RVA: 0xC3E060
 hkBaseObjectVtbl *__fastcall getVtablehkaiSilhouetteRecorderGraphLoadedEvent()
 {
-  hkaiSilhouetteRecorder::GraphLoadedEvent v1; // [rsp+20h] [rbp-28h]
+  hkaiSilhouetteRecorder::GraphLoadedEvent v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent(&v1, 0);
   return v1.vfptr;
@@ -553,8 +569,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiSilhouetteRecorderGraphLoadedEven
   hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderGraphLoadedEvent";
   hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::GraphLoadedEvent";
-  hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent;
-  hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent;
+  hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent;
+  hkaiSilhouetteRecorderGraphLoadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderGraphLoadedEvent;
   return result;
 }
 
@@ -588,17 +604,17 @@ hkClass *__fastcall hkaiSilhouetteRecorder::GraphUnloadedEvent::staticClass()
 
 // File Line: 669
 // RVA: 0xC3E080
-void __fastcall finishLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable;
+    *p = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable;
 }
 
 // File Line: 675
 // RVA: 0xC3E0A0
-void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 679
@@ -619,8 +635,8 @@ void **dynamic_initializer_for__hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo
   hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_typeName = "hkaiSilhouetteRecorderGraphUnloadedEvent";
   hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_vtable = result;
   hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_scopedName = "!hkaiSilhouetteRecorder::GraphUnloadedEvent";
-  hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent;
-  hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent;
+  hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent;
+  hkaiSilhouetteRecorderGraphUnloadedEventTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent;
   return result;
 }
 

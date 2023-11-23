@@ -70,30 +70,29 @@ hkClass *__fastcall hkpPointToPlaneConstraintData::staticClass()
 
 // File Line: 120
 // RVA: 0xD434F0
-void __fastcall finishLoadedObjecthkpPointToPlaneConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPointToPlaneConstraintData(
+        hkpConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpPointToPlaneConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpPointToPlaneConstraintData::`vftable;
   }
 }
 
 // File Line: 126
 // RVA: 0xD43520
-void __fastcall cleanupLoadedObjecthkpPointToPlaneConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpPointToPlaneConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 130
 // RVA: 0xD43530
 void **__fastcall getVtablehkpPointToPlaneConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-C8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpPointToPlaneConstraintData::`vftable;
@@ -110,8 +109,8 @@ void **dynamic_initializer_for__hkpPointToPlaneConstraintDataTypeInfo__()
   hkpPointToPlaneConstraintDataTypeInfo.m_typeName = "hkpPointToPlaneConstraintData";
   hkpPointToPlaneConstraintDataTypeInfo.m_vtable = result;
   hkpPointToPlaneConstraintDataTypeInfo.m_scopedName = "!hkpPointToPlaneConstraintData";
-  hkpPointToPlaneConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPointToPlaneConstraintData;
-  hkpPointToPlaneConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPointToPlaneConstraintData;
+  hkpPointToPlaneConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPointToPlaneConstraintData;
+  hkpPointToPlaneConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPointToPlaneConstraintData;
   return result;
 }
 

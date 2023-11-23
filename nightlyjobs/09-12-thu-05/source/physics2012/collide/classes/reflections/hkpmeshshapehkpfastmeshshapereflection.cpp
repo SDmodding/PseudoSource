@@ -28,26 +28,27 @@ hkClass *__fastcall hkpFastMeshShape::staticClass()
 
 // File Line: 61
 // RVA: 0xCECBE0
-void __fastcall finishLoadedObjecthkpFastMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpFastMeshShape(hkpFastMeshShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpFastMeshShape::hkpFastMeshShape);
+  if ( p )
+    hkpFastMeshShape::hkpFastMeshShape(p, finishing);
 }
 
 // File Line: 67
 // RVA: 0xCECC00
-void __fastcall cleanupLoadedObjecthkpFastMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpFastMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 71
 // RVA: 0xCECC10
 hkBaseObjectVtbl *__fastcall getVtablehkpFastMeshShape()
 {
-  hkpFastMeshShape v1; // [rsp+20h] [rbp-88h]
+  hkpFastMeshShape v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpFastMeshShape::hkpFastMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpMeshShape::hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 93
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpFastMeshShapeTypeInfo__()
   hkpFastMeshShapeTypeInfo.m_typeName = "hkpFastMeshShape";
   hkpFastMeshShapeTypeInfo.m_vtable = result;
   hkpFastMeshShapeTypeInfo.m_scopedName = "!hkpFastMeshShape";
-  hkpFastMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpFastMeshShape;
-  hkpFastMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpFastMeshShape;
+  hkpFastMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpFastMeshShape;
+  hkpFastMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpFastMeshShape;
   return result;
 }
 

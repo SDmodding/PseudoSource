@@ -28,17 +28,17 @@ hkClass *__fastcall hkaAnnotationTrack::Annotation::staticClass()
 
 // File Line: 63
 // RVA: 0xB1DE50
-void __fastcall finishLoadedObjecthkaAnnotationTrackAnnotation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaAnnotationTrackAnnotation(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   if ( p )
-    hkStringPtr::hkStringPtr((hkStringPtr *)p + 1, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
 }
 
 // File Line: 69
 // RVA: 0xB1DE70
-void __fastcall cleanupLoadedObjecthkaAnnotationTrackAnnotation(void *p)
+void __fastcall cleanupLoadedObjecthkaAnnotationTrackAnnotation(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
+  hkStringPtr::~hkStringPtr(p + 1);
 }
 
 // File Line: 106
@@ -71,15 +71,17 @@ hkClass *__fastcall hkaAnnotationTrack::staticClass()
 
 // File Line: 116
 // RVA: 0xB1DE80
-void __fastcall finishLoadedObjecthkaAnnotationTrack(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaAnnotationTrack(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 122
 // RVA: 0xB1DEA0
-void __fastcall cleanupLoadedObjecthkaAnnotationTrack(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaAnnotationTrack(hkaAnnotationTrack *p)
 {
-  hkaAnnotationTrack::~hkaAnnotationTrack((hkaAnnotationTrack *)p);
+  hkaAnnotationTrack::~hkaAnnotationTrack(p);
 }
 

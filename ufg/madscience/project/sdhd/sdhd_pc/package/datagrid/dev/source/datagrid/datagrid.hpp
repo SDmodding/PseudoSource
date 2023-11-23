@@ -1,43 +1,47 @@
 // File Line: 51
 // RVA: 0xDC7C0
-void __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Init(UFG::Grid<UFG::RoadNetworkSegment> *this, float x_min, float y_min, float x_max, float y_max, float grid_size)
+void __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Init(
+        UFG::Grid<UFG::RoadNetworkSegment> *this,
+        float x_min,
+        float y_min,
+        float x_max,
+        float y_max,
+        float grid_size)
 {
-  UFG::Grid<UFG::RoadNetworkSegment> *v6; // rdi
-  UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *v7; // rcx
-  UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > **v8; // rbx
+  UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *mGridNodes; // rcx
+  UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > **p_mNext; // rbx
   int v9; // ecx
   int v10; // eax
   unsigned __int64 v11; // rsi
-  signed __int64 v12; // rax
-  unsigned __int8 v13; // cf
+  __int64 v12; // rax
+  bool v13; // cf
   unsigned __int64 v14; // rax
   char *v15; // rax
-  signed __int64 v16; // rbx
+  UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *v16; // rbx
 
-  v6 = this;
-  v7 = this->mGridNodes;
-  if ( v7 )
+  mGridNodes = this->mGridNodes;
+  if ( mGridNodes )
   {
-    v8 = &v7[-1].mNode.mNext;
+    p_mNext = &mGridNodes[-1].mNode.mNext;
     `eh vector destructor iterator(
-      v7,
+      mGridNodes,
       0x10ui64,
-      (int)v7[-1].mNode.mNext,
+      (int)mGridNodes[-1].mNode.mNext,
       (void (__fastcall *)(void *))UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0>::~qList<UFG::qReflectField,UFG::qReflectField,1,0>);
-    operator delete[](v8);
-    v6->mGridNodes = 0i64;
+    operator delete[](p_mNext);
+    this->mGridNodes = 0i64;
   }
-  v6->mGridSizeInv = 1.0 / grid_size;
-  v6->mGridSize = grid_size;
-  v9 = (signed int)(float)((float)(x_max - x_min) * (float)(1.0 / grid_size)) + 1;
-  v6->mXDim = v9;
-  v10 = (signed int)(float)((float)(y_max - y_min) * (float)(1.0 / grid_size)) + 1;
-  v6->mYDim = v10;
-  v6->mXMax = x_max;
-  v6->mXMin = x_min;
-  v6->mYMax = y_max;
-  v6->mYMin = y_min;
-  v6->mNodeCount = 0;
+  this->mGridSizeInv = 1.0 / grid_size;
+  this->mGridSize = grid_size;
+  v9 = (int)(float)((float)(x_max - x_min) * (float)(1.0 / grid_size)) + 1;
+  this->mXDim = v9;
+  v10 = (int)(float)((float)(y_max - y_min) * (float)(1.0 / grid_size)) + 1;
+  this->mYDim = v10;
+  this->mXMax = x_max;
+  this->mXMin = x_min;
+  this->mYMax = y_max;
+  this->mYMin = y_min;
+  this->mNodeCount = 0;
   v11 = v9 * v10;
   v12 = 16 * v11;
   if ( !is_mul_ok(v11, 0x10ui64) )
@@ -50,38 +54,35 @@ void __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Init(UFG::Grid<UFG::RoadNetw
   if ( v15 )
   {
     *(_DWORD *)v15 = v11;
-    v16 = (signed __int64)(v15 + 8);
+    v16 = (UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *)(v15 + 8);
     `eh vector constructor iterator(
       v15 + 8,
       0x10ui64,
       v11,
       (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
-    v6->mGridNodes = (UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *)v16;
+    this->mGridNodes = v16;
   }
   else
   {
-    v6->mGridNodes = 0i64;
+    this->mGridNodes = 0i64;
   }
 }
 
 // File Line: 147
 // RVA: 0xD13A0
-__int64 __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Add(UFG::Grid<UFG::RoadNetworkSegment> *this, UFG::RoadNetworkSegment *data, int bucket_index)
+__int64 __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Add(
+        UFG::Grid<UFG::RoadNetworkSegment> *this,
+        UFG::RoadNetworkSegment *data,
+        unsigned int bucket_index)
 {
-  unsigned int v3; // esi
-  UFG::RoadNetworkSegment *v4; // rdi
-  UFG::Grid<UFG::RoadNetworkSegment> *v5; // rbp
   UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *v6; // rbx
-  UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *v7; // rax
+  UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *mPrev; // rax
   char *v8; // rax
   char *v9; // rcx
   UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *v10; // rax
 
-  v3 = bucket_index;
-  v4 = data;
-  v5 = this;
   v6 = &this->mGridNodes[bucket_index];
-  v7 = v6->mNode.mPrev;
+  mPrev = v6->mNode.mPrev;
   if ( (UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *)v6->mNode.mPrev == v6 )
   {
 LABEL_4:
@@ -91,7 +92,7 @@ LABEL_4:
     {
       *(_QWORD *)v8 = v8;
       *((_QWORD *)v8 + 1) = v8;
-      *((_QWORD *)v8 + 2) = v4;
+      *((_QWORD *)v8 + 2) = data;
     }
     else
     {
@@ -102,61 +103,63 @@ LABEL_4:
     *(_QWORD *)v9 = v10;
     *((_QWORD *)v9 + 1) = v6;
     v6->mNode.mPrev = (UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *)v9;
-    ++v5->mNodeCount;
+    ++this->mNodeCount;
   }
   else
   {
-    while ( (UFG::RoadNetworkSegment *)v7[1].mPrev != data )
+    while ( (UFG::RoadNetworkSegment *)mPrev[1].mPrev != data )
     {
-      v7 = v7->mPrev;
-      if ( v7 == (UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *)v6 )
+      mPrev = mPrev->mPrev;
+      if ( mPrev == (UFG::qNode<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment> > *)v6 )
         goto LABEL_4;
     }
   }
-  return v3;
+  return bucket_index;
 }
 
 // File Line: 406
 // RVA: 0xCF660
-void __fastcall UFG::GridNodesArray<UFG::RoadNetworkSegment>::GridNodesArray<UFG::RoadNetworkSegment>(UFG::GridNodesArray<UFG::RoadNetworkSegment> *this, UFG::Grid<UFG::RoadNetworkSegment> *grid, float x, float y)
+void __fastcall UFG::GridNodesArray<UFG::RoadNetworkSegment>::GridNodesArray<UFG::RoadNetworkSegment>(
+        UFG::GridNodesArray<UFG::RoadNetworkSegment> *this,
+        UFG::Grid<UFG::RoadNetworkSegment> *grid,
+        float x,
+        float y)
 {
-  float v4; // xmm4_4
+  float mXMin; // xmm4_4
   char v5; // r15
-  UFG::Grid<UFG::RoadNetworkSegment> *v6; // rbx
-  float v7; // xmm1_4
-  signed int v8; // er12
+  float mYMin; // xmm1_4
+  int v8; // r12d
   float v9; // xmm3_4
   float v10; // xmm2_4
-  signed int v11; // er8
+  int v11; // r8d
   UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *v12; // rdx
-  int v13; // er9
+  int v13; // r9d
   int v14; // esi
   int v15; // ebp
   int v16; // edi
   __int64 v17; // r14
   __int64 v18; // r11
   int i; // edx
-  int v20; // eax
+  int mXDim; // eax
   UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *v21; // r8
 
-  v4 = grid->mXMin;
+  mXMin = grid->mXMin;
   v5 = 0;
-  v6 = grid;
-  if ( x <= v4 )
+  if ( x <= mXMin )
     x = grid->mXMin;
   if ( x >= grid->mXMax )
     x = grid->mXMax;
-  v7 = grid->mYMin;
-  if ( y <= v7 )
+  mYMin = grid->mYMin;
+  if ( y <= mYMin )
     y = grid->mYMin;
   if ( y >= grid->mYMax )
     y = grid->mYMax;
   v8 = 3;
-  v9 = (float)(y - v7) * grid->mGridSizeInv;
-  v10 = (float)(x - v4) * grid->mGridSizeInv;
+  v9 = (float)(y - mYMin) * grid->mGridSizeInv;
+  v10 = (float)(x - mXMin) * grid->mGridSizeInv;
   this->mNumValidNodes = 0;
-  v11 = (signed int)v9;
-  v12 = &grid->mGridNodes[(signed int)v10 + (signed int)v9 * grid->mXDim];
+  v11 = (int)v9;
+  v12 = &grid->mGridNodes[(int)v10 + (int)v9 * grid->mXDim];
   if ( (UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *)v12->mNode.mNext != v12 )
   {
     this->mGridNodeArray[0] = v12;
@@ -165,7 +168,7 @@ void __fastcall UFG::GridNodesArray<UFG::RoadNetworkSegment>::GridNodesArray<UFG
   }
   while ( 1 )
   {
-    v13 = v8 / -2 + (signed int)v10;
+    v13 = v8 / -2 + (int)v10;
     v14 = v8 / -2 + v11;
     v15 = v13 + v8;
     v16 = v14 + v8;
@@ -179,10 +182,10 @@ void __fastcall UFG::GridNodesArray<UFG::RoadNetworkSegment>::GridNodesArray<UFG
         {
           if ( (v18 == v17 || v13 == v15 - 1 || i == v14 || i == v16 - 1) && v18 >= 0 )
           {
-            v20 = v6->mXDim;
-            if ( v13 < v20 && i >= 0 && i < v6->mYDim )
+            mXDim = grid->mXDim;
+            if ( v13 < mXDim && i >= 0 && i < grid->mYDim )
             {
-              v21 = &v6->mGridNodes[v13 + i * v20];
+              v21 = &grid->mGridNodes[v13 + i * mXDim];
               if ( (UFG::qList<UFG::qPointerNode<UFG::RoadNetworkSegment>,UFG::qPointerNode<UFG::RoadNetworkSegment>,1,0> *)v21->mNode.mNext != v21 )
               {
                 v5 = 1;
@@ -195,7 +198,7 @@ void __fastcall UFG::GridNodesArray<UFG::RoadNetworkSegment>::GridNodesArray<UFG
         ++v18;
       }
       while ( v13 < v15 );
-      v11 = (signed int)v9;
+      v11 = (int)v9;
     }
     if ( v5 )
       break;

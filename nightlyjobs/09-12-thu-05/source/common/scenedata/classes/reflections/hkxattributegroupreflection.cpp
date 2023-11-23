@@ -28,15 +28,17 @@ hkClass *__fastcall hkxAttributeGroup::staticClass()
 
 // File Line: 64
 // RVA: 0xE33C70
-void __fastcall finishLoadedObjecthkxAttributeGroup(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAttributeGroup(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 70
 // RVA: 0xE33C90
-void __fastcall cleanupLoadedObjecthkxAttributeGroup(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkxAttributeGroup(hkxAttributeGroup *p)
 {
-  hkxAttributeGroup::~hkxAttributeGroup((hkxAttributeGroup *)p);
+  hkxAttributeGroup::~hkxAttributeGroup(p);
 }
 

@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxAnimatedFloatClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 59
@@ -39,17 +39,17 @@ hkClass *__fastcall hkxAnimatedFloat::staticClass()
 
 // File Line: 66
 // RVA: 0xE316A0
-void __fastcall finishLoadedObjecthkxAnimatedFloat(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAnimatedFloat(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedFloat::`vftable;
+    *p = &hkxAnimatedFloat::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xE316C0
-void __fastcall cleanupLoadedObjecthkxAnimatedFloat(void *p)
+void __fastcall cleanupLoadedObjecthkxAnimatedFloat(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkxAnimatedFloatTypeInfo__()
   hkxAnimatedFloatTypeInfo.m_typeName = "hkxAnimatedFloat";
   hkxAnimatedFloatTypeInfo.m_vtable = result;
   hkxAnimatedFloatTypeInfo.m_scopedName = "!hkxAnimatedFloat";
-  hkxAnimatedFloatTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxAnimatedFloat;
-  hkxAnimatedFloatTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxAnimatedFloat;
+  hkxAnimatedFloatTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxAnimatedFloat;
+  hkxAnimatedFloatTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxAnimatedFloat;
   return result;
 }
 

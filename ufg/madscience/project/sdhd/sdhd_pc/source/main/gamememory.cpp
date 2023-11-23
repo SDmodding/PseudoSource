@@ -6,7 +6,7 @@ void __fastcall UFG::qUserCallback_InitMainPool(UFG *this)
   UFG::qMemoryPool::Init(
     UFG::gMainMemoryPool,
     "Main Pool",
-    UFG::gMainPoolMemoryPlat,
+    (char *)UFG::gMainPoolMemoryPlat,
     0x1F400000i64,
     0x4000000,
     1,

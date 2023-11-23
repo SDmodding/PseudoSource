@@ -1,12 +1,13 @@
 // File Line: 22
 // RVA: 0x617500
-void __fastcall UFG::UIHKSecondaryTutorialWidget::Update(UFG::UIHKSecondaryTutorialWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHKSecondaryTutorialWidget::Update(
+        UFG::UIHKSecondaryTutorialWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIHKSecondaryTutorialWidget *v3; // rbx
   __int32 v4; // ecx
-  Scaleform::GFx::Movie *v5; // rcx
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v3 = this;
   v4 = this->mState - 1;
   if ( v4 )
   {
@@ -14,17 +15,17 @@ void __fastcall UFG::UIHKSecondaryTutorialWidget::Update(UFG::UIHKSecondaryTutor
     {
       if ( screen )
       {
-        v5 = screen->mRenderable->m_movie.pObject;
-        if ( v5 )
-          Scaleform::GFx::Movie::Invoke(v5, "SecondaryTutorial_Hide", 0i64, 0i64, 0);
+        pObject = screen->mRenderable->m_movie.pObject;
+        if ( pObject )
+          Scaleform::GFx::Movie::Invoke(pObject, "SecondaryTutorial_Hide", 0i64, 0i64, 0);
       }
-      v3->mState = 0;
+      this->mState = STATE_IDLE;
     }
   }
   else
   {
-    UFG::UIHKSecondaryTutorialWidget::Flash_Show(v3, screen, v3->mCaption.mData);
-    v3->mState = 2;
+    UFG::UIHKSecondaryTutorialWidget::Flash_Show(this, screen, this->mCaption.mData);
+    this->mState = STATE_PHONE_CONTACTS;
   }
 }
 
@@ -32,11 +33,8 @@ void __fastcall UFG::UIHKSecondaryTutorialWidget::Update(UFG::UIHKSecondaryTutor
 // RVA: 0x60D240
 void __fastcall UFG::UIHKSecondaryTutorialWidget::Show(UFG::UIHKSecondaryTutorialWidget *this, const char *caption)
 {
-  UFG::UIHKSecondaryTutorialWidget *v2; // rbx
-
-  v2 = this;
   UFG::qString::Set(&this->mCaption, caption);
-  v2->mState = 1;
+  this->mState = STATE_ROOT_MENU;
 }
 
 // File Line: 56
@@ -44,35 +42,36 @@ void __fastcall UFG::UIHKSecondaryTutorialWidget::Show(UFG::UIHKSecondaryTutoria
 void __fastcall UFG::UIHKSecondaryTutorialWidget::Hide(UFG::UIHKSecondaryTutorialWidget *this)
 {
   if ( this->mState )
-    this->mState = 3;
+    this->mState = STATE_TEXT_INBOX;
 }
 
 // File Line: 65
 // RVA: 0x5E38D0
-void __fastcall UFG::UIHKSecondaryTutorialWidget::Flash_Show(UFG::UIHKSecondaryTutorialWidget *this, UFG::UIScreen *screen, const char *caption)
+void __fastcall UFG::UIHKSecondaryTutorialWidget::Flash_Show(
+        UFG::UIHKSecondaryTutorialWidget *this,
+        UFG::UIScreen *screen,
+        const char *caption)
 {
-  const char *v3; // rdi
-  Scaleform::GFx::Movie *v4; // rbx
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
 
   if ( screen )
   {
-    v3 = caption;
-    v4 = screen->mRenderable->m_movie.pObject;
-    if ( v4 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-      if ( ((unsigned int)pargs.Type >> 6) & 1 )
+      if ( (pargs.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
           pargs.pObjectInterface,
           &pargs,
-          *(_QWORD *)&pargs.mValue.NValue);
+          pargs.mValue);
         pargs.pObjectInterface = 0i64;
       }
-      pargs.Type = 6;
-      *(_QWORD *)&pargs.mValue.NValue = v3;
-      Scaleform::GFx::Movie::Invoke(v4, "SecondaryTutorial_Show", 0i64, &pargs, 1u);
+      pargs.Type = VT_String;
+      pargs.mValue.pString = caption;
+      Scaleform::GFx::Movie::Invoke(pObject, "SecondaryTutorial_Show", 0i64, &pargs, 1u);
       `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }

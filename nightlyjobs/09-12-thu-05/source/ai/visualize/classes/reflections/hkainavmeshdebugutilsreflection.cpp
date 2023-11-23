@@ -133,8 +133,9 @@ hkClass *__fastcall hkaiNavMeshDebugUtils::DebugInfo::staticClass()
 
 // File Line: 288
 // RVA: 0xC3E1F0
-void __fastcall cleanupLoadedObjecthkaiNavMeshDebugUtilsDebugInfo(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshDebugUtilsDebugInfo(hkaiNavMeshDebugUtils::DebugInfo *p)
 {
-  hkaiNavMeshDebugUtils::DebugInfo::~DebugInfo((hkaiNavMeshDebugUtils::DebugInfo *)p);
+  hkaiNavMeshDebugUtils::DebugInfo::~DebugInfo(p);
 }
 

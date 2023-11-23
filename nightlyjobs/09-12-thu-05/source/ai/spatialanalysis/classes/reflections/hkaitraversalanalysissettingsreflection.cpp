@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiTraversalAnalysisSettings::staticClass()
 
 // File Line: 93
 // RVA: 0xC32350
-void __fastcall finishLoadedObjecthkaiTraversalAnalysisSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiTraversalAnalysisSettings(
+        hkaiTraversalAnalysisSettings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings);
+  if ( p )
+    hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings(p, finishing);
 }
 
 // File Line: 99
 // RVA: 0xC32370
-void __fastcall cleanupLoadedObjecthkaiTraversalAnalysisSettings(void *p)
+void __fastcall cleanupLoadedObjecthkaiTraversalAnalysisSettings(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 103
 // RVA: 0xC32380
 hkBaseObjectVtbl *__fastcall getVtablehkaiTraversalAnalysisSettings()
 {
-  hkaiTraversalAnalysisSettings v1; // [rsp+20h] [rbp-48h]
+  hkaiTraversalAnalysisSettings v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiTraversalAnalysisSettingsTypeInfo
   hkaiTraversalAnalysisSettingsTypeInfo.m_typeName = "hkaiTraversalAnalysisSettings";
   hkaiTraversalAnalysisSettingsTypeInfo.m_vtable = result;
   hkaiTraversalAnalysisSettingsTypeInfo.m_scopedName = "!hkaiTraversalAnalysisSettings";
-  hkaiTraversalAnalysisSettingsTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiTraversalAnalysisSettings;
-  hkaiTraversalAnalysisSettingsTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiTraversalAnalysisSettings;
+  hkaiTraversalAnalysisSettingsTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiTraversalAnalysisSettings;
+  hkaiTraversalAnalysisSettingsTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiTraversalAnalysisSettings;
   return result;
 }
 

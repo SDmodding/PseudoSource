@@ -1,6 +1,6 @@
 // File Line: 83
 // RVA: 0xC5C390
-void __fastcall hkSemaphore::hkSemaphore(hkSemaphore *this, int initialCount, int maxCount, int numSpinIterations)
+void __fastcall hkSemaphore::hkSemaphore(hkSemaphore *this, LONG initialCount, LONG maxCount, int numSpinIterations)
 {
   this->m_semaphore = CreateSemaphoreW(0i64, initialCount, maxCount, 0i64);
 }
@@ -21,22 +21,24 @@ void __fastcall hkSemaphore::acquire(hkSemaphore *this)
 
 // File Line: 119
 // RVA: 0xC5C3F0
-void __fastcall hkSemaphore::release(hkSemaphore *this, int count)
+void __fastcall hkSemaphore::release(hkSemaphore *this, LONG count)
 {
   ReleaseSemaphore(this->m_semaphore, count, 0i64);
 }
 
 // File Line: 128
 // RVA: 0xC5C410
+// attributes: thunk
 void __fastcall hkSemaphore::acquire(hkSemaphore *semaphore)
 {
-  hkSemaphore::acquire(semaphore);
+  ?acquire@hkSemaphore@@QEAAXXZ(semaphore);
 }
 
 // File Line: 134
 // RVA: 0xC5C420
-void __fastcall hkSemaphore::release(hkSemaphore *semaphore, int count)
+// attributes: thunk
+void __fastcall hkSemaphore::release(hkSemaphore *semaphore, LONG count)
 {
-  hkSemaphore::release(semaphore, count);
+  ?release@hkSemaphore@@QEAAXH@Z(semaphore, count);
 }
 

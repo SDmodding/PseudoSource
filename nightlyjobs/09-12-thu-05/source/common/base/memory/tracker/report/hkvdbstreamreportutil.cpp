@@ -1,66 +1,58 @@
 // File Line: 16
 // RVA: 0x1301500
-void __fastcall writeModuleInfo(const char *text, void *context)
+void __fastcall writeModuleInfo(const char *text, hkOstream *context)
 {
-  const char *v2; // rbx
   hkOstream *v3; // rax
   hkOstream *v4; // rax
 
-  v2 = text;
-  v3 = hkOstream::operator<<((hkOstream *)context, "Module( str=r");
-  v4 = hkOstream::operator<<(v3, v2);
+  v3 = hkOstream::operator<<(context, "Module( str=r");
+  v4 = hkOstream::operator<<(v3, text);
   hkOstream::operator<<(v4, " )\n");
 }
 
 // File Line: 32
 // RVA: 0x1301540
-void __fastcall writeStackTrace(const char *text, void *context)
+void __fastcall writeStackTrace(const char *text, int *context)
 {
-  hkOstream **v2; // rsi
-  const char *v3; // rbx
   unsigned __int64 v4; // rdi
-  int v5; // eax
+  int IndexOf; // eax
   hkOstream *v6; // rcx
   hkOstream *v7; // rax
   hkOstream *v8; // rax
   hkOstream *v9; // rax
   hkOstream *v10; // rax
-  hkSubString texta; // [rsp+20h] [rbp-18h]
+  hkSubString texta; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = (hkOstream **)context;
-  v3 = text;
-  v4 = *(_QWORD *)(**((_QWORD **)context + 1) + 8i64 * *((signed int *)context + 4));
-  v5 = hkString::lastIndexOf(text, 10);
-  v6 = *v2;
-  texta.m_start = v3;
-  texta.m_end = &v3[v5];
+  v4 = *(_QWORD *)(**((_QWORD **)context + 1) + 8i64 * context[4]);
+  IndexOf = hkString::lastIndexOf(text, 10);
+  v6 = *(hkOstream **)context;
+  texta.m_start = text;
+  texta.m_end = &text[IndexOf];
   v7 = hkOstream::operator<<(v6, "Location( loc=");
-  v8 = hkOstream::operator<<(v7, v4, (int)v7);
+  v8 = hkOstream::operator<<(v7, v4);
   v9 = hkOstream::operator<<(v8, ", str=r\"\"\"");
   v10 = operator<<(v9, &texta);
   hkOstream::operator<<(v10, "\"\"\" )\n");
-  ++*((_DWORD *)v2 + 4);
+  ++context[4];
 }
 
 // File Line: 42
 // RVA: 0x13015E0
 void __fastcall writeMemorySystemStats(hkTrackerScanSnapshot *scanSnapshot, hkOstream *stream)
 {
-  hkOstream *v2; // rsi
-  const char *v3; // rax
+  const char *MemorySystemStatistics; // rax
   const char *v4; // rbx
   char *i; // rdi
 
-  v2 = stream;
-  v3 = hkTrackerScanSnapshot::getMemorySystemStatistics(scanSnapshot);
-  v4 = v3;
-  if ( v3 )
+  MemorySystemStatistics = hkTrackerScanSnapshot::getMemorySystemStatistics(scanSnapshot);
+  v4 = MemorySystemStatistics;
+  if ( MemorySystemStatistics )
   {
-    for ( i = hkString::strChr(v3, 10); i; i = hkString::strChr(i + 1, 10) )
+    for ( i = hkString::strChr(MemorySystemStatistics, 10); i; i = hkString::strChr(i + 1, 10) )
     {
-      hkOstream::operator<<(v2, "Statistics( str=");
-      hkOstream::write(v2, v4, (unsigned int)((_DWORD)i - (_DWORD)v4));
-      hkOstream::operator<<(v2, " )\n");
+      hkOstream::operator<<(stream, "Statistics( str=");
+      hkOstream::write(stream, v4, (unsigned int)((_DWORD)i - (_DWORD)v4));
+      hkOstream::operator<<(stream, " )\n");
       v4 = i + 1;
     }
   }
@@ -71,536 +63,491 @@ void __fastcall writeMemorySystemStats(hkTrackerScanSnapshot *scanSnapshot, hkOs
 void __fastcall hkVdbStreamReportUtil::generateReport(hkTrackerScanSnapshot *scanSnapshot, hkOstream *stream)
 {
   __int64 v2; // r14
-  hkTrackerScanSnapshot *v3; // r13
-  hkOstream *v4; // rbx
-  hkStackTracer::CallTree *v5; // rsi
-  unsigned __int64 v6; // rdi
+  hkStackTracer::CallTree *p_m_callTree; // rsi
+  unsigned __int64 SystemTime; // rdi
   hkOstream *v7; // rax
   hkOstream *v8; // rax
-  int v9; // eax
-  int v10; // er15
-  __int64 v11; // r12
-  hkMemorySnapshot::Provider *v12; // rsi
-  int v13; // eax
-  int v14; // edi
-  int *v15; // rax
-  __int64 v16; // r8
-  __int64 v17; // r9
-  __int64 v18; // r8
-  int v19; // er12
-  __int64 v20; // r15
-  hkMemorySnapshot::Allocation *v21; // r14
-  int v22; // edx
-  int v23; // eax
-  unsigned int v24; // edi
-  int v25; // er9
-  int v26; // edx
-  hkOstream *v27; // rax
-  hkOstream *v28; // rax
-  int v29; // eax
-  __int64 v30; // rdi
-  int v31; // esi
-  __int64 v32; // r9
-  const void *v33; // r8
-  int v34; // eax
-  int v35; // er12
-  __int64 v36; // r15
-  hkTrackerScanSnapshot::Block *v37; // rsi
-  hkTrackerTypeTreeNode *v38; // r14
-  int v39; // edi
+  int v9; // r15d
+  __int64 v10; // r12
+  hkMemorySnapshot::Provider *v11; // rsi
+  int v12; // edi
+  int v13; // r12d
+  __int64 v14; // r15
+  hkMemorySnapshot::Allocation *v15; // r14
+  int m_traceId; // edx
+  int v17; // eax
+  int v18; // edi
+  int v19; // r9d
+  int v20; // edx
+  hkOstream *v21; // rax
+  hkOstream *v22; // rax
+  __int64 v23; // rdi
+  int i; // esi
+  __int64 v25; // r8
+  int v26; // r12d
+  __int64 v27; // r15
+  hkTrackerScanSnapshot::Block *v28; // rsi
+  hkTrackerTypeTreeNode *m_type; // r14
+  signed int v30; // edi
+  hkOstream *v31; // rax
+  hkOstream *v32; // rax
+  hkOstream *v33; // rax
+  hkOstream *v34; // rax
+  hkOstream *v35; // rax
+  hkOstream *v36; // rax
+  hkOstream *v37; // rax
+  hkOstream *v38; // rax
+  hkOstream *v39; // rax
   hkOstream *v40; // rax
-  hkOstream *v41; // rax
-  hkOstream *v42; // rax
-  hkOstream *v43; // rax
-  hkOstream *v44; // rax
-  hkOstream *v45; // rax
-  hkOstream *v46; // rax
-  hkOstream *v47; // rax
-  hkOstream *v48; // rax
-  hkOstream *v49; // rax
-  int v50; // er8
-  __int64 v51; // r9
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v52; // r10
-  int v53; // edx
-  signed __int64 v54; // rcx
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v55; // rax
+  int v41; // r8d
+  __int64 v42; // r9
+  __int64 v43; // r10
+  int v44; // edx
+  __int64 v45; // rcx
+  _QWORD *v46; // rax
+  int v47; // edi
+  unsigned __int64 v48; // rsi
+  int v49; // edx
+  __int64 v50; // rcx
+  _QWORD *v51; // rax
+  bool v52; // cc
+  int v53; // edi
+  __int64 v54; // rsi
+  int v55; // r12d
   int v56; // edi
-  unsigned __int64 v57; // rsi
-  int v58; // edx
-  signed __int64 v59; // rcx
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v60; // rax
-  bool v61; // zf
-  bool v62; // sf
-  int v63; // edi
-  __int64 v64; // rsi
-  int v65; // er12
+  int v57; // r8d
+  __int64 v58; // r15
+  hkTrackerScanSnapshot::Block **m_data; // rax
+  __int64 v60; // rcx
+  unsigned __int64 *v61; // rsi
+  int v62; // r14d
+  int v63; // edx
+  hkOstream *v64; // rax
+  hkOstream *v65; // rax
   int v66; // edi
-  signed int v67; // er8
-  __int64 v68; // r15
-  hkTrackerScanSnapshot::Block **v69; // rax
-  __int64 v70; // rcx
-  unsigned __int64 *v71; // rsi
-  int v72; // er14
-  int v73; // edx
-  hkOstream *v74; // rax
-  hkOstream *v75; // rax
-  int v76; // edi
-  __int64 v77; // rsi
-  int v78; // ecx
+  __int64 v67; // rsi
+  int v68; // ecx
   __int64 sizeElem; // [rsp+20h] [rbp-69h]
-  __int64 sizeElema; // [rsp+20h] [rbp-69h]
-  __int64 v81; // [rsp+28h] [rbp-61h]
-  __int64 v82; // [rsp+28h] [rbp-61h]
-  __int64 v83[2]; // [rsp+30h] [rbp-59h]
-  unsigned __int64 *array; // [rsp+40h] [rbp-49h]
-  int v85; // [rsp+48h] [rbp-41h]
-  int v86; // [rsp+4Ch] [rbp-3Dh]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v87; // [rsp+50h] [rbp-39h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v88; // [rsp+60h] [rbp-29h]
-  hkOstream *context; // [rsp+70h] [rbp-19h]
-  unsigned __int64 **v90; // [rsp+78h] [rbp-11h]
-  int v91; // [rsp+80h] [rbp-9h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v92; // [rsp+88h] [rbp-1h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v93; // [rsp+98h] [rbp+Fh]
-  hkBool result; // [rsp+F0h] [rbp+67h]
-  hkStackTracer v95; // [rsp+100h] [rbp+77h]
-  unsigned __int64 out; // [rsp+108h] [rbp+7Fh]
+  __int64 v70; // [rsp+28h] [rbp-61h]
+  unsigned __int64 *array; // [rsp+40h] [rbp-49h] BYREF
+  int v72; // [rsp+48h] [rbp-41h]
+  int v73; // [rsp+4Ch] [rbp-3Dh]
+  AMD_HD3D v74; // [rsp+50h] [rbp-39h] BYREF
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > context; // [rsp+70h] [rbp-19h] BYREF
+  int v76; // [rsp+80h] [rbp-9h]
+  AMD_HD3D v77[2]; // [rsp+88h] [rbp-1h] BYREF
+  __int64 result; // [rsp+F0h] [rbp+67h] BYREF
+  hkStackTracer v79; // [rsp+100h] [rbp+77h] BYREF
+  unsigned __int64 out; // [rsp+108h] [rbp+7Fh] BYREF
 
   v2 = 0i64;
-  v3 = scanSnapshot;
-  v4 = stream;
-  v88.m_hashMod = -1;
-  v87.m_hashMod = -1;
-  v88.m_elem = 0i64;
-  v88.m_numElems = 0;
-  v87.m_elem = 0i64;
-  v87.m_numElems = 0;
-  v93.m_elem = 0i64;
-  v93.m_numElems = 0;
-  v93.m_hashMod = -1;
-  v92.m_elem = 0i64;
-  v92.m_numElems = 0;
-  v92.m_hashMod = -1;
-  hkStackTracer::hkStackTracer(&v95);
-  v5 = &v3->m_rawSnapshot.m_callTree;
-  if ( v3->m_blocks.m_size && hkStackTracer::CallTree::isEmpty(&v3->m_rawSnapshot.m_callTree, &result)->m_bool )
+  v74.mHeight = -1;
+  v74.mStereo = 0i64;
+  v74.mExtension = (IAmdDxExt *)0xFFFFFFFF00000000i64;
+  *(_QWORD *)&v74.mEnableStereo = 0i64;
+  v74.mWidth = 0;
+  v77[0].mStereo = 0i64;
+  v77[0].mExtension = (IAmdDxExt *)0xFFFFFFFF00000000i64;
+  *(_QWORD *)&v77[0].mEnableStereo = 0i64;
+  v77[0].mWidth = 0;
+  v77[0].mHeight = -1;
+  hkStackTracer::hkStackTracer(&v79);
+  p_m_callTree = &scanSnapshot->m_rawSnapshot.m_callTree;
+  if ( scanSnapshot->m_blocks.m_size
+    && hkStackTracer::CallTree::isEmpty(&scanSnapshot->m_rawSnapshot.m_callTree, (hkBool *)&result)->m_bool )
+  {
     hkOstream::operator<<(
-      v4,
+      stream,
       "#NOTE: Could not retrieve stack information. Are you using the hkCheckingMemorySystem?\n#\n");
-  hkOstream::operator<<(v4, "#V <integer> - Version number\n");
-  hkOstream::operator<<(v4, "#Date(ts=<timestamp>) - Date of capture\n");
-  hkOstream::operator<<(v4, "#Module(mod=<platform-dependent module/symbol identifier string>) - Module information\n");
-  hkOstream::operator<<(v4, "#Statistics(str=<string>) - Raw memory system Statistics\n");
+  }
+  hkOstream::operator<<(stream, "#V <integer> - Version number\n");
+  hkOstream::operator<<(stream, "#Date(ts=<timestamp>) - Date of capture\n");
   hkOstream::operator<<(
-    v4,
+    stream,
+    "#Module(mod=<platform-dependent module/symbol identifier string>) - Module information\n");
+  hkOstream::operator<<(stream, "#Statistics(str=<string>) - Raw memory system Statistics\n");
+  hkOstream::operator<<(
+    stream,
     "#Provider(id=<provider id>, name=<name>, parIds=[<parent>*]) - Hierarchy of providers (allocators)\n");
   hkOstream::operator<<(
-    v4,
+    stream,
     "#Router(temp=<provider id>, stack=<provider id>, heap=<provider id>, debug=<provider id>, solver=<provider id>) - Me"
     "mory router wiring\n");
   hkOstream::operator<<(
-    v4,
+    stream,
     "#Allocation(addr=<address>, size=<size>, provId=<provider id>, status=<status>, callstackId=<callstack id>) - Allocation report\n");
-  hkOstream::operator<<(v4, "#Type(id=<type id>, name=<type name>) - Block type definition\n");
+  hkOstream::operator<<(stream, "#Type(id=<type id>, name=<type name>) - Block type definition\n");
   hkOstream::operator<<(
-    v4,
+    stream,
     "#Block(id=<block id>, typeId=<type id>, addr=<address>, size=<size>) - Tracker block report\n");
   hkOstream::operator<<(
-    v4,
+    stream,
     "#References(blockId=<block id>, refIds=[<owned block id>+]) - Blocks referenced by a given block\n");
   hkOstream::operator<<(
-    v4,
+    stream,
     "#Callstack(id=<callstack id>, locations=[<location>+]) - Callstack declaration for a specific address\n");
-  hkOstream::operator<<(v4, "#Location(loc=<location>, str=<string name>) - Program location\n");
-  hkOstream::operator<<(v4, "V 1\n");
-  v6 = hkGetSystemTime();
-  v7 = hkOstream::operator<<(v4, "Date( ts=");
-  v8 = hkOstream::operator<<(v7, v6, (int)v7);
+  hkOstream::operator<<(stream, "#Location(loc=<location>, str=<string name>) - Program location\n");
+  hkOstream::operator<<(stream, "V 1\n");
+  SystemTime = hkGetSystemTime();
+  v7 = hkOstream::operator<<(stream, "Date( ts=");
+  v8 = hkOstream::operator<<(v7, SystemTime);
   hkOstream::operator<<(v8, " )\n");
-  hkStackTracer::getModuleInfo(&v95, writeModuleInfo, v4);
-  writeMemorySystemStats(v3, v4);
-  v10 = 0;
-  if ( v3->m_rawSnapshot.m_providers.m_size > 0 )
+  hkStackTracer::getModuleInfo(&v79, writeModuleInfo, stream);
+  writeMemorySystemStats(scanSnapshot, stream);
+  v9 = 0;
+  if ( scanSnapshot->m_rawSnapshot.m_providers.m_size > 0 )
   {
-    v11 = 0i64;
+    v10 = 0i64;
     do
     {
-      v12 = &v3->m_rawSnapshot.m_providers.m_data[v11];
-      hkOstream::printf(v4, "Provider( id=%i, name=%s, parIds=[", v9);
-      v14 = v2;
-      if ( v12->m_parentIndices.m_size > 0 )
+      v11 = &scanSnapshot->m_rawSnapshot.m_providers.m_data[v10];
+      hkOstream::printf(stream, "Provider( id=%i, name=%s, parIds=[", (unsigned int)v9, v11->m_name);
+      v12 = 0;
+      if ( v11->m_parentIndices.m_size > 0 )
       {
         do
         {
-          v15 = v12->m_parentIndices.m_data;
-          v16 = *(unsigned int *)((char *)v15 + v2);
-          hkOstream::printf(v4, "%i", (int)v15);
-          v13 = v12->m_parentIndices.m_size - 1;
-          if ( v14 != v13 )
-            v13 = (unsigned __int64)hkOstream::operator<<(v4, 44);
-          ++v14;
+          hkOstream::printf(stream, "%i", *(unsigned int *)((char *)v11->m_parentIndices.m_data + v2));
+          if ( v12 != v11->m_parentIndices.m_size - 1 )
+            hkOstream::operator<<(stream, 44);
+          ++v12;
           v2 += 4i64;
         }
-        while ( v14 < v12->m_parentIndices.m_size );
+        while ( v12 < v11->m_parentIndices.m_size );
         v2 = 0i64;
       }
-      hkOstream::printf(v4, "] )\n", v13);
+      hkOstream::printf(stream, "] )\n");
+      ++v9;
       ++v10;
-      ++v11;
     }
-    while ( v10 < v3->m_rawSnapshot.m_providers.m_size );
-    v5 = &v3->m_rawSnapshot.m_callTree;
+    while ( v9 < scanSnapshot->m_rawSnapshot.m_providers.m_size );
+    p_m_callTree = &scanSnapshot->m_rawSnapshot.m_callTree;
   }
-  v17 = (unsigned int)v3->m_rawSnapshot.m_routerWiring[1];
-  v18 = (unsigned int)v3->m_rawSnapshot.m_routerWiring[0];
-  LODWORD(v83[0]) = v3->m_rawSnapshot.m_routerWiring[4];
-  LODWORD(v81) = v3->m_rawSnapshot.m_routerWiring[3];
-  LODWORD(sizeElem) = v3->m_rawSnapshot.m_routerWiring[2];
   hkOstream::printf(
-    v4,
+    stream,
     "Router( temp=%i, stack=%i, heap=%i, debug=%i, solver=%i )\n",
-    v3->m_rawSnapshot.m_routerWiring[2],
-    sizeElem,
-    v81,
-    v83[0]);
-  v19 = v2;
-  if ( v3->m_rawSnapshot.m_allocations.m_size > 0 )
+    (unsigned int)scanSnapshot->m_rawSnapshot.m_routerWiring[0],
+    (unsigned int)scanSnapshot->m_rawSnapshot.m_routerWiring[1],
+    scanSnapshot->m_rawSnapshot.m_routerWiring[2],
+    scanSnapshot->m_rawSnapshot.m_routerWiring[3],
+    scanSnapshot->m_rawSnapshot.m_routerWiring[4]);
+  v13 = 0;
+  if ( scanSnapshot->m_rawSnapshot.m_allocations.m_size > 0 )
   {
-    v20 = 0i64;
+    v14 = 0i64;
     do
     {
-      v21 = &v3->m_rawSnapshot.m_allocations.m_data[v20];
-      if ( v21->m_traceId != -1
+      v15 = &scanSnapshot->m_rawSnapshot.m_allocations.m_data[v14];
+      if ( v15->m_traceId != -1
         && !(unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                            &v92,
-                            v21->m_traceId,
+                            (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v77,
+                            v15->m_traceId,
                             0i64) )
       {
-        v22 = v21->m_traceId;
+        m_traceId = v15->m_traceId;
         array = 0i64;
-        v85 = 0;
-        v86 = 2147483648;
-        v23 = hkStackTracer::CallTree::getCallStackSize(v5, v22);
-        v24 = v23;
-        if ( (v86 & 0x3FFFFFFF) >= v23 )
+        v72 = 0;
+        v73 = 0x80000000;
+        v17 = hkStackTracer::CallTree::getCallStackSize(p_m_callTree, m_traceId);
+        v18 = v17;
+        if ( (v73 & 0x3FFFFFFF) >= v17 )
         {
-          *(_DWORD *)&result.m_bool = 0;
+          LODWORD(result) = 0;
         }
         else
         {
-          v25 = v23;
-          if ( v23 < 2 * (v86 & 0x3FFFFFFF) )
-            v25 = 2 * (v86 & 0x3FFFFFFF);
-          hkArrayUtil::_reserve(
-            (hkResult *)&result,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &array,
-            v25,
-            8);
+          v19 = v17;
+          if ( v17 < 2 * (v73 & 0x3FFFFFFF) )
+            v19 = 2 * (v73 & 0x3FFFFFFF);
+          hkArrayUtil::_reserve((hkResult *)&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v19, 8);
         }
-        v26 = v21->m_traceId;
-        v85 = v24;
-        hkStackTracer::CallTree::getCallStack(v5, v26, array, v24);
-        v27 = hkOstream::operator<<(v4, "Callstack( id=");
-        v28 = hkOstream::operator<<(v27, v21->m_traceId, (int)v27);
-        v29 = (unsigned __int64)hkOstream::operator<<(v28, ", locations=[");
-        v30 = 0i64;
-        v31 = 0;
-        if ( v85 > 0 )
+        v20 = v15->m_traceId;
+        v72 = v18;
+        hkStackTracer::CallTree::getCallStack(p_m_callTree, v20, array, v18);
+        v21 = hkOstream::operator<<(stream, "Callstack( id=");
+        v22 = hkOstream::operator<<(v21, v15->m_traceId);
+        hkOstream::operator<<(v22, ", locations=[");
+        v23 = 0i64;
+        for ( i = 0; i < v72; ++v23 )
         {
-          do
-          {
-            hkOstream::operator<<(v4, *(unsigned __int64 *)((char *)array + v30), v29);
-            if ( v31 != v85 - 1 )
-              hkOstream::operator<<(v4, 44);
-            v29 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-                    &v87,
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                    *(unsigned __int64 *)((char *)array + v30),
-                    0i64);
-            ++v31;
-            v30 += 8i64;
-          }
-          while ( v31 < v85 );
-          LODWORD(v30) = 0;
+          hkOstream::operator<<(stream, array[v23]);
+          if ( i != v72 - 1 )
+            hkOstream::operator<<(stream, 44);
+          hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
+            (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v74,
+            &hkContainerHeapAllocator::s_alloc,
+            array[v23],
+            0i64);
+          ++i;
         }
-        hkOstream::operator<<(v4, "] )\n");
+        hkOstream::operator<<(stream, "] )\n");
         hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-          &v92,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          v21->m_traceId,
+          (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v77,
+          &hkContainerHeapAllocator::s_alloc,
+          v15->m_traceId,
           1ui64);
-        v85 = v30;
-        if ( v86 >= 0 )
-          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            array,
-            8 * v86);
+        v72 = 0;
+        if ( v73 >= 0 )
+          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v73);
         array = 0i64;
-        v86 = 2147483648;
+        v73 = 0x80000000;
       }
-      v32 = (unsigned int)v21->m_size;
-      v33 = v21->m_start;
-      LODWORD(v82) = v21->m_status.m_storage;
-      LODWORD(sizeElema) = v21->m_sourceId;
-      hkOstream::printf(v4, "Allocation( addr=0x%p, size=%i, provId=%i, status=%i", v21->m_sourceId, sizeElema, v82);
-      if ( v21->m_traceId != -1 )
-        hkOstream::printf(v4, ", callstackId=%i", v34);
-      hkOstream::operator<<(v4, " )\n");
-      ++v19;
-      ++v20;
-      v5 = &v3->m_rawSnapshot.m_callTree;
+      LODWORD(v70) = v15->m_status.m_storage;
+      LODWORD(sizeElem) = v15->m_sourceId;
+      hkOstream::printf(
+        stream,
+        "Allocation( addr=0x%p, size=%i, provId=%i, status=%i",
+        v15->m_start,
+        (unsigned int)v15->m_size,
+        sizeElem,
+        v70);
+      v25 = (unsigned int)v15->m_traceId;
+      if ( (_DWORD)v25 != -1 )
+        hkOstream::printf(stream, ", callstackId=%i", v25);
+      hkOstream::operator<<(stream, " )\n");
+      ++v13;
+      ++v14;
+      p_m_callTree = &scanSnapshot->m_rawSnapshot.m_callTree;
     }
-    while ( v19 < v3->m_rawSnapshot.m_allocations.m_size );
+    while ( v13 < scanSnapshot->m_rawSnapshot.m_allocations.m_size );
     v2 = 0i64;
   }
-  v35 = v2;
-  if ( v3->m_blocks.m_size > 0 )
+  v26 = 0;
+  if ( scanSnapshot->m_blocks.m_size > 0 )
   {
-    v36 = 0i64;
+    v27 = 0i64;
     do
     {
-      v37 = v3->m_blocks.m_data[v36];
-      v38 = v37->m_type;
+      v28 = scanSnapshot->m_blocks.m_data[v27];
+      m_type = v28->m_type;
       if ( hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::get(
-             &v88,
+             (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v74.mStereo,
              (hkResult *)&result,
-             (unsigned __int64)v37->m_type,
+             (unsigned __int64)v28->m_type,
              &out)->m_enum )
       {
-        v39 = v88.m_numElems & 0x7FFFFFFF;
-        v40 = hkOstream::operator<<(v4, "Type( id=");
-        v41 = hkOstream::operator<<(v40, v39, (int)v40);
-        hkOstream::operator<<(v41, ", name=");
-        hkTrackerTypeTreeNode::dumpType(v37->m_type, v4);
-        hkOstream::operator<<(v4, " )\n");
+        v30 = (__int64)v74.mExtension & 0x7FFFFFFF;
+        v31 = hkOstream::operator<<(stream, "Type( id=");
+        v32 = hkOstream::operator<<(v31, v30);
+        hkOstream::operator<<(v32, ", name=");
+        hkTrackerTypeTreeNode::dumpType(v28->m_type, stream);
+        hkOstream::operator<<(stream, " )\n");
         hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-          &v88,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          (unsigned __int64)v38,
-          v39);
+          (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v74.mStereo,
+          &hkContainerHeapAllocator::s_alloc,
+          (unsigned __int64)m_type,
+          v30);
       }
       else
       {
-        v39 = out;
+        v30 = out;
       }
-      v42 = hkOstream::operator<<(v4, "Block( id=");
-      v43 = hkOstream::operator<<(v42, v35, (int)v42);
-      v44 = hkOstream::operator<<(v43, ", typeId=");
-      v45 = hkOstream::operator<<(v44, v39, (int)v44);
-      v46 = hkOstream::operator<<(v45, ", addr=0x");
-      v47 = hkOstream::operator<<(v46, v37->m_start, (int)v46);
-      v48 = hkOstream::operator<<(v47, ", size=");
-      v49 = hkOstream::operator<<(v48, v37->m_size, (int)v48);
-      hkOstream::operator<<(v49, " )\n");
-      ++v35;
-      ++v36;
+      v33 = hkOstream::operator<<(stream, "Block( id=");
+      v34 = hkOstream::operator<<(v33, v26);
+      v35 = hkOstream::operator<<(v34, ", typeId=");
+      v36 = hkOstream::operator<<(v35, v30);
+      v37 = hkOstream::operator<<(v36, ", addr=0x");
+      v38 = hkOstream::operator<<(v37, v28->m_start);
+      v39 = hkOstream::operator<<(v38, ", size=");
+      v40 = hkOstream::operator<<(v39, v28->m_size);
+      hkOstream::operator<<(v40, " )\n");
+      ++v26;
+      ++v27;
     }
-    while ( v35 < v3->m_blocks.m_size );
+    while ( v26 < scanSnapshot->m_blocks.m_size );
     v2 = 0i64;
   }
   array = 0i64;
-  v50 = 0;
-  v85 = 0;
-  v86 = 2147483648;
-  v51 = v87.m_numElems & 0x7FFFFFFF;
-  if ( (v87.m_numElems & 0x7FFFFFFF) > 0 )
+  v41 = 0;
+  v72 = 0;
+  v73 = 0x80000000;
+  v42 = v74.mWidth & 0x7FFFFFFF;
+  if ( (v74.mWidth & 0x7FFFFFFF) != 0 )
   {
-    if ( (signed int)v51 < 0 )
-      LODWORD(v51) = v2;
-    hkArrayUtil::_reserve(
-      (hkResult *)&result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array,
-      v51,
-      8);
-    v50 = v85;
+    hkArrayUtil::_reserve((hkResult *)&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v42, 8);
+    v41 = v72;
   }
-  v52 = v87.m_elem;
-  v53 = 0;
-  v54 = 0i64;
-  if ( v87.m_hashMod >= 0 )
+  v43 = *(_QWORD *)&v74.mEnableStereo;
+  v44 = 0;
+  v45 = 0i64;
+  if ( (v74.mHeight & 0x80000000) == 0 )
   {
-    v55 = v87.m_elem;
+    v46 = *(_QWORD **)&v74.mEnableStereo;
     do
     {
-      if ( v55->key != -1i64 )
+      if ( *v46 != -1i64 )
         break;
-      ++v54;
-      ++v53;
-      ++v55;
+      ++v45;
+      ++v44;
+      v46 += 2;
     }
-    while ( v54 <= v87.m_hashMod );
+    while ( v45 <= (int)v74.mHeight );
   }
-  v56 = v53;
-  if ( v53 <= v87.m_hashMod )
+  v47 = v44;
+  if ( v44 <= (int)v74.mHeight )
   {
     do
     {
-      v57 = v52[v56].key;
-      if ( v50 == (v86 & 0x3FFFFFFF) )
+      v48 = *(_QWORD *)(v43 + 16i64 * v47);
+      if ( v41 == (v73 & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-        v50 = v85;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 8);
+        v41 = v72;
       }
-      v58 = v56 + 1;
-      array[v50] = v57;
-      v52 = v87.m_elem;
-      v50 = v85 + 1;
-      v59 = v56 + 1;
-      ++v85;
-      if ( v59 <= v87.m_hashMod )
+      v49 = v47 + 1;
+      array[v41] = v48;
+      v43 = *(_QWORD *)&v74.mEnableStereo;
+      v41 = v72 + 1;
+      v50 = v47 + 1;
+      ++v72;
+      if ( v50 <= (int)v74.mHeight )
       {
-        v60 = &v87.m_elem[v58];
+        v51 = (_QWORD *)(*(_QWORD *)&v74.mEnableStereo + 16i64 * v49);
         do
         {
-          if ( v60->key != -1i64 )
+          if ( *v51 != -1i64 )
             break;
-          ++v59;
-          ++v58;
-          ++v60;
+          ++v50;
+          ++v49;
+          v51 += 2;
         }
-        while ( v59 <= v87.m_hashMod );
+        while ( v50 <= (int)v74.mHeight );
       }
-      v56 = v58;
+      v47 = v49;
     }
-    while ( v58 <= v87.m_hashMod );
+    while ( v49 <= (int)v74.mHeight );
   }
-  if ( v50 )
+  if ( v41 )
   {
-    v90 = &array;
-    context = v4;
-    v91 = 0;
-    hkStackTracer::dumpStackTrace(&v95, array, v50, writeStackTrace, &context);
+    *(_QWORD *)&context.m_numElems = &array;
+    context.m_elem = (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *)stream;
+    v76 = 0;
+    hkStackTracer::dumpStackTrace(&v79, array, v41, writeStackTrace, &context);
   }
-  v85 = v2;
-  if ( v86 >= 0 )
+  v72 = 0;
+  if ( v73 >= 0 )
     ((void (__fastcall *)(hkContainerHeapAllocator::Allocator *, unsigned __int64 *, _QWORD, __int64))hkContainerHeapAllocator::s_alloc.vfptr->bufFree)(
       &hkContainerHeapAllocator::s_alloc,
       array,
-      (unsigned int)(8 * v86),
-      v51);
-  v61 = v3->m_blocks.m_size == 0;
-  v62 = v3->m_blocks.m_size < 0;
-  context = 0i64;
-  v90 = (unsigned __int64 **)-4294967296i64;
-  v63 = 0;
-  if ( !v62 && !v61 )
+      (unsigned int)(8 * v73),
+      v42);
+  v52 = scanSnapshot->m_blocks.m_size <= 0;
+  context.m_elem = 0i64;
+  *(_QWORD *)&context.m_numElems = 0xFFFFFFFF00000000ui64;
+  v53 = 0;
+  if ( !v52 )
   {
-    v64 = 0i64;
+    v54 = 0i64;
     do
-    {
       hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-        (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&context,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        (unsigned __int64)v3->m_blocks.m_data[v64],
-        v63++);
-      ++v64;
-    }
-    while ( v63 < v3->m_blocks.m_size );
+        &context,
+        &hkContainerHeapAllocator::s_alloc,
+        (unsigned __int64)scanSnapshot->m_blocks.m_data[v54++],
+        v53++);
+    while ( v53 < scanSnapshot->m_blocks.m_size );
   }
-  v65 = v2;
-  if ( v3->m_blocks.m_size > 0 )
+  v55 = 0;
+  if ( scanSnapshot->m_blocks.m_size > 0 )
   {
-    *(_QWORD *)&result.m_bool = 0i64;
-    v66 = 0;
+    result = 0i64;
+    v56 = 0;
     do
     {
-      v67 = 2147483648;
-      v68 = *(__int64 *)((char *)v3->m_blocks.m_data + v2);
-      v69 = v3->m_references.m_data;
-      v70 = *(signed int *)(v68 + 28);
+      v57 = 0x80000000;
+      v58 = *(__int64 *)((char *)scanSnapshot->m_blocks.m_data + v2);
+      m_data = scanSnapshot->m_references.m_data;
+      v60 = *(int *)(v58 + 28);
       array = 0i64;
-      v85 = 0;
-      v86 = 2147483648;
-      v71 = (unsigned __int64 *)&v69[v70];
-      if ( *(_DWORD *)(v68 + 32) > 0 )
+      v72 = 0;
+      v73 = 0x80000000;
+      v61 = (unsigned __int64 *)&m_data[v60];
+      if ( *(int *)(v58 + 32) > 0 )
       {
         do
         {
-          v72 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                  (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&context,
-                  *v71,
+          v62 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                  &context,
+                  *v61,
                   0xFFFFFFFFFFFFFFFFui64);
-          if ( v72 != -1 )
+          if ( v62 != -1 )
           {
-            v73 = v85;
-            if ( v85 == (v86 & 0x3FFFFFFF) )
+            v63 = v72;
+            if ( v72 == (v73 & 0x3FFFFFFF) )
             {
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 4);
-              v73 = v85;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 4);
+              v63 = v72;
             }
-            *((_DWORD *)array + v73) = v72;
-            ++v85;
+            *((_DWORD *)array + v63) = v62;
+            ++v72;
           }
-          ++v66;
-          ++v71;
+          ++v56;
+          ++v61;
         }
-        while ( v66 < *(_DWORD *)(v68 + 32) );
-        if ( v85 )
+        while ( v56 < *(_DWORD *)(v58 + 32) );
+        if ( v72 )
         {
-          v74 = hkOstream::operator<<(v4, "References( blockId=");
-          v75 = hkOstream::operator<<(v74, v65, (int)v74);
-          hkOstream::operator<<(v75, ", refIds=[");
-          v76 = 0;
-          if ( v85 > 0 )
+          v64 = hkOstream::operator<<(stream, "References( blockId=");
+          v65 = hkOstream::operator<<(v64, v55);
+          hkOstream::operator<<(v65, ", refIds=[");
+          v66 = 0;
+          if ( v72 > 0 )
           {
-            v77 = 0i64;
+            v67 = 0i64;
             do
             {
-              hkOstream::operator<<(v4, *(_DWORD *)((char *)array + v77), (int)array);
-              v78 = v85;
-              if ( v76 != v85 - 1 )
+              hkOstream::operator<<(stream, *(_DWORD *)((char *)array + v67));
+              v68 = v72;
+              if ( v66 != v72 - 1 )
               {
-                hkOstream::operator<<(v4, 44);
-                v78 = v85;
+                hkOstream::operator<<(stream, 44);
+                v68 = v72;
               }
-              ++v76;
-              v77 += 4i64;
+              ++v66;
+              v67 += 4i64;
             }
-            while ( v76 < v78 );
+            while ( v66 < v68 );
           }
-          hkOstream::operator<<(v4, "] )\n");
+          hkOstream::operator<<(stream, "] )\n");
         }
-        v2 = *(_QWORD *)&result.m_bool;
-        v67 = v86;
+        v2 = result;
+        v57 = v73;
       }
-      v66 = 0;
-      v85 = 0;
-      if ( v67 >= 0 )
+      v56 = 0;
+      v72 = 0;
+      if ( v57 >= 0 )
         ((void (__fastcall *)(hkContainerHeapAllocator::Allocator *, unsigned __int64 *, _QWORD, __int64))hkContainerHeapAllocator::s_alloc.vfptr->bufFree)(
           &hkContainerHeapAllocator::s_alloc,
           array,
-          (unsigned int)(4 * v67),
-          v51);
+          (unsigned int)(4 * v57),
+          v42);
       v2 += 8i64;
-      ++v65;
+      ++v55;
       array = 0i64;
-      v86 = 2147483648;
-      *(_QWORD *)&result.m_bool = v2;
+      v73 = 0x80000000;
+      result = v2;
     }
-    while ( v65 < v3->m_blocks.m_size );
+    while ( v55 < scanSnapshot->m_blocks.m_size );
   }
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&context,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
+    &context,
+    &hkContainerHeapAllocator::s_alloc);
   _((AMD_HD3D *)&context);
-  hkStackTracer::~hkStackTracer(&v95);
+  hkStackTracer::~hkStackTracer(&v79);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v92,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v92);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v77,
+    &hkContainerHeapAllocator::s_alloc);
+  _(v77);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v93,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v93);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v77[0].mStereo,
+    &hkContainerHeapAllocator::s_alloc);
+  _((AMD_HD3D *)&v77[0].mStereo);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v87,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v87);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v74,
+    &hkContainerHeapAllocator::s_alloc);
+  _(&v74);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v88,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v88);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v74.mStereo,
+    &hkContainerHeapAllocator::s_alloc);
+  _((AMD_HD3D *)&v74.mStereo);
 }
 

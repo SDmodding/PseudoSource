@@ -5,12 +5,17 @@ __int64 dynamic_initializer_for__gTaskFunctionDecl_OceanSkinBufferTask__()
   UFG::qTaskFunctionDecl::qTaskFunctionDecl(
     &gTaskFunctionDecl_OceanSkinBufferTask,
     &gTaskFunctionDeclData_OceanSkinBufferTask);
-  return atexit(dynamic_atexit_destructor_for__gTaskFunctionDecl_OceanSkinBufferTask__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTaskFunctionDecl_OceanSkinBufferTask__);
 }
 
 // File Line: 85
 // RVA: 0x79850
-void __fastcall OceanSkinBufferTask(int worker_id, UFG::qMemoryStreamer *memory_streamer, void *param0, void *param1, void *param2)
+void __fastcall OceanSkinBufferTask(
+        int worker_id,
+        UFG::qMemoryStreamer *memory_streamer,
+        _QWORD *param0,
+        void *param1,
+        void *param2)
 {
   unsigned int *v5; // rcx
   __m128 *v6; // r14
@@ -127,19 +132,19 @@ void __fastcall OceanSkinBufferTask(int worker_id, UFG::qMemoryStreamer *memory_
   float v117; // [rsp+50h] [rbp-C8h]
   float v118; // [rsp+130h] [rbp+18h]
 
-  v5 = (unsigned int *)*((_QWORD *)param0 + 10);
-  v6 = *(__m128 **)param0;
-  v7 = (__m128 *)*((_QWORD *)param0 + 1);
+  v5 = (unsigned int *)param0[10];
+  v6 = (__m128 *)*param0;
+  v7 = (__m128 *)param0[1];
   if ( v5 )
   {
     v8 = *((_QWORD *)v5 + 3);
-    v9 = (float)(signed int)v8;
+    v9 = (float)(int)v8;
     if ( v8 < 0 )
       v9 = v9 + 1.8446744e19;
     v10 = v9 * 0.001;
     v11 = *((_DWORD *)param0 + 16);
-    LODWORD(v12) = (unsigned __int128)_mm_shuffle_ps((__m128)v5[8], (__m128)v5[8], 0);
-    LODWORD(v13) = (unsigned __int128)_mm_shuffle_ps((__m128)v5[9], (__m128)v5[9], 0);
+    LODWORD(v12) = _mm_shuffle_ps((__m128)v5[8], (__m128)v5[8], 0).m128_u32[0];
+    LODWORD(v13) = _mm_shuffle_ps((__m128)v5[9], (__m128)v5[9], 0).m128_u32[0];
     v118 = v10;
     v117 = v12;
     v115 = v13;
@@ -162,167 +167,164 @@ void __fastcall OceanSkinBufferTask(int worker_id, UFG::qMemoryStreamer *memory_
         v21 = 32 * v18;
         v6 = (__m128 *)((char *)v6 + v21);
         v7 = (__m128 *)((char *)v7 + v21);
-        if ( v18 )
+        v22 = v18;
+        do
         {
-          v22 = v18;
-          do
+          v23 = *v20;
+          v20 += 2;
+          v24 = _mm_sub_ps(v23, v15);
+          v25 = _mm_sub_ps(v23, v14);
+          v26 = _mm_mul_ps(v24, v24);
+          v27 = (float)(_mm_shuffle_ps(v26, v26, 85).m128_f32[0] + _mm_shuffle_ps(v26, v26, 0).m128_f32[0])
+              + _mm_shuffle_ps(v26, v26, 170).m128_f32[0];
+          v28 = _mm_mul_ps(v25, v25);
+          v29 = _mm_add_ps(
+                  _mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)),
+                  _mm_shuffle_ps(v28, v28, 170));
+          v30 = _mm_mul_ps(_mm_mul_ps(_mm_andnot_ps(_mm_cmple_ps(v29, (__m128)0i64), _mm_rsqrt_ps(v29)), v25), v16);
+          if ( v27 >= v12
+            || (float)((float)(_mm_shuffle_ps(v30, v30, 85).m128_f32[0] + _mm_shuffle_ps(v30, v30, 0).m128_f32[0])
+                     + _mm_shuffle_ps(v30, v30, 170).m128_f32[0]) <= v13 )
           {
-            v23 = *v20;
-            v20 += 2;
-            v24 = _mm_sub_ps(v23, v15);
-            v25 = _mm_sub_ps(v23, v14);
-            v26 = _mm_mul_ps(v24, v24);
-            v27 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v26, v26, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v26, v26, 0)))
-                + COERCE_FLOAT(_mm_shuffle_ps(v26, v26, 170));
-            v28 = _mm_mul_ps(v25, v25);
-            v29 = _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)),
-                    _mm_shuffle_ps(v28, v28, 170));
-            v30 = _mm_mul_ps(_mm_mul_ps(_mm_andnot_ps(_mm_cmpleps(v29, (__m128)0i64), _mm_rsqrt_ps(v29)), v25), v16);
-            if ( v27 >= v12
-              || (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 0)))
-                       + COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 170))) <= v13 )
-            {
-              *v19 = v23;
-              v19[1] = gWorldUp;
-            }
-            else
-            {
-              v31 = _mm_mul_ps(v23, gWaveDir1);
-              v32 = v10 * 2.0943952;
-              v33 = _mm_add_ps(gWaveDir1dxy, v23);
-              v34 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v31, v31, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v31, v31, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v31, v31, 170));
-              v35 = _mm_mul_ps(v23, gWorldUp);
-              v36 = (float)(v34 * 0.44714484) - (float)(v10 * 2.0943952);
-              v37 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 170));
-              v38 = cosf(v36);
-              v39 = cosf((float)((float)((float)(v38 * v17) - v37) * v17) + v36);
-              v29.m128_f32[0] = v37 - (float)(v39 * v17);
-              v40 = _mm_shuffle_ps(v23, _mm_unpackhi_ps(v23, _mm_shuffle_ps(v29, v29, 0)), 180);
-              v41 = (__m128)(unsigned int)FLOAT_1_0;
-              v41.m128_f32[0] = 1.0 - v39;
-              v42 = _mm_sqrt_ps(v41);
-              v42.m128_f32[0] = v42.m128_f32[0] * v17;
-              v43 = v10 * 2.5132742;
-              v44 = _mm_mul_ps(_mm_shuffle_ps(v42, v42, 0), gWaveDir1);
-              v45 = _mm_add_ps(v40, v44);
-              v46 = _mm_mul_ps(v45, gWaveDir2);
-              v47 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v46, v46, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v46, v46, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v46, v46, 170));
-              v48 = _mm_mul_ps(v45, gWorldUp);
-              v49 = (float)(v47 * 0.64388859) - (float)(v10 * 2.5132742);
-              v50 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v48, v48, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v48, v48, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v48, v48, 170));
-              v51 = cosf(v49);
-              v52 = cosf((float)((float)((float)(v51 * 0.115) - v50) * 0.1) + v49);
-              v44.m128_f32[0] = v50 - (float)(v52 * 0.115);
-              v53 = v10 * 1.5906799;
-              v54 = _mm_shuffle_ps(v45, _mm_unpackhi_ps(v45, _mm_shuffle_ps(v44, v44, 0)), 180);
-              v55 = (__m128)(unsigned int)FLOAT_1_0;
-              v55.m128_f32[0] = 1.0 - v52;
-              v56 = _mm_sqrt_ps(v55);
-              v56.m128_f32[0] = v56.m128_f32[0] * 0.115;
-              v57 = _mm_mul_ps(_mm_shuffle_ps(v56, v56, 0), gWaveDir2);
-              v58 = _mm_add_ps(v54, v57);
-              v59 = _mm_mul_ps(v58, gWaveDir3);
-              v60 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v59, v59, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v59, v59, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v59, v59, 170));
-              v61 = _mm_mul_ps(v58, gWorldUp);
-              v62 = (float)(v60 * 0.25792685) - v53;
-              v63 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v61, v61, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v61, v61, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v61, v61, 170));
-              v64 = cosf(v62);
-              v65 = cosf(v62 - (float)((float)((float)(v64 * 0.15000001) - v63) * 0.1));
-              v57.m128_f32[0] = v63 - (float)(v65 * 0.15000001);
-              v66 = _mm_shuffle_ps(v58, _mm_unpackhi_ps(v58, _mm_shuffle_ps(v57, v57, 0)), 180);
-              v67 = (__m128)(unsigned int)FLOAT_1_0;
-              v67.m128_f32[0] = 1.0 - v65;
-              v68 = _mm_sqrt_ps(v67);
-              v69 = _mm_mul_ps(v33, gWaveDir1);
-              v68.m128_f32[0] = v68.m128_f32[0] * 0.15000001;
-              v70 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 170));
-              v71 = _mm_mul_ps(v33, gWorldUp);
-              v72 = _mm_mul_ps(_mm_shuffle_ps(v68, v68, 0), gWaveDir3);
-              v73 = (float)(v70 * 0.44714484) - v32;
-              v74 = _mm_add_ps(v66, v72);
-              v75 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 170));
-              v76 = cosf(v73);
-              v77 = cosf((float)((float)((float)(v76 * 0.25) - v75) * 0.25) + v73);
-              v72.m128_f32[0] = v75 - (float)(v77 * 0.25);
-              v78 = _mm_shuffle_ps(v33, _mm_unpackhi_ps(v33, _mm_shuffle_ps(v72, v72, 0)), 180);
-              v79 = (__m128)(unsigned int)FLOAT_1_0;
-              v79.m128_f32[0] = 1.0 - v77;
-              v80 = _mm_sqrt_ps(v79);
-              v80.m128_f32[0] = v80.m128_f32[0] * 0.25;
-              v81 = _mm_mul_ps(_mm_shuffle_ps(v80, v80, 0), gWaveDir1);
-              v82 = _mm_add_ps(_mm_add_ps(v78, v81), gWaveDir2dxy);
-              v83 = _mm_mul_ps(gWaveDir2, v82);
-              v84 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v83, v83, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v83, v83, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v83, v83, 170));
-              v85 = _mm_mul_ps(gWorldUp, v82);
-              v86 = (float)(v84 * 0.64388859) - v43;
-              v87 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v85, v85, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v85, v85, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v85, v85, 170));
-              v88 = cosf(v86);
-              v89 = cosf((float)((float)((float)(v88 * 0.115) - v87) * 0.1) + v86);
-              v81.m128_f32[0] = v87 - (float)(v89 * 0.115);
-              v90 = _mm_shuffle_ps(v82, _mm_unpackhi_ps(v82, _mm_shuffle_ps(v81, v81, 0)), 180);
-              v91 = (__m128)(unsigned int)FLOAT_1_0;
-              v91.m128_f32[0] = 1.0 - v89;
-              v92 = _mm_sqrt_ps(v91);
-              v92.m128_f32[0] = v92.m128_f32[0] * 0.115;
-              v93 = _mm_mul_ps(_mm_shuffle_ps(v92, v92, 0), gWaveDir2);
-              v94 = _mm_add_ps(_mm_add_ps(v90, v93), gWaveDir3dxy);
-              v95 = _mm_mul_ps(gWaveDir3, v94);
-              v96 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v95, v95, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v95, v95, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v95, v95, 170));
-              v97 = _mm_mul_ps(gWorldUp, v94);
-              v98 = (float)(v96 * 0.25792685) - v53;
-              v99 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v97, v97, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v97, v97, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v97, v97, 170));
-              v100 = cosf(v98);
-              v101 = cosf(v98 - (float)((float)((float)(v100 * 0.15000001) - v99) * 0.1));
-              v16 = v116;
-              v10 = v118;
-              *v19 = v74;
-              v93.m128_f32[0] = v99 - (float)(v101 * 0.15000001);
-              v13 = v115;
-              v102 = _mm_shuffle_ps(v94, _mm_unpackhi_ps(v94, _mm_shuffle_ps(v93, v93, 0)), 180);
-              v103 = (__m128)(unsigned int)FLOAT_1_0;
-              v12 = v117;
-              v103.m128_f32[0] = 1.0 - v101;
-              v104 = _mm_sqrt_ps(v103);
-              v104.m128_f32[0] = v104.m128_f32[0] * 0.15000001;
-              v17 = FLOAT_0_25;
-              v105 = _mm_sub_ps(_mm_add_ps(v102, _mm_mul_ps(_mm_shuffle_ps(v104, v104, 0), gWaveDir3)), v74);
-              v106 = _mm_shuffle_ps(v105, v105, 201);
-              v107 = _mm_sub_ps(_mm_mul_ps(gWorldUp, v106), _mm_mul_ps(_mm_shuffle_ps(gWorldUp, gWorldUp, 201), v105));
-              v108 = _mm_shuffle_ps(v107, v107, 201);
-              v109 = _mm_sub_ps(_mm_mul_ps(v108, v105), _mm_mul_ps(v106, v108));
-              v110 = _mm_shuffle_ps(v109, v109, 201);
-              v111 = _mm_mul_ps(v110, v110);
-              v112 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v111, v111, 85), _mm_shuffle_ps(v111, v111, 0)),
-                       _mm_shuffle_ps(v111, v111, 170));
-              v113 = _mm_rsqrt_ps(v112);
-              v19[1] = _mm_mul_ps(
-                         _mm_andnot_ps(
-                           _mm_cmpleps(v112, (__m128)0i64),
-                           _mm_mul_ps(
-                             _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v113, v112), v113)),
-                             _mm_mul_ps(*(__m128 *)_xmm, v113))),
-                         v110);
-            }
-            v15 = v114;
-            v19 += 2;
-            --v22;
+            *v19 = v23;
+            v19[1] = gWorldUp;
           }
-          while ( v22 );
+          else
+          {
+            v31 = _mm_mul_ps(v23, gWaveDir1);
+            v32 = v10 * 2.0943952;
+            v33 = _mm_add_ps(gWaveDir1dxy, v23);
+            v34 = (float)(_mm_shuffle_ps(v31, v31, 85).m128_f32[0] + _mm_shuffle_ps(v31, v31, 0).m128_f32[0])
+                + _mm_shuffle_ps(v31, v31, 170).m128_f32[0];
+            v35 = _mm_mul_ps(v23, gWorldUp);
+            v36 = (float)(v34 * 0.44714484) - (float)(v10 * 2.0943952);
+            v37 = (float)(_mm_shuffle_ps(v35, v35, 85).m128_f32[0] + _mm_shuffle_ps(v35, v35, 0).m128_f32[0])
+                + _mm_shuffle_ps(v35, v35, 170).m128_f32[0];
+            v38 = cosf(v36);
+            v39 = cosf((float)((float)((float)(v38 * v17) - v37) * v17) + v36);
+            v29.m128_f32[0] = v37 - (float)(v39 * v17);
+            v40 = _mm_shuffle_ps(v23, _mm_unpackhi_ps(v23, _mm_shuffle_ps(v29, v29, 0)), 180);
+            v41 = (__m128)(unsigned int)FLOAT_1_0;
+            v41.m128_f32[0] = 1.0 - v39;
+            v42 = _mm_sqrt_ps(v41);
+            v42.m128_f32[0] = v42.m128_f32[0] * v17;
+            v43 = v10 * 2.5132742;
+            v44 = _mm_mul_ps(_mm_shuffle_ps(v42, v42, 0), gWaveDir1);
+            v45 = _mm_add_ps(v40, v44);
+            v46 = _mm_mul_ps(v45, gWaveDir2);
+            v47 = (float)(_mm_shuffle_ps(v46, v46, 85).m128_f32[0] + _mm_shuffle_ps(v46, v46, 0).m128_f32[0])
+                + _mm_shuffle_ps(v46, v46, 170).m128_f32[0];
+            v48 = _mm_mul_ps(v45, gWorldUp);
+            v49 = (float)(v47 * 0.64388859) - (float)(v10 * 2.5132742);
+            v50 = (float)(_mm_shuffle_ps(v48, v48, 85).m128_f32[0] + _mm_shuffle_ps(v48, v48, 0).m128_f32[0])
+                + _mm_shuffle_ps(v48, v48, 170).m128_f32[0];
+            v51 = cosf(v49);
+            v52 = cosf((float)((float)((float)(v51 * 0.115) - v50) * 0.1) + v49);
+            v44.m128_f32[0] = v50 - (float)(v52 * 0.115);
+            v53 = v10 * 1.5906799;
+            v54 = _mm_shuffle_ps(v45, _mm_unpackhi_ps(v45, _mm_shuffle_ps(v44, v44, 0)), 180);
+            v55 = (__m128)(unsigned int)FLOAT_1_0;
+            v55.m128_f32[0] = 1.0 - v52;
+            v56 = _mm_sqrt_ps(v55);
+            v56.m128_f32[0] = v56.m128_f32[0] * 0.115;
+            v57 = _mm_mul_ps(_mm_shuffle_ps(v56, v56, 0), gWaveDir2);
+            v58 = _mm_add_ps(v54, v57);
+            v59 = _mm_mul_ps(v58, gWaveDir3);
+            v60 = (float)(_mm_shuffle_ps(v59, v59, 85).m128_f32[0] + _mm_shuffle_ps(v59, v59, 0).m128_f32[0])
+                + _mm_shuffle_ps(v59, v59, 170).m128_f32[0];
+            v61 = _mm_mul_ps(v58, gWorldUp);
+            v62 = (float)(v60 * 0.25792685) - v53;
+            v63 = (float)(_mm_shuffle_ps(v61, v61, 85).m128_f32[0] + _mm_shuffle_ps(v61, v61, 0).m128_f32[0])
+                + _mm_shuffle_ps(v61, v61, 170).m128_f32[0];
+            v64 = cosf(v62);
+            v65 = cosf(v62 - (float)((float)((float)(v64 * 0.15000001) - v63) * 0.1));
+            v57.m128_f32[0] = v63 - (float)(v65 * 0.15000001);
+            v66 = _mm_shuffle_ps(v58, _mm_unpackhi_ps(v58, _mm_shuffle_ps(v57, v57, 0)), 180);
+            v67 = (__m128)(unsigned int)FLOAT_1_0;
+            v67.m128_f32[0] = 1.0 - v65;
+            v68 = _mm_sqrt_ps(v67);
+            v69 = _mm_mul_ps(v33, gWaveDir1);
+            v68.m128_f32[0] = v68.m128_f32[0] * 0.15000001;
+            v70 = (float)(_mm_shuffle_ps(v69, v69, 85).m128_f32[0] + _mm_shuffle_ps(v69, v69, 0).m128_f32[0])
+                + _mm_shuffle_ps(v69, v69, 170).m128_f32[0];
+            v71 = _mm_mul_ps(v33, gWorldUp);
+            v72 = _mm_mul_ps(_mm_shuffle_ps(v68, v68, 0), gWaveDir3);
+            v73 = (float)(v70 * 0.44714484) - v32;
+            v74 = _mm_add_ps(v66, v72);
+            v75 = (float)(_mm_shuffle_ps(v71, v71, 85).m128_f32[0] + _mm_shuffle_ps(v71, v71, 0).m128_f32[0])
+                + _mm_shuffle_ps(v71, v71, 170).m128_f32[0];
+            v76 = cosf(v73);
+            v77 = cosf((float)((float)((float)(v76 * 0.25) - v75) * 0.25) + v73);
+            v72.m128_f32[0] = v75 - (float)(v77 * 0.25);
+            v78 = _mm_shuffle_ps(v33, _mm_unpackhi_ps(v33, _mm_shuffle_ps(v72, v72, 0)), 180);
+            v79 = (__m128)(unsigned int)FLOAT_1_0;
+            v79.m128_f32[0] = 1.0 - v77;
+            v80 = _mm_sqrt_ps(v79);
+            v80.m128_f32[0] = v80.m128_f32[0] * 0.25;
+            v81 = _mm_mul_ps(_mm_shuffle_ps(v80, v80, 0), gWaveDir1);
+            v82 = _mm_add_ps(_mm_add_ps(v78, v81), gWaveDir2dxy);
+            v83 = _mm_mul_ps(gWaveDir2, v82);
+            v84 = (float)(_mm_shuffle_ps(v83, v83, 85).m128_f32[0] + _mm_shuffle_ps(v83, v83, 0).m128_f32[0])
+                + _mm_shuffle_ps(v83, v83, 170).m128_f32[0];
+            v85 = _mm_mul_ps(gWorldUp, v82);
+            v86 = (float)(v84 * 0.64388859) - v43;
+            v87 = (float)(_mm_shuffle_ps(v85, v85, 85).m128_f32[0] + _mm_shuffle_ps(v85, v85, 0).m128_f32[0])
+                + _mm_shuffle_ps(v85, v85, 170).m128_f32[0];
+            v88 = cosf(v86);
+            v89 = cosf((float)((float)((float)(v88 * 0.115) - v87) * 0.1) + v86);
+            v81.m128_f32[0] = v87 - (float)(v89 * 0.115);
+            v90 = _mm_shuffle_ps(v82, _mm_unpackhi_ps(v82, _mm_shuffle_ps(v81, v81, 0)), 180);
+            v91 = (__m128)(unsigned int)FLOAT_1_0;
+            v91.m128_f32[0] = 1.0 - v89;
+            v92 = _mm_sqrt_ps(v91);
+            v92.m128_f32[0] = v92.m128_f32[0] * 0.115;
+            v93 = _mm_mul_ps(_mm_shuffle_ps(v92, v92, 0), gWaveDir2);
+            v94 = _mm_add_ps(_mm_add_ps(v90, v93), gWaveDir3dxy);
+            v95 = _mm_mul_ps(gWaveDir3, v94);
+            v96 = (float)(_mm_shuffle_ps(v95, v95, 85).m128_f32[0] + _mm_shuffle_ps(v95, v95, 0).m128_f32[0])
+                + _mm_shuffle_ps(v95, v95, 170).m128_f32[0];
+            v97 = _mm_mul_ps(gWorldUp, v94);
+            v98 = (float)(v96 * 0.25792685) - v53;
+            v99 = (float)(_mm_shuffle_ps(v97, v97, 85).m128_f32[0] + _mm_shuffle_ps(v97, v97, 0).m128_f32[0])
+                + _mm_shuffle_ps(v97, v97, 170).m128_f32[0];
+            v100 = cosf(v98);
+            v101 = cosf(v98 - (float)((float)((float)(v100 * 0.15000001) - v99) * 0.1));
+            v16 = v116;
+            v10 = v118;
+            *v19 = v74;
+            v93.m128_f32[0] = v99 - (float)(v101 * 0.15000001);
+            v13 = v115;
+            v102 = _mm_shuffle_ps(v94, _mm_unpackhi_ps(v94, _mm_shuffle_ps(v93, v93, 0)), 180);
+            v103 = (__m128)(unsigned int)FLOAT_1_0;
+            v12 = v117;
+            v103.m128_f32[0] = 1.0 - v101;
+            v104 = _mm_sqrt_ps(v103);
+            v104.m128_f32[0] = v104.m128_f32[0] * 0.15000001;
+            v17 = FLOAT_0_25;
+            v105 = _mm_sub_ps(_mm_add_ps(v102, _mm_mul_ps(_mm_shuffle_ps(v104, v104, 0), gWaveDir3)), v74);
+            v106 = _mm_shuffle_ps(v105, v105, 201);
+            v107 = _mm_sub_ps(_mm_mul_ps(gWorldUp, v106), _mm_mul_ps(_mm_shuffle_ps(gWorldUp, gWorldUp, 201), v105));
+            v108 = _mm_shuffle_ps(v107, v107, 201);
+            v109 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v108, v108, 201), v105), _mm_mul_ps(v106, v108));
+            v110 = _mm_shuffle_ps(v109, v109, 201);
+            v111 = _mm_mul_ps(v110, v110);
+            v112 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v111, v111, 85), _mm_shuffle_ps(v111, v111, 0)),
+                     _mm_shuffle_ps(v111, v111, 170));
+            v113 = _mm_rsqrt_ps(v112);
+            v19[1] = _mm_mul_ps(
+                       _mm_andnot_ps(
+                         _mm_cmple_ps(v112, (__m128)0i64),
+                         _mm_mul_ps(
+                           _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v113, v112), v113)),
+                           _mm_mul_ps(*(__m128 *)_xmm, v113))),
+                       v110);
+          }
+          v15 = v114;
+          v19 += 2;
+          --v22;
         }
+        while ( v22 );
       }
       while ( v11 );
     }

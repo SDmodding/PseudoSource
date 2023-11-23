@@ -2,12 +2,12 @@
 // RVA: 0x12FEE50
 hkReferencedObject *__fastcall hkTypeInfoRegistrycreate()
 {
-  _QWORD **v0; // rax
+  _QWORD **Value; // rax
   hkReferencedObject *result; // rax
   hkReferencedObject *v2; // rbx
 
-  v0 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  result = (hkReferencedObject *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v0[11] + 8i64))(v0[11], 48i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  result = (hkReferencedObject *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 48i64);
   v2 = result;
   if ( result )
   {
@@ -18,7 +18,7 @@ hkReferencedObject *__fastcall hkTypeInfoRegistrycreate()
       0);
     *(_DWORD *)&v2[2].m_memSizeAndFlags = 1;
     *(_DWORD *)(&v2[2].m_referenceCount + 1) = 1;
-    result = v2;
+    return v2;
   }
   return result;
 }

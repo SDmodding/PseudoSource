@@ -1,11 +1,13 @@
 // File Line: 48
 // RVA: 0xD5F570
-void __fastcall hkpConstraintInstance::hkpConstraintInstance(hkpConstraintInstance *this, hkpEntity *entityA, hkpEntity *entityB, hkpConstraintData *data, hkpConstraintInstance::ConstraintPriority priority)
+void __fastcall hkpConstraintInstance::hkpConstraintInstance(
+        hkpConstraintInstance *this,
+        hkpEntity *entityA,
+        hkpEntity *entityB,
+        hkpConstraintData *data,
+        hkpConstraintInstance::ConstraintPriority priority)
 {
-  hkpConstraintInstance *v5; // rsi
-  hkpEntity *v6; // rdi
-  hkpEntity *v7; // rbx
-  hkReferencedObject *v8; // rcx
+  hkpEntity *v8; // rcx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_data = data;
@@ -14,57 +16,55 @@ void __fastcall hkpConstraintInstance::hkpConstraintInstance(hkpConstraintInstan
   this->m_priority.m_storage = priority;
   *(_WORD *)&this->m_wantRuntime.m_bool = 1;
   this->m_listeners.m_data = 0i64;
-  *(_DWORD *)&this->m_listeners.m_size = 2147483648;
-  v5 = this;
-  v6 = entityB;
-  v7 = entityA;
+  *(_DWORD *)&this->m_listeners.m_size = 0x80000000;
   hkStringPtr::hkStringPtr(&this->m_name);
-  v5->m_userData = 0i64;
-  v5->m_internal = 0i64;
-  v5->m_uid = -16;
-  v5->m_entities[0] = v7;
-  v5->m_entities[1] = v6;
-  v5->m_constraintModifiers = 0i64;
+  this->m_userData = 0i64;
+  this->m_internal = 0i64;
+  this->m_uid = -16;
+  this->m_entities[0] = entityA;
+  this->m_entities[1] = entityB;
+  this->m_constraintModifiers = 0i64;
   hkReferencedObject::lockAll();
-  hkReferencedObject::addReference((hkReferencedObject *)&v5->m_entities[0]->vfptr);
-  v8 = (hkReferencedObject *)&v5->m_entities[1]->vfptr;
+  hkReferencedObject::addReference(this->m_entities[0]);
+  v8 = this->m_entities[1];
   if ( v8 )
     hkReferencedObject::addReference(v8);
-  hkReferencedObject::addReference((hkReferencedObject *)&v5->m_data->vfptr);
+  hkReferencedObject::addReference(this->m_data);
   hkReferencedObject::unlockAll();
 }
 
 // File Line: 86
 // RVA: 0xD5F8B0
-void __fastcall hkpConstraintInstance::hkpConstraintInstance(hkpConstraintInstance *this, hkpConstraintInstance::ConstraintPriority priority)
+void __fastcall hkpConstraintInstance::hkpConstraintInstance(
+        hkpConstraintInstance *this,
+        hkpConstraintInstance::ConstraintPriority priority)
 {
-  hkpConstraintInstance *v2; // rbx
-
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable;
   this->m_owner = 0i64;
   this->m_constraintModifiers = 0i64;
   this->m_priority.m_storage = priority;
   *(_WORD *)&this->m_wantRuntime.m_bool = 1;
-  v2 = this;
   this->m_listeners.m_data = 0i64;
-  *(_DWORD *)&this->m_listeners.m_size = 2147483648;
+  *(_DWORD *)&this->m_listeners.m_size = 0x80000000;
   hkStringPtr::hkStringPtr(&this->m_name);
-  v2->m_userData = 0i64;
-  v2->m_internal = 0i64;
-  v2->m_uid = -16;
+  this->m_userData = 0i64;
+  this->m_internal = 0i64;
+  this->m_uid = -16;
 }
 
 // File Line: 91
 // RVA: 0xD601F0
-void __fastcall hkpConstraintInstance::setPriority(hkpConstraintInstance *this, hkpConstraintInstance::ConstraintPriority priority)
+void __fastcall hkpConstraintInstance::setPriority(
+        hkpConstraintInstance *this,
+        hkpConstraintInstance::ConstraintPriority priority)
 {
-  hkConstraintInternal *v2; // rax
+  hkConstraintInternal *m_internal; // rax
 
-  v2 = this->m_internal;
+  m_internal = this->m_internal;
   this->m_priority.m_storage = priority;
-  if ( v2 )
-    v2->m_priority.m_storage = priority;
+  if ( m_internal )
+    m_internal->m_priority.m_storage = priority;
 }
 
 // File Line: 100
@@ -103,51 +103,49 @@ void __fastcall hkpConstraintInstance::entityRemovedCallback(hkpConstraintInstan
 
 // File Line: 131
 // RVA: 0xD5F730
-hkStringPtr *__fastcall hkpConstraintInstance::clone(hkpConstraintInstance *this, hkpEntity *newEntityA, hkpEntity *newEntityB, hkpConstraintInstance::CloningMode mode)
+hkStringPtr *__fastcall hkpConstraintInstance::clone(
+        hkpConstraintInstance *this,
+        hkpEntity *newEntityA,
+        hkpEntity *newEntityB,
+        hkpConstraintInstance::CloningMode mode)
 {
-  hkpEntity *v4; // rbp
-  hkpEntity *v5; // rbx
-  hkpConstraintInstance *v6; // rdi
-  hkpConstraintData *v7; // rsi
+  hkpConstraintData *m_data; // rsi
   _QWORD **v8; // rax
   hkpConstraintInstance *v9; // rax
   hkStringPtr *v10; // rax
   hkStringPtr *v11; // rbx
-  _QWORD **v12; // rax
+  _QWORD **Value; // rax
   hkpConstraintInstance *v13; // rax
   hkStringPtr *v14; // rax
   _QWORD **v15; // rax
   hkpConstraintInstance *v16; // rax
   hkStringPtr *v17; // rax
-  hkBool result; // [rsp+58h] [rbp+20h]
+  hkBool result; // [rsp+58h] [rbp+20h] BYREF
 
-  v4 = newEntityB;
-  v5 = newEntityA;
-  v6 = this;
   if ( mode )
   {
-    if ( mode == 1 )
+    if ( mode == CLONE_DATAS_WITH_MOTORS )
     {
-      v7 = hkpConstraintDataUtils::cloneIfCanHaveMotors(this->m_data);
-      if ( !v7 )
+      m_data = hkpConstraintDataUtils::cloneIfCanHaveMotors(this->m_data);
+      if ( !m_data )
       {
-        v7 = v6->m_data;
-        hkReferencedObject::addReference((hkReferencedObject *)&v6->m_data->vfptr);
+        m_data = this->m_data;
+        hkReferencedObject::addReference(m_data);
       }
-      v12 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v13 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v12[11] + 8i64))(
-                                       v12[11],
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v13 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                       Value[11],
                                        112i64);
       if ( v13 )
       {
         hkpConstraintInstance::hkpConstraintInstance(
           v13,
-          v5,
-          v4,
-          v7,
-          (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)v6->m_priority.m_storage);
+          newEntityA,
+          newEntityB,
+          m_data,
+          (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)this->m_priority.m_storage);
         v11 = v14;
-        hkReferencedObject::removeReference((hkReferencedObject *)&v7->vfptr);
+        hkReferencedObject::removeReference(m_data);
         goto LABEL_14;
       }
       goto LABEL_10;
@@ -155,38 +153,36 @@ hkStringPtr *__fastcall hkpConstraintInstance::clone(hkpConstraintInstance *this
   }
   else if ( hkpConstraintInstance::isConstrainedToWorld(this, &result)->m_bool )
   {
-    v7 = hkpConstraintDataCloningUtil::deepClone(v6->m_data);
+    m_data = hkpConstraintDataCloningUtil::deepClone(this->m_data);
     v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v9 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 112i64);
+    v9 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v8[11] + 8i64))(v8[11], 112i64);
     if ( v9 )
     {
       hkpConstraintInstance::hkpConstraintInstance(
         v9,
-        v5,
+        newEntityA,
         0i64,
-        v7,
-        (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)v6->m_priority.m_storage);
+        m_data,
+        (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)this->m_priority.m_storage);
       v11 = v10;
-      hkReferencedObject::removeReference((hkReferencedObject *)&v7->vfptr);
+      hkReferencedObject::removeReference(m_data);
       goto LABEL_14;
     }
 LABEL_10:
     v11 = 0i64;
-    hkReferencedObject::removeReference((hkReferencedObject *)&v7->vfptr);
+    hkReferencedObject::removeReference(m_data);
     goto LABEL_14;
   }
   v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v16 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v15[11] + 8i64))(
-                                   v15[11],
-                                   112i64);
+  v16 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v15[11] + 8i64))(v15[11], 112i64);
   if ( v16 )
   {
     hkpConstraintInstance::hkpConstraintInstance(
       v16,
-      v5,
-      v4,
-      v6->m_data,
-      (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)v6->m_priority.m_storage);
+      newEntityA,
+      newEntityB,
+      this->m_data,
+      (hkpConstraintInstance::ConstraintPriority)(unsigned __int8)this->m_priority.m_storage);
     v11 = v17;
   }
   else
@@ -194,7 +190,9 @@ LABEL_10:
     v11 = 0i64;
   }
 LABEL_14:
-  hkStringPtr::operator=(v11 + 10, (const char *)((_QWORD)v6->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
+  hkStringPtr::operator=(
+    v11 + 10,
+    (const char *)((unsigned __int64)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
   return v11;
 }
 
@@ -202,133 +200,132 @@ LABEL_14:
 // RVA: 0xD5F630
 void __fastcall hkpConstraintInstance::~hkpConstraintInstance(hkpConstraintInstance *this)
 {
-  hkpConstraintInstance *v1; // r14
-  hkReferencedObject *v2; // rcx
-  hkReferencedObject *v3; // rcx
-  hkpModifierConstraintAtom *v4; // rsi
+  hkpEntity *v2; // rcx
+  hkpEntity *v3; // rcx
+  hkpModifierConstraintAtom *m_constraintModifiers; // rsi
   hkpModifierConstraintAtom *v5; // rdi
-  unsigned int v6; // ebx
-  _QWORD **v7; // rax
-  hkReferencedObject *v8; // rcx
-  unsigned __int16 v9; // di
+  unsigned int m_modifierAtomSize; // ebx
+  _QWORD **Value; // rax
+  hkpConstraintData *m_data; // rcx
+  signed __int16 m_capacityAndFlags; // di
   hkpConstraintListener **v10; // rbx
   _QWORD **v11; // rax
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable;
   hkpConstraintCallbackUtil::fireConstraintDeleted(this);
-  v2 = (hkReferencedObject *)&v1->m_entities[0]->vfptr;
+  v2 = this->m_entities[0];
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  v3 = (hkReferencedObject *)&v1->m_entities[1]->vfptr;
+  v3 = this->m_entities[1];
   if ( v3 )
     hkReferencedObject::removeReference(v3);
-  v4 = v1->m_constraintModifiers;
-  if ( v4 && v4->m_type.m_storage >= 0x1Eu )
+  m_constraintModifiers = this->m_constraintModifiers;
+  if ( m_constraintModifiers && m_constraintModifiers->m_type.m_storage >= 0x1Eu )
   {
     do
     {
-      v5 = v4;
-      v4 = (hkpModifierConstraintAtom *)v4->m_child;
-      v6 = v5->m_modifierAtomSize;
-      v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, hkpModifierConstraintAtom *, _QWORD))(*v7[11] + 16i64))(v7[11], v5, v6);
+      v5 = m_constraintModifiers;
+      m_constraintModifiers = (hkpModifierConstraintAtom *)m_constraintModifiers->m_child;
+      m_modifierAtomSize = v5->m_modifierAtomSize;
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      (*(void (__fastcall **)(_QWORD *, hkpModifierConstraintAtom *, _QWORD))(*Value[11] + 16i64))(
+        Value[11],
+        v5,
+        m_modifierAtomSize);
     }
-    while ( v4->m_type.m_storage >= 0x1Eu );
+    while ( m_constraintModifiers->m_type.m_storage >= 0x1Eu );
   }
-  v8 = (hkReferencedObject *)&v1->m_data->vfptr;
-  if ( v8 )
-    hkReferencedObject::removeReference(v8);
-  hkStringPtr::~hkStringPtr(&v1->m_name);
-  v9 = v1->m_listeners.m_capacityAndFlags;
-  if ( (v9 & 0x8000u) == 0 )
+  m_data = this->m_data;
+  if ( m_data )
+    hkReferencedObject::removeReference(m_data);
+  hkStringPtr::~hkStringPtr(&this->m_name);
+  m_capacityAndFlags = this->m_listeners.m_capacityAndFlags;
+  if ( m_capacityAndFlags >= 0 )
   {
-    v10 = v1->m_listeners.m_data;
+    v10 = this->m_listeners.m_data;
     v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     (*(void (__fastcall **)(_QWORD *, hkpConstraintListener **, _QWORD))(*v11[11] + 16i64))(
       v11[11],
       v10,
-      8 * (v9 & 0x3FFFu));
+      8 * (m_capacityAndFlags & 0x3FFFu));
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 219
 // RVA: 0xD5FA60
-void __fastcall hkpConstraintInstance::addConstraintListener(hkpConstraintInstance *this, hkpConstraintListener *listener)
+void __fastcall hkpConstraintInstance::addConstraintListener(
+        hkpConstraintInstance *this,
+        hkpConstraintListener *listener)
 {
-  int v2; // er8
-  hkSmallArray<hkpConstraintListener *> *v3; // rbx
+  int m_size; // r8d
+  hkSmallArray<hkpConstraintListener *> *p_m_listeners; // rbx
   int v4; // eax
-  hkpConstraintListener *v5; // rdi
-  hkpConstraintListener **v6; // rcx
+  hkpConstraintListener **m_data; // rcx
 
-  v2 = this->m_listeners.m_size;
-  v3 = &this->m_listeners;
+  m_size = this->m_listeners.m_size;
+  p_m_listeners = &this->m_listeners;
   v4 = 0;
-  v5 = listener;
-  if ( v2 <= 0 )
+  if ( !this->m_listeners.m_size )
     goto LABEL_5;
-  v6 = v3->m_data;
-  while ( *v6 )
+  m_data = p_m_listeners->m_data;
+  while ( *m_data )
   {
     ++v4;
-    ++v6;
-    if ( v4 >= v2 )
+    ++m_data;
+    if ( v4 >= m_size )
       goto LABEL_5;
   }
-  if ( v4 < 0 )
+  if ( v4 >= 0 )
   {
-LABEL_5:
-    if ( (_WORD)v2 == (v3->m_capacityAndFlags & 0x3FFF) )
-      hkSmallArrayUtil::_reserveMore(v3, 8);
-    v3->m_data[v3->m_size++] = v5;
+    p_m_listeners->m_data[v4] = listener;
   }
   else
   {
-    v3->m_data[v4] = listener;
+LABEL_5:
+    if ( (_WORD)m_size == (p_m_listeners->m_capacityAndFlags & 0x3FFF) )
+      hkSmallArrayUtil::_reserveMore(p_m_listeners, 8);
+    p_m_listeners->m_data[p_m_listeners->m_size++] = listener;
   }
 }
 
 // File Line: 235
 // RVA: 0xD5FAF0
-void __fastcall hkpConstraintInstance::removeConstraintListener(hkpConstraintInstance *this, hkpConstraintListener *listener)
+void __fastcall hkpConstraintInstance::removeConstraintListener(
+        hkpConstraintInstance *this,
+        hkpConstraintListener *listener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
-  __int64 v4; // r8
-  hkpConstraintListener **v5; // rax
+  int v2; // r9d
+  __int64 v3; // r8
+  hkpConstraintListener **m_data; // rax
 
-  v2 = this->m_listeners.m_size;
-  v3 = 0;
-  v4 = 0i64;
-  if ( v2 <= 0 )
+  v2 = 0;
+  v3 = 0i64;
+  if ( this->m_listeners.m_size )
   {
-LABEL_5:
-    v3 = -1;
-  }
-  else
-  {
-    v5 = this->m_listeners.m_data;
-    while ( *v5 != listener )
+    m_data = this->m_listeners.m_data;
+    while ( *m_data != listener )
     {
-      ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++v2;
+      ++m_data;
+      if ( v3 >= this->m_listeners.m_size )
         goto LABEL_5;
     }
   }
-  this->m_listeners.m_data[v3] = 0i64;
+  else
+  {
+LABEL_5:
+    v2 = -1;
+  }
+  this->m_listeners.m_data[v2] = 0i64;
 }
 
 // File Line: 243
 // RVA: 0xD5FB40
 void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hkTransformf *transformation)
 {
-  hkTransformf *v2; // r15
-  hkpConstraintInstance *v3; // r14
-  hkVector4f *v4; // r14
+  hkpConstraintData *m_data; // r14
   unsigned int v5; // eax
   hkVector4f v6; // xmm1
   hkVector4f v7; // xmm0
@@ -337,25 +334,25 @@ void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hk
   hkVector4f v10; // xmm0
   hkVector4f v11; // xmm1
   hkVector4f v12; // xmm1
-  hkVector4f v13; // xmm3
-  hkVector4f v14; // xmm2
+  __m128 v13; // xmm3
+  __m128 v14; // xmm2
   hkVector4f v15; // xmm0
   hkVector4f v16; // xmm1
   hkVector4f v17; // xmm1
-  hkVector4f v18; // xmm4
-  hkVector4f v19; // xmm5
-  hkVector4f v20; // xmm2
-  hkVector4f v21; // xmm3
+  __m128 v18; // xmm4
+  __m128 v19; // xmm5
+  __m128 v20; // xmm2
+  __m128 v21; // xmm3
   hkVector4f v22; // xmm0
   hkVector4f v23; // xmm1
-  __m128i v24; // xmm1
-  signed __int64 v25; // rcx
-  __m128i v26; // xmm5
-  __m128i v27; // xmm6
-  __m128i v28; // xmm4
-  __m128i v29; // xmm2
-  __m128i v30; // xmm3
-  __m128i v31; // xmm1
+  __m128 v24; // xmm1
+  __int64 v25; // rcx
+  __m128 v26; // xmm5
+  __m128 v27; // xmm6
+  __m128 v28; // xmm4
+  __m128 v29; // xmm2
+  __m128 v30; // xmm3
+  __m128 v31; // xmm1
   hkVector4f v32; // xmm1
   hkVector4f v33; // xmm0
   hkVector4f v34; // xmm1
@@ -363,91 +360,95 @@ void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hk
   hkVector4f v36; // xmm1
   hkVector4f v37; // xmm0
   hkVector4f v38; // xmm1
-  int v39; // xmm6_4
-  hkVector4f v40; // xmm7
-  __m128 v41; // xmm0
+  int vfptr_high; // xmm6_4
+  hkReferencedObject v40; // xmm7
+  __m128 m_quad; // xmm0
   hkVector4f v42; // xmm1
-  __m128i v43; // xmm2
+  __m128 v43; // xmm2
   hkVector4f v44; // xmm0
   hkVector4f v45; // xmm1
   hkVector4f v46; // xmm0
-  __m128i v47; // xmm1
-  __m128i v48; // xmm0
-  __m128i v49; // xmm1
-  hkVector4f b; // [rsp+40h] [rbp-C0h]
-  hkVector4f planeNormalB; // [rsp+50h] [rbp-B0h]
-  hkVector4f steeringAxisB; // [rsp+60h] [rbp-A0h]
-  hkVector4f axisA; // [rsp+70h] [rbp-90h]
-  hkTransformf pivotA; // [rsp+80h] [rbp-80h]
-  hkTransformf pivotB; // [rsp+C0h] [rbp-40h]
-  hkVector4f axleA; // [rsp+100h] [rbp+0h]
-  hkVector4f v57; // [rsp+110h] [rbp+10h]
-  hkBool result; // [rsp+170h] [rbp+70h]
+  __m128 v47; // xmm1
+  __m128 v48; // xmm0
+  __m128 v49; // xmm1
+  hkVector4f b; // [rsp+40h] [rbp-C0h] BYREF
+  hkVector4f planeNormalB; // [rsp+50h] [rbp-B0h] BYREF
+  hkVector4f steeringAxisB; // [rsp+60h] [rbp-A0h] BYREF
+  hkVector4f axisA; // [rsp+70h] [rbp-90h] BYREF
+  hkTransformf pivotA; // [rsp+80h] [rbp-80h] BYREF
+  hkTransformf pivotB; // [rsp+C0h] [rbp-40h] BYREF
+  hkVector4f axleA; // [rsp+100h] [rbp+0h] BYREF
+  hkVector4f v57; // [rsp+110h] [rbp+10h] BYREF
+  hkBool result; // [rsp+170h] [rbp+70h] BYREF
 
-  v2 = transformation;
-  v3 = this;
   if ( hkpConstraintInstance::isConstrainedToWorld(this, &result)->m_bool )
   {
-    v4 = (hkVector4f *)v3->m_data;
-    v5 = (*(__int64 (__fastcall **)(hkVector4f *))(v4->m_quad.m128_u64[0] + 24))(v4);
+    m_data = this->m_data;
+    v5 = ((__int64 (__fastcall *)(hkpConstraintData *))m_data->vfptr[1].__first_virtual_table_function__)(m_data);
     while ( 2 )
     {
       switch ( v5 )
       {
         case 0u:
-          hkVector4f::setTransformedPos(v4 + 4, v2, v4 + 4);
-          hkpBallAndSocketConstraintData::setInBodySpace((hkpBallAndSocketConstraintData *)v4, v4 + 3, v4 + 4);
+          hkVector4f::setTransformedPos(
+            (hkVector4f *)&m_data[2].m_userData,
+            transformation,
+            (hkVector4f *)&m_data[2].m_userData);
+          hkpBallAndSocketConstraintData::setInBodySpace(
+            (hkpBallAndSocketConstraintData *)m_data,
+            (hkVector4f *)&m_data[2],
+            (hkVector4f *)&m_data[2].m_userData);
           return;
         case 1u:
-          v12.m_quad = (__m128)v4[5];
-          v13.m_quad = (__m128)v4[3];
-          v14.m_quad = (__m128)v4[7];
-          pivotB.m_rotation.m_col1 = (hkVector4f)v4[4].m_quad;
-          pivotB.m_translation = (hkVector4f)v4[6].m_quad;
-          v15.m_quad = (__m128)v4[8];
+          v12.m_quad = *(__m128 *)&m_data[3].m_memSizeAndFlags;
+          v13 = (__m128)m_data[2].hkReferencedObject;
+          v14 = *(__m128 *)&m_data[4].m_userData;
+          pivotB.m_rotation.m_col1 = *(hkVector4f *)&m_data[2].m_userData;
+          pivotB.m_translation = (hkVector4f)m_data[4].hkReferencedObject;
+          v15.m_quad = *(__m128 *)&m_data[5].m_memSizeAndFlags;
           pivotB.m_rotation.m_col2 = (hkVector4f)v12.m_quad;
-          v16.m_quad = (__m128)v4[9];
+          v16.m_quad = (__m128)m_data[6].hkReferencedObject;
           pivotA.m_rotation.m_col1 = (hkVector4f)v15.m_quad;
-          pivotA.m_translation = (hkVector4f)v4[10].m_quad;
-          pivotB.m_rotation.m_col0 = (hkVector4f)v13.m_quad;
-          pivotA.m_rotation.m_col0 = (hkVector4f)v14.m_quad;
+          pivotA.m_translation = *(hkVector4f *)&m_data[6].m_userData;
+          pivotB.m_rotation.m_col0.m_quad = v13;
+          pivotA.m_rotation.m_col0.m_quad = v14;
           pivotA.m_rotation.m_col2 = (hkVector4f)v16.m_quad;
-          _mm_store_si128((__m128i *)&axisA, (__m128i)v13.m_quad);
-          _mm_store_si128((__m128i *)&b, (__m128i)v14.m_quad);
-          hkVector4f::setTransformedPos(&pivotA.m_translation, v2, &pivotA.m_translation);
-          hkVector4f::setRotatedDir(&b, (hkMatrix3f *)&v2->m_rotation.m_col0, &b);
+          axisA.m_quad = v13;
+          b.m_quad = v14;
+          hkVector4f::setTransformedPos(&pivotA.m_translation, transformation, &pivotA.m_translation);
+          hkVector4f::setRotatedDir(&b, &transformation->m_rotation, &b);
           hkpHingeConstraintData::setInBodySpace(
-            (hkpHingeConstraintData *)v4,
+            (hkpHingeConstraintData *)m_data,
             &pivotB.m_translation,
             &pivotA.m_translation,
             &axisA,
             &b);
           return;
         case 2u:
-          v17.m_quad = (__m128)v4[6];
-          v18.m_quad = (__m128)v4[3];
-          v19.m_quad = (__m128)v4[4];
-          v20.m_quad = (__m128)v4[7];
-          v21.m_quad = (__m128)v4[8];
-          pivotB.m_rotation.m_col2 = (hkVector4f)v4[5].m_quad;
-          v22.m_quad = (__m128)v4[9];
+          v17.m_quad = (__m128)m_data[4].hkReferencedObject;
+          v18 = (__m128)m_data[2].hkReferencedObject;
+          v19 = *(__m128 *)&m_data[2].m_userData;
+          v20 = *(__m128 *)&m_data[4].m_userData;
+          v21 = *(__m128 *)&m_data[5].m_memSizeAndFlags;
+          pivotB.m_rotation.m_col2 = *(hkVector4f *)&m_data[3].m_memSizeAndFlags;
+          v22.m_quad = (__m128)m_data[6].hkReferencedObject;
           pivotB.m_translation = (hkVector4f)v17.m_quad;
-          v23.m_quad = (__m128)v4[10];
+          v23.m_quad = *(__m128 *)&m_data[6].m_userData;
           pivotA.m_rotation.m_col2 = (hkVector4f)v22.m_quad;
-          pivotB.m_rotation.m_col0 = (hkVector4f)v18.m_quad;
+          pivotB.m_rotation.m_col0.m_quad = v18;
           pivotA.m_translation = (hkVector4f)v23.m_quad;
-          pivotB.m_rotation.m_col1 = (hkVector4f)v19.m_quad;
-          pivotA.m_rotation.m_col0 = (hkVector4f)v20.m_quad;
-          pivotA.m_rotation.m_col1 = (hkVector4f)v21.m_quad;
-          _mm_store_si128((__m128i *)&steeringAxisB, (__m128i)v18.m_quad);
-          _mm_store_si128((__m128i *)&planeNormalB, (__m128i)v20.m_quad);
-          _mm_store_si128((__m128i *)&axisA, (__m128i)v19.m_quad);
-          _mm_store_si128((__m128i *)&b, (__m128i)v21.m_quad);
-          hkVector4f::setTransformedPos(&pivotA.m_translation, v2, &pivotA.m_translation);
-          hkVector4f::setRotatedDir(&planeNormalB, (hkMatrix3f *)&v2->m_rotation.m_col0, &planeNormalB);
-          hkVector4f::setRotatedDir(&b, (hkMatrix3f *)&v2->m_rotation.m_col0, &b);
+          pivotB.m_rotation.m_col1.m_quad = v19;
+          pivotA.m_rotation.m_col0.m_quad = v20;
+          pivotA.m_rotation.m_col1.m_quad = v21;
+          steeringAxisB.m_quad = v18;
+          planeNormalB.m_quad = v20;
+          axisA.m_quad = v19;
+          b.m_quad = v21;
+          hkVector4f::setTransformedPos(&pivotA.m_translation, transformation, &pivotA.m_translation);
+          hkVector4f::setRotatedDir(&planeNormalB, &transformation->m_rotation, &planeNormalB);
+          hkVector4f::setRotatedDir(&b, &transformation->m_rotation, &b);
           hkpLimitedHingeConstraintData::setInBodySpace(
-            (hkpLimitedHingeConstraintData *)v4,
+            (hkpLimitedHingeConstraintData *)m_data,
             &pivotB.m_translation,
             &pivotA.m_translation,
             &steeringAxisB,
@@ -456,25 +457,25 @@ void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hk
             &b);
           return;
         case 6u:
-          v26 = (__m128i)v4[3];
-          v27 = (__m128i)v4[4];
-          v28 = (__m128i)v4[6];
-          v29 = (__m128i)v4[7];
-          v30 = (__m128i)v4[8];
-          v31 = (__m128i)v4[10];
-          pivotB.m_rotation.m_col2 = (hkVector4f)v4[5].m_quad;
-          pivotB.m_rotation.m_col2 = (hkVector4f)v4[9].m_quad;
-          _mm_store_si128((__m128i *)&v57, v26);
-          _mm_store_si128((__m128i *)&axisA, v27);
-          _mm_store_si128((__m128i *)&axleA, v28);
-          _mm_store_si128((__m128i *)&b, v29);
-          _mm_store_si128((__m128i *)&planeNormalB, v30);
-          _mm_store_si128((__m128i *)&steeringAxisB, v31);
-          hkVector4f::setTransformedPos(&steeringAxisB, v2, &steeringAxisB);
-          hkVector4f::setRotatedDir(&b, (hkMatrix3f *)&v2->m_rotation.m_col0, &b);
-          hkVector4f::setRotatedDir(&planeNormalB, (hkMatrix3f *)&v2->m_rotation.m_col0, &planeNormalB);
+          v26 = (__m128)m_data[2].hkReferencedObject;
+          v27 = *(__m128 *)&m_data[2].m_userData;
+          v28 = (__m128)m_data[4].hkReferencedObject;
+          v29 = *(__m128 *)&m_data[4].m_userData;
+          v30 = *(__m128 *)&m_data[5].m_memSizeAndFlags;
+          v31 = *(__m128 *)&m_data[6].m_userData;
+          pivotB.m_rotation.m_col2 = *(hkVector4f *)&m_data[3].m_memSizeAndFlags;
+          pivotB.m_rotation.m_col2 = (hkVector4f)m_data[6].hkReferencedObject;
+          v57.m_quad = v26;
+          axisA.m_quad = v27;
+          axleA.m_quad = v28;
+          b.m_quad = v29;
+          planeNormalB.m_quad = v30;
+          steeringAxisB.m_quad = v31;
+          hkVector4f::setTransformedPos(&steeringAxisB, transformation, &steeringAxisB);
+          hkVector4f::setRotatedDir(&b, &transformation->m_rotation, &b);
+          hkVector4f::setRotatedDir(&planeNormalB, &transformation->m_rotation, &planeNormalB);
           hkpPrismaticConstraintData::setInBodySpace(
-            (hkpPrismaticConstraintData *)v4,
+            (hkpPrismaticConstraintData *)m_data,
             &axleA,
             &steeringAxisB,
             &v57,
@@ -483,71 +484,77 @@ void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hk
             &planeNormalB);
           return;
         case 7u:
-          v32.m_quad = (__m128)v4[4];
-          pivotB.m_rotation.m_col0 = (hkVector4f)v4[3].m_quad;
-          v33.m_quad = (__m128)v4[5];
+          v32.m_quad = *(__m128 *)&m_data[2].m_userData;
+          pivotB.m_rotation.m_col0 = (hkVector4f)m_data[2].hkReferencedObject;
+          v33.m_quad = *(__m128 *)&m_data[3].m_memSizeAndFlags;
           pivotB.m_rotation.m_col1 = (hkVector4f)v32.m_quad;
-          v34.m_quad = (__m128)v4[6];
+          v34.m_quad = (__m128)m_data[4].hkReferencedObject;
           pivotB.m_rotation.m_col2 = (hkVector4f)v33.m_quad;
-          v35.m_quad = (__m128)v4[7];
+          v35.m_quad = *(__m128 *)&m_data[4].m_userData;
           pivotB.m_translation = (hkVector4f)v34.m_quad;
-          v36.m_quad = (__m128)v4[8];
+          v36.m_quad = *(__m128 *)&m_data[5].m_memSizeAndFlags;
           pivotA.m_rotation.m_col0 = (hkVector4f)v35.m_quad;
-          v37.m_quad = (__m128)v4[9];
+          v37.m_quad = (__m128)m_data[6].hkReferencedObject;
           pivotA.m_rotation.m_col1 = (hkVector4f)v36.m_quad;
-          v38.m_quad = (__m128)v4[10];
+          v38.m_quad = *(__m128 *)&m_data[6].m_userData;
           pivotA.m_rotation.m_col2 = (hkVector4f)v37.m_quad;
           pivotA.m_translation = (hkVector4f)v38.m_quad;
-          hkVector4f::setTransformedPos(&pivotA.m_translation, v2, &pivotA.m_translation);
-          hkVector4f::setRotatedDir(v4 + 8, (hkMatrix3f *)&v2->m_rotation.m_col0, v4 + 8);
-          hkVector4f::setRotatedDir(v4 + 7, (hkMatrix3f *)&v2->m_rotation.m_col0, v4 + 7);
+          hkVector4f::setTransformedPos(&pivotA.m_translation, transformation, &pivotA.m_translation);
+          hkVector4f::setRotatedDir(
+            (hkVector4f *)&m_data[5].m_memSizeAndFlags,
+            &transformation->m_rotation,
+            (hkVector4f *)&m_data[5].m_memSizeAndFlags);
+          hkVector4f::setRotatedDir(
+            (hkVector4f *)&m_data[4].m_userData,
+            &transformation->m_rotation,
+            (hkVector4f *)&m_data[4].m_userData);
           hkpRagdollConstraintData::setInBodySpace(
-            (hkpRagdollConstraintData *)v4,
+            (hkpRagdollConstraintData *)m_data,
             &pivotB.m_translation,
             &pivotA.m_translation,
-            v4 + 4,
-            v4 + 8,
-            v4 + 3,
-            v4 + 7);
+            (hkVector4f *)&m_data[2].m_userData,
+            (hkVector4f *)&m_data[5].m_memSizeAndFlags,
+            (hkVector4f *)&m_data[2],
+            (hkVector4f *)&m_data[4].m_userData);
           return;
         case 8u:
-          v39 = v4[6].m_quad.m128_i32[1];
-          v40.m_quad = (__m128)v4[3];
-          _mm_store_si128((__m128i *)&steeringAxisB, (__m128i)v4[4].m_quad);
-          hkVector4f::setTransformedPos(&steeringAxisB, v2, &steeringAxisB);
-          v4[6].m_quad.m128_i32[1] = v39;
-          v4[6].m_quad.m128_i32[2] = v39;
-          v41 = steeringAxisB.m_quad;
-          v4[3] = (hkVector4f)v40.m_quad;
-          v4[4] = (hkVector4f)v41;
+          vfptr_high = HIDWORD(m_data[4].vfptr);
+          v40 = m_data[2].hkReferencedObject;
+          steeringAxisB.m_quad = *(__m128 *)&m_data[2].m_userData;
+          hkVector4f::setTransformedPos(&steeringAxisB, transformation, &steeringAxisB);
+          HIDWORD(m_data[4].vfptr) = vfptr_high;
+          *(_DWORD *)&m_data[4].m_memSizeAndFlags = vfptr_high;
+          m_quad = steeringAxisB.m_quad;
+          m_data[2].hkReferencedObject = v40;
+          *(__m128 *)&m_data[2].m_userData = m_quad;
           return;
         case 9u:
-          v42.m_quad = (__m128)v4[4];
-          v43 = (__m128i)v4[6];
-          pivotB.m_rotation.m_col0 = (hkVector4f)v4[3].m_quad;
-          v44.m_quad = (__m128)v4[5];
+          v42.m_quad = *(__m128 *)&m_data[2].m_userData;
+          v43 = (__m128)m_data[4].hkReferencedObject;
+          pivotB.m_rotation.m_col0 = (hkVector4f)m_data[2].hkReferencedObject;
+          v44.m_quad = *(__m128 *)&m_data[3].m_memSizeAndFlags;
           pivotB.m_rotation.m_col1 = (hkVector4f)v42.m_quad;
-          v45.m_quad = (__m128)v4[8];
+          v45.m_quad = *(__m128 *)&m_data[5].m_memSizeAndFlags;
           pivotB.m_rotation.m_col2 = (hkVector4f)v44.m_quad;
-          pivotB.m_rotation.m_col0 = (hkVector4f)v4[7].m_quad;
-          v46.m_quad = (__m128)v4[9];
+          pivotB.m_rotation.m_col0 = *(hkVector4f *)&m_data[4].m_userData;
+          v46.m_quad = (__m128)m_data[6].hkReferencedObject;
           pivotB.m_rotation.m_col1 = (hkVector4f)v45.m_quad;
-          v47 = (__m128i)v4[10];
+          v47 = *(__m128 *)&m_data[6].m_userData;
           pivotB.m_rotation.m_col2 = (hkVector4f)v46.m_quad;
-          _mm_store_si128((__m128i *)&planeNormalB, (__m128i)v4[7].m_quad);
-          v48 = (__m128i)v4[19];
-          _mm_store_si128((__m128i *)&axisA, v47);
-          v49 = (__m128i)v4[16];
-          _mm_store_si128((__m128i *)&b, v48);
-          _mm_store_si128((__m128i *)&v57, v43);
-          _mm_store_si128((__m128i *)&axleA, v49);
-          hkVector4f::setTransformedPos(&axisA, v2, &axisA);
-          _mm_store_si128((__m128i *)&steeringAxisB, (__m128i)v4[20].m_quad);
-          hkVector4f::setRotatedDir(&planeNormalB, (hkMatrix3f *)&v2->m_rotation.m_col0, &planeNormalB);
-          hkVector4f::setRotatedDir(&b, (hkMatrix3f *)&v2->m_rotation.m_col0, &b);
-          hkVector4f::setRotatedDir(&steeringAxisB, (hkMatrix3f *)&v2->m_rotation.m_col0, &steeringAxisB);
+          planeNormalB.m_quad = *(__m128 *)&m_data[4].m_userData;
+          v48 = *(__m128 *)&m_data[12].m_userData;
+          axisA.m_quad = v47;
+          v49 = *(__m128 *)&m_data[10].m_userData;
+          b.m_quad = v48;
+          v57.m_quad = v43;
+          axleA.m_quad = v49;
+          hkVector4f::setTransformedPos(&axisA, transformation, &axisA);
+          steeringAxisB.m_quad = *(__m128 *)&m_data[13].m_memSizeAndFlags;
+          hkVector4f::setRotatedDir(&planeNormalB, &transformation->m_rotation, &planeNormalB);
+          hkVector4f::setRotatedDir(&b, &transformation->m_rotation, &b);
+          hkVector4f::setRotatedDir(&steeringAxisB, &transformation->m_rotation, &steeringAxisB);
           hkpWheelConstraintData::setInBodySpace(
-            (hkpWheelConstraintData *)v4,
+            (hkpWheelConstraintData *)m_data,
             &v57,
             &axisA,
             &axleA,
@@ -556,51 +563,54 @@ void __fastcall hkpConstraintInstance::transform(hkpConstraintInstance *this, hk
             &steeringAxisB);
           return;
         case 0xCu:
-          v4 = (hkVector4f *)v4[4].m_quad.m128_u64[0];
+          m_data = (hkpConstraintData *)m_data[2].m_userData;
           goto LABEL_6;
         case 0xDu:
-          v4 = (hkVector4f *)hkpMalleableConstraintData::getWrappedConstraintData((hkpMalleableConstraintData *)v4);
+          m_data = hkpMalleableConstraintData::getWrappedConstraintData((hkpMalleableConstraintData *)m_data);
 LABEL_6:
-          v5 = (*(__int64 (__fastcall **)(hkVector4f *))(v4->m_quad.m128_u64[0] + 24))(v4);
+          v5 = ((__int64 (__fastcall *)(hkpConstraintData *))m_data->vfptr[1].__first_virtual_table_function__)(m_data);
           if ( v5 > 0x18 )
             return;
           continue;
         case 0xEu:
-          v24 = (__m128i)v4[10];
-          v25 = (unsigned __int8)v4[11].m_quad.m128_i8[2] + 7i64;
-          _mm_store_si128((__m128i *)&axisA, (__m128i)v4[6].m_quad);
-          _mm_store_si128((__m128i *)&b, v24);
-          _mm_store_si128((__m128i *)&planeNormalB, (__m128i)v4[v25].m_quad);
-          hkVector4f::setTransformedPos(&b, v2, &b);
-          hkVector4f::setRotatedDir(&planeNormalB, (hkMatrix3f *)&v2->m_rotation.m_col0, &planeNormalB);
-          hkpPointToPlaneConstraintData::setInBodySpace((hkpPointToPlaneConstraintData *)v4, &axisA, &b, &planeNormalB);
-          break;
+          v24 = *(__m128 *)&m_data[6].m_userData;
+          v25 = LOBYTE(m_data[7].m_referenceCount) + 7i64;
+          axisA.m_quad = (__m128)m_data[4].hkReferencedObject;
+          b.m_quad = v24;
+          planeNormalB.m_quad = (__m128)*((_OWORD *)&m_data->hkReferencedObject + v25);
+          hkVector4f::setTransformedPos(&b, transformation, &b);
+          hkVector4f::setRotatedDir(&planeNormalB, &transformation->m_rotation, &planeNormalB);
+          hkpPointToPlaneConstraintData::setInBodySpace(
+            (hkpPointToPlaneConstraintData *)m_data,
+            &axisA,
+            &b,
+            &planeNormalB);
+          return;
         case 0x17u:
-          v6.m_quad = (__m128)v4[4];
-          pivotA.m_rotation.m_col0 = (hkVector4f)v4[3].m_quad;
-          v7.m_quad = (__m128)v4[5];
+          v6.m_quad = *(__m128 *)&m_data[2].m_userData;
+          pivotA.m_rotation.m_col0 = (hkVector4f)m_data[2].hkReferencedObject;
+          v7.m_quad = *(__m128 *)&m_data[3].m_memSizeAndFlags;
           pivotA.m_rotation.m_col1 = (hkVector4f)v6.m_quad;
-          v8.m_quad = (__m128)v4[6];
+          v8.m_quad = (__m128)m_data[4].hkReferencedObject;
           pivotA.m_rotation.m_col2 = (hkVector4f)v7.m_quad;
           pivotA.m_translation = (hkVector4f)v8.m_quad;
-          hkTransformf::setMul(&pivotB, v2, (hkTransformf *)&v4[7]);
-          hkpFixedConstraintData::setInBodySpace((hkpFixedConstraintData *)v4, &pivotA, &pivotB);
-          break;
+          hkTransformf::setMul(&pivotB, transformation, (hkTransformf *)&m_data[4].m_userData);
+          hkpFixedConstraintData::setInBodySpace((hkpFixedConstraintData *)m_data, &pivotA, &pivotB);
+          return;
         case 0x18u:
-          v9.m_quad = (__m128)v4[4];
-          pivotA.m_rotation.m_col0 = (hkVector4f)v4[3].m_quad;
-          v10.m_quad = (__m128)v4[5];
+          v9.m_quad = *(__m128 *)&m_data[2].m_userData;
+          pivotA.m_rotation.m_col0 = (hkVector4f)m_data[2].hkReferencedObject;
+          v10.m_quad = *(__m128 *)&m_data[3].m_memSizeAndFlags;
           pivotA.m_rotation.m_col1 = (hkVector4f)v9.m_quad;
-          v11.m_quad = (__m128)v4[6];
+          v11.m_quad = (__m128)m_data[4].hkReferencedObject;
           pivotA.m_rotation.m_col2 = (hkVector4f)v10.m_quad;
           pivotA.m_translation = (hkVector4f)v11.m_quad;
-          hkTransformf::setMul(&pivotB, v2, (hkTransformf *)&v4[7]);
-          hkpDeformableFixedConstraintData::setInBodySpace((hkpDeformableFixedConstraintData *)v4, &pivotA, &pivotB);
-          break;
+          hkTransformf::setMul(&pivotB, transformation, (hkTransformf *)&m_data[4].m_userData);
+          hkpDeformableFixedConstraintData::setInBodySpace((hkpDeformableFixedConstraintData *)m_data, &pivotA, &pivotB);
+          return;
         default:
           return;
       }
-      break;
     }
   }
 }
@@ -609,28 +619,26 @@ LABEL_6:
 // RVA: 0xD60390
 void __fastcall hkpConstraintInstance::pointNullsToFixedRigidBody(hkpConstraintInstance *this)
 {
-  hkpConstraintInstance *v1; // rsi
-  _QWORD *v2; // rbx
-  signed __int64 v3; // rdi
+  hkpEntity **m_entities; // rbx
+  __int64 v3; // rdi
   __int64 v4; // rcx
   hkReferencedObject *v5; // rcx
 
-  v1 = this;
-  v2 = this->m_entities;
+  m_entities = this->m_entities;
   v3 = 2i64;
   do
   {
-    if ( !*v2 && v1->m_entities[0] != v1->m_entities[1] )
+    if ( !*m_entities && this->m_entities[0] != this->m_entities[1] )
     {
-      v4 = *(_QWORD *)(((_QWORD)v1->m_entities[0] ^ (_QWORD)v1->m_entities[1]) + 0x10i64);
+      v4 = *(_QWORD *)(((__int64)this->m_entities[0] ^ (__int64)this->m_entities[1]) + 0x10);
       if ( v4 )
       {
         v5 = *(hkReferencedObject **)(v4 + 56);
-        *v2 = v5;
+        *m_entities = (hkpEntity *)v5;
         hkReferencedObject::addReference(v5);
       }
     }
-    ++v2;
+    ++m_entities;
     --v3;
   }
   while ( v3 );
@@ -641,88 +649,80 @@ void __fastcall hkpConstraintInstance::pointNullsToFixedRigidBody(hkpConstraintI
 hkBool *__fastcall hkpConstraintInstance::isConstrainedToWorld(hkpConstraintInstance *this, hkBool *result)
 {
   hkpEntity *v2; // r8
-  hkpWorld *v3; // rcx
-  hkBool *v4; // rax
+  hkpWorld *m_world; // rcx
 
   v2 = this->m_entities[1];
-  if ( !v2 || (v3 = this->m_entities[0]->m_world) != 0i64 && v2 == (hkpEntity *)v3->m_fixedRigidBody )
+  if ( !v2 || (m_world = this->m_entities[0]->m_world) != 0i64 && v2 == m_world->m_fixedRigidBody )
   {
     result->m_bool = 1;
-    v4 = result;
+    return result;
   }
   else
   {
     result->m_bool = 0;
-    v4 = result;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 452
 // RVA: 0xD5F9D0
-void __fastcall hkpConstraintInstance::getPivotsInWorld(hkpConstraintInstance *this, hkVector4f *pivotAinW, hkVector4f *pivotBinW)
+void __fastcall hkpConstraintInstance::getPivotsInWorld(
+        hkpConstraintInstance *this,
+        hkVector4f *pivotAinW,
+        hkVector4f *pivotBinW)
 {
-  hkpConstraintInstance *v3; // rdi
-  hkVector4f *v4; // rbp
-  hkVector4f *v5; // rsi
-  __m128 *v6; // rax
-  hkpConstraintData *v7; // rcx
-  hkVector4f *v8; // rax
+  __m128 *PivotA; // rax
+  hkpConstraintData *m_data; // rcx
+  hkVector4f *PivotB; // rax
   hkpEntity *v9; // rdx
-  __m128 v10; // xmm0
+  __m128 m_quad; // xmm0
   hkpEntity *v11; // rax
-  hkTransformf *v12; // rbx
-  hkVector4f b; // [rsp+20h] [rbp-28h]
-  hkVector4f v14; // [rsp+30h] [rbp-18h]
+  hkTransformf *m_motion; // rbx
+  hkVector4f b; // [rsp+20h] [rbp-28h] BYREF
+  hkVector4f v14; // [rsp+30h] [rbp-18h] BYREF
 
-  v3 = this;
-  v4 = pivotBinW;
-  v5 = pivotAinW;
-  v6 = (__m128 *)hkpConstraintDataUtils::getPivotA(this->m_data);
-  v7 = v3->m_data;
-  b.m_quad = *v6;
-  v8 = hkpConstraintDataUtils::getPivotB(v7);
-  v9 = v3->m_entities[0];
-  v10 = v8->m_quad;
-  v11 = v3->m_entities[1];
-  v14.m_quad = v10;
-  v12 = (hkTransformf *)v11->m_collidable.m_motion;
-  hkVector4f::setTransformedPos(v5, (hkTransformf *)v9->m_collidable.m_motion, &b);
-  hkVector4f::setTransformedPos(v4, v12, &v14);
+  PivotA = (__m128 *)hkpConstraintDataUtils::getPivotA(this->m_data);
+  m_data = this->m_data;
+  b.m_quad = *PivotA;
+  PivotB = hkpConstraintDataUtils::getPivotB(m_data);
+  v9 = this->m_entities[0];
+  m_quad = PivotB->m_quad;
+  v11 = this->m_entities[1];
+  v14.m_quad = m_quad;
+  m_motion = (hkTransformf *)v11->m_collidable.m_motion;
+  hkVector4f::setTransformedPos(pivotAinW, (hkTransformf *)v9->m_collidable.m_motion, &b);
+  hkVector4f::setTransformedPos(pivotBinW, m_motion, &v14);
 }
 
 // File Line: 465
 // RVA: 0xD60210
-void __fastcall hkpConstraintInstance::setVirtualMassInverse(hkpConstraintInstance *this, hkVector4f *invMassA, hkVector4f *invMassB)
+void __fastcall hkpConstraintInstance::setVirtualMassInverse(
+        hkpConstraintInstance *this,
+        hkVector4f *invMassA,
+        hkVector4f *invMassB)
 {
-  hkVector4f *v3; // rsi
-  hkVector4f *v4; // rdi
-  hkpConstraintInstance *v5; // rbx
-  hkpModifierConstraintAtom *v6; // rax
-  _QWORD **v7; // rax
+  hkVector4f *Modifier; // rax
+  _QWORD **Value; // rax
   __int64 v8; // rax
 
-  v3 = invMassA;
-  v4 = invMassB;
-  v5 = this;
-  v6 = hkpWorldConstraintUtil::findModifier(this, TYPE_MAX|TYPE_CONVEX_LIST_CONTACT_MGR|0x18);
-  if ( v6 )
+  Modifier = (hkVector4f *)hkpWorldConstraintUtil::findModifier(this, TYPE_MAX|TYPE_CONVEX_LIST_CONTACT_MGR|0x18);
+  if ( Modifier )
   {
-    *(hkVector4f *)&v6[1].m_type.m_storage = (hkVector4f)v3->m_quad;
-    *(hkVector4f *)&v6[1].m_modifierAtomSize = (hkVector4f)v4->m_quad;
+    Modifier[3] = (hkVector4f)invMassA->m_quad;
+    Modifier[4] = (hkVector4f)invMassB->m_quad;
   }
   else
   {
-    v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v8 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v7[11] + 8i64))(v7[11], 80i64);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v8 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 80i64);
     if ( v8 )
     {
       *(_WORD *)v8 = 31;
       *(_WORD *)(v8 + 16) = 80;
     }
-    *(hkVector4f *)(v8 + 48) = (hkVector4f)v3->m_quad;
-    *(hkVector4f *)(v8 + 64) = (hkVector4f)v4->m_quad;
-    hkpWorldConstraintUtil::addModifier(v5, v5->m_owner, (hkpModifierConstraintAtom *)v8);
+    *(hkVector4f *)(v8 + 48) = (hkVector4f)invMassA->m_quad;
+    *(hkVector4f *)(v8 + 64) = (hkVector4f)invMassB->m_quad;
+    hkpWorldConstraintUtil::addModifier(this, this->m_owner, (hkpModifierConstraintAtom *)v8);
   }
 }
 
@@ -754,51 +754,43 @@ void __fastcall hkpConstraintInstance::setEnabled(hkpConstraintInstance *this, h
 // RVA: 0xD60310
 hkBool *__fastcall hkpConstraintInstance::isEnabled(hkpConstraintInstance *this, hkBool *result)
 {
-  hkBool *v2; // rbx
-
-  v2 = result;
   result->m_bool = hkpWorldConstraintUtil::findModifier(this, (hkpConstraintAtom::AtomType)34) == 0i64;
-  return v2;
+  return result;
 }
 
 // File Line: 513
 // RVA: 0xD5F920
-void __fastcall hkpConstraintInstance::replaceEntity(hkpConstraintInstance *this, hkpEntity *oldEntity, hkpEntity *newEntity)
+void __fastcall hkpConstraintInstance::replaceEntity(
+        hkpConstraintInstance *this,
+        hkpEntity *oldEntity,
+        hkpEntity *newEntity)
 {
-  hkpConstraintInstance *v3; // rdi
-  hkpEntity *v4; // rbx
-  hkpEntity *v5; // rbp
   BOOL v6; // esi
 
-  v3 = this;
-  v4 = newEntity;
-  v5 = oldEntity;
   v6 = oldEntity != this->m_entities[0];
-  hkReferencedObject::addReference((hkReferencedObject *)&newEntity->vfptr);
-  if ( v5 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v5->vfptr);
-  v3->m_entities[v6] = v4;
+  hkReferencedObject::addReference(newEntity);
+  if ( oldEntity )
+    hkReferencedObject::removeReference(oldEntity);
+  this->m_entities[v6] = newEntity;
 }
 
 // File Line: 529
 // RVA: 0xD60400
 void __fastcall hkpConstraintInstance::setFixedRigidBodyPointersToZero(hkpConstraintInstance *this, hkpWorld *world)
 {
-  hkpWorld *v2; // rsi
-  hkReferencedObject **v3; // rbx
-  signed __int64 v4; // rdi
+  hkReferencedObject **m_entities; // rbx
+  __int64 v4; // rdi
 
-  v2 = world;
-  v3 = (hkReferencedObject **)this->m_entities;
+  m_entities = this->m_entities;
   v4 = 2i64;
   do
   {
-    if ( *v3 == (hkReferencedObject *)v2->m_fixedRigidBody )
+    if ( *m_entities == world->m_fixedRigidBody )
     {
-      hkReferencedObject::removeReference(*v3);
-      *v3 = 0i64;
+      hkReferencedObject::removeReference(*m_entities);
+      *m_entities = 0i64;
     }
-    ++v3;
+    ++m_entities;
     --v4;
   }
   while ( v4 );

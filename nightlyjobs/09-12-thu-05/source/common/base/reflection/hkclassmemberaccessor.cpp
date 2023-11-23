@@ -1,48 +1,58 @@
 // File Line: 14
 // RVA: 0x12FF720
-void __fastcall hkClassMemberAccessor::connect(hkClassMemberAccessor *this, void *obj, hkClassMember *mem)
+void __fastcall hkClassMemberAccessor::connect(hkClassMemberAccessor *this, char *obj, hkClassMember *mem)
 {
-  __int64 v3; // rax
+  __int64 m_offset; // rax
 
-  v3 = mem->m_offset;
+  m_offset = mem->m_offset;
   this->m_member = mem;
-  this->m_address = (char *)obj + v3;
+  this->m_address = &obj[m_offset];
 }
 
 // File Line: 23
 // RVA: 0x12FF740
-void __fastcall hkClassMemberAccessor::connect(hkClassMemberAccessor *this, void *obj, hkClass *klass, const char *memberName)
+void __fastcall hkClassMemberAccessor::connect(
+        hkClassMemberAccessor *this,
+        char *obj,
+        hkClass *klass,
+        const char *memberName)
 {
-  char *v4; // rdi
-  hkClassMemberAccessor *v5; // rbx
-  hkClassMember *v6; // rax
+  hkClassMember *MemberByName; // rax
 
-  v4 = (char *)obj;
-  v5 = this;
   this->m_address = 0i64;
-  v6 = hkClass::getMemberByName(klass, memberName);
-  v5->m_member = v6;
-  if ( v6 )
-    v5->m_address = &v4[v6->m_offset];
+  MemberByName = hkClass::getMemberByName(klass, memberName);
+  this->m_member = MemberByName;
+  if ( MemberByName )
+    this->m_address = &obj[MemberByName->m_offset];
 }
 
 // File Line: 40
 // RVA: 0x12FF340
-void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(hkClassMemberAccessor *this, void *obj, hkClassMember *mem)
+void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(
+        hkClassMemberAccessor *this,
+        void *obj,
+        hkClassMember *mem)
 {
   hkClassMemberAccessor::connect(this, obj, mem);
 }
 
 // File Line: 45
 // RVA: 0x12FF360
-void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(hkClassMemberAccessor *this, hkVariant *var, const char *memberName)
+void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(
+        hkClassMemberAccessor *this,
+        hkVariant *var,
+        const char *memberName)
 {
   hkClassMemberAccessor::connect(this, var->m_object, var->m_class, memberName);
 }
 
 // File Line: 50
 // RVA: 0x12FF390
-void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(hkClassMemberAccessor *this, void *obj, hkClass *klass, const char *memberName)
+void __fastcall hkClassMemberAccessor::hkClassMemberAccessor(
+        hkClassMemberAccessor *this,
+        void *obj,
+        hkClass *klass,
+        const char *memberName)
 {
   hkClassMemberAccessor::connect(this, obj, klass, memberName);
 }
@@ -192,7 +202,7 @@ hkClassMemberAccessor::Matrix3 *__fastcall hkClassMemberAccessor::asMatrix3(hkCl
 // RVA: 0x12FF650
 hkClassMemberAccessor::Transform *__fastcall hkClassMemberAccessor::asTransform(hkClassMemberAccessor *this, int index)
 {
-  return (hkClassMemberAccessor::Transform *)((char *)this->m_address + 64 * (signed __int64)index);
+  return (hkClassMemberAccessor::Transform *)((char *)this->m_address + 64 * (__int64)index);
 }
 
 // File Line: 180
@@ -204,14 +214,18 @@ hkClassMemberAccessor::Matrix3 *__fastcall hkClassMemberAccessor::asRotation(hkC
 
 // File Line: 186
 // RVA: 0x12FF5B0
-hkClassMemberAccessor::SimpleArray *__fastcall hkClassMemberAccessor::asSimpleArray(hkClassMemberAccessor *this, int index)
+hkClassMemberAccessor::SimpleArray *__fastcall hkClassMemberAccessor::asSimpleArray(
+        hkClassMemberAccessor *this,
+        int index)
 {
   return (hkClassMemberAccessor::SimpleArray *)((char *)this->m_address + 16 * index);
 }
 
 // File Line: 192
 // RVA: 0x12FF5D0
-hkClassMemberAccessor::HomogeneousArray *__fastcall hkClassMemberAccessor::asHomogeneousArray(hkClassMemberAccessor *this, int index)
+hkClassMemberAccessor::HomogeneousArray *__fastcall hkClassMemberAccessor::asHomogeneousArray(
+        hkClassMemberAccessor *this,
+        int index)
 {
   return (hkClassMemberAccessor::HomogeneousArray *)((char *)this->m_address + 24 * index);
 }
@@ -232,34 +246,27 @@ hkClassMember *__fastcall hkClassMemberAccessor::getClassMember(hkClassMemberAcc
 
 // File Line: 210
 // RVA: 0x12FF690
-hkClassMemberAccessor *__fastcall hkClassMemberAccessor::member(hkClassMemberAccessor *this, hkClassMemberAccessor *result, const char *name)
+hkClassMemberAccessor *__fastcall hkClassMemberAccessor::member(
+        hkClassMemberAccessor *this,
+        hkClassMemberAccessor *result,
+        const char *name)
 {
-  hkClassMemberAccessor *v3; // rbx
-  const char *v4; // rdi
-  hkClassMemberAccessor *v5; // rsi
-  hkClass *v6; // rax
+  hkClass *StructClass; // rax
 
-  v3 = this;
-  v4 = name;
-  v5 = result;
-  v6 = hkClassMember::getStructClass(this->m_member);
-  hkClassMemberAccessor::hkClassMemberAccessor(v5, v3->m_address, v6, v4);
-  return v5;
+  StructClass = hkClassMember::getStructClass(this->m_member);
+  hkClassMemberAccessor::hkClassMemberAccessor(result, this->m_address, StructClass, name);
+  return result;
 }
 
 // File Line: 219
 // RVA: 0x12FF6E0
 hkClassAccessor *__fastcall hkClassMemberAccessor::object(hkClassMemberAccessor *this, hkClassAccessor *result)
 {
-  hkClassMemberAccessor *v2; // rbx
-  hkClassAccessor *v3; // rdi
-  hkClass *v4; // rax
+  hkClass *StructClass; // rax
 
-  v2 = this;
-  v3 = result;
-  v4 = hkClassMember::getStructClass(this->m_member);
-  hkClassAccessor::hkClassAccessor(v3, v2->m_address, v4);
-  return v3;
+  StructClass = hkClassMember::getStructClass(this->m_member);
+  hkClassAccessor::hkClassAccessor(result, this->m_address, StructClass);
+  return result;
 }
 
 // File Line: 226
@@ -272,8 +279,8 @@ void __fastcall hkClassAccessor::hkClassAccessor(hkClassAccessor *this, void *ob
 
 // File Line: 235
 // RVA: 0x12FF7B0
-void __fastcall hkClassAccessor::hkClassAccessor(hkClassAccessor *this, hkVariant *v)
+void __fastcall hkClassAccessor::hkClassAccessor(hkClassAccessor *this, hkClassAccessor *v)
 {
-  *this = (hkClassAccessor)*v;
+  this->m_variant = v->m_variant;
 }
 

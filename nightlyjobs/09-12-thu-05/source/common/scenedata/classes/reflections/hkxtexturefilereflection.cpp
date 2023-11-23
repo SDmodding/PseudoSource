@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxTextureFileClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 57
@@ -28,38 +28,34 @@ hkClass *__fastcall hkxTextureFile::staticClass()
 
 // File Line: 64
 // RVA: 0xE33340
-void __fastcall finishLoadedObjecthkxTextureFile(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxTextureFile(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  hkStringPtr *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = (hkStringPtr *)p;
-    v3 = (hkStringPtr *)((char *)p + 16);
+    v3 = p + 2;
     v3[-2].m_stringAndFlag = (const char *)&hkxTextureFile::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v2 + 3, (hkFinishLoadedObjectFlag)v4);
-    hkStringPtr::hkStringPtr(v2 + 4, (hkFinishLoadedObjectFlag)v4);
+    hkStringPtr::hkStringPtr(v3, finishing);
+    hkStringPtr::hkStringPtr(p + 3, finishing);
+    hkStringPtr::hkStringPtr(p + 4, finishing);
   }
 }
 
 // File Line: 70
 // RVA: 0xE33390
-void __fastcall cleanupLoadedObjecthkxTextureFile(void *p)
+void __fastcall cleanupLoadedObjecthkxTextureFile(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
 // RVA: 0xE333A0
 void **__fastcall getVtablehkxTextureFile()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-28h]
-  hkStringPtr v2; // [rsp+38h] [rbp-20h]
-  hkStringPtr v3; // [rsp+40h] [rbp-18h]
+  hkStringPtr v1; // [rsp+30h] [rbp-28h] BYREF
+  hkStringPtr v2; // [rsp+38h] [rbp-20h] BYREF
+  hkStringPtr v3; // [rsp+40h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
@@ -78,8 +74,8 @@ void **dynamic_initializer_for__hkxTextureFileTypeInfo__()
   hkxTextureFileTypeInfo.m_typeName = "hkxTextureFile";
   hkxTextureFileTypeInfo.m_vtable = result;
   hkxTextureFileTypeInfo.m_scopedName = "!hkxTextureFile";
-  hkxTextureFileTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxTextureFile;
-  hkxTextureFileTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxTextureFile;
+  hkxTextureFileTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxTextureFile;
+  hkxTextureFileTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxTextureFile;
   return result;
 }
 

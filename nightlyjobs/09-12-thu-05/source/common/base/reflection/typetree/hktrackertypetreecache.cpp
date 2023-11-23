@@ -2,87 +2,94 @@
 // RVA: 0x1303BE0
 void __fastcall hkTrackerTypeTreeCache::hkTrackerTypeTreeCache(hkTrackerTypeTreeCache *this)
 {
-  hkTrackerTypeTreeCache *v1; // rsi
-  hkMemoryAllocator **v2; // rax
-  hkTrackerTypeTreeNode::Type v3; // ebx
-  signed __int64 v4; // rdi
-  __int64 v5; // rax
+  hkMemoryAllocator **Value; // rax
+  int v3; // ebx
+  hkTrackerTypeTreeNode **v4; // rdi
+  hkTrackerTypeTreeNode *v5; // rax
 
-  v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkTrackerTypeTreeCache::`vftable;
-  v2 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  hkFreeList::hkFreeList(&v1->m_nodeFreeList, 0x30ui64, 8ui64, 0x400ui64, v2[11], 0i64);
+  Value = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  hkFreeList::hkFreeList(&this->m_nodeFreeList, 0x30ui64, 8ui64, 0x400ui64, Value[11], 0i64);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
-    &v1->m_textMap.m_map,
+    &this->m_textMap.m_map,
     0);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
-    &v1->m_namedTypeMap.m_map,
+    &this->m_namedTypeMap.m_map,
     0);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
-    &v1->m_expressionTypeMap.m_map,
+    &this->m_expressionTypeMap.m_map,
     0);
-  hkString::memSet(v1->m_builtInTypes, 0, 168);
+  hkString::memSet(this->m_builtInTypes, 0, 0xA8u);
   v3 = 4;
-  v4 = (signed __int64)&v1->m_builtInTypes[4];
+  v4 = &this->m_builtInTypes[4];
   do
   {
-    hkTrackerTypeTreeCache::newNode(v1, v3++);
-    v4 += 8i64;
-    *(_QWORD *)(v4 - 8) = v5;
+    hkTrackerTypeTreeCache::newNode(this, (hkTrackerTypeTreeNode::Type)v3++);
+    *v4++ = v5;
   }
-  while ( (signed int)v3 <= 15 );
+  while ( v3 <= 15 );
 }
 
 // File Line: 25
 // RVA: 0x1303750
-hkBool *__fastcall hkTrackerTypeTreeCache::getTypeExpressionTree(hkTrackerTypeTreeCache *this, hkBool *result, const char *name, hkTrackerTypeTreeNode **nodeOut)
+hkBool *__fastcall hkTrackerTypeTreeCache::getTypeExpressionTree(
+        hkTrackerTypeTreeCache *this,
+        hkBool *result,
+        const char *name,
+        hkTrackerTypeTreeNode **nodeOut)
 {
-  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v4; // rsi
-  hkBool *v5; // rbx
-  hkTrackerTypeTreeNode **v6; // rdi
-  Dummy *v7; // rbp
-  unsigned __int64 v8; // rax
-  hkBool resulta; // [rsp+30h] [rbp+8h]
+  hkStringMap<hkTrackerTypeTreeNode const *,hkContainerHeapAllocator> *p_m_expressionTypeMap; // rsi
+  Dummy *Key; // rbp
+  hkTrackerTypeTreeNode *Value; // rax
+  hkBool resulta; // [rsp+30h] [rbp+8h] BYREF
 
-  v4 = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_expressionTypeMap;
-  v5 = result;
-  v6 = nodeOut;
-  v7 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
-         (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_expressionTypeMap,
-         (unsigned __int64)name);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v4, &resulta, v7);
+  p_m_expressionTypeMap = &this->m_expressionTypeMap;
+  Key = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
+          (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_expressionTypeMap,
+          name);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
+    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)p_m_expressionTypeMap,
+    &resulta,
+    Key);
   if ( resulta.m_bool )
   {
-    v8 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(v4, v7);
-    v5->m_bool = 1;
-    *v6 = (hkTrackerTypeTreeNode *)v8;
+    Value = (hkTrackerTypeTreeNode *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
+                                       (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)p_m_expressionTypeMap,
+                                       Key);
+    result->m_bool = 1;
+    *nodeOut = Value;
   }
   else
   {
-    *v6 = 0i64;
-    v5->m_bool = 0;
+    *nodeOut = 0i64;
+    result->m_bool = 0;
   }
-  return v5;
+  return result;
 }
 
 // File Line: 41
 // RVA: 0x13037E0
-hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::getTypeExpressionTree(hkTrackerTypeTreeCache *this, const char *name)
+hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::getTypeExpressionTree(
+        hkTrackerTypeTreeCache *this,
+        const char *name)
 {
   return (hkTrackerTypeTreeNode *)hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getWithDefault(
                                     (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_expressionTypeMap,
-                                    (unsigned __int64)name,
+                                    name,
                                     0i64);
 }
 
 // File Line: 46
 // RVA: 0x1303800
-void __fastcall hkTrackerTypeTreeCache::setTypeExpressionTree(hkTrackerTypeTreeCache *this, const char *name, hkTrackerTypeTreeNode *node)
+void __fastcall hkTrackerTypeTreeCache::setTypeExpressionTree(
+        hkTrackerTypeTreeCache *this,
+        const char *name,
+        hkTrackerTypeTreeNode *node)
 {
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
     &this->m_expressionTypeMap.m_map,
-    (unsigned __int64)name,
+    name,
     (unsigned __int64)node);
 }
 
@@ -90,141 +97,132 @@ void __fastcall hkTrackerTypeTreeCache::setTypeExpressionTree(hkTrackerTypeTreeC
 // RVA: 0x1303820
 void __fastcall hkTrackerTypeTreeCache::newNode(hkTrackerTypeTreeCache *this, hkTrackerTypeTreeNode::Type type)
 {
-  hkFreeList *v2; // r8
-  hkTrackerTypeTreeNode::Type v3; // ebx
-  char *v4; // r9
-  unsigned __int64 v5; // rcx
+  hkFreeList *p_m_nodeFreeList; // r8
+  char *m_free; // r9
+  unsigned __int64 m_elementSize; // rcx
 
-  v2 = &this->m_nodeFreeList;
-  v3 = type;
-  v4 = (char *)this->m_nodeFreeList.m_free;
-  if ( v4 )
+  p_m_nodeFreeList = &this->m_nodeFreeList;
+  m_free = (char *)this->m_nodeFreeList.m_free;
+  if ( m_free )
   {
     --this->m_nodeFreeList.m_numFreeElements;
-    v2->m_free = *(hkFreeList::Element **)v4;
+    p_m_nodeFreeList->m_free = *(hkFreeList::Element **)m_free;
   }
   else
   {
-    v4 = this->m_nodeFreeList.m_top;
-    if ( v4 < this->m_nodeFreeList.m_blockEnd )
+    m_free = this->m_nodeFreeList.m_top;
+    if ( m_free < this->m_nodeFreeList.m_blockEnd )
     {
-      v5 = this->m_nodeFreeList.m_elementSize;
-      --v2->m_numFreeElements;
-      v2->m_top = &v4[v5];
+      m_elementSize = this->m_nodeFreeList.m_elementSize;
+      --p_m_nodeFreeList->m_numFreeElements;
+      p_m_nodeFreeList->m_top = &m_free[m_elementSize];
     }
     else
     {
-      v4 = hkFreeList::addSpace(&this->m_nodeFreeList);
+      m_free = hkFreeList::addSpace(&this->m_nodeFreeList);
     }
   }
-  if ( v4 )
-    hkTrackerTypeTreeNode::hkTrackerTypeTreeNode((hkTrackerTypeTreeNode *)v4, v3);
+  if ( m_free )
+    hkTrackerTypeTreeNode::hkTrackerTypeTreeNode((hkTrackerTypeTreeNode *)m_free, type);
 }
 
 // File Line: 59
 // RVA: 0x1303890
-hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::newNamedNode(hkTrackerTypeTreeCache *this, hkTrackerTypeTreeNode::Type type, hkSubString *name, hkBool allocName)
+hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::newNamedNode(
+        hkTrackerTypeTreeCache *this,
+        hkTrackerTypeTreeNode::Type type,
+        hkSubString *name,
+        hkBool allocName)
 {
-  hkTrackerTypeTreeCache *v4; // r15
-  int v5; // ebx
-  hkSubString *v6; // rsi
-  hkTrackerTypeTreeNode::Type v7; // er14
-  hkLifoAllocator *v8; // rax
-  char *v9; // rdi
+  signed int v5; // ebx
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // rdi
   int v10; // edx
   char *v11; // rcx
   hkTrackerTypeTreeNode *v12; // rsi
   signed int v13; // ebx
   hkLifoAllocator *v14; // rax
-  int v15; // er8
+  int v15; // r8d
 
-  v4 = this;
   v5 = LODWORD(name->m_end) - LODWORD(name->m_start);
-  v6 = name;
-  v7 = type;
-  v8 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (char *)v8->m_cur;
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (char *)Value->m_cur;
   v10 = (v5 + 128) & 0xFFFFFF80;
-  v11 = &v9[v10];
-  if ( v10 > v8->m_slabSize || v11 > v8->m_end )
-    v9 = (char *)hkLifoAllocator::allocateFromNewSlab(v8, v10);
+  v11 = &m_cur[v10];
+  if ( v10 > Value->m_slabSize || v11 > Value->m_end )
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, v10);
   else
-    v8->m_cur = v11;
-  hkString::strNcpy(v9, v6->m_start, v5);
-  v9[v5] = 0;
-  v12 = hkTrackerTypeTreeCache::newNamedNode(v4, v7, v9, (hkBool)1);
+    Value->m_cur = v11;
+  hkString::strNcpy(m_cur, name->m_start, v5);
+  m_cur[v5] = 0;
+  v12 = hkTrackerTypeTreeCache::newNamedNode(this, type, m_cur, (hkBool)1);
   v13 = (v5 + 128) & 0xFFFFFF80;
   v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v15 = (v13 + 15) & 0xFFFFFFF0;
-  if ( v13 > v14->m_slabSize || &v9[v15] != v14->m_cur || v14->m_firstNonLifoEnd == v9 )
-    hkLifoAllocator::slowBlockFree(v14, v9, v15);
+  if ( v13 > v14->m_slabSize || &m_cur[v15] != v14->m_cur || v14->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v14, m_cur, v15);
   else
-    v14->m_cur = v9;
+    v14->m_cur = m_cur;
   return v12;
 }
 
 // File Line: 70
 // RVA: 0x1303980
-hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::newNamedNode(hkTrackerTypeTreeCache *this, hkTrackerTypeTreeNode::Type type, const char *name, hkBool allocName)
+hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::newNamedNode(
+        hkTrackerTypeTreeCache *this,
+        hkTrackerTypeTreeNode::Type type,
+        const char *name,
+        hkBool allocName)
 {
-  hkTrackerTypeTreeNode::Type v4; // ebx
   const char *v5; // rdi
-  hkTrackerTypeTreeCache *v6; // rsi
   hkTrackerTypeTreeNode *result; // rax
-  hkTrackerTypeTreeNode *v8; // r8
-  unsigned __int64 v9; // rcx
-  hkTrackerTypeTreeNode *v10; // rax
-  hkTrackerTypeTreeNode *v11; // rbx
-  char v12; // [rsp+48h] [rbp+20h]
+  hkFreeList::Element **p_m_next; // r8
+  unsigned __int64 m_elementSize; // rcx
+  unsigned __int64 v10; // rax
+  unsigned __int64 v11; // rbx
 
-  v12 = allocName.m_bool;
-  v4 = type;
   v5 = name;
-  v6 = this;
   result = hkTrackerTypeTreeCache::getNamedNode(this, name);
   if ( !result || result->m_next )
   {
-    v8 = (hkTrackerTypeTreeNode *)v6->m_nodeFreeList.m_free;
-    if ( v8 )
+    p_m_next = &this->m_nodeFreeList.m_free->m_next;
+    if ( p_m_next )
     {
-      --v6->m_nodeFreeList.m_numFreeElements;
-      v6->m_nodeFreeList.m_free = *(hkFreeList::Element **)&v8->m_type;
+      --this->m_nodeFreeList.m_numFreeElements;
+      this->m_nodeFreeList.m_free = *p_m_next;
     }
     else
     {
-      v8 = (hkTrackerTypeTreeNode *)v6->m_nodeFreeList.m_top;
-      if ( (char *)v8 < v6->m_nodeFreeList.m_blockEnd )
+      p_m_next = (hkFreeList::Element **)this->m_nodeFreeList.m_top;
+      if ( (char *)p_m_next < this->m_nodeFreeList.m_blockEnd )
       {
-        v9 = v6->m_nodeFreeList.m_elementSize;
-        --v6->m_nodeFreeList.m_numFreeElements;
-        v6->m_nodeFreeList.m_top = (char *)v8 + v9;
+        m_elementSize = this->m_nodeFreeList.m_elementSize;
+        --this->m_nodeFreeList.m_numFreeElements;
+        this->m_nodeFreeList.m_top = (char *)p_m_next + m_elementSize;
       }
       else
       {
-        v8 = (hkTrackerTypeTreeNode *)hkFreeList::addSpace(&v6->m_nodeFreeList);
+        p_m_next = (hkFreeList::Element **)hkFreeList::addSpace(&this->m_nodeFreeList);
       }
     }
-    if ( v8 )
+    if ( p_m_next )
     {
-      hkTrackerTypeTreeNode::hkTrackerTypeTreeNode(v8, v4);
+      hkTrackerTypeTreeNode::hkTrackerTypeTreeNode((hkTrackerTypeTreeNode *)p_m_next, type);
       v11 = v10;
     }
     else
     {
       v11 = 0i64;
     }
-    if ( v12 )
-      v5 = hkTrackerTypeTreeCache::newText(v6, v5);
-    hkSubString::operator=(&v11->m_name, v5);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
-      &v6->m_namedTypeMap.m_map,
-      (unsigned __int64)v5,
-      (unsigned __int64)v11);
-    result = v11;
+    if ( allocName.m_bool )
+      v5 = hkTrackerTypeTreeCache::newText(this, v5);
+    hkSubString::operator=((hkSubString *)(v11 + 8), v5);
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(&this->m_namedTypeMap.m_map, v5, v11);
+    return (hkTrackerTypeTreeNode *)v11;
   }
-  else if ( result->m_type != v4 && v4 != 16 )
+  else if ( result->m_type != type && type != TYPE_ARRAY )
   {
-    result->m_type = v4;
+    result->m_type = type;
   }
   return result;
 }
@@ -235,64 +233,62 @@ hkTrackerTypeTreeNode *__fastcall hkTrackerTypeTreeCache::getNamedNode(hkTracker
 {
   return (hkTrackerTypeTreeNode *)hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getWithDefault(
                                     (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_namedTypeMap,
-                                    (unsigned __int64)name,
+                                    name,
                                     0i64);
 }
 
 // File Line: 113
 // RVA: 0x1303AA0
-char *__fastcall hkTrackerTypeTreeCache::newText(hkTrackerTypeTreeCache *this, const char *text)
+char *__fastcall hkTrackerTypeTreeCache::newText(hkTrackerTypeTreeCache *this, char *text)
 {
-  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v2; // rbx
-  const char *v3; // rdi
-  Dummy *v4; // rsi
+  hkStorageStringMap<int,hkContainerHeapAllocator> *p_m_textMap; // rbx
+  Dummy *Key; // rsi
   Dummy *v6; // rsi
   char *v7; // rdi
-  hkBool result; // [rsp+30h] [rbp+8h]
+  hkBool result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_textMap;
-  v3 = text;
-  v4 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
-         (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_textMap,
-         (unsigned __int64)text);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v2, &result, v4);
-  if ( result.m_bool )
-    return (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(
-                     (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)v2,
-                     v4);
-  v6 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(v2, (unsigned __int64)v3);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v2, &result, v6);
+  p_m_textMap = &this->m_textMap;
+  Key = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
+          (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_textMap,
+          text);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
+    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)p_m_textMap,
+    &result,
+    Key);
   if ( result.m_bool )
   {
-    v7 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(
-                   (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)v2,
-                   v6);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(
-      (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)v2,
-      v6,
-      1ui64);
+    return (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(&p_m_textMap->m_map, Key);
   }
   else
   {
-    v7 = hkString::strDup(v3, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
-      (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)v2,
-      (unsigned __int64)v7,
-      1ui64);
+    v6 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
+           (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)p_m_textMap,
+           text);
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
+      (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)p_m_textMap,
+      &result,
+      v6);
+    if ( result.m_bool )
+    {
+      v7 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(&p_m_textMap->m_map, v6);
+      hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(&p_m_textMap->m_map, v6, 1ui64);
+    }
+    else
+    {
+      v7 = hkString::strDup(text, &hkContainerHeapAllocator::s_alloc);
+      hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(&p_m_textMap->m_map, v7, 1ui64);
+    }
+    return v7;
   }
-  return v7;
 }
 
 // File Line: 127
 // RVA: 0x1303B90
 void __fastcall hkTrackerTypeTreeCache::clear(hkTrackerTypeTreeCache *this)
 {
-  hkTrackerTypeTreeCache *v1; // rbx
-
-  v1 = this;
   hkFreeList::freeAllMemory(&this->m_nodeFreeList);
-  hkStorageStringMap<hkTrackerLayoutHandler *,hkContainerHeapAllocator>::clear(&v1->m_textMap);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&v1->m_expressionTypeMap.m_map);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&v1->m_namedTypeMap.m_map);
+  hkStorageStringMap<hkTrackerLayoutHandler *,hkContainerHeapAllocator>::clear(&this->m_textMap);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&this->m_expressionTypeMap.m_map);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&this->m_namedTypeMap.m_map);
 }
 

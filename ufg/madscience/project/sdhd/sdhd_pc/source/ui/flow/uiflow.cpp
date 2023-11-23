@@ -2,24 +2,20 @@
 // RVA: 0x61F230
 bool __fastcall UFG::UIFlow::changeState(UFG::UIFlow *this, UFG::UIFlow::eState new_state)
 {
-  UFG::UIFlow::eState v2; // esi
-  UFG::UIFlow::eState v3; // edi
-  UFG::UIFlow *v4; // rbx
+  UFG::UIFlow::eState m_state; // esi
   bool result; // al
-  UFG::UIFlowVtbl *v6; // rax
+  UFG::UIFlowVtbl *vfptr; // rax
 
-  v2 = this->m_state;
-  v3 = new_state;
-  v4 = this;
-  result = this->vfptr->canChangeState(this, this->m_state, new_state);
+  m_state = this->m_state;
+  result = this->vfptr->canChangeState(this, m_state, new_state);
   if ( result )
   {
-    v4->vfptr->handleExitState(v4, v2, v3);
-    v6 = v4->vfptr;
-    v4->m_state = v3;
-    v4->m_time_elapsed_in_state = 0.0;
-    v6->handleEnterState(v4, v2, v3);
-    result = 1;
+    this->vfptr->handleExitState(this, m_state, new_state);
+    vfptr = this->vfptr;
+    this->m_state = new_state;
+    this->m_time_elapsed_in_state = 0.0;
+    vfptr->handleEnterState(this, m_state, new_state);
+    return 1;
   }
   return result;
 }
@@ -28,33 +24,28 @@ bool __fastcall UFG::UIFlow::changeState(UFG::UIFlow *this, UFG::UIFlow::eState 
 // RVA: 0x620670
 void __fastcall UFG::UIFlow::flowUpdate(UFG::UIFlow *this, float elapsed)
 {
-  UFG::UIFlow *v2; // rcx
+  UFG::UIFlow *m_child_flow; // rcx
 
   this->m_time_elapsed_in_state = elapsed + this->m_time_elapsed_in_state;
-  v2 = this->m_child_flow;
-  if ( v2 )
-    ((void (*)(void))v2->vfptr->flowUpdate)();
+  m_child_flow = this->m_child_flow;
+  if ( m_child_flow )
+    ((void (__fastcall *)(UFG::UIFlow *))m_child_flow->vfptr->flowUpdate)(m_child_flow);
 }
 
 // File Line: 54
 // RVA: 0x620280
 bool __fastcall UFG::UIFlow::flowHandleMessage(UFG::UIFlow *this, unsigned int msg_id, UFG::UIMessage *msg)
 {
-  UFG::UIFlow *v3; // rbx
-  UFG::UIFlow *v4; // rcx
+  UFG::UIFlow *m_child_flow; // rcx
   bool result; // al
-  UFG::UIMessage *v6; // rsi
-  unsigned int v7; // edi
 
-  v3 = this;
-  v4 = this->m_child_flow;
+  m_child_flow = this->m_child_flow;
   result = 0;
-  v6 = msg;
-  v7 = msg_id;
-  if ( !v4 || (result = ((__int64 (*)(void))v4->vfptr->flowHandleMessage)()) == 0 )
+  if ( (!m_child_flow
+     || !(result = ((__int64 (__fastcall *)(UFG::UIFlow *))m_child_flow->vfptr->flowHandleMessage)(m_child_flow)))
+    && msg_id == UI_HASH_REQUEST_STATE_CHANGE_30 )
   {
-    if ( v7 == UI_HASH_REQUEST_STATE_CHANGE_30 )
-      result = v3->vfptr->changeState(v3, (UFG::UIFlow::eState)LODWORD(v6[1].vfptr));
+    return this->vfptr->changeState(this, (UFG::UIFlow::eState)msg[1].vfptr);
   }
   return result;
 }
@@ -67,7 +58,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateInit__()
 
   v0 = UFG::qStringHash32("STATE_INIT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateInit, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateInit__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateInit__);
 }
 
 // File Line: 151
@@ -78,7 +69,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateNormal__()
 
   v0 = UFG::qStringHash32("STATE_NORMAL", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateNormal, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateNormal__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateNormal__);
 }
 
 // File Line: 152
@@ -89,7 +80,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateLoading__()
 
   v0 = UFG::qStringHash32("STATE_LOADING", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateLoading, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateLoading__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateLoading__);
 }
 
 // File Line: 153
@@ -100,7 +91,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateIdle__()
 
   v0 = UFG::qStringHash32("STATE_IDLE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateIdle, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateIdle__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateIdle__);
 }
 
 // File Line: 154
@@ -111,7 +102,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateIntro__()
 
   v0 = UFG::qStringHash32("STATE_INTRO", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateIntro, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateIntro__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateIntro__);
 }
 
 // File Line: 155
@@ -122,7 +113,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateActive__()
 
   v0 = UFG::qStringHash32("STATE_ACTIVE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateActive, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateActive__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateActive__);
 }
 
 // File Line: 156
@@ -133,7 +124,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateOutro__()
 
   v0 = UFG::qStringHash32("STATE_OUTRO", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateOutro, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateOutro__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateOutro__);
 }
 
 // File Line: 157
@@ -144,7 +135,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateExit__()
 
   v0 = UFG::qStringHash32("STATE_EXIT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateExit, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateExit__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateExit__);
 }
 
 // File Line: 158
@@ -155,7 +146,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateSleep__()
 
   v0 = UFG::qStringHash32("STATE_SLEEP", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateSleep, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateSleep__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateSleep__);
 }
 
 // File Line: 159
@@ -166,7 +157,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateDialogPrompt__()
 
   v0 = UFG::qStringHash32("STATE_DIALOG_PROMPT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateDialogPrompt, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateDialogPrompt__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateDialogPrompt__);
 }
 
 // File Line: 160
@@ -177,7 +168,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateFrontEnd__()
 
   v0 = UFG::qStringHash32("STATE_FRONT_END", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateFrontEnd, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateFrontEnd__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateFrontEnd__);
 }
 
 // File Line: 161
@@ -188,7 +179,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateInGame__()
 
   v0 = UFG::qStringHash32("STATE_IN_GAME", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateInGame, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateInGame__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateInGame__);
 }
 
 // File Line: 162
@@ -199,7 +190,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateQuitGame__()
 
   v0 = UFG::qStringHash32("STATE_QUIT_GAME", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateQuitGame, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateQuitGame__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateQuitGame__);
 }
 
 // File Line: 163
@@ -210,7 +201,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateSplash__()
 
   v0 = UFG::qStringHash32("STATE_SPLASH", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateSplash, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateSplash__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateSplash__);
 }
 
 // File Line: 164
@@ -221,7 +212,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateMainMenu__()
 
   v0 = UFG::qStringHash32("STATE_MAIN_MENU", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateMainMenu, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateMainMenu__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateMainMenu__);
 }
 
 // File Line: 165
@@ -232,7 +223,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StatePauseMenu__()
 
   v0 = UFG::qStringHash32("STATE_PAUSE_MENU", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StatePauseMenu, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StatePauseMenu__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StatePauseMenu__);
 }
 
 // File Line: 166
@@ -243,7 +234,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateNIS__()
 
   v0 = UFG::qStringHash32("STATE_NIS", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateNIS, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateNIS__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateNIS__);
 }
 
 // File Line: 167
@@ -254,6 +245,6 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_StateNISPause__()
 
   v0 = UFG::qStringHash32("STATE_NIS_PAUSE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_StateNISPause, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_StateNISPause__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_StateNISPause__);
 }
 

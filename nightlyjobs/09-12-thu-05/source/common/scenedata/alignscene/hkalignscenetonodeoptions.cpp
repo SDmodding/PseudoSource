@@ -9,13 +9,15 @@ void __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(hkAlignScen
 
 // File Line: 18
 // RVA: 0xE33D90
-void __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(hkAlignSceneToNodeOptions *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(
+        hkAlignSceneToNodeOptions *this,
+        hkFinishLoadedObjectFlag f)
 {
-  hkStringPtr *v2; // rcx
+  hkStringPtr *p_m_nodeName; // rcx
 
-  v2 = &this->m_nodeName;
-  v2[-4].m_stringAndFlag = (const char *)&hkAlignSceneToNodeOptions::`vftable;
-  hkStringPtr::hkStringPtr(v2, f);
+  p_m_nodeName = &this->m_nodeName;
+  p_m_nodeName[-4].m_stringAndFlag = (const char *)&hkAlignSceneToNodeOptions::`vftable;
+  hkStringPtr::hkStringPtr(p_m_nodeName, f);
 }
 
 // File Line: 22

@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__gFreemanDataFactory__()
     &gFreemanDataFactory,
     sFreemanDataFactoryList,
     sFreemanDataFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gFreemanDataFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gFreemanDataFactory__);
 }
 
 // File Line: 46
@@ -25,7 +25,7 @@ __int64 dynamic_initializer_for__gFreemanDataFactory__()
 __int64 dynamic_initializer_for__unitsEnum__()
 {
   TracksEnum<float>::TracksEnum<float>(&unitsEnum, "Global/Act/Units.xml");
-  return atexit(dynamic_atexit_destructor_for__unitsEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__unitsEnum__);
 }
 
 // File Line: 48

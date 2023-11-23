@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiAabbTreeNavVolumeMediator::staticClass()
 
 // File Line: 67
 // RVA: 0xBB5E90
-void __fastcall finishLoadedObjecthkaiAabbTreeNavVolumeMediator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiAabbTreeNavVolumeMediator(
+        hkaiAabbTreeNavVolumeMediator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator);
+  if ( p )
+    hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xBB5EB0
-void __fastcall cleanupLoadedObjecthkaiAabbTreeNavVolumeMediator(void *p)
+void __fastcall cleanupLoadedObjecthkaiAabbTreeNavVolumeMediator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xBB5EC0
 hkBaseObjectVtbl *__fastcall getVtablehkaiAabbTreeNavVolumeMediator()
 {
-  hkaiAabbTreeNavVolumeMediator v1; // [rsp+20h] [rbp-28h]
+  hkaiAabbTreeNavVolumeMediator v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiAabbTreeNavVolumeMediatorTypeInfo
   hkaiAabbTreeNavVolumeMediatorTypeInfo.m_typeName = "hkaiAabbTreeNavVolumeMediator";
   hkaiAabbTreeNavVolumeMediatorTypeInfo.m_vtable = result;
   hkaiAabbTreeNavVolumeMediatorTypeInfo.m_scopedName = "!hkaiAabbTreeNavVolumeMediator";
-  hkaiAabbTreeNavVolumeMediatorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiAabbTreeNavVolumeMediator;
-  hkaiAabbTreeNavVolumeMediatorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiAabbTreeNavVolumeMediator;
+  hkaiAabbTreeNavVolumeMediatorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiAabbTreeNavVolumeMediator;
+  hkaiAabbTreeNavVolumeMediatorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiAabbTreeNavVolumeMediator;
   return result;
 }
 

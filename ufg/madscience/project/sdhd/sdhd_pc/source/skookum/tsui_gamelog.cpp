@@ -2,24 +2,24 @@
 // RVA: 0x4E2CA0
 void __fastcall UFG::TSUI_GameLog::MthdC_add(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  unsigned int v3; // eax
-  const char ***v4; // r8
+  SSData **i_array_p; // rdx
+  unsigned int i_user_data; // eax
+  const char ***p_i_user_data; // r8
   const char *v5; // rbx
-  UFG::GameLogManager *v6; // rcx
-  UFG::qSymbol log_type; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v8; // [rsp+50h] [rbp+18h]
+  UFG::GameLogManager *Instance; // rcx
+  UFG::qSymbol log_type; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_log_type; // [rsp+50h] [rbp+18h]
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[1]->i_data_p->i_user_data;
-  v4 = (const char ***)&(*v2)->i_data_p->i_user_data;
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  p_i_user_data = (const char ***)&(*i_array_p)->i_data_p->i_user_data;
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64 )
   {
-    v8 = &log_type;
-    log_type.mUID = v3;
-    v5 = **v4;
-    v6 = UFG::GameLogManager::getInstance();
-    UFG::GameLogManager::LogItem(v6, (UFG::qSymbol)&log_type, v5);
+    p_log_type = &log_type;
+    log_type.mUID = i_user_data;
+    v5 = **p_i_user_data;
+    Instance = UFG::GameLogManager::getInstance();
+    UFG::GameLogManager::LogItem(Instance, (UFG::qSymbol)&log_type, v5);
   }
 }
 
@@ -27,9 +27,9 @@ void __fastcall UFG::TSUI_GameLog::MthdC_add(SSInvokedMethod *pScope, SSInstance
 // RVA: 0x4E4300
 void __fastcall UFG::TSUI_GameLog::MthdC_clear(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::GameLogManager *v2; // rax
+  UFG::GameLogManager *Instance; // rax
 
-  v2 = UFG::GameLogManager::getInstance();
-  UFG::GameLogManager::Clear(v2);
+  Instance = UFG::GameLogManager::getInstance();
+  UFG::GameLogManager::Clear(Instance);
 }
 

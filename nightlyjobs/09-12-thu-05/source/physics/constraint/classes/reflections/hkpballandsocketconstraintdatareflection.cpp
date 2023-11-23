@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpBallAndSocketConstraintDataAtomsClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 61
@@ -70,30 +70,29 @@ hkClass *__fastcall hkpBallAndSocketConstraintData::staticClass()
 
 // File Line: 122
 // RVA: 0xD435B0
-void __fastcall finishLoadedObjecthkpBallAndSocketConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBallAndSocketConstraintData(
+        hkpConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpBallAndSocketConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpBallAndSocketConstraintData::`vftable;
   }
 }
 
 // File Line: 128
 // RVA: 0xD435E0
-void __fastcall cleanupLoadedObjecthkpBallAndSocketConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpBallAndSocketConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 132
 // RVA: 0xD435F0
 void **__fastcall getVtablehkpBallAndSocketConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-78h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpBallAndSocketConstraintData::`vftable;
@@ -110,8 +109,8 @@ void **dynamic_initializer_for__hkpBallAndSocketConstraintDataTypeInfo__()
   hkpBallAndSocketConstraintDataTypeInfo.m_typeName = "hkpBallAndSocketConstraintData";
   hkpBallAndSocketConstraintDataTypeInfo.m_vtable = result;
   hkpBallAndSocketConstraintDataTypeInfo.m_scopedName = "!hkpBallAndSocketConstraintData";
-  hkpBallAndSocketConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBallAndSocketConstraintData;
-  hkpBallAndSocketConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBallAndSocketConstraintData;
+  hkpBallAndSocketConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBallAndSocketConstraintData;
+  hkpBallAndSocketConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBallAndSocketConstraintData;
   return result;
 }
 

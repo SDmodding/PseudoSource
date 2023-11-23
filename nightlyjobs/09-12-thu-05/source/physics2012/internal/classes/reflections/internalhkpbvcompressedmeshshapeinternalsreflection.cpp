@@ -63,15 +63,20 @@ hkClass *__fastcall hkpBvCompressedMeshShapeTree::staticClass()
 
 // File Line: 114
 // RVA: 0xD99490
-void __fastcall finishLoadedObjecthkpBvCompressedMeshShapeTree(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBvCompressedMeshShapeTree(
+        hkcdStaticMeshTreeBase *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkcdStaticMeshTreeBase::hkcdStaticMeshTreeBase);
+  if ( p )
+    hkcdStaticMeshTreeBase::hkcdStaticMeshTreeBase(p, finishing);
 }
 
 // File Line: 120
 // RVA: 0xD994B0
-void __fastcall cleanupLoadedObjecthkpBvCompressedMeshShapeTree(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpBvCompressedMeshShapeTree(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *p)
 {
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::~hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>((hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *)p);
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::~hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>(p);
 }
 

@@ -2,13 +2,11 @@
 // RVA: 0x82B60
 void __fastcall std::_Yarn<wchar_t>::~_Yarn<wchar_t>(std::_Yarn<wchar_t> *this)
 {
-  std::_Yarn<wchar_t> *v1; // rbx
-  wchar_t *v2; // rcx
+  wchar_t *Myptr; // rcx
 
-  v1 = this;
-  v2 = this->_Myptr;
-  if ( v2 )
-    free(v2);
-  v1->_Myptr = 0i64;
+  Myptr = this->_Myptr;
+  if ( Myptr )
+    free(Myptr);
+  this->_Myptr = 0i64;
 }
 

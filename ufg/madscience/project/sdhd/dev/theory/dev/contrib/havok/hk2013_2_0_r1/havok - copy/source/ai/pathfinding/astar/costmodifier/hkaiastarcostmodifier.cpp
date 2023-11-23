@@ -1,6 +1,9 @@
 // File Line: 14
 // RVA: 0xBD37F0
-hkSimdFloat32 *__fastcall hkaiAstarCostModifier::getModifiedCost(hkaiAstarCostModifier *this, hkSimdFloat32 *result, hkaiAstarCostModifier::NavVolumeGetModifiedCostCallbackContext *context)
+hkSimdFloat32 *__fastcall hkaiAstarCostModifier::getModifiedCost(
+        hkaiAstarCostModifier *this,
+        hkSimdFloat32 *result,
+        hkaiAstarCostModifier::NavVolumeGetModifiedCostCallbackContext *context)
 {
   hkSimdFloat32 *v3; // rax
 
@@ -11,12 +14,15 @@ hkSimdFloat32 *__fastcall hkaiAstarCostModifier::getModifiedCost(hkaiAstarCostMo
 
 // File Line: 19
 // RVA: 0xBD3810
-hkSimdFloat32 *__fastcall hkaiAstarCostModifier::getModifiedCost(hkaiAstarCostModifier *this, hkSimdFloat32 *result, hkaiAstarCostModifier::DirectedGraphGetModifiedCostCallbackContext *context)
+hkSimdFloat32 *__fastcall hkaiAstarCostModifier::getModifiedCost(
+        hkaiAstarCostModifier *this,
+        hkSimdFloat32 *result,
+        hkaiAstarCostModifier::DirectedGraphGetModifiedCostCallbackContext *context)
 {
   hkSimdFloat32 *v3; // rax
 
   v3 = result;
-  _mm_store_si128((__m128i *)result, (__m128i)context->m_edgeCost.m_real);
+  *result = context->m_edgeCost;
   return v3;
 }
 

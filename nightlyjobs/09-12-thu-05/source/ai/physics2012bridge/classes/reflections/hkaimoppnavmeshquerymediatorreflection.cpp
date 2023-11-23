@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiMoppNavMeshQueryMediator::staticClass()
 
 // File Line: 68
 // RVA: 0xC2E310
-void __fastcall finishLoadedObjecthkaiMoppNavMeshQueryMediator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiMoppNavMeshQueryMediator(
+        hkaiMoppNavMeshQueryMediator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiMoppNavMeshQueryMediator::hkaiMoppNavMeshQueryMediator);
+  if ( p )
+    hkaiMoppNavMeshQueryMediator::hkaiMoppNavMeshQueryMediator(p, finishing);
 }
 
 // File Line: 74
 // RVA: 0xC2E330
-void __fastcall cleanupLoadedObjecthkaiMoppNavMeshQueryMediator(void *p)
+void __fastcall cleanupLoadedObjecthkaiMoppNavMeshQueryMediator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
 // RVA: 0xC2E340
 hkBaseObjectVtbl *__fastcall getVtablehkaiMoppNavMeshQueryMediator()
 {
-  hkaiMoppNavMeshQueryMediator v1; // [rsp+20h] [rbp-48h]
+  hkaiMoppNavMeshQueryMediator v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkaiMoppNavMeshQueryMediator::hkaiMoppNavMeshQueryMediator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiMoppNavMeshQueryMediatorTypeInfo_
   hkaiMoppNavMeshQueryMediatorTypeInfo.m_typeName = "hkaiMoppNavMeshQueryMediator";
   hkaiMoppNavMeshQueryMediatorTypeInfo.m_vtable = result;
   hkaiMoppNavMeshQueryMediatorTypeInfo.m_scopedName = "!hkaiMoppNavMeshQueryMediator";
-  hkaiMoppNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiMoppNavMeshQueryMediator;
-  hkaiMoppNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiMoppNavMeshQueryMediator;
+  hkaiMoppNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiMoppNavMeshQueryMediator;
+  hkaiMoppNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiMoppNavMeshQueryMediator;
   return result;
 }
 

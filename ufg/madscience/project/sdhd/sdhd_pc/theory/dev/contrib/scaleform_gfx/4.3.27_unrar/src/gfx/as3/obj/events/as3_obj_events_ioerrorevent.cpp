@@ -36,7 +36,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243CD70 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *))Scaleform::GFx::AS3::Instances::fl_gfx::GamePadAnalogEvent::clone;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *))Scaleform::GFx::AS3::Instances::fl_gfx::GamePadAnalogEvent::clone;
   return result;
 }
 
@@ -56,14 +56,14 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 75
 // RVA: 0x864330
-void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toString(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toString(
+        Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rsi
-  Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *v3; // rdi
-  Scaleform::GFx::AS3::VM *v4; // rbx
-  long double *v5; // rax
-  long double v6; // rdx
-  Scaleform::GFx::ASStringNode *v7; // rcx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
+  Scaleform::GFx::AS3::Value::V1U *v5; // rax
+  Scaleform::GFx::AS3::Value::V1U v6; // rdx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v8; // zf
   Scaleform::GFx::ASString *v9; // rax
   Scaleform::GFx::ASStringNode *v10; // rdx
@@ -74,13 +74,13 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
   Scaleform::GFx::ASString *v15; // rax
   Scaleform::GFx::ASStringNode *v16; // rdx
   Scaleform::GFx::ASStringNode *v17; // rcx
-  unsigned int v18; // ebx
+  unsigned int Flags; // ebx
   Scaleform::GFx::AS3::Value::VU v19; // [rsp+8h] [rbp-79h]
   __int128 v20; // [rsp+8h] [rbp-79h]
   __int128 v21; // [rsp+8h] [rbp-79h]
   __int128 v22; // [rsp+8h] [rbp-79h]
-  Scaleform::GFx::AS3::Value v23; // [rsp+18h] [rbp-69h]
-  Scaleform::GFx::AS3::Value argv; // [rsp+38h] [rbp-49h]
+  Scaleform::GFx::AS3::Value v23; // [rsp+18h] [rbp-69h] BYREF
+  Scaleform::GFx::AS3::Value argv; // [rsp+38h] [rbp-49h] BYREF
   int v25; // [rsp+58h] [rbp-29h]
   __int64 v26; // [rsp+60h] [rbp-21h]
   __int128 v27; // [rsp+68h] [rbp-19h]
@@ -91,39 +91,36 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
   __int64 v32; // [rsp+A0h] [rbp+1Fh]
   __int128 v33; // [rsp+A8h] [rbp+27h]
   __int64 v34; // [rsp+B8h] [rbp+37h]
-  Scaleform::GFx::ASString resulta; // [rsp+E8h] [rbp+67h]
+  Scaleform::GFx::ASString resulta; // [rsp+E8h] [rbp+67h] BYREF
 
   v34 = -2i64;
-  v2 = result;
-  v3 = this;
   v23.Flags = 0;
   v23.Bonus.pWeakProxy = 0i64;
-  v4 = this->pTraits.pObject->pVM;
-  v5 = (long double *)Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-                        (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->StringManagerRef->Builtins,
-                        &resulta,
-                        "IOErrorEvent");
+  pVM = this->pTraits.pObject->pVM;
+  v5 = (Scaleform::GFx::AS3::Value::V1U *)Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+                                            pVM->StringManagerRef,
+                                            &resulta,
+                                            "IOErrorEvent");
   argv.Flags = 10;
   argv.Bonus.pWeakProxy = 0i64;
   v6 = *v5;
-  argv.value.VNumber = *v5;
-  if ( *(_QWORD *)v5 == *(_QWORD *)(*(_QWORD *)v5 + 8i64) + 104i64 )
+  argv.value.VS._1 = *v5;
+  if ( v5->VStr == &v5->VStr->pManager->NullStringNode )
   {
-    v19.VNumber = 0.0;
+    v19.VS._1.VStr = 0i64;
     argv.value = v19;
     argv.Flags = 12;
   }
   else
   {
-    ++*(_DWORD *)(*(_QWORD *)&v6 + 24i64);
+    ++v6.VStr->RefCount;
   }
-  v7 = resulta.pNode;
-  v8 = resulta.pNode->RefCount == 1;
-  --v7->RefCount;
+  pNode = resulta.pNode;
+  v8 = resulta.pNode->RefCount-- == 1;
   if ( v8 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v7);
-  v9 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->StringManagerRef->Builtins,
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  v9 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         pVM->StringManagerRef,
          &resulta,
          "type");
   v25 = 10;
@@ -141,12 +138,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
     ++v10->RefCount;
   }
   v11 = resulta.pNode;
-  v8 = resulta.pNode->RefCount == 1;
-  --v11->RefCount;
+  v8 = resulta.pNode->RefCount-- == 1;
   if ( v8 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-  v12 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-          (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->StringManagerRef->Builtins,
+  v12 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+          pVM->StringManagerRef,
           &resulta,
           "bubbles");
   v28 = 10;
@@ -164,12 +160,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
     ++v13->RefCount;
   }
   v14 = resulta.pNode;
-  v8 = resulta.pNode->RefCount == 1;
-  --v14->RefCount;
+  v8 = resulta.pNode->RefCount-- == 1;
   if ( v8 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v14);
-  v15 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-          (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->StringManagerRef->Builtins,
+  v15 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+          pVM->StringManagerRef,
           &resulta,
           "text");
   v31 = 10;
@@ -187,28 +182,22 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
     ++v16->RefCount;
   }
   v17 = resulta.pNode;
-  v8 = resulta.pNode->RefCount == 1;
-  --v17->RefCount;
+  v8 = resulta.pNode->RefCount-- == 1;
   if ( v8 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v17);
-  Scaleform::GFx::AS3::Instances::fl_events::Event::formatToString(
-    (Scaleform::GFx::AS3::Instances::fl_events::Event *)&v3->vfptr,
-    &v23,
-    4u,
-    &argv);
-  Scaleform::GFx::AS3::Value::Convert2String(&v23, (Scaleform::GFx::AS3::CheckResult *)&resulta, v2);
+  Scaleform::GFx::AS3::Instances::fl_events::Event::formatToString(this, &v23, 4u, &argv);
+  Scaleform::GFx::AS3::Value::Convert2String(&v23, (Scaleform::GFx::AS3::CheckResult *)&resulta, result);
   `eh vector destructor iterator(&argv, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
-  v18 = v23.Flags;
+  Flags = v23.Flags;
   if ( (v23.Flags & 0x1F) > 9 )
   {
-    if ( (v23.Flags >> 9) & 1 )
+    if ( (v23.Flags & 0x200) != 0 )
     {
       v8 = v23.Bonus.pWeakProxy->RefCount-- == 1;
       if ( v8 )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v23.Bonus.pWeakProxy = 0i64;
-      v23.value = 0ui64;
-      v23.Flags = v18 & 0xFFFFFDE0;
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      memset(&v23.Bonus, 0, 24);
+      v23.Flags = Flags & 0xFFFFFDE0;
     }
     else
     {
@@ -219,9 +208,10 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::toStrin
 
 // File Line: 99
 // RVA: 0x7E9500
-Scaleform::GFx::AS3::Class *__fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::GetEventClass(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this)
+Scaleform::GFx::AS3::Class *__fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::GetEventClass(
+        Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this)
 {
-  Scaleform::StringDataPtr gname; // [rsp+20h] [rbp-18h]
+  Scaleform::StringDataPtr gname; // [rsp+20h] [rbp-18h] BYREF
 
   gname.Size = 25i64;
   gname.pStr = "flash.events.IOErrorEvent";
@@ -233,73 +223,60 @@ Scaleform::GFx::AS3::Class *__fastcall Scaleform::GFx::AS3::Instances::fl_events
 
 // File Line: 107
 // RVA: 0x7B5F40
-Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *__fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::Clone(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *result)
+Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::Clone(
+        Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *result)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *v2; // rdi
-  Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_events::Event *v4; // rsi
-  Scaleform::GFx::ASStringNode *v5; // rbx
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
+  Scaleform::GFx::AS3::Instances::fl_events::Event *pObject; // rsi
+  Scaleform::GFx::ASStringNode *pNode; // rbx
+  Scaleform::GFx::ASStringNode *pNext; // rcx
 
-  v2 = result;
-  v3 = this;
-  Scaleform::GFx::AS3::Instances::fl_events::Event::Clone(
-    (Scaleform::GFx::AS3::Instances::fl_events::Event *)&this->vfptr,
-    result);
-  v4 = v2->pObject;
-  v5 = v3->Text.pNode;
-  ++v5->RefCount;
-  v6 = (Scaleform::GFx::ASStringNode *)v4[1].pNext;
-  v7 = v6->RefCount-- == 1;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
-  v4[1].pNext = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v5;
-  return v2;
+  Scaleform::GFx::AS3::Instances::fl_events::Event::Clone(this, result);
+  pObject = (Scaleform::GFx::AS3::Instances::fl_events::Event *)result->pObject;
+  pNode = this->Text.pNode;
+  ++pNode->RefCount;
+  pNext = (Scaleform::GFx::ASStringNode *)pObject[1].pNext;
+  if ( pNext->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNext);
+  pObject[1].pNext = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)pNode;
+  return result;
 }
 
 // File Line: 114
 // RVA: 0x7981F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rdi
-  unsigned int v4; // ebx
-  Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent *v5; // rsi
-  Scaleform::GFx::AS3::CheckResult result; // [rsp+38h] [rbp+10h]
+  Scaleform::GFx::AS3::CheckResult result; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = argv;
-  v4 = argc;
-  v5 = this;
-  Scaleform::GFx::AS3::Instances::fl_events::Event::AS3Constructor(
-    (Scaleform::GFx::AS3::Instances::fl_events::Event *)&this->vfptr,
-    argc,
-    argv);
-  if ( v4 >= 4 )
-    Scaleform::GFx::AS3::Value::Convert2String(v3 + 3, &result, &v5->Text);
+  Scaleform::GFx::AS3::Instances::fl_events::Event::AS3Constructor(this, argc, argv);
+  if ( argc >= 4 )
+    Scaleform::GFx::AS3::Value::Convert2String(argv + 3, &result, &this->Text);
 }
 
 // File Line: 152
 // RVA: 0x7FFA00
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_events::IOErrorEvent::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 192
 // RVA: 0x74B850
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_events::IOErrorEvent::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_events::IOErrorEvent::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
@@ -307,14 +284,12 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   Scaleform::GFx::AS3::Class *v9; // rax
   Scaleform::GFx::AS3::Class *v10; // rbx
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_events::IOErrorEventCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_events::IOErrorEventCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::Event::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::TextEvent::`vftable;
@@ -325,12 +300,12 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_events::IOErrorEventCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_events::IOErrorEventCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::Event::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::TextEvent::`vftable;
@@ -342,18 +317,18 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        80i64);
   v10 = v9;
   if ( v9 )
   {
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
     v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_events::IOErrorEvent::`vftable;
     v10[1].vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)"ioError";
   }
-  return v3;
+  return result;
 }
 

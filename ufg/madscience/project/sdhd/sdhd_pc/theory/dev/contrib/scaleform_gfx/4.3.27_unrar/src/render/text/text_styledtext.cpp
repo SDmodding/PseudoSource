@@ -1,14 +1,12 @@
 // File Line: 28
 // RVA: 0x958410
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::Allocator::AllocateParagraph(Scaleform::Render::Text::Allocator *this)
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::Allocator::AllocateParagraph(
+        Scaleform::Render::Text::Allocator *this)
 {
-  Scaleform::Render::Text::Allocator *v1; // rbx
   Scaleform::Render::Text::Paragraph *result; // rax
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v3; // ST28_8
-  unsigned int v4; // edx
+  unsigned int NewParagraphId; // edx
 
-  v1 = this;
-  result = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))this->pHeap->vfptr->Alloc)(
+  result = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pHeap->vfptr->Alloc)(
                                                    this->pHeap,
                                                    72i64);
   if ( !result )
@@ -17,36 +15,33 @@ Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::Allocato
   result->Text.Size = 0i64;
   result->Text.Allocated = 0i64;
   result->pFormat.pObject = 0i64;
-  v3 = &result->FormatInfo;
-  v3->Ranges.Data.Data = 0i64;
-  v3->Ranges.Data.Size = 0i64;
-  v3->Ranges.Data.Policy.Capacity = 0i64;
+  result->FormatInfo.Ranges.Data.Data = 0i64;
+  result->FormatInfo.Ranges.Data.Size = 0i64;
+  result->FormatInfo.Ranges.Data.Policy.Capacity = 0i64;
   result->StartIndex = 0i64;
   result->ModCounter = 0;
-  v4 = v1->NewParagraphId;
-  v1->NewParagraphId = v4 + 1;
-  result->UniqueId = v4;
+  NewParagraphId = this->NewParagraphId;
+  this->NewParagraphId = NewParagraphId + 1;
+  result->UniqueId = NewParagraphId;
   return result;
 }
 
 // File Line: 111
 // RVA: 0x969240
-wchar_t *__fastcall Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(Scaleform::Render::Text::Paragraph::TextBuffer *this, Scaleform::Render::Text::Allocator *pallocator, unsigned __int64 pos, unsigned __int64 length)
+wchar_t *__fastcall Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(
+        Scaleform::Render::Text::Paragraph::TextBuffer *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        unsigned __int64 pos,
+        unsigned __int64 length)
 {
-  unsigned __int64 v4; // rdi
-  unsigned __int64 v5; // r8
-  unsigned __int64 v6; // rsi
+  unsigned __int64 Size; // r8
   unsigned __int64 v7; // r9
-  Scaleform::Render::Text::Paragraph::TextBuffer *v8; // rbx
   wchar_t *v9; // rax
-  unsigned __int64 v10; // r8
-  wchar_t *v11; // rax
+  __int64 v10; // r8
+  wchar_t *pText; // rax
 
-  v4 = pos;
-  v5 = this->Size;
-  v6 = length;
-  v7 = v5 + length;
-  v8 = this;
+  Size = this->Size;
+  v7 = Size + length;
   if ( this->Allocated < v7 )
   {
     if ( this->pText )
@@ -56,73 +51,72 @@ wchar_t *__fastcall Scaleform::Render::Text::Paragraph::TextBuffer::CreatePositi
                         2 * v7);
     else
       v9 = (wchar_t *)pallocator->pHeap->vfptr->Alloc(pallocator->pHeap, 2 * v7, 0i64);
-    v5 = v8->Size;
-    v8->pText = v9;
-    v8->Allocated = v5 + v6;
+    Size = this->Size;
+    this->pText = v9;
+    this->Allocated = Size + length;
   }
-  v10 = v5 - v4;
+  v10 = Size - pos;
   if ( v10 )
-    memmove(&v8->pText[v4 + v6], &v8->pText[v4], 2 * v10);
-  v11 = v8->pText;
-  v8->Size += v6;
-  return &v11[v4];
+    memmove(&this->pText[pos + length], &this->pText[pos], 2 * v10);
+  pText = this->pText;
+  this->Size += length;
+  return &pText[pos];
 }
 
 // File Line: 228
 // RVA: 0x9404D0
-void __fastcall Scaleform::Render::Text::Paragraph::Paragraph(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Paragraph *o, Scaleform::Render::Text::Allocator *ptextAllocator)
+void __fastcall Scaleform::Render::Text::Paragraph::Paragraph(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Paragraph *o,
+        Scaleform::Render::Text::Allocator *ptextAllocator)
 {
-  Scaleform::Render::Text::Allocator *v3; // r13
-  Scaleform::Render::Text::Paragraph *v4; // rbx
-  Scaleform::Render::Text::Paragraph *v5; // r12
   wchar_t *v6; // rax
-  unsigned __int64 v7; // r8
+  unsigned __int64 Size; // r8
   signed __int64 v8; // rsi
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v9; // r15
-  unsigned int v10; // ecx
-  Scaleform::Render::Text::ParagraphFormat *v11; // rbx
-  Scaleform::Render::Text::ParagraphFormat *v12; // rcx
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *p_FormatInfo; // r15
+  unsigned int NewParagraphId; // ecx
+  Scaleform::Render::Text::ParagraphFormat *ParagraphFormat; // rbx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
   __int64 v13; // r14
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v14; // rbp
-  Scaleform::Render::Text::TextFormat *v15; // rax
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *Data; // rbp
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
   Scaleform::Render::Text::TextFormat *v16; // rbx
   Scaleform::Render::Text::TextFormat *v17; // rdi
   bool v18; // zf
 
-  v3 = ptextAllocator;
-  v4 = o;
-  v5 = this;
   v6 = (wchar_t *)ptextAllocator->pHeap->vfptr->Alloc(ptextAllocator->pHeap, 2 * o->Text.Size, 0i64);
-  v5->Text.pText = v6;
-  v7 = v4->Text.Size;
-  v5->Text.Size = v7;
-  v5->Text.Allocated = v7;
-  memmove(v6, v4->Text.pText, 2 * v4->Text.Size);
+  this->Text.pText = v6;
+  Size = o->Text.Size;
+  this->Text.Size = Size;
+  this->Text.Allocated = Size;
+  memmove(v6, o->Text.pText, 2 * o->Text.Size);
   v8 = 0i64;
-  v5->pFormat.pObject = 0i64;
-  v9 = &v5->FormatInfo;
+  this->pFormat.pObject = 0i64;
+  p_FormatInfo = &this->FormatInfo;
   Scaleform::ArrayData<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,Scaleform::AllocatorLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2>,Scaleform::ArrayDefaultPolicy>::ArrayData<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,Scaleform::AllocatorLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2>,Scaleform::ArrayDefaultPolicy>(
-    &v5->FormatInfo.Ranges.Data,
-    &v4->FormatInfo.Ranges.Data);
-  v5->StartIndex = v4->StartIndex;
-  v5->ModCounter = 0;
-  v10 = v3->NewParagraphId;
-  v3->NewParagraphId = v10 + 1;
-  v5->UniqueId = v10;
-  v11 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(v3, v4->pFormat.pObject);
-  v12 = v5->pFormat.pObject;
-  if ( v12 )
-    Scaleform::Render::Text::ParagraphFormat::Release(v12);
-  v5->pFormat.pObject = v11;
+    &this->FormatInfo.Ranges.Data,
+    &o->FormatInfo.Ranges.Data);
+  this->StartIndex = o->StartIndex;
+  this->ModCounter = 0;
+  NewParagraphId = ptextAllocator->NewParagraphId;
+  ptextAllocator->NewParagraphId = NewParagraphId + 1;
+  this->UniqueId = NewParagraphId;
+  ParagraphFormat = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(ptextAllocator, o->pFormat.pObject);
+  pObject = this->pFormat.pObject;
+  if ( pObject )
+    Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+  this->pFormat.pObject = ParagraphFormat;
   v13 = 0i64;
-  while ( v8 >= 0 && v8 < v5->FormatInfo.Ranges.Data.Size )
+  while ( v8 >= 0 && v8 < this->FormatInfo.Ranges.Data.Size )
   {
-    v14 = v9->Ranges.Data.Data;
-    v15 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v3, v9->Ranges.Data.Data[v13].Data.pObject);
-    v16 = v15;
-    if ( v15 )
-      ++v15->RefCount;
-    v17 = v14[v13].Data.pObject;
+    Data = p_FormatInfo->Ranges.Data.Data;
+    TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(
+                   ptextAllocator,
+                   p_FormatInfo->Ranges.Data.Data[v13].Data.pObject);
+    v16 = TextFormat;
+    if ( TextFormat )
+      ++TextFormat->RefCount;
+    v17 = Data[v13].Data.pObject;
     if ( v17 )
     {
       v18 = v17->RefCount-- == 1;
@@ -132,7 +126,7 @@ void __fastcall Scaleform::Render::Text::Paragraph::Paragraph(Scaleform::Render:
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v17);
       }
     }
-    v14[v13].Data.pObject = v16;
+    Data[v13].Data.pObject = v16;
     if ( v16 )
     {
       v18 = v16->RefCount-- == 1;
@@ -142,7 +136,7 @@ void __fastcall Scaleform::Render::Text::Paragraph::Paragraph(Scaleform::Render:
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16);
       }
     }
-    if ( v8 < (signed __int64)v5->FormatInfo.Ranges.Data.Size )
+    if ( v8 < (signed __int64)this->FormatInfo.Ranges.Data.Size )
     {
       ++v8;
       ++v13;
@@ -152,39 +146,43 @@ void __fastcall Scaleform::Render::Text::Paragraph::Paragraph(Scaleform::Render:
 
 // File Line: 276
 // RVA: 0x9B43F0
-void __fastcall Scaleform::Render::Text::Paragraph::SetTextFormat(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Allocator *pallocator, Scaleform::Render::Text::TextFormat *fmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::Paragraph::SetTextFormat(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        Scaleform::Render::Text::TextFormat *fmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
   Scaleform::Render::Text::TextFormat *v5; // rsi
-  Scaleform::Render::Text::Allocator *v6; // r13
   Scaleform::Render::Text::Paragraph *v7; // rbx
   unsigned __int64 v8; // r12
   unsigned __int64 v9; // r11
-  signed __int64 v10; // r12
-  unsigned __int64 v11; // rdx
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v12; // r10
-  wchar_t *v13; // rax
-  Scaleform::Render::Text::TextFormat *v14; // rdi
-  unsigned __int64 v15; // rcx
+  __int64 v10; // r12
+  unsigned __int64 Size; // rdx
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *Data; // r10
+  wchar_t *pText; // rax
+  Scaleform::Render::Text::TextFormat *pObject; // rdi
+  unsigned __int64 Length; // rcx
   Scaleform::Render::Text::TextFormat *v16; // rbx
   bool v17; // zf
   Scaleform::Render::Text::TextFormat *v18; // rbx
-  __int64 v19; // r14
+  __int64 Index; // r14
   unsigned __int64 v20; // r15
   __int64 v21; // rdi
-  Scaleform::MemoryHeap *v22; // rdx
+  Scaleform::MemoryHeap *pHeap; // rdx
   Scaleform::MemoryHeap *v23; // rax
   Scaleform::MemoryHeap *v24; // rax
   Scaleform::Render::Text::TextFormat *v25; // rax
   Scaleform::Render::Text::FontHandle *v26; // rcx
   Scaleform::Render::Text::HTMLImageTagDesc *v27; // rcx
   Scaleform::Render::Text::TextFormat *v28; // rdx
-  Scaleform::Render::Text::TextFormat *v29; // rax
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
   Scaleform::Render::Text::TextFormat *v30; // rbx
   unsigned __int64 v31; // rsi
   __int64 v32; // r9
   Scaleform::Render::Text::TextFormat *v33; // rdi
   unsigned __int64 v34; // rdx
-  unsigned __int64 v35; // r8
+  unsigned __int64 CurTextIndex; // r8
   __int64 v36; // r14
   Scaleform::Render::Text::TextFormat *v37; // rdi
   Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v38; // r11
@@ -197,67 +195,60 @@ void __fastcall Scaleform::Render::Text::Paragraph::SetTextFormat(Scaleform::Ren
   unsigned __int64 v45; // rdx
   unsigned __int64 v46; // rdx
   Scaleform::Render::Text::TextFormat *v47; // rbx
-  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+20h] [rbp-E0h]
-  Scaleform::StringDH *v49; // [rsp+70h] [rbp-90h]
-  Scaleform::Render::Text::TextFormat v50; // [rsp+80h] [rbp-80h]
-  Scaleform::Render::Text::TextFormat *key; // [rsp+D0h] [rbp-30h]
-  Scaleform::Render::Text::TextFormat *v52; // [rsp+D8h] [rbp-28h]
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+E0h] [rbp-20h]
+  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+20h] [rbp-E0h] BYREF
+  Scaleform::StringDH *p_FontList; // [rsp+70h] [rbp-90h]
+  Scaleform::Render::Text::TextFormat v50; // [rsp+80h] [rbp-80h] BYREF
+  Scaleform::Render::Text::TextFormat *key; // [rsp+D0h] [rbp-30h] BYREF
+  Scaleform::Render::Text::TextFormat *v52; // [rsp+D8h] [rbp-28h] BYREF
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+E0h] [rbp-20h] BYREF
   __int64 v54; // [rsp+F8h] [rbp-8h]
-  Scaleform::Render::Text::TextFormat v55; // [rsp+100h] [rbp+0h]
-  Scaleform::Render::Text::Paragraph *v56; // [rsp+190h] [rbp+90h]
-  Scaleform::Render::Text::TextFormat *v57; // [rsp+1A0h] [rbp+A0h]
-  unsigned __int64 v58; // [rsp+1A8h] [rbp+A8h]
+  Scaleform::Render::Text::TextFormat v55; // [rsp+100h] [rbp+0h] BYREF
 
-  v58 = startPos;
-  v57 = fmt;
-  v56 = this;
   v54 = -2i64;
   v5 = fmt;
-  v6 = pallocator;
   v7 = this;
   Scaleform::Render::Text::Paragraph::GetIteratorAt(this, &result, startPos);
   v8 = endPos;
-  v9 = v58;
-  if ( endPos < v58 )
-    v8 = v58;
+  v9 = startPos;
+  if ( endPos < startPos )
+    v8 = startPos;
   if ( v8 == -1i64 )
   {
     v10 = 0x7FFFFFFFFFFFFFFFi64;
     goto LABEL_6;
   }
-  v10 = v8 - v58;
+  v10 = v8 - startPos;
   if ( v10 > 0 )
   {
     while ( 1 )
     {
 LABEL_6:
-      v11 = result.pText->Size;
-      if ( result.CurTextIndex >= v11 )
+      Size = result.pText->Size;
+      if ( result.CurTextIndex >= Size )
       {
 LABEL_95:
-        v7 = v56;
+        v7 = this;
         break;
       }
       if ( result.FormatIterator.Index < 0
         || result.FormatIterator.Index >= result.FormatIterator.pArray->Ranges.Data.Size )
       {
-        v13 = result.pText->pText;
+        pText = result.pText->pText;
       }
       else
       {
-        v12 = result.FormatIterator.pArray->Ranges.Data.Data;
-        v11 = result.FormatIterator.pArray->Ranges.Data.Data[result.FormatIterator.Index].Index;
-        v13 = result.pText->pText;
-        if ( result.CurTextIndex >= v11 )
+        Data = result.FormatIterator.pArray->Ranges.Data.Data;
+        Size = result.FormatIterator.pArray->Ranges.Data.Data[result.FormatIterator.Index].Index;
+        pText = result.pText->pText;
+        if ( result.CurTextIndex >= Size )
         {
-          v14 = v12[result.FormatIterator.Index].Data.pObject;
-          v15 = v12[result.FormatIterator.Index].Length;
-          result.PlaceHolder.pText = &v13[v11];
-          result.PlaceHolder.Index = v11;
-          result.PlaceHolder.Length = v15;
-          if ( v14 )
-            ++v14->RefCount;
+          pObject = Data[result.FormatIterator.Index].Data.pObject;
+          Length = Data[result.FormatIterator.Index].Length;
+          result.PlaceHolder.pText = &pText[Size];
+          result.PlaceHolder.Index = Size;
+          result.PlaceHolder.Length = Length;
+          if ( pObject )
+            ++pObject->RefCount;
           v16 = result.PlaceHolder.pFormat.pObject;
           if ( result.PlaceHolder.pFormat.pObject )
           {
@@ -266,17 +257,17 @@ LABEL_95:
             {
               Scaleform::Render::Text::TextFormat::~TextFormat(v16);
               Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16);
-              v9 = v58;
+              v9 = startPos;
             }
           }
-          result.PlaceHolder.pFormat.pObject = v14;
+          result.PlaceHolder.pFormat.pObject = pObject;
           goto LABEL_21;
         }
       }
       v18 = result.PlaceHolder.pFormat.pObject;
-      result.PlaceHolder.Length = v11 - result.CurTextIndex;
+      result.PlaceHolder.Length = Size - result.CurTextIndex;
       result.PlaceHolder.Index = result.CurTextIndex;
-      result.PlaceHolder.pText = &v13[result.CurTextIndex];
+      result.PlaceHolder.pText = &pText[result.CurTextIndex];
       if ( result.PlaceHolder.pFormat.pObject )
       {
         v17 = result.PlaceHolder.pFormat.pObject->RefCount-- == 1;
@@ -284,33 +275,33 @@ LABEL_95:
         {
           Scaleform::Render::Text::TextFormat::~TextFormat(v18);
           Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v18);
-          v9 = v58;
+          v9 = startPos;
         }
       }
       result.PlaceHolder.pFormat.pObject = 0i64;
 LABEL_21:
-      v19 = result.PlaceHolder.Index;
+      Index = result.PlaceHolder.Index;
       v20 = result.PlaceHolder.Length;
       v21 = result.PlaceHolder.Index;
       if ( v9 > result.PlaceHolder.Index )
         v21 = v9;
-      v22 = v6->pHeap;
+      pHeap = pallocator->pHeap;
       v50.pAllocator = 0i64;
       v50.RefCount = 1;
       v23 = Scaleform::Memory::pGlobalHeap;
-      if ( v22 )
-        v23 = v22;
-      v49 = &v50.FontList;
+      if ( pHeap )
+        v23 = pHeap;
+      p_FontList = &v50.FontList;
       v50.FontList.pHeap = v23;
       _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-      v50.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+      v50.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
       v24 = Scaleform::Memory::pGlobalHeap;
-      if ( v22 )
-        v24 = v22;
-      v49 = &v50.Url;
+      if ( pHeap )
+        v24 = pHeap;
+      p_FontList = &v50.Url;
       v50.Url.pHeap = v24;
       _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-      v50.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+      v50.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
       v50.pImageDesc.pObject = 0i64;
       v50.pFontHandle.pObject = 0i64;
       v50.ColorV = -16777216;
@@ -326,43 +317,43 @@ LABEL_21:
         {
           key = &v55;
           Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
-            (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v55.pAllocator->TextFormatStorage.pTable,
+            &v55.pAllocator->TextFormatStorage,
             &key);
         }
         v26 = v55.pFontHandle.pObject;
         if ( v55.pFontHandle.pObject && !_InterlockedDecrement(&v55.pFontHandle.pObject->RefCount) && v26 )
-          v26->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v26->vfptr, 1u);
+          v26->vfptr->__vecDelDtor(v26, 1u);
         v27 = v55.pImageDesc.pObject;
         if ( v55.pImageDesc.pObject )
         {
           --v55.pImageDesc.pObject->RefCount;
           if ( !v27->RefCount )
-            v27->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v27->vfptr, 1u);
+            v27->vfptr->__vecDelDtor(v27, 1u);
         }
-        v49 = &v55.Url;
+        p_FontList = &v55.Url;
         if ( !_InterlockedDecrement((volatile signed __int32 *)((v55.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-        v49 = &v55.FontList;
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        p_FontList = &v55.FontList;
         if ( !_InterlockedDecrement((volatile signed __int32 *)((v55.FontList.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         v28 = &v50;
       }
       else
       {
         v28 = v5;
       }
-      v29 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v6, v28);
-      v30 = v29;
+      TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(pallocator, v28);
+      v30 = TextFormat;
       v31 = v10;
-      if ( v19 + v20 - v21 < v10 )
-        v31 = v19 + v20 - v21;
+      if ( Index + v20 - v21 < v10 )
+        v31 = Index + v20 - v21;
       range.Index = v21;
       range.Length = v31;
-      if ( v29 )
-        ++v29->RefCount;
-      range.Data.pObject = v29;
+      if ( TextFormat )
+        ++TextFormat->RefCount;
+      range.Data.pObject = TextFormat;
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::SetRange(
-        &v56->FormatInfo,
+        &this->FormatInfo,
         &range);
       v33 = range.Data.pObject;
       if ( range.Data.pObject )
@@ -376,10 +367,10 @@ LABEL_21:
       }
       v10 -= v31;
       v34 = result.pText->Size;
-      v35 = result.CurTextIndex;
+      CurTextIndex = result.CurTextIndex;
       if ( result.CurTextIndex < v34 )
       {
-        v36 = v20 + v19;
+        v36 = v20 + Index;
         v32 = result.FormatIterator.Index;
         v37 = result.PlaceHolder.pFormat.pObject;
         while ( 1 )
@@ -387,14 +378,14 @@ LABEL_21:
           if ( v32 < 0 || v32 >= result.FormatIterator.pArray->Ranges.Data.Size )
           {
             v40 = result.pText->pText;
-            result.PlaceHolder.Length = v34 - v35;
+            result.PlaceHolder.Length = v34 - CurTextIndex;
           }
           else
           {
             v38 = result.FormatIterator.pArray->Ranges.Data.Data;
             v39 = result.FormatIterator.pArray->Ranges.Data.Data[v32].Index;
             v40 = result.pText->pText;
-            if ( v35 >= v39 )
+            if ( CurTextIndex >= v39 )
             {
               v41 = v38[v32].Data.pObject;
               v42 = v38[v32].Length;
@@ -404,7 +395,7 @@ LABEL_21:
               if ( v41 )
               {
                 ++v41->RefCount;
-                v35 = result.CurTextIndex;
+                CurTextIndex = result.CurTextIndex;
                 v32 = result.FormatIterator.Index;
                 v37 = result.PlaceHolder.pFormat.pObject;
               }
@@ -417,16 +408,16 @@ LABEL_21:
                   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v37);
                 }
                 v32 = result.FormatIterator.Index;
-                v35 = result.CurTextIndex;
+                CurTextIndex = result.CurTextIndex;
               }
               v37 = v41;
               result.PlaceHolder.pFormat.pObject = v41;
               goto LABEL_69;
             }
-            result.PlaceHolder.Length = v39 - v35;
+            result.PlaceHolder.Length = v39 - CurTextIndex;
           }
-          result.PlaceHolder.Index = v35;
-          result.PlaceHolder.pText = &v40[v35];
+          result.PlaceHolder.Index = CurTextIndex;
+          result.PlaceHolder.pText = &v40[CurTextIndex];
           if ( v37 )
           {
             v17 = v37->RefCount-- == 1;
@@ -436,7 +427,7 @@ LABEL_21:
               Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v37);
             }
             v32 = result.FormatIterator.Index;
-            v35 = result.CurTextIndex;
+            CurTextIndex = result.CurTextIndex;
           }
           result.PlaceHolder.pFormat.pObject = 0i64;
           v37 = 0i64;
@@ -445,23 +436,23 @@ LABEL_69:
           {
             if ( v32 < 0 || v32 >= result.FormatIterator.pArray->Ranges.Data.Size )
             {
-              v35 = result.pText->Size;
-              result.CurTextIndex = result.pText->Size;
+              CurTextIndex = result.pText->Size;
+              result.CurTextIndex = CurTextIndex;
             }
-            else if ( v35 >= result.FormatIterator.pArray->Ranges.Data.Data[v32].Index )
+            else if ( CurTextIndex >= result.FormatIterator.pArray->Ranges.Data.Data[v32].Index )
             {
-              v35 += result.FormatIterator.pArray->Ranges.Data.Data[v32].Length;
-              result.CurTextIndex = v35;
+              CurTextIndex += result.FormatIterator.pArray->Ranges.Data.Data[v32].Length;
+              result.CurTextIndex = CurTextIndex;
               if ( v32 < (signed __int64)result.FormatIterator.pArray->Ranges.Data.Size )
                 result.FormatIterator.Index = ++v32;
             }
             else
             {
-              v35 = result.FormatIterator.pArray->Ranges.Data.Data[v32].Index;
-              result.CurTextIndex = result.FormatIterator.pArray->Ranges.Data.Data[v32].Index;
+              CurTextIndex = result.FormatIterator.pArray->Ranges.Data.Data[v32].Index;
+              result.CurTextIndex = CurTextIndex;
             }
             v34 = result.pText->Size;
-            if ( v35 < v34 )
+            if ( CurTextIndex < v34 )
               continue;
           }
           break;
@@ -480,15 +471,15 @@ LABEL_69:
       {
         v52 = &v50;
         Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
-          (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v50.pAllocator->TextFormatStorage.pTable,
+          &v50.pAllocator->TextFormatStorage,
           &v52);
       }
       v43 = v50.pFontHandle.pObject;
       if ( v50.pFontHandle.pObject && !_InterlockedDecrement(&v50.pFontHandle.pObject->RefCount) && v43 )
-        ((void (__fastcall *)(Scaleform::Render::Text::FontHandle *, signed __int64, unsigned __int64, __int64, const wchar_t *))v43->vfptr->__vecDelDtor)(
+        ((void (__fastcall *)(Scaleform::Render::Text::FontHandle *, __int64, unsigned __int64, __int64, const wchar_t *))v43->vfptr->__vecDelDtor)(
           v43,
           1i64,
-          v35,
+          CurTextIndex,
           v32,
           result.PlaceHolder.pText);
       v44 = v50.pImageDesc.pObject;
@@ -496,33 +487,30 @@ LABEL_69:
       {
         --v50.pImageDesc.pObject->RefCount;
         if ( !v44->RefCount )
-          ((void (__fastcall *)(Scaleform::Render::Text::HTMLImageTagDesc *, signed __int64, unsigned __int64, __int64, const wchar_t *))v44->vfptr->__vecDelDtor)(
+          ((void (__fastcall *)(Scaleform::Render::Text::HTMLImageTagDesc *, __int64, unsigned __int64, __int64))v44->vfptr->__vecDelDtor)(
             v44,
             1i64,
-            v35,
-            v32,
-            result.PlaceHolder.pText);
+            CurTextIndex,
+            v32);
       }
-      v49 = &v50.Url;
+      p_FontList = &v50.Url;
       v45 = v50.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
       if ( !_InterlockedDecrement((volatile signed __int32 *)((v50.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (__fastcall *)(Scaleform::MemoryHeap *, unsigned __int64, unsigned __int64, __int64, const wchar_t *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
+        ((void (__fastcall *)(Scaleform::MemoryHeap *, unsigned __int64, unsigned __int64, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
           Scaleform::Memory::pGlobalHeap,
           v45,
-          v35,
-          v32,
-          result.PlaceHolder.pText);
-      v49 = &v50.FontList;
+          CurTextIndex,
+          v32);
+      p_FontList = &v50.FontList;
       v46 = v50.FontList.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
       if ( !_InterlockedDecrement((volatile signed __int32 *)((v50.FontList.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (__fastcall *)(Scaleform::MemoryHeap *, unsigned __int64, unsigned __int64, __int64, const wchar_t *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
+        ((void (__fastcall *)(Scaleform::MemoryHeap *, unsigned __int64, unsigned __int64, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
           Scaleform::Memory::pGlobalHeap,
           v46,
-          v35,
-          v32,
-          result.PlaceHolder.pText);
-      v5 = v57;
-      v9 = v58;
+          CurTextIndex,
+          v32);
+      v5 = fmt;
+      v9 = startPos;
       if ( v10 <= 0 )
         goto LABEL_95;
     }
@@ -542,50 +530,47 @@ LABEL_69:
 
 // File Line: 314
 // RVA: 0x98D3C0
-Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragraph::GetTextFormat(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::TextFormat *result, unsigned __int64 startPos, unsigned __int64 endPos)
+Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragraph::GetTextFormat(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::TextFormat *result,
+        __int64 startPos,
+        unsigned __int64 endPos)
 {
-  unsigned __int64 v4; // r14
   unsigned __int64 v5; // rsi
-  Scaleform::Render::Text::TextFormat *v6; // r12
-  Scaleform::Render::Text::Paragraph *v7; // rbx
-  signed __int64 v8; // r14
+  __int64 v8; // r14
   Scaleform::MemoryHeap *v9; // rax
   Scaleform::MemoryHeap *v10; // rdx
   Scaleform::MemoryHeap *v11; // rcx
   Scaleform::MemoryHeap *v12; // rax
-  int v13; // er15
-  unsigned __int64 v14; // r8
-  Scaleform::Render::Text::TextFormat *v15; // rbx
-  unsigned __int64 v16; // rdx
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v17; // r10
-  unsigned __int64 v18; // r9
+  int v13; // r15d
+  unsigned __int64 CurTextIndex; // r8
+  Scaleform::Render::Text::TextFormat *pObject; // rbx
+  unsigned __int64 Size; // rdx
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *Data; // r10
+  unsigned __int64 Index; // r9
   const wchar_t *v19; // rax
   Scaleform::Render::Text::TextFormat *v20; // rdi
-  unsigned __int64 v21; // rdx
+  unsigned __int64 Length; // rdx
   bool v22; // zf
-  int v23; // eax
   Scaleform::Render::Text::TextFormat *v24; // rax
   Scaleform::Render::Text::TextFormat *v25; // rbx
-  Scaleform::Render::Text::Paragraph::FormatRunIterator resulta; // [rsp+20h] [rbp-E0h]
+  Scaleform::Render::Text::Paragraph::FormatRunIterator resulta; // [rsp+20h] [rbp-E0h] BYREF
   int v28; // [rsp+70h] [rbp-90h]
-  Scaleform::Render::Text::TextFormat fmt; // [rsp+80h] [rbp-80h]
+  Scaleform::Render::Text::TextFormat fmt; // [rsp+80h] [rbp-80h] BYREF
   __int64 v30; // [rsp+D0h] [rbp-30h]
-  Scaleform::Render::Text::TextFormat v31; // [rsp+D8h] [rbp-28h]
+  Scaleform::Render::Text::TextFormat v31; // [rsp+D8h] [rbp-28h] BYREF
 
   v30 = -2i64;
-  v4 = endPos;
   v5 = startPos;
-  v6 = result;
-  v7 = this;
   v28 = 0;
   Scaleform::Render::Text::Paragraph::GetIteratorAt(this, &resulta, startPos);
-  if ( v4 < v5 )
-    v4 = v5;
-  if ( v4 == -1i64 )
+  if ( endPos < v5 )
+    endPos = v5;
+  if ( endPos == -1i64 )
     v8 = 0x7FFFFFFFFFFFFFFFi64;
   else
-    v8 = v4 - v5;
-  v9 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v7);
+    v8 = endPos - v5;
+  v9 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
   v10 = v9;
   fmt.pAllocator = 0i64;
   fmt.RefCount = 1;
@@ -594,13 +579,13 @@ Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragra
     v11 = v9;
   fmt.FontList.pHeap = v11;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-  fmt.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+  fmt.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
   v12 = Scaleform::Memory::pGlobalHeap;
   if ( v10 )
     v12 = v10;
   fmt.Url.pHeap = v12;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-  fmt.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+  fmt.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
   fmt.pImageDesc.pObject = 0i64;
   fmt.pFontHandle.pObject = 0i64;
   fmt.ColorV = -16777216;
@@ -611,52 +596,51 @@ Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragra
   v13 = 0;
   if ( v8 > 0 )
   {
-    v14 = resulta.CurTextIndex;
-    v15 = resulta.PlaceHolder.pFormat.pObject;
+    CurTextIndex = resulta.CurTextIndex;
+    pObject = resulta.PlaceHolder.pFormat.pObject;
     do
     {
-      v16 = resulta.pText->Size;
-      if ( v14 >= v16 )
+      Size = resulta.pText->Size;
+      if ( CurTextIndex >= Size )
         break;
       if ( resulta.FormatIterator.Index < 0
         || resulta.FormatIterator.Index >= resulta.FormatIterator.pArray->Ranges.Data.Size )
       {
-        v19 = &resulta.pText->pText[v14];
-        resulta.PlaceHolder.Length = v16 - v14;
+        v19 = &resulta.pText->pText[CurTextIndex];
+        resulta.PlaceHolder.Length = Size - CurTextIndex;
       }
       else
       {
-        v17 = resulta.FormatIterator.pArray->Ranges.Data.Data;
-        v18 = resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index;
-        if ( v14 >= v18 )
+        Data = resulta.FormatIterator.pArray->Ranges.Data.Data;
+        Index = resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index;
+        if ( CurTextIndex >= Index )
         {
-          v20 = v17[resulta.FormatIterator.Index].Data.pObject;
-          v21 = v17[resulta.FormatIterator.Index].Length;
-          resulta.PlaceHolder.pText = &resulta.pText->pText[v18];
-          resulta.PlaceHolder.Index = v18;
-          resulta.PlaceHolder.Length = v21;
+          v20 = Data[resulta.FormatIterator.Index].Data.pObject;
+          Length = Data[resulta.FormatIterator.Index].Length;
+          resulta.PlaceHolder.pText = &resulta.pText->pText[Index];
+          resulta.PlaceHolder.Index = Index;
+          resulta.PlaceHolder.Length = Length;
           if ( v20 )
           {
             ++v20->RefCount;
-            v14 = resulta.CurTextIndex;
-            v15 = resulta.PlaceHolder.pFormat.pObject;
+            CurTextIndex = resulta.CurTextIndex;
+            pObject = resulta.PlaceHolder.pFormat.pObject;
           }
-          if ( v15 )
+          if ( pObject )
           {
-            v22 = v15->RefCount-- == 1;
+            v22 = pObject->RefCount-- == 1;
             if ( v22 )
             {
-              Scaleform::Render::Text::TextFormat::~TextFormat(v15);
-              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v15);
+              Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
             }
-            v14 = resulta.CurTextIndex;
+            CurTextIndex = resulta.CurTextIndex;
           }
-          v15 = v20;
+          pObject = v20;
           resulta.PlaceHolder.pFormat.pObject = v20;
           if ( v20 )
           {
-            v23 = v13++;
-            if ( v23 )
+            if ( v13++ )
             {
               v24 = Scaleform::Render::Text::TextFormat::Intersection(v20, &v31, &fmt);
               Scaleform::Render::Text::TextFormat::operator=(&fmt, v24);
@@ -666,27 +650,27 @@ Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragra
             {
               Scaleform::Render::Text::TextFormat::operator=(&fmt, v20);
             }
-            v14 = resulta.CurTextIndex;
-            v15 = resulta.PlaceHolder.pFormat.pObject;
+            CurTextIndex = resulta.CurTextIndex;
+            pObject = resulta.PlaceHolder.pFormat.pObject;
           }
           goto LABEL_34;
         }
-        v19 = &resulta.pText->pText[v14];
-        resulta.PlaceHolder.Length = v18 - v14;
+        v19 = &resulta.pText->pText[CurTextIndex];
+        resulta.PlaceHolder.Length = Index - CurTextIndex;
       }
-      resulta.PlaceHolder.Index = v14;
+      resulta.PlaceHolder.Index = CurTextIndex;
       resulta.PlaceHolder.pText = v19;
-      if ( v15 )
+      if ( pObject )
       {
-        v22 = v15->RefCount-- == 1;
+        v22 = pObject->RefCount-- == 1;
         if ( v22 )
         {
-          Scaleform::Render::Text::TextFormat::~TextFormat(v15);
-          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v15);
+          Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
         }
-        v14 = resulta.CurTextIndex;
+        CurTextIndex = resulta.CurTextIndex;
       }
-      v15 = 0i64;
+      pObject = 0i64;
       resulta.PlaceHolder.pFormat.pObject = 0i64;
 LABEL_34:
       v8 += v5 - resulta.PlaceHolder.Length - resulta.PlaceHolder.Index;
@@ -694,25 +678,25 @@ LABEL_34:
       if ( resulta.FormatIterator.Index < 0
         || resulta.FormatIterator.Index >= resulta.FormatIterator.pArray->Ranges.Data.Size )
       {
-        v14 = resulta.pText->Size;
-        resulta.CurTextIndex = resulta.pText->Size;
+        CurTextIndex = resulta.pText->Size;
+        resulta.CurTextIndex = CurTextIndex;
       }
-      else if ( v14 >= resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index )
+      else if ( CurTextIndex >= resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index )
       {
-        v14 += resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Length;
-        resulta.CurTextIndex = v14;
+        CurTextIndex += resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Length;
+        resulta.CurTextIndex = CurTextIndex;
         if ( resulta.FormatIterator.Index < (signed __int64)resulta.FormatIterator.pArray->Ranges.Data.Size )
           ++resulta.FormatIterator.Index;
       }
       else
       {
-        v14 = resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index;
-        resulta.CurTextIndex = resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index;
+        CurTextIndex = resulta.FormatIterator.pArray->Ranges.Data.Data[resulta.FormatIterator.Index].Index;
+        resulta.CurTextIndex = CurTextIndex;
       }
     }
     while ( v8 > 0 );
   }
-  Scaleform::Render::Text::TextFormat::TextFormat(v6, &fmt, 0i64);
+  Scaleform::Render::Text::TextFormat::TextFormat(result, &fmt, 0i64);
   v28 = 1;
   Scaleform::Render::Text::TextFormat::~TextFormat(&fmt);
   v25 = resulta.PlaceHolder.pFormat.pObject;
@@ -725,67 +709,69 @@ LABEL_34:
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
     }
   }
-  return v6;
+  return result;
 }
 
 // File Line: 342
 // RVA: 0x98D750
-Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragraph::GetTextFormatPtr(Scaleform::Render::Text::Paragraph *this, unsigned __int64 startPos)
+Scaleform::Render::Text::TextFormat *__fastcall Scaleform::Render::Text::Paragraph::GetTextFormatPtr(
+        Scaleform::Render::Text::Paragraph *this,
+        __int64 startPos)
 {
   Scaleform::Render::Text::TextFormat *v2; // rbx
-  unsigned __int64 v3; // rcx
+  unsigned __int64 Size; // rcx
   Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v4; // r10
-  __int64 v5; // r8
-  wchar_t *v6; // rax
-  Scaleform::Render::Text::Paragraph::FormatRunIterator *v7; // rax
-  Scaleform::Render::Text::TextFormat *v8; // rdi
+  __int64 Index; // r8
+  wchar_t *pText; // rax
+  Scaleform::Render::Text::Paragraph::FormatRunIterator *p_result; // rax
+  Scaleform::Render::Text::TextFormat *pObject; // rdi
   bool v9; // zf
   Scaleform::Render::Text::TextFormat *v10; // rax
   Scaleform::Render::Text::TextFormat *v11; // rdi
-  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+40h] [rbp-58h]
+  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+40h] [rbp-58h] BYREF
 
   Scaleform::Render::Text::Paragraph::GetIteratorAt(this, &result, startPos);
   v2 = 0i64;
-  v3 = result.pText->Size;
-  if ( result.CurTextIndex >= v3 )
+  Size = result.pText->Size;
+  if ( result.CurTextIndex >= Size )
     goto LABEL_14;
   if ( result.FormatIterator.Index < 0 || result.FormatIterator.Index >= result.FormatIterator.pArray->Ranges.Data.Size )
   {
-    v6 = result.pText->pText;
-    result.PlaceHolder.Length = v3 - result.CurTextIndex;
+    pText = result.pText->pText;
+    result.PlaceHolder.Length = Size - result.CurTextIndex;
 LABEL_8:
-    v8 = result.PlaceHolder.pFormat.pObject;
+    pObject = result.PlaceHolder.pFormat.pObject;
     result.PlaceHolder.Index = result.CurTextIndex;
-    result.PlaceHolder.pText = &v6[result.CurTextIndex];
+    result.PlaceHolder.pText = &pText[result.CurTextIndex];
     if ( result.PlaceHolder.pFormat.pObject )
     {
       v9 = result.PlaceHolder.pFormat.pObject->RefCount-- == 1;
       if ( v9 )
       {
-        Scaleform::Render::Text::TextFormat::~TextFormat(v8);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v8);
+        Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
       }
     }
-    v7 = &result;
+    p_result = &result;
     result.PlaceHolder.pFormat.pObject = 0i64;
     goto LABEL_12;
   }
   v4 = &result.FormatIterator.pArray->Ranges.Data.Data[result.FormatIterator.Index];
-  v5 = v4->Index;
-  v6 = result.pText->pText;
+  Index = v4->Index;
+  pText = result.pText->pText;
   if ( result.CurTextIndex < v4->Index )
   {
-    result.PlaceHolder.Length = v5 - result.CurTextIndex;
+    result.PlaceHolder.Length = Index - result.CurTextIndex;
     goto LABEL_8;
   }
-  v7 = (Scaleform::Render::Text::Paragraph::FormatRunIterator *)Scaleform::Render::Text::Paragraph::StyledTextRun::Set(
-                                                                  &result.PlaceHolder,
-                                                                  &v6[v5],
-                                                                  v5,
-                                                                  v4->Length,
-                                                                  v4->Data.pObject);
+  p_result = (Scaleform::Render::Text::Paragraph::FormatRunIterator *)Scaleform::Render::Text::Paragraph::StyledTextRun::Set(
+                                                                        &result.PlaceHolder,
+                                                                        &pText[Index],
+                                                                        Index,
+                                                                        v4->Length,
+                                                                        v4->Data.pObject);
 LABEL_12:
-  v10 = v7->PlaceHolder.pFormat.pObject;
+  v10 = p_result->PlaceHolder.pFormat.pObject;
   if ( v10 )
     v2 = v10;
 LABEL_14:
@@ -804,29 +790,28 @@ LABEL_14:
 
 // File Line: 386
 // RVA: 0x9B0520
-void __fastcall Scaleform::Render::Text::Paragraph::SetFormat(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Allocator *pallocator, Scaleform::Render::Text::ParagraphFormat *fmt)
+void __fastcall Scaleform::Render::Text::Paragraph::SetFormat(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        Scaleform::Render::Text::ParagraphFormat *fmt)
 {
-  Scaleform::Render::Text::Allocator *v3; // rbx
-  Scaleform::Render::Text::Paragraph *v4; // rdi
-  Scaleform::Render::Text::ParagraphFormat *v5; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
   Scaleform::Render::Text::ParagraphFormat *v6; // rax
-  Scaleform::Render::Text::ParagraphFormat *v7; // rbx
+  Scaleform::Render::Text::ParagraphFormat *ParagraphFormat; // rbx
   Scaleform::Render::Text::ParagraphFormat *v8; // rcx
-  Scaleform::Render::Text::ParagraphFormat result; // [rsp+28h] [rbp-30h]
-  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+78h] [rbp+20h]
+  Scaleform::Render::Text::ParagraphFormat result; // [rsp+28h] [rbp-30h] BYREF
+  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+78h] [rbp+20h] BYREF
 
-  v3 = pallocator;
-  v4 = this;
-  v5 = this->pFormat.pObject;
-  if ( v5 )
+  pObject = this->pFormat.pObject;
+  if ( pObject )
   {
-    v6 = Scaleform::Render::Text::ParagraphFormat::Merge(v5, &result, fmt);
-    v7 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(v3, v6);
+    v6 = Scaleform::Render::Text::ParagraphFormat::Merge(pObject, &result, fmt);
+    ParagraphFormat = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(pallocator, v6);
     if ( result.pAllocator )
     {
       key = &result;
       Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-        (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)&result.pAllocator->ParagraphFormatStorage.pTable,
+        &result.pAllocator->ParagraphFormatStorage,
         &key);
     }
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, result.pTabStops);
@@ -834,22 +819,24 @@ void __fastcall Scaleform::Render::Text::Paragraph::SetFormat(Scaleform::Render:
   }
   else
   {
-    v7 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(pallocator, fmt);
+    ParagraphFormat = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(pallocator, fmt);
   }
-  if ( v7 )
-    ++v7->RefCount;
-  v8 = v4->pFormat.pObject;
+  if ( ParagraphFormat )
+    ++ParagraphFormat->RefCount;
+  v8 = this->pFormat.pObject;
   if ( v8 )
     Scaleform::Render::Text::ParagraphFormat::Release(v8);
-  v4->pFormat.pObject = v7;
-  ++v4->ModCounter;
-  if ( v7 )
-    Scaleform::Render::Text::ParagraphFormat::Release(v7);
+  this->pFormat.pObject = ParagraphFormat;
+  ++this->ModCounter;
+  if ( ParagraphFormat )
+    Scaleform::Render::Text::ParagraphFormat::Release(ParagraphFormat);
 }
 
 // File Line: 403
 // RVA: 0x987D10
-Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::GetIterator(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Paragraph::FormatRunIterator *result)
+Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::GetIterator(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Paragraph::FormatRunIterator *result)
 {
   result->PlaceHolder.pText = 0i64;
   result->PlaceHolder.Index = 0i64;
@@ -865,78 +852,73 @@ Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Ren
 
 // File Line: 408
 // RVA: 0x987D70
-Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::GetIteratorAt(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Paragraph::FormatRunIterator *result, unsigned __int64 index)
+Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::GetIteratorAt(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Paragraph::FormatRunIterator *result,
+        __int64 index)
 {
-  Scaleform::Render::Text::Paragraph::FormatRunIterator *v3; // rbx
-
-  v3 = result;
   Scaleform::Render::Text::Paragraph::FormatRunIterator::FormatRunIterator(
     result,
     &this->FormatInfo,
     &this->Text,
     index);
-  return v3;
+  return result;
 }
 
 // File Line: 424
 // RVA: 0x9B40D0
 void __fastcall Scaleform::Render::Text::Paragraph::SetTermNullFormat(Scaleform::Render::Text::Paragraph *this)
 {
-  unsigned __int64 v1; // rdi
-  Scaleform::Render::Text::Paragraph *v2; // rbx
-  wchar_t *v3; // rax
+  unsigned __int64 Size; // rdi
+  wchar_t *pText; // rax
   wchar_t *v4; // rdx
   unsigned __int64 v5; // r8
   wchar_t *v6; // rcx
   unsigned __int64 v7; // rcx
 
-  v1 = this->Text.Size;
-  v2 = this;
-  if ( v1 )
+  Size = this->Text.Size;
+  if ( Size )
   {
-    v3 = this->Text.pText;
+    pText = this->Text.pText;
     v4 = 0i64;
-    v5 = v1 - 1;
-    if ( !this->Text.pText || (v6 = &v3[v5], v5 >= v1) )
+    v5 = Size - 1;
+    if ( !this->Text.pText || (v6 = &pText[v5], v5 >= Size) )
       v6 = 0i64;
     if ( !*v6 )
     {
-      if ( v1 )
-      {
-        v7 = v1 - 1;
-        if ( v3 && v7 < v1 )
-          v4 = &v3[v7];
-        if ( !*v4 )
-          --v1;
-      }
+      v7 = Size - 1;
+      if ( pText && v7 < Size )
+        v4 = &pText[v7];
+      if ( !*v4 )
+        --Size;
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-        &v2->FormatInfo,
-        v1,
+        &this->FormatInfo,
+        Size,
         1ui64);
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-        &v2->FormatInfo,
-        v1 + 1,
-        1ui64);
+        &this->FormatInfo,
+        Size + 1,
+        1i64);
     }
   }
 }
 
 // File Line: 438
 // RVA: 0x995870
-void __fastcall Scaleform::Render::Text::Paragraph::InsertString(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Allocator *pallocator, const wchar_t *pstr, unsigned __int64 pos, unsigned __int64 length, Scaleform::Render::Text::TextFormat *pnewFmt)
+void __fastcall Scaleform::Render::Text::Paragraph::InsertString(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        const wchar_t *pstr,
+        unsigned __int64 pos,
+        unsigned __int64 length,
+        Scaleform::Render::Text::TextFormat *pnewFmt)
 {
-  __int64 v6; // rbp
-  const wchar_t *v7; // rdi
-  Scaleform::Render::Text::Paragraph *v8; // rsi
   unsigned __int64 v9; // rbx
-  wchar_t *v10; // r14
-  Scaleform::Render::Text::TextFormat *v11; // rbx
+  wchar_t *Position; // r14
+  Scaleform::Render::Text::TextFormat *pObject; // rbx
   bool v12; // zf
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+28h] [rbp-30h]
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+28h] [rbp-30h] BYREF
 
-  v6 = pos;
-  v7 = pstr;
-  v8 = this;
   v9 = length;
   if ( length )
   {
@@ -952,33 +934,33 @@ void __fastcall Scaleform::Render::Text::Paragraph::InsertString(Scaleform::Rend
     }
     if ( v9 )
     {
-      v10 = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(&this->Text, pallocator, pos, v9);
+      Position = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(&this->Text, pallocator, pos, v9);
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-        &v8->FormatInfo,
-        v6,
+        &this->FormatInfo,
+        pos,
         v9);
-      ++v8->ModCounter;
-      if ( v10 )
+      ++this->ModCounter;
+      if ( Position )
       {
-        memmove(v10, v7, 2 * v9);
+        memmove(Position, pstr, 2 * v9);
         if ( pnewFmt )
         {
           ++pnewFmt->RefCount;
-          range.Index = v6;
+          range.Index = pos;
           range.Length = v9;
           ++pnewFmt->RefCount;
           range.Data.pObject = pnewFmt;
           Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::SetRange(
-            &v8->FormatInfo,
+            &this->FormatInfo,
             &range);
-          v11 = range.Data.pObject;
+          pObject = range.Data.pObject;
           if ( range.Data.pObject )
           {
             v12 = range.Data.pObject->RefCount-- == 1;
             if ( v12 )
             {
-              Scaleform::Render::Text::TextFormat::~TextFormat(v11);
-              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v11);
+              Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
             }
           }
           v12 = pnewFmt->RefCount-- == 1;
@@ -988,8 +970,8 @@ void __fastcall Scaleform::Render::Text::Paragraph::InsertString(Scaleform::Rend
             Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pnewFmt);
           }
         }
-        Scaleform::Render::Text::Paragraph::SetTermNullFormat(v8);
-        ++v8->ModCounter;
+        Scaleform::Render::Text::Paragraph::SetTermNullFormat(this);
+        ++this->ModCounter;
       }
     }
   }
@@ -997,65 +979,62 @@ void __fastcall Scaleform::Render::Text::Paragraph::InsertString(Scaleform::Rend
 
 // File Line: 502
 // RVA: 0x959BB0
-void __fastcall Scaleform::Render::Text::Paragraph::AppendTermNull(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Allocator *pallocator, Scaleform::Render::Text::TextFormat *pdefTextFmt)
+void __fastcall Scaleform::Render::Text::Paragraph::AppendTermNull(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        Scaleform::Render::Text::TextFormat *pdefTextFmt)
 {
-  Scaleform::Render::Text::TextFormat *v3; // rsi
-  Scaleform::Render::Text::Allocator *v4; // r15
-  Scaleform::Render::Text::Paragraph *v5; // rbx
-  unsigned __int64 v6; // rdi
+  unsigned __int64 Size; // rdi
   unsigned __int64 v7; // rax
-  wchar_t *v8; // rcx
+  wchar_t *pText; // rcx
   bool v9; // cf
   wchar_t *v10; // rax
   unsigned __int64 v11; // rax
   wchar_t *v12; // rax
-  wchar_t *v13; // r14
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v14; // rbp
-  Scaleform::Render::Text::TextFormat *v15; // rax
+  wchar_t *Position; // r14
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *p_FormatInfo; // rbp
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
   Scaleform::Render::Text::TextFormat *v16; // rbx
-  Scaleform::Render::Text::TextFormat *v17; // rdi
+  Scaleform::Render::Text::TextFormat *pObject; // rdi
   bool v18; // zf
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+28h] [rbp-40h]
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+28h] [rbp-40h] BYREF
 
-  v3 = pdefTextFmt;
-  v4 = pallocator;
-  v5 = this;
-  v6 = this->Text.Size;
-  if ( !v6 )
+  Size = this->Text.Size;
+  if ( !Size )
   {
-LABEL_12:
-    v13 = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(&v5->Text, pallocator, v6, 1ui64);
-    v14 = &v5->FormatInfo;
+LABEL_11:
+    Position = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(&this->Text, pallocator, Size, 1ui64);
+    p_FormatInfo = &this->FormatInfo;
     Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-      &v5->FormatInfo,
-      v6,
+      &this->FormatInfo,
+      Size,
       1ui64);
-    ++v5->ModCounter;
-    if ( v13 )
+    ++this->ModCounter;
+    if ( Position )
     {
-      *v13 = 0;
-      if ( !v5->FormatInfo.Ranges.Data.Size )
+      *Position = 0;
+      if ( !this->FormatInfo.Ranges.Data.Size )
       {
-        if ( v3 )
+        if ( pdefTextFmt )
         {
-          v15 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v4, v3);
-          v16 = v15;
-          range.Index = v6;
+          TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(pallocator, pdefTextFmt);
+          v16 = TextFormat;
+          range.Index = Size;
           range.Length = 1i64;
-          if ( v15 )
-            ++v15->RefCount;
-          range.Data.pObject = v15;
+          if ( TextFormat )
+            ++TextFormat->RefCount;
+          range.Data.pObject = TextFormat;
           Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::SetRange(
-            v14,
+            p_FormatInfo,
             &range);
-          v17 = range.Data.pObject;
+          pObject = range.Data.pObject;
           if ( range.Data.pObject )
           {
             v18 = range.Data.pObject->RefCount-- == 1;
             if ( v18 )
             {
-              Scaleform::Render::Text::TextFormat::~TextFormat(v17);
-              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v17);
+              Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
             }
           }
           if ( v16 )
@@ -1072,21 +1051,18 @@ LABEL_12:
     }
     return;
   }
-  v7 = v6 - 1;
-  v8 = this->Text.pText;
-  if ( !v8 || (v9 = v7 < v6, v10 = &v8[v7], !v9) )
+  v7 = Size - 1;
+  pText = this->Text.pText;
+  if ( !pText || (v9 = v7 < Size, v10 = &pText[v7], !v9) )
     v10 = 0i64;
   if ( *v10 )
   {
-    if ( v6 )
-    {
-      v11 = v6 - 1;
-      if ( !v5->Text.pText || (v9 = v11 < v6, v12 = &v5->Text.pText[v11], !v9) )
-        v12 = 0i64;
-      if ( !*v12 )
-        --v6;
-    }
-    goto LABEL_12;
+    v11 = Size - 1;
+    if ( !this->Text.pText || (v9 = v11 < Size, v12 = &this->Text.pText[v11], !v9) )
+      v12 = 0i64;
+    if ( !*v12 )
+      --Size;
+    goto LABEL_11;
   }
 }
 
@@ -1094,9 +1070,8 @@ LABEL_12:
 // RVA: 0x9AA680
 void __fastcall Scaleform::Render::Text::Paragraph::RemoveTermNull(Scaleform::Render::Text::Paragraph *this)
 {
-  unsigned __int64 v1; // rdx
-  Scaleform::Render::Text::Paragraph *v2; // rbx
-  wchar_t *v3; // rax
+  unsigned __int64 Size; // rdx
+  wchar_t *pText; // rax
   wchar_t *v4; // rcx
   unsigned __int64 v5; // r8
   bool v6; // cf
@@ -1104,34 +1079,30 @@ void __fastcall Scaleform::Render::Text::Paragraph::RemoveTermNull(Scaleform::Re
   unsigned __int64 v8; // r8
   unsigned __int64 v9; // rcx
 
-  v1 = this->Text.Size;
-  v2 = this;
-  if ( v1 )
+  Size = this->Text.Size;
+  if ( Size )
   {
-    v3 = this->Text.pText;
+    pText = this->Text.pText;
     v4 = 0i64;
-    v5 = v1 - 1;
-    if ( !v3 || (v6 = v5 < v1, v7 = &v3[v5], !v6) )
+    v5 = Size - 1;
+    if ( !pText || (v6 = v5 < Size, v7 = &pText[v5], !v6) )
       v7 = 0i64;
     if ( !*v7 )
     {
-      if ( v1 )
-      {
-        v8 = v1 - 1;
-        if ( v3 && v8 < v1 )
-          v4 = &v3[v8];
-        if ( !*v4 )
-          --v1;
-      }
+      v8 = Size - 1;
+      if ( pText && v8 < Size )
+        v4 = &pText[v8];
+      if ( !*v4 )
+        --Size;
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-        &v2->FormatInfo,
-        v1,
-        1ui64);
-      v9 = v2->Text.Size;
+        &this->FormatInfo,
+        Size,
+        1i64);
+      v9 = this->Text.Size;
       if ( v9 )
       {
-        if ( !v2->Text.pText[v9 - 1] )
-          v2->Text.Size = v9 - 1;
+        if ( !this->Text.pText[v9 - 1] )
+          this->Text.Size = v9 - 1;
       }
     }
   }
@@ -1161,15 +1132,14 @@ unsigned __int64 __fastcall Scaleform::Render::Text::Paragraph::GetLength(Scalef
 
 // File Line: 557
 // RVA: 0x9A8930
-void __fastcall Scaleform::Render::Text::Paragraph::Remove(Scaleform::Render::Text::Paragraph *this, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::Paragraph::Remove(
+        Scaleform::Render::Text::Paragraph *this,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  __int64 v3; // rsi
-  Scaleform::Render::Text::Paragraph *v4; // rdi
   unsigned __int64 v5; // rbx
-  unsigned __int64 v6; // r8
+  unsigned __int64 Size; // r8
 
-  v3 = startPos;
-  v4 = this;
   if ( endPos == -1i64 )
   {
     v5 = -1i64;
@@ -1180,13 +1150,13 @@ void __fastcall Scaleform::Render::Text::Paragraph::Remove(Scaleform::Render::Te
     if ( endPos == startPos )
       return;
   }
-  v6 = this->Text.Size;
-  if ( startPos < v6 )
+  Size = this->Text.Size;
+  if ( startPos < Size )
   {
-    if ( v5 + startPos < v6 )
+    if ( v5 + startPos < Size )
     {
-      memmove(&this->Text.pText[startPos], &this->Text.pText[v5 + startPos], 2 * (v6 - v5 - startPos));
-      v4->Text.Size -= v5;
+      memmove(&this->Text.pText[startPos], &this->Text.pText[v5 + startPos], 2 * (Size - v5 - startPos));
+      this->Text.Size -= v5;
     }
     else
     {
@@ -1194,36 +1164,37 @@ void __fastcall Scaleform::Render::Text::Paragraph::Remove(Scaleform::Render::Te
     }
   }
   Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-    &v4->FormatInfo,
-    v3,
+    &this->FormatInfo,
+    startPos,
     v5);
-  Scaleform::Render::Text::Paragraph::SetTermNullFormat(v4);
-  ++v4->ModCounter;
+  Scaleform::Render::Text::Paragraph::SetTermNullFormat(this);
+  ++this->ModCounter;
 }
 
 // File Line: 581
 // RVA: 0x9642F0
-void __fastcall Scaleform::Render::Text::Paragraph::Copy(Scaleform::Render::Text::Paragraph *this, Scaleform::Render::Text::Allocator *pallocator, Scaleform::Render::Text::Paragraph *psrcPara, unsigned __int64 startSrcIndex)
+void __fastcall Scaleform::Render::Text::Paragraph::Copy(
+        Scaleform::Render::Text::Paragraph *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        Scaleform::Render::Text::Paragraph *psrcPara,
+        signed __int64 startSrcIndex)
 {
-  signed __int64 v4; // r12
-  Scaleform::Render::Text::Paragraph *v5; // rbx
-  Scaleform::Render::Text::Paragraph *v6; // r13
   unsigned __int64 v7; // r14
-  unsigned __int64 v8; // r10
+  unsigned __int64 Size; // r10
   wchar_t *v9; // r15
-  unsigned __int64 v10; // rdx
-  __int64 v11; // r8
-  Scaleform::Render::Text::TextFormat *v12; // rbx
+  unsigned __int64 CurTextIndex; // rdx
+  __int64 Index; // r8
+  Scaleform::Render::Text::TextFormat *pObject; // rbx
   Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v13; // r9
   __int64 v14; // r11
-  wchar_t *v15; // rcx
-  Scaleform::Render::Text::Paragraph::FormatRunIterator *v16; // rax
+  wchar_t *pText; // rcx
+  Scaleform::Render::Text::Paragraph::FormatRunIterator *p_result; // rax
   bool v17; // zf
-  __int64 v18; // r9
+  signed __int64 v18; // r9
   unsigned __int64 v19; // rcx
   signed __int64 v20; // rdi
   unsigned __int64 v21; // rsi
-  Scaleform::Render::Text::TextFormat *v22; // rax
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
   Scaleform::Render::Text::TextFormat *v23; // rbx
   Scaleform::Render::Text::TextFormat *v24; // rdi
   Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v25; // r10
@@ -1234,15 +1205,12 @@ void __fastcall Scaleform::Render::Text::Paragraph::Copy(Scaleform::Render::Text
   wchar_t *v30; // rcx
   unsigned __int64 v31; // rcx
   Scaleform::Render::Text::TextFormat *v32; // rbx
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+10h] [rbp-41h]
-  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+28h] [rbp-29h]
+  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > range; // [rsp+10h] [rbp-41h] BYREF
+  Scaleform::Render::Text::Paragraph::FormatRunIterator result; // [rsp+28h] [rbp-29h] BYREF
   Scaleform::Render::Text::Allocator *v35; // [rsp+B0h] [rbp+5Fh]
-  char *retaddr; // [rsp+C8h] [rbp+77h]
+  signed __int64 retaddr; // [rsp+C8h] [rbp+77h]
   unsigned __int64 v37; // [rsp+D0h] [rbp+7Fh]
 
-  v4 = startSrcIndex;
-  v5 = psrcPara;
-  v6 = this;
   v7 = v37;
   if ( v37 )
   {
@@ -1250,83 +1218,84 @@ void __fastcall Scaleform::Render::Text::Paragraph::Copy(Scaleform::Render::Text
       this,
       pallocator,
       &psrcPara->Text.pText[startSrcIndex],
-      (unsigned __int64)retaddr,
+      retaddr,
       v37);
-    Scaleform::Render::Text::Paragraph::GetIteratorAt(v5, &result, v4);
-    v8 = result.pText->Size;
+    Scaleform::Render::Text::Paragraph::GetIteratorAt(psrcPara, &result, startSrcIndex);
+    Size = result.pText->Size;
     v9 = 0i64;
-    v10 = result.CurTextIndex;
-    if ( result.CurTextIndex < v8 )
+    CurTextIndex = result.CurTextIndex;
+    if ( result.CurTextIndex < Size )
     {
-      v11 = result.FormatIterator.Index;
-      v12 = result.PlaceHolder.pFormat.pObject;
+      Index = result.FormatIterator.Index;
+      pObject = result.PlaceHolder.pFormat.pObject;
       while ( 1 )
       {
         if ( !v7 )
           goto LABEL_39;
-        if ( v11 < 0 || v11 >= result.FormatIterator.pArray->Ranges.Data.Size )
+        if ( Index < 0 || Index >= result.FormatIterator.pArray->Ranges.Data.Size )
           break;
-        v13 = &result.FormatIterator.pArray->Ranges.Data.Data[v11];
+        v13 = &result.FormatIterator.pArray->Ranges.Data.Data[Index];
         v14 = v13->Index;
-        v15 = result.pText->pText;
-        if ( v10 < v13->Index )
+        pText = result.pText->pText;
+        if ( CurTextIndex < v13->Index )
         {
-          result.PlaceHolder.Length = v14 - v10;
+          result.PlaceHolder.Length = v14 - CurTextIndex;
 LABEL_11:
-          result.PlaceHolder.Index = v10;
-          result.PlaceHolder.pText = &v15[v10];
-          if ( v12 )
+          result.PlaceHolder.Index = CurTextIndex;
+          result.PlaceHolder.pText = &pText[CurTextIndex];
+          if ( pObject )
           {
-            v17 = v12->RefCount-- == 1;
+            v17 = pObject->RefCount-- == 1;
             if ( v17 )
             {
-              Scaleform::Render::Text::TextFormat::~TextFormat(v12);
-              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v12);
+              Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
             }
-            v11 = result.FormatIterator.Index;
-            v10 = result.CurTextIndex;
+            Index = result.FormatIterator.Index;
+            CurTextIndex = result.CurTextIndex;
           }
-          v12 = 0i64;
-          v16 = &result;
+          pObject = 0i64;
+          p_result = &result;
           result.PlaceHolder.pFormat.pObject = 0i64;
           goto LABEL_16;
         }
-        range.Data.pObject = v13->Data.pObject;
-        v16 = (Scaleform::Render::Text::Paragraph::FormatRunIterator *)Scaleform::Render::Text::Paragraph::StyledTextRun::Set(
-                                                                         &result.PlaceHolder,
-                                                                         &v15[v14],
-                                                                         v14,
-                                                                         v13->Length,
-                                                                         range.Data.pObject);
-        v10 = result.CurTextIndex;
-        v11 = result.FormatIterator.Index;
-        v12 = result.PlaceHolder.pFormat.pObject;
+        p_result = (Scaleform::Render::Text::Paragraph::FormatRunIterator *)Scaleform::Render::Text::Paragraph::StyledTextRun::Set(
+                                                                              &result.PlaceHolder,
+                                                                              &pText[v14],
+                                                                              v14,
+                                                                              v13->Length,
+                                                                              v13->Data.pObject);
+        CurTextIndex = result.CurTextIndex;
+        Index = result.FormatIterator.Index;
+        pObject = result.PlaceHolder.pFormat.pObject;
 LABEL_16:
-        v18 = v16->PlaceHolder.Index;
-        v19 = v16->PlaceHolder.Length;
-        if ( v18 >= v4 )
+        v18 = p_result->PlaceHolder.Index;
+        v19 = p_result->PlaceHolder.Length;
+        if ( v18 >= startSrcIndex )
         {
-          v20 = v18 - v4;
+          v20 = v18 - startSrcIndex;
         }
         else
         {
           v20 = 0i64;
-          v19 = v18 + v19 - v4;
+          v19 = v18 + v19 - startSrcIndex;
         }
         v21 = v7;
         if ( v19 < v7 )
           v21 = v19;
-        if ( v16->PlaceHolder.pFormat.pObject )
+        if ( p_result->PlaceHolder.pFormat.pObject )
         {
-          v22 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v35, v16->PlaceHolder.pFormat.pObject);
-          v23 = v22;
-          range.Index = (__int64)&retaddr[v20];
+          TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(
+                         v35,
+                         p_result->PlaceHolder.pFormat.pObject);
+          v23 = TextFormat;
+          range.Index = v20 + retaddr;
           range.Length = v21;
-          if ( v22 )
-            ++v22->RefCount;
-          range.Data.pObject = v22;
+          if ( TextFormat )
+            ++TextFormat->RefCount;
+          range.Data.pObject = TextFormat;
           Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::SetRange(
-            &v6->FormatInfo,
+            &this->FormatInfo,
             &range);
           v24 = range.Data.pObject;
           if ( range.Data.pObject )
@@ -1347,69 +1316,66 @@ LABEL_16:
               Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v23);
             }
           }
-          v12 = result.PlaceHolder.pFormat.pObject;
-          v11 = result.FormatIterator.Index;
-          v10 = result.CurTextIndex;
+          pObject = result.PlaceHolder.pFormat.pObject;
+          Index = result.FormatIterator.Index;
+          CurTextIndex = result.CurTextIndex;
         }
         v7 -= v21;
-        if ( v11 < 0 || v11 >= result.FormatIterator.pArray->Ranges.Data.Size )
+        if ( Index < 0 || Index >= result.FormatIterator.pArray->Ranges.Data.Size )
         {
-          v10 = result.pText->Size;
-          result.CurTextIndex = result.pText->Size;
+          CurTextIndex = result.pText->Size;
+          result.CurTextIndex = CurTextIndex;
         }
         else
         {
-          v25 = &result.FormatIterator.pArray->Ranges.Data.Data[v11];
-          if ( v10 >= v25->Index )
+          v25 = &result.FormatIterator.pArray->Ranges.Data.Data[Index];
+          if ( CurTextIndex >= v25->Index )
           {
-            v10 += v25->Length;
-            result.CurTextIndex = v10;
-            if ( v11 < (signed __int64)result.FormatIterator.pArray->Ranges.Data.Size )
-              result.FormatIterator.Index = ++v11;
+            CurTextIndex += v25->Length;
+            result.CurTextIndex = CurTextIndex;
+            if ( Index < (signed __int64)result.FormatIterator.pArray->Ranges.Data.Size )
+              result.FormatIterator.Index = ++Index;
           }
           else
           {
-            v10 = v25->Index;
+            CurTextIndex = v25->Index;
             result.CurTextIndex = v25->Index;
           }
         }
-        v8 = result.pText->Size;
-        if ( v10 >= v8 )
+        Size = result.pText->Size;
+        if ( CurTextIndex >= Size )
           goto LABEL_39;
       }
-      v15 = result.pText->pText;
-      result.PlaceHolder.Length = v8 - v10;
+      pText = result.pText->pText;
+      result.PlaceHolder.Length = Size - CurTextIndex;
       goto LABEL_11;
     }
 LABEL_39:
-    v26 = v6->Text.Size;
+    v26 = this->Text.Size;
     if ( v26 )
     {
       v27 = v26 - 1;
-      v28 = v6->Text.pText;
-      if ( !v6->Text.pText || (v29 = v27 < v26, v30 = &v28[v27], !v29) )
+      v28 = this->Text.pText;
+      if ( !this->Text.pText || (v29 = v27 < v26, v30 = &v28[v27], !v29) )
         v30 = 0i64;
       if ( !*v30 )
       {
-        if ( v26 )
-        {
-          v31 = v26 - 1;
-          if ( v28 && v31 < v26 )
-            v9 = &v28[v31];
-          if ( !*v9 )
-            --v26;
-        }
+        v31 = v26 - 1;
+        if ( v28 && v31 < v26 )
+          v9 = &v28[v31];
+        if ( !*v9 )
+          --v26;
         Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-          &v6->FormatInfo,
+          &this->FormatInfo,
           v26,
           1ui64);
         Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-          &v6->FormatInfo,
+          &this->FormatInfo,
           v26 + 1,
           1ui64);
       }
     }
-    ++v6->ModCounter;
+    ++this->ModCounter;
     v32 = result.PlaceHolder.pFormat.pObject;
     if ( result.PlaceHolder.pFormat.pObject )
     {
@@ -1421,238 +1387,225 @@ LABEL_39:
       }
     }
   }
-}32);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v32);
-      }
-    }
-  }
-}
+}-- == 1;
+      if ( v17 )
+      {
+     
 
 // File Line: 687
 // RVA: 0x93C030
-void __fastcall Scaleform::Render::Text::Paragraph::FormatRunIterator::FormatRunIterator(Scaleform::Render::Text::Paragraph::FormatRunIterator *this, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *fmts, Scaleform::Render::Text::Paragraph::TextBuffer *textHandle, unsigned __int64 index)
+void __fastcall Scaleform::Render::Text::Paragraph::FormatRunIterator::FormatRunIterator(
+        Scaleform::Render::Text::Paragraph::FormatRunIterator *this,
+        Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *fmts,
+        Scaleform::Render::Text::Paragraph::TextBuffer *textHandle,
+        __int64 index)
 {
-  signed __int64 v4; // rdi
-  Scaleform::Render::Text::Paragraph::TextBuffer *v5; // rbp
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v6; // rsi
-  Scaleform::Render::Text::Paragraph::FormatRunIterator *v7; // rbx
-  signed __int64 v8; // rax
-  unsigned __int64 v9; // rcx
+  __int64 NearestRangeIndex; // rax
+  unsigned __int64 Size; // rcx
   __int64 v10; // rcx
   __int64 v11; // r8
   __int64 v12; // rax
   __int64 v13; // r8
   __int64 v14; // rcx
 
-  v4 = index;
-  v5 = textHandle;
-  v6 = fmts;
-  v7 = this;
   this->PlaceHolder.pText = 0i64;
   this->PlaceHolder.Index = 0i64;
   this->PlaceHolder.Length = 0i64;
   this->PlaceHolder.pFormat.pObject = 0i64;
   this->pFormatInfo = fmts;
-  v8 = Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::FindNearestRangeIndex(
-         (Scaleform::RangeDataArray<void *,Scaleform::ArrayLH<Scaleform::RangeData<void *>,2,Scaleform::ArrayDefaultPolicy> > *)fmts,
-         index);
-  v7->FormatIterator.pArray = v6;
-  v7->FormatIterator.Index = 0i64;
-  if ( v8 >= 0 )
+  NearestRangeIndex = Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::FindNearestRangeIndex(
+                        (Scaleform::RangeDataArray<void *,Scaleform::ArrayLH<Scaleform::RangeData<void *>,2,Scaleform::ArrayDefaultPolicy> > *)fmts,
+                        index);
+  this->FormatIterator.pArray = fmts;
+  this->FormatIterator.Index = 0i64;
+  if ( NearestRangeIndex >= 0 )
   {
-    v9 = v6->Ranges.Data.Size;
-    if ( v8 >= v9 )
-      v8 = v9 - 1;
-    v7->FormatIterator.Index = v8;
+    Size = fmts->Ranges.Data.Size;
+    if ( NearestRangeIndex >= Size )
+      NearestRangeIndex = Size - 1;
+    this->FormatIterator.Index = NearestRangeIndex;
   }
   else
   {
-    v7->FormatIterator.Index = 0i64;
+    this->FormatIterator.Index = 0i64;
   }
-  v7->pText = v5;
-  v7->CurTextIndex = 0i64;
-  v10 = v7->FormatIterator.Index;
-  if ( v10 >= 0 && v10 < v6->Ranges.Data.Size )
+  this->pText = textHandle;
+  this->CurTextIndex = 0i64;
+  v10 = this->FormatIterator.Index;
+  if ( v10 >= 0 && v10 < fmts->Ranges.Data.Size )
   {
-    v11 = v6->Ranges.Data.Data[v10].Index;
-    if ( v4 < v11 || v4 > (signed __int64)(v6->Ranges.Data.Data[v10].Length + v11 - 1) )
+    v11 = fmts->Ranges.Data.Data[v10].Index;
+    if ( index < v11 || index > (signed __int64)(fmts->Ranges.Data.Data[v10].Length + v11 - 1) )
     {
-      v12 = v7->FormatIterator.Index;
-      if ( v4 > v6->Ranges.Data.Data[v12].Index )
+      v12 = this->FormatIterator.Index;
+      if ( index > fmts->Ranges.Data.Data[v12].Index )
       {
-        v13 = v6->Ranges.Data.Data[v12].Index;
-        v7->CurTextIndex = v13;
-        v7->CurTextIndex = v13 + v6->Ranges.Data.Data[v7->FormatIterator.Index].Length;
-        v14 = v7->FormatIterator.Index;
-        if ( v14 < (signed __int64)v6->Ranges.Data.Size )
-          v7->FormatIterator.Index = v14 + 1;
+        v13 = fmts->Ranges.Data.Data[v12].Index;
+        this->CurTextIndex = v13;
+        this->CurTextIndex = v13 + fmts->Ranges.Data.Data[this->FormatIterator.Index].Length;
+        v14 = this->FormatIterator.Index;
+        if ( v14 < (signed __int64)fmts->Ranges.Data.Size )
+          this->FormatIterator.Index = v14 + 1;
       }
     }
     else
     {
-      v7->CurTextIndex = v6->Ranges.Data.Data[v7->FormatIterator.Index].Index;
+      this->CurTextIndex = fmts->Ranges.Data.Data[this->FormatIterator.Index].Index;
     }
   }
 }
 
 // File Line: 722
 // RVA: 0x94ECC0
-Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(Scaleform::Render::Text::Paragraph::FormatRunIterator *this)
+Scaleform::Render::Text::Paragraph::FormatRunIterator *__fastcall Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(
+        Scaleform::Render::Text::Paragraph::FormatRunIterator *this)
 {
-  __int64 v1; // rax
-  Scaleform::Render::Text::Paragraph::FormatRunIterator *v2; // rbx
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v3; // rcx
+  __int64 Index; // rax
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *pArray; // rcx
   unsigned __int64 v4; // r8
-  signed __int64 v5; // r9
+  __int64 v5; // r9
   unsigned __int64 v6; // rdx
   wchar_t *v7; // rcx
   Scaleform::Render::Text::Paragraph::FormatRunIterator *result; // rax
-  Scaleform::Render::Text::Paragraph::TextBuffer *v9; // rax
-  __int64 v10; // r8
-  unsigned __int64 v11; // rdx
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
+  __int64 CurTextIndex; // r8
+  unsigned __int64 Size; // rdx
   wchar_t *v12; // rax
-  Scaleform::Render::Text::TextFormat *v13; // rdi
-  bool v14; // zf
+  Scaleform::Render::Text::TextFormat *pObject; // rdi
 
-  v1 = this->FormatIterator.Index;
-  v2 = this;
-  if ( v1 < 0 || (v3 = this->FormatIterator.pArray, v1 >= v3->Ranges.Data.Size) )
+  Index = this->FormatIterator.Index;
+  if ( Index < 0 || (pArray = this->FormatIterator.pArray, Index >= pArray->Ranges.Data.Size) )
   {
-    v9 = v2->pText;
-    v10 = v2->CurTextIndex;
-    v11 = v9->Size;
-    v12 = v9->pText;
-    v2->PlaceHolder.Index = v10;
-    v2->PlaceHolder.pText = &v12[v10];
-    v2->PlaceHolder.Length = v11 - v10;
+    pText = this->pText;
+    CurTextIndex = this->CurTextIndex;
+    Size = pText->Size;
+    v12 = pText->pText;
+    this->PlaceHolder.Index = CurTextIndex;
+    this->PlaceHolder.pText = &v12[CurTextIndex];
+    this->PlaceHolder.Length = Size - CurTextIndex;
   }
   else
   {
-    v4 = v3->Ranges.Data.Data[v1].Index;
-    v5 = (signed __int64)&v3->Ranges.Data.Data[v1];
-    v6 = v2->CurTextIndex;
-    v7 = v2->pText->pText;
+    v4 = pArray->Ranges.Data.Data[Index].Index;
+    v5 = (__int64)&pArray->Ranges.Data.Data[Index];
+    v6 = this->CurTextIndex;
+    v7 = this->pText->pText;
     if ( v6 >= v4 )
       return (Scaleform::Render::Text::Paragraph::FormatRunIterator *)Scaleform::Render::Text::Paragraph::StyledTextRun::Set(
-                                                                        &v2->PlaceHolder,
+                                                                        &this->PlaceHolder,
                                                                         &v7[v4],
                                                                         v4,
                                                                         *(_QWORD *)(v5 + 8),
                                                                         *(Scaleform::Render::Text::TextFormat **)(v5 + 16));
-    v2->PlaceHolder.Index = v6;
-    v2->PlaceHolder.pText = &v7[v6];
-    v2->PlaceHolder.Length = v4 - v6;
+    this->PlaceHolder.Index = v6;
+    this->PlaceHolder.pText = &v7[v6];
+    this->PlaceHolder.Length = v4 - v6;
   }
-  v13 = v2->PlaceHolder.pFormat.pObject;
-  if ( v13 )
+  pObject = this->PlaceHolder.pFormat.pObject;
+  if ( pObject )
   {
-    v14 = v13->RefCount-- == 1;
-    if ( v14 )
+    if ( pObject->RefCount-- == 1 )
     {
-      Scaleform::Render::Text::TextFormat::~TextFormat(v13);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13);
+      Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
     }
   }
-  result = v2;
-  v2->PlaceHolder.pFormat.pObject = 0i64;
+  result = this;
+  this->PlaceHolder.pFormat.pObject = 0i64;
   return result;
 }
 
 // File Line: 791
 // RVA: 0x9395F0
-void __fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::CharactersIterator(Scaleform::Render::Text::Paragraph::CharactersIterator *this, Scaleform::Render::Text::Paragraph *pparagraph, unsigned __int64 index)
+void __fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::CharactersIterator(
+        Scaleform::Render::Text::Paragraph::CharactersIterator *this,
+        Scaleform::Render::Text::Paragraph *pparagraph,
+        __int64 index)
 {
-  signed __int64 v3; // rdi
-  Scaleform::Render::Text::Paragraph *v4; // rbp
-  Scaleform::Render::Text::Paragraph::CharactersIterator *v5; // rbx
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v6; // rsi
-  unsigned __int64 v7; // rcx
-  unsigned __int64 v8; // rax
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *p_FormatInfo; // rsi
+  __int64 NearestRangeIndex; // rcx
+  unsigned __int64 Size; // rax
   __int64 v9; // rcx
   signed __int64 v10; // r8
   __int64 v11; // rcx
 
-  v3 = index;
-  v4 = pparagraph;
-  v5 = this;
   this->PlaceHolder.pFormat.pObject = 0i64;
   this->PlaceHolder.Index = 0i64;
   this->PlaceHolder.Character = 0;
-  v6 = &pparagraph->FormatInfo;
+  p_FormatInfo = &pparagraph->FormatInfo;
   this->pFormatInfo = &pparagraph->FormatInfo;
-  v7 = Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::FindNearestRangeIndex(
-         (Scaleform::RangeDataArray<void *,Scaleform::ArrayLH<Scaleform::RangeData<void *>,2,Scaleform::ArrayDefaultPolicy> > *)&pparagraph->FormatInfo,
-         index);
-  v5->FormatIterator.pArray = v6;
-  v5->FormatIterator.Index = 0i64;
-  if ( (v7 & 0x8000000000000000ui64) == 0i64 )
+  NearestRangeIndex = Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::FindNearestRangeIndex(
+                        (Scaleform::RangeDataArray<void *,Scaleform::ArrayLH<Scaleform::RangeData<void *>,2,Scaleform::ArrayDefaultPolicy> > *)&pparagraph->FormatInfo,
+                        index);
+  this->FormatIterator.pArray = p_FormatInfo;
+  this->FormatIterator.Index = 0i64;
+  if ( NearestRangeIndex >= 0 )
   {
-    v8 = v6->Ranges.Data.Size;
-    if ( v7 < v8 )
-      v5->FormatIterator.Index = v7;
+    Size = p_FormatInfo->Ranges.Data.Size;
+    if ( NearestRangeIndex < Size )
+      this->FormatIterator.Index = NearestRangeIndex;
     else
-      v5->FormatIterator.Index = v8 - 1;
+      this->FormatIterator.Index = Size - 1;
   }
   else
   {
-    v5->FormatIterator.Index = 0i64;
+    this->FormatIterator.Index = 0i64;
   }
-  v5->pText = (Scaleform::Render::Text::Paragraph::TextBuffer *)v4;
-  v5->CurTextIndex = v3;
-  v9 = v5->FormatIterator.Index;
-  if ( v9 >= 0 && v9 < v6->Ranges.Data.Size )
+  this->pText = (Scaleform::Render::Text::Paragraph::TextBuffer *)pparagraph;
+  this->CurTextIndex = index;
+  v9 = this->FormatIterator.Index;
+  if ( v9 >= 0 && v9 < p_FormatInfo->Ranges.Data.Size )
   {
-    v10 = v6->Ranges.Data.Data[v9].Index;
-    if ( (v3 < v10 || v3 > (signed __int64)(v6->Ranges.Data.Data[v9].Length + v10 - 1))
-      && (signed int)v3 > v6->Ranges.Data.Data[v5->FormatIterator.Index].Index )
+    v10 = p_FormatInfo->Ranges.Data.Data[v9].Index;
+    if ( (index < v10 || index > (signed __int64)(p_FormatInfo->Ranges.Data.Data[v9].Length + v10 - 1))
+      && (int)index > p_FormatInfo->Ranges.Data.Data[this->FormatIterator.Index].Index )
     {
-      v11 = v5->FormatIterator.Index;
-      if ( v11 < (signed __int64)v6->Ranges.Data.Size )
-        v5->FormatIterator.Index = v11 + 1;
+      v11 = this->FormatIterator.Index;
+      if ( v11 < (signed __int64)p_FormatInfo->Ranges.Data.Size )
+        this->FormatIterator.Index = v11 + 1;
     }
   }
 }
 
 // File Line: 802
 // RVA: 0x94EB90
-Scaleform::Render::Text::Paragraph::CharactersIterator *__fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(Scaleform::Render::Text::Paragraph::CharactersIterator *this)
+Scaleform::Render::Text::Paragraph::CharactersIterator *__fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(
+        Scaleform::Render::Text::Paragraph::CharactersIterator *this)
 {
-  Scaleform::Render::Text::Paragraph::TextBuffer *v1; // rax
-  Scaleform::Render::Text::Paragraph::CharactersIterator *v2; // rbx
-  unsigned __int64 v3; // r8
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
+  unsigned __int64 CurTextIndex; // r8
   wchar_t v4; // dx
-  __int64 v5; // rax
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v6; // rdx
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v7; // rsi
+  __int64 Index; // rax
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *pArray; // rdx
+  __int64 v7; // rsi
   Scaleform::Render::Text::TextFormat *v8; // rdi
   bool v9; // zf
-  Scaleform::Render::Text::TextFormat *v10; // rax
+  __int64 v10; // rax
   Scaleform::Render::Text::TextFormat *v11; // rdi
-  Scaleform::Render::Text::TextFormat *v13; // rsi
+  Scaleform::Render::Text::TextFormat *pObject; // rsi
 
-  v1 = this->pText;
-  v2 = this;
-  if ( !v1 || (v3 = this->CurTextIndex, v3 >= v1->Size) )
+  pText = this->pText;
+  if ( !pText || (CurTextIndex = this->CurTextIndex, CurTextIndex >= pText->Size) )
   {
     this->PlaceHolder.Index = this->CurTextIndex;
     this->PlaceHolder.Character = 0;
-    v13 = this->PlaceHolder.pFormat.pObject;
+    pObject = this->PlaceHolder.pFormat.pObject;
     if ( this->PlaceHolder.pFormat.pObject )
     {
-      v9 = v13->RefCount-- == 1;
+      v9 = pObject->RefCount-- == 1;
       if ( v9 )
       {
-        Scaleform::Render::Text::TextFormat::~TextFormat(v13);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13);
+        Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
       }
     }
     goto LABEL_21;
   }
-  v4 = v1->pText[v3];
-  this->PlaceHolder.Index = v3;
+  v4 = pText->pText[CurTextIndex];
+  this->PlaceHolder.Index = CurTextIndex;
   this->PlaceHolder.Character = v4;
-  v5 = this->FormatIterator.Index;
-  if ( v5 < 0 || (v6 = this->FormatIterator.pArray, v5 >= v6->Ranges.Data.Size) )
+  Index = this->FormatIterator.Index;
+  if ( Index < 0 || (pArray = this->FormatIterator.pArray, Index >= pArray->Ranges.Data.Size) )
   {
     v8 = this->PlaceHolder.pFormat.pObject;
 LABEL_7:
@@ -1666,18 +1619,18 @@ LABEL_7:
       }
     }
 LABEL_21:
-    v2->PlaceHolder.pFormat.pObject = 0i64;
-    return v2;
+    this->PlaceHolder.pFormat.pObject = 0i64;
+    return this;
   }
-  v7 = &v6->Ranges.Data.Data[v5];
-  if ( v3 < v7->Index )
+  v7 = (__int64)&pArray->Ranges.Data.Data[Index];
+  if ( CurTextIndex < *(_QWORD *)v7 )
   {
     v8 = this->PlaceHolder.pFormat.pObject;
     goto LABEL_7;
   }
-  v10 = v7->Data.pObject;
+  v10 = *(_QWORD *)(v7 + 16);
   if ( v10 )
-    ++v10->RefCount;
+    ++*(_DWORD *)(v10 + 8);
   v11 = this->PlaceHolder.pFormat.pObject;
   if ( this->PlaceHolder.pFormat.pObject )
   {
@@ -1688,65 +1641,63 @@ LABEL_21:
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v11);
     }
   }
-  v2->PlaceHolder.pFormat.pObject = v7->Data.pObject;
-  return v2;
+  this->PlaceHolder.pFormat.pObject = *(Scaleform::Render::Text::TextFormat **)(v7 + 16);
+  return this;
 }
 
 // File Line: 855
 // RVA: 0x94F1E0
-void __fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::operator+=(Scaleform::Render::Text::Paragraph::CharactersIterator *this, unsigned __int64 n)
+void __fastcall Scaleform::Render::Text::Paragraph::CharactersIterator::operator+=(
+        Scaleform::Render::Text::Paragraph::CharactersIterator *this,
+        unsigned __int64 n)
 {
   unsigned __int64 i; // r10
-  Scaleform::Render::Text::Paragraph::TextBuffer *v3; // rax
-  unsigned __int64 v4; // rdx
-  __int64 v5; // r9
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v6; // rax
-  __int64 v7; // r11
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
+  unsigned __int64 CurTextIndex; // rdx
+  __int64 Index; // r9
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *pArray; // rax
+  __int64 Size; // r11
 
   for ( i = n; i; --i )
   {
-    v3 = this->pText;
-    if ( v3 && (v4 = this->CurTextIndex, v4 < v3->Size) )
+    pText = this->pText;
+    if ( pText && (CurTextIndex = this->CurTextIndex, CurTextIndex < pText->Size) )
     {
-      this->CurTextIndex = v4 + 1;
-      v5 = this->FormatIterator.Index;
-      if ( v5 >= 0 )
+      this->CurTextIndex = CurTextIndex + 1;
+      Index = this->FormatIterator.Index;
+      if ( Index >= 0 )
       {
-        v6 = this->FormatIterator.pArray;
-        v7 = v6->Ranges.Data.Size;
-        if ( v5 < (unsigned __int64)v7
-          && v4 + 1 >= v6->Ranges.Data.Data[v5].Index + v6->Ranges.Data.Data[v5].Length
-          && v5 < v7 )
+        pArray = this->FormatIterator.pArray;
+        Size = pArray->Ranges.Data.Size;
+        if ( Index < (unsigned __int64)Size
+          && CurTextIndex + 1 >= pArray->Ranges.Data.Data[Index].Index + pArray->Ranges.Data.Data[Index].Length
+          && Index < Size )
         {
-          this->FormatIterator.Index = v5 + 1;
+          this->FormatIterator.Index = Index + 1;
         }
       }
     }
     else
     {
-      this->CurTextIndex = v3->Size;
+      this->CurTextIndex = pText->Size;
     }
   }
 }
 
 // File Line: 885
 // RVA: 0x9452D0
-void __fastcall Scaleform::Render::Text::StyledText::StyledText(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::Allocator *pallocator)
+void __fastcall Scaleform::Render::Text::StyledText::StyledText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::Allocator *pallocator)
 {
-  Scaleform::Render::Text::Allocator *v2; // rdi
-  Scaleform::Render::Text::StyledText *v3; // rbx
-  Scaleform::Render::Text::ParagraphFormat *v4; // rax
-  Scaleform::Render::Text::ParagraphFormat *v5; // rsi
-  Scaleform::Render::Text::ParagraphFormat *v6; // rcx
-  Scaleform::Render::Text::TextFormat *v7; // rsi
-  Scaleform::Render::Text::TextFormat *v8; // rdi
-  bool v9; // zf
-  Scaleform::Render::Text::ParagraphFormat srcfmt; // [rsp+28h] [rbp-40h]
-  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+78h] [rbp+10h]
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v12; // [rsp+80h] [rbp+18h]
+  Scaleform::Render::Text::ParagraphFormat *v4; // rsi
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
+  Scaleform::Render::Text::TextFormat *TextFormat; // rsi
+  Scaleform::Render::Text::TextFormat *v7; // rdi
+  Scaleform::Render::Text::ParagraphFormat srcfmt; // [rsp+28h] [rbp-40h] BYREF
+  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+78h] [rbp+10h] BYREF
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // [rsp+80h] [rbp+18h]
 
-  v2 = pallocator;
-  v3 = this;
   this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
@@ -1756,188 +1707,348 @@ void __fastcall Scaleform::Render::Text::StyledText::StyledText(Scaleform::Rende
   if ( pallocator )
     ++pallocator->RefCount;
   this->pTextAllocator.pObject = pallocator;
-  v4 = (Scaleform::Render::Text::ParagraphFormat *)&this->Paragraphs;
-  key = v4;
-  v12 = &this->Paragraphs;
-  v4->pAllocator = 0i64;
-  *(_QWORD *)&v4->RefCount = 0i64;
-  v4->pTabStops = 0i64;
+  key = (Scaleform::Render::Text::ParagraphFormat *)&this->Paragraphs;
+  p_Paragraphs = &this->Paragraphs;
+  this->Paragraphs.Data.Data = 0i64;
+  this->Paragraphs.Data.Size = 0i64;
+  this->Paragraphs.Data.Policy.Capacity = 0i64;
   this->pDefaultParagraphFormat.pObject = 0i64;
   this->pDefaultTextFormat.pObject = 0i64;
   this->RTFlags = 0;
   srcfmt.pAllocator = 0i64;
   srcfmt.RefCount = 1;
-  srcfmt.pTabStops = 0i64;
-  *(_QWORD *)&srcfmt.BlockIndent = 0i64;
-  *(_DWORD *)&srcfmt.RightMargin = 0;
-  v5 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(pallocator, &srcfmt);
-  v6 = v3->pDefaultParagraphFormat.pObject;
-  if ( v6 )
-    Scaleform::Render::Text::ParagraphFormat::Release(v6);
-  v3->pDefaultParagraphFormat.pObject = v5;
+  memset(&srcfmt.pTabStops, 0, 20);
+  v4 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(pallocator, &srcfmt);
+  pObject = this->pDefaultParagraphFormat.pObject;
+  if ( pObject )
+    Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+  this->pDefaultParagraphFormat.pObject = v4;
   if ( srcfmt.pAllocator )
   {
     key = &srcfmt;
     Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-      (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)&srcfmt.pAllocator->ParagraphFormatStorage.pTable,
+      &srcfmt.pAllocator->ParagraphFormatStorage,
       &key);
   }
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, srcfmt.pTabStops);
   srcfmt.pTabStops = 0i64;
-  v7 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v2, &v2->EntryTextFormat);
-  v8 = v3->pDefaultTextFormat.pObject;
-  if ( v8 )
+  TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(pallocator, &pallocator->EntryTextFormat);
+  v7 = this->pDefaultTextFormat.pObject;
+  if ( v7 )
   {
-    v9 = v8->RefCount-- == 1;
-    if ( v9 )
+    if ( v7->RefCount-- == 1 )
     {
-      Scaleform::Render::Text::TextFormat::~TextFormat(v8);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v8);
+      Scaleform::Render::Text::TextFormat::~TextFormat(v7);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v7);
     }
   }
-  v3->pDefaultTextFormat.pObject = v7;
+  this->pDefaultTextFormat.pObject = TextFormat;
 }
 
 // File Line: 892
 // RVA: 0x959000
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::AppendNewParagraph(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::AppendNewParagraph(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
 {
-  Scaleform::Render::Text::ParagraphFormat *v2; // rbp
-  Scaleform::Render::Text::StyledText *v3; // rsi
-  unsigned __int64 v4; // rcx
+  unsigned __int64 Size; // rcx
   unsigned __int64 v5; // r14
-  Scaleform::Render::Text::Paragraph *v6; // rcx
-  unsigned __int64 v7; // r9
+  Scaleform::Render::Text::Paragraph *pPara; // rcx
+  unsigned __int64 StartIndex; // r9
   unsigned __int64 v8; // rax
   unsigned __int64 v9; // rdx
   wchar_t *v10; // rcx
-  Scaleform::Render::Text::Allocator *v11; // rax
-  Scaleform::Render::Text::Paragraph *v12; // rbx
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  Scaleform::Render::Text::Paragraph *Paragraph; // rbx
   Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v13; // rdx
-  Scaleform::Render::Text::ParagraphFormat *v14; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
   unsigned __int64 v15; // rcx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v16; // rax
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *Data; // rax
   Scaleform::Render::Text::Paragraph *v17; // rbx
 
-  v2 = pdefParaFmt;
-  v3 = this;
-  v4 = this->Paragraphs.Data.Size;
+  Size = this->Paragraphs.Data.Size;
   v5 = 0i64;
-  if ( v4 )
+  if ( Size )
   {
-    v6 = v3->Paragraphs.Data.Data[v4 - 1].pPara;
-    v7 = v6->StartIndex;
-    v8 = v6->Text.Size;
+    pPara = this->Paragraphs.Data.Data[Size - 1].pPara;
+    StartIndex = pPara->StartIndex;
+    v8 = pPara->Text.Size;
     if ( v8 )
     {
       v9 = v8 - 1;
-      if ( v6->Text.pText && v9 < v8 )
-        v10 = &v6->Text.pText[v9];
+      if ( pPara->Text.pText && v9 < v8 )
+        v10 = &pPara->Text.pText[v9];
       else
         v10 = 0i64;
       if ( !*v10 )
         --v8;
     }
-    v5 = v8 + v7;
+    v5 = v8 + StartIndex;
   }
-  v11 = Scaleform::Render::Text::StyledText::GetAllocator(v3);
-  v12 = Scaleform::Render::Text::Allocator::AllocateParagraph(v11);
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  Paragraph = Scaleform::Render::Text::Allocator::AllocateParagraph(Allocator);
   Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)&v3->Paragraphs.Data.Data,
-    &v3->Paragraphs,
-    v3->Paragraphs.Data.Size + 1);
-  v13 = &v3->Paragraphs.Data.Data[v3->Paragraphs.Data.Size - 1];
+    &this->Paragraphs.Data,
+    &this->Paragraphs,
+    this->Paragraphs.Data.Size + 1);
+  v13 = &this->Paragraphs.Data.Data[this->Paragraphs.Data.Size - 1];
   if ( v13 )
   {
-    v13->pPara = v12;
-    v12 = 0i64;
+    v13->pPara = Paragraph;
+    Paragraph = 0i64;
   }
-  if ( v12 )
+  if ( Paragraph )
   {
     Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
-      v12->FormatInfo.Ranges.Data.Data,
-      v12->FormatInfo.Ranges.Data.Size);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v12->FormatInfo.Ranges.Data.Data);
-    v14 = v12->pFormat.pObject;
-    if ( v14 )
-      Scaleform::Render::Text::ParagraphFormat::Release(v14);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v12);
+      Paragraph->FormatInfo.Ranges.Data.Data,
+      Paragraph->FormatInfo.Ranges.Data.Size);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, Paragraph->FormatInfo.Ranges.Data.Data);
+    pObject = Paragraph->pFormat.pObject;
+    if ( pObject )
+      Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, Paragraph);
   }
-  v15 = v3->Paragraphs.Data.Size;
-  v16 = v3->Paragraphs.Data.Data;
-  v17 = v16[v15 - 1].pPara;
-  if ( !v2 )
-    v2 = v3->pDefaultParagraphFormat.pObject;
-  Scaleform::Render::Text::Paragraph::SetFormat(v16[v15 - 1].pPara, v3->pTextAllocator.pObject, v2);
+  v15 = this->Paragraphs.Data.Size;
+  Data = this->Paragraphs.Data.Data;
+  v17 = Data[v15 - 1].pPara;
+  if ( !pdefParaFmt )
+    pdefParaFmt = this->pDefaultParagraphFormat.pObject;
+  Scaleform::Render::Text::Paragraph::SetFormat(Data[v15 - 1].pPara, this->pTextAllocator.pObject, pdefParaFmt);
   v17->StartIndex = v5;
   return v17;
 }
 
 // File Line: 913
 // RVA: 0x958E30
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::Paragraph *srcPara)
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::Paragraph *srcPara)
 {
-  Scaleform::Render::Text::Paragraph *v2; // rdi
-  Scaleform::Render::Text::StyledText *v3; // rsi
-  unsigned __int64 v4; // rcx
+  unsigned __int64 Size; // rcx
   unsigned __int64 v5; // rbp
-  Scaleform::Render::Text::Paragraph *v6; // rcx
-  unsigned __int64 v7; // r9
+  Scaleform::Render::Text::Paragraph *pPara; // rcx
+  unsigned __int64 StartIndex; // r9
   unsigned __int64 v8; // rax
   unsigned __int64 v9; // rdx
   wchar_t *v10; // rcx
-  Scaleform::Render::Text::Allocator *v11; // rax
-  Scaleform::Render::Text::Allocator *v12; // rbx
+  Scaleform::Render::Text::Allocator *Allocator; // rbx
+  Scaleform::Render::Text::Paragraph *v12; // rax
   Scaleform::Render::Text::Paragraph *v13; // rax
-  Scaleform::Render::Text::Paragraph *v14; // rax
-  Scaleform::Render::Text::Paragraph *v15; // rbx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v16; // rdx
-  Scaleform::Render::Text::ParagraphFormat *v17; // rcx
+  Scaleform::Render::Text::Paragraph *v14; // rbx
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v15; // rdx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
   Scaleform::Render::Text::Paragraph *result; // rax
 
-  v2 = srcPara;
-  v3 = this;
-  v4 = this->Paragraphs.Data.Size;
+  Size = this->Paragraphs.Data.Size;
   v5 = 0i64;
-  if ( v4 )
+  if ( Size )
   {
-    v6 = v3->Paragraphs.Data.Data[v4 - 1].pPara;
-    v7 = v6->StartIndex;
-    v8 = v6->Text.Size;
+    pPara = this->Paragraphs.Data.Data[Size - 1].pPara;
+    StartIndex = pPara->StartIndex;
+    v8 = pPara->Text.Size;
     if ( v8 )
     {
       v9 = v8 - 1;
-      if ( v6->Text.pText && v9 < v8 )
-        v10 = &v6->Text.pText[v9];
+      if ( pPara->Text.pText && v9 < v8 )
+        v10 = &pPara->Text.pText[v9];
       else
         v10 = 0i64;
       if ( !*v10 )
         --v8;
     }
-    v5 = v8 + v7;
+    v5 = v8 + StartIndex;
   }
-  v11 = Scaleform::Render::Text::StyledText::GetAllocator(v3);
-  v12 = v11;
-  v13 = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v11->pHeap->vfptr->Alloc)(
-                                                v11->pHeap,
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  v12 = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Allocator->pHeap->vfptr->Alloc)(
+                                                Allocator->pHeap,
+                                                72i64);
+  if ( v12 )
+  {
+    Scaleform::Render::Text::Paragraph::Paragraph(v12, srcPara, Allocator);
+    v14 = v13;
+  }
+  else
+  {
+    v14 = 0i64;
+  }
+  Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
+    &this->Paragraphs.Data,
+    &this->Paragraphs,
+    this->Paragraphs.Data.Size + 1);
+  v15 = &this->Paragraphs.Data.Data[this->Paragraphs.Data.Size - 1];
+  if ( v15 )
+  {
+    v15->pPara = v14;
+    v14 = 0i64;
+  }
+  if ( v14 )
+  {
+    Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
+      v14->FormatInfo.Ranges.Data.Data,
+      v14->FormatInfo.Ranges.Data.Size);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v14->FormatInfo.Ranges.Data.Data);
+    pObject = v14->pFormat.pObject;
+    if ( pObject )
+      Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v14);
+  }
+  result = this->Paragraphs.Data.Data[this->Paragraphs.Data.Size - 1].pPara;
+  result->StartIndex = v5;
+  return result;
+}
+
+// File Line: 934
+// RVA: 0x995600
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::InsertNewParagraph(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *iter,
+        Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
+{
+  Scaleform::Render::Text::ParagraphFormat *v3; // rbp
+  __int64 CurIndex; // rdi
+  unsigned __int64 v6; // r15
+  Scaleform::Render::Text::Paragraph *pPara; // rcx
+  unsigned __int64 StartIndex; // r9
+  unsigned __int64 Size; // rax
+  unsigned __int64 v10; // rdx
+  wchar_t *v11; // rcx
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  Scaleform::Render::Text::Paragraph *Paragraph; // rbx
+  unsigned __int64 v14; // r8
+  __int64 v15; // r12
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v16; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *Data; // rax
+  Scaleform::Render::Text::Paragraph *v19; // rbx
+
+  v3 = pdefParaFmt;
+  if ( !iter->pArray )
+    return Scaleform::Render::Text::StyledText::AppendNewParagraph(this, pdefParaFmt);
+  CurIndex = iter->CurIndex;
+  if ( CurIndex < 0 || CurIndex >= SLODWORD(iter->pArray->Data.Size) )
+    return Scaleform::Render::Text::StyledText::AppendNewParagraph(this, pdefParaFmt);
+  v6 = 0i64;
+  if ( CurIndex )
+  {
+    pPara = this->Paragraphs.Data.Data[CurIndex - 1].pPara;
+    StartIndex = pPara->StartIndex;
+    Size = pPara->Text.Size;
+    if ( Size )
+    {
+      v10 = Size - 1;
+      if ( pPara->Text.pText && v10 < Size )
+        v11 = &pPara->Text.pText[v10];
+      else
+        v11 = 0i64;
+      if ( !*v11 )
+        --Size;
+    }
+    v6 = Size + StartIndex;
+  }
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  Paragraph = Scaleform::Render::Text::Allocator::AllocateParagraph(Allocator);
+  Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::Resize(
+    &this->Paragraphs.Data,
+    this->Paragraphs.Data.Size + 1);
+  v14 = this->Paragraphs.Data.Size;
+  if ( CurIndex < v14 - 1 )
+    memmove(&this->Paragraphs.Data.Data[CurIndex + 1], &this->Paragraphs.Data.Data[CurIndex], 8 * (v14 - CurIndex) - 8);
+  v15 = CurIndex;
+  v16 = &this->Paragraphs.Data.Data[CurIndex];
+  if ( v16 )
+  {
+    v16->pPara = Paragraph;
+    Paragraph = 0i64;
+  }
+  if ( Paragraph )
+  {
+    Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
+      Paragraph->FormatInfo.Ranges.Data.Data,
+      Paragraph->FormatInfo.Ranges.Data.Size);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, Paragraph->FormatInfo.Ranges.Data.Data);
+    pObject = Paragraph->pFormat.pObject;
+    if ( pObject )
+      Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, Paragraph);
+  }
+  Data = this->Paragraphs.Data.Data;
+  v19 = Data[v15].pPara;
+  if ( !v3 )
+    v3 = this->pDefaultParagraphFormat.pObject;
+  Scaleform::Render::Text::Paragraph::SetFormat(Data[v15].pPara, this->pTextAllocator.pObject, v3);
+  v19->StartIndex = v6;
+  return v19;
+}
+
+// File Line: 960
+// RVA: 0x994E40
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::InsertCopyOfParagraph(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *iter,
+        Scaleform::Render::Text::Paragraph *srcPara)
+{
+  __int64 CurIndex; // rdi
+  unsigned __int64 v6; // rbp
+  Scaleform::Render::Text::Paragraph *pPara; // rcx
+  unsigned __int64 StartIndex; // r9
+  unsigned __int64 Size; // rax
+  unsigned __int64 v10; // rdx
+  wchar_t *v11; // rcx
+  Scaleform::Render::Text::Allocator *Allocator; // rbx
+  Scaleform::Render::Text::Paragraph *v13; // rax
+  Scaleform::Render::Text::Paragraph *v14; // rax
+  Scaleform::Render::Text::Paragraph *v15; // rbx
+  unsigned __int64 v16; // r8
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v17; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
+  Scaleform::Render::Text::Paragraph *result; // rax
+
+  if ( !iter->pArray )
+    return Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(this, srcPara);
+  CurIndex = iter->CurIndex;
+  if ( CurIndex < 0 || CurIndex >= SLODWORD(iter->pArray->Data.Size) )
+    return Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(this, srcPara);
+  v6 = 0i64;
+  if ( CurIndex )
+  {
+    pPara = this->Paragraphs.Data.Data[CurIndex - 1].pPara;
+    StartIndex = pPara->StartIndex;
+    Size = pPara->Text.Size;
+    if ( Size )
+    {
+      v10 = Size - 1;
+      if ( pPara->Text.pText && v10 < Size )
+        v11 = &pPara->Text.pText[v10];
+      else
+        v11 = 0i64;
+      if ( !*v11 )
+        --Size;
+    }
+    v6 = Size + StartIndex;
+  }
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  v13 = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Allocator->pHeap->vfptr->Alloc)(
+                                                Allocator->pHeap,
                                                 72i64);
   if ( v13 )
   {
-    Scaleform::Render::Text::Paragraph::Paragraph(v13, v2, v12);
+    Scaleform::Render::Text::Paragraph::Paragraph(v13, srcPara, Allocator);
     v15 = v14;
   }
   else
   {
     v15 = 0i64;
   }
-  Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)&v3->Paragraphs.Data.Data,
-    &v3->Paragraphs,
-    v3->Paragraphs.Data.Size + 1);
-  v16 = &v3->Paragraphs.Data.Data[v3->Paragraphs.Data.Size - 1];
-  if ( v16 )
+  Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::Resize(
+    &this->Paragraphs.Data,
+    this->Paragraphs.Data.Size + 1);
+  v16 = this->Paragraphs.Data.Size;
+  if ( CurIndex < v16 - 1 )
+    memmove(&this->Paragraphs.Data.Data[CurIndex + 1], &this->Paragraphs.Data.Data[CurIndex], 8 * (v16 - CurIndex) - 8);
+  v17 = &this->Paragraphs.Data.Data[CurIndex];
+  if ( v17 )
   {
-    v16->pPara = v15;
+    v17->pPara = v15;
     v15 = 0i64;
   }
   if ( v15 )
@@ -1946,229 +2057,61 @@ Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledTe
       v15->FormatInfo.Ranges.Data.Data,
       v15->FormatInfo.Ranges.Data.Size);
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v15->FormatInfo.Ranges.Data.Data);
-    v17 = v15->pFormat.pObject;
-    if ( v17 )
-      Scaleform::Render::Text::ParagraphFormat::Release(v17);
+    pObject = v15->pFormat.pObject;
+    if ( pObject )
+      Scaleform::Render::Text::ParagraphFormat::Release(pObject);
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v15);
   }
-  result = v3->Paragraphs.Data.Data[v3->Paragraphs.Data.Size - 1].pPara;
-  result->StartIndex = v5;
-  return result;
-}
-
-// File Line: 934
-// RVA: 0x995600
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::InsertNewParagraph(Scaleform::Render::Text::StyledText *this, Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *iter, Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
-{
-  Scaleform::Render::Text::ParagraphFormat *v3; // rbp
-  Scaleform::Render::Text::StyledText *v4; // rsi
-  __int64 v5; // rdi
-  unsigned __int64 v6; // r15
-  Scaleform::Render::Text::Paragraph *v7; // rcx
-  unsigned __int64 v8; // r9
-  unsigned __int64 v9; // rax
-  unsigned __int64 v10; // rdx
-  wchar_t *v11; // rcx
-  Scaleform::Render::Text::Allocator *v12; // rax
-  Scaleform::Render::Text::Paragraph *v13; // rbx
-  unsigned __int64 v14; // r8
-  signed __int64 v15; // r12
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v16; // rcx
-  Scaleform::Render::Text::ParagraphFormat *v17; // rcx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v18; // rax
-  Scaleform::Render::Text::Paragraph *v19; // rbx
-
-  v3 = pdefParaFmt;
-  v4 = this;
-  if ( !iter->pArray )
-    return Scaleform::Render::Text::StyledText::AppendNewParagraph(this, pdefParaFmt);
-  v5 = iter->CurIndex;
-  if ( v5 < 0 || v5 >= SLODWORD(iter->pArray->Data.Size) )
-    return Scaleform::Render::Text::StyledText::AppendNewParagraph(this, pdefParaFmt);
-  v6 = 0i64;
-  if ( v5 )
-  {
-    v7 = this->Paragraphs.Data.Data[v5 - 1].pPara;
-    v8 = v7->StartIndex;
-    v9 = v7->Text.Size;
-    if ( v9 )
-    {
-      v10 = v9 - 1;
-      if ( v7->Text.pText && v10 < v9 )
-        v11 = &v7->Text.pText[v10];
-      else
-        v11 = 0i64;
-      if ( !*v11 )
-        --v9;
-    }
-    v6 = v9 + v8;
-  }
-  v12 = Scaleform::Render::Text::StyledText::GetAllocator(v4);
-  v13 = Scaleform::Render::Text::Allocator::AllocateParagraph(v12);
-  Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::Resize(
-    &v4->Paragraphs.Data,
-    v4->Paragraphs.Data.Size + 1);
-  v14 = v4->Paragraphs.Data.Size;
-  if ( v5 < v14 - 1 )
-    memmove(&v4->Paragraphs.Data.Data[v5 + 1], &v4->Paragraphs.Data.Data[v5], 8 * (v14 - v5) - 8);
-  v15 = v5;
-  v16 = &v4->Paragraphs.Data.Data[v5];
-  if ( v16 )
-  {
-    v16->pPara = v13;
-    v13 = 0i64;
-  }
-  if ( v13 )
-  {
-    Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
-      v13->FormatInfo.Ranges.Data.Data,
-      v13->FormatInfo.Ranges.Data.Size);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13->FormatInfo.Ranges.Data.Data);
-    v17 = v13->pFormat.pObject;
-    if ( v17 )
-      Scaleform::Render::Text::ParagraphFormat::Release(v17);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13);
-  }
-  v18 = v4->Paragraphs.Data.Data;
-  v19 = v18[v15].pPara;
-  if ( !v3 )
-    v3 = v4->pDefaultParagraphFormat.pObject;
-  Scaleform::Render::Text::Paragraph::SetFormat(v18[v15].pPara, v4->pTextAllocator.pObject, v3);
-  v19->StartIndex = v6;
-  return v19;
-}
-
-// File Line: 960
-// RVA: 0x994E40
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::InsertCopyOfParagraph(Scaleform::Render::Text::StyledText *this, Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *iter, Scaleform::Render::Text::Paragraph *srcPara)
-{
-  Scaleform::Render::Text::Paragraph *v3; // r14
-  Scaleform::Render::Text::StyledText *v4; // rsi
-  __int64 v5; // rdi
-  unsigned __int64 v6; // rbp
-  Scaleform::Render::Text::Paragraph *v7; // rcx
-  unsigned __int64 v8; // r9
-  unsigned __int64 v9; // rax
-  unsigned __int64 v10; // rdx
-  wchar_t *v11; // rcx
-  Scaleform::Render::Text::Allocator *v12; // rax
-  Scaleform::Render::Text::Allocator *v13; // rbx
-  Scaleform::Render::Text::Paragraph *v14; // rax
-  Scaleform::Render::Text::Paragraph *v15; // rax
-  Scaleform::Render::Text::Paragraph *v16; // rbx
-  unsigned __int64 v17; // r8
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v18; // rcx
-  Scaleform::Render::Text::ParagraphFormat *v19; // rcx
-  Scaleform::Render::Text::Paragraph *result; // rax
-
-  v3 = srcPara;
-  v4 = this;
-  if ( !iter->pArray )
-    return Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(this, srcPara);
-  v5 = iter->CurIndex;
-  if ( v5 < 0 || v5 >= SLODWORD(iter->pArray->Data.Size) )
-    return Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(this, srcPara);
-  v6 = 0i64;
-  if ( v5 )
-  {
-    v7 = this->Paragraphs.Data.Data[v5 - 1].pPara;
-    v8 = v7->StartIndex;
-    v9 = v7->Text.Size;
-    if ( v9 )
-    {
-      v10 = v9 - 1;
-      if ( v7->Text.pText && v10 < v9 )
-        v11 = &v7->Text.pText[v10];
-      else
-        v11 = 0i64;
-      if ( !*v11 )
-        --v9;
-    }
-    v6 = v9 + v8;
-  }
-  v12 = Scaleform::Render::Text::StyledText::GetAllocator(v4);
-  v13 = v12;
-  v14 = (Scaleform::Render::Text::Paragraph *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v12->pHeap->vfptr->Alloc)(
-                                                v12->pHeap,
-                                                72i64);
-  if ( v14 )
-  {
-    Scaleform::Render::Text::Paragraph::Paragraph(v14, v3, v13);
-    v16 = v15;
-  }
-  else
-  {
-    v16 = 0i64;
-  }
-  Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::Resize(
-    &v4->Paragraphs.Data,
-    v4->Paragraphs.Data.Size + 1);
-  v17 = v4->Paragraphs.Data.Size;
-  if ( v5 < v17 - 1 )
-    memmove(&v4->Paragraphs.Data.Data[v5 + 1], &v4->Paragraphs.Data.Data[v5], 8 * (v17 - v5) - 8);
-  v18 = &v4->Paragraphs.Data.Data[v5];
-  if ( v18 )
-  {
-    v18->pPara = v16;
-    v16 = 0i64;
-  }
-  if ( v16 )
-  {
-    Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
-      v16->FormatInfo.Ranges.Data.Data,
-      v16->FormatInfo.Ranges.Data.Size);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16->FormatInfo.Ranges.Data.Data);
-    v19 = v16->pFormat.pObject;
-    if ( v19 )
-      Scaleform::Render::Text::ParagraphFormat::Release(v19);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16);
-  }
-  result = v4->Paragraphs.Data.Data[v5].pPara;
+  result = this->Paragraphs.Data.Data[CurIndex].pPara;
   result->StartIndex = v6;
   return result;
 }
 
 // File Line: 984
 // RVA: 0x987DC0
-Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::GetLastParagraph(Scaleform::Render::Text::StyledText *this)
+Scaleform::Render::Text::Paragraph *__fastcall Scaleform::Render::Text::StyledText::GetLastParagraph(
+        Scaleform::Render::Text::StyledText *this)
 {
   signed __int64 v1; // rdx
-  Scaleform::Render::Text::Paragraph *result; // rax
 
   v1 = this->Paragraphs.Data.Size - 1;
   if ( this == (Scaleform::Render::Text::StyledText *)-24i64 || v1 < 0 || v1 >= SLODWORD(this->Paragraphs.Data.Size) )
-    result = 0i64;
+    return 0i64;
   else
-    result = this->Paragraphs.Data.Data[v1].pPara;
-  return result;
+    return this->Paragraphs.Data.Data[v1].pPara;
 }
 
 // File Line: 1015
 // RVA: 0x959480
-unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(Scaleform::Render::Text::StyledText *this, const char *putf8String, unsigned __int64 stringSize, Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy, Scaleform::Render::Text::TextFormat *pdefTextFmt, Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
+unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(
+        Scaleform::Render::Text::StyledText *this,
+        char *putf8String,
+        unsigned __int64 stringSize,
+        Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy,
+        Scaleform::Render::Text::TextFormat *pdefTextFmt,
+        Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
 {
   char *v6; // rdi
-  Scaleform::Render::Text::StyledText *v7; // r15
   const char *v8; // r12
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v9; // rdx
-  unsigned __int64 v10; // rcx
-  signed int v11; // ebx
-  signed __int64 v12; // rcx
-  Scaleform::Render::Text::Paragraph *v13; // r13
-  unsigned __int64 v14; // rbp
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdx
+  unsigned __int64 Size; // rcx
+  int v11; // ebx
+  __int64 v12; // rcx
+  Scaleform::Render::Text::Paragraph *pPara; // r13
+  unsigned __int64 StartIndex; // rbp
   Scaleform::Render::Text::ParagraphFormat *v15; // rsi
   int v16; // ecx
   unsigned __int64 v17; // rbp
   unsigned __int64 v18; // rax
   wchar_t *v19; // rax
-  signed int v20; // esi
+  int v20; // esi
   unsigned __int64 v21; // r14
-  unsigned int v22; // eax
+  unsigned int Char_Advance0; // eax
   char *v23; // rcx
-  wchar_t *v24; // rsi
+  wchar_t *Position; // rsi
   unsigned int v25; // eax
-  signed int v26; // eax
-  signed int v27; // eax
+  int v26; // eax
+  int v27; // eax
   Scaleform::Render::Text::TextFormat *v28; // rbx
   bool v29; // zf
   unsigned __int64 result; // rax
@@ -2176,13 +2119,12 @@ unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(Sc
   unsigned __int64 v32; // [rsp+38h] [rbp-60h]
   Scaleform::Render::Text::Paragraph *v33; // [rsp+40h] [rbp-58h]
   int v34; // [rsp+A0h] [rbp+8h]
-  char *putf8Buffer; // [rsp+A8h] [rbp+10h]
+  char *putf8Buffer; // [rsp+A8h] [rbp+10h] BYREF
   unsigned __int64 v36; // [rsp+B0h] [rbp+18h]
   Scaleform::Render::Text::StyledText::NewLinePolicy v37; // [rsp+B8h] [rbp+20h]
 
   v37 = newLinePolicy;
-  v6 = (char *)putf8String;
-  v7 = this;
+  v6 = putf8String;
   if ( stringSize == -1i64 )
   {
     do
@@ -2190,31 +2132,31 @@ unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(Sc
     while ( putf8String[stringSize] );
   }
   v8 = &putf8String[stringSize];
-  v9 = &this->Paragraphs;
-  v10 = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
   v11 = 0;
   v36 = 0i64;
-  v12 = v10 - 1;
-  if ( !v9 || v12 < 0 || v12 >= SLODWORD(v9->Data.Size) )
+  v12 = Size - 1;
+  if ( !p_Paragraphs || v12 < 0 || v12 >= SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v13 = 0i64;
+    pPara = 0i64;
     v33 = 0i64;
     goto LABEL_9;
   }
-  v13 = v9->Data.Data[v12].pPara;
-  v33 = v13;
-  if ( !v13 )
+  pPara = p_Paragraphs->Data.Data[v12].pPara;
+  v33 = pPara;
+  if ( !pPara )
   {
 LABEL_9:
-    v14 = 0i64;
+    StartIndex = 0i64;
     goto LABEL_10;
   }
-  v14 = v13->StartIndex;
+  StartIndex = pPara->StartIndex;
 LABEL_10:
-  v31 = v14;
-  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))v7->vfptr[1].__vecDelDtor)(
-    v7,
-    v14,
+  v31 = StartIndex;
+  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))this->vfptr[1].__vecDelDtor)(
+    this,
+    StartIndex,
     stringSize,
     v6);
   v15 = pdefParaFmt;
@@ -2222,33 +2164,33 @@ LABEL_10:
   do
   {
     v34 = v16 + 1;
-    if ( v16 || !v13 )
+    if ( v16 || !pPara )
     {
       v17 = 0i64;
-      v13 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v7, v15);
-      v33 = v13;
-      v13->StartIndex = v31;
+      pPara = Scaleform::Render::Text::StyledText::AppendNewParagraph(this, v15);
+      v33 = pPara;
+      pPara->StartIndex = v31;
       v32 = 0i64;
     }
     else
     {
-      Scaleform::Render::Text::Paragraph::RemoveTermNull(v13);
-      v17 = v13->Text.Size;
+      Scaleform::Render::Text::Paragraph::RemoveTermNull(pPara);
+      v17 = pPara->Text.Size;
       v32 = v17;
       if ( !v17 )
-        goto LABEL_67;
+        goto LABEL_21;
       v18 = v17 - 1;
-      if ( v13->Text.pText && v18 < v17 )
-        v19 = &v13->Text.pText[v18];
+      if ( pPara->Text.pText && v18 < v17 )
+        v19 = &pPara->Text.pText[v18];
       else
         v19 = 0i64;
       if ( !*v19 )
         v32 = --v17;
       if ( !v17 )
       {
-LABEL_67:
+LABEL_21:
         if ( v15 )
-          Scaleform::Render::Text::Paragraph::SetFormat(v13, v7->pTextAllocator.pObject, v15);
+          Scaleform::Render::Text::Paragraph::SetFormat(pPara, this->pTextAllocator.pObject, v15);
       }
     }
     v20 = v11;
@@ -2259,16 +2201,16 @@ LABEL_67:
       break;
     while ( v11 )
     {
-      v22 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
+      Char_Advance0 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
       v23 = putf8Buffer;
-      if ( !v22 )
-        v23 = putf8Buffer-- - 1;
-      if ( v37 || v20 != 13 || v21 || (v20 = -1, v22 != 10) )
+      if ( !Char_Advance0 )
+        v23 = --putf8Buffer;
+      if ( v37 || v20 != 13 || v21 || (v20 = -1, Char_Advance0 != 10) )
       {
-        v11 = v22;
-        if ( v22 == 10 )
+        v11 = Char_Advance0;
+        if ( Char_Advance0 == 10 )
           goto LABEL_39;
-        if ( v22 == 13 )
+        if ( Char_Advance0 == 13 )
           break;
         ++v21;
       }
@@ -2284,16 +2226,16 @@ LABEL_39:
       ++v21;
     if ( v21 )
     {
-      v24 = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(
-              &v13->Text,
-              v7->pTextAllocator.pObject,
-              v17,
-              v21);
+      Position = Scaleform::Render::Text::Paragraph::TextBuffer::CreatePosition(
+                   &pPara->Text,
+                   this->pTextAllocator.pObject,
+                   v17,
+                   v21);
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-        &v13->FormatInfo,
+        &pPara->FormatInfo,
         v17,
         v21);
-      ++v13->ModCounter;
+      ++pPara->ModCounter;
       v11 = -1;
       putf8Buffer = v6;
       if ( v6 < v8 )
@@ -2306,26 +2248,25 @@ LABEL_39:
           v6 = putf8Buffer;
           v11 = v25;
           if ( !v25 )
-            v6 = putf8Buffer-- - 1;
+            v6 = --putf8Buffer;
           if ( v25 == 13 || v25 == 10 )
           {
             v11 = 10;
-            if ( v7->RTFlags & 2 )
+            if ( (this->RTFlags & 2) != 0 )
               v11 = 13;
           }
-          *v24 = v11;
-          ++v24;
+          *Position++ = v11;
           v26 = 10;
-          if ( v7->RTFlags & 2 )
+          if ( (this->RTFlags & 2) != 0 )
             v26 = 13;
         }
         while ( v11 != v26 && v6 < v8 );
         v17 = v32;
-        v13 = v33;
+        pPara = v33;
       }
       Scaleform::Render::Text::Paragraph::SetTextFormat(
-        v13,
-        v7->pTextAllocator.pObject,
+        pPara,
+        this->pTextAllocator.pObject,
         pdefTextFmt,
         v17,
         0xFFFFFFFFFFFFFFFFui64);
@@ -2339,68 +2280,69 @@ LABEL_39:
   }
   while ( v11 );
   v27 = 10;
-  if ( v7->RTFlags & 2 )
+  if ( (this->RTFlags & 2) != 0 )
     v27 = 13;
   if ( v11 == v27 )
-    v13 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v7, pdefParaFmt);
+    pPara = Scaleform::Render::Text::StyledText::AppendNewParagraph(this, pdefParaFmt);
   v28 = pdefTextFmt;
-  Scaleform::Render::Text::Paragraph::AppendTermNull(v13, v7->pTextAllocator.pObject, pdefTextFmt);
-  if ( !(v28->PresentMask & 0x100) )
+  Scaleform::Render::Text::Paragraph::AppendTermNull(pPara, this->pTextAllocator.pObject, pdefTextFmt);
+  if ( (v28->PresentMask & 0x100) == 0 )
     return v36;
-  v29 = Scaleform::String::GetLength((Scaleform::String *)&v28->Url.0) == 0;
+  v29 = Scaleform::String::GetLength(&v28->Url) == 0;
   result = v36;
   if ( !v29 )
-    v7->RTFlags |= 1u;
+    this->RTFlags |= 1u;
   return result;
 }
 
 // File Line: 1127
 // RVA: 0x9597C0
-unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(Scaleform::Render::Text::StyledText *this, const wchar_t *pstr, unsigned __int64 length, Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy, Scaleform::Render::Text::TextFormat *pdefTextFmt, Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
+unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(
+        Scaleform::Render::Text::StyledText *this,
+        const wchar_t *pstr,
+        unsigned __int64 length,
+        Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy,
+        Scaleform::Render::Text::TextFormat *pdefTextFmt,
+        Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
 {
-  signed int v6; // esi
+  int v6; // esi
   const wchar_t *v7; // r12
   unsigned __int64 v8; // rbp
   Scaleform::Render::Text::StyledText *v9; // r13
-  unsigned __int64 v10; // r14
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v11; // rcx
-  signed __int64 v12; // r14
-  Scaleform::Render::Text::Paragraph *v13; // r14
-  unsigned __int64 v14; // rbx
+  unsigned __int64 Size; // r14
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rcx
+  __int64 v12; // r14
+  Scaleform::Render::Text::Paragraph *pPara; // r14
+  unsigned __int64 StartIndex; // rbx
   Scaleform::Render::Text::ParagraphFormat *v15; // rdi
   int v16; // ecx
   unsigned __int64 v17; // r15
   unsigned __int64 v18; // rax
   wchar_t *v19; // rax
-  Scaleform::Render::Text::Paragraph *v20; // rax
+  Scaleform::Render::Text::Paragraph *appended; // rax
   unsigned __int64 v21; // rbx
   wchar_t *v22; // r13
   unsigned __int64 v23; // r8
   unsigned __int64 v24; // rdx
   wchar_t *v25; // rax
   unsigned __int64 v26; // r8
-  wchar_t *v27; // rax
-  signed int v28; // eax
-  char v29; // cl
-  unsigned __int64 v30; // rdx
-  unsigned __int64 v31; // rax
-  wchar_t *v32; // rax
-  unsigned __int8 v33; // al
-  unsigned __int64 v34; // r15
-  signed int v35; // eax
-  unsigned __int64 v36; // rdi
-  signed __int64 v37; // rbx
-  __int64 v38; // rax
+  wchar_t *pText; // rax
+  int v28; // eax
+  unsigned __int64 v29; // rdx
+  unsigned __int64 v30; // rax
+  wchar_t *v31; // rax
+  unsigned __int8 v32; // al
+  unsigned __int64 v33; // r15
+  int v34; // eax
+  unsigned __int64 v35; // rdi
+  __int64 v36; // rbx
+  __int64 v37; // rax
   unsigned __int64 result; // rax
-  __int64 v40; // [rsp+30h] [rbp-58h]
-  const wchar_t *v41; // [rsp+38h] [rbp-50h]
-  Scaleform::Render::Text::StyledText *v42; // [rsp+90h] [rbp+8h]
-  int v43; // [rsp+98h] [rbp+10h]
-  unsigned __int64 v44; // [rsp+A0h] [rbp+18h]
-  Scaleform::Render::Text::StyledText::NewLinePolicy v45; // [rsp+A8h] [rbp+20h]
+  __int64 v39; // [rsp+30h] [rbp-58h]
+  const wchar_t *v40; // [rsp+38h] [rbp-50h]
+  int v42; // [rsp+98h] [rbp+10h]
+  unsigned __int64 v43; // [rsp+A0h] [rbp+18h]
 
-  v45 = newLinePolicy;
-  v42 = this;
   v6 = 0;
   v7 = pstr;
   v8 = length;
@@ -2412,65 +2354,65 @@ unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::AppendString(Sc
       ++v8;
     while ( pstr[v8] );
   }
-  v10 = this->Paragraphs.Data.Size;
-  v11 = &this->Paragraphs;
-  v12 = v10 - 1;
-  v41 = &pstr[v8];
-  if ( !v11 || v12 < 0 || v12 >= SLODWORD(v11->Data.Size) )
+  Size = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
+  v12 = Size - 1;
+  v40 = &pstr[v8];
+  if ( !p_Paragraphs || v12 < 0 || v12 >= SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v13 = 0i64;
+    pPara = 0i64;
     goto LABEL_10;
   }
-  v13 = v11->Data.Data[v12].pPara;
-  if ( !v13 )
+  pPara = p_Paragraphs->Data.Data[v12].pPara;
+  if ( !pPara )
   {
 LABEL_10:
-    v14 = 0i64;
+    StartIndex = 0i64;
     goto LABEL_11;
   }
-  v14 = v13->StartIndex;
+  StartIndex = pPara->StartIndex;
 LABEL_11:
-  v44 = v14;
+  v43 = StartIndex;
   ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, const wchar_t *))v9->vfptr[2].__vecDelDtor)(
     v9,
-    v14,
+    StartIndex,
     v8,
     pstr);
   v15 = pdefParaFmt;
-  v40 = 0i64;
+  v39 = 0i64;
   v16 = 0;
   while ( 1 )
   {
-    v43 = v16 + 1;
-    if ( v16 || !v13 )
+    v42 = v16 + 1;
+    if ( v16 || !pPara )
     {
-      v20 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v9, v15);
+      appended = Scaleform::Render::Text::StyledText::AppendNewParagraph(v9, v15);
       v17 = 0i64;
-      v20->StartIndex = v14;
-      v13 = v20;
+      appended->StartIndex = StartIndex;
+      pPara = appended;
     }
     else
     {
-      Scaleform::Render::Text::Paragraph::RemoveTermNull(v13);
-      v17 = v13->Text.Size;
+      Scaleform::Render::Text::Paragraph::RemoveTermNull(pPara);
+      v17 = pPara->Text.Size;
       if ( !v17 )
-        goto LABEL_85;
+        goto LABEL_22;
       v18 = v17 - 1;
-      if ( v13->Text.pText && v18 < v17 )
-        v19 = &v13->Text.pText[v18];
+      if ( pPara->Text.pText && v18 < v17 )
+        v19 = &pPara->Text.pText[v18];
       else
         v19 = 0i64;
       if ( !*v19 )
         --v17;
       if ( !v17 )
       {
-LABEL_85:
+LABEL_22:
         if ( v15 )
-          Scaleform::Render::Text::Paragraph::SetFormat(v13, v9->pTextAllocator.pObject, v15);
+          Scaleform::Render::Text::Paragraph::SetFormat(pPara, v9->pTextAllocator.pObject, v15);
       }
     }
     v21 = 0i64;
-    if ( v45 == NLP_CompressCRLF && v6 == 13 && *v7 == 10 )
+    if ( newLinePolicy == NLP_CompressCRLF && v6 == 13 && *v7 == 10 )
     {
       ++v7;
       if ( !--v8 )
@@ -2504,35 +2446,35 @@ LABEL_34:
 LABEL_37:
     if ( v21 )
     {
-      v23 = v13->Text.Size;
+      v23 = pPara->Text.Size;
       v24 = v23 + v21;
-      if ( v13->Text.Allocated < v23 + v21 )
+      if ( pPara->Text.Allocated < v23 + v21 )
       {
-        if ( v13->Text.pText )
+        if ( pPara->Text.pText )
           v25 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                              Scaleform::Memory::pGlobalHeap,
-                             v13->Text.pText,
+                             pPara->Text.pText,
                              2 * v24);
         else
           v25 = (wchar_t *)v9->pTextAllocator.pObject->pHeap->vfptr->Alloc(
                              v9->pTextAllocator.pObject->pHeap,
                              2 * v24,
                              0i64);
-        v23 = v13->Text.Size;
-        v13->Text.pText = v25;
-        v13->Text.Allocated = v23 + v21;
+        v23 = pPara->Text.Size;
+        pPara->Text.pText = v25;
+        pPara->Text.Allocated = v23 + v21;
       }
       v26 = v23 - v17;
       if ( v26 )
-        memmove(&v13->Text.pText[v21 + v17], &v13->Text.pText[v17], 2 * v26);
-      v27 = v13->Text.pText;
-      v13->Text.Size += v21;
-      v22 = &v27[v17];
+        memmove(&pPara->Text.pText[v21 + v17], &pPara->Text.pText[v17], 2 * v26);
+      pText = pPara->Text.pText;
+      pPara->Text.Size += v21;
+      v22 = &pText[v17];
       Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-        &v13->FormatInfo,
+        &pPara->FormatInfo,
         v17,
         v21);
-      ++v13->ModCounter;
+      ++pPara->ModCounter;
     }
     else
     {
@@ -2541,140 +2483,137 @@ LABEL_37:
     memmove(v22, v7, 2 * v21);
     v7 += v21;
     v8 -= v21;
-    if ( v6 != 10 && v6 != 13 )
+    if ( v6 == 10 || v6 == 13 )
     {
-      v9 = v42;
-    }
-    else
-    {
-      v9 = v42;
+      v9 = this;
       v28 = 10;
-      v29 = ((unsigned __int8)v42->RTFlags >> 1) & 1;
-      if ( v29 )
+      if ( (this->RTFlags & 2) != 0 )
         v28 = 13;
       if ( v6 != v28 )
       {
-        v30 = v13->Text.Size;
-        if ( v30 )
+        v29 = pPara->Text.Size;
+        if ( v29 )
         {
-          v31 = v30 - 1;
-          if ( v13->Text.pText && v31 < v30 )
-            v32 = &v13->Text.pText[v31];
+          v30 = v29 - 1;
+          if ( pPara->Text.pText && v30 < v29 )
+            v31 = &pPara->Text.pText[v30];
           else
-            v32 = 0i64;
-          if ( !*v32 )
-            --v30;
-          if ( v30 )
+            v31 = 0i64;
+          if ( !*v31 )
+            --v29;
+          if ( v29 )
           {
-            v33 = 10;
-            if ( v29 )
-              v33 = 13;
-            v13->Text.pText[v30 - 1] = v33;
+            v32 = 10;
+            if ( (this->RTFlags & 2) != 0 )
+              v32 = 13;
+            pPara->Text.pText[v29 - 1] = v32;
           }
         }
         v6 = 10;
-        if ( v42->RTFlags & 2 )
+        if ( (this->RTFlags & 2) != 0 )
           v6 = 13;
       }
     }
+    else
+    {
+      v9 = this;
+    }
     Scaleform::Render::Text::Paragraph::SetTextFormat(
-      v13,
+      pPara,
       v9->pTextAllocator.pObject,
       pdefTextFmt,
       v17,
       0xFFFFFFFFFFFFFFFFui64);
-    v44 += v21 + v17;
-    v34 = v21 + v40;
-    v40 += v21;
-    if ( v7 < v41 )
+    v43 += v21 + v17;
+    v33 = v21 + v39;
+    v39 += v21;
+    if ( v7 < v40 )
     {
       v15 = pdefParaFmt;
-      v16 = v43;
-      v14 = v44;
+      v16 = v42;
+      StartIndex = v43;
       if ( v6 )
         continue;
     }
     v15 = pdefParaFmt;
     goto LABEL_71;
   }
-  v34 = v40;
+  v33 = v39;
 LABEL_71:
-  v35 = 10;
-  if ( v9->RTFlags & 2 )
-    v35 = 13;
-  if ( v6 == v35 )
-    v13 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v9, v15);
-  Scaleform::Render::Text::Paragraph::AppendTermNull(v13, v9->pTextAllocator.pObject, pdefTextFmt);
-  if ( !(pdefTextFmt->PresentMask & 0x100) )
-    return v34;
-  v36 = pdefTextFmt->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
-  v37 = *(_QWORD *)v36 & 0x7FFFFFFFFFFFFFFFi64;
-  if ( *(_QWORD *)v36 >= 0i64 )
+  v34 = 10;
+  if ( (v9->RTFlags & 2) != 0 )
+    v34 = 13;
+  if ( v6 == v34 )
+    pPara = Scaleform::Render::Text::StyledText::AppendNewParagraph(v9, v15);
+  Scaleform::Render::Text::Paragraph::AppendTermNull(pPara, v9->pTextAllocator.pObject, pdefTextFmt);
+  if ( (pdefTextFmt->PresentMask & 0x100) == 0 )
+    return v33;
+  v35 = pdefTextFmt->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+  v36 = *(_QWORD *)v35 & 0x7FFFFFFFFFFFFFFFi64;
+  if ( *(__int64 *)v35 >= 0 )
   {
-    v38 = Scaleform::UTF8Util::GetLength((const char *)(v36 + 12), *(_QWORD *)v36 & 0x7FFFFFFFFFFFFFFFi64);
-    if ( v38 == v37 )
-      *(_QWORD *)v36 |= 0x8000000000000000ui64;
-    v37 = v38;
+    v37 = Scaleform::UTF8Util::GetLength((const char *)(v35 + 12), *(_QWORD *)v35 & 0x7FFFFFFFFFFFFFFFi64);
+    if ( v37 == v36 )
+      *(_QWORD *)v35 |= 0x8000000000000000ui64;
+    v36 = v37;
   }
-  result = v34;
-  if ( v37 )
+  result = v33;
+  if ( v36 )
     v9->RTFlags |= 1u;
   return result;
 }
 
 // File Line: 1236
 // RVA: 0x98A2A0
-Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *__fastcall Scaleform::Render::Text::StyledText::GetParagraphByIndex(Scaleform::Render::Text::StyledText *this, Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *result, unsigned __int64 index, unsigned __int64 *pindexInParagraph)
+Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *__fastcall Scaleform::Render::Text::StyledText::GetParagraphByIndex(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *result,
+        unsigned __int64 index,
+        unsigned __int64 *pindexInParagraph)
 {
-  signed __int64 v4; // r10
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v5; // rsi
+  __int64 Size; // r10
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rsi
   unsigned __int64 v6; // rbx
-  unsigned __int64 *v7; // r15
-  unsigned __int64 v8; // r11
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *v9; // rdi
   unsigned __int64 v10; // r9
-  Scaleform::Render::Text::Paragraph *v11; // rax
-  unsigned __int64 v12; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v13; // rax
   unsigned __int64 v14; // rdx
   Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *v15; // rax
 
-  v4 = this->Paragraphs.Data.Size;
-  v5 = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v6 = 0i64;
-  v7 = pindexInParagraph;
-  v8 = index;
-  v9 = result;
-  while ( v4 > 0 )
+  while ( Size > 0 )
   {
-    v10 = (v4 >> 1) + v6;
-    v11 = v5->Data.Data[v10].pPara;
-    v12 = v11->StartIndex;
-    if ( v8 >= v12 && v8 < v12 + v11->Text.Size || (signed int)v12 - (signed int)v8 >= 0 )
+    v10 = (Size >> 1) + v6;
+    pPara = p_Paragraphs->Data.Data[v10].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( index >= StartIndex && index < StartIndex + pPara->Text.Size || (int)StartIndex - (int)index >= 0 )
     {
-      v4 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v6 = v10 + 1;
-      v4 += -1 - (v4 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v6 >= this->Paragraphs.Data.Size
-    || ((v13 = v5->Data.Data[v6].pPara, v14 = v13->StartIndex, v8 < v14) || v8 >= v14 + v13->Text.Size)
-    && (_DWORD)v14 != (_DWORD)v8 )
+  if ( v6 < this->Paragraphs.Data.Size
+    && ((v13 = p_Paragraphs->Data.Data[v6].pPara, v14 = v13->StartIndex, index >= v14) && index < v14 + v13->Text.Size
+     || (_DWORD)v14 == (_DWORD)index) )
   {
-    v9->pArray = 0i64;
-    v9->CurIndex = -1i64;
-    v15 = v9;
+    if ( pindexInParagraph )
+      *pindexInParagraph = index - p_Paragraphs->Data.Data[(int)v6].pPara->StartIndex;
+    result->pArray = p_Paragraphs;
+    v15 = result;
+    result->CurIndex = (int)v6;
   }
   else
   {
-    if ( v7 )
-      *v7 = v8 - v5->Data.Data[(signed int)v6].pPara->StartIndex;
-    v9->pArray = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)&v5->Data;
-    v15 = v9;
-    v9->CurIndex = (signed int)v6;
+    result->pArray = 0i64;
+    result->CurIndex = -1i64;
+    return result;
   }
   return v15;
 }
@@ -2683,278 +2622,262 @@ Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::P
 // RVA: 0x970DA0
 void __fastcall Scaleform::Render::Text::StyledText::EnsureTermNull(Scaleform::Render::Text::StyledText *this)
 {
-  Scaleform::Render::Text::StyledText *v1; // rbx
   signed __int64 v2; // rdx
-  Scaleform::Render::Text::Paragraph *v3; // rax
-  unsigned __int64 v4; // rcx
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 Size; // rcx
   unsigned __int64 v5; // rdx
   wchar_t *v6; // rcx
   wchar_t v7; // cx
 
-  v1 = this;
   v2 = this->Paragraphs.Data.Size - 1;
   if ( this != (Scaleform::Render::Text::StyledText *)-24i64
     && v2 >= 0
     && v2 < SLODWORD(this->Paragraphs.Data.Size)
-    && (v3 = this->Paragraphs.Data.Data[v2].pPara) != 0i64
-    || (v3 = Scaleform::Render::Text::StyledText::AppendNewParagraph(this, 0i64)) != 0i64 )
+    && (pPara = this->Paragraphs.Data.Data[v2].pPara) != 0i64
+    || (pPara = Scaleform::Render::Text::StyledText::AppendNewParagraph(this, 0i64)) != 0i64 )
   {
-    v4 = v3->Text.Size;
-    if ( !v4
-      || ((v5 = v4 - 1, !v3->Text.pText) || v5 >= v4 ? (v6 = 0i64) : (v6 = &v3->Text.pText[v5]),
+    Size = pPara->Text.Size;
+    if ( !Size
+      || ((v5 = Size - 1, !pPara->Text.pText) || v5 >= Size ? (v6 = 0i64) : (v6 = &pPara->Text.pText[v5]),
           (v7 = *v6, v7 != 10) && v7 != 13) )
     {
-      Scaleform::Render::Text::Paragraph::AppendTermNull(v3, v1->pTextAllocator.pObject, v1->pDefaultTextFormat.pObject);
+      Scaleform::Render::Text::Paragraph::AppendTermNull(
+        pPara,
+        this->pTextAllocator.pObject,
+        this->pDefaultTextFormat.pObject);
     }
   }
 }
 
 // File Line: 1277
 // RVA: 0x9B4A30
-void __fastcall Scaleform::Render::Text::StyledText::SetTextFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::TextFormat *fmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::StyledText::SetTextFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::TextFormat *fmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  signed __int64 v4; // r10
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v5; // r15
+  __int64 Size; // r10
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r15
   unsigned __int64 v6; // rbx
-  signed __int64 v7; // rdi
-  unsigned __int64 v8; // rsi
-  unsigned __int64 v9; // r11
-  Scaleform::Render::Text::TextFormat *v10; // r12
-  Scaleform::Render::Text::StyledText *v11; // r13
+  __int64 v7; // rdi
   unsigned __int64 v12; // r9
-  Scaleform::Render::Text::Paragraph *v13; // rax
-  unsigned __int64 v14; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v15; // rax
   unsigned __int64 v16; // rdx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v17; // rax
-  Scaleform::Render::Text::Paragraph *v18; // rcx
-  unsigned __int64 v19; // rbp
-  _QWORD *v20; // r14
-  unsigned __int64 v21; // rsi
-  _QWORD *v22; // r10
-  unsigned __int64 v23; // rcx
-  unsigned __int64 v24; // rax
-  unsigned __int64 v25; // rdx
-  _WORD *v26; // rdx
-  unsigned __int64 v27; // rbx
-  unsigned __int64 v28; // rax
-  _WORD *v29; // rax
-  __m128i v30; // [rsp+30h] [rbp-38h]
-  unsigned __int64 v31; // [rsp+70h] [rbp+8h]
+  unsigned __int64 v17; // rbp
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v18; // r14
+  __int64 v19; // rsi
+  Scaleform::Render::Text::Paragraph *v20; // r10
+  unsigned __int64 v21; // rcx
+  unsigned __int64 v22; // rax
+  unsigned __int64 v23; // rdx
+  wchar_t *v24; // rdx
+  unsigned __int64 v25; // rbx
+  unsigned __int64 v26; // rax
+  wchar_t *v27; // rax
+  unsigned __int64 v28; // [rsp+70h] [rbp+8h]
 
-  v4 = this->Paragraphs.Data.Size;
-  v5 = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v6 = 0i64;
   v7 = -1i64;
-  v8 = endPos;
-  v9 = startPos;
-  v10 = fmt;
-  v11 = this;
-  while ( v4 > 0 )
+  while ( Size > 0 )
   {
-    v12 = (v4 >> 1) + v6;
-    v13 = v5->Data.Data[v12].pPara;
-    v14 = v13->StartIndex;
-    if ( v9 >= v14 && v9 < v14 + v13->Text.Size || (signed int)v14 - (signed int)v9 >= 0 )
+    v12 = (Size >> 1) + v6;
+    pPara = p_Paragraphs->Data.Data[v12].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v4 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v6 = v12 + 1;
-      v4 += -1 - (v4 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v6 >= this->Paragraphs.Data.Size
-    || ((v15 = v5->Data.Data[v6].pPara, v16 = v15->StartIndex, v9 < v16) || v9 >= v16 + v15->Text.Size)
-    && (_DWORD)v16 != (_DWORD)v9 )
+  if ( v6 < this->Paragraphs.Data.Size
+    && ((v15 = p_Paragraphs->Data.Data[v6].pPara, v16 = v15->StartIndex, startPos >= v16)
+     && startPos < v16 + v15->Text.Size
+     || (_DWORD)v16 == (_DWORD)startPos) )
   {
-    v19 = v31;
-    v20 = 0i64;
+    v17 = startPos - p_Paragraphs->Data.Data[(int)v6].pPara->StartIndex;
+    v7 = (int)v6;
+    v18 = &this->Paragraphs;
   }
   else
   {
-    v17 = v5->Data.Data;
-    v30.m128i_i64[0] = (__int64)&this->Paragraphs;
-    v30.m128i_i64[1] = (signed int)v6;
-    v18 = v17[(signed int)v6].pPara;
-    _mm_store_si128(&v30, v30);
-    v19 = v9 - v18->StartIndex;
-    v7 = v30.m128i_i64[1];
-    v20 = (_QWORD *)v30.m128i_i64[0];
+    v17 = v28;
+    v18 = 0i64;
   }
-  v21 = v8 - v9;
-  while ( v20 && v7 >= 0 && v7 < *((signed int *)v20 + 2) )
+  v19 = endPos - startPos;
+  while ( v18 && v7 >= 0 && v7 < SLODWORD(v18->Data.Size) )
   {
-    v22 = *(_QWORD **)(*v20 + 8 * v7);
-    v23 = v22[1];
-    v24 = v23;
-    if ( v23 )
+    v20 = v18->Data.Data[v7].pPara;
+    v21 = v20->Text.Size;
+    v22 = v21;
+    if ( v21 )
     {
-      v25 = v23 - 1;
-      if ( *v22 && v25 < v23 )
-        v26 = (_WORD *)(*v22 + 2 * v25);
+      v23 = v21 - 1;
+      if ( v20->Text.pText && v23 < v21 )
+        v24 = &v20->Text.pText[v23];
       else
-        v26 = 0i64;
-      if ( !*v26 )
-        v24 = v23 - 1;
+        v24 = 0i64;
+      if ( !*v24 )
+        v22 = v21 - 1;
     }
-    v27 = v21 + v19;
-    if ( v21 + v19 <= v24 )
+    v25 = v19 + v17;
+    if ( v19 + v17 <= v22 )
     {
-      if ( v21 + v19 != v24 )
+      if ( v19 + v17 != v22 )
         goto LABEL_36;
     }
     else
     {
-      v27 = v24;
+      v25 = v22;
     }
-    if ( v23 )
+    if ( v21 )
     {
-      v28 = v23 - 1;
-      if ( *v22 && v28 < v23 )
-        v29 = (_WORD *)(*v22 + 2 * v28);
+      v26 = v21 - 1;
+      if ( v20->Text.pText && v26 < v21 )
+        v27 = &v20->Text.pText[v26];
       else
-        v29 = 0i64;
-      if ( !*v29 )
+        v27 = 0i64;
+      if ( !*v27 )
       {
-        ++v27;
-        if ( v21 != -1i64 )
-          ++v21;
+        ++v25;
+        if ( v19 != -1 )
+          ++v19;
       }
     }
 LABEL_36:
     Scaleform::Render::Text::Paragraph::SetTextFormat(
-      *(Scaleform::Render::Text::Paragraph **)(*v20 + 8 * v7),
-      v11->pTextAllocator.pObject,
-      v10,
-      v19,
-      v27);
-    v21 += v19 - v27;
-    v19 = 0i64;
-    if ( v7 < v20[1] )
+      v18->Data.Data[v7].pPara,
+      this->pTextAllocator.pObject,
+      fmt,
+      v17,
+      v25);
+    v19 += v17 - v25;
+    v17 = 0i64;
+    if ( v7 < (signed __int64)v18->Data.Size )
       ++v7;
   }
-  if ( v10->PresentMask & 0x100 && Scaleform::String::GetLength((Scaleform::String *)&v10->Url.0) )
-    v11->RTFlags |= 1u;
+  if ( (fmt->PresentMask & 0x100) != 0 && Scaleform::String::GetLength(&fmt->Url) )
+    this->RTFlags |= 1u;
 }
 
 // File Line: 1312
 // RVA: 0x9B2570
-void __fastcall Scaleform::Render::Text::StyledText::SetParagraphFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::ParagraphFormat *fmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::StyledText::SetParagraphFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::ParagraphFormat *fmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  signed __int64 v4; // r10
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v5; // r14
+  __int64 Size; // r10
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r14
   unsigned __int64 v6; // rdi
-  signed __int64 v7; // rbx
-  unsigned __int64 v8; // r15
-  Scaleform::Render::Text::ParagraphFormat *v9; // r12
-  unsigned __int64 v10; // r9
-  Scaleform::Render::Text::StyledText *v11; // rbp
+  __int64 v7; // rbx
   unsigned __int64 v12; // r11
-  Scaleform::Render::Text::Paragraph *v13; // rax
-  unsigned __int64 v14; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v15; // rax
   unsigned __int64 v16; // rdx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v17; // rax
-  Scaleform::Render::Text::Paragraph *v18; // rcx
-  unsigned __int64 v19; // rdi
-  _QWORD *v20; // r14
-  unsigned __int64 v21; // r15
-  _QWORD *v22; // rsi
-  unsigned __int64 v23; // rax
-  unsigned __int64 v24; // rcx
-  _WORD *v25; // rcx
-  __m128i v26; // [rsp+20h] [rbp-38h]
-  unsigned __int64 v27; // [rsp+60h] [rbp+8h]
+  __int64 v17; // rdi
+  unsigned __int64 v18; // r15
+  Scaleform::Render::Text::Paragraph *v19; // rsi
+  unsigned __int64 v20; // rax
+  unsigned __int64 v21; // rcx
+  wchar_t *v22; // rcx
+  __int64 v23; // [rsp+28h] [rbp-30h]
+  __int64 v24; // [rsp+60h] [rbp+8h]
 
-  v4 = this->Paragraphs.Data.Size;
-  v5 = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v6 = 0i64;
   v7 = -1i64;
-  v8 = endPos;
-  v9 = fmt;
-  v10 = startPos;
-  v11 = this;
-  while ( v4 > 0 )
+  while ( Size > 0 )
   {
-    v12 = (v4 >> 1) + v6;
-    v13 = v5->Data.Data[v12].pPara;
-    v14 = v13->StartIndex;
-    if ( v10 >= v14 && v10 < v14 + v13->Text.Size || (signed int)v14 - (signed int)v10 >= 0 )
+    v12 = (Size >> 1) + v6;
+    pPara = p_Paragraphs->Data.Data[v12].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v4 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v6 = v12 + 1;
-      v4 += -1 - (v4 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v6 >= this->Paragraphs.Data.Size
-    || ((v15 = v5->Data.Data[v6].pPara, v16 = v15->StartIndex, v10 < v16) || v10 >= v16 + v15->Text.Size)
-    && (_DWORD)v16 != (_DWORD)v10 )
+  if ( v6 < this->Paragraphs.Data.Size
+    && ((v15 = p_Paragraphs->Data.Data[v6].pPara, v16 = v15->StartIndex, startPos >= v16)
+     && startPos < v16 + v15->Text.Size
+     || (_DWORD)v16 == (_DWORD)startPos) )
   {
-    v19 = v27;
-    v20 = 0i64;
+    v23 = (int)v6;
+    v17 = startPos - p_Paragraphs->Data.Data[(int)v6].pPara->StartIndex;
+    v7 = v23;
   }
   else
   {
-    v17 = v5->Data.Data;
-    v26.m128i_i64[0] = (__int64)&this->Paragraphs;
-    v26.m128i_i64[1] = (signed int)v6;
-    v18 = v17[(signed int)v6].pPara;
-    _mm_store_si128(&v26, v26);
-    v19 = v10 - v18->StartIndex;
-    v7 = v26.m128i_i64[1];
-    v20 = (_QWORD *)v26.m128i_i64[0];
+    v17 = v24;
+    p_Paragraphs = 0i64;
   }
-  v21 = v8 - v10;
-  while ( v20 && v7 >= 0 && v7 < *((signed int *)v20 + 2) )
+  v18 = endPos - startPos;
+  while ( p_Paragraphs && v7 >= 0 && v7 < SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v22 = *(_QWORD **)(*v20 + 8 * v7);
-    if ( !v19 )
+    v19 = p_Paragraphs->Data.Data[v7].pPara;
+    if ( !v17 )
       Scaleform::Render::Text::Paragraph::SetFormat(
-        *(Scaleform::Render::Text::Paragraph **)(*v20 + 8 * v7),
-        v11->pTextAllocator.pObject,
-        v9);
-    if ( !v21 )
+        p_Paragraphs->Data.Data[v7].pPara,
+        this->pTextAllocator.pObject,
+        fmt);
+    if ( !v18 )
       break;
-    v23 = v22[1];
-    if ( v23 )
+    v20 = v19->Text.Size;
+    if ( v20 )
     {
-      v24 = v23 - 1;
-      if ( *v22 && v24 < v23 )
-        v25 = (_WORD *)(*v22 + 2 * v24);
+      v21 = v20 - 1;
+      if ( v19->Text.pText && v21 < v20 )
+        v22 = &v19->Text.pText[v21];
       else
-        v25 = 0i64;
-      if ( !*v25 )
-        --v23;
+        v22 = 0i64;
+      if ( !*v22 )
+        --v20;
     }
-    if ( v21 <= v23 )
-      v23 = v21 + v19;
-    v21 += v19 - v23;
-    v19 = 0i64;
-    if ( v7 < v20[1] )
+    if ( v18 <= v20 )
+      v20 = v18 + v17;
+    v18 += v17 - v20;
+    v17 = 0i64;
+    if ( v7 < (signed __int64)p_Paragraphs->Data.Size )
       ++v7;
   }
 }
 
 // File Line: 1375
 // RVA: 0x98CAA0
-void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::TextFormat *pdestTextFmt, Scaleform::Render::Text::ParagraphFormat *pdestParaFmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::TextFormat *pdestTextFmt,
+        Scaleform::Render::Text::ParagraphFormat *pdestParaFmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
   unsigned __int64 v5; // r12
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v6; // rdi
-  signed __int64 v7; // r10
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdi
+  __int64 Size; // r10
   unsigned __int64 v8; // rbx
   unsigned __int64 v9; // r11
-  Scaleform::Render::Text::Paragraph *v10; // rax
-  unsigned __int64 v11; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v12; // rax
   unsigned __int64 v13; // rdx
-  signed __int64 v14; // r15
-  Scaleform::Render::Text::ParagraphFormat *v15; // r13
+  __int64 v14; // r15
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v15; // r13
   Scaleform::MemoryHeap *v16; // rax
   Scaleform::MemoryHeap *v17; // rdx
   Scaleform::MemoryHeap *v18; // rcx
@@ -2970,10 +2893,10 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
   Scaleform::Render::Text::TextFormat *v28; // rax
   Scaleform::Render::Text::FontHandle *v29; // rcx
   Scaleform::Render::Text::HTMLImageTagDesc *v30; // rcx
-  Scaleform::String::DataDesc *v31; // rdx
-  Scaleform::Render::Text::TextFormat *v32; // rax
+  Scaleform::String::DataDesc *pData; // rdx
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
   Scaleform::Render::Text::TextFormat *v33; // rax
-  Scaleform::Render::Text::FontHandle *v34; // rcx
+  Scaleform::Render::Text::FontHandle *pObject; // rcx
   Scaleform::Render::Text::HTMLImageTagDesc *v35; // rcx
   Scaleform::Render::Text::FontHandle *v36; // rcx
   Scaleform::Render::Text::HTMLImageTagDesc *v37; // rcx
@@ -2982,64 +2905,59 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
   __int64 v40; // rdi
   unsigned int *v41; // r9
   Scaleform::Render::Text::ParagraphFormat *v42; // rax
-  unsigned int *v43; // rsi
+  unsigned int *pTabStops; // rsi
   __int64 v44; // rdi
   unsigned int *v45; // r9
-  Scaleform::Render::Text::ParagraphFormat v46; // [rsp+20h] [rbp-E0h]
-  Scaleform::Render::Text::ParagraphFormat *v47[2]; // [rsp+50h] [rbp-B0h]
-  Scaleform::Render::Text::TextFormat fmt; // [rsp+60h] [rbp-A0h]
-  Scaleform::Render::Text::ParagraphFormat *v49; // [rsp+B0h] [rbp-50h]
-  Scaleform::Render::Text::TextFormat *key; // [rsp+B8h] [rbp-48h]
-  Scaleform::Render::Text::TextFormat *v51; // [rsp+C0h] [rbp-40h]
-  Scaleform::Render::Text::TextFormat *v52; // [rsp+C8h] [rbp-38h]
-  __int64 v53; // [rsp+D0h] [rbp-30h]
-  Scaleform::Render::Text::ParagraphFormat v54; // [rsp+D8h] [rbp-28h]
-  Scaleform::Render::Text::TextFormat result; // [rsp+100h] [rbp+0h]
-  Scaleform::Render::Text::TextFormat v56; // [rsp+150h] [rbp+50h]
-  Scaleform::Render::Text::TextFormat v57; // [rsp+1A0h] [rbp+A0h]
-  int v58; // [rsp+240h] [rbp+140h]
-  Scaleform::Render::Text::TextFormat *v59; // [rsp+248h] [rbp+148h]
-  Scaleform::Render::Text::ParagraphFormat *v60; // [rsp+250h] [rbp+150h]
+  Scaleform::Render::Text::ParagraphFormat v46; // [rsp+20h] [rbp-E0h] BYREF
+  Scaleform::Render::Text::ParagraphFormat *v47[2]; // [rsp+50h] [rbp-B0h] BYREF
+  Scaleform::Render::Text::TextFormat fmt; // [rsp+60h] [rbp-A0h] BYREF
+  Scaleform::Render::Text::ParagraphFormat *v49; // [rsp+B0h] [rbp-50h] BYREF
+  Scaleform::Render::Text::TextFormat *key; // [rsp+B8h] [rbp-48h] BYREF
+  Scaleform::Render::Text::TextFormat *v51; // [rsp+C0h] [rbp-40h] BYREF
+  Scaleform::Render::Text::TextFormat *v52[2]; // [rsp+C8h] [rbp-38h] BYREF
+  Scaleform::Render::Text::ParagraphFormat v53; // [rsp+D8h] [rbp-28h] BYREF
+  Scaleform::Render::Text::TextFormat result; // [rsp+100h] [rbp+0h] BYREF
+  Scaleform::Render::Text::TextFormat v55; // [rsp+150h] [rbp+50h] BYREF
+  Scaleform::Render::Text::TextFormat v56; // [rsp+1A0h] [rbp+A0h] BYREF
+  int v57; // [rsp+240h] [rbp+140h]
   unsigned __int64 startPosa; // [rsp+258h] [rbp+158h]
   int endPosa; // [rsp+260h] [rbp+160h]
 
-  v60 = pdestParaFmt;
-  v59 = pdestTextFmt;
-  v53 = -2i64;
+  v52[1] = (Scaleform::Render::Text::TextFormat *)-2i64;
   v5 = endPos - startPos;
-  v6 = &this->Paragraphs;
-  v7 = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
   v8 = 0i64;
-  while ( v7 > 0 )
+  while ( Size > 0 )
   {
-    v9 = (v7 >> 1) + v8;
-    v10 = v6->Data.Data[v9].pPara;
-    v11 = v10->StartIndex;
-    if ( startPos >= v11 && startPos < v11 + v10->Text.Size || (signed int)v11 - (signed int)startPos >= 0 )
+    v9 = (Size >> 1) + v8;
+    pPara = p_Paragraphs->Data.Data[v9].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v7 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v8 = v9 + 1;
-      v7 += -1 - (v7 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v8 >= this->Paragraphs.Data.Size
-    || ((v12 = v6->Data.Data[v8].pPara, v13 = v12->StartIndex, startPos < v13) || startPos >= v13 + v12->Text.Size)
-    && (_DWORD)v13 != (_DWORD)startPos )
+  if ( v8 < this->Paragraphs.Data.Size
+    && ((v12 = p_Paragraphs->Data.Data[v8].pPara, v13 = v12->StartIndex, startPos >= v13)
+     && startPos < v13 + v12->Text.Size
+     || (_DWORD)v13 == (_DWORD)startPos) )
   {
-    v15 = 0i64;
-    v14 = -1i64;
+    v47[0] = (Scaleform::Render::Text::ParagraphFormat *)&this->Paragraphs;
+    v47[1] = (Scaleform::Render::Text::ParagraphFormat *)(int)v8;
+    startPosa = startPos - p_Paragraphs->Data.Data[(int)v8].pPara->StartIndex;
+    v14 = (int)v8;
+    v15 = &this->Paragraphs;
   }
   else
   {
-    v47[0] = (Scaleform::Render::Text::ParagraphFormat *)&this->Paragraphs;
-    v47[1] = (Scaleform::Render::Text::ParagraphFormat *)(signed int)v8;
-    startPosa = startPos - v6->Data.Data[(signed int)v8].pPara->StartIndex;
-    _mm_store_si128((__m128i *)v47, *(__m128i *)v47);
-    v14 = (signed __int64)v47[1];
-    v15 = v47[0];
+    v15 = 0i64;
+    v14 = -1i64;
   }
   v16 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
   v17 = v16;
@@ -3050,13 +2968,13 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
     v18 = v16;
   fmt.FontList.pHeap = v18;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-  fmt.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+  fmt.FontList.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
   v19 = Scaleform::Memory::pGlobalHeap;
   if ( v17 )
     v19 = v17;
   fmt.Url.pHeap = v19;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-  fmt.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 2;
+  fmt.Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData.Size + 2;
   fmt.pImageDesc.pObject = 0i64;
   fmt.pFontHandle.pObject = 0i64;
   fmt.ColorV = -16777216;
@@ -3066,9 +2984,7 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
   fmt.PresentMask = 0;
   v46.pAllocator = 0i64;
   v46.RefCount = 1;
-  v46.pTabStops = 0i64;
-  *(_QWORD *)&v46.BlockIndent = 0i64;
-  *(_DWORD *)&v46.RightMargin = 0;
+  memset(&v46.pTabStops, 0, 20);
   v20 = 0;
   endPosa = 0;
   v21 = 0;
@@ -3077,9 +2993,9 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
     v22 = startPosa;
     do
     {
-      if ( !v15 || v14 < 0 || v14 >= (signed int)v15->RefCount )
+      if ( !v15 || v14 < 0 || v14 >= SLODWORD(v15->Data.Size) )
         break;
-      v23 = (Scaleform::Render::Text::Paragraph *)(&v15->pAllocator->vfptr)[v14];
+      v23 = v15->Data.Data[v14].pPara;
       v24 = v23->Text.Size;
       if ( v24 )
       {
@@ -3100,50 +3016,50 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
       v27 = v24 + v22;
       if ( v20 )
       {
-        v32 = Scaleform::Render::Text::Paragraph::GetTextFormat(v23, &v57, v22, v27);
-        v33 = Scaleform::Render::Text::TextFormat::Intersection(v32, &v56, &fmt);
+        TextFormat = Scaleform::Render::Text::Paragraph::GetTextFormat(v23, &v56, v22, v27);
+        v33 = Scaleform::Render::Text::TextFormat::Intersection(TextFormat, &v55, &fmt);
         Scaleform::Render::Text::TextFormat::operator=(&fmt, v33);
+        if ( v55.pAllocator )
+        {
+          v52[0] = &v55;
+          Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
+            &v55.pAllocator->TextFormatStorage,
+            v52);
+        }
+        pObject = v55.pFontHandle.pObject;
+        if ( v55.pFontHandle.pObject && !_InterlockedDecrement(&v55.pFontHandle.pObject->RefCount) && pObject )
+          pObject->vfptr->__vecDelDtor(pObject, 1u);
+        v35 = v55.pImageDesc.pObject;
+        if ( v55.pImageDesc.pObject )
+        {
+          --v55.pImageDesc.pObject->RefCount;
+          if ( !v35->RefCount )
+            v35->vfptr->__vecDelDtor(v35, 1u);
+        }
+        if ( !_InterlockedDecrement((volatile signed __int32 *)((v55.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        if ( !_InterlockedDecrement((volatile signed __int32 *)((v55.FontList.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         if ( v56.pAllocator )
         {
-          v52 = &v56;
+          v51 = &v56;
           Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
-            (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v56.pAllocator->TextFormatStorage.pTable,
-            &v52);
+            &v56.pAllocator->TextFormatStorage,
+            &v51);
         }
-        v34 = v56.pFontHandle.pObject;
-        if ( v56.pFontHandle.pObject && !_InterlockedDecrement(&v56.pFontHandle.pObject->RefCount) && v34 )
-          v34->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v34->vfptr, 1u);
-        v35 = v56.pImageDesc.pObject;
+        v36 = v56.pFontHandle.pObject;
+        if ( v56.pFontHandle.pObject && !_InterlockedDecrement(&v56.pFontHandle.pObject->RefCount) && v36 )
+          v36->vfptr->__vecDelDtor(v36, 1u);
+        v37 = v56.pImageDesc.pObject;
         if ( v56.pImageDesc.pObject )
         {
           --v56.pImageDesc.pObject->RefCount;
-          if ( !v35->RefCount )
-            v35->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v35->vfptr, 1u);
+          if ( !v37->RefCount )
+            v37->vfptr->__vecDelDtor(v37, 1u);
         }
         if ( !_InterlockedDecrement((volatile signed __int32 *)((v56.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        if ( !_InterlockedDecrement((volatile signed __int32 *)((v56.FontList.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        if ( v57.pAllocator )
-        {
-          v51 = &v57;
-          Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
-            (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v57.pAllocator->TextFormatStorage.pTable,
-            &v51);
-        }
-        v36 = v57.pFontHandle.pObject;
-        if ( v57.pFontHandle.pObject && !_InterlockedDecrement(&v57.pFontHandle.pObject->RefCount) && v36 )
-          v36->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v36->vfptr, 1u);
-        v37 = v57.pImageDesc.pObject;
-        if ( v57.pImageDesc.pObject )
-        {
-          --v57.pImageDesc.pObject->RefCount;
-          if ( !v37->RefCount )
-            v37->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v37->vfptr, 1u);
-        }
-        if ( !_InterlockedDecrement((volatile signed __int32 *)((v57.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        v31 = v57.FontList.pData;
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        pData = v56.FontList.pData;
       }
       else
       {
@@ -3153,45 +3069,45 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
         {
           key = &result;
           Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::TextFormat *>(
-            (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&result.pAllocator->TextFormatStorage.pTable,
+            &result.pAllocator->TextFormatStorage,
             &key);
         }
         v29 = result.pFontHandle.pObject;
         if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v29 )
-          v29->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v29->vfptr, 1u);
+          v29->vfptr->__vecDelDtor(v29, 1u);
         v30 = result.pImageDesc.pObject;
         if ( result.pImageDesc.pObject )
         {
           --result.pImageDesc.pObject->RefCount;
           if ( !v30->RefCount )
-            v30->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v30->vfptr, 1u);
+            v30->vfptr->__vecDelDtor(v30, 1u);
         }
         if ( !_InterlockedDecrement((volatile signed __int32 *)((result.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        v31 = result.FontList.pData;
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        pData = result.FontList.pData;
       }
-      if ( !_InterlockedDecrement((volatile signed __int32 *)(((unsigned __int64)v31 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+      if ( !_InterlockedDecrement((volatile signed __int32 *)(((unsigned __int64)pData & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
       v22 = startPosa;
       if ( !startPosa )
       {
         v38 = v23->pFormat.pObject;
         if ( v38 )
         {
-          v58 = v21 + 1;
+          v57 = v21 + 1;
           if ( v21 )
           {
-            v42 = Scaleform::Render::Text::ParagraphFormat::Intersection(v38, &v54, &v46);
+            v42 = Scaleform::Render::Text::ParagraphFormat::Intersection(v38, &v53, &v46);
             v46.BlockIndent = v42->BlockIndent;
             v46.Indent = v42->Indent;
             v46.Leading = v42->Leading;
             v46.LeftMargin = v42->LeftMargin;
             v46.RightMargin = v42->RightMargin;
             v46.PresentMask = v42->PresentMask;
-            v43 = v42->pTabStops;
-            if ( v43 )
+            pTabStops = v42->pTabStops;
+            if ( pTabStops )
             {
-              v44 = *v43;
+              v44 = *pTabStops;
               v45 = v46.pTabStops;
               if ( !v46.pTabStops || *v46.pTabStops != (_DWORD)v44 )
               {
@@ -3204,23 +3120,23 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
                 *v46.pTabStops = v44;
                 v45 = v46.pTabStops;
               }
-              memmove(v45 + 1, v43 + 1, 4 * v44);
+              memmove(v45 + 1, pTabStops + 1, 4 * v44);
             }
             else
             {
               Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v46.pTabStops);
               v46.pTabStops = 0i64;
             }
-            if ( v54.pAllocator )
+            if ( v53.pAllocator )
             {
-              v49 = &v54;
+              v49 = &v53;
               Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-                (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)&v54.pAllocator->ParagraphFormatStorage.pTable,
+                &v53.pAllocator->ParagraphFormatStorage,
                 &v49);
             }
-            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v54.pTabStops);
-            v54.pTabStops = 0i64;
-            v21 = v58;
+            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v53.pTabStops);
+            v53.pTabStops = 0i64;
+            v21 = v57;
           }
           else
           {
@@ -3247,174 +3163,162 @@ void __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(S
                 v41 = v46.pTabStops;
               }
               memmove(v41 + 1, v39 + 1, 4 * v40);
-              v21 = v58;
+              v21 = v57;
             }
             else
             {
               Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v46.pTabStops);
               v46.pTabStops = 0i64;
-              v21 = v58;
+              v21 = v57;
             }
           }
         }
       }
       v5 -= v24;
-      if ( v14 < *(_QWORD *)&v15->RefCount )
+      if ( v14 < (signed __int64)v15->Data.Size )
         ++v14;
       v20 = endPosa;
     }
     while ( v5 );
   }
-  if ( v59 )
-    Scaleform::Render::Text::TextFormat::operator=(v59, &fmt);
-  if ( v60 )
+  if ( pdestTextFmt )
+    Scaleform::Render::Text::TextFormat::operator=(pdestTextFmt, &fmt);
+  if ( pdestParaFmt )
   {
-    v60->BlockIndent = v46.BlockIndent;
-    v60->Indent = v46.Indent;
-    v60->Leading = v46.Leading;
-    v60->LeftMargin = v46.LeftMargin;
-    v60->RightMargin = v46.RightMargin;
-    v60->PresentMask = v46.PresentMask;
-    Scaleform::Render::Text::ParagraphFormat::CopyTabStops(v60, v46.pTabStops);
+    pdestParaFmt->BlockIndent = v46.BlockIndent;
+    pdestParaFmt->Indent = v46.Indent;
+    pdestParaFmt->Leading = v46.Leading;
+    pdestParaFmt->LeftMargin = v46.LeftMargin;
+    pdestParaFmt->RightMargin = v46.RightMargin;
+    pdestParaFmt->PresentMask = v46.PresentMask;
+    Scaleform::Render::Text::ParagraphFormat::CopyTabStops(pdestParaFmt, v46.pTabStops);
   }
   if ( v46.pAllocator )
   {
     v47[0] = &v46;
     Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-      (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)&v46.pAllocator->ParagraphFormatStorage.pTable,
+      &v46.pAllocator->ParagraphFormatStorage,
       v47);
   }
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v46.pTabStops);
   v46.pTabStops = 0i64;
   Scaleform::Render::Text::TextFormat::~TextFormat(&fmt);
+}v46.pTabStops = 0i64;
+  Scaleform::Render::Text::TextFormat::~TextFormat(&fmt);
 }
 
 // File Line: 1421
 // RVA: 0x98D250
-__int64 __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::TextFormat **ppdestTextFmt, Scaleform::Render::Text::ParagraphFormat **ppdestParaFmt, unsigned __int64 pos)
+__int64 __fastcall Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::TextFormat **ppdestTextFmt,
+        Scaleform::Render::Text::ParagraphFormat **ppdestParaFmt,
+        unsigned __int64 pos)
 {
   Scaleform::Render::Text::ParagraphFormat *v4; // rsi
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v5; // r15
-  unsigned __int64 v6; // r10
-  signed __int64 v7; // rdi
-  signed __int64 v8; // r9
-  Scaleform::Render::Text::ParagraphFormat **v9; // r12
-  Scaleform::Render::Text::TextFormat **v10; // r13
-  Scaleform::Render::Text::StyledText *v11; // rbp
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r15
+  __int64 v7; // rdi
+  __int64 Size; // r9
   unsigned __int64 v12; // rbx
   unsigned __int64 v13; // r11
-  Scaleform::Render::Text::Paragraph *v14; // rax
-  unsigned __int64 v15; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v16; // rax
   unsigned __int64 v17; // rdx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v18; // rax
-  unsigned __int64 v19; // r10
-  __int64 v20; // rdx
-  unsigned __int8 v21; // cl
-  __int64 v22; // rbx
-  Scaleform::Render::Text::TextFormat *v23; // rax
+  unsigned __int64 v18; // r10
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v19; // rdx
+  unsigned __int8 v20; // cl
+  Scaleform::Render::Text::Paragraph *v21; // rbx
+  Scaleform::Render::Text::TextFormat *pObject; // rax
   __int64 result; // rax
-  __m128i v25; // [rsp+20h] [rbp-38h]
-  unsigned __int64 v26; // [rsp+60h] [rbp+8h]
+  unsigned __int64 v24; // [rsp+60h] [rbp+8h]
 
   v4 = 0i64;
-  v5 = &this->Paragraphs;
-  v6 = pos;
+  p_Paragraphs = &this->Paragraphs;
   v7 = -1i64;
-  v8 = this->Paragraphs.Data.Size;
-  v9 = ppdestParaFmt;
-  v10 = ppdestTextFmt;
-  v11 = this;
+  Size = this->Paragraphs.Data.Size;
   v12 = 0i64;
-  while ( v8 > 0 )
+  while ( Size > 0 )
   {
-    v13 = (v8 >> 1) + v12;
-    v14 = v5->Data.Data[v13].pPara;
-    v15 = v14->StartIndex;
-    if ( v6 >= v15 && v6 < v15 + v14->Text.Size || (signed int)v15 - (signed int)v6 >= 0 )
+    v13 = (Size >> 1) + v12;
+    pPara = p_Paragraphs->Data.Data[v13].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( pos >= StartIndex && pos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)pos >= 0 )
     {
-      v8 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v12 = v13 + 1;
-      v8 += -1 - (v8 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v12 >= this->Paragraphs.Data.Size
-    || ((v16 = v5->Data.Data[v12].pPara, v17 = v16->StartIndex, v6 < v17) || v6 >= v17 + v16->Text.Size)
-    && (_DWORD)v17 != (_DWORD)v6 )
+  if ( v12 < this->Paragraphs.Data.Size
+    && ((v16 = p_Paragraphs->Data.Data[v12].pPara, v17 = v16->StartIndex, pos >= v17) && pos < v17 + v16->Text.Size
+     || (_DWORD)v17 == (_DWORD)pos) )
   {
-    v19 = v26;
-    v20 = 0i64;
+    v18 = pos - p_Paragraphs->Data.Data[(int)v12].pPara->StartIndex;
+    v7 = (int)v12;
+    v19 = &this->Paragraphs;
   }
   else
   {
-    v18 = v5->Data.Data;
-    v25.m128i_i64[0] = (__int64)&this->Paragraphs;
-    v25.m128i_i64[1] = (signed int)v12;
-    v19 = v6 - v18[(signed int)v12].pPara->StartIndex;
-    _mm_store_si128(&v25, v25);
-    v7 = v25.m128i_i64[1];
-    v20 = v25.m128i_i64[0];
+    v18 = v24;
+    v19 = 0i64;
   }
-  v21 = 0;
-  if ( !v20
+  v20 = 0;
+  if ( !v19
     || v7 < 0
-    || v7 >= *(signed int *)(v20 + 8)
-    || (v22 = *(_QWORD *)(*(_QWORD *)v20 + 8 * v7),
-        v23 = Scaleform::Render::Text::Paragraph::GetTextFormatPtr(
-                *(Scaleform::Render::Text::Paragraph **)(*(_QWORD *)v20 + 8 * v7),
-                v19),
-        v4 = *(Scaleform::Render::Text::ParagraphFormat **)(v22 + 24),
-        v21 = 1,
-        !v23) )
+    || v7 >= SLODWORD(v19->Data.Size)
+    || (v21 = v19->Data.Data[v7].pPara,
+        pObject = Scaleform::Render::Text::Paragraph::GetTextFormatPtr(v21, v18),
+        v4 = v21->pFormat.pObject,
+        v20 = 1,
+        !pObject) )
   {
-    v23 = v11->pDefaultTextFormat.pObject;
+    pObject = this->pDefaultTextFormat.pObject;
   }
   if ( !v4 )
-    v4 = v11->pDefaultParagraphFormat.pObject;
-  if ( v10 )
-    *v10 = v23;
-  result = v21;
-  if ( v9 )
-    *v9 = v4;
+    v4 = this->pDefaultParagraphFormat.pObject;
+  if ( ppdestTextFmt )
+    *ppdestTextFmt = pObject;
+  result = v20;
+  if ( ppdestParaFmt )
+    *ppdestParaFmt = v4;
   return result;
 }
 
 // File Line: 1449
 // RVA: 0x9AF040
-void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::TextFormat *defaultTextFmt)
+void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::TextFormat *defaultTextFmt)
 {
-  Scaleform::Render::Text::TextFormat *v2; // rdi
-  Scaleform::Render::Text::StyledText *v3; // rbx
-  Scaleform::Render::Text::HTMLImageTagDesc *v4; // rcx
-  Scaleform::Render::Text::Allocator *v5; // rax
+  Scaleform::Render::Text::HTMLImageTagDesc *pObject; // rcx
+  Scaleform::Render::Text::Allocator *Allocator; // rax
   Scaleform::Render::Text::TextFormat *v6; // rsi
   Scaleform::Render::Text::TextFormat *v7; // rdi
   bool v8; // zf
   Scaleform::Render::Text::Allocator *v9; // rax
-  Scaleform::Render::Text::TextFormat *v10; // rsi
+  Scaleform::Render::Text::TextFormat *TextFormat; // rsi
   Scaleform::Render::Text::TextFormat *v11; // rdi
-  Scaleform::Render::Text::TextFormat srcfmt; // [rsp+30h] [rbp-58h]
+  Scaleform::Render::Text::TextFormat srcfmt; // [rsp+30h] [rbp-58h] BYREF
 
-  v2 = defaultTextFmt;
-  v3 = this;
   if ( Scaleform::Render::Text::TextFormat::GetImageDesc(defaultTextFmt) )
   {
-    Scaleform::Render::Text::TextFormat::TextFormat(&srcfmt, v2, 0i64);
-    v4 = srcfmt.pImageDesc.pObject;
+    Scaleform::Render::Text::TextFormat::TextFormat(&srcfmt, defaultTextFmt, 0i64);
+    pObject = srcfmt.pImageDesc.pObject;
     if ( srcfmt.pImageDesc.pObject )
     {
       --srcfmt.pImageDesc.pObject->RefCount;
-      if ( !v4->RefCount )
-        v4->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v4->vfptr, 1u);
+      if ( !pObject->RefCount )
+        pObject->vfptr->__vecDelDtor(pObject, 1u);
     }
     srcfmt.pImageDesc.pObject = 0i64;
     srcfmt.PresentMask |= 0x200u;
-    v5 = Scaleform::Render::Text::StyledText::GetAllocator(v3);
-    v6 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v5, &srcfmt);
-    v7 = v3->pDefaultTextFormat.pObject;
+    Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+    v6 = Scaleform::Render::Text::Allocator::AllocateTextFormat(Allocator, &srcfmt);
+    v7 = this->pDefaultTextFormat.pObject;
     if ( v7 )
     {
       v8 = v7->RefCount-- == 1;
@@ -3424,14 +3328,14 @@ void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(Scalef
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v7);
       }
     }
-    v3->pDefaultTextFormat.pObject = v6;
+    this->pDefaultTextFormat.pObject = v6;
     Scaleform::Render::Text::TextFormat::~TextFormat(&srcfmt);
   }
   else
   {
-    v9 = Scaleform::Render::Text::StyledText::GetAllocator(v3);
-    v10 = Scaleform::Render::Text::Allocator::AllocateTextFormat(v9, v2);
-    v11 = v3->pDefaultTextFormat.pObject;
+    v9 = Scaleform::Render::Text::StyledText::GetAllocator(this);
+    TextFormat = Scaleform::Render::Text::Allocator::AllocateTextFormat(v9, defaultTextFmt);
+    v11 = this->pDefaultTextFormat.pObject;
     if ( v11 )
     {
       v8 = v11->RefCount-- == 1;
@@ -3441,120 +3345,105 @@ void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(Scalef
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v11);
       }
     }
-    v3->pDefaultTextFormat.pObject = v10;
+    this->pDefaultTextFormat.pObject = TextFormat;
   }
 }
 
 // File Line: 1462
 // RVA: 0x9AEDD0
-void __fastcall Scaleform::Render::Text::StyledText::SetDefaultParagraphFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::ParagraphFormat *defaultParagraphFmt)
+void __fastcall Scaleform::Render::Text::StyledText::SetDefaultParagraphFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::ParagraphFormat *defaultParagraphFmt)
 {
-  Scaleform::Render::Text::ParagraphFormat *v2; // rbx
-  Scaleform::Render::Text::StyledText *v3; // rdi
-  Scaleform::Render::Text::Allocator *v4; // rax
-  Scaleform::Render::Text::ParagraphFormat *v5; // rax
-  Scaleform::Render::Text::ParagraphFormat *v6; // rcx
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  Scaleform::Render::Text::ParagraphFormat *ParagraphFormat; // rax
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
   Scaleform::Render::Text::ParagraphFormat *v7; // rbx
 
-  v2 = defaultParagraphFmt;
-  v3 = this;
-  v4 = Scaleform::Render::Text::StyledText::GetAllocator(this);
-  v5 = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(v4, v2);
-  v6 = v3->pDefaultParagraphFormat.pObject;
-  v7 = v5;
-  if ( v6 )
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  ParagraphFormat = Scaleform::Render::Text::Allocator::AllocateParagraphFormat(Allocator, defaultParagraphFmt);
+  pObject = this->pDefaultParagraphFormat.pObject;
+  v7 = ParagraphFormat;
+  if ( pObject )
   {
-    Scaleform::Render::Text::ParagraphFormat::Release(v6);
-    v3->pDefaultParagraphFormat.pObject = v7;
+    Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+    this->pDefaultParagraphFormat.pObject = v7;
   }
   else
   {
-    v3->pDefaultParagraphFormat.pObject = v5;
+    this->pDefaultParagraphFormat.pObject = ParagraphFormat;
   }
 }
 
 // File Line: 1468
 // RVA: 0x9AF160
-void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::TextFormat *pdefaultTextFmt)
+void __fastcall Scaleform::Render::Text::StyledText::SetDefaultTextFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::TextFormat *pdefaultTextFmt)
 {
-  Scaleform::Render::Text::StyledText *v2; // rsi
-  Scaleform::Render::Text::TextFormat *v3; // rbx
-  Scaleform::Render::Text::TextFormat *v4; // rdi
-  bool v5; // zf
+  Scaleform::Render::Text::TextFormat *pObject; // rdi
 
-  v2 = this;
-  v3 = pdefaultTextFmt;
   if ( Scaleform::Render::Text::TextFormat::GetImageDesc(pdefaultTextFmt) )
   {
-    Scaleform::Render::Text::StyledText::SetDefaultTextFormat(v2, v3);
+    Scaleform::Render::Text::StyledText::SetDefaultTextFormat(this, pdefaultTextFmt);
   }
   else
   {
-    if ( v3 )
-      ++v3->RefCount;
-    v4 = v2->pDefaultTextFormat.pObject;
-    if ( v4 )
+    if ( pdefaultTextFmt )
+      ++pdefaultTextFmt->RefCount;
+    pObject = this->pDefaultTextFormat.pObject;
+    if ( pObject )
     {
-      v5 = v4->RefCount-- == 1;
-      if ( v5 )
+      if ( pObject->RefCount-- == 1 )
       {
-        Scaleform::Render::Text::TextFormat::~TextFormat(v4);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
+        Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
       }
     }
-    v2->pDefaultTextFormat.pObject = v3;
+    this->pDefaultTextFormat.pObject = pdefaultTextFmt;
   }
 }
 
 // File Line: 1481
 // RVA: 0x9AEE20
-void __fastcall Scaleform::Render::Text::StyledText::SetDefaultParagraphFormat(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::ParagraphFormat *pdefaultParagraphFmt)
+void __fastcall Scaleform::Render::Text::StyledText::SetDefaultParagraphFormat(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::ParagraphFormat *pdefaultParagraphFmt)
 {
-  Scaleform::Render::Text::ParagraphFormat *v2; // rbx
-  Scaleform::Render::Text::StyledText *v3; // rdi
-  Scaleform::Render::Text::ParagraphFormat *v4; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rcx
 
-  v2 = pdefaultParagraphFmt;
-  v3 = this;
   if ( pdefaultParagraphFmt )
     ++pdefaultParagraphFmt->RefCount;
-  v4 = this->pDefaultParagraphFormat.pObject;
-  if ( v4 )
+  pObject = this->pDefaultParagraphFormat.pObject;
+  if ( pObject )
   {
-    Scaleform::Render::Text::ParagraphFormat::Release(v4);
-    v3->pDefaultParagraphFormat.pObject = v2;
+    Scaleform::Render::Text::ParagraphFormat::Release(pObject);
+    this->pDefaultParagraphFormat.pObject = pdefaultParagraphFmt;
   }
   else
   {
-    v3->pDefaultParagraphFormat.pObject = pdefaultParagraphFmt;
+    this->pDefaultParagraphFormat.pObject = pdefaultParagraphFmt;
   }
 }
 
 // File Line: 1487
 // RVA: 0x985480
-Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetHtml(Scaleform::Render::Text::StyledText *this, Scaleform::String *result)
+Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetHtml(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::String *result)
 {
-  Scaleform::String *v2; // rbx
-  Scaleform::StringBuffer *v3; // rax
-  __int128 v5; // [rsp+30h] [rbp-38h]
-  __int64 v6; // [rsp+40h] [rbp-28h]
-  __int64 v7; // [rsp+48h] [rbp-20h]
-  char v8; // [rsp+50h] [rbp-18h]
-  Scaleform::MemoryHeap *v9; // [rsp+58h] [rbp-10h]
+  Scaleform::StringBuffer *Html; // rax
+  Scaleform::StringBuffer v5; // [rsp+30h] [rbp-38h] BYREF
 
-  v2 = result;
-  v5 = 0ui64;
-  v6 = 0i64;
-  v7 = 512i64;
-  v8 = 0;
-  v9 = Scaleform::Memory::pGlobalHeap;
-  v3 = Scaleform::Render::Text::StyledText::GetHtml(this, (Scaleform::StringBuffer *)&v5);
-  Scaleform::String::String(v2, v3);
-  if ( (_QWORD)v5 )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *, _QWORD))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-      Scaleform::Memory::pGlobalHeap,
-      v5);
-  return v2;
+  memset(&v5, 0, 24);
+  v5.GrowSize = 512i64;
+  v5.LengthIsSize = 0;
+  v5.pHeap = Scaleform::Memory::pGlobalHeap;
+  Html = Scaleform::Render::Text::StyledText::GetHtml(this, &v5);
+  Scaleform::String::String(result, Html);
+  if ( v5.pData )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  return result;
 }
 
 // File Line: 1501
@@ -3566,32 +3455,32 @@ Scaleform::Render::Text::StyledText::GetHtml
 __int64 __fastcall Scaleform::Render::Text::StyledText::GetLength(Scaleform::Render::Text::StyledText *this)
 {
   __int64 v1; // r9
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v2; // rdx
-  signed __int64 v3; // rcx
-  Scaleform::Render::Text::Paragraph *v4; // r10
-  unsigned __int64 v5; // rax
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdx
+  __int64 v3; // rcx
+  Scaleform::Render::Text::Paragraph *pPara; // r10
+  unsigned __int64 Size; // rax
   unsigned __int64 v6; // r8
   wchar_t *v7; // r8
 
   v1 = 0i64;
-  v2 = &this->Paragraphs;
+  p_Paragraphs = &this->Paragraphs;
   v3 = 0i64;
-  while ( v2 && v3 >= 0 && v3 < SLODWORD(v2->Data.Size) )
+  while ( p_Paragraphs && v3 >= 0 && v3 < SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v4 = v2->Data.Data[v3].pPara;
-    v5 = v4->Text.Size;
-    if ( v5 )
+    pPara = p_Paragraphs->Data.Data[v3].pPara;
+    Size = pPara->Text.Size;
+    if ( Size )
     {
-      v6 = v5 - 1;
-      if ( v4->Text.pText && v6 < v5 )
-        v7 = &v4->Text.pText[v6];
+      v6 = Size - 1;
+      if ( pPara->Text.pText && v6 < Size )
+        v7 = &pPara->Text.pText[v6];
       else
         v7 = 0i64;
       if ( !*v7 )
-        --v5;
+        --Size;
     }
-    v1 += v5;
-    if ( v3 < (signed __int64)v2->Data.Size )
+    v1 += Size;
+    if ( v3 < (signed __int64)p_Paragraphs->Data.Size )
       ++v3;
   }
   return v1;
@@ -3599,531 +3488,501 @@ __int64 __fastcall Scaleform::Render::Text::StyledText::GetLength(Scaleform::Ren
 
 // File Line: 1705
 // RVA: 0x98C6A0
-Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetText(Scaleform::Render::Text::StyledText *this, Scaleform::String *result)
+Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::String *result)
 {
-  Scaleform::String *v2; // rbx
-
-  v2 = result;
   result->HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
   Scaleform::Render::Text::StyledText::GetText(this, result);
-  return v2;
+  return result;
 }
 
 // File Line: 1712
 // RVA: 0x98C6F0
-Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetText(Scaleform::Render::Text::StyledText *this, Scaleform::String *retStr)
+Scaleform::String *__fastcall Scaleform::Render::Text::StyledText::GetText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::String *retStr)
 {
-  Scaleform::String *v2; // rsi
-  Scaleform::Render::Text::StyledText *v3; // rdi
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v4; // rdi
-  signed __int64 v5; // rbx
-  Scaleform::Render::Text::Paragraph *v6; // rcx
-  unsigned __int64 v7; // r8
-  const wchar_t *v8; // rdx
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdi
+  __int64 v5; // rbx
+  Scaleform::Render::Text::Paragraph *pPara; // rcx
+  unsigned __int64 Size; // r8
+  const wchar_t *pText; // rdx
   unsigned __int64 v9; // rax
   const wchar_t *v10; // rax
 
-  v2 = retStr;
-  v3 = this;
-  Scaleform::String::AssignString(retStr, &customWorldMapCaption, 0i64);
-  v4 = &v3->Paragraphs;
+  Scaleform::String::AssignString(retStr, &customCaption, 0i64);
+  p_Paragraphs = &this->Paragraphs;
   v5 = 0i64;
-  while ( v4 && v5 >= 0 && v5 < SLODWORD(v4->Data.Size) )
+  while ( p_Paragraphs && v5 >= 0 && v5 < SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v6 = v4->Data.Data[v5].pPara;
-    v7 = v6->Text.Size;
-    v8 = v6->Text.pText;
-    if ( v7 )
+    pPara = p_Paragraphs->Data.Data[v5].pPara;
+    Size = pPara->Text.Size;
+    pText = pPara->Text.pText;
+    if ( Size )
     {
-      v9 = v7 - 1;
-      if ( v8 && v9 < v7 )
-        v10 = &v8[v9];
+      v9 = Size - 1;
+      if ( pText && v9 < Size )
+        v10 = &pText[v9];
       else
         v10 = 0i64;
       if ( !*v10 )
-        --v7;
+        --Size;
     }
-    Scaleform::String::AppendString(v2, v8, v7);
-    if ( v5 < (signed __int64)v4->Data.Size )
+    Scaleform::String::AppendString(retStr, pText, Size);
+    if ( v5 < (signed __int64)p_Paragraphs->Data.Size )
       ++v5;
   }
-  return v2;
+  return retStr;
 }
 
 // File Line: 1727
 // RVA: 0x98C790
-void __fastcall Scaleform::Render::Text::StyledText::GetText(Scaleform::Render::Text::StyledText *this, Scaleform::WStringBuffer *pBuffer)
+void __fastcall Scaleform::Render::Text::StyledText::GetText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::WStringBuffer *pBuffer)
 {
-  Scaleform::WStringBuffer *v2; // r14
-  Scaleform::Render::Text::StyledText *v3; // rsi
-  __int64 v4; // rax
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v5; // rsi
-  signed __int64 v6; // rdi
+  __int64 Length; // rax
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rsi
+  __int64 v6; // rdi
   __int64 v7; // rbp
-  Scaleform::Render::Text::Paragraph *v8; // rbx
-  wchar_t *v9; // rdx
-  unsigned __int64 v10; // rbx
+  Scaleform::Render::Text::Paragraph *pPara; // rbx
+  wchar_t *pText; // rdx
+  unsigned __int64 Size; // rbx
   unsigned __int64 v11; // rax
   bool v12; // cf
   char *v13; // rax
 
-  v2 = pBuffer;
-  v3 = this;
-  v4 = Scaleform::Render::Text::StyledText::GetLength(this);
-  Scaleform::WStringBuffer::Resize(v2, v4 + 1);
-  v5 = &v3->Paragraphs;
+  Length = Scaleform::Render::Text::StyledText::GetLength(this);
+  Scaleform::WStringBuffer::Resize(pBuffer, Length + 1);
+  p_Paragraphs = &this->Paragraphs;
   v6 = 0i64;
   v7 = 0i64;
-  while ( v5 && v6 >= 0 && v6 < SLODWORD(v5->Data.Size) )
+  while ( p_Paragraphs && v6 >= 0 && v6 < SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v8 = v5->Data.Data[v6].pPara;
-    v9 = v8->Text.pText;
-    v10 = v8->Text.Size;
-    if ( v10 )
+    pPara = p_Paragraphs->Data.Data[v6].pPara;
+    pText = pPara->Text.pText;
+    Size = pPara->Text.Size;
+    if ( Size )
     {
-      v11 = v10 - 1;
-      if ( !v9 || (v12 = v11 < v10, v13 = (char *)&v9[v11], !v12) )
+      v11 = Size - 1;
+      if ( !pText || (v12 = v11 < Size, v13 = (char *)&pText[v11], !v12) )
         v13 = 0i64;
       if ( !*(_WORD *)v13 )
-        --v10;
+        --Size;
     }
-    memmove(&v2->pText[v7], v9, 2 * v10);
-    v7 += v10;
-    if ( v6 < (signed __int64)v5->Data.Size )
+    memmove(&pBuffer->pText[v7], pText, 2 * Size);
+    v7 += Size;
+    if ( v6 < (signed __int64)p_Paragraphs->Data.Size )
       ++v6;
   }
-  v2->pText[v7] = 0;
+  pBuffer->pText[v7] = 0;
 }
 
 // File Line: 1747
 // RVA: 0x98C860
-void __fastcall Scaleform::Render::Text::StyledText::GetText(Scaleform::Render::Text::StyledText *this, Scaleform::WStringBuffer *pBuffer, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::StyledText::GetText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::WStringBuffer *pBuffer,
+        unsigned __int64 startPos,
+        __int64 endPos)
 {
-  unsigned __int64 v4; // rbp
-  unsigned __int64 v5; // rbx
-  Scaleform::WStringBuffer *v6; // r13
-  Scaleform::Render::Text::StyledText *v7; // r14
+  __int64 Length; // rbp
   unsigned __int64 v8; // rbp
-  signed __int64 v9; // rdx
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v10; // rsi
-  signed __int64 v11; // rdi
-  unsigned __int64 v12; // r12
+  __int64 Size; // rdx
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rsi
+  __int64 v11; // rdi
+  __int64 v12; // r12
   unsigned __int64 v13; // r11
   unsigned __int64 v14; // r10
-  Scaleform::Render::Text::Paragraph *v15; // rax
-  unsigned __int64 v16; // r9
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r9
   Scaleform::Render::Text::Paragraph *v17; // rax
   unsigned __int64 v18; // rdx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v19; // rax
-  Scaleform::Render::Text::Paragraph *v20; // rcx
-  _QWORD *v21; // rsi
-  __int64 v22; // r14
-  _QWORD *v23; // rdx
-  unsigned __int64 v24; // rbx
-  unsigned __int64 v25; // rax
-  bool v26; // cf
-  _WORD *v27; // rax
-  unsigned __int64 v28; // rbx
-  const void *v29; // rdx
-  __m128i v30; // [rsp+20h] [rbp-38h]
+  __int64 v19; // r14
+  Scaleform::Render::Text::Paragraph *v20; // rdx
+  unsigned __int64 v21; // rbx
+  unsigned __int64 v22; // rax
+  bool v23; // cf
+  wchar_t *v24; // rax
+  unsigned __int64 v25; // rbx
+  wchar_t *v26; // rdx
 
-  v4 = endPos;
-  v5 = startPos;
-  v6 = pBuffer;
-  v7 = this;
-  if ( endPos == -1i64 )
-    v4 = Scaleform::Render::Text::StyledText::GetLength(this);
-  v8 = v4 - v5;
-  Scaleform::WStringBuffer::Resize(v6, v8 + 1);
-  v9 = v7->Paragraphs.Data.Size;
-  v10 = &v7->Paragraphs;
+  Length = endPos;
+  if ( endPos == -1 )
+    Length = Scaleform::Render::Text::StyledText::GetLength(this);
+  v8 = Length - startPos;
+  Scaleform::WStringBuffer::Resize(pBuffer, v8 + 1);
+  Size = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v11 = -1i64;
   v12 = 0i64;
   v13 = 0i64;
-  while ( v9 > 0 )
+  while ( Size > 0 )
   {
-    v14 = (v9 >> 1) + v13;
-    v15 = v10->Data.Data[v14].pPara;
-    v16 = v15->StartIndex;
-    if ( v5 >= v16 && v5 < v16 + v15->Text.Size || (signed int)v16 - (signed int)v5 >= 0 )
+    v14 = (Size >> 1) + v13;
+    pPara = p_Paragraphs->Data.Data[v14].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v9 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v13 = v14 + 1;
-      v9 += -1 - (v9 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v13 >= v7->Paragraphs.Data.Size
-    || ((v17 = v10->Data.Data[v13].pPara, v18 = v17->StartIndex, v5 < v18) || v5 >= v18 + v17->Text.Size)
-    && (_DWORD)v18 != (_DWORD)v5 )
+  if ( v13 < this->Paragraphs.Data.Size
+    && ((v17 = p_Paragraphs->Data.Data[v13].pPara, v18 = v17->StartIndex, startPos >= v18)
+     && startPos < v18 + v17->Text.Size
+     || (_DWORD)v18 == (_DWORD)startPos) )
   {
-    v21 = 0i64;
+    v12 = startPos - p_Paragraphs->Data.Data[(int)v13].pPara->StartIndex;
+    v11 = (int)v13;
   }
   else
   {
-    v19 = v10->Data.Data;
-    v30.m128i_i64[0] = (__int64)&v7->Paragraphs;
-    v30.m128i_i64[1] = (signed int)v13;
-    v20 = v19[(signed int)v13].pPara;
-    _mm_store_si128(&v30, v30);
-    v12 = v5 - v20->StartIndex;
-    v11 = v30.m128i_i64[1];
-    v21 = (_QWORD *)v30.m128i_i64[0];
+    p_Paragraphs = 0i64;
   }
-  v22 = 0i64;
-  while ( v21 && v11 >= 0 && v11 < *((signed int *)v21 + 2) && v8 )
+  v19 = 0i64;
+  while ( p_Paragraphs && v11 >= 0 && v11 < SLODWORD(p_Paragraphs->Data.Size) && v8 )
   {
-    v23 = *(_QWORD **)(*v21 + 8 * v11);
-    v24 = v23[1];
-    if ( v24 )
+    v20 = p_Paragraphs->Data.Data[v11].pPara;
+    v21 = v20->Text.Size;
+    if ( v21 )
     {
-      v25 = v24 - 1;
-      if ( !*v23 || (v26 = v25 < v24, v27 = (_WORD *)(*v23 + 2 * v25), !v26) )
-        v27 = 0i64;
-      if ( !*v27 )
-        --v24;
+      v22 = v21 - 1;
+      if ( !v20->Text.pText || (v23 = v22 < v21, v24 = &v20->Text.pText[v22], !v23) )
+        v24 = 0i64;
+      if ( !*v24 )
+        --v21;
     }
-    v28 = v24 - v12;
-    v29 = (const void *)(*v23 + 2 * v12);
-    if ( v28 > v8 )
-      v28 = v8;
-    memmove(&v6->pText[v22], v29, 2 * v28);
-    v22 += v28;
-    v8 -= v28;
+    v25 = v21 - v12;
+    v26 = &v20->Text.pText[v12];
+    if ( v25 > v8 )
+      v25 = v8;
+    memmove(&pBuffer->pText[v19], v26, 2 * v25);
+    v19 += v25;
+    v8 -= v25;
     v12 = 0i64;
-    if ( v11 < v21[1] )
+    if ( v11 < (signed __int64)p_Paragraphs->Data.Size )
       ++v11;
   }
-  v6->pText[v22] = 0;
+  pBuffer->pText[v19] = 0;
 }
 
 // File Line: 1779
 // RVA: 0x964DE0
-Scaleform::Render::Text::StyledText *__fastcall Scaleform::Render::Text::StyledText::CopyStyledText(Scaleform::Render::Text::StyledText *this, unsigned __int64 startPos, unsigned __int64 endPos)
+Scaleform::Render::Text::StyledText *__fastcall Scaleform::Render::Text::StyledText::CopyStyledText(
+        Scaleform::Render::Text::StyledText *this,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  unsigned __int64 v3; // rsi
-  unsigned __int64 v4; // rbp
-  Scaleform::Render::Text::StyledText *v5; // rdi
-  Scaleform::Render::Text::Allocator *v6; // rax
-  Scaleform::Render::Text::Allocator *v7; // rbx
-  __int64 v8; // rcx
+  Scaleform::Render::Text::Allocator *Allocator; // rbx
+  __int64 v7; // rcx
+  Scaleform::Render::Text::StyledText *v8; // rax
   Scaleform::Render::Text::StyledText *v9; // rax
-  Scaleform::Render::Text::StyledText *v10; // rax
-  Scaleform::Render::Text::StyledText *v11; // rbx
+  Scaleform::Render::Text::StyledText *v10; // rbx
 
-  v3 = endPos;
-  v4 = startPos;
-  v5 = this;
-  v6 = Scaleform::Render::Text::StyledText::GetAllocator(this);
-  v7 = v6;
-  v9 = (Scaleform::Render::Text::StyledText *)((__int64 (__fastcall *)(__int64, signed __int64))v6->pHeap->vfptr->Alloc)(
-                                                v8,
+  Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this);
+  v8 = (Scaleform::Render::Text::StyledText *)((__int64 (__fastcall *)(__int64, __int64))Allocator->pHeap->vfptr->Alloc)(
+                                                v7,
                                                 72i64);
-  if ( v9 )
+  if ( v8 )
   {
-    Scaleform::Render::Text::StyledText::StyledText(v9, v7);
-    v11 = v10;
+    Scaleform::Render::Text::StyledText::StyledText(v8, Allocator);
+    v10 = v9;
   }
   else
   {
-    v11 = 0i64;
+    v10 = 0i64;
   }
-  Scaleform::Render::Text::StyledText::CopyStyledText(v5, v11, v4, v3);
-  return v11;
+  Scaleform::Render::Text::StyledText::CopyStyledText(this, v10, startPos, endPos);
+  return v10;
 }
 
 // File Line: 1787
 // RVA: 0x964E70
-void __fastcall Scaleform::Render::Text::StyledText::CopyStyledText(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::StyledText *pdest, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::StyledText::CopyStyledText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::StyledText *pdest,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  unsigned __int64 v4; // rsi
-  unsigned __int64 v5; // rdi
-  Scaleform::Render::Text::StyledText *v6; // r15
+  unsigned __int64 Length; // rsi
   Scaleform::Render::Text::StyledText *v7; // rbp
   unsigned __int64 v8; // rsi
-  signed __int64 v9; // rdx
+  __int64 Size; // rdx
   wchar_t *v10; // r13
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v11; // r12
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r12
   unsigned __int64 v12; // r11
   unsigned __int64 v13; // r10
-  Scaleform::Render::Text::Paragraph *v14; // rax
-  unsigned __int64 v15; // r9
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r9
   Scaleform::Render::Text::Paragraph *v16; // rax
   unsigned __int64 v17; // rdx
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v18; // rax
-  signed __int64 v19; // rbp
-  Scaleform::Render::Text::Paragraph *v20; // r14
-  unsigned __int64 v21; // rdi
-  Scaleform::Render::Text::Paragraph *v22; // rax
-  unsigned __int64 v23; // rcx
-  unsigned __int64 v24; // rdx
-  wchar_t *v25; // rax
-  unsigned __int64 v26; // rcx
-  unsigned __int64 v27; // rbx
-  Scaleform::Render::Text::Allocator *v28; // rax
-  signed __int64 v29; // rdi
-  _QWORD *v30; // r14
-  Scaleform::Render::Text::Paragraph *v31; // rdx
-  unsigned __int64 v32; // rbx
-  unsigned __int64 v33; // rax
-  bool v34; // cf
-  wchar_t *v35; // rax
-  Scaleform::Render::Text::Paragraph *v36; // rdi
-  Scaleform::Render::Text::Paragraph *v37; // rbx
-  Scaleform::Render::Text::Allocator *v38; // rax
-  signed __int64 v39; // rcx
-  Scaleform::Render::Text::Paragraph *v40; // rdx
-  unsigned __int64 v41; // rax
-  unsigned __int64 v42; // rcx
-  __m128i v43; // [rsp+30h] [rbp-48h]
-  Scaleform::Render::Text::StyledText *v44; // [rsp+80h] [rbp+8h]
-  Scaleform::Render::Text::Paragraph *v45; // [rsp+88h] [rbp+10h]
+  signed __int64 v18; // rbp
+  Scaleform::Render::Text::Paragraph *v19; // r14
+  signed __int64 v20; // rdi
+  Scaleform::Render::Text::Paragraph *appended; // rax
+  unsigned __int64 v22; // rcx
+  unsigned __int64 v23; // rdx
+  wchar_t *v24; // rax
+  unsigned __int64 v25; // rcx
+  unsigned __int64 v26; // rbx
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  __int64 v28; // rdi
+  Scaleform::Render::Text::Paragraph *v29; // rdx
+  unsigned __int64 v30; // rbx
+  unsigned __int64 v31; // rax
+  bool v32; // cf
+  wchar_t *v33; // rax
+  Scaleform::Render::Text::Paragraph *v34; // rdi
+  Scaleform::Render::Text::Paragraph *v35; // rbx
+  Scaleform::Render::Text::Allocator *v36; // rax
+  signed __int64 v37; // rcx
+  Scaleform::Render::Text::Paragraph *v38; // rdx
+  unsigned __int64 v39; // rax
+  unsigned __int64 v40; // rcx
+  __int64 v41; // [rsp+38h] [rbp-40h]
+  Scaleform::Render::Text::Paragraph *v43; // [rsp+88h] [rbp+10h]
 
-  v44 = this;
-  v4 = endPos;
-  v5 = startPos;
-  v6 = pdest;
+  Length = endPos;
   v7 = this;
   if ( endPos == -1i64 )
-    v4 = Scaleform::Render::Text::StyledText::GetLength(this);
-  v8 = v4 - v5;
-  Scaleform::Render::Text::StyledText::Clear(v6);
-  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))v6->vfptr[1].__vecDelDtor)(
-    v6,
-    v5,
+    Length = Scaleform::Render::Text::StyledText::GetLength(this);
+  v8 = Length - startPos;
+  Scaleform::Render::Text::StyledText::Clear(pdest);
+  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))pdest->vfptr[1].__vecDelDtor)(
+    pdest,
+    startPos,
     v8,
-    &customWorldMapCaption);
-  v9 = v7->Paragraphs.Data.Size;
+    &customCaption);
+  Size = v7->Paragraphs.Data.Size;
   v10 = 0i64;
-  v11 = &v7->Paragraphs;
+  p_Paragraphs = &v7->Paragraphs;
   v12 = 0i64;
-  while ( v9 > 0 )
+  while ( Size > 0 )
   {
-    v13 = (v9 >> 1) + v12;
-    v14 = v11->Data.Data[v13].pPara;
-    v15 = v14->StartIndex;
-    if ( v5 >= v15 && v5 < v15 + v14->Text.Size || (signed int)v15 - (signed int)v5 >= 0 )
+    v13 = (Size >> 1) + v12;
+    pPara = p_Paragraphs->Data.Data[v13].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v9 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v12 = v13 + 1;
-      v9 += -1 - (v9 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
   if ( v12 < v7->Paragraphs.Data.Size )
   {
-    if ( (v16 = v11->Data.Data[v12].pPara, v17 = v16->StartIndex, v5 >= v17) && v5 < v17 + v16->Text.Size
-      || (_DWORD)v17 == (_DWORD)v5 )
+    if ( (v16 = p_Paragraphs->Data.Data[v12].pPara, v17 = v16->StartIndex, startPos >= v17)
+      && startPos < v17 + v16->Text.Size
+      || (_DWORD)v17 == (_DWORD)startPos )
     {
-      v18 = v11->Data.Data;
-      v19 = (signed int)v12;
-      v43.m128i_i64[0] = (__int64)v11;
-      v43.m128i_i64[1] = (signed int)v12;
-      v20 = v18[(signed int)v12].pPara;
-      _mm_store_si128(&v43, v43);
-      v21 = v5 - v20->StartIndex;
-      if ( (v12 & 0x80000000) == 0i64 && (signed int)v12 < (signed __int64)SLODWORD(v11->Data.Size) )
+      v18 = (int)v12;
+      v41 = (int)v12;
+      v19 = p_Paragraphs->Data.Data[(int)v12].pPara;
+      v20 = startPos - v19->StartIndex;
+      if ( (v12 & 0x80000000) == 0i64 && (int)v12 < (__int64)SLODWORD(p_Paragraphs->Data.Size) )
       {
-        if ( !v21 )
-          goto LABEL_57;
-        v22 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v6, v20->pFormat.pObject);
-        v23 = v20->Text.Size;
-        v45 = v22;
-        if ( v23 )
+        if ( !v20 )
+          goto LABEL_26;
+        appended = Scaleform::Render::Text::StyledText::AppendNewParagraph(pdest, v19->pFormat.pObject);
+        v22 = v19->Text.Size;
+        v43 = appended;
+        if ( v22 )
         {
-          v24 = v23 - 1;
-          if ( !v20->Text.pText || (v25 = &v20->Text.pText[v24], v24 >= v23) )
-            v25 = 0i64;
-          if ( !*v25 )
-            --v23;
+          v23 = v22 - 1;
+          if ( !v19->Text.pText || (v24 = &v19->Text.pText[v23], v23 >= v22) )
+            v24 = 0i64;
+          if ( !*v24 )
+            --v22;
         }
-        v26 = v23 - v21;
-        v27 = v8;
-        if ( v26 < v8 )
-          v27 = v26;
-        v28 = Scaleform::Render::Text::StyledText::GetAllocator(v6);
-        Scaleform::Render::Text::Paragraph::Copy(v45, v28, v20, v21);
-        v8 -= v27;
-        v29 = v19 + 1;
-        if ( v19 >= (signed __int64)v11->Data.Size )
-LABEL_57:
-          v29 = v43.m128i_i64[1];
-        v30 = (_QWORD *)v43.m128i_i64[0];
-        while ( v29 >= 0 && v29 < *((signed int *)v30 + 2) && v8 )
+        v25 = v22 - v20;
+        v26 = v8;
+        if ( v25 < v8 )
+          v26 = v25;
+        Allocator = Scaleform::Render::Text::StyledText::GetAllocator(pdest);
+        Scaleform::Render::Text::Paragraph::Copy(v43, Allocator, v19, v20);
+        v8 -= v26;
+        v28 = v18 + 1;
+        if ( v18 >= (signed __int64)p_Paragraphs->Data.Size )
+LABEL_26:
+          v28 = v41;
+        while ( v28 >= 0 && v28 < SLODWORD(p_Paragraphs->Data.Size) && v8 )
         {
-          v31 = *(Scaleform::Render::Text::Paragraph **)(*v30 + 8 * v29);
-          v32 = v31->Text.Size;
-          if ( v32 )
+          v29 = p_Paragraphs->Data.Data[v28].pPara;
+          v30 = v29->Text.Size;
+          if ( v30 )
           {
-            v33 = v32 - 1;
-            if ( !v31->Text.pText || (v34 = v33 < v32, v35 = &v31->Text.pText[v33], !v34) )
-              v35 = 0i64;
-            if ( !*v35 )
-              --v32;
+            v31 = v30 - 1;
+            if ( !v29->Text.pText || (v32 = v31 < v30, v33 = &v29->Text.pText[v31], !v32) )
+              v33 = 0i64;
+            if ( !*v33 )
+              --v30;
           }
-          if ( v32 > v8 )
+          if ( v30 > v8 )
           {
-            v36 = *(Scaleform::Render::Text::Paragraph **)(*v30 + 8 * v29);
-            v37 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v6, v36->pFormat.pObject);
-            v38 = Scaleform::Render::Text::StyledText::GetAllocator(v6);
-            Scaleform::Render::Text::Paragraph::Copy(v37, v38, v36, 0i64);
+            v34 = p_Paragraphs->Data.Data[v28].pPara;
+            v35 = Scaleform::Render::Text::StyledText::AppendNewParagraph(pdest, v34->pFormat.pObject);
+            v36 = Scaleform::Render::Text::StyledText::GetAllocator(pdest);
+            Scaleform::Render::Text::Paragraph::Copy(v35, v36, v34, 0i64);
             break;
           }
-          Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(v6, v31);
-          v8 -= v32;
-          if ( v29 < v30[1] )
-            ++v29;
+          Scaleform::Render::Text::StyledText::AppendCopyOfParagraph(pdest, v29);
+          v8 -= v30;
+          if ( v28 < (signed __int64)p_Paragraphs->Data.Size )
+            ++v28;
         }
       }
-      v7 = v44;
+      v7 = this;
     }
   }
-  v39 = v6->Paragraphs.Data.Size - 1;
-  if ( v6 != (Scaleform::Render::Text::StyledText *)-24i64 && v39 >= 0 && v39 < SLODWORD(v6->Paragraphs.Data.Size) )
+  v37 = pdest->Paragraphs.Data.Size - 1;
+  if ( pdest != (Scaleform::Render::Text::StyledText *)-24i64 && v37 >= 0 && v37 < SLODWORD(pdest->Paragraphs.Data.Size) )
   {
-    v40 = v6->Paragraphs.Data.Data[v39].pPara;
-    if ( v40 )
+    v38 = pdest->Paragraphs.Data.Data[v37].pPara;
+    if ( v38 )
     {
-      v41 = v40->Text.Size;
-      if ( v41 )
+      v39 = v38->Text.Size;
+      if ( v39 )
       {
-        v42 = v41 - 1;
-        if ( v40->Text.pText && v42 < v41 )
-          v10 = &v40->Text.pText[v42];
+        v40 = v39 - 1;
+        if ( v38->Text.pText && v40 < v39 )
+          v10 = &v38->Text.pText[v40];
         if ( *v10 == 10 || *v10 == 13 )
-          Scaleform::Render::Text::StyledText::AppendNewParagraph(v6, v40->pFormat.pObject);
+          Scaleform::Render::Text::StyledText::AppendNewParagraph(pdest, v38->pFormat.pObject);
       }
     }
   }
-  Scaleform::Render::Text::StyledText::EnsureTermNull(v6);
-  if ( v7->RTFlags & 1 )
-    v6->RTFlags |= 1u;
+  Scaleform::Render::Text::StyledText::EnsureTermNull(pdest);
+  if ( (v7->RTFlags & 1) != 0 )
+    pdest->RTFlags |= 1u;
 }
 
 // File Line: 1857
 // RVA: 0x9959B0
-__int64 __fastcall Scaleform::Render::Text::StyledText::InsertString(Scaleform::Render::Text::StyledText *this, const wchar_t *pstr, unsigned __int64 pos, unsigned __int64 length, Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy, Scaleform::Render::Text::TextFormat *pdefTextFmt, Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
+__int64 __fastcall Scaleform::Render::Text::StyledText::InsertString(
+        Scaleform::Render::Text::StyledText *this,
+        const wchar_t *pstr,
+        unsigned __int64 pos,
+        unsigned __int64 length,
+        Scaleform::Render::Text::StyledText::NewLinePolicy newLinePolicy,
+        Scaleform::Render::Text::TextFormat *pdefTextFmt,
+        Scaleform::Render::Text::ParagraphFormat *pdefParaFmt)
 {
   unsigned __int64 v7; // rdi
   unsigned __int64 v8; // rbx
-  const wchar_t *v9; // rsi
-  Scaleform::Render::Text::StyledText *v10; // r14
   wchar_t *v12; // r13
   Scaleform::Render::Text::StyledText *v13; // r11
   unsigned __int64 v14; // r8
-  unsigned __int64 v15; // rbp
-  signed __int64 v16; // r9
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v17; // r14
-  signed __int64 v18; // r10
-  signed __int64 v19; // r11
-  Scaleform::Render::Text::Paragraph *v20; // rax
-  unsigned __int64 v21; // r8
-  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v22; // rax
+  unsigned __int64 Size; // rbp
+  __int64 v16; // r9
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r14
+  __int64 v18; // r10
+  __int64 v19; // r11
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *Data; // rax
   Scaleform::Render::Text::Paragraph *v23; // rcx
-  unsigned __int64 v24; // rax
-  signed __int64 v25; // r14
-  Scaleform::Render::Text::ParagraphFormat *v26; // r9
-  signed __int16 v27; // bp
-  _QWORD *v28; // r15
-  Scaleform::Render::Text::Paragraph *v29; // r12
-  unsigned __int64 v30; // rax
-  unsigned __int64 v31; // rcx
-  bool v32; // cf
-  wchar_t *v33; // rcx
-  signed __int64 v34; // rax
-  unsigned __int64 v35; // rbx
-  Scaleform::Render::Text::Paragraph *v36; // rax
-  Scaleform::Render::Text::ParagraphFormat *v37; // r13
-  Scaleform::Render::Text::Paragraph *v38; // rcx
-  Scaleform::Render::Text::ParagraphFormat *v39; // r15
-  bool v40; // zf
-  Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *v41; // rcx
-  unsigned __int64 v42; // ST28_8
-  unsigned __int64 v43; // r15
-  unsigned __int64 v44; // r15
-  unsigned __int64 v45; // r8
-  unsigned __int64 v46; // rax
+  __int64 CurIndex; // r14
+  Scaleform::Render::Text::ParagraphFormat *v25; // r9
+  wchar_t v26; // bp
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *pArray; // r15
+  Scaleform::Render::Text::Paragraph *v28; // r12
+  unsigned __int64 v29; // rax
+  unsigned __int64 v30; // rcx
+  bool v31; // cf
+  wchar_t *v32; // rcx
+  __int64 v33; // rax
+  unsigned __int64 v34; // rbx
+  Scaleform::Render::Text::Paragraph *inserted; // rax
+  Scaleform::Render::Text::ParagraphFormat *pObject; // r13
+  Scaleform::Render::Text::Paragraph *v37; // rcx
+  Scaleform::Render::Text::ParagraphFormat *v38; // r15
+  Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *pAllocator; // rcx
+  unsigned __int64 v41; // r15
+  unsigned __int64 v42; // r15
+  unsigned __int64 v43; // r8
+  unsigned __int64 v44; // rax
+  unsigned __int64 v45; // r15
+  unsigned __int64 v46; // r13
   unsigned __int64 v47; // r15
-  unsigned __int64 v48; // r13
-  unsigned __int64 v49; // r15
-  wchar_t *v50; // rax
+  wchar_t *pText; // rax
+  unsigned __int64 v49; // rcx
+  wchar_t *v50; // rcx
   unsigned __int64 v51; // rcx
   wchar_t *v52; // rcx
-  unsigned __int64 v53; // rcx
-  wchar_t *v54; // rcx
-  unsigned __int64 v55; // r8
-  unsigned __int8 v56; // al
-  _QWORD *v57; // rdx
-  __int64 v58; // rcx
-  signed __int64 v59; // rcx
-  Scaleform::Render::Text::Paragraph *v60; // rax
-  unsigned __int64 v61; // rcx
-  unsigned __int64 v62; // rdx
-  unsigned __int64 v63; // rdi
-  signed __int64 v64; // rbx
-  __int64 v65; // rax
-  unsigned __int64 v66; // [rsp+30h] [rbp-88h]
-  __int64 v67; // [rsp+38h] [rbp-80h]
-  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+40h] [rbp-78h]
-  Scaleform::Render::Text::Paragraph *v69; // [rsp+48h] [rbp-70h]
-  __m128i v70; // [rsp+50h] [rbp-68h]
-  __m128i v71; // [rsp+60h] [rbp-58h]
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator iter; // [rsp+70h] [rbp-48h]
-  Scaleform::Render::Text::StyledText *v73; // [rsp+C0h] [rbp+8h]
+  unsigned __int64 v53; // r8
+  unsigned __int8 v54; // al
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v55; // rdx
+  Scaleform::Render::Text::Paragraph *v56; // rcx
+  __int64 v57; // rcx
+  Scaleform::Render::Text::Paragraph *appended; // rax
+  unsigned __int64 v59; // rcx
+  unsigned __int64 v60; // rdx
+  unsigned __int64 v61; // rdi
+  __int64 v62; // rbx
+  __int64 v63; // rax
+  unsigned __int64 v64; // [rsp+30h] [rbp-88h]
+  __int64 v65; // [rsp+38h] [rbp-80h]
+  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+40h] [rbp-78h] BYREF
+  Scaleform::Render::Text::Paragraph *v67; // [rsp+48h] [rbp-70h]
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator v68; // [rsp+50h] [rbp-68h]
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator v69; // [rsp+60h] [rbp-58h]
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator iter; // [rsp+70h] [rbp-48h] BYREF
   unsigned __int64 startSrcIndex; // [rsp+D8h] [rbp+20h]
 
-  v73 = this;
   v7 = length;
   v8 = pos;
-  v9 = pstr;
-  v10 = this;
   if ( !length )
     return 0i64;
   if ( pos > Scaleform::Render::Text::StyledText::GetLength(this) )
-    v8 = Scaleform::Render::Text::StyledText::GetLength(v10);
+    v8 = Scaleform::Render::Text::StyledText::GetLength(this);
   v12 = 0i64;
   if ( v7 == -1i64 )
   {
     v7 = 0i64;
-    if ( *v9 )
+    if ( *pstr )
     {
       do
         ++v7;
-      while ( v9[v7] );
+      while ( pstr[v7] );
     }
   }
-  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, const wchar_t *))v10->vfptr[2].__vecDelDtor)(
-    v10,
+  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, const wchar_t *))this->vfptr[2].__vecDelDtor)(
+    this,
     v8,
     v7,
-    v9);
-  v13 = v73;
+    pstr);
+  v13 = this;
   v14 = 0i64;
-  v15 = v73->Paragraphs.Data.Size;
+  Size = this->Paragraphs.Data.Size;
   startSrcIndex = 0i64;
-  if ( !v15 )
+  if ( !Size )
   {
-    v25 = -1i64;
-    v70.m128i_i64[0] = 0i64;
-    v70.m128i_i64[1] = -1i64;
+    CurIndex = -1i64;
+    v68.pArray = 0i64;
+    v68.CurIndex = -1i64;
     goto LABEL_24;
   }
-  v16 = v73->Paragraphs.Data.Size;
-  v17 = &v73->Paragraphs;
+  v16 = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v18 = 0i64;
   if ( v16 > 0 )
   {
     do
     {
       v19 = (v16 >> 1) + v18;
-      v20 = v17->Data.Data[v19].pPara;
-      v21 = v20->StartIndex;
-      if ( v8 >= v21 && v8 < v21 + v20->Text.Size || (signed int)v21 - (signed int)v8 >= 0 )
+      pPara = p_Paragraphs->Data.Data[v19].pPara;
+      StartIndex = pPara->StartIndex;
+      if ( v8 >= StartIndex && v8 < StartIndex + pPara->Text.Size || (int)StartIndex - (int)v8 >= 0 )
       {
         v16 >>= 1;
       }
@@ -4134,85 +3993,80 @@ __int64 __fastcall Scaleform::Render::Text::StyledText::InsertString(Scaleform::
       }
     }
     while ( v16 > 0 );
-    v13 = v73;
+    v13 = this;
   }
-  if ( v18 == v15 )
+  if ( v18 == Size )
     LODWORD(v18) = v18 - 1;
-  v22 = v17->Data.Data;
-  v70.m128i_i64[0] = (__int64)&v73->Paragraphs;
-  v23 = v22[(signed int)v18].pPara;
-  v70.m128i_i64[1] = (signed int)v18;
-  _mm_store_si128(&v70, v70);
-  v24 = v23->StartIndex;
-  v14 = v8 - v24;
-  v66 = v23->StartIndex;
-  startSrcIndex = v8 - v24;
-  if ( (signed int)v18 < 0 || (signed int)v18 >= (signed __int64)SLODWORD(v73->Paragraphs.Data.Size) )
+  Data = p_Paragraphs->Data.Data;
+  v68.pArray = &this->Paragraphs;
+  v23 = Data[(int)v18].pPara;
+  v68.CurIndex = (int)v18;
+  v14 = v8 - v23->StartIndex;
+  v64 = v23->StartIndex;
+  startSrcIndex = v14;
+  if ( (int)v18 < 0 || (int)v18 >= (__int64)SLODWORD(this->Paragraphs.Data.Size) )
   {
-    v25 = v70.m128i_i64[1];
+    CurIndex = v68.CurIndex;
 LABEL_24:
-    v66 = 0i64;
+    v64 = 0i64;
     goto LABEL_25;
   }
-  v25 = v70.m128i_i64[1];
+  CurIndex = v68.CurIndex;
 LABEL_25:
-  v26 = pdefParaFmt;
-  v27 = 0;
-  v67 = 0i64;
+  v25 = pdefParaFmt;
+  v26 = 0;
+  v65 = 0i64;
   while ( 1 )
   {
-    if ( newLinePolicy == 2 )
+    if ( newLinePolicy == NLP_IgnoreCRLF )
     {
       if ( !v7 )
         break;
       do
       {
-        if ( *v9 != 13 && *v9 != 10 )
+        if ( *pstr != 13 && *pstr != 10 )
           break;
-        ++v9;
+        ++pstr;
         --v7;
       }
       while ( v7 );
       if ( !v7 )
         break;
     }
-    v28 = (_QWORD *)v70.m128i_i64[0];
-    if ( !v70.m128i_i64[0] || v25 < 0 || v25 >= *(signed int *)(v70.m128i_i64[0] + 8) )
+    pArray = (Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *)v68.pArray;
+    if ( !v68.pArray || CurIndex < 0 || CurIndex >= SLODWORD(v68.pArray->Data.Size) )
     {
-      Scaleform::Render::Text::StyledText::AppendNewParagraph(v13, v26);
-      v13 = v73;
-      v26 = pdefParaFmt;
+      Scaleform::Render::Text::StyledText::AppendNewParagraph(v13, v25);
+      v13 = this;
+      v25 = pdefParaFmt;
       v14 = 0i64;
-      v71 = (__m128i)(unsigned __int64)&v73->Paragraphs;
+      v69 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator)(unsigned __int64)&this->Paragraphs;
       startSrcIndex = 0i64;
-      _mm_store_si128(&v70, v71);
-      v25 = v70.m128i_i64[1];
-      v28 = (_QWORD *)v70.m128i_i64[0];
+      v68 = v69;
+      CurIndex = 0i64;
+      pArray = &this->Paragraphs;
     }
-    v29 = *(Scaleform::Render::Text::Paragraph **)(*v28 + 8 * v25);
-    v30 = v29->Text.Size;
-    if ( !v30 )
-      goto LABEL_139;
-    v31 = v30 - 1;
-    if ( !v29->Text.pText || (v32 = v31 < v30, v33 = &v29->Text.pText[v31], !v32) )
-      v33 = 0i64;
-    if ( !*v33 )
-      --v30;
-    if ( !v30 )
+    v28 = pArray->Data.Data[CurIndex].pPara;
+    v29 = v28->Text.Size;
+    if ( !v29 )
+      goto LABEL_43;
+    v30 = v29 - 1;
+    if ( !v28->Text.pText || (v31 = v30 < v29, v32 = &v28->Text.pText[v30], !v31) )
+      v32 = 0i64;
+    if ( !*v32 )
+      --v29;
+    if ( !v29 )
     {
-LABEL_139:
-      Scaleform::Render::Text::Paragraph::SetFormat(
-        *(Scaleform::Render::Text::Paragraph **)(*v28 + 8 * v25),
-        v13->pTextAllocator.pObject,
-        v26);
-      v13 = v73;
+LABEL_43:
+      Scaleform::Render::Text::Paragraph::SetFormat(pArray->Data.Data[CurIndex].pPara, v13->pTextAllocator.pObject, v25);
+      v13 = this;
       v14 = startSrcIndex;
     }
-    v34 = -1i64;
-    v35 = 0i64;
-    if ( newLinePolicy == NLP_CompressCRLF && v27 == 13 && *v9 == 10 )
+    v33 = -1i64;
+    v34 = 0i64;
+    if ( newLinePolicy == NLP_CompressCRLF && v26 == 13 && *pstr == 10 )
     {
-      ++v9;
+      ++pstr;
       if ( !--v7 )
         break;
     }
@@ -4220,341 +4074,324 @@ LABEL_139:
     {
       while ( 1 )
       {
-        v27 = v9[v35];
-        if ( v27 == 10 || v27 == 13 )
+        v26 = pstr[v34];
+        if ( v26 == 10 || v26 == 13 )
           break;
-        if ( !v27 )
+        if ( !v26 )
           goto LABEL_74;
-        if ( ++v35 >= v7 )
+        if ( ++v34 >= v7 )
           goto LABEL_53;
       }
-      if ( newLinePolicy == 2 )
+      if ( newLinePolicy == NLP_IgnoreCRLF )
       {
-        v27 = 1;
+        v26 = 1;
 LABEL_74:
-        Scaleform::Render::Text::Paragraph::InsertString(v29, v13->pTextAllocator.pObject, v9, v14, v35, pdefTextFmt);
-        goto LABEL_97;
+        Scaleform::Render::Text::Paragraph::InsertString(v28, v13->pTextAllocator.pObject, pstr, v14, v34, pdefTextFmt);
+        goto LABEL_96;
       }
-      v34 = v35;
+      v33 = v34;
     }
 LABEL_53:
-    if ( v27 == 10 || v27 == 13 )
-      ++v35;
-    if ( v34 == -1 )
+    if ( v26 == 10 || v26 == 13 )
+      ++v34;
+    if ( v33 == -1 )
       goto LABEL_74;
-    _mm_store_si128((__m128i *)&iter, v70);
-    if ( v25 < v28[1] )
-      iter.CurIndex = v25 + 1;
-    v36 = Scaleform::Render::Text::StyledText::InsertNewParagraph(v13, &iter, pdefParaFmt);
-    v37 = v29->pFormat.pObject;
-    v38 = v36;
-    v69 = v36;
-    if ( v37 )
-      ++v37->RefCount;
-    v39 = v36->pFormat.pObject;
-    if ( v39 )
+    iter = v68;
+    if ( CurIndex < (signed __int64)pArray->Data.Size )
+      iter.CurIndex = CurIndex + 1;
+    inserted = Scaleform::Render::Text::StyledText::InsertNewParagraph(v13, &iter, pdefParaFmt);
+    pObject = v28->pFormat.pObject;
+    v37 = inserted;
+    v67 = inserted;
+    if ( pObject )
+      ++pObject->RefCount;
+    v38 = inserted->pFormat.pObject;
+    if ( v38 )
     {
-      v40 = v39->RefCount-- == 1;
-      if ( v40 )
+      if ( v38->RefCount-- == 1 )
       {
-        v41 = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)v39->pAllocator;
-        if ( v39->pAllocator )
+        pAllocator = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)v38->pAllocator;
+        if ( v38->pAllocator )
         {
-          key = v39;
+          key = v38;
           Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-            v41 + 3,
+            pAllocator + 3,
             &key);
         }
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v39->pTabStops);
-        v39->pTabStops = 0i64;
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v39);
-        v38 = v69;
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v38->pTabStops);
+        v38->pTabStops = 0i64;
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v38);
+        v37 = v67;
       }
     }
-    v38->pFormat.pObject = v37;
-    ++v38->ModCounter;
+    v37->pFormat.pObject = pObject;
+    ++v37->ModCounter;
     v12 = 0i64;
-    v42 = v29->Text.Size - startSrcIndex;
-    Scaleform::Render::Text::Paragraph::Copy(v38, v73->pTextAllocator.pObject, v29, startSrcIndex);
-    v43 = v29->Text.Size;
+    Scaleform::Render::Text::Paragraph::Copy(v37, this->pTextAllocator.pObject, v28, startSrcIndex);
+    v41 = v28->Text.Size;
     Scaleform::Render::Text::Paragraph::InsertString(
-      v29,
-      v73->pTextAllocator.pObject,
-      v9,
+      v28,
+      this->pTextAllocator.pObject,
+      pstr,
       startSrcIndex,
-      v35,
+      v34,
       pdefTextFmt);
-    v44 = v43 - startSrcIndex;
-    if ( v44 )
+    v42 = v41 - startSrcIndex;
+    if ( v42 )
     {
-      v45 = v29->Text.Size;
-      v46 = v29->Text.Size;
-      if ( v44 < v45 )
-        v46 = v44;
-      v47 = v45 - v46;
-      if ( v45 == -1i64 )
+      v43 = v28->Text.Size;
+      v44 = v43;
+      if ( v42 < v43 )
+        v44 = v42;
+      v45 = v43 - v44;
+      if ( v43 == -1i64 )
       {
-        v48 = -1i64;
+        v46 = -1i64;
         goto LABEL_76;
       }
-      v48 = v46;
-      if ( v45 != v47 )
+      v46 = v44;
+      if ( v43 != v45 )
       {
 LABEL_76:
-        if ( v47 < v45 )
+        if ( v45 < v43 )
         {
-          if ( v47 + v48 < v45 )
+          if ( v45 + v46 < v43 )
           {
-            memmove(&v29->Text.pText[v45 - v46], &v29->Text.pText[v45 - v46 + v48], 2 * (v46 - v48));
-            v29->Text.Size -= v48;
+            memmove(&v28->Text.pText[v43 - v44], &v28->Text.pText[v43 - v44 + v46], 2 * (v44 - v46));
+            v28->Text.Size -= v46;
           }
           else
           {
-            v29->Text.Size = v47;
+            v28->Text.Size = v45;
           }
         }
         Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-          &v29->FormatInfo,
-          v47,
-          v48);
-        v49 = v29->Text.Size;
-        if ( v49 )
+          &v28->FormatInfo,
+          v45,
+          v46);
+        v47 = v28->Text.Size;
+        if ( v47 )
         {
-          v50 = v29->Text.pText;
-          v51 = v49 - 1;
-          if ( v29->Text.pText && v51 < v49 )
-            v52 = &v50[v51];
+          pText = v28->Text.pText;
+          v49 = v47 - 1;
+          if ( v28->Text.pText && v49 < v47 )
+            v50 = &pText[v49];
           else
-            v52 = 0i64;
-          if ( !*v52 )
+            v50 = 0i64;
+          if ( !*v50 )
           {
-            if ( v49 )
-            {
-              v53 = v49 - 1;
-              if ( v50 && v53 < v49 )
-                v54 = &v50[v53];
-              else
-                v54 = 0i64;
-              if ( !*v54 )
-                --v49;
-            }
+            v51 = v47 - 1;
+            if ( pText && v51 < v47 )
+              v52 = &pText[v51];
+            else
+              v52 = 0i64;
+            if ( !*v52 )
+              --v47;
             Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::ExpandRange(
-              &v29->FormatInfo,
-              v49,
+              &v28->FormatInfo,
+              v47,
               1ui64);
             Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>,2,Scaleform::ArrayDefaultPolicy>>::RemoveRange(
-              &v29->FormatInfo,
-              v49 + 1,
+              &v28->FormatInfo,
+              v47 + 1,
               1ui64);
           }
         }
-        ++v29->ModCounter;
+        ++v28->ModCounter;
       }
       v12 = 0i64;
     }
-    v28 = (_QWORD *)v70.m128i_i64[0];
-LABEL_97:
-    if ( v27 != 13 && v27 != 10 )
+    pArray = (Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *)v68.pArray;
+LABEL_96:
+    if ( v26 == 13 || v26 == 10 )
     {
-      v13 = v73;
-      v55 = startSrcIndex;
+      v13 = this;
+      v53 = startSrcIndex;
+      v54 = 10;
+      if ( (this->RTFlags & 2) != 0 )
+        v54 = 13;
+      if ( v26 != v54 )
+        v28->Text.pText[v34 - 1 + startSrcIndex] = v54;
     }
     else
     {
-      v13 = v73;
-      v55 = startSrcIndex;
-      v56 = 10;
-      if ( v73->RTFlags & 2 )
-        v56 = 13;
-      if ( v27 != v56 )
-        v29->Text.pText[v35 - 1 + startSrcIndex] = v56;
+      v13 = this;
+      v53 = startSrcIndex;
     }
-    v67 += v35;
-    v7 -= v35;
-    v9 += v35;
-    v29->StartIndex = v66;
-    if ( newLinePolicy == 2 )
+    v65 += v34;
+    v7 -= v34;
+    pstr += v34;
+    v28->StartIndex = v64;
+    if ( newLinePolicy == NLP_IgnoreCRLF )
     {
-      v14 = v35 + v55;
+      v14 = v34 + v53;
       startSrcIndex = v14;
     }
     else
     {
       v14 = 0i64;
       startSrcIndex = 0i64;
-      v66 += v29->Text.Size;
-      if ( v25 < v28[1] )
-        v70.m128i_i64[1] = ++v25;
+      v64 += v28->Text.Size;
+      if ( CurIndex < (signed __int64)pArray->Data.Size )
+        v68.CurIndex = ++CurIndex;
     }
     if ( v7 )
     {
-      v26 = pdefParaFmt;
-      if ( v27 )
+      v25 = pdefParaFmt;
+      if ( v26 )
         continue;
     }
     break;
   }
-  v57 = (_QWORD *)v70.m128i_i64[0];
-  while ( v57 && v25 >= 0 && v25 < *((signed int *)v57 + 2) )
+  v55 = v68.pArray;
+  while ( v55 && CurIndex >= 0 && CurIndex < SLODWORD(v55->Data.Size) )
   {
-    v58 = *(_QWORD *)(*v57 + 8 * v25);
-    *(_QWORD *)(v58 + 56) = v66;
-    v66 += *(_QWORD *)(v58 + 8);
-    if ( v25 < v57[1] )
-      ++v25;
+    v56 = v55->Data.Data[CurIndex].pPara;
+    v56->StartIndex = v64;
+    v64 += v56->Text.Size;
+    if ( CurIndex < (signed __int64)v55->Data.Size )
+      ++CurIndex;
   }
-  v59 = v13->Paragraphs.Data.Size - 1;
+  v57 = v13->Paragraphs.Data.Size - 1;
   if ( v13 != (Scaleform::Render::Text::StyledText *)-24i64
-    && v59 >= 0
-    && v59 < SLODWORD(v13->Paragraphs.Data.Size)
-    && (v60 = v13->Paragraphs.Data.Data[v59].pPara) != 0i64 )
+    && v57 >= 0
+    && v57 < SLODWORD(v13->Paragraphs.Data.Size)
+    && (appended = v13->Paragraphs.Data.Data[v57].pPara) != 0i64 )
   {
-LABEL_122:
-    v61 = v60->Text.Size;
-    if ( !v61 )
-      goto LABEL_140;
-    v62 = v61 - 1;
-    if ( v60->Text.pText && v62 < v61 )
-      v12 = &v60->Text.pText[v62];
+LABEL_121:
+    v59 = appended->Text.Size;
+    if ( !v59 )
+      goto LABEL_127;
+    v60 = v59 - 1;
+    if ( appended->Text.pText && v60 < v59 )
+      v12 = &appended->Text.pText[v60];
     if ( *v12 != 10 && *v12 != 13 )
-LABEL_140:
+LABEL_127:
       Scaleform::Render::Text::Paragraph::AppendTermNull(
-        v60,
+        appended,
         v13->pTextAllocator.pObject,
         v13->pDefaultTextFormat.pObject);
   }
   else
   {
-    v60 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v13, 0i64);
-    if ( v60 )
+    appended = Scaleform::Render::Text::StyledText::AppendNewParagraph(v13, 0i64);
+    if ( appended )
     {
-      v13 = v73;
-      goto LABEL_122;
+      v13 = this;
+      goto LABEL_121;
     }
   }
-  if ( pdefTextFmt->PresentMask & 0x100 )
+  if ( (pdefTextFmt->PresentMask & 0x100) != 0 )
   {
-    v63 = pdefTextFmt->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
-    v64 = *(_QWORD *)v63 & 0x7FFFFFFFFFFFFFFFi64;
-    if ( *(_QWORD *)v63 >= 0i64 )
+    v61 = pdefTextFmt->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+    v62 = *(_QWORD *)v61 & 0x7FFFFFFFFFFFFFFFi64;
+    if ( *(__int64 *)v61 >= 0 )
     {
-      v65 = Scaleform::UTF8Util::GetLength((const char *)(v63 + 12), *(_QWORD *)v63 & 0x7FFFFFFFFFFFFFFFi64);
-      if ( v65 == v64 )
-        *(_QWORD *)v63 |= 0x8000000000000000ui64;
-      v64 = v65;
+      v63 = Scaleform::UTF8Util::GetLength((char *)(v61 + 12), *(_QWORD *)v61 & 0x7FFFFFFFFFFFFFFFi64);
+      if ( v63 == v62 )
+        *(_QWORD *)v61 |= 0x8000000000000000ui64;
+      v62 = v63;
     }
-    if ( v64 )
-      v73->RTFlags |= 1u;
+    if ( v62 )
+      this->RTFlags |= 1u;
   }
-  return v67;
+  return v65;
 }
 
 // File Line: 2016
 // RVA: 0x996110
-unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::InsertStyledText(Scaleform::Render::Text::StyledText *this, Scaleform::Render::Text::StyledText *text, unsigned __int64 pos, unsigned __int64 length)
+unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::InsertStyledText(
+        Scaleform::Render::Text::StyledText *this,
+        Scaleform::Render::Text::StyledText *text,
+        unsigned __int64 pos,
+        unsigned __int64 length)
 {
-  Scaleform::Render::Text::StyledText *v4; // r13
   unsigned __int64 v5; // rbx
-  unsigned __int64 v6; // rdi
-  Scaleform::Render::Text::StyledText *v7; // rbp
   unsigned __int64 v8; // rax
-  unsigned __int64 v9; // rsi
+  unsigned __int64 Size; // rsi
   wchar_t *v10; // r12
-  signed __int64 v11; // r9
-  signed __int64 v12; // r8
-  signed __int64 v13; // r10
-  signed __int64 v14; // r11
-  __int64 v15; // rax
-  unsigned __int64 v16; // rdx
-  __int64 v17; // rax
-  __int64 v18; // rcx
+  __int64 v11; // r9
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // r8
+  __int64 v13; // r10
+  __int64 v14; // r11
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // rdx
+  Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *Data; // rax
+  Scaleform::Render::Text::Paragraph *v18; // rcx
   Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator v19; // xmm0
-  unsigned __int64 v20; // rdi
-  __int64 v21; // rbx
+  signed __int64 v20; // rdi
+  __int64 CurIndex; // rbx
   unsigned __int64 v22; // rsi
   Scaleform::Render::Text::StyledText::ParagraphPtrWrapper *v23; // rax
   Scaleform::Render::Text::Paragraph *v24; // rbp
   Scaleform::Render::Text::Paragraph *v25; // r15
-  unsigned __int64 v26; // rax
-  unsigned __int64 v27; // rcx
-  bool v28; // cf
-  wchar_t *v29; // rcx
-  unsigned __int64 v30; // rsi
-  Scaleform::Render::Text::Paragraph *v31; // r15
-  Scaleform::Render::Text::Paragraph *v32; // rax
-  unsigned __int64 v33; // ST28_8
-  Scaleform::Render::Text::Paragraph *v34; // rbp
-  unsigned __int64 v35; // rax
-  unsigned __int64 v36; // rcx
-  wchar_t *v37; // rcx
-  unsigned __int64 v38; // rax
-  unsigned __int64 v39; // rcx
-  unsigned __int64 v40; // r12
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v41; // r8
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v42; // rax
-  unsigned __int64 v43; // rax
-  unsigned __int64 v44; // rcx
-  wchar_t *v45; // rcx
-  unsigned __int64 v46; // rsi
-  Scaleform::Render::Text::StyledText *v47; // rcx
-  signed __int64 v48; // rbp
-  Scaleform::Render::Text::Paragraph *v49; // r15
-  unsigned __int64 v50; // rax
-  unsigned __int64 v51; // rdi
-  unsigned __int64 v52; // rcx
-  wchar_t *v53; // rcx
-  unsigned __int64 v54; // rcx
-  wchar_t *v55; // rax
-  wchar_t v56; // ax
-  Scaleform::Render::Text::Paragraph *v57; // rdi
-  unsigned __int64 v58; // rax
-  unsigned __int64 v59; // rcx
-  wchar_t *v60; // rcx
-  Scaleform::Render::Text::Paragraph *v61; // rcx
-  signed __int64 v62; // rcx
-  Scaleform::Render::Text::Paragraph *v63; // rax
-  unsigned __int64 v64; // rcx
-  unsigned __int64 v65; // rdx
-  Scaleform::Render::Text::Paragraph *v67; // [rsp+30h] [rbp-68h]
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator iter; // [rsp+40h] [rbp-58h]
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator v69; // [rsp+50h] [rbp-48h]
-  Scaleform::Render::Text::StyledText *v70; // [rsp+A8h] [rbp+10h]
-  unsigned __int64 v71; // [rsp+B8h] [rbp+20h]
+  unsigned __int64 v26; // rsi
+  Scaleform::Render::Text::Paragraph *v27; // r15
+  Scaleform::Render::Text::Paragraph *v28; // rbp
+  unsigned __int64 v29; // rax
+  unsigned __int64 v30; // rcx
+  unsigned __int64 v31; // r12
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v32; // r8
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *pArray; // rax
+  unsigned __int64 v34; // rax
+  unsigned __int64 v35; // rcx
+  wchar_t *v36; // rcx
+  unsigned __int64 v37; // rsi
+  Scaleform::Render::Text::StyledText *v38; // rcx
+  __int64 v39; // rbp
+  Scaleform::Render::Text::Paragraph *v40; // r15
+  unsigned __int64 v41; // rax
+  unsigned __int64 v42; // rdi
+  unsigned __int64 v43; // rcx
+  wchar_t *v44; // rcx
+  unsigned __int64 v45; // rcx
+  wchar_t *v46; // rax
+  wchar_t v47; // ax
+  Scaleform::Render::Text::Paragraph *v48; // rdi
+  unsigned __int64 v49; // rax
+  unsigned __int64 v50; // rcx
+  bool v51; // cf
+  wchar_t *v52; // rcx
+  Scaleform::Render::Text::Paragraph *v53; // rcx
+  signed __int64 v54; // rcx
+  Scaleform::Render::Text::Paragraph *appended; // rax
+  unsigned __int64 v56; // rcx
+  unsigned __int64 v57; // rdx
+  Scaleform::Render::Text::Paragraph *inserted; // [rsp+30h] [rbp-68h]
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator iter; // [rsp+40h] [rbp-58h] BYREF
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator v61; // [rsp+50h] [rbp-48h] BYREF
+  unsigned __int64 v63; // [rsp+B8h] [rbp+20h]
 
-  v71 = length;
-  v70 = text;
-  v4 = this;
+  v63 = length;
   v5 = length;
-  v6 = pos;
-  v7 = text;
   v8 = Scaleform::Render::Text::StyledText::GetLength(text);
   if ( v5 == -1i64 || v5 > v8 )
   {
     v5 = v8;
-    v71 = v8;
+    v63 = v8;
   }
-  if ( !v5 || !v7->Paragraphs.Data.Size )
+  if ( !v5 || !text->Paragraphs.Data.Size )
     return 0i64;
-  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))v4->vfptr[1].__vecDelDtor)(
-    v4,
-    v6,
+  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64, char *))this->vfptr[1].__vecDelDtor)(
+    this,
+    pos,
     v5,
-    &customWorldMapCaption);
-  v9 = v4->Paragraphs.Data.Size;
+    &customCaption);
+  Size = this->Paragraphs.Data.Size;
   v10 = 0i64;
-  if ( !v9 )
-    goto LABEL_121;
-  v11 = v4->Paragraphs.Data.Size;
-  v12 = (signed __int64)&v4->Paragraphs;
+  if ( !Size )
+    goto LABEL_19;
+  v11 = this->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
   v13 = 0i64;
   if ( v11 > 0 )
   {
     do
     {
       v14 = (v11 >> 1) + v13;
-      v15 = *(_QWORD *)(*(_QWORD *)v12 + 8 * v14);
-      v16 = *(_QWORD *)(v15 + 56);
-      if ( v6 >= v16 && v6 < v16 + *(_QWORD *)(v15 + 8) || (signed int)v16 - (signed int)v6 >= 0 )
+      pPara = p_Paragraphs->Data.Data[v14].pPara;
+      StartIndex = pPara->StartIndex;
+      if ( pos >= StartIndex && pos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)pos >= 0 )
       {
         v11 >>= 1;
       }
@@ -4565,469 +4402,417 @@ unsigned __int64 __fastcall Scaleform::Render::Text::StyledText::InsertStyledTex
       }
     }
     while ( v11 > 0 );
-    v12 = (signed __int64)&v4->Paragraphs;
+    p_Paragraphs = &this->Paragraphs;
   }
-  if ( v13 == v9 )
+  if ( v13 == Size )
     LODWORD(v13) = v13 - 1;
-  v17 = *(_QWORD *)v12;
-  v69.pArray = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)v12;
-  v18 = *(_QWORD *)(v17 + 8i64 * (signed int)v13);
-  v69.CurIndex = (signed int)v13;
-  v19 = v69;
-  v20 = v6 - *(_QWORD *)(v18 + 56);
-  if ( (signed int)v13 < 0 || (signed int)v13 >= (signed __int64)*(signed int *)(v12 + 8) )
+  Data = p_Paragraphs->Data.Data;
+  v61.pArray = p_Paragraphs;
+  v18 = Data[(int)v13].pPara;
+  v61.CurIndex = (int)v13;
+  v19 = v61;
+  v20 = pos - v18->StartIndex;
+  if ( (int)v13 < 0 || (int)v13 >= (__int64)SLODWORD(p_Paragraphs->Data.Size) )
   {
-LABEL_121:
-    Scaleform::Render::Text::StyledText::AppendNewParagraph(v4, 0i64);
+LABEL_19:
+    Scaleform::Render::Text::StyledText::AppendNewParagraph(this, 0i64);
     iter.CurIndex = 0i64;
-    iter.pArray = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)&v4->Paragraphs.Data;
+    iter.pArray = &this->Paragraphs;
     v20 = 0i64;
-    v19 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator)(unsigned __int64)&v4->Paragraphs;
-    v69 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator)(unsigned __int64)&v4->Paragraphs;
+    v19 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator)(unsigned __int64)&this->Paragraphs;
+    v61 = v19;
   }
-  v21 = v69.CurIndex;
-  if ( v19.pArray && v69.CurIndex >= 0 && v69.CurIndex < SLODWORD(v19.pArray->Data.Size) )
-    v22 = v19.pArray->Data.Data[v69.CurIndex].pPara->StartIndex;
+  CurIndex = v61.CurIndex;
+  if ( v19.pArray && v61.CurIndex >= 0 && v61.CurIndex < SLODWORD(v19.pArray->Data.Size) )
+    v22 = v19.pArray->Data.Data[v61.CurIndex].pPara->StartIndex;
   else
     v22 = 0i64;
   v23 = v19.pArray->Data.Data;
-  if ( v7->Paragraphs.Data.Size == 1 )
+  if ( text->Paragraphs.Data.Size == 1 )
   {
-    v24 = v23[v69.CurIndex].pPara;
-    v25 = v70->Paragraphs.Data.Data->pPara;
-    v26 = v25->Text.Size;
-    if ( v26 )
-    {
-      v27 = v26 - 1;
-      if ( !v25->Text.pText || (v28 = v27 < v26, v29 = &v25->Text.pText[v27], !v28) )
-        v29 = 0i64;
-      *v29;
-    }
-    Scaleform::Render::Text::Paragraph::Copy(v24, v4->pTextAllocator.pObject, v25, 0i64);
+    v24 = v23[v61.CurIndex].pPara;
+    v25 = text->Paragraphs.Data.Data->pPara;
+    Scaleform::Render::Text::Paragraph::Copy(v24, this->pTextAllocator.pObject, v25, 0i64);
     if ( !v20 )
-      Scaleform::Render::Text::Paragraph::SetFormat(v24, v4->pTextAllocator.pObject, v25->pFormat.pObject);
-    v30 = v24->Text.Size + v22;
+      Scaleform::Render::Text::Paragraph::SetFormat(v24, this->pTextAllocator.pObject, v25->pFormat.pObject);
+    v26 = v24->Text.Size + v22;
   }
   else
   {
-    v31 = v23[v69.CurIndex].pPara;
-    _mm_store_si128((__m128i *)&iter, (__m128i)v19);
-    if ( v21 < (signed __int64)v19.pArray->Data.Size )
-      iter.CurIndex = v21 + 1;
-    v32 = Scaleform::Render::Text::StyledText::InsertNewParagraph(v4, &iter, v31->pFormat.pObject);
-    v33 = v31->Text.Size - v20;
-    v67 = v32;
-    Scaleform::Render::Text::Paragraph::Copy(v32, v4->pTextAllocator.pObject, v31, v20);
-    iter.pArray = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)(v31->Text.Size - v20);
-    v34 = v7->Paragraphs.Data.Data->pPara;
-    v35 = v34->Text.Size;
-    if ( v35 )
+    v27 = v23[v61.CurIndex].pPara;
+    iter = v19;
+    if ( v61.CurIndex < (signed __int64)v19.pArray->Data.Size )
+      iter.CurIndex = v61.CurIndex + 1;
+    inserted = Scaleform::Render::Text::StyledText::InsertNewParagraph(this, &iter, v27->pFormat.pObject);
+    Scaleform::Render::Text::Paragraph::Copy(inserted, this->pTextAllocator.pObject, v27, v20);
+    iter.pArray = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)(v27->Text.Size - v20);
+    v28 = text->Paragraphs.Data.Data->pPara;
+    Scaleform::Render::Text::Paragraph::Copy(v27, this->pTextAllocator.pObject, v28, 0i64);
+    v29 = v28->Text.Size;
+    if ( v29 )
     {
-      v36 = v35 - 1;
-      if ( !v34->Text.pText || (v28 = v36 < v35, v37 = &v34->Text.pText[v36], !v28) )
-        v37 = 0i64;
-      *v37;
-    }
-    Scaleform::Render::Text::Paragraph::Copy(v31, v4->pTextAllocator.pObject, v34, 0i64);
-    v38 = v34->Text.Size;
-    if ( v38 )
-    {
-      v39 = v38 - 1;
-      if ( v34->Text.pText && v39 < v38 )
-        v10 = &v34->Text.pText[v39];
+      v30 = v29 - 1;
+      if ( v28->Text.pText && v30 < v29 )
+        v10 = &v28->Text.pText[v30];
       if ( !*v10 )
-        --v38;
+        --v29;
     }
-    v40 = v71 - v38;
+    v31 = v63 - v29;
     if ( !v20 )
-      Scaleform::Render::Text::Paragraph::SetFormat(v31, v4->pTextAllocator.pObject, v34->pFormat.pObject);
+      Scaleform::Render::Text::Paragraph::SetFormat(v27, this->pTextAllocator.pObject, v28->pFormat.pObject);
     if ( iter.pArray )
     {
-      v41 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)v31->Text.Size;
-      v42 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)v31->Text.Size;
-      if ( iter.pArray < v41 )
-        v42 = iter.pArray;
-      Scaleform::Render::Text::Paragraph::Remove(v31, v31->Text.Size - (_QWORD)v42, (unsigned __int64)v41);
+      v32 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)v27->Text.Size;
+      pArray = v32;
+      if ( iter.pArray < v32 )
+        pArray = iter.pArray;
+      Scaleform::Render::Text::Paragraph::Remove(v27, v27->Text.Size - (_QWORD)pArray, (unsigned __int64)v32);
     }
-    v43 = v31->Text.Size;
-    if ( v43 )
+    v34 = v27->Text.Size;
+    if ( v34 )
     {
-      v44 = v43 - 1;
-      if ( v31->Text.pText && v44 < v43 )
-        v45 = &v31->Text.pText[v44];
+      v35 = v34 - 1;
+      if ( v27->Text.pText && v35 < v34 )
+        v36 = &v27->Text.pText[v35];
       else
-        v45 = 0i64;
-      if ( !*v45 )
-        --v43;
+        v36 = 0i64;
+      if ( !*v36 )
+        --v34;
     }
-    v46 = v43 + v22;
-    if ( v21 < (signed __int64)v19.pArray->Data.Size )
-      v69.CurIndex = ++v21;
-    v47 = v70;
-    v48 = 0i64;
-    if ( (signed __int64)v70->Paragraphs.Data.Size > 0 )
-      v48 = 1i64;
-    while ( v48 >= 0 && v48 < SLODWORD(v47->Paragraphs.Data.Size) && v40 )
+    v37 = v34 + v22;
+    if ( CurIndex < (signed __int64)v19.pArray->Data.Size )
+      v61.CurIndex = ++CurIndex;
+    v38 = text;
+    v39 = (signed __int64)text->Paragraphs.Data.Size > 0;
+    while ( v39 >= 0 && v39 < SLODWORD(v38->Paragraphs.Data.Size) && v31 )
     {
-      v49 = v47->Paragraphs.Data.Data[v48].pPara;
-      v50 = v49->Text.Size;
-      v51 = v50;
-      if ( v50 )
+      v40 = v38->Paragraphs.Data.Data[v39].pPara;
+      v41 = v40->Text.Size;
+      v42 = v41;
+      if ( v41 )
       {
-        v52 = v50 - 1;
-        if ( v49->Text.pText && v52 < v50 )
-          v53 = &v49->Text.pText[v52];
+        v43 = v41 - 1;
+        if ( v40->Text.pText && v43 < v41 )
+          v44 = &v40->Text.pText[v43];
         else
-          v53 = 0i64;
-        if ( !*v53 )
-          v51 = v50 - 1;
+          v44 = 0i64;
+        if ( !*v44 )
+          v42 = v41 - 1;
       }
-      if ( v51 > v40
-        || v51 == v40
-        && (!v50
-         || ((v54 = v50 - 1, !v49->Text.pText) || v54 >= v50 ? (v55 = 0i64) : (v55 = &v49->Text.pText[v54]),
-             (v56 = *v55, v56 != 13) && v56 != 10)) )
+      if ( v42 > v31
+        || v42 == v31
+        && (!v41
+         || ((v45 = v41 - 1, !v40->Text.pText) || v45 >= v41 ? (v46 = 0i64) : (v46 = &v40->Text.pText[v45]),
+             (v47 = *v46, v47 != 13) && v47 != 10)) )
       {
-        v57 = v67;
+        v48 = inserted;
         v10 = 0i64;
-        Scaleform::Render::Text::Paragraph::Copy(v67, v4->pTextAllocator.pObject, v49, 0i64);
-        Scaleform::Render::Text::Paragraph::SetFormat(v67, v4->pTextAllocator.pObject, v49->pFormat.pObject);
-        goto LABEL_89;
+        Scaleform::Render::Text::Paragraph::Copy(inserted, this->pTextAllocator.pObject, v40, 0i64);
+        Scaleform::Render::Text::Paragraph::SetFormat(inserted, this->pTextAllocator.pObject, v40->pFormat.pObject);
+        goto LABEL_78;
       }
-      Scaleform::Render::Text::StyledText::InsertCopyOfParagraph(v4, &v69, v49);
-      v47 = v70;
-      v40 -= v51;
-      v46 += v51;
-      if ( v48 < (signed __int64)v70->Paragraphs.Data.Size )
-        ++v48;
-      if ( v21 < (signed __int64)v19.pArray->Data.Size )
-        v69.CurIndex = ++v21;
+      Scaleform::Render::Text::StyledText::InsertCopyOfParagraph(this, &v61, v40);
+      v38 = text;
+      v31 -= v42;
+      v37 += v42;
+      if ( v39 < (signed __int64)text->Paragraphs.Data.Size )
+        ++v39;
+      if ( CurIndex < (signed __int64)v19.pArray->Data.Size )
+        v61.CurIndex = ++CurIndex;
     }
-    v57 = v67;
+    v48 = inserted;
     v10 = 0i64;
-LABEL_89:
-    v58 = v57->Text.Size;
-    v57->StartIndex = v46;
-    if ( v58 )
+LABEL_78:
+    v49 = v48->Text.Size;
+    v48->StartIndex = v37;
+    if ( v49 )
     {
-      v59 = v58 - 1;
-      if ( !v57->Text.pText || (v28 = v59 < v58, v60 = &v57->Text.pText[v59], !v28) )
-        v60 = 0i64;
-      if ( !*v60 )
-        --v58;
+      v50 = v49 - 1;
+      if ( !v48->Text.pText || (v51 = v50 < v49, v52 = &v48->Text.pText[v50], !v51) )
+        v52 = 0i64;
+      if ( !*v52 )
+        --v49;
     }
-    v30 = v58 + v46;
+    v26 = v49 + v37;
   }
-  if ( v21 < (signed __int64)v19.pArray->Data.Size )
-    ++v21;
-  while ( v21 >= 0 )
+  if ( CurIndex < (signed __int64)v19.pArray->Data.Size )
+    ++CurIndex;
+  while ( CurIndex >= 0 )
   {
-    if ( v21 >= SLODWORD(v19.pArray->Data.Size) )
+    if ( CurIndex >= SLODWORD(v19.pArray->Data.Size) )
       break;
-    v61 = v19.pArray->Data.Data[v21].pPara;
-    if ( v61->StartIndex == v30 )
+    v53 = v19.pArray->Data.Data[CurIndex].pPara;
+    if ( v53->StartIndex == v26 )
       break;
-    v61->StartIndex = v30;
-    v30 += v61->Text.Size;
-    if ( v21 < (signed __int64)v19.pArray->Data.Size )
-      ++v21;
+    v53->StartIndex = v26;
+    v26 += v53->Text.Size;
+    if ( CurIndex < (signed __int64)v19.pArray->Data.Size )
+      ++CurIndex;
   }
-  v62 = v4->Paragraphs.Data.Size - 1;
-  if ( v4 != (Scaleform::Render::Text::StyledText *)-24i64
-    && v62 >= 0
-    && v62 < SLODWORD(v4->Paragraphs.Data.Size)
-    && (v63 = v4->Paragraphs.Data.Data[v62].pPara) != 0i64
-    || (v63 = Scaleform::Render::Text::StyledText::AppendNewParagraph(v4, 0i64)) != 0i64 )
+  v54 = this->Paragraphs.Data.Size - 1;
+  if ( this != (Scaleform::Render::Text::StyledText *)-24i64
+    && v54 >= 0
+    && v54 < SLODWORD(this->Paragraphs.Data.Size)
+    && (appended = this->Paragraphs.Data.Data[v54].pPara) != 0i64
+    || (appended = Scaleform::Render::Text::StyledText::AppendNewParagraph(this, 0i64)) != 0i64 )
   {
-    v64 = v63->Text.Size;
-    if ( !v64 )
-      goto LABEL_122;
-    v65 = v64 - 1;
-    if ( v63->Text.pText && v65 < v64 )
-      v10 = &v63->Text.pText[v65];
+    v56 = appended->Text.Size;
+    if ( !v56 )
+      goto LABEL_103;
+    v57 = v56 - 1;
+    if ( appended->Text.pText && v57 < v56 )
+      v10 = &appended->Text.pText[v57];
     if ( *v10 != 10 && *v10 != 13 )
-LABEL_122:
+LABEL_103:
       Scaleform::Render::Text::Paragraph::AppendTermNull(
-        v63,
-        v4->pTextAllocator.pObject,
-        v4->pDefaultTextFormat.pObject);
+        appended,
+        this->pTextAllocator.pObject,
+        this->pDefaultTextFormat.pObject);
   }
-  if ( v70->RTFlags & 1 )
-    v4->RTFlags |= 1u;
-  return v71;
-} v10 = &v63->Text.pText[v65];
-    if ( *v10 != 10 && *v10 != 13 )
-LABEL_122:
-      Scaleform::Render::Text::Paragraph::AppendTermNull(
-        v63,
-        v4->pTextAllocator.pObject,
-        v4->pDefaultTextFormat.pObject);
-  }
-  if ( v70->RTFlags & 1 )
-    v4->RTFlags |= 1u;
-  return v71;
+  if ( (text->RTFlags & 1) != 0 )
+    this->RTFlags |= 1u;
+  return v63;
 }
 
 // File Line: 2144
 // RVA: 0x9A8CE0
-void __fastcall Scaleform::Render::Text::StyledText::Remove(Scaleform::Render::Text::StyledText *this, unsigned __int64 startPos, unsigned __int64 length)
+void __fastcall Scaleform::Render::Text::StyledText::Remove(
+        Scaleform::Render::Text::StyledText *this,
+        unsigned __int64 startPos,
+        unsigned __int64 length)
 {
   unsigned __int64 v3; // r13
-  unsigned __int64 v4; // rbx
-  Scaleform::Render::Text::StyledText *v5; // r12
-  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v6; // rdi
-  signed __int64 v7; // r9
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdi
+  __int64 Size; // r9
   unsigned __int64 v8; // r11
   signed __int64 v9; // rsi
   unsigned __int64 v10; // r10
-  Scaleform::Render::Text::Paragraph *v11; // rax
-  unsigned __int64 v12; // r8
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r8
   Scaleform::Render::Text::Paragraph *v13; // rax
   unsigned __int64 v14; // rdx
   unsigned __int64 v15; // rbx
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v16; // rdi
-  unsigned __int64 v17; // r14
-  Scaleform::Render::Text::Paragraph *v18; // rcx
-  unsigned __int64 v19; // rax
-  unsigned __int64 v20; // r15
-  Scaleform::Render::Text::Paragraph *v21; // rbx
-  unsigned __int64 v22; // r15
-  unsigned __int64 v23; // rcx
-  Scaleform::Render::Text::Paragraph *v24; // rbp
-  Scaleform::Render::Text::ParagraphFormat *v25; // rbx
-  bool v26; // zf
-  Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *v27; // rcx
-  bool v28; // dl
-  unsigned __int64 startDestIndex; // ST20_8
-  Scaleform::Render::Text::Paragraph *v30; // rbx
-  unsigned __int64 v31; // ST20_8
-  Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *v32[2]; // [rsp+40h] [rbp-58h]
-  unsigned __int64 v33; // [rsp+A0h] [rbp+8h]
-  bool v34; // [rsp+A0h] [rbp+8h]
-  Scaleform::Render::Text::Paragraph *v35; // [rsp+A8h] [rbp+10h]
-  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+B0h] [rbp+18h]
-  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *v37; // [rsp+B8h] [rbp+20h]
+  unsigned __int64 v16; // r14
+  Scaleform::Render::Text::Paragraph *v17; // rcx
+  unsigned __int64 v18; // rax
+  unsigned __int64 v19; // r15
+  Scaleform::Render::Text::Paragraph *v20; // rbx
+  unsigned __int64 v21; // r15
+  unsigned __int64 v22; // rcx
+  Scaleform::Render::Text::Paragraph *v23; // rbp
+  Scaleform::Render::Text::ParagraphFormat *pObject; // rbx
+  Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *pAllocator; // rcx
+  bool v27; // dl
+  Scaleform::Render::Text::Paragraph *v28; // rbx
+  unsigned __int64 v29; // [rsp+A0h] [rbp+8h]
+  bool v30; // [rsp+A0h] [rbp+8h]
+  Scaleform::Render::Text::Paragraph *v31; // [rsp+A8h] [rbp+10h]
+  Scaleform::Render::Text::ParagraphFormat *key; // [rsp+B0h] [rbp+18h] BYREF
+  Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *p_FormatInfo; // [rsp+B8h] [rbp+20h]
 
   v3 = length;
-  v4 = startPos;
-  v5 = this;
   if ( length == -1i64 )
     v3 = Scaleform::Render::Text::StyledText::GetLength(this);
-  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64))v5->vfptr[3].__vecDelDtor)(
-    v5,
-    v4,
+  ((void (__fastcall *)(Scaleform::Render::Text::StyledText *, unsigned __int64, unsigned __int64))this->vfptr[3].__vecDelDtor)(
+    this,
+    startPos,
     v3);
-  v6 = &v5->Paragraphs;
-  v7 = v5->Paragraphs.Data.Size;
+  p_Paragraphs = &this->Paragraphs;
+  Size = this->Paragraphs.Data.Size;
   v8 = 0i64;
   v9 = -1i64;
-  while ( v7 > 0 )
+  while ( Size > 0 )
   {
-    v10 = (v7 >> 1) + v8;
-    v11 = v6->Data.Data[v10].pPara;
-    v12 = v11->StartIndex;
-    if ( v4 >= v12 && v4 < v12 + v11->Text.Size || (signed int)v12 - (signed int)v4 >= 0 )
+    v10 = (Size >> 1) + v8;
+    pPara = p_Paragraphs->Data.Data[v10].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( startPos >= StartIndex && startPos < StartIndex + pPara->Text.Size || (int)StartIndex - (int)startPos >= 0 )
     {
-      v7 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v8 = v10 + 1;
-      v7 += -1 - (v7 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v8 >= v5->Paragraphs.Data.Size
-    || ((v13 = v6->Data.Data[v8].pPara, v14 = v13->StartIndex, v4 < v14) || v4 >= v14 + v13->Text.Size)
-    && (_DWORD)v14 != (_DWORD)v4 )
+  if ( v8 < this->Paragraphs.Data.Size
+    && ((v13 = p_Paragraphs->Data.Data[v8].pPara, v14 = v13->StartIndex, startPos >= v14)
+     && startPos < v14 + v13->Text.Size
+     || (_DWORD)v14 == (_DWORD)startPos) )
   {
-    v16 = 0i64;
-    v15 = v33;
+    v15 = startPos - p_Paragraphs->Data.Data[(int)v8].pPara->StartIndex;
+    v9 = (int)v8;
   }
   else
   {
-    v32[0] = (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)&v5->Paragraphs.Data.Data;
-    v32[1] = (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)(signed int)v8;
-    v15 = v4 - v6->Data.Data[(signed int)v8].pPara->StartIndex;
-    _mm_store_si128((__m128i *)v32, *(__m128i *)v32);
-    v9 = (signed __int64)v32[1];
-    v16 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *)v32[0];
+    p_Paragraphs = 0i64;
+    v15 = v29;
   }
-  v35 = 0i64;
-  v17 = v3;
-  v34 = 0;
-  if ( v16 )
+  v31 = 0i64;
+  v16 = v3;
+  v30 = 0;
+  if ( p_Paragraphs )
   {
-    if ( v9 >= 0 && v9 < SLODWORD(v16->Data.Size) )
+    if ( v9 >= 0 && v9 < SLODWORD(p_Paragraphs->Data.Size) )
     {
-      v18 = v16->Data.Data[v9].pPara;
-      v19 = v18->Text.Size;
-      v20 = v18->Text.Size - v15;
-      if ( v3 < v20 )
-        v20 = v3;
-      if ( v20 <= v19 )
+      v17 = p_Paragraphs->Data.Data[v9].pPara;
+      v18 = v17->Text.Size;
+      v19 = v18 - v15;
+      if ( v3 < v18 - v15 )
+        v19 = v3;
+      if ( v19 <= v18 )
       {
-        v34 = v20 + v15 >= v19;
-        v35 = v16->Data.Data[v9].pPara;
-        Scaleform::Render::Text::Paragraph::Remove(v18, v15, v20 + v15);
-        v17 = v3 - v20;
-        if ( v9 < (signed __int64)v16->Data.Size )
+        v30 = v19 + v15 >= v18;
+        v31 = p_Paragraphs->Data.Data[v9].pPara;
+        Scaleform::Render::Text::Paragraph::Remove(v17, v15, v19 + v15);
+        v16 = v3 - v19;
+        if ( v9 < (signed __int64)p_Paragraphs->Data.Size )
           ++v9;
       }
     }
     while ( 1 )
     {
-      if ( !v16 )
-        goto LABEL_61;
-      if ( v9 < 0 || v9 >= SLODWORD(v16->Data.Size) )
-        goto LABEL_46;
-      v21 = v16->Data.Data[v9].pPara;
-      v22 = v21->Text.Size;
-      if ( v17 < v22 )
-        break;
-      v5->vfptr[5].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, (unsigned int)v16->Data.Data[v9].pPara);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v21->Text.pText);
-      v21->Text.pText = 0i64;
-      v21->Text.Allocated = 0i64;
-      v21->Text.Size = 0i64;
-      v23 = v16->Data.Size;
-      if ( v9 < (signed int)v23 )
+      if ( v9 < 0 || v9 >= SLODWORD(p_Paragraphs->Data.Size) )
       {
-        if ( v23 == 1 )
+LABEL_45:
+        v27 = v30;
+        goto LABEL_46;
+      }
+      v20 = p_Paragraphs->Data.Data[v9].pPara;
+      v21 = v20->Text.Size;
+      if ( v16 < v21 )
+        break;
+      this->vfptr[5].__vecDelDtor(this, (unsigned int)p_Paragraphs->Data.Data[v9].pPara);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v20->Text.pText);
+      v20->Text.pText = 0i64;
+      v20->Text.Allocated = 0i64;
+      v20->Text.Size = 0i64;
+      v22 = p_Paragraphs->Data.Size;
+      if ( v9 < (int)v22 )
+      {
+        if ( v22 == 1 )
         {
           Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-            (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)&v16->Data.Data,
-            v16,
+            &p_Paragraphs->Data,
+            p_Paragraphs,
             0i64);
         }
         else
         {
-          v24 = v16->Data.Data[v9].pPara;
-          key = (Scaleform::Render::Text::ParagraphFormat *)v24;
-          if ( v24 )
+          v23 = p_Paragraphs->Data.Data[v9].pPara;
+          key = (Scaleform::Render::Text::ParagraphFormat *)v23;
+          if ( v23 )
           {
-            v37 = &v24->FormatInfo;
+            p_FormatInfo = &v23->FormatInfo;
             Scaleform::ConstructorMov<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>>>::DestructArray(
-              v24->FormatInfo.Ranges.Data.Data,
-              v24->FormatInfo.Ranges.Data.Size);
+              v23->FormatInfo.Ranges.Data.Data,
+              v23->FormatInfo.Ranges.Data.Size);
             Scaleform::Memory::pGlobalHeap->vfptr->Free(
               Scaleform::Memory::pGlobalHeap,
-              v24->FormatInfo.Ranges.Data.Data);
-            v25 = v24->pFormat.pObject;
-            if ( v25 )
+              v23->FormatInfo.Ranges.Data.Data);
+            pObject = v23->pFormat.pObject;
+            if ( pObject )
             {
-              v26 = v25->RefCount-- == 1;
-              if ( v26 )
+              if ( pObject->RefCount-- == 1 )
               {
-                v27 = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)v25->pAllocator;
-                if ( v25->pAllocator )
+                pAllocator = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)pObject->pAllocator;
+                if ( pObject->pAllocator )
                 {
-                  key = v25;
+                  key = pObject;
                   Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-                    v27 + 3,
+                    pAllocator + 3,
                     &key);
                 }
-                Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25->pTabStops);
-                v25->pTabStops = 0i64;
-                Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
+                Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject->pTabStops);
+                pObject->pTabStops = 0i64;
+                Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
               }
             }
-            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v24);
+            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v23);
           }
-          memmove(&v16->Data.Data[v9], &v16->Data.Data[v9 + 1], 8 * (v16->Data.Size - v9) - 8);
-          --v16->Data.Size;
+          memmove(
+            &p_Paragraphs->Data.Data[v9],
+            &p_Paragraphs->Data.Data[v9 + 1],
+            8 * (p_Paragraphs->Data.Size - v9) - 8);
+          --p_Paragraphs->Data.Size;
         }
       }
-      v17 -= v22;
-      if ( !v17 )
-      {
-LABEL_46:
-        v28 = v34;
-        goto LABEL_47;
-      }
+      v16 -= v21;
+      if ( !v16 )
+        goto LABEL_45;
     }
-    v28 = v34;
-    if ( v35 && v34 )
+    v27 = v30;
+    if ( v31 && v30 )
     {
-      startDestIndex = v35->Text.Size;
-      Scaleform::Render::Text::Paragraph::Copy(v35, v5->pTextAllocator.pObject, v21, v17);
-      v5->vfptr[5].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, (unsigned int)v21);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v21->Text.pText);
-      v21->Text.pText = 0i64;
-      v21->Text.Allocated = 0i64;
-      v21->Text.Size = 0i64;
-      if ( v9 < SLODWORD(v16->Data.Size) )
+      Scaleform::Render::Text::Paragraph::Copy(v31, this->pTextAllocator.pObject, v20, v16);
+      this->vfptr[5].__vecDelDtor(this, (unsigned int)v20);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v20->Text.pText);
+      v20->Text.pText = 0i64;
+      v20->Text.Allocated = 0i64;
+      v20->Text.Size = 0i64;
+      if ( v9 < SLODWORD(p_Paragraphs->Data.Size) )
         Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-          v16,
+          p_Paragraphs,
           v9);
-      v28 = 0;
+      v27 = 0;
     }
-LABEL_47:
-    if ( !v16 )
-      goto LABEL_61;
-    if ( v9 >= 0 && v9 < SLODWORD(v16->Data.Size) )
+LABEL_46:
+    if ( v9 < 0 || v9 >= SLODWORD(p_Paragraphs->Data.Size) )
+      goto LABEL_54;
+    v28 = p_Paragraphs->Data.Data[v9].pPara;
+    if ( v28->Text.Size )
     {
-      v30 = v16->Data.Data[v9].pPara;
-      if ( !v30->Text.Size )
-        goto LABEL_54;
-      if ( v35 && v28 )
+      if ( !v31 || !v27 )
       {
-        v31 = v35->Text.Size;
-        Scaleform::Render::Text::Paragraph::Copy(v35, v5->pTextAllocator.pObject, v30, 0i64);
 LABEL_54:
-        v5->vfptr[5].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, (unsigned int)v30);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v30->Text.pText);
-        v30->Text.pText = 0i64;
-        v30->Text.Allocated = 0i64;
-        v30->Text.Size = 0i64;
-        if ( v9 < SLODWORD(v16->Data.Size) )
-          Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-            v16,
-            v9);
-        goto LABEL_56;
+        while ( v9 >= 0 && v9 < SLODWORD(p_Paragraphs->Data.Size) )
+        {
+          p_Paragraphs->Data.Data[v9].pPara->StartIndex -= v3;
+          if ( v9 < (signed __int64)p_Paragraphs->Data.Size )
+            ++v9;
+        }
+        goto LABEL_58;
       }
+      Scaleform::Render::Text::Paragraph::Copy(v31, this->pTextAllocator.pObject, v28, 0i64);
     }
-LABEL_56:
-    while ( v16 && v9 >= 0 && v9 < SLODWORD(v16->Data.Size) )
-    {
-      v16->Data.Data[v9].pPara->StartIndex -= v3;
-      if ( v9 < (signed __int64)v16->Data.Size )
-        ++v9;
-    }
+    this->vfptr[5].__vecDelDtor(this, (unsigned int)v28);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v28->Text.pText);
+    v28->Text.pText = 0i64;
+    v28->Text.Allocated = 0i64;
+    v28->Text.Size = 0i64;
+    if ( v9 < SLODWORD(p_Paragraphs->Data.Size) )
+      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
+        p_Paragraphs,
+        v9);
+    goto LABEL_54;
   }
-LABEL_61:
-  Scaleform::Render::Text::StyledText::EnsureTermNull(v5);
+LABEL_58:
+  Scaleform::Render::Text::StyledText::EnsureTermNull(this);
 }
 
 // File Line: 2369
 // RVA: 0x95FAC0
 void __fastcall Scaleform::Render::Text::StyledText::Clear(Scaleform::Render::Text::StyledText *this)
 {
-  unsigned __int64 v1; // rbp
-  Scaleform::Render::Text::StyledText *v2; // rbx
-  unsigned __int64 v3; // rsi
-  Scaleform::Render::Text::Paragraph *v4; // rdi
+  unsigned __int64 Size; // rbp
+  unsigned __int64 i; // rsi
+  Scaleform::Render::Text::Paragraph *pPara; // rdi
 
-  v1 = this->Paragraphs.Data.Size;
-  v2 = this;
-  v3 = 0i64;
-  if ( v1 )
+  Size = this->Paragraphs.Data.Size;
+  for ( i = 0i64; i < Size; pPara->Text.Size = 0i64 )
   {
-    do
-    {
-      v4 = v2->Paragraphs.Data.Data[v3].pPara;
-      Scaleform::Render::Text::StyledText::GetAllocator(v2);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->Text.pText);
-      ++v3;
-      v4->Text.pText = 0i64;
-      v4->Text.Allocated = 0i64;
-      v4->Text.Size = 0i64;
-    }
-    while ( v3 < v1 );
+    pPara = this->Paragraphs.Data.Data[i].pPara;
+    Scaleform::Render::Text::StyledText::GetAllocator(this);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pPara->Text.pText);
+    ++i;
+    pPara->Text.pText = 0i64;
+    pPara->Text.Allocated = 0i64;
   }
   Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> *)&v2->Paragraphs.Data.Data,
-    &v2->Paragraphs,
+    &this->Paragraphs.Data,
+    &this->Paragraphs,
     0i64);
-  v2->RTFlags &= 0xFEu;
+  this->RTFlags &= ~1u;
 }
 

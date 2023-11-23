@@ -28,33 +28,31 @@ hkClass *__fastcall hkpReorientAction::staticClass()
 
 // File Line: 65
 // RVA: 0xE0B710
-void __fastcall finishLoadedObjecthkpReorientAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpReorientAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpReorientAction::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpReorientAction::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xE0B750
-void __fastcall cleanupLoadedObjecthkpReorientAction(void *p)
+void __fastcall cleanupLoadedObjecthkpReorientAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xE0B760
 void **__fastcall getVtablehkpReorientAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-50h]
+  hkStringPtr v1; // [rsp+48h] [rbp-50h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpReorientAction::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpReorientActionTypeInfo__()
   hkpReorientActionTypeInfo.m_typeName = "hkpReorientAction";
   hkpReorientActionTypeInfo.m_vtable = result;
   hkpReorientActionTypeInfo.m_scopedName = "!hkpReorientAction";
-  hkpReorientActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpReorientAction;
-  hkpReorientActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpReorientAction;
+  hkpReorientActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpReorientAction;
+  hkpReorientActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpReorientAction;
   return result;
 }
 

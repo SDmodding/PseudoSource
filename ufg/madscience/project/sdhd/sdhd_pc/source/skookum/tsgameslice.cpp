@@ -2,7 +2,7 @@
 // RVA: 0x1531080
 __int64 dynamic_initializer_for__UFG::TSGameSlice::msInteriorTriggerData__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::TSGameSlice::msInteriorTriggerData__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::TSGameSlice::msInteriorTriggerData__);
 }
 
 // File Line: 117
@@ -10,455 +10,486 @@ __int64 dynamic_initializer_for__UFG::TSGameSlice::msInteriorTriggerData__()
 void UFG::TSGameSlice::BindAtomics(void)
 {
   SSClass *v0; // rax
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+  ASymbol rebindh; // [rsp+20h] [rbp-18h]
+  ASymbol rebindi; // [rsp+20h] [rbp-18h]
+  ASymbol rebindj; // [rsp+20h] [rbp-18h]
+  ASymbol rebindk; // [rsp+20h] [rbp-18h]
+  ASymbol rebindl; // [rsp+20h] [rbp-18h]
+  ASymbol rebindm; // [rsp+20h] [rbp-18h]
+  ASymbol rebindn; // [rsp+20h] [rbp-18h]
 
   UFG::SkookumMgr::mspGameSliceClass = (SSActorClass *)SSBrain::get_class("GameSlice");
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_name",
     UFG::TSGameSlice::Mthd_gameslice_get_name,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_layer_name",
     UFG::TSGameSlice::Mthd_gameslice_get_layer_name,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "start_gameslice",
     UFG::TSGameSlice::Mthd_start_gameslice,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "complete_gameslice",
     UFG::TSGameSlice::Mthd_complete_gameslice,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_fail_gameslice",
     UFG::TSGameSlice::Coro_fail_gameslice,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_restoring",
     UFG::TSGameSlice::Mthd_is_gameslice_restoring,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_exclusive",
     UFG::TSGameSlice::Mthd_is_gameslice_exclusive,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_random_exclusive",
     UFG::TSGameSlice::Mthd_is_gameslice_random_exclusive,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_challenge_mode",
     UFG::TSGameSlice::Mthd_is_challenge_mode,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_single_container",
     UFG::TSGameSlice::Mthd_is_gameslice_single_container,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_active_master",
     UFG::TSGameSlice::Mthd_is_gameslice_active_master,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_gameslice_failed",
     UFG::TSGameSlice::Mthd_is_gameslice_failed,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_progression_fail_pending",
     UFG::TSGameSlice::Mthd_is_progression_fail_pending,
     1,
-    0);
+    rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_target_gameslice_completed",
     UFG::TSGameSlice::Mthd_is_target_gameslice_completed,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_exit_challenge_private",
     UFG::TSGameSlice::Mthd_gameslice_exit_challenge_private,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_restore_checkpoint_private",
     UFG::TSGameSlice::Mthd_gameslice_restore_checkpoint_private,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_cancel_mission_private",
     UFG::TSGameSlice::Mthd_gameslice_cancel_mission_private,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_enable_on_enter_trigger",
     UFG::TSGameSlice::Mthd_gameslice_enable_on_enter_trigger,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_enable_on_exit_trigger",
     UFG::TSGameSlice::Mthd_gameslice_enable_on_exit_trigger,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_disable_on_enter_trigger",
     UFG::TSGameSlice::Mthd_gameslice_disable_on_enter_trigger,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_disable_on_exit_trigger",
     UFG::TSGameSlice::Mthd_gameslice_disable_on_exit_trigger,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_type",
     UFG::TSGameSlice::Mthd_gameslice_get_type,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "get_active_master",
     UFG::TSGameSlice::MthdC_get_active_master,
     1,
-    0);
+    rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "reset_gameslice_fail_timer_debug",
     UFG::TSGameSlice::MthdC_reset_gameslice_fail_timer_debug,
     1,
-    0);
+    rebindb);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_progression_trigger",
     UFG::TSGameSlice::Mthd_gameslice_get_progression_trigger,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_rewards_properties",
     UFG::TSGameSlice::Mthd_gameslice_get_rewards_properties,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_restore_vehicle",
     UFG::TSGameSlice::Mthd_gameslice_get_restore_vehicle,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_play_intro_nis",
     UFG::TSGameSlice::Coro_gameslice_play_intro_nis,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_code_setup",
     UFG::TSGameSlice::Coro_gameslice_code_setup,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_code_cleanup",
     UFG::TSGameSlice::Mthd_gameslice_code_cleanup,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_claim_exclusive",
     UFG::TSGameSlice::Mthd_gameslice_claim_exclusive,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_get_completion_count",
     UFG::TSGameSlice::Mthd_gameslice_get_completion_count,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_wait_progression_trigger_private",
     UFG::TSGameSlice::Coro_gameslice_wait_progression_trigger_private,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_wait_case_open_private",
     UFG::TSGameSlice::Coro_gameslice_wait_case_open_private,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_wait_until_in_game_state",
     UFG::TSWorld::Coro_wait_until_in_game_state,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_gameslice_wait_until_tracker_running",
     UFG::TSGameSlice::Coro_gameslice_wait_until_tracker_running,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "enable_objective",
     UFG::TSGameSlice::Mthd_enable_objective,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "disable_objective",
     UFG::TSGameSlice::Mthd_disable_objective,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "set_objective_caption",
     UFG::TSGameSlice::Mthd_set_objective_caption,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "set_objective_status",
     UFG::TSGameSlice::Mthd_set_objective_status,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_objective_complete",
     UFG::TSGameSlice::Mthd_is_objective_complete,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "is_single_character_sprinkle",
     UFG::TSGameSlice::Mthd_is_single_character_sprinkle,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "get_override_for_sprinkle_character",
     UFG::TSGameSlice::Mthd_get_override_for_sprinkle_character,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "attach_to_objective",
     UFG::TSGameSlice::Mthd_attach_to_objective,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "remove_from_objective",
     UFG::TSGameSlice::Mthd_remove_from_objective,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "faction_get_standing",
     UFG::TSGameSlice::Mthd_faction_get_standing,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "set_battle_type",
     UFG::TSGameSlice::Mthd_set_battle_type,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebindc.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "set_dialogue_state",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
     1,
-    0);
+    rebindc);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "load_audio_resources",
     UFG::TSGameSlice::Mthd_load_audio_resources,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "unload_audio_resources",
     UFG::TSGameSlice::Mthd_unload_audio_resources,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebindd.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_enable_ambient_units",
     UFG::TSGameSlice::Mthd_cops_enable_ambient_units,
     1,
-    0);
+    rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_enable",
     UFG::TSGameSlice::Mthd_cops_enable,
     1,
-    0);
+    rebinde);
+  LOBYTE(rebindf.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_get_ratio_for_current_heat_level",
     UFG::TSGameSlice::Mthd_cops_get_ratio_for_current_heat_level,
     1,
-    0);
+    rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_get_heat_level",
     UFG::TSGameSlice::Mthd_cops_get_heat_level,
     1,
-    0);
+    rebindg);
+  LOBYTE(rebindh.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_set_heat_level",
     UFG::TSGameSlice::Mthd_cops_set_heat_level,
     1,
-    0);
+    rebindh);
+  LOBYTE(rebindi.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_exclude_player_for_rest_of_chase",
     UFG::TSGameSlice::Mthd_cops_exclude_player_for_rest_of_chase,
     1,
-    0);
+    rebindi);
+  LOBYTE(rebindj.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_escalate_to_minimum_heat_level",
     UFG::TSGameSlice::Mthd_cops_escalate_to_minimum_heat_level,
     1,
-    0);
+    rebindj);
+  LOBYTE(rebindk.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_get_enabled",
     UFG::TSGameSlice::Mthd_cops_get_enabled,
     1,
-    0);
+    rebindk);
+  LOBYTE(rebindl.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_trigger_instant_cooldown",
     UFG::TSGameSlice::Mthd_cops_trigger_instant_cooldown,
     1,
-    0);
+    rebindl);
+  LOBYTE(rebindm.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_is_cooling_down",
     UFG::TSGameSlice::Mthd_cops_is_cooling_down,
     1,
-    0);
+    rebindm);
+  LOBYTE(rebindn.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "cops_debug_cap_heat_level",
     UFG::TSGameSlice::Mthd_cops_debug_cap_heat_level,
     1,
-    0);
+    rebindn);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_wait_until_cops_heat_level_below",
     UFG::TSGameSlice::Coro_wait_until_cops_heat_level_below,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_camera_raycast_to_target",
     (bool (__fastcall *)(SSInvokedCoroutine *))UFG::TSGameSlice::Coro_camera_raycast_to_target,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_async_is_target_occluded",
     UFG::TSGameSlice::Coro_async_is_target_occluded,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "_launch_store_front",
     (bool (__fastcall *)(SSInvokedCoroutine *))UFG::TSGameSlice::Coro_launch_store_front,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_set_restore_vehicle_marker",
     UFG::TSGameSlice::Mthd_gameslice_set_restore_vehicle_location_marker,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_set_restore_location_marker",
     UFG::TSGameSlice::Mthd_gameslice_set_restore_location_marker,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_set_cancel_location_marker",
     UFG::TSGameSlice::Mthd_gameslice_set_cancel_location_marker,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_set_complete_location_marker",
     UFG::TSGameSlice::Mthd_gameslice_set_complete_location_marker,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "gameslice_set_restore_location",
     UFG::TSGameSlice::Mthd_gameslice_set_restore_location,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "missionscoring_add_cop_event",
     UFG::TSGameSlice::Mthd_missionscoring_add_cop_event,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "missionscoring_add_triad_event",
     UFG::TSGameSlice::Mthd_missionscoring_add_triad_event,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "borrow_ambient_actor",
     UFG::TSGameSlice::Mthd_borrow_ambient_actor,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "despawn_npc",
     UFG::TSGameSlice::Mthd_despawn_npc,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "send_collectible_telemetry_stat",
     UFG::TSGameSlice::Mthd_send_collectible_telemetry_stat,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "release_interior_triggers",
     UFG::TSGameSlice::Mthd_release_interior_triggers,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspGameSliceClass->vfptr,
+    UFG::SkookumMgr::mspGameSliceClass,
     "setup_interior_triggers",
     UFG::TSGameSlice::Mthd_setup_interior_triggers,
-    0);
+    SSBindFlag_instance_no_rebind);
   v0 = SSBrain::get_class("ScriptTests");
-  SSClass::register_method_func(v0, "launch_if_available", UFG::TSGameSlice::Mthd_ScriptTest_launch_if_available, 0);
+  SSClass::register_method_func(
+    v0,
+    "launch_if_available",
+    UFG::TSGameSlice::Mthd_ScriptTest_launch_if_available,
+    SSBindFlag_instance_no_rebind);
 }
 
 // File Line: 230
 // RVA: 0x4FA8A0
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_name(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  SSObjectBase *v3; // r8
-  signed __int64 v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
   AString *v5; // rax
-  AStringRef *v6; // rbx
-  bool v7; // zf
-  AObjReusePool<AStringRef> *v8; // rax
-  AObjBlock<AStringRef> *v9; // rcx
-  unsigned __int64 v10; // rdx
+  AStringRef *i_str_ref_p; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v11; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v12; // rcx
-  AString v13; // [rsp+48h] [rbp+10h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AString v13; // [rsp+48h] [rbp+10h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = pScope->i_scope_p.i_obj_p;
-    if ( v3 && pScope->i_scope_p.i_ptr_id == v3->i_ptr_id )
-      v4 = (signed __int64)&v3[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    AString::AString(&v13, *(const char **)(*(_QWORD *)(v4 + 152) + 32i64), 0);
-    *v2 = SSString::as_instance(v5);
-    v6 = v13.i_str_ref_p;
-    v7 = v13.i_str_ref_p->i_ref_count == 1;
-    --v6->i_ref_count;
-    if ( v7 )
+      p_i_ptr_id = 0i64;
+    AString::AString(&v13, *(const char **)(*((_QWORD *)p_i_ptr_id + 19) + 32i64), 0);
+    *ppResult = SSString::as_instance(v5);
+    i_str_ref_p = v13.i_str_ref_p;
+    if ( v13.i_str_ref_p->i_ref_count-- == 1 )
     {
-      if ( v6->i_deallocate )
-        AMemory::c_free_func(v6->i_cstr_p);
-      v8 = AStringRef::get_pool();
-      v9 = v8->i_block_p;
-      v10 = (unsigned __int64)v9->i_objects_a;
-      if ( (unsigned __int64)v6 < v10
-        || (v11 = (unsigned __int64)v6 < v10 + 24i64 * v9->i_size, v12 = &v8->i_pool, !v11) )
+      if ( i_str_ref_p->i_deallocate )
+        AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)i_str_ref_p < i_objects_a
+        || (v11 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size,
+            p_i_exp_pool = &pool->i_pool,
+            !v11) )
       {
-        v12 = &v8->i_exp_pool;
+        p_i_exp_pool = &pool->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v12, v6);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
     }
   }
 }
@@ -467,17 +498,17 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_name(SSInvokedMethod *pScop
 // RVA: 0x4FA850
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_layer_name(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // rcx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rcx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    *ppResult = SSSymbol::as_instance((ASymbol *)(*(_QWORD *)(v3 + 152) + 168i64));
+      p_i_ptr_id = 0i64;
+    *ppResult = SSSymbol::as_instance((ASymbol *)(*((_QWORD *)p_i_ptr_id + 19) + 168i64));
   }
 }
 
@@ -485,107 +516,113 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_layer_name(SSInvokedMethod 
 // RVA: 0x50C010
 void __fastcall UFG::TSGameSlice::Mthd_start_gameslice(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rcx
+  SSObjectBase *i_obj_p; // rdx
+  UFG::GameSlice **p_i_ptr_id; // rcx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = (UFG::GameSlice **)&i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  UFG::GameSlice::SetState(*(UFG::GameSlice **)(v3 + 152), STATE_STARTED);
+    p_i_ptr_id = 0i64;
+  UFG::GameSlice::SetState(p_i_ptr_id[19], STATE_STARTED);
 }
 
 // File Line: 269
 // RVA: 0x4F6920
 void __fastcall UFG::TSGameSlice::Mthd_complete_gameslice(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( v3 && v2->i_scope_p.i_ptr_id == v3->i_ptr_id )
-    UFG::GameSlice::CompleteSlice((UFG::GameSlice *)v3[8].vfptr);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    UFG::GameSlice::CompleteSlice((UFG::GameSlice *)i_obj_p[8].vfptr);
   else
     UFG::GameSlice::CompleteSlice(MEMORY[0x98]);
 }
 
 // File Line: 278
 // RVA: 0x4FAC90
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_restore_vehicle_location_marker(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_restore_vehicle_location_marker(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v4; // r8
-  SSData **v5; // rdx
-  int v6; // xmm0_4
+  SSData **i_array_p; // rdx
+  int i_user_data; // xmm0_4
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
   if ( v4 )
   {
-    v5 = pScope->i_data.i_array_p;
-    v6 = v5[1]->i_data_p->i_user_data;
-    *(_DWORD *)(v4 + 180) = (*v5)->i_data_p->i_user_data;
-    *(_DWORD *)(v4 + 192) = v6;
+    i_array_p = pScope->i_data.i_array_p;
+    i_user_data = i_array_p[1]->i_data_p->i_user_data;
+    *(_DWORD *)(v4 + 180) = (*i_array_p)->i_data_p->i_user_data;
+    *(_DWORD *)(v4 + 192) = i_user_data;
   }
 }
 
 // File Line: 290
 // RVA: 0x4FAC50
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_restore_location_marker(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_restore_location_marker(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v4; // r8
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
   if ( v4 )
     *(_DWORD *)(v4 + 176) = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
 }
 
 // File Line: 302
 // RVA: 0x4FABA0
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_cancel_location_marker(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_cancel_location_marker(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v4; // r8
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
   if ( v4 )
     *(_DWORD *)(v4 + 196) = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
 }
 
 // File Line: 314
 // RVA: 0x4FABE0
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_complete_location_marker(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_complete_location_marker(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v4; // r8
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
   if ( v4 )
     *(_DWORD *)(v4 + 200) = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
 }
@@ -594,12 +631,12 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_complete_location_marker(SS
 // RVA: 0x4FAC20
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_set_restore_location(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::qVector3 *v2; // rbx
+  UFG::qVector3 *i_user_data; // rbx
   UFG::ProgressionTracker *v3; // rax
 
-  v2 = (UFG::qVector3 *)(*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (UFG::qVector3 *)(*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v3 = UFG::ProgressionTracker::Instance();
-  UFG::ProgressionTracker::SetScriptRestoreLocation(v3, v2);
+  UFG::ProgressionTracker::SetScriptRestoreLocation(v3, i_user_data);
 }
 
 // File Line: 337
@@ -616,24 +653,22 @@ void __fastcall UFG::TSGameSlice::Mthd_ScriptTest_launch_if_available(SSInvokedM
 // RVA: 0x4F61C0
 void __fastcall UFG::TSGameSlice::Mthd_borrow_ambient_actor(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  UFG::qBaseNodeRB *v3; // rax
-  SSObjectBase *v4; // r8
-  signed __int64 v5; // r8
+  UFG::qBaseNodeRB *ArgByNameOrInstance; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // r8
   UFG::GameSlice *v6; // rcx
 
-  v2 = pScope;
-  v3 = UFG::TSSimObject::GetArgByNameOrInstance((SSInvokedContextBase *)&pScope->vfptr, 0);
-  if ( v3 )
+  ArgByNameOrInstance = UFG::TSSimObject::GetArgByNameOrInstance(pScope, 0);
+  if ( ArgByNameOrInstance )
   {
-    v4 = v2->i_scope_p.i_obj_p;
-    if ( v4 && v2->i_scope_p.i_ptr_id == v4->i_ptr_id )
-      v5 = (signed __int64)&v4[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v5 = 0i64;
-    v6 = *(UFG::GameSlice **)(v5 + 152);
+      p_i_ptr_id = 0i64;
+    v6 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
     if ( v6 )
-      UFG::GameSlice::BorrowAmbientActor(v6, (UFG::SimObject *)v3);
+      UFG::GameSlice::BorrowAmbientActor(v6, (UFG::SimObjectCharacter *)ArgByNameOrInstance);
   }
 }
 
@@ -661,29 +696,29 @@ void __fastcall UFG::TSGameSlice::Mthd_missionscoring_add_triad_event(SSInvokedM
 // RVA: 0x4DA830
 bool __fastcall UFG::TSGameSlice::Coro_fail_gameslice(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rdx
-  signed __int64 v2; // rbx
-  UFG::GameSlice *v3; // rbx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rbx
+  UFG::GameSlice *Parent; // rbx
   SSInstance *i; // rdi
   UFG::ProgressionTracker *v5; // rax
-  UFG::qString caption; // [rsp+28h] [rbp-30h]
+  UFG::qString caption; // [rsp+28h] [rbp-30h] BYREF
 
   if ( !pScope->i_update_count )
   {
-    v1 = pScope->i_scope_p.i_obj_p;
-    if ( v1 && pScope->i_scope_p.i_ptr_id == v1->i_ptr_id )
-      v2 = (signed __int64)&v1[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v2 = 0i64;
-    v3 = *(UFG::GameSlice **)(v2 + 152);
-    for ( i = (*pScope->i_data.i_array_p)->i_data_p; v3; v3 = UFG::GameSlice::GetParent(v3) )
+      p_i_ptr_id = 0i64;
+    Parent = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+    for ( i = (*pScope->i_data.i_array_p)->i_data_p; Parent; Parent = UFG::GameSlice::GetParent(Parent) )
     {
-      if ( !UFG::GameSlice::GetParent(v3) )
+      if ( !UFG::GameSlice::GetParent(Parent) )
         break;
     }
     UFG::qString::qString(&caption, *(const char **)i->i_user_data);
     v5 = UFG::ProgressionTracker::Instance();
-    UFG::ProgressionTracker::OnFailGameSlice(v5, v3, &caption);
+    UFG::ProgressionTracker::OnFailGameSlice(v5, Parent, &caption);
     UFG::qString::~qString(&caption);
   }
   return 0;
@@ -693,29 +728,27 @@ bool __fastcall UFG::TSGameSlice::Coro_fail_gameslice(SSInvokedCoroutine *pScope
 // RVA: 0x501580
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_restoring(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rdi
-  signed __int64 v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
   __int64 v5; // rax
   bool v6; // bl
   UFG::GameStatTracker *v7; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = *(_QWORD *)(v4 + 152);
+      p_i_ptr_id = 0i64;
+    v5 = *((_QWORD *)p_i_ptr_id + 19);
     v6 = *(_DWORD *)(v5 + 264) == 2;
-    if ( *(_DWORD *)(v5 + 264) == 2 && !*(_QWORD *)(v5 + 368) && *(_DWORD *)(v5 + 268) > 0 )
+    if ( *(_DWORD *)(v5 + 264) == 2 && !*(_QWORD *)(v5 + 368) && *(int *)(v5 + 268) > 0 )
     {
       v7 = UFG::GameStatTracker::Instance();
       UFG::GameStatTracker::ApplyDelta(v7, RestoreUsed, 1);
     }
-    *v3 = (SSInstance *)SSBoolean::pool_new(v6);
+    *ppResult = SSBoolean::pool_new(v6);
   }
 }
 
@@ -723,17 +756,17 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_restoring(SSInvokedMethod *p
 // RVA: 0x501490
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_exclusive(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    *ppResult = (SSInstance *)SSBoolean::pool_new(*(_BYTE *)(*(_QWORD *)(v3 + 152) + 324i64) != 0);
+      p_i_ptr_id = 0i64;
+    *ppResult = SSBoolean::pool_new(*(_BYTE *)(*((_QWORD *)p_i_ptr_id + 19) + 324i64) != 0);
   }
 }
 
@@ -741,17 +774,17 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_exclusive(SSInvokedMethod *p
 // RVA: 0x501530
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_random_exclusive(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    *ppResult = (SSInstance *)SSBoolean::pool_new(*(_BYTE *)(*(_QWORD *)(v3 + 152) + 327i64) != 0);
+      p_i_ptr_id = 0i64;
+    *ppResult = SSBoolean::pool_new(*(_BYTE *)(*((_QWORD *)p_i_ptr_id + 19) + 327i64) != 0);
   }
 }
 
@@ -759,14 +792,12 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_random_exclusive(SSInvokedMe
 // RVA: 0x500F70
 void __fastcall UFG::TSGameSlice::Mthd_is_challenge_mode(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::ProgressionTracker *v3; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::ProgressionTracker::Instance();
-    *v2 = (SSInstance *)SSBoolean::pool_new((unsigned int)(v3->mModeType - 1) <= 1);
+    *ppResult = SSBoolean::pool_new((unsigned int)(v3->mModeType - 1) <= 1);
   }
 }
 
@@ -774,24 +805,22 @@ void __fastcall UFG::TSGameSlice::Mthd_is_challenge_mode(SSInvokedMethod *pScope
 // RVA: 0x501610
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_single_container(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rdi
-  signed __int64 v4; // rbx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rbx
   UFG::GameSlice *v5; // rbx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = *(UFG::GameSlice **)(v4 + 152);
+      p_i_ptr_id = 0i64;
+    v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
     if ( !v5 || UFG::GameSlice::GetParent(v5) || (unsigned int)UFG::GameSlice::GetNumChildren(v5) )
-      *v3 = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
     else
-      *v3 = (SSInstance *)SSBoolean::pool_new(1);
+      *ppResult = SSBoolean::pool_new(1);
   }
 }
 
@@ -799,25 +828,23 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_single_container(SSInvokedMe
 // RVA: 0x501410
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_active_master(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rdi
-  signed __int64 v4; // r8
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // r8
   UFG::GameSlice *v5; // rbx
   UFG::ProgressionTracker *v6; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = *(UFG::GameSlice **)(v4 + 152);
+      p_i_ptr_id = 0i64;
+    v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
     if ( v5 && (v6 = UFG::ProgressionTracker::Instance(), v5 == UFG::ProgressionTracker::GetActiveMaster(v6)) )
-      *v3 = (SSInstance *)SSBoolean::pool_new(1);
+      *ppResult = SSBoolean::pool_new(1);
     else
-      *v3 = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
   }
 }
 
@@ -825,91 +852,89 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_active_master(SSInvokedMetho
 // RVA: 0x4FAAE0
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rdi
-  signed __int64 v4; // rbx
-  UFG::GameSlice *v5; // rbx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rbx
+  UFG::GameSlice *Parent; // rbx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = *(UFG::GameSlice **)(v4 + 152);
-    if ( !v5 )
+      p_i_ptr_id = 0i64;
+    Parent = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+    if ( !Parent )
       goto LABEL_9;
-    while ( UFG::GameSlice::GetParent(v5) )
+    while ( UFG::GameSlice::GetParent(Parent) )
     {
-      v5 = UFG::GameSlice::GetParent(v5);
-      if ( !v5 )
+      Parent = UFG::GameSlice::GetParent(Parent);
+      if ( !Parent )
         goto LABEL_9;
     }
-    if ( v5 )
-      *v3 = SSSymbol::as_instance((ASymbol *)UFG::gGameSliceTypeSymbols[v5->mType]);
+    if ( Parent )
+      *ppResult = SSSymbol::as_instance((ASymbol *)UFG::gGameSliceTypeSymbols[Parent->mType]);
     else
 LABEL_9:
-      *v3 = SSSymbol::as_instance((ASymbol *)UFG::gGameSliceTypeSymbols[0]);
+      *ppResult = SSSymbol::as_instance((ASymbol *)UFG::gGameSliceTypeSymbols[0]);
   }
 }
 
 // File Line: 500
 // RVA: 0x4E7180
-void __fastcall UFG::TSGameSlice::MthdC_get_active_master(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::MthdC_get_active_master(SSInvokedMethod *pScope, SSActor **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::ProgressionTracker *v3; // rax
-  UFG::GameSlice *v4; // rax
-  UFG::SSGameSlice *v5; // rax
+  UFG::GameSlice *ActiveMaster; // rax
+  UFG::SSGameSlice *mScript; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::ProgressionTracker::Instance();
-    v4 = UFG::ProgressionTracker::GetActiveMaster(v3);
-    if ( v4 )
+    ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v3);
+    if ( ActiveMaster )
     {
-      v5 = v4->mScript;
-      if ( v5 )
+      mScript = ActiveMaster->mScript;
+      if ( mScript )
       {
-        ++v5->i_ref_count;
-        *v2 = (SSInstance *)&v5->vfptr;
+        ++mScript->i_ref_count;
+        *ppResult = &mScript->SSActor;
       }
       else
       {
-        *v2 = 0i64;
+        *ppResult = 0i64;
       }
     }
     else
     {
-      *v2 = SSBrain::c_nil_p;
+      *ppResult = (SSActor *)SSBrain::c_nil_p;
     }
   }
 }
 
 // File Line: 513
 // RVA: 0x4EC3E0
-void __fastcall UFG::TSGameSlice::MthdC_reset_gameslice_fail_timer_debug(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::MthdC_reset_gameslice_fail_timer_debug(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInstance *v2; // rbx
+  SSInstance *i_data_p; // rbx
   UFG::ProgressionTracker *v3; // rax
-  UFG::GameSlice *v4; // rbx
+  UFG::GameSlice *Parent; // rbx
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
   v3 = UFG::ProgressionTracker::Instance();
-  v4 = (UFG::GameSlice *)UFG::ProgressionTracker::Find(v3, (UFG::qSymbol *)&v2->i_user_data, 0);
-  if ( v4 )
+  Parent = (UFG::GameSlice *)UFG::ProgressionTracker::Find(v3, (UFG::qSymbol *)&i_data_p->i_user_data, 0);
+  if ( Parent )
   {
     do
     {
-      if ( !UFG::GameSlice::GetParent(v4) )
+      if ( !UFG::GameSlice::GetParent(Parent) )
         break;
-      v4 = UFG::GameSlice::GetParent(v4);
+      Parent = UFG::GameSlice::GetParent(Parent);
     }
-    while ( v4 );
-    v4->mCompletionStatusTimestamp = 0i64;
+    while ( Parent );
+    Parent->mCompletionStatusTimestamp = 0i64;
   }
 }
 
@@ -917,17 +942,17 @@ void __fastcall UFG::TSGameSlice::MthdC_reset_gameslice_fail_timer_debug(SSInvok
 // RVA: 0x5014E0
 void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_failed(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    *ppResult = (SSInstance *)SSBoolean::pool_new(((*(_DWORD *)(*(_QWORD *)(v3 + 152) + 272i64) - 1) & 0xFFFFFFFD) == 0);
+      p_i_ptr_id = 0i64;
+    *ppResult = SSBoolean::pool_new(((*(_DWORD *)(*((_QWORD *)p_i_ptr_id + 19) + 272i64) - 1) & 0xFFFFFFFD) == 0);
   }
 }
 
@@ -935,14 +960,12 @@ void __fastcall UFG::TSGameSlice::Mthd_is_gameslice_failed(SSInvokedMethod *pSco
 // RVA: 0x503030
 void __fastcall UFG::TSGameSlice::Mthd_is_progression_fail_pending(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::ProgressionTracker *v3; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::ProgressionTracker::Instance();
-    *v2 = (SSInstance *)SSBoolean::pool_new(v3->mState == 10);
+    *ppResult = SSBoolean::pool_new(v3->mState == 10);
   }
 }
 
@@ -950,21 +973,19 @@ void __fastcall UFG::TSGameSlice::Mthd_is_progression_fail_pending(SSInvokedMeth
 // RVA: 0x503450
 void __fastcall UFG::TSGameSlice::Mthd_is_target_gameslice_completed(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rdi
-  SSInstance *v3; // rbx
+  SSInstance *i_data_p; // rbx
   UFG::ProgressionTracker *v4; // rax
   UFG::qBaseTreeRB *v5; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = (*pScope->i_data.i_array_p)->i_data_p;
+    i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
     v4 = UFG::ProgressionTracker::Instance();
-    v5 = UFG::ProgressionTracker::Find(v4, (UFG::qSymbol *)&v3->i_user_data, 0);
+    v5 = UFG::ProgressionTracker::Find(v4, (UFG::qSymbol *)&i_data_p->i_user_data, 0);
     if ( v5 )
-      *v2 = (SSInstance *)SSBoolean::pool_new(LODWORD(v5[3].mNULL.mChild[1]) == 8);
+      *ppResult = SSBoolean::pool_new(LODWORD(v5[3].mNULL.mChild[1]) == 8);
     else
-      *v2 = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
   }
 }
 
@@ -982,7 +1003,9 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_exit_challenge_private(SSInvoke
 
 // File Line: 593
 // RVA: 0x4FAB80
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_restore_checkpoint_private(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_restore_checkpoint_private(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
   UFG::ProgressionTracker *v2; // rax
 
@@ -994,68 +1017,69 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_restore_checkpoint_private(SSIn
 // RVA: 0x4FA210
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_cancel_mission_private(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
   UFG::ProgressionTracker::RestoreType v3; // ebx
-  signed __int64 v4; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   UFG::GameSlice *v5; // rsi
-  SSData **v6; // rdx
-  SSInstance *v7; // rdi
+  SSData **i_array_p; // rdx
+  SSInstance *i_data_p; // rdi
   bool v8; // bp
-  UFG::qBaseTreeRB *v9; // rax
-  UFG::TransformNodeComponent *v10; // rbx
+  UFG::qBaseTreeRB *Named; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::ProgressionTracker *v11; // rax
   UFG::ProgressionTracker *v12; // rax
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  v3 = 0;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v4 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  v3 = RestoreType_Unknown;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(UFG::GameSlice **)(v4 + 152);
-  v6 = pScope->i_data.i_array_p;
-  v7 = v6[1]->i_data_p;
-  v8 = (*v6)->i_data_p->i_user_data != 0;
-  if ( LODWORD(v7->i_user_data) == UFG::qSymbol::create_from_string(&result, "safehouse")->mUID )
+    p_i_ptr_id = 0i64;
+  v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = i_array_p[1]->i_data_p;
+  v8 = (*i_array_p)->i_data_p->i_user_data != 0;
+  if ( LODWORD(i_data_p->i_user_data) == UFG::qSymbol::create_from_string(&result, "safehouse")->mUID )
     goto LABEL_18;
-  if ( LODWORD(v7->i_user_data) == UFG::qSymbol::create_from_string(&result, "hospital")->mUID )
+  if ( LODWORD(i_data_p->i_user_data) == UFG::qSymbol::create_from_string(&result, "hospital")->mUID )
   {
-    v3 = 5;
+    v3 = RestoreType_Hospital;
     goto LABEL_19;
   }
-  if ( LODWORD(v7->i_user_data) == UFG::qSymbol::create_from_string(&result, "policestation")->mUID )
+  if ( LODWORD(i_data_p->i_user_data) == UFG::qSymbol::create_from_string(&result, "policestation")->mUID )
   {
-    v3 = 6;
+    v3 = RestoreType_PoliceStation;
     goto LABEL_19;
   }
-  if ( LODWORD(v7->i_user_data) != UFG::qSymbol::create_from_string(&result, "cancelmarker")->mUID )
+  if ( LODWORD(i_data_p->i_user_data) != UFG::qSymbol::create_from_string(&result, "cancelmarker")->mUID )
   {
-    if ( LODWORD(v7->i_user_data) != UFG::qSymbol::create_from_string(&result, "currentlocation")->mUID )
+    if ( LODWORD(i_data_p->i_user_data) != UFG::qSymbol::create_from_string(&result, "currentlocation")->mUID )
       goto LABEL_19;
     if ( LocalPlayer )
     {
-      v10 = LocalPlayer->m_pTransformNodeComponent;
-      if ( v10 )
+      m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+      if ( m_pTransformNodeComponent )
         goto LABEL_14;
     }
 LABEL_18:
-    v3 = 3;
+    v3 = RestoreType_SafehouseFailure;
     goto LABEL_19;
   }
   result.mUID = UFG::GameSlice::GetCancelLocationMarker(v5)->mUID;
   if ( result.mUID != -1 )
   {
-    v9 = UFG::MarkerBase::GetNamed(&result);
-    if ( v9 )
+    Named = UFG::MarkerBase::GetNamed(&result);
+    if ( Named )
     {
-      v10 = (UFG::TransformNodeComponent *)v9[1].mNULL.mParent;
+      m_pTransformNodeComponent = (UFG::TransformNodeComponent *)Named[1].mNULL.mParent;
 LABEL_14:
-      UFG::TransformNodeComponent::UpdateWorldTransform(v10);
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
       v11 = UFG::ProgressionTracker::Instance();
-      UFG::ProgressionTracker::SetScriptRestoreLocation(v11, (UFG::qVector3 *)&v10->mWorldTransform.v3);
-      v3 = 7;
-      goto LABEL_19;
+      UFG::ProgressionTracker::SetScriptRestoreLocation(
+        v11,
+        (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3);
+      v3 = RestoreType_ScriptLocation;
     }
   }
 LABEL_19:
@@ -1067,282 +1091,284 @@ LABEL_19:
 // RVA: 0x4FAA60
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_rewards_properties(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  signed __int64 v4; // rcx
-  UFG::qPropertySet *v5; // rax
+  SSObjectBase *i_obj_p; // r8
+  UFG::GameSlice **p_i_ptr_id; // rcx
+  UFG::qPropertySet *RewardsProperties; // rax
   unsigned __int64 v6; // rdi
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = (UFG::GameSlice **)&i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = UFG::GameSlice::GetRewardsProperties(*(UFG::GameSlice **)(v4 + 152));
-    v6 = (unsigned __int64)v5;
-    if ( v5 )
+      p_i_ptr_id = 0i64;
+    RewardsProperties = UFG::GameSlice::GetRewardsProperties(p_i_ptr_id[19]);
+    v6 = (unsigned __int64)RewardsProperties;
+    if ( RewardsProperties )
     {
-      UFG::qPropertySet::AddRef(v5);
-      *v3 = SSInstance::pool_new(UFG::SkookumMgr::mspPropertySetClass, v6);
+      UFG::qPropertySet::AddRef(RewardsProperties);
+      *ppResult = SSInstance::pool_new(UFG::SkookumMgr::mspPropertySetClass, v6);
     }
     else
     {
-      *v3 = SSBrain::c_nil_p;
+      *ppResult = SSBrain::c_nil_p;
     }
   }
 }
 
 // File Line: 675
 // RVA: 0x4FA9A0
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_restore_vehicle(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_restore_vehicle(SSInvokedMethod *pScope, UFG::TSActor **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  signed __int64 v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
   UFG::SimObject *v5; // rcx
-  UFG::TSActorComponent *v6; // rax
+  UFG::TSActorComponent *ComponentOfType; // rax
   SSActorClass *v7; // rsi
   UFG::TSActorComponent *v8; // rdi
-  SSClass *v9; // rcx
-  SSClass *v10; // rcx
-  UFG::TSActor *v11; // rax
+  SSClass *i_class_p; // rcx
+  SSClass *i_superclass_p; // rcx
+  UFG::TSActor *Actor; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v4 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v4 = 0i64;
-    v5 = *(UFG::SimObject **)(*(_QWORD *)(v4 + 152) + 512i64);
+      p_i_ptr_id = 0i64;
+    v5 = *(UFG::SimObject **)(*((_QWORD *)p_i_ptr_id + 19) + 512i64);
     if ( v5
-      && ((v6 = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(v5, UFG::TSActorComponent::_TypeUID),
+      && ((ComponentOfType = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(
+                                                        v5,
+                                                        UFG::TSActorComponent::_TypeUID),
            v7 = UFG::TSVehicle::mClass,
-           v8 = v6,
-           v9 = UFG::TSActorComponent::GetActor(v6)->i_class_p,
-           v7 == (SSActorClass *)v9)
-       || (v10 = v9->i_superclass_p) != 0i64 && SSClass::is_class(v10, (SSClass *)&v7->vfptr)) )
+           v8 = ComponentOfType,
+           i_class_p = UFG::TSActorComponent::GetActor(ComponentOfType)->i_class_p,
+           v7 == i_class_p)
+       || (i_superclass_p = i_class_p->i_superclass_p) != 0i64 && SSClass::is_class(i_superclass_p, v7)) )
     {
-      v11 = UFG::TSActorComponent::GetActor(v8);
-      ++v11->i_ref_count;
-      *v3 = (SSInstance *)&v11->vfptr;
+      Actor = UFG::TSActorComponent::GetActor(v8);
+      ++Actor->i_ref_count;
+      *ppResult = Actor;
     }
     else
     {
-      *v3 = SSBrain::c_nil_p;
+      *ppResult = (UFG::TSActor *)SSBrain::c_nil_p;
     }
   }
 }
 
 // File Line: 735
 // RVA: 0x4FA530
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_enable_on_enter_trigger(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_enable_on_enter_trigger(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSInvokedMethod *v3; // rbx
-  signed __int64 v4; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   fastdelegate::detail::GenericClass *v5; // r14
-  SSInstance *v6; // rdx
-  UFG::TriggerRegion *v7; // rdi
+  SSInstance *i_data_p; // rdx
+  UFG::TriggerRegion *i_user_data; // rdi
   unsigned int v8; // edx
   UFG::qBaseTreeRB *v9; // rax
   __int64 v10; // rcx
-  UFG::TriggerTarget *v11; // rbx
+  UFG::TriggerTarget *mNext; // rbx
   __int64 i; // rbp
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v13; // rdx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mPrev; // rdx
   UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v14; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  v3 = pScope;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v4 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(fastdelegate::detail::GenericClass **)(v4 + 152);
-  v6 = (*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v6 )
-    goto LABEL_17;
-  if ( v6->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
+    p_i_ptr_id = 0i64;
+  v5 = (fastdelegate::detail::GenericClass *)*((_QWORD *)p_i_ptr_id + 19);
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
+    goto LABEL_11;
+  if ( i_data_p->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
   {
-    v7 = (UFG::TriggerRegion *)v6->i_user_data;
+    i_user_data = (UFG::TriggerRegion *)i_data_p->i_user_data;
     goto LABEL_12;
   }
-  v8 = v6->i_user_data;
+  v8 = i_data_p->i_user_data;
   if ( !v8
     || (v9 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v8)) == 0i64
-    || (v7 = (UFG::TriggerRegion *)&v9[-2].mNULL, v9 == (UFG::qBaseTreeRB *)112) )
+    || (i_user_data = (UFG::TriggerRegion *)&v9[-2].mNULL, v9 == (UFG::qBaseTreeRB *)112) )
   {
-LABEL_17:
-    v7 = 0i64;
+LABEL_11:
+    i_user_data = 0i64;
   }
 LABEL_12:
-  v10 = *((_QWORD *)v3->i_data.i_array_p + 1);
-  v11 = (UFG::TriggerTarget *)v7->mTrackList.mNode.mNext;
+  v10 = *((_QWORD *)pScope->i_data.i_array_p + 1);
+  mNext = (UFG::TriggerTarget *)i_user_data->mTrackList.mNode.mNext;
   for ( i = *(_QWORD *)(v10 + 8);
-        v11 != (UFG::TriggerTarget *)&v7->mTrackList;
-        v11 = (UFG::TriggerTarget *)v7->mTrackList.mNode.mNext )
+        mNext != (UFG::TriggerTarget *)&i_user_data->mTrackList;
+        mNext = (UFG::TriggerTarget *)i_user_data->mTrackList.mNode.mNext )
   {
-    v13 = v11->mPrev;
-    v14 = v11->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
-    v11->mPrev = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&v11->mPrev;
-    v11->mNext = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&v11->mPrev;
-    UFG::TriggerTarget::~TriggerTarget(v11);
-    operator delete[](v11);
+    mPrev = mNext->mPrev;
+    v14 = mNext->mNext;
+    mPrev->mNext = v14;
+    v14->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::TriggerTarget::~TriggerTarget(mNext);
+    operator delete[](mNext);
   }
-  UFG::TriggerRegion::ResetEvents(v7);
-  UFG::TriggerRegion::TrackTarget(v7, *(UFG::SimObject **)(i + 208), 0i64);
-  v7->mOnEnteredDelegate.m_Closure.m_pthis = v5;
-  v7->mOnEnteredDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::GameSlice::OnEnterTrigger;
-  UFG::TriggerRegion::EnableHot(v7, 1);
+  UFG::TriggerRegion::ResetEvents(i_user_data);
+  UFG::TriggerRegion::TrackTarget(i_user_data, *(UFG::SimObject **)(i + 208), 0i64);
+  i_user_data->mOnEnteredDelegate.m_Closure.m_pthis = v5;
+  i_user_data->mOnEnteredDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::GameSlice::OnEnterTrigger;
+  UFG::TriggerRegion::EnableHot(i_user_data, 1);
 }
 
 // File Line: 755
 // RVA: 0x4FA660
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_enable_on_exit_trigger(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSInvokedMethod *v3; // rbx
-  signed __int64 v4; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   fastdelegate::detail::GenericClass *v5; // r14
-  SSInstance *v6; // rdx
-  UFG::TriggerRegion *v7; // rdi
+  SSInstance *i_data_p; // rdx
+  UFG::TriggerRegion *i_user_data; // rdi
   unsigned int v8; // edx
   UFG::qBaseTreeRB *v9; // rax
   __int64 v10; // rcx
-  UFG::TriggerTarget *v11; // rbx
+  UFG::TriggerTarget *mNext; // rbx
   __int64 i; // rbp
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v13; // rdx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mPrev; // rdx
   UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v14; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  v3 = pScope;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v4 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(fastdelegate::detail::GenericClass **)(v4 + 152);
-  v6 = (*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v6 )
-    goto LABEL_17;
-  if ( v6->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
+    p_i_ptr_id = 0i64;
+  v5 = (fastdelegate::detail::GenericClass *)*((_QWORD *)p_i_ptr_id + 19);
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
+    goto LABEL_11;
+  if ( i_data_p->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
   {
-    v7 = (UFG::TriggerRegion *)v6->i_user_data;
+    i_user_data = (UFG::TriggerRegion *)i_data_p->i_user_data;
     goto LABEL_12;
   }
-  v8 = v6->i_user_data;
+  v8 = i_data_p->i_user_data;
   if ( !v8
     || (v9 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v8)) == 0i64
-    || (v7 = (UFG::TriggerRegion *)&v9[-2].mNULL, v9 == (UFG::qBaseTreeRB *)112) )
+    || (i_user_data = (UFG::TriggerRegion *)&v9[-2].mNULL, v9 == (UFG::qBaseTreeRB *)112) )
   {
-LABEL_17:
-    v7 = 0i64;
+LABEL_11:
+    i_user_data = 0i64;
   }
 LABEL_12:
-  v10 = *((_QWORD *)v3->i_data.i_array_p + 1);
-  v11 = (UFG::TriggerTarget *)v7->mTrackList.mNode.mNext;
+  v10 = *((_QWORD *)pScope->i_data.i_array_p + 1);
+  mNext = (UFG::TriggerTarget *)i_user_data->mTrackList.mNode.mNext;
   for ( i = *(_QWORD *)(v10 + 8);
-        v11 != (UFG::TriggerTarget *)&v7->mTrackList;
-        v11 = (UFG::TriggerTarget *)v7->mTrackList.mNode.mNext )
+        mNext != (UFG::TriggerTarget *)&i_user_data->mTrackList;
+        mNext = (UFG::TriggerTarget *)i_user_data->mTrackList.mNode.mNext )
   {
-    v13 = v11->mPrev;
-    v14 = v11->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
-    v11->mPrev = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&v11->mPrev;
-    v11->mNext = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&v11->mPrev;
-    UFG::TriggerTarget::~TriggerTarget(v11);
-    operator delete[](v11);
+    mPrev = mNext->mPrev;
+    v14 = mNext->mNext;
+    mPrev->mNext = v14;
+    v14->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::TriggerTarget::~TriggerTarget(mNext);
+    operator delete[](mNext);
   }
-  UFG::TriggerRegion::ResetEvents(v7);
-  UFG::TriggerRegion::TrackTarget(v7, *(UFG::SimObject **)(i + 208), 0i64);
-  v7->mOnExitedDelegate.m_Closure.m_pthis = v5;
-  v7->mOnExitedDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::GameSlice::OnExitTrigger;
-  UFG::TriggerRegion::EnableHot(v7, 1);
+  UFG::TriggerRegion::ResetEvents(i_user_data);
+  UFG::TriggerRegion::TrackTarget(i_user_data, *(UFG::SimObject **)(i + 208), 0i64);
+  i_user_data->mOnExitedDelegate.m_Closure.m_pthis = v5;
+  i_user_data->mOnExitedDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))UFG::GameSlice::OnExitTrigger;
+  UFG::TriggerRegion::EnableHot(i_user_data, 1);
 }
 
 // File Line: 775
 // RVA: 0x4FA450
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_disable_on_enter_trigger(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_disable_on_enter_trigger(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInstance *v2; // rdx
-  UFG::TriggerRegion *v3; // rcx
+  SSInstance *i_data_p; // rdx
+  UFG::TriggerRegion *i_user_data; // rcx
   unsigned int v4; // edx
   UFG::qBaseTreeRB *v5; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v2 )
-    goto LABEL_11;
-  if ( v2->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
+    goto LABEL_7;
+  if ( i_data_p->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
   {
-    v3 = (UFG::TriggerRegion *)v2->i_user_data;
+    i_user_data = (UFG::TriggerRegion *)i_data_p->i_user_data;
     goto LABEL_8;
   }
-  v4 = v2->i_user_data;
+  v4 = i_data_p->i_user_data;
   if ( !v4
     || (v5 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v4)) == 0i64
-    || (v3 = (UFG::TriggerRegion *)&v5[-2].mNULL, v5 == (UFG::qBaseTreeRB *)112) )
+    || (i_user_data = (UFG::TriggerRegion *)&v5[-2].mNULL, v5 == (UFG::qBaseTreeRB *)112) )
   {
-LABEL_11:
-    v3 = 0i64;
+LABEL_7:
+    i_user_data = 0i64;
   }
 LABEL_8:
-  v3->mOnEnteredDelegate.m_Closure.m_pFunction = 0i64;
-  v3->mOnEnteredDelegate.m_Closure.m_pthis = 0i64;
-  UFG::TriggerRegion::EnableHot(v3, 0);
+  i_user_data->mOnEnteredDelegate.m_Closure.m_pFunction = 0i64;
+  i_user_data->mOnEnteredDelegate.m_Closure.m_pthis = 0i64;
+  UFG::TriggerRegion::EnableHot(i_user_data, 0);
 }
 
 // File Line: 787
 // RVA: 0x4FA4C0
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_disable_on_exit_trigger(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_disable_on_exit_trigger(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInstance *v2; // rdx
-  UFG::TriggerRegion *v3; // rcx
+  SSInstance *i_data_p; // rdx
+  UFG::TriggerRegion *i_user_data; // rcx
   unsigned int v4; // edx
   UFG::qBaseTreeRB *v5; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v2 )
-    goto LABEL_11;
-  if ( v2->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
+    goto LABEL_7;
+  if ( i_data_p->i_class_p == UFG::TSTriggerRegion::mspTriggerRegionClass )
   {
-    v3 = (UFG::TriggerRegion *)v2->i_user_data;
+    i_user_data = (UFG::TriggerRegion *)i_data_p->i_user_data;
     goto LABEL_8;
   }
-  v4 = v2->i_user_data;
+  v4 = i_data_p->i_user_data;
   if ( !v4
     || (v5 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v4)) == 0i64
-    || (v3 = (UFG::TriggerRegion *)&v5[-2].mNULL, v5 == (UFG::qBaseTreeRB *)112) )
+    || (i_user_data = (UFG::TriggerRegion *)&v5[-2].mNULL, v5 == (UFG::qBaseTreeRB *)112) )
   {
-LABEL_11:
-    v3 = 0i64;
+LABEL_7:
+    i_user_data = 0i64;
   }
 LABEL_8:
-  v3->mOnExitedDelegate.m_Closure.m_pFunction = 0i64;
-  v3->mOnExitedDelegate.m_Closure.m_pthis = 0i64;
-  UFG::TriggerRegion::EnableHot(v3, 0);
+  i_user_data->mOnExitedDelegate.m_Closure.m_pFunction = 0i64;
+  i_user_data->mOnExitedDelegate.m_Closure.m_pthis = 0i64;
+  UFG::TriggerRegion::EnableHot(i_user_data, 0);
 }
 
 // File Line: 799
 // RVA: 0x4FA950
-void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_progression_trigger(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_progression_trigger(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // rcx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rcx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    *ppResult = SSSymbol::as_instance((ASymbol *)(*(_QWORD *)(v3 + 152) + 172i64));
+      p_i_ptr_id = 0i64;
+    *ppResult = SSSymbol::as_instance((ASymbol *)(*((_QWORD *)p_i_ptr_id + 19) + 172i64));
   }
 }
 
@@ -1350,39 +1376,35 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_progression_trigger(SSInvok
 // RVA: 0x4DB2D0
 bool __fastcall UFG::TSGameSlice::Coro_gameslice_play_intro_nis(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rdx
-  SSInvokedCoroutine *v2; // rsi
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v4; // rbp
   UFG::qSharedStringData *v5; // rbx
   const char *v7; // rbx
-  NISManager *v8; // rax
-  NISInstance *v9; // rax
-  NISInstance *v10; // rbx
-  NISManager *v11; // rax
+  NISManager *Instance; // rax
+  NISInstance *v9; // rbx
+  NISManager *v10; // rax
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  v2 = pScope;
-  if ( v1 && pScope->i_scope_p.i_ptr_id == v1->i_ptr_id )
-    v3 = (signed __int64)&v1[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
   v5 = (UFG::qSharedStringData *)(*(_QWORD *)(v4 + 64) - 48i64);
   if ( v5 == UFG::qSharedStringData::GetEmptyString() )
     return 1;
-  if ( v2->i_update_count || NISManager::GetInstance()->mState )
-    return NISManager::GetInstance()->mState == 0;
+  if ( pScope->i_update_count || NISManager::GetInstance()->mState )
+    return NISManager::GetInstance()->mState == STATE_INVALID;
   v7 = *(const char **)(v4 + 64);
-  v8 = NISManager::GetInstance();
-  v9 = NISManager::CreateInstance(v8, v7);
-  v10 = v9;
+  Instance = NISManager::GetInstance();
+  v9 = NISManager::CreateInstance(Instance, v7);
   v9->mbDestroyOnUnload = 1;
   v9->mbIntermediateNIS = *(_BYTE *)(v4 + 81);
   v9->mbPostNISFadeIn = *(_BYTE *)(v4 + 80);
   v9->mpPostNISSceneSettings = *(UFG::SceneSettings **)(v4 + 72);
-  v11 = NISManager::GetInstance();
-  NISManager::Play(v11, v10);
+  v10 = NISManager::GetInstance();
+  NISManager::Play(v10, v9);
   return 0;
 }
 
@@ -1390,31 +1412,28 @@ bool __fastcall UFG::TSGameSlice::Coro_gameslice_play_intro_nis(SSInvokedCorouti
 // RVA: 0x4DB1B0
 bool __fastcall UFG::TSGameSlice::Coro_gameslice_code_setup(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rsi
-  SSObjectBase *v2; // rcx
-  signed __int64 v3; // rdi
+  SSObjectBase *i_obj_p; // rcx
+  unsigned int *p_i_ptr_id; // rdi
   __int64 v4; // rdi
-  signed int v5; // ebx
+  int v5; // ebx
   UFG::CopSystem *v6; // rax
   UFG::SceneSettings *v7; // rbx
   UFG::ProgressionTracker *v8; // rax
   UFG::ProgressionTracker *v9; // rax
   UFG::SceneSettings *v10; // rbx
   UFG::ProgressionTracker *v11; // rax
-  bool result; // al
 
-  v1 = pScope;
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || (v3 = (signed __int64)&v2[-2].i_ptr_id, v1->i_scope_p.i_ptr_id != v2->i_ptr_id) )
-    v3 = 0i64;
-  v4 = *(_QWORD *)(v3 + 152);
-  if ( !v1->i_update_count )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || (p_i_ptr_id = &i_obj_p[-2].i_ptr_id, pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id) )
+    p_i_ptr_id = 0i64;
+  v4 = *((_QWORD *)p_i_ptr_id + 19);
+  if ( !pScope->i_update_count )
   {
     v5 = *(_DWORD *)(v4 + 208);
     if ( v5 > 0 )
     {
       v6 = UFG::CopSystem::Instance();
-      v6->vfptr[100].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v6->vfptr, v5);
+      v6->vfptr[100].__vecDelDtor(v6, v5);
     }
   }
   if ( UFG::GameSlice::ShouldTeleportVehicleOnStart((UFG::GameSlice *)v4) )
@@ -1430,43 +1449,39 @@ bool __fastcall UFG::TSGameSlice::Coro_gameslice_code_setup(SSInvokedCoroutine *
   }
   UFG::GameSlice::SetupPedsAndVehicles((UFG::GameSlice *)v4);
   UFG::GameSlice::SetupSceneLayers((UFG::GameSlice *)v4);
-  if ( *(_DWORD *)(v4 + 268) != 4 && UFG::GameSlice::ShouldTeleportOnStart((UFG::GameSlice *)v4) )
+  if ( *(_DWORD *)(v4 + 268) == 4 || !UFG::GameSlice::ShouldTeleportOnStart((UFG::GameSlice *)v4) )
   {
-    if ( v1->i_update_count )
-    {
-      result = (unsigned int)UFG::FlowController::GetCurrentState(&UFG::gFlowController) == uidGameStateInGame_10;
-    }
-    else
-    {
-      v10 = *(UFG::SceneSettings **)(v4 + 352);
-      v11 = UFG::ProgressionTracker::Instance();
-      UFG::ProgressionTracker::ApplySceneSettings(v11, v10);
-      result = 0;
-    }
+    UFG::GameSlice::SetupTimeAndWeather((UFG::GameSlice *)v4, 0);
+    return 1;
+  }
+  else if ( pScope->i_update_count )
+  {
+    return (unsigned int)UFG::FlowController::GetCurrentState(&UFG::gFlowController) == uidGameStateInGame_10;
   }
   else
   {
-    UFG::GameSlice::SetupTimeAndWeather((UFG::GameSlice *)v4, 0);
-    result = 1;
+    v10 = *(UFG::SceneSettings **)(v4 + 352);
+    v11 = UFG::ProgressionTracker::Instance();
+    UFG::ProgressionTracker::ApplySceneSettings(v11, v10);
+    return 0;
   }
-  return result;
 }
 
 // File Line: 897
 // RVA: 0x4FA3F0
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_code_cleanup(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
-  signed __int64 v3; // rbx
+  SSObjectBase *i_obj_p; // rbx
+  unsigned int *p_i_ptr_id; // rbx
   UFG::GameSlice *v4; // rbx
   UFG::CopSystem *v5; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(UFG::GameSlice **)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
   if ( v4->mMaxHeatLevel > 0 )
   {
     v5 = UFG::CopSystem::Instance();
@@ -1481,20 +1496,18 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_code_cleanup(SSInvokedMethod *p
 // RVA: 0x4FA380
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_claim_exclusive(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rdi
-  signed __int64 v4; // rbx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rbx
   UFG::GameSlice *v5; // rbx
-  char v6; // cl
+  bool v6; // cl
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  v3 = ppResult;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v4 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(UFG::GameSlice **)(v4 + 152);
-  if ( (unsigned __int8)UFG::GameSlice::IsExclusiveAvailable(v5) )
+    p_i_ptr_id = 0i64;
+  v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+  if ( UFG::GameSlice::IsExclusiveAvailable(v5) )
   {
     UFG::GameSlice::ClaimExclusive(v5);
     v6 = 1;
@@ -1503,41 +1516,38 @@ void __fastcall UFG::TSGameSlice::Mthd_gameslice_claim_exclusive(SSInvokedMethod
   {
     v6 = v5->mExclusiveChild == v5;
   }
-  if ( v3 )
-    *v3 = (SSInstance *)SSBoolean::pool_new(v6);
+  if ( ppResult )
+    *ppResult = SSBoolean::pool_new(v6);
 }
 
 // File Line: 948
 // RVA: 0x4FA7C0
 void __fastcall UFG::TSGameSlice::Mthd_gameslice_get_completion_count(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  unsigned int v3; // edi
-  SSInstance **v4; // rsi
-  signed __int64 v5; // rbx
-  UFG::GameSlice *v6; // rbx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int mCompletionCount; // edi
+  unsigned int *p_i_ptr_id; // rbx
+  UFG::GameSlice *Parent; // rbx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = 0;
-    v4 = ppResult;
-    if ( !v2 || (v5 = (signed __int64)&v2[-2].i_ptr_id, pScope->i_scope_p.i_ptr_id != v2->i_ptr_id) )
-      v5 = 0i64;
-    v6 = *(UFG::GameSlice **)(v5 + 152);
-    if ( v6 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    mCompletionCount = 0;
+    if ( !i_obj_p || (p_i_ptr_id = &i_obj_p[-2].i_ptr_id, pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id) )
+      p_i_ptr_id = 0i64;
+    Parent = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+    if ( Parent )
     {
-      while ( UFG::GameSlice::GetParent(v6) )
+      while ( UFG::GameSlice::GetParent(Parent) )
       {
-        v6 = UFG::GameSlice::GetParent(v6);
-        if ( !v6 )
-          goto LABEL_11;
+        Parent = UFG::GameSlice::GetParent(Parent);
+        if ( !Parent )
+          goto LABEL_10;
       }
-      if ( v6 )
-        v3 = v6->mCompletionCount;
+      mCompletionCount = Parent->mCompletionCount;
     }
-LABEL_11:
-    *v4 = SSInstance::pool_new(SSBrain::c_integer_class_p, v3);
+LABEL_10:
+    *ppResult = SSInstance::pool_new(SSBrain::c_integer_class_p, mCompletionCount);
   }
 }
 
@@ -1545,43 +1555,40 @@ LABEL_11:
 // RVA: 0x4DB400
 bool __fastcall UFG::TSGameSlice::Coro_gameslice_wait_progression_trigger_private(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rdx
+  SSObjectBase *i_obj_p; // rdx
   bool v2; // zf
-  signed __int64 v3; // rcx
+  UFG::GameSlice **p_i_ptr_id; // rcx
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( !v1 || (v2 = pScope->i_scope_p.i_ptr_id == v1->i_ptr_id, v3 = (signed __int64)&v1[-2].i_ptr_id, !v2) )
-    v3 = 0i64;
-  return (unsigned __int8)UFG::GameSlice::IsWaitingForTrigger(*(UFG::GameSlice **)(v3 + 152)) == 0;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p
+    || (v2 = pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id, p_i_ptr_id = (UFG::GameSlice **)&i_obj_p[-2].i_ptr_id, !v2) )
+  {
+    p_i_ptr_id = 0i64;
+  }
+  return !UFG::GameSlice::IsWaitingForTrigger(p_i_ptr_id[19]);
 }
 
 // File Line: 973
 // RVA: 0x4DB3A0
 bool __fastcall UFG::TSGameSlice::Coro_gameslice_wait_case_open_private(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rdx
-  signed __int64 v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   __int64 v3; // rbx
   UFG::ProgressionTracker *v4; // rax
-  UFG::CaseInfo *v5; // rax
+  UFG::CaseInfo *Case; // rax
   bool result; // al
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( v1 && pScope->i_scope_p.i_ptr_id == v1->i_ptr_id )
-    v2 = (signed __int64)&v1[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v2 = 0i64;
-  v3 = *(_QWORD *)(v2 + 152);
-  if ( *(_DWORD *)(v3 + 268) == 10
-    && (v4 = UFG::ProgressionTracker::Instance(),
-        (v5 = UFG::CaseTracker::GetCase(&v4->mCaseTracker, (UFG::GameSlice *)v3)) != 0i64) )
-  {
-    result = UFG::CaseInfo::IsOpened(v5);
-  }
-  else
-  {
-    result = 1;
-  }
+    p_i_ptr_id = 0i64;
+  v3 = *((_QWORD *)p_i_ptr_id + 19);
+  result = *(_DWORD *)(v3 + 268) != 10
+        || (v4 = UFG::ProgressionTracker::Instance(),
+            (Case = UFG::CaseTracker::GetCase(&v4->mCaseTracker, (UFG::GameSlice *)v3)) == 0i64)
+        || UFG::CaseInfo::IsOpened(Case);
   return result;
 }
 
@@ -1599,44 +1606,44 @@ bool __fastcall UFG::TSGameSlice::Coro_gameslice_wait_until_tracker_running(SSIn
   UFG::ProgressionTracker *v1; // rax
 
   v1 = UFG::ProgressionTracker::Instance();
-  return !v1->mDirty && v1->mState == 3;
+  return !v1->mDirty && v1->mState == STATE_COMPLETE;
 }
 
 // File Line: 998
 // RVA: 0x4F8D40
 void __fastcall UFG::TSGameSlice::Mthd_enable_objective(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdi
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdi
   UFG::GameSlice *v4; // rdi
-  UFG::ObjectiveTracker *v5; // rbx
-  UFG::Objective *v6; // rdi
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // rbx
+  UFG::Objective *Objective; // rdi
   UFG::qSharedStringData *v7; // rbx
-  const char *v8; // rbx
-  UFG::GameLogManager *v9; // rcx
-  UFG::qString identifier; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol log_type; // [rsp+60h] [rbp+8h]
-  UFG::qSymbol *v12; // [rsp+70h] [rbp+18h]
+  const char *mData; // rbx
+  UFG::GameLogManager *Instance; // rcx
+  UFG::qString identifier; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol log_type; // [rsp+60h] [rbp+8h] BYREF
+  UFG::qSymbol *p_log_type; // [rsp+70h] [rbp+18h]
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(UFG::GameSlice **)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  v5 = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
-  UFG::ObjectiveTracker::UpdateStatus(v5, &identifier, STATUS_ACTIVE, v4);
-  v6 = UFG::ObjectiveTracker::FindObjective(v5, &identifier);
-  v12 = &log_type;
+  p_mObjectiveTracker = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
+  UFG::ObjectiveTracker::UpdateStatus(p_mObjectiveTracker, &identifier, STATUS_ACTIVE, v4);
+  Objective = UFG::ObjectiveTracker::FindObjective(p_mObjectiveTracker, &identifier);
+  p_log_type = &log_type;
   log_type.mUID = qSymbol_GameLogType_Objective_15.mUID;
-  v7 = (UFG::qSharedStringData *)(v6->mLog.mText - 48);
+  v7 = (UFG::qSharedStringData *)(Objective->mLog.mText - 48);
   if ( v7 == UFG::qSharedStringData::GetEmptyString() )
-    v8 = v6->mCaption.mData;
+    mData = Objective->mCaption.mData;
   else
-    v8 = v6->mLog.mText;
-  v9 = UFG::GameLogManager::getInstance();
-  UFG::GameLogManager::LogItem(v9, (UFG::qSymbol)&log_type, v8);
+    mData = Objective->mLog.mText;
+  Instance = UFG::GameLogManager::getInstance();
+  UFG::GameLogManager::LogItem(Instance, (UFG::qSymbol)&log_type, mData);
   UFG::qString::~qString(&identifier);
 }
 
@@ -1644,21 +1651,21 @@ void __fastcall UFG::TSGameSlice::Mthd_enable_objective(SSInvokedMethod *pScope,
 // RVA: 0x4F8500
 void __fastcall UFG::TSGameSlice::Mthd_disable_objective(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rbx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rbx
   UFG::GameSlice *v4; // rbx
   UFG::ProgressionTracker *v5; // rax
-  UFG::qString identifier; // [rsp+28h] [rbp-30h]
+  UFG::qString identifier; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(UFG::GameSlice **)(v3 + 152);
+    p_i_ptr_id = 0i64;
+  v4 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
   v5 = UFG::ProgressionTracker::Instance();
-  UFG::ObjectiveTracker::UpdateStatus(&v5->mObjectiveTracker, &identifier, 0, v4);
+  UFG::ObjectiveTracker::UpdateStatus(&v5->mObjectiveTracker, &identifier, STATUS_INACTIVE, v4);
   UFG::qString::~qString(&identifier);
 }
 
@@ -1666,23 +1673,23 @@ void __fastcall UFG::TSGameSlice::Mthd_disable_objective(SSInvokedMethod *pScope
 // RVA: 0x509060
 void __fastcall UFG::TSGameSlice::Mthd_set_objective_caption(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdi
-  SSObjectBase *v3; // rdx
-  signed __int64 v4; // rbx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rbx
   UFG::GameSlice *v5; // rbx
   UFG::ProgressionTracker *v6; // rax
-  UFG::qString caption; // [rsp+28h] [rbp-60h]
-  UFG::qString identifier; // [rsp+50h] [rbp-38h]
+  UFG::qString caption; // [rsp+28h] [rbp-60h] BYREF
+  UFG::qString identifier; // [rsp+50h] [rbp-38h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( v3 && pScope->i_scope_p.i_ptr_id == v3->i_ptr_id )
-    v4 = (signed __int64)&v3[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(UFG::GameSlice **)(v4 + 152);
+    p_i_ptr_id = 0i64;
+  v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  UFG::qString::qString(&caption, **(const char ***)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64) + 32i64));
+  UFG::qString::qString(
+    &caption,
+    **(const char ***)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64) + 32i64));
   v6 = UFG::ProgressionTracker::Instance();
   UFG::ObjectiveTracker::UpdateCaption(&v6->mObjectiveTracker, &identifier, &caption, v5);
   UFG::qString::~qString(&caption);
@@ -1693,23 +1700,21 @@ void __fastcall UFG::TSGameSlice::Mthd_set_objective_caption(SSInvokedMethod *pS
 // RVA: 0x509120
 void __fastcall UFG::TSGameSlice::Mthd_set_objective_status(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  SSObjectBase *v3; // rdx
-  signed __int64 v4; // rdi
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdi
   UFG::GameSlice *v5; // rdi
   UFG::Objective::Status v6; // ebx
   UFG::ProgressionTracker *v7; // rax
-  UFG::qString identifier; // [rsp+28h] [rbp-30h]
+  UFG::qString identifier; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( v3 && pScope->i_scope_p.i_ptr_id == v3->i_ptr_id )
-    v4 = (signed __int64)&v3[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v4 = 0i64;
-  v5 = *(UFG::GameSlice **)(v4 + 152);
+    p_i_ptr_id = 0i64;
+  v5 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  v6 = (unsigned int)UFG::Objective::MapSymbolToStatus((ASymbol *)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1)
+  v6 = (unsigned int)UFG::Objective::MapSymbolToStatus((ASymbol *)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1)
                                                                              + 8i64)
                                                                  + 32i64));
   v7 = UFG::ProgressionTracker::Instance();
@@ -1721,57 +1726,57 @@ void __fastcall UFG::TSGameSlice::Mthd_set_objective_status(SSInvokedMethod *pSc
 // RVA: 0x4F59A0
 void __fastcall UFG::TSGameSlice::Mthd_attach_to_objective(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  SSData **v3; // rdx
+  SSData **i_array_p; // rdx
   bool v4; // si
-  SSInstance *v5; // rbx
-  SSClass *v6; // rcx
-  UFG::ProgressionTracker *v7; // rax
-  UFG::ObjectiveTracker *v8; // rdi
-  UFG::Objective *v9; // rax
-  UFG::Objective *v10; // rbx
-  UFG::qString blip; // [rsp+38h] [rbp-B0h]
-  UFG::qString identifier; // [rsp+60h] [rbp-88h]
-  UFG::qString corona; // [rsp+88h] [rbp-60h]
-  UFG::qString v14; // [rsp+B0h] [rbp-38h]
-  UFG::qSymbol v15; // [rsp+F0h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+100h] [rbp+18h]
+  SSInstance *i_data_p; // rbx
+  SSClass *i_class_p; // rcx
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // rdi
+  UFG::Objective *Objective; // rax
+  UFG::Objective *v9; // rbx
+  UFG::qString blip; // [rsp+38h] [rbp-B0h] BYREF
+  UFG::qString identifier; // [rsp+60h] [rbp-88h] BYREF
+  UFG::qString corona; // [rsp+88h] [rbp-60h] BYREF
+  UFG::qString v13; // [rsp+B0h] [rbp-38h] BYREF
+  UFG::qSymbol v14; // [rsp+F0h] [rbp+8h] BYREF
+  UFG::qSymbol result; // [rsp+100h] [rbp+18h] BYREF
 
-  v2 = pScope;
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  UFG::qString::qString(&blip, **(const char ***)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 2) + 8i64) + 32i64));
-  UFG::qString::qString(&corona, **(const char ***)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64) + 32i64));
-  v3 = v2->i_data.i_array_p;
-  v4 = v3[4]->i_data_p->i_user_data != 0;
-  v15.mUID = -1;
-  v5 = v3[1]->i_data_p;
-  if ( v5 )
+  UFG::qString::qString(
+    &blip,
+    **(const char ***)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 2) + 8i64) + 32i64));
+  UFG::qString::qString(
+    &corona,
+    **(const char ***)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64) + 32i64));
+  i_array_p = pScope->i_data.i_array_p;
+  v4 = i_array_p[4]->i_data_p->i_user_data != 0;
+  v14.mUID = -1;
+  i_data_p = i_array_p[1]->i_data_p;
+  if ( i_data_p )
   {
-    v6 = v5->i_class_p;
-    if ( v6 == SSBrain::c_string_class_p )
+    i_class_p = i_data_p->i_class_p;
+    if ( i_class_p == SSBrain::c_string_class_p )
     {
-      UFG::qString::qString(&v14, *(const char **)v5->i_user_data);
-      v15.mUID = UFG::qSymbol::create_from_string(&result, v14.mData)->mUID;
-      UFG::qString::~qString(&v14);
+      UFG::qString::qString(&v13, *(const char **)i_data_p->i_user_data);
+      v14.mUID = UFG::qSymbol::create_from_string(&result, v13.mData)->mUID;
+      UFG::qString::~qString(&v13);
     }
-    else if ( v6 == SSBrain::c_symbol_class_p )
+    else if ( i_class_p == SSBrain::c_symbol_class_p )
     {
-      v15.mUID = v5->i_user_data;
+      v14.mUID = i_data_p->i_user_data;
     }
     else
     {
-      if ( !((unsigned __int8 (*)(void))v6->vfptr->is_actor_class)() )
+      if ( !i_class_p->vfptr->is_actor_class(i_class_p) )
         goto LABEL_10;
-      v15.mUID = *(_DWORD *)(*(_QWORD *)&v5[4].i_ref_count + 72i64);
+      v14.mUID = *(_DWORD *)(*(_QWORD *)&i_data_p[4].i_ref_count + 72i64);
     }
-    v7 = UFG::ProgressionTracker::Instance();
-    v8 = &v7->mObjectiveTracker;
-    v9 = UFG::ObjectiveTracker::FindObjective(&v7->mObjectiveTracker, &identifier);
-    v10 = v9;
-    if ( v9 )
+    p_mObjectiveTracker = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
+    Objective = UFG::ObjectiveTracker::FindObjective(p_mObjectiveTracker, &identifier);
+    v9 = Objective;
+    if ( Objective )
     {
-      UFG::Objective::AddIndicator(v9, &v15, &blip, &corona, 1);
-      UFG::ObjectiveTracker::UpdateStatus(v8, v10, v4);
+      UFG::Objective::AddIndicator(Objective, (UFG::qSymbolUC *)&v14, &blip, &corona, 1);
+      UFG::ObjectiveTracker::UpdateStatus(p_mObjectiveTracker, v9, v4);
     }
   }
 LABEL_10:
@@ -1784,30 +1789,27 @@ LABEL_10:
 // RVA: 0x506520
 void __fastcall UFG::TSGameSlice::Mthd_remove_from_objective(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
   __int64 v3; // rbx
   SSClass *v4; // rcx
-  UFG::ProgressionTracker *v5; // rax
-  UFG::ObjectiveTracker *v6; // rdi
-  UFG::Objective *v7; // rax
-  UFG::Objective *v8; // rbx
-  UFG::qString identifier; // [rsp+28h] [rbp-60h]
-  UFG::qString v10; // [rsp+50h] [rbp-38h]
-  UFG::qSymbol name; // [rsp+90h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+A0h] [rbp+18h]
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // rdi
+  UFG::Objective *Objective; // rax
+  UFG::Objective *v7; // rbx
+  UFG::qString identifier; // [rsp+28h] [rbp-60h] BYREF
+  UFG::qString v9; // [rsp+50h] [rbp-38h] BYREF
+  UFG::qSymbol name; // [rsp+90h] [rbp+8h] BYREF
+  UFG::qSymbol result; // [rsp+A0h] [rbp+18h] BYREF
 
-  v2 = pScope;
   UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
   name.mUID = -1;
-  v3 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64);
+  v3 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
   if ( v3 )
   {
     v4 = *(SSClass **)(v3 + 24);
     if ( v4 == SSBrain::c_string_class_p )
     {
-      UFG::qString::qString(&v10, **(const char ***)(v3 + 32));
-      name.mUID = UFG::qSymbol::create_from_string(&result, v10.mData)->mUID;
-      UFG::qString::~qString(&v10);
+      UFG::qString::qString(&v9, **(const char ***)(v3 + 32));
+      name.mUID = UFG::qSymbol::create_from_string(&result, v9.mData)->mUID;
+      UFG::qString::~qString(&v9);
     }
     else if ( v4 == SSBrain::c_symbol_class_p )
     {
@@ -1815,18 +1817,17 @@ void __fastcall UFG::TSGameSlice::Mthd_remove_from_objective(SSInvokedMethod *pS
     }
     else
     {
-      if ( !((unsigned __int8 (*)(void))v4->vfptr->is_actor_class)() )
+      if ( !v4->vfptr->is_actor_class(v4) )
         goto LABEL_10;
       name.mUID = *(_DWORD *)(*(_QWORD *)(v3 + 208) + 72i64);
     }
-    v5 = UFG::ProgressionTracker::Instance();
-    v6 = &v5->mObjectiveTracker;
-    v7 = UFG::ObjectiveTracker::FindObjective(&v5->mObjectiveTracker, &identifier);
-    v8 = v7;
-    if ( v7 )
+    p_mObjectiveTracker = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
+    Objective = UFG::ObjectiveTracker::FindObjective(p_mObjectiveTracker, &identifier);
+    v7 = Objective;
+    if ( Objective )
     {
-      UFG::Objective::RemoveIndicator(v7, &name, 1);
-      UFG::ObjectiveTracker::UpdateStatus(v6, v8, 0);
+      UFG::Objective::RemoveIndicator(Objective, &name, 1);
+      UFG::ObjectiveTracker::UpdateStatus(p_mObjectiveTracker, v7, 0);
     }
   }
 LABEL_10:
@@ -1837,22 +1838,20 @@ LABEL_10:
 // RVA: 0x502850
 void __fastcall UFG::TSGameSlice::Mthd_is_objective_complete(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   bool v3; // di
   UFG::ProgressionTracker *v4; // rax
-  UFG::Objective *v5; // rax
-  UFG::qString identifier; // [rsp+28h] [rbp-30h]
+  UFG::Objective *Objective; // rax
+  UFG::qString identifier; // [rsp+28h] [rbp-30h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = 0;
     UFG::qString::qString(&identifier, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
     v4 = UFG::ProgressionTracker::Instance();
-    v5 = UFG::ObjectiveTracker::FindObjective(&v4->mObjectiveTracker, &identifier);
-    if ( v5 )
-      v3 = v5->mStatus == 3;
-    *v2 = (SSInstance *)SSBoolean::pool_new(v3);
+    Objective = UFG::ObjectiveTracker::FindObjective(&v4->mObjectiveTracker, &identifier);
+    if ( Objective )
+      v3 = Objective->mStatus == STATUS_COMPLETED;
+    *ppResult = SSBoolean::pool_new(v3);
     UFG::qString::~qString(&identifier);
   }
 }
@@ -1861,50 +1860,50 @@ void __fastcall UFG::TSGameSlice::Mthd_is_objective_complete(SSInvokedMethod *pS
 // RVA: 0x503170
 void __fastcall UFG::TSGameSlice::Mthd_is_single_character_sprinkle(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  signed __int64 v3; // r8
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // r8
   __int64 v4; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-      v3 = (signed __int64)&v2[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v3 = 0i64;
-    v4 = *(_QWORD *)(v3 + 152);
+      p_i_ptr_id = 0i64;
+    v4 = *((_QWORD *)p_i_ptr_id + 19);
     if ( *(_DWORD *)(v4 + 268) == 4 && *(_BYTE *)(v4 + 481) )
-      *ppResult = (SSInstance *)SSBoolean::pool_new(1);
+      *ppResult = SSBoolean::pool_new(1);
     else
-      *ppResult = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
   }
 }
 
 // File Line: 1147
 // RVA: 0x4FDAE0
-void __fastcall UFG::TSGameSlice::Mthd_get_override_for_sprinkle_character(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_get_override_for_sprinkle_character(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  int v3; // edx
-  SSObjectBase *v4; // r8
-  signed __int64 v5; // rax
+  int i_user_data; // edx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int *p_i_ptr_id; // rax
   ASymbol *v6; // rax
   ASymbol *v7; // rcx
 
-  v2 = ppResult;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  if ( v2 )
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  if ( ppResult )
   {
-    v4 = pScope->i_scope_p.i_obj_p;
-    if ( v4 && pScope->i_scope_p.i_ptr_id == v4->i_ptr_id )
-      v5 = (signed __int64)&v4[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v5 = 0i64;
-    v6 = *(ASymbol **)(v5 + 152);
+      p_i_ptr_id = 0i64;
+    v6 = (ASymbol *)*((_QWORD *)p_i_ptr_id + 19);
     v7 = v6 + 121;
-    if ( v3 )
+    if ( i_user_data )
       v7 = v6 + 122;
-    *v2 = SSSymbol::as_instance(v7);
+    *ppResult = SSSymbol::as_instance(v7);
   }
 }
 
@@ -1912,27 +1911,25 @@ void __fastcall UFG::TSGameSlice::Mthd_get_override_for_sprinkle_character(SSInv
 // RVA: 0x4F9C90
 void __fastcall UFG::TSGameSlice::Mthd_faction_get_standing(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  SSInstance **v3; // r14
-  UFG::qSymbol *v4; // rdi
+  SSData **i_array_p; // r8
+  UFG::qSymbol *i_data_p; // rdi
   UFG::qSymbol *v5; // rbx
   UFG::GameStatTracker *v6; // rsi
   UFG::eFactionClassEnum v7; // eax
-  UFG::eFactionStandingEnum v8; // eax
+  UFG::eFactionStandingEnum Standing; // eax
   UFG::qStaticSymbol *v9; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_data.i_array_p;
-    v3 = ppResult;
-    v4 = (UFG::qSymbol *)(*v2)->i_data_p;
-    v5 = (UFG::qSymbol *)v2[1]->i_data_p;
+    i_array_p = pScope->i_data.i_array_p;
+    i_data_p = (UFG::qSymbol *)(*i_array_p)->i_data_p;
+    v5 = (UFG::qSymbol *)i_array_p[1]->i_data_p;
     v6 = UFG::FactionInterface::Get();
     LODWORD(v5) = UFG::FactionInterface::MapSymbolToFaction(v5 + 8);
-    v7 = (unsigned int)UFG::FactionInterface::MapSymbolToFaction(v4 + 8);
-    v8 = (unsigned int)UFG::FactionInterface::GetStanding(&v6->mFactionInterface, v7, (UFG::eFactionClassEnum)v5);
-    v9 = UFG::FactionInterface::MapStandingToSymbol(&v6->mFactionInterface, v8);
-    *v3 = SSSymbol::as_instance((ASymbol *)v9);
+    v7 = (unsigned int)UFG::FactionInterface::MapSymbolToFaction(i_data_p + 8);
+    Standing = (unsigned int)UFG::FactionInterface::GetStanding(&v6->mFactionInterface, v7, (UFG::eFactionClassEnum)v5);
+    v9 = UFG::FactionInterface::MapStandingToSymbol(&v6->mFactionInterface, Standing);
+    *ppResult = SSSymbol::as_instance((ASymbol *)v9);
   }
 }
 
@@ -1940,20 +1937,20 @@ void __fastcall UFG::TSGameSlice::Mthd_faction_get_standing(SSInvokedMethod *pSc
 // RVA: 0x507380
 void __fastcall UFG::TSGameSlice::Mthd_set_battle_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rbx
-  UFG::eBattleType v3; // eax
+  SSInstance *i_data_p; // rbx
+  UFG::eBattleType BattleTypeFromName; // eax
   char *v4; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = (unsigned int)UFG::GetBattleTypeFromName((UFG::qSymbol *)&v2->i_user_data);
-  if ( v3 == -1 )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  BattleTypeFromName = (unsigned int)UFG::GetBattleTypeFromName((UFG::qSymbol *)&i_data_p->i_user_data);
+  if ( BattleTypeFromName == eBATTLE_TYPE_NONE )
   {
-    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->i_user_data);
+    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_data_p->i_user_data);
     UFG::qPrintf("Script error: invalid battle type %s\n", v4);
   }
   else
   {
-    UFG::BattleManager::s_pInstance->m_CurrentBattleType = v3;
+    UFG::BattleManager::s_pInstance->m_CurrentBattleType = BattleTypeFromName;
   }
 }
 
@@ -1966,74 +1963,74 @@ void __fastcall UFG::TSGameSlice::Mthd_cops_enable_ambient_units(SSInvokedMethod
 
   v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0;
   v3 = UFG::CopSystem::Instance();
-  v3->vfptr[85].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, v2);
+  v3->vfptr[85].__vecDelDtor(v3, v2);
 }
 
 // File Line: 1201
 // RVA: 0x4F6DF0
 void __fastcall UFG::TSGameSlice::Mthd_cops_enable(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rax
+  SSInstance *i_data_p; // rax
   bool v3; // bl
   UFG::CopSystem *v4; // rax
   UFG::CopSystem *v5; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = v2->i_user_data != 0;
-  if ( !v2->i_user_data )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  v3 = i_data_p->i_user_data != 0;
+  if ( !i_data_p->i_user_data )
   {
     v4 = UFG::CopSystem::Instance();
     if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v4->vfptr[89].__vecDelDtor)(v4) )
-      UFG::CopSystem::Instance()->mStats.mFinishReason = 4;
+      UFG::CopSystem::Instance()->mStats.mFinishReason = eFinishReason_Script;
   }
   v5 = UFG::CopSystem::Instance();
-  v5->vfptr[4].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v5->vfptr, v3);
+  v5->vfptr[4].__vecDelDtor(v5, v3);
 }
 
 // File Line: 1213
 // RVA: 0x4F7070
 void __fastcall UFG::TSGameSlice::Mthd_cops_set_heat_level(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rsi
-  unsigned int v3; // edi
+  unsigned int i_user_data; // edi
   UFG::CopSystem *v4; // rax
   UFG::CopSystem *v5; // rbx
   __int64 v6; // rax
   UFG::CopSystem *v7; // rax
-  UFG::qString v8; // [rsp+28h] [rbp-30h]
+  UFG::qString v8; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v4 = UFG::CopSystem::Instance();
-  if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v4->vfptr[89].__vecDelDtor)(v4) && !v3 )
-    UFG::CopSystem::Instance()->mStats.mFinishReason = 4;
+  if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v4->vfptr[89].__vecDelDtor)(v4) && !i_user_data )
+    UFG::CopSystem::Instance()->mStats.mFinishReason = eFinishReason_Script;
   v5 = UFG::CopSystem::Instance();
-  UFG::qString::qString(&v8, **(const char ***)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64) + 32i64));
-  LODWORD(v5) = (__int64)v5->vfptr[109].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v5->vfptr, v6);
+  UFG::qString::qString(&v8, **(const char ***)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64) + 32i64));
+  LODWORD(v5) = v5->vfptr[109].__vecDelDtor(v5, v6);
   UFG::qString::~qString(&v8);
   v7 = UFG::CopSystem::Instance();
-  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v7->vfptr[88].__vecDelDtor)(v7, v3, (unsigned int)v5);
+  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v7->vfptr[88].__vecDelDtor)(v7, i_user_data, (unsigned int)v5);
 }
 
 // File Line: 1227
 // RVA: 0x4F6D90
 void __fastcall UFG::TSGameSlice::Mthd_cops_debug_cap_heat_level(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  unsigned int v2; // ebx
+  unsigned int i_user_data; // ebx
   UFG::CopSystem *v3; // rax
   UFG::CopSystem *v4; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v3 = UFG::CopSystem::Instance();
-  if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) && !v2 )
-    UFG::CopSystem::Instance()->mStats.mFinishReason = 4;
+  if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) && !i_user_data )
+    UFG::CopSystem::Instance()->mStats.mFinishReason = eFinishReason_Script;
   v4 = UFG::CopSystem::Instance();
-  v4->vfptr[100].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v4->vfptr, v2);
+  v4->vfptr[100].__vecDelDtor(v4, i_user_data);
 }
 
 // File Line: 1240
 // RVA: 0x4F6F40
-void __fastcall UFG::TSGameSlice::Mthd_cops_exclude_player_for_rest_of_chase(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_cops_exclude_player_for_rest_of_chase(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
   UFG::CopSystem *v2; // rax
   UFG::CopSystem *v3; // rax
@@ -2052,44 +2049,48 @@ void __fastcall UFG::TSGameSlice::Mthd_cops_exclude_player_for_rest_of_chase(SSI
 
 // File Line: 1253
 // RVA: 0x4F6E90
-void __fastcall UFG::TSGameSlice::Mthd_cops_escalate_to_minimum_heat_level(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSGameSlice::Mthd_cops_escalate_to_minimum_heat_level(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  signed int v3; // esi
+  int i_user_data; // esi
   UFG::CopSystem *v4; // rdi
   __int64 v5; // rax
   unsigned int v6; // ebx
   UFG::CopSystem *v7; // rax
   UFG::CopSystem *v8; // rax
-  UFG::qString v9; // [rsp+28h] [rbp-30h]
+  UFG::qString v9; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v4 = UFG::CopSystem::Instance();
-  UFG::qString::qString(&v9, **(const char ***)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64) + 32i64));
-  v6 = (__int64)v4->vfptr[109].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v4->vfptr, v5);
+  UFG::qString::qString(&v9, **(const char ***)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64) + 32i64));
+  v6 = (unsigned int)v4->vfptr[109].__vecDelDtor(v4, v5);
   UFG::qString::~qString(&v9);
   v7 = UFG::CopSystem::Instance();
-  if ( ((signed int (__fastcall *)(UFG::CopSystem *))v7->vfptr[89].__vecDelDtor)(v7) < v3 )
+  if ( ((int (__fastcall *)(UFG::CopSystem *))v7->vfptr[89].__vecDelDtor)(v7) < i_user_data )
   {
     v8 = UFG::CopSystem::Instance();
-    ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v8->vfptr[88].__vecDelDtor)(v8, (unsigned int)v3, v6);
+    ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v8->vfptr[88].__vecDelDtor)(
+      v8,
+      (unsigned int)i_user_data,
+      v6);
   }
 }
 
 // File Line: 1265
 // RVA: 0x4F7000
-void __usercall UFG::TSGameSlice::Mthd_cops_get_ratio_for_current_heat_level(SSInvokedMethod *pScope@<rcx>, SSInstance **ppResult@<rdx>, unsigned int a3@<xmm0>)
+void __fastcall UFG::TSGameSlice::Mthd_cops_get_ratio_for_current_heat_level(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInstance **v3; // rbx
-  UFG::CopSystem *v4; // rax
+  UFG::CopSystem *v3; // rax
+  float user_data; // [rsp+38h] [rbp+10h]
 
   if ( ppResult )
   {
-    v3 = ppResult;
-    v4 = UFG::CopSystem::Instance();
-    ((void (__fastcall *)(UFG::CopSystem *))v4->vfptr[90].__vecDelDtor)(v4);
-    *v3 = SSInstance::pool_new(SSBrain::c_real_class_p, a3);
+    v3 = UFG::CopSystem::Instance();
+    user_data = ((float (__fastcall *)(UFG::CopSystem *))v3->vfptr[90].__vecDelDtor)(v3);
+    *ppResult = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(user_data));
   }
 }
 
@@ -2097,16 +2098,14 @@ void __usercall UFG::TSGameSlice::Mthd_cops_get_ratio_for_current_heat_level(SSI
 // RVA: 0x4F6FC0
 void __fastcall UFG::TSGameSlice::Mthd_cops_get_heat_level(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::CopSystem *v3; // rax
   unsigned int v4; // eax
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::CopSystem::Instance();
     v4 = ((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3);
-    *v2 = SSInstance::pool_new(SSBrain::c_integer_class_p, v4);
+    *ppResult = SSInstance::pool_new(SSBrain::c_integer_class_p, v4);
   }
 }
 
@@ -2114,16 +2113,14 @@ void __fastcall UFG::TSGameSlice::Mthd_cops_get_heat_level(SSInvokedMethod *pSco
 // RVA: 0x4F6F90
 void __fastcall UFG::TSGameSlice::Mthd_cops_get_enabled(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::CopSystem *v3; // rax
   char v4; // al
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::CopSystem::Instance();
     v4 = ((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[7].__vecDelDtor)(v3);
-    *v2 = (SSInstance *)SSBoolean::pool_new(v4);
+    *ppResult = SSBoolean::pool_new(v4);
   }
 }
 
@@ -2141,16 +2138,14 @@ void __fastcall UFG::TSGameSlice::Mthd_cops_trigger_instant_cooldown(SSInvokedMe
 // RVA: 0x4F7040
 void __fastcall UFG::TSGameSlice::Mthd_cops_is_cooling_down(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
   UFG::CopSystem *v3; // rax
   char v4; // al
 
   if ( ppResult )
   {
-    v2 = ppResult;
     v3 = UFG::CopSystem::Instance();
     v4 = ((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[8].__vecDelDtor)(v3);
-    *v2 = (SSInstance *)SSBoolean::pool_new(v4);
+    *ppResult = SSBoolean::pool_new(v4);
   }
 }
 
@@ -2158,42 +2153,46 @@ void __fastcall UFG::TSGameSlice::Mthd_cops_is_cooling_down(SSInvokedMethod *pSc
 // RVA: 0x4DEC80
 bool __fastcall UFG::TSGameSlice::Coro_wait_until_cops_heat_level_below(SSInvokedCoroutine *pScope)
 {
-  signed int v2; // ebx
+  int i_user_data; // ebx
   UFG::CopSystem *v3; // rax
 
   if ( pScope->i_update_count < 0xA )
     return 0;
-  v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v3 = UFG::CopSystem::Instance();
-  return ((signed int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) < v2;
+  return ((int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) < i_user_data;
 }
 
 // File Line: 1325
 // RVA: 0x50F490
-void __fastcall UFG::RayCastToTargetAsyncRayCallback(UFG::RayCastData *raycastData, UFG::SimComponent *simComponent, void *callbackUserData)
+void __fastcall UFG::RayCastToTargetAsyncRayCallback(
+        UFG::RayCastData *raycastData,
+        UFG::SimComponent *simComponent,
+        _DWORD *callbackUserData)
 {
   SSInvokedContextBase *v3; // rbx
-  UFG::RayCastData *v4; // rdi
-  UFG::qBaseNodeRB *v5; // rax
-  _BOOL8 v6; // r8
+  UFG::qBaseNodeRB *ArgByNameOrInstance; // rax
+  unsigned __int64 IsVisible; // r8
   SSData *v7; // rdx
-  SSInstance *v8; // rax
-  UFG::SimObject *ray_hit_object; // [rsp+40h] [rbp+18h]
+  SSInstance *i_data_p; // rax
+  UFG::SimObject *ray_hit_object; // [rsp+40h] [rbp+18h] BYREF
 
   v3 = *(SSInvokedContextBase **)callbackUserData;
-  v4 = raycastData;
-  if ( !*(_QWORD *)callbackUserData || *((_DWORD *)callbackUserData + 2) != v3->i_ptr_id )
+  if ( !*(_QWORD *)callbackUserData || callbackUserData[2] != v3->i_ptr_id )
     v3 = 0i64;
   operator delete[](callbackUserData);
   if ( v3 )
   {
-    v5 = UFG::TSSimObject::GetArgByNameOrInstance(v3, 1u);
+    ArgByNameOrInstance = UFG::TSSimObject::GetArgByNameOrInstance(v3, 1u);
     ray_hit_object = 0i64;
-    v6 = UFG::TargetIsVisible(v4, (UFG::SimObject *)v5, &ray_hit_object);
+    IsVisible = (unsigned __int8)UFG::TargetIsVisible(
+                                   raycastData,
+                                   (UFG::SimObjectGame *)ArgByNameOrInstance,
+                                   (UFG::VehicleOccupantComponent **)&ray_hit_object);
     v7 = *v3->i_data.i_array_p;
-    v8 = v7->i_data_p;
+    i_data_p = v7->i_data_p;
     LOBYTE(v7) = 1;
-    v8->i_user_data = v6;
+    i_data_p->i_user_data = IsVisible;
     ((void (__fastcall *)(SSInvokedContextBase *, SSData *))v3->vfptr[1].get_topmost_scope)(v3, v7);
   }
 }
@@ -2202,58 +2201,56 @@ void __fastcall UFG::RayCastToTargetAsyncRayCallback(UFG::RayCastData *raycastDa
 // RVA: 0x4DA620
 char __fastcall UFG::TSGameSlice::Coro_camera_raycast_to_target(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rbx
-  UFG::SimObject *v2; // r14
-  Render::DebugDrawContext *v3; // r15
+  UFG::SimObjectCVBase *ArgByNameOrInstance; // r14
+  Render::DebugDrawContext *Context; // r15
   __int64 v4; // rdx
   bool v5; // di
   bool v6; // bp
-  UFG::BaseCameraComponent *v7; // rax
-  UFG::BaseCameraComponent *v8; // rax
-  float v9; // xmm1_4
-  float v10; // xmm2_4
+  UFG::BaseCameraComponent *mCurrentCamera; // rax
+  UFG::BaseCameraComponent *p_mCamera; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
   UFG::allocator::free_link *v11; // rax
   UFG::allocator::free_link *v12; // rdi
   bool v13; // al
   UFG::qColour *v15; // r9
-  UFG::qVector3 p0; // [rsp+48h] [rbp-40h]
-  UFG::qVector3 raycastPosition; // [rsp+58h] [rbp-30h]
+  UFG::qVector3 p0; // [rsp+48h] [rbp-40h] BYREF
+  UFG::qVector3 raycastPosition; // [rsp+58h] [rbp-30h] BYREF
 
-  v1 = pScope;
-  v2 = UFG::TSSimObject::GetArgByNameOrInstance((SSInvokedContextBase *)&pScope->vfptr, 1u);
-  if ( v2 )
+  ArgByNameOrInstance = (UFG::SimObjectCVBase *)UFG::TSSimObject::GetArgByNameOrInstance(pScope, 1u);
+  if ( ArgByNameOrInstance )
   {
-    v3 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-    v4 = *(_QWORD *)(*((_QWORD *)v1->i_data.i_array_p + 2) + 8i64);
+    Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
+    v4 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 2) + 8i64);
     v5 = *(_QWORD *)(v4 + 32) != 0i64;
-    v6 = *(_QWORD *)(v4 + 32) || !v1->i_update_count;
-    v7 = UFG::Director::Get()->mCurrentCamera;
-    if ( v7 )
-      v8 = (UFG::BaseCameraComponent *)((char *)v7 + 80);
+    v6 = *(_QWORD *)(v4 + 32) || !pScope->i_update_count;
+    mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+    if ( mCurrentCamera )
+      p_mCamera = (UFG::BaseCameraComponent *)&mCurrentCamera->mCamera;
     else
-      v8 = 0i64;
-    v9 = v8->mCamera.mView.v2.y;
-    v10 = v8->mCamera.mView.v2.z;
-    p0.x = v8->mCamera.mView.v2.x;
-    p0.y = v9;
-    p0.z = v10;
+      p_mCamera = 0i64;
+    y = p_mCamera->mCamera.mView.v2.y;
+    z = p_mCamera->mCamera.mView.v2.z;
+    p0.x = p_mCamera->mCamera.mView.v2.x;
+    p0.y = y;
+    p0.z = z;
     if ( v6 )
-      UFG::ComputeObjectRaycastPosition(v2, &raycastPosition);
-    if ( v1->i_update_count )
+      UFG::ComputeObjectRaycastPosition(ArgByNameOrInstance, &raycastPosition);
+    if ( pScope->i_update_count )
     {
       if ( v5 )
       {
         v15 = &UFG::qColour::Green;
-        if ( (*v1->i_data.i_array_p)->i_data_p->i_user_data > 0 )
+        if ( (*pScope->i_data.i_array_p)->i_data_p->i_user_data )
           v15 = &UFG::qColour::Red;
-        Render::DebugDrawContext::DrawLine(v3, &p0, &raycastPosition, v15, &UFG::qMatrix44::msIdentity, 0i64, 0);
+        Render::DebugDrawContext::DrawLine(Context, &p0, &raycastPosition, v15, &UFG::qMatrix44::msIdentity, 0i64, 0);
       }
     }
     else
     {
       if ( v5 )
         Render::DebugDrawContext::DrawLine(
-          v3,
+          Context,
           &p0,
           &raycastPosition,
           &UFG::qColour::Blue,
@@ -2264,8 +2261,8 @@ char __fastcall UFG::TSGameSlice::Coro_camera_raycast_to_target(SSInvokedCorouti
       v12 = v11;
       if ( v11 )
       {
-        v11->mNext = (UFG::allocator::free_link *)v1;
-        LODWORD(v11[1].mNext) = v1->i_ptr_id;
+        v11->mNext = (UFG::allocator::free_link *)pScope;
+        LODWORD(v11[1].mNext) = pScope->i_ptr_id;
       }
       else
       {
@@ -2279,10 +2276,10 @@ char __fastcall UFG::TSGameSlice::Coro_camera_raycast_to_target(SSInvokedCorouti
               UFG::RayCastToTargetAsyncRayCallback,
               0i64,
               v12);
-      (*v1->i_data.i_array_p)->i_data_p->i_user_data = 0i64;
+      (*pScope->i_data.i_array_p)->i_data_p->i_user_data = 0i64;
       if ( v13 )
       {
-        ++v1->i_pending_count;
+        ++pScope->i_pending_count;
         return 0;
       }
       operator delete[](v12);
@@ -2290,7 +2287,7 @@ char __fastcall UFG::TSGameSlice::Coro_camera_raycast_to_target(SSInvokedCorouti
   }
   else
   {
-    (*v1->i_data.i_array_p)->i_data_p->i_user_data = 0i64;
+    (*pScope->i_data.i_array_p)->i_data_p->i_user_data = 0i64;
   }
   return 1;
 }
@@ -2299,181 +2296,161 @@ char __fastcall UFG::TSGameSlice::Coro_camera_raycast_to_target(SSInvokedCorouti
 // RVA: 0x4D9F70
 char __fastcall UFG::TSGameSlice::Coro_async_is_target_occluded(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rdi
   unsigned __int64 v2; // rsi
-  UFG::SimObjectVehicle *v3; // rbx
+  UFG::SimObjectVehicle *ArgByNameOrInstance; // rbx
   __int64 v4; // rax
   bool v5; // r14
   bool v6; // bp
-  UFG::BaseCameraComponent *v7; // rax
-  signed __int64 v8; // rax
-  float v9; // xmm1_4
-  float v10; // xmm2_4
-  float v11; // xmm0_4
-  unsigned __int16 v12; // cx
-  float v13; // xmm6_4
-  UFG::CharacterOccupantComponent *v14; // rax
-  unsigned __int16 v15; // cx
-  UFG::VehicleSubjectComponent *v16; // rax
+  UFG::BaseCameraComponent *mCurrentCamera; // rax
+  UFG::Camera *p_mCamera; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  __int16 m_Flags; // cx
+  float v12; // xmm6_4
+  UFG::CharacterOccupantComponent *m_pComponent; // rax
+  __int16 v14; // cx
+  UFG::VehicleSubjectComponent *ComponentOfTypeHK; // rax
+  double v16; // xmm0_8
   float v17; // xmm6_4
-  Render::DebugDrawContext *v18; // rax
+  Render::DebugDrawContext *Context; // rax
   UFG::SimAsyncOcclusionQueryManager *v19; // rax
   UFG::SimAsyncOcclusionQueryManager *v20; // rax
-  SSObjectBase *v21; // rdx
-  unsigned int v23; // ecx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int i_update_count; // ecx
   SSObjectBase *v24; // rbx
-  UFG::SimAsyncOcclusionQuery *v25; // rbx
+  UFG::SimAsyncOcclusionQuery *vfptr; // rbx
   SSObjectBase *v26; // rcx
   UFG::SimAsyncOcclusionQueryManager *v27; // rax
-  UFG::qVector3 p0; // [rsp+40h] [rbp-38h]
-  UFG::qVector3 raycastPosition; // [rsp+50h] [rbp-28h]
+  UFG::qVector3 p0; // [rsp+40h] [rbp-38h] BYREF
+  UFG::qVector3 raycastPosition; // [rsp+50h] [rbp-28h] BYREF
 
-  v1 = pScope;
   v2 = 0i64;
-  v3 = (UFG::SimObjectVehicle *)UFG::TSSimObject::GetArgByNameOrInstance((SSInvokedContextBase *)&pScope->vfptr, 1u);
-  if ( v3 )
+  ArgByNameOrInstance = (UFG::SimObjectVehicle *)UFG::TSSimObject::GetArgByNameOrInstance(pScope, 1u);
+  if ( !ArgByNameOrInstance )
+    goto LABEL_40;
+  v4 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 2) + 8i64);
+  v5 = *(_QWORD *)(v4 + 32) != 0i64;
+  v6 = *(_QWORD *)(v4 + 32) || !pScope->i_update_count;
+  mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+  if ( mCurrentCamera )
+    p_mCamera = &mCurrentCamera->mCamera;
+  else
+    p_mCamera = 0i64;
+  y = p_mCamera->mTransformation.v3.y;
+  z = p_mCamera->mTransformation.v3.z;
+  p0.x = p_mCamera->mTransformation.v3.x;
+  p0.y = y;
+  p0.z = z;
+  if ( v6 )
+    UFG::ComputeObjectRaycastPosition(ArgByNameOrInstance, &raycastPosition);
+  m_Flags = ArgByNameOrInstance->m_Flags;
+  v12 = FLOAT_0_5;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v4 = *(_QWORD *)(*((_QWORD *)v1->i_data.i_array_p + 2) + 8i64);
-    v5 = *(_QWORD *)(v4 + 32) > 0ui64;
-    v6 = *(_QWORD *)(v4 + 32) > 0ui64 || !v1->i_update_count;
-    v7 = UFG::Director::Get()->mCurrentCamera;
-    if ( v7 )
-      v8 = (signed __int64)&v7->mCamera;
+    m_pComponent = (UFG::CharacterOccupantComponent *)ArgByNameOrInstance->m_Components.p[44].m_pComponent;
+  }
+  else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+  {
+    m_pComponent = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        ArgByNameOrInstance,
+                                                        UFG::CharacterOccupantComponent::_TypeUID);
+  }
+  else
+  {
+    m_pComponent = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
+                                                        ArgByNameOrInstance,
+                                                        UFG::CharacterOccupantComponent::_TypeUID);
+  }
+  if ( m_pComponent )
+    ArgByNameOrInstance = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
+  if ( ArgByNameOrInstance )
+  {
+    v14 = ArgByNameOrInstance->m_Flags;
+    if ( (v14 & 0x4000) != 0 )
+      goto LABEL_28;
+    if ( v14 < 0 )
+    {
+      ComponentOfTypeHK = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(ArgByNameOrInstance);
+      goto LABEL_30;
+    }
+    if ( (v14 & 0x2000) != 0 || (v14 & 0x1000) != 0 )
+LABEL_28:
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            ArgByNameOrInstance,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
     else
-      v8 = 0i64;
-    v9 = *(float *)(v8 + 180);
-    v10 = *(float *)(v8 + 184);
-    v11 = *(float *)(v8 + 176);
-    p0.x = *(float *)(v8 + 176);
-    p0.y = v9;
-    p0.z = v10;
-    if ( v6 )
-      UFG::ComputeObjectRaycastPosition((UFG::SimObject *)&v3->vfptr, &raycastPosition);
-    v12 = v3->m_Flags;
-    v13 = FLOAT_0_5;
-    if ( (v12 >> 14) & 1 )
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                            ArgByNameOrInstance,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
+LABEL_30:
+    if ( ComponentOfTypeHK )
     {
-      v14 = (UFG::CharacterOccupantComponent *)v3->m_Components.p[44].m_pComponent;
-    }
-    else if ( (v12 & 0x8000u) == 0 )
-    {
-      if ( (v12 >> 13) & 1 )
-      {
-        v14 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                   UFG::CharacterOccupantComponent::_TypeUID);
-      }
-      else if ( (v12 >> 12) & 1 )
-      {
-        v14 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                   UFG::CharacterOccupantComponent::_TypeUID);
-      }
-      else
-      {
-        v14 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v3->vfptr,
-                                                   UFG::CharacterOccupantComponent::_TypeUID);
-      }
-    }
-    else
-    {
-      v14 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterOccupantComponent::_TypeUID);
-    }
-    if ( v14 )
-      v3 = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v14);
-    if ( v3 )
-    {
-      v15 = v3->m_Flags;
-      if ( (v15 >> 14) & 1 )
-      {
-        v16 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v3->vfptr,
-                                                UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else if ( (v15 & 0x8000u) == 0 )
-      {
-        if ( (v15 >> 13) & 1 )
-          v16 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v3->vfptr,
-                                                  UFG::VehicleSubjectComponent::_TypeUID);
-        else
-          v16 = (UFG::VehicleSubjectComponent *)((v15 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v3->vfptr,
-                                                                     UFG::VehicleSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::VehicleSubjectComponent::_TypeUID));
-      }
-      else
-      {
-        v16 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v3);
-      }
-      if ( v16 )
-      {
-        ((void (__fastcall *)(UFG::VehicleSubjectComponent *))v16->vfptr[21].__vecDelDtor)(v16);
-        v13 = v11;
-      }
-    }
-    v17 = v13 + 1.0;
-    if ( !v1->i_update_count )
-    {
-      if ( v5 )
-      {
-        v18 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-        Render::DebugDrawContext::DrawLine(
-          v18,
-          &p0,
-          &raycastPosition,
-          &UFG::qColour::Blue,
-          &UFG::qMatrix44::msIdentity,
-          0i64,
-          0);
-      }
-      v19 = UFG::SimAsyncOcclusionQueryManager::Get();
-      v20 = UFG::SimAsyncOcclusionQueryManager::CreateQuery(v19, &raycastPosition, v17);
-      v21 = v1->i_scope_p.i_obj_p;
-      if ( !v21 || v1->i_scope_p.i_ptr_id != v21->i_ptr_id )
-        v21 = 0i64;
-      v21[2].vfptr = (SSObjectBaseVtbl *)v20;
-      return 0;
+      v16 = ((double (__fastcall *)(UFG::VehicleSubjectComponent *))ComponentOfTypeHK->vfptr[21].__vecDelDtor)(ComponentOfTypeHK);
+      v12 = *(float *)&v16;
     }
   }
-  v23 = v1->i_update_count;
-  if ( !v23 )
-    goto LABEL_60;
-  v24 = v1->i_scope_p.i_obj_p;
-  if ( !v24 || v1->i_scope_p.i_ptr_id != v24->i_ptr_id )
+  v17 = v12 + 1.0;
+  if ( !pScope->i_update_count )
+  {
+    if ( v5 )
+    {
+      Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                              Render::DebugDrawManager::mInstance,
+                                              2u);
+      Render::DebugDrawContext::DrawLine(
+        Context,
+        &p0,
+        &raycastPosition,
+        &UFG::qColour::Blue,
+        &UFG::qMatrix44::msIdentity,
+        0i64,
+        0);
+    }
+    v19 = UFG::SimAsyncOcclusionQueryManager::Get();
+    v20 = UFG::SimAsyncOcclusionQueryManager::CreateQuery(v19, &raycastPosition, v17);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    i_obj_p[2].vfptr = (SSObjectBaseVtbl *)v20;
+    return 0;
+  }
+LABEL_40:
+  i_update_count = pScope->i_update_count;
+  if ( !i_update_count )
+    goto LABEL_50;
+  v24 = pScope->i_scope_p.i_obj_p;
+  if ( !v24 || pScope->i_scope_p.i_ptr_id != v24->i_ptr_id )
     v24 = 0i64;
-  v25 = (UFG::SimAsyncOcclusionQuery *)v24[2].vfptr;
-  if ( !v25 )
+  vfptr = (UFG::SimAsyncOcclusionQuery *)v24[2].vfptr;
+  if ( !vfptr )
   {
-LABEL_60:
-    (*v1->i_data.i_array_p)->i_data_p->i_user_data = 1i64;
-    v26 = v1->i_scope_p.i_obj_p;
-    if ( !v26 || v1->i_scope_p.i_ptr_id != v26->i_ptr_id )
+LABEL_50:
+    (*pScope->i_data.i_array_p)->i_data_p->i_user_data = 1i64;
+    v26 = pScope->i_scope_p.i_obj_p;
+    if ( !v26 || pScope->i_scope_p.i_ptr_id != v26->i_ptr_id )
       v26 = 0i64;
-    v25 = (UFG::SimAsyncOcclusionQuery *)v26[2].vfptr;
-    if ( !v25 )
+    vfptr = (UFG::SimAsyncOcclusionQuery *)v26[2].vfptr;
+    if ( !vfptr )
       return 1;
-    goto LABEL_56;
+    goto LABEL_54;
   }
-  if ( v23 <= 0x14 )
+  if ( i_update_count <= 0x14 )
   {
-    if ( !v25->mQueryCompleted )
+    if ( !vfptr->mQueryCompleted )
       return 0;
-    goto LABEL_51;
+    goto LABEL_49;
   }
-  if ( v25->mQueryCompleted )
+  if ( vfptr->mQueryCompleted )
   {
-LABEL_51:
-    LOBYTE(v2) = v25->mVisibility > 0.0;
-    (*v1->i_data.i_array_p)->i_data_p->i_user_data = v2;
-    goto LABEL_56;
+LABEL_49:
+    LOBYTE(v2) = vfptr->mVisibility > 0.0;
+    (*pScope->i_data.i_array_p)->i_data_p->i_user_data = v2;
+    goto LABEL_54;
   }
-  (*v1->i_data.i_array_p)->i_data_p->i_user_data = 1i64;
-LABEL_56:
+  (*pScope->i_data.i_array_p)->i_data_p->i_user_data = 1i64;
+LABEL_54:
   v27 = UFG::SimAsyncOcclusionQueryManager::Get();
-  UFG::SimAsyncOcclusionQueryManager::ReleaseQuery(v27, v25);
+  UFG::SimAsyncOcclusionQueryManager::ReleaseQuery(v27, vfptr);
   return 1;
 }
 
@@ -2481,135 +2458,127 @@ LABEL_56:
 // RVA: 0x4DB950
 char __fastcall UFG::TSGameSlice::Coro_launch_store_front(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rbp
   SSActor *v2; // rbx
-  SSClass *v3; // rdi
+  SSClass *i_class_p; // rdi
   __int64 v4; // r15
   UFG::StoreFrontTracker *v5; // rax
-  SSData **v6; // r8
+  SSData **i_array_p; // r8
   UFG::StoreFrontTracker *v7; // rsi
-  UFG::qPropertySet *v8; // rbp
+  UFG::qPropertySet *i_user_data; // rbp
   bool v9; // bl
-  SSInstance *v10; // r14
+  SSInstance *i_data_p; // r14
   SSInstance *v11; // r12
-  UFG::qSymbol *v12; // rax
+  UFG::qArray<unsigned long,0> *v12; // rax
   UFG::qSymbol *v13; // rdi
   UFG::qPropertySet *v14; // rdx
   UFG::qPropertySet *v15; // rdi
-  UFG::qSymbol *v16; // rax
-  UFG::qSymbol *v17; // rax
-  UFG::qSymbol *v18; // rax
+  UFG::qArray<unsigned long,0> *v16; // rax
+  UFG::qArray<unsigned long,0> *v17; // rax
+  UFG::qArray<unsigned long,0> *v18; // rax
   unsigned __int64 v19; // rbx
-  const char *v20; // rbx
-  UFG::qSymbol *v21; // rax
-  const char *v22; // rbx
-  UFG::qSymbol *v23; // rax
-  UFG::qSymbol *v24; // rax
+  char *v20; // rbx
+  UFG::qArray<unsigned long,0> *v21; // rax
+  char *v22; // rbx
+  UFG::qArray<unsigned long,0> *v23; // rax
+  UFG::qArray<unsigned long,0> *v24; // rax
   UFG::qSymbol *v25; // rax
   hkpCollidable *v26; // rdx
   hkpCollidable *v27; // r8
   hkpCollisionInput *v28; // r9
-  hkpNullContactMgr *v29; // rbx
-  UFG::UIScreen *v31; // rax
+  hkpNullContactMgr *ContactMgr; // rbx
+  UFG::UIScreen *Screen; // rax
   UFG::StoreFrontTracker *v32; // rax
-  UFG::qSymbol v; // [rsp+60h] [rbp+8h]
-  UFG::qSymbol v34; // [rsp+68h] [rbp+10h]
-  UFG::qSymbol result; // [rsp+70h] [rbp+18h]
-  UFG::qSymbol v36; // [rsp+78h] [rbp+20h]
+  UFG::qSymbol v; // [rsp+60h] [rbp+8h] BYREF
+  UFG::qSymbol v34; // [rsp+68h] [rbp+10h] BYREF
+  UFG::qSymbol result; // [rsp+70h] [rbp+18h] BYREF
+  UFG::qSymbol v36; // [rsp+78h] [rbp+20h] BYREF
 
-  v1 = pScope;
   if ( pScope->i_update_count )
   {
-    v31 = UFG::UIScreenManagerBase::getScreen(
-            (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-            "Wardrobe");
-    if ( !v31 || !LOBYTE(v31[1].vfptr) )
+    Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "Wardrobe");
+    if ( !Screen || !LOBYTE(Screen[1].vfptr) )
     {
-      v31 = UFG::UIScreenManagerBase::getScreen(
-              (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-              "GarageBrowser");
-      if ( !v31 || !LOBYTE(v31[1].vfptr) )
+      Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "GarageBrowser");
+      if ( !Screen || !LOBYTE(Screen[1].vfptr) )
         return 0;
     }
-    UFG::UIScreenManagerBase::queuePopScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v31->mScreenUID);
+    UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, Screen->mScreenUID);
     v32 = UFG::StoreFrontTracker::Instance();
     UFG::StoreFrontTracker::UnloadStoreData(v32);
     return 1;
   }
   v2 = *(SSActor **)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
   if ( !v2 )
-    goto LABEL_30;
-  v3 = v2->i_class_p;
-  if ( v3->vfptr->is_actor_class((SSClassDescBase *)&v3->vfptr) )
+    goto LABEL_7;
+  i_class_p = v2->i_class_p;
+  if ( i_class_p->vfptr->is_actor_class(i_class_p) )
     goto LABEL_8;
-  if ( v3 == SSBrain::c_symbol_class_p && LODWORD(v2->i_user_data) != -1 )
+  if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(v2->i_user_data) != -1 )
     v2 = SSActor::find((ASymbol *)&v2->i_user_data);
   else
-LABEL_30:
+LABEL_7:
     v2 = 0i64;
 LABEL_8:
   v4 = *(_QWORD *)&v2[1].i_icoroutines_to_update.i_count;
   v5 = UFG::StoreFrontTracker::Instance();
-  v6 = v1->i_data.i_array_p;
+  i_array_p = pScope->i_data.i_array_p;
   v7 = v5;
-  v8 = (UFG::qPropertySet *)(*v6)->i_data_p->i_user_data;
-  v9 = v6[2]->i_data_p->i_user_data != 0;
-  v.mUID = v6[3]->i_data_p->i_user_data;
-  v34.mUID = v6[4]->i_data_p->i_user_data;
-  v10 = v6[5]->i_data_p;
-  v11 = v6[6]->i_data_p;
-  v12 = UFG::qSymbol::create_from_string(&result, "InventoryType");
-  v13 = UFG::qPropertySet::Get<UFG::qSymbol>(v8, v12, DEPTH_RECURSE);
-  if ( v.mUID != UFG::gNullQSymbol.mUID || v34.mUID != UFG::gNullQSymbol.mUID )
-  {
-    UFG::qSymbol::create_from_string(&result, "store_front_set");
-    v15 = UFG::qPropertySet::CreateContainedSet(&result, "temp_store_front");
-    UFG::PSWrapper::AppendParentLocal(v15, v8);
-    if ( v9 )
-    {
-      v16 = UFG::qSymbol::create_from_string(&v36, "HasInventoryUI");
-      PropertyUtils::Set<bool>(v15, v16, v9);
-    }
-    v17 = UFG::qSymbol::create_from_string(&v36, "StoreType");
-    PropertyUtils::Set<UFG::qSymbol>(v15, v17, &v);
-    v18 = UFG::qSymbol::create_from_string(&v36, "StoreId");
-    PropertyUtils::Set<UFG::qSymbol>(v15, v18, &v34);
-    v19 = v10->i_user_data;
-    if ( *(_DWORD *)(v19 + 8) > 1u )
-    {
-      v20 = *(const char **)v19;
-      v21 = UFG::qSymbol::create_from_string(&v36, "StorePreviewMarker");
-      UFG::qPropertySet::Set<char const *>(v15, v21, v20);
-      v22 = *(const char **)v11->i_user_data;
-      v23 = UFG::qSymbol::create_from_string(&v36, "StoreCameraMarker");
-      UFG::qPropertySet::Set<char const *>(v15, v23, v22);
-    }
-    v24 = UFG::qSymbol::create_from_string(&v36, "InventoryType");
-    v25 = UFG::qPropertySet::Get<UFG::qSymbol>(v8, v24, DEPTH_RECURSE);
-    UFG::StoreFrontTracker::LoadStoreData(v7, v25);
-    v14 = v15;
-  }
-  else
+  i_user_data = (UFG::qPropertySet *)(*i_array_p)->i_data_p->i_user_data;
+  v9 = i_array_p[2]->i_data_p->i_user_data != 0;
+  v.mUID = i_array_p[3]->i_data_p->i_user_data;
+  v34.mUID = i_array_p[4]->i_data_p->i_user_data;
+  i_data_p = i_array_p[5]->i_data_p;
+  v11 = i_array_p[6]->i_data_p;
+  v12 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&result, "InventoryType");
+  v13 = UFG::qPropertySet::Get<UFG::qSymbol>(i_user_data, v12, DEPTH_RECURSE);
+  if ( v.mUID == UFG::gNullQSymbol.mUID && v34.mUID == UFG::gNullQSymbol.mUID )
   {
     UFG::qSymbol::create_from_string(&v36, "Clothing");
     UFG::StoreFrontTracker::LoadStoreData(v7, v13);
-    v14 = v8;
+    v14 = i_user_data;
+  }
+  else
+  {
+    UFG::qSymbol::create_from_string(&result, "store_front_set");
+    v15 = UFG::qPropertySet::CreateContainedSet(&result, "temp_store_front");
+    UFG::PSWrapper::AppendParentLocal(v15, i_user_data);
+    if ( v9 )
+    {
+      v16 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "HasInventoryUI");
+      PropertyUtils::Set<bool>(v15, v16, v9);
+    }
+    v17 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "StoreType");
+    PropertyUtils::Set<UFG::qSymbol>(v15, v17, &v);
+    v18 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "StoreId");
+    PropertyUtils::Set<UFG::qSymbol>(v15, v18, &v34);
+    v19 = i_data_p->i_user_data;
+    if ( *(_DWORD *)(v19 + 8) > 1u )
+    {
+      v20 = *(char **)v19;
+      v21 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "StorePreviewMarker");
+      UFG::qPropertySet::Set<char const *>(v15, v21, v20);
+      v22 = *(char **)v11->i_user_data;
+      v23 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "StoreCameraMarker");
+      UFG::qPropertySet::Set<char const *>(v15, v23, v22);
+    }
+    v24 = (UFG::qArray<unsigned long,0> *)UFG::qSymbol::create_from_string(&v36, "InventoryType");
+    v25 = UFG::qPropertySet::Get<UFG::qSymbol>(i_user_data, v24, DEPTH_RECURSE);
+    UFG::StoreFrontTracker::LoadStoreData(v7, v25);
+    v14 = v15;
   }
   UFG::StoreFrontTracker::SetCurrentStore(v7, v14);
-  v29 = hkpNullContactMgrFactory::createContactMgr((hkpNullContactMgrFactory *)v7, v26, v27, v28);
-  if ( *(_DWORD *)&v29[1].m_memSizeAndFlags == 61 )
+  ContactMgr = hkpNullContactMgrFactory::createContactMgr((hkpNullContactMgrFactory *)v7, v26, v27, v28);
+  if ( *(_DWORD *)&ContactMgr[1].m_memSizeAndFlags == 61 )
   {
     UFG::UIHKScreenWardrobe::QueuePush();
   }
-  else if ( *(_DWORD *)&v29[1].m_memSizeAndFlags == 62 || *(_DWORD *)&v29[1].m_memSizeAndFlags == 63 )
+  else if ( (unsigned int)(*(_DWORD *)&ContactMgr[1].m_memSizeAndFlags - 62) <= 1 )
   {
     UFG::UIHKScreenGarageBrowser::QueuePush();
-    *(_QWORD *)&v29->m_type = v4;
+    *(_QWORD *)&ContactMgr->m_type = v4;
     return 0;
   }
-  *(_QWORD *)&v29->m_type = v4;
+  *(_QWORD *)&ContactMgr->m_type = v4;
   return 0;
 }
 
@@ -2617,13 +2586,11 @@ LABEL_8:
 // RVA: 0x504A40
 void __fastcall UFG::TSGameSlice::Mthd_load_audio_resources(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( v3 && v2->i_scope_p.i_ptr_id == v3->i_ptr_id )
-    UFG::TidoGame::LoadGameSliceAudioResources((UFG::GameSlice *)v3[8].vfptr);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    UFG::TidoGame::LoadGameSliceAudioResources((UFG::GameSlice *)i_obj_p[8].vfptr);
   else
     UFG::TidoGame::LoadGameSliceAudioResources(MEMORY[0x98]);
 }
@@ -2632,13 +2599,11 @@ void __fastcall UFG::TSGameSlice::Mthd_load_audio_resources(SSInvokedMethod *pSc
 // RVA: 0x50E2D0
 void __fastcall UFG::TSGameSlice::Mthd_unload_audio_resources(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( v3 && v2->i_scope_p.i_ptr_id == v3->i_ptr_id )
-    UFG::TidoGame::UnloadGameSliceAudioResources((UFG::GameSlice *)v3[8].vfptr);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    UFG::TidoGame::UnloadGameSliceAudioResources((UFG::GameSlice *)i_obj_p[8].vfptr);
   else
     UFG::TidoGame::UnloadGameSliceAudioResources(MEMORY[0x98]);
 }
@@ -2647,61 +2612,59 @@ void __fastcall UFG::TSGameSlice::Mthd_unload_audio_resources(SSInvokedMethod *p
 // RVA: 0x4F7BD0
 void __fastcall UFG::TSGameSlice::Mthd_despawn_npc(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rsi
-  UFG::TSCharacter *v3; // rbx
-  SSActorClass *v4; // rdi
+  UFG::TSCharacter *i_data_p; // rbx
+  SSActorClass *i_class_p; // rdi
   SSClass *v5; // rcx
-  SSClass *v6; // rcx
-  SSObjectBase *v7; // rcx
-  signed __int64 v8; // rdi
+  SSClass *i_superclass_p; // rcx
+  SSObjectBase *i_obj_p; // rcx
+  unsigned int *p_i_ptr_id; // rdi
   __int64 v9; // rcx
-  UFG::GameSlice *v10; // rax
-  bool v11; // zf
+  UFG::GameSlice *Parent; // rax
 
-  v2 = pScope;
-  v3 = (UFG::TSCharacter *)(*pScope->i_data.i_array_p)->i_data_p;
-  v4 = (SSActorClass *)v3->i_class_p;
-  if ( UFG::SkookumMgr::mspCharacterClass == v4
-    || (v5 = v4->i_superclass_p) != 0i64 && SSClass::is_class(v5, (SSClass *)&UFG::SkookumMgr::mspCharacterClass->vfptr) )
+  i_data_p = (UFG::TSCharacter *)(*pScope->i_data.i_array_p)->i_data_p;
+  i_class_p = (SSActorClass *)i_data_p->i_class_p;
+  if ( UFG::SkookumMgr::mspCharacterClass == i_class_p
+    || (v5 = i_class_p->i_superclass_p) != 0i64 && SSClass::is_class(v5, UFG::SkookumMgr::mspCharacterClass) )
   {
-    if ( UFG::SkookumMgr::mspPlayerClass == v4 )
+    if ( UFG::SkookumMgr::mspPlayerClass == i_class_p )
       return;
-    v6 = v4->i_superclass_p;
-    if ( v6 )
+    i_superclass_p = i_class_p->i_superclass_p;
+    if ( i_superclass_p )
     {
-      if ( SSClass::is_class(v6, (SSClass *)&UFG::SkookumMgr::mspPlayerClass->vfptr) )
+      if ( SSClass::is_class(i_superclass_p, UFG::SkookumMgr::mspPlayerClass) )
         return;
     }
   }
   else
   {
-    if ( v4 != (SSActorClass *)SSBrain::c_symbol_class_p )
+    if ( i_class_p != SSBrain::c_symbol_class_p )
       return;
-    v3 = UFG::TSCharacter::find_instance((UFG::qSymbol *)&v3->i_user_data);
+    i_data_p = UFG::TSCharacter::find_instance((UFG::qSymbol *)&i_data_p->i_user_data);
   }
-  if ( v3 )
+  if ( i_data_p )
   {
-    v7 = v2->i_scope_p.i_obj_p;
-    if ( v7 && v2->i_scope_p.i_ptr_id == v7->i_ptr_id )
-      v8 = (signed __int64)&v7[-2].i_ptr_id;
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+      p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
     else
-      v8 = 0i64;
-    v9 = (*(__int64 (__fastcall **)(signed __int64, UFG::TSCharacter *))(*(_QWORD *)(v8 + 24) + 120i64))(v8 + 24, v3);
+      p_i_ptr_id = 0i64;
+    v9 = (*(__int64 (__fastcall **)(char *, UFG::TSCharacter *))(*((_QWORD *)p_i_ptr_id + 3) + 120i64))(
+           (char *)p_i_ptr_id + 24,
+           i_data_p);
     if ( v9
-      || (v10 = UFG::GameSlice::GetParent(*(UFG::GameSlice **)(v8 + 152))) != 0i64
-      && (v9 = ((__int64 (__fastcall *)(SSObjectBaseVtbl **, UFG::TSCharacter *))v10->mScript->vfptr[1].get_topmost_scope)(
-                 &v10->mScript->vfptr,
-                 v3)) != 0 )
+      || (Parent = UFG::GameSlice::GetParent(*((UFG::GameSlice **)p_i_ptr_id + 19))) != 0i64
+      && (v9 = ((__int64 (__fastcall *)(SSActor *, UFG::TSCharacter *))Parent->mScript->vfptr[1].get_topmost_scope)(
+                 &Parent->mScript->SSActor,
+                 i_data_p)) != 0 )
     {
       *(_QWORD *)(v9 + 8) = SSBrain::c_nil_p;
-      v11 = v3->i_ref_count-- == 1;
-      if ( v11 )
+      if ( i_data_p->i_ref_count-- == 1 )
       {
-        v3->i_ref_count = 2147483648;
-        v3->vfptr[1].get_scope_context((SSObjectBase *)&v3->vfptr);
+        i_data_p->i_ref_count = 0x80000000;
+        i_data_p->vfptr[1].get_scope_context(i_data_p);
       }
     }
-    UFG::TSCharacter::Despawn(v3, (*v2->i_data.i_array_p)->i_data_p->i_user_data != 0);
+    UFG::TSCharacter::Despawn(i_data_p, (*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0);
   }
 }
 
@@ -2710,15 +2673,15 @@ void __fastcall UFG::TSGameSlice::Mthd_despawn_npc(SSInvokedMethod *pScope, SSIn
 __int64 UFG::_dynamic_initializer_for__nullSym__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&nullSym, 0xFFFFFFFF);
-  return atexit(UFG::_dynamic_atexit_destructor_for__nullSym__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__nullSym__);
 }
 
 // File Line: 1722
 // RVA: 0x4E2820
-void __fastcall UFG::InteriorTriggerProperties::LoadFromProperties(UFG::InteriorTriggerProperties *this, UFG::qPropertySet *trigger_prop_set)
+void __fastcall UFG::InteriorTriggerProperties::LoadFromProperties(
+        UFG::InteriorTriggerProperties *this,
+        UFG::qPropertySet *trigger_prop_set)
 {
-  UFG::qPropertySet *v2; // rdi
-  UFG::InteriorTriggerProperties *v3; // rbx
   UFG::qSymbol *v4; // rsi
   UFG::qSymbol *v5; // rax
   UFG::qSymbol *v6; // rcx
@@ -2750,146 +2713,204 @@ void __fastcall UFG::InteriorTriggerProperties::LoadFromProperties(UFG::Interior
   char *v32; // rax
   bool *v33; // rax
   UFG::InteriorTriggerProperties::tri_state v34; // esi
-  signed int v35; // ecx
+  UFG::InteriorTriggerProperties::tri_state v35; // ecx
   bool *v36; // rax
-  signed int v37; // ecx
+  UFG::InteriorTriggerProperties::tri_state v37; // ecx
   bool *v38; // rax
-  signed int v39; // ecx
+  UFG::InteriorTriggerProperties::tri_state v39; // ecx
   bool *v40; // rax
-  signed int v41; // ecx
+  UFG::InteriorTriggerProperties::tri_state v41; // ecx
   bool *v42; // rax
-  signed int v43; // ecx
+  UFG::InteriorTriggerProperties::tri_state v43; // ecx
   bool *v44; // rax
 
-  v2 = trigger_prop_set;
-  v3 = this;
   v4 = &nullSym_0;
-  if ( !(_S12_7 & 1) )
+  if ( (_S12_7 & 1) == 0 )
   {
     _S12_7 |= 1u;
     UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&nullSym_0, 0xFFFFFFFF);
     atexit(UFG::InteriorTriggerProperties::LoadFromProperties_::_2_::_dynamic_atexit_destructor_for__nullSym__);
   }
-  v5 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_TriggerName.mUID, DEPTH_RECURSE);
+  v5 = PropertyUtils::Get<UFG::qSymbol>(
+         trigger_prop_set,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_TriggerName,
+         DEPTH_RECURSE);
   v6 = &nullSym_0;
   if ( v5 )
     v6 = v5;
-  v3->mTriggerName = (UFG::qSymbol)v6->mUID;
-  v7 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_Category.mUID, DEPTH_RECURSE);
+  this->mTriggerName = (UFG::qSymbol)v6->mUID;
+  v7 = PropertyUtils::Get<UFG::qSymbol>(
+         trigger_prop_set,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_Category,
+         DEPTH_RECURSE);
   v8 = &nullSym_0;
   if ( v7 )
     v8 = v7;
-  v3->mCategory = (UFG::qSymbol)v8->mUID;
-  v9 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_Environment.mUID, DEPTH_RECURSE);
+  this->mCategory = (UFG::qSymbol)v8->mUID;
+  v9 = PropertyUtils::Get<UFG::qSymbol>(
+         trigger_prop_set,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_Environment,
+         DEPTH_RECURSE);
   v10 = &nullSym_0;
   if ( v9 )
     v10 = v9;
-  v3->mEnvironment = (UFG::qSymbol)v10->mUID;
-  v11 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnvironmentApplyAmount.mUID, DEPTH_RECURSE);
+  this->mEnvironment = (UFG::qSymbol)v10->mUID;
+  v11 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnvironmentApplyAmount,
+          DEPTH_RECURSE);
   v12 = FLOAT_3_4028235e38;
   if ( v11 )
     v13 = *v11;
   else
     v13 = FLOAT_3_4028235e38;
-  v3->mEnvironmentApplyAmount = v13;
-  v14 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnvironmentTransition.mUID, DEPTH_RECURSE);
+  this->mEnvironmentApplyAmount = v13;
+  v14 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnvironmentTransition,
+          DEPTH_RECURSE);
   if ( v14 )
     v15 = *v14;
   else
     v15 = FLOAT_3_4028235e38;
-  v3->mEnvironmentTransition = v15;
-  v16 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_EnterEnvironment.mUID, DEPTH_RECURSE);
+  this->mEnvironmentTransition = v15;
+  v16 = PropertyUtils::Get<UFG::qSymbol>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnterEnvironment,
+          DEPTH_RECURSE);
   v17 = &nullSym_0;
   if ( v16 )
     v17 = v16;
-  v3->mEnterEnvironment = (UFG::qSymbol)v17->mUID;
-  v18 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnterEnvironmentApplyAmount.mUID, DEPTH_RECURSE);
+  this->mEnterEnvironment = (UFG::qSymbol)v17->mUID;
+  v18 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnterEnvironmentApplyAmount,
+          DEPTH_RECURSE);
   if ( v18 )
     v19 = *v18;
   else
     v19 = FLOAT_3_4028235e38;
-  v3->mEnterEnvironmentApplyAmount = v19;
-  v20 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnterEnvironmentTransition.mUID, DEPTH_RECURSE);
+  this->mEnterEnvironmentApplyAmount = v19;
+  v20 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnterEnvironmentTransition,
+          DEPTH_RECURSE);
   if ( v20 )
     v21 = *v20;
   else
     v21 = FLOAT_3_4028235e38;
-  v3->mEnterEnvironmentTransition = v21;
-  v22 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_ExitEnvironment.mUID, DEPTH_RECURSE);
+  this->mEnterEnvironmentTransition = v21;
+  v22 = PropertyUtils::Get<UFG::qSymbol>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_ExitEnvironment,
+          DEPTH_RECURSE);
   if ( v22 )
     v4 = v22;
-  v3->mExitEnvironment = (UFG::qSymbol)v4->mUID;
-  v23 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_ExitEnvironmentApplyAmount.mUID, DEPTH_RECURSE);
+  this->mExitEnvironment = (UFG::qSymbol)v4->mUID;
+  v23 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_ExitEnvironmentApplyAmount,
+          DEPTH_RECURSE);
   if ( v23 )
     v24 = *v23;
   else
     v24 = FLOAT_3_4028235e38;
-  v3->mExitEnvironmentApplyAmount = v24;
-  v25 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_ExitEnvironmentTransition.mUID, DEPTH_RECURSE);
+  this->mExitEnvironmentApplyAmount = v24;
+  v25 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_ExitEnvironmentTransition,
+          DEPTH_RECURSE);
   if ( v25 )
     v26 = *v25;
   else
     v26 = FLOAT_3_4028235e38;
-  v3->mExitEnvironmentTransition = v26;
-  v27 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnvironmentTransitionOn.mUID, DEPTH_RECURSE);
+  this->mExitEnvironmentTransition = v26;
+  v27 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnvironmentTransitionOn,
+          DEPTH_RECURSE);
   if ( v27 )
     v28 = *v27;
   else
     v28 = FLOAT_3_4028235e38;
-  v3->mEnvironmentTransitionOn = v28;
-  v29 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_EnvironmentTransitionOff.mUID, DEPTH_RECURSE);
+  this->mEnvironmentTransitionOn = v28;
+  v29 = PropertyUtils::Get<float>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_EnvironmentTransitionOff,
+          DEPTH_RECURSE);
   if ( v29 )
     v12 = *v29;
-  v3->mEnvironmentTransitionOff = v12;
-  v30 = PropertyUtils::Get<UFG::qSymbol>(v2, (UFG::qSymbol *)&qSymbol_PhysicsActiveRegionMode.mUID, DEPTH_RECURSE);
+  this->mEnvironmentTransitionOff = v12;
+  v30 = PropertyUtils::Get<UFG::qSymbol>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_PhysicsActiveRegionMode,
+          DEPTH_RECURSE);
   if ( v30 )
-    v3->mPhysicsActiveRegionMode = (UFG::qSymbol)v30->mUID;
+    this->mPhysicsActiveRegionMode = (UFG::qSymbol)v30->mUID;
   else
-    UFG::qSymbol::set_null(&v3->mPhysicsActiveRegionMode);
-  v31 = PropertyUtils::Get<char const *>(v2, (UFG::qSymbol *)&qSymbol_CameraContextOverrideTow.mUID, DEPTH_RECURSE);
-  UFG::qString::Set(&v3->mCameraContextOverrideTow, v31);
-  v32 = PropertyUtils::Get<char const *>(v2, (UFG::qSymbol *)&qSymbol_CameraContextLocalOverrideTow.mUID, DEPTH_RECURSE);
-  UFG::qString::Set(&v3->mCameraContextLocalOverrideTow, v32);
-  v33 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_NestedEnvironment.mUID, DEPTH_RECURSE);
-  v34 = 0;
+    UFG::qSymbol::set_null(&this->mPhysicsActiveRegionMode);
+  v31 = PropertyUtils::Get<char const *>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_CameraContextOverrideTow,
+          DEPTH_RECURSE);
+  UFG::qString::Set(&this->mCameraContextOverrideTow, v31);
+  v32 = PropertyUtils::Get<char const *>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_CameraContextLocalOverrideTow,
+          DEPTH_RECURSE);
+  UFG::qString::Set(&this->mCameraContextLocalOverrideTow, v32);
+  v33 = PropertyUtils::Get<bool>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_NestedEnvironment,
+          DEPTH_RECURSE);
+  v34 = set_false;
   if ( v33 )
-    v35 = *v33 != 0;
+    v35 = *v33;
   else
-    v35 = -1;
-  v3->mNestedEnvironment = v35;
-  v36 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_DisableProxyPeds.mUID, DEPTH_RECURSE);
+    v35 = set_none;
+  this->mNestedEnvironment = v35;
+  v36 = PropertyUtils::Get<bool>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_DisableProxyPeds,
+          DEPTH_RECURSE);
   if ( v36 )
-    v37 = *v36 != 0;
+    v37 = *v36;
   else
-    v37 = -1;
-  v3->mDisableProxyPeds = v37;
-  v38 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_DisableTraffic.mUID, DEPTH_RECURSE);
+    v37 = set_none;
+  this->mDisableProxyPeds = v37;
+  v38 = PropertyUtils::Get<bool>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_DisableTraffic,
+          DEPTH_RECURSE);
   if ( v38 )
-    v39 = *v38 != 0;
+    v39 = *v38;
   else
-    v39 = -1;
-  v3->mDisableTraffic = v39;
-  v40 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_OnEnterOnly.mUID, DEPTH_RECURSE);
+    v39 = set_none;
+  this->mDisableTraffic = v39;
+  v40 = PropertyUtils::Get<bool>(trigger_prop_set, (UFG::qArray<unsigned long,0> *)&qSymbol_OnEnterOnly, DEPTH_RECURSE);
   if ( v40 )
-    v41 = *v40 != 0;
+    v41 = *v40;
   else
-    v41 = -1;
-  v3->mOnEnterOnly = v41;
-  v42 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_SpecialTrigger.mUID, DEPTH_RECURSE);
+    v41 = set_none;
+  this->mOnEnterOnly = v41;
+  v42 = PropertyUtils::Get<bool>(
+          trigger_prop_set,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_SpecialTrigger,
+          DEPTH_RECURSE);
   if ( v42 )
-    v43 = *v42 != 0;
+    v43 = *v42;
   else
-    v43 = -1;
-  v3->mSpecialTrigger = v43;
-  v44 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_ForceWalk.mUID, DEPTH_RECURSE);
+    v43 = set_none;
+  this->mSpecialTrigger = v43;
+  v44 = PropertyUtils::Get<bool>(trigger_prop_set, (UFG::qArray<unsigned long,0> *)&qSymbol_ForceWalk, DEPTH_RECURSE);
   if ( v44 )
   {
-    LOBYTE(v34) = *v44 != 0;
-    v3->mForceWalk = v34;
+    LOBYTE(v34) = *v44;
+    this->mForceWalk = v34;
   }
   else
   {
-    v3->mForceWalk = -1;
+    this->mForceWalk = set_none;
   }
 }
 
@@ -2897,65 +2918,57 @@ void __fastcall UFG::InteriorTriggerProperties::LoadFromProperties(UFG::Interior
 // RVA: 0x4E17A0
 void __fastcall UFG::TSGameSlice::InteriorExterior_OnEnterHandler(UFG::TriggerRegion *trigger_region)
 {
-  signed int v1; // er9
+  int v1; // r9d
   unsigned int v2; // eax
-  unsigned int v3; // er8
-  UFG::qSymbol *v4; // rcx
+  unsigned int mUID; // r8d
+  UFG::qSymbol *p_mTriggerName; // rcx
   UFG::InteriorTriggerProperties *v5; // rbx
   SSClass *v6; // rsi
-  AObjReusePool<SSInstance> *v7; // rax
-  AObjReusePool<SSInstance> *v8; // rdi
+  AObjReusePool<SSInstance> *pool; // rdi
+  unsigned int i_count; // eax
   unsigned int v9; // eax
-  unsigned int v10; // eax
-  unsigned int v11; // eax
-  __int64 v12; // rcx
-  SSInstance **v13; // rax
-  __int64 v14; // rdx
-  unsigned int v15; // eax
+  __int64 v10; // rcx
+  SSInstance **i_array_p; // rax
+  SSInstance *v12; // rdx
+  unsigned int v13; // eax
+  SSClass *v14; // rdi
+  AObjReusePool<SSInstance> *v15; // rbx
   unsigned int v16; // eax
-  SSClass *v17; // rdi
-  AObjReusePool<SSInstance> *v18; // rax
-  AObjReusePool<SSInstance> *v19; // rbx
-  unsigned int v20; // eax
+  unsigned int v17; // eax
+  __int64 v18; // rcx
+  SSInstance **v19; // rax
+  SSInstance *v20; // rdx
   unsigned int v21; // eax
-  unsigned int v22; // eax
-  __int64 v23; // rcx
-  SSInstance **v24; // rax
-  __int64 v25; // rdx
-  unsigned int v26; // eax
-  UFG::TSActor *v27; // r11
-  UFG::qBaseNodeRB *v28; // rax
-  bool v29; // cl
+  UFG::TSActor *v22; // r11
+  UFG::qBaseNodeRB *SimObject; // rax
+  bool v24; // cl
+  UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *p_mNode; // rdi
+  UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *v26; // rsi
+  UFG::SimObject *v27; // rax
+  UFG::CharacterSubjectComponent *ComponentOfType; // rdi
+  unsigned int v29; // eax
   UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *v30; // rdi
   UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *v31; // rsi
   UFG::SimObject *v32; // rax
   UFG::CharacterSubjectComponent *v33; // rdi
-  UFG::qSymbol v34; // eax
-  UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *v35; // rdi
-  UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *v36; // rsi
-  UFG::SimObject *v37; // rax
-  UFG::CharacterSubjectComponent *v38; // rdi
-  UFG::qSymbol v39; // eax
-  UFG::InteriorTriggerProperties::tri_state v40; // eax
-  UFG::PedSpawnManager *v41; // rax
-  UFG::PedSpawnManager *v42; // rax
-  SSInstance *args_pp; // [rsp+48h] [rbp-28h]
-  SSInstance *v44; // [rsp+50h] [rbp-20h]
-  SSInstance *v45; // [rsp+58h] [rbp-18h]
-  char *pszSymbolString; // [rsp+60h] [rbp-10h]
-  UFG::qSymbol result; // [rsp+A8h] [rbp+38h]
-  UFG::qSymbol *v48; // [rsp+B0h] [rbp+40h]
+  unsigned int v34; // eax
+  UFG::InteriorTriggerProperties::tri_state mDisableProxyPeds; // eax
+  UFG::PedSpawnManager *Instance; // rax
+  UFG::PedSpawnManager *v37; // rax
+  UFG::qString args_pp; // [rsp+48h] [rbp-28h] BYREF
+  __int64 result; // [rsp+A8h] [rbp+38h] BYREF
+  __int64 *p_result; // [rsp+B0h] [rbp+40h]
 
   v1 = 99999;
   v2 = 0;
   if ( UFG::TSGameSlice::msInteriorTriggerData.size )
   {
-    v3 = trigger_region->i_name.mUID;
-    v4 = &UFG::TSGameSlice::msInteriorTriggerData.p->mTriggerName;
-    while ( v4->mUID != v3 )
+    mUID = trigger_region->i_name.mUID;
+    p_mTriggerName = &UFG::TSGameSlice::msInteriorTriggerData.p->mTriggerName;
+    while ( p_mTriggerName->mUID != mUID )
     {
       ++v2;
-      v4 += 42;
+      p_mTriggerName += 42;
       if ( v2 >= UFG::TSGameSlice::msInteriorTriggerData.size )
         goto LABEL_7;
     }
@@ -2963,84 +2976,78 @@ void __fastcall UFG::TSGameSlice::InteriorExterior_OnEnterHandler(UFG::TriggerRe
   }
 LABEL_7:
   v5 = &UFG::TSGameSlice::msInteriorTriggerData.p[v1];
-  if ( v5->mNestedEnvironment == 1 )
+  if ( v5->mNestedEnvironment == set_true )
   {
-    args_pp = SSSymbol::as_instance((ASymbol *)&v5->mEnterEnvironment);
-    result.mUID = LODWORD(v5->mEnterEnvironmentApplyAmount);
+    args_pp.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)SSSymbol::as_instance((ASymbol *)&v5->mEnterEnvironment);
+    *(float *)&result = v5->mEnterEnvironmentApplyAmount;
     v6 = SSBrain::c_real_class_p;
-    v7 = SSInstance::get_pool();
-    v8 = v7;
-    v9 = v7->i_pool.i_count;
-    if ( v9 )
+    pool = SSInstance::get_pool();
+    if ( pool->i_pool.i_count )
     {
-      v15 = v9 - 1;
-      v8->i_pool.i_count = v15;
-      v12 = v15;
-      v13 = v8->i_pool.i_array_p;
+      v13 = pool->i_pool.i_count - 1;
+      pool->i_pool.i_count = v13;
+      v10 = v13;
+      i_array_p = pool->i_pool.i_array_p;
     }
     else
     {
-      if ( !v8->i_exp_pool.i_count )
-        AObjReusePool<SSInstance>::append_block(v8, v8->i_expand_size);
-      v10 = v8->i_exp_pool.i_count;
-      if ( !v10 )
+      if ( !pool->i_exp_pool.i_count )
+        AObjReusePool<SSInstance>::append_block(pool, pool->i_expand_size);
+      i_count = pool->i_exp_pool.i_count;
+      if ( !i_count )
       {
-        v14 = 0i64;
+        v12 = 0i64;
         goto LABEL_16;
       }
-      v11 = v10 - 1;
-      v8->i_exp_pool.i_count = v11;
-      v12 = v11;
-      v13 = v8->i_exp_pool.i_array_p;
+      v9 = i_count - 1;
+      pool->i_exp_pool.i_count = v9;
+      v10 = v9;
+      i_array_p = pool->i_exp_pool.i_array_p;
     }
-    v14 = (__int64)v13[v12];
+    v12 = i_array_p[v10];
 LABEL_16:
-    *(_QWORD *)(v14 + 24) = v6;
-    *(_QWORD *)(v14 + 32) = result.mUID;
-    *(_DWORD *)(v14 + 16) = 1;
-    v16 = SSObjectBase::c_ptr_id_prev + 1;
-    SSObjectBase::c_ptr_id_prev = v16;
-    *(_DWORD *)(v14 + 8) = v16;
-    v44 = (SSInstance *)v14;
-    result.mUID = LODWORD(v5->mEnterEnvironmentTransition);
-    v17 = SSBrain::c_real_class_p;
-    v18 = SSInstance::get_pool();
-    v19 = v18;
-    v20 = v18->i_pool.i_count;
-    if ( v20 )
+    v12->i_class_p = v6;
+    v12->i_user_data = (unsigned int)result;
+    v12->i_ref_count = 1;
+    v12->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
+    args_pp.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)v12;
+    *(float *)&result = v5->mEnterEnvironmentTransition;
+    v14 = SSBrain::c_real_class_p;
+    v15 = SSInstance::get_pool();
+    if ( v15->i_pool.i_count )
     {
-      v26 = v20 - 1;
-      v19->i_pool.i_count = v26;
-      v23 = v26;
-      v24 = v19->i_pool.i_array_p;
+      v21 = v15->i_pool.i_count - 1;
+      v15->i_pool.i_count = v21;
+      v18 = v21;
+      v19 = v15->i_pool.i_array_p;
     }
     else
     {
-      if ( !v19->i_exp_pool.i_count )
-        AObjReusePool<SSInstance>::append_block(v19, v19->i_expand_size);
-      v21 = v19->i_exp_pool.i_count;
-      if ( !v21 )
+      if ( !v15->i_exp_pool.i_count )
+        AObjReusePool<SSInstance>::append_block(v15, v15->i_expand_size);
+      v16 = v15->i_exp_pool.i_count;
+      if ( !v16 )
       {
-        v25 = 0i64;
+        v20 = 0i64;
         goto LABEL_24;
       }
-      v22 = v21 - 1;
-      v19->i_exp_pool.i_count = v22;
-      v23 = v22;
-      v24 = v19->i_exp_pool.i_array_p;
+      v17 = v16 - 1;
+      v15->i_exp_pool.i_count = v17;
+      v18 = v17;
+      v19 = v15->i_exp_pool.i_array_p;
     }
-    v25 = (__int64)v24[v23];
+    v20 = v19[v18];
 LABEL_24:
-    *(_QWORD *)(v25 + 24) = v17;
-    *(_QWORD *)(v25 + 32) = result.mUID;
-    *(_DWORD *)(v25 + 16) = 1;
-    *(_DWORD *)(v25 + 8) = ++SSObjectBase::c_ptr_id_prev;
-    v45 = (SSInstance *)v25;
+    v20->i_class_p = v14;
+    v20->i_user_data = (unsigned int)result;
+    v20->i_ref_count = 1;
+    v20->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
+    *(_QWORD *)&args_pp.mMagic = v20;
     if ( SkookumScript::c_world_p )
       SSInstance::coroutine_call(
-        (SSInstance *)&SkookumScript::c_world_p->vfptr,
+        SkookumScript::c_world_p,
         (ASymbol *)&qSymbol__render_override_environment_named,
-        &args_pp,
+        (SSInstance **)&args_pp,
         3u,
         1,
         0.0,
@@ -3048,27 +3055,27 @@ LABEL_24:
         0i64);
     return;
   }
-  if ( v5->mForceWalk != -1 )
+  if ( v5->mForceWalk != set_none )
   {
-    v27 = (UFG::TSActor *)SSActor::find((ASymbol *)&qSymbol_PlayerOne_Havok);
-    if ( !v27 )
+    v22 = (UFG::TSActor *)SSActor::find((ASymbol *)&qSymbol_PlayerOne_Havok);
+    if ( !v22 )
     {
-      v28 = UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)&qSymbol_PlayerOne_Havok.mUID);
-      v27 = UFG::TSActor::FromSimObject((UFG::SimObject *)v28);
+      SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &qSymbol_PlayerOne_Havok);
+      v22 = UFG::TSActor::FromSimObject((UFG::SimObject *)SimObject);
     }
-    v29 = v5->mForceWalk == 1;
-    *(_QWORD *)&result.mUID = 0i64;
-    if ( v29 )
-      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, UFG::qSymbol *, _QWORD, _QWORD, _QWORD))v27->vfptr[1].set_data_by_name)(
-        v27,
+    v24 = v5->mForceWalk == set_true;
+    result = 0i64;
+    if ( v24 )
+      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, __int64 *, _QWORD, _QWORD, _QWORD))v22->vfptr[1].set_data_by_name)(
+        v22,
         &qSymbol_start_force_walk,
         &result,
         0i64,
         0i64,
         0i64);
     else
-      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, UFG::qSymbol *, _QWORD, _QWORD, _QWORD))v27->vfptr[1].set_data_by_name)(
-        v27,
+      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, __int64 *, _QWORD, _QWORD, _QWORD))v22->vfptr[1].set_data_by_name)(
+        v22,
         &qSymbol_stop_force_walk,
         &result,
         0i64,
@@ -3077,7 +3084,35 @@ LABEL_24:
   }
   if ( v5->mCameraContextOverrideTow.mLength )
   {
-    UFG::qString::FormatEx((UFG::qString *)&args_pp, "Cameras-%s", v5->mCameraContextOverrideTow.mData);
+    UFG::qString::FormatEx(&args_pp, "Cameras-%s", v5->mCameraContextOverrideTow.mData);
+    p_mNode = UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext - 78;
+    if ( (UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *)&UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext[-78] != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 )
+    {
+      do
+      {
+        v26 = (UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *)&p_mNode[78].mNext[-78];
+        if ( ((__int64 (__fastcall *)(UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *))p_mNode->mPrev[8].mNext)(p_mNode) )
+        {
+          v27 = (UFG::SimObject *)((__int64 (__fastcall *)(UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *))p_mNode->mPrev[8].mNext)(p_mNode);
+          ComponentOfType = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                                v27,
+                                                                UFG::CharacterSubjectComponent::_TypeUID);
+          if ( ComponentOfType )
+          {
+            p_result = &result;
+            v29 = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, args_pp.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideScriptGlobal(ComponentOfType, 0, (UFG::qSymbol)v29);
+          }
+        }
+        p_mNode = &v26->mNode;
+      }
+      while ( v26 != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 );
+    }
+    UFG::qString::~qString(&args_pp);
+  }
+  if ( v5->mCameraContextLocalOverrideTow.mLength )
+  {
+    UFG::qString::FormatEx(&args_pp, "Cameras-%s", v5->mCameraContextLocalOverrideTow.mData);
     v30 = UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext - 78;
     if ( (UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *)&UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext[-78] != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 )
     {
@@ -3092,57 +3127,31 @@ LABEL_24:
                                                     UFG::CharacterSubjectComponent::_TypeUID);
           if ( v33 )
           {
-            v48 = &result;
-            v34.mUID = (unsigned int)UFG::qSymbol::create_from_string(&result, pszSymbolString);
-            UFG::CharacterSubjectComponent::SetContextOverrideScriptGlobal(v33, 0, v34);
+            p_result = &result;
+            v34 = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, args_pp.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideScriptLocal(v33, 0, (UFG::qSymbol)v34);
           }
         }
         v30 = &v31->mNode;
       }
       while ( v31 != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 );
     }
-    UFG::qString::~qString((UFG::qString *)&args_pp);
-  }
-  if ( v5->mCameraContextLocalOverrideTow.mLength )
-  {
-    UFG::qString::FormatEx((UFG::qString *)&args_pp, "Cameras-%s", v5->mCameraContextLocalOverrideTow.mData);
-    v35 = UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext - 78;
-    if ( (UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *)&UFG::FollowCameraComponent::s_FollowCameraComponentList.mNode.mNext[-78] != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 )
-    {
-      do
-      {
-        v36 = (UFG::qList<UFG::FollowCameraComponent,UFG::FollowCameraComponent,1,0> *)&v35[78].mNext[-78];
-        if ( ((__int64 (__fastcall *)(UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *))v35->mPrev[8].mNext)(v35) )
-        {
-          v37 = (UFG::SimObject *)((__int64 (__fastcall *)(UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *))v35->mPrev[8].mNext)(v35);
-          v38 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                    v37,
-                                                    UFG::CharacterSubjectComponent::_TypeUID);
-          if ( v38 )
-          {
-            v48 = &result;
-            v39.mUID = (unsigned int)UFG::qSymbol::create_from_string(&result, pszSymbolString);
-            UFG::CharacterSubjectComponent::SetContextOverrideScriptLocal(v38, 0, v39);
-          }
-        }
-        v35 = &v36->mNode;
-      }
-      while ( v36 != &UFG::FollowCameraComponent::s_FollowCameraComponentList - 78 );
-    }
-    UFG::qString::~qString((UFG::qString *)&args_pp);
+    UFG::qString::~qString(&args_pp);
   }
   if ( v5->mEnvironment.mUID != nullSym.mUID )
   {
-    args_pp = SSSymbol::as_instance((ASymbol *)&v5->mEnvironment);
-    result.mUID = LODWORD(v5->mEnvironmentApplyAmount);
-    v44 = SSInstance::pool_new(SSBrain::c_real_class_p, result.mUID);
-    result.mUID = LODWORD(v5->mEnvironmentTransitionOn);
-    v45 = SSInstance::pool_new(SSBrain::c_real_class_p, result.mUID);
+    args_pp.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)SSSymbol::as_instance((ASymbol *)&v5->mEnvironment);
+    *(float *)&result = v5->mEnvironmentApplyAmount;
+    args_pp.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)SSInstance::pool_new(
+                                                               SSBrain::c_real_class_p,
+                                                               (unsigned int)result);
+    *(float *)&result = v5->mEnvironmentTransitionOn;
+    *(_QWORD *)&args_pp.mMagic = SSInstance::pool_new(SSBrain::c_real_class_p, (unsigned int)result);
     if ( SkookumScript::c_world_p )
       SSInstance::coroutine_call(
-        (SSInstance *)&SkookumScript::c_world_p->vfptr,
+        SkookumScript::c_world_p,
         (ASymbol *)&qSymbol__render_override_environment_named,
-        &args_pp,
+        (SSInstance **)&args_pp,
         3u,
         1,
         0.0,
@@ -3153,20 +3162,20 @@ LABEL_24:
     UFG::ActiveRegionManager::SetModeFromSymbol(
       &UFG::BasePhysicsSystem::mInstance->mActiveRegionManager,
       &v5->mPhysicsActiveRegionMode);
-  v40 = v5->mDisableProxyPeds;
-  if ( v40 == 1 )
+  mDisableProxyPeds = v5->mDisableProxyPeds;
+  if ( mDisableProxyPeds == set_true )
   {
-    v41 = UFG::PedSpawnManager::GetInstance();
-    UFG::PedSpawnManager::DisableProxyPeds(v41);
+    Instance = UFG::PedSpawnManager::GetInstance();
+    UFG::PedSpawnManager::DisableProxyPeds(Instance);
   }
-  else if ( v40 == set_false )
+  else if ( mDisableProxyPeds == set_false )
   {
-    v42 = UFG::PedSpawnManager::GetInstance();
-    UFG::PedSpawnManager::EnableProxyPeds(v42);
+    v37 = UFG::PedSpawnManager::GetInstance();
+    UFG::PedSpawnManager::EnableProxyPeds(v37);
   }
-  if ( v5->mDisableTraffic == 1 )
+  if ( v5->mDisableTraffic == set_true )
     UFG::WheeledVehicleManager::EnableTrafficSystem(UFG::WheeledVehicleManager::m_Instance, 0);
-  if ( v5->mSpecialTrigger != 1 && v5->mEnvironment.mUID == nullSym.mUID )
+  if ( v5->mSpecialTrigger != set_true && v5->mEnvironment.mUID == nullSym.mUID )
   {
     UFG::RenderWorld::SetFlags(0);
     UFG::GeographicalLayerManager::SetActiveCategory(&v5->mCategory);
@@ -3177,62 +3186,56 @@ LABEL_24:
 // RVA: 0x4E1C80
 void __fastcall UFG::TSGameSlice::InteriorExterior_OnExitHandler(UFG::TriggerRegion *trigger_region)
 {
-  __int64 v1; // rsi
+  __int64 size; // rsi
   __int64 v2; // rbx
-  UFG::TriggerRegion *v3; // rbp
-  signed int v4; // er9
+  int v4; // r9d
   unsigned int v5; // eax
-  UFG::qSymbol *v6; // rdx
+  UFG::qSymbol *p_mTriggerName; // rdx
   UFG::InteriorTriggerProperties *v7; // rdi
   SSInstance *v8; // rax
   SSClass *v9; // rbp
-  AObjReusePool<SSInstance> *v10; // rax
-  AObjReusePool<SSInstance> *v11; // rsi
+  AObjReusePool<SSInstance> *pool; // rsi
+  unsigned int i_count; // eax
   unsigned int v12; // eax
-  unsigned int v13; // eax
-  unsigned int v14; // eax
-  __int64 v15; // rcx
-  SSInstance **v16; // rax
-  __int64 v17; // rdx
-  unsigned int v18; // eax
-  __int64 v19; // rax
-  SSClass *v20; // rsi
-  AObjReusePool<SSInstance> *v21; // rax
-  AObjReusePool<SSInstance> *v22; // rdi
-  unsigned int v23; // eax
-  unsigned int v24; // eax
+  __int64 v13; // rcx
+  SSInstance **i_array_p; // rax
+  __int64 v15; // rdx
+  unsigned int v16; // eax
+  __int64 v17; // rax
+  SSClass *v18; // rsi
+  AObjReusePool<SSInstance> *v19; // rdi
+  unsigned int v20; // eax
+  unsigned int v21; // eax
+  __int64 v22; // rcx
+  SSInstance **v23; // rax
+  __int64 v24; // rdx
   unsigned int v25; // eax
-  __int64 v26; // rcx
-  SSInstance **v27; // rax
-  __int64 v28; // rdx
-  unsigned int v29; // eax
-  __int64 v30; // rax
-  UFG::TSActor *v31; // rcx
-  UFG::qBaseNodeRB *v32; // rax
-  bool v33; // zf
-  SSInstance *v34; // rax
-  unsigned int v35; // edx
-  UFG::qBaseTreeRB *v36; // rax
-  signed __int64 v37; // rax
-  int v38; // ecx
-  UFG::PedSpawnManager *v39; // rax
-  SSInstance *args_pp; // [rsp+40h] [rbp-38h]
-  __int64 v41; // [rsp+48h] [rbp-30h]
-  SSInstance *v42; // [rsp+50h] [rbp-28h]
-  unsigned __int64 user_data; // [rsp+88h] [rbp+10h]
+  __int64 v26; // rax
+  UFG::TSActor *v27; // rcx
+  UFG::qBaseNodeRB *SimObject; // rax
+  bool v29; // zf
+  SSInstance *v30; // rax
+  unsigned int mUID; // edx
+  UFG::qBaseTreeRB *v32; // rax
+  UFG::qBaseNodeRB *p_mNULL; // rax
+  int v34; // ecx
+  UFG::PedSpawnManager *Instance; // rax
+  SSInstance *args_pp; // [rsp+40h] [rbp-38h] BYREF
+  __int64 v37; // [rsp+48h] [rbp-30h]
+  SSInstance *v38; // [rsp+50h] [rbp-28h]
+  unsigned __int64 user_data; // [rsp+88h] [rbp+10h] BYREF
 
-  v1 = UFG::TSGameSlice::msInteriorTriggerData.size;
+  size = UFG::TSGameSlice::msInteriorTriggerData.size;
   v2 = 0i64;
-  v3 = trigger_region;
   v4 = 99999;
   v5 = 0;
   if ( UFG::TSGameSlice::msInteriorTriggerData.size )
   {
-    v6 = &UFG::TSGameSlice::msInteriorTriggerData.p->mTriggerName;
-    while ( v6->mUID != trigger_region->i_name.mUID )
+    p_mTriggerName = &UFG::TSGameSlice::msInteriorTriggerData.p->mTriggerName;
+    while ( p_mTriggerName->mUID != trigger_region->i_name.mUID )
     {
       ++v5;
-      v6 += 42;
+      p_mTriggerName += 42;
       if ( v5 >= UFG::TSGameSlice::msInteriorTriggerData.size )
         goto LABEL_7;
     }
@@ -3240,85 +3243,79 @@ void __fastcall UFG::TSGameSlice::InteriorExterior_OnExitHandler(UFG::TriggerReg
   }
 LABEL_7:
   v7 = &UFG::TSGameSlice::msInteriorTriggerData.p[v4];
-  if ( v7->mNestedEnvironment == 1 )
+  if ( v7->mNestedEnvironment == set_true )
   {
     v8 = SSSymbol::as_instance((ASymbol *)&v7->mExitEnvironment);
     v9 = SSBrain::c_real_class_p;
     *(float *)&user_data = v7->mExitEnvironmentApplyAmount;
     args_pp = v8;
-    v10 = SSInstance::get_pool();
-    v11 = v10;
-    v12 = v10->i_pool.i_count;
-    if ( v12 )
+    pool = SSInstance::get_pool();
+    if ( pool->i_pool.i_count )
     {
-      v18 = v12 - 1;
-      v11->i_pool.i_count = v18;
-      v15 = v18;
-      v16 = v11->i_pool.i_array_p;
+      v16 = pool->i_pool.i_count - 1;
+      pool->i_pool.i_count = v16;
+      v13 = v16;
+      i_array_p = pool->i_pool.i_array_p;
     }
     else
     {
-      if ( !v11->i_exp_pool.i_count )
-        AObjReusePool<SSInstance>::append_block(v11, v11->i_expand_size);
-      v13 = v11->i_exp_pool.i_count;
-      if ( !v13 )
+      if ( !pool->i_exp_pool.i_count )
+        AObjReusePool<SSInstance>::append_block(pool, pool->i_expand_size);
+      i_count = pool->i_exp_pool.i_count;
+      if ( !i_count )
       {
-        v17 = 0i64;
+        v15 = 0i64;
         goto LABEL_16;
       }
-      v14 = v13 - 1;
-      v11->i_exp_pool.i_count = v14;
-      v15 = v14;
-      v16 = v11->i_exp_pool.i_array_p;
+      v12 = i_count - 1;
+      pool->i_exp_pool.i_count = v12;
+      v13 = v12;
+      i_array_p = pool->i_exp_pool.i_array_p;
     }
-    v17 = (__int64)v16[v15];
+    v15 = (__int64)i_array_p[v13];
 LABEL_16:
-    v19 = (unsigned int)user_data;
-    *(_QWORD *)(v17 + 24) = v9;
-    *(_DWORD *)(v17 + 16) = 1;
-    *(_QWORD *)(v17 + 32) = v19;
-    LODWORD(v19) = SSObjectBase::c_ptr_id_prev + 1;
-    SSObjectBase::c_ptr_id_prev = v19;
-    *(_DWORD *)(v17 + 8) = v19;
-    v20 = SSBrain::c_real_class_p;
+    v17 = (unsigned int)user_data;
+    *(_QWORD *)(v15 + 24) = v9;
+    *(_DWORD *)(v15 + 16) = 1;
+    *(_QWORD *)(v15 + 32) = v17;
+    *(_DWORD *)(v15 + 8) = ++SSObjectBase::c_ptr_id_prev;
+    v18 = SSBrain::c_real_class_p;
     *(float *)&user_data = v7->mExitEnvironmentTransition;
-    v41 = v17;
-    v21 = SSInstance::get_pool();
-    v22 = v21;
-    v23 = v21->i_pool.i_count;
-    if ( v23 )
+    v37 = v15;
+    v19 = SSInstance::get_pool();
+    if ( v19->i_pool.i_count )
     {
-      v29 = v23 - 1;
-      v22->i_pool.i_count = v29;
-      v26 = v29;
-      v27 = v22->i_pool.i_array_p;
+      v25 = v19->i_pool.i_count - 1;
+      v19->i_pool.i_count = v25;
+      v22 = v25;
+      v23 = v19->i_pool.i_array_p;
     }
     else
     {
-      if ( !v22->i_exp_pool.i_count )
-        AObjReusePool<SSInstance>::append_block(v22, v22->i_expand_size);
-      v24 = v22->i_exp_pool.i_count;
-      if ( !v24 )
+      if ( !v19->i_exp_pool.i_count )
+        AObjReusePool<SSInstance>::append_block(v19, v19->i_expand_size);
+      v20 = v19->i_exp_pool.i_count;
+      if ( !v20 )
       {
-        v28 = 0i64;
+        v24 = 0i64;
         goto LABEL_24;
       }
-      v25 = v24 - 1;
-      v22->i_exp_pool.i_count = v25;
-      v26 = v25;
-      v27 = v22->i_exp_pool.i_array_p;
+      v21 = v20 - 1;
+      v19->i_exp_pool.i_count = v21;
+      v22 = v21;
+      v23 = v19->i_exp_pool.i_array_p;
     }
-    v28 = (__int64)v27[v26];
+    v24 = (__int64)v23[v22];
 LABEL_24:
-    v30 = (unsigned int)user_data;
-    *(_QWORD *)(v28 + 24) = v20;
-    *(_DWORD *)(v28 + 16) = 1;
-    *(_QWORD *)(v28 + 32) = v30;
-    *(_DWORD *)(v28 + 8) = ++SSObjectBase::c_ptr_id_prev;
-    v42 = (SSInstance *)v28;
+    v26 = (unsigned int)user_data;
+    *(_QWORD *)(v24 + 24) = v18;
+    *(_DWORD *)(v24 + 16) = 1;
+    *(_QWORD *)(v24 + 32) = v26;
+    *(_DWORD *)(v24 + 8) = ++SSObjectBase::c_ptr_id_prev;
+    v38 = (SSInstance *)v24;
     if ( SkookumScript::c_world_p )
       SSInstance::coroutine_call(
-        (SSInstance *)&SkookumScript::c_world_p->vfptr,
+        SkookumScript::c_world_p,
         (ASymbol *)&qSymbol__render_override_environment_named,
         &args_pp,
         3u,
@@ -3328,27 +3325,27 @@ LABEL_24:
         0i64);
     return;
   }
-  if ( v7->mForceWalk != -1 )
+  if ( v7->mForceWalk != set_none )
   {
-    v31 = (UFG::TSActor *)SSActor::find((ASymbol *)&qSymbol_PlayerOne_Havok);
-    if ( !v31 )
+    v27 = (UFG::TSActor *)SSActor::find((ASymbol *)&qSymbol_PlayerOne_Havok);
+    if ( !v27 )
     {
-      v32 = UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)&qSymbol_PlayerOne_Havok.mUID);
-      v31 = UFG::TSActor::FromSimObject((UFG::SimObject *)v32);
+      SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &qSymbol_PlayerOne_Havok);
+      v27 = UFG::TSActor::FromSimObject((UFG::SimObject *)SimObject);
     }
-    v33 = v7->mForceWalk == 1;
+    v29 = v7->mForceWalk == set_true;
     user_data = 0i64;
-    if ( v33 )
-      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, unsigned __int64 *, _QWORD, _QWORD, _QWORD))v31->vfptr[1].set_data_by_name)(
-        v31,
+    if ( v29 )
+      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, unsigned __int64 *, _QWORD, _QWORD, _QWORD))v27->vfptr[1].set_data_by_name)(
+        v27,
         &qSymbol_stop_force_walk,
         &user_data,
         0i64,
         0i64,
         0i64);
     else
-      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, unsigned __int64 *, _QWORD, _QWORD, _QWORD))v31->vfptr[1].set_data_by_name)(
-        v31,
+      ((void (__fastcall *)(UFG::TSActor *, UFG::qStaticSymbol *, unsigned __int64 *, _QWORD, _QWORD, _QWORD))v27->vfptr[1].set_data_by_name)(
+        v27,
         &qSymbol_start_force_walk,
         &user_data,
         0i64,
@@ -3364,13 +3361,13 @@ LABEL_24:
   {
     args_pp = SSSymbol::as_instance((ASymbol *)&v7->mEnvironment);
     LODWORD(user_data) = 0;
-    v34 = SSInstance::pool_new(SSBrain::c_real_class_p, 0i64);
+    v30 = SSInstance::pool_new(SSBrain::c_real_class_p, 0i64);
     *(float *)&user_data = v7->mEnvironmentTransitionOff;
-    v41 = (__int64)v34;
-    v42 = SSInstance::pool_new(SSBrain::c_real_class_p, (unsigned int)user_data);
+    v37 = (__int64)v30;
+    v38 = SSInstance::pool_new(SSBrain::c_real_class_p, (unsigned int)user_data);
     if ( SkookumScript::c_world_p )
       SSInstance::coroutine_call(
-        (SSInstance *)&SkookumScript::c_world_p->vfptr,
+        SkookumScript::c_world_p,
         (ASymbol *)&qSymbol__render_override_environment_named,
         &args_pp,
         3u,
@@ -3382,218 +3379,215 @@ LABEL_24:
   if ( v7->mPhysicsActiveRegionMode.mUID != -1 )
   {
     UFG::qSymbol::create_from_string((UFG::qSymbol *)&user_data, "ARM_EXTERIOR");
-    if ( (_DWORD)v1 )
+    if ( (_DWORD)size )
     {
       do
       {
-        v35 = UFG::TSGameSlice::msInteriorTriggerData.p[v2].mTriggerName.mUID;
-        if ( v35 != v3->i_name.mUID )
+        mUID = UFG::TSGameSlice::msInteriorTriggerData.p[v2].mTriggerName.mUID;
+        if ( mUID != trigger_region->i_name.mUID )
         {
-          if ( v35 )
+          if ( mUID )
           {
-            v36 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v35);
-            if ( v36 )
+            v32 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, mUID);
+            if ( v32 )
             {
-              v37 = (signed __int64)&v36[-2].mNULL;
-              if ( v37 )
+              p_mNULL = &v32[-2].mNULL;
+              if ( p_mNULL )
               {
-                if ( (*(_DWORD *)(v37 + 192) & 0x10012) == 65554 )
+                if ( ((__int64)p_mNULL[6].mParent & 0x10012) == 65554 )
                 {
-                  v38 = user_data;
+                  v34 = user_data;
                   if ( UFG::TSGameSlice::msInteriorTriggerData.p[v2].mPhysicsActiveRegionMode.mUID != -1 )
-                    v38 = UFG::TSGameSlice::msInteriorTriggerData.p[v2].mPhysicsActiveRegionMode.mUID;
-                  LODWORD(user_data) = v38;
+                    v34 = UFG::TSGameSlice::msInteriorTriggerData.p[v2].mPhysicsActiveRegionMode.mUID;
+                  LODWORD(user_data) = v34;
                 }
               }
             }
           }
         }
         ++v2;
-        --v1;
+        --size;
       }
-      while ( v1 );
+      while ( size );
     }
     UFG::ActiveRegionManager::SetModeFromSymbol(
       &UFG::BasePhysicsSystem::mInstance->mActiveRegionManager,
       (UFG::qSymbol *)&user_data);
   }
-  if ( v7->mDisableTraffic == 1 )
+  if ( v7->mDisableTraffic == set_true )
   {
     UFG::WheeledVehicleManager::EnableTrafficSystem(UFG::WheeledVehicleManager::m_Instance, 1);
     UFG::PedSpawnManager::msRequestEmergencyDump = 1;
   }
-  if ( v7->mSpecialTrigger != 1 && v7->mEnvironment.mUID == nullSym.mUID )
+  if ( v7->mSpecialTrigger != set_true && v7->mEnvironment.mUID == nullSym.mUID )
   {
     UFG::RenderWorld::SetFlags(1u);
     UFG::GeographicalLayerManager::SetActiveCategory(&v7->mCategory);
-    v39 = UFG::PedSpawnManager::GetInstance();
-    UFG::PedSpawnManager::EnableProxyPeds(v39);
+    Instance = UFG::PedSpawnManager::GetInstance();
+    UFG::PedSpawnManager::EnableProxyPeds(Instance);
     UFG::GeographicalLayerManager::SetActiveCategory(&nullSym);
   }
 }
 
 // File Line: 2055
 // RVA: 0x510140
-void __fastcall UFG::TSGameSlice::SetupTriggersFromList(UFG::qPropertyList *pTriggerDataList, UFG::GameSlice *pGameSlice)
+void __fastcall UFG::TSGameSlice::SetupTriggersFromList(
+        UFG::qPropertyList *pTriggerDataList,
+        UFG::GameSlice *pGameSlice)
 {
-  unsigned int v2; // er12
+  unsigned int mNumElements; // r12d
   UFG::GameSlice *v3; // rsi
-  UFG::qPropertyList *v4; // r13
-  unsigned int v5; // er15
-  char *v6; // rax
+  unsigned int i; // r15d
+  char *ValuePtr; // rax
   UFG::qPropertySet *v7; // rdi
   unsigned int v8; // ebx
   unsigned int v9; // edx
   __int64 v10; // r14
-  unsigned int v11; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v12; // rax
-  UFG::TriggerRegion *v13; // rdi
+  UFG::TriggerRegion *p_mNULL; // rdi
   UFG::SimObjectCharacter *v14; // rbp
-  UFG::TriggerTarget *i; // rbx
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v16; // rdx
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v17; // rax
+  UFG::TriggerTarget *j; // rbx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mPrev; // rdx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mNext; // rax
   void (__fastcall *v18)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
   void (__fastcall *v19)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
-  UFG::GameSlice *v20; // [rsp+58h] [rbp+10h]
 
-  v20 = pGameSlice;
-  v2 = pTriggerDataList->mNumElements;
+  mNumElements = pTriggerDataList->mNumElements;
   v3 = pGameSlice;
-  v4 = pTriggerDataList;
-  v5 = 0;
-  if ( v2 )
+  for ( i = 0; i < mNumElements; ++i )
   {
-    do
+    ValuePtr = UFG::qPropertyList::GetValuePtr(pTriggerDataList, 0x1Au, i);
+    if ( !ValuePtr || (v7 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr], !*(_QWORD *)ValuePtr) )
+      v7 = 0i64;
+    v8 = UFG::TSGameSlice::msInteriorTriggerData.size + 1;
+    if ( UFG::TSGameSlice::msInteriorTriggerData.size + 1 > UFG::TSGameSlice::msInteriorTriggerData.capacity )
     {
-      v6 = UFG::qPropertyList::GetValuePtr(v4, 0x1Au, v5);
-      if ( !v6 || (v7 = (UFG::qPropertySet *)&v6[*(_QWORD *)v6], !*(_QWORD *)v6) )
-        v7 = 0i64;
-      v8 = UFG::TSGameSlice::msInteriorTriggerData.size + 1;
-      if ( UFG::TSGameSlice::msInteriorTriggerData.size + 1 > UFG::TSGameSlice::msInteriorTriggerData.capacity )
-      {
-        if ( UFG::TSGameSlice::msInteriorTriggerData.capacity )
-          v9 = 2 * UFG::TSGameSlice::msInteriorTriggerData.capacity;
-        else
-          v9 = 1;
-        for ( ; v9 < v8; v9 *= 2 )
-          ;
-        if ( v9 - v8 > 0x10000 )
-          v9 = UFG::TSGameSlice::msInteriorTriggerData.size + 65537;
-        UFG::qArray<UFG::InteriorTriggerProperties,0>::Reallocate(
-          &UFG::TSGameSlice::msInteriorTriggerData,
-          v9,
-          "qArray.Add");
-      }
-      UFG::TSGameSlice::msInteriorTriggerData.size = v8;
-      v10 = v8 - 1;
-      UFG::InteriorTriggerProperties::LoadFromProperties(&UFG::TSGameSlice::msInteriorTriggerData.p[v10], v7);
-      UFG::TSGameSlice::msInteriorTriggerData.p[v10].mGameSlicePtr = v3;
-      v11 = UFG::TSGameSlice::msInteriorTriggerData.p[v10].mTriggerName.mUID;
-      if ( !v11
-        || (v12 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v11),
-            v13 = (UFG::TriggerRegion *)&v12[-2].mNULL,
-            !v12) )
-      {
-        v13 = 0i64;
-      }
-      v14 = LocalPlayer;
-      if ( v13 )
-      {
-        for ( i = (UFG::TriggerTarget *)v13->mTrackList.mNode.mNext;
-              i != (UFG::TriggerTarget *)&v13->mTrackList;
-              i = (UFG::TriggerTarget *)v13->mTrackList.mNode.mNext )
-        {
-          v16 = i->mPrev;
-          v17 = i->mNext;
-          v16->mNext = v17;
-          v17->mPrev = v16;
-          i->mPrev = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&i->mPrev;
-          i->mNext = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&i->mPrev;
-          UFG::TriggerTarget::~TriggerTarget(i);
-          operator delete[](i);
-        }
-        UFG::TriggerRegion::ResetEvents(v13);
-        UFG::TriggerRegion::TrackTarget(v13, (UFG::SimObject *)&v14->vfptr, 0i64);
-        v18 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-        v13->mOnEnteredDelegate.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)UFG::TSGameSlice::InteriorExterior_OnEnterHandler;
-        if ( !UFG::TSGameSlice::InteriorExterior_OnEnterHandler )
-          v18 = 0i64;
-        v13->mOnEnteredDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v18;
-        if ( UFG::TSGameSlice::msInteriorTriggerData.p[v10].mOnEnterOnly != 1 )
-        {
-          v19 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-          v13->mOnExitedDelegate.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)UFG::TSGameSlice::InteriorExterior_OnExitHandler;
-          if ( !UFG::TSGameSlice::InteriorExterior_OnExitHandler )
-            v19 = 0i64;
-          v13->mOnExitedDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v19;
-        }
-        UFG::TriggerRegion::EnableHot(v13, 1);
-        v3 = v20;
-      }
-      ++v5;
+      if ( UFG::TSGameSlice::msInteriorTriggerData.capacity )
+        v9 = 2 * UFG::TSGameSlice::msInteriorTriggerData.capacity;
+      else
+        v9 = 1;
+      for ( ; v9 < v8; v9 *= 2 )
+        ;
+      if ( v9 - v8 > 0x10000 )
+        v9 = UFG::TSGameSlice::msInteriorTriggerData.size + 65537;
+      UFG::qArray<UFG::InteriorTriggerProperties,0>::Reallocate(
+        &UFG::TSGameSlice::msInteriorTriggerData,
+        v9,
+        "qArray.Add");
     }
-    while ( v5 < v2 );
+    UFG::TSGameSlice::msInteriorTriggerData.size = v8;
+    v10 = v8 - 1;
+    UFG::InteriorTriggerProperties::LoadFromProperties(&UFG::TSGameSlice::msInteriorTriggerData.p[v10], v7);
+    UFG::TSGameSlice::msInteriorTriggerData.p[v10].mGameSlicePtr = v3;
+    mUID = UFG::TSGameSlice::msInteriorTriggerData.p[v10].mTriggerName.mUID;
+    if ( !mUID
+      || (v12 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, mUID),
+          p_mNULL = (UFG::TriggerRegion *)&v12[-2].mNULL,
+          !v12) )
+    {
+      p_mNULL = 0i64;
+    }
+    v14 = LocalPlayer;
+    if ( p_mNULL )
+    {
+      for ( j = (UFG::TriggerTarget *)p_mNULL->mTrackList.mNode.mNext;
+            j != (UFG::TriggerTarget *)&p_mNULL->mTrackList;
+            j = (UFG::TriggerTarget *)p_mNULL->mTrackList.mNode.mNext )
+      {
+        mPrev = j->mPrev;
+        mNext = j->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        j->mPrev = j;
+        j->mNext = j;
+        UFG::TriggerTarget::~TriggerTarget(j);
+        operator delete[](j);
+      }
+      UFG::TriggerRegion::ResetEvents(p_mNULL);
+      UFG::TriggerRegion::TrackTarget(p_mNULL, v14, 0i64);
+      v18 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
+      p_mNULL->mOnEnteredDelegate.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)UFG::TSGameSlice::InteriorExterior_OnEnterHandler;
+      if ( !UFG::TSGameSlice::InteriorExterior_OnEnterHandler )
+        v18 = 0i64;
+      p_mNULL->mOnEnteredDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v18;
+      if ( UFG::TSGameSlice::msInteriorTriggerData.p[v10].mOnEnterOnly != set_true )
+      {
+        v19 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
+        p_mNULL->mOnExitedDelegate.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)UFG::TSGameSlice::InteriorExterior_OnExitHandler;
+        if ( !UFG::TSGameSlice::InteriorExterior_OnExitHandler )
+          v19 = 0i64;
+        p_mNULL->mOnExitedDelegate.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v19;
+      }
+      UFG::TriggerRegion::EnableHot(p_mNULL, 1);
+      v3 = pGameSlice;
+    }
   }
-}
+}  }
+      UFG::TriggerRegion::EnableHot(p_mNULL, 1);
+      v3 = pGameSlice;
+    }
+  }
+
 
 // File Line: 2097
 // RVA: 0x506B70
 void __fastcall UFG::TSGameSlice::Mthd_send_collectible_telemetry_stat(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  int v3; // ebx
+  SSData **i_array_p; // rdx
+  int i_user_data; // ebx
   int v4; // edi
-  int v5; // er14
+  int v5; // r14d
   UFG::GameStatTracker *v6; // rax
   UFG::GameStat::Int32Stat v7; // edx
-  int v8; // er15
+  int Stat; // r15d
   UFG::OSuiteDBLogger *v9; // rbp
   unsigned __int64 v10; // rsi
   UFG::OnlineManager *v11; // rax
-  __int64 v12; // rbx
-  __int64 v13; // rbx
-  char dest; // [rsp+20h] [rbp-98h]
+  __int64 SystemTimeUTC; // rbx
+  __int64 mSimTimeMSec; // rbx
+  char dest[128]; // [rsp+20h] [rbp-98h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (*v2)->i_data_p->i_user_data;
-  v4 = v2[1]->i_data_p->i_user_data;
-  if ( v2[2]->i_data_p->i_user_data )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = (*i_array_p)->i_data_p->i_user_data;
+  v4 = i_array_p[1]->i_data_p->i_user_data;
+  if ( i_array_p[2]->i_data_p->i_user_data )
   {
     v5 = -1923866446;
     v6 = UFG::GameStatTracker::Instance();
-    v7 = 23;
+    v7 = StatueOffensiveStage;
   }
   else
   {
     v5 = -46881340;
     v6 = UFG::GameStatTracker::Instance();
-    v7 = 22;
+    v7 = StatueDefensiveStage;
   }
-  v8 = UFG::GameStatTracker::GetStat(v6, v7);
+  Stat = UFG::GameStatTracker::GetStat(v6, v7);
   v9 = UFG::OSuiteDBLogger::Instance();
   if ( UFG::OSuiteDBLogger::CreateMetric(v9, "StatueUpgrade") )
   {
     v10 = UFG::Metrics::msRealTimeMSec;
-    UFG::qSPrintf(&dest, 128, "i64_%s", "CollectibleId");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v10);
+    UFG::qSPrintf(dest, 128, "i64_%s", "CollectibleId");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, v10);
     v11 = UFG::OnlineManager::Instance();
     LODWORD(v10) = UFG::OnlineManager::GetOnlineIdStringHash32(v11);
-    UFG::qSPrintf(&dest, 128, "i32_%s", "PlayerId");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v10);
-    UFG::qSPrintf(&dest, 128, "i32_%s", "EventType");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v5);
-    UFG::qSPrintf(&dest, 128, "i32_%s", "CollectibleType");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v3);
-    UFG::qSPrintf(&dest, 128, "i32_%s", "CollectibleName");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v4);
-    UFG::qSPrintf(&dest, 128, "i32_%s", "NewStage");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v8);
-    v12 = UFG::qGetSystemTimeUTC();
-    UFG::qSPrintf(&dest, 128, "i64_%s", "Timestamp");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v12);
-    v13 = UFG::Metrics::msInstance.mSimTimeMSec;
-    UFG::qSPrintf(&dest, 128, "i64_%s", "SimTime");
-    OSuite::ZMetric::SetProperty(v9->m_pMetric, &dest, v13);
+    UFG::qSPrintf(dest, 128, "i32_%s", "PlayerId");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, v10);
+    UFG::qSPrintf(dest, 128, "i32_%s", "EventType");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, v5);
+    UFG::qSPrintf(dest, 128, "i32_%s", "CollectibleType");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, i_user_data);
+    UFG::qSPrintf(dest, 128, "i32_%s", "CollectibleName");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, v4);
+    UFG::qSPrintf(dest, 128, "i32_%s", "NewStage");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, Stat);
+    SystemTimeUTC = UFG::qGetSystemTimeUTC();
+    UFG::qSPrintf(dest, 128, "i64_%s", "Timestamp");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, SystemTimeUTC);
+    mSimTimeMSec = UFG::Metrics::msInstance.mSimTimeMSec;
+    UFG::qSPrintf(dest, 128, "i64_%s", "SimTime");
+    OSuite::ZMetric::SetProperty(v9->m_pMetric, dest, mSimTimeMSec);
     UFG::OSuiteDBLogger::SubmitMetric(v9, 1);
   }
 }
@@ -3602,62 +3596,56 @@ void __fastcall UFG::TSGameSlice::Mthd_send_collectible_telemetry_stat(SSInvoked
 // RVA: 0x5063D0
 void __fastcall UFG::TSGameSlice::Mthd_release_interior_triggers(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  unsigned int v2; // ebp
-  unsigned int v3; // edx
+  unsigned int i; // ebp
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v4; // rax
-  UFG::TriggerRegion *v5; // rdi
-  UFG::TriggerTarget *i; // rbx
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v7; // rcx
-  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *v8; // rax
-  UFG::InteriorTriggerProperties::tri_state *v9; // rbx
+  UFG::TriggerRegion *p_mNULL; // rdi
+  UFG::TriggerTarget *j; // rbx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mPrev; // rcx
+  UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *mNext; // rax
+  UFG::InteriorTriggerProperties::tri_state *p_mOnEnterOnly; // rbx
 
-  v2 = 0;
-  if ( UFG::TSGameSlice::msInteriorTriggerData.size )
+  for ( i = 0; i < UFG::TSGameSlice::msInteriorTriggerData.size; ++i )
   {
-    do
+    mUID = UFG::TSGameSlice::msInteriorTriggerData.p[i].mTriggerName.mUID;
+    if ( mUID )
     {
-      v3 = UFG::TSGameSlice::msInteriorTriggerData.p[v2].mTriggerName.mUID;
-      if ( v3 )
+      v4 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, mUID);
+      if ( v4 )
       {
-        v4 = UFG::qBaseTreeRB::Get(&UFG::TriggerRegion::msTriggerRegions.mTree, v3);
-        if ( v4 )
+        p_mNULL = (UFG::TriggerRegion *)&v4[-2].mNULL;
+        if ( v4 != (UFG::qBaseTreeRB *)112 )
         {
-          v5 = (UFG::TriggerRegion *)&v4[-2].mNULL;
-          if ( v4 != (UFG::qBaseTreeRB *)112 )
+          if ( (p_mNULL->mModeFlags & 0x10012) == 65554 )
+            ((void (__fastcall *)(UFG::TriggerRegion *))p_mNULL->vfptr[19].__vecDelDtor)(p_mNULL);
+          for ( j = (UFG::TriggerTarget *)p_mNULL->mTrackList.mNode.mNext;
+                j != (UFG::TriggerTarget *)&p_mNULL->mTrackList;
+                j = (UFG::TriggerTarget *)p_mNULL->mTrackList.mNode.mNext )
           {
-            if ( (v5->mModeFlags & 0x10012) == 65554 )
-              ((void (__fastcall *)(UFG::TriggerRegion *))v5->vfptr[19].__vecDelDtor)(v5);
-            for ( i = (UFG::TriggerTarget *)v5->mTrackList.mNode.mNext;
-                  i != (UFG::TriggerTarget *)&v5->mTrackList;
-                  i = (UFG::TriggerTarget *)v5->mTrackList.mNode.mNext )
-            {
-              v7 = i->mPrev;
-              v8 = i->mNext;
-              v7->mNext = v8;
-              v8->mPrev = v7;
-              i->mPrev = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&i->mPrev;
-              i->mNext = (UFG::qNode<UFG::TriggerTarget,UFG::TriggerTarget> *)&i->mPrev;
-              UFG::TriggerTarget::~TriggerTarget(i);
-              operator delete[](i);
-            }
-            UFG::TriggerRegion::ResetEvents(v5);
-            UFG::TriggerRegion::EnableHot(v5, 0);
+            mPrev = j->mPrev;
+            mNext = j->mNext;
+            mPrev->mNext = mNext;
+            mNext->mPrev = mPrev;
+            j->mPrev = j;
+            j->mNext = j;
+            UFG::TriggerTarget::~TriggerTarget(j);
+            operator delete[](j);
           }
+          UFG::TriggerRegion::ResetEvents(p_mNULL);
+          UFG::TriggerRegion::EnableHot(p_mNULL, 0);
         }
       }
-      ++v2;
     }
-    while ( v2 < UFG::TSGameSlice::msInteriorTriggerData.size );
   }
   if ( UFG::TSGameSlice::msInteriorTriggerData.p )
   {
-    v9 = &UFG::TSGameSlice::msInteriorTriggerData.p[-1].mOnEnterOnly;
+    p_mOnEnterOnly = &UFG::TSGameSlice::msInteriorTriggerData.p[-1].mOnEnterOnly;
     `eh vector destructor iterator(
       UFG::TSGameSlice::msInteriorTriggerData.p,
       0xA8ui64,
       UFG::TSGameSlice::msInteriorTriggerData.p[-1].mOnEnterOnly,
       (void (__fastcall *)(void *))UFG::InteriorTriggerProperties::~InteriorTriggerProperties);
-    operator delete[](v9);
+    operator delete[](p_mOnEnterOnly);
   }
   UFG::TSGameSlice::msInteriorTriggerData.p = 0i64;
   *(_QWORD *)&UFG::TSGameSlice::msInteriorTriggerData.size = 0i64;
@@ -3667,32 +3655,32 @@ void __fastcall UFG::TSGameSlice::Mthd_release_interior_triggers(SSInvokedMethod
 // RVA: 0x50B590
 void __fastcall UFG::TSGameSlice::Mthd_setup_interior_triggers(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  signed __int64 v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  unsigned int *p_i_ptr_id; // rdx
   UFG::GameSlice *v4; // rsi
   UFG::qSymbol *v5; // rax
-  UFG::qPropertySet *v6; // rdi
+  UFG::qPropertySet *PropertySet; // rdi
   UFG::qSymbol *v7; // rax
   UFG::qPropertySet *v8; // rbx
   UFG::qPropertyList *v9; // rdi
   UFG::qPropertyList *v10; // rbx
   unsigned int v11; // edx
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol v13; // [rsp+50h] [rbp+18h]
-  UFG::qSymbol v14; // [rsp+58h] [rbp+20h]
+  UFG::qArray<unsigned long,0> result; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol v13; // [rsp+50h] [rbp+18h] BYREF
+  UFG::qSymbol v14; // [rsp+58h] [rbp+20h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( v2 && pScope->i_scope_p.i_ptr_id == v2->i_ptr_id )
-    v3 = (signed __int64)&v2[-2].i_ptr_id;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    p_i_ptr_id = &i_obj_p[-2].i_ptr_id;
   else
-    v3 = 0i64;
-  v4 = *(UFG::GameSlice **)(v3 + 152);
-  UFG::qSymbol::create_from_string(&result, "List");
+    p_i_ptr_id = 0i64;
+  v4 = (UFG::GameSlice *)*((_QWORD *)p_i_ptr_id + 19);
+  UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, "List");
   v5 = UFG::qSymbol::create_from_string(&v13, "default-interiors-list");
-  v6 = UFG::PropertySetManager::GetPropertySet(v5);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v5);
   v7 = UFG::qSymbol::create_from_string(&v14, "default-interiors-lighting");
   v8 = UFG::PropertySetManager::GetPropertySet(v7);
-  v9 = UFG::qPropertySet::Get<UFG::qPropertyList>(v6, &result, DEPTH_RECURSE);
+  v9 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &result, DEPTH_RECURSE);
   v10 = UFG::qPropertySet::Get<UFG::qPropertyList>(v8, &result, DEPTH_RECURSE);
   v11 = v9->mNumElements + v10->mNumElements;
   if ( v11 > UFG::TSGameSlice::msInteriorTriggerData.capacity )
@@ -3709,24 +3697,23 @@ void __fastcall UFG::TSGameSlice::Mthd_setup_interior_triggers(SSInvokedMethod *
 void UFG::TSGameSlice::FromCPP_setup_interior_triggers(void)
 {
   UFG::qSymbol *v0; // rax
-  UFG::qPropertySet *v1; // rdi
+  UFG::qPropertySet *PropertySet; // rdi
   UFG::qSymbol *v2; // rax
   UFG::qPropertySet *v3; // rbx
   UFG::qPropertyList *v4; // rdi
   UFG::qPropertyList *v5; // rbx
   unsigned int v6; // edx
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
-  UFG::qSymbol v8; // [rsp+38h] [rbp+10h]
-  UFG::qSymbol v9; // [rsp+40h] [rbp+18h]
+  UFG::qArray<unsigned long,0> result; // [rsp+30h] [rbp+8h] BYREF
+  UFG::qSymbol v8; // [rsp+40h] [rbp+18h] BYREF
 
   if ( !UFG::TSGameSlice::msInteriorTriggerData.size )
   {
-    UFG::qSymbol::create_from_string(&result, "List");
-    v0 = UFG::qSymbol::create_from_string(&v8, "default-interiors-list");
-    v1 = UFG::PropertySetManager::GetPropertySet(v0);
-    v2 = UFG::qSymbol::create_from_string(&v9, "default-interiors-lighting");
+    UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, "List");
+    v0 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&result.p, "default-interiors-list");
+    PropertySet = UFG::PropertySetManager::GetPropertySet(v0);
+    v2 = UFG::qSymbol::create_from_string(&v8, "default-interiors-lighting");
     v3 = UFG::PropertySetManager::GetPropertySet(v2);
-    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(v1, &result, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &result, DEPTH_RECURSE);
     v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(v3, &result, DEPTH_RECURSE);
     v6 = v4->mNumElements + v5->mNumElements;
     if ( v6 > UFG::TSGameSlice::msInteriorTriggerData.capacity )

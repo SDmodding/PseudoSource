@@ -36,35 +36,33 @@ void UFG::PredictiveStreaming::DeleteInstance(void)
 // RVA: 0x3E8AB0
 void __fastcall UFG::PredictiveStreaming::PredictiveStreaming(UFG::PredictiveStreaming *this)
 {
-  UFG::PredictiveStreaming *v1; // rbx
-  ActionController *v2; // rdi
+  ActionController *p_m_ActionController; // rdi
   ActionContext *v3; // rax
 
-  v1 = this;
-  v2 = &this->m_ActionController;
+  p_m_ActionController = &this->m_ActionController;
   ActionController::ActionController(&this->m_ActionController);
   v3 = (ActionContext *)UFG::qMalloc(0xD8ui64, "ActionTreeComponent::ActionContext.PredictiveStreaming", 0i64);
   if ( v3 )
     ActionContext::ActionContext(v3);
-  v1->m_pActionContext = v3;
-  v1->m_ActionController.m_Context = v3;
-  v3->mActionController = v2;
-  UFG::PredictiveStreaming::InitActionTree(v1);
+  this->m_pActionContext = v3;
+  this->m_ActionController.m_Context = v3;
+  v3->mActionController = p_m_ActionController;
+  UFG::PredictiveStreaming::InitActionTree(this);
 }
 
 // File Line: 77
 // RVA: 0x3EABD0
-void __fastcall UFG::PredictiveStreaming::Update(UFG::PredictiveStreaming *this, const float fTimeDeltaS)
+void __fastcall UFG::PredictiveStreaming::Update(UFG::PredictiveStreaming *this, float fTimeDeltaS)
 {
-  ActionController *v2; // rsi
+  ActionController *p_m_ActionController; // rsi
   int v3; // edi
   bool v4; // bl
-  char *v5; // rbx
+  char *mBuffer; // rbx
   char *v6; // rax
-  Render::DebugDrawContext *v7; // rax
-  UFG::qStringBuilder debugStringBuilder; // [rsp+38h] [rbp-20h]
+  Render::DebugDrawContext *Context; // rax
+  UFG::qStringBuilder debugStringBuilder; // [rsp+38h] [rbp-20h] BYREF
 
-  v2 = &this->m_ActionController;
+  p_m_ActionController = &this->m_ActionController;
   ActionController::Update(&this->m_ActionController, fTimeDeltaS);
   if ( UFG::PredictiveStreaming::ms_bDrawActionController )
   {
@@ -74,31 +72,33 @@ void __fastcall UFG::PredictiveStreaming::Update(UFG::PredictiveStreaming *this,
     {
       v4 = gReflectOnlyOpportunities;
       gReflectOnlyOpportunities = 0;
-      ActionController::GetDebugString(v2, &debugStringBuilder, 1, 0i64, 0i64);
+      ActionController::GetDebugString(p_m_ActionController, &debugStringBuilder, 1, 0i64, 0i64);
       gReflectOnlyOpportunities = v4;
     }
     else
     {
-      ActionController::GetDebugString(v2, &debugStringBuilder, 0, 0i64, 0i64);
+      ActionController::GetDebugString(p_m_ActionController, &debugStringBuilder, 0, 0i64, 0i64);
     }
-    v5 = debugStringBuilder.mBuffer;
+    mBuffer = debugStringBuilder.mBuffer;
     if ( UFG::PredictiveStreaming::ms_iScrollActionController <= 0 )
     {
 LABEL_8:
-      if ( v5 )
+      if ( mBuffer )
       {
-        v7 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-        Render::DebugDrawContext::DrawTextA(v7, 80, 100, &UFG::qColour::White, v5);
+        Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                                Render::DebugDrawManager::mInstance,
+                                                1u);
+        Render::DebugDrawContext::DrawTextA(Context, 80, 100, &UFG::qColour::White, mBuffer);
       }
     }
     else
     {
       while ( 1 )
       {
-        v6 = UFG::qStringFind(v5, "\n");
+        v6 = UFG::qStringFind(mBuffer, "\n");
         if ( !v6 )
           break;
-        v5 = v6 + 1;
+        mBuffer = v6 + 1;
         if ( ++v3 >= UFG::PredictiveStreaming::ms_iScrollActionController )
           goto LABEL_8;
       }
@@ -111,14 +111,12 @@ LABEL_8:
 // RVA: 0x3E9390
 void __fastcall UFG::PredictiveStreaming::InitActionTree(UFG::PredictiveStreaming *this)
 {
-  UFG::PredictiveStreaming *v1; // rbx
-  ActionPath absolutePath; // [rsp+28h] [rbp-20h]
+  ActionPath absolutePath; // [rsp+28h] [rbp-20h] BYREF
 
-  v1 = this;
   absolutePath.mPath.mCount = 0;
   absolutePath.mPath.mData.mOffset = 0i64;
   ActionPath::Append(&absolutePath, "\\Global\\Streaming");
-  v1->m_pActionContext->m_OpeningBranch = ActionNode::Find(&absolutePath, 0i64);
+  this->m_pActionContext->m_OpeningBranch = ActionNode::Find(&absolutePath, 0i64);
   if ( absolutePath.mPath.mCount >= 0 && absolutePath.mPath.mData.mOffset )
   {
     if ( (UFG::qOffset64<ActionID *> *)((char *)&absolutePath.mPath.mData + absolutePath.mPath.mData.mOffset) )

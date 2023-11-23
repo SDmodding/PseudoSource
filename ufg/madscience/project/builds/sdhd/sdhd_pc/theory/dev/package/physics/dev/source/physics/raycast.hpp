@@ -18,8 +18,6 @@ void __fastcall UFG::RayCastData::RayCastData(UFG::RayCastData *this)
 // RVA: 0x969F0
 void __fastcall UFG::AsyncRayCastData::AsyncRayCastData(UFG::AsyncRayCastData *this)
 {
-  UFG::CastData *v1; // [rsp+28h] [rbp+10h]
-
   this->mInput.m_enableShapeCollectionFilter.m_bool = 0;
   this->mInput.m_filterInfo = 0;
   this->mInput.m_userData = 0i64;
@@ -30,9 +28,8 @@ void __fastcall UFG::AsyncRayCastData::AsyncRayCastData(UFG::AsyncRayCastData *t
   this->mOutput.m_rootCollidable = 0i64;
   this->mDebugName = 0i64;
   this->mCollisionModelName.mUID = -1;
-  v1 = (UFG::CastData *)&this->simComponent;
-  v1->simComponent.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->simComponent.mPrev;
-  v1->simComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->simComponent.mPrev;
+  this->simComponent.mPrev = &this->simComponent;
+  this->simComponent.mNext = &this->simComponent;
   this->simComponent.m_pPointer = 0i64;
   this->callbackUserData = 0i64;
   this->raycastCallback = 0i64;
@@ -42,12 +39,9 @@ void __fastcall UFG::AsyncRayCastData::AsyncRayCastData(UFG::AsyncRayCastData *t
 // RVA: 0x96A70
 void __fastcall UFG::AsyncShapeCasterCollector::AsyncShapeCasterCollector(UFG::AsyncShapeCasterCollector *this)
 {
-  UFG::qList<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo,1,0> *v1; // [rsp+28h] [rbp+10h]
-
   this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable;
-  v1 = &this->mHitList;
-  v1->mNode.mPrev = &v1->mNode;
-  v1->mNode.mNext = &v1->mNode;
+  this->mHitList.mNode.mPrev = &this->mHitList.mNode;
+  this->mHitList.mNode.mNext = &this->mHitList.mNode;
   this->mPhantom = 0i64;
   this->mShape = 0i64;
   this->mRadius = 0.0;
@@ -61,12 +55,15 @@ void __fastcall UFG::AsyncShapeCasterCollector::AsyncShapeCasterCollector(UFG::A
 void __fastcall UFG::AsyncShapeCasterCollector::~AsyncShapeCasterCollector(UFG::AsyncShapeCasterCollector *this)
 {
   this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::AsyncShapeCasterCollector::`vftable;
-  UFG::ShapeCasterCollector::~ShapeCasterCollector((UFG::ShapeCasterCollector *)&this->vfptr);
+  UFG::ShapeCasterCollector::~ShapeCasterCollector(this);
 }
 
 // File Line: 217
 // RVA: 0xA0700
-void __fastcall UFG::AsyncShapeCasterCollector::AddHit(UFG::AsyncShapeCasterCollector *this, hkpRootCdPoint *pt, bool oneHitPerRigidBody)
+void __fastcall UFG::AsyncShapeCasterCollector::AddHit(
+        UFG::AsyncShapeCasterCollector *this,
+        hkpRootCdPoint *pt,
+        bool oneHitPerRigidBody)
 {
   this->mHit = 1;
   this->mOutput.m_contact.m_position = pt->m_contact.m_position;

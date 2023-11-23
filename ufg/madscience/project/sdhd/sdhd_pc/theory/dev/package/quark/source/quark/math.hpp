@@ -1,11 +1,8 @@
 // File Line: 301
 // RVA: 0x1EDF90
-void __fastcall UFG::qQuaternion::qQuaternion(UFG::qQuaternion *this, UFG::qVector4 *v)
+void __fastcall UFG::qQuaternion::qQuaternion(UFG::qQuaternion *this, UFG::qQuaternion *v)
 {
-  this->x = v->x;
-  this->y = v->y;
-  this->z = v->z;
-  this->w = v->w;
+  *(UFG::qVector4 *)this = (UFG::qVector4)*v;
 }
 
 // File Line: 431

@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNIVERSAL_KEYBOARD_ACCEPT__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_ACCEPT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_ACCEPT", -1);
   UI_HASH_UNIVERSAL_KEYBOARD_ACCEPT = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNIVERSAL_KEYBOARD_CANCEL__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_CANCEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_CANCEL", -1);
   UI_HASH_UNIVERSAL_KEYBOARD_CANCEL = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNIVERSAL_KEYBOARD_ABORT__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_ABORT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNIVERSAL_KEYBOARD_ABORT", -1);
   UI_HASH_UNIVERSAL_KEYBOARD_ABORT = result;
   return result;
 }

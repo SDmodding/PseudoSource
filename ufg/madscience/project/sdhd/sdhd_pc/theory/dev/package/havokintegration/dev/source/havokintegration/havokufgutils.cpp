@@ -25,9 +25,9 @@ void __fastcall hkQsTransform_fasterRenormalizeBatch(hkQsTransformf *poseOut, un
   __m128 v22; // xmm2
   __m128 v23; // xmm1
   unsigned int v24; // edx
-  __m128 *v25; // rax
+  hkQuaternionf *p_m_rotation; // rax
   __int64 v26; // rcx
-  __m128 v27; // xmm3
+  __m128 m_quad; // xmm3
   __m128 v28; // xmm0
   __m128 v29; // xmm2
   __m128 v30; // xmm1
@@ -81,21 +81,21 @@ void __fastcall hkQsTransform_fasterRenormalizeBatch(hkQsTransformf *poseOut, un
   v24 = numTransforms & 3;
   if ( v24 )
   {
-    v25 = &poseOut->m_rotation.m_vec.m_quad;
+    p_m_rotation = &poseOut->m_rotation;
     v26 = v24;
     do
     {
-      v27 = *v25;
-      v25 += 3;
-      v28 = _mm_mul_ps(v27, v27);
+      m_quad = p_m_rotation->m_vec.m_quad;
+      p_m_rotation += 3;
+      v28 = _mm_mul_ps(m_quad, m_quad);
       v29 = _mm_add_ps(_mm_shuffle_ps(v28, v28, 78), v28);
       v30 = _mm_add_ps(_mm_shuffle_ps(v29, v29, 177), v29);
       v31 = _mm_rsqrt_ps(v30);
-      v25[-3] = _mm_mul_ps(
-                  v27,
-                  _mm_mul_ps(
-                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v31, v30), v31)),
-                    _mm_mul_ps(*(__m128 *)_xmm, v31)));
+      p_m_rotation[-3].m_vec.m_quad = _mm_mul_ps(
+                                        m_quad,
+                                        _mm_mul_ps(
+                                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v31, v30), v31)),
+                                          _mm_mul_ps(*(__m128 *)_xmm, v31)));
       --v26;
     }
     while ( v26 );

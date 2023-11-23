@@ -28,23 +28,24 @@ hkClass *__fastcall hkpTransformShape::staticClass()
 
 // File Line: 68
 // RVA: 0xCEBFF0
-void __fastcall finishLoadedObjecthkpTransformShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTransformShape(hkpTransformShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpTransformShape::hkpTransformShape);
+  if ( p )
+    hkpTransformShape::hkpTransformShape(p, finishing);
 }
 
 // File Line: 74
 // RVA: 0xCEC010
-void __fastcall cleanupLoadedObjecthkpTransformShape(void *p)
+void __fastcall cleanupLoadedObjecthkpTransformShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
 // RVA: 0xCEC020
 hkBaseObjectVtbl *__fastcall getVtablehkpTransformShape()
 {
-  hkpTransformShape v1; // [rsp+20h] [rbp-98h]
+  hkpTransformShape v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkpTransformShape::hkpTransformShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpTransformShapeTypeInfo__()
   hkpTransformShapeTypeInfo.m_typeName = "hkpTransformShape";
   hkpTransformShapeTypeInfo.m_vtable = result;
   hkpTransformShapeTypeInfo.m_scopedName = "!hkpTransformShape";
-  hkpTransformShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTransformShape;
-  hkpTransformShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTransformShape;
+  hkpTransformShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTransformShape;
+  hkpTransformShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTransformShape;
   return result;
 }
 

@@ -70,8 +70,9 @@ void __fastcall finishLoadedObjecthkcdStaticPvs(void *p, int finishing)
 
 // File Line: 140
 // RVA: 0xC8E9D0
-void __fastcall cleanupLoadedObjecthkcdStaticPvs(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkcdStaticPvs(hkcdStaticPvs *p)
 {
-  hkcdStaticPvs::~hkcdStaticPvs((hkcdStaticPvs *)p);
+  hkcdStaticPvs::~hkcdStaticPvs(p);
 }
 

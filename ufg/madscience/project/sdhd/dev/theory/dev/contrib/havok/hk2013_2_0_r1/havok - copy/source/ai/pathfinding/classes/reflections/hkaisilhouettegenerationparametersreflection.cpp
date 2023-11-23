@@ -81,17 +81,17 @@ hkClass *__fastcall hkaiSilhouetteMerger::staticClass()
 
 // File Line: 136
 // RVA: 0xBB6180
-void __fastcall finishLoadedObjecthkaiSilhouetteMerger(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSilhouetteMerger(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteMerger::`vftable;
+    *p = &hkaiSilhouetteMerger::`vftable;
 }
 
 // File Line: 142
 // RVA: 0xBB61A0
-void __fastcall cleanupLoadedObjecthkaiSilhouetteMerger(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteMerger(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 146
@@ -112,8 +112,8 @@ void **dynamic_initializer_for__hkaiSilhouetteMergerTypeInfo__()
   hkaiSilhouetteMergerTypeInfo.m_typeName = "hkaiSilhouetteMerger";
   hkaiSilhouetteMergerTypeInfo.m_vtable = result;
   hkaiSilhouetteMergerTypeInfo.m_scopedName = "!hkaiSilhouetteMerger";
-  hkaiSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSilhouetteMerger;
-  hkaiSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSilhouetteMerger;
+  hkaiSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSilhouetteMerger;
+  hkaiSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSilhouetteMerger;
   return result;
 }
 
@@ -147,17 +147,17 @@ hkClass *__fastcall hkaiSimpleSilhouetteMerger::staticClass()
 
 // File Line: 200
 // RVA: 0xBB61C0
-void __fastcall finishLoadedObjecthkaiSimpleSilhouetteMerger(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSimpleSilhouetteMerger(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSimpleSilhouetteMerger::`vftable;
+    *p = &hkaiSimpleSilhouetteMerger::`vftable;
 }
 
 // File Line: 206
 // RVA: 0xBB61E0
-void __fastcall cleanupLoadedObjecthkaiSimpleSilhouetteMerger(void *p)
+void __fastcall cleanupLoadedObjecthkaiSimpleSilhouetteMerger(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 210
@@ -178,8 +178,8 @@ void **dynamic_initializer_for__hkaiSimpleSilhouetteMergerTypeInfo__()
   hkaiSimpleSilhouetteMergerTypeInfo.m_typeName = "hkaiSimpleSilhouetteMerger";
   hkaiSimpleSilhouetteMergerTypeInfo.m_vtable = result;
   hkaiSimpleSilhouetteMergerTypeInfo.m_scopedName = "!hkaiSimpleSilhouetteMerger";
-  hkaiSimpleSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSimpleSilhouetteMerger;
-  hkaiSimpleSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSimpleSilhouetteMerger;
+  hkaiSimpleSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSimpleSilhouetteMerger;
+  hkaiSimpleSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSimpleSilhouetteMerger;
   return result;
 }
 
@@ -213,17 +213,17 @@ hkClass *__fastcall hkaiConvexHullSilhouetteMerger::staticClass()
 
 // File Line: 264
 // RVA: 0xBB6200
-void __fastcall finishLoadedObjecthkaiConvexHullSilhouetteMerger(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiConvexHullSilhouetteMerger(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiConvexHullSilhouetteMerger::`vftable;
+    *p = &hkaiConvexHullSilhouetteMerger::`vftable;
 }
 
 // File Line: 270
 // RVA: 0xBB6220
-void __fastcall cleanupLoadedObjecthkaiConvexHullSilhouetteMerger(void *p)
+void __fastcall cleanupLoadedObjecthkaiConvexHullSilhouetteMerger(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 274
@@ -244,8 +244,8 @@ void **dynamic_initializer_for__hkaiConvexHullSilhouetteMergerTypeInfo__()
   hkaiConvexHullSilhouetteMergerTypeInfo.m_typeName = "hkaiConvexHullSilhouetteMerger";
   hkaiConvexHullSilhouetteMergerTypeInfo.m_vtable = result;
   hkaiConvexHullSilhouetteMergerTypeInfo.m_scopedName = "!hkaiConvexHullSilhouetteMerger";
-  hkaiConvexHullSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiConvexHullSilhouetteMerger;
-  hkaiConvexHullSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiConvexHullSilhouetteMerger;
+  hkaiConvexHullSilhouetteMergerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiConvexHullSilhouetteMerger;
+  hkaiConvexHullSilhouetteMergerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiConvexHullSilhouetteMerger;
   return result;
 }
 

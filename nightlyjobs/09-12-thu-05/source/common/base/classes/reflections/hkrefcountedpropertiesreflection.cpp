@@ -35,16 +35,14 @@ void __fastcall finishLoadedObjecthkRefCountedPropertiesEntry(void *p, int finis
 
 // File Line: 84
 // RVA: 0xC55360
-void __fastcall cleanupLoadedObjecthkRefCountedPropertiesEntry(void *p)
+void __fastcall cleanupLoadedObjecthkRefCountedPropertiesEntry(hkReferencedObject **p)
 {
-  _QWORD *v1; // rbx
   hkReferencedObject *v2; // rcx
 
-  v1 = p;
-  v2 = *(hkReferencedObject **)p;
+  v2 = *p;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  *v1 = 0i64;
+  *p = 0i64;
 }
 
 // File Line: 120
@@ -65,7 +63,7 @@ void dynamic_initializer_for__hkRefCountedPropertiesClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 123
@@ -77,15 +75,17 @@ hkClass *__fastcall hkRefCountedProperties::staticClass()
 
 // File Line: 130
 // RVA: 0xC55390
-void __fastcall finishLoadedObjecthkRefCountedProperties(void *p, int finishing)
+void __fastcall finishLoadedObjecthkRefCountedProperties(hkRefCountedProperties *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkRefCountedProperties::hkRefCountedProperties);
+  if ( p )
+    hkRefCountedProperties::hkRefCountedProperties(p, finishing);
 }
 
 // File Line: 136
 // RVA: 0xC553B0
-void __fastcall cleanupLoadedObjecthkRefCountedProperties(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkRefCountedProperties(hkRefCountedProperties *p)
 {
-  hkRefCountedProperties::~hkRefCountedProperties((hkRefCountedProperties *)p);
+  hkRefCountedProperties::~hkRefCountedProperties(p);
 }
 

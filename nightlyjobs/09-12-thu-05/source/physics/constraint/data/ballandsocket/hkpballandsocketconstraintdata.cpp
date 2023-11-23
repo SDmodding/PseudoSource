@@ -2,20 +2,21 @@
 // RVA: 0xD45D80
 void __fastcall hkpBallAndSocketConstraintData::hkpBallAndSocketConstraintData(hkpBallAndSocketConstraintData *this)
 {
-  hkpBallAndSocketConstraintData *v1; // rbx
-
-  v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
   this->vfptr = (hkBaseObjectVtbl *)&hkpBallAndSocketConstraintData::`vftable;
   hkpBallAndSocketConstraintData::Atoms::Atoms(&this->m_atoms);
-  v1->m_atoms.m_pivots.m_translationA = 0i64;
-  v1->m_atoms.m_pivots.m_translationB = 0i64;
+  this->m_atoms.m_pivots.m_translationA = 0i64;
+  this->m_atoms.m_pivots.m_translationB = 0i64;
 }
 
 // File Line: 22
 // RVA: 0xD45DF0
-void __fastcall hkpBallAndSocketConstraintData::setInWorldSpace(hkpBallAndSocketConstraintData *this, hkTransformf *bodyATransform, hkTransformf *bodyBTransform, hkVector4f *pivot)
+void __fastcall hkpBallAndSocketConstraintData::setInWorldSpace(
+        hkpBallAndSocketConstraintData *this,
+        hkTransformf *bodyATransform,
+        hkTransformf *bodyBTransform,
+        hkVector4f *pivot)
 {
   hkVector4f v4; // xmm3
   __m128 v5; // xmm5
@@ -66,7 +67,10 @@ void __fastcall hkpBallAndSocketConstraintData::setInWorldSpace(hkpBallAndSocket
 
 // File Line: 29
 // RVA: 0xD45DD0
-void __fastcall hkpBallAndSocketConstraintData::setInBodySpace(hkpBallAndSocketConstraintData *this, hkVector4f *pivotA, hkVector4f *pivotB)
+void __fastcall hkpBallAndSocketConstraintData::setInBodySpace(
+        hkpBallAndSocketConstraintData *this,
+        hkVector4f *pivotA,
+        hkVector4f *pivotB)
 {
   this->m_atoms.m_pivots.m_translationA = (hkVector4f)pivotA->m_quad;
   this->m_atoms.m_pivots.m_translationB = (hkVector4f)pivotB->m_quad;
@@ -74,7 +78,9 @@ void __fastcall hkpBallAndSocketConstraintData::setInBodySpace(hkpBallAndSocketC
 
 // File Line: 35
 // RVA: 0xD45F00
-void __fastcall hkpBallAndSocketConstraintData::setBreachImpulse(hkpBallAndSocketConstraintData *this, float breachImpulse)
+void __fastcall hkpBallAndSocketConstraintData::setBreachImpulse(
+        hkpBallAndSocketConstraintData *this,
+        float breachImpulse)
 {
   this->m_atoms.m_ballSocket.m_breachImpulse = breachImpulse;
 }
@@ -88,7 +94,9 @@ float __fastcall hkpBallAndSocketConstraintData::getBreachImpulse(hkpBallAndSock
 
 // File Line: 45
 // RVA: 0xD45F20
-void __fastcall hkpBallAndSocketConstraintData::setMaximumLinearImpulse(hkpBallAndSocketConstraintData *this, float maxLinearImpulse)
+void __fastcall hkpBallAndSocketConstraintData::setMaximumLinearImpulse(
+        hkpBallAndSocketConstraintData *this,
+        float maxLinearImpulse)
 {
   this->m_atoms.m_setupStabilization.m_maxLinImpulse = maxLinearImpulse;
   this->m_atoms.m_ballSocket.m_enableLinearImpulseLimit.m_bool = maxLinearImpulse < 3.40282e38;
@@ -103,7 +111,7 @@ float __fastcall hkpBallAndSocketConstraintData::getMaximumLinearImpulse(hkpBall
 
 // File Line: 57
 // RVA: 0xD45F50
-void __fastcall hkpBallAndSocketConstraintData::setBodyToNotify(hkpBallAndSocketConstraintData *this, int bodyIdx)
+void __fastcall hkpBallAndSocketConstraintData::setBodyToNotify(hkpBallAndSocketConstraintData *this, char bodyIdx)
 {
   this->m_atoms.m_ballSocket.m_bodiesToNotify = 1 << bodyIdx;
 }
@@ -112,19 +120,24 @@ void __fastcall hkpBallAndSocketConstraintData::setBodyToNotify(hkpBallAndSocket
 // RVA: 0xD45F70
 __int64 __fastcall hkpBallAndSocketConstraintData::getNotifiedBodyIndex(hkpBallAndSocketConstraintData *this)
 {
-  return (unsigned int)(unsigned __int8)this->m_atoms.m_ballSocket.m_bodiesToNotify >> 1;
+  return (unsigned __int8)this->m_atoms.m_ballSocket.m_bodiesToNotify >> 1;
 }
 
 // File Line: 72
 // RVA: 0xD45EE0
-void __fastcall hkpBallAndSocketConstraintData::getConstraintInfo(hkpBallAndSocketConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpBallAndSocketConstraintData::getConstraintInfo(
+        hkpBallAndSocketConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_pivots.m_type, 80, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_pivots, 0x50u, infoOut);
 }
 
 // File Line: 77
 // RVA: 0xD46010
-void __fastcall hkpBallAndSocketConstraintData::getRuntimeInfo(hkpBallAndSocketConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpBallAndSocketConstraintData::getRuntimeInfo(
+        hkpBallAndSocketConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   if ( wantRuntime.m_bool || 3.40282e38 != this->m_atoms.m_ballSocket.m_breachImpulse )
   {
@@ -141,19 +154,16 @@ void __fastcall hkpBallAndSocketConstraintData::getRuntimeInfo(hkpBallAndSocketC
 // RVA: 0xD45EC0
 hkBool *__fastcall hkpBallAndSocketConstraintData::isValid(hkpBallAndSocketConstraintData *this, hkBool *result)
 {
-  hkBool *v2; // rax
-
   if ( this->m_atoms.m_ballSocket.m_solvingMethod.m_storage || this->m_atoms.m_setupStabilization.m_enabled.m_bool )
   {
     result->m_bool = 1;
-    v2 = result;
+    return result;
   }
   else
   {
     result->m_bool = 0;
-    v2 = result;
+    return result;
   }
-  return v2;
 }
 
 // File Line: 105
@@ -165,11 +175,13 @@ __int64 __fastcall hkpBallAndSocketConstraintData::getType(hkpBallAndSocketConst
 
 // File Line: 113
 // RVA: 0xD45F80
-void __fastcall hkpBallAndSocketConstraintData::setSolvingMethod(hkpBallAndSocketConstraintData *this, hkpConstraintAtom::SolvingMethod method)
+void __fastcall hkpBallAndSocketConstraintData::setSolvingMethod(
+        hkpBallAndSocketConstraintData *this,
+        hkpConstraintAtom::SolvingMethod method)
 {
   if ( method )
   {
-    if ( method == 1 )
+    if ( method == METHOD_OLD )
     {
       this->m_atoms.m_setupStabilization.m_enabled.m_bool = 0;
       this->m_atoms.m_ballSocket.m_solvingMethod.m_storage = 1;
@@ -184,23 +196,29 @@ void __fastcall hkpBallAndSocketConstraintData::setSolvingMethod(hkpBallAndSocke
 
 // File Line: 142
 // RVA: 0xD45FA0
-hkResult *__fastcall hkpBallAndSocketConstraintData::getInertiaStabilizationFactor(hkpBallAndSocketConstraintData *this, hkResult *result, float *inertiaStabilizationFactorOut)
+hkResult *__fastcall hkpBallAndSocketConstraintData::getInertiaStabilizationFactor(
+        hkpBallAndSocketConstraintData *this,
+        hkResult *result,
+        float *inertiaStabilizationFactorOut)
 {
-  float v3; // eax
+  float m_inertiaStabilizationFactor; // eax
 
-  v3 = this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor;
-  result->m_enum = 0;
-  *inertiaStabilizationFactorOut = v3;
+  m_inertiaStabilizationFactor = this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor;
+  result->m_enum = HK_SUCCESS;
+  *inertiaStabilizationFactorOut = m_inertiaStabilizationFactor;
   return result;
 }
 
 // File Line: 151
 // RVA: 0xD45FC0
-hkResult *__fastcall hkpBallAndSocketConstraintData::setInertiaStabilizationFactor(hkpBallAndSocketConstraintData *this, hkResult *result, const float inertiaStabilizationFactorIn)
+hkResult *__fastcall hkpBallAndSocketConstraintData::setInertiaStabilizationFactor(
+        hkpBallAndSocketConstraintData *this,
+        hkResult *result,
+        float inertiaStabilizationFactorIn)
 {
   hkResult *v3; // rax
 
-  result->m_enum = 0;
+  result->m_enum = HK_SUCCESS;
   v3 = result;
   this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor = fminf(fmaxf(inertiaStabilizationFactorIn, 0.0), 1.0);
   return v3;

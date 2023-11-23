@@ -28,26 +28,29 @@ hkClass *__fastcall hkpTriSampledHeightFieldCollection::staticClass()
 
 // File Line: 76
 // RVA: 0xCECB80
-void __fastcall finishLoadedObjecthkpTriSampledHeightFieldCollection(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTriSampledHeightFieldCollection(
+        hkpTriSampledHeightFieldCollection *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldCollection);
+  if ( p )
+    hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldCollection(p, finishing);
 }
 
 // File Line: 82
 // RVA: 0xCECBA0
-void __fastcall cleanupLoadedObjecthkpTriSampledHeightFieldCollection(void *p)
+void __fastcall cleanupLoadedObjecthkpTriSampledHeightFieldCollection(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 86
 // RVA: 0xCECBB0
 hkBaseObjectVtbl *__fastcall getVtablehkpTriSampledHeightFieldCollection()
 {
-  hkpTriSampledHeightFieldCollection v1; // [rsp+20h] [rbp-68h]
+  hkpTriSampledHeightFieldCollection v1; // [rsp+20h] [rbp-68h] BYREF
 
   hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldCollection(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 108
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpTriSampledHeightFieldCollectionTyp
   hkpTriSampledHeightFieldCollectionTypeInfo.m_typeName = "hkpTriSampledHeightFieldCollection";
   hkpTriSampledHeightFieldCollectionTypeInfo.m_vtable = result;
   hkpTriSampledHeightFieldCollectionTypeInfo.m_scopedName = "!hkpTriSampledHeightFieldCollection";
-  hkpTriSampledHeightFieldCollectionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTriSampledHeightFieldCollection;
-  hkpTriSampledHeightFieldCollectionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTriSampledHeightFieldCollection;
+  hkpTriSampledHeightFieldCollectionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTriSampledHeightFieldCollection;
+  hkpTriSampledHeightFieldCollectionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTriSampledHeightFieldCollection;
   return result;
 }
 

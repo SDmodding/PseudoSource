@@ -9,20 +9,14 @@ hkMeshShape *__fastcall hkMemoryMeshBody::getMeshShape(hkMemoryMeshBody *this)
 // RVA: 0x131A0B0
 void __fastcall hkMemoryMeshBody::getTransform(hkMemoryMeshBody *this, hkMatrix4f *transform)
 {
-  transform->m_col0 = this->m_transform.m_col0;
-  transform->m_col1 = this->m_transform.m_col1;
-  transform->m_col2 = this->m_transform.m_col2;
-  transform->m_col3 = this->m_transform.m_col3;
+  *transform = this->m_transform;
 }
 
 // File Line: 45
 // RVA: 0x131A100
 void __fastcall hkMemoryMeshBody::setTransform(hkMemoryMeshBody *this, hkMatrix4f *matrix)
 {
-  this->m_transform.m_col0 = matrix->m_col0;
-  this->m_transform.m_col1 = matrix->m_col1;
-  this->m_transform.m_col2 = matrix->m_col2;
-  this->m_transform.m_col3 = matrix->m_col3;
+  this->m_transform = *matrix;
 }
 
 // File Line: 51
@@ -40,27 +34,39 @@ hkIndexedTransformSet *__fastcall hkMemoryMeshBody::getNumIndexedTransforms(hkMe
 
   result = this->m_transformSet.m_pntr;
   if ( result )
-    result = (hkIndexedTransformSet *)(unsigned int)result->m_matrices.m_size;
+    return (hkIndexedTransformSet *)(unsigned int)result->m_matrices.m_size;
   return result;
 }
 
 // File Line: 56
 // RVA: 0x131A0E0
-void __fastcall hkMemoryMeshBody::setIndexedTransforms(hkMemoryMeshBody *this, int startIndex, hkMatrix4f *matrices, int numMatrices)
+void __fastcall hkMemoryMeshBody::setIndexedTransforms(
+        hkMemoryMeshBody *this,
+        int startIndex,
+        hkMatrix4f *matrices,
+        int numMatrices)
 {
   hkIndexedTransformSet::setMatrices(this->m_transformSet.m_pntr, startIndex, matrices, numMatrices);
 }
 
 // File Line: 58
 // RVA: 0x131A060
-void __fastcall hkMemoryMeshBody::getIndexedTransforms(hkMemoryMeshBody *this, int startIndex, hkMatrix4f *matrices, int numMatrices)
+void __fastcall hkMemoryMeshBody::getIndexedTransforms(
+        hkMemoryMeshBody *this,
+        int startIndex,
+        hkMatrix4f *matrices,
+        int numMatrices)
 {
   hkIndexedTransformSet::getMatrices(this->m_transformSet.m_pntr, startIndex, matrices, numMatrices);
 }
 
 // File Line: 60
 // RVA: 0x131A050
-void __fastcall hkMemoryMeshBody::getIndexedInverseTransforms(hkMemoryMeshBody *this, int startIndex, hkMatrix4f *matrices, int numMatrices)
+void __fastcall hkMemoryMeshBody::getIndexedInverseTransforms(
+        hkMemoryMeshBody *this,
+        int startIndex,
+        hkMatrix4f *matrices,
+        int numMatrices)
 {
   hkIndexedTransformSet::getInverseMatrices(this->m_transformSet.m_pntr, startIndex, matrices, numMatrices);
 }
@@ -94,7 +100,7 @@ hkIndexedTransformSet *__fastcall hkMemoryMeshBody::getNumIndexMappings(hkMemory
 
   result = this->m_transformSet.m_pntr;
   if ( result )
-    result = (hkIndexedTransformSet *)(unsigned int)result->m_indexMappings.m_size;
+    return (hkIndexedTransformSet *)(unsigned int)result->m_indexMappings.m_size;
   return result;
 }
 
@@ -102,7 +108,7 @@ hkIndexedTransformSet *__fastcall hkMemoryMeshBody::getNumIndexMappings(hkMemory
 // RVA: 0x131A080
 const char *__fastcall hkMemoryMeshBody::getName(hkMemoryMeshBody *this)
 {
-  return (const char *)((_QWORD)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
+  return (const char *)((unsigned __int64)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
 }
 
 // File Line: 76

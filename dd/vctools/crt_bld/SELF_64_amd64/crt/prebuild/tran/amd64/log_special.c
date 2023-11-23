@@ -1,15 +1,13 @@
 // File Line: 82
 // RVA: 0x12CABAC
-float __fastcall logf_special_common(float x, float y, unsigned int code, unsigned int op, char *name)
+float __fastcall logf_special_common(float x, float y, unsigned int code, int op, char *name)
 {
-  int v5; // edx
-  unsigned int v6; // er8
-  int v7; // er8
+  int v6; // r8d
+  int v7; // r8d
   unsigned __int64 v8; // r8
-  int v9; // er9
+  int v9; // r9d
   char *v10; // rcx
 
-  v5 = op;
   v6 = code - 1;
   if ( !v6 )
   {
@@ -31,7 +29,7 @@ LABEL_7:
     v9 = 1;
     v10 = name;
 LABEL_8:
-    handle_errorf(v10, v5, v8, v9);
+    handle_errorf(v10, op, v8, v9);
   }
   return y;
 }
@@ -52,14 +50,12 @@ float __fastcall log10f_special(float x, float y, unsigned int code)
 
 // File Line: 133
 // RVA: 0x12CAAC0
-long double __fastcall log_special_common(long double x, long double y, unsigned int code, unsigned int op, char *name)
+long double __fastcall log_special_common(long double x, long double y, unsigned int code, int op, char *name)
 {
-  int v5; // edx
-  unsigned int v6; // er8
-  int v7; // er8
-  int v8; // er9
+  int v6; // r8d
+  int v7; // r8d
+  int v8; // r9d
 
-  v5 = op;
   v6 = code - 1;
   if ( !v6 )
   {
@@ -71,7 +67,7 @@ long double __fastcall log_special_common(long double x, long double y, unsigned
   {
     v8 = 1;
 LABEL_7:
-    handle_error(name, v5, *(unsigned __int64 *)&y, v8);
+    handle_error(name, op, *(unsigned __int64 *)&y, v8);
   }
   return y;
 }

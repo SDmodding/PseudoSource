@@ -28,24 +28,24 @@ hkClass *__fastcall hkpConstrainedSystemFilter::staticClass()
 
 // File Line: 64
 // RVA: 0xE0A6B0
-void __fastcall finishLoadedObjecthkpConstrainedSystemFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConstrainedSystemFilter(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpConstrainedSystemFilter::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpConstrainedSystemFilter::`vftable{for `hkpCollidableCollidableFilter};
-    *((_QWORD *)p + 3) = &hkpConstrainedSystemFilter::`vftable{for `hkpShapeCollectionFilter};
-    *((_QWORD *)p + 4) = &hkpConstrainedSystemFilter::`vftable{for `hkpRayShapeCollectionFilter};
-    *((_QWORD *)p + 5) = &hkpConstrainedSystemFilter::`vftable{for `hkpRayCollidableFilter};
-    *((_QWORD *)p + 9) = &hkpConstrainedSystemFilter::`vftable;
+    *p = &hkpConstrainedSystemFilter::`vftable{for `hkReferencedObject};
+    p[2] = &hkpConstrainedSystemFilter::`vftable{for `hkpCollidableCollidableFilter};
+    p[3] = &hkpConstrainedSystemFilter::`vftable{for `hkpShapeCollectionFilter};
+    p[4] = &hkpConstrainedSystemFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    p[5] = &hkpConstrainedSystemFilter::`vftable{for `hkpRayCollidableFilter};
+    p[9] = &hkpConstrainedSystemFilter::`vftable;
   }
 }
 
 // File Line: 70
 // RVA: 0xE0A700
-void __fastcall cleanupLoadedObjecthkpConstrainedSystemFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpConstrainedSystemFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -66,8 +66,8 @@ void **dynamic_initializer_for__hkpConstrainedSystemFilterTypeInfo__()
   hkpConstrainedSystemFilterTypeInfo.m_typeName = "hkpConstrainedSystemFilter";
   hkpConstrainedSystemFilterTypeInfo.m_vtable = result;
   hkpConstrainedSystemFilterTypeInfo.m_scopedName = "!hkpConstrainedSystemFilter";
-  hkpConstrainedSystemFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConstrainedSystemFilter;
-  hkpConstrainedSystemFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConstrainedSystemFilter;
+  hkpConstrainedSystemFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConstrainedSystemFilter;
+  hkpConstrainedSystemFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConstrainedSystemFilter;
   return result;
 }
 

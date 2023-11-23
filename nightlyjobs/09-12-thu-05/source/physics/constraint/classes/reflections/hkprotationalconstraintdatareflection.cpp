@@ -70,30 +70,27 @@ hkClass *__fastcall hkpRotationalConstraintData::staticClass()
 
 // File Line: 120
 // RVA: 0xD44590
-void __fastcall finishLoadedObjecthkpRotationalConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpRotationalConstraintData(hkpConstraintData *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpRotationalConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpRotationalConstraintData::`vftable;
   }
 }
 
 // File Line: 126
 // RVA: 0xD445C0
-void __fastcall cleanupLoadedObjecthkpRotationalConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpRotationalConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 130
 // RVA: 0xD445D0
 void **__fastcall getVtablehkpRotationalConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-A8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-A8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpRotationalConstraintData::`vftable;
@@ -110,8 +107,8 @@ void **dynamic_initializer_for__hkpRotationalConstraintDataTypeInfo__()
   hkpRotationalConstraintDataTypeInfo.m_typeName = "hkpRotationalConstraintData";
   hkpRotationalConstraintDataTypeInfo.m_vtable = result;
   hkpRotationalConstraintDataTypeInfo.m_scopedName = "!hkpRotationalConstraintData";
-  hkpRotationalConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpRotationalConstraintData;
-  hkpRotationalConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpRotationalConstraintData;
+  hkpRotationalConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpRotationalConstraintData;
+  hkpRotationalConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpRotationalConstraintData;
   return result;
 }
 

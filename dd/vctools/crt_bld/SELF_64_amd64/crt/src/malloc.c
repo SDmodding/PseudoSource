@@ -1,18 +1,15 @@
 // File Line: 83
 // RVA: 0x12B1008
-void *__fastcall malloc(unsigned __int64 size)
+LPVOID __fastcall malloc(unsigned __int64 size)
 {
-  unsigned __int64 v1; // rbx
-  unsigned __int64 v2; // rdi
-  void *v3; // rsi
-  void *result; // rax
+  SIZE_T v2; // rdi
+  LPVOID v3; // rsi
 
-  v1 = size;
   if ( size > 0xFFFFFFFFFFFFFFE0ui64 )
   {
     callnewh(size);
     *errno() = 12;
-    result = 0i64;
+    return 0i64;
   }
   else
   {
@@ -29,19 +26,17 @@ void *__fastcall malloc(unsigned __int64 size)
       }
       v3 = HeapAlloc(crtheap, 0, v2);
       if ( v3 )
-        break;
+        return v3;
       if ( !newmode )
       {
         *errno() = 12;
-LABEL_12:
+LABEL_11:
         *errno() = 12;
-        break;
+        return v3;
       }
-      if ( !callnewh(v1) )
-        goto LABEL_12;
+      if ( !callnewh(size) )
+        goto LABEL_11;
     }
-    result = v3;
   }
-  return result;
 }
 

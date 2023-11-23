@@ -63,23 +63,24 @@ hkClass *__fastcall hkaiNavVolumeInstance::staticClass()
 
 // File Line: 142
 // RVA: 0xBB6EA0
-void __fastcall finishLoadedObjecthkaiNavVolumeInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolumeInstance(hkaiNavVolumeInstance *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavVolumeInstance::hkaiNavVolumeInstance);
+  if ( p )
+    hkaiNavVolumeInstance::hkaiNavVolumeInstance(p, finishing);
 }
 
 // File Line: 148
 // RVA: 0xBB6EC0
-void __fastcall cleanupLoadedObjecthkaiNavVolumeInstance(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolumeInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 152
 // RVA: 0xBB6ED0
 hkBaseObjectVtbl *__fastcall getVtablehkaiNavVolumeInstance()
 {
-  hkaiNavVolumeInstance v1; // [rsp+20h] [rbp-88h]
+  hkaiNavVolumeInstance v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkaiNavVolumeInstance::hkaiNavVolumeInstance(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiNavVolumeInstanceTypeInfo__()
   hkaiNavVolumeInstanceTypeInfo.m_typeName = "hkaiNavVolumeInstance";
   hkaiNavVolumeInstanceTypeInfo.m_vtable = result;
   hkaiNavVolumeInstanceTypeInfo.m_scopedName = "!hkaiNavVolumeInstance";
-  hkaiNavVolumeInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavVolumeInstance;
-  hkaiNavVolumeInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavVolumeInstance;
+  hkaiNavVolumeInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavVolumeInstance;
+  hkaiNavVolumeInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavVolumeInstance;
   return result;
 }
 

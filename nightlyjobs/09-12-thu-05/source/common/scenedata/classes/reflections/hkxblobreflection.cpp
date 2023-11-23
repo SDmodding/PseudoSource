@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxBlobClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxBlob::staticClass()
 
 // File Line: 62
 // RVA: 0xE31950
-void __fastcall finishLoadedObjecthkxBlob(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxBlob(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxBlob::`vftable;
+    *p = &hkxBlob::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE31970
-void __fastcall cleanupLoadedObjecthkxBlob(void *p)
+void __fastcall cleanupLoadedObjecthkxBlob(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxBlobTypeInfo__()
   hkxBlobTypeInfo.m_typeName = "hkxBlob";
   hkxBlobTypeInfo.m_vtable = result;
   hkxBlobTypeInfo.m_scopedName = "!hkxBlob";
-  hkxBlobTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxBlob;
-  hkxBlobTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxBlob;
+  hkxBlobTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxBlob;
+  hkxBlobTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxBlob;
   return result;
 }
 

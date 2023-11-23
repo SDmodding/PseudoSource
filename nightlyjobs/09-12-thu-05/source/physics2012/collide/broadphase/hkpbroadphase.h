@@ -5,8 +5,8 @@ hkpBroadPhase *__fastcall hkpBroadPhase::getCapabilityDelegate(hkpBroadPhase *th
   hkpBroadPhase *result; // rax
 
   result = 0i64;
-  if ( cap & this->m_caps )
-    result = this;
+  if ( (cap & this->m_caps) != 0 )
+    return this;
   return result;
 }
 

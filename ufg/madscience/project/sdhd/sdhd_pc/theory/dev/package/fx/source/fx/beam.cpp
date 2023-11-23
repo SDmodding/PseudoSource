@@ -3,29 +3,25 @@
 __int64 Render::_dynamic_initializer_for__gBeamManager__()
 {
   hkSeekableStreamReader *v0; // rbx
-  signed int v1; // edi
+  int i; // edi
 
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&Render::gBeamManager.mBeamMat.mPrev);
+  UFG::qResourceHandle::qResourceHandle(&Render::gBeamManager.mBeamMat);
   v0 = &stru_142362608;
-  v1 = 31;
-  do
+  for ( i = 31; i >= 0; --i )
   {
     Assembly::GetRCX(v0);
     v0 = (hkSeekableStreamReader *)((char *)v0 + 56);
-    --v1;
   }
-  while ( v1 >= 0 );
   unk_142362600 = 0;
-  return atexit(Render::_dynamic_atexit_destructor_for__gBeamManager__);
+  return atexit((int (__fastcall *)())Render::_dynamic_atexit_destructor_for__gBeamManager__);
 }
 
 // File Line: 29
 // RVA: 0x1CD4D0
 void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
 {
-  Render::BeamManager *v1; // rbp
   _WORD *v2; // rsi
-  unsigned int v3; // er14
+  unsigned int v3; // r14d
   Illusion::Material *v4; // rdi
   int v5; // eax
   int v6; // ebx
@@ -34,15 +30,14 @@ void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
   unsigned int v9; // eax
   int v10; // eax
   UFG::qResourceWarehouse *v11; // rax
-  __int64 v12; // rax
+  __int64 mOffset; // rax
   _WORD *v13; // rax
   __int64 v14; // rax
-  UFG::qResourceInventory *v15; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v16; // rax
-  signed __int64 v17; // rbx
-  signed __int64 v18; // rdi
+  CB_BeamSettings **p_settings; // rbx
+  __int64 v18; // rdi
 
-  v1 = this;
   v2 = 0i64;
   this->mLastUpdateSimFrame = UFG::Metrics::msInstance.mSimFrameCount;
   this->mAnimCounter = 0;
@@ -50,7 +45,7 @@ void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
                                                       &Illusion::gStateSystem,
                                                       "cbBeamSettings",
                                                       0);
-  v3 = UFG::qStringHashUpper32("BeamManager.BeamMat", 0xFFFFFFFF);
+  v3 = UFG::qStringHashUpper32("BeamManager.BeamMat", -1);
   v4 = Illusion::Factory::NewMaterial("BeamManager.BeamMat", v3, 4u, 0i64, 0i64, 0i64);
   v5 = UFG::qStringHash32("BEAM", 0xFFFFFFFF);
   LOWORD(v4[1].mNode.mChild[0]) = 0;
@@ -58,7 +53,7 @@ void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
   HIDWORD(v4[1].mNode.mParent) = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v7 = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v4[1].mTypeUID = -1957338719;
-  LODWORD(v4[1].mResourceHandles.mNode.mNext) = v6;
+  LODWORD(v4[1].mResourceHandles.UFG::qResourceData::mNode.mNext) = v6;
   LODWORD(v4[1].mNode.mParent) = v7;
   *(_WORD *)&v4[1].mDebugName[12] = 0;
   *(_DWORD *)&v4[1].mDebugName[8] = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
@@ -69,52 +64,55 @@ void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
   LOWORD(v4[1].mMaterialUser.mOffset) = 0;
   *(&v4[1].mNumParams + 1) = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
   v9 = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
-  LODWORD(v4[2].mResourceHandles.mNode.mPrev) = 1002903008;
+  LODWORD(v4[2].mResourceHandles.UFG::qResourceData::mNode.mPrev) = 1002903008;
   v4[2].mNode.mUID = 1099738947;
   v4[1].mNumParams = v9;
   LOWORD(v4[2].mTypeUID) = 0;
-  HIDWORD(v4[2].mResourceHandles.mNode.mNext) = UFG::qStringHash32("iAlphaState", 0xFFFFFFFF);
+  HIDWORD(v4[2].mResourceHandles.UFG::qResourceData::mNode.mNext) = UFG::qStringHash32("iAlphaState", 0xFFFFFFFF);
   v10 = UFG::qStringHash32("iAlphaState", 0xFFFFFFFF);
-  *((_DWORD *)&v4[2].0 + 22) = 315097330;
-  LODWORD(v4[2].mResourceHandles.mNode.mNext) = v10;
+  *((_DWORD *)&v4[2].UFG::qResourceData + 22) = 315097330;
+  LODWORD(v4[2].mResourceHandles.UFG::qResourceData::mNode.mNext) = v10;
   *(_DWORD *)&v4[2].mDebugName[28] = -89056095;
   v11 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v11, (UFG::qResourceData *)&v4->mNode);
+  UFG::qResourceWarehouse::Add(v11, v4);
   if ( v4[2].mNode.mUID != 0x418CAF43 )
   {
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&v4[2],
-      (unsigned int)v4[2].mResourceHandles.mNode.mPrev,
+      (unsigned int)v4[2].mResourceHandles.UFG::qResourceData::mNode.mPrev,
       0x418CAF43u);
-    v12 = v4->mMaterialUser.mOffset;
-    if ( v12 )
-      v13 = (_WORD *)((char *)&v4->mMaterialUser + v12);
+    mOffset = v4->mMaterialUser.mOffset;
+    if ( mOffset )
+      v13 = (_WORD *)((char *)&v4->mMaterialUser + mOffset);
     else
       v13 = 0i64;
     *v13 |= 0x20u;
   }
   if ( *(_DWORD *)&v4[2].mDebugName[28] != -89056095 )
   {
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4[2].mDebugName[4], *((_DWORD *)&v4[2].0 + 22), 0xFAB11CA1);
+    UFG::qResourceHandle::Init(
+      (UFG::qResourceHandle *)&v4[2].mDebugName[4],
+      *((_DWORD *)&v4[2].UFG::qResourceData + 22),
+      0xFAB11CA1);
     v14 = v4->mMaterialUser.mOffset;
     if ( v14 )
       v2 = (_WORD *)((char *)&v4->mMaterialUser + v14);
     *v2 |= 0x20u;
   }
-  v15 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v16 = UFG::qResourceWarehouse::Instance();
-    v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v15;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v16, 0xB4C26312);
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mBeamMat.mPrev, 0xB4C26312, v3, v15);
-  v17 = (signed __int64)&v1->mBeams[0].settings;
+  UFG::qResourceHandle::Init(&this->mBeamMat, 0xB4C26312, v3, Inventory);
+  p_settings = &this->mBeams[0].settings;
   v18 = 32i64;
   do
   {
-    v17 += 56i64;
-    *(_QWORD *)(v17 - 56) = UFG::qMalloc(0x20ui64, "BeamSettings", 0x1000ui64);
+    p_settings += 7;
+    *(p_settings - 7) = (CB_BeamSettings *)UFG::qMalloc(0x20ui64, "BeamSettings", 0x1000ui64);
     --v18;
   }
   while ( v18 );
@@ -125,73 +123,68 @@ void __fastcall Render::BeamManager::Init(Render::BeamManager *this)
 void __fastcall Render::BeamManager::Render(Render::BeamManager *this, Render::View *view, float fTime)
 {
   bool v3; // zf
-  Render::View *v4; // r15
-  Render::BeamManager *v5; // rbx
-  unsigned int v6; // er14
+  unsigned int v6; // r14d
   float v7; // xmm0_4
   float v8; // xmm12_4
-  signed __int64 v9; // rsi
+  __int64 v9; // rsi
   float v10; // xmm5_4
-  __m128 v11; // xmm13
-  __m128 v12; // xmm7
+  __m128 y_low; // xmm13
+  __m128 x_low; // xmm7
   __m128 v13; // xmm2
   __m128 v14; // xmm8
   float v15; // xmm14_4
-  __m128 v16; // xmm9
-  float v17; // xmm11_4
-  float v18; // xmm15_4
-  float v19; // xmm3_4
-  float v20; // xmm11_4
-  __m128 v21; // xmm12
-  float v22; // xmm4_4
-  __m128 v23; // xmm2
-  float v24; // xmm2_4
-  float v25; // xmm11_4
-  float v26; // xmm12_4
-  float v27; // xmm2_4
-  float v28; // xmm11_4
-  __m128 v29; // xmm3
-  float v30; // xmm1_4
-  float v31; // xmm8_4
-  __m128 v32; // xmm4
-  __m128 v33; // xmm3
-  float v34; // xmm5_4
-  __m128 v35; // xmm2
-  float v36; // xmm1_4
-  float v37; // xmm3_4
-  float v38; // xmm5_4
+  __m128 z_low; // xmm9
+  float v17; // xmm15_4
+  float v18; // xmm3_4
+  float v19; // xmm11_4
+  __m128 v20; // xmm12
+  float v21; // xmm4_4
+  __m128 v22; // xmm2
+  float v23; // xmm2_4
+  float v24; // xmm11_4
+  float v25; // xmm12_4
+  float v26; // xmm2_4
+  float v27; // xmm11_4
+  __m128 v28; // xmm3
+  float v29; // xmm1_4
+  float v30; // xmm8_4
+  __m128 v31; // xmm4
+  __m128 v32; // xmm3
+  float v33; // xmm5_4
+  __m128 v34; // xmm2
+  float v35; // xmm1_4
+  float v36; // xmm3_4
+  float v37; // xmm5_4
+  float width; // xmm11_4
   float v39; // xmm11_4
-  float v40; // xmm11_4
-  float v41; // xmm3_4
-  __m128 v42; // xmm12
-  __m128 v43; // xmm2
-  float v44; // xmm2_4
-  UFG::qResourceData *v45; // rdi
-  unsigned int v46; // er8
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v47; // rax
-  UFG::qResourceData *v48; // rdi
-  unsigned int v49; // er8
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v50; // rax
-  char *v51; // rax
-  _DWORD *v52; // rdx
-  char *v53; // rdi
-  unsigned int v54; // esi
-  Illusion::StateValues *v55; // rax
-  unsigned int v56; // eax
-  float v57; // [rsp+30h] [rbp-B8h]
-  __int64 v58; // [rsp+34h] [rbp-B4h]
-  Render::Poly poly; // [rsp+40h] [rbp-A8h]
-  UFG::qMatrix44 local_world; // [rsp+50h] [rbp-98h]
-  float v61; // [rsp+148h] [rbp+60h]
-  float vars0; // [rsp+150h] [rbp+68h]
-  float v63; // [rsp+160h] [rbp+78h]
+  float v40; // xmm3_4
+  __m128 v41; // xmm12
+  __m128 v42; // xmm2
+  float v43; // xmm2_4
+  UFG::qResourceData *mData; // rdi
+  unsigned int texID; // r8d
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rax
+  UFG::qResourceData *v47; // rdi
+  unsigned int mNext_high; // r8d
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v49; // rax
+  char *v50; // rax
+  CB_BeamSettings *settings; // rdx
+  char *v52; // rdi
+  unsigned int mBeamSettingsStateIndex_low; // esi
+  Illusion::StateValues *StateValues; // rax
+  unsigned int mSimFrameCount; // eax
+  float v56; // [rsp+30h] [rbp-B8h]
+  __int64 v57; // [rsp+34h] [rbp-B4h]
+  Render::Poly poly; // [rsp+40h] [rbp-A8h] BYREF
+  UFG::qMatrix44 local_world; // [rsp+50h] [rbp-98h] BYREF
+  float x; // [rsp+148h] [rbp+60h]
+  float y; // [rsp+150h] [rbp+68h]
+  float z; // [rsp+160h] [rbp+78h]
 
   v3 = this->mBeamMat.mData == 0i64;
-  v4 = view;
-  v61 = view->mViewWorld.v3.x;
-  v5 = this;
-  vars0 = view->mViewWorld.v3.y;
-  v63 = view->mViewWorld.v3.z;
+  x = view->mViewWorld.v3.x;
+  y = view->mViewWorld.v3.y;
+  z = view->mViewWorld.v3.z;
   if ( !v3 )
   {
     v6 = 0;
@@ -203,203 +196,201 @@ void __fastcall Render::BeamManager::Render(Render::BeamManager *this, Render::V
       {
         Render::Poly::Poly(&poly, v7, v7, 1.0, 1.0, 0.0);
         v9 = v6;
-        v10 = v5->mBeams[v9].p0.x;
-        v11 = (__m128)LODWORD(v5->mBeams[v9].p0.y);
-        v12 = (__m128)LODWORD(v5->mBeams[v9].p1.x);
-        v13 = v11;
-        v14 = (__m128)LODWORD(v5->mBeams[v9].p1.y);
-        v15 = v5->mBeams[v9].p0.z;
-        v16 = (__m128)LODWORD(v5->mBeams[v9].p1.z);
-        v17 = v5->mBeams[v9].p0.z;
-        v18 = (float)(v5->mBeams[v9].p0.x + v12.m128_f32[0]) * v8;
-        v13.m128_f32[0] = (float)((float)((float)(v11.m128_f32[0] - v14.m128_f32[0])
-                                        * (float)(v11.m128_f32[0] - v14.m128_f32[0]))
-                                + (float)((float)(v5->mBeams[v9].p0.x - v12.m128_f32[0])
-                                        * (float)(v5->mBeams[v9].p0.x - v12.m128_f32[0])))
-                        + (float)((float)(v5->mBeams[v9].p0.z - v16.m128_f32[0])
-                                * (float)(v5->mBeams[v9].p0.z - v16.m128_f32[0]));
-        v19 = vars0 - (float)((float)(v5->mBeams[v9].p0.y + v14.m128_f32[0]) * v8);
-        *(float *)&v58 = (float)(v5->mBeams[v9].p0.y + v14.m128_f32[0]) * v8;
+        v10 = this->mBeams[v9].p0.x;
+        y_low = (__m128)LODWORD(this->mBeams[v9].p0.y);
+        x_low = (__m128)LODWORD(this->mBeams[v9].p1.x);
+        v13 = y_low;
+        v14 = (__m128)LODWORD(this->mBeams[v9].p1.y);
+        v15 = this->mBeams[v9].p0.z;
+        z_low = (__m128)LODWORD(this->mBeams[v9].p1.z);
+        v17 = (float)(v10 + x_low.m128_f32[0]) * v8;
+        v13.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - v14.m128_f32[0])
+                                        * (float)(y_low.m128_f32[0] - v14.m128_f32[0]))
+                                + (float)((float)(v10 - x_low.m128_f32[0]) * (float)(v10 - x_low.m128_f32[0])))
+                        + (float)((float)(v15 - z_low.m128_f32[0]) * (float)(v15 - z_low.m128_f32[0]));
+        v18 = y - (float)((float)(this->mBeams[v9].p0.y + v14.m128_f32[0]) * v8);
+        *(float *)&v57 = (float)(this->mBeams[v9].p0.y + v14.m128_f32[0]) * v8;
         local_world.v0 = UFG::qMatrix44::msIdentity.v0;
-        local_world.v2 = UFG::qMatrix44::msIdentity.v2;
-        v20 = (float)(v17 + v16.m128_f32[0]) * v8;
-        v21 = (__m128)LODWORD(v61);
-        LODWORD(v57) = (unsigned __int128)_mm_sqrt_ps(v13);
-        local_world.v1 = UFG::qMatrix44::msIdentity.v1;
-        v21.m128_f32[0] = v61 - v18;
-        v22 = v63 - v20;
-        v23 = v21;
+        *(_QWORD *)&local_world.v2.z = *(_QWORD *)&UFG::qMatrix44::msIdentity.v2.z;
+        v19 = (float)(v15 + z_low.m128_f32[0]) * v8;
+        v20 = (__m128)LODWORD(x);
+        LODWORD(v56) = _mm_sqrt_ps(v13).m128_u32[0];
+        *(_QWORD *)&local_world.v1.x = *(_QWORD *)&UFG::qMatrix44::msIdentity.v1.x;
+        v20.m128_f32[0] = x - v17;
+        v21 = z - v19;
+        v22 = v20;
         *(UFG::qVector4 *)&local_world.v1.z = UFG::qMatrix44::msIdentity.v3;
-        *((float *)&v58 + 1) = v20;
-        v23.m128_f32[0] = (float)((float)(v21.m128_f32[0] * v21.m128_f32[0]) + (float)(v19 * v19)) + (float)(v22 * v22);
-        if ( v23.m128_f32[0] == 0.0 )
-          v24 = 0.0;
+        *((float *)&v57 + 1) = v19;
+        v22.m128_f32[0] = (float)((float)(v20.m128_f32[0] * v20.m128_f32[0]) + (float)(v18 * v18)) + (float)(v21 * v21);
+        if ( v22.m128_f32[0] == 0.0 )
+          v23 = 0.0;
         else
-          v24 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v23));
-        v12.m128_f32[0] = v12.m128_f32[0] - v10;
-        v14.m128_f32[0] = v14.m128_f32[0] - v11.m128_f32[0];
-        v25 = v24;
-        v26 = v21.m128_f32[0] * v24;
-        v27 = v24 * v22;
-        v16.m128_f32[0] = v16.m128_f32[0] - v15;
-        v28 = v25 * v19;
-        v29 = v14;
-        v29.m128_f32[0] = (float)((float)(v14.m128_f32[0] * v14.m128_f32[0]) + (float)(v12.m128_f32[0] * v12.m128_f32[0]))
-                        + (float)(v16.m128_f32[0] * v16.m128_f32[0]);
-        if ( v29.m128_f32[0] == 0.0 )
-          v30 = 0.0;
+          v23 = 1.0 / _mm_sqrt_ps(v22).m128_f32[0];
+        x_low.m128_f32[0] = x_low.m128_f32[0] - v10;
+        v14.m128_f32[0] = v14.m128_f32[0] - y_low.m128_f32[0];
+        v24 = v23;
+        v25 = v20.m128_f32[0] * v23;
+        v26 = v23 * v21;
+        z_low.m128_f32[0] = z_low.m128_f32[0] - v15;
+        v27 = v24 * v18;
+        v28 = v14;
+        v28.m128_f32[0] = (float)((float)(v14.m128_f32[0] * v14.m128_f32[0])
+                                + (float)(x_low.m128_f32[0] * x_low.m128_f32[0]))
+                        + (float)(z_low.m128_f32[0] * z_low.m128_f32[0]);
+        if ( v28.m128_f32[0] == 0.0 )
+          v29 = 0.0;
         else
-          v30 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v29));
-        v31 = v14.m128_f32[0] * v30;
-        v16.m128_f32[0] = v16.m128_f32[0] * v30;
-        v12.m128_f32[0] = v12.m128_f32[0] * v30;
-        v32 = v16;
-        v33 = v12;
-        v32.m128_f32[0] = (float)(v16.m128_f32[0] * v28) - (float)(v31 * v27);
-        v33.m128_f32[0] = (float)(v12.m128_f32[0] * v27) - (float)(v16.m128_f32[0] * v26);
-        v35 = v33;
-        v34 = (float)(v31 * v26) - (float)(v12.m128_f32[0] * v28);
-        v35.m128_f32[0] = (float)((float)(v33.m128_f32[0] * v33.m128_f32[0]) + (float)(v32.m128_f32[0] * v32.m128_f32[0]))
-                        + (float)(v34 * v34);
-        if ( v35.m128_f32[0] == 0.0 )
-          v36 = 0.0;
+          v29 = 1.0 / _mm_sqrt_ps(v28).m128_f32[0];
+        v30 = v14.m128_f32[0] * v29;
+        z_low.m128_f32[0] = z_low.m128_f32[0] * v29;
+        x_low.m128_f32[0] = x_low.m128_f32[0] * v29;
+        v31 = z_low;
+        v32 = x_low;
+        v31.m128_f32[0] = (float)(z_low.m128_f32[0] * v27) - (float)(v30 * v26);
+        v32.m128_f32[0] = (float)(x_low.m128_f32[0] * v26) - (float)(z_low.m128_f32[0] * v25);
+        v34 = v32;
+        v33 = (float)(v30 * v25) - (float)(x_low.m128_f32[0] * v27);
+        v34.m128_f32[0] = (float)((float)(v32.m128_f32[0] * v32.m128_f32[0]) + (float)(v31.m128_f32[0] * v31.m128_f32[0]))
+                        + (float)(v33 * v33);
+        if ( v34.m128_f32[0] == 0.0 )
+          v35 = 0.0;
         else
-          v36 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v35));
-        v32.m128_f32[0] = v32.m128_f32[0] * v36;
-        v37 = v33.m128_f32[0] * v36;
+          v35 = 1.0 / _mm_sqrt_ps(v34).m128_f32[0];
+        v31.m128_f32[0] = v31.m128_f32[0] * v35;
+        v36 = v32.m128_f32[0] * v35;
         local_world.v0.w = 0.0;
         local_world.v1.w = 0.0;
-        v42 = v32;
-        v38 = v34 * v36;
-        local_world.v0.z = v16.m128_f32[0] * v57;
-        local_world.v0.x = v12.m128_f32[0] * v57;
-        v39 = v5->mBeams[v9].width;
-        local_world.v0.y = v31 * v57;
-        local_world.v1.z = v38 * v39;
-        local_world.v1.x = v32.m128_f32[0] * v39;
-        local_world.v1.y = v37 * v39;
-        v40 = (float)(v38 * v31) - (float)(v37 * v16.m128_f32[0]);
-        v41 = (float)(v37 * v12.m128_f32[0]) - (float)(v32.m128_f32[0] * v31);
-        v42.m128_f32[0] = (float)(v32.m128_f32[0] * v16.m128_f32[0]) - (float)(v38 * v12.m128_f32[0]);
-        v43 = v42;
-        v43.m128_f32[0] = (float)((float)(v42.m128_f32[0] * v42.m128_f32[0]) + (float)(v40 * v40)) + (float)(v41 * v41);
-        if ( v43.m128_f32[0] == 0.0 )
-          v44 = 0.0;
+        v41 = v31;
+        v37 = v33 * v35;
+        local_world.v0.z = z_low.m128_f32[0] * v56;
+        local_world.v0.x = x_low.m128_f32[0] * v56;
+        width = this->mBeams[v9].width;
+        local_world.v0.y = v30 * v56;
+        local_world.v1.z = v37 * width;
+        local_world.v1.x = v31.m128_f32[0] * width;
+        local_world.v1.y = v36 * width;
+        v39 = (float)(v37 * v30) - (float)(v36 * z_low.m128_f32[0]);
+        v40 = (float)(v36 * x_low.m128_f32[0]) - (float)(v31.m128_f32[0] * v30);
+        v41.m128_f32[0] = (float)(v31.m128_f32[0] * z_low.m128_f32[0]) - (float)(v37 * x_low.m128_f32[0]);
+        v42 = v41;
+        v42.m128_f32[0] = (float)((float)(v41.m128_f32[0] * v41.m128_f32[0]) + (float)(v39 * v39)) + (float)(v40 * v40);
+        if ( v42.m128_f32[0] == 0.0 )
+          v43 = 0.0;
         else
-          v44 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v43));
-        v45 = v5->mBeamMat.mData;
-        v46 = v5->mBeams[v9].texID;
-        local_world.v1.z = v18;
+          v43 = 1.0 / _mm_sqrt_ps(v42).m128_f32[0];
+        mData = this->mBeamMat.mData;
+        texID = this->mBeams[v9].texID;
+        local_world.v1.z = v17;
         local_world.v2.w = 0.0;
-        local_world.v2.z = v44 * v41;
-        local_world.v2.y = v44 * v42.m128_f32[0];
-        *(_QWORD *)&local_world.v1.w = v58;
-        if ( v45[2].mTypeUID != v46 )
+        local_world.v2.z = v43 * v40;
+        local_world.v2.y = v43 * v41.m128_f32[0];
+        *(_QWORD *)&local_world.v1.w = v57;
+        if ( mData[2].mTypeUID != texID )
         {
-          UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v45[2].mNode.mUID, *(_DWORD *)&v45[2].mDebugName[4], v46);
-          v47 = v45[1].mResourceHandles.mNode.mPrev;
-          if ( v47 )
-            v47 = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)((char *)v47 + (_QWORD)v45 + 120);
-          LOWORD(v47->mPrev) |= 0x20u;
+          UFG::qResourceHandle::Init(
+            (UFG::qResourceHandle *)&mData[2].mNode.mUID,
+            *(_DWORD *)&mData[2].mDebugName[4],
+            texID);
+          mPrev = mData[1].mResourceHandles.mNode.mPrev;
+          if ( mPrev )
+            mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)((char *)mPrev + (_QWORD)mData + 120);
+          LOWORD(mPrev->mPrev) |= 0x20u;
         }
-        v5->mBeams[v9].settings->AnimUVScaleOffset[2] = (float)(v5->mAnimCounter + v5->mBeams[v9].textureAnimStart);
-        v48 = v5->mBeamMat.mData;
-        v49 = HIDWORD(v48[2].mResourceHandles.mNode.mNext[6].mNext);
-        if ( *(_DWORD *)&v48[3].mDebugName[20] != v49 )
+        this->mBeams[v9].settings->AnimUVScaleOffset[2] = (float)(this->mAnimCounter + this->mBeams[v9].textureAnimStart);
+        v47 = this->mBeamMat.mData;
+        mNext_high = HIDWORD(v47[2].mResourceHandles.mNode.mNext[6].mNext);
+        if ( *(_DWORD *)&v47[3].mDebugName[20] != mNext_high )
         {
-          UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v48[3].mTypeUID, *(_DWORD *)&v48[3].mDebugName[28], v49);
-          v50 = v48[1].mResourceHandles.mNode.mPrev;
-          if ( v50 )
-            v50 = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)((char *)v50 + (_QWORD)v48 + 120);
-          LOWORD(v50->mPrev) |= 0x20u;
+          UFG::qResourceHandle::Init(
+            (UFG::qResourceHandle *)&v47[3].mTypeUID,
+            *(_DWORD *)&v47[3].mDebugName[28],
+            mNext_high);
+          v49 = v47[1].mResourceHandles.mNode.mPrev;
+          if ( v49 )
+            v49 = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)((char *)v49 + (_QWORD)v47 + 120);
+          LOWORD(v49->mPrev) |= 0x20u;
         }
-        v5->mBeams[v9].settings->AnimUVScaleOffset[3] = v5->mBeams[v9].age / v5->mBeams[v9].lifeTime;
-        v51 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x20u, 0x10u);
-        v52 = (_DWORD *)v5->mBeams[v9].settings->Colour;
-        v53 = v51;
-        *(_DWORD *)v51 = *v52;
-        *((_DWORD *)v51 + 1) = v52[1];
-        *((_DWORD *)v51 + 2) = v52[2];
-        *((_DWORD *)v51 + 3) = v52[3];
-        *((_DWORD *)v51 + 4) = v52[4];
-        *((_DWORD *)v51 + 5) = v52[5];
-        *((_DWORD *)v51 + 6) = v52[6];
-        *((_DWORD *)v51 + 7) = v52[7];
-        v54 = SLOWORD(v5->mBeamSettingsStateIndex);
-        v55 = Render::View::GetStateValues(v4);
-        if ( v54 >= 64 )
-          v55->mSetValueMask.mFlags[1] |= 1i64 << ((unsigned __int8)v54 - 64);
+        this->mBeams[v9].settings->AnimUVScaleOffset[3] = this->mBeams[v9].age / this->mBeams[v9].lifeTime;
+        v50 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x20u, 0x10u);
+        settings = this->mBeams[v9].settings;
+        v52 = v50;
+        *(float *)v50 = settings->Colour[0];
+        *((_DWORD *)v50 + 1) = LODWORD(settings->Colour[1]);
+        *((_DWORD *)v50 + 2) = LODWORD(settings->Colour[2]);
+        *((_DWORD *)v50 + 3) = LODWORD(settings->Colour[3]);
+        *((_DWORD *)v50 + 4) = LODWORD(settings->AnimUVScaleOffset[0]);
+        *((_DWORD *)v50 + 5) = LODWORD(settings->AnimUVScaleOffset[1]);
+        *((_DWORD *)v50 + 6) = LODWORD(settings->AnimUVScaleOffset[2]);
+        *((_DWORD *)v50 + 7) = LODWORD(settings->AnimUVScaleOffset[3]);
+        mBeamSettingsStateIndex_low = SLOWORD(this->mBeamSettingsStateIndex);
+        StateValues = Render::View::GetStateValues(view);
+        if ( mBeamSettingsStateIndex_low >= 64 )
+          StateValues->mSetValueMask.mFlags[1] |= 1i64 << ((unsigned __int8)mBeamSettingsStateIndex_low - 64);
         else
-          v55->mSetValueMask.mFlags[0] |= 1i64 << v54;
-        v55->mParamValues[(signed __int16)v54] = v53;
-        Render::View::Draw(v4, &poly, (Illusion::Material *)v5->mBeamMat.mData, &local_world);
+          StateValues->mSetValueMask.mFlags[0] |= 1i64 << mBeamSettingsStateIndex_low;
+        StateValues->mParamValues[(__int16)mBeamSettingsStateIndex_low] = v52;
+        Render::View::Draw(view, &poly, (Illusion::Material *)this->mBeamMat.mData, &local_world);
         ++v6;
         v8 = FLOAT_0_5;
         v7 = FLOAT_N0_5;
       }
-      while ( v6 < v5->mNumBeams );
+      while ( v6 < this->mNumBeams );
     }
-    ++v5->mAnimCounter;
-    v56 = UFG::Metrics::msInstance.mSimFrameCount;
+    ++this->mAnimCounter;
+    mSimFrameCount = UFG::Metrics::msInstance.mSimFrameCount;
     if ( !UFG::Metrics::msInstance.mSimPausedInGame && !UFG::Metrics::msInstance.mSimPausedDebug )
-      v5->mNumBeams = 0;
-    v5->mLastUpdateSimFrame = v56;
+      this->mNumBeams = 0;
+    this->mLastUpdateSimFrame = mSimFrameCount;
   }
 }
 
 // File Line: 153
 // RVA: 0x1C6A00
-void __fastcall Render::BeamManager::AddBeam(Render::BeamManager *this, Render::BeamManager::AddBeamParameters *beamParameters)
+void __fastcall Render::BeamManager::AddBeam(
+        Render::BeamManager *this,
+        Render::BeamManager::AddBeamParameters *beamParameters)
 {
-  Render::BeamManager::AddBeamParameters *v2; // rdi
-  Render::BeamManager *v3; // rbx
-  unsigned int v4; // eax
-  float v5; // xmm0_4
-  float v6; // xmm1_4
-  signed __int64 v7; // rcx
+  unsigned int mSimFrameCount; // eax
+  float y; // xmm0_4
+  float z; // xmm1_4
+  __int64 mNumBeams; // rcx
   float v8; // xmm0_4
   float v9; // xmm1_4
-  signed __int64 v10; // rcx
+  __int64 v10; // rcx
 
-  v2 = beamParameters;
-  v3 = this;
   if ( this->mNumBeams != 32 )
   {
     if ( UFG::Metrics::msInstance.mSimPausedInGame || UFG::Metrics::msInstance.mSimPausedDebug )
     {
-      v4 = UFG::Metrics::msInstance.mSimFrameCount;
+      mSimFrameCount = UFG::Metrics::msInstance.mSimFrameCount;
       if ( UFG::Metrics::msInstance.mSimFrameCount > this->mLastUpdateSimFrame )
       {
         this->mNumBeams = 0;
-        this->mLastUpdateSimFrame = v4;
+        this->mLastUpdateSimFrame = mSimFrameCount;
       }
     }
-    v5 = beamParameters->startPoint.y;
-    v6 = beamParameters->startPoint.z;
-    v7 = this->mNumBeams;
-    v3->mBeams[v7].p0.x = beamParameters->startPoint.x;
-    v3->mBeams[v7].p0.y = v5;
-    v3->mBeams[v7].p0.z = v6;
+    y = beamParameters->startPoint.y;
+    z = beamParameters->startPoint.z;
+    mNumBeams = this->mNumBeams;
+    this->mBeams[mNumBeams].p0.x = beamParameters->startPoint.x;
+    this->mBeams[mNumBeams].p0.y = y;
+    this->mBeams[mNumBeams].p0.z = z;
     v8 = beamParameters->endPoint.y;
     v9 = beamParameters->endPoint.z;
-    v10 = v3->mNumBeams;
-    v3->mBeams[v10].p1.x = beamParameters->endPoint.x;
-    v3->mBeams[v10].p1.y = v8;
-    v3->mBeams[v10].p1.z = v9;
-    v3->mBeams[v3->mNumBeams].width = beamParameters->width;
-    v3->mBeams[v3->mNumBeams].texID = beamParameters->beamSettings->mTextureUID;
-    v3->mBeams[v3->mNumBeams].settings->Colour[0] = beamParameters->beamSettings->minColour.x;
-    v3->mBeams[v3->mNumBeams].settings->Colour[1] = beamParameters->beamSettings->minColour.y;
-    v3->mBeams[v3->mNumBeams].settings->Colour[2] = beamParameters->beamSettings->minColour.z;
-    v3->mBeams[v3->mNumBeams].settings->Colour[3] = beamParameters->beamSettings->minColour.w;
-    v3->mBeams[v3->mNumBeams].settings->AnimUVScaleOffset[0] = beamParameters->beamSettings->numAnimPages.x;
-    v3->mBeams[v3->mNumBeams].settings->AnimUVScaleOffset[1] = beamParameters->beamSettings->numAnimPages.y;
-    v3->mBeams[v3->mNumBeams].textureAnimStart = UFG::qRandom(
-                                                   (signed int)(float)(beamParameters->beamSettings->numAnimPages.y
-                                                                     * beamParameters->beamSettings->numAnimPages.x),
-                                                   &UFG::qDefaultSeed);
-    v3->mBeams[v3->mNumBeams].lifeTime = v2->beamSettings->mLifeTime;
-    v3->mBeams[v3->mNumBeams++].age = v2->age;
+    v10 = this->mNumBeams;
+    this->mBeams[v10].p1.x = beamParameters->endPoint.x;
+    this->mBeams[v10].p1.y = v8;
+    this->mBeams[v10].p1.z = v9;
+    this->mBeams[this->mNumBeams].width = beamParameters->width;
+    this->mBeams[this->mNumBeams].texID = beamParameters->beamSettings->mTextureUID;
+    *(UFG::qVector4 *)this->mBeams[this->mNumBeams].settings->Colour = beamParameters->beamSettings->minColour;
+    *(UFG::qVector2 *)this->mBeams[this->mNumBeams].settings->AnimUVScaleOffset = beamParameters->beamSettings->numAnimPages;
+    this->mBeams[this->mNumBeams].textureAnimStart = UFG::qRandom(
+                                                       (int)(float)(beamParameters->beamSettings->numAnimPages.y
+                                                                  * beamParameters->beamSettings->numAnimPages.x),
+                                                       (unsigned int *)&UFG::qDefaultSeed);
+    this->mBeams[this->mNumBeams].lifeTime = beamParameters->beamSettings->mLifeTime;
+    this->mBeams[this->mNumBeams++].age = beamParameters->age;
   }
 }
 

@@ -3,19 +3,17 @@
 void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m, int n)
 {
   int v3; // edi
-  hkaMatrix<float> *v4; // rbx
   int v5; // eax
   int v6; // eax
-  int v7; // er9
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int v7; // r9d
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
-  this->m_data.m_capacityAndFlags = 2147483648;
+  this->m_data.m_capacityAndFlags = 0x80000000;
   this->m_data.m_data = 0i64;
   this->m_data.m_size = 0;
   this->m_m = m;
   v3 = n * m;
   this->m_n = n;
-  v4 = this;
   v5 = this->m_data.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v5 >= n * m )
   {
@@ -27,8 +25,8 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m
     v7 = n * m;
     if ( v3 < v6 )
       v7 = v6;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, v7, 4);
-    v4->m_data.m_size = v3;
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, this, v7, 4);
+    this->m_data.m_size = v3;
   }
 }
 
@@ -36,22 +34,20 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m
 // RVA: 0xBB4DD0
 void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m, int n, float val)
 {
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   int v5; // esi
-  hkaMatrix<float> *v6; // rdi
   int v7; // eax
   int v8; // eax
-  int v9; // er9
-  hkResult result; // [rsp+58h] [rbp+10h]
+  int v9; // r9d
+  hkResult result; // [rsp+58h] [rbp+10h] BYREF
 
   v4 = 0i64;
-  this->m_data.m_capacityAndFlags = 2147483648;
+  this->m_data.m_capacityAndFlags = 0x80000000;
   this->m_data.m_data = 0i64;
   this->m_data.m_size = 0;
   this->m_m = m;
   v5 = n * m;
   this->m_n = n;
-  v6 = this;
   v7 = this->m_data.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v7 < n * m )
   {
@@ -59,22 +55,22 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m
     v9 = n * m;
     if ( v5 < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, v9, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, this, v9, 4);
   }
-  v6->m_data.m_size = v5;
+  this->m_data.m_size = v5;
   if ( v5 >= 4i64 )
   {
     do
     {
       v4 += 4i64;
-      v6->m_data.m_data[v4 - 4] = val;
-      v6->m_data.m_data[v4 - 3] = val;
-      v6->m_data.m_data[v4 - 2] = val;
-      v6->m_data.m_data[v4 - 1] = val;
+      this->m_data.m_data[v4 - 4] = val;
+      this->m_data.m_data[v4 - 3] = val;
+      this->m_data.m_data[v4 - 2] = val;
+      this->m_data.m_data[v4 - 1] = val;
     }
     while ( v4 < v5 - 3i64 );
   }
-  for ( ; v4 < v5; v6->m_data.m_data[v4 - 1] = val )
+  for ( ; v4 < v5; this->m_data.m_data[v4 - 1] = val )
     ++v4;
 }
 
@@ -83,27 +79,23 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, int m
 void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, hkaMatrix<float> *A)
 {
   int v2; // edi
-  hkaMatrix<float> *v3; // rsi
-  hkaMatrix<float> *v4; // rbx
   int v5; // eax
   int v6; // ecx
   int v7; // ebp
   int v8; // ecx
-  int v9; // er9
+  int v9; // r9d
   __int64 v10; // rdx
   float v11; // eax
-  hkResult result; // [rsp+40h] [rbp+8h]
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  this->m_data.m_capacityAndFlags = 2147483648;
+  this->m_data.m_capacityAndFlags = 0x80000000;
   v2 = 0;
-  v3 = A;
   this->m_data.m_data = 0i64;
   this->m_data.m_size = 0;
   this->m_m = A->m_m;
-  v4 = this;
   this->m_n = A->m_n;
   v5 = hkaMatrix<float>::Size(this);
-  v6 = v4->m_data.m_capacityAndFlags & 0x3FFFFFFF;
+  v6 = this->m_data.m_capacityAndFlags & 0x3FFFFFFF;
   v7 = v5;
   if ( v6 < v5 )
   {
@@ -111,20 +103,19 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, hkaMa
     v9 = v5;
     if ( v5 < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, v9, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, this, v9, 4);
   }
-  v4->m_data.m_size = v7;
-  if ( v4->m_m * v4->m_n > 0 )
+  this->m_data.m_size = v7;
+  if ( this->m_m * this->m_n > 0 )
   {
     v10 = 0i64;
     do
     {
       ++v2;
-      v11 = v3->m_data.m_data[v10];
-      ++v10;
-      v4->m_data.m_data[v10 - 1] = v11;
+      v11 = A->m_data.m_data[v10++];
+      this->m_data.m_data[v10 - 1] = v11;
     }
-    while ( v2 < v4->m_m * v4->m_n );
+    while ( v2 < this->m_m * this->m_n );
   }
 }
 
@@ -132,20 +123,20 @@ void __fastcall hkaMatrix<float>::hkaMatrix<float>(hkaMatrix<float> *this, hkaMa
 // RVA: 0xBB50F0
 hkaMatrix<float> *__fastcall hkaMatrix<float>::operator-=(hkaMatrix<float> *this, hkaMatrix<float> *A)
 {
-  int v2; // er8
-  float *v3; // r9
+  int v2; // r8d
+  float *m_data; // r9
   __int64 v4; // rdx
 
   v2 = 0;
   if ( this->m_m * this->m_n > 0 )
   {
-    v3 = A->m_data.m_data;
+    m_data = A->m_data.m_data;
     v4 = 0i64;
     do
     {
       ++v2;
       ++v4;
-      this->m_data.m_data[v4 - 1] = this->m_data.m_data[v4 - 1] - v3[v4 - 1];
+      this->m_data.m_data[v4 - 1] = this->m_data.m_data[v4 - 1] - m_data[v4 - 1];
     }
     while ( v2 < this->m_m * this->m_n );
   }
@@ -154,23 +145,21 @@ hkaMatrix<float> *__fastcall hkaMatrix<float>::operator-=(hkaMatrix<float> *this
 
 // File Line: 220
 // RVA: 0xBB5050
-hkaMatrix<float> *__fastcall hkaMatrix<float>::operator-(hkaMatrix<float> *this, hkaMatrix<float> *result, hkaMatrix<float> *A)
+hkaMatrix<float> *__fastcall hkaMatrix<float>::operator-(
+        hkaMatrix<float> *this,
+        hkaMatrix<float> *result,
+        hkaMatrix<float> *A)
 {
-  hkaMatrix<float> *v3; // rdi
-  hkaMatrix<float> *v4; // rbx
-
-  v3 = result;
-  v4 = A;
   hkaMatrix<float>::hkaMatrix<float>(result, this);
-  hkaMatrix<float>::operator-=(v3, v4);
-  return v3;
+  hkaMatrix<float>::operator-=(result, A);
+  return result;
 }
 
 // File Line: 268
 // RVA: 0xBB5690
-void __fastcall hkaMatrix<float>::SetAll(hkaMatrix<float> *this, const float *v)
+void __fastcall hkaMatrix<float>::SetAll(hkaMatrix<float> *this, float *v)
 {
-  signed __int64 v2; // r8
+  __int64 v2; // r8
   int v3; // eax
 
   v2 = 0i64;
@@ -195,7 +184,7 @@ void __fastcall hkaMatrix<float>::SetAll(hkaMatrix<float> *this, const float *v)
 // RVA: 0xBB50D0
 float __fastcall hkaMatrix<float>::operator()(hkaMatrix<float> *this, int i, int j)
 {
-  return this->m_data.m_data[j + i * (signed __int64)this->m_n];
+  return this->m_data.m_data[j + i * (__int64)this->m_n];
 }
 
 // File Line: 289

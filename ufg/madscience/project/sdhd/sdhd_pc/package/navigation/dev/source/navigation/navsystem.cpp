@@ -9,7 +9,7 @@ void __fastcall UpdatePreQueryComponentType_NavComponent(float dt)
         v1 != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)(&UFG::NavComponent::s_NavComponentList - 4);
         UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)v1 )
   {
-    ((void (*)(void))v1->mPrev[8].mNext)();
+    ((void (__fastcall *)(UFG::qNode<UFG::NavComponent,UFG::NavComponent> *))v1->mPrev[8].mNext)(v1);
     v1 = UFG::NavComponent::s_NavComponentpCurrentIterator->mNext - 4;
   }
   UFG::NavComponent::s_NavComponentpCurrentIterator = 0i64;
@@ -26,7 +26,7 @@ void __fastcall UpdatePostQueryComponentType_NavComponent(float dt)
         v1 != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)(&UFG::NavComponent::s_NavComponentList - 4);
         UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)v1 )
   {
-    ((void (*)(void))v1->mPrev[9].mPrev)();
+    ((void (__fastcall *)(UFG::qNode<UFG::NavComponent,UFG::NavComponent> *))v1->mPrev[9].mPrev)(v1);
     v1 = UFG::NavComponent::s_NavComponentpCurrentIterator->mNext - 4;
   }
   UFG::NavComponent::s_NavComponentpCurrentIterator = 0i64;
@@ -43,7 +43,7 @@ void __fastcall UpdateSteeringComponentType_NavComponent(float dt)
         v1 != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)(&UFG::NavComponent::s_NavComponentList - 4);
         UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)v1 )
   {
-    ((void (*)(void))v1->mPrev[9].mNext)();
+    ((void (__fastcall *)(UFG::qNode<UFG::NavComponent,UFG::NavComponent> *))v1->mPrev[9].mNext)(v1);
     v1 = UFG::NavComponent::s_NavComponentpCurrentIterator->mNext - 4;
   }
   UFG::NavComponent::s_NavComponentpCurrentIterator = 0i64;
@@ -60,7 +60,7 @@ void __fastcall UpdateControlComponentType_NavComponent(float dt)
         v1 != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)(&UFG::NavComponent::s_NavComponentList - 4);
         UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)v1 )
   {
-    ((void (*)(void))v1->mPrev[10].mPrev)();
+    ((void (__fastcall *)(UFG::qNode<UFG::NavComponent,UFG::NavComponent> *))v1->mPrev[10].mPrev)(v1);
     v1 = UFG::NavComponent::s_NavComponentpCurrentIterator->mNext - 4;
   }
   UFG::NavComponent::s_NavComponentpCurrentIterator = 0i64;
@@ -112,36 +112,35 @@ void __fastcall UFG::NavSystemBase::PostSteeringUpdate(UFG::NavSystemBase *this,
 
 // File Line: 113
 // RVA: 0x263F80
-char __fastcall UFG::NavSystemBase::DetectObstacle(UFG::NavSystemBase *this, UFG::NavComponent *pIgnoreTarget, UFG::HavokNavPosition *navPosition)
+bool __fastcall UFG::NavSystemBase::DetectObstacle(
+        UFG::NavSystemBase *this,
+        UFG::NavComponent *pIgnoreTarget,
+        UFG::HavokNavPosition *navPosition)
 {
   UFG::NavComponent *v3; // rax
-  UFG::HavokNavPosition *v4; // rbp
-  UFG::NavComponent *v5; // rsi
-  UFG::SimObject *v6; // rcx
-  UFG::TransformNodeComponent *v7; // rbx
-  char result; // al
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  bool result; // al
 
   v3 = (UFG::NavComponent *)&UFG::NavComponent::s_NavComponentList.mNode.mNext[-4];
-  v4 = navPosition;
-  v5 = pIgnoreTarget;
   for ( UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)&UFG::NavComponent::s_NavComponentList.mNode.mNext[-4];
         v3 != (UFG::NavComponent *)(&UFG::NavComponent::s_NavComponentList - 4);
         UFG::NavComponent::s_NavComponentpCurrentIterator = v3 )
   {
-    if ( v3 != v5 )
+    if ( v3 != pIgnoreTarget )
     {
-      v6 = v3->m_pSimObject;
-      if ( v6 )
-        v7 = v6->m_pTransformNodeComponent;
+      m_pSimObject = v3->m_pSimObject;
+      if ( m_pSimObject )
+        m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
       else
-        v7 = 0i64;
-      UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-      if ( (float)((float)((float)((float)(v7->mWorldTransform.v3.y - v4->m_vPosition.y)
-                                 * (float)(v7->mWorldTransform.v3.y - v4->m_vPosition.y))
-                         + (float)((float)(v7->mWorldTransform.v3.x - v4->m_vPosition.x)
-                                 * (float)(v7->mWorldTransform.v3.x - v4->m_vPosition.x)))
-                 + (float)((float)(v7->mWorldTransform.v3.z - v4->m_vPosition.z)
-                         * (float)(v7->mWorldTransform.v3.z - v4->m_vPosition.z))) < 0.69999999 )
+        m_pTransformNodeComponent = 0i64;
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      if ( (float)((float)((float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.y - navPosition->m_vPosition.y)
+                                 * (float)(m_pTransformNodeComponent->mWorldTransform.v3.y - navPosition->m_vPosition.y))
+                         + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.x - navPosition->m_vPosition.x)
+                                 * (float)(m_pTransformNodeComponent->mWorldTransform.v3.x - navPosition->m_vPosition.x)))
+                 + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.z - navPosition->m_vPosition.z)
+                         * (float)(m_pTransformNodeComponent->mWorldTransform.v3.z - navPosition->m_vPosition.z))) < 0.69999999 )
       {
         result = 1;
         goto LABEL_10;

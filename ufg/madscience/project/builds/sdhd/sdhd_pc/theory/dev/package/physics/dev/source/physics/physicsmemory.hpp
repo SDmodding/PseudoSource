@@ -3,7 +3,7 @@
 void __fastcall HavokJobMemoryPoolTagger::onEndJob(HavokJobMemoryPoolTagger *this, hkJobType t)
 {
   _QWORD *v2; // rax
-  signed __int64 v3; // rdx
+  __int64 v3; // rdx
   char v4; // al
 
   v2 = NtCurrentTeb()->Reserved1[11];

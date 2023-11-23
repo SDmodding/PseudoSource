@@ -3,8 +3,8 @@
 void __fastcall OSuite::ZHttpStreamReader::ZHttpStreamReader(OSuite::ZHttpStreamReader *this)
 {
   this->m_nChunkSize = -1;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
+  this->OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
+  this->OSuite::IReader::vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
   this->m_httpConnection = 0i64;
   this->m_nBytesRead = 0i64;
   this->m_nContentLength = 0i64;
@@ -15,13 +15,17 @@ void __fastcall OSuite::ZHttpStreamReader::ZHttpStreamReader(OSuite::ZHttpStream
 // RVA: 0xEE1D48
 void __fastcall OSuite::ZHttpStreamReader::~ZHttpStreamReader(OSuite::ZHttpStreamReader *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
+  this->OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
+  this->OSuite::IReader::vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
 }
 
 // File Line: 35
 // RVA: 0xEE1EF4
-void __fastcall OSuite::ZHttpStreamReader::Init(OSuite::ZHttpStreamReader *this, OSuite::ZHttpConnection *httpConnection, unsigned __int64 nContentLength, bool bTransferChunked)
+void __fastcall OSuite::ZHttpStreamReader::Init(
+        OSuite::ZHttpStreamReader *this,
+        OSuite::ZHttpConnection *httpConnection,
+        unsigned __int64 nContentLength,
+        bool bTransferChunked)
 {
   this->m_nChunkSize = -1;
   this->m_nBytesRead = 0i64;
@@ -35,7 +39,10 @@ void __fastcall OSuite::ZHttpStreamReader::Init(OSuite::ZHttpStreamReader *this,
 
 // File Line: 53
 // RVA: 0xEE1F20
-unsigned __int64 __fastcall OSuite::ZHttpStreamReader::Read(OSuite::ZHttpStreamReader *this, void *pDest, unsigned __int64 nCount)
+unsigned __int64 __fastcall OSuite::ZHttpStreamReader::Read(
+        OSuite::ZHttpStreamReader *this,
+        void *pDest,
+        unsigned __int64 nCount)
 {
   return OSuite::ZHttpStreamReader::ReceiveBytes((OSuite::ZHttpStreamReader *)((char *)this - 8), pDest, nCount);
 }
@@ -51,17 +58,15 @@ int __fastcall OSuite::ZHttpStreamReader::ReadByte(OSuite::ZHttpStreamReader *th
 // RVA: 0xEE1DFC
 void __fastcall OSuite::ZHttpStreamReader::Flush(OSuite::ZHttpStreamReader *this)
 {
-  OSuite::ZObjectVtbl *v1; // rax
-  OSuite::ZHttpStreamReader *i; // rbx
-  char pMem; // [rsp+20h] [rbp-118h]
+  OSuite::ZObjectVtbl *i; // rax
+  char pMem[256]; // [rsp+20h] [rbp-118h] BYREF
 
-  v1 = this->vfptr;
-  for ( i = this;
-        !((unsigned __int8 (__fastcall *)(OSuite::ZHttpStreamReader *))v1[10].__vecDelDtor)(this)
-     && OSuite::ZHttpStreamReader::ReceiveBytes((OSuite::ZHttpStreamReader *)((char *)i - 8), &pMem, 0x100ui64);
-        this = i )
+  for ( i = this->OSuite::ZObject::vfptr;
+        !((unsigned __int8 (*)(void))i[10].__vecDelDtor)()
+     && OSuite::ZHttpStreamReader::ReceiveBytes((OSuite::ZHttpStreamReader *)((char *)this - 8), pMem, 0x100ui64);
+        i = this->OSuite::ZObject::vfptr )
   {
-    v1 = i->vfptr;
+    ;
   }
 }
 
@@ -73,7 +78,7 @@ char __fastcall OSuite::ZHttpStreamReader::Skip(OSuite::ZHttpStreamReader *this,
   OSuite::ZHttpStreamReader *v4; // rdi
   unsigned __int64 v5; // r8
   unsigned __int64 v6; // rax
-  char pMem; // [rsp+20h] [rbp-118h]
+  char pMem[256]; // [rsp+20h] [rbp-118h] BYREF
 
   v2 = nOffset;
   if ( nOffset < 0 )
@@ -86,7 +91,7 @@ char __fastcall OSuite::ZHttpStreamReader::Skip(OSuite::ZHttpStreamReader *this,
       v5 = v2;
       if ( (unsigned __int64)v2 >= 0x100 )
         v5 = 256i64;
-      v6 = OSuite::ZHttpStreamReader::ReceiveBytes(v4, &pMem, v5);
+      v6 = OSuite::ZHttpStreamReader::ReceiveBytes(v4, pMem, v5);
       if ( !v6 )
         break;
       v2 -= v6;
@@ -100,40 +105,38 @@ char __fastcall OSuite::ZHttpStreamReader::Skip(OSuite::ZHttpStreamReader *this,
 
 // File Line: 98
 // RVA: 0xEE222C
-bool __fastcall OSuite::ZHttpStreamReader::SetPosition(OSuite::ZHttpStreamReader *this, unsigned __int64 nPosition)
+bool __fastcall OSuite::ZHttpStreamReader::SetPosition(
+        OSuite::ZHttpStreamReader *this,
+        OSuite::ZHttpConnection *nPosition)
 {
-  bool result; // al
-
-  if ( nPosition > this->m_nBytesRead || (OSuite::ZHttpConnection *)nPosition < this->m_httpConnection )
-    result = 0;
+  if ( (unsigned __int64)nPosition > this->m_nBytesRead || nPosition < this->m_httpConnection )
+    return 0;
   else
-    result = (__int64)this->vfptr[4].__vecDelDtor((OSuite::ZObject *)this, nPosition - LODWORD(this->m_httpConnection));
-  return result;
+    return (bool)this->OSuite::ZObject::vfptr[4].__vecDelDtor(
+                   this,
+                   (unsigned int)((_DWORD)nPosition - LODWORD(this->m_httpConnection)));
 }
 
 // File Line: 121
 // RVA: 0xEE1FB0
-unsigned __int64 __fastcall OSuite::ZHttpStreamReader::ReceiveBytes(OSuite::ZHttpStreamReader *this, void *pMem, unsigned __int64 nLength)
+unsigned __int64 __fastcall OSuite::ZHttpStreamReader::ReceiveBytes(
+        OSuite::ZHttpStreamReader *this,
+        void *pMem,
+        unsigned __int64 nLength)
 {
-  unsigned __int64 v3; // rdi
-  void *v4; // rsi
-  OSuite::ZHttpStreamReader *v5; // rbx
   unsigned __int64 result; // rax
 
-  v3 = nLength;
-  v4 = pMem;
-  v5 = this;
-  if ( this->m_nContentLength != -1i64 && (!((__int64 (*)(void))this->vfptr->ReadyToRead)() || !v3) )
+  if ( this->m_nContentLength != -1i64
+    && (!(__int64)this->OSuite::IReader::vfptr->ReadyToRead(&this->OSuite::IReader) || !nLength) )
+  {
     return 0i64;
-  result = OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(v5, v4, v3);
+  }
+  result = OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(this, pMem, nLength);
   if ( result )
   {
-    v5->m_nBytesRead += result;
-    if ( v5->m_bTransferChunked )
-    {
-      if ( v5->m_bLastChunkReceive )
-        v5->m_nContentLength = v5->m_nBytesRead;
-    }
+    this->m_nBytesRead += result;
+    if ( this->m_bTransferChunked && this->m_bLastChunkReceive )
+      this->m_nContentLength = this->m_nBytesRead;
   }
   return result;
 }
@@ -142,132 +145,114 @@ unsigned __int64 __fastcall OSuite::ZHttpStreamReader::ReceiveBytes(OSuite::ZHtt
 // RVA: 0xEE1F60
 int __fastcall OSuite::ZHttpStreamReader::ReceiveByte(OSuite::ZHttpStreamReader *this)
 {
-  OSuite::ZHttpStreamReader *v1; // rbx
   int result; // eax
 
-  v1 = this;
-  if ( this->m_nContentLength != -1i64 && !((__int64 (*)(void))this->vfptr->ReadyToRead)() )
+  if ( this->m_nContentLength != -1i64 && !(__int64)this->OSuite::IReader::vfptr->ReadyToRead(&this->OSuite::IReader) )
     return -1;
-  result = OSuite::ZHttpStreamReader::ReceiveChunkedByte(v1);
+  result = OSuite::ZHttpStreamReader::ReceiveChunkedByte(this);
   if ( result != -1 )
   {
-    ++v1->m_nBytesRead;
-    if ( v1->m_bTransferChunked )
-    {
-      if ( v1->m_bLastChunkReceive )
-        v1->m_nContentLength = v1->m_nBytesRead;
-    }
+    ++this->m_nBytesRead;
+    if ( this->m_bTransferChunked && this->m_bLastChunkReceive )
+      this->m_nContentLength = this->m_nBytesRead;
   }
   return result;
 }
 
 // File Line: 161
 // RVA: 0xEE20D8
-__int64 __fastcall OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(OSuite::ZHttpStreamReader *this, void *pMem, unsigned __int64 nLength)
+__int64 __fastcall OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(
+        OSuite::ZHttpStreamReader *this,
+        char *pMem,
+        unsigned __int64 nLength)
 {
-  OSuite::ZHttpStreamReader *v3; // rdi
-  unsigned __int64 v4; // rsi
-  void *v5; // rbp
-  signed int v7; // ecx
+  int m_nChunkSize; // ecx
   int v8; // eax
   unsigned __int64 v9; // rbx
   OSuite::ZSocket *v10; // rax
   __int64 v11; // rbx
   OSuite::ZSocket *v12; // rax
   OSuite::ZSocket *v13; // rax
-  char pBuffer; // [rsp+20h] [rbp-28h]
+  char pBuffer[8]; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = this;
-  v4 = nLength;
-  v5 = pMem;
-  if ( ((unsigned __int8 (*)(void))this->vfptr->Eof)() )
+  if ( this->OSuite::IReader::vfptr->Eof(&this->OSuite::IReader) )
     return 0i64;
-  if ( v3->m_bTransferChunked )
+  if ( this->m_bTransferChunked )
   {
-    OSuite::ZHttpStreamReader::ReceiveChunkSize(v3);
-    if ( v3->m_bLastChunkReceive )
+    OSuite::ZHttpStreamReader::ReceiveChunkSize(this);
+    if ( this->m_bLastChunkReceive )
       return 0i64;
-    v7 = v3->m_nChunkSize;
-    if ( v7 <= 0 )
+    m_nChunkSize = this->m_nChunkSize;
+    if ( m_nChunkSize <= 0 )
       return 0i64;
-    v8 = v4;
-    if ( (signed int)v4 > v7 )
-      v8 = v3->m_nChunkSize;
+    v8 = nLength;
+    if ( (int)nLength > m_nChunkSize )
+      v8 = this->m_nChunkSize;
     v9 = v8;
-    v10 = OSuite::ZHttpConnection::Socket(v3->m_httpConnection);
-    v11 = OSuite::ZSocket::ReceiveBuffer(v10, v5, v9);
-    if ( !v11 )
+    v10 = OSuite::ZHttpConnection::Socket(this->m_httpConnection);
+    v11 = OSuite::ZSocket::ReceiveBuffer(v10, pMem, v9);
+    if ( !v11 && OSuite::ZHttpConnection::HasFatalError(this->m_httpConnection) )
+      return 0i64;
+    this->m_nChunkSize -= v11;
+    nLength -= v11;
+    if ( !this->m_nChunkSize )
     {
-      if ( OSuite::ZHttpConnection::HasFatalError(v3->m_httpConnection) )
-        return 0i64;
-    }
-    v3->m_nChunkSize -= v11;
-    v4 -= v11;
-    if ( !v3->m_nChunkSize )
-    {
-      v12 = OSuite::ZHttpConnection::Socket(v3->m_httpConnection);
-      OSuite::ZSocket::ReceiveBuffer(v12, &pBuffer, 2ui64);
-      v3->m_nChunkSize = -1;
+      v12 = OSuite::ZHttpConnection::Socket(this->m_httpConnection);
+      OSuite::ZSocket::ReceiveBuffer(v12, pBuffer, 2ui64);
+      this->m_nChunkSize = -1;
     }
   }
   else
   {
-    v13 = OSuite::ZHttpConnection::Socket(v3->m_httpConnection);
-    v11 = OSuite::ZSocket::ReceiveBuffer(v13, v5, v4);
+    v13 = OSuite::ZHttpConnection::Socket(this->m_httpConnection);
+    v11 = OSuite::ZSocket::ReceiveBuffer(v13, pMem, nLength);
   }
-  if ( v11 != v4 )
-  {
-    if ( OSuite::ZHttpConnection::HasFatalError(v3->m_httpConnection) )
-      OSuite::ZHttpConnection::Abort(v3->m_httpConnection);
-  }
+  if ( v11 != nLength && OSuite::ZHttpConnection::HasFatalError(this->m_httpConnection) )
+    OSuite::ZHttpConnection::Abort(this->m_httpConnection);
   return v11;
 }
 
 // File Line: 203
 // RVA: 0xEE21E4
-signed __int64 __fastcall OSuite::ZHttpStreamReader::ReceiveChunkedByte(OSuite::ZHttpStreamReader *this)
+__int64 __fastcall OSuite::ZHttpStreamReader::ReceiveChunkedByte(OSuite::ZHttpStreamReader *this)
 {
-  signed __int64 result; // rax
-  unsigned __int8 pMem; // [rsp+20h] [rbp-18h]
+  char pMem[8]; // [rsp+20h] [rbp-18h] BYREF
 
-  if ( OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(this, &pMem, 1ui64) == 1 )
-    result = pMem;
+  if ( OSuite::ZHttpStreamReader::ReceiveChunkedBuffer(this, pMem, 1ui64) == 1 )
+    return (unsigned __int8)pMem[0];
   else
-    result = 0xFFFFFFFFi64;
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 214
 // RVA: 0xEE2024
 __int64 __fastcall OSuite::ZHttpStreamReader::ReceiveChunkSize(OSuite::ZHttpStreamReader *this)
 {
-  OSuite::ZHttpStreamReader *v1; // rbx
   OSuite::ZSocket *v2; // rax
-  int v3; // er9
+  int v3; // r9d
   int v4; // eax
   OSuite::ZSocket *v5; // rax
-  char v7[4]; // [rsp+20h] [rbp-48h]
-  char pszString; // [rsp+28h] [rbp-40h]
-  char v9; // [rsp+29h] [rbp-3Fh]
+  char v7[4]; // [rsp+20h] [rbp-48h] BYREF
+  OSuite::ZHttpParser pszString[5]; // [rsp+28h] [rbp-40h] BYREF
 
-  v1 = this;
   if ( this->m_nChunkSize == -1 )
   {
     v2 = OSuite::ZHttpConnection::Socket(this->m_httpConnection);
-    if ( OSuite::ZSocket::ReceiveString(v2, &pszString, 0x28ui64) )
+    if ( OSuite::ZSocket::ReceiveString(v2, (char *)pszString, 0x28ui64) )
     {
       *(_DWORD *)v7 = 0;
-      v4 = OSuite::ZHttpParser::parsebase<char>((OSuite::ZHttpParser *)&pszString, v7, (int *)0x10, v3);
-      v1->m_nChunkSize = v4;
+      v4 = OSuite::ZHttpParser::parsebase<char>(pszString, v7, (int *)0x10, v3);
+      this->m_nChunkSize = v4;
       if ( !v4 )
       {
         do
-          v5 = OSuite::ZHttpConnection::Socket(v1->m_httpConnection);
-        while ( OSuite::ZSocket::ReceiveString(v5, &pszString, 0x28ui64) && (pszString != 10 || v9) );
-        v1->m_bLastChunkReceive = 1;
+          v5 = OSuite::ZHttpConnection::Socket(this->m_httpConnection);
+        while ( OSuite::ZSocket::ReceiveString(v5, (char *)pszString, 0x28ui64)
+             && (LOBYTE(pszString[0].vfptr) != 10 || BYTE1(pszString[0].vfptr)) );
+        this->m_bLastChunkReceive = 1;
       }
     }
   }
-  return (unsigned int)v1->m_nChunkSize;
+  return (unsigned int)this->m_nChunkSize;
 }
 

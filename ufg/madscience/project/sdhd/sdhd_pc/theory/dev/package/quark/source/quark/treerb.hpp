@@ -10,7 +10,8 @@ void __fastcall UFG::qBaseNodeRB::qBaseNodeRB(UFG::qBaseNodeRB *this, unsigned i
 
 // File Line: 68
 // RVA: 0x3BF0
-__int64 __fastcall BasicArrayImplementation<hkDataArrayImpl *>::getSize(BasicArrayImplementation<hkDataObjectImpl *> *this)
+__int64 __fastcall BasicArrayImplementation<hkDataArrayImpl *>::getSize(
+        BasicArrayImplementation<hkDataObjectImpl *> *this)
 {
   return (unsigned int)this->m_data.m_size;
 }
@@ -24,67 +25,66 @@ _BOOL8 __fastcall UFG::qBaseTreeRB::IsEmpty(UFG::qBaseTreeRB *this)
 
 // File Line: 146
 // RVA: 0x1ECBE0
-void __fastcall UFG::qNodeRB<UFG::PropertyMetadata>::qNodeRB<UFG::PropertyMetadata>(UFG::qNodeRB<UFG::PropertyMetadata> *this, unsigned int uid)
+void __fastcall UFG::qNodeRB<UFG::PropertyMetadata>::qNodeRB<UFG::PropertyMetadata>(
+        UFG::qNodeRB<UFG::PropertyMetadata> *this,
+        unsigned int uid)
 {
   UFG::qBaseNodeRB::qBaseNodeRB(&this->mNode, uid);
 }
 
 // File Line: 173
 // RVA: 0x289E0
-void __fastcall UFG::qTreeRB<UFG::qMapNode32<void *>,UFG::qMapNode32<void *>,1>::~qTreeRB<UFG::qMapNode32<void *>,UFG::qMapNode32<void *>,1>(UFG::qTreeRB<UFG::qMapNode32<unsigned long>,UFG::qMapNode32<unsigned long>,1> *this)
+void __fastcall UFG::qTreeRB<UFG::qMapNode32<void *>,UFG::qMapNode32<void *>,1>::~qTreeRB<UFG::qMapNode32<void *>,UFG::qMapNode32<void *>,1>(
+        UFG::qTreeRB<UFG::qMapNode32<unsigned long>,UFG::qMapNode32<unsigned long>,1> *this)
 {
-  Render::Skinning *v1; // rdi
-  Render::SkinningCacheNode *v2; // rbx
+  Render::SkinningCacheNode *Head; // rbx
 
-  v1 = (Render::Skinning *)this;
-  if ( this->mTree.mCount )
+  while ( this->mTree.mCount )
   {
-    do
-    {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v1->mSkinnedVertexBuffers);
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mSkinnedVertexBuffers.mTree, &v2->mNode);
-      operator delete[](v2);
-    }
-    while ( v1->mSkinnedVertexBuffers.mTree.mCount );
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)this, &Head->mNode);
+    operator delete[](Head);
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB(v1);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)this);
 }
 
 // File Line: 180
 // RVA: 0x16EF50
-UFG::qSharedStringData *__fastcall UFG::qTreeRB<UFG::qFileMapLocation,UFG::qFileMapLocation,1>::Get(UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *this, unsigned int uid)
+UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *__fastcall UFG::qTreeRB<UFG::qFileMapLocation,UFG::qFileMapLocation,1>::Get(
+        UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *this,
+        unsigned int uid)
 {
-  UFG::qSharedStringData *v2; // r8
-  UFG::qSharedStringData *v3; // r9
-  UFG::qSharedStringData *result; // rax
+  UFG::qSharedStringData *p_mNULL; // r9
+  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *result; // rax
   bool i; // zf
-  unsigned int v6; // ecx
+  unsigned int mUID; // ecx
   UFG::qSharedStringData *j; // rcx
 
-  v2 = (UFG::qSharedStringData *)this;
   if ( uid )
   {
-    v3 = (UFG::qSharedStringData *)&this->mTree.mNULL;
-    result = (UFG::qSharedStringData *)this;
+    p_mNULL = (UFG::qSharedStringData *)&this->mTree.mNULL;
+    result = this;
     for ( i = this == (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)&this->mTree.mNULL;
           !i;
-          i = result == v3 )
+          i = result == (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)p_mNULL )
     {
-      v6 = result->mNode.mUID;
-      if ( result != v2 && v6 == uid )
+      mUID = result->mTree.mRoot.mUID;
+      if ( result != this && mUID == uid )
       {
-        for ( j = (UFG::qSharedStringData *)result->mNode.mChild[0]; j; j = (UFG::qSharedStringData *)j->mNode.mChild[0] )
+        for ( j = (UFG::qSharedStringData *)result->mTree.mRoot.mChild[0];
+              j;
+              j = (UFG::qSharedStringData *)j->mNode.mChild[0] )
         {
           if ( j->mNode.mUID != uid )
             break;
-          result = j;
+          result = (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)j;
         }
         return result;
       }
-      if ( uid > v6 )
-        result = (UFG::qSharedStringData *)result->mNode.mChild[1];
+      if ( uid > mUID )
+        result = (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)result->mTree.mRoot.mChild[1];
       else
-        result = (UFG::qSharedStringData *)result->mNode.mChild[0];
+        result = (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)result->mTree.mRoot.mChild[0];
     }
   }
   return 0i64;
@@ -92,144 +92,143 @@ UFG::qSharedStringData *__fastcall UFG::qTreeRB<UFG::qFileMapLocation,UFG::qFile
 
 // File Line: 184
 // RVA: 0x5B7CB0
-void __fastcall UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1> *this, UFG::qNodeRB<UEL::ParameterBindingEntry> *n)
+// attributes: thunk
+void __fastcall UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(
+        UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1> *this,
+        UFG::qNodeRB<UEL::ParameterBindingEntry> *n)
 {
   UFG::qBaseTreeRB::Add(&this->mTree, &n->mNode);
 }
 
 // File Line: 187
 // RVA: 0x5BDED0
-void __fastcall UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1>::DeleteAll(UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1> *this)
+void __fastcall UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1>::DeleteAll(
+        UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1> *this)
 {
-  UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *v1; // rdi
-  Render::SkinningCacheNode *v2; // rbx
-  Illusion::Buffer *v3; // rcx
+  Render::SkinningCacheNode *Head; // rbx
+  Illusion::Buffer *mCachedBufferPtr; // rcx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rcx
 
-  v1 = (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this;
-  if ( this->mTree.mCount )
+  while ( this->mTree.mCount )
   {
-    do
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)this, &Head->mNode);
+    if ( Head )
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(v1);
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mTree, &v2->mNode);
-      if ( v2 )
-      {
-        v3 = v2[3].mCachedBufferPtr;
-        if ( v3 )
-          operator delete[](v3);
-        v2[3].mCachedBufferPtr = 0i64;
-        v2[3].mNode.mUID = 0i64;
-        v4 = v2[3].mNode.mChild[1];
-        if ( v4 )
-          operator delete[](v4);
-        v2[3].mNode.mChild[1] = 0i64;
-        v2[3].mNode.mChild[0] = 0i64;
-        UFG::DataStreamer::Handle::~Handle((UFG::DataStreamer::Handle *)&v2[2]);
-        UFG::qString::~qString((UFG::qString *)&v2->mCachedBufferPtr);
-        operator delete[](v2);
-      }
+      mCachedBufferPtr = Head[3].mCachedBufferPtr;
+      if ( mCachedBufferPtr )
+        operator delete[](mCachedBufferPtr);
+      Head[3].mCachedBufferPtr = 0i64;
+      Head[3].mNode.mUID = 0i64;
+      v4 = Head[3].mNode.mChild[1];
+      if ( v4 )
+        operator delete[](v4);
+      Head[3].mNode.mChild[1] = 0i64;
+      Head[3].mNode.mChild[0] = 0i64;
+      UFG::DataStreamer::Handle::~Handle((UFG::DataStreamer::Handle *)&Head[2]);
+      UFG::qString::~qString((UFG::qString *)&Head->mCachedBufferPtr);
+      operator delete[](Head);
     }
-    while ( v1->mTree.mCount );
   }
 }
 
 // File Line: 192
 // RVA: 0x28180
-Render::SkinningCacheNode *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetHead(UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this)
+// attributes: thunk
+Render::SkinningCacheNode *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetHead(
+        UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this)
 {
   return UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this);
 }
 
 // File Line: 194
 // RVA: 0x28190
-UFG::qBaseTreeRB *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetNext(UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this, UFG::qNodeRB<UFG::qResourceData> *x)
+// attributes: thunk
+UFG::qBaseTreeRB *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetNext(
+        UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this,
+        UFG::qBaseNodeRB *x)
 {
-  return UFG::qBaseTreeRB::GetNext(&this->mTree, &x->mNode);
+  return UFG::qBaseTreeRB::GetNext(&this->mTree, x);
 }
 
 // File Line: 195
 // RVA: 0x172050
-UFG::qResourceData *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetPrev(UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this, UFG::qNodeRB<UFG::qResourceData> *x)
+UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *__fastcall UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1>::GetPrev(
+        UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *this,
+        UFG::qNodeRB<UFG::qResourceData> *x)
 {
-  UFG::qResourceData *v2; // r8
-  UFG::qBaseNodeRB *v3; // r9
-  UFG::qResourceData *v4; // r10
-  UFG::qResourceData *i; // rax
-  UFG::qResourceData *result; // rax
+  UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *v2; // r8
+  UFG::qBaseNodeRB *p_mNULL; // r9
+  UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *i; // rax
+  UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *result; // rax
   UFG::qResourceData *v7; // rcx
 
-  v2 = (UFG::qResourceData *)x->mNode.mChild[0];
-  v3 = &this->mTree.mNULL;
-  v4 = (UFG::qResourceData *)this;
+  v2 = (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)x->mNode.mChild[0];
+  p_mNULL = &this->mTree.mNULL;
   if ( &this->mTree.mNULL == (UFG::qBaseNodeRB *)v2 )
   {
-    result = (UFG::qResourceData *)((_QWORD)x->mNode.mParent & 0xFFFFFFFFFFFFFFFEui64);
-    if ( x == (UFG::qNodeRB<UFG::qResourceData> *)result->mNode.mChild[0] )
+    result = (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)((unsigned __int64)x->mNode.mParent & 0xFFFFFFFFFFFFFFFEui64);
+    if ( x == (UFG::qNodeRB<UFG::qResourceData> *)result->mTree.mRoot.mChild[0] )
     {
-      while ( result != v4 )
+      while ( result != this )
       {
-        v7 = result;
-        result = (UFG::qResourceData *)((_QWORD)result->mNode.mParent & 0xFFFFFFFFFFFFFFFEui64);
-        if ( v7 != (UFG::qResourceData *)result->mNode.mChild[0] )
+        v7 = (UFG::qResourceData *)result;
+        result = (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)((unsigned __int64)result->mTree.mRoot.mParent & 0xFFFFFFFFFFFFFFFEui64);
+        if ( v7 != (UFG::qResourceData *)result->mTree.mRoot.mChild[0] )
           return result;
       }
-      result = 0i64;
+      return 0i64;
     }
   }
   else
   {
-    for ( i = (UFG::qResourceData *)v2->mNode.mChild[1];
-          i != (UFG::qResourceData *)v3;
-          i = (UFG::qResourceData *)i->mNode.mChild[1] )
+    for ( i = (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)v2->mTree.mRoot.mChild[1];
+          i != (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)p_mNULL;
+          i = (UFG::qTreeRB<UFG::qResourceData,UFG::qResourceData,1> *)i->mTree.mRoot.mChild[1] )
     {
       v2 = i;
     }
-    result = v2;
+    return v2;
   }
   return result;
 }
 
 // File Line: 214
 // RVA: 0x5C39C0
-void __fastcall UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>(UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip> *this, unsigned int key, UFG::UIHKPlayerObjectiveMinimapBlip *val)
+void __fastcall UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>(
+        UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip> *this,
+        unsigned int key,
+        UFG::UIHKPlayerObjectiveMinimapBlip *val)
 {
-  UFG::UIHKPlayerObjectiveMinimapBlip *v3; // rdi
-  UFG::qSafePointer<UFG::SimComponent,UFG::HudComponent> *v4; // ST28_8
-  UFG::UIHKPlayerObjectiveMinimapBlip *v5; // [rsp+68h] [rbp+20h]
+  UFG::UIHKPlayerObjectiveMinimapBlip *p_mValue; // rbx
 
-  v3 = val;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = key;
-  v5 = &this->mValue;
-  v5->name.mUID = -1;
+  p_mValue = &this->mValue;
+  this->mValue.name.mUID = -1;
   UFG::qString::qString(&this->mValue.type);
-  v4 = &v5->target;
-  v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v5->target.m_pPointer = 0i64;
-  UFG::UIHKPlayerObjectiveMinimapBlip::operator=(v5, v3);
+  p_mValue->target.mPrev = &p_mValue->target;
+  p_mValue->target.mNext = &p_mValue->target;
+  p_mValue->target.m_pPointer = 0i64;
+  UFG::UIHKPlayerObjectiveMinimapBlip::operator=(p_mValue, val);
 }
 
 // File Line: 232
 // RVA: 0xE0160
-void __fastcall UFG::qMap<Render::VerletCloth *>::Set(UFG::qMap<Render::VerletCloth *> *this, unsigned int key, Render::VerletCloth *const *value)
+void __fastcall UFG::qMap<Render::VerletCloth *>::Set(
+        UFG::qMap<Render::VerletCloth *> *this,
+        unsigned int key,
+        Render::VerletCloth **value)
 {
-  Render::VerletCloth *const *v3; // rdi
-  unsigned int v4; // esi
-  UFG::qMap<Render::VerletCloth *> *v5; // rbp
   UFG::qBaseTreeRB *v6; // rax
   char *v7; // rax
   UFG::qBaseNodeRB *v8; // rbx
 
-  v3 = value;
-  v4 = key;
-  v5 = this;
   if ( key && (v6 = UFG::qBaseTreeRB::Get(&this->mTree.mTree, key)) != 0i64 )
   {
-    v6->mNULL.mParent = (UFG::qBaseNodeRB *)*v3;
+    v6->mNULL.mParent = (UFG::qBaseNodeRB *)*value;
   }
   else
   {
@@ -240,15 +239,15 @@ void __fastcall UFG::qMap<Render::VerletCloth *>::Set(UFG::qMap<Render::VerletCl
       *(_QWORD *)v7 = 0i64;
       *((_QWORD *)v7 + 1) = 0i64;
       *((_QWORD *)v7 + 2) = 0i64;
-      *((_DWORD *)v7 + 6) = v4;
-      *((Render::VerletCloth **)v7 + 4) = *v3;
+      *((_DWORD *)v7 + 6) = key;
+      *((_QWORD *)v7 + 4) = *value;
     }
     else
     {
       v8 = 0i64;
     }
-    UFG::qBaseTreeRB::Add(&v5->mTree.mTree, v8);
-    v8[1].mParent = (UFG::qBaseNodeRB *)*v3;
+    UFG::qBaseTreeRB::Add(&this->mTree.mTree, v8);
+    v8[1].mParent = (UFG::qBaseNodeRB *)*value;
   }
 }
 

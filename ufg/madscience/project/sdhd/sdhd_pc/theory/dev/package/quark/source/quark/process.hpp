@@ -7,16 +7,16 @@ void __fastcall UFG::qMutexScopeLocker::~qMutexScopeLocker(UFG::qMutexScopeLocke
 
 // File Line: 138
 // RVA: 0xA16E90
-UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *__fastcall UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>>::operator->(UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> > *this, UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *result)
+UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *__fastcall UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>>::operator->(
+        UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> > *this,
+        UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *result)
 {
-  UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *v2; // rbx
-  UFG::qMutex *v3; // rcx
+  UFG::qMutex *p_mMutex; // rcx
 
-  v2 = result;
   result->mObj = this->mObj;
-  v3 = &this->mMutex;
-  result->mLock.mMutex = v3;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)v3);
-  return v2;
+  p_mMutex = &this->mMutex;
+  result->mLock.mMutex = p_mMutex;
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)p_mMutex);
+  return result;
 }
 

@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiNavMeshPathRequestInfo::staticClass()
 
 // File Line: 89
 // RVA: 0xBB6C20
-void __fastcall finishLoadedObjecthkaiNavMeshPathRequestInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshPathRequestInfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiNavMeshPathRequestInfo::`vftable;
+    *p = &hkaiNavMeshPathRequestInfo::`vftable;
 }
 
 // File Line: 95
 // RVA: 0xBB6C40
-void __fastcall cleanupLoadedObjecthkaiNavMeshPathRequestInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshPathRequestInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 99
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiNavMeshPathRequestInfoTypeInfo__()
   hkaiNavMeshPathRequestInfoTypeInfo.m_typeName = "hkaiNavMeshPathRequestInfo";
   hkaiNavMeshPathRequestInfoTypeInfo.m_vtable = result;
   hkaiNavMeshPathRequestInfoTypeInfo.m_scopedName = "!hkaiNavMeshPathRequestInfo";
-  hkaiNavMeshPathRequestInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavMeshPathRequestInfo;
-  hkaiNavMeshPathRequestInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavMeshPathRequestInfo;
+  hkaiNavMeshPathRequestInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavMeshPathRequestInfo;
+  hkaiNavMeshPathRequestInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavMeshPathRequestInfo;
   return result;
 }
 
@@ -94,17 +94,17 @@ hkClass *__fastcall hkaiNavVolumePathRequestInfo::staticClass()
 
 // File Line: 160
 // RVA: 0xBB6C60
-void __fastcall finishLoadedObjecthkaiNavVolumePathRequestInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolumePathRequestInfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiNavVolumePathRequestInfo::`vftable;
+    *p = &hkaiNavVolumePathRequestInfo::`vftable;
 }
 
 // File Line: 166
 // RVA: 0xBB6C80
-void __fastcall cleanupLoadedObjecthkaiNavVolumePathRequestInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolumePathRequestInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 170
@@ -125,8 +125,8 @@ void **dynamic_initializer_for__hkaiNavVolumePathRequestInfoTypeInfo__()
   hkaiNavVolumePathRequestInfoTypeInfo.m_typeName = "hkaiNavVolumePathRequestInfo";
   hkaiNavVolumePathRequestInfoTypeInfo.m_vtable = result;
   hkaiNavVolumePathRequestInfoTypeInfo.m_scopedName = "!hkaiNavVolumePathRequestInfo";
-  hkaiNavVolumePathRequestInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavVolumePathRequestInfo;
-  hkaiNavVolumePathRequestInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavVolumePathRequestInfo;
+  hkaiNavVolumePathRequestInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavVolumePathRequestInfo;
+  hkaiNavVolumePathRequestInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavVolumePathRequestInfo;
   return result;
 }
 
@@ -159,7 +159,7 @@ void dynamic_initializer_for__hkaiWorldCharacterStepSerializableContextClass__()
     &hkaiWorldCharacterStepSerializableContext_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 284
@@ -171,23 +171,26 @@ hkClass *__fastcall hkaiWorld::CharacterStepSerializableContext::staticClass()
 
 // File Line: 291
 // RVA: 0xBB6CA0
-void __fastcall finishLoadedObjecthkaiWorldCharacterStepSerializableContext(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiWorldCharacterStepSerializableContext(
+        hkaiWorld::CharacterStepSerializableContext *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiWorld::CharacterStepSerializableContext::CharacterStepSerializableContext);
+  if ( p )
+    hkaiWorld::CharacterStepSerializableContext::CharacterStepSerializableContext(p, finishing);
 }
 
 // File Line: 297
 // RVA: 0xBB6CC0
-void __fastcall cleanupLoadedObjecthkaiWorldCharacterStepSerializableContext(void *p)
+void __fastcall cleanupLoadedObjecthkaiWorldCharacterStepSerializableContext(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 301
 // RVA: 0xBB6CD0
 hkBaseObjectVtbl *__fastcall getVtablehkaiWorldCharacterStepSerializableContext()
 {
-  hkaiWorld::CharacterStepSerializableContext v1; // [rsp+20h] [rbp-58h]
+  hkaiWorld::CharacterStepSerializableContext v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkaiWorld::CharacterStepSerializableContext::CharacterStepSerializableContext(&v1, 0);
   return v1.vfptr;
@@ -204,8 +207,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiWorldCharacterStepSerializableCon
   hkaiWorldCharacterStepSerializableContextTypeInfo.m_typeName = "hkaiWorldCharacterStepSerializableContext";
   hkaiWorldCharacterStepSerializableContextTypeInfo.m_vtable = result;
   hkaiWorldCharacterStepSerializableContextTypeInfo.m_scopedName = "!hkaiWorld::CharacterStepSerializableContext";
-  hkaiWorldCharacterStepSerializableContextTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiWorldCharacterStepSerializableContext;
-  hkaiWorldCharacterStepSerializableContextTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiWorldCharacterStepSerializableContext;
+  hkaiWorldCharacterStepSerializableContextTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiWorldCharacterStepSerializableContext;
+  hkaiWorldCharacterStepSerializableContextTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiWorldCharacterStepSerializableContext;
   return result;
 }
 
@@ -227,7 +230,7 @@ void dynamic_initializer_for__hkaiWorldClass__()
     &hkaiWorld_Default,
     0i64,
     0,
-    0x20u);
+    32);
 }
 
 // File Line: 400
@@ -239,23 +242,24 @@ hkClass *__fastcall hkaiWorld::staticClass()
 
 // File Line: 407
 // RVA: 0xBB6CF0
-void __fastcall finishLoadedObjecthkaiWorld(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiWorld(hkaiWorld *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiWorld::hkaiWorld);
+  if ( p )
+    hkaiWorld::hkaiWorld(p, finishing);
 }
 
 // File Line: 413
 // RVA: 0xBB6D10
-void __fastcall cleanupLoadedObjecthkaiWorld(void *p)
+void __fastcall cleanupLoadedObjecthkaiWorld(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 417
 // RVA: 0xBB6D20
 hkBaseObjectVtbl *__fastcall getVtablehkaiWorld()
 {
-  hkaiWorld v1; // [rsp+20h] [rbp-288h]
+  hkaiWorld v1; // [rsp+20h] [rbp-288h] BYREF
 
   hkaiWorld::hkaiWorld(&v1, 0);
   return v1.vfptr;
@@ -272,8 +276,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiWorldTypeInfo__()
   hkaiWorldTypeInfo.m_typeName = "hkaiWorld";
   hkaiWorldTypeInfo.m_vtable = result;
   hkaiWorldTypeInfo.m_scopedName = "!hkaiWorld";
-  hkaiWorldTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiWorld;
-  hkaiWorldTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiWorld;
+  hkaiWorldTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiWorld;
+  hkaiWorldTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiWorld;
   return result;
 }
 

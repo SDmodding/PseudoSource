@@ -1,85 +1,85 @@
 // File Line: 94
 // RVA: 0x948760
-void __fastcall Scaleform::ListAllocBase<Scaleform::Render::TextNotifier,127,Scaleform::AllocatorLH_POD<Scaleform::Render::TextNotifier,75>>::~ListAllocBase<Scaleform::Render::TextNotifier,127,Scaleform::AllocatorLH_POD<Scaleform::Render::TextNotifier,75>>(Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> > *this)
+void __fastcall Scaleform::ListAllocBase<Scaleform::Render::TextNotifier,127,Scaleform::AllocatorLH_POD<Scaleform::Render::TextNotifier,75>>::~ListAllocBase<Scaleform::Render::TextNotifier,127,Scaleform::AllocatorLH_POD<Scaleform::Render::TextNotifier,75>>(
+        Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> > *this)
 {
-  Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> >::PageType *v1; // rdx
-  Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> >::PageType *v2; // rbx
+  Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> >::PageType *FirstPage; // rdx
+  Scaleform::ListAllocBase<Scaleform::Render::FenceImpl,127,Scaleform::AllocatorLH_POD<Scaleform::Render::FenceImpl,2> >::PageType *pNext; // rbx
 
-  v1 = this->FirstPage;
+  FirstPage = this->FirstPage;
   if ( this->FirstPage )
   {
     do
     {
-      v2 = v1->pNext;
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1 = v2;
+      pNext = FirstPage->pNext;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      FirstPage = pNext;
     }
-    while ( v2 );
+    while ( pNext );
   }
 }
 
 // File Line: 127
 // RVA: 0x9557D0
-Scaleform::Render::GlyphNode *__fastcall Scaleform::ListAllocBase<Scaleform::Render::GlyphNode,127,Scaleform::AllocatorLH_POD<Scaleform::Render::GlyphNode,75>>::Alloc(Scaleform::ListAllocBase<Scaleform::Render::GlyphNode,127,Scaleform::AllocatorLH_POD<Scaleform::Render::GlyphNode,75> > *this, Scaleform::Render::GlyphNode *v)
+Scaleform::Render::GlyphNode *__fastcall Scaleform::ListAllocBase<Scaleform::Render::GlyphNode,127,Scaleform::AllocatorLH_POD<Scaleform::Render::GlyphNode,75>>::Alloc(
+        Scaleform::ListAllocBase<Scaleform::Render::GlyphNode,127,Scaleform::AllocatorLH_POD<Scaleform::Render::GlyphNode,75> > *this,
+        Scaleform::Render::GlyphNode *v)
 {
-  Scaleform::Render::GlyphNode *v2; // rbx
   Scaleform::Render::GlyphNode *result; // rax
-  __int16 v4; // cx
+  __int16 y; // cx
 
-  v2 = v;
   result = Scaleform::ListAllocBase<Scaleform::Render::GlyphNode,127,Scaleform::AllocatorLH_POD<Scaleform::Render::GlyphNode,75>>::allocate(this);
-  result->Param.pFont = v2->Param.pFont;
-  *(_QWORD *)&result->Param.GlyphIndex = *(_QWORD *)&v2->Param.GlyphIndex;
-  *(_QWORD *)&result->Param.BlurY = *(_QWORD *)&v2->Param.BlurY;
-  result->pSlot = v2->pSlot;
-  result->pNext = v2->pNext;
-  result->pNex2 = v2->pNex2;
-  result->mRect = v2->mRect;
-  v4 = v2->Origin.y;
-  result->Origin.x = v2->Origin.x;
-  result->Origin.y = v4;
-  result->Scale = v2->Scale;
+  result->Param.pFont = v->Param.pFont;
+  *(_QWORD *)&result->Param.GlyphIndex = *(_QWORD *)&v->Param.GlyphIndex;
+  *(_QWORD *)&result->Param.BlurY = *(_QWORD *)&v->Param.BlurY;
+  result->pSlot = v->pSlot;
+  result->pNext = v->pNext;
+  result->pNex2 = v->pNex2;
+  result->mRect = v->mRect;
+  y = v->Origin.y;
+  result->Origin.x = v->Origin.x;
+  result->Origin.y = y;
+  result->Scale = v->Scale;
   return result;
 }
 
 // File Line: 154
 // RVA: 0x9CE2F0
-Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::NodeType *__fastcall Scaleform::ListAllocBase<Scaleform::Render::BeginDisplayData,127,Scaleform::AllocatorLH_POD<Scaleform::Render::BeginDisplayData,2>>::allocate(Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> > *this)
+Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *__fastcall Scaleform::ListAllocBase<Scaleform::Render::BeginDisplayData,127,Scaleform::AllocatorLH_POD<Scaleform::Render::BeginDisplayData,2>>::allocate(
+        Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> > *this)
 {
-  Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::NodeType *result; // rax
-  Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> > *v2; // rbx
-  unsigned int v3; // ecx
-  void *v4; // rdx
-  Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *v5; // rcx
-  int v6; // [rsp+30h] [rbp+8h]
+  Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *result; // rax
+  unsigned int NumElementsInPage; // ecx
+  void *pHeapOrPtr; // rdx
+  Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *LastPage; // rcx
+  int v6; // [rsp+30h] [rbp+8h] BYREF
 
-  result = this->FirstEmptySlot;
-  v2 = this;
+  result = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)this->FirstEmptySlot;
   if ( result )
   {
-    this->FirstEmptySlot = result->pNext;
+    this->FirstEmptySlot = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::NodeType *)result->Data[0].pPrev;
   }
   else
   {
-    v3 = this->NumElementsInPage;
-    if ( v3 >= 0x7F )
+    NumElementsInPage = this->NumElementsInPage;
+    if ( NumElementsInPage >= 0x7F )
     {
-      v4 = v2->pHeapOrPtr;
+      pHeapOrPtr = this->pHeapOrPtr;
       v6 = 2;
-      result = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::NodeType *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(Scaleform::Memory::pGlobalHeap, v4, 8136ui64, (Scaleform::AllocInfo *)&v6);
-      result[1016].pNext = 0i64;
-      v5 = v2->LastPage;
-      if ( v5 )
-        v5->pNext = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)result;
+      result = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(Scaleform::Memory::pGlobalHeap, pHeapOrPtr, 8136i64, &v6);
+      result->pNext = 0i64;
+      LastPage = this->LastPage;
+      if ( LastPage )
+        LastPage->pNext = result;
       else
-        v2->FirstPage = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)result;
-      v2->LastPage = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)result;
-      v2->NumElementsInPage = 1;
+        this->FirstPage = result;
+      this->LastPage = result;
+      this->NumElementsInPage = 1;
     }
     else
     {
-      result = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::NodeType *)&v2->LastPage->Data[(unsigned __int64)v3];
-      v2->NumElementsInPage = v3 + 1;
+      result = (Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *)((char *)this->LastPage + 64 * (unsigned __int64)NumElementsInPage);
+      this->NumElementsInPage = NumElementsInPage + 1;
     }
   }
   return result;

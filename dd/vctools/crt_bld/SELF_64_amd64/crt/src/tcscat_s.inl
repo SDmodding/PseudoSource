@@ -1,11 +1,11 @@
 // File Line: 13
 // RVA: 0x12B912C
-__int64 __fastcall strcat_s(char *_Dst, unsigned __int64 _SizeInBytes, const char *_Src)
+__int64 __fastcall strcat_s(char *_Dst, unsigned __int64 _SizeInBytes, char *_Src)
 {
   char *v3; // r9
   int *v4; // rax
   unsigned int v5; // ebx
-  signed __int64 v7; // rcx
+  __int64 v7; // rcx
   char v8; // al
 
   v3 = _Dst;

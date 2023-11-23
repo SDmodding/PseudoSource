@@ -74,17 +74,17 @@ hkClass *__fastcall hkaiTraversalAnnotationLibrary::staticClass()
 
 // File Line: 123
 // RVA: 0xC323D0
-void __fastcall finishLoadedObjecthkaiTraversalAnnotationLibrary(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiTraversalAnnotationLibrary(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiTraversalAnnotationLibrary::`vftable;
+    *p = &hkaiTraversalAnnotationLibrary::`vftable;
 }
 
 // File Line: 129
 // RVA: 0xC323F0
-void __fastcall cleanupLoadedObjecthkaiTraversalAnnotationLibrary(void *p)
+void __fastcall cleanupLoadedObjecthkaiTraversalAnnotationLibrary(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 133
@@ -105,8 +105,8 @@ void **dynamic_initializer_for__hkaiTraversalAnnotationLibraryTypeInfo__()
   hkaiTraversalAnnotationLibraryTypeInfo.m_typeName = "hkaiTraversalAnnotationLibrary";
   hkaiTraversalAnnotationLibraryTypeInfo.m_vtable = result;
   hkaiTraversalAnnotationLibraryTypeInfo.m_scopedName = "!hkaiTraversalAnnotationLibrary";
-  hkaiTraversalAnnotationLibraryTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiTraversalAnnotationLibrary;
-  hkaiTraversalAnnotationLibraryTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiTraversalAnnotationLibrary;
+  hkaiTraversalAnnotationLibraryTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiTraversalAnnotationLibrary;
+  hkaiTraversalAnnotationLibraryTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiTraversalAnnotationLibrary;
   return result;
 }
 

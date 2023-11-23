@@ -5,7 +5,7 @@ __int64 dynamic_initializer_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTriggerT
   UFG::qTaskFunctionDecl::qTaskFunctionDecl(
     &gTaskFunctionDecl_EarlyFlushRenderPhaseTriggerTask,
     &gTaskFunctionDeclData_EarlyFlushRenderPhaseTriggerTask);
-  return atexit(dynamic_atexit_destructor_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTriggerTask__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTriggerTask__);
 }
 
 // File Line: 35
@@ -15,22 +15,25 @@ __int64 dynamic_initializer_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTask__()
   UFG::qTaskFunctionDecl::qTaskFunctionDecl(
     &gTaskFunctionDecl_EarlyFlushRenderPhaseTask,
     &gTaskFunctionDeclData_EarlyFlushRenderPhaseTask);
-  return atexit(dynamic_atexit_destructor_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTask__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTaskFunctionDecl_EarlyFlushRenderPhaseTask__);
 }
 
 // File Line: 37
 // RVA: 0x7D5B0
-void __fastcall EarlyFlushRenderPhaseTask(int workerId, UFG::qMemoryStreamer *memory_streamer, void *param_stream, void *pad0)
+void __fastcall EarlyFlushRenderPhaseTask(
+        int workerId,
+        UFG::qMemoryStreamer *memory_streamer,
+        _QWORD *param_stream,
+        void *pad0)
 {
-  char *v4; // r14
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v5; // rdx
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v6; // r8
-  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v7; // rax
+  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *mPrev; // rax
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v8; // rcx
   RenderQueueLayer *v9; // rsi
   RenderQueueLayer **v10; // rbx
-  signed __int64 v11; // rdi
-  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v12; // rdx
+  __int64 v11; // rdi
+  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *mNext; // rdx
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v13; // rax
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v14; // rcx
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v15; // rcx
@@ -41,34 +44,32 @@ void __fastcall EarlyFlushRenderPhaseTask(int workerId, UFG::qMemoryStreamer *me
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v20; // rcx
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v21; // rcx
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v22; // rax
-  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> v23; // [rsp+28h] [rbp-28h]
-  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> v24; // [rsp+38h] [rbp-18h]
+  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> v23; // [rsp+28h] [rbp-28h] BYREF
+  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> v24; // [rsp+38h] [rbp-18h] BYREF
 
-  v4 = (char *)param_stream;
   v23.mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v23;
   v23.mNode.mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v23;
-  v5 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)((char *)param_stream + 16);
-  v6 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)*((_QWORD *)param_stream + 3);
+  v5 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)(param_stream + 2);
+  v6 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)param_stream[3];
   if ( v6 != v5 )
   {
-    v7 = v23.mNode.mPrev;
+    mPrev = v23.mNode.mPrev;
     v8 = v5->mPrev;
     v23.mNode.mPrev->mNext = v6;
-    v6->mPrev = v7;
+    v6->mPrev = mPrev;
     v8->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v23;
     v23.mNode.mPrev = v8;
     v5->mPrev = v5;
     v5->mNext = v5;
   }
-  if ( *v4 && v4[1] )
+  if ( *(_BYTE *)param_stream && *((_BYTE *)param_stream + 1) )
   {
-    v9 = (RenderQueueLayer *)*((_QWORD *)v4 + 9);
-    v10 = (RenderQueueLayer **)(v4 + 80);
+    v9 = (RenderQueueLayer *)param_stream[9];
+    v10 = (RenderQueueLayer **)(param_stream + 10);
     v11 = 4i64;
     do
     {
-      RenderQueueLayer::Merge(v9, *v10);
-      ++v10;
+      RenderQueueLayer::Merge(v9, *v10++);
       --v11;
     }
     while ( v11 );
@@ -77,13 +78,13 @@ void __fastcall EarlyFlushRenderPhaseTask(int workerId, UFG::qMemoryStreamer *me
     v9->mSerializationList = &v24;
     RenderQueueLayer::SerializeRenderQueues(v9);
     v9->mSerializationList = 0i64;
-    v12 = v24.mNode.mNext;
+    mNext = v24.mNode.mNext;
     if ( (UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *)v24.mNode.mNext != &v24 )
     {
       v13 = v23.mNode.mPrev;
       v14 = v24.mNode.mPrev;
       v23.mNode.mPrev->mNext = v24.mNode.mNext;
-      v12->mPrev = v13;
+      mNext->mPrev = v13;
       v14->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v23;
       v23.mNode.mPrev = v14;
       v24.mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v24;
@@ -97,7 +98,7 @@ void __fastcall EarlyFlushRenderPhaseTask(int workerId, UFG::qMemoryStreamer *me
     v24.mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v24;
     v24.mNode.mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v24;
   }
-  v17 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)(*((_QWORD *)v4 + 1) + 16i64);
+  v17 = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)(param_stream[1] + 16i64);
   v18 = v23.mNode.mNext;
   if ( (UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *)v23.mNode.mNext != &v23 )
   {

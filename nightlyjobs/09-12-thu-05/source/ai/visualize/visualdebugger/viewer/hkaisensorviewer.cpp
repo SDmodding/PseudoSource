@@ -12,66 +12,59 @@ void hkaiSensorViewer::registerViewer(void)
 // RVA: 0xC418D0
 hkProcess *__fastcall hkaiSensorViewer::create(hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
 {
-  hkArray<hkProcessContext *,hkContainerHeapAllocator> *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkaiSensorViewer *v3; // rax
   __int64 v4; // rax
-  hkProcess *result; // rax
 
-  v1 = contexts;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkaiSensorViewer *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 104i64);
-  if ( v3 && (hkaiSensorViewer::hkaiSensorViewer(v3, v1), v4) )
-    result = (hkProcess *)(v4 + 16);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkaiSensorViewer *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 104i64);
+  if ( v3 && (hkaiSensorViewer::hkaiSensorViewer(v3, contexts), v4) )
+    return (hkProcess *)(v4 + 16);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 32
 // RVA: 0xC41F20
-void __fastcall hkaiSensorViewer::hkaiSensorViewer(hkaiSensorViewer *this, hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
+void __fastcall hkaiSensorViewer::hkaiSensorViewer(
+        hkaiSensorViewer *this,
+        hkArray<hkProcessContext *,hkContainerHeapAllocator> *contexts)
 {
-  hkaiSensorViewer *v2; // rbx
-
-  v2 = this;
-  hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
-  v2->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
-  v2->m_displayAabbs.m_capacityAndFlags = 2147483648;
-  v2->m_displayAabbs.m_data = 0i64;
-  v2->m_displayAabbs.m_size = 0;
+  hkaiViewerBase::hkaiViewerBase(this, contexts);
+  this->hkaiViewerBase::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
+  this->hkaiViewerBase::hkProcess::vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
+  this->hkaiViewerBase::hkaiViewerContextWorldListener::vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
+  this->m_displayAabbs.m_capacityAndFlags = 0x80000000;
+  this->m_displayAabbs.m_data = 0i64;
+  this->m_displayAabbs.m_size = 0;
 }
 
 // File Line: 37
 // RVA: 0xC41930
 void __fastcall hkaiSensorViewer::init(hkaiSensorViewer *this)
 {
-  hkProcessHandler *v1; // rax
+  hkProcessHandler *m_processHandler; // rax
   int v2; // ebx
-  hkaiSensorViewer *v3; // rsi
   __int64 v4; // rdi
 
-  v1 = this->m_processHandler;
+  m_processHandler = this->m_processHandler;
   v2 = 0;
-  v3 = this;
-  if ( v1 )
+  if ( m_processHandler )
   {
     v4 = 0i64;
     do
     {
-      if ( v2 >= SLODWORD(v1[22].vfptr) )
+      if ( v2 >= SLODWORD(m_processHandler[22].vfptr) )
         break;
-      ((void (__fastcall *)(hkDebugDisplayHandler **, _QWORD))v3->m_displayHandler[1].vfptr)(
-        &v3->m_displayHandler,
-        *(void *(__fastcall **)(hkProcessHandler *, unsigned int))((char *)&v1[21].vfptr->__vecDelDtor + v4));
-      v1 = v3->m_processHandler;
+      ((void (__fastcall *)(hkDebugDisplayHandler **, _QWORD))this->m_displayHandler[1].vfptr)(
+        &this->m_displayHandler,
+        *(void *(__fastcall **)(hkProcessHandler *, unsigned int))((char *)&m_processHandler[21].vfptr->__vecDelDtor + v4));
+      m_processHandler = this->m_processHandler;
       ++v2;
       v4 += 8i64;
     }
-    while ( v1 );
+    while ( m_processHandler );
   }
 }
 
@@ -80,61 +73,58 @@ void __fastcall hkaiSensorViewer::init(hkaiSensorViewer *this)
 void __fastcall hkaiSensorViewer::~hkaiSensorViewer(hkaiSensorViewer *this)
 {
   int v1; // edi
-  hkaiSensorViewer *v2; // rbx
   __int64 v3; // rsi
-  hkaiViewerContext *v4; // rdx
-  hkDisplayAABB *v5; // rcx
-  int v6; // edi
-  hkDisplayAABB *v7; // rsi
-  signed __int64 v8; // rbp
-  int v9; // eax
+  hkaiViewerContext *m_pntr; // rdx
+  int v5; // edi
+  hkDisplayAABB *v6; // rsi
+  hkDisplayAABB *v7; // rbp
+  int m_capacityAndFlags; // eax
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
+  this->hkaiViewerBase::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
   v1 = 0;
-  this->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
-  v2 = this;
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
+  this->hkaiViewerBase::hkProcess::vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
+  this->hkaiViewerBase::hkaiViewerContextWorldListener::vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
     do
     {
-      v4 = v2->m_context.m_pntr;
-      if ( v1 >= v4->m_worlds.m_size )
+      m_pntr = this->m_context.m_pntr;
+      if ( v1 >= m_pntr->m_worlds.m_size )
         break;
-      hkaiSensorViewer::worldRemovedCallback((hkaiSensorViewer *)((char *)v2 + 64), v4->m_worlds.m_data[v3]);
+      hkaiSensorViewer::worldRemovedCallback(
+        (hkaiSensorViewer *)&this->hkaiViewerContextWorldListener,
+        m_pntr->m_worlds.m_data[v3]);
       ++v1;
       ++v3;
     }
-    while ( v2->m_context.m_pntr );
+    while ( this->m_context.m_pntr );
   }
-  v5 = v2->m_displayAabbs.m_data;
-  v6 = v2->m_displayAabbs.m_size - 1;
-  if ( v6 >= 0 )
+  v5 = this->m_displayAabbs.m_size - 1;
+  if ( v5 >= 0 )
   {
-    v7 = &v5[v6];
-    v8 = (signed __int64)&v5[v6];
+    v6 = &this->m_displayAabbs.m_data[v5];
+    v7 = v6;
     do
     {
-      v7->vfptr->__vecDelDtor((hkBaseObject *)v8, 0);
-      v8 -= 144i64;
+      v6->vfptr->__vecDelDtor(v7--, 0i64);
+      --v5;
       --v6;
-      --v7;
     }
-    while ( v6 >= 0 );
+    while ( v5 >= 0 );
   }
-  v9 = v2->m_displayAabbs.m_capacityAndFlags;
-  v2->m_displayAabbs.m_size = 0;
-  if ( v9 >= 0 )
+  m_capacityAndFlags = this->m_displayAabbs.m_capacityAndFlags;
+  this->m_displayAabbs.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_displayAabbs.m_data,
-      144 * (v9 & 0x3FFFFFFF));
-  v2->m_displayAabbs.m_data = 0i64;
-  v2->m_displayAabbs.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
-  hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_displayAabbs.m_data,
+      144 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_displayAabbs.m_data = 0i64;
+  this->m_displayAabbs.m_capacityAndFlags = 0x80000000;
+  this->hkaiWorld::Listener::vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
+  hkaiViewerBase::~hkaiViewerBase(this);
 }
 
 // File Line: 53
@@ -144,7 +134,7 @@ void __fastcall hkaiSensorViewer::worldAddedCallback(hkaiSensorViewer *this, hka
   if ( this == (hkaiSensorViewer *)64 )
     hkaiWorld::addListener(w, 0i64);
   else
-    hkaiWorld::addListener(w, (hkaiWorld::Listener *)&this->vfptr);
+    hkaiWorld::addListener(w, (hkaiWorld::Listener *)&this->hkProcess);
 }
 
 // File Line: 58
@@ -154,328 +144,303 @@ void __fastcall hkaiSensorViewer::worldRemovedCallback(hkaiSensorViewer *this, h
   if ( this == (hkaiSensorViewer *)64 )
     hkaiWorld::removeListener(w, 0i64);
   else
-    hkaiWorld::removeListener(w, (hkaiWorld::Listener *)&this->vfptr);
+    hkaiWorld::removeListener(w, (hkaiWorld::Listener *)&this->hkProcess);
 }
 
 // File Line: 63
 // RVA: 0xC419A0
-void __fastcall hkaiSensorViewer::postStepCallback(hkaiSensorViewer *this, hkaiWorld *world, hkArrayBase<hkaiBehavior *> *behaviors)
+void __fastcall hkaiSensorViewer::postStepCallback(
+        hkaiSensorViewer *this,
+        hkaiWorld *world,
+        hkArrayBase<hkaiBehavior *> *behaviors)
 {
   int v3; // ebx
-  hkArrayBase<hkaiBehavior *> *v4; // rdi
-  hkaiSensorViewer *v5; // r13
-  int v6; // er14
+  int v6; // r14d
   __int64 v7; // rsi
   int v8; // eax
   int v9; // ecx
-  LPVOID v10; // rax
-  char *v11; // rcx
-  hkArrayBase<hkaiBehavior *> *v12; // rax
-  int v13; // er15
-  __int64 v14; // rsi
-  signed int v15; // er12
-  int v16; // ecx
-  hkaiBehavior *v17; // r14
-  __m128 *v18; // rbx
-  __m128 *v19; // rax
-  __m128 *v20; // rcx
-  __m128 v21; // xmm0
-  __m128 v22; // xmm2
-  __int64 v23; // r15
-  int v24; // eax
-  int v25; // eax
-  signed __int64 v26; // rdx
-  int v27; // ebx
-  void (__fastcall ***v28)(signed __int64, _QWORD, hkArrayBase<hkaiBehavior *> *); // rdi
-  signed __int64 v29; // rsi
-  __int64 v30; // rax
-  hkDisplayAABB *v31; // rbx
-  __int64 v32; // rdi
-  int v33; // ebx
-  hkLifoAllocator *v34; // rax
+  hkLifoAllocator *Value; // rax
+  hkVector4f *m_cur; // r8
+  int v12; // edx
+  char *v13; // rcx
+  hkVector4f *v14; // rax
+  int v15; // r15d
+  __int64 v16; // rsi
+  int i; // r12d
+  int v18; // ecx
+  hkaiBehavior *v19; // r14
+  __m128 *p_m_quad; // rbx
+  __m128 *v21; // rax
+  __m128 *v22; // rcx
+  __m128 v23; // xmm0
+  __m128 v24; // xmm2
+  __int64 v25; // r15
+  int v26; // eax
+  int v27; // eax
+  int v28; // ebx
+  void (__fastcall ***v29)(_QWORD, _QWORD); // rdi
+  void (__fastcall ***v30)(_QWORD, _QWORD); // rsi
+  __int64 vfptr_low; // rax
+  hkDisplayAABB *v32; // rbx
+  __int64 v33; // rdi
+  int v34; // ebx
   hkLifoAllocator *v35; // rcx
   char *v36; // rax
   int v37; // edx
   char *v38; // r8
-  unsigned int v39; // ebx
-  int v40; // ebx
+  int v39; // ebx
+  int v40; // edi
   int v41; // edi
-  int v42; // edi
-  __int64 v43; // rsi
-  signed __int64 v44; // rbx
-  hkaiViewerContext *v45; // rcx
-  hkBaseObjectVtbl *v46; // r10
-  int v47; // eax
-  char *v48; // rdi
-  signed int v49; // ebx
-  hkLifoAllocator *v50; // rax
-  int v51; // er8
-  int v52; // eax
-  char *v53; // rdi
-  signed int v54; // ebx
-  hkLifoAllocator *v55; // rax
-  int v56; // er8
-  __int64 sizeElem; // [rsp+20h] [rbp-11h]
-  hkArrayBase<hkaiBehavior *> *array; // [rsp+28h] [rbp-9h]
-  int v59; // [rsp+30h] [rbp-1h]
-  int v60; // [rsp+34h] [rbp+3h]
-  void *v61; // [rsp+38h] [rbp+7h]
-  int v62; // [rsp+40h] [rbp+Fh]
-  char *v63; // [rsp+48h] [rbp+17h]
-  int v64; // [rsp+50h] [rbp+1Fh]
-  int v65; // [rsp+54h] [rbp+23h]
+  __int64 v42; // rsi
+  __int64 v43; // rbx
+  hkaiViewerContext *m_pntr; // rcx
+  hkBaseObjectVtbl *vfptr; // r10
+  int v46; // eax
+  char *v47; // rdi
+  signed int v48; // ebx
+  hkLifoAllocator *v49; // rax
+  int v50; // r8d
+  int v51; // eax
+  char *v52; // rdi
+  signed int v53; // ebx
+  hkLifoAllocator *v54; // rax
+  int v55; // r8d
+  hkVector4f *array; // [rsp+28h] [rbp-9h] BYREF
+  int v57; // [rsp+30h] [rbp-1h]
+  int v58; // [rsp+34h] [rbp+3h]
+  void *v59; // [rsp+38h] [rbp+7h]
+  int v60; // [rsp+40h] [rbp+Fh]
+  char *v61; // [rsp+48h] [rbp+17h] BYREF
+  int v62; // [rsp+50h] [rbp+1Fh]
+  int v63; // [rsp+54h] [rbp+23h]
   void *p; // [rsp+58h] [rbp+27h]
-  int v67; // [rsp+60h] [rbp+2Fh]
-  hkaiSensorViewer *retaddr; // [rsp+98h] [rbp+67h]
+  int v65; // [rsp+60h] [rbp+2Fh]
+  hkaiSensorViewer *retaddr; // [rsp+98h] [rbp+67h] BYREF
 
   v3 = 0;
-  v4 = behaviors;
-  v5 = this;
   v6 = 0;
   if ( behaviors->m_size > 0 )
   {
     v7 = 0i64;
     do
     {
-      v8 = (__int64)v4->m_data[v7]->vfptr[6].__vecDelDtor((hkBaseObject *)&v4->m_data[v7]->vfptr, (unsigned int)world);
+      v8 = (int)behaviors->m_data[v7]->hkReferencedObject::hkBaseObject::vfptr[6].__vecDelDtor(
+                  behaviors->m_data[v7],
+                  world);
       ++v6;
       ++v7;
       v3 += v8;
     }
-    while ( v6 < v4->m_size );
+    while ( v6 < behaviors->m_size );
   }
   v9 = 0;
   array = 0i64;
-  v60 = 2147483648;
-  v62 = v3;
-  v59 = 0;
+  v58 = 0x80000000;
+  v60 = v3;
+  v57 = 0;
   if ( v3 )
   {
-    v10 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    behaviors = (hkArrayBase<hkaiBehavior *> *)*((_QWORD *)v10 + 3);
-    world = (hkaiWorld *)((32 * v3 + 127) & 0xFFFFFF80);
-    v11 = (char *)behaviors + (signed int)world;
-    if ( (signed int)world > *((_DWORD *)v10 + 4) || (unsigned __int64)v11 > *((_QWORD *)v10 + 4) )
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkVector4f *)Value->m_cur;
+    v12 = (32 * v3 + 127) & 0xFFFFFF80;
+    v13 = (char *)m_cur + v12;
+    if ( v12 > Value->m_slabSize || v13 > Value->m_end )
     {
-      v12 = (hkArrayBase<hkaiBehavior *> *)hkLifoAllocator::allocateFromNewSlab((hkLifoAllocator *)v10, (int)world);
-      v9 = v59;
-      behaviors = v12;
-      array = v12;
+      v14 = (hkVector4f *)hkLifoAllocator::allocateFromNewSlab(Value, v12);
+      v9 = v57;
+      array = v14;
     }
     else
     {
-      *((_QWORD *)v10 + 3) = v11;
-      v9 = v59;
-      array = behaviors;
+      Value->m_cur = v13;
+      v9 = v57;
+      array = m_cur;
     }
   }
   else
   {
     array = 0i64;
   }
-  v13 = 0;
-  v61 = array;
-  v60 = v3 | 0x80000000;
-  if ( v4->m_size > 0 )
+  v15 = 0;
+  v59 = array;
+  v58 = v3 | 0x80000000;
+  if ( behaviors->m_size > 0 )
   {
-    v14 = 0i64;
+    v16 = 0i64;
     do
     {
-      v15 = 0;
-      if ( ((signed int (__fastcall *)(hkaiBehavior *, hkaiWorld *, hkArrayBase<hkaiBehavior *> *))v4->m_data[v14]->vfptr[6].__vecDelDtor)(
-             v4->m_data[v14],
-             world,
-             behaviors) > 0 )
+      for ( i = 0;
+            i < ((int (__fastcall *)(hkaiBehavior *))behaviors->m_data[v16]->hkReferencedObject::hkBaseObject::vfptr[6].__vecDelDtor)(behaviors->m_data[v16]);
+            p_m_quad[1] = _mm_add_ps(v24, v21[2]) )
       {
-        do
+        v18 = v57;
+        v19 = behaviors->m_data[v16];
+        if ( v57 == (v58 & 0x3FFFFFFF) )
         {
-          v16 = v59;
-          v17 = v4->m_data[v14];
-          if ( v59 == (v60 & 0x3FFFFFFF) )
-          {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 32);
-            v16 = v59;
-          }
-          v59 = v16 + 1;
-          v18 = (__m128 *)&array[2 * v16];
-          v19 = (__m128 *)((__int64 (__fastcall *)(hkaiBehavior *, _QWORD))v17->vfptr[6].__first_virtual_table_function__)(
-                            v17,
-                            (unsigned int)v15++);
-          v20 = (__m128 *)v19[9].m128_u64[1];
-          v21 = _mm_max_ps(_mm_shuffle_ps((__m128)v19[6].m128_u32[3], (__m128)v19[6].m128_u32[3], 0), v19[5]);
-          v22 = _mm_mul_ps(v20[5], v21);
-          *v18 = _mm_add_ps(_mm_mul_ps(v20[4], v21), v19[2]);
-          v18[1] = _mm_add_ps(v22, v19[2]);
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 32);
+          v18 = v57;
         }
-        while ( v15 < ((signed int (*)(void))v4->m_data[v14]->vfptr[6].__vecDelDtor)() );
+        v57 = v18 + 1;
+        p_m_quad = &array[2 * v18].m_quad;
+        v21 = (__m128 *)((__int64 (__fastcall *)(hkaiBehavior *, _QWORD))v19->hkReferencedObject::hkBaseObject::vfptr[6].__first_virtual_table_function__)(
+                          v19,
+                          (unsigned int)i++);
+        v22 = (__m128 *)v21[9].m128_u64[1];
+        v23 = _mm_max_ps(_mm_shuffle_ps((__m128)v21[6].m128_u32[3], (__m128)v21[6].m128_u32[3], 0), v21[5]);
+        v24 = _mm_mul_ps(v22[5], v23);
+        *p_m_quad = _mm_add_ps(_mm_mul_ps(v22[4], v23), v21[2]);
       }
-      ++v13;
-      ++v14;
+      ++v15;
+      ++v16;
     }
-    while ( v13 < v4->m_size );
-    v9 = v59;
-    v5 = retaddr;
+    while ( v15 < behaviors->m_size );
+    v9 = v57;
+    this = retaddr;
   }
-  if ( v9 > SLODWORD(v5->vfptr) )
+  if ( v9 > SLODWORD(this->hkaiViewerBase::hkProcess::vfptr) )
   {
-    v23 = v9;
-    v24 = HIDWORD(v5->vfptr) & 0x3FFFFFFF;
-    if ( v24 < v9 )
+    v25 = v9;
+    v26 = HIDWORD(this->hkaiViewerBase::hkProcess::vfptr) & 0x3FFFFFFF;
+    if ( v26 < v9 )
     {
-      v25 = 2 * v24;
-      if ( v9 < v25 )
-        v9 = v25;
-      hkArrayUtil::_reserve(
-        (hkResult *)&retaddr,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v5->m_memSizeAndFlags,
-        v9,
-        144);
-      v9 = v59;
+      v27 = 2 * v26;
+      if ( v9 < v27 )
+        v9 = v27;
+      hkArrayUtil::_reserve((hkResult *)&retaddr, &hkContainerHeapAllocator::s_alloc, &this->m_memSizeAndFlags, v9, 144);
+      v9 = v57;
     }
-    v26 = *(_QWORD *)&v5->m_memSizeAndFlags + 144 * v23;
-    v27 = LODWORD(v5->vfptr) - v23 - 1;
-    if ( v27 >= 0 )
+    v28 = LODWORD(this->hkaiViewerBase::hkProcess::vfptr) - v25 - 1;
+    if ( v28 >= 0 )
     {
-      v28 = (void (__fastcall ***)(signed __int64, _QWORD, hkArrayBase<hkaiBehavior *> *))(v26 + 144i64 * v27);
-      v29 = v26 + 144i64 * v27;
+      v29 = (void (__fastcall ***)(_QWORD, _QWORD))(*(_QWORD *)&this->m_memSizeAndFlags + 144 * v25 + 144i64 * v28);
+      v30 = v29;
       do
       {
-        (**v28)(v29, 0i64, behaviors);
-        v29 -= 144i64;
-        --v27;
-        v28 -= 18;
+        (**v29)(v30, 0i64);
+        v30 -= 18;
+        --v28;
+        v29 -= 18;
       }
-      while ( v27 >= 0 );
-      v9 = v59;
+      while ( v28 >= 0 );
+      v9 = v57;
     }
-    v30 = SLODWORD(v5->vfptr);
-    v31 = (hkDisplayAABB *)(*(_QWORD *)&v5->m_memSizeAndFlags + 144 * v30);
-    if ( (signed int)v23 - (signed int)v30 > 0 )
+    vfptr_low = SLODWORD(this->hkaiViewerBase::hkProcess::vfptr);
+    v32 = (hkDisplayAABB *)(*(_QWORD *)&this->m_memSizeAndFlags + 144 * vfptr_low);
+    if ( (int)v25 - (int)vfptr_low > 0 )
     {
-      v32 = (unsigned int)(v23 - v30);
+      v33 = (unsigned int)(v25 - vfptr_low);
       do
       {
-        if ( v31 )
-          hkDisplayAABB::hkDisplayAABB(v31);
-        ++v31;
-        --v32;
+        if ( v32 )
+          hkDisplayAABB::hkDisplayAABB(v32);
+        ++v32;
+        --v33;
       }
-      while ( v32 );
-      v9 = v59;
+      while ( v33 );
+      v9 = v57;
     }
-    LODWORD(v5->vfptr) = v23;
+    LODWORD(this->hkaiViewerBase::hkProcess::vfptr) = v25;
   }
-  v33 = v9;
-  v63 = 0i64;
-  v64 = 0;
-  v65 = 2147483648;
-  v67 = v9;
+  v34 = v9;
+  v61 = 0i64;
+  v62 = 0;
+  v63 = 0x80000000;
+  v65 = v9;
   if ( v9 )
   {
-    v34 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v35 = v34;
-    v36 = (char *)v34->m_cur;
-    v37 = (8 * v33 + 127) & 0xFFFFFF80;
+    v35 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v36 = (char *)v35->m_cur;
+    v37 = (8 * v34 + 127) & 0xFFFFFF80;
     v38 = &v36[v37];
     if ( v37 > v35->m_slabSize || v38 > v35->m_end )
     {
       v36 = (char *)hkLifoAllocator::allocateFromNewSlab(v35, v37);
-      v9 = v59;
+      v9 = v57;
     }
     else
     {
       v35->m_cur = v38;
-      v9 = v59;
+      v9 = v57;
     }
   }
   else
   {
     v36 = 0i64;
   }
-  v39 = v33 | 0x80000000;
-  v63 = v36;
+  v61 = v36;
   p = v36;
-  v65 = v39;
-  v40 = v39 & 0x3FFFFFFF;
-  v41 = v9;
-  if ( v40 < v9 )
+  v63 = v34 | 0x80000000;
+  v39 = v34 & 0x3FFFFFFF;
+  v40 = v9;
+  if ( v39 < v9 )
   {
-    if ( v9 < 2 * v40 )
-      v9 = 2 * v40;
-    hkArrayUtil::_reserve(
-      (hkResult *)&retaddr,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v63,
-      v9,
-      8);
-    v9 = v59;
+    if ( v9 < 2 * v39 )
+      v9 = 2 * v39;
+    hkArrayUtil::_reserve((hkResult *)&retaddr, &hkContainerHeapAllocator::s_alloc, &v61, v9, 8);
+    v9 = v57;
   }
-  v64 = v41;
-  v42 = 0;
+  v62 = v40;
+  v41 = 0;
   if ( v9 > 0 )
   {
-    v43 = 0i64;
+    v42 = 0i64;
     do
     {
-      v44 = 144i64 * v42;
+      v43 = 144i64 * v41;
       hkDisplayAABB::setExtents(
-        (hkDisplayAABB *)(v44 + *(_QWORD *)&v5->m_memSizeAndFlags),
-        (hkVector4f *)&array[2 * v42],
-        (hkVector4f *)&array[2 * v42 + 1]);
-      ++v42;
-      v43 += 8i64;
-      *(_QWORD *)&v63[v43 - 8] = v44 + *(_QWORD *)&v5->m_memSizeAndFlags;
+        (hkDisplayAABB *)(v43 + *(_QWORD *)&this->m_memSizeAndFlags),
+        &array[2 * v41],
+        &array[2 * v41 + 1]);
+      ++v41;
+      v42 += 8i64;
+      *(_QWORD *)&v61[v42 - 8] = v43 + *(_QWORD *)&this->m_memSizeAndFlags;
     }
-    while ( v42 < v59 );
+    while ( v41 < v57 );
   }
-  v45 = v5[-1].m_context.m_pntr;
-  v46 = v45->vfptr;
+  m_pntr = this[-1].m_context.m_pntr;
+  vfptr = m_pntr->hkReferencedObject::hkBaseObject::vfptr;
   LODWORD(array) = hkaiSensorViewer::m_tag;
-  LODWORD(sizeElem) = 0;
-  ((void (__fastcall *)(hkaiViewerContext *, hkaiSensorViewer **, char **, _QWORD, __int64))v46[13].__vecDelDtor)(
-    v45,
+  ((void (__fastcall *)(hkaiViewerContext *, hkaiSensorViewer **, char **, _QWORD, _DWORD))vfptr[13].__vecDelDtor)(
+    m_pntr,
     &retaddr,
-    &v63,
+    &v61,
     hkColor::ORANGE,
-    sizeElem);
-  v47 = v64;
-  v48 = (char *)p;
-  if ( p == v63 )
-    v47 = 0;
-  v64 = v47;
-  v49 = (8 * v67 + 127) & 0xFFFFFF80;
-  v50 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v51 = (v49 + 15) & 0xFFFFFFF0;
-  if ( v49 > v50->m_slabSize || &v48[v51] != v50->m_cur || v50->m_firstNonLifoEnd == v48 )
-    hkLifoAllocator::slowBlockFree(v50, v48, v51);
+    0);
+  v46 = v62;
+  v47 = (char *)p;
+  if ( p == v61 )
+    v46 = 0;
+  v62 = v46;
+  v48 = (8 * v65 + 127) & 0xFFFFFF80;
+  v49 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v50 = (v48 + 15) & 0xFFFFFFF0;
+  if ( v48 > v49->m_slabSize || &v47[v50] != v49->m_cur || v49->m_firstNonLifoEnd == v47 )
+    hkLifoAllocator::slowBlockFree(v49, v47, v50);
   else
-    v50->m_cur = v48;
-  v64 = 0;
-  if ( v65 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v63,
-      8 * v65);
-  v52 = v59;
-  v53 = (char *)v61;
-  v63 = 0i64;
-  if ( v61 == array )
-    v52 = 0;
-  v65 = 2147483648;
-  v59 = v52;
-  v54 = (32 * v62 + 127) & 0xFFFFFF80;
-  v55 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v56 = (v54 + 15) & 0xFFFFFFF0;
-  if ( v54 > v55->m_slabSize || &v53[v56] != v55->m_cur || v55->m_firstNonLifoEnd == v53 )
-    hkLifoAllocator::slowBlockFree(v55, v53, v56);
+    v49->m_cur = v47;
+  v62 = 0;
+  if ( v63 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v61, 8 * v63);
+  v51 = v57;
+  v52 = (char *)v59;
+  v61 = 0i64;
+  if ( v59 == array )
+    v51 = 0;
+  v63 = 0x80000000;
+  v57 = v51;
+  v53 = (32 * v60 + 127) & 0xFFFFFF80;
+  v54 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v55 = (v53 + 15) & 0xFFFFFFF0;
+  if ( v53 > v54->m_slabSize || &v52[v55] != v54->m_cur || v54->m_firstNonLifoEnd == v52 )
+    hkLifoAllocator::slowBlockFree(v54, v52, v55);
   else
-    v55->m_cur = v53;
-  v59 = 0;
-  if ( v60 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      32 * v60);
+    v54->m_cur = v52;
+  v57 = 0;
+  if ( v58 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 32 * v58);
+}
+  v57 = 0;
+  if ( v58 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 32 * v58);
 }
 

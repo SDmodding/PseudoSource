@@ -28,23 +28,26 @@ hkClass *__fastcall hkpSimpleBreakableMaterial::staticClass()
 
 // File Line: 58
 // RVA: 0xD510B0
-void __fastcall finishLoadedObjecthkpSimpleBreakableMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSimpleBreakableMaterial(
+        hkpSimpleBreakableMaterial *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial);
+  if ( p )
+    hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(p, finishing);
 }
 
 // File Line: 64
 // RVA: 0xD510D0
-void __fastcall cleanupLoadedObjecthkpSimpleBreakableMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkpSimpleBreakableMaterial(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
 // RVA: 0xD510E0
 hkBaseObjectVtbl *__fastcall getVtablehkpSimpleBreakableMaterial()
 {
-  hkpSimpleBreakableMaterial v1; // [rsp+20h] [rbp-28h]
+  hkpSimpleBreakableMaterial v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpSimpleBreakableMaterialTypeInfo__(
   hkpSimpleBreakableMaterialTypeInfo.m_typeName = "hkpSimpleBreakableMaterial";
   hkpSimpleBreakableMaterialTypeInfo.m_vtable = result;
   hkpSimpleBreakableMaterialTypeInfo.m_scopedName = "!hkpSimpleBreakableMaterial";
-  hkpSimpleBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSimpleBreakableMaterial;
-  hkpSimpleBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSimpleBreakableMaterial;
+  hkpSimpleBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSimpleBreakableMaterial;
+  hkpSimpleBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSimpleBreakableMaterial;
   return result;
 }
 

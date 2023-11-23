@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiDynamicNavMeshQueryMediatorClass__()
     &hkaiDynamicNavMeshQueryMediator_Default,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 84
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiDynamicNavMeshQueryMediator::staticClass()
 
 // File Line: 91
 // RVA: 0xBB66E0
-void __fastcall finishLoadedObjecthkaiDynamicNavMeshQueryMediator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDynamicNavMeshQueryMediator(
+        hkaiDynamicNavMeshQueryMediator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiDynamicNavMeshQueryMediator::hkaiDynamicNavMeshQueryMediator);
+  if ( p )
+    hkaiDynamicNavMeshQueryMediator::hkaiDynamicNavMeshQueryMediator(p, finishing);
 }
 
 // File Line: 97
 // RVA: 0xBB6700
-void __fastcall cleanupLoadedObjecthkaiDynamicNavMeshQueryMediator(void *p)
+void __fastcall cleanupLoadedObjecthkaiDynamicNavMeshQueryMediator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 101
 // RVA: 0xBB6710
 hkBaseObjectVtbl *__fastcall getVtablehkaiDynamicNavMeshQueryMediator()
 {
-  hkaiDynamicNavMeshQueryMediator v1; // [rsp+20h] [rbp-38h]
+  hkaiDynamicNavMeshQueryMediator v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkaiDynamicNavMeshQueryMediator::hkaiDynamicNavMeshQueryMediator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiDynamicNavMeshQueryMediatorTypeIn
   hkaiDynamicNavMeshQueryMediatorTypeInfo.m_typeName = "hkaiDynamicNavMeshQueryMediator";
   hkaiDynamicNavMeshQueryMediatorTypeInfo.m_vtable = result;
   hkaiDynamicNavMeshQueryMediatorTypeInfo.m_scopedName = "!hkaiDynamicNavMeshQueryMediator";
-  hkaiDynamicNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDynamicNavMeshQueryMediator;
-  hkaiDynamicNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDynamicNavMeshQueryMediator;
+  hkaiDynamicNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDynamicNavMeshQueryMediator;
+  hkaiDynamicNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDynamicNavMeshQueryMediator;
   return result;
 }
 

@@ -14,7 +14,7 @@ _BOOL8 __fastcall PoseDriver::IsActive(PoseDriver *this)
 
 // File Line: 99
 // RVA: 0x2DCAD0
-void __fastcall PoseDriver::SetActive(PoseDriver *this, bool tf)
+void __fastcall PoseDriver::SetActive(PoseDriver *this, char tf)
 {
   this->mActive = tf;
 }
@@ -58,12 +58,10 @@ bool __fastcall AimConstraint2::IsDisabled(AimConstraint2 *this)
 // RVA: 0x2AF780
 Expression::IMemberMap *__fastcall AimConstraint2::CreateClone(AimConstraint2 *this)
 {
-  AimConstraint2 *v1; // rbx
   char *v2; // rax
   __int64 v3; // rax
   __int64 v4; // rcx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(
          &gActionTreeMemoryPool,
          0x40ui64,
@@ -79,16 +77,16 @@ Expression::IMemberMap *__fastcall AimConstraint2::CreateClone(AimConstraint2 *t
   {
     v4 = 0i64;
   }
-  *(_QWORD *)(v4 + 8) = v1->mResourceOwner;
-  *(_QWORD *)(v4 + 32) = v1->mResourceOwner;
-  *(_BYTE *)(v4 + 40) = v1->mActive;
-  *(_BYTE *)(v4 + 41) = v1->mDisabled;
-  *(_BYTE *)(v4 + 42) = v1->mBreakpoint;
-  *(_DWORD *)(v4 + 44) = v1->mName.mUID;
-  *(_DWORD *)(v4 + 48) = v1->mJointID;
-  *(_DWORD *)(v4 + 52) = v1->mTargetJointID;
-  *(_DWORD *)(v4 + 56) = v1->mEffectorJoint.mUID;
-  *(_DWORD *)(v4 + 60) = v1->mTargetJoint.mUID;
+  *(_QWORD *)(v4 + 8) = this->PoseDriver::Expression::IMemberMap::mResourceOwner;
+  *(_QWORD *)(v4 + 32) = this->PoseDriver::mResourceOwner;
+  *(_BYTE *)(v4 + 40) = this->mActive;
+  *(_BYTE *)(v4 + 41) = this->mDisabled;
+  *(_BYTE *)(v4 + 42) = this->mBreakpoint;
+  *(_DWORD *)(v4 + 44) = this->mName.mUID;
+  *(_DWORD *)(v4 + 48) = this->mJointID;
+  *(_DWORD *)(v4 + 52) = this->mTargetJointID;
+  *(_DWORD *)(v4 + 56) = this->mEffectorJoint.mUID;
+  *(_DWORD *)(v4 + 60) = this->mTargetJoint.mUID;
   return (Expression::IMemberMap *)v4;
 }
 
@@ -114,13 +112,10 @@ void __fastcall AimConstraintMultiLink::Create()
 // RVA: 0x298C20
 void __fastcall TwoLinkIKsolver::TwoLinkIKsolver(TwoLinkIKsolver *this, MemImageLoadFlag flag)
 {
-  UFG::qNode<PoseDriver,PoseDriver> *v2; // rax
-
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
-  this->mResourceOwner = 0i64;
-  v2 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->PoseDriver::Expression::IMemberMap::mResourceOwner = 0i64;
+  this->mPrev = &this->UFG::qNode<PoseDriver,PoseDriver>;
+  this->mNext = &this->UFG::qNode<PoseDriver,PoseDriver>;
   this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&TwoLinkIKsolver::`vftable;
   this->mLinkInfo.m_firstJointIdx = -1;
@@ -195,16 +190,14 @@ bool __fastcall TwistXRotLinearLink::IsDisabled(TwistXRotLinearLink *this)
 TwistXRotLinearLink *__fastcall TwistXRotLinearLink::Create()
 {
   char *v0; // rdx
-  _QWORD *v1; // rax
 
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x60ui64, "MemberMap::TwistXRotLinearLink", 0i64, 1u);
   if ( !v0 )
     return 0i64;
   *(_QWORD *)v0 = &Expression::IMemberMap::`vftable;
   *((_QWORD *)v0 + 1) = 0i64;
-  v1 = v0 + 16;
-  *v1 = v1;
-  v1[1] = v1;
+  *((_QWORD *)v0 + 2) = v0 + 16;
+  *((_QWORD *)v0 + 3) = v0 + 16;
   *(_QWORD *)v0 = &PoseDriver::`vftable;
   *((_WORD *)v0 + 20) = 0;
   v0[42] = 0;
@@ -241,12 +234,10 @@ bool __fastcall FollowLink::IsDisabled(FollowLink *this)
 // RVA: 0x2AFAF0
 Expression::IMemberMap *__fastcall FollowLink::CreateClone(FollowLink *this)
 {
-  FollowLink *v1; // rbx
   char *v2; // rax
   __int64 v3; // rax
   __int64 v4; // rcx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x60ui64, "MemberMap::CreateClone of FollowLink", 0i64, 1u);
   if ( v2 )
   {
@@ -257,22 +248,22 @@ Expression::IMemberMap *__fastcall FollowLink::CreateClone(FollowLink *this)
   {
     v4 = 0i64;
   }
-  *(_QWORD *)(v4 + 8) = v1->mResourceOwner;
-  *(_QWORD *)(v4 + 32) = v1->mResourceOwner;
-  *(_BYTE *)(v4 + 40) = v1->mActive;
-  *(_BYTE *)(v4 + 41) = v1->mDisabled;
-  *(_BYTE *)(v4 + 42) = v1->mBreakpoint;
-  *(_DWORD *)(v4 + 44) = v1->mName.mUID;
-  *(_QWORD *)(v4 + 48) = v1->mCreature;
-  *(_DWORD *)(v4 + 56) = v1->mDriveJoint.mUID;
-  *(_DWORD *)(v4 + 60) = v1->mFollowJoint.mUID;
-  *(_DWORD *)(v4 + 64) = v1->mDriveJointID;
-  *(_DWORD *)(v4 + 68) = v1->mFollowJointID;
-  *(_DWORD *)(v4 + 72) = v1->mTransformFloatParamRotInput.mValue;
-  *(_DWORD *)(v4 + 76) = v1->mTransformFloatParamRotOutput.mValue;
-  *(_BYTE *)(v4 + 80) = v1->mDriveJointIsParentOfFollow;
-  *(float *)(v4 + 84) = v1->m_M;
-  *(float *)(v4 + 88) = v1->m_B;
+  *(_QWORD *)(v4 + 8) = this->PoseDriver::Expression::IMemberMap::mResourceOwner;
+  *(_QWORD *)(v4 + 32) = this->PoseDriver::mResourceOwner;
+  *(_BYTE *)(v4 + 40) = this->mActive;
+  *(_BYTE *)(v4 + 41) = this->mDisabled;
+  *(_BYTE *)(v4 + 42) = this->mBreakpoint;
+  *(_DWORD *)(v4 + 44) = this->mName.mUID;
+  *(_QWORD *)(v4 + 48) = this->mCreature;
+  *(_DWORD *)(v4 + 56) = this->mDriveJoint.mUID;
+  *(_DWORD *)(v4 + 60) = this->mFollowJoint.mUID;
+  *(_DWORD *)(v4 + 64) = this->mDriveJointID;
+  *(_DWORD *)(v4 + 68) = this->mFollowJointID;
+  *(_DWORD *)(v4 + 72) = this->mTransformFloatParamRotInput.mValue;
+  *(_DWORD *)(v4 + 76) = this->mTransformFloatParamRotOutput.mValue;
+  *(_BYTE *)(v4 + 80) = this->mDriveJointIsParentOfFollow;
+  *(float *)(v4 + 84) = this->m_M;
+  *(float *)(v4 + 88) = this->m_B;
   return (Expression::IMemberMap *)v4;
 }
 
@@ -315,12 +306,10 @@ bool __fastcall Spring1DOF::IsDisabled(Spring1DOF *this)
 // RVA: 0x2AFCD0
 Spring1DOF *__fastcall Spring1DOF::CreateClone(Spring1DOF *this)
 {
-  Spring1DOF *v1; // rdi
   char *v2; // rax
   Spring1DOF *v3; // rax
   Spring1DOF *v4; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB8ui64, "MemberMap::CreateClone of Spring1DOF", 0i64, 1u);
   if ( v2 )
   {
@@ -331,7 +320,7 @@ Spring1DOF *__fastcall Spring1DOF::CreateClone(Spring1DOF *this)
   {
     v4 = 0i64;
   }
-  Spring1DOF::operator=(v4, v1);
+  Spring1DOF::operator=(v4, this);
   return v4;
 }
 

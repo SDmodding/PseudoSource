@@ -1,12 +1,11 @@
 // File Line: 84
 // RVA: 0x12BA650
-const __m128i *__fastcall wcsstr(const wchar_t *wcs1, const wchar_t *wcs2)
+const __m128i *__fastcall wcsstr(const __m128i *wcs1, const __m128i *wcs2)
 {
-  wchar_t v2; // di
-  const wchar_t *v3; // rbx
+  unsigned __int16 v2; // di
   const __m128i *v4; // r8
   __m128i v6; // xmm3
-  __m128i v7; // xmm0
+  __m128i v7; // xmm1
   unsigned int v8; // eax
   unsigned __int64 v9; // rcx
   const __m128i *v10; // rdx
@@ -14,10 +13,10 @@ const __m128i *__fastcall wcsstr(const wchar_t *wcs1, const wchar_t *wcs2)
   __m128i v12; // xmm1
   unsigned int v13; // eax
   unsigned __int64 v14; // rcx
-  __m128i v15; // xmm0
-  const wchar_t *v16; // rcx
-  signed __int64 v17; // r9
-  wchar_t v18; // dx
+  __m128i inserted; // xmm0
+  const __m128i *v16; // rcx
+  __int64 v17; // r9
+  unsigned __int16 v18; // dx
   __m128i v19; // xmm1
   unsigned __int8 v20; // cf
   const __m128i *v21; // rdx
@@ -26,11 +25,10 @@ const __m128i *__fastcall wcsstr(const wchar_t *wcs1, const wchar_t *wcs2)
   __m128i v24; // xmm2
   unsigned __int8 v25; // sf
 
-  v2 = *wcs2;
-  v3 = wcs2;
-  v4 = (const __m128i *)wcs1;
-  if ( !*wcs2 )
-    return (const __m128i *)wcs1;
+  v2 = wcs2->m128i_i16[0];
+  v4 = wcs1;
+  if ( !wcs2->m128i_i16[0] )
+    return wcs1;
   if ( _isa_available < 2 )
   {
     v6 = _mm_shuffle_epi32(_mm_shufflelo_epi16(_mm_cvtsi32_si128(v2), 0), 0);
@@ -45,12 +43,12 @@ const __m128i *__fastcall wcsstr(const wchar_t *wcs1, const wchar_t *wcs2)
         _BitScanForward((unsigned int *)&v9, v8);
         v4 = (const __m128i *)((char *)v4 + 2 * (v9 >> 1));
 LABEL_9:
-        if ( 0 == LOWORD(v4->m128i_i64[0]) )
+        if ( !v4->m128i_i16[0] )
           return 0i64;
-        if ( v2 == LOWORD(v4->m128i_i64[0]) )
+        if ( v2 == v4->m128i_i16[0] )
         {
           v10 = v4;
-          for ( i = (const __m128i *)v3; ; i = (const __m128i *)((char *)i + 2) )
+          for ( i = wcs2; ; i = (const __m128i *)((char *)i + 2) )
           {
             while ( 2 )
             {
@@ -74,9 +72,9 @@ LABEL_9:
               }
               break;
             }
-            if ( 0 == LOWORD(i->m128i_i64[0]) )
+            if ( !i->m128i_i16[0] )
               return v4;
-            if ( LOWORD(v10->m128i_i64[0]) != LOWORD(i->m128i_i64[0]) )
+            if ( v10->m128i_i16[0] != i->m128i_i16[0] )
               break;
             v10 = (const __m128i *)((char *)v10 + 2);
           }
@@ -92,16 +90,16 @@ LABEL_9:
   if ( ((unsigned __int16)wcs2 & 0xFFFu) > 0xFF0ui64 )
   {
     v16 = wcs2;
-    v15 = 0i64;
+    inserted = 0i64;
     v17 = 8i64;
-    v18 = *wcs2;
+    v18 = wcs2->m128i_i16[0];
     do
     {
-      v15 = _mm_insert_epi16(_mm_srli_si128(v15, 2), v18, 7);
-      if ( 0 != v18 )
+      inserted = _mm_insert_epi16(_mm_srli_si128(inserted, 2), v18, 7);
+      if ( v18 )
       {
-        ++v16;
-        v18 = *v16;
+        v16 = (const __m128i *)((char *)v16 + 2);
+        v18 = v16->m128i_i16[0];
       }
       --v17;
     }
@@ -109,37 +107,37 @@ LABEL_9:
   }
   else
   {
-    v15 = _mm_loadu_si128((const __m128i *)wcs2);
+    inserted = _mm_loadu_si128(wcs2);
   }
   while ( 1 )
   {
     while ( ((unsigned __int16)v4 & 0xFFFu) > 0xFF0ui64 )
     {
-      if ( 0 == LOWORD(v4->m128i_i64[0]) )
+      if ( !v4->m128i_i16[0] )
         return 0i64;
-      if ( LOWORD(v4->m128i_i64[0]) == v2 )
+      if ( v4->m128i_i16[0] == v2 )
         goto LABEL_32;
 LABEL_40:
       v4 = (const __m128i *)((char *)v4 + 2);
     }
     v19 = _mm_loadu_si128(v4);
-    v20 = _mm_cmpistrc(v15, v19, 13);
-    if ( v20 | _mm_cmpistrz(v15, v19, 13) )
+    v20 = _mm_cmpistrc(inserted, v19, 13);
+    if ( v20 | _mm_cmpistrz(inserted, v19, 13) )
       break;
     ++v4;
   }
   if ( !v20 )
     return 0i64;
-  v4 = (const __m128i *)((char *)v4 + 2 * _mm_cmpistri(v15, v19, 13));
+  v4 = (const __m128i *)((char *)v4 + 2 * _mm_cmpistri(inserted, v19, 13));
 LABEL_32:
   v21 = v4;
-  for ( j = (const __m128i *)v3; ; ++j )
+  for ( j = wcs2; ; ++j )
   {
     while ( ((unsigned __int16)v21 & 0xFFFu) > 0xFF0ui64 || ((unsigned __int16)j & 0xFFFu) > 0xFF0ui64 )
     {
-      if ( 0 == LOWORD(j->m128i_i64[0]) )
+      if ( !j->m128i_i16[0] )
         return v4;
-      if ( LOWORD(v21->m128i_i64[0]) != LOWORD(j->m128i_i64[0]) )
+      if ( v21->m128i_i16[0] != j->m128i_i16[0] )
         goto LABEL_40;
       v21 = (const __m128i *)((char *)v21 + 2);
       j = (const __m128i *)((char *)j + 2);

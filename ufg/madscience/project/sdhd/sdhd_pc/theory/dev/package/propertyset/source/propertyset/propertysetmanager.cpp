@@ -3,17 +3,20 @@
 __int64 UFG::_dynamic_initializer_for__PropertySetManager_SchemaComponentPropertyLookup__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::PropertySetManager_SchemaComponentPropertyLookup.mTree);
-  return atexit(UFG::_dynamic_atexit_destructor_for__PropertySetManager_SchemaComponentPropertyLookup__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PropertySetManager_SchemaComponentPropertyLookup__);
 }
 
 // File Line: 62
 // RVA: 0x1ECE60
-void __fastcall UFG::SchemaDef::SchemaDef(UFG::SchemaDef *this, UFG::qPropertySet *propertySet, UFG::SchemaDef *parentSchema)
+void __fastcall UFG::SchemaDef::SchemaDef(
+        UFG::SchemaDef *this,
+        UFG::qPropertySet *propertySet,
+        UFG::SchemaDef *parentSchema)
 {
-  UFG::qArray<unsigned long,0> *v3; // rax
+  UFG::qArray<unsigned long,0> *Name; // rax
   UFG::qSymbol *v4; // rax
-  const char *v5; // rax
-  const char *v6; // rax
+  const char *NameString; // rax
+  const char *UsedSpace; // rax
   const char *v7; // rax
   const char *v8; // rax
   const char *v9; // rax
@@ -21,128 +24,118 @@ void __fastcall UFG::SchemaDef::SchemaDef(UFG::SchemaDef *this, UFG::qPropertySe
   unsigned int v11; // eax
   unsigned int v12; // eax
   UFG::qBaseNodeRB *v13; // [rsp+28h] [rbp-110h]
-  UFG::qSymbol v14; // [rsp+40h] [rbp-F8h]
-  unsigned int uid; // [rsp+48h] [rbp-F0h]
-  UFG::qSymbol v16; // [rsp+50h] [rbp-E8h]
-  UFG::qBaseNodeRB *v17; // [rsp+58h] [rbp-E0h]
-  UFG::qPropertySetResource *v18; // [rsp+60h] [rbp-D8h]
+  AMD_HD3D v14; // [rsp+40h] [rbp-F8h] BYREF
+  UFG::qPropertySetResource *Resource; // [rsp+60h] [rbp-D8h]
   UFG::qSymbol *source; // [rsp+68h] [rbp-D0h]
-  UFG::qString *v20; // [rsp+70h] [rbp-C8h]
-  UFG::qList<UFG::qPropertySet,UFG::qPropertySet,1,0> *v21; // [rsp+78h] [rbp-C0h]
-  UFG::qString *v22; // [rsp+80h] [rbp-B8h]
-  UFG::qBaseNodeRB *v23; // [rsp+88h] [rbp-B0h]
-  UFG::qSymbol *v24; // [rsp+90h] [rbp-A8h]
+  UFG::qString *v17; // [rsp+70h] [rbp-C8h]
+  UFG::qList<UFG::qPropertySet,UFG::qPropertySet,1,0> *p_mPropertySetInstances; // [rsp+78h] [rbp-C0h]
+  UFG::qString *v19; // [rsp+80h] [rbp-B8h]
+  UFG::qBaseNodeRB *p_mNode; // [rsp+88h] [rbp-B0h]
+  UFG::qSymbol *v21; // [rsp+90h] [rbp-A8h]
   UFG::qString *text; // [rsp+98h] [rbp-A0h]
-  UFG::qSymbol *v26; // [rsp+A0h] [rbp-98h]
-  UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource> *v27; // [rsp+A8h] [rbp-90h]
-  UFG::qBaseNodeRB *x; // [rsp+B0h] [rbp-88h]
-  UFG::qString *v29; // [rsp+B8h] [rbp-80h]
-  UFG::qList<UFG::SchemaDef,UFG::SchemaDef,0,0> *v30; // [rsp+C0h] [rbp-78h]
-  UFG::qSymbol *v31; // [rsp+C8h] [rbp-70h]
-  __int64 v32; // [rsp+D0h] [rbp-68h]
-  UFG::qString result; // [rsp+D8h] [rbp-60h]
-  UFG::qString v34; // [rsp+100h] [rbp-38h]
-  UFG::SchemaDef *derivedDef; // [rsp+140h] [rbp+8h]
-  UFG::qPropertySet *v36; // [rsp+148h] [rbp+10h]
-  UFG::SchemaDef *v37; // [rsp+150h] [rbp+18h]
+  UFG::qSymbol *v23; // [rsp+A0h] [rbp-98h]
+  UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource> *p_mPropertySet; // [rsp+A8h] [rbp-90h]
+  UFG::qString *v25; // [rsp+B8h] [rbp-80h]
+  UFG::qList<UFG::SchemaDef,UFG::SchemaDef,0,0> *p_mDerivedSchemas; // [rsp+C0h] [rbp-78h]
+  UFG::qSymbol *v27; // [rsp+C8h] [rbp-70h]
+  __int64 v28; // [rsp+D0h] [rbp-68h]
+  UFG::qString result; // [rsp+D8h] [rbp-60h] BYREF
+  UFG::qString v30; // [rsp+100h] [rbp-38h] BYREF
 
-  v37 = parentSchema;
-  v36 = propertySet;
-  derivedDef = this;
-  v32 = -2i64;
-  this->mPrev = (UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *)&this->mPrev;
-  v3 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(propertySet);
-  uid = UFG::qSymbolUC::as_uint32(v3);
-  v23 = &derivedDef->mNode;
-  UFG::qBaseNodeRB::qBaseNodeRB(&derivedDef->mNode, uid);
-  derivedDef->mbComponentSchema = 0;
-  derivedDef->mbSkipParentCheck = 0;
-  BackInfo::BackInfo(&derivedDef->mName);
-  UFG::qString::qString(&derivedDef->mNameString);
-  BackInfo::BackInfo(&derivedDef->mClassName);
-  UFG::qString::qString(&derivedDef->mClassNameString);
-  BackInfo::BackInfo(&derivedDef->mPropertyName);
-  UFG::qString::qString(&derivedDef->mPropertyNameString);
-  v27 = (UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource> *)&derivedDef->mPropertySet.mPrev;
-  UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource>::qTypedResourceHandle<1415605297,UFG::qPropertySetResource>((UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource> *)&derivedDef->mPropertySet.mPrev);
-  v21 = &derivedDef->mPropertySetInstances;
-  derivedDef->mPropertySetInstances.mNode.mPrev = &derivedDef->mPropertySetInstances.mNode;
-  derivedDef->mPropertySetInstances.mNode.mNext = &derivedDef->mPropertySetInstances.mNode;
-  derivedDef->mpParentSchema = v37;
-  v30 = &derivedDef->mDerivedSchemas;
-  derivedDef->mDerivedSchemas.mNode.mPrev = &derivedDef->mDerivedSchemas.mNode;
-  derivedDef->mDerivedSchemas.mNode.mNext = &derivedDef->mDerivedSchemas.mNode;
-  v18 = UFG::qPropertySet::GetResource(v36);
-  v4 = UFG::qPropertySet::GetName(v36);
-  UFG::qSymbol::qSymbol(&derivedDef->mName, v4);
-  v5 = UFG::qPropertySetResource::GetNameString(v18);
-  UFG::qString::operator=(&derivedDef->mNameString, v5);
-  v6 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&derivedDef->mNameString);
-  v29 = UFG::PropertySchemaUtils::classNameFromPropSetName(&result, v6);
-  text = v29;
-  UFG::qString::operator=(&derivedDef->mPropertyNameString, v29);
+  v28 = -2i64;
+  this->mPrev = this;
+  this->mNext = this;
+  Name = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(propertySet);
+  v14.mWidth = UFG::qSymbolUC::as_uint32(Name);
+  p_mNode = &this->mNode;
+  UFG::qBaseNodeRB::qBaseNodeRB(&this->mNode, v14.mWidth);
+  this->mbComponentSchema = 0;
+  this->mbSkipParentCheck = 0;
+  BackInfo::BackInfo(&this->mName);
+  UFG::qString::qString(&this->mNameString);
+  BackInfo::BackInfo(&this->mClassName);
+  UFG::qString::qString(&this->mClassNameString);
+  BackInfo::BackInfo(&this->mPropertyName);
+  UFG::qString::qString(&this->mPropertyNameString);
+  p_mPropertySet = &this->mPropertySet;
+  UFG::qTypedResourceHandle<1415605297,UFG::qPropertySetResource>::qTypedResourceHandle<1415605297,UFG::qPropertySetResource>(&this->mPropertySet);
+  p_mPropertySetInstances = &this->mPropertySetInstances;
+  this->mPropertySetInstances.mNode.mPrev = &this->mPropertySetInstances.mNode;
+  this->mPropertySetInstances.mNode.mNext = &this->mPropertySetInstances.mNode;
+  this->mpParentSchema = parentSchema;
+  p_mDerivedSchemas = &this->mDerivedSchemas;
+  this->mDerivedSchemas.mNode.mPrev = &this->mDerivedSchemas.mNode;
+  this->mDerivedSchemas.mNode.mNext = &this->mDerivedSchemas.mNode;
+  Resource = UFG::qPropertySet::GetResource(propertySet);
+  v4 = UFG::qPropertySet::GetName(propertySet);
+  UFG::qSymbol::qSymbol(&this->mName, v4);
+  NameString = UFG::qPropertySetResource::GetNameString(Resource);
+  UFG::qString::operator=(&this->mNameString, NameString);
+  UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&this->mNameString);
+  v25 = UFG::PropertySchemaUtils::classNameFromPropSetName(&result, UsedSpace);
+  text = v25;
+  UFG::qString::operator=(&this->mPropertyNameString, v25);
   UFG::qString::~qString(&result);
-  v7 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&derivedDef->mPropertyNameString);
-  v31 = UFG::qSymbol::create_from_string(&v16, v7);
-  source = v31;
-  UFG::qSymbol::qSymbol(&derivedDef->mPropertyName, v31);
-  _((AMD_HD3D *)&v16);
-  v8 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&derivedDef->mNameString);
-  v20 = UFG::PropertySchemaUtils::classNameFromPropSetName(&v34, v8);
-  v22 = v20;
-  UFG::qString::operator=(&derivedDef->mClassNameString, v20);
-  UFG::qString::~qString(&v34);
-  v9 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&derivedDef->mClassNameString);
-  v24 = UFG::qSymbol::create_from_string(&v14, v9);
-  v26 = v24;
-  UFG::qSymbol::qSymbol(&derivedDef->mClassName, v24);
-  _((AMD_HD3D *)&v14);
-  v10 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(v36);
+  v7 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&this->mPropertyNameString);
+  v27 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&v14.mStereo, v7);
+  source = v27;
+  UFG::qSymbol::qSymbol(&this->mPropertyName, v27);
+  _((AMD_HD3D *)&v14.mStereo);
+  v8 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&this->mNameString);
+  v17 = UFG::PropertySchemaUtils::classNameFromPropSetName(&v30, v8);
+  v19 = v17;
+  UFG::qString::operator=(&this->mClassNameString, v17);
+  UFG::qString::~qString(&v30);
+  v9 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&this->mClassNameString);
+  v21 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&v14, v9);
+  v23 = v21;
+  UFG::qSymbol::qSymbol(&this->mClassName, v21);
+  _(&v14);
+  v10 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(propertySet);
   v11 = UFG::qSymbolUC::as_uint32(v10);
-  UFG::qPropertySetHandle::Init(&derivedDef->mPropertySet, v11);
-  if ( v37 )
-    UFG::SchemaDef::AddDerivedSchema(v37, derivedDef);
+  UFG::qPropertySetHandle::Init(&this->mPropertySet, v11);
+  if ( parentSchema )
+    UFG::SchemaDef::AddDerivedSchema(parentSchema, this);
   v13 = (UFG::qBaseNodeRB *)AMemory::malloc_default(0x28ui64);
   if ( v13 )
   {
-    v12 = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&derivedDef->mPropertyName);
+    v12 = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&this->mPropertyName);
     UFG::qBaseNodeRB::qBaseNodeRB(v13, v12);
-    v13[1].mParent = (UFG::qBaseNodeRB *)derivedDef;
-    v17 = v13;
+    v13[1].mParent = (UFG::qBaseNodeRB *)this;
+    v14.mExtension = (IAmdDxExt *)v13;
   }
   else
   {
-    v17 = 0i64;
+    v14.mExtension = 0i64;
   }
-  x = v17;
-  UFG::qBaseTreeRB::Add(&UFG::PropertySetManager_SchemaComponentPropertyLookup.mTree, v17);
+  UFG::qBaseTreeRB::Add(
+    &UFG::PropertySetManager_SchemaComponentPropertyLookup.mTree,
+    (UFG::qBaseNodeRB *)v14.mExtension);
 }
 
 // File Line: 84
 // RVA: 0x1F18D0
 void __fastcall UFG::SchemaDef::AddDerivedSchema(UFG::SchemaDef *this, UFG::SchemaDef *derivedDef)
 {
-  UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *v2; // ST10_8
+  UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *mPrev; // [rsp+10h] [rbp-28h]
 
   derivedDef->mpParentSchema = this;
-  v2 = this->mDerivedSchemas.mNode.mPrev;
-  v2->mNext = (UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *)&derivedDef->mPrev;
-  derivedDef->mPrev = v2;
+  mPrev = this->mDerivedSchemas.mNode.mPrev;
+  mPrev->mNext = derivedDef;
+  derivedDef->mPrev = mPrev;
   derivedDef->mNext = &this->mDerivedSchemas.mNode;
-  this->mDerivedSchemas.mNode.mPrev = (UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *)&derivedDef->mPrev;
+  this->mDerivedSchemas.mNode.mPrev = derivedDef;
 }
 
 // File Line: 90
 // RVA: 0x1F9A00
 char __fastcall UFG::SchemaDef::IsDerivedFrom(UFG::SchemaDef *this, UFG::SchemaDef *otherSchema)
 {
-  UFG::SchemaDef *i; // [rsp+0h] [rbp-18h]
-
-  for ( i = this; i; i = i->mpParentSchema )
+  while ( this )
   {
-    if ( i == otherSchema )
+    if ( this == otherSchema )
       return 1;
+    this = this->mpParentSchema;
   }
   return 0;
 }
@@ -152,7 +145,7 @@ char __fastcall UFG::SchemaDef::IsDerivedFrom(UFG::SchemaDef *this, UFG::SchemaD
 __int64 UFG::_dynamic_initializer_for__PropertySetManager_Rootpath__()
 {
   UFG::qString::qString(&UFG::PropertySetManager_Rootpath, "Data\\PropertySets\\");
-  return atexit(UFG::_dynamic_atexit_destructor_for__PropertySetManager_Rootpath__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PropertySetManager_Rootpath__);
 }
 
 // File Line: 126
@@ -161,7 +154,7 @@ __int64 UFG::_dynamic_initializer_for__PropertySetManager_CurrentlyLoadingFileSt
 {
   UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::PropertySetManager_CurrentlyLoadingFileStack;
   UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::PropertySetManager_CurrentlyLoadingFileStack;
-  return atexit(UFG::_dynamic_atexit_destructor_for__PropertySetManager_CurrentlyLoadingFileStack__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PropertySetManager_CurrentlyLoadingFileStack__);
 }
 
 // File Line: 131
@@ -169,7 +162,7 @@ __int64 UFG::_dynamic_initializer_for__PropertySetManager_CurrentlyLoadingFileSt
 __int64 UFG::_dynamic_initializer_for__PropertySetManager_SchemaDefs__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::PropertySetManager_SchemaDefs.mTree);
-  return atexit(UFG::_dynamic_atexit_destructor_for__PropertySetManager_SchemaDefs__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PropertySetManager_SchemaDefs__);
 }
 
 // File Line: 132
@@ -179,19 +172,21 @@ __int64 UFG::_dynamic_initializer_for__PropertySetManager_PropertyLookup__()
   UFG::PropertySetManager_PropertyLookup.p = 0i64;
   UFG::PropertySetManager_PropertyLookup.size = 0;
   UFG::PropertySetManager_PropertyLookup.capacity = 0;
-  return atexit(UFG::_dynamic_atexit_destructor_for__PropertySetManager_PropertyLookup__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PropertySetManager_PropertyLookup__);
 }
 
 // File Line: 139
 // RVA: 0x1ECD10
-void __fastcall UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(UFG::PropertyModificationCallbackSupress *this)
+void __fastcall UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(
+        UFG::PropertyModificationCallbackSupress *this)
 {
   ++UFG::PropertySetManager_CallbackSupressionRefCount;
 }
 
 // File Line: 144
 // RVA: 0x1EE570
-void __fastcall UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(UFG::PropertyModificationCallbackSupress *this)
+void __fastcall UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(
+        UFG::PropertyModificationCallbackSupress *this)
 {
   --UFG::PropertySetManager_CallbackSupressionRefCount;
 }
@@ -207,81 +202,73 @@ _BOOL8 __fastcall UFG::fnSortPropertyLookup(UFG::PropertyLookup *a, UFG::Propert
 // RVA: 0x1F6D20
 void __fastcall UFG::GetDerivedSchemaList(UFG::SchemaDef *schema_def, UFG::qArray<UFG::SchemaDef *,0> *derived_schemas)
 {
-  unsigned int v2; // ST30_4
   UFG::SchemaDef *schema_defa; // [rsp+28h] [rbp-80h]
-  UFG::SchemaDef *v4; // [rsp+B0h] [rbp+8h]
-  UFG::qArray<UFG::SchemaDef *,0> *derived_schemasa; // [rsp+B8h] [rbp+10h]
+  unsigned int size; // [rsp+30h] [rbp-78h]
 
-  derived_schemasa = derived_schemas;
-  v4 = schema_def;
-  if ( schema_def->mDerivedSchemas.mNode.mNext == &schema_def->mDerivedSchemas.mNode )
+  if ( schema_def->mDerivedSchemas.mNode.mNext == (UFG::qNode<UFG::SchemaDef,UFG::SchemaDef> *)&schema_def->mDerivedSchemas )
   {
-    v2 = derived_schemas->size;
+    size = derived_schemas->size;
     UFG::qArray<UFG::SchemaDef *,0>::Grow(derived_schemas, 1u, "qArray.Add");
-    derived_schemasa->p[v2] = v4;
+    derived_schemas->p[size] = schema_def;
   }
-  for ( schema_defa = (UFG::SchemaDef *)v4->mDerivedSchemas.mNode.mNext;
-        schema_defa != (UFG::SchemaDef *)&v4->mDerivedSchemas;
+  for ( schema_defa = (UFG::SchemaDef *)schema_def->mDerivedSchemas.mNode.mNext;
+        schema_defa != (UFG::SchemaDef *)&schema_def->mDerivedSchemas;
         schema_defa = (UFG::SchemaDef *)schema_defa->mNext )
   {
-    UFG::GetDerivedSchemaList(schema_defa, derived_schemasa);
+    UFG::GetDerivedSchemaList(schema_defa, derived_schemas);
   }
 }
 
 // File Line: 168
 // RVA: 0x1F5590
-UFG::qSymbol *__fastcall UFG::FindSchema(UFG::qPropertySet *propertySet, UFG::qArray<UFG::SchemaDef *,0> *derived_schemas)
+UFG::SchemaDef *__fastcall UFG::FindSchema(
+        UFG::qPropertySet *propertySet,
+        UFG::qArray<UFG::SchemaDef *,0> *derived_schemas)
 {
-  UFG::qPropertySet *v3; // ST40_8
   unsigned int i; // [rsp+20h] [rbp-38h]
   unsigned int parent_index; // [rsp+24h] [rbp-34h]
-  unsigned int v6; // [rsp+2Ch] [rbp-2Ch]
-  UFG::qSymbol *v7; // [rsp+30h] [rbp-28h]
-  UFG::SchemaDef *v8; // [rsp+38h] [rbp-20h]
-  UFG::qPropertySet *v9; // [rsp+60h] [rbp+8h]
-  UFG::qArray<UFG::SchemaDef *,0> *derived_schemasa; // [rsp+68h] [rbp+10h]
+  unsigned int v5; // [rsp+2Ch] [rbp-2Ch]
+  UFG::SchemaDef *v6; // [rsp+30h] [rbp-28h]
+  UFG::SchemaDef *Schema; // [rsp+38h] [rbp-20h]
+  UFG::qPropertySet *propertySeta; // [rsp+40h] [rbp-18h]
 
-  derived_schemasa = derived_schemas;
-  v9 = propertySet;
-  for ( i = 0; i < derived_schemasa->size; ++i )
+  for ( i = 0; i < derived_schemas->size; ++i )
   {
-    v7 = (UFG::qSymbol *)derived_schemasa->p[i];
-    if ( UFG::qPropertySet::PropertyExists(v9, v7 + 36, 0) )
-      return v7;
+    v6 = derived_schemas->p[i];
+    if ( UFG::qPropertySet::PropertyExists(propertySet, &v6->mPropertyName, DEPTH_LOCAL) )
+      return v6;
   }
-  v6 = UFG::qPropertySet::NumParents(v9);
-  for ( parent_index = 0; parent_index < v6; ++parent_index )
+  v5 = UFG::qPropertySet::NumParents(propertySet);
+  for ( parent_index = 0; parent_index < v5; ++parent_index )
   {
-    v3 = UFG::qPropertySet::GetParentFromIdx(v9, parent_index);
-    v8 = UFG::FindSchema(v3, derived_schemasa);
-    if ( v8 )
-      return (UFG::qSymbol *)v8;
+    propertySeta = UFG::qPropertySet::GetParentFromIdx(propertySet, parent_index);
+    Schema = UFG::FindSchema(propertySeta, derived_schemas);
+    if ( Schema )
+      return Schema;
   }
   return 0i64;
 }
 
 // File Line: 217
 // RVA: 0x1F8200
-UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qPropertySet *propertySet, UFG::qSymbol *propertyName)
+UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(
+        UFG::qPropertySet *propertySet,
+        UFG::qArray<unsigned long,0> *propertyName)
 {
-  UFG::qSymbolUC *v2; // rax
+  UFG::qSymbolUC *Name; // rax
   char *v3; // rax
   int v5; // [rsp+30h] [rbp-68h]
   UFG::SchemaDef *schema_def; // [rsp+38h] [rbp-60h]
-  unsigned int v7; // [rsp+40h] [rbp-58h]
-  int v8; // [rsp+44h] [rbp-54h]
-  int v9; // [rsp+48h] [rbp-50h]
+  unsigned int mPropertyNameUID; // [rsp+40h] [rbp-58h]
+  signed int v8; // [rsp+44h] [rbp-54h]
+  signed int v9; // [rsp+48h] [rbp-50h]
   UFG::SchemaDef *v10; // [rsp+50h] [rbp-48h]
-  UFG::qArray<UFG::SchemaDef *,0> derived_schemas; // [rsp+60h] [rbp-38h]
-  hkResourceContainer *v12; // [rsp+70h] [rbp-28h]
-  hkResourceContainer *v13; // [rsp+78h] [rbp-20h]
+  UFG::qArray<UFG::SchemaDef *,0> derived_schemas; // [rsp+60h] [rbp-38h] BYREF
+  hkResourceContainer *UsedSpace; // [rsp+70h] [rbp-28h]
+  hkResourceContainer *CurrentlyLoadingFilename; // [rsp+78h] [rbp-20h]
   char *v14; // [rsp+80h] [rbp-18h]
   __int64 v15; // [rsp+88h] [rbp-10h]
-  UFG::qPropertySet *propertySeta; // [rsp+A0h] [rbp+8h]
-  UFG::qArray<unsigned long,0> *v17; // [rsp+A8h] [rbp+10h]
 
-  v17 = (UFG::qArray<unsigned long,0> *)propertyName;
-  propertySeta = propertySet;
   v15 = -2i64;
   if ( !UFG::PropertySetManager_PropertyLookup_IsSorted )
   {
@@ -297,12 +284,12 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qP
   while ( v9 <= v8 )
   {
     v5 = (v8 + v9) / 2;
-    v7 = UFG::PropertySetManager_PropertyLookup.p[v5].mPropertyNameUID;
-    if ( (unsigned int)UFG::qSymbolUC::as_uint32(v17) <= v7 )
+    mPropertyNameUID = UFG::PropertySetManager_PropertyLookup.p[v5].mPropertyNameUID;
+    if ( (unsigned int)UFG::qSymbolUC::as_uint32(propertyName) <= mPropertyNameUID )
     {
-      if ( (unsigned int)UFG::qSymbolUC::as_uint32(v17) >= v7 )
+      if ( (unsigned int)UFG::qSymbolUC::as_uint32(propertyName) >= mPropertyNameUID )
       {
-        if ( (unsigned int)UFG::qSymbolUC::as_uint32(v17) == v7 )
+        if ( (unsigned int)UFG::qSymbolUC::as_uint32(propertyName) == mPropertyNameUID )
         {
           schema_def = UFG::PropertySetManager_PropertyLookup.p[v5].mSchemaDef;
           break;
@@ -320,7 +307,7 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qP
   }
   if ( schema_def )
   {
-    if ( propertySeta )
+    if ( propertySet )
     {
       v10 = schema_def;
       if ( !schema_def->mbSkipParentCheck )
@@ -329,15 +316,20 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qP
         derived_schemas.size = 0;
         derived_schemas.capacity = 0;
         UFG::GetDerivedSchemaList(schema_def, &derived_schemas);
-        schema_def = (UFG::SchemaDef *)UFG::FindSchema(propertySeta, &derived_schemas);
+        schema_def = UFG::FindSchema(propertySet, &derived_schemas);
         if ( !schema_def && UFG::PropertySetManager::GetCurrentlyLoadingFilename() )
         {
-          v13 = UFG::PropertySetManager::GetCurrentlyLoadingFilename();
-          v12 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v10->mNameString);
-          v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v17);
-          v2 = (UFG::qSymbolUC *)UFG::qPropertySet::GetName(propertySeta);
-          v3 = UFG::qSymbol::as_cstr_dbg(v2);
-          UFG::qPrintf("Warning: %s defines property %s without parent %s [%s]\n", v3, v14, v12, v13);
+          CurrentlyLoadingFilename = UFG::PropertySetManager::GetCurrentlyLoadingFilename();
+          UsedSpace = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v10->mNameString);
+          v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)propertyName);
+          Name = (UFG::qSymbolUC *)UFG::qPropertySet::GetName(propertySet);
+          v3 = UFG::qSymbol::as_cstr_dbg(Name);
+          UFG::qPrintf(
+            "Warning: %s defines property %s without parent %s [%s]\n",
+            v3,
+            v14,
+            (const char *)UsedSpace,
+            (const char *)CurrentlyLoadingFilename);
           schema_def = v10;
         }
         UFG::qArray<UFG::PropertyLookup,0>::Clear((UFG::qArray<UFG::PropertyLookup,0> *)&derived_schemas);
@@ -349,79 +341,68 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qP
 
 // File Line: 274
 // RVA: 0x1F8190
-UFG::qBaseNodeRB *__fastcall UFG::PropertySetManager::GetSchemaForComponentPropertyName(UFG::qSymbol *componentPropertyName)
+UFG::qBaseNodeRB *__fastcall UFG::PropertySetManager::GetSchemaForComponentPropertyName(
+        UFG::qArray<unsigned long,0> *componentPropertyName)
 {
-  UFG::qBaseNodeRB *result; // rax
   unsigned int uid; // [rsp+20h] [rbp-28h]
   UFG::qBaseTreeRB *v3; // [rsp+28h] [rbp-20h]
 
-  uid = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)componentPropertyName);
+  uid = UFG::qSymbolUC::as_uint32(componentPropertyName);
   if ( uid )
     v3 = UFG::qBaseTreeRB::Get(&UFG::PropertySetManager_SchemaComponentPropertyLookup.mTree, uid);
   else
     v3 = 0i64;
   if ( v3 )
-    result = v3->mNULL.mParent;
+    return v3->mNULL.mParent;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 308
 // RVA: 0x1F99A0
 bool __fastcall UFG::PropertySetManager::IsComponentPropertySet(UFG::qPropertySet *property_set)
 {
-  UFG::qSymbol *v1; // rax
-  _BOOL8 v2; // rax
-  UFG::qSymbol *v3; // rax
-  UFG::qPropertySet *v5; // [rsp+40h] [rbp+8h]
+  UFG::qSymbol *SchemaName; // rax
+  UFG::qArray<unsigned long,0> *v3; // rax
 
-  v5 = property_set;
-  if ( property_set
-    && (v1 = UFG::qPropertySet::GetSchemaName(property_set), !UFG::qSymbol::operator==(v1, &UFG::gNullQSymbol)) )
-  {
-    v3 = UFG::qPropertySet::GetSchemaName(v5);
-    v2 = UFG::PropertySetManager::GetSchema(v3)->mbComponentSchema;
-  }
-  else
-  {
-    LOBYTE(v2) = 0;
-  }
-  return v2;
+  if ( !property_set )
+    return 0;
+  SchemaName = UFG::qPropertySet::GetSchemaName(property_set);
+  if ( UFG::qSymbol::operator==(SchemaName, &UFG::gNullQSymbol) )
+    return 0;
+  v3 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetSchemaName(property_set);
+  return UFG::PropertySetManager::GetSchema(v3)->mbComponentSchema;
 }
 
 // File Line: 317
 // RVA: 0x1F8110
-UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchema(UFG::qSymbol *schemaName)
+UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchema(UFG::qArray<unsigned long,0> *schemaName)
 {
   unsigned int uid; // [rsp+20h] [rbp-38h]
   UFG::qBaseTreeRB *v3; // [rsp+28h] [rbp-30h]
-  signed __int64 v4; // [rsp+30h] [rbp-28h]
 
-  uid = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)schemaName);
+  uid = UFG::qSymbolUC::as_uint32(schemaName);
   if ( !uid )
     return 0i64;
   v3 = UFG::qBaseTreeRB::Get(&UFG::PropertySetManager_SchemaDefs.mTree, uid);
   if ( v3 )
-    v4 = (signed __int64)&v3[-1].mNULL.mUID;
+    return (UFG::SchemaDef *)&v3[-1].mNULL.mUID;
   else
-    v4 = 0i64;
-  return (UFG::SchemaDef *)v4;
+    return 0i64;
 }
 
 // File Line: 336
 // RVA: 0x1E8F50
-void __fastcall UFG::CopyProperty<short>(UFG::qPropertySet *target_set, UFG::qPropertySet *source_set, UFG::qSymbol *property_name)
+void __fastcall UFG::CopyProperty<short>(
+        UFG::qPropertySet *target_set,
+        UFG::qPropertySet *source_set,
+        UFG::qSymbol *property_name)
 {
   __int16 *v3; // [rsp+20h] [rbp-18h]
-  UFG::qPropertySet *v4; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *name; // [rsp+50h] [rbp+18h]
 
-  name = property_name;
-  v4 = target_set;
   v3 = UFG::qPropertySet::Get<short>(source_set, property_name, DEPTH_RECURSE);
   if ( v3 )
-    UFG::qPropertySet::Set<short>(v4, name, *v3);
+    UFG::qPropertySet::Set<short>(target_set, property_name, *v3);
 }
 
 // File Line: 355
@@ -435,172 +416,169 @@ _BOOL8 __fastcall UFG::fnSortUnPermute(UFG::UnPermute_lookup *a, UFG::UnPermute_
 // RVA: 0x1F33F0
 void __fastcall UFG::CopyPropertiesTo(UFG::qPropertySet *target_set, UFG::qPropertySet *source_set)
 {
-  UFG::qArray<unsigned long,0> *v2; // rax
-  unsigned int v3; // eax
+  unsigned int v2; // eax
   UFG::UnPermute_lookup *property_name; // [rsp+30h] [rbp-88h]
   unsigned int index; // [rsp+38h] [rbp-80h]
   unsigned int i; // [rsp+3Ch] [rbp-7Ch]
   unsigned int newsize; // [rsp+40h] [rbp-78h]
-  UFG::qArray<UFG::UnPermute_lookup,0> v8; // [rsp+48h] [rbp-70h]
+  UFG::qArray<UFG::UnPermute_lookup,0> v7; // [rsp+48h] [rbp-70h] BYREF
   unsigned int type_uid; // [rsp+58h] [rbp-60h]
-  ePropertyType v10; // [rsp+5Ch] [rbp-5Ch]
-  ePropertyType v11; // [rsp+60h] [rbp-58h]
-  UFG::qArray<unsigned long,0> *v12; // [rsp+68h] [rbp-50h]
-  UFG::qPropertyList *v13; // [rsp+70h] [rbp-48h]
-  UFG::qPropertySet *v14; // [rsp+78h] [rbp-40h]
+  ePropertyType v9; // [rsp+5Ch] [rbp-5Ch]
+  ePropertyType property_type; // [rsp+60h] [rbp-58h]
+  UFG::qArray<unsigned long,0> *PropertyNameFromIndex; // [rsp+68h] [rbp-50h]
+  UFG::qPropertyList *v12; // [rsp+70h] [rbp-48h]
+  UFG::qPropertySet *v13; // [rsp+78h] [rbp-40h]
   char *v; // [rsp+80h] [rbp-38h]
-  UFG::qPropertySet *v16; // [rsp+88h] [rbp-30h]
-  char *v17; // [rsp+90h] [rbp-28h]
-  unsigned int v18; // [rsp+98h] [rbp-20h]
-  UFG::qPropertyList *v19; // [rsp+A0h] [rbp-18h]
-  __int64 v20; // [rsp+A8h] [rbp-10h]
-  UFG::qPropertySet *target_seta; // [rsp+C0h] [rbp+8h]
-  UFG::qPropertySet *source_seta; // [rsp+C8h] [rbp+10h]
+  UFG::qPropertySet *v15; // [rsp+88h] [rbp-30h]
+  char *ValuePtr; // [rsp+90h] [rbp-28h]
+  unsigned int size; // [rsp+98h] [rbp-20h]
+  UFG::qPropertyList *v18; // [rsp+A0h] [rbp-18h]
+  __int64 v19; // [rsp+A8h] [rbp-10h]
 
-  source_seta = source_set;
-  target_seta = target_set;
-  v20 = -2i64;
+  v19 = -2i64;
   newsize = UFG::qPropertySet::NumProperties(source_set);
-  v8.p = 0i64;
-  v8.size = 0;
-  v8.capacity = 0;
-  if ( newsize > 0 )
-    UFG::qArray<UFG::UnPermute_lookup,0>::Reallocate(&v8, newsize, "qArray.Reallocate(Reserve)");
+  v7.p = 0i64;
+  v7.size = 0;
+  v7.capacity = 0;
+  if ( newsize )
+    UFG::qArray<UFG::UnPermute_lookup,0>::Reallocate(&v7, newsize, "qArray.Reallocate(Reserve)");
   for ( index = 0; index < newsize; ++index )
   {
-    type_uid = UFG::qPropertySet::GetPropertyTypeFromIndex(source_seta, index);
-    v2 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetPropertyNameFromIndex(source_seta, index);
-    v12 = v2;
-    v3 = UFG::qSymbolUC::as_uint32(v2);
-    v17 = (char *)UFG::qPropertySet::GetValuePtr(source_seta, type_uid, v3, DEPTH_RECURSE, 0i64);
-    v18 = v8.size;
-    UFG::qArray<UFG::UnPermute_lookup,0>::Grow(&v8, 1u, "qArray.Add");
-    UFG::qSymbol::qSymbol(&v8.p[index].property_name, (UFG::qSymbol *)v12);
-    v8.p[index].property_type = type_uid;
-    v8.p[index].property_value_address = v17;
-    v8.p[index].property_index_local = index;
+    type_uid = UFG::qPropertySet::GetPropertyTypeFromIndex(source_set, index);
+    PropertyNameFromIndex = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetPropertyNameFromIndex(
+                                                              source_set,
+                                                              index);
+    v2 = UFG::qSymbolUC::as_uint32(PropertyNameFromIndex);
+    ValuePtr = (char *)UFG::qPropertySet::GetValuePtr(source_set, type_uid, v2, DEPTH_RECURSE, 0i64);
+    size = v7.size;
+    UFG::qArray<UFG::UnPermute_lookup,0>::Grow(&v7, 1u, "qArray.Add");
+    UFG::qSymbol::qSymbol(&v7.p[index].property_name, (UFG::qSymbol *)PropertyNameFromIndex);
+    v7.p[index].property_type = type_uid;
+    v7.p[index].property_value_address = ValuePtr;
+    v7.p[index].property_index_local = index;
   }
   UFG::qSort<UFG::UnPermute_lookup,bool (*)(UFG::UnPermute_lookup const &,UFG::UnPermute_lookup const &)>(
-    v8.p,
-    v8.size,
+    v7.p,
+    v7.size,
     UFG::fnSortUnPermute);
   for ( i = 0; i < newsize; ++i )
   {
-    v11 = v8.p[i].property_type;
-    property_name = &v8.p[i];
-    v10 = v11;
-    switch ( v11 )
+    property_type = v7.p[i].property_type;
+    property_name = &v7.p[i];
+    v9 = property_type;
+    switch ( property_type )
     {
-      case 0:
-        UFG::CopyProperty<signed char>(target_seta, source_seta, &property_name->property_name);
+      case UID_int8:
+        UFG::CopyProperty<signed char>(target_set, source_set, &property_name->property_name);
         break;
-      case 1:
-        UFG::CopyProperty<short>(target_seta, source_seta, &property_name->property_name);
+      case UID_int16:
+        UFG::CopyProperty<short>(target_set, source_set, &property_name->property_name);
         break;
-      case 2:
-        UFG::CopyProperty<long>(target_seta, source_seta, &property_name->property_name);
+      case UID_int32:
+        UFG::CopyProperty<long>(target_set, source_set, &property_name->property_name);
         break;
-      case 3:
-        UFG::CopyProperty<__int64>(target_seta, source_seta, &property_name->property_name);
+      case UID_int64:
+        UFG::CopyProperty<__int64>(target_set, source_set, &property_name->property_name);
         break;
-      case 5:
-        UFG::CopyProperty<unsigned char>(target_seta, source_seta, &property_name->property_name);
+      case UID_uint8:
+        UFG::CopyProperty<unsigned char>(target_set, source_set, &property_name->property_name);
         break;
-      case 6:
-        UFG::CopyProperty<unsigned short>(target_seta, source_seta, &property_name->property_name);
+      case UID_uint16:
+        UFG::CopyProperty<unsigned short>(target_set, source_set, &property_name->property_name);
         break;
-      case 7:
-        UFG::CopyProperty<unsigned long>(target_seta, source_seta, &property_name->property_name);
+      case UID_uint32:
+        UFG::CopyProperty<unsigned long>(target_set, source_set, &property_name->property_name);
         break;
-      case 8:
-        UFG::CopyProperty<unsigned __int64>(target_seta, source_seta, &property_name->property_name);
+      case UID_uint64:
+        UFG::CopyProperty<unsigned __int64>(target_set, source_set, &property_name->property_name);
         break;
-      case 9:
-        UFG::CopyProperty<bool>(target_seta, source_seta, &property_name->property_name);
+      case UID_bool:
+        UFG::CopyProperty<bool>(target_set, source_set, &property_name->property_name);
         break;
-      case 10:
-        UFG::CopyProperty<float>(target_seta, source_seta, &property_name->property_name);
+      case UID_float:
+        UFG::CopyProperty<float>(target_set, source_set, &property_name->property_name);
         break;
-      case 12:
+      case UID_string:
         UFG::PSWrapper::EnableSchemaPropertyChecking(0);
-        v = UFG::qPropertySet::Get<char const *>(source_seta, &property_name->property_name, DEPTH_RECURSE);
-        UFG::qPropertySet::Set<char const *>(target_seta, &property_name->property_name, v);
+        v = UFG::qPropertySet::Get<char const *>(
+              source_set,
+              (UFG::qArray<unsigned long,0> *)property_name,
+              DEPTH_RECURSE);
+        UFG::qPropertySet::Set<char const *>(target_set, (UFG::qArray<unsigned long,0> *)property_name, v);
         UFG::PSWrapper::EnableSchemaPropertyChecking(1);
         break;
-      case 17:
-        UFG::CopyProperty<UFG::qVector2>(target_seta, source_seta, &property_name->property_name);
+      case UID_qVector2:
+        UFG::CopyProperty<UFG::qVector2>(target_set, source_set, &property_name->property_name);
         break;
-      case 18:
-        UFG::CopyProperty<UFG::qVector3>(target_seta, source_seta, &property_name->property_name);
+      case UID_qVector3:
+        UFG::CopyProperty<UFG::qVector3>(target_set, source_set, &property_name->property_name);
         break;
-      case 19:
-        UFG::CopyProperty<UFG::qVector4>(target_seta, source_seta, &property_name->property_name);
+      case UID_qVector4:
+        UFG::CopyProperty<UFG::qVector4>(target_set, source_set, &property_name->property_name);
         break;
-      case 20:
-        UFG::CopyProperty<UFG::qMatrix44>(target_seta, source_seta, &property_name->property_name);
+      case UID_qMatrix44:
+      case UID_TransRot:
+        UFG::CopyProperty<UFG::qMatrix44>(target_set, source_set, &property_name->property_name);
         break;
-      case 22:
-        UFG::CopyProperty<UFG::qSymbol>(target_seta, source_seta, &property_name->property_name);
+      case UID_qSymbol:
+        UFG::CopyProperty<UFG::qSymbol>(target_set, source_set, &property_name->property_name);
         break;
-      case 23:
-        UFG::CopyProperty<UFG::qSymbolUC>(target_seta, source_seta, &property_name->property_name);
+      case UID_qSymbolUC:
+        UFG::CopyProperty<UFG::qSymbolUC>(target_set, source_set, &property_name->property_name);
         break;
-      case 24:
-        UFG::CopyProperty<UFG::qWiseSymbol>(target_seta, source_seta, &property_name->property_name);
+      case UID_qWiseSymbol:
+        UFG::CopyProperty<UFG::qWiseSymbol>(target_set, source_set, &property_name->property_name);
         break;
-      case 25:
+      case UID_list:
         UFG::PSWrapper::EnableSchemaPropertyChecking(0);
-        v19 = UFG::qPropertySet::Get<UFG::qPropertyList>(source_seta, &property_name->property_name, DEPTH_RECURSE);
-        v13 = (UFG::qPropertyList *)UFG::qPropertyList::Clone(v19);
-        UFG::qPropertySet::Set<UFG::qPropertyList>(target_seta, &property_name->property_name, v13);
+        v18 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+                source_set,
+                (UFG::qArray<unsigned long,0> *)property_name,
+                DEPTH_RECURSE);
+        v12 = (UFG::qPropertyList *)UFG::qPropertyList::Clone(v18);
+        UFG::qPropertySet::Set<UFG::qPropertyList>(target_set, (UFG::qArray<unsigned long,0> *)property_name, v12);
         UFG::PSWrapper::EnableSchemaPropertyChecking(1);
         break;
-      case 26:
+      case UID_propertyset:
         UFG::PSWrapper::EnableSchemaPropertyChecking(0);
-        v14 = UFG::qPropertySet::Get<UFG::qPropertySet>(source_seta, &property_name->property_name, DEPTH_RECURSE);
-        v16 = UFG::qPropertySet::Clone(v14);
-        UFG::qPropertySet::Set<UFG::qPropertySet>(target_seta, &property_name->property_name, v16);
+        v13 = UFG::qPropertySet::Get<UFG::qPropertySet>(
+                source_set,
+                (UFG::qArray<unsigned long,0> *)property_name,
+                DEPTH_RECURSE);
+        v15 = UFG::qPropertySet::Clone(v13);
+        UFG::qPropertySet::Set<UFG::qPropertySet>(target_set, (UFG::qArray<unsigned long,0> *)property_name, v15);
         UFG::PSWrapper::EnableSchemaPropertyChecking(1);
         break;
-      case 27:
-        UFG::CopyProperty<UFG::qMatrix44>(target_seta, source_seta, &property_name->property_name);
-        break;
-      case 28:
-        UFG::CopyProperty<UFG::qTransQuat>(target_seta, source_seta, &property_name->property_name);
+      case UID_qTransQuat:
+        UFG::CopyProperty<UFG::qTransQuat>(target_set, source_set, &property_name->property_name);
         break;
       default:
         continue;
     }
   }
-  UFG::qArray<UFG::UnPermute_lookup,0>::Clear(&v8);
+  UFG::qArray<UFG::UnPermute_lookup,0>::Clear(&v7);
 }
 
 // File Line: 457
 // RVA: 0x1F54A0
 UFG::qPropertySet *__fastcall UFG::FindParentSchemaSetRecurse(UFG::qPropertySet *propertySet, UFG::SchemaDef *schema)
 {
-  UFG::qPropertySet *v2; // rax
-  UFG::qSymbol *v3; // rax
+  UFG::qSymbol *SchemaName; // rax
   unsigned int parent_index; // [rsp+20h] [rbp-28h]
-  unsigned int v6; // [rsp+24h] [rbp-24h]
+  unsigned int v5; // [rsp+24h] [rbp-24h]
   UFG::qPropertySet *propertySeta; // [rsp+28h] [rbp-20h]
-  UFG::qPropertySet *v8; // [rsp+30h] [rbp-18h]
-  UFG::qPropertySet *v9; // [rsp+50h] [rbp+8h]
-  UFG::SchemaDef *schemaa; // [rsp+58h] [rbp+10h]
+  UFG::qPropertySet *ParentSchemaSetRecurse; // [rsp+30h] [rbp-18h]
 
-  schemaa = schema;
-  v9 = propertySet;
-  v6 = UFG::qPropertySet::NumParents(propertySet);
-  for ( parent_index = 0; parent_index < v6; ++parent_index )
+  v5 = UFG::qPropertySet::NumParents(propertySet);
+  for ( parent_index = 0; parent_index < v5; ++parent_index )
   {
-    v2 = UFG::qPropertySet::GetParentFromIdx(v9, parent_index);
-    propertySeta = v2;
-    v3 = UFG::qPropertySet::GetSchemaName(v2);
-    if ( UFG::qSymbol::operator==(v3, &schemaa->mName) )
+    propertySeta = UFG::qPropertySet::GetParentFromIdx(propertySet, parent_index);
+    SchemaName = UFG::qPropertySet::GetSchemaName(propertySeta);
+    if ( UFG::qSymbol::operator==(SchemaName, &schema->mName) )
       return propertySeta;
-    v8 = UFG::FindParentSchemaSetRecurse(propertySeta, schemaa);
-    if ( v8 )
-      return v8;
+    ParentSchemaSetRecurse = UFG::FindParentSchemaSetRecurse(propertySeta, schema);
+    if ( ParentSchemaSetRecurse )
+      return ParentSchemaSetRecurse;
   }
   return 0i64;
 }
@@ -609,74 +587,68 @@ UFG::qPropertySet *__fastcall UFG::FindParentSchemaSetRecurse(UFG::qPropertySet 
 // RVA: 0x1FEE20
 void __fastcall UFG::SetupSchemaSetRecurse(UFG::SchemaDef *schema_def, UFG::qPropertySet *propertySet)
 {
-  UFG::qPropertySet *source_set; // ST28_8
-  UFG::qPropertySet *v3; // [rsp+20h] [rbp-18h]
-  UFG::SchemaDef *schema; // [rsp+40h] [rbp+8h]
-  UFG::qPropertySet *propertySeta; // [rsp+48h] [rbp+10h]
+  UFG::qPropertySet *ParentSchemaSetRecurse; // [rsp+20h] [rbp-18h]
+  UFG::qPropertySet *source_set; // [rsp+28h] [rbp-10h]
 
-  propertySeta = propertySet;
-  schema = schema_def;
   if ( schema_def->mpParentSchema )
     UFG::SetupSchemaSetRecurse(schema_def->mpParentSchema, propertySet);
-  v3 = UFG::FindParentSchemaSetRecurse(propertySeta, schema);
-  if ( v3 )
+  ParentSchemaSetRecurse = UFG::FindParentSchemaSetRecurse(propertySet, schema_def);
+  if ( ParentSchemaSetRecurse )
   {
-    UFG::CopyPropertiesTo(propertySeta, v3);
+    UFG::CopyPropertiesTo(propertySet, ParentSchemaSetRecurse);
   }
   else
   {
-    source_set = (UFG::qPropertySet *)UFG::qPropertySetHandle::Get(&schema->mPropertySet);
-    UFG::CopyPropertiesTo(propertySeta, source_set);
+    source_set = (UFG::qPropertySet *)UFG::qPropertySetHandle::Get(&schema_def->mPropertySet);
+    UFG::CopyPropertiesTo(propertySet, source_set);
   }
 }
 
 // File Line: 493
 // RVA: 0x1FECB0
-void __fastcall UFG::PropertySetManager::SetupSchemaSet(UFG::qPropertySet *propertySet, UFG::qSymbol *schemaName)
+void __fastcall UFG::PropertySetManager::SetupSchemaSet(
+        UFG::qPropertySet *propertySet,
+        UFG::qArray<unsigned long,0> *schemaName)
 {
-  char v2; // [rsp+20h] [rbp-78h]
+  UFG::PropertyModificationCallbackSupress v2; // [rsp+20h] [rbp-78h] BYREF
   UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v3; // [rsp+28h] [rbp-70h]
   UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v4; // [rsp+30h] [rbp-68h]
-  UFG::qList<UFG::qPropertySet,UFG::qPropertySet,1,0> *v5; // [rsp+38h] [rbp-60h]
+  UFG::qList<UFG::qPropertySet,UFG::qPropertySet,1,0> *p_mPropertySetInstances; // [rsp+38h] [rbp-60h]
   UFG::SchemaDef *schema_def; // [rsp+40h] [rbp-58h]
-  UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v7; // [rsp+48h] [rbp-50h]
-  UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v8; // [rsp+50h] [rbp-48h]
+  UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *mNext; // [rsp+48h] [rbp-50h]
+  UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *mPrev; // [rsp+50h] [rbp-48h]
   UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v9; // [rsp+58h] [rbp-40h]
   UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v10; // [rsp+60h] [rbp-38h]
   __int64 v11; // [rsp+68h] [rbp-30h]
   UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *v12; // [rsp+70h] [rbp-28h]
   __int64 v13; // [rsp+78h] [rbp-20h]
   __int64 v14; // [rsp+80h] [rbp-18h]
-  UFG::qPropertySet *propertySeta; // [rsp+A0h] [rbp+8h]
-  UFG::qSymbol *schemaNamea; // [rsp+A8h] [rbp+10h]
 
-  schemaNamea = schemaName;
-  propertySeta = propertySet;
   v13 = -2i64;
-  UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v2);
-  UFG::qPropertySet::RemovePropertiesAllLocal(propertySeta);
-  v3 = (UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *)&propertySeta->mPrev;
-  v8 = propertySeta->mPrev;
-  v7 = propertySeta->mNext;
-  v8->mNext = v7;
-  v7->mPrev = v8;
+  UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(&v2);
+  UFG::qPropertySet::RemovePropertiesAllLocal(propertySet);
+  v3 = &propertySet->UFG::qNode<UFG::qPropertySet,UFG::qPropertySet>;
+  mPrev = propertySet->mPrev;
+  mNext = propertySet->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
   v11 = 16i64;
   v12 = v3 - 1;
-  schema_def = UFG::PropertySetManager::GetSchema(schemaNamea);
-  UFG::SetupSchemaSetRecurse(schema_def, propertySeta);
-  v5 = &schema_def->mPropertySetInstances;
+  schema_def = UFG::PropertySetManager::GetSchema(schemaName);
+  UFG::SetupSchemaSetRecurse(schema_def, propertySet);
+  p_mPropertySetInstances = &schema_def->mPropertySetInstances;
   v14 = 16i64;
-  v10 = (UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *)&propertySeta->mPrev;
-  v4 = (UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *)&propertySeta->mPrev;
+  v10 = &propertySet->UFG::qNode<UFG::qPropertySet,UFG::qPropertySet>;
+  v4 = &propertySet->UFG::qNode<UFG::qPropertySet,UFG::qPropertySet>;
   v9 = schema_def->mPropertySetInstances.mNode.mPrev;
-  v9->mNext = (UFG::qNode<UFG::qPropertySet,UFG::qPropertySet> *)&propertySeta->mPrev;
+  v9->mNext = &propertySet->UFG::qNode<UFG::qPropertySet,UFG::qPropertySet>;
   v4->mPrev = v9;
-  v4->mNext = &v5->mNode;
-  v5->mNode.mPrev = v4;
-  UFG::qPropertySet::SetAllPropertiesToDefault(propertySeta);
-  UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v2);
+  v4->mNext = &p_mPropertySetInstances->mNode;
+  p_mPropertySetInstances->mNode.mPrev = v4;
+  UFG::qPropertySet::SetAllPropertiesToDefault(propertySet);
+  UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(&v2);
 }
 
 // File Line: 538
@@ -695,7 +667,7 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateContainedPropertySe
 
 // File Line: 577
 // RVA: 0x1F4760
-UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateTopLevelPropertySet(UFG::qSymbol *propSetName)
+UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateTopLevelPropertySet(UFG::qSymbolUC *propSetName)
 {
   return UFG::qPropertySet::CreateResourceSet(propSetName, "CreatePropertySet");
 }
@@ -704,21 +676,17 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateTopLevelPropertySet
 // RVA: 0x1F4680
 UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateOrFindPropertySet(UFG::qSymbol *propSetName)
 {
-  UFG::qPropertySet *v2; // rax
-  UFG::qPropertySetResource *v3; // rax
-  UFG::qPropertySet *v4; // [rsp+20h] [rbp-18h]
-  UFG::qSymbol *propSetNamea; // [rsp+40h] [rbp+8h]
+  UFG::qPropertySetResource *Resource; // rax
+  UFG::qPropertySet *PropSet; // [rsp+20h] [rbp-18h]
 
-  propSetNamea = propSetName;
-  v4 = UFG::PropertySetCache::GetPropSet(propSetName);
-  if ( !v4 )
+  PropSet = UFG::PropertySetCache::GetPropSet(propSetName);
+  if ( !PropSet )
   {
-    v2 = UFG::PropertySetManager::CreateTopLevelPropertySet(propSetNamea);
-    v4 = v2;
-    v3 = UFG::qPropertySet::GetResource(v2);
-    UFG::PropertySetCache::Add(v3);
+    PropSet = UFG::PropertySetManager::CreateTopLevelPropertySet(propSetName);
+    Resource = UFG::qPropertySet::GetResource(PropSet);
+    UFG::PropertySetCache::Add(Resource);
   }
-  return v4;
+  return PropSet;
 }
 
 // File Line: 617
@@ -726,22 +694,20 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::CreateOrFindPropertySet(U
 UFG::qPropertySet *__fastcall UFG::PropertySetManager::ReloadPropertySet(UFG::qSymbol *propSetName)
 {
   char *v1; // rax
-  const char *v2; // rax
-  UFG::qPropertySet *v3; // ST28_8
+  const char *UsedSpace; // rax
   UFG::qPropertySet *pExistingPropSet; // [rsp+20h] [rbp-48h]
-  UFG::qString result; // [rsp+38h] [rbp-30h]
-  UFG::qSymbol *propSetNamea; // [rsp+70h] [rbp+8h]
+  UFG::qPropertySet *v5; // [rsp+28h] [rbp-40h]
+  _BYTE result[48]; // [rsp+38h] [rbp-30h] BYREF
 
-  propSetNamea = propSetName;
   pExistingPropSet = UFG::PropertySetCache::GetPropSet(propSetName);
   if ( !pExistingPropSet )
-    return UFG::PropertySetManager::CreateTopLevelPropertySet(propSetNamea);
-  v1 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)propSetNamea);
-  UFG::PropertySetManager::DeterminePathAndFilename(&result, v1, 0i64);
-  v2 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&result);
-  v3 = UFG::PropertySetManager::LoadFromFile(v2, 1u, pExistingPropSet);
-  UFG::qString::~qString(&result);
-  return v3;
+    return UFG::PropertySetManager::CreateTopLevelPropertySet((UFG::qSymbolUC *)propSetName);
+  v1 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)propSetName);
+  UFG::PropertySetManager::DeterminePathAndFilename((UFG::qString *)result, v1, 0i64);
+  UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)result);
+  v5 = UFG::PropertySetManager::LoadFromFile(UsedSpace, 1, pExistingPropSet);
+  UFG::qString::~qString((UFG::qString *)result);
+  return v5;
 }
 
 // File Line: 637
@@ -753,86 +719,77 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadPropertySetFromXML(Si
 
 // File Line: 642
 // RVA: 0x1F9E10
-UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadPropertySetFromXML(SimpleXML::XMLDocument *pDocument, bool alwaysReload)
+UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadPropertySetFromXML(
+        SimpleXML::XMLDocument *pDocument,
+        bool alwaysReload)
 {
-  UFG::qSymbol result; // [rsp+20h] [rbp-38h]
-  UFG::qPropertySet *existing_set; // [rsp+28h] [rbp-30h]
-  SimpleXML::XMLNode *v5; // [rsp+30h] [rbp-28h]
-  char *pszSymbolString; // [rsp+38h] [rbp-20h]
+  AMD_HD3D result; // [rsp+20h] [rbp-38h] BYREF
   char *name; // [rsp+40h] [rbp-18h]
-  __int64 v8; // [rsp+48h] [rbp-10h]
-  SimpleXML::XMLDocument *xml_doc; // [rsp+60h] [rbp+8h]
-  bool v10; // [rsp+68h] [rbp+10h]
+  __int64 v5; // [rsp+48h] [rbp-10h]
 
-  v10 = alwaysReload;
-  xml_doc = pDocument;
-  v8 = -2i64;
-  existing_set = 0i64;
+  v5 = -2i64;
+  *(_QWORD *)&result.mWidth = 0i64;
   if ( pDocument )
   {
     name = "PropertySet";
-    v5 = SimpleXML::XMLDocument::GetNode(pDocument, "PropertySet", 0i64);
-    if ( v5 )
+    result.mStereo = (IAmdDxExtQuadBufferStereo *)SimpleXML::XMLDocument::GetNode(pDocument, "PropertySet", 0i64);
+    if ( result.mStereo )
     {
-      pszSymbolString = SimpleXML::XMLNode::GetAttribute(v5, "name");
-      if ( pszSymbolString )
+      result.mExtension = (IAmdDxExt *)SimpleXML::XMLNode::GetAttribute((SimpleXML::XMLNode *)result.mStereo, "name");
+      if ( result.mExtension )
       {
-        UFG::qSymbol::create_from_string(&result, pszSymbolString);
-        existing_set = UFG::PropertySetCache::GetPropSet(&result);
-        if ( existing_set && v10 == 1 )
-          UFG::qPropertySetResource::LoadSetFromXMLNode(xml_doc, 0i64, existing_set, 1);
-        _((AMD_HD3D *)&result);
+        UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, (const char *)result.mExtension);
+        *(_QWORD *)&result.mWidth = UFG::PropertySetCache::GetPropSet((UFG::qSymbol *)&result);
+        if ( *(_QWORD *)&result.mWidth && alwaysReload )
+          UFG::qPropertySetResource::LoadSetFromXMLNode(pDocument, 0i64, *(UFG::qPropertySet **)&result.mWidth, 1);
+        _(&result);
       }
-      if ( !existing_set )
+      if ( !*(_QWORD *)&result.mWidth )
       {
-        existing_set = UFG::qPropertySet::CreateResourceSet(&UFG::gNullQSymbol, "TopLevelPropertySet");
-        if ( !UFG::qPropertySetResource::LoadSetFromXMLNode(xml_doc, 0i64, existing_set, 1) )
+        *(_QWORD *)&result.mWidth = UFG::qPropertySet::CreateResourceSet(
+                                      (UFG::qSymbolUC *)&UFG::gNullQSymbol,
+                                      "TopLevelPropertySet");
+        if ( !UFG::qPropertySetResource::LoadSetFromXMLNode(pDocument, 0i64, *(UFG::qPropertySet **)&result.mWidth, 1) )
         {
-          UFG::qPropertySet::Destroy(existing_set);
-          existing_set = 0i64;
+          UFG::qPropertySet::Destroy(*(UFG::qPropertySet **)&result.mWidth);
+          *(_QWORD *)&result.mWidth = 0i64;
         }
       }
     }
   }
-  return existing_set;
+  return *(UFG::qPropertySet **)&result.mWidth;
 }
 
 // File Line: 780
 // RVA: 0x1F9B40
-UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadFromFile(const char *fullPath, unsigned int propertiesFlags, UFG::qPropertySet *pExistingPropSet)
+UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadFromFile(
+        const char *fullPath,
+        char propertiesFlags,
+        UFG::qPropertySet *pExistingPropSet)
 {
-  UFG::qPropertySet *result; // rax
-  UFG::qPropertySetResource *v4; // rax
+  UFG::qPropertySetResource *Resource; // rax
   UFG::qPropertySetResource *v5; // rax
-  char v6; // [rsp+20h] [rbp-58h]
-  bool v7; // [rsp+21h] [rbp-57h]
+  UFG::PropertyModificationCallbackSupress v6; // [rsp+20h] [rbp-58h] BYREF
   UFG::qPropertySet *propSet; // [rsp+28h] [rbp-50h]
   SimpleXML::XMLDocument *v9; // [rsp+30h] [rbp-48h]
   SimpleXML::XMLDocument *xml_doc; // [rsp+38h] [rbp-40h]
   SimpleXML::XMLDocument *v11; // [rsp+40h] [rbp-38h]
-  UFG::qPropertySet *v12; // [rsp+48h] [rbp-30h]
+  __int64 v12; // [rsp+48h] [rbp-30h]
   UFG::qPropertySet *v13; // [rsp+50h] [rbp-28h]
   SimpleXML::XMLDocument *v14; // [rsp+58h] [rbp-20h]
   __int64 v15; // [rsp+60h] [rbp-18h]
-  char *filename; // [rsp+80h] [rbp+8h]
-  unsigned int v17; // [rsp+88h] [rbp+10h]
-  UFG::qPropertySet *v18; // [rsp+90h] [rbp+18h]
 
-  v18 = pExistingPropSet;
-  v17 = propertiesFlags;
-  filename = (char *)fullPath;
   v15 = -2i64;
-  UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v6);
-  v7 = UFG::qFileExists(filename);
-  if ( v7 )
+  UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(&v6);
+  if ( UFG::qFileExists(fullPath) )
   {
-    propSet = v18;
-    if ( v18 && (unsigned __int8)UFG::PropertySetCache::ContainsSet(propSet) )
+    propSet = pExistingPropSet;
+    if ( pExistingPropSet && UFG::PropertySetCache::ContainsSet(propSet) )
     {
-      v4 = UFG::qPropertySet::GetResource(propSet);
-      UFG::PropertySetCache::Remove(v4);
+      Resource = UFG::qPropertySet::GetResource(propSet);
+      UFG::PropertySetCache::Remove(Resource);
     }
-    xml_doc = SimpleXML::XMLDocument::Open(filename, 1ui64, 0i64);
+    xml_doc = SimpleXML::XMLDocument::Open(fullPath, 1ui64, 0i64);
     if ( xml_doc )
     {
       if ( propSet )
@@ -842,7 +799,7 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadFromFile(const char *
       }
       else
       {
-        propSet = UFG::qPropertySet::CreateResourceSet(&UFG::gNullQSymbol, "LoadFromFilePS");
+        propSet = UFG::qPropertySet::CreateResourceSet((UFG::qSymbolUC *)&UFG::gNullQSymbol, "LoadFromFilePS");
       }
       propSet = UFG::qPropertySetResource::LoadSetFromXMLNode(xml_doc, 0i64, propSet, 1);
       v14 = xml_doc;
@@ -860,23 +817,22 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::LoadFromFile(const char *
     }
     if ( propSet )
     {
-      if ( v17 & 1 )
+      if ( (propertiesFlags & 1) != 0 )
       {
         v5 = UFG::qPropertySet::GetResource(propSet);
         UFG::PropertySetCache::Add(v5);
       }
     }
     v13 = propSet;
-    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v6);
-    result = v13;
+    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(&v6);
+    return v13;
   }
   else
   {
     v12 = 0i64;
-    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v6);
-    result = v12;
+    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(&v6);
+    return (UFG::qPropertySet *)v12;
   }
-  return result;
 }
 
 // File Line: 839
@@ -895,62 +851,58 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::GetPropertySet(UFG::qSymb
 
 // File Line: 880
 // RVA: 0x1F51D0
-UFG::qString *__fastcall UFG::PropertySetManager::DeterminePathAndFilename(UFG::qString *result, const char *propSetName, const char *alt_root_path)
+UFG::qString *__fastcall UFG::PropertySetManager::DeterminePathAndFilename(
+        UFG::qString *result,
+        char *propSetName,
+        hkResourceContainer *alt_root_path)
 {
-  const char *v3; // rax
+  const char *UsedSpace; // rax
   hkResourceContainer *v4; // rax
   const char *v5; // rax
-  int lengthb; // ST34_4
-  int v7; // eax
+  int v6; // eax
+  int lengthb; // [rsp+34h] [rbp-84h]
   char *format; // [rsp+38h] [rbp-80h]
-  char *v10; // [rsp+40h] [rbp-78h]
-  char *v11; // [rsp+48h] [rbp-70h]
-  UFG::qString v12; // [rsp+58h] [rbp-60h]
-  char *text; // [rsp+80h] [rbp-38h]
-  char *v14; // [rsp+88h] [rbp-30h]
-  int length[2]; // [rsp+90h] [rbp-28h]
+  char *Last; // [rsp+40h] [rbp-78h]
+  hkResourceContainer *v11; // [rsp+48h] [rbp-70h]
+  hkMemoryResourceContainer v12; // [rsp+58h] [rbp-60h] BYREF
   char *textb; // [rsp+98h] [rbp-20h]
-  __int64 v17; // [rsp+A0h] [rbp-18h]
-  UFG::qString *v18; // [rsp+C0h] [rbp+8h]
-  const char *v19; // [rsp+D0h] [rbp+18h]
+  __int64 v14; // [rsp+A0h] [rbp-18h]
 
-  v19 = alt_root_path;
-  v18 = result;
-  v17 = -2i64;
-  format = (char *)Assembly::GetRCX((void *)propSetName);
-  UFG::qString::qString(&v12, format);
-  if ( (unsigned int)UFG::qString::ReplaceString(&v12, "-", "\\", 0) )
+  v14 = -2i64;
+  format = (char *)Assembly::GetRCX(propSetName);
+  UFG::qString::qString((UFG::qString *)&v12, format);
+  if ( (unsigned int)UFG::qString::ReplaceString((UFG::qString *)&v12, "-", "\\", 0) )
   {
-    v3 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v12);
-    v14 = UFG::qStringFindLast(v3, "\\");
-    v4 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v12);
-    *(_QWORD *)length = v14 - (char *)v4;
-    v5 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v12);
-    UFG::qString::Set(&v12, v5, length[0], 0i64, 0);
+    UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(&v12);
+    v12.m_children.m_data = (hkRefPtr<hkMemoryResourceContainer> *)UFG::qStringFindLast(UsedSpace, "\\");
+    v4 = Scaleform::SysAllocPagedMalloc::GetUsedSpace(&v12);
+    *(_QWORD *)&v12.m_children.m_size = (char *)v12.m_children.m_data - (char *)v4;
+    v5 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(&v12);
+    UFG::qString::Set((UFG::qString *)&v12, v5, v12.m_children.m_size, 0i64, 0);
   }
   else
   {
-    UFG::qString::operator=(&v12, &customWorldMapCaption);
+    UFG::qString::operator=((UFG::qString *)&v12, &customCaption);
   }
-  if ( v19 )
-    v11 = (char *)v19;
+  if ( alt_root_path )
+    v11 = alt_root_path;
   else
-    v11 = (char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&UFG::PropertySetManager_Rootpath);
-  text = v11;
+    v11 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&UFG::PropertySetManager_Rootpath);
+  *(_QWORD *)&v12.m_resourceHandles.m_size = v11;
   lengthb = hkaMatrix<float>::Width((hkaMatrix<float> *)&v12);
-  textb = (char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v12);
-  v7 = UFG::qStringLength(text);
-  UFG::qString::Set(&v12, text, v7, textb, lengthb);
-  UFG::qString::operator+=(&v12, "\\");
-  v10 = UFG::qStringFindLast(format, "-");
-  if ( v10 )
-    UFG::qString::operator+=(&v12, v10 + 1);
+  textb = (char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(&v12);
+  v6 = UFG::qStringLength(*(const char **)&v12.m_resourceHandles.m_size);
+  UFG::qString::Set((UFG::qString *)&v12, *(const char **)&v12.m_resourceHandles.m_size, v6, textb, lengthb);
+  UFG::qString::operator+=((UFG::qString *)&v12, "\\");
+  Last = UFG::qStringFindLast(format, "-");
+  if ( Last )
+    UFG::qString::operator+=((UFG::qString *)&v12, Last + 1);
   else
-    UFG::qString::operator+=(&v12, format);
-  UFG::qString::operator+=(&v12, UFG::PropertySetManager_extension_xml);
-  UFG::qString::qString(v18, &v12);
-  UFG::qString::~qString(&v12);
-  return v18;
+    UFG::qString::operator+=((UFG::qString *)&v12, format);
+  UFG::qString::operator+=((UFG::qString *)&v12, UFG::PropertySetManager_extension_xml);
+  UFG::qString::qString(result, (UFG::qString *)&v12);
+  UFG::qString::~qString((UFG::qString *)&v12);
+  return result;
 }
 
 // File Line: 912
@@ -964,47 +916,43 @@ void __fastcall UFG::PropertySetManager::Init(const char *rootDir)
 // RVA: 0x1F7280
 UFG::qPropertySet *__fastcall UFG::PropertySetManager::GetParentSchemaSet(UFG::qPropertySet *property_set)
 {
-  UFG::qSymbol *sym; // ST28_8
-  UFG::qSymbol *v2; // rax
-  UFG::qPropertySet *v4; // [rsp+20h] [rbp-18h]
-  UFG::qPropertySet *i; // [rsp+40h] [rbp+8h]
+  UFG::qSymbol *SchemaName; // rax
+  UFG::qPropertySet *ParentFromIdx; // [rsp+20h] [rbp-18h]
+  UFG::qSymbol *sym; // [rsp+28h] [rbp-10h]
 
-  for ( i = property_set; UFG::qPropertySet::NumParents(i); i = v4 )
+  while ( UFG::qPropertySet::NumParents(property_set) )
   {
-    v4 = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(i, 0);
-    sym = UFG::qPropertySet::GetName(v4);
-    v2 = UFG::qPropertySet::GetSchemaName(v4);
-    if ( UFG::qSymbol::operator==(v2, sym) )
-      return v4;
+    ParentFromIdx = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(property_set, 0);
+    sym = UFG::qPropertySet::GetName(ParentFromIdx);
+    SchemaName = UFG::qPropertySet::GetSchemaName(ParentFromIdx);
+    if ( UFG::qSymbol::operator==(SchemaName, sym) )
+      return ParentFromIdx;
+    property_set = ParentFromIdx;
   }
   return 0i64;
 }
 
 // File Line: 935
 // RVA: 0x1F1CA0
-UFG::SchemaDef *__fastcall UFG::PropertySetManager::AddSchemaDef(UFG::qPropertySet *property_set, UFG::SchemaDef *parent_schema_def)
+UFG::SchemaDef *__fastcall UFG::PropertySetManager::AddSchemaDef(
+        UFG::qPropertySet *property_set,
+        UFG::SchemaDef *parent_schema_def)
 {
   __int64 v2; // rax
   UFG::qPropertySet *v3; // rax
-  unsigned int v4; // ST34_4
   unsigned int property_index; // [rsp+20h] [rbp-78h]
-  unsigned int v7; // [rsp+30h] [rbp-68h]
+  unsigned int v6; // [rsp+30h] [rbp-68h]
+  unsigned int size; // [rsp+34h] [rbp-64h]
   __int64 v8; // [rsp+38h] [rbp-60h]
   UFG::qSymbol *name; // [rsp+40h] [rbp-58h]
   UFG::SchemaDef *v10; // [rsp+50h] [rbp-48h]
-  int v11; // [rsp+60h] [rbp-38h]
-  __int64 v12; // [rsp+68h] [rbp-30h]
-  __int64 v13; // [rsp+70h] [rbp-28h]
-  UFG::qPropertySet *propertySet; // [rsp+A0h] [rbp+8h]
-  UFG::SchemaDef *parentSchema; // [rsp+A8h] [rbp+10h]
+  __int64 v11[7]; // [rsp+60h] [rbp-38h] BYREF
 
-  parentSchema = parent_schema_def;
-  propertySet = property_set;
-  v13 = -2i64;
+  v11[2] = -2i64;
   v10 = (UFG::SchemaDef *)AMemory::malloc_default(0x108ui64);
   if ( v10 )
   {
-    UFG::SchemaDef::SchemaDef(v10, propertySet, parentSchema);
+    UFG::SchemaDef::SchemaDef(v10, property_set, parent_schema_def);
     v8 = v2;
   }
   else
@@ -1015,24 +963,24 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::AddSchemaDef(UFG::qPropertyS
     UFG::qBaseTreeRB::Add(&UFG::PropertySetManager_SchemaDefs.mTree, (UFG::qBaseNodeRB *)(v8 + 16));
   else
     UFG::qBaseTreeRB::Add(&UFG::PropertySetManager_SchemaDefs.mTree, 0i64);
-  v7 = UFG::qPropertySet::NumProperties(propertySet);
-  for ( property_index = 0; property_index < v7; ++property_index )
+  v6 = UFG::qPropertySet::NumProperties(property_set);
+  for ( property_index = 0; property_index < v6; ++property_index )
   {
-    if ( !UFG::qPropertySet::PropertyIsDefaultIdx(propertySet, property_index) )
+    if ( !UFG::qPropertySet::PropertyIsDefaultIdx(property_set, property_index) )
     {
-      name = UFG::qPropertySet::GetPropertyNameFromIndex(propertySet, property_index);
-      if ( !parentSchema
-        || (v3 = UFG::qPropertySetHandle::Get(&parentSchema->mPropertySet),
+      name = UFG::qPropertySet::GetPropertyNameFromIndex(property_set, property_index);
+      if ( !parent_schema_def
+        || (v3 = UFG::qPropertySetHandle::Get(&parent_schema_def->mPropertySet),
             !UFG::qPropertySet::PropertyExists(v3, name, DEPTH_RECURSE)) )
       {
-        v11 = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)name);
-        v12 = v8;
-        v4 = UFG::PropertySetManager_PropertyLookup.size;
+        LODWORD(v11[0]) = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)name);
+        v11[1] = v8;
+        size = UFG::PropertySetManager_PropertyLookup.size;
         UFG::qArray<UFG::PropertyLookup,0>::Grow(&UFG::PropertySetManager_PropertyLookup, 1u, "qArray.Add");
         qmemcpy(
-          &UFG::PropertySetManager_PropertyLookup.p[v4],
-          &v11,
-          sizeof(UFG::PropertySetManager_PropertyLookup.p[v4]));
+          &UFG::PropertySetManager_PropertyLookup.p[size],
+          v11,
+          sizeof(UFG::PropertySetManager_PropertyLookup.p[size]));
         UFG::PropertySetManager_PropertyLookup_IsSorted = 0;
       }
     }
@@ -1044,29 +992,25 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::AddSchemaDef(UFG::qPropertyS
 // RVA: 0x1FA250
 UFG::qPropertySet *__fastcall UFG::PropertySetManager::NewLoadXML(const char *propSetFilename, bool *found_existing)
 {
-  UFG::qPropertySet *v3; // [rsp+30h] [rbp-78h]
-  UFG::qSymbol result; // [rsp+38h] [rbp-70h]
+  UFG::qPropertySet *PropSet; // [rsp+30h] [rbp-78h]
+  UFG::qSymbol result; // [rsp+38h] [rbp-70h] BYREF
   SimpleXML::XMLDocument *pDocument; // [rsp+40h] [rbp-68h]
   SimpleXML::XMLDocument *v6; // [rsp+48h] [rbp-60h]
-  __int128 text_buffer; // [rsp+50h] [rbp-58h]
+  __int128 text_buffer; // [rsp+50h] [rbp-58h] BYREF
   unsigned int sourceCRC; // [rsp+60h] [rbp-48h]
   UFG::qPropertySetResource *pPropResource; // [rsp+68h] [rbp-40h]
   char *pszSymbolString; // [rsp+70h] [rbp-38h]
-  SimpleXML::XMLNode *v11; // [rsp+78h] [rbp-30h]
+  SimpleXML::XMLNode *Node; // [rsp+78h] [rbp-30h]
   char *v12; // [rsp+80h] [rbp-28h]
   SimpleXML::XMLDocument *v13; // [rsp+88h] [rbp-20h]
   SimpleXML::XMLDocument *v14; // [rsp+90h] [rbp-18h]
   __int64 v15; // [rsp+98h] [rbp-10h]
-  char *filename; // [rsp+B0h] [rbp+8h]
-  bool *v17; // [rsp+B8h] [rbp+10h]
 
-  v17 = found_existing;
-  filename = (char *)propSetFilename;
   v15 = -2i64;
   UFG::PropertySetManager::PushCurrentlyLoadingFilename(propSetFilename);
-  *v17 = 0;
-  v3 = 0i64;
-  text_buffer = (unsigned __int64)UFG::qReadEntireFile(filename, (__int64 *)&text_buffer + 1, 0i64, 0i64, 0i64);
+  *found_existing = 0;
+  PropSet = 0i64;
+  text_buffer = (unsigned __int64)UFG::qReadEntireFile(propSetFilename, (__int64 *)&text_buffer + 1, 0i64, 0i64, 0i64);
   if ( (_QWORD)text_buffer )
   {
     pDocument = (SimpleXML::XMLDocument *)SimpleXML::XMLDocument::OpenBuffer(
@@ -1074,27 +1018,27 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::NewLoadXML(const char *pr
                                             SDWORD2(text_buffer));
     if ( pDocument )
     {
-      sourceCRC = UFG::qDataHash32((const void *)text_buffer, *((unsigned __int64 *)&text_buffer + 1), 0xFFFFFFFF);
+      sourceCRC = UFG::qDataHash32((char *)text_buffer, *((unsigned __int64 *)&text_buffer + 1), 0xFFFFFFFF);
       v12 = "PropertySet";
-      v11 = SimpleXML::XMLDocument::GetNode(pDocument, "PropertySet", 0i64);
-      if ( v11 )
+      Node = SimpleXML::XMLDocument::GetNode(pDocument, "PropertySet", 0i64);
+      if ( Node )
       {
-        pszSymbolString = SimpleXML::XMLNode::GetAttribute(v11, "name");
+        pszSymbolString = SimpleXML::XMLNode::GetAttribute(Node, "name");
         if ( pszSymbolString )
         {
           UFG::qSymbol::create_from_string(&result, pszSymbolString);
-          v3 = UFG::PropertySetCache::GetPropSet(&result);
-          if ( v3 )
+          PropSet = UFG::PropertySetCache::GetPropSet(&result);
+          if ( PropSet )
           {
-            *v17 = 1;
+            *found_existing = 1;
           }
           else
           {
-            v3 = UFG::PropertySetManager::LoadPropertySetFromXML(pDocument);
-            if ( v3 )
+            PropSet = UFG::PropertySetManager::LoadPropertySetFromXML(pDocument);
+            if ( PropSet )
             {
-              UFG::qPropertySet::AddRef(v3);
-              pPropResource = UFG::qPropertySet::GetResource(v3);
+              UFG::qPropertySet::AddRef(PropSet);
+              pPropResource = UFG::qPropertySet::GetResource(PropSet);
               UFG::qPropertySetResource::SetSourceCRC(pPropResource, sourceCRC);
               UFG::PropertySetCache::Add(pPropResource);
             }
@@ -1115,10 +1059,10 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::NewLoadXML(const char *pr
         v13 = 0i64;
       }
     }
-    UFG::qFreeEntireFile((void *)text_buffer, 0i64);
+    UFG::qFreeEntireFile((char *)text_buffer, 0i64);
   }
   UFG::PropertySetManager::PopCurrentlyLoadingFilename();
-  return v3;
+  return PropSet;
 }
 
 // File Line: 1067
@@ -1137,166 +1081,157 @@ _BOOL8 __fastcall UFG::PropertySetManager::IsSchemaBuildMode()
 
 // File Line: 1087
 // RVA: 0x1F1ED0
-__int64 __fastcall UFG::PropertySetManager::AppendParentLocal(UFG::qPropertySet *propertySet, UFG::qSymbol *parentName)
+__int64 __fastcall UFG::PropertySetManager::AppendParentLocal(
+        UFG::qPropertySet *propertySet,
+        UFG::qSymbolUC *parentName)
 {
-  const char *parentNameString; // ST20_8
-  UFG::qPropertySet *propertySeta; // [rsp+40h] [rbp+8h]
+  const char *parentNameString; // [rsp+20h] [rbp-18h]
 
-  propertySeta = propertySet;
-  parentNameString = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)parentName);
-  return UFG::PropertySetManager::AppendParentLocal(propertySeta, parentNameString);
+  parentNameString = UFG::qSymbol::as_cstr_dbg(parentName);
+  return UFG::PropertySetManager::AppendParentLocal(propertySet, parentNameString);
 }
 
 // File Line: 1094
 // RVA: 0x1F1F10
-__int64 __fastcall UFG::PropertySetManager::AppendParentLocal(UFG::qPropertySet *propertySet, const char *parentNameString)
+__int64 __fastcall UFG::PropertySetManager::AppendParentLocal(
+        UFG::qPropertySet *propertySet,
+        const char *parentNameString)
 {
-  const char *v2; // rax
-  UFG::qSymbol *v3; // rax
-  char *v5; // rax
-  bool found_existing; // [rsp+20h] [rbp-68h]
-  unsigned int v7; // [rsp+24h] [rbp-64h]
-  UFG::qSymbol result; // [rsp+28h] [rbp-60h]
-  UFG::qPropertySet *parentPropSet; // [rsp+30h] [rbp-58h]
-  unsigned int v10; // [rsp+38h] [rbp-50h]
-  unsigned int v11; // [rsp+3Ch] [rbp-4Ch]
-  char *v12; // [rsp+40h] [rbp-48h]
-  hkResourceContainer *v13; // [rsp+48h] [rbp-40h]
-  __int64 v14; // [rsp+50h] [rbp-38h]
-  UFG::qString v15; // [rsp+58h] [rbp-30h]
-  UFG::qPropertySet *propSet; // [rsp+90h] [rbp+8h]
-  char *pszSymbolString; // [rsp+98h] [rbp+10h]
+  const char *UsedSpace; // rax
+  UFG::qSymbol *SchemaName; // rax
+  char *NameStringDBG; // rax
+  bool found_existing; // [rsp+20h] [rbp-68h] BYREF
+  int appended; // [rsp+24h] [rbp-64h]
+  AMD_HD3D result; // [rsp+28h] [rbp-60h] BYREF
+  hkResourceContainer *CurrentlyLoadingFilename; // [rsp+48h] [rbp-40h]
+  __int64 v10; // [rsp+50h] [rbp-38h]
+  _BYTE v11[48]; // [rsp+58h] [rbp-30h] BYREF
 
-  pszSymbolString = (char *)parentNameString;
-  propSet = propertySet;
-  v14 = -2i64;
-  UFG::qSymbol::create_from_string(&result, parentNameString);
-  parentPropSet = UFG::PropertySetManager::FindPropertySet(&result);
-  v7 = -1;
-  if ( parentPropSet )
+  v10 = -2i64;
+  UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, parentNameString);
+  *(_QWORD *)&result.mWidth = UFG::PropertySetManager::FindPropertySet((UFG::qSymbol *)&result);
+  appended = -1;
+  if ( *(_QWORD *)&result.mWidth )
   {
-    v7 = UFG::PSWrapper::AppendParentLocal(propSet, parentPropSet);
+    appended = UFG::PSWrapper::AppendParentLocal(propertySet, *(UFG::qPropertySet **)&result.mWidth);
   }
   else
   {
-    UFG::PropertySetManager::DeterminePathAndFilename(&v15, pszSymbolString, 0i64);
+    UFG::PropertySetManager::DeterminePathAndFilename((UFG::qString *)v11, parentNameString, 0i64);
     found_existing = 0;
-    v2 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v15);
-    parentPropSet = UFG::PropertySetManager::NewLoadXML(v2, &found_existing);
-    if ( parentPropSet )
+    UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)v11);
+    *(_QWORD *)&result.mWidth = UFG::PropertySetManager::NewLoadXML(UsedSpace, &found_existing);
+    if ( *(_QWORD *)&result.mWidth )
     {
-      v7 = UFG::PSWrapper::AppendParentLocal(propSet, parentPropSet);
+      appended = UFG::PSWrapper::AppendParentLocal(propertySet, *(UFG::qPropertySet **)&result.mWidth);
     }
     else
     {
       if ( UFG::PropertySetManager::IsSchemaBuildMode() )
       {
-        v3 = UFG::qPropertySet::GetSchemaName(propSet);
-        if ( UFG::qSymbol::is_null(v3) )
+        SchemaName = UFG::qPropertySet::GetSchemaName(propertySet);
+        if ( UFG::qSymbol::is_null(SchemaName) )
         {
-          v11 = v7;
-          UFG::qString::~qString(&v15);
-          _((AMD_HD3D *)&result);
-          return v11;
+          HIDWORD(result.mStereo) = appended;
+          UFG::qString::~qString((UFG::qString *)v11);
+          _(&result);
+          return HIDWORD(result.mStereo);
         }
       }
       if ( UFG::PropertySetManager::IsSupressingAsserts() )
       {
-        v13 = UFG::PropertySetManager::GetCurrentlyLoadingFilename();
-        v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&result);
-        v5 = UFG::qPropertySet::GetNameStringDBG(propSet);
+        CurrentlyLoadingFilename = UFG::PropertySetManager::GetCurrentlyLoadingFilename();
+        result.mExtension = (IAmdDxExt *)UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&result);
+        NameStringDBG = UFG::qPropertySet::GetNameStringDBG(propertySet);
         UFG::qPrintf(
           "Error: failed to find parent of property set [%s] named [%s] - %s\n",
-          v5,
-          v12,
-          v13,
-          *(_QWORD *)&found_existing);
+          NameStringDBG,
+          (const char *)result.mExtension,
+          (const char *)CurrentlyLoadingFilename);
         ++UFG::PropertySetManager_SupressedAssertCount;
       }
     }
-    UFG::qString::~qString(&v15);
+    UFG::qString::~qString((UFG::qString *)v11);
   }
-  if ( v7 != -1 )
-    Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat((hkgpIndexedMesh::EdgeBarrier *)propSet, 0i64);
-  v10 = v7;
-  _((AMD_HD3D *)&result);
-  return v10;
+  if ( appended != -1 )
+    Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(
+      (hkgpIndexedMesh::EdgeBarrier *)propertySet,
+      0i64);
+  LODWORD(result.mStereo) = appended;
+  _(&result);
+  return LODWORD(result.mStereo);
 }
 
 // File Line: 1143
 // RVA: 0x1FBD10
-void __fastcall UFG::PropertySetManager::RemoveParentLocal(UFG::qPropertySet *propertySet, UFG::qSymbol *parentName)
+void __fastcall UFG::PropertySetManager::RemoveParentLocal(
+        UFG::qPropertySet *propertySet,
+        UFG::qArray<unsigned long,0> *parentName)
 {
-  UFG::qPropertySet *v2; // [rsp+30h] [rbp+8h]
-
-  v2 = propertySet;
   UFG::qPropertySet::RemoveParent(propertySet, parentName);
-  Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat((hkgpIndexedMesh::EdgeBarrier *)v2, 0i64);
+  Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(
+    (hkgpIndexedMesh::EdgeBarrier *)propertySet,
+    0i64);
 }
 
 // File Line: 1150
 // RVA: 0x1F7930
-UFG::qSymbol *__fastcall UFG::GetPropertyNameForPropertyCollection(UFG::qSymbol *result, UFG::qPropertySet *owner, UFG::qPropertyCollection *collectionToFind)
+UFG::qSymbol *__fastcall UFG::GetPropertyNameForPropertyCollection(
+        UFG::qSymbol *result,
+        UFG::qPropertySet *owner,
+        UFG::qPropertyCollection *collectionToFind)
 {
   unsigned int index; // [rsp+24h] [rbp-44h]
-  ePropertyType v5; // [rsp+28h] [rbp-40h]
+  ePropertyType PropertyTypeFromIndex; // [rsp+28h] [rbp-40h]
   unsigned int v6; // [rsp+2Ch] [rbp-3Ch]
   UFG::qSymbol *name; // [rsp+30h] [rbp-38h]
   UFG::qSymbol *source; // [rsp+38h] [rbp-30h]
-  UFG::qSymbol *v9; // [rsp+70h] [rbp+8h]
-  UFG::qPropertySet *v10; // [rsp+78h] [rbp+10h]
-  UFG::qPropertySet *v11; // [rsp+80h] [rbp+18h]
 
-  v11 = (UFG::qPropertySet *)collectionToFind;
-  v10 = owner;
-  v9 = result;
   v6 = UFG::qPropertySet::NumProperties(owner);
   for ( index = 0; index < v6; ++index )
   {
-    v5 = UFG::qPropertySet::GetPropertyTypeFromIndex(v10, index);
-    if ( UFG::qPropertyCollection::IsPropertySet((UFG::qPropertyCollection *)&v11->mFlags) && v5 == 26 )
+    PropertyTypeFromIndex = UFG::qPropertySet::GetPropertyTypeFromIndex(owner, index);
+    if ( UFG::qPropertyCollection::IsPropertySet(collectionToFind) && PropertyTypeFromIndex == UID_propertyset )
     {
-      name = UFG::qPropertySet::GetPropertyNameFromIndex(v10, index);
-      if ( UFG::qPropertySet::Get<UFG::qPropertySet>(v10, name, DEPTH_RECURSE) == v11 )
+      name = UFG::qPropertySet::GetPropertyNameFromIndex(owner, index);
+      if ( UFG::qPropertySet::Get<UFG::qPropertySet>(owner, (UFG::qArray<unsigned long,0> *)name, DEPTH_RECURSE) == collectionToFind )
       {
-        UFG::qSymbol::qSymbol(v9, name);
-        return v9;
+        UFG::qSymbol::qSymbol(result, name);
+        return result;
       }
     }
-    else if ( UFG::qPropertyCollection::IsPropertyList((UFG::qPropertyCollection *)&v11->mFlags) && v5 == 25 )
+    else if ( UFG::qPropertyCollection::IsPropertyList(collectionToFind) && PropertyTypeFromIndex == UID_list )
     {
-      source = UFG::qPropertySet::GetPropertyNameFromIndex(v10, index);
-      if ( UFG::qPropertySet::Get<UFG::qPropertyList>(v10, source, DEPTH_RECURSE) == (UFG::qPropertyList *)v11 )
+      source = UFG::qPropertySet::GetPropertyNameFromIndex(owner, index);
+      if ( UFG::qPropertySet::Get<UFG::qPropertyList>(owner, (UFG::qArray<unsigned long,0> *)source, DEPTH_RECURSE) == collectionToFind )
       {
-        UFG::qSymbol::qSymbol(v9, source);
-        return v9;
+        UFG::qSymbol::qSymbol(result, source);
+        return result;
       }
     }
   }
-  UFG::qSymbol::qSymbol(v9, &UFG::gNullQSymbol);
-  return v9;
+  UFG::qSymbol::qSymbol(result, &UFG::gNullQSymbol);
+  return result;
 }
 
 // File Line: 1184
 // RVA: 0x1F77C0
-signed __int64 __fastcall UFG::GetPropertyIndexForPropertyCollection(UFG::qPropertyList *owner, UFG::qPropertyCollection *collectionToFind)
+__int64 __fastcall UFG::GetPropertyIndexForPropertyCollection(
+        hkMemoryResourceContainer *owner,
+        UFG::qPropertySet *collectionToFind)
 {
   unsigned int index; // [rsp+20h] [rbp-28h]
-  unsigned int v4; // [rsp+24h] [rbp-24h]
-  UFG::qPropertyList *v5; // [rsp+50h] [rbp+8h]
-  UFG::qPropertySet *v6; // [rsp+58h] [rbp+10h]
+  unsigned int StartingPos; // [rsp+24h] [rbp-24h]
 
-  v6 = (UFG::qPropertySet *)collectionToFind;
-  v5 = owner;
-  v4 = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos((hkMemoryResourceContainer *)owner);
-  for ( index = 0; index < v4; ++index )
+  StartingPos = Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStartingPos(owner);
+  for ( index = 0; index < StartingPos; ++index )
   {
-    if ( UFG::qPropertyCollection::IsPropertySet((UFG::qPropertyCollection *)&v6->mFlags) )
+    if ( UFG::qPropertyCollection::IsPropertySet(collectionToFind) )
     {
-      if ( UFG::qPropertyList::Get<UFG::qPropertySet>(v5, index) == v6 )
+      if ( UFG::qPropertyList::Get<UFG::qPropertySet>((UFG::qPropertyList *)owner, index) == collectionToFind )
         return index;
     }
-    else if ( UFG::qPropertyList::Get<UFG::qPropertyList>(v5, index) == (UFG::qPropertyList *)v6 )
+    else if ( UFG::qPropertyList::Get<UFG::qPropertyList>((UFG::qPropertyList *)owner, index) == (UFG::qPropertyList *)collectionToFind )
     {
       return index;
     }
@@ -1306,159 +1241,156 @@ signed __int64 __fastcall UFG::GetPropertyIndexForPropertyCollection(UFG::qPrope
 
 // File Line: 1212
 // RVA: 0x1F7EA0
-UFG::qPropertySet *__fastcall UFG::PropertySetManager::GetPtrFromPath(UFG::qPropertyPath *path, UFG::qPropertySet *basePropertySet)
+UFG::qPropertySet *__fastcall UFG::PropertySetManager::GetPtrFromPath(
+        UFG::qPropertyPath *path,
+        UFG::qPropertySet *basePropertySet)
 {
-  UFG::qArray<unsigned long,0> *v2; // rax
+  UFG::qArray<unsigned long,0> *Name; // rax
   unsigned int i; // [rsp+20h] [rbp-48h]
-  UFG::qWiseSymbol result; // [rsp+24h] [rbp-44h]
-  UFG::qPropertySet *v6; // [rsp+28h] [rbp-40h]
-  unsigned int v7; // [rsp+30h] [rbp-38h]
-  unsigned int v8; // [rsp+34h] [rbp-34h]
-  unsigned int *v9; // [rsp+38h] [rbp-30h]
-  unsigned int *v10; // [rsp+40h] [rbp-28h]
-  UFG::qPropertyList *v11; // [rsp+48h] [rbp-20h]
-  unsigned int *v12; // [rsp+50h] [rbp-18h]
-  __int64 v13; // [rsp+58h] [rbp-10h]
-  UFG::qPropertyPath *v14; // [rsp+70h] [rbp+8h]
-  UFG::qPropertySet *v15; // [rsp+78h] [rbp+10h]
+  UFG::qArray<unsigned long,0> result; // [rsp+24h] [rbp-44h] BYREF
+  unsigned int size; // [rsp+34h] [rbp-34h]
+  unsigned int *v7; // [rsp+38h] [rbp-30h]
+  unsigned int *v8; // [rsp+40h] [rbp-28h]
+  UFG::qPropertyList *v9; // [rsp+48h] [rbp-20h]
+  unsigned int *p; // [rsp+50h] [rbp-18h]
+  __int64 v11; // [rsp+58h] [rbp-10h]
 
-  v15 = basePropertySet;
-  v14 = path;
-  v13 = -2i64;
-  v6 = 0i64;
-  v12 = path->mPath.p;
-  v2 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(basePropertySet);
-  if ( (unsigned int)UFG::qSymbolUC::as_uint32(v2) == *v12 )
+  v11 = -2i64;
+  *(_QWORD *)&result.capacity = 0i64;
+  p = path->mPath.p;
+  Name = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(basePropertySet);
+  if ( (unsigned int)UFG::qSymbolUC::as_uint32(Name) == *p )
   {
-    v6 = v15;
+    *(_QWORD *)&result.capacity = basePropertySet;
     for ( i = 1; ; ++i )
     {
-      v8 = v14->mPath.size;
-      if ( i >= v8 )
+      size = path->mPath.size;
+      if ( i >= size )
         break;
-      v9 = &v14->mPath.p[i];
-      UFG::qSymbol::qSymbol(&result, *v9);
-      v7 = UFG::qPropertySet::GetPropertyTypeFromName(v6, (UFG::qSymbol *)&result, DEPTH_RECURSE);
-      if ( v7 == 25 )
+      v7 = &path->mPath.p[i];
+      UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&result, *v7);
+      HIDWORD(result.p) = UFG::qPropertySet::GetPropertyTypeFromName(
+                            *(UFG::qPropertySet **)&result.capacity,
+                            &result,
+                            DEPTH_RECURSE);
+      if ( HIDWORD(result.p) == 25 )
       {
-        v11 = UFG::qPropertySet::Get<UFG::qPropertyList>(v6, (UFG::qSymbol *)&result, DEPTH_RECURSE);
-        v10 = &v14->mPath.p[++i];
-        v6 = UFG::qPropertyList::Get<UFG::qPropertySet>(v11, *v10);
+        v9 = UFG::qPropertySet::Get<UFG::qPropertyList>(*(UFG::qPropertySet **)&result.capacity, &result, DEPTH_RECURSE);
+        v8 = &path->mPath.p[++i];
+        *(_QWORD *)&result.capacity = UFG::qPropertyList::Get<UFG::qPropertySet>(v9, *v8);
       }
-      else if ( v7 == 26 )
+      else if ( HIDWORD(result.p) == 26 )
       {
-        v6 = UFG::qPropertySet::Get<UFG::qPropertySet>(v6, (UFG::qSymbol *)&result, DEPTH_RECURSE);
+        *(_QWORD *)&result.capacity = UFG::qPropertySet::Get<UFG::qPropertySet>(
+                                        *(UFG::qPropertySet **)&result.capacity,
+                                        &result,
+                                        DEPTH_RECURSE);
       }
       else
       {
-        v6 = 0i64;
+        *(_QWORD *)&result.capacity = 0i64;
       }
       _((AMD_HD3D *)&result);
     }
   }
-  return v6;
+  return *(UFG::qPropertySet **)&result.capacity;
 }
 
 // File Line: 1240
 // RVA: 0x1F7340
-_BOOL8 __fastcall UFG::GetPathCore(UFG::qPropertyPath *path, UFG::qPropertyCollection *propertyCollection, unsigned int extraUID)
+_BOOL8 __fastcall UFG::GetPathCore(UFG::qPropertyPath *path, UFG::qPropertySet *propertyCollection, int extraUID)
 {
-  UFG::qArray<unsigned long,0> *v3; // rax
+  UFG::qArray<unsigned long,0> *Name; // rax
   unsigned int newsize; // [rsp+20h] [rbp-E8h]
-  UFG::qPropertySet *collectionToFind; // [rsp+28h] [rbp-E0h]
   unsigned int i; // [rsp+30h] [rbp-D8h]
-  UFG::qSymbol result; // [rsp+34h] [rbp-D4h]
-  UFG::qSymbol v9; // [rsp+3Ch] [rbp-CCh]
-  unsigned int v10; // [rsp+40h] [rbp-C8h]
-  UFG::qPropertySet *v11; // [rsp+48h] [rbp-C0h]
-  unsigned int v12; // [rsp+50h] [rbp-B8h]
-  UFG::qPropertyList *v13; // [rsp+58h] [rbp-B0h]
-  UFG::qPropertyList *v14; // [rsp+60h] [rbp-A8h]
+  AMD_HD3D result; // [rsp+34h] [rbp-D4h] BYREF
+  UFG::qPropertyList *v9; // [rsp+58h] [rbp-B0h]
+  UFG::qPropertyList *OwningList; // [rsp+60h] [rbp-A8h]
   UFG::qPropertySet *owner; // [rsp+68h] [rbp-A0h]
-  __int64 v16; // [rsp+70h] [rbp-98h]
-  int v17[34]; // [rsp+80h] [rbp-88h]
-  UFG::qPropertyPath *v18; // [rsp+110h] [rbp+8h]
+  __int64 v12; // [rsp+70h] [rbp-98h]
+  int v13[34]; // [rsp+80h] [rbp-88h]
 
-  v18 = path;
-  v16 = -2i64;
-  collectionToFind = (UFG::qPropertySet *)propertyCollection;
+  v12 = -2i64;
   newsize = 0;
   if ( extraUID != -1 )
   {
-    v17[0] = extraUID;
+    v13[0] = extraUID;
     newsize = 1;
   }
-  while ( collectionToFind )
+  while ( propertyCollection )
   {
-    if ( UFG::qPropertyCollection::IsPropertySet((UFG::qPropertyCollection *)&collectionToFind->mFlags) )
+    if ( UFG::qPropertyCollection::IsPropertySet(propertyCollection) )
     {
-      owner = UFG::qPropertyCollection::GetOwningSet((UFG::qPropertyCollection *)&collectionToFind->mFlags);
-      v14 = UFG::qPropertyCollection::GetOwningList((UFG::qPropertyCollection *)&collectionToFind->mFlags);
+      owner = UFG::qPropertyCollection::GetOwningSet(propertyCollection);
+      OwningList = UFG::qPropertyCollection::GetOwningList(propertyCollection);
       if ( owner )
       {
-        UFG::GetPropertyNameForPropertyCollection(&result, owner, (UFG::qPropertyCollection *)&collectionToFind->mFlags);
-        v17[newsize++] = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&result);
-        collectionToFind = owner;
-        _((AMD_HD3D *)&result);
+        UFG::GetPropertyNameForPropertyCollection((UFG::qSymbol *)&result, owner, propertyCollection);
+        v13[newsize++] = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&result);
+        propertyCollection = owner;
+        _(&result);
       }
       else
       {
-        if ( !v14 )
+        if ( !OwningList )
         {
-          v3 = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(collectionToFind);
-          v17[newsize++] = UFG::qSymbolUC::as_uint32(v3);
+          Name = (UFG::qArray<unsigned long,0> *)UFG::qPropertySet::GetName(propertyCollection);
+          v13[newsize++] = UFG::qSymbolUC::as_uint32(Name);
           break;
         }
-        v12 = UFG::GetPropertyIndexForPropertyCollection(v14, (UFG::qPropertyCollection *)&collectionToFind->mFlags);
-        v17[newsize++] = v12;
-        collectionToFind = (UFG::qPropertySet *)v14;
+        HIDWORD(result.mExtension) = UFG::GetPropertyIndexForPropertyCollection(OwningList, propertyCollection);
+        v13[newsize++] = HIDWORD(result.mExtension);
+        propertyCollection = (UFG::qPropertySet *)OwningList;
       }
     }
     else
     {
-      v11 = UFG::qPropertyCollection::GetOwningSet((UFG::qPropertyCollection *)&collectionToFind->mFlags);
-      v13 = UFG::qPropertyCollection::GetOwningList((UFG::qPropertyCollection *)&collectionToFind->mFlags);
-      if ( v11 )
+      *(IAmdDxExtQuadBufferStereo **)((char *)&result.mStereo + 4) = (IAmdDxExtQuadBufferStereo *)UFG::qPropertyCollection::GetOwningSet(propertyCollection);
+      v9 = UFG::qPropertyCollection::GetOwningList(propertyCollection);
+      if ( *(IAmdDxExtQuadBufferStereo **)((char *)&result.mStereo + 4) )
       {
-        UFG::GetPropertyNameForPropertyCollection(&v9, v11, (UFG::qPropertyCollection *)&collectionToFind->mFlags);
-        v17[newsize++] = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&v9);
-        collectionToFind = v11;
-        _((AMD_HD3D *)&v9);
+        UFG::GetPropertyNameForPropertyCollection(
+          (UFG::qSymbol *)&result.mWidth,
+          *(UFG::qPropertySet **)((char *)&result.mStereo + 4),
+          propertyCollection);
+        v13[newsize++] = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)&result.mWidth);
+        propertyCollection = *(UFG::qPropertySet **)((char *)&result.mStereo + 4);
+        _((AMD_HD3D *)&result.mWidth);
       }
       else
       {
-        if ( !v13 )
+        if ( !v9 )
           break;
-        v10 = UFG::GetPropertyIndexForPropertyCollection(v13, (UFG::qPropertyCollection *)&collectionToFind->mFlags);
-        v17[newsize++] = v10;
-        collectionToFind = (UFG::qPropertySet *)v13;
+        result.mHeight = UFG::GetPropertyIndexForPropertyCollection(v9, propertyCollection);
+        v13[newsize++] = result.mHeight;
+        propertyCollection = (UFG::qPropertySet *)v9;
       }
     }
   }
-  UFG::qPropertyPath::Clear(v18);
-  UFG::qArray<unsigned long,0>::Resize(&v18->mPath, newsize, "qArray.Reallocate(Resize)");
+  UFG::qPropertyPath::Clear(path);
+  UFG::qArray<unsigned long,0>::Resize(&path->mPath, newsize, "qArray.Reallocate(Resize)");
   for ( i = 0; i < newsize; ++i )
-    v18->mPath.p[newsize - 1 - i] = v17[i];
+    path->mPath.p[newsize - 1 - i] = v13[i];
   return newsize != 0;
 }
 
 // File Line: 1315
 // RVA: 0x1F7300
-bool __fastcall UFG::PropertySetManager::GetPath(UFG::qPropertyPath *path, UFG::qPropertySet *propertySet, UFG::qSymbol *propertyName)
+bool __fastcall UFG::PropertySetManager::GetPath(
+        UFG::qPropertyPath *path,
+        UFG::qPropertySet *propertySet,
+        UFG::qArray<unsigned long,0> *propertyName)
 {
   unsigned int v3; // eax
-  UFG::qPropertyPath *patha; // [rsp+30h] [rbp+8h]
-  UFG::qPropertySet *propertyCollection; // [rsp+38h] [rbp+10h]
 
-  propertyCollection = propertySet;
-  patha = path;
-  v3 = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)propertyName);
-  return UFG::GetPathCore(patha, (UFG::qPropertyCollection *)&propertyCollection->mFlags, v3);
+  v3 = UFG::qSymbolUC::as_uint32(propertyName);
+  return UFG::GetPathCore(path, propertySet, v3);
 }
 
 // File Line: 1353
 // RVA: 0x1FE000
-char __fastcall UFG::PropertySetManager::SetModificationCallback(bool (__fastcall *callback)(UFG::qPropertyCollection *, unsigned int))
+char __fastcall UFG::PropertySetManager::SetModificationCallback(
+        bool (__fastcall *callback)(UFG::qPropertyCollection *, unsigned int))
 {
   UFG::PropertySetManager_PropertyModificationCallback = callback;
   return 1;
@@ -1466,38 +1398,36 @@ char __fastcall UFG::PropertySetManager::SetModificationCallback(bool (__fastcal
 
 // File Line: 1359
 // RVA: 0x1FF530
-char __fastcall UFG::UpdateDefaultValuesRecurse(UFG::qPropertySet *component_property_prop_set, UFG::qPropertySet *property_set, UFG::qSymbol *componentPropertyName, UFG::qSymbol *propertyName, unsigned int property_index, const char *source_set_name)
+char __fastcall UFG::UpdateDefaultValuesRecurse(
+        UFG::qPropertySet *component_property_prop_set,
+        UFG::qPropertySet *property_set,
+        UFG::qArray<unsigned long,0> *componentPropertyName,
+        UFG::qArray<unsigned long,0> *propertyName,
+        unsigned int property_index,
+        const char *source_set_name)
 {
   unsigned int parent_index; // [rsp+30h] [rbp-28h]
   unsigned int v8; // [rsp+34h] [rbp-24h]
   UFG::qPropertySet *srcPropSet; // [rsp+38h] [rbp-20h]
   UFG::qPropertySet *property_seta; // [rsp+40h] [rbp-18h]
-  UFG::qPropertySet *dstPropSet; // [rsp+60h] [rbp+8h]
-  UFG::qPropertySet *v12; // [rsp+68h] [rbp+10h]
-  UFG::qSymbol *name; // [rsp+70h] [rbp+18h]
-  UFG::qSymbol *propertyNamea; // [rsp+78h] [rbp+20h]
 
-  propertyNamea = propertyName;
-  name = componentPropertyName;
-  v12 = property_set;
-  dstPropSet = component_property_prop_set;
   v8 = UFG::qPropertySet::NumParents(property_set);
   for ( parent_index = 0; parent_index < v8; ++parent_index )
   {
-    property_seta = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(v12, parent_index);
-    srcPropSet = UFG::qPropertySet::Get<UFG::qPropertySet>(property_seta, name, 0);
-    if ( srcPropSet && !UFG::qPropertySet::PropertyIsDefaultByName(srcPropSet, propertyNamea) )
+    property_seta = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(property_set, parent_index);
+    srcPropSet = UFG::qPropertySet::Get<UFG::qPropertySet>(property_seta, componentPropertyName, DEPTH_LOCAL);
+    if ( srcPropSet && !UFG::qPropertySet::PropertyIsDefaultByName(srcPropSet, propertyName) )
     {
       UFG::PSWrapper::EnableSchemaPropertyChecking(0);
-      UFG::PropertySchemaUtils::CopyPropertyValue(srcPropSet, dstPropSet, propertyNamea);
+      UFG::PropertySchemaUtils::CopyPropertyValue(srcPropSet, component_property_prop_set, propertyName);
       UFG::PSWrapper::EnableSchemaPropertyChecking(1);
       return 1;
     }
     if ( UFG::UpdateDefaultValuesRecurse(
-           dstPropSet,
+           component_property_prop_set,
            property_seta,
-           name,
-           propertyNamea,
+           (UFG::qSymbol *)componentPropertyName,
+           (UFG::qSymbol *)propertyName,
            property_index,
            source_set_name) )
     {
@@ -1509,31 +1439,28 @@ char __fastcall UFG::UpdateDefaultValuesRecurse(UFG::qPropertySet *component_pro
 
 // File Line: 1394
 // RVA: 0x1FF480
-void __fastcall UFG::PropertySetManager::UpdateDefaultValues(UFG::qPropertySet *component_property_prop_set, UFG::qPropertySet *property_set, UFG::qSymbol *componentPropertyName)
+void __fastcall UFG::PropertySetManager::UpdateDefaultValues(
+        UFG::qPropertySet *component_property_prop_set,
+        UFG::qPropertySet *property_set,
+        UFG::qSymbol *componentPropertyName)
 {
-  UFG::qSymbolUC *v3; // rax
+  UFG::qSymbolUC *Name; // rax
   unsigned int index; // [rsp+30h] [rbp-28h]
   unsigned int v5; // [rsp+34h] [rbp-24h]
   const char *source_set_name; // [rsp+38h] [rbp-20h]
   UFG::qSymbol *propertyName; // [rsp+40h] [rbp-18h]
-  UFG::qPropertySet *component_property_prop_seta; // [rsp+60h] [rbp+8h]
-  UFG::qPropertySet *property_seta; // [rsp+68h] [rbp+10h]
-  UFG::qSymbol *componentPropertyNamea; // [rsp+70h] [rbp+18h]
 
-  componentPropertyNamea = componentPropertyName;
-  property_seta = property_set;
-  component_property_prop_seta = component_property_prop_set;
-  v3 = (UFG::qSymbolUC *)UFG::qPropertySet::GetName(property_set);
-  source_set_name = UFG::qSymbol::as_cstr_dbg(v3);
-  v5 = UFG::qPropertySet::NumProperties(component_property_prop_seta);
+  Name = (UFG::qSymbolUC *)UFG::qPropertySet::GetName(property_set);
+  source_set_name = UFG::qSymbol::as_cstr_dbg(Name);
+  v5 = UFG::qPropertySet::NumProperties(component_property_prop_set);
   for ( index = 0; index < v5; ++index )
   {
-    propertyName = UFG::qPropertySet::GetPropertyNameFromIndex(component_property_prop_seta, index);
-    if ( (unsigned __int8)UFG::qPropertySet::PropertyIsDefaultIdx(component_property_prop_seta, index) )
+    propertyName = UFG::qPropertySet::GetPropertyNameFromIndex(component_property_prop_set, index);
+    if ( UFG::qPropertySet::PropertyIsDefaultIdx(component_property_prop_set, index) )
       UFG::UpdateDefaultValuesRecurse(
-        component_property_prop_seta,
-        property_seta,
-        componentPropertyNamea,
+        component_property_prop_set,
+        property_set,
+        componentPropertyName,
         propertyName,
         index,
         source_set_name);
@@ -1542,44 +1469,47 @@ void __fastcall UFG::PropertySetManager::UpdateDefaultValues(UFG::qPropertySet *
 
 // File Line: 1410
 // RVA: 0x1F1760
-UFG::qPropertySet *__fastcall UFG::PropertySetManager::AddComponentPropertySet(UFG::qPropertySet *property_set, UFG::SchemaDef *component_schema, UFG::qPropertySet *component_parent_set)
+UFG::qPropertySet *__fastcall UFG::PropertySetManager::AddComponentPropertySet(
+        UFG::qPropertySet *property_set,
+        UFG::SchemaDef *component_schema,
+        UFG::qPropertySet *component_parent_set)
 {
-  UFG::qSymbol *v3; // rax
-  char v5; // [rsp+20h] [rbp-28h]
+  UFG::qSymbol *SchemaName; // rax
+  UFG::PropertyModificationCallbackSupress v5; // [rsp+20h] [rbp-28h] BYREF
   UFG::qPropertySet *propertySet; // [rsp+28h] [rbp-20h]
   UFG::SchemaDef *i; // [rsp+30h] [rbp-18h]
   __int64 v8; // [rsp+38h] [rbp-10h]
-  UFG::qPropertySet *property_seta; // [rsp+50h] [rbp+8h]
-  UFG::SchemaDef *v10; // [rsp+58h] [rbp+10h]
-  UFG::qPropertySet *parent; // [rsp+60h] [rbp+18h]
 
-  parent = component_parent_set;
-  v10 = component_schema;
-  property_seta = property_set;
   v8 = -2i64;
-  propertySet = UFG::qPropertySet::Get<UFG::qPropertySet>(property_set, &component_schema->mPropertyName, 0);
+  propertySet = UFG::qPropertySet::Get<UFG::qPropertySet>(
+                  property_set,
+                  (UFG::qArray<unsigned long,0> *)&component_schema->mPropertyName,
+                  DEPTH_LOCAL);
   if ( !propertySet )
   {
-    propertySet = UFG::qPropertySet::CreateContainedSet(&v10->mPropertyName, "child_set");
-    UFG::qPropertySet::SetSchemaName(propertySet, &v10->mName);
-    UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v5);
-    if ( parent )
+    propertySet = UFG::qPropertySet::CreateContainedSet(&component_schema->mPropertyName, "child_set");
+    UFG::qPropertySet::SetSchemaName(propertySet, &component_schema->mName);
+    UFG::PropertyModificationCallbackSupress::PropertyModificationCallbackSupress(&v5);
+    if ( component_parent_set )
     {
-      UFG::qPropertySet::AddParent(propertySet, parent);
-      UFG::qPropertySet::CopyFrom(propertySet, parent, 0);
+      UFG::qPropertySet::AddParent(propertySet, component_parent_set);
+      UFG::qPropertySet::CopyFrom(propertySet, component_parent_set, 0);
     }
     else
     {
-      v3 = UFG::qPropertySet::GetSchemaName(propertySet);
-      UFG::PropertySetManager::SetupSchemaSet(propertySet, v3);
-      UFG::PropertySetManager::UpdateDefaultValues(propertySet, property_seta, &v10->mPropertyName);
+      SchemaName = UFG::qPropertySet::GetSchemaName(propertySet);
+      UFG::PropertySetManager::SetupSchemaSet(propertySet, SchemaName);
+      UFG::PropertySetManager::UpdateDefaultValues(propertySet, property_set, &component_schema->mPropertyName);
     }
-    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress((UFG::PropertyModificationCallbackSupress *)&v5);
-    for ( i = v10; i; i = Scaleform::GFx::AS3::InstanceTraits::fl::GlobalObjectScript::GetFilePtr(i) )
+    UFG::PropertyModificationCallbackSupress::~PropertyModificationCallbackSupress(&v5);
+    for ( i = component_schema; i; i = Scaleform::GFx::AS3::InstanceTraits::fl::GlobalObjectScript::GetFilePtr(i) )
     {
-      UFG::qPropertySet::Set<UFG::qPropertySet>(property_seta, &i->mPropertyName, propertySet);
-      if ( i != v10 )
-        UFG::qPropertySet::SetPropertyDefaultLocal(property_seta, &i->mPropertyName, 1);
+      UFG::qPropertySet::Set<UFG::qPropertySet>(
+        property_set,
+        (UFG::qArray<unsigned long,0> *)&i->mPropertyName,
+        propertySet);
+      if ( i != component_schema )
+        UFG::qPropertySet::SetPropertyDefaultLocal(property_set, &i->mPropertyName, 1);
     }
     UFG::qPropertySet::SetAllPropertiesToDefault(propertySet);
   }
@@ -1591,25 +1521,23 @@ UFG::qPropertySet *__fastcall UFG::PropertySetManager::AddComponentPropertySet(U
 void __fastcall UFG::PropertySetManager::PushCurrentlyLoadingFilename(const char *filename)
 {
   UFG::qNode<UFG::qString,UFG::qString> *v1; // rax
-  UFG::qNode<UFG::qString,UFG::qString> *v2; // ST30_8
+  UFG::qNode<UFG::qString,UFG::qString> *mPrev; // [rsp+30h] [rbp-48h]
   UFG::qNode<UFG::qString,UFG::qString> *v3; // [rsp+38h] [rbp-40h]
   UFG::qString *v4; // [rsp+40h] [rbp-38h]
-  char *format; // [rsp+80h] [rbp+8h]
 
-  format = (char *)filename;
   v4 = (UFG::qString *)AMemory::malloc_default(0x28ui64);
   if ( v4 )
   {
-    UFG::qString::qString(v4, format);
+    UFG::qString::qString(v4, filename);
     v3 = v1;
   }
   else
   {
     v3 = 0i64;
   }
-  v2 = UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev;
+  mPrev = UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev;
   UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev->mNext = v3;
-  v3->mPrev = v2;
+  v3->mPrev = mPrev;
   v3->mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::PropertySetManager_CurrentlyLoadingFileStack;
   UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev = v3;
 }
@@ -1618,7 +1546,7 @@ void __fastcall UFG::PropertySetManager::PushCurrentlyLoadingFilename(const char
 // RVA: 0x1FA4F0
 void UFG::PropertySetManager::PopCurrentlyLoadingFilename(void)
 {
-  if ( UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mNext != (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::PropertySetManager_CurrentlyLoadingFileStack )
+  if ( (UFG::qList<UFG::qString,UFG::qString,1,0> *)UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mNext != &UFG::PropertySetManager_CurrentlyLoadingFileStack )
     UFG::qList<UFG::qString,UFG::qString,1,0>::Remove(
       &UFG::PropertySetManager_CurrentlyLoadingFileStack,
       (UFG::qString *)UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev);
@@ -1628,13 +1556,10 @@ void UFG::PropertySetManager::PopCurrentlyLoadingFilename(void)
 // RVA: 0x1F6C80
 hkResourceContainer *__fastcall UFG::PropertySetManager::GetCurrentlyLoadingFilename()
 {
-  hkResourceContainer *result; // rax
-
-  if ( UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mNext == (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::PropertySetManager_CurrentlyLoadingFileStack )
-    result = 0i64;
+  if ( (UFG::qList<UFG::qString,UFG::qString,1,0> *)UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mNext == &UFG::PropertySetManager_CurrentlyLoadingFileStack )
+    return 0i64;
   else
-    result = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev);
-  return result;
+    return Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)UFG::PropertySetManager_CurrentlyLoadingFileStack.mNode.mPrev);
 }
 
 // File Line: 1522
@@ -1642,7 +1567,7 @@ hkResourceContainer *__fastcall UFG::PropertySetManager::GetCurrentlyLoadingFile
 __int64 UFG::PropertyMetadataDatabase::_dynamic_initializer_for__mMetadata__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::PropertyMetadataDatabase::mMetadata.mTree);
-  return atexit(UFG::PropertyMetadataDatabase::_dynamic_atexit_destructor_for__mMetadata__);
+  return atexit((int (__fastcall *)())UFG::PropertyMetadataDatabase::_dynamic_atexit_destructor_for__mMetadata__);
 }
 
 // File Line: 1523
@@ -1650,27 +1575,28 @@ __int64 UFG::PropertyMetadataDatabase::_dynamic_initializer_for__mMetadata__()
 __int64 UFG::PropertyMetadataDatabase::_dynamic_initializer_for__mSuggestionCommands__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::PropertyMetadataDatabase::mSuggestionCommands.mTree);
-  return atexit(UFG::PropertyMetadataDatabase::_dynamic_atexit_destructor_for__mSuggestionCommands__);
+  return atexit((int (__fastcall *)())UFG::PropertyMetadataDatabase::_dynamic_atexit_destructor_for__mSuggestionCommands__);
 }
 
 // File Line: 1536
 // RVA: 0x1F6620
-UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Get(UFG::qSymbol *propertyName)
+UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Get(UFG::qArray<unsigned long,0> *propertyName)
 {
   unsigned int uid; // [rsp+20h] [rbp-28h]
-  UFG::qBaseTreeRB *v3; // [rsp+28h] [rbp-20h]
 
-  uid = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)propertyName);
+  uid = UFG::qSymbolUC::as_uint32(propertyName);
   if ( uid )
-    v3 = UFG::qBaseTreeRB::Get(&UFG::PropertyMetadataDatabase::mMetadata.mTree, uid);
+    return UFG::qBaseTreeRB::Get(&UFG::PropertyMetadataDatabase::mMetadata.mTree, uid);
   else
-    v3 = 0i64;
-  return v3;
+    return 0i64;
 }
 
 // File Line: 1691
 // RVA: 0x1EF8B0
-UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *propertyName, const char *entryName, const char *entryValue)
+UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(
+        UFG::qArray<unsigned long,0> *propertyName,
+        const char *entryName,
+        const char *entryValue)
 {
   char *v3; // rax
   UFG::qBaseNodeRB *v4; // rax
@@ -1683,14 +1609,8 @@ UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *pr
   UFG::PropertyMetadata::Entry *v12; // [rsp+48h] [rbp-60h]
   UFG::qBaseNodeRB *v13; // [rsp+50h] [rbp-58h]
   UFG::PropertyMetadata *v14; // [rsp+58h] [rbp-50h]
-  UFG::qSymbol *v15; // [rsp+B0h] [rbp+8h]
-  char *str; // [rsp+B8h] [rbp+10h]
-  char *entryValuea; // [rsp+C0h] [rbp+18h]
 
-  entryValuea = (char *)entryValue;
-  str = (char *)entryName;
-  v15 = propertyName;
-  uid = UFG::qSymbolUC::as_uint32((UFG::qArray<unsigned long,0> *)propertyName);
+  uid = UFG::qSymbolUC::as_uint32(propertyName);
   if ( uid )
     x = UFG::qBaseTreeRB::Get(&UFG::PropertyMetadataDatabase::mMetadata.mTree, uid);
   else
@@ -1700,7 +1620,7 @@ UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *pr
     v14 = (UFG::PropertyMetadata *)AMemory::malloc_default(0x90ui64);
     if ( v14 )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v15);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)propertyName);
       UFG::PropertyMetadata::PropertyMetadata(v14, v3);
       v13 = v4;
     }
@@ -1711,9 +1631,9 @@ UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *pr
     x = (UFG::qBaseTreeRB *)v13;
     UFG::qBaseTreeRB::Add(&UFG::PropertyMetadataDatabase::mMetadata.mTree, v13);
   }
-  v8 = UFG::qStringHashUpper32(str, 0xFFFFFFFF);
+  v8 = UFG::qStringHashUpper32(entryName, -1);
   if ( v8 )
-    v10 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)x + 32), v8);
+    v10 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&x->mNULL, v8);
   else
     v10 = 0i64;
   if ( !v10 )
@@ -1721,7 +1641,7 @@ UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *pr
     v12 = (UFG::PropertyMetadata::Entry *)AMemory::malloc_default(0x70ui64);
     if ( v12 )
     {
-      UFG::PropertyMetadata::Entry::Entry(v12, str, entryValuea);
+      UFG::PropertyMetadata::Entry::Entry(v12, entryName, entryValue);
       v11 = v5;
     }
     else
@@ -1729,44 +1649,43 @@ UFG::qBaseTreeRB *__fastcall UFG::PropertyMetadataDatabase::Add(UFG::qSymbol *pr
       v11 = 0i64;
     }
     v10 = (UFG::qBaseTreeRB *)v11;
-    UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)((char *)x + 32), v11);
+    UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&x->mNULL, v11);
   }
   return v10;
 }
 
 // File Line: 1730
 // RVA: 0x1F9CF0
-void __fastcall UFG::PropertyMetadataDatabase::LoadFromPropertyNode(UFG::qSymbol *propertyName, SimpleXML::XMLNode *node)
+void __fastcall UFG::PropertyMetadataDatabase::LoadFromPropertyNode(
+        UFG::qArray<unsigned long,0> *propertyName,
+        SimpleXML::XMLNode *node)
 {
-  char *entryName; // ST28_8
-  const char *v3; // rax
+  const char *UsedSpace; // rax
   unsigned int index; // [rsp+20h] [rbp-78h]
-  unsigned int v5; // [rsp+24h] [rbp-74h]
-  UFG::qString attribute_name; // [rsp+30h] [rbp-68h]
-  __int64 v7; // [rsp+58h] [rbp-40h]
-  UFG::qString attribute_value; // [rsp+60h] [rbp-38h]
-  UFG::qSymbol *propertyNamea; // [rsp+A0h] [rbp+8h]
-  SimpleXML::XMLNode *v10; // [rsp+A8h] [rbp+10h]
+  unsigned int AttributeCount; // [rsp+24h] [rbp-74h]
+  char *entryName; // [rsp+28h] [rbp-70h]
+  hkMemoryResourceContainer attribute_name; // [rsp+30h] [rbp-68h] BYREF
 
-  v10 = node;
-  propertyNamea = propertyName;
-  v7 = -2i64;
-  v5 = SimpleXML::XMLNode::GetAttributeCount(node);
-  for ( index = 0; index < v5; ++index )
+  *(_QWORD *)&attribute_name.m_resourceHandles.m_size = -2i64;
+  AttributeCount = SimpleXML::XMLNode::GetAttributeCount(node);
+  for ( index = 0; index < AttributeCount; ++index )
   {
-    UFG::qString::qString(&attribute_name);
-    UFG::qString::qString(&attribute_value);
-    SimpleXML::XMLNode::GetAttribute(v10, index, &attribute_name, &attribute_value);
-    if ( !(unsigned int)UFG::qString::IsEmpty(&attribute_name)
-      && (char)UFG::qString::operator[](&attribute_name, 0) == 95 )
+    UFG::qString::qString((UFG::qString *)&attribute_name);
+    UFG::qString::qString((UFG::qString *)&attribute_name.m_children);
+    SimpleXML::XMLNode::GetAttribute(
+      node,
+      index,
+      (UFG::qString *)&attribute_name,
+      (UFG::qString *)&attribute_name.m_children);
+    if ( !UFG::qString::IsEmpty((UFG::qString *)&attribute_name)
+      && (char)UFG::qString::operator[]((UFG::qString *)&attribute_name, 0) == 95 )
     {
-      entryName = (char *)&Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&attribute_name)->vfptr
-                + 1;
-      v3 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&attribute_value);
-      UFG::PropertyMetadataDatabase::Add(propertyNamea, entryName, v3);
+      entryName = (char *)&Scaleform::SysAllocPagedMalloc::GetUsedSpace(&attribute_name)->vfptr + 1;
+      UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&attribute_name.m_children);
+      UFG::PropertyMetadataDatabase::Add(propertyName, entryName, UsedSpace);
     }
-    UFG::qString::~qString(&attribute_value);
-    UFG::qString::~qString(&attribute_name);
+    UFG::qString::~qString((UFG::qString *)&attribute_name.m_children);
+    UFG::qString::~qString((UFG::qString *)&attribute_name);
   }
 }
 

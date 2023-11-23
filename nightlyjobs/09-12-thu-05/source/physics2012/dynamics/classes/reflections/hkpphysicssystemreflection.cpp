@@ -28,30 +28,30 @@ hkClass *__fastcall hkpPhysicsSystem::staticClass()
 
 // File Line: 110
 // RVA: 0xD50F70
-void __fastcall finishLoadedObjecthkpPhysicsSystem(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPhysicsSystem(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 80);
+    v2 = p + 10;
     v2[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 116
 // RVA: 0xD50FA0
-void __fastcall cleanupLoadedObjecthkpPhysicsSystem(void *p)
+void __fastcall cleanupLoadedObjecthkpPhysicsSystem(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 120
 // RVA: 0xD50FB0
 void **__fastcall getVtablehkpPhysicsSystem()
 {
-  hkStringPtr v1; // [rsp+70h] [rbp-28h]
+  hkStringPtr v1; // [rsp+70h] [rbp-28h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpPhysicsSystem::`vftable;
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkpPhysicsSystemTypeInfo__()
   hkpPhysicsSystemTypeInfo.m_typeName = "hkpPhysicsSystem";
   hkpPhysicsSystemTypeInfo.m_vtable = result;
   hkpPhysicsSystemTypeInfo.m_scopedName = "!hkpPhysicsSystem";
-  hkpPhysicsSystemTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPhysicsSystem;
-  hkpPhysicsSystemTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPhysicsSystem;
+  hkpPhysicsSystemTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPhysicsSystem;
+  hkpPhysicsSystemTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPhysicsSystem;
   return result;
 }
 

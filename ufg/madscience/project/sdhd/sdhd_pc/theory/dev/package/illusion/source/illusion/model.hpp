@@ -2,14 +2,11 @@
 // RVA: 0x8CF80
 void __fastcall Illusion::Mesh::Mesh(Illusion::Mesh *this)
 {
-  Illusion::Mesh *v1; // rbx
-
-  v1 = this;
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mMaterialHandle.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mIndexBufferHandle.mPrev);
+  UFG::qResourceHandle::qResourceHandle(&this->mMaterialHandle);
+  UFG::qResourceHandle::qResourceHandle(&this->mVertexDeclHandle);
+  UFG::qResourceHandle::qResourceHandle(&this->mIndexBufferHandle);
   `eh vector constructor iterator(
-    v1->mVertexBufferHandles,
+    this->mVertexBufferHandles,
     0x20ui64,
     4,
     (void (__fastcall *)(void *))Illusion::BufferHandle::BufferHandle);
@@ -19,13 +16,10 @@ void __fastcall Illusion::Mesh::Mesh(Illusion::Mesh *this)
 // RVA: 0x8CFF0
 void __fastcall Illusion::Model::Model(Illusion::Model *this)
 {
-  Illusion::Model *v1; // rbx
-
-  v1 = this;
-  UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mMaterialTableHandle.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mBonePaletteHandle.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mMorphTargetsHandle.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mLocatorsHandle.mPrev);
+  UFG::qResourceData::qResourceData(&this->UFG::qResourceData);
+  UFG::qResourceHandle::qResourceHandle(&this->mMaterialTableHandle);
+  UFG::qResourceHandle::qResourceHandle(&this->mBonePaletteHandle);
+  UFG::qResourceHandle::qResourceHandle(&this->mMorphTargetsHandle);
+  UFG::qResourceHandle::qResourceHandle(&this->mLocatorsHandle);
 }
 

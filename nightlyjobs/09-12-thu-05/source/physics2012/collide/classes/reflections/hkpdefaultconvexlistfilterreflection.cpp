@@ -28,17 +28,17 @@ hkClass *__fastcall hkpDefaultConvexListFilter::staticClass()
 
 // File Line: 58
 // RVA: 0xCEB9B0
-void __fastcall finishLoadedObjecthkpDefaultConvexListFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDefaultConvexListFilter(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDefaultConvexListFilter::`vftable;
+    *p = &hkpDefaultConvexListFilter::`vftable;
 }
 
 // File Line: 64
 // RVA: 0xCEB9D0
-void __fastcall cleanupLoadedObjecthkpDefaultConvexListFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpDefaultConvexListFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpDefaultConvexListFilterTypeInfo__()
   hkpDefaultConvexListFilterTypeInfo.m_typeName = "hkpDefaultConvexListFilter";
   hkpDefaultConvexListFilterTypeInfo.m_vtable = result;
   hkpDefaultConvexListFilterTypeInfo.m_scopedName = "!hkpDefaultConvexListFilter";
-  hkpDefaultConvexListFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDefaultConvexListFilter;
-  hkpDefaultConvexListFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDefaultConvexListFilter;
+  hkpDefaultConvexListFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDefaultConvexListFilter;
+  hkpDefaultConvexListFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDefaultConvexListFilter;
   return result;
 }
 

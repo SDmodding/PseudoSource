@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiClimbUpAnalyzer::staticClass()
 
 // File Line: 66
 // RVA: 0xC32210
-void __fastcall finishLoadedObjecthkaiClimbUpAnalyzer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiClimbUpAnalyzer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiClimbUpAnalyzer::`vftable;
+    *p = &hkaiClimbUpAnalyzer::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xC32230
-void __fastcall cleanupLoadedObjecthkaiClimbUpAnalyzer(void *p)
+void __fastcall cleanupLoadedObjecthkaiClimbUpAnalyzer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiClimbUpAnalyzerTypeInfo__()
   hkaiClimbUpAnalyzerTypeInfo.m_typeName = "hkaiClimbUpAnalyzer";
   hkaiClimbUpAnalyzerTypeInfo.m_vtable = result;
   hkaiClimbUpAnalyzerTypeInfo.m_scopedName = "!hkaiClimbUpAnalyzer";
-  hkaiClimbUpAnalyzerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiClimbUpAnalyzer;
-  hkaiClimbUpAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiClimbUpAnalyzer;
+  hkaiClimbUpAnalyzerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiClimbUpAnalyzer;
+  hkaiClimbUpAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiClimbUpAnalyzer;
   return result;
 }
 

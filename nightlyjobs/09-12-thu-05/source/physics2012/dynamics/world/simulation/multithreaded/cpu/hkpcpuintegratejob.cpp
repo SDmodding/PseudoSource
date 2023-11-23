@@ -8,23 +8,35 @@ hkBool *__fastcall canSolveOnSingleProcessor(hkBool *result, hkpBuildJacobianTas
 
 // File Line: 111
 // RVA: 0xD93A90
-void __fastcall createAndAppendNewTask(hkpBuildJacobianTaskHeader *taskHeader, hkpBuildJacobianTaskCollection *outBuildCollection, hkpSolveJacobiansTaskCollection *outSolveCollection, hkpBuildJacobianTask **prevBuildTask, hkpSolveConstraintBatchTask **prevSolveTask, hkpSolveConstraintBatchTask **firstTaskOfPreviousBatch, hkpSolveConstraintBatchTask **firstTaskOfCurrentBatch, hkpJacobianSchema **schemas, hkpSolverElemTemp **elemTemp, hkLocalArray<hkConstraintInternalInfo> *constraintsForThisTask, int *batchIndexOfLastTask, int currentBatchIndex, unsigned __int16 **ptrToBatchSize, hkBool putOnPpuOnlyBuildJacobianTaskList, hkBool generateSolveTasks, hkArray<hkConstraintInternalCallbackInfo,hkContainerHeapAllocator> *callbackConstraints)
+void __fastcall createAndAppendNewTask(
+        hkpBuildJacobianTaskHeader *taskHeader,
+        hkpBuildJacobianTaskCollection *outBuildCollection,
+        hkpSolveJacobiansTaskCollection *outSolveCollection,
+        hkpBuildJacobianTask **prevBuildTask,
+        hkpSolveConstraintBatchTask **prevSolveTask,
+        hkpSolveConstraintBatchTask **firstTaskOfPreviousBatch,
+        hkpSolveConstraintBatchTask **firstTaskOfCurrentBatch,
+        hkpJacobianSchema **schemas,
+        hkpSolverElemTemp **elemTemp,
+        hkLocalArray<hkConstraintInternalInfo> *constraintsForThisTask,
+        int *batchIndexOfLastTask,
+        int currentBatchIndex,
+        unsigned __int16 **ptrToBatchSize,
+        hkBool putOnPpuOnlyBuildJacobianTaskList,
+        hkBool generateSolveTasks,
+        hkArray<hkConstraintInternalCallbackInfo,hkContainerHeapAllocator> *callbackConstraints)
 {
-  hkpJacobianSchema **v16; // rsi
-  hkpSolverElemTemp **v17; // r15
   hkpBuildJacobianTaskHeader *v18; // r14
   hkpJacobianSchema *v19; // r12
-  hkpBuildJacobianTask **v20; // r13
-  hkpBuildJacobianTaskCollection *v21; // rdi
-  _QWORD **v22; // rax
+  _QWORD **Value; // rax
   __int64 v23; // rax
   hkpBuildJacobianTask *v24; // r8
-  hkpVelocityAccumulator *v25; // rax
-  __int64 v26; // rbp
+  hkpVelocityAccumulator *m_accumulatorsBase; // rax
+  __int64 m_size; // rbp
   __int64 v27; // r14
-  signed __int64 v28; // r10
+  hkpConstraintInstance **p_m_instance; // r10
   hkConstraintInternalInfo *v29; // r11
-  hkConstraintInternal *v30; // r9
+  hkConstraintInternal *m_internal; // r9
   __int64 v31; // rcx
   hkConstraintInternalCallbackInfo *v32; // rdx
   __int16 v33; // cx
@@ -33,23 +45,15 @@ void __fastcall createAndAppendNewTask(hkpBuildJacobianTaskHeader *taskHeader, h
   hkpSolveConstraintBatchTask *v36; // rdx
   hkpSolveConstraintBatchTask *v37; // rax
   unsigned __int16 i; // r10
-  hkpBuildJacobianTaskHeader *v39; // [rsp+60h] [rbp+8h]
-  hkpSolveJacobiansTaskCollection *v40; // [rsp+70h] [rbp+18h]
   hkpJacobianSchema **schemasa; // [rsp+98h] [rbp+40h]
   hkpSolverElemTemp **elemTempa; // [rsp+A0h] [rbp+48h]
 
-  v40 = outSolveCollection;
-  v39 = taskHeader;
-  v16 = schemas;
-  v17 = elemTemp;
   v18 = taskHeader;
   v19 = *schemas;
   schemasa = (hkpJacobianSchema **)*schemas;
   elemTempa = (hkpSolverElemTemp **)*elemTemp;
-  v20 = prevBuildTask;
-  v21 = outBuildCollection;
-  v22 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v23 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v22[11] + 8i64))(v22[11], 3968i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v23 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 3968i64);
   v24 = (hkpBuildJacobianTask *)v23;
   if ( v23 )
   {
@@ -61,69 +65,69 @@ void __fastcall createAndAppendNewTask(hkpBuildJacobianTaskHeader *taskHeader, h
   {
     v24 = 0i64;
   }
-  if ( *v20 )
+  if ( *prevBuildTask )
   {
-    (*v20)->m_next = v24;
-    (*v20)->m_schemasOfNextTask = *v16;
+    (*prevBuildTask)->m_next = v24;
+    (*prevBuildTask)->m_schemasOfNextTask = *schemas;
   }
   else if ( !putOnPpuOnlyBuildJacobianTaskList.m_bool )
   {
-    v21->m_buildJacobianTasks = v24;
-    v21->m_numBuildJacobianTasks = 0;
+    outBuildCollection->m_buildJacobianTasks = v24;
+    outBuildCollection->m_numBuildJacobianTasks = 0;
   }
-  ++v21->m_numBuildJacobianTasks;
+  ++outBuildCollection->m_numBuildJacobianTasks;
   v24->m_taskHeader = v18;
   v24->m_numAtomInfos = constraintsForThisTask->m_size;
-  v25 = v18->m_accumulatorsBase;
+  m_accumulatorsBase = v18->m_accumulatorsBase;
   v24->m_schemas = v19;
-  v24->m_accumulators = v25;
-  v26 = constraintsForThisTask->m_size;
-  if ( v26 > 0 )
+  v24->m_accumulators = m_accumulatorsBase;
+  m_size = constraintsForThisTask->m_size;
+  if ( m_size > 0 )
   {
     v27 = 0i64;
-    v28 = (signed __int64)&v24->m_atomInfos[0].m_instance;
+    p_m_instance = &v24->m_atomInfos[0].m_instance;
     do
     {
       v29 = &constraintsForThisTask->m_data[v27];
-      v30 = v29->m_internal;
-      if ( v29->m_internal->m_callbackRequest & 0xB )
+      m_internal = v29->m_internal;
+      if ( (v29->m_internal->m_callbackRequest & 0xB) != 0 )
       {
         v31 = callbackConstraints->m_size;
         callbackConstraints->m_size = v31 + 1;
         v32 = &callbackConstraints->m_data[v31];
         v32->m_internal = v29->m_internal;
         *(_QWORD *)&v32->m_entityAIndex = *(_QWORD *)&v29->m_entityAIndex;
-        v32->m_atomInfo = (hkpBuildJacobianTask::AtomInfo *)(v28 - 8);
+        v32->m_atomInfo = (hkpBuildJacobianTask::AtomInfo *)(p_m_instance - 1);
       }
       ++v27;
-      v28 += 48i64;
-      *(_QWORD *)(v28 - 56) = v30->m_atoms;
-      *(_WORD *)(v28 - 16) = v30->m_atomsSize;
-      *(_QWORD *)(v28 - 48) = v30->m_constraint;
-      *(_QWORD *)(v28 - 40) = v30->m_runtime;
-      *(_WORD *)(v28 - 14) = v30->m_runtimeSize;
+      p_m_instance += 6;
+      *(p_m_instance - 7) = (hkpConstraintInstance *)m_internal->m_atoms;
+      *((_WORD *)p_m_instance - 8) = m_internal->m_atomsSize;
+      *(p_m_instance - 6) = m_internal->m_constraint;
+      *(p_m_instance - 5) = (hkpConstraintInstance *)m_internal->m_runtime;
+      *((_WORD *)p_m_instance - 7) = m_internal->m_runtimeSize;
       v33 = v29->m_entityBIndex + 1;
-      *(_WORD *)(v28 - 12) = v29->m_entityAIndex + 1;
-      *(_WORD *)(v28 - 10) = v33;
-      *(_QWORD *)(v28 - 32) = (char *)v30->m_entities[0] + 368;
-      *(_QWORD *)(v28 - 24) = (char *)v30->m_entities[1] + 368;
-      *v16 += v30->m_sizeOfSchemas;
-      *v17 += v30->m_numSolverElemTemps;
-      --v26;
+      *((_WORD *)p_m_instance - 6) = v29->m_entityAIndex + 1;
+      *((_WORD *)p_m_instance - 5) = v33;
+      *(p_m_instance - 4) = (hkpConstraintInstance *)&m_internal->m_entities[0]->m_motion.m_motionState;
+      *(p_m_instance - 3) = (hkpConstraintInstance *)&m_internal->m_entities[1]->m_motion.m_motionState;
+      *schemas += m_internal->m_sizeOfSchemas;
+      *elemTemp += m_internal->m_numSolverElemTemps;
+      --m_size;
     }
-    while ( v26 );
-    v18 = v39;
+    while ( m_size );
+    v18 = taskHeader;
     v19 = (hkpJacobianSchema *)schemasa;
   }
   constraintsForThisTask->m_size = 0;
-  *v16 += 32;
-  v24->m_schemasOfNextTask = *v16;
-  *v17 = (hkpSolverElemTemp *)(((unsigned __int64)&(*v17)[3].m_usedImpulseFactor + 3) & 0xFFFFFFFFFFFFFFF0ui64);
-  *v20 = v24;
+  *schemas += 32;
+  v24->m_schemasOfNextTask = *schemas;
+  *elemTemp = (hkpSolverElemTemp *)(((unsigned __int64)&(*elemTemp)[3].m_usedImpulseFactor + 3) & 0xFFFFFFFFFFFFFFF0ui64);
+  *prevBuildTask = v24;
   if ( generateSolveTasks.m_bool )
   {
     v34 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v35 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v34[11] + 8i64))(v34[11], 64i64);
+    v35 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v34[11] + 8i64))(v34[11], 64i64);
     v36 = (hkpSolveConstraintBatchTask *)v35;
     if ( v35 )
     {
@@ -141,7 +145,7 @@ void __fastcall createAndAppendNewTask(hkpBuildJacobianTaskHeader *taskHeader, h
     if ( currentBatchIndex != *batchIndexOfLastTask )
     {
       if ( !currentBatchIndex )
-        v40->m_firstSolveJacobiansTask = v36;
+        outSolveCollection->m_firstSolveJacobiansTask = v36;
       *batchIndexOfLastTask = currentBatchIndex;
       if ( *prevSolveTask )
       {
@@ -164,1100 +168,1081 @@ void __fastcall createAndAppendNewTask(hkpBuildJacobianTaskHeader *taskHeader, h
     v36->m_accumulators = v18->m_accumulatorsBase;
     v36->m_schemas = v19;
     v36->m_solverElemTemp = (hkpSolverElemTemp *)elemTempa;
-    v36->m_sizeOfSchemaBuffer = *(_DWORD *)v16 - (_DWORD)v19;
-    v36->m_sizeOfSolverElemTempBuffer = *(_DWORD *)v17 - (_DWORD)elemTempa;
+    v36->m_sizeOfSchemaBuffer = *(_DWORD *)schemas - (_DWORD)v19;
+    v36->m_sizeOfSolverElemTempBuffer = *(_DWORD *)elemTemp - (_DWORD)elemTempa;
     *prevSolveTask = v36;
   }
 }
 
 // File Line: 338
 // RVA: 0xD93DA0
-void __fastcall createBuildJacobianAndSolveJacobianTaskCollection(hkpSimulationIsland *island, hkBool forceCoherentConstraintOrderingInSolver, hkpBuildJacobianTaskHeader *taskHeader, hkpBuildJacobianTaskCollection *outBuildCollection, hkpSolveJacobiansTaskCollection *outSolveCollection)
+void __fastcall createBuildJacobianAndSolveJacobianTaskCollection(
+        hkpSimulationIsland *island,
+        hkBool forceCoherentConstraintOrderingInSolver,
+        hkpBuildJacobianTaskHeader *taskHeader,
+        hkpBuildJacobianTaskCollection *outBuildCollection,
+        hkpSolveJacobiansTaskCollection *outSolveCollection)
 {
   hkpSimulationIsland *v5; // rsi
-  _QWORD *v6; // rdi
+  _QWORD *Value; // rdi
   _QWORD *v7; // rcx
   unsigned __int64 v8; // rax
-  signed __int64 v9; // rcx
-  __int64 v10; // rbx
+  _QWORD *v9; // rcx
+  __int64 m_size; // rbx
   unsigned __int64 v11; // r14
-  int v12; // er9
+  int m_numConstraints; // r9d
   __int64 v13; // r13
-  int v14; // er9
-  int v15; // er12
+  int v14; // r9d
+  int v15; // r12d
   hkLifoAllocator *v16; // rax
   int v17; // edx
   char *v18; // rcx
-  signed int v19; // edi
-  int v20; // er15
-  int v21; // edi
+  int v19; // edi
+  int v20; // r15d
+  __int64 v21; // rcx
   __int64 v22; // rcx
-  __int64 v23; // rcx
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v24; // rax
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v25; // r12
-  int v26; // ebx
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v23; // rax
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v24; // r12
+  int v25; // ebx
   __int64 i; // rdi
-  int v28; // ebx
-  signed int v29; // er13
-  __int16 v30; // r12
-  __int64 v31; // rax
-  unsigned __int64 v32; // rbx
-  unsigned __int64 v33; // rsi
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v34; // r14
-  unsigned __int8 *v35; // rbx
-  __int64 v36; // rcx
-  int v37; // eax
-  unsigned __int8 **v38; // rcx
-  int v39; // eax
-  unsigned __int8 **v40; // rcx
-  _QWORD *v41; // rax
-  signed int v42; // edi
+  int v27; // ebx
+  int v28; // r13d
+  __int16 v29; // r12
+  __int64 v30; // rax
+  unsigned __int64 v31; // rbx
+  unsigned __int64 v32; // rsi
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v33; // r14
+  unsigned __int8 *v34; // rbx
+  __int64 v35; // rcx
+  int v36; // eax
+  hkpSolverElemTemp **v37; // rcx
+  int v38; // eax
+  hkpSolverElemTemp **v39; // rcx
+  _QWORD *v40; // rax
+  int v41; // edi
+  unsigned __int64 v42; // rcx
   unsigned __int64 v43; // rcx
-  signed __int64 v44; // rcx
-  _QWORD *v45; // rax
+  _QWORD *v44; // rax
+  unsigned __int64 v45; // rcx
   unsigned __int64 v46; // rcx
-  signed __int64 v47; // rcx
-  _QWORD *v48; // rax
+  _QWORD *v47; // rax
+  unsigned __int64 v48; // rcx
   unsigned __int64 v49; // rcx
-  signed __int64 v50; // rcx
-  hkpSolveConstraintBatchTask *v51; // r12
-  __int64 v52; // r14
-  __int64 v53; // rax
-  hkLifoAllocator *v54; // rax
-  bool v55; // sf
-  unsigned __int8 v56; // of
-  unsigned __int64 v57; // rcx
-  __int64 *v58; // rcx
-  unsigned int v59; // eax
-  __int64 v60; // rdi
-  __int64 v61; // rax
-  bool v62; // r15
-  _DWORD *v63; // rdi
-  signed int v64; // eax
-  void **v65; // rdx
-  bool v66; // zf
-  __int64 v67; // rcx
-  char *v68; // r12
-  __int64 v69; // r8
-  __int64 v70; // rdx
-  signed int v71; // er13
-  unsigned __int64 v72; // r8
-  unsigned __int16 v73; // ax
-  unsigned __int16 v74; // ax
-  int *v75; // rax
-  __int64 v76; // r15
-  unsigned __int64 v77; // rdi
-  __int64 v78; // rbx
-  __int64 v79; // rsi
-  _QWORD **v80; // rax
-  __int64 v81; // rax
-  hkpBuildJacobianTask *v82; // r9
-  hkpBuildJacobianTask *v83; // rax
-  hkpBuildJacobianTaskCollection *v84; // rax
-  hkpVelocityAccumulator *v85; // rax
-  __int64 v86; // r10
-  _QWORD *v87; // rdi
-  unsigned __int64 v88; // r12
-  _QWORD *v89; // rbx
-  int v90; // esi
-  signed __int64 v91; // r8
-  __int64 v92; // rdx
-  __int64 v93; // rax
-  signed __int64 v94; // rcx
-  __int16 v95; // cx
-  bool v96; // al
-  signed __int64 v97; // r15
-  unsigned __int64 v98; // rdi
-  _QWORD **v99; // rax
-  __int64 v100; // rax
-  hkpSolveConstraintBatchTask *v101; // rcx
-  hkpSolveConstraintBatchTask *v102; // r8
-  int v103; // er9
-  unsigned __int16 v104; // ax
-  __int64 v105; // rdx
-  hkpVelocityAccumulator *v106; // rax
-  __int64 v107; // rsi
-  int v108; // edi
-  __int64 v109; // rbx
-  unsigned __int16 v110; // ax
-  int v111; // ecx
-  int *v112; // rdi
-  signed int *v113; // rdx
-  _QWORD *v114; // rcx
-  __int64 v115; // rsi
-  int v116; // ebx
-  __int64 v117; // r12
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v118; // r14
-  __int64 v119; // rdi
-  unsigned __int16 v120; // ax
-  int *v121; // rax
-  _QWORD *v122; // rax
-  __int64 *v123; // rax
-  unsigned __int64 v124; // r13
-  __int64 v125; // r12
-  __int64 v126; // rbx
-  unsigned __int64 v127; // rsi
-  _QWORD **v128; // rax
-  __int64 v129; // rax
-  hkpBuildJacobianTask *v130; // r9
-  hkpBuildJacobianTask *v131; // rax
-  hkpBuildJacobianTaskCollection *v132; // rax
-  hkpVelocityAccumulator *v133; // rax
-  __int64 v134; // r10
-  _QWORD *v135; // r8
-  _QWORD *v136; // rbx
-  int v137; // esi
-  signed __int64 v138; // rdi
-  __int64 v139; // rdx
-  __int64 v140; // rax
-  signed __int64 v141; // rcx
-  __int16 v142; // cx
-  signed __int64 v143; // r12
-  unsigned __int64 v144; // r13
-  _QWORD **v145; // rax
-  __int64 v146; // rax
-  hkpSolveConstraintBatchTask *v147; // rcx
-  hkpSolveConstraintBatchTask *v148; // rdi
-  int v149; // eax
-  unsigned __int16 v150; // ax
-  __int64 v151; // rdx
-  hkpVelocityAccumulator *v152; // rax
-  __int64 v153; // rax
+  hkpSolveConstraintBatchTask *v50; // r12
+  __int64 v51; // r14
+  hkpJacobianSchema *m_schemasBase; // rax
+  hkLifoAllocator *v53; // rax
+  bool v54; // cc
+  unsigned __int64 v55; // rcx
+  __int64 *v56; // rcx
+  unsigned int v57; // eax
+  __int64 v58; // rdi
+  bool v59; // r15
+  _DWORD *v60; // rdi
+  int v61; // eax
+  char **p_array; // rdx
+  bool v63; // zf
+  __int64 v64; // rcx
+  char *v65; // r12
+  __int64 v66; // r8
+  __int64 v67; // rdx
+  int v68; // r13d
+  unsigned __int64 v69; // r8
+  unsigned __int16 v70; // ax
+  unsigned __int16 v71; // ax
+  int *v72; // rax
+  hkpSolverElemTemp *v73; // r15
+  hkpSolverElemTemp *v74; // rdi
+  hkpSolverElemTemp *v75; // rbx
+  hkpSolverElemTemp *v76; // rsi
+  _QWORD **v77; // rax
+  __int64 v78; // rax
+  hkpBuildJacobianTask *v79; // r9
+  hkpBuildJacobianTask *v80; // rax
+  hkpBuildJacobianTaskCollection *v81; // rax
+  hkpVelocityAccumulator *m_accumulatorsBase; // rax
+  __int64 v83; // r10
+  _QWORD *v84; // rdi
+  hkpSolverElemTemp *v85; // r12
+  _QWORD *v86; // rbx
+  int v87; // esi
+  hkpConstraintInstance **p_m_instance; // r8
+  __int64 v89; // rdx
+  __int64 v90; // rax
+  __int64 v91; // rcx
+  __int16 v92; // cx
+  bool v93; // al
+  hkpSolverElemTemp *v94; // r15
+  hkpSolverElemTemp *v95; // rdi
+  _QWORD **v96; // rax
+  __int64 v97; // rax
+  hkpSolveConstraintBatchTask *v98; // rcx
+  hkpSolveConstraintBatchTask *v99; // r8
+  int v100; // r9d
+  unsigned __int16 v101; // ax
+  __int64 v102; // rdx
+  hkpVelocityAccumulator *v103; // rax
+  __int64 v104; // rsi
+  int v105; // edi
+  __int64 v106; // rbx
+  unsigned __int16 v107; // ax
+  int v108; // ecx
+  int *v109; // rdi
+  int *v110; // rdx
+  _QWORD *v111; // rcx
+  __int64 v112; // rsi
+  int v113; // ebx
+  __int64 v114; // r12
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v115; // r14
+  __int64 v116; // rdi
+  unsigned __int16 v117; // ax
+  int *v118; // rax
+  _QWORD *v119; // rax
+  __int64 *v120; // rax
+  hkpSolverElemTemp *v121; // r13
+  hkpSolverElemTemp *v122; // r12
+  hkpSolverElemTemp *v123; // rbx
+  hkpSolverElemTemp *v124; // rsi
+  _QWORD **v125; // rax
+  __int64 v126; // rax
+  hkpBuildJacobianTask *v127; // r9
+  hkpBuildJacobianTask *v128; // rax
+  hkpBuildJacobianTaskCollection *v129; // rax
+  hkpVelocityAccumulator *v130; // rax
+  __int64 v131; // r10
+  _QWORD *v132; // r8
+  _QWORD *v133; // rbx
+  int v134; // esi
+  hkpConstraintInstance **v135; // rdi
+  __int64 v136; // rdx
+  __int64 v137; // rax
+  __int64 v138; // rcx
+  __int16 v139; // cx
+  hkpSolverElemTemp *v140; // r12
+  hkpSolverElemTemp *v141; // r13
+  _QWORD **v142; // rax
+  __int64 v143; // rax
+  hkpSolveConstraintBatchTask *v144; // rcx
+  hkpSolveConstraintBatchTask *v145; // rdi
+  int v146; // eax
+  unsigned __int16 v147; // ax
+  __int64 v148; // rdx
+  hkpVelocityAccumulator *v149; // rax
+  __int64 v150; // rax
+  _QWORD **v151; // rax
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v152; // rdi
+  _QWORD **v153; // rax
   _QWORD **v154; // rax
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v155; // rdi
-  _QWORD **v156; // rax
-  _QWORD **v157; // rax
+  unsigned __int16 v155; // ax
+  __int64 v156; // rsi
+  unsigned int v157; // ecx
   unsigned __int16 v158; // ax
-  __int64 v159; // rsi
-  unsigned int v160; // ecx
-  unsigned __int16 v161; // ax
-  __int64 v162; // rdi
-  _QWORD **v163; // rax
-  __int64 v164; // rax
-  __int64 *v165; // r15
-  __int64 v166; // rdx
-  __int64 v167; // r8
-  __int64 *v168; // rdi
-  __int64 v169; // rcx
-  hkLifoAllocator *v170; // rax
-  signed int v171; // edi
-  hkLifoAllocator *v172; // rax
-  int v173; // er8
-  _QWORD *v174; // rdi
-  _QWORD *v175; // rcx
-  unsigned __int64 v176; // rax
-  signed __int64 v177; // rcx
-  int v178; // [rsp+30h] [rbp-D0h]
-  int v179; // [rsp+34h] [rbp-CCh]
-  int v180; // [rsp+38h] [rbp-C8h]
-  int v181; // [rsp+3Ch] [rbp-C4h]
-  int v182; // [rsp+40h] [rbp-C0h]
-  char *v183; // [rsp+48h] [rbp-B8h]
-  hkResult result; // [rsp+50h] [rbp-B0h]
-  unsigned __int16 *v185; // [rsp+58h] [rbp-A8h]
-  hkpSolveConstraintBatchTask *v186; // [rsp+60h] [rbp-A0h]
-  unsigned __int64 v187; // [rsp+68h] [rbp-98h]
-  void *v188; // [rsp+70h] [rbp-90h]
-  hkpSolveConstraintBatchTask *v189; // [rsp+78h] [rbp-88h]
-  char *array; // [rsp+80h] [rbp-80h]
-  int v191; // [rsp+88h] [rbp-78h]
-  int v192; // [rsp+8Ch] [rbp-74h]
-  char *v193; // [rsp+90h] [rbp-70h]
-  int v194; // [rsp+98h] [rbp-68h]
-  int v195; // [rsp+9Ch] [rbp-64h]
-  unsigned __int8 *v196; // [rsp+A0h] [rbp-60h]
+  __int64 v159; // rdi
+  _QWORD **v160; // rax
+  hkpBuildJacobianTaskCollection::CallbackPair *v161; // rax
+  char *v162; // r15
+  hkpBuildJacobianTaskCollection::CallbackPair *v163; // rdx
+  __int64 v164; // r8
+  char *v165; // rdi
+  hkConstraintInternal *v166; // rcx
+  hkLifoAllocator *v167; // rax
+  signed int v168; // edi
+  hkLifoAllocator *v169; // rax
+  int v170; // r8d
+  _QWORD *v171; // rdi
+  _QWORD *v172; // rcx
+  unsigned __int64 v173; // rax
+  _QWORD *v174; // rcx
+  int v175; // [rsp+30h] [rbp-D0h]
+  int v176; // [rsp+34h] [rbp-CCh] BYREF
+  int v177; // [rsp+38h] [rbp-C8h]
+  int v178; // [rsp+3Ch] [rbp-C4h]
+  int v179; // [rsp+40h] [rbp-C0h]
+  char *v180; // [rsp+48h] [rbp-B8h]
+  hkResult result; // [rsp+50h] [rbp-B0h] BYREF
+  unsigned __int16 *p_m_firstBatchSize; // [rsp+58h] [rbp-A8h]
+  hkpSolveConstraintBatchTask *v183; // [rsp+60h] [rbp-A0h]
+  hkpSolverElemTemp *m_solverTempBase; // [rsp+68h] [rbp-98h]
+  void *m_cur; // [rsp+70h] [rbp-90h]
+  hkpSolveConstraintBatchTask *v186; // [rsp+78h] [rbp-88h]
+  char *array; // [rsp+80h] [rbp-80h] BYREF
+  int v188; // [rsp+88h] [rbp-78h]
+  int v189; // [rsp+8Ch] [rbp-74h]
+  char *v190; // [rsp+90h] [rbp-70h] BYREF
+  int v191; // [rsp+98h] [rbp-68h]
+  int v192; // [rsp+9Ch] [rbp-64h]
+  hkpSolverElemTemp *v193; // [rsp+A0h] [rbp-60h]
   void *p; // [rsp+A8h] [rbp-58h]
-  unsigned __int64 v198; // [rsp+B0h] [rbp-50h]
-  _DWORD *v199; // [rsp+B8h] [rbp-48h]
-  unsigned __int64 v200; // [rsp+C0h] [rbp-40h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v201; // [rsp+C8h] [rbp-38h]
-  int v202; // [rsp+D0h] [rbp-30h]
-  hkpBuildJacobianTask *v203; // [rsp+D8h] [rbp-28h]
-  unsigned __int8 *v204; // [rsp+E0h] [rbp-20h]
-  unsigned __int8 *v205; // [rsp+E8h] [rbp-18h]
-  int *v206; // [rsp+F0h] [rbp-10h]
-  int *v207; // [rsp+F8h] [rbp-8h]
-  unsigned __int64 v208; // [rsp+100h] [rbp+0h]
-  unsigned int v209; // [rsp+108h] [rbp+8h]
-  int v210; // [rsp+10Ch] [rbp+Ch]
-  unsigned int v211; // [rsp+110h] [rbp+10h]
+  unsigned __int64 v195; // [rsp+B0h] [rbp-50h]
+  _DWORD *v196; // [rsp+B8h] [rbp-48h]
+  unsigned __int64 m_data; // [rsp+C0h] [rbp-40h]
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *v198; // [rsp+C8h] [rbp-38h]
+  int v199; // [rsp+D0h] [rbp-30h]
+  hkpBuildJacobianTask *v200; // [rsp+D8h] [rbp-28h]
+  hkpSolverElemTemp *v201; // [rsp+E0h] [rbp-20h]
+  hkpSolverElemTemp *v202; // [rsp+E8h] [rbp-18h]
+  int *v203; // [rsp+F0h] [rbp-10h]
+  int *v204; // [rsp+F8h] [rbp-8h]
+  unsigned __int64 v205; // [rsp+100h] [rbp+0h]
+  unsigned int v206; // [rsp+108h] [rbp+8h]
+  int v207; // [rsp+10Ch] [rbp+Ch]
+  unsigned int v208; // [rsp+110h] [rbp+10h]
   void *ptr; // [rsp+118h] [rbp+18h]
-  void **v213; // [rsp+120h] [rbp+20h]
-  __int64 v214; // [rsp+128h] [rbp+28h]
-  hkpSimulationIsland *v215; // [rsp+180h] [rbp+80h]
-  bool v216; // [rsp+180h] [rbp+80h]
-  char v217; // [rsp+188h] [rbp+88h]
-  hkpBuildJacobianTaskHeader *v218; // [rsp+190h] [rbp+90h]
-  hkpBuildJacobianTaskCollection *v219; // [rsp+198h] [rbp+98h]
+  char **v210; // [rsp+120h] [rbp+20h]
+  __int64 v211; // [rsp+128h] [rbp+28h]
+  bool v213; // [rsp+180h] [rbp+80h]
 
-  v219 = outBuildCollection;
-  v218 = taskHeader;
-  v217 = forceCoherentConstraintOrderingInSolver.m_bool;
-  v215 = island;
   v5 = island;
-  v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v7 = (_QWORD *)v6[1];
-  if ( (unsigned __int64)v7 < v6[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v7 = (_QWORD *)Value[1];
+  if ( (unsigned __int64)v7 < Value[3] )
   {
     *v7 = "TtBuildJacTask";
     v8 = __rdtsc();
-    v9 = (signed __int64)(v7 + 2);
-    *(_DWORD *)(v9 - 8) = v8;
-    v6[1] = v9;
+    v9 = v7 + 2;
+    *((_DWORD *)v9 - 2) = v8;
+    Value[1] = v9;
   }
-  v10 = v5->m_entities.m_size;
-  v12 = v5->m_numConstraints;
-  v200 = (unsigned __int64)v5->m_entities.m_data;
-  v11 = v200;
-  v179 = v10;
-  v13 = v10;
-  v214 = v10;
-  v198 = v200 + 8 * v10;
+  m_size = v5->m_entities.m_size;
+  m_numConstraints = v5->m_numConstraints;
+  m_data = (unsigned __int64)v5->m_entities.m_data;
+  v11 = m_data;
+  v176 = m_size;
+  v13 = m_size;
+  v211 = m_size;
+  v195 = m_data + 8 * m_size;
   array = 0i64;
-  v191 = 0;
-  v192 = 2147483648;
-  if ( v12 > 0 )
-  {
-    if ( v12 < 0 )
-      v12 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v12, 16);
-  }
+  v188 = 0;
+  v189 = 0x80000000;
+  if ( m_numConstraints > 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&array, m_numConstraints, 16);
   v14 = v5->m_numConstraints;
-  v193 = 0i64;
-  v194 = 0;
-  v195 = 2147483648;
+  v190 = 0i64;
+  v191 = 0;
+  v192 = 0x80000000;
   if ( v14 > 0 )
-  {
-    if ( v14 < 0 )
-      v14 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &v193, v14, 16);
-  }
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&v190, v14, 16);
   v15 = v5->m_numConstraints;
-  v180 = 0;
-  v210 = v15;
+  v177 = 0;
+  v207 = v15;
   if ( v15 )
   {
     v16 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     v17 = (24 * v15 + 127) & 0xFFFFFF80;
-    v188 = v16->m_cur;
-    v18 = (char *)v188 + v17;
+    m_cur = v16->m_cur;
+    v18 = (char *)m_cur + v17;
     if ( v17 > v16->m_slabSize || v18 > v16->m_end )
-      v188 = hkLifoAllocator::allocateFromNewSlab(v16, v17);
+      m_cur = (void *)hkLifoAllocator::allocateFromNewSlab(v16, v17);
     else
       v16->m_cur = v18;
   }
   else
   {
-    v188 = 0i64;
+    m_cur = 0i64;
   }
   v19 = 64;
   v20 = 0;
-  for ( result.m_enum = v15 | 0x80000000; v19 < (signed int)v10; v19 *= 2 )
+  for ( result.m_enum = v15 | 0x80000000; v19 < (int)m_size; v19 *= 2 )
     ;
-  v21 = 4 * v19;
-  v22 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 10);
-  v209 = 8 * v21;
-  ptr = (void *)(*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v22 + 8i64))(v22, (unsigned int)(8 * v21));
-  v23 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-  v24 = (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)(*(__int64 (__fastcall **)(__int64, signed __int64))(*(_QWORD *)v23 + 8i64))(
-                                                                                             v23,
+  v21 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 10);
+  v206 = 32 * v19;
+  ptr = (void *)(*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v21 + 8i64))(v21, (unsigned int)(32 * v19));
+  v22 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+  v23 = (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)(*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v22 + 8i64))(
+                                                                                             v22,
                                                                                              16i64);
-  v25 = v24;
-  v201 = v24;
-  if ( v24 )
+  v24 = v23;
+  v198 = v23;
+  if ( v23 )
   {
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>(
-      v24,
+      v23,
       ptr,
-      8 * v21);
+      32 * v19);
   }
   else
   {
-    v25 = 0i64;
-    v201 = 0i64;
+    v24 = 0i64;
+    v198 = 0i64;
   }
-  v26 = 0;
-  for ( i = 0i64; i < v13; ++v26 )
+  v25 = 0;
+  for ( i = 0i64; i < v13; ++v25 )
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-      v25,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+      v24,
+      &hkContainerHeapAllocator::s_alloc,
       *(_QWORD *)(v11 + 8 * i++),
-      v26);
-  v28 = 0;
-  v29 = 128;
-  v30 = 0;
-  if ( v11 < v198 )
+      v25);
+  v27 = 0;
+  v28 = 128;
+  v29 = 0;
+  if ( v11 < v195 )
   {
     do
     {
-      v31 = *(_QWORD *)v11;
-      if ( v29 != *(_DWORD *)(*(_QWORD *)v11 + 240i64) )
-        *(_DWORD *)(v31 + 240) = v29;
-      v32 = *(_QWORD *)(v31 + 248);
-      v29 += 128;
-      v33 = v32 + ((unsigned __int64)*(unsigned __int16 *)(v31 + 256) << 6);
-      if ( v32 < v33 )
+      v30 = *(_QWORD *)v11;
+      if ( v28 != *(_DWORD *)(*(_QWORD *)v11 + 240i64) )
+        *(_DWORD *)(v30 + 240) = v28;
+      v31 = *(_QWORD *)(v30 + 248);
+      v28 += 128;
+      v32 = v31 + ((unsigned __int64)*(unsigned __int16 *)(v30 + 256) << 6);
+      if ( v31 < v32 )
       {
-        v34 = v201;
-        v35 = (unsigned __int8 *)(v32 + 42);
+        v33 = v198;
+        v34 = (unsigned __int8 *)(v31 + 42);
         do
         {
-          v36 = *v35;
-          v204 = v35 - 42;
-          *((_WORD *)&v205 + v36) = v30;
-          *((_WORD *)&v205 + 1 - (signed int)v36) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                                                      v34,
-                                                      *(_QWORD *)&v35[8 * (1 - (signed int)v36) - 34],
-                                                      0xFFFFui64);
-          v20 += v35[1];
-          if ( *(v35 - 7) >= 4u )
+          v35 = *v34;
+          v201 = (hkpSolverElemTemp *)(v34 - 42);
+          *((_WORD *)&v202 + v35) = v29;
+          *((_WORD *)&v202 + 1 - (int)v35) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                                               v33,
+                                               *(_QWORD *)&v34[8 * (1 - (int)v35) - 34],
+                                               0xFFFFui64);
+          v20 += v34[1];
+          if ( *(v34 - 7) >= 4u )
           {
-            v39 = v194;
-            v40 = (unsigned __int8 **)&v193[16 * v194];
-            if ( v40 )
+            v38 = v191;
+            v39 = (hkpSolverElemTemp **)&v190[16 * v191];
+            if ( v39 )
             {
-              *v40 = v204;
-              v40[1] = v205;
-              v39 = v194;
+              *v39 = v201;
+              v39[1] = v202;
+              v38 = v191;
             }
-            v194 = v39 + 1;
+            v191 = v38 + 1;
           }
           else
           {
-            v37 = v191;
-            v38 = (unsigned __int8 **)&array[16 * v191];
-            if ( v38 )
+            v36 = v188;
+            v37 = (hkpSolverElemTemp **)&array[16 * v188];
+            if ( v37 )
             {
-              *v38 = v204;
-              v38[1] = v205;
-              v37 = v191;
+              *v37 = v201;
+              v37[1] = v202;
+              v36 = v188;
             }
-            v191 = v37 + 1;
+            v188 = v36 + 1;
           }
-          v35 += 64;
+          v34 += 64;
         }
-        while ( (unsigned __int64)(v35 - 42) < v33 );
-        v11 = v200;
+        while ( (unsigned __int64)(v34 - 42) < v32 );
+        v11 = m_data;
       }
       v11 += 8i64;
-      ++v30;
-      v200 = v11;
+      ++v29;
+      m_data = v11;
     }
-    while ( v11 < v198 );
-    v5 = v215;
-    v28 = 0;
+    while ( v11 < v195 );
+    v5 = island;
+    v27 = 0;
   }
-  v41 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v42 = v179;
-  v43 = v41[1];
-  if ( v43 < v41[3] )
+  v40 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v41 = v176;
+  v42 = v40[1];
+  if ( v42 < v40[3] )
   {
-    v44 = v43 + 16;
-    *(_QWORD *)(v44 - 16) = "MiNumEntities";
-    *(float *)(v44 - 8) = (float)v42;
-    v41[1] = v44;
+    v43 = v42 + 16;
+    *(_QWORD *)(v43 - 16) = "MiNumEntities";
+    *(float *)(v43 - 8) = (float)v41;
+    v40[1] = v43;
   }
-  v45 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v46 = v45[1];
-  if ( v46 < v45[3] )
+  v44 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v45 = v44[1];
+  if ( v45 < v44[3] )
   {
-    v47 = v46 + 16;
-    *(_QWORD *)(v47 - 16) = "MiNumConstraints";
-    *(float *)(v47 - 8) = (float)v5->m_numConstraints;
-    v45[1] = v47;
+    v46 = v45 + 16;
+    *(_QWORD *)(v46 - 16) = "MiNumConstraints";
+    *(float *)(v46 - 8) = (float)v5->m_numConstraints;
+    v44[1] = v46;
   }
-  v48 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v49 = v48[1];
-  if ( v49 < v48[3] )
+  v47 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v48 = v47[1];
+  if ( v48 < v47[3] )
   {
-    v50 = v49 + 16;
-    *(_QWORD *)(v50 - 16) = "MiNumJacobians";
-    *(float *)(v50 - 8) = (float)v5->m_constraintInfo.m_numSolverResults;
-    v48[1] = v50;
+    v49 = v48 + 16;
+    *(_QWORD *)(v49 - 16) = "MiNumJacobians";
+    *(float *)(v49 - 8) = (float)v5->m_constraintInfo.m_numSolverResults;
+    v47[1] = v49;
   }
-  v203 = 0i64;
-  v51 = 0i64;
-  v218->m_solveInSingleThreadOnPpuOnly.m_bool = v20 != 0;
-  v189 = 0i64;
-  v52 = 0i64;
   v200 = 0i64;
-  v218->m_solveInSingleThread.m_bool = v20 != 0;
-  v53 = (__int64)v218->m_schemasBase;
-  v216 = v20 == 0;
-  v187 = (unsigned __int64)v218->m_solverTempBase;
-  outSolveCollection->m_firstBatchSize = 0;
-  v196 = (unsigned __int8 *)v53;
-  v185 = &outSolveCollection->m_firstBatchSize;
+  v50 = 0i64;
+  taskHeader->m_solveInSingleThreadOnPpuOnly.m_bool = v20 != 0;
   v186 = 0i64;
-  v178 = 0;
-  v181 = -1;
-  v182 = -1;
-  v54 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v56 = __OFSUB__(v54->m_slabSize, 1280);
-  v55 = v54->m_slabSize - 1280 < 0;
-  v57 = (unsigned __int64)v54->m_cur + 1280;
-  p = v54->m_cur;
-  if ( v55 ^ v56 || (void *)v57 > v54->m_end )
-    p = hkLifoAllocator::allocateFromNewSlab(v54, 1280);
+  v51 = 0i64;
+  m_data = 0i64;
+  taskHeader->m_solveInSingleThread.m_bool = v20 != 0;
+  m_schemasBase = taskHeader->m_schemasBase;
+  v213 = v20 == 0;
+  m_solverTempBase = taskHeader->m_solverTempBase;
+  outSolveCollection->m_firstBatchSize = 0;
+  v193 = (hkpSolverElemTemp *)m_schemasBase;
+  p_m_firstBatchSize = &outSolveCollection->m_firstBatchSize;
+  v183 = 0i64;
+  v175 = 0;
+  v178 = -1;
+  v179 = -1;
+  v53 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v54 = v53->m_slabSize < 1280;
+  v55 = (unsigned __int64)v53->m_cur + 1280;
+  p = v53->m_cur;
+  if ( v54 || (void *)v55 > v53->m_end )
+    p = (void *)hkLifoAllocator::allocateFromNewSlab(v53, 1280);
   else
-    v54->m_cur = (void *)v57;
-  v58 = (__int64 *)*((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 10);
-  v59 = 4 * v42;
-  v60 = *v58;
-  v211 = v59;
-  v61 = (*(__int64 (__fastcall **)(__int64 *, _QWORD))(v60 + 8))(v58, v59);
-  v62 = 0;
-  v63 = (_DWORD *)v61;
-  v199 = (_DWORD *)v61;
-  v64 = 0;
-  v202 = 0;
+    v53->m_cur = (void *)v55;
+  v56 = (__int64 *)*((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 10);
+  v57 = 4 * v41;
+  v58 = *v56;
+  v208 = v57;
+  v59 = 0;
+  v60 = (_DWORD *)(*(__int64 (__fastcall **)(__int64 *, _QWORD))(v58 + 8))(v56, v57);
+  v196 = v60;
+  v61 = 0;
+  v199 = 0;
   do
   {
-    if ( v64 )
+    if ( v61 )
     {
-      v65 = (void **)&v193;
+      p_array = &v190;
     }
     else
     {
-      v65 = (void **)&array;
-      v203 = 0i64;
+      p_array = &array;
+      v200 = 0i64;
     }
-    v66 = *((_DWORD *)v65 + 2) == 0;
-    v213 = v65;
-    if ( !v66 )
+    v63 = *((_DWORD *)p_array + 2) == 0;
+    v210 = p_array;
+    if ( !v63 )
     {
       while ( 1 )
       {
-        v67 = v214;
-        if ( v214 > 0 )
+        v64 = v211;
+        if ( v211 > 0 )
         {
-          while ( v67 )
+          while ( v64 )
           {
-            *v63 = 0;
-            ++v63;
-            --v67;
+            *v60++ = 0;
+            --v64;
           }
-          v63 = v199;
+          v60 = v196;
         }
-        v68 = (char *)*v65;
-        v69 = *((signed int *)v65 + 2);
-        ++v181;
-        v70 = (__int64)v68;
-        v71 = 1;
-        v72 = (unsigned __int64)&v68[16 * v69];
-        v198 = (unsigned __int64)v68;
-        v183 = v68;
-        v208 = v72;
-        if ( (unsigned __int64)v68 < v72 )
+        v65 = *p_array;
+        v66 = *((int *)p_array + 2);
+        ++v178;
+        v67 = (__int64)v65;
+        v68 = 1;
+        v69 = (unsigned __int64)&v65[16 * v66];
+        v195 = (unsigned __int64)v65;
+        v180 = v65;
+        v205 = v69;
+        if ( (unsigned __int64)v65 < v69 )
         {
           while ( 1 )
           {
-            v73 = *((_WORD *)v68 + 4);
-            v179 = 0;
-            if ( v73 == -1 )
-              v206 = &v179;
+            v70 = *((_WORD *)v65 + 4);
+            v176 = 0;
+            if ( v70 == 0xFFFF )
+              v203 = &v176;
             else
-              v206 = &v63[v73];
-            v74 = *((_WORD *)v68 + 5);
-            if ( v74 == -1 )
-              v75 = &v179;
+              v203 = &v60[v70];
+            v71 = *((_WORD *)v65 + 5);
+            if ( v71 == 0xFFFF )
+              v72 = &v176;
             else
-              v75 = &v63[v74];
-            v207 = v75;
-            if ( v28 == 80 || v62 )
+              v72 = &v60[v71];
+            v204 = v72;
+            if ( v27 == 80 || v59 )
             {
-              v76 = (__int64)v196;
-              v77 = v187;
-              v78 = (__int64)v196;
-              v79 = v187;
-              v204 = (unsigned __int8 *)v187;
-              v80 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-              v81 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v80[11] + 8i64))(v80[11], 3968i64);
-              v82 = (hkpBuildJacobianTask *)v81;
-              if ( v81 )
+              v73 = v193;
+              v74 = m_solverTempBase;
+              v75 = v193;
+              v76 = m_solverTempBase;
+              v201 = m_solverTempBase;
+              v77 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+              v78 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v77[11] + 8i64))(v77[11], 3968i64);
+              v79 = (hkpBuildJacobianTask *)v78;
+              if ( v78 )
               {
-                *(_DWORD *)(v81 + 40) = 0;
-                *(_QWORD *)(v81 + 32) = 0i64;
-                *(_QWORD *)v81 = 0i64;
+                *(_DWORD *)(v78 + 40) = 0;
+                *(_QWORD *)(v78 + 32) = 0i64;
+                *(_QWORD *)v78 = 0i64;
               }
               else
               {
-                v82 = 0i64;
+                v79 = 0i64;
               }
-              v83 = v203;
-              if ( v203 )
+              v80 = v200;
+              if ( v200 )
               {
-                v203->m_next = v82;
-                v83->m_schemasOfNextTask = (hkpJacobianSchema *)v76;
-                v84 = v219;
+                v200->m_next = v79;
+                v80->m_schemasOfNextTask = (hkpJacobianSchema *)v73;
+                v81 = outBuildCollection;
               }
               else
               {
-                v84 = v219;
-                v219->m_buildJacobianTasks = v82;
-                v219->m_numBuildJacobianTasks = 0;
+                v81 = outBuildCollection;
+                outBuildCollection->m_buildJacobianTasks = v79;
+                outBuildCollection->m_numBuildJacobianTasks = 0;
               }
-              ++v84->m_numBuildJacobianTasks;
-              v82->m_taskHeader = v218;
-              v82->m_numAtomInfos = v178;
-              v85 = v218->m_accumulatorsBase;
-              v82->m_schemas = (hkpJacobianSchema *)v76;
-              v86 = v178;
-              v82->m_accumulators = v85;
-              if ( v178 > 0 )
+              ++v81->m_numBuildJacobianTasks;
+              v79->m_taskHeader = taskHeader;
+              v79->m_numAtomInfos = v175;
+              m_accumulatorsBase = taskHeader->m_accumulatorsBase;
+              v79->m_schemas = (hkpJacobianSchema *)v73;
+              v83 = v175;
+              v79->m_accumulators = m_accumulatorsBase;
+              if ( v175 > 0 )
               {
-                v87 = p;
-                v88 = v187;
-                v89 = v188;
-                v90 = v180;
-                v91 = (signed __int64)&v82->m_atomInfos[0].m_instance;
+                v84 = p;
+                v85 = m_solverTempBase;
+                v86 = m_cur;
+                v87 = v177;
+                p_m_instance = &v79->m_atomInfos[0].m_instance;
                 do
                 {
-                  v92 = *v87;
-                  if ( *(_BYTE *)(*v87 + 34i64) & 0xB )
+                  v89 = *v84;
+                  if ( (*(_BYTE *)(*v84 + 34i64) & 0xB) != 0 )
                   {
-                    v93 = v90++;
-                    v94 = 3 * v93;
-                    v89[v94] = v92;
-                    v89[v94 + 1] = v87[1];
-                    v89[v94 + 2] = v91 - 8;
+                    v90 = v87++;
+                    v91 = 3 * v90;
+                    v86[v91] = v89;
+                    v86[v91 + 1] = v84[1];
+                    v86[v91 + 2] = p_m_instance - 1;
                   }
-                  v87 += 2;
-                  v91 += 48i64;
-                  *(_QWORD *)(v91 - 56) = *(_QWORD *)(v92 + 24);
-                  *(_WORD *)(v91 - 16) = *(_WORD *)(v92 + 32);
-                  *(_QWORD *)(v91 - 48) = *(_QWORD *)v92;
-                  *(_QWORD *)(v91 - 40) = *(_QWORD *)(v92 + 48);
-                  *(_WORD *)(v91 - 14) = *(_WORD *)(v92 + 56);
-                  v95 = *((_WORD *)v87 - 3) + 1;
-                  *(_WORD *)(v91 - 12) = *((_WORD *)v87 - 4) + 1;
-                  *(_WORD *)(v91 - 10) = v95;
-                  *(_QWORD *)(v91 - 32) = *(_QWORD *)(v92 + 8) + 368i64;
-                  *(_QWORD *)(v91 - 24) = *(_QWORD *)(v92 + 16) + 368i64;
-                  v76 += *(unsigned __int16 *)(v92 + 36);
-                  v88 += 4i64 * *(unsigned __int16 *)(v92 + 40);
-                  --v86;
+                  v84 += 2;
+                  p_m_instance += 6;
+                  *(p_m_instance - 7) = *(hkpConstraintInstance **)(v89 + 24);
+                  *((_WORD *)p_m_instance - 8) = *(_WORD *)(v89 + 32);
+                  *(p_m_instance - 6) = *(hkpConstraintInstance **)v89;
+                  *(p_m_instance - 5) = *(hkpConstraintInstance **)(v89 + 48);
+                  *((_WORD *)p_m_instance - 7) = *(_WORD *)(v89 + 56);
+                  v92 = *((_WORD *)v84 - 3) + 1;
+                  *((_WORD *)p_m_instance - 6) = *((_WORD *)v84 - 4) + 1;
+                  *((_WORD *)p_m_instance - 5) = v92;
+                  *(p_m_instance - 4) = (hkpConstraintInstance *)(*(_QWORD *)(v89 + 8) + 368i64);
+                  *(p_m_instance - 3) = (hkpConstraintInstance *)(*(_QWORD *)(v89 + 16) + 368i64);
+                  v73 = (hkpSolverElemTemp *)((char *)v73 + *(unsigned __int16 *)(v89 + 36));
+                  v85 += *(unsigned __int16 *)(v89 + 40);
+                  --v83;
                 }
-                while ( v86 );
-                v78 = (__int64)v196;
-                v187 = v88;
-                v68 = (char *)v198;
-                v77 = v187;
-                v180 = v90;
-                v79 = (__int64)v204;
+                while ( v83 );
+                v75 = v193;
+                m_solverTempBase = v85;
+                v65 = (char *)v195;
+                v74 = m_solverTempBase;
+                v177 = v87;
+                v76 = v201;
               }
-              v96 = v216;
-              v97 = v76 + 32;
-              v98 = (v77 + 15) & 0xFFFFFFFFFFFFFFF0ui64;
-              v178 = 0;
-              v203 = v82;
-              v196 = (unsigned __int8 *)v97;
-              v82->m_schemasOfNextTask = (hkpJacobianSchema *)v97;
-              v187 = v98;
-              if ( v216 )
+              v93 = v213;
+              v94 = v73 + 8;
+              v95 = (hkpSolverElemTemp *)(((unsigned __int64)&v74[3].m_usedImpulseFactor + 3) & 0xFFFFFFFFFFFFFFF0ui64);
+              v175 = 0;
+              v200 = v79;
+              v193 = v94;
+              v79->m_schemasOfNextTask = (hkpJacobianSchema *)v94;
+              m_solverTempBase = v95;
+              if ( v213 )
               {
-                v99 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-                v100 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v99[11] + 8i64))(v99[11], 64i64);
-                v101 = (hkpSolveConstraintBatchTask *)v100;
-                if ( v100 )
+                v96 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+                v97 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v96[11] + 8i64))(v96[11], 64i64);
+                v98 = (hkpSolveConstraintBatchTask *)v97;
+                if ( v97 )
                 {
-                  *(_QWORD *)v100 = 0i64;
-                  *(_BYTE *)(v100 + 48) = 0;
-                  *(_WORD *)(v100 + 50) = 0;
-                  *(_QWORD *)(v100 + 56) = 0i64;
+                  *(_QWORD *)v97 = 0i64;
+                  *(_BYTE *)(v97 + 48) = 0;
+                  *(_WORD *)(v97 + 50) = 0;
+                  *(_QWORD *)(v97 + 56) = 0i64;
                 }
                 else
                 {
-                  v101 = 0i64;
+                  v98 = 0i64;
                 }
-                v102 = v189;
-                if ( v189 )
-                  v189->m_next = v101;
-                v103 = v181;
-                if ( v181 != v182 )
+                v99 = v186;
+                if ( v186 )
+                  v186->m_next = v98;
+                v100 = v178;
+                if ( v178 != v179 )
                 {
-                  if ( !v181 )
-                    outSolveCollection->m_firstSolveJacobiansTask = v101;
-                  v182 = v103;
-                  if ( v102 )
+                  if ( !v178 )
+                    outSolveCollection->m_firstSolveJacobiansTask = v98;
+                  v179 = v100;
+                  if ( v99 )
                   {
-                    v104 = *v185;
-                    if ( v52 )
+                    v101 = *p_m_firstBatchSize;
+                    if ( v51 )
                     {
-                      v105 = (__int64)v186;
+                      v102 = (__int64)v183;
                       do
                       {
-                        if ( v52 == v105 )
+                        if ( v51 == v102 )
                           break;
-                        *(_WORD *)(v52 + 50) = v104;
-                        *(_QWORD *)(v52 + 56) = v105;
-                        v52 = *(_QWORD *)v52;
+                        *(_WORD *)(v51 + 50) = v101;
+                        *(_QWORD *)(v51 + 56) = v102;
+                        v51 = *(_QWORD *)v51;
                       }
-                      while ( v52 );
+                      while ( v51 );
                     }
-                    v102->m_isLastTaskInBatch.m_bool = 1;
-                    v185 = &v102->m_sizeOfNextBatch;
+                    v99->m_isLastTaskInBatch.m_bool = 1;
+                    p_m_firstBatchSize = &v99->m_sizeOfNextBatch;
                   }
-                  v52 = (__int64)v186;
-                  v186 = v101;
-                  v200 = v52;
+                  v51 = (__int64)v183;
+                  v183 = v98;
+                  m_data = v51;
                 }
-                v189 = v101;
-                ++*v185;
-                v101->m_taskHeader = v218;
-                v106 = v218->m_accumulatorsBase;
-                v101->m_schemas = (hkpJacobianSchema *)v78;
-                v101->m_accumulators = v106;
-                v101->m_solverElemTemp = (hkpSolverElemTemp *)v79;
-                v101->m_sizeOfSchemaBuffer = v97 - v78;
-                v101->m_sizeOfSolverElemTempBuffer = v98 - v79;
-                v96 = v216;
+                v186 = v98;
+                ++*p_m_firstBatchSize;
+                v98->m_taskHeader = taskHeader;
+                v103 = taskHeader->m_accumulatorsBase;
+                v98->m_schemas = (hkpJacobianSchema *)v75;
+                v98->m_accumulators = v103;
+                v98->m_solverElemTemp = v76;
+                v98->m_sizeOfSchemaBuffer = (_DWORD)v94 - (_DWORD)v75;
+                v98->m_sizeOfSolverElemTempBuffer = (_DWORD)v95 - (_DWORD)v76;
+                v93 = v213;
               }
-              v28 = 0;
-              v70 = (__int64)v183;
-              v72 = v208;
-              v71 += v96;
-              v62 = 0;
+              v27 = 0;
+              v67 = (__int64)v180;
+              v69 = v205;
+              v68 += v93;
+              v59 = 0;
             }
-            if ( v217 && v71 > 1 )
+            if ( forceCoherentConstraintOrderingInSolver.m_bool && v68 > 1 )
             {
-              if ( (unsigned __int64)v68 < v72 )
+              if ( (unsigned __int64)v65 < v69 )
               {
                 do
                 {
-                  v123 = *(__int64 **)v68;
-                  v68 += 16;
-                  v70 += 16i64;
-                  *(_QWORD *)(v70 - 16) = v123;
-                  *(_QWORD *)(v70 - 8) = *((_QWORD *)v68 - 1);
+                  v120 = *(__int64 **)v65;
+                  v65 += 16;
+                  v67 += 16i64;
+                  *(_QWORD *)(v67 - 16) = v120;
+                  *(_QWORD *)(v67 - 8) = *((_QWORD *)v65 - 1);
                 }
-                while ( (unsigned __int64)v68 < v72 );
-                v183 = (char *)v70;
+                while ( (unsigned __int64)v65 < v69 );
+                v180 = (char *)v67;
               }
               break;
             }
-            if ( *(_BYTE *)(*(_QWORD *)v68 + 43i64) == 1 )
+            if ( *(_BYTE *)(*(_QWORD *)v65 + 43i64) == 1 )
             {
-              v107 = **(_QWORD **)v68;
-              v108 = 0;
-              if ( *(_DWORD *)(v107 + 120) > 0 )
+              v104 = **(_QWORD **)v65;
+              v105 = 0;
+              if ( *(int *)(v104 + 120) > 0 )
               {
-                v109 = 0i64;
+                v106 = 0i64;
                 while ( 1 )
                 {
-                  v110 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                           v201,
-                           *(_QWORD *)(v109 + *(_QWORD *)(v107 + 112)),
+                  v107 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                           v198,
+                           *(_QWORD *)(v106 + *(_QWORD *)(v104 + 112)),
                            0xFFFFui64);
-                  if ( v110 != -1 )
+                  if ( v107 != 0xFFFF )
                   {
-                    v111 = v199[v110];
-                    if ( v111 )
+                    v108 = v196[v107];
+                    if ( v108 )
                     {
-                      if ( v111 != v71 )
+                      if ( v108 != v68 )
                         break;
                     }
                   }
-                  ++v108;
-                  v109 += 8i64;
-                  if ( v108 >= *(_DWORD *)(v107 + 120) )
+                  ++v105;
+                  v106 += 8i64;
+                  if ( v105 >= *(_DWORD *)(v104 + 120) )
                   {
-                    v28 = v178;
-                    goto LABEL_108;
+                    v27 = v175;
+                    goto LABEL_104;
                   }
                 }
-LABEL_120:
-                v70 = (__int64)v183;
-LABEL_121:
-                v28 = v178;
-                v70 += 16i64;
-                *(_QWORD *)(v70 - 16) = *(_QWORD *)v68;
-                v122 = (_QWORD *)*((_QWORD *)v68 + 1);
-                v183 = (char *)v70;
-                *(_QWORD *)(v70 - 8) = v122;
-                goto LABEL_128;
+LABEL_116:
+                v67 = (__int64)v180;
+LABEL_117:
+                v27 = v175;
+                v67 += 16i64;
+                *(_QWORD *)(v67 - 16) = *(_QWORD *)v65;
+                v119 = (_QWORD *)*((_QWORD *)v65 + 1);
+                v180 = (char *)v67;
+                *(_QWORD *)(v67 - 8) = v119;
+                goto LABEL_124;
               }
-LABEL_108:
-              v112 = v206;
-              v113 = v207;
+LABEL_104:
+              v109 = v203;
+              v110 = v204;
             }
             else
             {
-              v112 = v206;
-              if ( *v206 && *v206 != v71 )
-                goto LABEL_121;
-              v113 = v207;
-              if ( *v207 && *v207 != v71 )
-                goto LABEL_120;
+              v109 = v203;
+              if ( *v203 && *v203 != v68 )
+                goto LABEL_117;
+              v110 = v204;
+              if ( *v204 && *v204 != v68 )
+                goto LABEL_116;
             }
-            v114 = (char *)p + 16 * v28;
-            if ( v114 )
+            v111 = (char *)p + 16 * v27;
+            if ( v111 )
             {
-              *v114 = *(_QWORD *)v68;
-              v114[1] = *((_QWORD *)v68 + 1);
+              *v111 = *(_QWORD *)v65;
+              v111[1] = *((_QWORD *)v65 + 1);
             }
-            v178 = ++v28;
-            if ( *(_BYTE *)(*(_QWORD *)v68 + 43i64) == 1 )
+            v175 = ++v27;
+            if ( *(_BYTE *)(*(_QWORD *)v65 + 43i64) == 1 )
             {
-              v115 = **(_QWORD **)v68;
-              v116 = 0;
-              if ( *(_DWORD *)(v115 + 120) > 0 )
+              v112 = **(_QWORD **)v65;
+              v113 = 0;
+              if ( *(int *)(v112 + 120) > 0 )
               {
-                v117 = (__int64)v199;
-                v118 = v201;
-                v119 = 0i64;
+                v114 = (__int64)v196;
+                v115 = v198;
+                v116 = 0i64;
                 do
                 {
-                  v120 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                           v118,
-                           *(_QWORD *)(v119 + *(_QWORD *)(v115 + 112)),
+                  v117 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                           v115,
+                           *(_QWORD *)(v116 + *(_QWORD *)(v112 + 112)),
                            0xFFFFui64);
-                  if ( v120 == -1 )
-                    v121 = &v179;
+                  if ( v117 == 0xFFFF )
+                    v118 = &v176;
                   else
-                    v121 = (int *)(v117 + 4i64 * v120);
-                  ++v116;
-                  *v121 = v71;
-                  v119 += 8i64;
+                    v118 = (int *)(v114 + 4i64 * v117);
+                  ++v113;
+                  *v118 = v68;
+                  v116 += 8i64;
                 }
-                while ( v116 < *(_DWORD *)(v115 + 120) );
-                v52 = v200;
-                v68 = (char *)v198;
+                while ( v113 < *(_DWORD *)(v112 + 120) );
+                v51 = m_data;
+                v65 = (char *)v195;
               }
-              v62 = v216;
-              v28 = v178;
+              v59 = v213;
+              v27 = v175;
             }
             else
             {
-              *v112 = v71;
-              *v113 = v71;
+              *v109 = v68;
+              *v110 = v68;
             }
-            v70 = (__int64)v183;
-LABEL_128:
-            v72 = v208;
-            v68 += 16;
-            v198 = (unsigned __int64)v68;
-            if ( (unsigned __int64)v68 >= v208 )
+            v67 = (__int64)v180;
+LABEL_124:
+            v69 = v205;
+            v65 += 16;
+            v195 = (unsigned __int64)v65;
+            if ( (unsigned __int64)v65 >= v205 )
               break;
-            v63 = v199;
+            v60 = v196;
           }
         }
-        if ( v28 )
+        if ( v27 )
         {
-          v124 = v187;
-          v125 = (__int64)v196;
-          v126 = (__int64)v196;
-          v127 = v187;
-          v208 = v187;
-          v204 = v196;
-          v128 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v129 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v128[11] + 8i64))(v128[11], 3968i64);
-          v130 = (hkpBuildJacobianTask *)v129;
-          if ( v129 )
+          v121 = m_solverTempBase;
+          v122 = v193;
+          v123 = v193;
+          v124 = m_solverTempBase;
+          v205 = (unsigned __int64)m_solverTempBase;
+          v201 = v193;
+          v125 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v126 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v125[11] + 8i64))(v125[11], 3968i64);
+          v127 = (hkpBuildJacobianTask *)v126;
+          if ( v126 )
           {
-            *(_DWORD *)(v129 + 40) = 0;
-            *(_QWORD *)(v129 + 32) = 0i64;
-            *(_QWORD *)v129 = 0i64;
+            *(_DWORD *)(v126 + 40) = 0;
+            *(_QWORD *)(v126 + 32) = 0i64;
+            *(_QWORD *)v126 = 0i64;
           }
           else
           {
-            v130 = 0i64;
+            v127 = 0i64;
           }
-          v131 = v203;
-          if ( v203 )
+          v128 = v200;
+          if ( v200 )
           {
-            v203->m_next = v130;
-            v131->m_schemasOfNextTask = (hkpJacobianSchema *)v125;
-            v132 = v219;
+            v200->m_next = v127;
+            v128->m_schemasOfNextTask = (hkpJacobianSchema *)v122;
+            v129 = outBuildCollection;
           }
           else
           {
-            v132 = v219;
-            v219->m_buildJacobianTasks = v130;
-            v219->m_numBuildJacobianTasks = 0;
+            v129 = outBuildCollection;
+            outBuildCollection->m_buildJacobianTasks = v127;
+            outBuildCollection->m_numBuildJacobianTasks = 0;
           }
-          ++v132->m_numBuildJacobianTasks;
-          v130->m_taskHeader = v218;
-          v130->m_numAtomInfos = v178;
-          v133 = v218->m_accumulatorsBase;
-          v130->m_schemas = (hkpJacobianSchema *)v125;
-          v134 = v178;
-          v130->m_accumulators = v133;
-          if ( v178 > 0 )
+          ++v129->m_numBuildJacobianTasks;
+          v127->m_taskHeader = taskHeader;
+          v127->m_numAtomInfos = v175;
+          v130 = taskHeader->m_accumulatorsBase;
+          v127->m_schemas = (hkpJacobianSchema *)v122;
+          v131 = v175;
+          v127->m_accumulators = v130;
+          if ( v175 > 0 )
           {
-            v135 = p;
-            v136 = v188;
-            v137 = v180;
-            v138 = (signed __int64)&v130->m_atomInfos[0].m_instance;
+            v132 = p;
+            v133 = m_cur;
+            v134 = v177;
+            v135 = &v127->m_atomInfos[0].m_instance;
             do
             {
-              v139 = *v135;
-              if ( *(_BYTE *)(*v135 + 34i64) & 0xB )
+              v136 = *v132;
+              if ( (*(_BYTE *)(*v132 + 34i64) & 0xB) != 0 )
               {
-                v140 = v137++;
-                v141 = 3 * v140;
-                v136[v141] = v139;
-                v136[v141 + 1] = v135[1];
-                v136[v141 + 2] = v138 - 8;
+                v137 = v134++;
+                v138 = 3 * v137;
+                v133[v138] = v136;
+                v133[v138 + 1] = v132[1];
+                v133[v138 + 2] = v135 - 1;
               }
-              v135 += 2;
-              v138 += 48i64;
-              *(_QWORD *)(v138 - 56) = *(_QWORD *)(v139 + 24);
-              *(_WORD *)(v138 - 16) = *(_WORD *)(v139 + 32);
-              *(_QWORD *)(v138 - 48) = *(_QWORD *)v139;
-              *(_QWORD *)(v138 - 40) = *(_QWORD *)(v139 + 48);
-              *(_WORD *)(v138 - 14) = *(_WORD *)(v139 + 56);
-              v142 = *((_WORD *)v135 - 3) + 1;
-              *(_WORD *)(v138 - 12) = *((_WORD *)v135 - 4) + 1;
-              *(_WORD *)(v138 - 10) = v142;
-              *(_QWORD *)(v138 - 32) = *(_QWORD *)(v139 + 8) + 368i64;
-              *(_QWORD *)(v138 - 24) = *(_QWORD *)(v139 + 16) + 368i64;
-              v125 += *(unsigned __int16 *)(v139 + 36);
-              v124 += 4i64 * *(unsigned __int16 *)(v139 + 40);
-              --v134;
+              v132 += 2;
+              v135 += 6;
+              *(v135 - 7) = *(hkpConstraintInstance **)(v136 + 24);
+              *((_WORD *)v135 - 8) = *(_WORD *)(v136 + 32);
+              *(v135 - 6) = *(hkpConstraintInstance **)v136;
+              *(v135 - 5) = *(hkpConstraintInstance **)(v136 + 48);
+              *((_WORD *)v135 - 7) = *(_WORD *)(v136 + 56);
+              v139 = *((_WORD *)v132 - 3) + 1;
+              *((_WORD *)v135 - 6) = *((_WORD *)v132 - 4) + 1;
+              *((_WORD *)v135 - 5) = v139;
+              *(v135 - 4) = (hkpConstraintInstance *)(*(_QWORD *)(v136 + 8) + 368i64);
+              *(v135 - 3) = (hkpConstraintInstance *)(*(_QWORD *)(v136 + 16) + 368i64);
+              v122 = (hkpSolverElemTemp *)((char *)v122 + *(unsigned __int16 *)(v136 + 36));
+              v121 += *(unsigned __int16 *)(v136 + 40);
+              --v131;
             }
-            while ( v134 );
-            v126 = (__int64)v204;
-            v180 = v137;
-            v127 = v208;
+            while ( v131 );
+            v123 = v201;
+            v177 = v134;
+            v124 = (hkpSolverElemTemp *)v205;
           }
-          v143 = v125 + 32;
-          v144 = (v124 + 15) & 0xFFFFFFFFFFFFFFF0ui64;
-          v178 = 0;
-          v196 = (unsigned __int8 *)v143;
-          v130->m_schemasOfNextTask = (hkpJacobianSchema *)v143;
-          v203 = v130;
-          v187 = v144;
-          if ( v216 )
+          v140 = v122 + 8;
+          v141 = (hkpSolverElemTemp *)(((unsigned __int64)&v121[3].m_usedImpulseFactor + 3) & 0xFFFFFFFFFFFFFFF0ui64);
+          v175 = 0;
+          v193 = v140;
+          v127->m_schemasOfNextTask = (hkpJacobianSchema *)v140;
+          v200 = v127;
+          m_solverTempBase = v141;
+          if ( v213 )
           {
-            v145 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-            v146 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v145[11] + 8i64))(v145[11], 64i64);
-            v147 = (hkpSolveConstraintBatchTask *)v146;
-            if ( v146 )
+            v142 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+            v143 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v142[11] + 8i64))(v142[11], 64i64);
+            v144 = (hkpSolveConstraintBatchTask *)v143;
+            if ( v143 )
             {
-              *(_QWORD *)v146 = 0i64;
-              *(_BYTE *)(v146 + 48) = 0;
-              *(_WORD *)(v146 + 50) = 0;
-              *(_QWORD *)(v146 + 56) = 0i64;
+              *(_QWORD *)v143 = 0i64;
+              *(_BYTE *)(v143 + 48) = 0;
+              *(_WORD *)(v143 + 50) = 0;
+              *(_QWORD *)(v143 + 56) = 0i64;
             }
             else
             {
-              v147 = 0i64;
+              v144 = 0i64;
             }
-            v148 = v189;
-            if ( v189 )
-              v189->m_next = v147;
-            v149 = v181;
-            if ( v181 != v182 )
+            v145 = v186;
+            if ( v186 )
+              v186->m_next = v144;
+            v146 = v178;
+            if ( v178 != v179 )
             {
-              if ( !v181 )
-                outSolveCollection->m_firstSolveJacobiansTask = v147;
-              v182 = v149;
-              if ( v148 )
+              if ( !v178 )
+                outSolveCollection->m_firstSolveJacobiansTask = v144;
+              v179 = v146;
+              if ( v145 )
               {
-                v150 = *v185;
-                if ( v52 )
+                v147 = *p_m_firstBatchSize;
+                if ( v51 )
                 {
-                  v151 = (__int64)v186;
+                  v148 = (__int64)v183;
                   do
                   {
-                    if ( v52 == v151 )
+                    if ( v51 == v148 )
                       break;
-                    *(_WORD *)(v52 + 50) = v150;
-                    *(_QWORD *)(v52 + 56) = v151;
-                    v52 = *(_QWORD *)v52;
+                    *(_WORD *)(v51 + 50) = v147;
+                    *(_QWORD *)(v51 + 56) = v148;
+                    v51 = *(_QWORD *)v51;
                   }
-                  while ( v52 );
+                  while ( v51 );
                 }
-                v148->m_isLastTaskInBatch.m_bool = 1;
-                v185 = &v148->m_sizeOfNextBatch;
+                v145->m_isLastTaskInBatch.m_bool = 1;
+                p_m_firstBatchSize = &v145->m_sizeOfNextBatch;
               }
-              v52 = (__int64)v186;
-              v186 = v147;
-              v200 = v52;
+              v51 = (__int64)v183;
+              v183 = v144;
+              m_data = v51;
             }
-            v189 = v147;
-            ++*v185;
-            v147->m_taskHeader = v218;
-            v152 = v218->m_accumulatorsBase;
-            v147->m_schemas = (hkpJacobianSchema *)v126;
-            v147->m_accumulators = v152;
-            v147->m_solverElemTemp = (hkpSolverElemTemp *)v127;
-            LODWORD(v152) = v143 - v126;
-            v28 = 0;
-            v51 = v147;
-            v147->m_sizeOfSchemaBuffer = (signed int)v152;
-            v147->m_sizeOfSolverElemTempBuffer = v144 - v127;
-            goto LABEL_165;
+            v186 = v144;
+            ++*p_m_firstBatchSize;
+            v144->m_taskHeader = taskHeader;
+            v149 = taskHeader->m_accumulatorsBase;
+            v144->m_schemas = (hkpJacobianSchema *)v123;
+            v144->m_accumulators = v149;
+            v144->m_solverElemTemp = v124;
+            LODWORD(v149) = (_DWORD)v140 - (_DWORD)v123;
+            v27 = 0;
+            v50 = v144;
+            v144->m_sizeOfSchemaBuffer = (int)v149;
+            v144->m_sizeOfSolverElemTempBuffer = (_DWORD)v141 - (_DWORD)v124;
+            goto LABEL_161;
           }
-          v28 = 0;
+          v27 = 0;
         }
-        v51 = v189;
-LABEL_165:
-        v65 = v213;
-        v63 = v199;
-        v153 = (v183 - (_BYTE *)*v213) >> 4;
-        *((_DWORD *)v213 + 2) = v153;
-        if ( !(_DWORD)v153 )
+        v50 = v186;
+LABEL_161:
+        p_array = v210;
+        v60 = v196;
+        v150 = (v180 - *v210) >> 4;
+        *((_DWORD *)v210 + 2) = v150;
+        if ( !(_DWORD)v150 )
         {
-          v64 = v202;
+          v61 = v199;
           break;
         }
       }
     }
-    v202 = ++v64;
+    v199 = ++v61;
   }
-  while ( v64 < 2 );
-  v154 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, _DWORD *, _QWORD))(*v154[10] + 16i64))(v154[10], v63, v211);
-  v155 = v201;
-  if ( v201 )
+  while ( v61 < 2 );
+  v151 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  (*(void (__fastcall **)(_QWORD *, _DWORD *, _QWORD))(*v151[10] + 16i64))(v151[10], v60, v208);
+  v152 = v198;
+  if ( v198 )
   {
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-      v201,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-    _((AMD_HD3D *)v155);
-    v156 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *, signed __int64))(*v156[11] + 16i64))(
-      v156[11],
-      v155,
+      v198,
+      &hkContainerHeapAllocator::s_alloc);
+    _((AMD_HD3D *)v152);
+    v153 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *, __int64))(*v153[11] + 16i64))(
+      v153[11],
+      v152,
       16i64);
   }
-  v157 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, void *, _QWORD))(*v157[10] + 16i64))(v157[10], ptr, v209);
-  if ( v216 )
+  v154 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  (*(void (__fastcall **)(_QWORD *, void *, _QWORD))(*v154[10] + 16i64))(v154[10], ptr, v206);
+  if ( v213 )
   {
-    v158 = *v185;
-    if ( v52 )
+    v155 = *p_m_firstBatchSize;
+    if ( v51 )
     {
-      v159 = (__int64)v186;
+      v156 = (__int64)v183;
       do
       {
-        if ( v52 == v159 )
+        if ( v51 == v156 )
           break;
-        *(_WORD *)(v52 + 50) = v158;
-        *(_QWORD *)(v52 + 56) = v159;
-        v52 = *(_QWORD *)v52;
+        *(_WORD *)(v51 + 50) = v155;
+        *(_QWORD *)(v51 + 56) = v156;
+        v51 = *(_QWORD *)v51;
       }
-      while ( v52 );
+      while ( v51 );
     }
-    v51->m_isLastTaskInBatch.m_bool = 1;
-    v160 = v218->m_numAllEntities + 1;
-    v218->m_accumulatorsEnd = &v218->m_accumulatorsBase[(unsigned __int64)v160];
-    v161 = ((v160 - 1) >> 7) + 1;
-    v218->m_numApplyGravityJobs = v161;
-    v218->m_numIntegrateVelocitiesJobs = v161;
+    v50->m_isLastTaskInBatch.m_bool = 1;
+    v157 = taskHeader->m_numAllEntities + 1;
+    taskHeader->m_accumulatorsEnd = &taskHeader->m_accumulatorsBase[(unsigned __int64)v157];
+    v158 = ((v157 - 1) >> 7) + 1;
+    taskHeader->m_numApplyGravityJobs = v158;
+    taskHeader->m_numIntegrateVelocitiesJobs = v158;
   }
-  v162 = v180;
-  v219->m_numCallbackConstraints = 0;
-  v219->m_callbackConstraints = 0i64;
-  if ( (_DWORD)v162 )
+  v159 = v177;
+  outBuildCollection->m_numCallbackConstraints = 0;
+  outBuildCollection->m_callbackConstraints = 0i64;
+  if ( (_DWORD)v159 )
   {
-    v163 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v164 = (*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v163[11] + 8i64))(v163[11], (unsigned int)(16 * v162));
-    v165 = (__int64 *)v188;
-    v219->m_numCallbackConstraints = v162;
-    v166 = v164;
-    v219->m_callbackConstraints = (hkpBuildJacobianTaskCollection::CallbackPair *)v164;
-    v167 = v162;
-    if ( (signed int)v162 > 0 )
+    v160 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v161 = (hkpBuildJacobianTaskCollection::CallbackPair *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v160[11] + 8i64))(
+                                                             v160[11],
+                                                             (unsigned int)(16 * v159));
+    v162 = (char *)m_cur;
+    outBuildCollection->m_numCallbackConstraints = v159;
+    v163 = v161;
+    outBuildCollection->m_callbackConstraints = v161;
+    v164 = v159;
+    if ( (int)v159 > 0 )
     {
-      v168 = v165;
+      v165 = v162;
       do
       {
-        v169 = *v168;
-        v166 += 16i64;
-        v168 += 3;
-        *(_QWORD *)(v166 - 16) = v169;
-        *(_QWORD *)(v166 - 8) = *(v168 - 1);
-        --v167;
+        v166 = *(hkConstraintInternal **)v165;
+        ++v163;
+        v165 += 24;
+        v163[-1].m_callbackConstraints = v166;
+        v163[-1].m_atomInfo = (hkpBuildJacobianTask::AtomInfo *)*((_QWORD *)v165 - 1);
+        --v164;
       }
-      while ( v167 );
+      while ( v164 );
     }
   }
   else
   {
-    v165 = (__int64 *)v188;
+    v162 = (char *)m_cur;
   }
-  v170 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v170->m_slabSize < 1280 || (char *)p + 1280 != v170->m_cur || v170->m_firstNonLifoEnd == p )
-    hkLifoAllocator::slowBlockFree(v170, p, 1280);
+  v167 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  if ( v167->m_slabSize < 1280 || (char *)p + 1280 != v167->m_cur || v167->m_firstNonLifoEnd == p )
+    hkLifoAllocator::slowBlockFree(v167, (char *)p, 1280);
   else
-    v170->m_cur = p;
-  v171 = (24 * v210 + 127) & 0xFFFFFF80;
-  v172 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v173 = (v171 + 15) & 0xFFFFFFF0;
-  if ( v171 > v172->m_slabSize || (char *)v165 + v173 != v172->m_cur || v172->m_firstNonLifoEnd == v165 )
-    hkLifoAllocator::slowBlockFree(v172, v165, v173);
+    v167->m_cur = p;
+  v168 = (24 * v207 + 127) & 0xFFFFFF80;
+  v169 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v170 = (v168 + 15) & 0xFFFFFFF0;
+  if ( v168 > v169->m_slabSize || &v162[v170] != v169->m_cur || v169->m_firstNonLifoEnd == v162 )
+    hkLifoAllocator::slowBlockFree(v169, v162, v170);
   else
-    v172->m_cur = v165;
-  if ( (signed int)result.m_enum >= 0 )
+    v169->m_cur = v162;
+  if ( result.m_enum >= HK_SUCCESS )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v165,
+      &hkContainerHeapAllocator::s_alloc,
+      v162,
       24 * (result.m_enum & 0x3FFFFFFF));
-  v194 = 0;
-  if ( v195 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      v193,
-      16 * v195);
-  v193 = 0i64;
-  v195 = 2147483648;
   v191 = 0;
   if ( v192 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      16 * v192);
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, v190, 16 * v192);
+  v190 = 0i64;
+  v192 = 0x80000000;
+  v188 = 0;
+  if ( v189 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 16 * v189);
   array = 0i64;
-  v192 = 2147483648;
-  v174 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v175 = (_QWORD *)v174[1];
-  if ( (unsigned __int64)v175 < v174[3] )
+  v189 = 0x80000000;
+  v171 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v172 = (_QWORD *)v171[1];
+  if ( (unsigned __int64)v172 < v171[3] )
   {
-    *v175 = "Et";
-    v176 = __rdtsc();
-    v177 = (signed __int64)(v175 + 2);
-    *(_DWORD *)(v177 - 8) = v176;
-    v174[1] = v177;
+    *v172 = "Et";
+    v173 = __rdtsc();
+    v174 = v172 + 2;
+    *((_DWORD *)v174 - 2) = v173;
+    v171[1] = v174;
   }
 }
 
 // File Line: 834
 // RVA: 0xD93060
-__int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *nextJobOut, hkBool *jobWasCancelledOut)
+__int64 __fastcall integrateJob(
+        hkpMtThreadStructure *tl,
+        hkJobQueue *jobQueue,
+        hkJobQueue::JobQueueEntry *nextJobOut,
+        hkBool *jobWasCancelledOut)
 {
   __int64 v4; // r14
   hkJobQueue::JobQueueEntry *v5; // rsi
-  hkJobQueue *v6; // r12
   hkpMtThreadStructure *v7; // rbx
   __int64 v8; // rcx
   __int64 v9; // rax
-  int v10; // er13
-  char *v11; // r15
-  int v12; // edi
-  hkJobQueue::JobStatus v13; // ebx
-  signed int v14; // eax
+  int v10; // r13d
+  hkpVelocityAccumulator *v11; // r15
+  signed int v12; // edi
+  hkJobQueue::JobStatus NextJob; // ebx
+  int i; // eax
   _QWORD **v15; // rax
   __int64 v16; // rax
-  signed int v17; // er12
-  _QWORD *v18; // r8
+  int v17; // r12d
+  _QWORD *Value; // r8
   unsigned __int64 v19; // rcx
   unsigned __int64 v20; // rax
-  signed __int64 v21; // r13
+  __int64 p_m_dynamicsStepInfo; // r13
   _QWORD *v22; // r8
   _QWORD *v23; // rcx
   unsigned __int64 v24; // rax
-  signed __int64 v25; // rcx
+  _QWORD *v25; // rcx
   int v26; // edi
   __int64 v27; // rbx
   __int64 v28; // rcx
   _QWORD **v29; // rax
   __int64 v30; // rax
-  hkpBuildJacobianTaskHeader *v31; // rdi
-  hkJobQueue::JobQueueEntry *v32; // rcx
-  signed __int64 v33; // rax
+  __int64 v31; // rdi
+  hkJobQueue::JobQueueEntry *p_job; // rcx
+  __int64 v33; // rax
   hkJob v34; // xmm0
   __int128 v35; // xmm1
   __int128 v36; // xmm0
@@ -1266,24 +1251,23 @@ __int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, 
   __int128 v39; // xmm1
   __int128 v40; // xmm0
   __int128 v41; // xmm1
-  __int64 result; // rax
   _QWORD *v43; // r8
   _QWORD *v44; // rcx
   unsigned __int64 v45; // rax
-  signed __int64 v46; // rcx
+  _QWORD *v46; // rcx
   hkpEntity **v47; // rcx
   int v48; // eax
   _QWORD *v49; // r8
   _QWORD *v50; // rcx
   unsigned __int64 v51; // rax
-  signed __int64 v52; // rcx
+  _QWORD *v52; // rcx
   char v53; // dl
   char v54; // r8
   signed int v55; // ecx
   int v56; // eax
   unsigned int v57; // ecx
-  hkpSolveConstraintBatchTask *v58; // rax
-  void *v59; // rax
+  __int64 v58; // rax
+  __int64 v59; // rax
   _QWORD *v60; // r9
   unsigned __int64 v61; // r8
   unsigned __int64 v62; // rax
@@ -1291,13 +1275,13 @@ __int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, 
   _QWORD *v64; // r8
   _QWORD *v65; // rcx
   unsigned __int64 v66; // rax
-  signed __int64 v67; // rcx
-  signed int v68; // ebx
+  _QWORD *v67; // rcx
+  int v68; // ebx
   unsigned int v69; // ecx
   _QWORD *v70; // r8
   _QWORD *v71; // rcx
   unsigned __int64 v72; // rax
-  signed __int64 v73; // rcx
+  _QWORD *v73; // rcx
   __int128 v74; // xmm1
   __int128 v75; // xmm0
   __int128 v76; // xmm1
@@ -1312,7 +1296,7 @@ __int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, 
   _QWORD *v85; // r8
   _QWORD *v86; // rcx
   unsigned __int64 v87; // rax
-  signed __int64 v88; // rcx
+  _QWORD *v88; // rcx
   int v89; // eax
   unsigned int v90; // ecx
   hkpEntity **v91; // rax
@@ -1322,28 +1306,21 @@ __int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, 
   unsigned __int64 v95; // rax
   __int16 v96; // ax
   int preallocatedBufferSize; // [rsp+40h] [rbp-C0h]
-  int v98; // [rsp+44h] [rbp-BCh]
-  int v99; // [rsp+48h] [rbp-B8h]
+  int v98; // [rsp+44h] [rbp-BCh] BYREF
+  int v99; // [rsp+48h] [rbp-B8h] BYREF
   hkpEntity **v100; // [rsp+50h] [rbp-B0h]
-  hkpSolveJacobiansTaskCollection outSolveCollection; // [rsp+58h] [rbp-A8h]
-  hkpBuildJacobianTaskCollection outBuildCollection; // [rsp+68h] [rbp-98h]
-  hkJobQueue::JobQueueEntry v103; // [rsp+90h] [rbp-70h]
-  hkJobQueue::JobQueueEntry job; // [rsp+190h] [rbp+90h]
-  hkJobQueue::JobQueueEntry oldJob; // [rsp+290h] [rbp+190h]
-  char dynamicDataStorage; // [rsp+390h] [rbp+290h]
-  hkpMtThreadStructure *v107; // [rsp+680h] [rbp+580h]
-  hkJobQueue *lpCriticalSection; // [rsp+688h] [rbp+588h]
+  hkpSolveJacobiansTaskCollection outSolveCollection; // [rsp+58h] [rbp-A8h] BYREF
+  hkpBuildJacobianTaskCollection outBuildCollection; // [rsp+68h] [rbp-98h] BYREF
+  hkJobQueue::JobQueueEntry v103; // [rsp+90h] [rbp-70h] BYREF
+  hkJobQueue::JobQueueEntry job; // [rsp+190h] [rbp+90h] BYREF
+  hkJobQueue::JobQueueEntry oldJob; // [rsp+290h] [rbp+190h] BYREF
+  char dynamicDataStorage[736]; // [rsp+390h] [rbp+290h] BYREF
   unsigned int v109; // [rsp+690h] [rbp+590h]
-  hkBool *v110; // [rsp+698h] [rbp+598h]
   int v111; // [rsp+698h] [rbp+598h]
 
-  v110 = jobWasCancelledOut;
-  lpCriticalSection = jobQueue;
-  v107 = tl;
   v4 = *(_QWORD *)&nextJobOut->m_data[8];
   jobWasCancelledOut->m_bool = 0;
   v5 = nextJobOut;
-  v6 = jobQueue;
   v7 = tl;
   if ( !*(_DWORD *)(v4 + 20) )
   {
@@ -1352,17 +1329,17 @@ __int64 __fastcall integrateJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, 
     v109 = 0;
     v11 = 0i64;
 LABEL_9:
-    v18 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v19 = v18[1];
-    if ( v19 < v18[3] )
+    Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v19 = Value[1];
+    if ( v19 < Value[3] )
     {
       *(_QWORD *)v19 = "LtIntegrate";
       *(_QWORD *)(v19 + 16) = "StInit";
       v20 = __rdtsc();
       *(_DWORD *)(v19 + 8) = v20;
-      v18[1] = v19 + 24;
+      Value[1] = v19 + 24;
     }
-    v21 = (signed __int64)&v7->m_world->m_dynamicsStepInfo;
+    p_m_dynamicsStepInfo = (__int64)&v7->m_world->m_dynamicsStepInfo;
     if ( !v7->m_world->m_processActionsInSingleThread.m_bool )
     {
       v22 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -1371,29 +1348,32 @@ LABEL_9:
       {
         *v23 = "StActions";
         v24 = __rdtsc();
-        v25 = (signed __int64)(v23 + 2);
-        *(_DWORD *)(v25 - 8) = v24;
+        v25 = v23 + 2;
+        *((_DWORD *)v25 - 2) = v24;
         v22[1] = v25;
       }
       v26 = 0;
-      if ( *(_DWORD *)(v4 + 80) > 0 )
+      if ( *(int *)(v4 + 80) > 0 )
       {
         v27 = 0i64;
         do
         {
           v28 = *(_QWORD *)(v27 + *(_QWORD *)(v4 + 72));
           if ( v28 )
-            (*(void (__fastcall **)(__int64, signed __int64, _QWORD *))(*(_QWORD *)v28 + 24i64))(v28, v21, v22);
+            (*(void (__fastcall **)(__int64, __int64, _QWORD *))(*(_QWORD *)v28 + 24i64))(
+              v28,
+              p_m_dynamicsStepInfo,
+              v22);
           ++v26;
           v27 += 8i64;
         }
         while ( v26 < *(_DWORD *)(v4 + 80) );
-        v7 = v107;
+        v7 = tl;
       }
     }
     v29 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v30 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v29[11] + 8i64))(v29[11], 208i64);
-    v31 = (hkpBuildJacobianTaskHeader *)v30;
+    v30 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v29[11] + 8i64))(v29[11], 208i64);
+    v31 = v30;
     if ( v30 )
     {
       *(_QWORD *)(v30 + 24) = 0i64;
@@ -1402,7 +1382,7 @@ LABEL_9:
       *(_DWORD *)(v30 + 16) = 1;
       *(_QWORD *)(v30 + 136) = 0i64;
       *(_DWORD *)(v30 + 144) = 0;
-      *(_DWORD *)(v30 + 148) = 2147483648;
+      *(_DWORD *)(v30 + 148) = 0x80000000;
       *(_QWORD *)(v30 + 152) = 0i64;
       *(_DWORD *)(v30 + 160) = 0;
       *(_QWORD *)(v30 + 168) = 0i64;
@@ -1420,56 +1400,56 @@ LABEL_9:
     {
       *v44 = "StIsland Splitting";
       v45 = __rdtsc();
-      v46 = (signed __int64)(v44 + 2);
-      *(_DWORD *)(v46 - 8) = v45;
+      v46 = v44 + 2;
+      *((_DWORD *)v46 - 2) = v45;
       v43[1] = v46;
     }
     v47 = *(hkpEntity ***)(v4 + 96);
     v48 = *(_DWORD *)(v4 + 104);
-    v31->m_numAllEntities = v48;
-    v31->m_allEntities = v47;
+    *(_WORD *)(v31 + 128) = v48;
+    *(_QWORD *)(v31 + 120) = v47;
     v111 = v48;
     LOWORD(v48) = *(_WORD *)(v4 + 108);
     v100 = v47;
-    v31->m_numUnfinishedJobsForBroadphase = 0;
-    v31->m_islandShouldBeDeactivated = 1;
-    v31->m_buffer = 0i64;
-    v31->m_bufferSize = 0;
-    v31->m_entitiesCapacity = v48;
-    v31->m_impulseLimitsBreached = 0i64;
-    v31->m_tasks.m_buildJacobianTasks = 0i64;
-    v31->m_accumulatorsBase = 0i64;
+    *(_DWORD *)(v31 + 4) = 0;
+    *(_DWORD *)(v31 + 8) = 1;
+    *(_QWORD *)(v31 + 24) = 0i64;
+    *(_DWORD *)(v31 + 32) = 0;
+    *(_WORD *)(v31 + 130) = v48;
+    *(_QWORD *)(v31 + 48) = 0i64;
+    *(_QWORD *)(v31 + 152) = 0i64;
+    *(_QWORD *)(v31 + 64) = 0i64;
     v49 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v50 = (_QWORD *)v49[1];
     if ( (unsigned __int64)v50 < v49[3] )
     {
       *v50 = "StSplitIslands";
       v51 = __rdtsc();
-      v52 = (signed __int64)(v50 + 2);
-      *(_DWORD *)(v52 - 8) = v51;
+      v52 = v50 + 2;
+      *((_DWORD *)v52 - 2) = v51;
       v49[1] = v52;
     }
     ++*(_BYTE *)(v4 + 48);
     v53 = *(_BYTE *)(v4 + 49);
     v54 = *(_BYTE *)(v4 + 48);
-    if ( v53 & 0xC )
+    if ( (v53 & 0xC) != 0 )
     {
       v55 = *(_DWORD *)(v4 + 40);
       if ( *(_DWORD *)(v4 + 104) > v55 )
         v55 = *(_DWORD *)(v4 + 104);
       if ( v55 < (signed int)v7->m_world->m_minDesiredIslandSize )
       {
-        if ( !(v54 & 7) )
+        if ( (v54 & 7) == 0 )
           v17 = 1;
       }
       else
       {
         *(_BYTE *)(v4 + 49) = v53 & 0xF3;
-        if ( !(v54 & 3) )
+        if ( (v54 & 3) == 0 )
           v17 = 1;
       }
     }
-    else if ( v53 & 3 && !(v54 & 7) && v7->m_world->m_wantSimulationIslands.m_bool )
+    else if ( (v53 & 3) != 0 && (v54 & 7) == 0 && v7->m_world->m_wantSimulationIslands.m_bool )
     {
       v17 = 1;
     }
@@ -1486,21 +1466,25 @@ LABEL_9:
         {
           *v86 = "StSetupJobs";
           v87 = __rdtsc();
-          v88 = (signed __int64)(v86 + 2);
-          *(_DWORD *)(v88 - 8) = v87;
+          v88 = v86 + 2;
+          *((_DWORD *)v88 - 2) = v87;
           v85[1] = v88;
         }
-        hkpConstraintSolverSetup::calcBufferOffsetsForSolve((hkpSimulationIsland *)v4, v11, preallocatedBufferSize, v31);
-        v31->m_numSolverResults = *(_DWORD *)(v4 + 24);
+        hkpConstraintSolverSetup::calcBufferOffsetsForSolve(
+          (hkpSimulationIsland *)v4,
+          v11,
+          preallocatedBufferSize,
+          (hkpBuildJacobianTaskHeader *)v31);
+        *(_DWORD *)(v31 + 104) = *(_DWORD *)(v4 + 24);
         v89 = *(_DWORD *)(v4 + 28);
-        v31->m_bufferCapacity = v109;
-        v31->m_exportFinished = 0;
-        v31->m_numSolverElemTemps = v89;
-        v31->m_splitCheckRequested = v17;
+        *(_DWORD *)(v31 + 36) = v109;
+        *(_BYTE *)(v31 + 40) = 0;
+        *(_DWORD *)(v31 + 108) = v89;
+        *(_BYTE *)(v31 + 41) = v17;
         v90 = (unsigned int)(v111 - 1) >> 7;
-        v31->m_constraintQueryIn = &v7->m_constraintQueryIn;
-        v31->m_numUnfinishedJobsForBroadphase = v17 + v90 + 1;
-        v31->m_openJobs = v90 + 2;
+        *(_QWORD *)(v31 + 112) = &v7->m_constraintQueryIn;
+        *(_DWORD *)(v31 + 4) = v17 + v90 + 1;
+        *(_DWORD *)v31 = v90 + 2;
         v91 = v100;
         *(_WORD *)&v5->m_data[42] = v111;
         v5->m_jobSubType = 1;
@@ -1508,8 +1492,8 @@ LABEL_9:
         *(_QWORD *)&v5->m_data[32] = v91;
         *(_WORD *)&v5->m_data[40] = 0;
         v5->m_jobSpuType.m_storage = 1;
-        hkJobQueue::addJob(lpCriticalSection, v5, 0);
-        v92.m_bool = *(_BYTE *)(v21 + 332);
+        hkJobQueue::addJob(jobQueue, v5, JOB_HIGH_PRIORITY);
+        v92.m_bool = *(_BYTE *)(p_m_dynamicsStepInfo + 332);
         outBuildCollection.m_buildJacobianTasks = 0i64;
         outBuildCollection.m_numBuildJacobianTasks = 0;
         outBuildCollection.m_callbackConstraints = 0i64;
@@ -1519,7 +1503,7 @@ LABEL_9:
         createBuildJacobianAndSolveJacobianTaskCollection(
           (hkpSimulationIsland *)v4,
           v92,
-          v31,
+          (hkpBuildJacobianTaskHeader *)v31,
           &outBuildCollection,
           &outSolveCollection);
         v93 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -1531,22 +1515,23 @@ LABEL_9:
           *(_DWORD *)(v94 + 8) = v95;
           v93[1] = v94 + 16;
         }
-        v31->m_tasks = outBuildCollection;
+        *(hkpBuildJacobianTaskCollection *)(v31 + 152) = outBuildCollection;
         *(_WORD *)&v103.m_data[32] = 2;
-        v31->m_solveTasks = outSolveCollection;
+        *(_QWORD *)(v31 + 184) = outSolveCollection.m_firstSolveJacobiansTask;
         v103.m_data[34] = 1;
+        *(_QWORD *)(v31 + 192) = *(_QWORD *)&outSolveCollection.m_firstBatchSize;
         *(_WORD *)&v103.m_data[38] = -1;
-        *(_WORD *)&v103.m_data[36] = 64;
+        strcpy(&v103.m_data[36], "@");
         v96 = *(_WORD *)v5->m_data;
         *(_QWORD *)&v103.m_data[64] = v31;
         *(_WORD *)&v103.m_data[48] = v96;
         *(_QWORD *)&v103.m_data[56] = *(_QWORD *)&v5->m_data[8];
         *(_QWORD *)&v103.m_data[72] = *(_QWORD *)&v5->m_data[24];
         return hkJobQueue::finishJobAndGetNextJob(
-                 lpCriticalSection,
-                 (hkJobQueue::JobQueueEntry *)((char *)&v103 + 48),
+                 jobQueue,
+                 (hkJobQueue::JobQueueEntry *)&v103.m_data[32],
                  v5,
-                 0);
+                 WAIT_FOR_NEXT_JOB);
       }
       v70 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
       v71 = (_QWORD *)v70[1];
@@ -1554,8 +1539,8 @@ LABEL_9:
       {
         *v71 = "StSolver 1Cpu";
         v72 = __rdtsc();
-        v73 = (signed __int64)(v71 + 2);
-        *(_DWORD *)(v73 - 8) = v72;
+        v73 = v71 + 2;
+        *((_DWORD *)v73 - 2) = v72;
         v70[1] = v73;
       }
       v74 = *(_OWORD *)&v7->m_constraintQueryIn.m_frameInvDeltaTime.m_storage;
@@ -1574,48 +1559,48 @@ LABEL_9:
       v80 = *(_OWORD *)&v7->m_constraintQueryIn.m_constraintInstance.m_storage;
       *(_OWORD *)&v103.m_data[224] = v79;
       *(_OWORD *)&v103.m_data[208] = v80;
-      if ( (signed int)hkpConstraintSolverSetup::solve(
-                         (hkStepInfo *)v21,
-                         (hkpSolverInfo *)(v21 + 16),
-                         (hkpConstraintQueryIn *)&v103.m_data[96],
-                         (hkpSimulationIsland *)v4) <= 5 )
-        v31->m_islandShouldBeDeactivated = 0;
+      if ( (int)hkpConstraintSolverSetup::solve(
+                  (hkStepInfo *)p_m_dynamicsStepInfo,
+                  (hkpSolverInfo *)(p_m_dynamicsStepInfo + 16),
+                  (hkpConstraintQueryIn *)&v103.m_data[96],
+                  (hkpSimulationIsland *)v4) <= 5 )
+        *(_DWORD *)(v31 + 8) = 0;
       v81 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*v81[13] + 32i64))(v81[13], v11, v109);
+      (*(void (__fastcall **)(_QWORD *, hkpVelocityAccumulator *, _QWORD))(*v81[13] + 32i64))(v81[13], v11, v109);
     }
     else
     {
       if ( v7->m_world->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool )
       {
-        v31->m_buffer = 0i64;
-        *(_QWORD *)&v31->m_bufferSize = 0i64;
-        v31->m_accumulatorsBase = 0i64;
-        v31->m_schemasBase = 0i64;
-        v31->m_solverTempBase = 0i64;
-        v31->m_numSolverResults = *(_DWORD *)(v4 + 24);
+        *(_QWORD *)(v31 + 24) = 0i64;
+        *(_QWORD *)(v31 + 32) = 0i64;
+        *(_QWORD *)(v31 + 64) = 0i64;
+        *(_QWORD *)(v31 + 88) = 0i64;
+        *(_QWORD *)(v31 + 96) = 0i64;
+        *(_DWORD *)(v31 + 104) = *(_DWORD *)(v4 + 24);
         v56 = *(_DWORD *)(v4 + 28);
-        v31->m_solveTasks.m_firstSolveJacobiansTask = 0i64;
-        v31->m_numSolverElemTemps = v56;
-        v31->m_bufferCapacity = v109;
-        v31->m_splitCheckRequested = v17;
-        v31->m_constraintQueryIn = &v7->m_constraintQueryIn;
+        *(_QWORD *)(v31 + 184) = 0i64;
+        *(_DWORD *)(v31 + 108) = v56;
+        *(_DWORD *)(v31 + 36) = v109;
+        *(_BYTE *)(v31 + 41) = v17;
+        *(_QWORD *)(v31 + 112) = &v7->m_constraintQueryIn;
         v57 = ((unsigned int)(v111 - 1) >> 7) + 1;
-        v31->m_numUnfinishedJobsForBroadphase = v57 + v17;
+        *(_DWORD *)(v31 + 4) = v57 + v17;
         *(_WORD *)&v5->m_jobSubType = 11;
         v5->m_jobSpuType.m_storage = 2;
         v5->m_threadAffinity = -1;
         v5->m_size = 112;
-        v58 = v31->m_solveTasks.m_firstSolveJacobiansTask;
+        v58 = *(_QWORD *)(v31 + 184);
         *(_WORD *)&v5->m_data[74] = 0;
         *(_QWORD *)&v5->m_data[32] = v58;
-        *(_WORD *)&v5->m_data[72] = v31->m_numAllEntities;
-        v59 = v31->m_buffer;
+        *(_WORD *)&v5->m_data[72] = *(_WORD *)(v31 + 128);
+        v59 = *(_QWORD *)(v31 + 24);
         *(_QWORD *)&v5->m_data[16] = v31;
         *(_QWORD *)&v5->m_data[64] = v59;
         v5->m_data[80] = 1;
         v5->m_jobSpuType.m_storage = 1;
-        v31->m_exportFinished = 1;
-        v31->m_openJobs = v57;
+        *(_BYTE *)(v31 + 40) = 1;
+        *(_DWORD *)v31 = v57;
         v60 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
         v61 = v60[1];
         if ( v61 < v60[3] )
@@ -1627,7 +1612,7 @@ LABEL_9:
         }
         if ( v17 )
         {
-          v63 = hkJobQueue::lockQueue(lpCriticalSection, &dynamicDataStorage);
+          v63 = hkJobQueue::lockQueue(jobQueue, dynamicDataStorage);
           *(_WORD *)v103.m_data = *(_WORD *)v5->m_data;
           *(_QWORD *)&v103.m_data[8] = *(_QWORD *)&v5->m_data[8];
           *(_QWORD *)&v103.m_data[16] = *(_QWORD *)&v5->m_data[16];
@@ -1636,10 +1621,15 @@ LABEL_9:
           v103.m_jobSpuType.m_storage = 2;
           v103.m_size = 48;
           v103.m_threadAffinity = -1;
-          hkJobQueue::addJobQueueLocked(lpCriticalSection, v63, &v103, 0);
-          hkJobQueue::unlockQueue(&lpCriticalSection->m_criticalSection.m_section);
+          hkJobQueue::addJobQueueLocked(jobQueue, v63, &v103, JOB_HIGH_PRIORITY);
+          hkJobQueue::unlockQueue(&jobQueue->m_criticalSection.m_section);
         }
-        return hkJobQueue::finishAddAndGetNextJob(lpCriticalSection, 0, 0, v5, 0);
+        return hkJobQueue::finishAddAndGetNextJob(
+                 jobQueue,
+                 HK_JOB_TYPE_DYNAMICS,
+                 JOB_HIGH_PRIORITY,
+                 v5,
+                 WAIT_FOR_NEXT_JOB);
       }
       v64 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
       v65 = (_QWORD *)v64[1];
@@ -1647,14 +1637,14 @@ LABEL_9:
       {
         *v65 = "StSingleObj";
         v66 = __rdtsc();
-        v67 = (signed __int64)(v65 + 2);
-        *(_DWORD *)(v67 - 8) = v66;
+        v67 = v65 + 2;
+        *((_DWORD *)v67 - 2) = v66;
         v64[1] = v67;
       }
       v68 = hkRigidMotionUtilApplyForcesAndStep(
-              (hkpSolverInfo *)(v21 + 16),
-              (hkStepInfo *)v21,
-              (hkVector4f *)(v21 + 48),
+              (hkpSolverInfo *)(p_m_dynamicsStepInfo + 16),
+              (hkStepInfo *)p_m_dynamicsStepInfo,
+              (hkVector4f *)(p_m_dynamicsStepInfo + 48),
               *(hkpMotion *const **)(v4 + 96),
               *(_DWORD *)(v4 + 104),
               336);
@@ -1663,10 +1653,12 @@ LABEL_9:
         *(hkpEntity *const **)(v4 + 96),
         *(unsigned int *)(v4 + 104));
       if ( v68 <= 5 )
-        v31->m_islandShouldBeDeactivated = 0;
+        *(_DWORD *)(v31 + 8) = 0;
     }
     if ( v17 )
-      hkCpuSplitSimulationIslandJobImpl((hkpSimulationIsland *)v4, &v31->m_newSplitIslands);
+      hkCpuSplitSimulationIslandJobImpl(
+        (hkpSimulationIsland *)v4,
+        (hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *)(v31 + 136));
     v82 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v83 = v82[1];
     if ( v83 < v82[3] )
@@ -1676,14 +1668,14 @@ LABEL_9:
       *(_DWORD *)(v83 + 8) = v84;
       v82[1] = v83 + 16;
     }
-    v31->m_exportFinished = 1;
+    *(_BYTE *)(v31 + 40) = 1;
     *(_WORD *)&v5->m_jobSubType = 12;
     v5->m_jobSpuType.m_storage = 2;
     v5->m_size = 64;
     *(_QWORD *)&v5->m_data[16] = v31;
     *(_WORD *)&v5->m_data[32] = 1;
     v5->m_threadAffinity = -1;
-    hkJobQueue::finishAddAndGetNextJob(lpCriticalSection, 0, 0, v5, 0);
+    hkJobQueue::finishAddAndGetNextJob(jobQueue, HK_JOB_TYPE_DYNAMICS, JOB_HIGH_PRIORITY, v5, WAIT_FOR_NEXT_JOB);
     return 0i64;
   }
   preallocatedBufferSize = hkpConstraintSolverSetup::calcBufferSize((hkpSimulationIsland *)v4);
@@ -1692,7 +1684,7 @@ LABEL_9:
   v9 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v8 + 24i64))(v8, &v99);
   v10 = v99;
   v109 = v99;
-  v11 = (char *)v9;
+  v11 = (hkpVelocityAccumulator *)v9;
   if ( v9 )
   {
 LABEL_8:
@@ -1701,67 +1693,64 @@ LABEL_8:
   }
   while ( 1 )
   {
-    v12 = (unsigned __int64)TlsGetValue(hkThreadNumber.m_slotID);
+    v12 = (unsigned int)TlsGetValue(hkThreadNumber.m_slotID);
     TlsSetValue(hkThreadNumber.m_slotID, (LPVOID)1);
-    v13 = hkJobQueue::getNextJob(v6, &job, DO_NOT_WAIT_FOR_NEXT_JOB);
+    NextJob = hkJobQueue::getNextJob(jobQueue, &job, DO_NOT_WAIT_FOR_NEXT_JOB);
     TlsSetValue(hkThreadNumber.m_slotID, (LPVOID)v12);
-    if ( v13 == GOT_NEXT_JOB )
+    if ( NextJob == GOT_NEXT_JOB )
       break;
-    v14 = 0;
-    do
-      ++v14;
-    while ( v14 < 4000 );
+    for ( i = 0; i < 4000; ++i )
+      ;
     v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     v98 = v10;
     v16 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v15[13] + 24i64))(v15[13], &v98);
     v10 = v98;
     v109 = v98;
-    v11 = (char *)v16;
+    v11 = (hkpVelocityAccumulator *)v16;
     if ( v16 )
     {
-      v7 = v107;
+      v7 = tl;
       goto LABEL_8;
     }
   }
-  hkJobQueue::addJob(v6, v5, JOB_LOW_PRIORITY);
+  hkJobQueue::addJob(jobQueue, v5, JOB_LOW_PRIORITY);
   *(_WORD *)&oldJob.m_jobSubType = 16;
-  hkJobQueue::finishJob(v6, &oldJob, 0);
-  v32 = &job;
-  if ( ((unsigned __int8)v5 | (unsigned __int8)&job) & 0xF )
+  hkJobQueue::finishJob(jobQueue, &oldJob, FINISH_FLAG_NORMAL);
+  p_job = &job;
+  if ( (((unsigned __int8)v5 | (unsigned __int8)&job) & 0xF) != 0 )
   {
     memmove(v5, &job, 0x100ui64);
-    v110->m_bool = 1;
-    result = 0i64;
+    jobWasCancelledOut->m_bool = 1;
+    return 0i64;
   }
   else
   {
     v33 = 2i64;
     do
     {
-      v34 = v32->0;
-      v35 = *(_OWORD *)v32->m_data;
+      v34 = p_job->hkJob;
+      v35 = *(_OWORD *)p_job->m_data;
       v5 = (hkJobQueue::JobQueueEntry *)((char *)v5 + 128);
-      v32 = (hkJobQueue::JobQueueEntry *)((char *)v32 + 128);
-      *(hkJob *)&v5[-1].m_data[112] = v34;
-      v36 = *(_OWORD *)&v32[-1].m_data[144];
+      p_job = (hkJobQueue::JobQueueEntry *)((char *)p_job + 128);
+      *((hkJob *)v5 - 8) = v34;
+      v36 = *(_OWORD *)&p_job[-1].m_data[144];
       *(_OWORD *)&v5[-1].m_data[128] = v35;
-      v37 = *(_OWORD *)&v32[-1].m_data[160];
+      v37 = *(_OWORD *)&p_job[-1].m_data[160];
       *(_OWORD *)&v5[-1].m_data[144] = v36;
-      v38 = *(_OWORD *)&v32[-1].m_data[176];
+      v38 = *(_OWORD *)&p_job[-1].m_data[176];
       *(_OWORD *)&v5[-1].m_data[160] = v37;
-      v39 = *(_OWORD *)&v32[-1].m_data[192];
+      v39 = *(_OWORD *)&p_job[-1].m_data[192];
       *(_OWORD *)&v5[-1].m_data[176] = v38;
-      v40 = *(_OWORD *)&v32[-1].m_data[208];
+      v40 = *(_OWORD *)&p_job[-1].m_data[208];
       *(_OWORD *)&v5[-1].m_data[192] = v39;
-      v41 = *(_OWORD *)&v32[-1].m_data[224];
+      v41 = *(_OWORD *)&p_job[-1].m_data[224];
       *(_OWORD *)&v5[-1].m_data[208] = v40;
       *(_OWORD *)&v5[-1].m_data[224] = v41;
       --v33;
     }
     while ( v33 );
-    v110->m_bool = 1;
-    result = 0i64;
+    jobWasCancelledOut->m_bool = 1;
+    return 0i64;
   }
-  return result;
 }
 

@@ -36,14 +36,7 @@ void __fastcall UFG::qInit(UFG::qInitParams *init_params)
 
   UFG::gQuarkInitialized = 1;
   if ( init_params )
-  {
-    *(_QWORD *)&UFG::gQuarkInitParams.mMemory_NumTransactions = *(_QWORD *)&init_params->mMemory_NumTransactions;
-    *(_QWORD *)&UFG::gQuarkInitParams.mTool_EnableDebugExecutableCheck = *(_QWORD *)&init_params->mTool_EnableDebugExecutableCheck;
-    UFG::gQuarkInitParams.mPS3_SysCacheName = init_params->mPS3_SysCacheName;
-    *(_QWORD *)&UFG::gQuarkInitParams.mPS3_FileIOThreadStackSize = *(_QWORD *)&init_params->mPS3_FileIOThreadStackSize;
-    *(_QWORD *)&UFG::gQuarkInitParams.mX360_FileIOThreadStackSize = *(_QWORD *)&init_params->mX360_FileIOThreadStackSize;
-    *(_QWORD *)&UFG::gQuarkInitParams.mX360_FileIOThreadLogicalCoreID = *(_QWORD *)&init_params->mX360_FileIOThreadLogicalCoreID;
-  }
+    UFG::gQuarkInitParams = *init_params;
   UFG::InitMemorySystem((UFG *)init_params);
   UFG::qInitPlat();
   UFG::gMainThreadId = (unsigned __int64)UFG::qGetCurrentThreadID();
@@ -54,7 +47,7 @@ void __fastcall UFG::qInit(UFG::qInitParams *init_params)
   _(v2);
   v3 = (AMD_HD3D *)UFG::qSpuManager::Instance();
   _(v3);
-  if ( !(_S8_4 & 1) )
+  if ( (_S8_4 & 1) == 0 )
   {
     _S8_4 |= 1u;
     stru_14235BC40.mTaskFunctionDecls.mNode.mPrev = (UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *)&stru_14235BC40;
@@ -70,14 +63,14 @@ void __fastcall UFG::qInit(UFG::qInitParams *init_params)
 void __fastcall UFG::qClose(UFG *this)
 {
   UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *i; // rdx
-  UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *v2; // rcx
-  UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *v3; // rax
+  UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *mPrev; // rcx
+  UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *mNext; // rax
   AMD_HD3D *v4; // rax
   UFG *v5; // rcx
   AMD_HD3D *v6; // rcx
-  UFG::MemoryTransaction *v7; // rdx
+  char *v7; // rdx
 
-  if ( !(_S8_4 & 1) )
+  if ( (_S8_4 & 1) == 0 )
   {
     _S8_4 |= 1u;
     stru_14235BC40.mTaskFunctionDecls.mNode.mPrev = (UFG::qNode<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl> *)&stru_14235BC40;
@@ -89,10 +82,10 @@ void __fastcall UFG::qClose(UFG *this)
         (UFG::qTaskFunctionManager *)stru_14235BC40.mTaskFunctionDecls.mNode.mNext != &stru_14235BC40;
         i = stru_14235BC40.mTaskFunctionDecls.mNode.mNext )
   {
-    v2 = i->mPrev;
-    v3 = i->mNext;
-    v2->mNext = v3;
-    v3->mPrev = v2;
+    mPrev = i->mPrev;
+    mNext = i->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     i->mPrev = i;
     i->mNext = i;
   }
@@ -101,7 +94,7 @@ void __fastcall UFG::qClose(UFG *this)
   UFG::qValidateChunkFileBuilders(v5);
   UFG::qFileSystem::ClosePlat(&UFG::gQuarkFileSystem);
   _(v6);
-  v7 = UFG::gMemoryTransactions;
+  v7 = (char *)UFG::gMemoryTransactions;
   if ( UFG::gMemoryTransactions )
   {
     UFG::gMemoryTransactions = 0i64;

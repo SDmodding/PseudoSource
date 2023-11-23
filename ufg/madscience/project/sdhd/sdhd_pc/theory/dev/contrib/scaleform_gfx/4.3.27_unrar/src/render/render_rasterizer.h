@@ -1,5 +1,6 @@
 // File Line: 87
 // RVA: 0x954DB0
+// attributes: thunk
 void __fastcall Scaleform::Render::Rasterizer::AddVertex(Scaleform::Render::Rasterizer *this, float x, float y)
 {
   Scaleform::Render::Rasterizer::LineTo(this, x, y);

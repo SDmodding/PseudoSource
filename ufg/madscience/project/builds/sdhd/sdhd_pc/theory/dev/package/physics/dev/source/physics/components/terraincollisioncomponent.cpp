@@ -2,7 +2,7 @@
 // RVA: 0x1458DE0
 __int64 dynamic_initializer_for__UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList__);
 }
 
 // File Line: 66
@@ -14,104 +14,101 @@ const char *__fastcall UFG::TerrainCollisionComponent::GetTypeName(UFG::TerrainC
 
 // File Line: 78
 // RVA: 0x9A070
-void __fastcall UFG::TerrainCollisionComponent::TerrainCollisionComponent(UFG::TerrainCollisionComponent *this, unsigned int name_uid, int width, int height, unsigned __int16 *data, float quant_offset, float quant_scale, UFG::qVector3 *dimensions, UFG::qVector3 *pos)
+void __fastcall UFG::TerrainCollisionComponent::TerrainCollisionComponent(
+        UFG::TerrainCollisionComponent *this,
+        unsigned int name_uid,
+        int width,
+        int height,
+        unsigned __int16 *data,
+        float quant_offset,
+        float quant_scale,
+        UFG::qVector3 *dimensions,
+        UFG::qVector3 *pos)
 {
-  int v9; // edi
-  int v10; // ebx
-  UFG::TerrainCollisionComponent *v11; // rsi
-  UFG::BasePhysicsObject *v12; // rdx
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *v13; // ST38_8
-  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v14; // rcx
-  float v15; // xmm1_4
-  float v16; // xmm2_4
-  float v17; // xmm1_4
-  float v18; // xmm2_4
-  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v19; // rax
-  signed __int64 v20; // rbx
-  char v21; // dl
-  __int64 v22; // rax
-  char v23; // cl
-  _QWORD **v24; // rax
-  __int64 v25; // rax
-  int v26; // edx
-  char v27; // al
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float v14; // xmm1_4
+  float v15; // xmm2_4
+  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *mPrev; // rax
+  __int64 v17; // rbx
+  char v18; // dl
+  char v19; // cl
+  _QWORD **Value; // rax
+  hkArray<unsigned short,hkContainerHeapAllocator> *v21; // rax
+  int v22; // edx
+  char v23; // al
 
-  v9 = height;
-  v10 = width;
-  v11 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v12 = (UFG::BasePhysicsObject *)&v11->vfptr;
-  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
-  v11->mUserData.isBoat = 0;
-  v13 = &v11->mUserData.simComponent;
-  v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-  v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-  v11->mUserData.simComponent.m_pPointer = 0i64;
-  v14 = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&v11->mPrev;
-  v14->mPrev = v14;
-  v14->mNext = v14;
-  v11->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
-  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
-  v11->mWidth = v10;
-  v11->mHeight = v9;
-  v11->mQuantOffset = quant_offset;
-  v11->mQuantScale = quant_scale;
-  v15 = pos->y;
-  v16 = pos->z;
-  v11->mPosition.x = pos->x;
-  v11->mPosition.y = v15;
-  v11->mPosition.z = v16;
-  v17 = dimensions->y;
-  v18 = dimensions->z;
-  v11->mDimensions.x = dimensions->x;
-  v11->mDimensions.y = v17;
-  v11->mDimensions.z = v18;
-  v11->mRigidBody = 0i64;
-  v11->mHeightFieldShape = 0i64;
-  v19 = UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev;
-  UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&v11->mPrev;
-  v14->mPrev = v19;
-  v11->mNext = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList;
-  UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&v11->mPrev;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->UFG::BasePhysicsObject::vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
+  this->mUserData.isBoat = 0;
+  this->mUserData.simComponent.mPrev = &this->mUserData.simComponent;
+  this->mUserData.simComponent.mNext = &this->mUserData.simComponent;
+  this->mUserData.simComponent.m_pPointer = 0i64;
+  this->mPrev = &this->UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent>;
+  this->mNext = &this->UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent>;
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::BasePhysicsObject::vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
+  this->mWidth = width;
+  this->mHeight = height;
+  this->mQuantOffset = quant_offset;
+  this->mQuantScale = quant_scale;
+  y = pos->y;
+  z = pos->z;
+  this->mPosition.x = pos->x;
+  this->mPosition.y = y;
+  this->mPosition.z = z;
+  v14 = dimensions->y;
+  v15 = dimensions->z;
+  this->mDimensions.x = dimensions->x;
+  this->mDimensions.y = v14;
+  this->mDimensions.z = v15;
+  this->mRigidBody = 0i64;
+  this->mHeightFieldShape = 0i64;
+  mPrev = UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev;
+  UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList;
+  UFG::TerrainCollisionComponent::s_TerrainCollisionComponentList.mNode.mPrev = &this->UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v11->vfptr,
+    this,
     UFG::TerrainCollisionComponent::_TerrainCollisionComponentTypeUID,
     "TerrainCollisionComponent");
-  v20 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
-  v21 = ++*(_BYTE *)(v20 + 80);
-  v22 = v21;
-  *(_DWORD *)(v20 + 4 * v22) = 3;
-  *(_QWORD *)(v20 + 8 * v22 + 16) = "TerrainCollisionElementArray";
-  *(_QWORD *)(v20 + 8 * v22 + 48) = 0i64;
-  v23 = *(_BYTE *)(v20 + 81);
-  if ( v21 > v23 )
-    v23 = v21;
-  *(_BYTE *)(v20 + 81) = v23;
-  v24 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v25 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v24[11] + 8i64))(v24[11], 16i64);
-  if ( v25 )
+  v17 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
+  v18 = ++*(_BYTE *)(v17 + 80);
+  *(_DWORD *)(v17 + 4i64 * v18) = 3;
+  *(_QWORD *)(v17 + 8i64 * v18 + 16) = "TerrainCollisionElementArray";
+  *(_QWORD *)(v17 + 8i64 * v18 + 48) = 0i64;
+  v19 = *(_BYTE *)(v17 + 81);
+  if ( v18 > v19 )
+    v19 = v18;
+  *(_BYTE *)(v17 + 81) = v19;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v21 = (hkArray<unsigned short,hkContainerHeapAllocator> *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                                              Value[11],
+                                                              16i64);
+  if ( v21 )
   {
-    v26 = v11->mHeight * v11->mWidth;
-    *(_QWORD *)v25 = data;
-    *(_DWORD *)(v25 + 8) = v26;
-    *(_DWORD *)(v25 + 12) = v26 | 0x80000000;
+    v22 = this->mHeight * this->mWidth;
+    v21->m_data = data;
+    v21->m_size = v22;
+    v21->m_capacityAndFlags = v22 | 0x80000000;
   }
   else
   {
-    v25 = 0i64;
+    v21 = 0i64;
   }
-  v11->mData = (hkArray<unsigned short,hkContainerHeapAllocator> *)v25;
-  v27 = *(_BYTE *)(v20 + 80);
-  if ( v27 > 0 )
+  this->mData = v21;
+  v23 = *(_BYTE *)(v17 + 80);
+  if ( v23 > 0 )
   {
-    *(_BYTE *)(v20 + 80) = v27 - 1;
+    *(_BYTE *)(v17 + 80) = v23 - 1;
   }
   else
   {
-    *(_BYTE *)(v20 + 80) = 0;
-    *(_DWORD *)v20 = 3;
-    *(_QWORD *)(v20 + 16) = 0i64;
-    *(_QWORD *)(v20 + 48) = 0i64;
+    *(_BYTE *)(v17 + 80) = 0;
+    *(_DWORD *)v17 = 3;
+    *(_QWORD *)(v17 + 16) = 0i64;
+    *(_QWORD *)(v17 + 48) = 0i64;
   }
 }
 
@@ -119,44 +116,42 @@ void __fastcall UFG::TerrainCollisionComponent::TerrainCollisionComponent(UFG::T
 // RVA: 0x9D540
 void __fastcall UFG::TerrainCollisionComponent::~TerrainCollisionComponent(UFG::TerrainCollisionComponent *this)
 {
-  UFG::TerrainCollisionComponent *v1; // rdi
   UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v2; // rbx
-  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v3; // rcx
-  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v4; // rax
-  hkArray<unsigned short,hkContainerHeapAllocator> *v5; // rsi
-  int v6; // er8
-  _QWORD **v7; // rax
+  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *mPrev; // rcx
+  UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *mNext; // rax
+  hkArray<unsigned short,hkContainerHeapAllocator> *mData; // rsi
+  int m_capacityAndFlags; // r8d
+  _QWORD **Value; // rax
   UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v8; // rdx
   UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v9; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::BasePhysicsObject::vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
   if ( this == UFG::TerrainCollisionComponent::s_TerrainCollisionComponentpCurrentIterator )
     UFG::TerrainCollisionComponent::s_TerrainCollisionComponentpCurrentIterator = (UFG::TerrainCollisionComponent *)&this->mPrev[-7].mNext;
-  v2 = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = v1->mData;
-  if ( v5 )
+  mData = this->mData;
+  if ( mData )
   {
-    v5->m_size = 0;
-    v6 = v5->m_capacityAndFlags;
-    if ( v6 >= 0 )
+    mData->m_size = 0;
+    m_capacityAndFlags = mData->m_capacityAndFlags;
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v5->m_data,
-        2 * (v6 & 0x3FFFFFFF));
-    v5->m_data = 0i64;
-    v5->m_capacityAndFlags = 2147483648;
-    v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkArray<unsigned short,hkContainerHeapAllocator> *, signed __int64))(*v7[11] + 16i64))(
-      v7[11],
-      v5,
+        &hkContainerHeapAllocator::s_alloc,
+        mData->m_data,
+        2 * (m_capacityAndFlags & 0x3FFFFFFF));
+    mData->m_data = 0i64;
+    mData->m_capacityAndFlags = 0x80000000;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkArray<unsigned short,hkContainerHeapAllocator> *, __int64))(*Value[11] + 16i64))(
+      Value[11],
+      mData,
       16i64);
   }
   v8 = v2->mPrev;
@@ -165,184 +160,181 @@ void __fastcall UFG::TerrainCollisionComponent::~TerrainCollisionComponent(UFG::
   v9->mPrev = v8;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::BasePhysicsObject::~BasePhysicsObject((UFG::BasePhysicsObject *)&v1->vfptr);
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::BasePhysicsObject::~BasePhysicsObject(&this->UFG::BasePhysicsObject);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 98
 // RVA: 0xADBB0
 void __fastcall UFG::TerrainCollisionComponent::OnAttach(UFG::TerrainCollisionComponent *this, UFG::SimObject *object)
 {
-  UFG::TerrainCollisionComponent *v2; // rbx
-  signed __int64 v3; // rdi
+  __int64 v3; // rdi
   char v4; // dl
-  __int64 v5; // rax
-  char v6; // cl
-  __m128 v7; // xmm2
-  __m128 v8; // xmm1
-  __m128 v9; // xmm3
-  __m128 v10; // xmm6
-  __m128 v11; // xmm7
-  __m128 v12; // xmm8
-  _QWORD **v13; // rax
+  char v5; // cl
+  __m128 x_low; // xmm2
+  __m128 y_low; // xmm1
+  __m128 v8; // xmm3
+  __m128 z_low; // xmm6
+  __m128 v10; // xmm7
+  __m128 v11; // xmm8
+  _QWORD **Value; // rax
+  hkpCompressedSampledHeightFieldShape *v13; // rax
   hkpCompressedSampledHeightFieldShape *v14; // rax
-  hkpSampledHeightFieldShape *v15; // rax
-  hkpSampledHeightFieldShape *v16; // rsi
-  _QWORD **v17; // rax
+  hkpCompressedSampledHeightFieldShape *v15; // rsi
+  _QWORD **v16; // rax
+  hkpTriSampledHeightFieldCollection *v17; // rax
   hkpTriSampledHeightFieldCollection *v18; // rax
-  hkpTriSampledHeightFieldCollection *v19; // rax
-  hkpTriSampledHeightFieldCollection *v20; // r14
-  _QWORD **v21; // rax
-  hkpTriSampledHeightFieldBvTreeShape *v22; // rax
-  hkpShape *v23; // rax
-  hkpShape *v24; // r15
-  unsigned int v25; // er14
-  unsigned int v26; // eax
-  UFG::qBaseTreeRB *v27; // rsi
-  UFG::qBaseTreeRB *v28; // rax
-  unsigned __int64 v29; // r8
-  _QWORD **v30; // rax
-  hkpRigidBody *v31; // rax
-  char v32; // al
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *v33; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v34; // rcx
+  hkpTriSampledHeightFieldCollection *v19; // r14
+  _QWORD **v20; // rax
+  hkpTriSampledHeightFieldBvTreeShape *v21; // rax
+  hkpShape *v22; // rax
+  hkpShape *v23; // r15
+  unsigned int v24; // r14d
+  unsigned int v25; // eax
+  UFG::qBaseTreeRB *v26; // rsi
+  UFG::qBaseTreeRB *v27; // rax
+  unsigned __int64 v28; // r8
+  _QWORD **v29; // rax
+  hkpRigidBody *v30; // rax
+  char v31; // al
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *p_simComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v35; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v36; // rax
-  UFG::qReflectHandleBase v37; // [rsp+30h] [rbp-A8h]
-  char v38; // [rsp+58h] [rbp-80h]
-  hkpSampledHeightFieldBaseCinfo info; // [rsp+60h] [rbp-78h]
-  __int128 v40; // [rsp+98h] [rbp-40h]
-  __m128 v41; // [rsp+A8h] [rbp-30h]
-  hkQsTransformf v42; // [rsp+B8h] [rbp-20h]
-  hkpRigidBodyCinfo v43; // [rsp+E8h] [rbp+10h]
-  hkTransformf transform; // [rsp+1C8h] [rbp+F0h]
-  hkTransformf transformOut; // [rsp+208h] [rbp+130h]
+  UFG::qReflectHandleBase v36; // [rsp+30h] [rbp-A8h] BYREF
+  char v37; // [rsp+58h] [rbp-80h]
+  __m128 info; // [rsp+60h] [rbp-78h] BYREF
+  int info_16; // [rsp+70h] [rbp-68h]
+  int info_20; // [rsp+74h] [rbp-64h]
+  _OWORD info_24[4]; // [rsp+78h] [rbp-60h] BYREF
+  hkQsTransformf v42; // [rsp+B8h] [rbp-20h] BYREF
+  hkpRigidBodyCinfo v43; // [rsp+E8h] [rbp+10h] BYREF
+  hkTransformf transform; // [rsp+1C8h] [rbp+F0h] BYREF
+  hkTransformf transformOut; // [rsp+208h] [rbp+130h] BYREF
   void *v46; // [rsp+2A8h] [rbp+1D0h]
 
-  info.m_scale.m_quad.m128_u64[1] = -2i64;
-  v2 = this;
+  info.m128_u64[1] = -2i64;
   if ( !this->mRigidBody )
   {
     v3 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
     v4 = ++*(_BYTE *)(v3 + 80);
-    v5 = v4;
-    *(_DWORD *)(v3 + 4 * v5) = 3;
-    *(_QWORD *)(v3 + 8 * v5 + 16) = "TerrainCollisionElement";
-    *(_QWORD *)(v3 + 8 * v5 + 48) = 0i64;
-    v6 = *(_BYTE *)(v3 + 81);
-    if ( v4 > v6 )
-      v6 = v4;
-    *(_BYTE *)(v3 + 81) = v6;
-    v38 = 0;
-    info.m_xRes = v2->mWidth;
-    info.m_zRes = v2->mHeight;
-    info.m_minHeight = 0.0;
-    info.m_maxHeight = v2->mDimensions.z;
-    v7 = (__m128)LODWORD(v2->mDimensions.x);
-    v7.m128_f32[0] = v7.m128_f32[0] / (float)(info.m_xRes - 1);
-    v8 = (__m128)LODWORD(v2->mDimensions.y);
-    v8.m128_f32[0] = v8.m128_f32[0] / (float)(info.m_zRes - 1);
-    info.m_scale.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps(v7, v8), _xmm);
-    v9 = 0i64;
-    v9.m128_f32[0] = (float)1;
-    *(__m128 *)&info.m_minHeight = v9;
-    v41 = _mm_shuffle_ps(v9, v9, 21);
-    *(__m128 *)(&info.m_useProjectionBasedHeight + 8) = _xmm;
-    v40 = _xmm;
-    hkTransformf::set4x4ColumnMajor(&transform, &info.m_minHeight);
+    *(_DWORD *)(v3 + 4i64 * v4) = 3;
+    *(_QWORD *)(v3 + 8i64 * v4 + 16) = "TerrainCollisionElement";
+    *(_QWORD *)(v3 + 8i64 * v4 + 48) = 0i64;
+    v5 = *(_BYTE *)(v3 + 81);
+    if ( v4 > v5 )
+      v5 = v4;
+    *(_BYTE *)(v3 + 81) = v5;
+    v37 = 0;
+    info_16 = this->mWidth;
+    info_20 = this->mHeight;
+    LODWORD(info_24[0]) = 0;
+    DWORD1(info_24[0]) = LODWORD(this->mDimensions.z);
+    x_low = (__m128)LODWORD(this->mDimensions.x);
+    x_low.m128_f32[0] = x_low.m128_f32[0] / (float)(info_16 - 1);
+    y_low = (__m128)LODWORD(this->mDimensions.y);
+    y_low.m128_f32[0] = y_low.m128_f32[0] / (float)(info_20 - 1);
+    info = _mm_unpacklo_ps(_mm_unpacklo_ps(x_low, y_low), _xmm);
+    v8 = 0i64;
+    v8.m128_f32[0] = (float)1;
+    info_24[0] = v8;
+    info_24[3] = _mm_shuffle_ps(v8, v8, 21);
+    info_24[1] = _xmm;
+    info_24[2] = _xmm;
+    hkTransformf::set4x4ColumnMajor(&transform, (const float *)info_24);
     hkQsTransformf::setFromTransformNoScale(&v42, &transform);
     hkQsTransformf::copyToTransform(&v42, &transformOut);
-    v10 = (__m128)LODWORD(v2->mPosition.z);
-    v11 = (__m128)LODWORD(v2->mPosition.y);
-    v12 = (__m128)LODWORD(v2->mPosition.x);
-    v13 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v14 = (hkpCompressedSampledHeightFieldShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v13[11] + 8i64))(
-                                                    v13[11],
+    z_low = (__m128)LODWORD(this->mPosition.z);
+    v10 = (__m128)LODWORD(this->mPosition.y);
+    v11 = (__m128)LODWORD(this->mPosition.x);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v13 = (hkpCompressedSampledHeightFieldShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                                    Value[11],
                                                     176i64);
-    v46 = v14;
-    if ( v14 )
+    v46 = v13;
+    if ( v13 )
     {
       hkpCompressedSampledHeightFieldShape::hkpCompressedSampledHeightFieldShape(
-        v14,
-        &info,
-        v2->mData,
-        v2->mQuantOffset,
-        v2->mQuantScale);
-      v16 = v15;
+        v13,
+        (hkpSampledHeightFieldBaseCinfo *)&info,
+        this->mData,
+        this->mQuantOffset,
+        this->mQuantScale);
+      v15 = v14;
     }
     else
     {
-      v16 = 0i64;
+      v15 = 0i64;
     }
-    v17 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v18 = (hkpTriSampledHeightFieldCollection *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v17[11] + 8i64))(
-                                                  v17[11],
+    v16 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v17 = (hkpTriSampledHeightFieldCollection *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v16[11] + 8i64))(
+                                                  v16[11],
                                                   96i64);
-    v46 = v18;
-    if ( v18 )
+    v46 = v17;
+    if ( v17 )
     {
-      hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldCollection(v18, v16, hkConvexShapeDefaultRadius);
-      v20 = v19;
+      hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldCollection(v17, v15, hkConvexShapeDefaultRadius);
+      v19 = v18;
     }
     else
     {
-      v20 = 0i64;
+      v19 = 0i64;
     }
-    hkReferencedObject::removeReference((hkReferencedObject *)&v16->vfptr);
-    v21 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v22 = (hkpTriSampledHeightFieldBvTreeShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v21[11] + 8i64))(
-                                                   v21[11],
+    hkReferencedObject::removeReference(v15);
+    v20 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v21 = (hkpTriSampledHeightFieldBvTreeShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v20[11] + 8i64))(
+                                                   v20[11],
                                                    80i64);
-    v46 = v22;
-    if ( v22 )
+    v46 = v21;
+    if ( v21 )
     {
-      hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvTreeShape(v22, v20, (hkBool)1);
-      v24 = v23;
+      hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvTreeShape(v21, v19, (hkBool)1);
+      v23 = v22;
     }
     else
     {
-      v24 = 0i64;
+      v23 = 0i64;
     }
-    hkReferencedObject::removeReference((hkReferencedObject *)&v20->vfptr);
-    v2->mHeightFieldShape = (hkpCompressedSampledHeightFieldShape *)v16;
+    hkReferencedObject::removeReference(v19);
+    this->mHeightFieldShape = v15;
     hkpRigidBodyCinfo::hkpRigidBodyCinfo(&v43);
-    v43.m_position.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps(v12, v10), _mm_unpacklo_ps(v11, (__m128)0i64));
+    v43.m_position.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps(v11, z_low), _mm_unpacklo_ps(v10, (__m128)0i64));
     v43.m_rotation = v42.m_rotation;
     v43.m_motionType.m_storage = 5;
-    v43.m_shape = v24;
+    v43.m_shape = v23;
     v43.m_collisionFilterInfo = 9;
-    UFG::qReflectHandleBase::qReflectHandleBase(&v37);
-    v37.mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
-    v25 = UFG::qStringHashUpper32("STATIC_HEIGHTFIELD", 0xFFFFFFFF);
-    if ( _S2_3 & 1 )
+    UFG::qReflectHandleBase::qReflectHandleBase(&v36);
+    v36.mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
+    v24 = UFG::qStringHashUpper32("STATIC_HEIGHTFIELD", 0xFFFFFFFF);
+    if ( (_S2_3 & 1) != 0 )
     {
-      v26 = default_uid;
+      v25 = default_uid;
     }
     else
     {
       _S2_3 |= 1u;
-      v26 = UFG::qStringHashUpper32("default", 0xFFFFFFFF);
-      default_uid = v26;
+      v25 = UFG::qStringHashUpper32("default", 0xFFFFFFFF);
+      default_uid = v25;
     }
-    if ( v26 )
-      v27 = UFG::qBaseTreeRB::Get(&UFG::PhysicsPropertyManager::sObjectPropertiesLookup.mTree, v26);
+    if ( v25 )
+      v26 = UFG::qBaseTreeRB::Get(&UFG::PhysicsPropertyManager::sObjectPropertiesLookup.mTree, v25);
     else
-      v27 = 0i64;
-    if ( v25 && (v28 = UFG::qBaseTreeRB::Get(&UFG::PhysicsPropertyManager::sObjectPropertiesLookup.mTree, v25)) != 0i64 )
-      v29 = *(_QWORD *)&v28->mNULL.mUID;
+      v26 = 0i64;
+    if ( v24 && (v27 = UFG::qBaseTreeRB::Get(&UFG::PhysicsPropertyManager::sObjectPropertiesLookup.mTree, v24)) != 0i64 )
+      v28 = *(_QWORD *)&v27->mNULL.mUID;
     else
-      v29 = *(_QWORD *)&v27->mNULL.mUID;
-    UFG::qReflectHandleBase::Init(&v37, v37.mTypeUID, v29);
-    v30 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v31 = (hkpRigidBody *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v30[11] + 8i64))(v30[11], 720i64);
-    v46 = v31;
-    if ( v31 )
-      hkpRigidBody::hkpRigidBody(v31, &v43);
-    v2->mRigidBody = v31;
-    v32 = *(_BYTE *)(v3 + 80);
-    if ( v32 > 0 )
+      v28 = *(_QWORD *)&v26->mNULL.mUID;
+    UFG::qReflectHandleBase::Init(&v36, v36.mTypeUID, v28);
+    v29 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v30 = (hkpRigidBody *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v29[11] + 8i64))(v29[11], 720i64);
+    v46 = v30;
+    if ( v30 )
+      hkpRigidBody::hkpRigidBody(v30, &v43);
+    this->mRigidBody = v30;
+    v31 = *(_BYTE *)(v3 + 80);
+    if ( v31 > 0 )
     {
-      *(_BYTE *)(v3 + 80) = v32 - 1;
+      *(_BYTE *)(v3 + 80) = v31 - 1;
     }
     else
     {
@@ -351,49 +343,40 @@ void __fastcall UFG::TerrainCollisionComponent::OnAttach(UFG::TerrainCollisionCo
       *(_QWORD *)(v3 + 16) = 0i64;
       *(_QWORD *)(v3 + 48) = 0i64;
     }
-    v33 = &v2->mUserData.simComponent;
-    if ( v2->mUserData.simComponent.m_pPointer )
+    p_simComponent = &this->mUserData.simComponent;
+    if ( this->mUserData.simComponent.m_pPointer )
     {
-      v34 = v33->mPrev;
-      v35 = v2->mUserData.simComponent.mNext;
-      v34->mNext = v35;
-      v35->mPrev = v34;
-      v33->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v33->mPrev;
-      v2->mUserData.simComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mUserData.simComponent.mPrev;
+      mPrev = p_simComponent->mPrev;
+      mNext = this->mUserData.simComponent.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_simComponent->mPrev = p_simComponent;
+      this->mUserData.simComponent.mNext = &this->mUserData.simComponent;
     }
-    v2->mUserData.simComponent.m_pPointer = (UFG::SimComponent *)&v2->vfptr;
-    v36 = v2->m_SafePointerList.mNode.mPrev;
-    v36->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v33->mPrev;
-    v33->mPrev = v36;
-    v2->mUserData.simComponent.mNext = &v2->m_SafePointerList.mNode;
-    v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v33->mPrev;
-    v2->mRigidBody->m_userData = (unsigned __int64)&v2->mUserData;
-    UFG::PhysicsPropertyManager::SetObjectPropertiesHandleUid(
-      v37.mData->mBaseNode.mUID,
-      (hkpWorldObject *)&v2->mRigidBody->vfptr);
-    hkpWorld::addEntity(
-      UFG::BasePhysicsSystem::mInstance->mWorld,
-      (hkpEntity *)&v2->mRigidBody->vfptr,
-      HK_ENTITY_ACTIVATION_DO_ACTIVATE);
-    UFG::qReflectHandleBase::~qReflectHandleBase(&v37);
+    this->mUserData.simComponent.m_pPointer = this;
+    v35 = this->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+    v35->mNext = p_simComponent;
+    p_simComponent->mPrev = v35;
+    this->mUserData.simComponent.mNext = &this->m_SafePointerList.mNode;
+    this->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = p_simComponent;
+    this->mRigidBody->m_userData = (unsigned __int64)&this->mUserData;
+    UFG::PhysicsPropertyManager::SetObjectPropertiesHandleUid(v36.mData->mBaseNode.mUID, this->mRigidBody);
+    hkpWorld::addEntity(UFG::BasePhysicsSystem::mInstance->mWorld, this->mRigidBody, HK_ENTITY_ACTIVATION_DO_ACTIVATE);
+    UFG::qReflectHandleBase::~qReflectHandleBase(&v36);
   }
-}tity(
-      UFG::BasePhysicsSystem::mIns
+}
 
 // File Line: 167
 // RVA: 0xAE0A0
 void __fastcall UFG::TerrainCollisionComponent::OnDetach(UFG::TerrainCollisionComponent *this)
 {
-  UFG::TerrainCollisionComponent *v1; // rbx
-
-  v1 = this;
   if ( this->mRigidBody )
   {
-    hkReferencedObject::removeReference((hkReferencedObject *)&this->mHeightFieldShape->vfptr);
-    UFG::BasePhysicsSystem::RemoveEntity(UFG::BasePhysicsSystem::mInstance, v1->mRigidBody, 0);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v1->mRigidBody->vfptr);
-    v1->mRigidBody->m_userData = 0i64;
-    v1->mRigidBody = 0i64;
+    hkReferencedObject::removeReference(this->mHeightFieldShape);
+    UFG::BasePhysicsSystem::RemoveEntity(UFG::BasePhysicsSystem::mInstance, this->mRigidBody, 0);
+    hkReferencedObject::removeReference(this->mRigidBody);
+    this->mRigidBody->m_userData = 0i64;
+    this->mRigidBody = 0i64;
   }
 }
 

@@ -1,187 +1,166 @@
 // File Line: 21
 // RVA: 0x1464E0
-signed __int64 __fastcall UFG::ExternalSourceUtil::GetRandomVariation(unsigned int baseHash, unsigned int *final_hash, int lastVar)
+__int64 __fastcall UFG::ExternalSourceUtil::GetRandomVariation(
+        unsigned int baseHash,
+        unsigned int *final_hash,
+        int lastVar)
 {
-  unsigned int *v3; // r12
-  unsigned int v4; // er15
-  int v5; // er14
   unsigned int v6; // eax
-  int v7; // eax
-  signed __int64 result; // rax
+  int StreamFileSize; // eax
   int v9; // esi
   unsigned int v10; // eax
-  UFG::WwiseFilePackageLowLevelIODeferred **v11; // rbx
+  UFG::WwiseFilePackageLowLevelIODeferred **p; // rbx
   unsigned int v12; // edi
   __int64 v13; // rax
-  signed int v14; // ebx
+  int v14; // ebx
   unsigned int i; // edi
-  int v16; // [rsp+20h] [rbp-48h]
-  int v17; // [rsp+24h] [rbp-44h]
-  char v18; // [rsp+38h] [rbp-30h]
-  int v19; // [rsp+3Ch] [rbp-2Ch]
-  __int16 str; // [rsp+88h] [rbp+20h]
+  int v16[6]; // [rsp+20h] [rbp-48h] BYREF
+  char v17; // [rsp+38h] [rbp-30h]
+  int v18; // [rsp+3Ch] [rbp-2Ch]
+  __int16 str; // [rsp+88h] [rbp+20h] BYREF
 
-  v3 = final_hash;
-  v4 = baseHash;
-  v5 = lastVar;
   str = 65;
   v6 = UFG::qWiseSymbolUIDFromString((const char *)&str, baseHash);
-  v7 = UFG::WwiseInterface::GetStreamFileSize(v6);
-  if ( v7 )
+  StreamFileSize = UFG::WwiseInterface::GetStreamFileSize(v6);
+  if ( StreamFileSize )
   {
     v9 = 0;
-    if ( v7 > 0 )
+    if ( StreamFileSize > 0 )
     {
       do
       {
         LOBYTE(str) = str + 1;
         ++v9;
-        v10 = UFG::qWiseSymbolUIDFromString((const char *)&str, v4);
-        v11 = UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p;
-        v19 = -1;
-        v18 = 0;
+        v10 = UFG::qWiseSymbolUIDFromString((const char *)&str, baseHash);
+        p = UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p;
+        v18 = -1;
+        v17 = 0;
         v12 = v10;
-        v16 = 0;
-        v17 = 4;
+        v16[0] = 0;
+        v16[1] = 4;
         if ( UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p == &UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p[UFG::WwiseInterface::sm_WwiseLowLevelIODevices.size] )
           break;
         while ( 1 )
         {
-          v13 = ((__int64 (__fastcall *)(UFG::WwiseFilePackageLowLevelIODeferred *, _QWORD, int *))(*v11)->vfptr[1].Open)(
-                  *v11,
+          v13 = ((__int64 (__fastcall *)(UFG::WwiseFilePackageLowLevelIODeferred *, _QWORD, int *))(*p)->UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::UFG::WwiseDefaultIOHookDeferred::UFG::WwiseDefaultIOHookDeferredBase::AK::StreamMgr::IAkFileLocationResolver::vfptr[1].Open)(
+                  *p,
                   v12,
-                  &v16);
+                  v16);
           if ( v13 )
             break;
-          ++v11;
-          if ( v11 == &UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p[UFG::WwiseInterface::sm_WwiseLowLevelIODevices.size] )
+          if ( ++p == &UFG::WwiseInterface::sm_WwiseLowLevelIODevices.p[UFG::WwiseInterface::sm_WwiseLowLevelIODevices.size] )
             goto LABEL_9;
         }
       }
-      while ( (signed int)v13 > 0 );
+      while ( (int)v13 > 0 );
     }
 LABEL_9:
     v14 = 6;
-    for ( i = UFG::qRandom(v9, &UFG::qDefaultSeed); i == v5; i = UFG::qRandom(v9, &UFG::qDefaultSeed) )
+    for ( i = UFG::qRandom(v9, &UFG::qDefaultSeed); i == lastVar; i = UFG::qRandom(v9, &UFG::qDefaultSeed) )
     {
       if ( v14 < 0 )
         break;
       --v14;
     }
     LOBYTE(str) = i + 65;
-    *v3 = UFG::qWiseSymbolUIDFromString((const char *)&str, v4);
-    result = i;
+    *final_hash = UFG::qWiseSymbolUIDFromString((const char *)&str, baseHash);
+    return i;
   }
   else
   {
-    *v3 = 0;
-    result = 0xFFFFFFFFi64;
+    *final_hash = 0;
+    return 0xFFFFFFFFi64;
   }
-  return result;
 }
 
 // File Line: 66
 // RVA: 0x13FE30
 void __fastcall UFG::ArgumentSequencer::ArgumentSequencer(UFG::ArgumentSequencer *this)
 {
-  UFG::ArgumentSequencer *v1; // rbx
-
-  v1 = this;
-  UFG::ArgumentSequencerBase::ArgumentSequencerBase((UFG::ArgumentSequencerBase *)&this->vfptr);
-  v1->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencer::`vftable;
+  UFG::ArgumentSequencerBase::ArgumentSequencerBase(this);
+  this->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencer::`vftable;
 }
 
 // File Line: 83
 // RVA: 0x14B960
 char __fastcall UFG::ArgumentSequencer::SequenceArgs(UFG::ArgumentSequencer *this, UFG::DialogArgList *args)
 {
-  UFG::DialogArgList *v2; // r15
   UFG::ArgumentSequencer *v3; // rbx
-  unsigned int v4; // edx
+  unsigned int m_uDialogEventId; // edx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // r13
+  int *p_mCount; // r13
   __int64 v7; // rbp
   __int64 v8; // r12
   unsigned int v9; // edx
   UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // r14
-  unsigned int v12; // esi
+  int *v11; // r14
+  unsigned int m_nArgs; // esi
   __int64 v13; // rbx
   unsigned int *v14; // rdi
   UFG::qBaseTreeRB *v15; // rax
-  unsigned int v17; // [rsp+30h] [rbp-58h]
-  unsigned int v18; // [rsp+34h] [rbp-54h]
-  unsigned int v19; // [rsp+38h] [rbp-50h]
-  unsigned int v20; // [rsp+3Ch] [rbp-4Ch]
-  unsigned int v21; // [rsp+40h] [rbp-48h]
-  unsigned int v22; // [rsp+44h] [rbp-44h]
-  unsigned int v23; // [rsp+48h] [rbp-40h]
-  unsigned int v24; // [rsp+4Ch] [rbp-3Ch]
-  UFG::ArgumentSequencer *v25; // [rsp+90h] [rbp+8h]
-  unsigned int v26; // [rsp+98h] [rbp+10h]
+  int v17[22]; // [rsp+30h] [rbp-58h] BYREF
+  unsigned int v19; // [rsp+98h] [rbp+10h]
 
-  v25 = this;
-  v2 = args;
   v3 = this;
-  v4 = args->m_uDialogEventId;
-  if ( v4 )
+  m_uDialogEventId = args->m_uDialogEventId;
+  if ( m_uDialogEventId )
   {
-    v5 = UFG::qBaseTreeRB::Get(&this->m_events.mTree, v4);
+    v5 = UFG::qBaseTreeRB::Get(&this->m_events.mTree, m_uDialogEventId);
     if ( v5 )
     {
-      v6 = (signed __int64)&v5[-1].mCount;
+      p_mCount = &v5[-1].mCount;
       if ( v5 != (UFG::qBaseTreeRB *)8 )
       {
-        v17 = v2->m_args[0];
-        v18 = v2->m_args[1];
-        v19 = v2->m_args[2];
-        v20 = v2->m_args[3];
-        v21 = v2->m_args[4];
-        v22 = v2->m_args[5];
-        v23 = v2->m_nArgs;
-        v24 = v2->m_uDialogEventId;
+        v17[0] = args->m_args[0];
+        v17[1] = args->m_args[1];
+        v17[2] = args->m_args[2];
+        v17[3] = args->m_args[3];
+        v17[4] = args->m_args[4];
+        v17[5] = args->m_args[5];
+        v17[6] = args->m_nArgs;
+        v17[7] = args->m_uDialogEventId;
         v7 = 0i64;
-        v26 = *(_DWORD *)(v6 + 40);
-        if ( v26 )
+        v19 = p_mCount[10];
+        if ( v19 )
         {
           v8 = 0i64;
           do
           {
-            v9 = *(_DWORD *)(v8 + *(_QWORD *)(v6 + 48));
+            v9 = *(_DWORD *)(v8 + *((_QWORD *)p_mCount + 6));
             if ( v9
               && (v10 = UFG::qBaseTreeRB::Get(&v3->m_argumentGroup.mTree, v9)) != 0i64
-              && (v11 = (signed __int64)&v10[-1].mCount, v10 != (UFG::qBaseTreeRB *)8)
-              && (v12 = v2->m_nArgs, v13 = 0i64, v12) )
+              && (v11 = &v10[-1].mCount, v10 != (UFG::qBaseTreeRB *)8)
+              && (m_nArgs = args->m_nArgs, v13 = 0i64, m_nArgs) )
             {
-              v14 = &v17;
+              v14 = (unsigned int *)v17;
               while ( 1 )
               {
                 if ( *v14 )
                 {
-                  v15 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v11 + 40), *v14);
+                  v15 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v11 + 10), *v14);
                   if ( v15 )
                     break;
                 }
                 v13 = (unsigned int)(v13 + 1);
                 ++v14;
-                if ( (unsigned int)v13 >= v12 )
+                if ( (unsigned int)v13 >= m_nArgs )
                   goto LABEL_16;
               }
-              v2->m_args[v7] = v15->mRoot.mUID;
-              *(&v17 + v13) = 0;
+              args->m_args[v7] = v15->mRoot.mUID;
+              v17[v13] = 0;
             }
             else
             {
 LABEL_16:
-              v2->m_args[v7] = 0;
+              args->m_args[v7] = 0;
             }
             v7 = (unsigned int)(v7 + 1);
             v8 += 4i64;
-            v3 = v25;
+            v3 = this;
           }
-          while ( (unsigned int)v7 < v26 );
+          while ( (unsigned int)v7 < v19 );
         }
-        v2->m_nArgs = v7;
+        args->m_nArgs = v7;
       }
     }
   }

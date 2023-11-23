@@ -28,23 +28,26 @@ hkClass *__fastcall hkpStaticCompoundShapeBreakableMaterial::staticClass()
 
 // File Line: 58
 // RVA: 0xD51230
-void __fastcall finishLoadedObjecthkpStaticCompoundShapeBreakableMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpStaticCompoundShapeBreakableMaterial(
+        hkpStaticCompoundShapeBreakableMaterial *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeBreakableMaterial);
+  if ( p )
+    hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeBreakableMaterial(p, finishing);
 }
 
 // File Line: 64
 // RVA: 0xD51250
-void __fastcall cleanupLoadedObjecthkpStaticCompoundShapeBreakableMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkpStaticCompoundShapeBreakableMaterial(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
 // RVA: 0xD51260
 hkBaseObjectVtbl *__fastcall getVtablehkpStaticCompoundShapeBreakableMaterial()
 {
-  hkpStaticCompoundShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h]
+  hkpStaticCompoundShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeBreakableMaterial(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpStaticCompoundShapeBreakableMateri
   hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_typeName = "hkpStaticCompoundShapeBreakableMaterial";
   hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_vtable = result;
   hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_scopedName = "!hkpStaticCompoundShapeBreakableMaterial";
-  hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpStaticCompoundShapeBreakableMaterial;
-  hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpStaticCompoundShapeBreakableMaterial;
+  hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpStaticCompoundShapeBreakableMaterial;
+  hkpStaticCompoundShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpStaticCompoundShapeBreakableMaterial;
   return result;
 }
 

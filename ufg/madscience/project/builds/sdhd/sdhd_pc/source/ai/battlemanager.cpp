@@ -7,7 +7,7 @@ void UFG::BattleManager::CreateInstance(void)
   v0 = (UFG::BattleManager *)UFG::qMalloc(8ui64, "BattleManager", 0i64);
   if ( v0 )
   {
-    v0->m_CurrentBattleType = 0;
+    v0->m_CurrentBattleType = eBATTLE_TYPE_NORMAL;
     v0->m_DebugDisplay = 0;
     UFG::BattleManager::s_pInstance = v0;
   }

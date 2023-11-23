@@ -1,413 +1,386 @@
 // File Line: 121
 // RVA: 0x12B73F0
 // local variable allocation has failed, the output may be wrong!
-double __cdecl pow(double result, double Y)
+double __cdecl pow(double X, double Y)
 {
   __m128i v2; // xmm5
   double v3; // r8
   double v4; // xmm6_8
   __m128i v5; // xmm2
-  unsigned __int64 v6; // STA0_8
-  unsigned __int64 v7; // r8
-  double v8; // xmm2_8
-  double v9; // xmm1_8
-  double v10; // xmm1_8
-  double v11; // xmm4_8
-  double v12; // xmm1_8
-  double v13; // xmm5_8
-  double v14; // xmm7_8
-  double v15; // xmm1_8
-  double v16; // xmm2_8
+  unsigned __int64 v6; // r8
+  double v7; // xmm2_8
+  double v8; // xmm1_8
+  double v9; // xmm4_8
+  double v10; // xmm5_8
+  double v11; // xmm7_8
+  double v12; // xmm2_8
+  double v13; // xmm0_8
+  double v14; // xmm1_8
+  double v15; // xmm3_8
+  double v16; // xmm7_8
   double v17; // xmm0_8
-  double v18; // xmm1_8
-  double v19; // xmm3_8
-  double v20; // xmm0_8
-  double v21; // xmm7_8
-  double v22; // xmm0_8
-  double v23; // xmm5_8
-  double v24; // xmm0_8
-  double v25; // xmm7_8
-  double v26; // xmm6_8
-  long double v27; // xmm3_8
-  double v28; // xmm0_8
-  double v29; // xmm6_8
-  __m128d v30; // xmm7
-  signed __int64 v31; // rdx
-  __m128i v32; // xmm4
-  double v33; // xmm1_8
-  int v34; // ecx
-  __int64 v35; // rax
-  __int64 v36; // rcx
-  double v37; // xmm2_8
-  int v38; // er9
-  double v39; // xmm0_8
-  double v40; // rcx
-  double v41; // xmm1_8
-  int v42; // er11
-  char v43; // cl
-  unsigned __int64 v44; // xmm0_8
-  double v45; // r11
-  __m128i v46; // xmm2
-  unsigned __int64 v47; // r11
-  signed __int64 v48; // r10
-  double v49; // xmm0_8
-  double v50; // xmm1_8
-  double v51; // xmm3_8
-  double v52; // xmm4_8
-  double v53; // xmm1_8
-  double v54; // xmm7_8
-  double v55; // xmm1_8
-  double v56; // xmm2_8
-  double v57; // xmm0_8
-  double v58; // xmm1_8
-  double v59; // xmm3_8
-  double v60; // xmm0_8
-  double v61; // rax
-  double v62; // rax
-  double v63; // rax
-  double v64; // rax
-  double v65; // rax
-  unsigned int v66; // er9
-  double v67; // rax
-  double v68; // r9
-  bool v69; // zf
+  double v18; // xmm7_8
+  double v19; // xmm6_8
+  double v20; // xmm3_8
+  double v21; // xmm0_8
+  double v22; // xmm6_8
+  __m128d v23; // xmm7
+  signed __int64 v24; // rdx
+  __m128i v25; // xmm4
+  double v26; // xmm1_8
+  int v27; // ecx
+  __int64 v28; // rax
+  __int64 v29; // rcx
+  double v30; // xmm2_8
+  int v31; // r9d
+  double v32; // xmm0_8
+  double v33; // rcx
+  double v34; // xmm1_8
+  int v35; // r11d
+  char v36; // cl
+  unsigned __int64 v37; // xmm0_8
+  double v38; // r11
+  __m128i v39; // xmm2
+  unsigned __int64 v40; // r11
+  signed __int64 v41; // r10
+  double v42; // xmm0_8
+  double v43; // xmm1_8
+  double v44; // xmm3_8
+  double v45; // xmm5_8
+  double v46; // xmm7_8
+  double v47; // xmm2_8
+  double v48; // xmm1_8
+  double v49; // xmm3_8
+  double v50; // xmm2_8
+  double v51; // xmm5_8
+  double v52; // xmm7_8
+  double v53; // xmm4_8
+  double v54; // rax
+  double v55; // rax
+  double v56; // rax
+  double v57; // rax
+  double v58; // rax
+  unsigned int v59; // r9d
+  double v60; // rax
+  double v61; // r9
+  bool v62; // zf
   double x; // [rsp+40h] [rbp-D8h]
-  long double y; // [rsp+50h] [rbp-C8h]
-  unsigned __int64 v72; // [rsp+70h] [rbp-A8h]
+  unsigned __int64 v65; // [rsp+70h] [rbp-A8h]
+  unsigned __int64 v66; // [rsp+A0h] [rbp-78h]
 
-  x = result;
-  y = Y;
-  if ( !(*(_QWORD *)&Y & _exp_mant_mask_0) )
+  x = X;
+  if ( (*(_QWORD *)&Y & _exp_mant_mask_0) == 0 )
     return *(double *)&_real_one_3;
   if ( *(_QWORD *)&Y != _pos_one )
   {
-    v72 = _pos_zero;
-    if ( (*(_QWORD *)&result & _sign_mask) != _sign_mask )
+    v65 = _pos_zero;
+    if ( (*(_QWORD *)&X & _sign_mask) != _sign_mask )
     {
-      if ( *(_QWORD *)&result == _pos_one )
-        return result;
-      if ( *(_QWORD *)&result == _pos_zero )
+      if ( *(_QWORD *)&X == _pos_one )
+        return X;
+      if ( *(_QWORD *)&X == _pos_zero )
         goto __x_is_zero_0;
-      if ( (*(_QWORD *)&result & _exp_mask) == _exp_mask )
+      if ( (*(_QWORD *)&X & _exp_mask) == _exp_mask )
         goto __x_is_inf_or_nan_4;
-      if ( (signed __int64)(*(_QWORD *)&Y & _exp_mask) <= (signed __int64)_ay_max_bound )
+      if ( (__int64)(*(_QWORD *)&Y & _exp_mask) <= (__int64)_ay_max_bound )
       {
-        if ( (signed __int64)(*(_QWORD *)&Y & _exp_mask) < (signed __int64)_ay_min_bound )
+        if ( (__int64)(*(_QWORD *)&Y & _exp_mask) < (__int64)_ay_min_bound )
           return Y + 1.0;
 __log_x_0:
-        v3 = result;
-        *(_QWORD *)&v4 = (unsigned __int128)_mm_cvtepi32_pd(
-                                              _mm_sub_epi64(
-                                                _mm_srli_epi64(*(__m128i *)&result, 0x34u),
-                                                *(__m128i *)&_mask_1023_1));
-        v5 = _mm_and_si128(*(__m128i *)&result, *(__m128i *)&_real_mant_2);
+        v3 = X;
+        v4 = _mm_cvtepi32_pd(_mm_sub_epi64(_mm_srli_epi64(*(__m128i *)&X, 0x34u), *(__m128i *)&_mask_1023_1)).m128d_f64[0];
+        v5 = _mm_and_si128(*(__m128i *)&X, *(__m128i *)&_real_mant_2);
         if ( v4 == -1023.0 )
         {
-          v46 = _mm_or_si128(v5, *(__m128i *)&_real_one_3);
-          *(double *)v46.m128i_i64 = *(double *)v46.m128i_i64 - *(double *)&_real_one_3;
-          v2.m128i_i64[0] = v46.m128i_i64[0];
-          v5 = _mm_and_si128(v46, *(__m128i *)&_real_mant_2);
+          v39 = _mm_or_si128(v5, *(__m128i *)&_real_one_3);
+          *(double *)v39.m128i_i64 = *(double *)v39.m128i_i64 - *(double *)&_real_one_3;
+          v2.m128i_i64[0] = v39.m128i_i64[0];
+          v5 = _mm_and_si128(v39, *(__m128i *)&_real_mant_2);
           v3 = *(double *)v5.m128i_i64;
-          *(_QWORD *)&v4 = (unsigned __int128)_mm_cvtepi32_pd(_mm_sub_epi32(_mm_srli_epi64(v2, 0x34u), *(__m128i *)&_mask_2045_0));
+          *(_QWORD *)&v4 = *(_OWORD *)&_mm_cvtepi32_pd(_mm_sub_epi32(_mm_srli_epi64(v2, 0x34u), *(__m128i *)&_mask_2045_0));
         }
-        v6 = 2 * (_mask_mant9_0 & *(_QWORD *)&v3) + (_mask_mant_all8_0 & *(_QWORD *)&v3);
-        v7 = v6 >> 44;
-        *(_QWORD *)&v8 = (unsigned __int128)_mm_or_si128(v5, *(__m128i *)&_real_half_2);
-        *(_QWORD *)&v9 = (unsigned __int128)_mm_or_si128((__m128i)v6, *(__m128i *)&_real_half_2);
-        if ( COERCE_DOUBLE(COERCE_UNSIGNED_INT64(result - *(double *)&_real_one_3) & _real_notsign_1) < 0.125 )
+        v66 = 2 * (_mask_mant9_0 & *(_QWORD *)&v3) + (_mask_mant_all8_0 & *(_QWORD *)&v3);
+        v6 = v66 >> 44;
+        *(_QWORD *)&v7 = _mm_or_si128(v5, *(__m128i *)&_real_half_2).m128i_u64[0];
+        *(_QWORD *)&v8 = _mm_or_si128((__m128i)v66, *(__m128i *)&_real_half_2).m128i_u64[0];
+        if ( COERCE_DOUBLE(COERCE_UNSIGNED_INT64(X - *(double *)&_real_one_3) & _real_notsign_1) < 0.125 )
         {
-          v49 = v9;
-          v50 = v9 - v8;
-          v51 = _log_F_inv_head[v7] + _log_F_inv_tail[v7];
-          *(_QWORD *)&v52 = COERCE_UNSIGNED_INT64(v50 * v51) & _real_fffffffff8000000;
-          v53 = (v50 - v52 * v49) * v51;
-          v54 = v53;
-          v55 = v53 + v52;
-          v56 = v55;
-          v57 = v55 * v55;
-          v58 = (0.25 * v56 + 0.3333333333333333) * v56 * (v55 * v55);
-          v59 = ((0.1428571428571429 * v56 + 0.1666666666666667) * v56 + 0.2) * v56 * (v57 * v57);
-          v60 = v52 * v52 * 0.5;
-          v16 = v52 + v60;
-          v18 = 0.00000005769999047543285 * v4
-              + _log_256_tail[v7]
-              - (v58
-               + v59
-               + v52
-               - (v52
-                + v60)
-               + v60
-               + v52 * v54
-               + v54 * v54 * 0.5
-               + v54);
-          v19 = v18 - (v52 + v60);
-          v17 = _log_256_lead[v7];
+          v42 = v8;
+          v43 = v8 - v7;
+          v44 = _log_F_inv_head[v6] + _log_F_inv_tail[v6];
+          *(_QWORD *)&v45 = COERCE_UNSIGNED_INT64(v43 * v44) & _real_fffffffff8000000;
+          v46 = (v43 - v45 * v42) * v44;
+          v47 = v46 + v45;
+          v48 = (0.25 * v47 + 0.3333333333333333) * v47 * (v47 * v47);
+          v49 = ((0.1428571428571429 * v47 + 0.1666666666666667) * v47 + 0.2) * v47 * (v47 * v47 * (v47 * v47));
+          v50 = v45;
+          v51 = v45 * v46 + v46 * v46 * 0.5 + v46;
+          v52 = v50;
+          v53 = v50 * v50 * 0.5;
+          v12 = v50 + v53;
+          v14 = 0.00000005769999047543285 * v4 + _log_256_tail[v6] - (v48 + v49 + v52 - v12 + v53 + v51);
+          v15 = v14 - v12;
+          v13 = _log_256_lead[v6];
         }
         else
         {
-          v10 = v9 - v8;
-          v11 = v10;
-          v12 = v10 * _log_F_inv_head[v7];
-          v13 = v12;
-          v14 = v11 * _log_F_inv_tail[v7];
-          v15 = v12 + v14;
-          v16 = v15;
-          v17 = _log_256_lead[v7];
-          v18 = _log_256_tail[v7]
+          v9 = v8 - v7;
+          v10 = v9 * _log_F_inv_head[v6];
+          v11 = v9 * _log_F_inv_tail[v6];
+          v12 = v10 + v11;
+          v13 = _log_256_lead[v6];
+          v14 = _log_256_tail[v6]
               + 0.00000005769999047543285 * v4
-              - ((0.3333333333333333 * v16 + 0.5) * (v15 * v15)
-               + ((0.1666666666666667 * v16 + 0.2) * v16 + 0.25) * (v15 * v15 * (v15 * v15))
-               + v14
-               + v13
-               - v16);
-          v19 = v18 - v16;
+              - ((0.3333333333333333 * v12 + 0.5) * (v12 * v12)
+               + ((0.1666666666666667 * v12 + 0.2) * v12 + 0.25) * (v12 * v12 * (v12 * v12))
+               + v11
+               + v10
+               - v12);
+          v15 = v14 - v12;
         }
-        v20 = v17 + 0.6931471228599548 * v4;
-        v21 = v20;
-        v22 = v20 + v19;
-        v23 = v22;
-        *(_QWORD *)&v24 = *(_QWORD *)&v22 & _real_fffffffff8000000;
-        v25 = v21 - v23 + v19 + v18 - (v16 + v19) + v23 - v24;
-        v26 = v24 * COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&y);
-        v27 = (y - COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&y)) * v25
-            + (y - COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&y)) * v24
-            + v25 * COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&y);
-        v28 = v24 * COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&y) + v27;
-        v29 = v26 - v28 + v27;
-        v30 = (__m128d)_real_64_by_log2_1;
-        v30.m128d_f64[0] = 92.33248261689366 * v28;
-        v31 = *(_QWORD *)&v28;
-        if ( 92.33248261689366 * v28 <= 65536.0 )
+        v16 = v13 + 0.6931471228599548 * v4;
+        *(_QWORD *)&v17 = COERCE_UNSIGNED_INT64(v16 + v15) & _real_fffffffff8000000;
+        v18 = v16 - (v16 + v15) + v15 + v14 - (v12 + v15) + v16 + v15 - v17;
+        v19 = v17 * COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&Y);
+        v20 = (Y - COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&Y)) * v18
+            + (Y - COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&Y)) * v17
+            + v18 * COERCE_DOUBLE(_real_fffffffff8000000 & *(_QWORD *)&Y);
+        v21 = v19 + v20;
+        v22 = v19 - v21 + v20;
+        v23 = (__m128d)_real_64_by_log2_1;
+        v23.m128d_f64[0] = 92.33248261689366 * v21;
+        v24 = *(_QWORD *)&v21;
+        if ( 92.33248261689366 * v21 <= 65536.0 )
         {
-          if ( v30.m128d_f64[0] < -68800.0 )
+          if ( v23.m128d_f64[0] < -68800.0 )
           {
-            *(_QWORD *)&v45 = v72 | _real_zero_2;
+            *(_QWORD *)&v38 = v65 | _real_zero_2;
 __z_is_zero_or_inf_0:
-            v66 = _flag_z_zero_0;
-            if ( *(_QWORD *)&v45 & _exp_mant_mask_0 )
-              v66 = _flag_z_inf_0;
-            return pow_special(x, y, v45, v66);
+            v59 = _flag_z_zero_0;
+            if ( (*(_QWORD *)&v38 & _exp_mant_mask_0) != 0 )
+              v59 = _flag_z_inf_0;
+            return pow_special(x, Y, v38, v59);
           }
-          v32 = _mm_cvtpd_epi32(v30);
-          *(_QWORD *)&v33 = (unsigned __int128)_mm_cvtepi32_pd(v32);
-          v34 = _mm_cvtsi128_si32(v32);
-          v35 = v34 & 0x3F;
-          v36 = (unsigned int)((v34 - (signed int)v35) >> 6);
-          v38 = 0;
-          if ( (signed int)v36 <= (signed int)_denormal_threshold_0 )
-            v38 = v36;
-          *(_QWORD *)&v40 = (v36 + 1023) << 52;
-          v37 = v28 - 0.01083042426034808 * v33 + v33 * -4.359010638708991e-10 + v29;
-          v39 = (0.5 * v37 + *(double *)&_real_one_3) * v37
-              + (0.04166666666666666 * v37 + 0.1666666666666667) * (v37 * v37 * v37)
-              + (0.001388888888888889 * v37 + 0.008333333333333333) * (v37 * v37 * (v37 * v37 * v37));
-          v41 = _two_to_jby64_head_table[v35] * v39
-              + _two_to_jby64_tail_table[v35] * v39
-              + _two_to_jby64_tail_table[v35]
-              + _two_to_jby64_head_table[v35];
-          if ( *(_QWORD *)&v40 != _real_inf_4 )
+          v25 = _mm_cvtpd_epi32(v23);
+          v26 = _mm_cvtepi32_pd(v25).m128d_f64[0];
+          v27 = _mm_cvtsi128_si32(v25);
+          v28 = v27 & 0x3F;
+          v29 = (unsigned int)((v27 - (int)v28) >> 6);
+          v31 = 0;
+          if ( (int)v29 <= (int)_denormal_threshold_0 )
+            v31 = v29;
+          *(_QWORD *)&v33 = (v29 + 1023) << 52;
+          v30 = v21 - 0.01083042426034808 * v26 + v26 * -4.359010638708991e-10 + v22;
+          v32 = (0.5 * v30 + *(double *)&_real_one_3) * v30
+              + (0.04166666666666666 * v30 + 0.1666666666666667) * (v30 * v30 * v30)
+              + (0.001388888888888889 * v30 + 0.008333333333333333) * (v30 * v30 * (v30 * v30 * v30));
+          v34 = _two_to_jby64_head_table[v28] * v32
+              + _two_to_jby64_tail_table[v28] * v32
+              + _two_to_jby64_tail_table[v28]
+              + _two_to_jby64_head_table[v28];
+          if ( *(_QWORD *)&v33 != _real_inf_4 )
           {
-            if ( v38 )
+            if ( v31 )
             {
-              v42 = 0;
-              if ( v41 >= *(double *)&_real_one_3 )
-                v42 = v38;
-              if ( v42 == _denormal_threshold_0 )
+              v35 = 0;
+              if ( v34 >= *(double *)&_real_one_3 )
+                v35 = v31;
+              if ( v35 == _denormal_threshold_0 )
               {
-                *(_QWORD *)&result = COERCE_UNSIGNED_INT64(v41 * v40) | v72;
+                *(_QWORD *)&X = COERCE_UNSIGNED_INT64(v34 * v33) | v65;
               }
               else
               {
-                if ( v31 > (signed __int64)_denormal_tiny_threshold_0 )
+                if ( v24 > (__int64)_denormal_tiny_threshold_0 )
                 {
-                  v44 = _real_smallest_denormal_0 | v72;
+                  v37 = _real_smallest_denormal_0 | v65;
                 }
                 else
                 {
-                  v43 = v38 + 50;
-                  if ( v38 + 1074 < 0 )
-                    v43 = 0;
-                  v44 = COERCE_UNSIGNED_INT64(v41 * COERCE_DOUBLE(1i64 << v43)) | v72;
+                  v36 = v31 + 50;
+                  if ( v31 + 1074 < 0 )
+                    v36 = 0;
+                  v37 = COERCE_UNSIGNED_INT64(v34 * COERCE_DOUBLE(1i64 << v36)) | v65;
                 }
-                result = pow_special(x, y, *(long double *)&v44, _flag_z_denormal_0);
+                return pow_special(x, Y, *(long double *)&v37, _flag_z_denormal_0);
               }
             }
             else
             {
-              *(_QWORD *)&result = COERCE_UNSIGNED_INT64(v41 * v40) | v72;
+              *(_QWORD *)&X = COERCE_UNSIGNED_INT64(v34 * v33) | v65;
             }
-            return result;
+            return X;
           }
-          if ( v41 < *(double *)&_real_one_3 )
+          if ( v34 < *(double *)&_real_one_3 )
           {
-            *(_QWORD *)&result = *(_QWORD *)&v41 | _enable_almost_inf_0 | v72;
-            return result;
+            *(_QWORD *)&X = *(_QWORD *)&v34 | _enable_almost_inf_0 | v65;
+            return X;
           }
         }
-        *(_QWORD *)&v45 = v72 | _real_inf_4;
+        *(_QWORD *)&v38 = v65 | _real_inf_4;
         goto __z_is_zero_or_inf_0;
       }
       goto __ay_is_very_large_0;
     }
-    if ( (signed __int64)(*(_QWORD *)&Y & _exp_mask) > (signed __int64)_ay_max_bound )
+    if ( (__int64)(*(_QWORD *)&Y & _exp_mask) > (__int64)_ay_max_bound )
     {
 __ay_is_very_large_0:
-      if ( (*(_QWORD *)&result & _exp_mask) != _exp_mask )
+      if ( (*(_QWORD *)&X & _exp_mask) != _exp_mask )
       {
-        if ( *(_QWORD *)&result & _exp_mant_mask_0 )
+        if ( (*(_QWORD *)&X & _exp_mant_mask_0) != 0 )
         {
-          if ( *(_QWORD *)&result != _neg_one )
+          if ( *(_QWORD *)&X != _neg_one )
           {
-            if ( (signed __int64)(_exp_mant_mask_0 & *(_QWORD *)&result) < (signed __int64)_pos_one )
+            if ( (__int64)(_exp_mant_mask_0 & *(_QWORD *)&X) < (__int64)_pos_one )
             {
-              v45 = 0.0;
-              if ( *(_QWORD *)&Y & _sign_mask )
-                v45 = *(double *)&_pos_inf;
+              v38 = 0.0;
+              if ( (*(_QWORD *)&Y & _sign_mask) != 0 )
+                v38 = *(double *)&_pos_inf;
             }
             else
             {
-              v45 = 0.0;
-              if ( !(*(_QWORD *)&Y & _sign_mask) )
-                v45 = *(double *)&_pos_inf;
+              v38 = 0.0;
+              if ( (*(_QWORD *)&Y & _sign_mask) == 0 )
+                v38 = *(double *)&_pos_inf;
             }
-            v65 = 0.0;
+            v58 = 0.0;
             if ( (*(_QWORD *)&Y & _exp_mask) == _exp_mask )
-              v65 = Y;
-            if ( *(_QWORD *)&v65 & _mant_mask )
-              v45 = Y;
-            if ( !(*(_QWORD *)&v65 & _mant_mask) )
+              v58 = Y;
+            if ( (*(_QWORD *)&v58 & _mant_mask) != 0 )
+              v38 = Y;
+            if ( (*(_QWORD *)&v58 & _mant_mask) == 0 )
             {
-              if ( v65 != 0.0 )
-                return v45;
+              if ( v58 != 0.0 )
+                return v38;
               goto __z_is_zero_or_inf_0;
             }
-            return pow_special(result, Y, v45, _flag_y_nan_0);
+            return pow_special(X, Y, v38, _flag_y_nan_0);
           }
 __x_is_neg_one_0:
-          v62 = 0.0;
-          v45 = Y;
+          v55 = 0.0;
+          v38 = Y;
           if ( (*(_QWORD *)&Y & _exp_mask) == _exp_mask )
-            v62 = Y;
-          if ( !(*(_QWORD *)&v62 & _mant_mask) )
+            v55 = Y;
+          if ( (*(_QWORD *)&v55 & _mant_mask) == 0 )
           {
-            *(_QWORD *)&result = v72 | _pos_one;
-            return result;
+            *(_QWORD *)&X = v65 | _pos_one;
+            return X;
           }
-          return pow_special(result, Y, v45, _flag_y_nan_0);
+          return pow_special(X, Y, v38, _flag_y_nan_0);
         }
 __x_is_zero_0:
-        v63 = 0.0;
+        v56 = 0.0;
         if ( (*(_QWORD *)&Y & _exp_mask) == _exp_mask )
         {
-          v45 = Y;
+          v38 = Y;
           if ( *(_QWORD *)&Y == _neg_inf )
-            v63 = *(double *)&_pos_inf;
+            v56 = *(double *)&_pos_inf;
           if ( *(_QWORD *)&Y != _neg_inf )
           {
-            if ( !(*(_QWORD *)&Y & _mant_mask) )
-              return v63;
-            return pow_special(result, Y, v45, _flag_y_nan_0);
+            if ( (*(_QWORD *)&Y & _mant_mask) == 0 )
+              return v56;
+            return pow_special(X, Y, v38, _flag_y_nan_0);
           }
         }
         else
         {
-          if ( *(_QWORD *)&Y & _sign_mask )
-            v63 = *(double *)&_pos_inf;
-          if ( !(*(_QWORD *)&Y & _sign_mask) )
+          if ( (*(_QWORD *)&Y & _sign_mask) != 0 )
+            v56 = *(double *)&_pos_inf;
+          if ( (*(_QWORD *)&Y & _sign_mask) == 0 )
           {
-            *(_QWORD *)&result = *(_QWORD *)&v63 | v72;
-            return result;
+            *(_QWORD *)&X = *(_QWORD *)&v56 | v65;
+            return X;
           }
         }
-        return pow_special(result, Y, COERCE_LONG_DOUBLE(*(_QWORD *)&v63 | v72), _flag_x_zero_z_inf_0);
+        return pow_special(X, Y, COERCE_LONG_DOUBLE(*(_QWORD *)&v56 | v65), _flag_x_zero_z_inf_0);
       }
       goto __x_is_inf_or_nan_4;
     }
-    v47 = *(_QWORD *)&Y & _exp_mant_mask_0;
-    v48 = ((*(_QWORD *)&Y & _exp_mant_mask_0) >> _exp_shift) - _exp_bias;
-    if ( v48 >= 0 )
+    v40 = *(_QWORD *)&Y & _exp_mant_mask_0;
+    v41 = ((*(_QWORD *)&Y & _exp_mant_mask_0) >> _exp_shift) - _exp_bias;
+    if ( v41 >= 0 )
     {
-      if ( v48 > (signed __int64)_yexp_53 )
+      if ( v41 > (__int64)_yexp_53 )
       {
 __continue_after_y_int_check_0:
-        if ( *(_QWORD *)&result == _neg_zero )
+        if ( *(_QWORD *)&X == _neg_zero )
           goto __x_is_zero_0;
-        if ( *(_QWORD *)&result == _neg_one )
+        if ( *(_QWORD *)&X == _neg_one )
           goto __x_is_neg_one_0;
-        if ( (*(_QWORD *)&result & _exp_mask) != _exp_mask )
+        if ( (*(_QWORD *)&X & _exp_mask) != _exp_mask )
         {
-          *(_OWORD *)&result = *(_QWORD *)&result & _exp_mant_mask_0;
+          *(_OWORD *)&X = *(_QWORD *)&X & _exp_mant_mask_0;
           goto __log_x_0;
         }
 __x_is_inf_or_nan_4:
-        v45 = 0.0;
-        if ( !(*(_QWORD *)&Y & _sign_mask) )
-          v45 = *(double *)&_pos_inf;
-        if ( *(_QWORD *)&result & _mant_mask )
-          v45 = result;
-        if ( !(*(_QWORD *)&result & _mant_mask) )
+        v38 = 0.0;
+        if ( (*(_QWORD *)&Y & _sign_mask) == 0 )
+          v38 = *(double *)&_pos_inf;
+        if ( (*(_QWORD *)&X & _mant_mask) != 0 )
+          v38 = X;
+        if ( (*(_QWORD *)&X & _mant_mask) == 0 )
         {
-          v64 = 0.0;
+          v57 = 0.0;
           if ( (*(_QWORD *)&Y & _exp_mask) == _exp_mask )
-            v64 = Y;
-          if ( *(_QWORD *)&v64 & _mant_mask )
-            v45 = Y;
-          if ( !(*(_QWORD *)&v64 & _mant_mask) )
+            v57 = Y;
+          if ( (*(_QWORD *)&v57 & _mant_mask) != 0 )
+            v38 = Y;
+          if ( (*(_QWORD *)&v57 & _mant_mask) == 0 )
           {
-            *(_QWORD *)&result = *(_QWORD *)&v45 | v72;
-            return result;
+            *(_QWORD *)&X = *(_QWORD *)&v38 | v65;
+            return X;
           }
-          return pow_special(result, Y, v45, _flag_y_nan_0);
+          return pow_special(X, Y, v38, _flag_y_nan_0);
         }
         goto __x_is_nan_0;
       }
-      if ( !(v47 & (_mant_full >> v48)) )
+      if ( (v40 & (_mant_full >> v41)) == 0 )
       {
-        if ( v47 & (_1_before_mant >> v48) )
-          v72 = _sign_mask;
+        if ( (v40 & (_1_before_mant >> v41)) != 0 )
+          v65 = _sign_mask;
         goto __continue_after_y_int_check_0;
       }
     }
-    if ( (*(_QWORD *)&result & _exp_mask) != _exp_mask )
+    if ( (*(_QWORD *)&X & _exp_mask) != _exp_mask )
     {
-      if ( *(_QWORD *)&result != _neg_zero )
-        return pow_special(result, Y, -2.696539702293474e308/*NaN*/, _flag_x_neg_y_notint_0);
+      if ( *(_QWORD *)&X != _neg_zero )
+        return pow_special(X, Y, NAN, _flag_x_neg_y_notint_0);
       goto __x_is_zero_0;
     }
     goto __x_is_inf_or_nan_4;
   }
-  v61 = 0.0;
-  v45 = result;
-  if ( (*(_QWORD *)&result & _exp_mask) == _exp_mask )
-    v61 = result;
-  if ( *(_QWORD *)&v61 & _mant_mask )
+  v54 = 0.0;
+  v38 = X;
+  if ( (*(_QWORD *)&X & _exp_mask) == _exp_mask )
+    v54 = X;
+  if ( (*(_QWORD *)&v54 & _mant_mask) != 0 )
   {
 __x_is_nan_0:
-    v67 = 0.0;
+    v60 = 0.0;
     if ( (*(_QWORD *)&Y & _exp_mask) == _exp_mask )
-      v67 = Y;
-    if ( *(_QWORD *)&v67 & _mant_mask )
+      v60 = Y;
+    if ( (*(_QWORD *)&v60 & _mant_mask) != 0 )
     {
-      v68 = Y;
-      v69 = *(_QWORD *)&v45 == _ind_pattern;
-      if ( *(_QWORD *)&v45 == _ind_pattern )
-        v45 = Y;
-      if ( !v69 )
+      v61 = Y;
+      v62 = *(_QWORD *)&v38 == _ind_pattern;
+      if ( *(_QWORD *)&v38 == _ind_pattern )
+        v38 = Y;
+      if ( !v62 )
       {
         if ( *(_QWORD *)&Y == _ind_pattern )
-          v68 = v45;
-        if ( _sign_mask & *(_QWORD *)&v68 )
-          v68 = v45;
-        if ( _sign_mask & *(_QWORD *)&v45 )
-          v45 = v68;
+          v61 = v38;
+        if ( (_sign_mask & *(_QWORD *)&v61) != 0 )
+          v61 = v38;
+        if ( (_sign_mask & *(_QWORD *)&v38) != 0 )
+          v38 = v61;
       }
-      result = pow_special(result, Y, v45, _flag_x_nan_y_nan_0);
+      return pow_special(X, Y, v38, _flag_x_nan_y_nan_0);
     }
     else
     {
-      result = pow_special(result, Y, v45, _flag_x_nan_4);
+      return pow_special(X, Y, v38, _flag_x_nan_4);
     }
   }
-  return result;
+  return X;
 }
 

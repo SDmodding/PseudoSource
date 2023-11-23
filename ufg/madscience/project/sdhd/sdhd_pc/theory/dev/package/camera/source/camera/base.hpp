@@ -2,14 +2,11 @@
 // RVA: 0xB9880
 UFG::ComponentIDDesc *__fastcall UFG::BaseCameraComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::BaseCameraComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::BaseCameraComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::BaseCameraComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::BaseCameraComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::BaseCameraComponent::_DescInit = 1;
     UFG::BaseCameraComponent::_TypeUID = UFG::BaseCameraComponent::_TypeIDesc.mChildBitMask | (UFG::BaseCameraComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::BaseCameraComponent::_BaseCameraComponentTypeUID = UFG::BaseCameraComponent::_TypeIDesc.mChildBitMask | (UFG::BaseCameraComponent::_TypeIDesc.mBaseTypeIndex << 25);
@@ -54,16 +51,10 @@ void __fastcall UFG::BaseCameraComponent::SetCurrent(UFG::BaseCameraComponent *t
 
 // File Line: 57
 // RVA: 0xB9AF0
-void __usercall UFG::BaseCameraComponent::GetFovRadians(UFG::BaseCameraComponent *this@<rcx>, float *fov@<rdx>, float *velocity@<r8>, int a4@<xmm0>)
+void __fastcall UFG::BaseCameraComponent::GetFovRadians(UFG::BaseCameraComponent *this, float *fov, float *velocity)
 {
-  float *v4; // rdi
-  float *v5; // rbx
-
-  v4 = velocity;
-  v5 = fov;
-  ((void (*)(void))this->vfptr[19].__vecDelDtor)();
-  *(_DWORD *)v5 = a4;
-  *v4 = 0.0;
+  *fov = ((float (__fastcall *)(UFG::BaseCameraComponent *))this->vfptr[19].__vecDelDtor)(this);
+  *velocity = 0.0;
 }
 
 // File Line: 58
@@ -75,18 +66,21 @@ void __fastcall UFG::BaseCameraComponent::SetFovRadians(UFG::BaseCameraComponent
 
 // File Line: 60
 // RVA: 0xB9A80
-void __fastcall UFG::BaseCameraComponent::GetEyeWorld(UFG::BaseCameraComponent *this, UFG::qVector3 *position, UFG::qVector3 *velocity)
+void __fastcall UFG::BaseCameraComponent::GetEyeWorld(
+        UFG::BaseCameraComponent *this,
+        UFG::qVector3 *position,
+        UFG::qVector3 *velocity)
 {
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v5; // xmm0_4
   float v6; // xmm1_4
 
-  v3 = this->mEyeCurr.y;
-  v4 = this->mEyeCurr.z;
+  y = this->mEyeCurr.y;
+  z = this->mEyeCurr.z;
   position->x = this->mEyeCurr.x;
-  position->y = v3;
-  position->z = v4;
+  position->y = y;
+  position->z = z;
   v5 = this->mEyeVelocity.y;
   v6 = this->mEyeVelocity.z;
   velocity->x = this->mEyeVelocity.x;
@@ -96,18 +90,21 @@ void __fastcall UFG::BaseCameraComponent::GetEyeWorld(UFG::BaseCameraComponent *
 
 // File Line: 61
 // RVA: 0xB9B20
-void __fastcall UFG::BaseCameraComponent::GetLookWorld(UFG::BaseCameraComponent *this, UFG::qVector3 *position, UFG::qVector3 *velocity)
+void __fastcall UFG::BaseCameraComponent::GetLookWorld(
+        UFG::BaseCameraComponent *this,
+        UFG::qVector3 *position,
+        UFG::qVector3 *velocity)
 {
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v5; // xmm0_4
   float v6; // xmm1_4
 
-  v3 = this->mLookCurr.y;
-  v4 = this->mLookCurr.z;
+  y = this->mLookCurr.y;
+  z = this->mLookCurr.z;
   position->x = this->mLookCurr.x;
-  position->y = v3;
-  position->z = v4;
+  position->y = y;
+  position->z = z;
   v5 = this->mLookVelocity.y;
   v6 = this->mLookVelocity.z;
   velocity->x = this->mLookVelocity.x;
@@ -117,7 +114,10 @@ void __fastcall UFG::BaseCameraComponent::GetLookWorld(UFG::BaseCameraComponent 
 
 // File Line: 63
 // RVA: 0xBA5B0
-void __fastcall UFG::BaseCameraComponent::SetEyeWorld(UFG::BaseCameraComponent *this, UFG::qVector3 *position, UFG::qVector3 *velocity)
+void __fastcall UFG::BaseCameraComponent::SetEyeWorld(
+        UFG::BaseCameraComponent *this,
+        UFG::qVector3 *position,
+        UFG::qVector3 *velocity)
 {
   UFG::BaseCameraComponent::SetEyeLookUp(
     this,
@@ -129,7 +129,10 @@ void __fastcall UFG::BaseCameraComponent::SetEyeWorld(UFG::BaseCameraComponent *
 
 // File Line: 64
 // RVA: 0xBA6B0
-void __fastcall UFG::BaseCameraComponent::SetLookWorld(UFG::BaseCameraComponent *this, UFG::qVector3 *position, UFG::qVector3 *velocity)
+void __fastcall UFG::BaseCameraComponent::SetLookWorld(
+        UFG::BaseCameraComponent *this,
+        UFG::qVector3 *position,
+        UFG::qVector3 *velocity)
 {
   UFG::BaseCameraComponent::SetEyeLookUp(
     this,

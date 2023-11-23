@@ -2,12 +2,10 @@
 // RVA: 0x14B820
 void __fastcall AKPLATFORM::SafeStrCpy(wchar_t *in_pDest, const wchar_t *in_pSrc, unsigned __int64 in_uDestMaxNumChars)
 {
-  wchar_t *v3; // rdi
   unsigned __int64 v4; // rbx
-  signed __int64 v5; // rax
-  signed __int64 v6; // rbx
+  __int64 v5; // rax
+  __int64 v6; // rbx
 
-  v3 = in_pDest;
   v4 = in_uDestMaxNumChars - 1;
   v5 = -1i64;
   do
@@ -22,6 +20,6 @@ void __fastcall AKPLATFORM::SafeStrCpy(wchar_t *in_pDest, const wchar_t *in_pSrc
     v4 = v6 + 1;
   }
   wcsncpy_s(in_pDest, in_uDestMaxNumChars, in_pSrc, v4);
-  v3[v4] = 0;
+  in_pDest[v4] = 0;
 }
 

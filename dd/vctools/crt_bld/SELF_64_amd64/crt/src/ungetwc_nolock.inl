@@ -1,97 +1,94 @@
 // File Line: 31
 // RVA: 0x12DC5F4
-signed __int64 __fastcall ungetwc_nolock(unsigned __int16 ch, _iobuf *str)
+__int64 __fastcall ungetwc_nolock(wchar_t ch, _iobuf *str)
 {
-  _iobuf *v2; // rdi
-  unsigned __int16 v3; // bp
   int v4; // esi
   ioinfo *v5; // r14
-  signed __int64 v6; // rbx
+  __int64 v6; // rbx
   ioinfo *v7; // rax
-  signed __int64 v8; // rbx
+  __int64 v8; // rbx
   char *v9; // rdx
   __int64 v10; // rdx
   char v11; // al
-  unsigned __int64 v13; // rcx
-  _WORD *v14; // rax
-  int pRetValue; // [rsp+20h] [rbp-48h]
-  unsigned __int16 v16; // [rsp+24h] [rbp-44h]
-  char dst; // [rsp+28h] [rbp-40h]
-  char v18; // [rsp+29h] [rbp-3Fh]
+  char *v13; // rcx
+  char *ptr; // rax
+  int pRetValue; // [rsp+20h] [rbp-48h] BYREF
+  wchar_t v16; // [rsp+24h] [rbp-44h]
+  char dst[8]; // [rsp+28h] [rbp-40h] BYREF
 
-  v2 = str;
-  v3 = ch;
   v16 = ch;
-  if ( ch == -1 )
+  if ( ch == 0xFFFF )
     return 0xFFFFi64;
   v4 = 2;
-  if ( !(str->_flag & 1) && (SLOBYTE(str->_flag) >= 0 || str->_flag & 2) )
+  if ( (str->_flag & 1) == 0 && (SLOBYTE(str->_flag) >= 0 || (str->_flag & 2) != 0) )
     return 0xFFFFi64;
   if ( !str->_base )
     getbuf(str);
-  if ( v2->_flag & 0x40
-    || ((v5 = &_badioinfo, (unsigned int)fileno(v2) == -1) || (unsigned int)fileno(v2) == -2 ? (v7 = &_badioinfo) : (v6 = (signed __int64)(signed int)fileno(v2) >> 5, v7 = &_pioinfo[v6][fileno(v2) & 0x1F]),
+  if ( (str->_flag & 0x40) != 0
+    || ((v5 = &_badioinfo, (unsigned int)fileno(str) == -1) || (unsigned int)fileno(str) == -2
+      ? (v7 = &_badioinfo)
+      : (v6 = (__int64)(int)fileno(str) >> 5, v7 = &_pioinfo[v6][fileno(str) & 0x1F]),
         v7->osfile >= 0) )
   {
-    v13 = (unsigned __int64)(v2->_base + 2);
-    if ( v2->_ptr < (char *)v13 )
+    v13 = str->_base + 2;
+    if ( str->_ptr < v13 )
     {
-      if ( v2->_cnt || (unsigned __int64)v2->_bufsiz < 2 )
+      if ( str->_cnt || (unsigned __int64)str->_bufsiz < 2 )
         return 0xFFFFi64;
-      v2->_ptr = (char *)v13;
+      str->_ptr = v13;
     }
-    v2->_ptr -= 2;
-    v14 = v2->_ptr;
-    if ( v2->_flag & 0x40 )
+    str->_ptr -= 2;
+    ptr = str->_ptr;
+    if ( (str->_flag & 0x40) != 0 )
     {
-      if ( *v14 != v3 )
+      if ( *(_WORD *)ptr != ch )
       {
-        v2->_ptr = (char *)(v14 + 1);
+        str->_ptr = ptr + 2;
         return 0xFFFFi64;
       }
     }
     else
     {
-      *v14 = v3;
+      *(_WORD *)ptr = ch;
     }
 LABEL_27:
-    v2->_cnt += v4;
-    v2->_flag &= 0xFFFFFFEF;
-    v2->_flag |= 1u;
-    return v3;
+    str->_cnt += v4;
+    str->_flag &= ~0x10u;
+    str->_flag |= 1u;
+    return ch;
   }
-  if ( (unsigned int)fileno(v2) != -1 && (unsigned int)fileno(v2) != -2 )
+  if ( (unsigned int)fileno(str) != -1 && (unsigned int)fileno(str) != -2 )
   {
-    v8 = (signed __int64)(signed int)fileno(v2) >> 5;
-    v5 = &_pioinfo[v8][fileno(v2) & 0x1F];
+    v8 = (__int64)(int)fileno(str) >> 5;
+    v5 = &_pioinfo[v8][fileno(str) & 0x1F];
   }
-  if ( *((_BYTE *)v5 + 56) & 0x7F )
+  if ( (*((_BYTE *)v5 + 56) & 0x7F) != 0 )
   {
-    dst = v3;
+    dst[0] = ch;
     pRetValue = 2;
-    v18 = HIBYTE(v16);
+    dst[1] = HIBYTE(v16);
   }
   else
   {
-    if ( (unsigned int)wctomb_s(&pRetValue, &dst, 5ui64, v3) )
+    if ( (unsigned int)wctomb_s(&pRetValue, dst, 5ui64, ch) )
       return 0xFFFFi64;
     v4 = pRetValue;
   }
-  v9 = &v2->_base[v4];
-  if ( v2->_ptr >= v9 )
+  v9 = &str->_base[v4];
+  if ( str->_ptr >= v9 )
     goto LABEL_24;
-  if ( !v2->_cnt && v4 <= v2->_bufsiz )
+  if ( !str->_cnt && v4 <= str->_bufsiz )
   {
-    v2->_ptr = v9;
+    str->_ptr = v9;
 LABEL_24:
     v10 = v4 - 1;
     if ( v4 - 1 >= 0 )
     {
       do
       {
-        --v2->_ptr;
-        v11 = *(&dst + v10--);
-        *v2->_ptr = v11;
+        --str->_ptr;
+        v11 = dst[v10--];
+        *str->_ptr = v11;
       }
       while ( v10 >= 0 );
       v4 = pRetValue;

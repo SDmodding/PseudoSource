@@ -1,20 +1,17 @@
 // File Line: 139
 // RVA: 0xA1AEB0
-ID3D11InputLayout *__fastcall Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Get(Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> *this, Illusion::Shader *t1, Illusion::VertexDecl *t2)
+ID3D11InputLayout *__fastcall Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Get(
+        Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> *this,
+        Illusion::Shader *t1,
+        Illusion::VertexDecl *t2)
 {
-  Illusion::VertexDecl *v3; // rbx
-  Illusion::Shader *v4; // rdi
-  Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> *v5; // rsi
   ID3D11InputLayout *v6; // rax
   UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *v7; // rax
   ID3D11InputLayout *v8; // rbp
   ID3D11InputLayout *v9; // r14
   UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *v10; // rax
-  UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor result; // [rsp+28h] [rbp-30h]
+  UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor result; // [rsp+28h] [rbp-30h] BYREF
 
-  v3 = t2;
-  v4 = t1;
-  v5 = this;
   if ( !t1 || !t2 )
     return 0i64;
   v6 = Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Get(
@@ -24,41 +21,41 @@ ID3D11InputLayout *__fastcall Illusion::CombinedObjectManager<Illusion::Shader,I
   if ( !v6 )
   {
     v7 = UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>>::operator->(
-           v5->mGlobalCache,
+           this->mGlobalCache,
            &result);
-    v8 = Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Get(v7->mObj, v4, v3);
+    v8 = Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Get(v7->mObj, t1, t2);
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)result.mLock.mMutex);
     if ( v8 )
     {
       Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Set(
-        &v5->mLocalCache,
-        v4,
-        v3,
+        &this->mLocalCache,
+        t1,
+        t2,
         v8);
-      v6 = v8;
+      return v8;
     }
     else
     {
-      v6 = (ID3D11InputLayout *)v5->vfptr->CreateD3DObject(v5, v4, v3);
+      v6 = (ID3D11InputLayout *)this->vfptr->CreateD3DObject(this, t1, t2);
       v9 = v6;
       if ( v6 )
       {
         v10 = UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>>::operator->(
-                v5->mGlobalCache,
+                this->mGlobalCache,
                 &result);
         Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Set(
           v10->mObj,
-          v4,
-          v3,
+          t1,
+          t2,
           v9);
         UFG::qMutex::Unlock((LPCRITICAL_SECTION)result.mLock.mMutex);
         Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::Set(
-          &v5->mLocalCache,
-          v4,
-          v3,
+          &this->mLocalCache,
+          t1,
+          t2,
           v9);
-        v9->vfptr->Release((IUnknown *)&v9->vfptr);
-        v6 = v9;
+        v9->vfptr->Release(v9);
+        return v9;
       }
     }
   }

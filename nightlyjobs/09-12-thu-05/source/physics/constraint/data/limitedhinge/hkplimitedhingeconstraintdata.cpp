@@ -2,38 +2,37 @@
 // RVA: 0xD454D0
 void __fastcall hkpLimitedHingeConstraintData::hkpLimitedHingeConstraintData(hkpLimitedHingeConstraintData *this)
 {
-  hkpLimitedHingeConstraintData *v1; // rbx
-
-  v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
   this->m_userData = 0i64;
   hkpLimitedHingeConstraintData::Atoms::Atoms(&this->m_atoms);
-  v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
-  v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
-  v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  v1->m_atoms.m_transforms.m_transformA.m_translation = 0i64;
-  v1->m_atoms.m_transforms.m_transformB.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
-  v1->m_atoms.m_transforms.m_transformB.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
-  v1->m_atoms.m_transforms.m_transformB.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  v1->m_atoms.m_transforms.m_transformB.m_translation = 0i64;
-  v1->m_atoms.m_angMotor.m_correspondingAngLimitSolverResultOffset = 32;
-  v1->m_atoms.m_2dAng.m_freeRotationAxis = 0;
-  v1->m_atoms.m_angLimit.m_limitAxis = 0;
-  v1->m_atoms.m_angLimit.m_minAngle = -3.1415927;
-  v1->m_atoms.m_angLimit.m_maxAngle = 3.1415927;
-  v1->m_atoms.m_angLimit.m_angularLimitsTauFactor = 1.0;
-  *(_WORD *)&v1->m_atoms.m_angFriction.m_firstFrictionAxis = 256;
-  v1->m_atoms.m_angFriction.m_maxFrictionTorque = 0.0;
-  *(_DWORD *)&v1->m_atoms.m_angMotor.m_initializedOffset = 5505104;
-  *(_WORD *)&v1->m_atoms.m_angMotor.m_isEnabled.m_bool = 0;
-  v1->m_atoms.m_angMotor.m_targetAngle = 0.0;
-  v1->m_atoms.m_angMotor.m_motor = 0i64;
+  this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
+  this->m_atoms.m_transforms.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
+  this->m_atoms.m_transforms.m_transformA.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
+  this->m_atoms.m_transforms.m_transformA.m_translation = 0i64;
+  this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
+  this->m_atoms.m_transforms.m_transformB.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
+  this->m_atoms.m_transforms.m_transformB.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
+  this->m_atoms.m_transforms.m_transformB.m_translation = 0i64;
+  this->m_atoms.m_angMotor.m_correspondingAngLimitSolverResultOffset = 32;
+  this->m_atoms.m_2dAng.m_freeRotationAxis = 0;
+  this->m_atoms.m_angLimit.m_limitAxis = 0;
+  this->m_atoms.m_angLimit.m_minAngle = -3.1415927;
+  this->m_atoms.m_angLimit.m_maxAngle = 3.1415927;
+  this->m_atoms.m_angLimit.m_angularLimitsTauFactor = 1.0;
+  *(_WORD *)&this->m_atoms.m_angFriction.m_firstFrictionAxis = 256;
+  this->m_atoms.m_angFriction.m_maxFrictionTorque = 0.0;
+  *(_DWORD *)&this->m_atoms.m_angMotor.m_initializedOffset = 5505104;
+  *(_WORD *)&this->m_atoms.m_angMotor.m_isEnabled.m_bool = 0;
+  this->m_atoms.m_angMotor.m_targetAngle = 0.0;
+  this->m_atoms.m_angMotor.m_motor = 0i64;
 }
 
 // File Line: 59
 // RVA: 0xD45490
-void __fastcall hkpLimitedHingeConstraintData::Atoms::Atoms(hkpLimitedHingeConstraintData::Atoms *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkpLimitedHingeConstraintData::Atoms::Atoms(
+        hkpLimitedHingeConstraintData::Atoms *this,
+        hkFinishLoadedObjectFlag f)
 {
   this->m_angMotor.m_initializedOffset = -1;
   this->m_angMotor.m_previousTargetAngleOffset = -1;
@@ -49,25 +48,24 @@ void __fastcall hkpLimitedHingeConstraintData::Atoms::Atoms(hkpLimitedHingeConst
 // RVA: 0xD455D0
 void __fastcall hkpLimitedHingeConstraintData::~hkpLimitedHingeConstraintData(hkpLimitedHingeConstraintData *this)
 {
-  hkpLimitedHingeConstraintData *v1; // rbx
-  hkpConstraintMotor *v2; // rcx
+  hkpConstraintMotor *m_motor; // rcx
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
-  v2 = this->m_atoms.m_angMotor.m_motor;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  m_motor = this->m_atoms.m_angMotor.m_motor;
+  if ( m_motor )
+    hkReferencedObject::removeReference(m_motor);
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 82
 // RVA: 0xD457F0
-void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(hkpLimitedHingeConstraintData *this, hkTransformf *bodyATransform, hkTransformf *bodyBTransform, hkVector4f *pivot, hkVector4f *axisIn)
+void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(
+        hkpLimitedHingeConstraintData *this,
+        hkTransformf *bodyATransform,
+        hkTransformf *bodyBTransform,
+        hkVector4f *pivot,
+        hkVector4f *axisIn)
 {
-  hkVector4f *v5; // rsi
-  hkTransformf *v6; // rbp
-  hkTransformf *v7; // rbx
-  hkpLimitedHingeConstraintData *v8; // rdi
   __m128 v9; // xmm1
   __m128 v10; // xmm3
   __m128 v11; // xmm2
@@ -82,21 +80,17 @@ void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(hkpLimitedHingeCo
   __m128 v20; // xmm2
   __m128 v21; // xmm1
   __m128 v22; // xmm0
-  hkVector4f b; // [rsp+20h] [rbp-88h]
-  hkVector4f v24; // [rsp+30h] [rbp-78h]
-  hkVector4f v25; // [rsp+40h] [rbp-68h]
+  hkVector4f b; // [rsp+20h] [rbp-88h] BYREF
+  hkVector4f v24; // [rsp+30h] [rbp-78h] BYREF
+  hkVector4f v25; // [rsp+40h] [rbp-68h] BYREF
 
-  v5 = pivot;
-  v6 = bodyBTransform;
-  v7 = bodyATransform;
-  v8 = this;
   v9 = _mm_mul_ps(axisIn->m_quad, axisIn->m_quad);
   v10 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v9, v9, 85), _mm_shuffle_ps(v9, v9, 0)), _mm_shuffle_ps(v9, v9, 170));
   v11 = _mm_rsqrt_ps(v10);
   b.m_quad = _mm_mul_ps(
                axisIn->m_quad,
                _mm_andnot_ps(
-                 _mm_cmpleps(v10, (__m128)0i64),
+                 _mm_cmple_ps(v10, (__m128)0i64),
                  _mm_mul_ps(
                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v11, v10), v11)),
                    _mm_mul_ps(*(__m128 *)_xmm, v11))));
@@ -105,7 +99,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(hkpLimitedHingeCo
   v14 = _mm_shuffle_ps(v12, v12, 206);
   v15 = _mm_mul_ps(v14, v14);
   v16 = _mm_mul_ps(v13, v13);
-  v17 = _mm_cmpltps(
+  v17 = _mm_cmplt_ps(
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v16, v16, 85), _mm_shuffle_ps(v16, v16, 0)),
             _mm_shuffle_ps(v16, v16, 170)),
@@ -121,7 +115,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(hkpLimitedHingeCo
   v24.m_quad = _mm_mul_ps(
                  v18,
                  _mm_andnot_ps(
-                   _mm_cmpleps(v20, (__m128)0i64),
+                   _mm_cmple_ps(v20, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v21, v20), v21)),
                      _mm_mul_ps(*(__m128 *)_xmm, v21))));
@@ -131,35 +125,42 @@ void __fastcall hkpLimitedHingeConstraintData::setInWorldSpace(hkpLimitedHingeCo
   v25.m_quad = _mm_shuffle_ps(v22, v22, 201);
   hkVector4f::setRotatedInverseDir(
     &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0,
-    (hkMatrix3f *)&bodyATransform->m_rotation.m_col0,
+    &bodyATransform->m_rotation,
     &b);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_transforms.m_transformA.m_rotation.m_col1,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col1,
+    &bodyATransform->m_rotation,
     &v24);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_transforms.m_transformA.m_rotation.m_col2,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col2,
+    &bodyATransform->m_rotation,
     &v25);
-  hkVector4f::setTransformedInversePos(&v8->m_atoms.m_transforms.m_transformA.m_translation, v7, v5);
+  hkVector4f::setTransformedInversePos(&this->m_atoms.m_transforms.m_transformA.m_translation, bodyATransform, pivot);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_transforms.m_transformB.m_rotation.m_col0,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0,
+    &bodyBTransform->m_rotation,
     &b);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_transforms.m_transformB.m_rotation.m_col1,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col1,
+    &bodyBTransform->m_rotation,
     &v24);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_transforms.m_transformB.m_rotation.m_col2,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col2,
+    &bodyBTransform->m_rotation,
     &v25);
-  hkVector4f::setTransformedInversePos(&v8->m_atoms.m_transforms.m_transformB.m_translation, v6, v5);
+  hkVector4f::setTransformedInversePos(&this->m_atoms.m_transforms.m_transformB.m_translation, bodyBTransform, pivot);
 }
 
 // File Line: 109
 // RVA: 0xD45610
-void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeConstraintData *this, hkVector4f *pivotA, hkVector4f *pivotB, hkVector4f *axisA, hkVector4f *axisB, hkVector4f *axisAPerp, hkVector4f *axisBPerp)
+void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(
+        hkpLimitedHingeConstraintData *this,
+        hkVector4f *pivotA,
+        hkVector4f *pivotB,
+        hkVector4f *axisA,
+        hkVector4f *axisB,
+        hkVector4f *axisAPerp,
+        hkVector4f *axisBPerp)
 {
   __m128 v7; // xmm1
   __m128 v8; // xmm3
@@ -185,7 +186,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeCon
   v9 = _mm_rsqrt_ps(v8);
   this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0.m_quad = _mm_mul_ps(
                                                                        _mm_andnot_ps(
-                                                                         _mm_cmpleps(v8, (__m128)0i64),
+                                                                         _mm_cmple_ps(v8, (__m128)0i64),
                                                                          _mm_mul_ps(
                                                                            _mm_sub_ps(
                                                                              (__m128)_xmm,
@@ -198,7 +199,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeCon
   v13.m_quad = (__m128)this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0;
   v14.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v11, (__m128)0i64),
+                   _mm_cmple_ps(v11, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v12, v11), v12)),
                      _mm_mul_ps(*(__m128 *)_xmm, v12))),
@@ -214,7 +215,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeCon
   v18 = _mm_rsqrt_ps(v17);
   this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0.m_quad = _mm_mul_ps(
                                                                        _mm_andnot_ps(
-                                                                         _mm_cmpleps(v17, (__m128)0i64),
+                                                                         _mm_cmple_ps(v17, (__m128)0i64),
                                                                          _mm_mul_ps(
                                                                            _mm_sub_ps(
                                                                              (__m128)_xmm,
@@ -227,7 +228,7 @@ void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeCon
   v22.m_quad = (__m128)this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0;
   v23.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v20, (__m128)0i64),
+                   _mm_cmple_ps(v20, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v21, v20), v21)),
                      _mm_mul_ps(*(__m128 *)_xmm, v21))),
@@ -242,7 +243,9 @@ void __fastcall hkpLimitedHingeConstraintData::setInBodySpace(hkpLimitedHingeCon
 
 // File Line: 130
 // RVA: 0xD45BA0
-void __fastcall hkpLimitedHingeConstraintData::setBreachImpulse(hkpLimitedHingeConstraintData *this, float breachImpulse)
+void __fastcall hkpLimitedHingeConstraintData::setBreachImpulse(
+        hkpLimitedHingeConstraintData *this,
+        float breachImpulse)
 {
   this->m_atoms.m_ballSocket.m_breachImpulse = breachImpulse;
 }
@@ -256,7 +259,7 @@ float __fastcall hkpLimitedHingeConstraintData::getBreachImpulse(hkpLimitedHinge
 
 // File Line: 140
 // RVA: 0xD45BC0
-void __fastcall hkpLimitedHingeConstraintData::setBodyToNotify(hkpLimitedHingeConstraintData *this, int bodyIdx)
+void __fastcall hkpLimitedHingeConstraintData::setBodyToNotify(hkpLimitedHingeConstraintData *this, char bodyIdx)
 {
   this->m_atoms.m_ballSocket.m_bodiesToNotify = 1 << bodyIdx;
 }
@@ -265,12 +268,15 @@ void __fastcall hkpLimitedHingeConstraintData::setBodyToNotify(hkpLimitedHingeCo
 // RVA: 0xD45BE0
 __int64 __fastcall hkpLimitedHingeConstraintData::getNotifiedBodyIndex(hkpLimitedHingeConstraintData *this)
 {
-  return (unsigned int)(unsigned __int8)this->m_atoms.m_ballSocket.m_bodiesToNotify >> 1;
+  return (unsigned __int8)this->m_atoms.m_ballSocket.m_bodiesToNotify >> 1;
 }
 
 // File Line: 155
 // RVA: 0xD45A90
-void __fastcall hkpLimitedHingeConstraintData::setMotorEnabled(hkpLimitedHingeConstraintData *this, struct hkpConstraintRuntime *runtimeIn, hkBool isEnabled)
+void __fastcall hkpLimitedHingeConstraintData::setMotorEnabled(
+        hkpLimitedHingeConstraintData *this,
+        struct hkpConstraintRuntime *runtimeIn,
+        hkBool isEnabled)
 {
   this->m_atoms.m_angMotor.m_isEnabled = isEnabled;
   this->m_atoms.m_angFriction.m_isEnabled = isEnabled.m_bool == 0;
@@ -287,30 +293,31 @@ void __fastcall hkpLimitedHingeConstraintData::setMotorEnabled(hkpLimitedHingeCo
 // RVA: 0xD45A40
 void __fastcall hkpLimitedHingeConstraintData::setMotor(hkpLimitedHingeConstraintData *this, hkpConstraintMotor *motor)
 {
-  hkpConstraintMotor *v2; // rbx
-  hkpLimitedHingeConstraintData *v3; // rdi
-  hkReferencedObject *v4; // rcx
+  hkpConstraintMotor *m_motor; // rcx
 
-  v2 = motor;
-  v3 = this;
   if ( motor )
-    hkReferencedObject::addReference((hkReferencedObject *)&motor->vfptr);
-  v4 = (hkReferencedObject *)&v3->m_atoms.m_angMotor.m_motor->vfptr;
-  if ( v4 )
-    hkReferencedObject::removeReference(v4);
-  v3->m_atoms.m_angMotor.m_motor = v2;
+    hkReferencedObject::addReference(motor);
+  m_motor = this->m_atoms.m_angMotor.m_motor;
+  if ( m_motor )
+    hkReferencedObject::removeReference(m_motor);
+  this->m_atoms.m_angMotor.m_motor = motor;
 }
 
 // File Line: 184
 // RVA: 0xD45B80
-void __fastcall hkpLimitedHingeConstraintData::getConstraintInfo(hkpLimitedHingeConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpLimitedHingeConstraintData::getConstraintInfo(
+        hkpLimitedHingeConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_transforms.m_type, 264, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_transforms, 0x108u, infoOut);
 }
 
 // File Line: 189
 // RVA: 0xD45C90
-void __fastcall hkpLimitedHingeConstraintData::getRuntimeInfo(hkpLimitedHingeConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpLimitedHingeConstraintData::getRuntimeInfo(
+        hkpLimitedHingeConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   infoOut->m_numSolverResults = 10;
   infoOut->m_sizeOfExternalRuntime = 96;
@@ -320,49 +327,44 @@ void __fastcall hkpLimitedHingeConstraintData::getRuntimeInfo(hkpLimitedHingeCon
 // RVA: 0xD45AE0
 hkBool *__fastcall hkpLimitedHingeConstraintData::isValid(hkpLimitedHingeConstraintData *this, hkBool *result)
 {
-  hkBool *v2; // rdi
-  hkpLimitedHingeConstraintData *v3; // rbx
-  hkBool *v4; // rax
-
-  v2 = result;
-  v3 = this;
   if ( this->m_atoms.m_ballSocket.m_solvingMethod.m_storage || this->m_atoms.m_setupStabilization.m_enabled.m_bool )
   {
     if ( hkRotationf::isOrthonormal(&this->m_atoms.m_transforms.m_transformA.m_rotation, 0.0000099999997)
-      && hkRotationf::isOrthonormal(&v3->m_atoms.m_transforms.m_transformB.m_rotation, 0.0000099999997)
-      && (!v3->m_atoms.m_angMotor.m_isEnabled.m_bool || v3->m_atoms.m_angLimit.m_isEnabled) )
+      && hkRotationf::isOrthonormal(&this->m_atoms.m_transforms.m_transformB.m_rotation, 0.0000099999997)
+      && (!this->m_atoms.m_angMotor.m_isEnabled.m_bool || this->m_atoms.m_angLimit.m_isEnabled) )
     {
-      v2->m_bool = 1;
-      v4 = v2;
+      result->m_bool = 1;
+      return result;
     }
     else
     {
-      v2->m_bool = 0;
-      v4 = v2;
+      result->m_bool = 0;
+      return result;
     }
   }
   else
   {
     result->m_bool = 0;
-    v4 = result;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 214
 // RVA: 0xD45AD0
-signed __int64 __fastcall hkpLimitedHingeConstraintData::getType(hkpLimitedHingeConstraintData *this)
+__int64 __fastcall hkpLimitedHingeConstraintData::getType(hkpLimitedHingeConstraintData *this)
 {
   return 2i64;
 }
 
 // File Line: 222
 // RVA: 0xD45BF0
-void __fastcall hkpLimitedHingeConstraintData::setSolvingMethod(hkpLimitedHingeConstraintData *this, hkpConstraintAtom::SolvingMethod method)
+void __fastcall hkpLimitedHingeConstraintData::setSolvingMethod(
+        hkpLimitedHingeConstraintData *this,
+        hkpConstraintAtom::SolvingMethod method)
 {
   if ( method )
   {
-    if ( method == 1 )
+    if ( method == METHOD_OLD )
     {
       this->m_atoms.m_setupStabilization.m_enabled.m_bool = 0;
       this->m_atoms.m_ballSocket.m_solvingMethod.m_storage = 1;
@@ -377,23 +379,29 @@ void __fastcall hkpLimitedHingeConstraintData::setSolvingMethod(hkpLimitedHingeC
 
 // File Line: 251
 // RVA: 0xD45C20
-hkResult *__fastcall hkpLimitedHingeConstraintData::getInertiaStabilizationFactor(hkpLimitedHingeConstraintData *this, hkResult *result, float *inertiaStabilizationFactorOut)
+hkResult *__fastcall hkpLimitedHingeConstraintData::getInertiaStabilizationFactor(
+        hkpLimitedHingeConstraintData *this,
+        hkResult *result,
+        float *inertiaStabilizationFactorOut)
 {
-  float v3; // eax
+  float m_inertiaStabilizationFactor; // eax
 
-  v3 = this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor;
-  result->m_enum = 0;
-  *inertiaStabilizationFactorOut = v3;
+  m_inertiaStabilizationFactor = this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor;
+  result->m_enum = HK_SUCCESS;
+  *inertiaStabilizationFactorOut = m_inertiaStabilizationFactor;
   return result;
 }
 
 // File Line: 260
 // RVA: 0xD45C40
-hkResult *__fastcall hkpLimitedHingeConstraintData::setInertiaStabilizationFactor(hkpLimitedHingeConstraintData *this, hkResult *result, const float inertiaStabilizationFactorIn)
+hkResult *__fastcall hkpLimitedHingeConstraintData::setInertiaStabilizationFactor(
+        hkpLimitedHingeConstraintData *this,
+        hkResult *result,
+        float inertiaStabilizationFactorIn)
 {
   hkResult *v3; // rax
 
-  result->m_enum = 0;
+  result->m_enum = HK_SUCCESS;
   v3 = result;
   this->m_atoms.m_ballSocket.m_inertiaStabilizationFactor = fminf(fmaxf(inertiaStabilizationFactorIn, 0.0), 1.0);
   return v3;

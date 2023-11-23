@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxVertexIntDataChannelClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxVertexIntDataChannel::staticClass()
 
 // File Line: 62
 // RVA: 0xE33B20
-void __fastcall finishLoadedObjecthkxVertexIntDataChannel(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxVertexIntDataChannel(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxVertexIntDataChannel::`vftable;
+    *p = &hkxVertexIntDataChannel::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE33B40
-void __fastcall cleanupLoadedObjecthkxVertexIntDataChannel(void *p)
+void __fastcall cleanupLoadedObjecthkxVertexIntDataChannel(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxVertexIntDataChannelTypeInfo__()
   hkxVertexIntDataChannelTypeInfo.m_typeName = "hkxVertexIntDataChannel";
   hkxVertexIntDataChannelTypeInfo.m_vtable = result;
   hkxVertexIntDataChannelTypeInfo.m_scopedName = "!hkxVertexIntDataChannel";
-  hkxVertexIntDataChannelTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxVertexIntDataChannel;
-  hkxVertexIntDataChannelTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxVertexIntDataChannel;
+  hkxVertexIntDataChannelTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxVertexIntDataChannel;
+  hkxVertexIntDataChannelTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxVertexIntDataChannel;
   return result;
 }
 

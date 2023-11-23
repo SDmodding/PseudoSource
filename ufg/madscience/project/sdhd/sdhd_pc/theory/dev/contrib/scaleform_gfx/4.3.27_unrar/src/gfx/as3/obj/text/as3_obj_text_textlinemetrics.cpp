@@ -1,80 +1,73 @@
 // File Line: 51
 // RVA: 0x8AEBF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rdi
-  unsigned int v4; // ebx
-  Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics *v5; // rsi
-  Scaleform::GFx::AS3::CheckResult result; // [rsp+38h] [rbp+10h]
+  Scaleform::GFx::AS3::CheckResult result; // [rsp+38h] [rbp+10h] BYREF
 
   if ( argc )
   {
-    v3 = argv;
-    v4 = argc;
-    v5 = this;
-    if ( argc >= 1 )
-      Scaleform::GFx::AS3::Value::Convert2Number(argv, &result, &this->ascent);
-    if ( v4 >= 2 )
-      Scaleform::GFx::AS3::Value::Convert2Number(v3 + 1, &result, &v5->descent);
-    if ( v4 >= 3 )
-      Scaleform::GFx::AS3::Value::Convert2Number(v3 + 2, &result, &v5->height);
-    if ( v4 >= 4 )
-      Scaleform::GFx::AS3::Value::Convert2Number(v3 + 3, &result, &v5->leading);
-    if ( v4 >= 5 )
-      Scaleform::GFx::AS3::Value::Convert2Number(v3 + 4, &result, &v5->width);
-    if ( v4 >= 6 )
-      Scaleform::GFx::AS3::Value::Convert2Number(v3 + 5, &result, &v5->x);
+    Scaleform::GFx::AS3::Value::Convert2Number(argv, &result, &this->ascent);
+    if ( argc >= 2 )
+      Scaleform::GFx::AS3::Value::Convert2Number(argv + 1, &result, &this->descent);
+    if ( argc >= 3 )
+      Scaleform::GFx::AS3::Value::Convert2Number(argv + 2, &result, &this->height);
+    if ( argc >= 4 )
+      Scaleform::GFx::AS3::Value::Convert2Number(argv + 3, &result, &this->leading);
+    if ( argc >= 5 )
+      Scaleform::GFx::AS3::Value::Convert2Number(argv + 4, &result, &this->width);
+    if ( argc >= 6 )
+      Scaleform::GFx::AS3::Value::Convert2Number(argv + 5, &result, &this->x);
   }
 }
 
 // File Line: 87
 // RVA: 0x8EB060
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 109
 // RVA: 0x873830
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::TextLineMetrics::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::TextLineMetrics::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rbx
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::fl::Object *v5; // rax
-  Scaleform::GFx::AS3::ClassTraits::fl::Object *v6; // rdi
+  Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rdi
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v8; // rdi
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_text::TextLineMetricsCI);
+    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, vm, &Scaleform::GFx::AS3::fl_text::TextLineMetricsCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::TextLineMetrics::`vftable;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = (Scaleform::GFx::AS3::ClassTraits::Traits *)&v6->vfptr;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_text::TextLineMetricsCI);
+    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, vm, &Scaleform::GFx::AS3::fl_text::TextLineMetricsCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::TextLineMetrics::`vftable;
   }
   else
@@ -82,13 +75,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

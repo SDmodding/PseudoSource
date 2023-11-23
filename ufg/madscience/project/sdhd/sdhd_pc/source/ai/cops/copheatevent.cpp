@@ -4,6 +4,6 @@ void __fastcall UFG::CopHeatEvent::CopHeatEvent(UFG::CopHeatEvent *this)
 {
   this->mTimestamp = 0.0;
   this->mTracked = 1;
-  this->mHeatEventIndex = 26;
+  this->mHeatEventIndex = NUM_HEATEVENTS;
 }
 

@@ -18,22 +18,20 @@ void __fastcall hkaiLocalSteeringInput::init(hkaiLocalSteeringInput *this, hkaiC
 
 // File Line: 42
 // RVA: 0xBD4C50
-void __fastcall hkaiLocalSteeringInput::init(hkaiLocalSteeringInput *this, hkaiCharacter *character, hkaiReferenceFrame *referenceFrame, hkaiPathFollowingCharacterState *characterState)
+void __fastcall hkaiLocalSteeringInput::init(
+        hkaiLocalSteeringInput *this,
+        hkaiCharacter *character,
+        hkaiReferenceFrame *referenceFrame,
+        hkaiPathFollowingCharacterState *characterState)
 {
-  hkaiPathFollowingCharacterState *v4; // rdi
-  hkaiReferenceFrame *v5; // rsi
-  hkaiLocalSteeringInput *v6; // rbx
   hkVector4f v7; // xmm1
 
-  v4 = characterState;
-  v5 = referenceFrame;
-  v6 = this;
   hkaiLocalSteeringInput::init(this, character);
-  v6->m_currentPosition = v4->m_position;
-  v6->m_currentForward = v4->m_forward;
-  v6->m_currentUp = v4->m_up;
-  v7.m_quad = (__m128)v4->m_velocity;
-  v6->m_referenceFrame = v5;
-  v6->m_currentVelocity = (hkVector4f)v7.m_quad;
+  this->m_currentPosition = characterState->m_position;
+  this->m_currentForward = characterState->m_forward;
+  this->m_currentUp = characterState->m_up;
+  v7.m_quad = (__m128)characterState->m_velocity;
+  this->m_referenceFrame = referenceFrame;
+  this->m_currentVelocity = (hkVector4f)v7.m_quad;
 }
 

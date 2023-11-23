@@ -38,12 +38,15 @@ void __fastcall hkpWheelConstraintData::hkpWheelConstraintData(hkpWheelConstrain
 
 // File Line: 40
 // RVA: 0xD49E80
-void __fastcall hkpWheelConstraintData::setInWorldSpace(hkpWheelConstraintData *this, hkTransformf *bodyATransform, hkTransformf *bodyBTransform, hkVector4f *pivot, hkVector4f *axleTmp, hkVector4f *suspensionAxis, hkVector4f *steeringAxisTmp)
+void __fastcall hkpWheelConstraintData::setInWorldSpace(
+        hkpWheelConstraintData *this,
+        hkTransformf *bodyATransform,
+        hkTransformf *bodyBTransform,
+        hkVector4f *pivot,
+        hkVector4f *axleTmp,
+        hkVector4f *suspensionAxis,
+        hkVector4f *steeringAxisTmp)
 {
-  hkTransformf *v7; // r14
-  hkpWheelConstraintData *v8; // r15
-  hkVector4f *v9; // rbx
-  hkTransformf *v10; // rdi
   __m128 v11; // xmm1
   __m128 v12; // xmm3
   __m128 v13; // xmm2
@@ -61,26 +64,22 @@ void __fastcall hkpWheelConstraintData::setInWorldSpace(hkpWheelConstraintData *
   __m128 v25; // xmm1
   __m128 v26; // xmm2
   __m128 v27; // xmm1
-  __m128 v28; // xmm3
+  hkVector4f v28; // xmm3
   __m128 v29; // xmm1
   __m128 v30; // xmm2
   __m128 v31; // xmm2
-  hkVector4f v32; // [rsp+20h] [rbp-88h]
-  hkVector4f v33; // [rsp+30h] [rbp-78h]
-  hkVector4f b; // [rsp+40h] [rbp-68h]
-  hkVector4f v35; // [rsp+50h] [rbp-58h]
+  hkVector4f v32; // [rsp+20h] [rbp-88h] BYREF
+  hkVector4f v33; // [rsp+30h] [rbp-78h] BYREF
+  hkVector4f b; // [rsp+40h] [rbp-68h] BYREF
+  hkVector4f v35; // [rsp+50h] [rbp-58h] BYREF
 
-  v7 = bodyBTransform;
-  v8 = this;
-  v9 = pivot;
-  v10 = bodyATransform;
   v11 = _mm_mul_ps(axleTmp->m_quad, axleTmp->m_quad);
   v12 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 85), _mm_shuffle_ps(v11, v11, 0)), _mm_shuffle_ps(v11, v11, 170));
   v13 = _mm_rsqrt_ps(v12);
   v32.m_quad = _mm_mul_ps(
                  axleTmp->m_quad,
                  _mm_andnot_ps(
-                   _mm_cmpleps(v12, (__m128)0i64),
+                   _mm_cmple_ps(v12, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v13, v12), v13)),
                      _mm_mul_ps(v13, *(__m128 *)_xmm))));
@@ -90,7 +89,7 @@ void __fastcall hkpWheelConstraintData::setInWorldSpace(hkpWheelConstraintData *
   v17 = _mm_mul_ps(
           steeringAxisTmp->m_quad,
           _mm_andnot_ps(
-            _mm_cmpleps(v15, (__m128)0i64),
+            _mm_cmple_ps(v15, (__m128)0i64),
             _mm_mul_ps(
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
               _mm_mul_ps(v16, *(__m128 *)_xmm))));
@@ -98,29 +97,29 @@ void __fastcall hkpWheelConstraintData::setInWorldSpace(hkpWheelConstraintData *
   v33.m_quad = v17;
   hkVector4f::setRotatedInverseDir(
     &this->m_atoms.m_suspensionBase.m_transformA.m_translation,
-    (hkMatrix3f *)&bodyATransform->m_rotation.m_col0,
+    &bodyATransform->m_rotation,
     &b);
-  v35.m_quad = _mm_sub_ps(v9->m_quad, v7->m_translation.m_quad);
+  v35.m_quad = _mm_sub_ps(pivot->m_quad, bodyBTransform->m_translation.m_quad);
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_suspensionBase.m_transformB.m_translation,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
+    &this->m_atoms.m_suspensionBase.m_transformB.m_translation,
+    &bodyBTransform->m_rotation,
     &v35);
-  v8->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
-  v8->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
-  v8->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
+  this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
+  this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
+  this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
+    &this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0,
+    &bodyBTransform->m_rotation,
     suspensionAxis);
   v18 = _mm_shuffle_ps(
-          v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
-          _mm_unpackhi_ps(v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad, (__m128)0i64),
+          this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
+          _mm_unpackhi_ps(this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad, (__m128)0i64),
           196);
   v19 = _mm_shuffle_ps(v18, v18, 241);
   v20 = _mm_shuffle_ps(v18, v18, 206);
   v21 = _mm_mul_ps(v19, v19);
   v22 = _mm_mul_ps(v20, v20);
-  v23 = _mm_cmpltps(
+  v23 = _mm_cmplt_ps(
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v21, v21, 85), _mm_shuffle_ps(v21, v21, 0)),
             _mm_shuffle_ps(v21, v21, 170)),
@@ -133,77 +132,74 @@ void __fastcall hkpWheelConstraintData::setInWorldSpace(hkpWheelConstraintData *
   v25 = _mm_mul_ps(v24, v24);
   v26 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v25, v25, 85), _mm_shuffle_ps(v25, v25, 0)), _mm_shuffle_ps(v25, v25, 170));
   v27 = _mm_rsqrt_ps(v26);
-  v28 = _mm_mul_ps(
-          _mm_andnot_ps(
-            _mm_cmpleps(v26, (__m128)0i64),
-            _mm_mul_ps(
-              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v27, v26), v27)),
-              _mm_mul_ps(v27, *(__m128 *)_xmm))),
-          v24);
-  v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col1.m_quad = v28;
+  v28.m_quad = _mm_mul_ps(
+                 _mm_andnot_ps(
+                   _mm_cmple_ps(v26, (__m128)0i64),
+                   _mm_mul_ps(
+                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v27, v26), v27)),
+                     _mm_mul_ps(v27, *(__m128 *)_xmm))),
+                 v24);
+  this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col1 = (hkVector4f)v28.m_quad;
   v29 = _mm_sub_ps(
-          _mm_mul_ps(_mm_shuffle_ps(v28, v28, 201), v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad),
+          _mm_mul_ps(
+            _mm_shuffle_ps(v28.m_quad, v28.m_quad, 201),
+            this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad),
           _mm_mul_ps(
             _mm_shuffle_ps(
-              v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
-              v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
+              this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
+              this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0.m_quad,
               201),
-            v28));
-  v8->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col2.m_quad = _mm_shuffle_ps(v29, v29, 201);
-  hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_steeringBase.m_rotationA.m_col0,
-    (hkMatrix3f *)&v10->m_rotation.m_col0,
-    &v32);
-  hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_steeringBase.m_rotationB.m_col0,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
-    &v32);
-  v8->m_initialAxleInB = v8->m_atoms.m_steeringBase.m_rotationB.m_col0;
-  hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_steeringBase.m_rotationA.m_col1,
-    (hkMatrix3f *)&v10->m_rotation.m_col0,
-    &v33);
-  hkVector4f::setRotatedInverseDir(
-    &v8->m_atoms.m_steeringBase.m_rotationB.m_col1,
-    (hkMatrix3f *)&v7->m_rotation.m_col0,
-    &v33);
-  v8->m_initialSteeringAxisInB = v8->m_atoms.m_steeringBase.m_rotationB.m_col1;
+            v28.m_quad));
+  this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col2.m_quad = _mm_shuffle_ps(v29, v29, 201);
+  hkVector4f::setRotatedInverseDir(&this->m_atoms.m_steeringBase.m_rotationA.m_col0, &bodyATransform->m_rotation, &v32);
+  hkVector4f::setRotatedInverseDir(&this->m_atoms.m_steeringBase.m_rotationB.m_col0, &bodyBTransform->m_rotation, &v32);
+  this->m_initialAxleInB = this->m_atoms.m_steeringBase.m_rotationB.m_col0;
+  hkVector4f::setRotatedInverseDir(&this->m_atoms.m_steeringBase.m_rotationA.m_col1, &bodyATransform->m_rotation, &v33);
+  hkVector4f::setRotatedInverseDir(&this->m_atoms.m_steeringBase.m_rotationB.m_col1, &bodyBTransform->m_rotation, &v33);
+  this->m_initialSteeringAxisInB = this->m_atoms.m_steeringBase.m_rotationB.m_col1;
   v30 = _mm_sub_ps(
           _mm_mul_ps(
             _mm_shuffle_ps(
-              v8->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad,
-              v8->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad,
               201),
-            v8->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad),
+            this->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad),
           _mm_mul_ps(
             _mm_shuffle_ps(
-              v8->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad,
-              v8->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad,
               201),
-            v8->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad));
-  v8->m_atoms.m_steeringBase.m_rotationA.m_col2.m_quad = _mm_shuffle_ps(v30, v30, 201);
+            this->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad));
+  this->m_atoms.m_steeringBase.m_rotationA.m_col2.m_quad = _mm_shuffle_ps(v30, v30, 201);
   v31 = _mm_sub_ps(
           _mm_mul_ps(
             _mm_shuffle_ps(
-              v8->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad,
-              v8->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad,
               201),
-            v8->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad),
+            this->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad),
           _mm_mul_ps(
             _mm_shuffle_ps(
-              v8->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad,
-              v8->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad,
+              this->m_atoms.m_steeringBase.m_rotationB.m_col0.m_quad,
               201),
-            v8->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad));
-  v8->m_atoms.m_steeringBase.m_rotationB.m_col2.m_quad = _mm_shuffle_ps(v31, v31, 201);
+            this->m_atoms.m_steeringBase.m_rotationB.m_col1.m_quad));
+  this->m_atoms.m_steeringBase.m_rotationB.m_col2.m_quad = _mm_shuffle_ps(v31, v31, 201);
 }
 
 // File Line: 85
 // RVA: 0xD4A1C0
-void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *this, hkVector4f *pivotA, hkVector4f *pivotB, hkVector4f *axleA, hkVector4f *axleB, hkVector4f *suspensionAxisB, hkVector4f *steeringAxisB)
+void __fastcall hkpWheelConstraintData::setInBodySpace(
+        hkpWheelConstraintData *this,
+        hkVector4f *pivotA,
+        hkVector4f *pivotB,
+        hkVector4f *axleA,
+        hkVector4f *axleB,
+        hkVector4f *suspensionAxisB,
+        hkVector4f *steeringAxisB)
 {
-  __m128 v7; // xmm6
-  __m128 v8; // xmm8
+  __m128 m_quad; // xmm6
+  __m128 inserted; // xmm8
   __m128 v9; // xmm6
   __m128 v10; // xmm5
   __m128 v11; // xmm6
@@ -248,29 +244,29 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
   this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_atoms.m_suspensionBase.m_transformA.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  v7 = suspensionAxisB->m_quad;
-  v8 = (__m128)_mm_insert_epi16((__m128i)0i64, 0x8000u, 1);
+  m_quad = suspensionAxisB->m_quad;
+  inserted = (__m128)_mm_insert_epi16((__m128i)0i64, 0x8000u, 1);
   this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0 = (hkVector4f)suspensionAxisB->m_quad;
-  v9 = _mm_shuffle_ps(v7, _mm_unpackhi_ps(v7, (__m128)0i64), 196);
+  v9 = _mm_shuffle_ps(m_quad, _mm_unpackhi_ps(m_quad, (__m128)0i64), 196);
   v10 = _mm_shuffle_ps(v9, v9, 241);
   v11 = _mm_shuffle_ps(v9, v9, 206);
   v12 = _mm_mul_ps(v11, v11);
   v13 = _mm_mul_ps(v10, v10);
-  v14 = _mm_cmpltps(
+  v14 = _mm_cmplt_ps(
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v13, v13, 85), _mm_shuffle_ps(v13, v13, 0)),
             _mm_shuffle_ps(v13, v13, 170)),
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v12, v12, 85), _mm_shuffle_ps(v12, v12, 0)),
             _mm_shuffle_ps(v12, v12, 170)));
-  v15 = _mm_xor_ps(_mm_or_ps(_mm_and_ps(v11, v14), _mm_andnot_ps(v14, v10)), v8);
+  v15 = _mm_xor_ps(_mm_or_ps(_mm_and_ps(v11, v14), _mm_andnot_ps(v14, v10)), inserted);
   v16 = _mm_mul_ps(v15, v15);
   v17 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v16, v16, 85), _mm_shuffle_ps(v16, v16, 0)), _mm_shuffle_ps(v16, v16, 170));
   v18 = _mm_rsqrt_ps(v17);
   v19.m_quad = (__m128)this->m_atoms.m_suspensionBase.m_transformB.m_rotation.m_col0;
   v20.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v17, (__m128)0i64),
+                   _mm_cmple_ps(v17, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)),
                      _mm_mul_ps(*(__m128 *)_xmm, v18))),
@@ -285,7 +281,7 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
   v24 = _mm_rsqrt_ps(v23);
   this->m_atoms.m_steeringBase.m_rotationA.m_col0.m_quad = _mm_mul_ps(
                                                              _mm_andnot_ps(
-                                                               _mm_cmpleps(v23, (__m128)0i64),
+                                                               _mm_cmple_ps(v23, (__m128)0i64),
                                                                _mm_mul_ps(
                                                                  _mm_sub_ps(
                                                                    (__m128)_xmm,
@@ -299,7 +295,7 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
   v28 = _mm_rsqrt_ps(v27);
   v29.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v27, (__m128)0i64),
+                   _mm_cmple_ps(v27, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v28, v27), v28)),
                      _mm_mul_ps(v28, *(__m128 *)_xmm))),
@@ -314,20 +310,20 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
   v32 = _mm_shuffle_ps(v30, v30, 206);
   v33 = _mm_mul_ps(v32, v32);
   v34 = _mm_mul_ps(v31, v31);
-  v35 = _mm_cmpltps(
+  v35 = _mm_cmplt_ps(
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v34, v34, 85), _mm_shuffle_ps(v34, v34, 0)),
             _mm_shuffle_ps(v34, v34, 170)),
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v33, v33, 85), _mm_shuffle_ps(v33, v33, 0)),
             _mm_shuffle_ps(v33, v33, 170)));
-  v36 = _mm_xor_ps(_mm_or_ps(_mm_andnot_ps(v35, v31), _mm_and_ps(v32, v35)), v8);
+  v36 = _mm_xor_ps(_mm_or_ps(_mm_andnot_ps(v35, v31), _mm_and_ps(v32, v35)), inserted);
   v37 = _mm_mul_ps(v36, v36);
   v38 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v37, v37, 85), _mm_shuffle_ps(v37, v37, 0)), _mm_shuffle_ps(v37, v37, 170));
   v39 = _mm_rsqrt_ps(v38);
   this->m_atoms.m_steeringBase.m_rotationA.m_col1.m_quad = _mm_mul_ps(
                                                              _mm_andnot_ps(
-                                                               _mm_cmpleps(v38, (__m128)0i64),
+                                                               _mm_cmple_ps(v38, (__m128)0i64),
                                                                _mm_mul_ps(
                                                                  _mm_sub_ps(
                                                                    (__m128)_xmm,
@@ -341,7 +337,7 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
   v43 = _mm_rsqrt_ps(v42);
   v44.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v42, (__m128)0i64),
+                   _mm_cmple_ps(v42, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v43, v42), v43)),
                      _mm_mul_ps(v43, *(__m128 *)_xmm))),
@@ -382,7 +378,7 @@ void __fastcall hkpWheelConstraintData::setInBodySpace(hkpWheelConstraintData *t
 // RVA: 0xD4A590
 void __fastcall hkpWheelConstraintData::setSteeringAngle(hkpWheelConstraintData *this, float angle)
 {
-  __m128i v2; // xmm6
+  __m128i si128; // xmm6
   __m128 v3; // xmm3
   __m128i v4; // xmm7
   __m128i v5; // xmm6
@@ -398,37 +394,33 @@ void __fastcall hkpWheelConstraintData::setSteeringAngle(hkpWheelConstraintData 
   float v15; // [rsp+50h] [rbp+8h]
   float v16; // [rsp+58h] [rbp+10h]
 
-  v2 = _mm_load_si128((const __m128i *)_xmm);
+  si128 = _mm_load_si128((const __m128i *)_xmm);
   v3 = _mm_andnot_ps(*(__m128 *)_xmm, (__m128)LODWORD(angle));
-  v4 = _mm_add_epi32(v2, v2);
-  v5 = _mm_andnot_si128(v2, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(*(__m128 *)_xmm, v3)), v2));
+  v4 = _mm_add_epi32(si128, si128);
+  v5 = _mm_andnot_si128(si128, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(*(__m128 *)_xmm, v3)), si128));
   v6 = _mm_cvtepi32_ps(v5);
   v7 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v5, v4), (__m128i)0i64);
   v8 = _mm_add_ps(
          _mm_add_ps(_mm_add_ps(_mm_mul_ps(*(__m128 *)DP1_0, v6), v3), _mm_mul_ps(*(__m128 *)DP2, v6)),
          _mm_mul_ps(*(__m128 *)DP3, v6));
   v9 = _mm_mul_ps(v8, v8);
-  v3.m128_i32[0] = (unsigned __int128)_mm_andnot_ps(
-                                        v7,
-                                        _mm_add_ps(
-                                          _mm_sub_ps(
-                                            _mm_mul_ps(
-                                              _mm_mul_ps(
-                                                _mm_add_ps(
-                                                  _mm_mul_ps(
-                                                    _mm_add_ps(
-                                                      _mm_mul_ps(v9, *(__m128 *)cosCoeff0_0),
-                                                      *(__m128 *)cosCoeff1),
-                                                    v9),
-                                                  *(__m128 *)cosCoeff2_0),
-                                                v9),
-                                              v9),
-                                            _mm_mul_ps(v9, *(__m128 *)_xmm)),
-                                          *(__m128 *)_xmm));
+  v3.m128_f32[0] = _mm_andnot_ps(
+                     v7,
+                     _mm_add_ps(
+                       _mm_sub_ps(
+                         _mm_mul_ps(
+                           _mm_mul_ps(
+                             _mm_add_ps(
+                               _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v9, *(__m128 *)cosCoeff0_0), *(__m128 *)cosCoeff1), v9),
+                               *(__m128 *)cosCoeff2_0),
+                             v9),
+                           v9),
+                         _mm_mul_ps(v9, *(__m128 *)_xmm)),
+                       *(__m128 *)_xmm)).m128_f32[0];
   v10 = (float)((float)((float)((float)(v9.m128_f32[0] * -0.00019515296) + 0.0083321612) * v9.m128_f32[0]) + -0.16666655)
       * v9.m128_f32[0];
   v11.m_quad = (__m128)this->m_initialAxleInB;
-  LODWORD(v15) = (v3.m128_i32[0] | COERCE_UNSIGNED_INT((float)(v10 * v8.m128_f32[0]) + v8.m128_f32[0]) & v7.m128_i32[0]) ^ ((unsigned int)*(_OWORD *)&_mm_and_si128(_mm_add_epi32(v4, v4), v5) << 29) ^ _xmm[0] & LODWORD(angle);
+  LODWORD(v15) = (v3.m128_i32[0] | COERCE_UNSIGNED_INT((float)(v10 * v8.m128_f32[0]) + v8.m128_f32[0]) & v7.m128_i32[0]) ^ (_mm_and_si128(_mm_add_epi32(v4, v4), v5).m128i_u32[0] << 29) ^ _xmm[0] & LODWORD(angle);
   v16 = fsqrt(1.0 - (float)(v15 * v15));
   v12 = _mm_sub_ps(
           _mm_mul_ps(_mm_shuffle_ps(v11.m_quad, v11.m_quad, 201), this->m_initialSteeringAxisInB.m_quad),
@@ -451,14 +443,19 @@ void __fastcall hkpWheelConstraintData::setSteeringAngle(hkpWheelConstraintData 
 
 // File Line: 137
 // RVA: 0xD4A870
-void __fastcall hkpWheelConstraintData::getConstraintInfo(hkpWheelConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpWheelConstraintData::getConstraintInfo(
+        hkpWheelConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_suspensionBase.m_type, 336, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_suspensionBase, 0x150u, infoOut);
 }
 
 // File Line: 142
 // RVA: 0xD4A890
-void __fastcall hkpWheelConstraintData::getRuntimeInfo(hkpWheelConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpWheelConstraintData::getRuntimeInfo(
+        hkpWheelConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   if ( wantRuntime.m_bool )
   {
@@ -477,44 +474,40 @@ hkBool *__fastcall hkpWheelConstraintData::isValid(hkpWheelConstraintData *this,
 {
   hkVector4f v2; // xmm0
   hkVector4f v3; // xmm1
-  hkpWheelConstraintData *v4; // rbx
-  hkTransformf *v5; // rcx
-  hkBool *v6; // rdi
+  hkTransformf *p_m_transformA; // rcx
   hkVector4f v7; // xmm0
   hkVector4f v8; // xmm1
   hkVector4f v9; // xmm0
-  hkRotationf v11; // [rsp+20h] [rbp-98h]
-  __m128 v12; // [rsp+50h] [rbp-68h]
-  hkRotationf v13; // [rsp+60h] [rbp-58h]
+  hkRotationf v11; // [rsp+20h] [rbp-98h] BYREF
+  __m128 m_quad; // [rsp+50h] [rbp-68h]
+  hkRotationf v13; // [rsp+60h] [rbp-58h] BYREF
   __m128 v14; // [rsp+90h] [rbp-28h]
 
   v2.m_quad = (__m128)this->m_atoms.m_steeringBase.m_rotationA.m_col0;
   v3.m_quad = (__m128)this->m_atoms.m_steeringBase.m_rotationA.m_col1;
-  v4 = this;
-  v5 = &this->m_atoms.m_suspensionBase.m_transformA;
-  v6 = result;
+  p_m_transformA = &this->m_atoms.m_suspensionBase.m_transformA;
   v11.m_col0 = (hkVector4f)v2.m_quad;
-  v7.m_quad = (__m128)v5[3].m_translation;
+  v7.m_quad = (__m128)p_m_transformA[3].m_translation;
   v11.m_col1 = (hkVector4f)v3.m_quad;
-  v8.m_quad = (__m128)v5[4].m_rotation.m_col1;
+  v8.m_quad = (__m128)p_m_transformA[4].m_rotation.m_col1;
   v11.m_col2 = (hkVector4f)v7.m_quad;
-  v13.m_col0 = v5[4].m_rotation.m_col0;
-  v9.m_quad = (__m128)v5[4].m_rotation.m_col2;
+  v13.m_col0 = p_m_transformA[4].m_rotation.m_col0;
+  v9.m_quad = (__m128)p_m_transformA[4].m_rotation.m_col2;
   v13.m_col1 = (hkVector4f)v8.m_quad;
   v13.m_col2 = (hkVector4f)v9.m_quad;
-  v12 = aabbOut.m_quad;
+  m_quad = aabbOut.m_quad;
   v14 = aabbOut.m_quad;
-  v6->m_bool = hkRotationf::isOrthonormal(&v5->m_rotation, 0.0000099999997)
-            && hkRotationf::isOrthonormal(&v4->m_atoms.m_suspensionBase.m_transformB.m_rotation, 0.0000099999997)
-            && hkRotationf::isOrthonormal(&v11, 0.0000099999997)
-            && hkRotationf::isOrthonormal(&v13, 0.0000099999997)
-            && v4->m_atoms.m_lin0Limit.m_max >= v4->m_atoms.m_lin0Limit.m_min;
-  return v6;
+  result->m_bool = hkRotationf::isOrthonormal(&p_m_transformA->m_rotation, 0.0000099999997)
+                && hkRotationf::isOrthonormal(&this->m_atoms.m_suspensionBase.m_transformB.m_rotation, 0.0000099999997)
+                && hkRotationf::isOrthonormal(&v11, 0.0000099999997)
+                && hkRotationf::isOrthonormal(&v13, 0.0000099999997)
+                && this->m_atoms.m_lin0Limit.m_max >= this->m_atoms.m_lin0Limit.m_min;
+  return result;
 }
 
 // File Line: 168
 // RVA: 0xD4A760
-signed __int64 __fastcall hkpWheelConstraintData::getType(hkpWheelConstraintData *this)
+__int64 __fastcall hkpWheelConstraintData::getType(hkpWheelConstraintData *this)
 {
   return 9i64;
 }

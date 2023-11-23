@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiStaticTreeNavMeshQueryMediator::staticClass()
 
 // File Line: 67
 // RVA: 0xBB7750
-void __fastcall finishLoadedObjecthkaiStaticTreeNavMeshQueryMediator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiStaticTreeNavMeshQueryMediator(
+        hkaiStaticTreeNavMeshQueryMediator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiStaticTreeNavMeshQueryMediator::hkaiStaticTreeNavMeshQueryMediator);
+  if ( p )
+    hkaiStaticTreeNavMeshQueryMediator::hkaiStaticTreeNavMeshQueryMediator(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xBB7770
-void __fastcall cleanupLoadedObjecthkaiStaticTreeNavMeshQueryMediator(void *p)
+void __fastcall cleanupLoadedObjecthkaiStaticTreeNavMeshQueryMediator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xBB7780
 hkBaseObjectVtbl *__fastcall getVtablehkaiStaticTreeNavMeshQueryMediator()
 {
-  hkaiStaticTreeNavMeshQueryMediator v1; // [rsp+20h] [rbp-28h]
+  hkaiStaticTreeNavMeshQueryMediator v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkaiStaticTreeNavMeshQueryMediator::hkaiStaticTreeNavMeshQueryMediator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiStaticTreeNavMeshQueryMediatorTyp
   hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_typeName = "hkaiStaticTreeNavMeshQueryMediator";
   hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_vtable = result;
   hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_scopedName = "!hkaiStaticTreeNavMeshQueryMediator";
-  hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiStaticTreeNavMeshQueryMediator;
-  hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiStaticTreeNavMeshQueryMediator;
+  hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiStaticTreeNavMeshQueryMediator;
+  hkaiStaticTreeNavMeshQueryMediatorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiStaticTreeNavMeshQueryMediator;
   return result;
 }
 

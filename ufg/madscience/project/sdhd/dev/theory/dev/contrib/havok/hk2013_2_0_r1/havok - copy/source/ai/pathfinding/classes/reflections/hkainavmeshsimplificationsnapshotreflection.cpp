@@ -28,15 +28,19 @@ hkClass *__fastcall hkaiNavMeshSimplificationSnapshot::staticClass()
 
 // File Line: 71
 // RVA: 0xBB7E90
-void __fastcall finishLoadedObjecthkaiNavMeshSimplificationSnapshot(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshSimplificationSnapshot(
+        hkaiNavMeshSimplificationSnapshot *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot);
+  if ( p )
+    hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot(p, finishing);
 }
 
 // File Line: 77
 // RVA: 0xBB7EB0
-void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationSnapshot(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationSnapshot(hkaiNavMeshSimplificationSnapshot *p)
 {
-  hkaiNavMeshSimplificationSnapshot::~hkaiNavMeshSimplificationSnapshot((hkaiNavMeshSimplificationSnapshot *)p);
+  hkaiNavMeshSimplificationSnapshot::~hkaiNavMeshSimplificationSnapshot(p);
 }
 

@@ -2,78 +2,73 @@
 // RVA: 0x4AD020
 bool __fastcall UFG::PersistentData::MapBool::Iterator::IsValid(UFG::PersistentData::MapBool::Iterator *this)
 {
-  UFG::PersistentData::MapBool::Iterator *v1; // r8
-  UFG::PersistentData::MapBool *v2; // rcx
+  UFG::PersistentData::MapBool *mList; // rcx
 
-  v1 = this;
-  v2 = this->mList;
-  if ( v2->mKeepType == KEEP_BOTH )
-    return v1->mIndex < v2->mValues.size;
-  if ( (unsigned int)(v2->mKeepType - 1) > 1 )
+  mList = this->mList;
+  if ( mList->mKeepType == KEEP_BOTH )
+    return this->mIndex < mList->mValues.size;
+  if ( (unsigned int)(mList->mKeepType - 1) > 1 )
     return 0;
-  return v1->mIndex < v2->mNames.size;
+  return this->mIndex < mList->mNames.size;
 }
 
 // File Line: 99
 // RVA: 0x4A5440
-UFG::PersistentData::KeyValue *__fastcall UFG::PersistentData::MapBool::Iterator::GetName(UFG::PersistentData::MapBool::Iterator *this)
+UFG::PersistentData::KeyValue *__fastcall UFG::PersistentData::MapBool::Iterator::GetName(
+        UFG::PersistentData::MapBool::Iterator *this)
 {
-  UFG::PersistentData::MapBool *v1; // rdx
+  UFG::PersistentData::MapBool *mList; // rdx
 
-  v1 = this->mList;
-  if ( v1->mKeepType == KEEP_BOTH )
-    return &v1->mValues.p[this->mIndex];
-  if ( (unsigned int)(v1->mKeepType - 1) > 1 )
+  mList = this->mList;
+  if ( mList->mKeepType == KEEP_BOTH )
+    return &mList->mValues.p[this->mIndex];
+  if ( (unsigned int)(mList->mKeepType - 1) > 1 )
     return (UFG::PersistentData::KeyValue *)&UFG::gNullQSymbol;
-  return (UFG::PersistentData::KeyValue *)&v1->mNames.p[this->mIndex];
+  return (UFG::PersistentData::KeyValue *)&mList->mNames.p[this->mIndex];
 }
 
 // File Line: 126
 // RVA: 0x4A67B0
 bool __fastcall UFG::PersistentData::MapBool::Iterator::GetStatus(UFG::PersistentData::MapBool::Iterator *this)
 {
-  UFG::PersistentData::MapBool *v1; // r8
-  bool result; // al
+  UFG::PersistentData::MapBool *mList; // r8
 
-  v1 = this->mList;
-  if ( v1->mKeepType )
-    result = v1->mKeepType == 1;
+  mList = this->mList;
+  if ( mList->mKeepType )
+    return mList->mKeepType == KEEP_TRUE;
   else
-    result = v1->mValues.p[this->mIndex].mBoolValue;
-  return result;
+    return mList->mValues.p[this->mIndex].mBoolValue;
 }
 
 // File Line: 195
 // RVA: 0x490AE0
 void __fastcall UFG::PersistentData::MapBool::~MapBool(UFG::PersistentData::MapBool *this)
 {
-  UFG::PersistentData::MapBool *v1; // rdi
-  UFG::qSymbol *v2; // rcx
+  UFG::qSymbol *p; // rcx
   UFG::qSymbol *v3; // rbx
   UFG::PersistentData::KeyValue *v4; // rcx
   $CCFB32CF948EEB04FF452B3FEB4ECF53 *v5; // rbx
 
-  v1 = this;
   this->mValues.size = 0;
   this->mNames.size = 0;
-  v2 = this->mNames.p;
-  if ( v2 )
+  p = this->mNames.p;
+  if ( p )
   {
-    v3 = v2 - 1;
-    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    v3 = p - 1;
+    `eh vector destructor iterator(p, 4ui64, p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
-  v1->mNames.p = 0i64;
-  *(_QWORD *)&v1->mNames.size = 0i64;
-  v4 = v1->mValues.p;
+  this->mNames.p = 0i64;
+  *(_QWORD *)&this->mNames.size = 0i64;
+  v4 = this->mValues.p;
   if ( v4 )
   {
     v5 = &v4[-1].4;
     `eh vector destructor iterator(v4, 8ui64, v4[-1].mIntValue, (void (__fastcall *)(void *))_);
     operator delete[](v5);
   }
-  v1->mValues.p = 0i64;
-  *(_QWORD *)&v1->mValues.size = 0i64;
+  this->mValues.p = 0i64;
+  *(_QWORD *)&this->mValues.size = 0i64;
 }
 
 // File Line: 206
@@ -92,44 +87,46 @@ __int64 __fastcall UFG::PersistentData::MapBool::GetCount(UFG::PersistentData::M
 __int64 __fastcall UFG::PersistentData::MapBool::GetTrueCount(UFG::PersistentData::MapBool *this)
 {
   __int64 result; // rax
-  __int64 v2; // rdx
+  __int64 size; // rdx
   $CCFB32CF948EEB04FF452B3FEB4ECF53 *v3; // rcx
 
-  if ( this->mKeepType == 2 )
+  if ( this->mKeepType == KEEP_FALSE )
     return 0i64;
-  if ( this->mKeepType == 1 )
+  if ( this->mKeepType == KEEP_TRUE )
     return this->mNames.size;
-  v2 = this->mValues.size;
+  size = this->mValues.size;
   result = 0i64;
-  if ( (_DWORD)v2 )
+  if ( (_DWORD)size )
   {
     v3 = &this->mValues.p->4;
     do
     {
-      if ( LOBYTE(v3->mFloatValue) )
+      if ( v3->mBoolValue )
         result = (unsigned int)(result + 1);
       v3 += 2;
-      --v2;
+      --size;
     }
-    while ( v2 );
+    while ( size );
   }
   return result;
 }
 
 // File Line: 254
 // RVA: 0x48A7B0
-char __fastcall UFG::PersistentData::RemoveArrayElementPreserveOrder<UFG::qSymbol>(UFG::qArray<UFG::qSymbol,0> *_array, int index)
+char __fastcall UFG::PersistentData::RemoveArrayElementPreserveOrder<UFG::qSymbol>(
+        UFG::qArray<UFG::qSymbol,0> *_array,
+        int index)
 {
   __int64 i; // rax
-  UFG::qSymbol *v3; // r10
+  UFG::qSymbol *p; // r10
   __int64 v4; // r8
-  unsigned int v5; // edx
+  unsigned int mUID; // edx
 
-  for ( i = (unsigned int)(index + 1); (unsigned int)i < _array->size; v3[v4].mUID = v5 )
+  for ( i = (unsigned int)(index + 1); (unsigned int)i < _array->size; p[v4].mUID = mUID )
   {
-    v3 = _array->p;
+    p = _array->p;
     v4 = (unsigned int)(i - 1);
-    v5 = v3[i].mUID;
+    mUID = p[i].mUID;
     i = (unsigned int)(i + 1);
   }
   if ( _array->size > 1 )
@@ -141,45 +138,42 @@ char __fastcall UFG::PersistentData::RemoveArrayElementPreserveOrder<UFG::qSymbo
 
 // File Line: 266
 // RVA: 0x4BD8B0
-void __fastcall UFG::PersistentData::MapBool::SetStatus(UFG::PersistentData::MapBool *this, UFG::qSymbol *name, bool status)
+void __fastcall UFG::PersistentData::MapBool::SetStatus(
+        UFG::PersistentData::MapBool *this,
+        UFG::qSymbol *name,
+        bool status)
 {
-  bool v3; // bp
-  UFG::qSymbol *v4; // r11
-  UFG::PersistentData::MapBool *v5; // r10
   unsigned int v6; // edx
   unsigned int v7; // eax
   UFG::qSymbol *v8; // rcx
-  unsigned int v9; // edx
-  UFG::qSymbol *v10; // rcx
-  UFG::qArray<UFG::PersistentData::KeyValue,0> *v11; // rsi
+  unsigned int size; // edx
+  UFG::qSymbol *p; // rcx
+  UFG::qArray<UFG::PersistentData::KeyValue,0> *p_mValues; // rsi
   __int64 v12; // rdi
   unsigned int v13; // eax
-  unsigned int v14; // edx
+  unsigned int mUID; // edx
   UFG::PersistentData::KeyValue *v15; // rcx
-  unsigned int v16; // edx
+  unsigned int capacity; // edx
   unsigned int v17; // ebx
-  UFG::qSymbol v18; // er14
+  unsigned int v18; // r14d
   unsigned int v19; // edx
   UFG::PersistentData::KeyValue *v20; // rcx
   int v21; // [rsp+44h] [rbp+Ch]
 
-  v3 = status;
-  v4 = name;
-  v5 = this;
   if ( this->mKeepType )
   {
-    if ( this->mKeepType == 1 )
+    if ( this->mKeepType == KEEP_TRUE )
     {
-      v9 = this->mNames.size;
+      size = this->mNames.size;
       v7 = 0;
-      if ( v9 )
+      if ( size )
       {
-        v10 = this->mNames.p;
-        while ( v4->mUID != v10->mUID )
+        p = this->mNames.p;
+        while ( name->mUID != p->mUID )
         {
           ++v7;
-          ++v10;
-          if ( v7 >= v9 )
+          ++p;
+          if ( v7 >= size )
             goto LABEL_16;
         }
       }
@@ -192,20 +186,20 @@ LABEL_16:
       {
 LABEL_10:
         if ( v7 == -1 )
-          UFG::qArray<UFG::qSymbol,0>::Add(&v5->mNames, v4, "qArray.Add");
+          UFG::qArray<UFG::qSymbol,0>::Add(&this->mNames, name, "qArray.Add");
         return;
       }
     }
     else
     {
-      if ( this->mKeepType != 2 )
+      if ( this->mKeepType != KEEP_FALSE )
         return;
       v6 = this->mNames.size;
       v7 = 0;
       if ( v6 )
       {
         v8 = this->mNames.p;
-        while ( v4->mUID != v8->mUID )
+        while ( name->mUID != v8->mUID )
         {
           ++v7;
           ++v8;
@@ -222,39 +216,35 @@ LABEL_8:
         goto LABEL_10;
     }
     if ( v7 != -1 )
-      UFG::PersistentData::RemoveArrayElementPreserveOrder<UFG::qSymbol>(&v5->mNames, v7);
+      UFG::PersistentData::RemoveArrayElementPreserveOrder<UFG::qSymbol>(&this->mNames, v7);
   }
   else
   {
-    v11 = &this->mValues;
+    p_mValues = &this->mValues;
     v12 = this->mValues.size;
     v13 = 0;
     if ( !(_DWORD)v12 )
       goto LABEL_24;
-    v14 = name->mUID;
+    mUID = name->mUID;
     v15 = this->mValues.p;
-    while ( v15->mKey.mUID != v14 )
+    while ( v15->mKey.mUID != mUID )
     {
       ++v13;
       ++v15;
       if ( v13 >= (unsigned int)v12 )
         goto LABEL_24;
     }
-    if ( v13 != -1 )
-    {
-      v5->mValues.p[v13].mBoolValue = status;
-    }
-    else
+    if ( v13 == -1 )
     {
 LABEL_24:
-      v16 = v11->capacity;
+      capacity = p_mValues->capacity;
       v17 = v12 + 1;
-      v18.mUID = v4->mUID;
+      v18 = name->mUID;
       LOBYTE(v21) = status;
-      if ( (signed int)v12 + 1 > v16 )
+      if ( (int)v12 + 1 > capacity )
       {
-        if ( v16 )
-          v19 = 2 * v16;
+        if ( capacity )
+          v19 = 2 * capacity;
         else
           v19 = 1;
         for ( ; v19 < v17; v19 *= 2 )
@@ -263,13 +253,17 @@ LABEL_24:
           v19 = 2;
         if ( v19 - v17 > 0x10000 )
           v19 = v12 + 65537;
-        UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(v11, v19, "MapTypes");
+        UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(p_mValues, v19, "MapTypes");
       }
-      v20 = v11->p;
-      v11->size = v17;
-      v20[v12].mKey = v18;
+      v20 = p_mValues->p;
+      p_mValues->size = v17;
+      v20[v12].mKey.mUID = v18;
       v20[v12].mIntValue = v21;
-      v20[v12].mBoolValue = v3;
+      v20[v12].mBoolValue = status;
+    }
+    else
+    {
+      this->mValues.p[v13].mBoolValue = status;
     }
   }
 }
@@ -278,61 +272,54 @@ LABEL_24:
 // RVA: 0x4A6800
 bool __fastcall UFG::PersistentData::MapBool::GetStatus(UFG::PersistentData::MapBool *this, UFG::qSymbol *name)
 {
-  UFG::PersistentData::MapBool *v2; // r8
-  UFG::PersistentData::MapBool::KeepType v3; // ecx
-  UFG::qSymbol *v4; // r9
-  int v5; // ecx
+  UFG::PersistentData::MapBool::KeepType mKeepType; // ecx
+  __int32 v5; // ecx
   unsigned int v6; // edx
   unsigned int v7; // eax
-  unsigned int v8; // er9
-  UFG::qSymbol *v9; // rcx
+  unsigned int v8; // r9d
+  UFG::qSymbol *p; // rcx
   unsigned int v11; // edx
   unsigned int v12; // eax
-  unsigned int v13; // er9
+  unsigned int v13; // r9d
   UFG::qSymbol *v14; // rcx
-  unsigned int v15; // edx
-  unsigned int v16; // eax
-  unsigned int v17; // er9
-  UFG::PersistentData::KeyValue *v18; // rcx
+  unsigned int size; // edx
+  int v16; // eax
+  unsigned int mUID; // r9d
+  UFG::PersistentData::KeyValue *i; // rcx
 
-  v2 = this;
-  v3 = this->mKeepType;
-  v4 = name;
-  if ( v3 == KEEP_BOTH )
+  mKeepType = this->mKeepType;
+  if ( mKeepType == KEEP_BOTH )
   {
-    v15 = v2->mValues.size;
+    size = this->mValues.size;
     v16 = 0;
-    if ( v15 )
+    if ( size )
     {
-      v17 = v4->mUID;
-      v18 = v2->mValues.p;
-      while ( v18->mKey.mUID != v17 )
+      mUID = name->mUID;
+      for ( i = this->mValues.p; i->mKey.mUID != mUID; ++i )
       {
-        ++v16;
-        ++v18;
-        if ( v16 >= v15 )
+        if ( ++v16 >= size )
           return 0;
       }
       if ( v16 != -1 )
-        return v2->mValues.p[v16].mBoolValue;
+        return this->mValues.p[v16].mBoolValue;
     }
     return 0;
   }
-  v5 = v3 - 1;
+  v5 = mKeepType - 1;
   if ( v5 )
   {
     if ( v5 == 1 )
     {
-      v6 = v2->mNames.size;
+      v6 = this->mNames.size;
       v7 = 0;
       if ( v6 )
       {
-        v8 = v4->mUID;
-        v9 = v2->mNames.p;
-        while ( v8 != v9->mUID )
+        v8 = name->mUID;
+        p = this->mNames.p;
+        while ( v8 != p->mUID )
         {
           ++v7;
-          ++v9;
+          ++p;
           if ( v7 >= v6 )
             goto LABEL_8;
         }
@@ -346,12 +333,12 @@ LABEL_8:
     }
     return 0;
   }
-  v11 = v2->mNames.size;
+  v11 = this->mNames.size;
   v12 = 0;
   if ( v11 )
   {
-    v13 = v4->mUID;
-    v14 = v2->mNames.p;
+    v13 = name->mUID;
+    v14 = this->mNames.p;
     while ( v13 != v14->mUID )
     {
       ++v12;
@@ -372,13 +359,10 @@ LABEL_14:
 // RVA: 0x4A6920
 bool __fastcall UFG::PersistentData::MapBool::GetStatusByIndex(UFG::PersistentData::MapBool *this, unsigned int index)
 {
-  bool result; // al
-
   if ( this->mKeepType )
-    result = this->mKeepType == 1;
+    return this->mKeepType == KEEP_TRUE;
   else
-    result = this->mValues.p[index].mBoolValue;
-  return result;
+    return this->mValues.p[index].mBoolValue;
 }
 
 // File Line: 476
@@ -390,49 +374,44 @@ __int64 __fastcall UFG::qSymbolUC::as_uint32(UFG::qArray<unsigned long,0> *this)
 
 // File Line: 481
 // RVA: 0x4BDB30
-void __fastcall UFG::PersistentData::MapInt::SetStatus(UFG::PersistentData::MapInt *this, UFG::qSymbol *name, int status)
+void __fastcall UFG::PersistentData::MapInt::SetStatus(
+        UFG::PersistentData::MapInt *this,
+        UFG::qSymbol *name,
+        int status)
 {
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rax
-  int v5; // ebp
-  UFG::PersistentData::MapInt *v6; // rsi
-  UFG::PersistentData::KeyValue *v7; // rcx
+  UFG::PersistentData::KeyValue *p; // rcx
   UFG::PersistentData::KeyValue *v8; // r9
-  unsigned int v9; // er14
-  unsigned int v10; // edx
+  unsigned int mUID; // r14d
+  unsigned int capacity; // edx
   unsigned int v11; // ebx
   unsigned int v12; // edx
   UFG::PersistentData::KeyValue *v13; // rax
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = status;
-  v6 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v7 = this->mValues.p;
-  v8 = v7;
+  p = this->mValues.p;
+  v8 = p;
   while ( v8->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
     ++v8;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    v7[v4].mIntValue = status;
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v9 = name->mUID;
-    v10 = v6->mValues.capacity;
-    v11 = v3 + 1;
-    if ( (signed int)v3 + 1 > v10 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    v11 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v10 )
-        v12 = 2 * v10;
+      if ( capacity )
+        v12 = 2 * capacity;
       else
         v12 = 1;
       for ( ; v12 < v11; v12 *= 2 )
@@ -440,14 +419,18 @@ LABEL_5:
       if ( v12 <= 2 )
         v12 = 2;
       if ( v12 - v11 > 0x10000 )
-        v12 = v3 + 65537;
-      UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&v6->mValues, v12, "MapTypes");
+        v12 = size + 65537;
+      UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&this->mValues, v12, "MapTypes");
     }
-    v13 = v6->mValues.p;
-    v6->mValues.size = v11;
-    v13[v3].mKey.mUID = v9;
-    v13[v3].mIntValue = v5;
-    v13[v3].mBoolValue = v5;
+    v13 = this->mValues.p;
+    this->mValues.size = v11;
+    v13[size].mKey.mUID = mUID;
+    v13[size].mIntValue = status;
+    v13[size].mBoolValue = status;
+  }
+  else
+  {
+    p[v4].mIntValue = status;
   }
 }
 
@@ -455,91 +438,78 @@ LABEL_5:
 // RVA: 0x4A68F0
 __int64 __fastcall UFG::PersistentData::MapInt::GetStatus(UFG::PersistentData::MapInt *this, UFG::qSymbol *name)
 {
-  unsigned int v2; // er8
+  unsigned int size; // r8d
   __int64 v3; // rax
-  UFG::PersistentData::KeyValue *v4; // r9
-  unsigned int v5; // edx
-  UFG::PersistentData::KeyValue *v6; // rcx
-  __int64 result; // rax
+  UFG::PersistentData::KeyValue *p; // r9
+  unsigned int mUID; // edx
+  UFG::PersistentData::KeyValue *i; // rcx
 
-  v2 = this->mValues.size;
+  size = this->mValues.size;
   v3 = 0i64;
   if ( !this->mValues.size )
-    goto LABEL_5;
-  v4 = this->mValues.p;
-  v5 = name->mUID;
-  v6 = this->mValues.p;
-  while ( v6->mKey.mUID != v5 )
+    return 0i64;
+  p = this->mValues.p;
+  mUID = name->mUID;
+  for ( i = p; i->mKey.mUID != mUID; ++i )
   {
     v3 = (unsigned int)(v3 + 1);
-    ++v6;
-    if ( (unsigned int)v3 >= v2 )
-      goto LABEL_5;
+    if ( (unsigned int)v3 >= size )
+      return 0i64;
   }
-  if ( (_DWORD)v3 != -1 )
-    result = (unsigned int)v4[v3].mIntValue;
+  if ( (_DWORD)v3 == -1 )
+    return 0i64;
   else
-LABEL_5:
-    result = 0i64;
-  return result;
+    return (unsigned int)p[v3].mIntValue;
 }
 
 // File Line: 507
 // RVA: 0x4A41D0
 __int64 __fastcall UFG::PersistentData::MapInt::GetInt(UFG::PersistentData::MapInt *this, unsigned int index)
 {
-  __int64 result; // rax
-
   if ( index >= this->mValues.size )
-    result = 0i64;
+    return 0i64;
   else
-    result = (unsigned int)this->mValues.p[index].mIntValue;
-  return result;
+    return (unsigned int)this->mValues.p[index].mIntValue;
 }
 
 // File Line: 520
 // RVA: 0x494360
-void __fastcall UFG::PersistentData::MapInt::ApplyDelta(UFG::PersistentData::MapInt *this, UFG::qSymbol *name, int delta)
+void __fastcall UFG::PersistentData::MapInt::ApplyDelta(
+        UFG::PersistentData::MapInt *this,
+        UFG::qSymbol *name,
+        int delta)
 {
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rax
-  int v5; // ebp
-  UFG::PersistentData::MapInt *v6; // rsi
-  UFG::PersistentData::KeyValue *v7; // r9
-  unsigned int v8; // er14
-  unsigned int v9; // edx
+  UFG::PersistentData::KeyValue *p; // r9
+  unsigned int mUID; // r14d
+  unsigned int capacity; // edx
   unsigned int v10; // ebx
   unsigned int v11; // edx
   UFG::PersistentData::KeyValue *v12; // rax
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = delta;
-  v6 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v7 = this->mValues.p;
-  while ( v7->mKey.mUID != name->mUID )
+  p = this->mValues.p;
+  while ( p->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
-    ++v7;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    ++p;
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    this->mValues.p[v4].mIntValue += delta;
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v8 = name->mUID;
-    v9 = this->mValues.capacity;
-    v10 = v3 + 1;
-    if ( (signed int)v3 + 1 > v9 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    v10 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v9 )
-        v11 = 2 * v9;
+      if ( capacity )
+        v11 = 2 * capacity;
       else
         v11 = 1;
       for ( ; v11 < v10; v11 *= 2 )
@@ -547,14 +517,18 @@ LABEL_5:
       if ( v11 <= 2 )
         v11 = 2;
       if ( v11 - v10 > 0x10000 )
-        v11 = v3 + 65537;
+        v11 = size + 65537;
       UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&this->mValues, v11, "MapTypes");
     }
-    v12 = v6->mValues.p;
-    v6->mValues.size = v10;
-    v12[v3].mKey.mUID = v8;
-    v12[v3].mIntValue = v5;
-    v12[v3].mBoolValue = v5;
+    v12 = this->mValues.p;
+    this->mValues.size = v10;
+    v12[size].mKey.mUID = mUID;
+    v12[size].mIntValue = delta;
+    v12[size].mBoolValue = delta;
+  }
+  else
+  {
+    this->mValues.p[v4].mIntValue += delta;
   }
 }
 
@@ -562,28 +536,26 @@ LABEL_5:
 // RVA: 0x4A6E30
 __int64 __fastcall UFG::PersistentData::MapInt::GetTotal(UFG::PersistentData::MapInt *this)
 {
-  unsigned int v1; // er11
+  signed int size; // r11d
   int v2; // edx
-  UFG::PersistentData::MapInt *v3; // r10
-  int v4; // er8
-  float v5; // ebx
+  int v4; // r8d
+  int mIntValue; // ebx
   unsigned int v6; // edi
-  signed __int64 v7; // rcx
+  __int64 v7; // rcx
   int *v8; // rax
   __int64 v9; // rcx
   __int64 v10; // r9
 
-  v1 = this->mValues.size;
+  size = this->mValues.size;
   v2 = 0;
-  v3 = this;
   v4 = 0;
-  v5 = 0.0;
+  mIntValue = 0;
   v6 = 0;
   v7 = 0i64;
-  if ( (signed int)v1 >= 2 )
+  if ( size >= 2 )
   {
-    v8 = (int *)&v3->mValues.p[1].4;
-    v9 = ((v1 - 2) >> 1) + 1;
+    v8 = (int *)&this->mValues.p[1].4;
+    v9 = ((unsigned int)(size - 2) >> 1) + 1;
     v10 = (unsigned int)v9;
     v6 = 2 * v9;
     v7 = 2 * v9;
@@ -596,67 +568,64 @@ __int64 __fastcall UFG::PersistentData::MapInt::GetTotal(UFG::PersistentData::Ma
     }
     while ( v10 );
   }
-  if ( v6 < v1 )
-    v5 = v3->mValues.p[v7].mFloatValue;
-  return (unsigned int)(LODWORD(v5) + v4 + v2);
+  if ( v6 < size )
+    mIntValue = this->mValues.p[v7].mIntValue;
+  return (unsigned int)(mIntValue + v4 + v2);
 }
 
 // File Line: 546
 // RVA: 0x4A5300
-void __fastcall UFG::PersistentData::MapInt::GetMaxMin(UFG::PersistentData::MapInt *this, UFG::qSymbol **max, UFG::qSymbol **min)
+void __fastcall UFG::PersistentData::MapInt::GetMaxMin(
+        UFG::PersistentData::MapInt *this,
+        UFG::PersistentData::KeyValue **max,
+        UFG::PersistentData::KeyValue **min)
 {
-  unsigned int v3; // er10
-  UFG::qSymbol **v4; // rbx
-  UFG::qSymbol **v5; // rdi
-  UFG::PersistentData::MapInt *v6; // r9
-  UFG::PersistentData::KeyValue *v7; // rax
-  float v8; // er11
+  unsigned int size; // r10d
+  UFG::PersistentData::KeyValue *p; // rax
+  int mIntValue; // r11d
   unsigned int v9; // edx
   int v10; // esi
-  signed __int64 v11; // r8
+  __int64 v11; // r8
   UFG::PersistentData::KeyValue *v12; // rcx
   UFG::PersistentData::KeyValue *v13; // rcx
 
-  v3 = this->mValues.size;
-  v4 = min;
-  v5 = max;
-  v6 = this;
+  size = this->mValues.size;
   if ( this->mValues.size )
   {
-    v7 = this->mValues.p;
-    if ( v3 == 1 )
+    p = this->mValues.p;
+    if ( size == 1 )
     {
-      *max = (UFG::qSymbol *)v7;
+      *max = p;
       *min = 0i64;
     }
     else
     {
-      v8 = v7->mFloatValue;
-      *min = (UFG::qSymbol *)v7;
-      *max = (UFG::qSymbol *)v7;
+      mIntValue = p->mIntValue;
+      *min = p;
+      *max = p;
       v9 = 1;
-      v10 = LODWORD(v8);
-      if ( v3 > 1 )
+      v10 = mIntValue;
+      if ( size > 1 )
       {
         v11 = 1i64;
         do
         {
-          v12 = v6->mValues.p;
+          v12 = this->mValues.p;
           if ( v10 < v12[v11].mIntValue )
           {
             v10 = v12[v11].mIntValue;
-            *v5 = (UFG::qSymbol *)&v12[v9];
+            *max = &v12[v9];
           }
-          v13 = v6->mValues.p;
-          if ( SLODWORD(v8) > v13[v11].mIntValue )
+          v13 = this->mValues.p;
+          if ( mIntValue > v13[v11].mIntValue )
           {
-            v8 = v13[v11].mFloatValue;
-            *v4 = (UFG::qSymbol *)&v13[v9];
+            mIntValue = v13[v11].mIntValue;
+            *min = &v13[v9];
           }
           ++v9;
           ++v11;
         }
-        while ( v9 < v3 );
+        while ( v9 < size );
       }
     }
   }
@@ -669,67 +638,67 @@ void __fastcall UFG::PersistentData::MapInt::GetMaxMin(UFG::PersistentData::MapI
 
 // File Line: 643
 // RVA: 0x4BDC00
-void __fastcall UFG::PersistentData::MapUInt64::SetStatus(UFG::PersistentData::MapUInt64 *this, UFG::qSymbol *name, unsigned __int64 status)
+void __fastcall UFG::PersistentData::MapUInt64::SetStatus(
+        UFG::PersistentData::MapUInt64 *this,
+        UFG::qSymbol *name,
+        unsigned __int64 status)
 {
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rax
-  unsigned __int64 v5; // r14
-  UFG::PersistentData::MapUInt64 *v6; // rsi
-  UFG::PersistentData::KeyValue64 *v7; // rcx
+  UFG::PersistentData::KeyValue64 *p; // rcx
   UFG::PersistentData::KeyValue64 *v8; // r9
-  unsigned int v9; // ebp
-  unsigned int v10; // edx
+  unsigned int mUID; // ebp
+  unsigned int capacity; // edx
   unsigned int v11; // ebx
   unsigned int v12; // edx
-  signed __int64 v13; // rax
+  UFG::PersistentData::KeyValue64 *v13; // rax
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = status;
-  v6 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v7 = this->mValues.p;
-  v8 = v7;
+  p = this->mValues.p;
+  v8 = p;
   while ( v8->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
     ++v8;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    v7[v4].mIntValue = status;
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v9 = name->mUID;
-    v10 = v6->mValues.capacity;
-    v11 = v3 + 1;
-    if ( (signed int)v3 + 1 > v10 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    v11 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v10 )
-        v12 = 2 * v10;
+      if ( capacity )
+        v12 = 2 * capacity;
       else
         v12 = 1;
       for ( ; v12 < v11; v12 *= 2 )
         ;
       if ( v12 - v11 > 0x10000 )
-        v12 = v3 + 65537;
-      UFG::qArray<UFG::PersistentData::KeyValue64,0>::Reallocate(&v6->mValues, v12, "MapTypes");
+        v12 = size + 65537;
+      UFG::qArray<UFG::PersistentData::KeyValue64,0>::Reallocate(&this->mValues, v12, "MapTypes");
     }
-    v6->mValues.size = v11;
-    v13 = (signed __int64)&v6->mValues.p[v3];
-    *(_DWORD *)v13 = v9;
-    *(_QWORD *)(v13 + 8) = v5;
+    this->mValues.size = v11;
+    v13 = &this->mValues.p[size];
+    v13->mKey.mUID = mUID;
+    v13->mIntValue = status;
+  }
+  else
+  {
+    p[v4].mIntValue = status;
   }
 }
 
 // File Line: 737
 // RVA: 0x4A5470
-UFG::PersistentData::KeyValue *__fastcall UFG::PersistentData::MapFloat::Iterator::GetName(UFG::PersistentData::MapFloat::Iterator *this)
+UFG::PersistentData::KeyValue *__fastcall UFG::PersistentData::MapFloat::Iterator::GetName(
+        UFG::PersistentData::MapFloat::Iterator *this)
 {
   return &this->mList->mValues.p[this->mIndex];
 }
@@ -743,47 +712,44 @@ float __fastcall UFG::PersistentData::MapFloat::Iterator::GetStatus(UFG::Persist
 
 // File Line: 779
 // RVA: 0x4BDA50
-void __fastcall UFG::PersistentData::MapFloat::SetStatus(UFG::PersistentData::MapFloat *this, UFG::qSymbol *name, float status)
+void __fastcall UFG::PersistentData::MapFloat::SetStatus(
+        UFG::PersistentData::MapFloat *this,
+        UFG::qSymbol *name,
+        float status)
 {
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rax
-  UFG::PersistentData::MapFloat *v5; // rsi
-  UFG::PersistentData::KeyValue *v6; // rcx
+  UFG::PersistentData::KeyValue *p; // rcx
   UFG::PersistentData::KeyValue *v7; // r8
-  unsigned int v8; // ebp
-  unsigned int v9; // edx
+  unsigned int mUID; // ebp
+  unsigned int capacity; // edx
   unsigned int v10; // ebx
   unsigned int v11; // edx
   UFG::PersistentData::KeyValue *v12; // rcx
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v6 = this->mValues.p;
-  v7 = v6;
+  p = this->mValues.p;
+  v7 = p;
   while ( v7->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
     ++v7;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    v6[v4].mFloatValue = status;
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v8 = name->mUID;
-    v9 = v5->mValues.capacity;
-    v10 = v3 + 1;
-    if ( (signed int)v3 + 1 > v9 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    v10 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v9 )
-        v11 = 2 * v9;
+      if ( capacity )
+        v11 = 2 * capacity;
       else
         v11 = 1;
       for ( ; v11 < v10; v11 *= 2 )
@@ -791,14 +757,18 @@ LABEL_5:
       if ( v11 <= 2 )
         v11 = 2;
       if ( v11 - v10 > 0x10000 )
-        v11 = v3 + 65537;
-      UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&v5->mValues, v11, "MapTypes");
+        v11 = size + 65537;
+      UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&this->mValues, v11, "MapTypes");
     }
-    v12 = v5->mValues.p;
-    v5->mValues.size = v10;
-    v12[v3].mKey.mUID = v8;
-    v12[v3].mFloatValue = status;
-    v12[v3].mBoolValue = LOBYTE(status);
+    v12 = this->mValues.p;
+    this->mValues.size = v10;
+    v12[size].mKey.mUID = mUID;
+    v12[size].mFloatValue = status;
+    v12[size].mBoolValue = LOBYTE(status);
+  }
+  else
+  {
+    p[v4].mFloatValue = status;
   }
 }
 
@@ -806,76 +776,68 @@ LABEL_5:
 // RVA: 0x4A68B0
 float __fastcall UFG::PersistentData::MapFloat::GetStatus(UFG::PersistentData::MapFloat *this, UFG::qSymbol *name)
 {
-  unsigned int v2; // er8
+  unsigned int size; // r8d
   __int64 v3; // rax
-  UFG::PersistentData::KeyValue *v4; // r9
-  unsigned int v5; // edx
-  UFG::PersistentData::KeyValue *v6; // rcx
-  float result; // xmm0_4
+  UFG::PersistentData::KeyValue *p; // r9
+  unsigned int mUID; // edx
+  UFG::PersistentData::KeyValue *i; // rcx
 
-  v2 = this->mValues.size;
+  size = this->mValues.size;
   v3 = 0i64;
   if ( !this->mValues.size )
-    goto LABEL_5;
-  v4 = this->mValues.p;
-  v5 = name->mUID;
-  v6 = this->mValues.p;
-  while ( v6->mKey.mUID != v5 )
+    return 0.0;
+  p = this->mValues.p;
+  mUID = name->mUID;
+  for ( i = p; i->mKey.mUID != mUID; ++i )
   {
     v3 = (unsigned int)(v3 + 1);
-    ++v6;
-    if ( (unsigned int)v3 >= v2 )
-      goto LABEL_5;
+    if ( (unsigned int)v3 >= size )
+      return 0.0;
   }
-  if ( (_DWORD)v3 != -1 )
-    result = v4[v3].mFloatValue;
+  if ( (_DWORD)v3 == -1 )
+    return 0.0;
   else
-LABEL_5:
-    result = 0.0;
-  return result;
+    return p[v3].mFloatValue;
 }
 
 // File Line: 805
 // RVA: 0x494270
-void __fastcall UFG::PersistentData::MapFloat::ApplyDelta(UFG::PersistentData::MapFloat *this, UFG::qSymbol *name, float delta)
+void __fastcall UFG::PersistentData::MapFloat::ApplyDelta(
+        UFG::PersistentData::MapFloat *this,
+        UFG::qSymbol *name,
+        float delta)
 {
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rax
-  UFG::PersistentData::MapFloat *v5; // rsi
-  UFG::PersistentData::KeyValue *v6; // r8
-  unsigned int v7; // ebp
-  unsigned int v8; // edx
+  UFG::PersistentData::KeyValue *p; // r8
+  unsigned int mUID; // ebp
+  unsigned int capacity; // edx
   unsigned int v9; // ebx
   unsigned int v10; // edx
   UFG::PersistentData::KeyValue *v11; // rcx
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v6 = this->mValues.p;
-  while ( v6->mKey.mUID != name->mUID )
+  p = this->mValues.p;
+  while ( p->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
-    ++v6;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    ++p;
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    this->mValues.p[v4].mFloatValue = delta + this->mValues.p[v4].mFloatValue;
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v7 = name->mUID;
-    v8 = this->mValues.capacity;
-    v9 = v3 + 1;
-    if ( (signed int)v3 + 1 > v8 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    v9 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v8 )
-        v10 = 2 * v8;
+      if ( capacity )
+        v10 = 2 * capacity;
       else
         v10 = 1;
       for ( ; v10 < v9; v10 *= 2 )
@@ -883,31 +845,35 @@ LABEL_5:
       if ( v10 <= 2 )
         v10 = 2;
       if ( v10 - v9 > 0x10000 )
-        v10 = v3 + 65537;
+        v10 = size + 65537;
       UFG::qArray<UFG::PersistentData::KeyValue,0>::Reallocate(&this->mValues, v10, "MapTypes");
     }
-    v11 = v5->mValues.p;
-    v5->mValues.size = v9;
-    v11[v3].mKey.mUID = v7;
-    v11[v3].mFloatValue = delta;
-    v11[v3].mBoolValue = LOBYTE(delta);
+    v11 = this->mValues.p;
+    this->mValues.size = v9;
+    v11[size].mKey.mUID = mUID;
+    v11[size].mFloatValue = delta;
+    v11[size].mBoolValue = LOBYTE(delta);
+  }
+  else
+  {
+    this->mValues.p[v4].mFloatValue = delta + this->mValues.p[v4].mFloatValue;
   }
 }
 
 // File Line: 818
 // RVA: 0x4A5120
-void __fastcall UFG::PersistentData::MapFloat::GetMaxMin(UFG::PersistentData::MapFloat *this, UFG::qSymbol **max, UFG::qSymbol **min)
+void __fastcall UFG::PersistentData::MapFloat::GetMaxMin(
+        UFG::PersistentData::MapFloat *this,
+        UFG::PersistentData::KeyValue **max,
+        UFG::PersistentData::KeyValue **min)
 {
-  unsigned int v3; // esi
-  UFG::qSymbol **v4; // rbx
-  UFG::qSymbol **v5; // rdi
-  UFG::PersistentData::MapFloat *v6; // r9
-  UFG::PersistentData::KeyValue *v7; // rax
-  float v8; // xmm0_4
+  unsigned int size; // esi
+  UFG::PersistentData::KeyValue *p; // rax
+  float mFloatValue; // xmm0_4
   unsigned int v9; // edx
-  signed __int64 v10; // r8
+  __int64 v10; // r8
   float v11; // xmm1_4
-  unsigned int v12; // er10
+  unsigned int v12; // r10d
   UFG::PersistentData::KeyValue *v13; // rcx
   UFG::PersistentData::KeyValue *v14; // rcx
   UFG::PersistentData::KeyValue *v15; // r11
@@ -916,112 +882,109 @@ void __fastcall UFG::PersistentData::MapFloat::GetMaxMin(UFG::PersistentData::Ma
   UFG::PersistentData::KeyValue *v18; // rcx
   UFG::PersistentData::KeyValue *v19; // r11
   UFG::PersistentData::KeyValue *v20; // r11
-  signed __int64 v21; // r8
+  __int64 v21; // r8
   UFG::PersistentData::KeyValue *v22; // rcx
   UFG::PersistentData::KeyValue *v23; // rcx
 
-  v3 = this->mValues.size;
-  v4 = min;
-  v5 = max;
-  v6 = this;
-  if ( this->mValues.size >= 1 )
+  size = this->mValues.size;
+  if ( this->mValues.size )
   {
-    v7 = this->mValues.p;
-    if ( v3 == 1 )
+    p = this->mValues.p;
+    if ( size == 1 )
     {
-      *max = (UFG::qSymbol *)v7;
+      *max = p;
       *min = 0i64;
     }
     else
     {
-      v8 = v7->mFloatValue;
-      *min = (UFG::qSymbol *)v7;
-      *max = (UFG::qSymbol *)v7;
+      mFloatValue = p->mFloatValue;
+      *min = p;
+      *max = p;
       v9 = 1;
       v10 = 1i64;
-      v11 = v8;
-      if ( v3 > 1 )
+      v11 = mFloatValue;
+      if ( size > 1 )
       {
-        if ( (signed int)(v3 - 1) >= 4 )
+        if ( (int)(size - 1) >= 4 )
         {
           v12 = 3;
           do
           {
-            v13 = v6->mValues.p;
+            v13 = this->mValues.p;
             if ( v11 < v13[v10].mFloatValue )
             {
               v11 = v13[v10].mFloatValue;
-              *v5 = (UFG::qSymbol *)&v13[v9];
+              *max = &v13[v9];
             }
-            v14 = v6->mValues.p;
-            if ( v8 > v14[v10].mFloatValue )
+            v14 = this->mValues.p;
+            if ( mFloatValue > v14[v10].mFloatValue )
             {
-              v8 = v14[v10].mFloatValue;
-              *v4 = (UFG::qSymbol *)&v14[v9];
+              mFloatValue = v14[v10].mFloatValue;
+              *min = &v14[v9];
             }
-            v15 = v6->mValues.p;
+            v15 = this->mValues.p;
             if ( v11 < v15[v10 + 1].mFloatValue )
             {
               v11 = v15[v10 + 1].mFloatValue;
-              *v5 = (UFG::qSymbol *)&v15[v12 - 1];
+              *max = &v15[v12 - 1];
             }
-            v16 = v6->mValues.p;
-            if ( v8 > v16[v10 + 1].mFloatValue )
+            v16 = this->mValues.p;
+            if ( mFloatValue > v16[v10 + 1].mFloatValue )
             {
-              v8 = v16[v10 + 1].mFloatValue;
-              *v4 = (UFG::qSymbol *)&v16[v12 - 1];
+              mFloatValue = v16[v10 + 1].mFloatValue;
+              *min = &v16[v12 - 1];
             }
-            v17 = v6->mValues.p;
+            v17 = this->mValues.p;
             if ( v11 < v17[v10 + 2].mFloatValue )
             {
               v11 = v17[v10 + 2].mFloatValue;
-              *v5 = (UFG::qSymbol *)&v17[v12];
+              *max = &v17[v12];
             }
-            v18 = v6->mValues.p;
-            if ( v8 > v18[v10 + 2].mFloatValue )
+            v18 = this->mValues.p;
+            if ( mFloatValue > v18[v10 + 2].mFloatValue )
             {
-              v8 = v18[v10 + 2].mFloatValue;
-              *v4 = (UFG::qSymbol *)&v18[v12];
+              mFloatValue = v18[v10 + 2].mFloatValue;
+              *min = &v18[v12];
             }
-            v19 = v6->mValues.p;
+            v19 = this->mValues.p;
             if ( v11 < v19[v10 + 3].mFloatValue )
             {
               v11 = v19[v10 + 3].mFloatValue;
-              *v5 = (UFG::qSymbol *)&v19[v12 + 1];
+              *max = &v19[v12 + 1];
             }
-            v20 = v6->mValues.p;
-            if ( v8 > v20[v10 + 3].mFloatValue )
+            v20 = this->mValues.p;
+            if ( mFloatValue > v20[v10 + 3].mFloatValue )
             {
-              v8 = v20[v10 + 3].mFloatValue;
-              *v4 = (UFG::qSymbol *)&v20[v12 + 1];
+              mFloatValue = v20[v10 + 3].mFloatValue;
+              *min = &v20[v12 + 1];
             }
             v9 += 4;
             v10 += 4i64;
             v12 += 4;
           }
-          while ( v9 < v3 - 3 );
+          while ( v9 < size - 3 );
         }
-        if ( v9 < v3 )
+        if ( v9 < size )
         {
           v21 = v10;
           do
           {
-            v22 = v6->mValues.p;
+            v22 = this->mValues.p;
             if ( v11 < v22[v21].mFloatValue )
             {
               v11 = v22[v21].mFloatValue;
-              *v5 = (UFG::qSymbol *)&v22[v9];
+              *max = &v22[v9];
             }
-            v23 = v6->mValues.p;
-            if ( v8 > v23[v21].mFloatValue )
+            v23 = this->mValues.p;
+            if ( mFloatValue > v23[v21].mFloatValue )
             {
-              v8 = v23[v21].mFloatValue;
-              *v4 = (UFG::qSymbol *)&v23[v9];
+              mFloatValue = v23[v21].mFloatValue;
+              *min = &v23[v9];
             }
             ++v9;
             ++v21;
           }
-          while ( v9 < v3 );
+          while ( v9 < size );
         }
       }
     }
@@ -1049,54 +1012,54 @@ void __fastcall UFG::PersistentData::MapFloat::Iterator::Next(ARefCountMix<SSIns
 
 // File Line: 873
 // RVA: 0x4A5420
-UFG::PersistentData::KeyBinary *__fastcall UFG::PersistentData::MapBinary::Iterator::GetName(UFG::PersistentData::MapBinary::Iterator *this)
+UFG::PersistentData::KeyBinary *__fastcall UFG::PersistentData::MapBinary::Iterator::GetName(
+        UFG::PersistentData::MapBinary::Iterator *this)
 {
   return &this->mList->mValues.p[this->mIndex];
 }
 
 // File Line: 880
 // RVA: 0x4A1940
-UFG::PersistentData::Binary *__fastcall UFG::PersistentData::MapBinary::Iterator::GetBinary(UFG::PersistentData::MapBinary::Iterator *this)
+UFG::PersistentData::Binary *__fastcall UFG::PersistentData::MapBinary::Iterator::GetBinary(
+        UFG::PersistentData::MapBinary::Iterator *this)
 {
-  return (UFG::PersistentData::Binary *)((char *)this->mList->mValues.p + 8 * (3i64 * this->mIndex + 1));
+  return &this->mList->mValues.p[this->mIndex].mBinary;
 }
 
 // File Line: 894
 // RVA: 0x48CE70
-void __fastcall UFG::PersistentData::MapBinary::MapBinary(UFG::PersistentData::MapBinary *this, UFG::PersistentData::MapBinary *src)
+void __fastcall UFG::PersistentData::MapBinary::MapBinary(
+        UFG::PersistentData::MapBinary *this,
+        UFG::PersistentData::MapBinary *src)
 {
-  UFG::PersistentData::MapBinary *v2; // rbp
-  UFG::PersistentData::MapBinary *v3; // r14
   __int64 v4; // r15
-  __int64 v5; // r12
+  __int64 size; // r12
   UFG::PersistentData::KeyBinary *v6; // rsi
-  unsigned int v7; // edi
+  unsigned int mSize; // edi
   UFG::allocator::free_link *v8; // rbx
-  UFG::PersistentData::Binary binary; // [rsp+28h] [rbp-40h]
+  UFG::PersistentData::Binary binary; // [rsp+28h] [rbp-40h] BYREF
 
-  v2 = src;
-  v3 = this;
   v4 = 0i64;
   this->mValues.p = 0i64;
   *(_QWORD *)&this->mValues.size = 0i64;
   UFG::PersistentData::MapBinary::Clear(this);
-  v3->mPersistentDataType = v2->mPersistentDataType;
-  if ( v2->mValues.size )
+  this->mPersistentDataType = src->mPersistentDataType;
+  if ( src->mValues.size )
   {
-    v5 = v2->mValues.size;
+    size = src->mValues.size;
     do
     {
-      v6 = &v2->mValues.p[v4];
-      v7 = v6->mBinary.mSize;
-      v8 = UFG::qMalloc(v6->mBinary.mSize, "MapBinary", 0i64);
-      UFG::qMemCopy(v8, v6->mBinary.mpBuffer, v7);
+      v6 = &src->mValues.p[v4];
+      mSize = v6->mBinary.mSize;
+      v8 = UFG::qMalloc(mSize, "MapBinary", 0i64);
+      UFG::qMemCopy(v8, v6->mBinary.mpBuffer, mSize);
       binary.mpBuffer = v8;
-      binary.mSize = v7;
-      UFG::PersistentData::MapBinary::SetBinary(v3, &v6->mKey, &binary);
+      binary.mSize = mSize;
+      UFG::PersistentData::MapBinary::SetBinary(this, &v6->mKey, &binary);
       ++v4;
-      --v5;
+      --size;
     }
-    while ( v5 );
+    while ( size );
   }
 }
 
@@ -1104,84 +1067,78 @@ void __fastcall UFG::PersistentData::MapBinary::MapBinary(UFG::PersistentData::M
 // RVA: 0x4978A0
 void __fastcall UFG::PersistentData::MapBinary::Clear(UFG::PersistentData::MapBinary *this)
 {
-  UFG::PersistentData::MapBinary *v1; // rsi
   __int64 v2; // rdi
-  __int64 v3; // rbp
-  UFG::PersistentData::KeyBinary *v4; // rbx
+  __int64 size; // rbp
+  UFG::PersistentData::KeyBinary *p; // rbx
   UFG::PersistentData::KeyBinary *v5; // rcx
-  unsigned int *v6; // rbx
+  unsigned int *p_mSize; // rbx
 
-  v1 = this;
   if ( this->mValues.size )
   {
     v2 = 0i64;
-    v3 = this->mValues.size;
+    size = this->mValues.size;
     do
     {
-      v4 = v1->mValues.p;
-      if ( v4[v2].mBinary.mSize > 0 )
-        operator delete[](v4[v2].mBinary.mpBuffer);
-      v4[v2].mBinary.mpBuffer = 0i64;
-      v4[v2].mBinary.mSize = 0;
-      ++v2;
-      --v3;
+      p = this->mValues.p;
+      if ( p[v2].mBinary.mSize )
+        operator delete[](p[v2].mBinary.mpBuffer);
+      p[v2].mBinary.mpBuffer = 0i64;
+      p[v2++].mBinary.mSize = 0;
+      --size;
     }
-    while ( v3 );
+    while ( size );
   }
-  v5 = v1->mValues.p;
+  v5 = this->mValues.p;
   if ( v5 )
   {
-    v6 = &v5[-1].mBinary.mSize;
+    p_mSize = &v5[-1].mBinary.mSize;
     `eh vector destructor iterator(v5, 0x18ui64, v5[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
-    operator delete[](v6);
+    operator delete[](p_mSize);
   }
-  v1->mValues.p = 0i64;
-  *(_QWORD *)&v1->mValues.size = 0i64;
+  this->mValues.p = 0i64;
+  *(_QWORD *)&this->mValues.size = 0i64;
 }
 
 // File Line: 926
 // RVA: 0x4AD3F0
 void __fastcall UFG::PersistentData::MapBinary::KeepLatest(UFG::PersistentData::MapBinary *this, unsigned int newsize)
 {
-  UFG::PersistentData::MapBinary *v2; // rbx
-  unsigned int v3; // eax
+  int v3; // eax
   __int64 v4; // rsi
-  UFG::PersistentData::KeyBinary *v5; // rdi
-  signed int v6; // er8
-  signed __int64 v7; // rdx
+  UFG::PersistentData::KeyBinary *p; // rdi
+  int v6; // r8d
+  __int64 v7; // rdx
   UFG::PersistentData::KeyBinary *v8; // rcx
 
-  v2 = this;
   v3 = this->mValues.size - newsize;
-  if ( (signed int)v3 >= 1 )
+  if ( v3 >= 1 )
   {
-    v4 = v3;
+    v4 = (unsigned int)v3;
     do
     {
-      v5 = v2->mValues.p;
-      if ( v5->mBinary.mSize > 0 )
-        operator delete[](v5->mBinary.mpBuffer);
+      p = this->mValues.p;
+      if ( p->mBinary.mSize )
+        operator delete[](p->mBinary.mpBuffer);
       v6 = 1;
-      v5->mBinary.mpBuffer = 0i64;
-      v5->mBinary.mSize = 0;
-      if ( v2->mValues.size != 1 )
+      p->mBinary.mpBuffer = 0i64;
+      p->mBinary.mSize = 0;
+      if ( this->mValues.size != 1 )
       {
         v7 = 1i64;
         do
         {
           ++v6;
-          v8 = &v2->mValues.p[v7];
-          ++v7;
+          v8 = &this->mValues.p[v7++];
           v8[-1].mKey.mUID = v8->mKey.mUID;
           v8[-1].mBinary.mpBuffer = v8->mBinary.mpBuffer;
           v8[-1].mBinary.mSize = v8->mBinary.mSize;
         }
-        while ( v6 != v2->mValues.size );
+        while ( v6 != this->mValues.size );
       }
-      if ( v2->mValues.size > 1 )
-        --v2->mValues.size;
+      if ( this->mValues.size > 1 )
+        --this->mValues.size;
       else
-        v2->mValues.size = 0;
+        this->mValues.size = 0;
       --v4;
     }
     while ( v4 );
@@ -1190,86 +1147,85 @@ void __fastcall UFG::PersistentData::MapBinary::KeepLatest(UFG::PersistentData::
 
 // File Line: 947
 // RVA: 0x4BBBB0
-void __fastcall UFG::PersistentData::MapBinary::SetBinary(UFG::PersistentData::MapBinary *this, UFG::qSymbol *name, UFG::PersistentData::Binary *binary)
+void __fastcall UFG::PersistentData::MapBinary::SetBinary(
+        UFG::PersistentData::MapBinary *this,
+        UFG::qSymbol *name,
+        UFG::PersistentData::Binary *binary)
 {
-  signed __int64 v3; // rdi
-  signed __int64 v4; // rax
-  UFG::PersistentData::Binary *v5; // rbx
-  UFG::PersistentData::MapBinary *v6; // rsi
-  UFG::PersistentData::KeyBinary *v7; // r15
+  __int64 size; // rdi
+  unsigned __int64 v4; // rax
+  UFG::PersistentData::KeyBinary *p; // r15
   UFG::PersistentData::KeyBinary *v8; // r9
-  unsigned int v9; // ebp
-  unsigned int v10; // edx
-  void *v11; // r14
-  unsigned int v12; // er15
+  unsigned int mUID; // ebp
+  unsigned int capacity; // edx
+  void *mpBuffer; // r14
+  unsigned int mSize; // r15d
   unsigned int v13; // ebx
   unsigned int v14; // edx
   unsigned int v15; // ebp
   void *v16; // r14
-  signed __int64 v17; // rdi
+  unsigned __int64 v17; // rdi
   UFG::PersistentData::KeyBinary *v18; // rbx
   UFG::PersistentData::KeyBinary *v19; // rax
-  signed __int64 v20; // rcx
+  __int64 v20; // rcx
 
-  v3 = this->mValues.size;
+  size = this->mValues.size;
   v4 = 0i64;
-  v5 = binary;
-  v6 = this;
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)size )
     goto LABEL_5;
-  v7 = this->mValues.p;
-  v8 = this->mValues.p;
+  p = this->mValues.p;
+  v8 = p;
   while ( v8->mKey.mUID != name->mUID )
   {
     v4 = (unsigned int)(v4 + 1);
     ++v8;
-    if ( (unsigned int)v4 >= (unsigned int)v3 )
+    if ( (unsigned int)v4 >= (unsigned int)size )
       goto LABEL_5;
   }
-  if ( (_DWORD)v4 != -1 )
-  {
-    v15 = binary->mSize;
-    v16 = binary->mpBuffer;
-    v17 = v4;
-    if ( v7[v4].mBinary.mSize )
-      operator delete[](v7[v17].mBinary.mpBuffer);
-    v7[v17].mBinary.mpBuffer = v16;
-    v7[v17].mBinary.mSize = v15;
-    if ( !v5->mpBuffer )
-    {
-      v18 = &v6->mValues.p[v17];
-      if ( v18->mBinary.mSize )
-        operator delete[](v18->mBinary.mpBuffer);
-      v18->mBinary.mpBuffer = 0i64;
-      v18->mBinary.mSize = 0;
-    }
-  }
-  else
+  if ( (_DWORD)v4 == -1 )
   {
 LABEL_5:
-    v9 = name->mUID;
-    v10 = this->mValues.capacity;
-    v11 = binary->mpBuffer;
-    v12 = binary->mSize;
-    v13 = v3 + 1;
-    if ( (signed int)v3 + 1 > v10 )
+    mUID = name->mUID;
+    capacity = this->mValues.capacity;
+    mpBuffer = binary->mpBuffer;
+    mSize = binary->mSize;
+    v13 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v10 )
-        v14 = 2 * v10;
+      if ( capacity )
+        v14 = 2 * capacity;
       else
         v14 = 1;
       for ( ; v14 < v13; v14 *= 2 )
         ;
       if ( v14 - v13 > 0x10000 )
-        v14 = v3 + 65537;
+        v14 = size + 65537;
       UFG::qArray<UFG::PersistentData::KeyBinary,0>::Reallocate(&this->mValues, v14, "qArray.Add");
     }
-    v19 = v6->mValues.p;
-    v20 = v3;
-    v6->mValues.size = v13;
-    v19[v20].mKey.mUID = v9;
-    v19[v20].mBinary.mpBuffer = v11;
-    v19[v20].mBinary.mSize = v12;
+    v19 = this->mValues.p;
+    v20 = size;
+    this->mValues.size = v13;
+    v19[v20].mKey.mUID = mUID;
+    v19[v20].mBinary.mpBuffer = mpBuffer;
+    v19[v20].mBinary.mSize = mSize;
+  }
+  else
+  {
+    v15 = binary->mSize;
+    v16 = binary->mpBuffer;
+    v17 = v4;
+    if ( p[v4].mBinary.mSize )
+      operator delete[](p[v17].mBinary.mpBuffer);
+    p[v17].mBinary.mpBuffer = v16;
+    p[v17].mBinary.mSize = v15;
+    if ( !binary->mpBuffer )
+    {
+      v18 = &this->mValues.p[v17];
+      if ( v18->mBinary.mSize )
+        operator delete[](v18->mBinary.mpBuffer);
+      v18->mBinary.mpBuffer = 0i64;
+      v18->mBinary.mSize = 0;
+    }
   }
 }
 

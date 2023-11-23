@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkaPredictiveCompressedAnimationClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 168
@@ -63,23 +63,26 @@ hkClass *__fastcall hkaPredictiveCompressedAnimation::staticClass()
 
 // File Line: 175
 // RVA: 0xB1DB10
-void __fastcall finishLoadedObjecthkaPredictiveCompressedAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaPredictiveCompressedAnimation(
+        hkaPredictiveCompressedAnimation *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation);
+  if ( p )
+    hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(p, finishing);
 }
 
 // File Line: 181
 // RVA: 0xB1DB30
-void __fastcall cleanupLoadedObjecthkaPredictiveCompressedAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkaPredictiveCompressedAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 185
 // RVA: 0xB1DB40
 hkBaseObjectVtbl *__fastcall getVtablehkaPredictiveCompressedAnimation()
 {
-  hkaPredictiveCompressedAnimation v1; // [rsp+20h] [rbp-C8h]
+  hkaPredictiveCompressedAnimation v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(&v1, 0);
   return v1.vfptr;
@@ -96,8 +99,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaPredictiveCompressedAnimationTypeI
   hkaPredictiveCompressedAnimationTypeInfo.m_typeName = "hkaPredictiveCompressedAnimation";
   hkaPredictiveCompressedAnimationTypeInfo.m_vtable = result;
   hkaPredictiveCompressedAnimationTypeInfo.m_scopedName = "!hkaPredictiveCompressedAnimation";
-  hkaPredictiveCompressedAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaPredictiveCompressedAnimation;
-  hkaPredictiveCompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaPredictiveCompressedAnimation;
+  hkaPredictiveCompressedAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaPredictiveCompressedAnimation;
+  hkaPredictiveCompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaPredictiveCompressedAnimation;
   return result;
 }
 

@@ -3,15 +3,15 @@
 void __fastcall UFG::Event::~Event(UFG::Event *this)
 {
   UFG::qNode<UFG::Event,UFG::Event> *v1; // rdx
-  UFG::qNode<UFG::Event,UFG::Event> *v2; // rcx
-  UFG::qNode<UFG::Event,UFG::Event> *v3; // rax
+  UFG::qNode<UFG::Event,UFG::Event> *mPrev; // rcx
+  UFG::qNode<UFG::Event,UFG::Event> *mNext; // rax
 
   this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
-  v1 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
-  v2 = this->mPrev;
-  v3 = v1->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  v1 = &this->UFG::qNode<UFG::Event,UFG::Event>;
+  mPrev = this->mPrev;
+  mNext = v1->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
 }

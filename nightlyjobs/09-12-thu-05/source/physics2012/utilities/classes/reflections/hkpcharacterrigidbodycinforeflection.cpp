@@ -28,17 +28,17 @@ hkClass *__fastcall hkpCharacterRigidBodyCinfo::staticClass()
 
 // File Line: 278
 // RVA: 0xE0A660
-void __fastcall finishLoadedObjecthkpCharacterRigidBodyCinfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCharacterRigidBodyCinfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterRigidBodyCinfo::`vftable;
+    *p = &hkpCharacterRigidBodyCinfo::`vftable;
 }
 
 // File Line: 284
 // RVA: 0xE0A680
-void __fastcall cleanupLoadedObjecthkpCharacterRigidBodyCinfo(void *p)
+void __fastcall cleanupLoadedObjecthkpCharacterRigidBodyCinfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 288
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpCharacterRigidBodyCinfoTypeInfo__()
   hkpCharacterRigidBodyCinfoTypeInfo.m_typeName = "hkpCharacterRigidBodyCinfo";
   hkpCharacterRigidBodyCinfoTypeInfo.m_vtable = result;
   hkpCharacterRigidBodyCinfoTypeInfo.m_scopedName = "!hkpCharacterRigidBodyCinfo";
-  hkpCharacterRigidBodyCinfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCharacterRigidBodyCinfo;
-  hkpCharacterRigidBodyCinfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCharacterRigidBodyCinfo;
+  hkpCharacterRigidBodyCinfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCharacterRigidBodyCinfo;
+  hkpCharacterRigidBodyCinfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCharacterRigidBodyCinfo;
   return result;
 }
 

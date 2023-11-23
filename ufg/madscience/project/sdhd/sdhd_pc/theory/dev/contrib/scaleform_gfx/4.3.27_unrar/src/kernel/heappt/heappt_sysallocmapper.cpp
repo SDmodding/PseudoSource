@@ -1,12 +1,15 @@
 // File Line: 39
 // RVA: 0x945430
-void __fastcall Scaleform::SysAllocMapper::SysAllocMapper(Scaleform::SysAllocMapper *this, Scaleform::SysMemMapper *mapper, unsigned __int64 segSize, unsigned __int64 granularity, bool bestFit)
+void __fastcall Scaleform::SysAllocMapper::SysAllocMapper(
+        Scaleform::SysAllocMapper *this,
+        Scaleform::SysMemMapper *mapper,
+        unsigned __int64 segSize,
+        unsigned __int64 granularity,
+        bool bestFit)
 {
-  Scaleform::SysAllocMapper *v5; // rdi
-  signed __int64 v6; // rax
+  unsigned __int64 v6; // rax
   unsigned __int64 v7; // rbx
 
-  v5 = this;
   this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
   this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
   this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocMapper::`vftable;
@@ -23,52 +26,50 @@ void __fastcall Scaleform::SysAllocMapper::SysAllocMapper(Scaleform::SysAllocMap
   this->BestFit = bestFit;
   this->LastUsed = 0i64;
   v7 = mapper->vfptr->GetPageSize(mapper);
-  v5->PageSize = v7;
-  v5->PageShift = (unsigned __int8)Scaleform::Alg::UpperBit(v7);
-  v5->Granularity = (v7 + v5->Granularity - 1) & ~(v7 - 1);
-  v5->Footprint = 0i64;
-  v5->NumSegments = 0i64;
-  v5->LastSegment = -1i64;
+  this->PageSize = v7;
+  this->PageShift = (unsigned __int8)Scaleform::Alg::UpperBit(v7);
+  this->Granularity = (v7 + this->Granularity - 1) & ~(v7 - 1);
+  this->Footprint = 0i64;
+  this->NumSegments = 0i64;
+  this->LastSegment = -1i64;
 }
 
 // File Line: 64
 // RVA: 0x987560
 void __fastcall Scaleform::SysAllocMapper::GetInfo(Scaleform::SysAllocMapper *this, Scaleform::SysAllocPaged::Info *i)
 {
-  unsigned __int64 v2; // rax
+  unsigned __int64 Granularity; // rax
 
   i->MinAlign = this->PageSize;
   i->MaxAlign = 0i64;
-  v2 = this->Granularity;
+  Granularity = this->Granularity;
   i->HasRealloc = 1;
-  if ( v2 <= 0x1000 )
-    v2 = 0i64;
-  i->Granularity = v2;
+  if ( Granularity <= 0x1000 )
+    Granularity = 0i64;
+  i->Granularity = Granularity;
 }
 
 // File Line: 100
 // RVA: 0x9CF4E0
-signed __int64 __fastcall Scaleform::SysAllocMapper::binarySearch(Scaleform::SysAllocMapper *this, const char *ptr)
+__int64 __fastcall Scaleform::SysAllocMapper::binarySearch(Scaleform::SysAllocMapper *this, char *ptr)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // r9
-  char *v4; // r11
-  signed __int64 v5; // rdx
+  __int64 NumSegments; // rax
+  __int64 v3; // r9
+  __int64 v5; // rdx
 
-  v2 = this->NumSegments;
+  NumSegments = this->NumSegments;
   v3 = 0i64;
-  v4 = (char *)ptr;
-  while ( v2 > 0 )
+  while ( NumSegments > 0 )
   {
-    v5 = (v2 >> 1) + v3;
-    if ( this->Segments[v5].Memory >= v4 )
+    v5 = (NumSegments >> 1) + v3;
+    if ( this->Segments[v5].Memory >= ptr )
     {
-      v2 >>= 1;
+      NumSegments >>= 1;
     }
     else
     {
       v3 = v5 + 1;
-      v2 += -1 - (v2 >> 1);
+      NumSegments += -1 - (NumSegments >> 1);
     }
   }
   return v3;
@@ -76,51 +77,50 @@ signed __int64 __fastcall Scaleform::SysAllocMapper::binarySearch(Scaleform::Sys
 
 // File Line: 125
 // RVA: 0x9E3060
-signed __int64 __fastcall Scaleform::SysAllocMapper::findSegment(Scaleform::SysAllocMapper *this, const char *ptr)
+unsigned __int64 __fastcall Scaleform::SysAllocMapper::findSegment(Scaleform::SysAllocMapper *this, char *ptr)
 {
-  signed __int64 v2; // r8
+  __int64 NumSegments; // r8
   unsigned __int64 v3; // r10
-  const char *v4; // rbx
-  Scaleform::SysAllocMapper *v5; // r11
   unsigned __int64 v6; // rcx
   unsigned __int64 v7; // rcx
-  signed __int64 result; // rax
-  unsigned __int64 v9; // rax
+  unsigned __int64 result; // rax
+  char *Memory; // rax
   unsigned __int64 v10; // rdx
 
-  v2 = this->NumSegments;
+  NumSegments = this->NumSegments;
   v3 = 0i64;
-  v4 = ptr;
-  v5 = this;
-  if ( v2 > 0 )
+  if ( NumSegments > 0 )
   {
     do
     {
-      v6 = (v2 >> 1) + v3;
-      if ( v5->Segments[v6].Memory >= ptr )
+      v6 = (NumSegments >> 1) + v3;
+      if ( this->Segments[v6].Memory >= ptr )
       {
-        v2 >>= 1;
+        NumSegments >>= 1;
       }
       else
       {
         v3 = v6 + 1;
-        v2 += -1 - (v2 >> 1);
+        NumSegments += -1 - (NumSegments >> 1);
       }
     }
-    while ( v2 > 0 );
+    while ( NumSegments > 0 );
     if ( v3 )
     {
-      v7 = *(&v5->SegmSize + 3 * v3);
-      if ( (unsigned __int64)ptr >= v7 && (unsigned __int64)ptr < v5->SegmSize + v7 )
+      v7 = *(&this->SegmSize + 3 * v3);
+      if ( (unsigned __int64)ptr >= v7 && (unsigned __int64)ptr < this->SegmSize + v7 )
         return v3 - 1;
     }
   }
-  if ( v3 >= v5->NumSegments
-    || (v9 = (unsigned __int64)v5->Segments[v3].Memory, (unsigned __int64)ptr < v9)
-    || (v10 = v9 + v5->SegmSize, result = v3, (unsigned __int64)v4 >= v10) )
-  {
-    result = v5->NumSegments;
-  }
+  if ( v3 >= this->NumSegments )
+    return this->NumSegments;
+  Memory = this->Segments[v3].Memory;
+  if ( ptr < Memory )
+    return this->NumSegments;
+  v10 = (unsigned __int64)&Memory[this->SegmSize];
+  result = v3;
+  if ( (unsigned __int64)ptr >= v10 )
+    return this->NumSegments;
   return result;
 }
 
@@ -128,171 +128,166 @@ signed __int64 __fastcall Scaleform::SysAllocMapper::findSegment(Scaleform::SysA
 // RVA: 0x9F05C0
 char __fastcall Scaleform::SysAllocMapper::reserveSegment(Scaleform::SysAllocMapper *this, unsigned __int64 size)
 {
-  unsigned __int64 v2; // rsi
-  Scaleform::SysAllocMapper *v3; // rdi
-  unsigned __int64 v4; // r9
-  unsigned __int64 v5; // rbx
+  unsigned __int64 PageSize; // r9
+  unsigned __int64 SegmSize; // rbx
   unsigned __int64 v6; // r11
-  signed __int64 v7; // r10
-  const char *v8; // rbp
-  unsigned __int64 v9; // rcx
-  char result; // al
+  __int64 v7; // r10
+  char *v8; // rbp
+  unsigned __int64 Granularity; // rcx
   unsigned __int64 v11; // rsi
   char *v12; // rax
   char *v13; // r14
   unsigned __int64 v14; // r9
-  unsigned __int64 v15; // r10
+  unsigned __int64 PageShift; // r10
   char *v16; // r8
   unsigned __int64 v17; // rsi
-  unsigned __int64 v18; // rax
-  signed __int64 v19; // rax
+  unsigned __int64 NumSegments; // rax
+  unsigned __int64 v19; // rax
 
-  v2 = size;
-  v3 = this;
   if ( this->NumSegments >= 0x20 )
     return 0;
-  v4 = this->PageSize;
-  v5 = this->SegmSize;
+  PageSize = this->PageSize;
+  SegmSize = this->SegmSize;
   v6 = this->PageShift + 3;
-  v7 = ~(v4 - 1);
-  if ( v5 - (v7 & (((v5 + 8 * v4 - 1) >> (LOBYTE(this->PageShift) + 3)) + v4 - 1)) < size )
-    v5 = this->Granularity
-       * ((this->Granularity + (v7 & (((size - 1 + 8 * v4) >> v6) + v4 - 1)) + size - 1)
-        / this->Granularity);
-  for ( ; v5 - (v7 & (((v5 + 8 * v4 - 1) >> v6) + v4 - 1)) < size; v5 += this->Granularity )
+  v7 = ~(PageSize - 1);
+  if ( SegmSize - (v7 & (((SegmSize + 8 * PageSize - 1) >> (LOBYTE(this->PageShift) + 3)) + PageSize - 1)) < size )
+    SegmSize = this->Granularity
+             * ((this->Granularity + (v7 & (((size - 1 + 8 * PageSize) >> v6) + PageSize - 1)) + size - 1)
+              / this->Granularity);
+  for ( ; SegmSize - (v7 & (((SegmSize + 8 * PageSize - 1) >> v6) + PageSize - 1)) < size; SegmSize += this->Granularity )
     ;
   while ( 1 )
   {
-    v8 = (const char *)v3->pMapper->vfptr->ReserveAddrSpace(v3->pMapper, v5);
+    v8 = (char *)this->pMapper->vfptr->ReserveAddrSpace(this->pMapper, SegmSize);
     if ( v8 )
       break;
-    v9 = v3->Granularity;
-    v5 = v9 * (((v5 >> 1) + v9 - 1) / v9);
-    if ( v5 < 2 * v9
-      || v5 - (~(v3->PageSize - 1) & (((v5 + 8 * v3->PageSize - 1) >> (LOBYTE(v3->PageShift) + 3)) + v3->PageSize - 1)) < v2 )
+    Granularity = this->Granularity;
+    SegmSize = Granularity * (((SegmSize >> 1) + Granularity - 1) / Granularity);
+    if ( SegmSize < 2 * Granularity
+      || SegmSize
+       - (~(this->PageSize - 1) & (((SegmSize + 8 * this->PageSize - 1) >> (LOBYTE(this->PageShift) + 3))
+                                 + this->PageSize
+                                 - 1)) < size )
     {
       return 0;
     }
   }
-  v11 = ~(v3->PageSize - 1) & (((v5 + 8 * v3->PageSize - 1) >> (LOBYTE(v3->PageShift) + 3)) + v3->PageSize - 1);
-  v12 = (char *)v3->pMapper->vfptr->MapPages(v3->pMapper, (void *)&v8[v5 - v11], v11);
+  v11 = ~(this->PageSize - 1) & (((SegmSize + 8 * this->PageSize - 1) >> (LOBYTE(this->PageShift) + 3))
+                               + this->PageSize
+                               - 1);
+  v12 = (char *)this->pMapper->vfptr->MapPages(this->pMapper, &v8[SegmSize - v11], v11);
   v13 = v12;
   if ( v12 )
   {
     memset(v12, 0, v11 & 0xFFFFFFFFFFFFFFFCui64);
-    v14 = v3->PageSize;
-    v15 = v3->PageShift;
+    v14 = this->PageSize;
+    PageShift = this->PageShift;
     v16 = &v13[4
-             * ((v5 - (~(v14 - 1) & (((v5 + 8 * v14 - 1) >> ((unsigned __int8)v15 + 3)) + v14 - 1))) >> v3->PageShift >> 5)];
-    *(_DWORD *)v16 |= 1 << (((v5 - (~(v14 - 1) & (((v5 + 8 * v14 - 1) >> ((unsigned __int8)v15 + 3)) + v14 - 1))) >> v3->PageShift) & 0x1F);
-    v17 = Scaleform::SysAllocMapper::binarySearch(v3, v8);
-    v18 = v3->NumSegments;
-    if ( v17 < v18 )
-      memmove(&v3->vfptr + 3 * v17 + 10, &v3->Segments[v17], 24 * (v18 - v17));
-    ++v3->NumSegments;
+             * ((SegmSize - (~(v14 - 1) & (((SegmSize + 8 * v14 - 1) >> ((unsigned __int8)PageShift + 3)) + v14 - 1))) >> PageShift >> 5)];
+    *(_DWORD *)v16 |= 1 << (((SegmSize
+                            - (~(v14 - 1) & (((SegmSize + 8 * v14 - 1) >> ((unsigned __int8)PageShift + 3)) + v14 - 1))) >> PageShift) & 0x1F);
+    v17 = Scaleform::SysAllocMapper::binarySearch(this, v8);
+    NumSegments = this->NumSegments;
+    if ( v17 < NumSegments )
+      memmove(&this->Segments[v17 + 1], &this->Segments[v17], 24 * (NumSegments - v17));
+    ++this->NumSegments;
     v19 = v17;
-    v3->Segments[v19].Memory = (char *)v8;
-    v3->Segments[v19].Size = v5;
-    v3->Segments[v19].PageCount = 0i64;
-    result = 1;
+    this->Segments[v19].Memory = v8;
+    this->Segments[v19].Size = SegmSize;
+    this->Segments[v19].PageCount = 0i64;
+    return 1;
   }
   else
   {
-    v3->pMapper->vfptr->ReleaseAddrSpace(v3->pMapper, (void *)v8, v5);
-    result = 0;
+    this->pMapper->vfptr->ReleaseAddrSpace(this->pMapper, v8, SegmSize);
+    return 0;
   }
-  return result;
 }
 
 // File Line: 206
 // RVA: 0x9EFCD0
 void __fastcall Scaleform::SysAllocMapper::releaseSegment(Scaleform::SysAllocMapper *this, unsigned __int64 pos)
 {
-  unsigned __int64 v2; // r9
-  unsigned __int64 v3; // r11
+  unsigned __int64 PageSize; // r9
+  unsigned __int64 Size; // r11
   char *v4; // rbp
-  unsigned __int64 v5; // r14
-  Scaleform::SysAllocMapper *v6; // rdi
-  unsigned __int64 v7; // rcx
+  unsigned __int64 NumSegments; // rcx
 
-  v2 = this->PageSize;
-  v3 = this->Segments[pos].Size;
+  PageSize = this->PageSize;
+  Size = this->Segments[pos].Size;
   v4 = (char *)this + 24 * pos;
-  v5 = pos;
-  v6 = this;
   this->pMapper->vfptr->UnmapPages(
     this->pMapper,
-    (void *)(v3
+    (void *)(Size
            + *((_QWORD *)v4 + 7)
-           - (~(v2 - 1) & (((v3 + 8 * v2 - 1) >> ((unsigned __int8)this->PageShift + 3)) + v2 - 1))),
-    ~(v2 - 1) & (((v3 + 8 * v2 - 1) >> ((unsigned __int8)this->PageShift + 3)) + v2 - 1));
-  v6->pMapper->vfptr->ReleaseAddrSpace(v6->pMapper, (void *)*((_QWORD *)v4 + 7), *((_QWORD *)v4 + 8));
-  v7 = v6->NumSegments;
-  if ( v5 + 1 < v7 )
-    memmove(v4 + 56, v4 + 80, 24 * (v7 - v5 - 1));
-  --v6->NumSegments;
-  v6->LastSegment = -1i64;
+           - (~(PageSize - 1) & (((Size + 8 * PageSize - 1) >> ((unsigned __int8)this->PageShift + 3)) + PageSize - 1))),
+    ~(PageSize - 1) & (((Size + 8 * PageSize - 1) >> ((unsigned __int8)this->PageShift + 3)) + PageSize - 1));
+  this->pMapper->vfptr->ReleaseAddrSpace(this->pMapper, (void *)*((_QWORD *)v4 + 7), *((_QWORD *)v4 + 8));
+  NumSegments = this->NumSegments;
+  if ( pos + 1 < NumSegments )
+    memmove(v4 + 56, v4 + 80, 24 * (NumSegments - pos - 1));
+  --this->NumSegments;
+  this->LastSegment = -1i64;
 }
 
 // File Line: 249
 // RVA: 0x9CBF40
-__int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper *this, unsigned __int64 pos, unsigned __int64 size, unsigned __int64 alignment)
+char *__fastcall Scaleform::SysAllocMapper::allocMem(
+        Scaleform::SysAllocMapper *this,
+        unsigned __int64 pos,
+        unsigned __int64 size,
+        unsigned __int64 alignment)
 {
-  unsigned __int64 v4; // r13
-  unsigned __int64 v5; // rbx
-  Scaleform::SysAllocMapper *v6; // rbp
-  signed __int64 v7; // r9
+  unsigned __int64 PageSize; // r13
+  unsigned __int64 PageShift; // rbx
+  __int64 v7; // r9
   unsigned __int64 v8; // r10
-  Scaleform::SysAllocBaseVtbl **v9; // rax
-  Scaleform::SysAllocBaseVtbl *v10; // rsi
-  Scaleform::SysAllocBaseVtbl *v11; // r11
+  char **v9; // rax
+  char *v10; // rsi
+  char *v11; // r11
   unsigned __int64 v12; // r14
   unsigned int *v13; // rdi
   unsigned __int64 v14; // r15
-  signed __int64 v15; // r12
+  __int64 v15; // r12
   unsigned __int64 v16; // rsi
   unsigned __int64 v17; // rbx
   unsigned __int64 v18; // rsi
   unsigned __int64 v19; // rax
   unsigned __int64 v20; // rcx
   unsigned int v21; // edx
-  unsigned int v22; // er8
-  unsigned int v23; // er8
+  unsigned int v22; // r8d
+  unsigned int v23; // r8d
   int v24; // ecx
   int v25; // ecx
-  signed __int64 v26; // rdx
+  unsigned __int64 v26; // rdx
   unsigned __int64 i; // rcx
   unsigned __int64 v28; // rcx
   __int64 v29; // rcx
   __int64 v30; // rcx
-  signed __int64 v31; // rax
+  unsigned __int64 FreeSize; // rax
   unsigned __int64 v32; // rbx
-  __int64 v33; // rsi
-  signed __int64 v34; // rax
-  Scaleform::SysAllocBaseVtbl **v36; // [rsp+70h] [rbp+8h]
-  unsigned __int64 v37; // [rsp+78h] [rbp+10h]
-  unsigned __int64 v38; // [rsp+80h] [rbp+18h]
-  unsigned __int64 v39; // [rsp+88h] [rbp+20h]
+  char *v33; // rsi
+  unsigned __int64 v34; // rax
+  char **v36; // [rsp+70h] [rbp+8h]
 
-  v39 = alignment;
-  v38 = size;
-  v37 = pos;
-  v4 = this->PageSize;
-  v5 = this->PageShift;
-  v6 = this;
-  v7 = ~(v4 - 1);
+  PageSize = this->PageSize;
+  PageShift = this->PageShift;
+  v7 = ~(PageSize - 1);
   v8 = size;
-  v9 = &this->vfptr + pos + 2 * pos + 7;
+  v9 = &this->Segments[0].Memory + 2 * pos + pos;
   v10 = v9[1];
   v11 = *v9;
-  v36 = &this->vfptr + pos + 2 * pos + 7;
-  v12 = size >> v5;
-  v13 = (unsigned int *)((char *)*v9
-                       + (_QWORD)v10
-                       - (v7 & ((((unsigned __int64)v10 + 8 * v4 - 1) >> ((unsigned __int8)v5 + 3)) + v4 - 1)));
+  v36 = v9;
+  v12 = size >> PageShift;
+  v13 = (unsigned int *)&(*v9)[(_QWORD)v10
+                             - (v7 & (((unsigned __int64)&v10[8 * PageSize - 1] >> ((unsigned __int8)PageShift + 3))
+                                    + PageSize
+                                    - 1))];
   v14 = -1i64;
   v15 = -1i64;
-  v16 = (unsigned __int64)v10 - (v7 & ((((unsigned __int64)v10 + 8 * v4 - 1) >> ((unsigned __int8)v5 + 3)) + v4 - 1));
+  v16 = (unsigned __int64)&v10[-(v7 & (((unsigned __int64)&v10[8 * PageSize - 1] >> ((unsigned __int8)PageShift + 3))
+                                     + PageSize
+                                     - 1))];
   v17 = 0i64;
   v18 = v16 >> this->PageShift;
   if ( !v18 )
@@ -301,7 +296,7 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
   {
     v19 = v17 >> 5;
     v20 = v17 & 0x1F;
-    if ( (v13[v17 >> 5] >> v20) & 1 )
+    if ( ((v13[v17 >> 5] >> v20) & 1) != 0 )
     {
       v21 = Scaleform::HeapPT::BitSet1::HeadUsedTable[v20];
       v22 = v21 & v13[v19];
@@ -316,7 +311,7 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
             break;
         }
         v28 = v13[v19];
-        if ( (_WORD)v28 == -1 )
+        if ( (_WORD)v28 == 0xFFFF )
         {
           if ( (v28 & 0xFFFFFF) == 0xFFFFFF )
             v30 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[v28 >> 24] + 24;
@@ -326,7 +321,7 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
         }
         else
         {
-          if ( (_BYTE)v28 == -1 )
+          if ( (_BYTE)v28 == 0xFF )
             v29 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[BYTE1(v28)] + 8;
           else
             v29 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[(unsigned __int8)v28];
@@ -336,7 +331,7 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
       else
       {
         v23 = v22 >> v20;
-        if ( (_WORD)v23 == -1 )
+        if ( (_WORD)v23 == 0xFFFF )
         {
           if ( (v23 & 0xFFFFFF) == 0xFFFFFF )
             v25 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[(unsigned __int64)v23 >> 24] + 24;
@@ -346,7 +341,7 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
         }
         else
         {
-          if ( (_BYTE)v23 == -1 )
+          if ( (_BYTE)v23 == 0xFF )
             v24 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[BYTE1(v23)] + 8;
           else
             v24 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastUsedBlock[(unsigned __int8)v23];
@@ -355,20 +350,18 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
       }
       continue;
     }
-    v31 = Scaleform::HeapPT::BitSet1::FindFreeSize(v13, v17);
-    v8 = v38;
+    FreeSize = Scaleform::HeapPT::BitSet1::FindFreeSize(v13, v17);
+    v8 = size;
     v11 = *v36;
-    if ( v38 + (~(v39 - 1) & ((unsigned __int64)*v36 + v17 * v4 + v39 - 1)) <= (unsigned __int64)*v36
-                                                                             + v17 * v4
-                                                                             + v31 * v4
-      && v31 - v12 < v14 )
+    if ( size + (~(alignment - 1) & (unsigned __int64)&(*v36)[v17 * PageSize - 1 + alignment]) <= (unsigned __int64)&(*v36)[v17 * PageSize + FreeSize * PageSize]
+      && FreeSize - v12 < v14 )
     {
       v15 = v17;
-      v14 = v31 - v12;
-      if ( !v6->BestFit )
+      v14 = FreeSize - v12;
+      if ( !this->BestFit )
         break;
     }
-    v17 += v31;
+    v17 += FreeSize;
   }
   while ( v17 < v18 );
   if ( v15 == 0xFFFFFFFFi64 )
@@ -379,61 +372,52 @@ __int64 __fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper
   {
 LABEL_31:
     v32 = v15
-        + ((signed __int64)((~(v39 - 1) & ((unsigned __int64)v11 + v15 * v4 + v39 - 1)) - v15 * v4 - (_QWORD)v11) >> v6->PageShift);
-    v33 = (__int64)v6->pMapper->vfptr->MapPages(
-                     v6->pMapper,
-                     (char *)v11
-                   + v4
-                   * (v15
-                    + ((signed __int64)((~(v39 - 1) & ((unsigned __int64)v11 + v15 * v4 + v39 - 1))
-                                      - v15 * v4
-                                      - (_QWORD)v11) >> v6->PageShift)),
-                     v8);
+        + ((__int64)((~(alignment - 1) & (unsigned __int64)&v11[v15 * PageSize - 1 + alignment])
+                   - v15 * PageSize
+                   - (_QWORD)v11) >> this->PageShift);
+    v33 = (char *)this->pMapper->vfptr->MapPages(this->pMapper, &v11[PageSize * v32], v8);
     if ( v33 )
     {
       Scaleform::HeapPT::BitSet1::SetUsed(v13, v32, v12);
-      v36[2] = (Scaleform::SysAllocBaseVtbl *)((char *)v36[2] + v12);
-      v6->Footprint += v12 << v6->PageShift;
+      v36[2] += v12;
+      this->Footprint += v12 << this->PageShift;
     }
   }
   v34 = -1i64;
   if ( v33 )
-    v34 = v37;
-  v6->LastSegment = v34;
-  v6->LastUsed = (char *)(v33 + v38);
+    v34 = pos;
+  this->LastSegment = v34;
+  this->LastUsed = &v33[size];
   return v33;
 }
 
 // File Line: 310
 // RVA: 0x9CC2F0
-void *__fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper *this, unsigned __int64 size, unsigned __int64 alignment)
+char *__fastcall Scaleform::SysAllocMapper::allocMem(
+        Scaleform::SysAllocMapper *this,
+        unsigned __int64 size,
+        unsigned __int64 alignment)
 {
-  unsigned __int64 v3; // rbp
-  unsigned __int64 v4; // rdx
-  unsigned __int64 v5; // rsi
-  Scaleform::SysAllocMapper *v6; // rdi
-  void *result; // rax
+  unsigned __int64 LastSegment; // rdx
+  char *result; // rax
   unsigned __int64 i; // rbx
 
-  v3 = size;
-  v4 = this->LastSegment;
-  v5 = alignment;
-  v6 = this;
-  if ( v4 != -1i64 )
+  LastSegment = this->LastSegment;
+  if ( LastSegment != -1i64 )
   {
-    result = (void *)Scaleform::SysAllocMapper::allocMem(this, v4, v3, alignment);
+    result = Scaleform::SysAllocMapper::allocMem(this, LastSegment, size, alignment);
     if ( result )
       return result;
-    v6->LastUsed = 0i64;
+    this->LastUsed = 0i64;
   }
-  for ( i = 0i64; i < v6->NumSegments; ++i )
+  for ( i = 0i64; i < this->NumSegments; ++i )
   {
-    if ( i != v6->LastSegment )
+    if ( i != this->LastSegment )
     {
-      result = (void *)Scaleform::SysAllocMapper::allocMem(v6, i, v3, v5);
+      result = Scaleform::SysAllocMapper::allocMem(this, i, size, alignment);
       if ( result )
         return result;
-      v6->LastUsed = 0i64;
+      this->LastUsed = 0i64;
     }
   }
   return 0i64;
@@ -441,139 +425,137 @@ void *__fastcall Scaleform::SysAllocMapper::allocMem(Scaleform::SysAllocMapper *
 
 // File Line: 338
 // RVA: 0x9E35D0
-signed __int64 __fastcall Scaleform::SysAllocMapper::freeMem(Scaleform::SysAllocMapper *this, void *ptr, unsigned __int64 size)
+unsigned __int64 __fastcall Scaleform::SysAllocMapper::freeMem(
+        Scaleform::SysAllocMapper *this,
+        char *ptr,
+        unsigned __int64 size)
 {
-  unsigned __int64 v3; // r14
-  void *v4; // rdi
-  Scaleform::SysAllocMapper *v5; // rbp
-  signed __int64 v6; // rax
-  signed __int64 v7; // rsi
-  Scaleform::SysAllocBaseVtbl **v8; // rbx
-  unsigned __int64 v9; // rcx
-  unsigned __int64 v10; // r14
+  unsigned __int64 Segment; // rsi
+  Scaleform::SysAllocBaseVtbl **v7; // rbx
+  unsigned __int64 PageShift; // rcx
+  unsigned __int64 v9; // r14
 
-  v3 = size;
-  v4 = ptr;
-  v5 = this;
-  v6 = Scaleform::SysAllocMapper::findSegment(this, (const char *)ptr);
-  v7 = v6;
-  v8 = &(&v5->vfptr)[3 * v6];
-  v5->pMapper->vfptr->UnmapPages(v5->pMapper, v4, v3);
-  v9 = v5->PageShift;
-  v10 = v3 >> v9;
+  Segment = Scaleform::SysAllocMapper::findSegment(this, ptr);
+  v7 = &(&this->vfptr)[3 * Segment];
+  this->pMapper->vfptr->UnmapPages(this->pMapper, ptr, size);
+  PageShift = this->PageShift;
+  v9 = size >> PageShift;
   Scaleform::HeapPT::BitSet1::SetFree(
-    (unsigned int *)((char *)v8[7]
-                   + (_QWORD)v8[8]
-                   - (~(v5->PageSize - 1) & ((((unsigned __int64)v8[8] + 8 * v5->PageSize - 1) >> ((unsigned __int8)v9
-                                                                                                 + 3))
-                                           + v5->PageSize
-                                           - 1))),
-    ((_BYTE *)v4 - (_BYTE *)v8[7]) >> v9,
-    v10);
-  v8[9] = (Scaleform::SysAllocBaseVtbl *)((char *)v8[9] - v10);
-  v5->Footprint -= v10 << v5->PageShift;
-  return v7;
+    (unsigned int *)((char *)v7[7]
+                   + (_QWORD)v7[8]
+                   - (~(this->PageSize - 1) & ((((unsigned __int64)v7[8] + 8 * this->PageSize - 1) >> ((unsigned __int8)PageShift + 3))
+                                             + this->PageSize
+                                             - 1))),
+    (ptr - (char *)v7[7]) >> PageShift,
+    v9);
+  v7[9] = (Scaleform::SysAllocBaseVtbl *)((char *)v7[9] - v9);
+  this->Footprint -= v9 << this->PageShift;
+  return Segment;
 }
 
 // File Line: 360
 // RVA: 0x956D50
-void *__fastcall Scaleform::SysAllocMapper::Alloc(Scaleform::SysAllocMapper *this, unsigned __int64 size, unsigned __int64 alignment)
+void *__fastcall Scaleform::SysAllocMapper::Alloc(
+        Scaleform::SysAllocMapper *this,
+        unsigned __int64 size,
+        unsigned __int64 alignment)
 {
-  unsigned __int64 v3; // rdi
-  Scaleform::SysAllocMapper *v4; // rsi
-  signed __int64 v5; // rax
-  unsigned __int64 v6; // rbx
+  unsigned __int64 PageSize; // rdi
+  unsigned __int64 v5; // rbx
   void *result; // rax
 
-  v3 = alignment;
+  PageSize = alignment;
   if ( alignment < this->PageSize )
-    v3 = this->PageSize;
-  v4 = this;
-  v5 = ~(v3 - 1);
-  v6 = v5 & (v3 + size - 1);
-  result = Scaleform::SysAllocMapper::allocMem(this, v5 & (v3 + size - 1), v3);
+    PageSize = this->PageSize;
+  v5 = ~(PageSize - 1) & (PageSize + size - 1);
+  result = Scaleform::SysAllocMapper::allocMem(this, v5, PageSize);
   if ( !result )
   {
-    if ( Scaleform::SysAllocMapper::reserveSegment(v4, v6) )
-      result = Scaleform::SysAllocMapper::allocMem(v4, v6, v3);
+    if ( Scaleform::SysAllocMapper::reserveSegment(this, v5) )
+      return Scaleform::SysAllocMapper::allocMem(this, v5, PageSize);
     else
-      result = 0i64;
+      return 0i64;
   }
   return result;
 }
 
 // File Line: 381
 // RVA: 0x9A7090
-char __fastcall Scaleform::SysAllocMapper::ReallocInPlace(Scaleform::SysAllocMapper *this, void *oldPtr, unsigned __int64 oldSize, unsigned __int64 newSize, unsigned __int64 alignment)
+char __fastcall Scaleform::SysAllocMapper::ReallocInPlace(
+        Scaleform::SysAllocMapper *this,
+        const char *oldPtr,
+        unsigned __int64 oldSize,
+        unsigned __int64 newSize,
+        unsigned __int64 alignment)
 {
-  unsigned __int64 v5; // rbp
-  Scaleform::SysAllocMapper *v6; // rbx
+  unsigned __int64 PageSize; // rbp
   unsigned __int64 v7; // rcx
-  _BYTE *v8; // r14
-  signed __int64 v9; // rax
+  __int64 v9; // rax
   unsigned __int64 v10; // rdi
   unsigned __int64 v11; // rsi
   char result; // al
-  unsigned __int64 v13; // rax
-  unsigned __int64 v14; // r10
+  unsigned __int64 Segment; // rax
+  unsigned __int64 PageShift; // r10
   unsigned __int64 v15; // rsi
   Scaleform::SysAllocBaseVtbl **v16; // r15
-  unsigned __int64 v17; // r14
+  __int64 v17; // r14
   unsigned __int64 v18; // rdi
   unsigned int *v19; // r12
 
-  v5 = this->PageSize;
-  v6 = this;
+  PageSize = this->PageSize;
   v7 = alignment;
-  if ( alignment < v5 )
-    v7 = v5;
-  v8 = oldPtr;
+  if ( alignment < PageSize )
+    v7 = PageSize;
   v9 = ~(v7 - 1);
   v10 = v9 & (v7 + oldSize - 1);
   v11 = v9 & (v7 + newSize - 1);
   if ( v11 == v10 )
     return 1;
   if ( v11 <= v10 )
-    return ((__int64 (__fastcall *)(Scaleform::SysAllocMapper *, char *, unsigned __int64, unsigned __int64))v6->vfptr[1].shutdownHeapEngine)(
-             v6,
-             (char *)oldPtr + v11,
+    return ((__int64 (__fastcall *)(Scaleform::SysAllocMapper *, const char *, unsigned __int64, unsigned __int64))this->vfptr[1].shutdownHeapEngine)(
+             this,
+             &oldPtr[v11],
              v10 - v11,
              v7);
-  v13 = Scaleform::SysAllocMapper::findSegment(v6, (const char *)oldPtr);
-  v14 = v6->PageShift;
+  Segment = Scaleform::SysAllocMapper::findSegment(this, oldPtr);
+  PageShift = this->PageShift;
   v15 = v11 - v10;
-  v16 = &(&v6->vfptr)[3 * v13];
-  v17 = (signed __int64)(v10 + v8 - v6->Segments[v13].Memory) >> v14;
-  v18 = v15 >> v6->PageShift;
-  v19 = (unsigned int *)((char *)v16[8]
-                       + (unsigned __int64)&v6->Segments[v13].Memory[-(~(v5 - 1) & (((v6->Segments[v13].Size + 8 * v5 - 1) >> ((unsigned __int8)v14 + 3))
-                                                                                  + v5
-                                                                                  - 1))]);
-  if ( Scaleform::HeapPT::BitSet1::FindFreeSize(v19, v17) < v18
-    || !(__int64)v6->pMapper->vfptr->MapPages(v6->pMapper, (char *)v16[7] + v17 * v5, v15) )
+  v16 = &(&this->vfptr)[3 * Segment];
+  v17 = (__int64)(v10 + oldPtr - (const char *)v16[7]) >> PageShift;
+  v18 = v15 >> PageShift;
+  v19 = (unsigned int *)((char *)v16[7]
+                       + (_QWORD)v16[8]
+                       - (~(PageSize - 1) & ((((unsigned __int64)v16[8] + 8 * PageSize - 1) >> ((unsigned __int8)PageShift
+                                                                                              + 3))
+                                           + PageSize
+                                           - 1)));
+  if ( Scaleform::HeapPT::BitSet1::FindFreeSize(v19, v17) < v15 >> PageShift
+    || !this->pMapper->vfptr->MapPages(this->pMapper, (char *)v16[7] + v17 * PageSize, v15) )
   {
     return 0;
   }
   Scaleform::HeapPT::BitSet1::SetUsed(v19, v17, v18);
   v16[9] = (Scaleform::SysAllocBaseVtbl *)((char *)v16[9] + v18);
   result = 1;
-  v6->Footprint += v18 << v6->PageShift;
+  this->Footprint += v18 << this->PageShift;
   return result;
 }
 
 // File Line: 422
 // RVA: 0x97DFF0
-char __fastcall Scaleform::SysAllocMapper::Free(Scaleform::SysAllocMapper *this, void *ptr, unsigned __int64 size, unsigned __int64 alignment)
+char __fastcall Scaleform::SysAllocMapper::Free(
+        Scaleform::SysAllocMapper *this,
+        void *ptr,
+        unsigned __int64 size,
+        unsigned __int64 alignment)
 {
-  Scaleform::SysAllocMapper *v4; // rbx
   unsigned __int64 v5; // rax
 
-  v4 = this;
   if ( alignment < this->PageSize )
     alignment = this->PageSize;
   v5 = Scaleform::SysAllocMapper::freeMem(this, ptr, ~(alignment - 1) & (alignment + size - 1));
-  if ( !v4->Segments[v5].PageCount )
-    Scaleform::SysAllocMapper::releaseSegment(v4, v5);
+  if ( !this->Segments[v5].PageCount )
+    Scaleform::SysAllocMapper::releaseSegment(this, v5);
   return 1;
 }
 
@@ -581,12 +563,9 @@ char __fastcall Scaleform::SysAllocMapper::Free(Scaleform::SysAllocMapper *this,
 // RVA: 0x9800B0
 char *__fastcall Scaleform::SysAllocMapper::GetBase(Scaleform::SysAllocMapper *this)
 {
-  char *result; // rax
-
   if ( this->NumSegments )
-    result = this->Segments[0].Memory;
+    return this->Segments[0].Memory;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 

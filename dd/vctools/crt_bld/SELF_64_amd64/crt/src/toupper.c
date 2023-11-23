@@ -3,93 +3,92 @@
 __int64 __fastcall toupper_l(int c, localeinfo_struct *plocinfo)
 {
   __int64 v2; // rdi
-  threadlocaleinfostruct *v3; // rdx
+  threadlocaleinfostruct *locinfo; // rdx
   int v4; // eax
   __int64 result; // rax
-  signed int v6; // esi
   int cchSrc; // ecx
-  int *v8; // rax
-  int v9; // eax
-  bool v10; // zf
-  _LocaleUpdate v11; // [rsp+50h] [rbp-20h]
-  char SrcStr; // [rsp+80h] [rbp+10h]
-  char v13; // [rsp+81h] [rbp+11h]
-  char v14; // [rsp+82h] [rbp+12h]
-  char DestStr; // [rsp+90h] [rbp+20h]
-  unsigned __int8 v16; // [rsp+91h] [rbp+21h]
+  int *v7; // rax
+  int v8; // eax
+  bool v9; // zf
+  _LocaleUpdate v10; // [rsp+50h] [rbp-20h] BYREF
+  char SrcStr; // [rsp+80h] [rbp+10h] BYREF
+  char v12; // [rsp+81h] [rbp+11h]
+  char v13; // [rsp+82h] [rbp+12h]
+  char DestStr; // [rsp+90h] [rbp+20h] BYREF
+  unsigned __int8 v15; // [rsp+91h] [rbp+21h]
 
   v2 = c;
-  _LocaleUpdate::_LocaleUpdate(&v11, plocinfo);
+  _LocaleUpdate::_LocaleUpdate(&v10, plocinfo);
   if ( (unsigned int)v2 >= 0x100 )
   {
-    if ( v11.localeinfo.locinfo->mb_cur_max > 1 && (v6 = (signed int)v2 >> 8, isleadbyte_l(BYTE1(v2), &v11.localeinfo)) )
+    if ( v10.localeinfo.locinfo->mb_cur_max > 1 && isleadbyte_l(BYTE1(v2), &v10.localeinfo) )
     {
-      SrcStr = v6;
-      v13 = v2;
-      v14 = 0;
+      SrcStr = BYTE1(v2);
+      v12 = v2;
+      v13 = 0;
       cchSrc = 2;
     }
     else
     {
-      v8 = errno();
+      v7 = errno();
       cchSrc = 1;
-      *v8 = 42;
+      *v7 = 42;
       SrcStr = v2;
-      v13 = 0;
+      v12 = 0;
     }
-    v9 = _crtLCMapStringA(
-           &v11.localeinfo,
-           v11.localeinfo.locinfo->locale_name[2],
+    v8 = _crtLCMapStringA(
+           &v10.localeinfo,
+           v10.localeinfo.locinfo->locale_name[2],
            0x200u,
            &SrcStr,
            cchSrc,
            &DestStr,
            3,
-           v11.localeinfo.locinfo->lc_codepage,
+           v10.localeinfo.locinfo->lc_codepage,
            1);
-    if ( v9 )
+    if ( v8 )
     {
-      v10 = v9 == 1;
+      v9 = v8 == 1;
       result = (unsigned __int8)DestStr;
-      if ( !v10 )
-        result = (unsigned int)v16 | ((_DWORD)result << 8);
+      if ( !v9 )
+        result = v15 | ((unsigned __int8)DestStr << 8);
       goto LABEL_17;
     }
   }
   else
   {
-    v3 = v11.localeinfo.locinfo;
-    if ( v11.localeinfo.locinfo->mb_cur_max <= 1 )
+    locinfo = v10.localeinfo.locinfo;
+    if ( v10.localeinfo.locinfo->mb_cur_max <= 1 )
     {
-      v4 = v11.localeinfo.locinfo->pctype[v2] & 2;
+      v4 = v10.localeinfo.locinfo->pctype[v2] & 2;
     }
     else
     {
-      v4 = isctype_l(v2, 2, &v11.localeinfo);
-      v3 = v11.localeinfo.locinfo;
+      v4 = isctype_l(v2, 2, &v10.localeinfo);
+      locinfo = v10.localeinfo.locinfo;
     }
     if ( v4 )
     {
-      result = (unsigned __int8)v3->pcumap[v2];
+      result = (unsigned __int8)locinfo->pcumap[v2];
 LABEL_17:
-      if ( v11.updated )
-        v11.ptd->_ownlocale &= 0xFFFFFFFD;
+      if ( v10.updated )
+        v10.ptd->_ownlocale &= ~2u;
       return result;
     }
   }
-  if ( v11.updated )
-    v11.ptd->_ownlocale &= 0xFFFFFFFD;
+  if ( v10.updated )
+    v10.ptd->_ownlocale &= ~2u;
   return (unsigned int)v2;
 }
 
 // File Line: 149
 // RVA: 0x12B4BE0
-__int64 __fastcall toupper_0(int c)
+__int64 __fastcall toupper_0(unsigned int c)
 {
   if ( _locale_changed )
     return toupper_l(c, 0i64);
-  if ( (unsigned int)(c - 97) <= 0x19 )
+  if ( c - 97 <= 0x19 )
     c -= 32;
-  return (unsigned int)c;
+  return c;
 }
 

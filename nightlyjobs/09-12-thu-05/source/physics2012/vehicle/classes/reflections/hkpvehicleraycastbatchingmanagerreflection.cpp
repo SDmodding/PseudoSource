@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleRayCastBatchingManager::staticClass()
 
 // File Line: 63
 // RVA: 0xE25DC0
-void __fastcall finishLoadedObjecthkpVehicleRayCastBatchingManager(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleRayCastBatchingManager(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleRayCastBatchingManager::`vftable;
+    *p = &hkpVehicleRayCastBatchingManager::`vftable;
 }
 
 // File Line: 69
 // RVA: 0xE25DE0
-void __fastcall cleanupLoadedObjecthkpVehicleRayCastBatchingManager(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleRayCastBatchingManager(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleRayCastBatchingManagerTypeInfo__()
   hkpVehicleRayCastBatchingManagerTypeInfo.m_typeName = "hkpVehicleRayCastBatchingManager";
   hkpVehicleRayCastBatchingManagerTypeInfo.m_vtable = result;
   hkpVehicleRayCastBatchingManagerTypeInfo.m_scopedName = "!hkpVehicleRayCastBatchingManager";
-  hkpVehicleRayCastBatchingManagerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleRayCastBatchingManager;
-  hkpVehicleRayCastBatchingManagerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleRayCastBatchingManager;
+  hkpVehicleRayCastBatchingManagerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleRayCastBatchingManager;
+  hkpVehicleRayCastBatchingManagerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleRayCastBatchingManager;
   return result;
 }
 

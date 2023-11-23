@@ -2,8 +2,8 @@
 // RVA: 0x1456090
 __int64 dynamic_initializer_for__gIrrHelperModelHandle__()
 {
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&gIrrHelperModelHandle.mPrev);
-  return atexit(dynamic_atexit_destructor_for__gIrrHelperModelHandle__);
+  UFG::qResourceHandle::qResourceHandle(&gIrrHelperModelHandle);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gIrrHelperModelHandle__);
 }
 
 // File Line: 98
@@ -21,15 +21,15 @@ __int64 dynamic_initializer_for__kGaussBlur3x3HDR_UID__()
 // RVA: 0x1456160
 __int64 dynamic_initializer_for__gLogFilename__()
 {
-  UFG::qString::qString(&gLogFilename, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__gLogFilename__);
+  UFG::qString::qString(&gLogFilename, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gLogFilename__);
 }
 
 // File Line: 241
 // RVA: 0x1455ED0
 __int64 dynamic_initializer_for__gCaptureContextQueue__()
 {
-  return atexit(dynamic_atexit_destructor_for__gCaptureContextQueue__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gCaptureContextQueue__);
 }
 
 // File Line: 1742
@@ -53,7 +53,7 @@ void InitIrradianceCaptureSystem(void)
   unsigned int v14; // eax
   UFG::qResourceWarehouse *v15; // rax
   unsigned int v16; // ebx
-  UFG::qResourceInventory *v17; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v18; // rax
 
   v0 = UFG::qStringHashUpper32("IrradianceVolumeProbe", 0xFFFFFFFF);
@@ -65,7 +65,7 @@ void InitIrradianceCaptureSystem(void)
   HIDWORD(v2[1].mNode.mParent) = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v4 = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v2[1].mTypeUID = -1957338719;
-  LODWORD(v2[1].mResourceHandles.mNode.mNext) = v3;
+  LODWORD(v2[1].mResourceHandles.UFG::qResourceData::mNode.mNext) = v3;
   LODWORD(v2[1].mNode.mParent) = v4;
   v5 = gRenderVolumeHelperMaterial;
   *(_WORD *)&gRenderVolumeHelperMaterial[1].mDebugName[12] = 0;
@@ -78,16 +78,16 @@ void InitIrradianceCaptureSystem(void)
   LOWORD(gRenderVolumeHelperMaterial[1].mMaterialUser.mOffset) = 0;
   *(&v7[1].mNumParams + 1) = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
   v8 = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
-  LODWORD(v7[2].mResourceHandles.mNode.mPrev) = 1002903008;
+  LODWORD(v7[2].mResourceHandles.UFG::qResourceData::mNode.mPrev) = 1002903008;
   v7[2].mNode.mUID = 543723269;
   v7[1].mNumParams = v8;
   v9 = gRenderVolumeHelperMaterial;
   LOWORD(gRenderVolumeHelperMaterial[2].mTypeUID) = 0;
-  HIDWORD(v9[2].mResourceHandles.mNode.mNext) = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
+  HIDWORD(v9[2].mResourceHandles.UFG::qResourceData::mNode.mNext) = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
   v10 = UFG::qStringHash32("texVolume0", 0xFFFFFFFF);
-  *((_DWORD *)&v9[2].0 + 22) = -1958479169;
+  *((_DWORD *)&v9[2].UFG::qResourceData + 22) = -1958479169;
   *(_DWORD *)&v9[2].mDebugName[28] = 0;
-  LODWORD(v9[2].mResourceHandles.mNode.mNext) = v10;
+  LODWORD(v9[2].mResourceHandles.UFG::qResourceData::mNode.mNext) = v10;
   v11 = gRenderVolumeHelperMaterial;
   LOWORD(gRenderVolumeHelperMaterial[2].mStateBlockMask.mFlags[1]) = 0;
   HIDWORD(v11[2].mStateBlockMask.mFlags[0]) = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
@@ -96,22 +96,22 @@ void InitIrradianceCaptureSystem(void)
   LODWORD(v11[3].mNode.mChild[0]) = 0;
   LODWORD(v11[2].mStateBlockMask.mFlags[0]) = v12;
   v13 = gRenderVolumeHelperMaterial;
-  LOWORD(gRenderVolumeHelperMaterial[3].mResourceHandles.mNode.mPrev) = 0;
+  LOWORD(gRenderVolumeHelperMaterial[3].mResourceHandles.UFG::qResourceData::mNode.mPrev) = 0;
   *(&v13[3].mNode.mUID + 1) = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
   v14 = UFG::qStringHash32("texVolume2", 0xFFFFFFFF);
   *(_DWORD *)&v13[3].mDebugName[20] = -1958479169;
   *(_DWORD *)&v13[3].mDebugName[12] = 0;
   v13[3].mNode.mUID = v14;
   v15 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v15, (UFG::qResourceData *)&gRenderVolumeHelperMaterial->mNode);
+  UFG::qResourceWarehouse::Add(v15, gRenderVolumeHelperMaterial);
   v16 = UFG::qStringHash32("UNITSPHERE", 0xFFFFFFFF);
-  v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v18 = UFG::qResourceWarehouse::Instance();
-    v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gIrrHelperModelHandle.mPrev, 0xA2ADCD77, v16, v17);
+  UFG::qResourceHandle::Init(&gIrrHelperModelHandle, 0xA2ADCD77, v16, Inventory);
 }
 

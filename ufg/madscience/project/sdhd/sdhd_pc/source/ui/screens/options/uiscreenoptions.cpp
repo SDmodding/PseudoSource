@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_DIALOG_APPLY_CHANGES__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_DIALOG_APPLY_CHANGES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_DIALOG_APPLY_CHANGES", -1);
   UI_HASH_OPTIONS_DIALOG_APPLY_CHANGES = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_POP_OPTIONS_DIALOG_AND_APPLY_CHAN
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("POP_OPTIONS_DIALOG_AND_APPLY_CHANGES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("POP_OPTIONS_DIALOG_AND_APPLY_CHANGES", -1);
   UI_HASH_POP_OPTIONS_DIALOG_AND_APPLY_CHANGES = result;
   return result;
 }

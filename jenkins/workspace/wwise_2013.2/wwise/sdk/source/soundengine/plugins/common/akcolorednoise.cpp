@@ -1,13 +1,16 @@
 // File Line: 22
 // RVA: 0xADDD00
-void __fastcall DSP::CAkColoredNoise::Init(DSP::CAkColoredNoise *this, DSP::CAkColoredNoise::AkNoiseColor in_eNoiseColor, unsigned int in_uSampleRate)
+void __fastcall DSP::CAkColoredNoise::Init(
+        DSP::CAkColoredNoise *this,
+        DSP::CAkColoredNoise::AkNoiseColor in_eNoiseColor,
+        int in_uSampleRate)
 {
   float v3; // xmm0_4
 
   this->m_NoiseColor = in_eNoiseColor;
   switch ( in_eNoiseColor )
   {
-    case 1:
+    case NOISECOLOR_PINK:
       *(_QWORD *)this->m_RandGenTable = 0i64;
       *(_QWORD *)&this->m_RandGenTable[2] = 0i64;
       *(_QWORD *)&this->m_RandGenTable[4] = 0i64;
@@ -17,9 +20,9 @@ void __fastcall DSP::CAkColoredNoise::Init(DSP::CAkColoredNoise *this, DSP::CAkC
       *(_QWORD *)&this->m_RandGenTable[12] = 0i64;
       *(_QWORD *)&this->m_RandGenTable[14] = 0i64;
       *(_QWORD *)&this->m_uIndex = 0i64;
-      this->m_DCFilter.m_fA1 = 1.0 - (float)(251.32742 / (float)(signed int)in_uSampleRate);
+      this->m_DCFilter.m_fA1 = 1.0 - (float)(251.32742 / (float)in_uSampleRate);
       break;
-    case 3:
+    case NOISECOLOR_PURPLE:
       DSP::BiquadFilter<DSP::SingleChannelPolicy>::SetCoefs(
         &this->PurpleFilter,
         AKPURPLENOISE_B0COEF_2,
@@ -28,7 +31,7 @@ void __fastcall DSP::CAkColoredNoise::Init(DSP::CAkColoredNoise *this, DSP::CAkC
         AKPURPLENOISE_A1COEF_2,
         AKPURPLENOISE_A2COEF_2);
       break;
-    case 2:
+    case NOISECOLOR_RED:
       v3 = AKREDNOISE_B0COEF_2;
       this->RedFilter.fA1 = -0.995;
       this->RedFilter.fB0 = v3;
@@ -38,17 +41,18 @@ void __fastcall DSP::CAkColoredNoise::Init(DSP::CAkColoredNoise *this, DSP::CAkC
 
 // File Line: 53
 // RVA: 0xADDDD0
-void __fastcall DSP::CAkColoredNoise::GenerateBufferPink(DSP::CAkColoredNoise *this, float *out_pfBuffer, unsigned int in_uNumFrames)
+void __fastcall DSP::CAkColoredNoise::GenerateBufferPink(
+        DSP::CAkColoredNoise *this,
+        float *out_pfBuffer,
+        unsigned int in_uNumFrames)
 {
   __int64 v3; // r14
-  float *v4; // rsi
-  DSP::CAkColoredNoise *v5; // rbx
-  unsigned int v6; // edi
+  unsigned int m_uIndex; // edi
   float *v7; // r10
-  float v8; // xmm6_4
+  float m_fRunningSum; // xmm6_4
   float *v9; // r9
   float *v10; // r11
-  signed __int64 v11; // r8
+  float *v11; // r8
   float v12; // xmm0_4
   __int64 v13; // rcx
   float v14; // xmm6_4
@@ -67,112 +71,101 @@ void __fastcall DSP::CAkColoredNoise::GenerateBufferPink(DSP::CAkColoredNoise *t
   float v27; // xmm0_4
   float v28; // xmm6_4
   float v29; // xmm0_4
-  char *v30; // r10
+  signed __int64 v30; // r10
   float v31; // xmm0_4
   __int64 v32; // rcx
   float v33; // xmm6_4
 
   v3 = in_uNumFrames;
-  v4 = out_pfBuffer;
-  v5 = this;
-  DSP::CAkWhiteNoise::GenerateBuffer((DSP::CAkWhiteNoise *)&this->m_uLCGState, out_pfBuffer, 2 * in_uNumFrames);
-  v6 = v5->m_uIndex;
-  v7 = &v4[v3];
-  v8 = v5->m_fRunningSum;
-  v9 = v4;
+  DSP::CAkWhiteNoise::GenerateBuffer(this, out_pfBuffer, 2 * in_uNumFrames);
+  m_uIndex = this->m_uIndex;
+  v7 = &out_pfBuffer[v3];
+  m_fRunningSum = this->m_fRunningSum;
+  v9 = out_pfBuffer;
   v10 = v7;
-  if ( v4 < v7 )
+  if ( out_pfBuffer < v7 )
   {
     if ( (4 * v3 + 3) / 4 >= 4 )
     {
-      v11 = (signed __int64)(v7 - 3);
+      v11 = v7 - 3;
       do
       {
         v12 = *v7;
         v9 += 4;
         v7 += 4;
         v13 = CountTrailingZerosTable_0[(unsigned __int64)(125613361
-                                                         * ((unsigned __int16)(v6 + 1) & (unsigned int)-(unsigned __int16)(v6 + 1))) >> 27];
-        v14 = v8 - v5->m_RandGenTable[v13];
-        v5->m_RandGenTable[v13] = v12;
+                                                         * ((unsigned __int16)(m_uIndex + 1) & (unsigned int)-(unsigned __int16)(m_uIndex + 1))) >> 27];
+        v14 = m_fRunningSum - this->m_RandGenTable[v13];
+        this->m_RandGenTable[v13] = v12;
         v15 = v14 + v12;
         v16 = CountTrailingZerosTable_0[(unsigned __int64)(125613361
-                                                         * ((unsigned __int16)(v6 + 2) & (unsigned int)-(unsigned __int16)(v6 + 2))) >> 27];
+                                                         * ((unsigned __int16)(m_uIndex + 2) & (unsigned int)-(unsigned __int16)(m_uIndex + 2))) >> 27];
         v17 = v15 + *(v9 - 4);
-        v18 = v15 - v5->m_RandGenTable[v16];
+        v18 = v15 - this->m_RandGenTable[v16];
         *(v9 - 4) = v17 * 0.14705883;
         v19 = *(v7 - 3);
-        v5->m_RandGenTable[v16] = v19;
+        this->m_RandGenTable[v16] = v19;
         v20 = v18 + v19;
         v21 = CountTrailingZerosTable_0[(unsigned __int64)(125613361
-                                                         * ((unsigned __int16)(v6 + 3) & (unsigned int)-(unsigned __int16)(v6 + 3))) >> 27];
-        v6 = (unsigned __int16)(v6 + 4);
+                                                         * ((unsigned __int16)(m_uIndex + 3) & (unsigned int)-(unsigned __int16)(m_uIndex + 3))) >> 27];
+        m_uIndex = (unsigned __int16)(m_uIndex + 4);
         v22 = v20 + *(v9 - 3);
-        v23 = v20 - v5->m_RandGenTable[v21];
+        v23 = v20 - this->m_RandGenTable[v21];
         *(v9 - 3) = v22 * 0.14705883;
         v24 = *(v7 - 2);
-        v5->m_RandGenTable[v21] = v24;
+        this->m_RandGenTable[v21] = v24;
         v25 = v23 + v24;
-        v26 = CountTrailingZerosTable_0[(unsigned __int64)(125613361 * (v6 & -v6)) >> 27];
+        v26 = CountTrailingZerosTable_0[(unsigned __int64)(125613361 * (m_uIndex & -m_uIndex)) >> 27];
         v27 = v25 + *(v9 - 2);
-        v28 = v25 - v5->m_RandGenTable[v26];
+        v28 = v25 - this->m_RandGenTable[v26];
         *(v9 - 2) = v27 * 0.14705883;
         v29 = *(v7 - 1);
-        v8 = v28 + v29;
-        v5->m_RandGenTable[v26] = v29;
-        *(v9 - 1) = (float)(v8 + *(v9 - 1)) * 0.14705883;
+        m_fRunningSum = v28 + v29;
+        this->m_RandGenTable[v26] = v29;
+        *(v9 - 1) = (float)(m_fRunningSum + *(v9 - 1)) * 0.14705883;
       }
-      while ( (signed __int64)v9 < v11 );
+      while ( (__int64)v9 < (__int64)v11 );
     }
     if ( v9 < v10 )
     {
-      v30 = (char *)((char *)v7 - (char *)v9);
+      v30 = (char *)v7 - (char *)v9;
       do
       {
-        v31 = *(float *)((char *)v9 + (_QWORD)v30);
-        ++v9;
-        v6 = (unsigned __int16)(v6 + 1);
-        v32 = CountTrailingZerosTable_0[(unsigned __int64)(125613361 * (v6 & -v6)) >> 27];
-        v33 = v8 - v5->m_RandGenTable[v32];
-        v5->m_RandGenTable[v32] = v31;
-        v8 = v33 + v31;
-        *(v9 - 1) = (float)(v8 + *(v9 - 1)) * 0.14705883;
+        v31 = *(float *)((char *)v9++ + v30);
+        m_uIndex = (unsigned __int16)(m_uIndex + 1);
+        v32 = CountTrailingZerosTable_0[(unsigned __int64)(125613361 * (m_uIndex & -m_uIndex)) >> 27];
+        v33 = m_fRunningSum - this->m_RandGenTable[v32];
+        this->m_RandGenTable[v32] = v31;
+        m_fRunningSum = v33 + v31;
+        *(v9 - 1) = (float)(m_fRunningSum + *(v9 - 1)) * 0.14705883;
       }
       while ( v9 < v10 );
     }
   }
-  DSP::OnePoleZeroHPFilter::ProcessBuffer(&v5->m_DCFilter, v4, v3);
-  v5->m_uIndex = v6;
-  v5->m_fRunningSum = v8;
+  DSP::OnePoleZeroHPFilter::ProcessBuffer(&this->m_DCFilter, out_pfBuffer, v3);
+  this->m_uIndex = m_uIndex;
+  this->m_fRunningSum = m_fRunningSum;
 }
 
 // File Line: 95
 // RVA: 0xADE010
-void __fastcall DSP::CAkColoredNoise::GenerateBufferRed(DSP::CAkColoredNoise *this, float *out_pfBuffer, unsigned int in_uNumFrames)
+void __fastcall DSP::CAkColoredNoise::GenerateBufferRed(
+        DSP::CAkColoredNoise *this,
+        float *out_pfBuffer,
+        unsigned int in_uNumFrames)
 {
-  unsigned int v3; // edi
-  float *v4; // rsi
-  DSP::CAkColoredNoise *v5; // rbx
-
-  v3 = in_uNumFrames;
-  v4 = out_pfBuffer;
-  v5 = this;
-  DSP::CAkWhiteNoise::GenerateBuffer((DSP::CAkWhiteNoise *)&this->m_uLCGState, out_pfBuffer, in_uNumFrames);
-  DSP::OnePoleFilter::ProcessBuffer(&v5->RedFilter, v4, v3);
+  DSP::CAkWhiteNoise::GenerateBuffer(this, out_pfBuffer, in_uNumFrames);
+  DSP::OnePoleFilter::ProcessBuffer(&this->RedFilter, out_pfBuffer, in_uNumFrames);
 }
 
 // File Line: 103
 // RVA: 0xADE060
-void __fastcall DSP::CAkColoredNoise::GenerateBufferPurple(DSP::CAkColoredNoise *this, float *out_pfBuffer, unsigned int in_uNumFrames)
+void __fastcall DSP::CAkColoredNoise::GenerateBufferPurple(
+        DSP::CAkColoredNoise *this,
+        float *out_pfBuffer,
+        unsigned int in_uNumFrames)
 {
-  unsigned int v3; // edi
-  float *v4; // rsi
-  DSP::CAkColoredNoise *v5; // rbx
-
-  v3 = in_uNumFrames;
-  v4 = out_pfBuffer;
-  v5 = this;
-  DSP::CAkWhiteNoise::GenerateBuffer((DSP::CAkWhiteNoise *)&this->m_uLCGState, out_pfBuffer, in_uNumFrames);
-  DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(&v5->PurpleFilter, v4, v3, 0);
+  DSP::CAkWhiteNoise::GenerateBuffer(this, out_pfBuffer, in_uNumFrames);
+  DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(&this->PurpleFilter, out_pfBuffer, in_uNumFrames, 0);
 }
 

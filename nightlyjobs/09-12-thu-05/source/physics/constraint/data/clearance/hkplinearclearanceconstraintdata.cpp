@@ -1,6 +1,7 @@
 // File Line: 15
 // RVA: 0xD4BD30
-void __fastcall hkpLinearClearanceConstraintData::hkpLinearClearanceConstraintData(hkpLinearClearanceConstraintData *this)
+void __fastcall hkpLinearClearanceConstraintData::hkpLinearClearanceConstraintData(
+        hkpLinearClearanceConstraintData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
@@ -49,7 +50,9 @@ void __fastcall hkpLinearClearanceConstraintData::hkpLinearClearanceConstraintDa
 
 // File Line: 67
 // RVA: 0xD4BD00
-void __fastcall hkpLinearClearanceConstraintData::Atoms::Atoms(hkpLinearClearanceConstraintData::Atoms *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkpLinearClearanceConstraintData::Atoms::Atoms(
+        hkpLinearClearanceConstraintData::Atoms *this,
+        hkFinishLoadedObjectFlag f)
 {
   this->m_motor.m_initializedOffset = -1;
   this->m_motor.m_previousTargetPositionOffset = -1;
@@ -59,27 +62,29 @@ void __fastcall hkpLinearClearanceConstraintData::Atoms::Atoms(hkpLinearClearanc
 
 // File Line: 77
 // RVA: 0xD4BEB0
-void __fastcall hkpLinearClearanceConstraintData::~hkpLinearClearanceConstraintData(hkpLinearClearanceConstraintData *this)
+void __fastcall hkpLinearClearanceConstraintData::~hkpLinearClearanceConstraintData(
+        hkpLinearClearanceConstraintData *this)
 {
-  hkpLinearClearanceConstraintData *v1; // rbx
-  hkpConstraintMotor *v2; // rcx
+  hkpConstraintMotor *m_motor; // rcx
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
-  v2 = this->m_atoms.m_motor.m_motor;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  m_motor = this->m_atoms.m_motor.m_motor;
+  if ( m_motor )
+    hkReferencedObject::removeReference(m_motor);
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 87
 // RVA: 0xD4BEF0
-void __fastcall hkpLinearClearanceConstraintData::setInWorldSpace(hkpLinearClearanceConstraintData *this, hkpLinearClearanceConstraintData::Type type, hkTransformf *bodyATransform, hkTransformf *bodyBTransform, hkVector4f *pivot, hkVector4f *axis1, hkVector4f *axis2)
+void __fastcall hkpLinearClearanceConstraintData::setInWorldSpace(
+        hkpLinearClearanceConstraintData *this,
+        hkpLinearClearanceConstraintData::Type type,
+        hkTransformf *bodyATransform,
+        hkTransformf *bodyBTransform,
+        hkVector4f *pivot,
+        hkVector4f *axis1,
+        hkVector4f *axis2)
 {
-  hkTransformf *v7; // rbp
-  hkpLinearClearanceConstraintData *v8; // r12
-  hkpLinearClearanceConstraintData::Type v9; // er15
-  hkTransformf *v10; // r14
   __m128 v11; // xmm1
   __m128 v12; // xmm3
   __m128 v13; // xmm2
@@ -92,72 +97,76 @@ void __fastcall hkpLinearClearanceConstraintData::setInWorldSpace(hkpLinearClear
   __m128 v20; // xmm1
   __m128 v21; // xmm2
   __m128 v22; // xmm1
-  hkVector4f axis2B; // [rsp+40h] [rbp-98h]
-  hkVector4f axis2A; // [rsp+50h] [rbp-88h]
-  hkVector4f axis1B; // [rsp+60h] [rbp-78h]
-  hkVector4f axis1A; // [rsp+70h] [rbp-68h]
-  hkVector4f pivotB; // [rsp+80h] [rbp-58h]
-  hkVector4f pivotA; // [rsp+90h] [rbp-48h]
+  hkVector4f axis2B; // [rsp+40h] [rbp-98h] BYREF
+  hkVector4f axis2A; // [rsp+50h] [rbp-88h] BYREF
+  hkVector4f axis1B; // [rsp+60h] [rbp-78h] BYREF
+  hkVector4f axis1A; // [rsp+70h] [rbp-68h] BYREF
+  hkVector4f pivotB; // [rsp+80h] [rbp-58h] BYREF
+  hkVector4f pivotA; // [rsp+90h] [rbp-48h] BYREF
 
-  v7 = bodyATransform;
-  v8 = this;
-  v9 = type;
-  v10 = bodyBTransform;
-  hkVector4f::setRotatedInverseDir(&axis1A, (hkMatrix3f *)&bodyATransform->m_rotation.m_col0, axis1);
+  hkVector4f::setRotatedInverseDir(&axis1A, &bodyATransform->m_rotation, axis1);
   v11 = _mm_mul_ps(axis1A.m_quad, axis1A.m_quad);
   v12 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 85), _mm_shuffle_ps(v11, v11, 0)), _mm_shuffle_ps(v11, v11, 170));
   v13 = _mm_rsqrt_ps(v12);
   axis1A.m_quad = _mm_mul_ps(
                     axis1A.m_quad,
                     _mm_andnot_ps(
-                      _mm_cmpleps(v12, (__m128)0i64),
+                      _mm_cmple_ps(v12, (__m128)0i64),
                       _mm_mul_ps(
                         _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v13, v12), v13)),
                         _mm_mul_ps(*(__m128 *)_xmm, v13))));
-  hkVector4f::setRotatedInverseDir(&axis2A, (hkMatrix3f *)&v7->m_rotation.m_col0, axis2);
+  hkVector4f::setRotatedInverseDir(&axis2A, &bodyATransform->m_rotation, axis2);
   v14 = _mm_mul_ps(axis2A.m_quad, axis2A.m_quad);
   v15 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)), _mm_shuffle_ps(v14, v14, 170));
   v16 = _mm_rsqrt_ps(v15);
   axis2A.m_quad = _mm_mul_ps(
                     axis2A.m_quad,
                     _mm_andnot_ps(
-                      _mm_cmpleps(v15, (__m128)0i64),
+                      _mm_cmple_ps(v15, (__m128)0i64),
                       _mm_mul_ps(
                         _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
                         _mm_mul_ps(*(__m128 *)_xmm, v16))));
-  hkVector4f::setTransformedInversePos(&pivotA, v7, pivot);
-  hkVector4f::setRotatedInverseDir(&axis1B, (hkMatrix3f *)&v10->m_rotation.m_col0, axis1);
+  hkVector4f::setTransformedInversePos(&pivotA, bodyATransform, pivot);
+  hkVector4f::setRotatedInverseDir(&axis1B, &bodyBTransform->m_rotation, axis1);
   v17 = _mm_mul_ps(axis1B.m_quad, axis1B.m_quad);
   v18 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v17, v17, 85), _mm_shuffle_ps(v17, v17, 0)), _mm_shuffle_ps(v17, v17, 170));
   v19 = _mm_rsqrt_ps(v18);
   axis1B.m_quad = _mm_mul_ps(
                     axis1B.m_quad,
                     _mm_andnot_ps(
-                      _mm_cmpleps(v18, (__m128)0i64),
+                      _mm_cmple_ps(v18, (__m128)0i64),
                       _mm_mul_ps(
                         _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v19, v18), v19)),
                         _mm_mul_ps(*(__m128 *)_xmm, v19))));
-  hkVector4f::setRotatedInverseDir(&axis2B, (hkMatrix3f *)&v10->m_rotation.m_col0, axis2);
+  hkVector4f::setRotatedInverseDir(&axis2B, &bodyBTransform->m_rotation, axis2);
   v20 = _mm_mul_ps(axis2B.m_quad, axis2B.m_quad);
   v21 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v20, v20, 85), _mm_shuffle_ps(v20, v20, 0)), _mm_shuffle_ps(v20, v20, 170));
   v22 = _mm_rsqrt_ps(v21);
   axis2B.m_quad = _mm_mul_ps(
                     axis2B.m_quad,
                     _mm_andnot_ps(
-                      _mm_cmpleps(v21, (__m128)0i64),
+                      _mm_cmple_ps(v21, (__m128)0i64),
                       _mm_mul_ps(
                         _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v22, v21), v22)),
                         _mm_mul_ps(*(__m128 *)_xmm, v22))));
-  hkVector4f::setTransformedInversePos(&pivotB, v10, pivot);
-  hkpLinearClearanceConstraintData::setInBodySpace(v8, v9, &pivotA, &pivotB, &axis1A, &axis1B, &axis2A, &axis2B);
+  hkVector4f::setTransformedInversePos(&pivotB, bodyBTransform, pivot);
+  hkpLinearClearanceConstraintData::setInBodySpace(this, type, &pivotA, &pivotB, &axis1A, &axis1B, &axis2A, &axis2B);
 }
 
 // File Line: 101
 // RVA: 0xD4C170
-void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearClearanceConstraintData *this, hkpLinearClearanceConstraintData::Type type, hkVector4f *pivotA, hkVector4f *pivotB, hkVector4f *axis1A, hkVector4f *axis1B, hkVector4f *axis2A, hkVector4f *axis2B)
+void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(
+        hkpLinearClearanceConstraintData *this,
+        int type,
+        hkVector4f *pivotA,
+        hkVector4f *pivotB,
+        hkVector4f *axis1A,
+        hkVector4f *axis1B,
+        hkVector4f *axis2A,
+        hkVector4f *axis2B)
 {
   hkVector4f *v8; // rax
-  __m128 v9; // xmm5
+  __m128 m_quad; // xmm5
   hkVector4f *v10; // rax
   __m128 v11; // xmm1
   __m128 v12; // xmm3
@@ -187,20 +196,20 @@ void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearCleara
   v8 = axis1A;
   this->m_atoms.m_transforms.m_transformA.m_translation = (hkVector4f)pivotA->m_quad;
   this->m_atoms.m_transforms.m_transformB.m_translation = (hkVector4f)pivotB->m_quad;
-  v9 = v8->m_quad;
+  m_quad = v8->m_quad;
   v10 = axis2A;
-  v11 = _mm_mul_ps(v9, v9);
+  v11 = _mm_mul_ps(m_quad, m_quad);
   v12 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 85), _mm_shuffle_ps(v11, v11, 0)), _mm_shuffle_ps(v11, v11, 170));
   v13 = _mm_rsqrt_ps(v12);
   this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0.m_quad = _mm_mul_ps(
                                                                        _mm_andnot_ps(
-                                                                         _mm_cmpleps(v12, (__m128)0i64),
+                                                                         _mm_cmple_ps(v12, (__m128)0i64),
                                                                          _mm_mul_ps(
                                                                            _mm_sub_ps(
                                                                              (__m128)_xmm,
                                                                              _mm_mul_ps(_mm_mul_ps(v13, v12), v13)),
                                                                            _mm_mul_ps(*(__m128 *)_xmm, v13))),
-                                                                       v9);
+                                                                       m_quad);
   v14 = v10->m_quad;
   v15 = axis1B;
   v16 = _mm_mul_ps(v14, v14);
@@ -209,7 +218,7 @@ void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearCleara
   v19.m_quad = (__m128)this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0;
   v20.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v17, (__m128)0i64),
+                   _mm_cmple_ps(v17, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)),
                      _mm_mul_ps(*(__m128 *)_xmm, v18))),
@@ -228,7 +237,7 @@ void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearCleara
   v34 = 0;
   this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0.m_quad = _mm_mul_ps(
                                                                        _mm_andnot_ps(
-                                                                         _mm_cmpleps(v24, (__m128)0i64),
+                                                                         _mm_cmple_ps(v24, (__m128)0i64),
                                                                          _mm_mul_ps(
                                                                            _mm_sub_ps(
                                                                              (__m128)_xmm,
@@ -241,7 +250,7 @@ void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearCleara
   v30.m_quad = (__m128)this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0;
   v31.m_quad = _mm_mul_ps(
                  _mm_andnot_ps(
-                   _mm_cmpleps(v28, (__m128)0i64),
+                   _mm_cmple_ps(v28, (__m128)0i64),
                    _mm_mul_ps(
                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v29, v28), v29)),
                      _mm_mul_ps(*(__m128 *)_xmm, v29))),
@@ -251,37 +260,40 @@ void __fastcall hkpLinearClearanceConstraintData::setInBodySpace(hkpLinearCleara
           _mm_mul_ps(_mm_shuffle_ps(v31.m_quad, v31.m_quad, 201), v30.m_quad),
           _mm_mul_ps(_mm_shuffle_ps(v30.m_quad, v30.m_quad, 201), v31.m_quad));
   this->m_atoms.m_transforms.m_transformB.m_rotation.m_col2.m_quad = _mm_shuffle_ps(v32, v32, 201);
-  this->m_atoms.m_ang.m_numConstrainedAxes = *((_BYTE *)&v33 + (signed int)type);
+  this->m_atoms.m_ang.m_numConstrainedAxes = *((_BYTE *)&v33 + type);
 }
 
 // File Line: 122
 // RVA: 0xD4C370
-void __fastcall hkpLinearClearanceConstraintData::setMotor(hkpLinearClearanceConstraintData *this, hkpConstraintMotor *motor)
+void __fastcall hkpLinearClearanceConstraintData::setMotor(
+        hkpLinearClearanceConstraintData *this,
+        hkpConstraintMotor *motor)
 {
-  hkpConstraintMotor *v2; // rbx
-  hkpLinearClearanceConstraintData *v3; // rdi
-  hkReferencedObject *v4; // rcx
+  hkpConstraintMotor *m_motor; // rcx
 
-  v2 = motor;
-  v3 = this;
   if ( motor )
-    hkReferencedObject::addReference((hkReferencedObject *)&motor->vfptr);
-  v4 = (hkReferencedObject *)&v3->m_atoms.m_motor.m_motor->vfptr;
-  if ( v4 )
-    hkReferencedObject::removeReference(v4);
-  v3->m_atoms.m_motor.m_motor = v2;
+    hkReferencedObject::addReference(motor);
+  m_motor = this->m_atoms.m_motor.m_motor;
+  if ( m_motor )
+    hkReferencedObject::removeReference(m_motor);
+  this->m_atoms.m_motor.m_motor = motor;
 }
 
 // File Line: 137
 // RVA: 0xD4C4B0
-void __fastcall hkpLinearClearanceConstraintData::getConstraintInfo(hkpLinearClearanceConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpLinearClearanceConstraintData::getConstraintInfo(
+        hkpLinearClearanceConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_transforms.m_type, 280, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_transforms, 0x118u, infoOut);
 }
 
 // File Line: 142
 // RVA: 0xD4C4D0
-void __fastcall hkpLinearClearanceConstraintData::getRuntimeInfo(hkpLinearClearanceConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpLinearClearanceConstraintData::getRuntimeInfo(
+        hkpLinearClearanceConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   infoOut->m_numSolverResults = 14;
   infoOut->m_sizeOfExternalRuntime = 120;
@@ -291,40 +303,36 @@ void __fastcall hkpLinearClearanceConstraintData::getRuntimeInfo(hkpLinearCleara
 // RVA: 0xD4C410
 hkBool *__fastcall hkpLinearClearanceConstraintData::isValid(hkpLinearClearanceConstraintData *this, hkBool *result)
 {
-  hkpLinearClearanceConstraintData *v2; // rbx
-  hkBool *v3; // rdi
-  hkBool *v4; // rax
-
-  v2 = this;
-  v3 = result;
   if ( hkRotationf::isOrthonormal(&this->m_atoms.m_transforms.m_transformA.m_rotation, 0.0000099999997)
-    && hkRotationf::isOrthonormal(&v2->m_atoms.m_transforms.m_transformB.m_rotation, 0.0000099999997)
-    && v2->m_atoms.m_linLimit0.m_max >= v2->m_atoms.m_linLimit0.m_min
-    && v2->m_atoms.m_linLimit1.m_max >= v2->m_atoms.m_linLimit1.m_min
-    && v2->m_atoms.m_linLimit2.m_max >= v2->m_atoms.m_linLimit2.m_min
-    && v2->m_atoms.m_ang.m_numConstrainedAxes <= 3u )
+    && hkRotationf::isOrthonormal(&this->m_atoms.m_transforms.m_transformB.m_rotation, 0.0000099999997)
+    && this->m_atoms.m_linLimit0.m_max >= this->m_atoms.m_linLimit0.m_min
+    && this->m_atoms.m_linLimit1.m_max >= this->m_atoms.m_linLimit1.m_min
+    && this->m_atoms.m_linLimit2.m_max >= this->m_atoms.m_linLimit2.m_min
+    && this->m_atoms.m_ang.m_numConstrainedAxes <= 3u )
   {
-    v3->m_bool = 1;
-    v4 = v3;
+    result->m_bool = 1;
+    return result;
   }
   else
   {
-    v3->m_bool = 0;
-    v4 = v3;
+    result->m_bool = 0;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 159
 // RVA: 0xD4C400
-signed __int64 __fastcall hkpLinearClearanceConstraintData::getType(hkpLinearClearanceConstraintData *this)
+__int64 __fastcall hkpLinearClearanceConstraintData::getType(hkpLinearClearanceConstraintData *this)
 {
   return 25i64;
 }
 
 // File Line: 164
 // RVA: 0xD4C3C0
-void __fastcall hkpLinearClearanceConstraintData::setMotorEnabled(hkpLinearClearanceConstraintData *this, struct hkpConstraintRuntime *runtimeIn, hkBool isEnabled)
+void __fastcall hkpLinearClearanceConstraintData::setMotorEnabled(
+        hkpLinearClearanceConstraintData *this,
+        struct hkpConstraintRuntime *runtimeIn,
+        hkBool isEnabled)
 {
   this->m_atoms.m_motor.m_isEnabled = isEnabled;
   this->m_atoms.m_friction0.m_isEnabled = isEnabled.m_bool == 0;

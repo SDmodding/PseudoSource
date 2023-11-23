@@ -2,9 +2,9 @@
 // RVA: 0x12C9C68
 float __fastcall expf_special(float x, float y, unsigned int code)
 {
-  unsigned int v3; // er8
-  int v4; // er8
-  int v5; // er9
+  int v3; // r8d
+  int v4; // r8d
+  int v5; // r9d
 
   v3 = code - 1;
   if ( !v3 )
@@ -31,9 +31,9 @@ LABEL_7:
 // RVA: 0x12C9B98
 long double __fastcall exp_special(long double x, long double y, unsigned int code)
 {
-  unsigned int v3; // er8
-  int v4; // er8
-  int v5; // er9
+  int v3; // r8d
+  int v4; // r8d
+  int v5; // r9d
 
   v3 = code - 1;
   if ( !v3 )

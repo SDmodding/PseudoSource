@@ -2,40 +2,55 @@
 // RVA: 0x49DAC0
 void __fastcall UFG::ProgressionTracker::DrawMissionWorkStates(UFG::ProgressionTracker *this, float realTimeDelta)
 {
-  UFG::GameSlice *v2; // rbx
-  float v3; // xmm2_4
-  signed __int64 v4; // rbp
-  Render::DebugDrawContext *v5; // rsi
-  UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *v6; // rbx
+  UFG::GameSlice *mpActiveMaster; // rbx
+  float mSecondsLeftToDisplayFor; // xmm2_4
+  UFG::qList<UFG::MissionWorkStatus,UFG::MissionWorkStatus,1,0> *p_mMissionStates; // rbp
+  Render::DebugDrawContext *Context; // rsi
+  UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *mNext; // rbx
   int v7; // edi
 
-  v2 = this->mpActiveMaster;
-  if ( v2 )
+  mpActiveMaster = this->mpActiveMaster;
+  if ( mpActiveMaster )
   {
-    if ( v2->mType == 11 )
+    if ( mpActiveMaster->mType == (NUM_TYPES|TYPE_OCCLUSION|0x8) )
     {
-      v3 = v2->mSecondsLeftToDisplayFor;
-      if ( v3 > 0.0 )
+      mSecondsLeftToDisplayFor = mpActiveMaster->mSecondsLeftToDisplayFor;
+      if ( mSecondsLeftToDisplayFor > 0.0 )
       {
-        v2->mSecondsLeftToDisplayFor = v3 - realTimeDelta;
-        v4 = (signed __int64)&v2->mMissionStates;
-        v5 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
-        Render::DebugDrawContext::DrawTextA(v5, 70, 75, &UFG::qColour::White, "%s Work States", v2->mTitle.mText);
-        v6 = v2->mMissionStates.mNode.mNext;
-        if ( v6 == (UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *)v4 )
+        mpActiveMaster->mSecondsLeftToDisplayFor = mSecondsLeftToDisplayFor - realTimeDelta;
+        p_mMissionStates = &mpActiveMaster->mMissionStates;
+        Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                                Render::DebugDrawManager::mInstance,
+                                                3u);
+        Render::DebugDrawContext::DrawTextA(
+          Context,
+          70,
+          75,
+          &UFG::qColour::White,
+          "%s Work States",
+          mpActiveMaster->mTitle.mText);
+        mNext = mpActiveMaster->mMissionStates.mNode.mNext;
+        if ( mNext == (UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *)p_mMissionStates )
         {
-          Render::DebugDrawContext::DrawTextA(v5, 70, 90, &UFG::qColour::White, "None");
+          Render::DebugDrawContext::DrawTextA(Context, 70, 90, &UFG::qColour::White, "None");
         }
         else
         {
           v7 = 90;
           do
           {
-            Render::DebugDrawContext::DrawTextA(v5, 70, v7, &UFG::qColour::White, "%s : %s", v6[2].mNext, v6[5].mPrev);
-            v6 = v6->mNext;
+            Render::DebugDrawContext::DrawTextA(
+              Context,
+              70,
+              v7,
+              &UFG::qColour::White,
+              "%s : %s",
+              (const char *)mNext[2].mNext,
+              (const char *)mNext[5].mPrev);
+            mNext = mNext->mNext;
             v7 += 15;
           }
-          while ( v6 != (UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *)v4 );
+          while ( mNext != (UFG::qNode<UFG::MissionWorkStatus,UFG::MissionWorkStatus> *)p_mMissionStates );
         }
       }
     }

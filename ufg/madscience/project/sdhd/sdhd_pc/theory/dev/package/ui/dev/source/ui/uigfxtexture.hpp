@@ -1,9 +1,11 @@
 // File Line: 84
 // RVA: 0xA264F0
-Scaleform::Render::Size<unsigned long> *__fastcall UFG::UIGfxTexture::GetTextureSize(UFG::UIGfxTexture *this, Scaleform::Render::Size<unsigned long> *result, unsigned int plane)
+Scaleform::Render::Size<unsigned long> *__fastcall UFG::UIGfxTexture::GetTextureSize(
+        UFG::UIGfxTexture *this,
+        Scaleform::Render::Size<unsigned long> *result,
+        unsigned int plane)
 {
-  result->Width = this->ImgSize.Width;
-  result->Height = this->ImgSize.Height;
+  *result = this->ImgSize;
   return result;
 }
 
@@ -15,7 +17,7 @@ Scaleform::Render::TextureFormat *__fastcall UFG::UIGfxTexture::GetTextureFormat
 
   result = this->pFormat;
   if ( result )
-    result = (Scaleform::Render::TextureFormat *)result[1].vfptr;
+    return (Scaleform::Render::TextureFormat *)result[1].vfptr;
   return result;
 }
 

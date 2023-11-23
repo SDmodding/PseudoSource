@@ -2,9 +2,8 @@
 // RVA: 0xA29490
 void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rsi
   char v2; // bl
-  Scaleform::SysAllocBase *v3; // rax
+  UIGfxAllocator *v3; // rax
   Scaleform::GFx::Loader *v4; // r15
   Scaleform::GFx::ZlibSupportBase *v5; // rax
   __int64 v6; // rax
@@ -12,58 +11,56 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   UFG::UIGfxFileOpener *v8; // rax
   UFG::UIGfxFileOpener *v9; // rcx
   __int64 v10; // rax
-  Scaleform::Log *v11; // rbx
+  Scaleform::GFx::Resource *v11; // rbx
   __int64 v12; // rax
-  Scaleform::Render::RenderBuffer *v13; // rbx
+  Scaleform::GFx::State *v13; // rbx
   __int64 v14; // rax
-  Scaleform::Render::RenderBuffer *v15; // rbx
+  Scaleform::GFx::State *v15; // rbx
   Scaleform::GFx::ImageFileHandlerRegistry *v16; // rax
   Scaleform::GFx::ImageFileHandlerRegistry *v17; // rax
   Scaleform::GFx::ImageFileHandlerRegistry *v18; // r12
   __int64 v19; // rax
-  Scaleform::Render::RenderBuffer *v20; // r14
+  Scaleform::GFx::State *v20; // r14
   Scaleform::GFx::AS3Support *v21; // rax
-  Scaleform::Render::RenderBuffer *v22; // rax
-  Scaleform::Render::RenderBuffer *v23; // r15
-  UFG::allocator::free_link *v24; // rax
+  Scaleform::GFx::State *v22; // rax
+  Scaleform::GFx::State *v23; // r15
+  UFG::UIThreadCommandQueue *v24; // rax
   UFG::UIGfxTranslator *v25; // rax
   UFG::UIGfxTranslator *v26; // rax
   UFG::UIGfxTranslator *v27; // r13
-  Scaleform::GFx::Loader *v28; // rbx
+  Scaleform::GFx::Loader *m_gfxMovieLoader; // rbx
   Scaleform::GFx::DrawTextManager *v29; // rax
   Scaleform::GFx::DrawTextManager *v30; // rax
-  Scaleform::Ptr<Scaleform::GFx::FontProvider> *v31; // rax
-  Scaleform::GFx::DrawTextManager::TextParams *v32; // rbx
-  _QWORD *v33; // rbx
-  signed __int64 v34; // rdi
+  Scaleform::Ptr<Scaleform::GFx::FontProvider> *FontProvider; // rax
+  Scaleform::GFx::DrawTextManager::TextParams *DefaultTextParams; // rbx
+  Scaleform::GFx::DrawText **m_drawText; // rbx
+  __int64 v34; // rdi
   UFG::UIInputHandler *v35; // rax
   UFG::UIInputHandler *v36; // rax
   const char **v37; // rbx
-  Scaleform::GFx::DrawTextManager::TextParams params; // [rsp+40h] [rbp-C0h]
-  Scaleform::MemoryHeap::HeapDesc rootHeapDesc; // [rsp+68h] [rbp-98h]
-  Scaleform::Render::RenderBuffer *v40; // [rsp+A8h] [rbp-58h]
-  Scaleform::Render::RenderBuffer *v41; // [rsp+B0h] [rbp-50h]
-  Scaleform::Render::RenderBuffer *v42; // [rsp+B8h] [rbp-48h]
+  Scaleform::GFx::DrawTextManager::TextParams params; // [rsp+40h] [rbp-C0h] BYREF
+  Scaleform::MemoryHeap::HeapDesc rootHeapDesc; // [rsp+68h] [rbp-98h] BYREF
+  Scaleform::GFx::State *v40; // [rsp+A8h] [rbp-58h]
+  Scaleform::GFx::State *v41; // [rsp+B0h] [rbp-50h]
+  Scaleform::GFx::State *v42; // [rsp+B8h] [rbp-48h]
   Scaleform::GFx::Loader *v43; // [rsp+C0h] [rbp-40h]
-  Scaleform::Render::Rect<float> viewRect; // [rsp+D0h] [rbp-30h]
-  Scaleform::Render::RenderBuffer *v45; // [rsp+E0h] [rbp-20h]
+  Scaleform::Render::Rect<float> viewRect; // [rsp+D0h] [rbp-30h] BYREF
+  Scaleform::GFx::State *v45; // [rsp+E0h] [rbp-20h]
   __int64 v46; // [rsp+E8h] [rbp-18h]
   Scaleform::GFx::ImageFileHandlerRegistry *v47; // [rsp+F0h] [rbp-10h]
-  Scaleform::Log *v48; // [rsp+F8h] [rbp-8h]
-  unsigned int v49; // [rsp+150h] [rbp+50h]
-  Scaleform::Ptr<Scaleform::GFx::FileOpenerBase> pfileOpener; // [rsp+158h] [rbp+58h]
-  Scaleform::Ptr<Scaleform::GFx::ZlibSupportBase> pzlib; // [rsp+160h] [rbp+60h]
-  Scaleform::Ptr<Scaleform::GFx::FontProvider> result; // [rsp+168h] [rbp+68h]
+  Scaleform::GFx::Resource *v48; // [rsp+F8h] [rbp-8h]
+  Scaleform::Ptr<Scaleform::GFx::FileOpenerBase> pfileOpener; // [rsp+158h] [rbp+58h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ZlibSupportBase> pzlib; // [rsp+160h] [rbp+60h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::FontProvider> result; // [rsp+168h] [rbp+68h] BYREF
 
   v46 = -2i64;
-  v1 = this;
   v2 = 0;
-  v3 = (Scaleform::SysAllocBase *)UFG::qMemoryPool::Allocate(
-                                    &gScaleformMemoryPool,
-                                    8ui64,
-                                    "UIScreenManagerBase::baseInit",
-                                    0i64,
-                                    1u);
+  v3 = (UIGfxAllocator *)UFG::qMemoryPool::Allocate(
+                           &gScaleformMemoryPool,
+                           8ui64,
+                           "UIScreenManagerBase::baseInit",
+                           0i64,
+                           1u);
   if ( v3 )
   {
     v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
@@ -74,7 +71,7 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   {
     v3 = 0i64;
   }
-  v1->m_gfxAllocator = (UIGfxAllocator *)v3;
+  this->m_gfxAllocator = v3;
   rootHeapDesc.Flags = 0;
   rootHeapDesc.MinAlign = 16i64;
   rootHeapDesc.Granularity = 0x4000i64;
@@ -90,7 +87,7 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   {
     v5 = (Scaleform::GFx::ZlibSupportBase *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                               Scaleform::Memory::pGlobalHeap,
-                                              24ui64,
+                                              24i64,
                                               0i64);
     if ( v5 )
     {
@@ -100,7 +97,7 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
       v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
       v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
       v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
-      v5->SType = 29;
+      v5->SType = State_Internal_MaskOwner|State_MaskNode|0x10;
       v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupportBase::`vftable;
       v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupport::`vftable;
     }
@@ -109,7 +106,7 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
       v5 = 0i64;
     }
     pzlib.pObject = v5;
-    v6 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    v6 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
            Scaleform::Memory::pGlobalHeap,
            24i64);
     if ( v6 )
@@ -137,20 +134,17 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   {
     v7 = 0i64;
   }
-  v1->m_gfxMovieLoader = v7;
-  if ( v2 & 2 )
+  this->m_gfxMovieLoader = v7;
+  if ( (v2 & 2) != 0 )
   {
-    v2 &= 0xFDu;
+    v2 &= ~2u;
     if ( pfileOpener.pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)pfileOpener.pObject);
   }
-  if ( v2 & 1 && pzlib.pObject )
+  if ( (v2 & 1) != 0 && pzlib.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)pzlib.pObject);
   UFG::sUIGfxFileOpener_ThreadID = GetCurrentThreadId();
-  v8 = (UFG::UIGfxFileOpener *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
-                                 Scaleform::Memory::pGlobalHeap,
-                                 32ui64,
-                                 0i64);
+  v8 = (UFG::UIGfxFileOpener *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 32i64, 0i64);
   v9 = v8;
   if ( v8 )
   {
@@ -160,7 +154,7 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
     v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
     v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
-    v8->SType = 12;
+    v8->SType = State_OrigScale9Parent|State_MaskNode;
     v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpenerBase::`vftable;
     GFx_Compile_with_SF_BUILD_DEBUG = 0;
     v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpener::`vftable;
@@ -171,16 +165,16 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   {
     v9 = 0i64;
   }
-  v1->m_gfxFileOpener = v9;
-  v9->vfptr[6].__vecDelDtor((Scaleform::RefCountImplCore *)&v9->vfptr, UFG::gUIChunkFiles);
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
+  this->m_gfxFileOpener = v9;
+  v9->vfptr[6].__vecDelDtor(v9, UFG::gUIChunkFiles);
+  this->m_gfxMovieLoader->vfptr->SetState(
+    this->m_gfxMovieLoader,
     State_OrigScale9Parent|State_MaskNode,
-    (Scaleform::GFx::State *)&v1->m_gfxFileOpener->vfptr);
-  v10 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    this->m_gfxFileOpener);
+  v10 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
           Scaleform::Memory::pGlobalHeap,
           16i64);
-  v11 = (Scaleform::Log *)v10;
+  v11 = (Scaleform::GFx::Resource *)v10;
   if ( v10 )
   {
     *(_QWORD *)v10 = &Scaleform::RefCountImplCore::`vftable;
@@ -196,13 +190,13 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v11 = 0i64;
   }
   v48 = v11;
-  Scaleform::GFx::StateBag::SetLog((Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr, v11);
+  Scaleform::GFx::StateBag::SetLog(this->m_gfxMovieLoader, v11);
   if ( v11 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v11);
-  v12 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  v12 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
           Scaleform::Memory::pGlobalHeap,
           24i64);
-  v13 = (Scaleform::Render::RenderBuffer *)v12;
+  v13 = (Scaleform::GFx::State *)v12;
   if ( v12 )
   {
     *(_QWORD *)v12 = &Scaleform::RefCountImplCore::`vftable;
@@ -220,16 +214,13 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v13 = 0i64;
   }
   v45 = v13;
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
-    State_ViewMatrix3D,
-    (Scaleform::GFx::State *)v13);
+  this->m_gfxMovieLoader->vfptr->SetState(this->m_gfxMovieLoader, State_ViewMatrix3D, v13);
   if ( v13 )
-    Scaleform::RefCountImpl::Release(v13);
-  v14 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v13);
+  v14 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
           Scaleform::Memory::pGlobalHeap,
           24i64);
-  v15 = (Scaleform::Render::RenderBuffer *)v14;
+  v15 = (Scaleform::GFx::State *)v14;
   if ( v14 )
   {
     *(_QWORD *)v14 = &Scaleform::RefCountImplCore::`vftable;
@@ -247,18 +238,15 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v15 = 0i64;
   }
   v40 = v15;
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
-    State_ProjectionMatrix3D,
-    (Scaleform::GFx::State *)v15);
+  this->m_gfxMovieLoader->vfptr->SetState(this->m_gfxMovieLoader, State_ProjectionMatrix3D, v15);
   if ( v15 )
-    Scaleform::RefCountImpl::Release(v15);
-  v16 = (Scaleform::GFx::ImageFileHandlerRegistry *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v15);
+  v16 = (Scaleform::GFx::ImageFileHandlerRegistry *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                       Scaleform::Memory::pGlobalHeap,
                                                       56i64);
   if ( v16 )
   {
-    Scaleform::GFx::ImageFileHandlerRegistry::ImageFileHandlerRegistry(v16, 0);
+    Scaleform::GFx::ImageFileHandlerRegistry::ImageFileHandlerRegistry(v16, NoInit);
     v18 = v17;
   }
   else
@@ -266,17 +254,12 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v18 = 0i64;
   }
   v47 = v18;
-  Scaleform::GFx::ImageFileHandlerRegistry::AddHandler(
-    v18,
-    (Scaleform::Render::ImageFileHandler *)&Scaleform::Render::TGA::FileReader::Instance.vfptr);
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
-    State_Type_Count|State_MaskNode,
-    (Scaleform::GFx::State *)&v18->vfptr);
-  v19 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  Scaleform::GFx::ImageFileHandlerRegistry::AddHandler(v18, &Scaleform::Render::TGA::FileReader::Instance);
+  this->m_gfxMovieLoader->vfptr->SetState(this->m_gfxMovieLoader, State_Type_Count|State_MaskNode, v18);
+  v19 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
           Scaleform::Memory::pGlobalHeap,
           24i64);
-  v20 = (Scaleform::Render::RenderBuffer *)v19;
+  v20 = (Scaleform::GFx::State *)v19;
   if ( v19 )
   {
     *(_QWORD *)v19 = &Scaleform::RefCountImplCore::`vftable;
@@ -294,11 +277,8 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v20 = 0i64;
   }
   v41 = v20;
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
-    State_ProjectionMatrix3D|0x20,
-    (Scaleform::GFx::State *)v20);
-  v21 = (Scaleform::GFx::AS3Support *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  this->m_gfxMovieLoader->vfptr->SetState(this->m_gfxMovieLoader, State_ProjectionMatrix3D|0x20, v20);
+  v21 = (Scaleform::GFx::AS3Support *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                         Scaleform::Memory::pGlobalHeap,
                                         24i64);
   if ( v21 )
@@ -311,24 +291,21 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     v23 = 0i64;
   }
   v42 = v23;
-  v1->m_gfxMovieLoader->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr,
-    State_UserData|0x20,
-    (Scaleform::GFx::State *)v23);
-  v24 = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
+  this->m_gfxMovieLoader->vfptr->SetState(this->m_gfxMovieLoader, State_UserData|0x20, v23);
+  v24 = (UFG::UIThreadCommandQueue *)UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
   if ( v24 )
   {
-    v24->mNext = (UFG::allocator::free_link *)&Scaleform::Render::ThreadCommandQueue::`vftable;
-    v24->mNext = (UFG::allocator::free_link *)&UFG::UIThreadCommandQueue::`vftable;
+    v24->vfptr = (Scaleform::Render::ThreadCommandQueueVtbl *)&Scaleform::Render::ThreadCommandQueue::`vftable;
+    v24->vfptr = (Scaleform::Render::ThreadCommandQueueVtbl *)&UFG::UIThreadCommandQueue::`vftable;
   }
   else
   {
     v24 = 0i64;
   }
-  v1->mThreadCommandQueue = (UFG::UIThreadCommandQueue *)v24;
+  this->mThreadCommandQueue = v24;
   v25 = (UFG::UIGfxTranslator *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                   Scaleform::Memory::pGlobalHeap,
-                                  144ui64,
+                                  144i64,
                                   0i64);
   if ( v25 )
   {
@@ -339,60 +316,56 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   {
     v27 = 0i64;
   }
-  v1->m_translator = v27;
-  v28 = v1->m_gfxMovieLoader;
-  v27->mScreenFactory = v1->m_screenFactory;
-  v28->vfptr->SetState((Scaleform::GFx::StateBag *)&v28->vfptr, State_BlendMode, (Scaleform::GFx::State *)&v27->vfptr);
-  v27->mGfxLoader = v28;
-  UFG::UIGfxTranslator::setLanguage(v1->m_translator, eLang_English, 1);
-  v29 = (Scaleform::GFx::DrawTextManager *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  this->m_translator = v27;
+  m_gfxMovieLoader = this->m_gfxMovieLoader;
+  v27->mScreenFactory = this->m_screenFactory;
+  m_gfxMovieLoader->vfptr->SetState(m_gfxMovieLoader, State_BlendMode, v27);
+  v27->mGfxLoader = m_gfxMovieLoader;
+  UFG::UIGfxTranslator::setLanguage(this->m_translator, eLang_English, 1);
+  v29 = (Scaleform::GFx::DrawTextManager *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                              Scaleform::Memory::pGlobalHeap,
                                              40i64);
   if ( v29 )
-    Scaleform::GFx::DrawTextManager::DrawTextManager(v29, v1->m_gfxMovieLoader);
+    Scaleform::GFx::DrawTextManager::DrawTextManager(v29, this->m_gfxMovieLoader);
   else
     v30 = 0i64;
-  v1->m_gfxDrawTextManager = v30;
-  v31 = Scaleform::GFx::StateBag::GetFontProvider((Scaleform::GFx::StateBag *)&v1->m_gfxMovieLoader->vfptr, &result);
-  v1->m_gfxDrawTextManager->vfptr->SetState(
-    (Scaleform::GFx::StateBag *)&v1->m_gfxDrawTextManager->vfptr,
+  this->m_gfxDrawTextManager = v30;
+  FontProvider = Scaleform::GFx::StateBag::GetFontProvider(this->m_gfxMovieLoader, &result);
+  this->m_gfxDrawTextManager->vfptr->SetState(
+    &this->m_gfxDrawTextManager->Scaleform::GFx::StateBag,
     State_ProjectionMatrix3D|0x10,
-    (Scaleform::GFx::State *)&v31->pObject->vfptr);
+    FontProvider->pObject);
   if ( result.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
-  v32 = Scaleform::GFx::DrawTextManager::GetDefaultTextParams(v1->m_gfxDrawTextManager);
-  params.TextColor.Raw = v32->TextColor.Raw;
-  params.HAlignment = v32->HAlignment;
-  params.VAlignment = v32->VAlignment;
-  params.FontStyle = v32->FontStyle;
-  params.FontSize = v32->FontSize;
-  Scaleform::String::String(&params.FontName, &v32->FontName);
-  params.Underline = v32->Underline;
-  params.Multiline = v32->Multiline;
-  params.WordWrap = v32->WordWrap;
-  *(_WORD *)((char *)&v49 + 1) = -1;
-  LOBYTE(v49) = -1;
-  HIBYTE(v49) = -1;
-  params.TextColor.Raw = v49;
+  DefaultTextParams = Scaleform::GFx::DrawTextManager::GetDefaultTextParams(this->m_gfxDrawTextManager);
+  params.TextColor.Raw = DefaultTextParams->TextColor.Raw;
+  params.HAlignment = DefaultTextParams->HAlignment;
+  params.VAlignment = DefaultTextParams->VAlignment;
+  params.FontStyle = DefaultTextParams->FontStyle;
+  params.FontSize = DefaultTextParams->FontSize;
+  Scaleform::String::String(&params.FontName, &DefaultTextParams->FontName);
+  params.Underline = DefaultTextParams->Underline;
+  params.Multiline = DefaultTextParams->Multiline;
+  params.WordWrap = DefaultTextParams->WordWrap;
+  params.TextColor.Raw = -1;
   Scaleform::String::operator=(&params.FontName, "$TitleFont");
   params.FontSize = FLOAT_24_0;
-  Scaleform::GFx::DrawTextManager::SetDefaultTextParams(v1->m_gfxDrawTextManager, &params);
+  Scaleform::GFx::DrawTextManager::SetDefaultTextParams(this->m_gfxDrawTextManager, &params);
   viewRect = 0i64;
-  v33 = v1->m_drawText;
+  m_drawText = this->m_drawText;
   v34 = 32i64;
   do
   {
-    *v33 = Scaleform::GFx::DrawTextManager::CreateHtmlText(
-             v1->m_gfxDrawTextManager,
-             &customWorldMapCaption,
-             &viewRect,
-             0i64,
-             0xFFFFFFFF);
-    ++v33;
+    *m_drawText++ = (Scaleform::GFx::DrawText *)Scaleform::GFx::DrawTextManager::CreateHtmlText(
+                                                  this->m_gfxDrawTextManager,
+                                                  &customCaption,
+                                                  &viewRect,
+                                                  0i64,
+                                                  0xFFFFFFFF);
     --v34;
   }
   while ( v34 );
-  UFG::UIScreenManagerBase::initViewport(v1, 0i64);
+  UFG::UIScreenManagerBase::initViewport(this, 0i64);
   v35 = (UFG::UIInputHandler *)UFG::qMemoryPool::Allocate(
                                  &gScaleformMemoryPool,
                                  0xDCui64,
@@ -403,8 +376,8 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     UFG::UIInputHandler::UIInputHandler(v35);
   else
     v36 = 0i64;
-  v1->m_inputHandler = v36;
-  UFG::UIScreenManagerBase::initCustomRendering(v1);
+  this->m_inputHandler = v36;
+  UFG::UIScreenManagerBase::initCustomRendering(this);
   v37 = UFG::gLanguageOverrideNames;
   do
   {
@@ -412,13 +385,13 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
     LODWORD(v34) = v34 + 1;
     ++v37;
   }
-  while ( (signed int)v34 < 24 );
+  while ( (int)v34 < 24 );
   if ( !_InterlockedDecrement((volatile signed __int32 *)((params.FontName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( v23 )
-    Scaleform::RefCountImpl::Release(v23);
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v23);
   if ( v20 )
-    Scaleform::RefCountImpl::Release(v20);
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v20);
   if ( v18 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v18);
 }
@@ -427,94 +400,88 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
 // RVA: 0xA2FF80
 void __fastcall UFG::UIScreenManagerBase::initViewport(UFG::UIScreenManagerBase *this, UFG::UIScreen *single_screen)
 {
-  UFG::UIScreen *v2; // rbx
-  UFG::UIScreenManagerBase *v3; // rdi
-  Illusion::Target *v4; // rax
-  int v5; // ecx
-  int v6; // er8
+  Illusion::Target *BackBufferTarget; // rax
+  int m_targetWidth; // ecx
+  int mHeight; // r8d
   float v7; // xmm4_4
   int v8; // esi
-  int y; // er14
+  int y; // r14d
   float v10; // xmm5_4
   int width; // ebp
-  int height; // er15
+  int height; // r15d
   float v13; // xmm0_4
-  Scaleform::GFx::DrawTextManager *v14; // rcx
-  signed __int64 v15; // r12
-  signed __int64 i; // rbx
-  signed __int64 j; // rbx
-  Scaleform::Render::Viewport vp; // [rsp+40h] [rbp-48h]
+  Scaleform::GFx::DrawTextManager *m_gfxDrawTextManager; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // r12
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **i; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
+  Scaleform::Render::Viewport vp; // [rsp+40h] [rbp-48h] BYREF
 
-  v2 = single_screen;
-  v3 = this;
   this->m_targetWidth = Render::GetBackBufferTarget()->mWidth;
-  v4 = Render::GetBackBufferTarget();
-  v5 = v3->m_targetWidth;
-  v6 = v4->mHeight;
-  v7 = (float)v5;
-  v3->m_targetHeight = v6;
+  BackBufferTarget = Render::GetBackBufferTarget();
+  m_targetWidth = this->m_targetWidth;
+  mHeight = BackBufferTarget->mHeight;
+  v7 = (float)m_targetWidth;
+  this->m_targetHeight = mHeight;
   v8 = 0;
   y = 0;
-  v10 = (float)v6;
-  width = v5;
-  height = v6;
-  v13 = (float)v5 / (float)v6;
+  v10 = (float)mHeight;
+  width = m_targetWidth;
+  height = mHeight;
+  v13 = (float)m_targetWidth / (float)mHeight;
   if ( v13 <= 5.3333335 )
   {
     if ( v13 > 3.5555556 )
     {
-      v8 = v5 / 3u;
-      width = v5 / 3u;
+      v8 = m_targetWidth / 3u;
+      width = m_targetWidth / 3u;
     }
   }
   else
   {
-    width = (signed int)(float)((float)((float)v6 * 16.0) * 0.11111111);
-    v8 = (unsigned int)(v5 - width) >> 1;
+    width = (int)(float)((float)((float)mHeight * 16.0) * 0.11111111);
+    v8 = (unsigned int)(m_targetWidth - width) >> 1;
   }
-  if ( !v3->mScaleViewportInCode && UFG::gUIViewportScale != 1.0 && UFG::gUIViewportScale > 0.0 )
+  if ( !this->mScaleViewportInCode && UFG::gUIViewportScale != 1.0 && UFG::gUIViewportScale > 0.0 )
   {
-    width = (signed int)(float)(v7 * UFG::gUIViewportScale);
-    v8 = (signed int)(float)((float)((float)(1.0 - UFG::gUIViewportScale) * v7) * 0.5);
-    height = (signed int)(float)(v10 * UFG::gUIViewportScale);
-    y = (signed int)(float)((float)(v10 * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
+    width = (int)(float)(v7 * UFG::gUIViewportScale);
+    v8 = (int)(float)((float)((float)(1.0 - UFG::gUIViewportScale) * v7) * 0.5);
+    height = (int)(float)(v10 * UFG::gUIViewportScale);
+    y = (int)(float)((float)(v10 * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
   }
-  if ( v2 )
+  if ( single_screen )
   {
-    UFG::UIScreenRenderable::setViewport(v2->mRenderable, v5, v6, v8, y, width, height);
+    UFG::UIScreenRenderable::setViewport(single_screen->mRenderable, m_targetWidth, mHeight, v8, y, width, height);
   }
   else
   {
-    vp.BufferWidth = v5;
-    v14 = v3->m_gfxDrawTextManager;
-    vp.BufferHeight = v6;
+    vp.BufferWidth = m_targetWidth;
+    m_gfxDrawTextManager = this->m_gfxDrawTextManager;
+    vp.BufferHeight = mHeight;
     vp.Left = v8;
     vp.Top = y;
     vp.Width = width;
     vp.Height = height;
-    *(_QWORD *)&vp.ScissorHeight = 0i64;
-    *(_QWORD *)&vp.ScissorTop = 0i64;
-    vp.ScissorLeft = 0;
-    Scaleform::GFx::DrawTextManager::SetViewport(v14, &vp);
-    v15 = (signed __int64)&v3->m_screenStack.mNode.mNext;
-    for ( i = (signed __int64)&v3->m_screenStack.mNode.mNext[-1].mNext;
-          (UFG::UIScreenManagerBase *)i != v3;
-          i = *(_QWORD *)(i + 16) - 8i64 )
+    memset(&vp.ScissorLeft, 0, 20);
+    Scaleform::GFx::DrawTextManager::SetViewport(m_gfxDrawTextManager, &vp);
+    p_mNext = &this->m_screenStack.mNode.mNext;
+    for ( i = &this->m_screenStack.mNode.mNext[-1].mNext;
+          i != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this;
+          i = &i[2][-1].mNext )
     {
       UFG::UIScreenRenderable::setViewport(
-        *(UFG::UIScreenRenderable **)(i + 96),
-        v3->m_targetWidth,
-        v3->m_targetHeight,
+        (UFG::UIScreenRenderable *)i[12],
+        this->m_targetWidth,
+        this->m_targetHeight,
         v8,
         y,
         width,
         height);
     }
-    for ( j = (signed __int64)&v3->m_overlayStack.mNode.mNext[-1].mNext; j != v15; j = *(_QWORD *)(j + 16) - 8i64 )
+    for ( j = &this->m_overlayStack.mNode.mNext[-1].mNext; j != p_mNext; j = &j[2][-1].mNext )
       UFG::UIScreenRenderable::setViewport(
-        *(UFG::UIScreenRenderable **)(j + 96),
-        v3->m_targetWidth,
-        v3->m_targetHeight,
+        (UFG::UIScreenRenderable *)j[12],
+        this->m_targetWidth,
+        this->m_targetHeight,
         v8,
         y,
         width,
@@ -524,34 +491,37 @@ void __fastcall UFG::UIScreenManagerBase::initViewport(UFG::UIScreenManagerBase 
 
 // File Line: 362
 // RVA: 0xA2BF10
-void __fastcall UFG::UIScreenManagerBase::getViewportOffsetAndScale(UFG::UIScreenManagerBase *this, UFG::qVector2 *offset, UFG::qVector2 *scale)
+void __fastcall UFG::UIScreenManagerBase::getViewportOffsetAndScale(
+        UFG::UIScreenManagerBase *this,
+        UFG::qVector2 *offset,
+        UFG::qVector2 *scale)
 {
-  signed int v3; // er9
-  signed int v4; // er10
-  signed int v5; // er11
-  signed int v6; // ebx
-  signed int v7; // edi
-  signed int v8; // esi
+  signed int m_targetWidth; // r9d
+  signed int m_targetHeight; // r10d
+  int v5; // r11d
+  int v6; // ebx
+  int v7; // edi
+  int v8; // esi
   float v9; // xmm1_4
   float v10; // xmm0_4
-  float v11; // xmm1_4
+  float y; // xmm1_4
   float v12; // xmm3_4
   float v13; // xmm1_4
 
-  v3 = this->m_targetWidth;
-  v4 = this->m_targetHeight;
+  m_targetWidth = this->m_targetWidth;
+  m_targetHeight = this->m_targetHeight;
   v5 = 0;
   v6 = 0;
-  v7 = this->m_targetWidth;
-  v8 = this->m_targetHeight;
+  v7 = m_targetWidth;
+  v8 = m_targetHeight;
   if ( UFG::gUIViewportScale != 1.0 && UFG::gUIViewportScale > 0.0 )
   {
-    v5 = (signed int)(float)((float)((float)v3 * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
-    v7 = (signed int)(float)((float)v3 * UFG::gUIViewportScale);
-    v6 = (signed int)(float)((float)((float)v4 * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
-    v8 = (signed int)(float)((float)v4 * UFG::gUIViewportScale);
+    v5 = (int)(float)((float)((float)m_targetWidth * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
+    v7 = (int)(float)((float)m_targetWidth * UFG::gUIViewportScale);
+    v6 = (int)(float)((float)((float)m_targetHeight * (float)(1.0 - UFG::gUIViewportScale)) * 0.5);
+    v8 = (int)(float)((float)m_targetHeight * UFG::gUIViewportScale);
   }
-  v9 = (float)v3 / (float)v4;
+  v9 = (float)m_targetWidth / (float)m_targetHeight;
   v10 = 1.7777778 - v9;
   if ( (float)(1.7777778 - v9) < 0.0 )
     LODWORD(v10) ^= _xmm[0];
@@ -563,28 +533,28 @@ void __fastcall UFG::UIScreenManagerBase::getViewportOffsetAndScale(UFG::UIScree
       if ( v9 > 1.7777778 )
       {
         offset->y = 0.0;
-        offset->x = (float)((float)v3 - (float)((float)(1.0 / v12) * (float)v3)) * 0.5;
-        scale->x = (float)((float)v7 * (float)(1.0 / v12)) / (float)(signed int)this->m_flashWidth;
-        scale->y = (float)v8 / (float)(signed int)this->m_flashHeight;
-        v5 = (signed int)(float)((float)v5 * v12);
+        offset->x = (float)((float)m_targetWidth - (float)((float)(1.0 / v12) * (float)m_targetWidth)) * 0.5;
+        scale->x = (float)((float)v7 * (float)(1.0 / v12)) / (float)(int)this->m_flashWidth;
+        scale->y = (float)v8 / (float)(int)this->m_flashHeight;
+        v5 = (int)(float)((float)v5 * v12);
       }
     }
     else
     {
       offset->x = 0.0;
-      offset->y = (float)((float)(signed int)this->m_targetHeight - (float)((float)v4 * v12)) * 0.5;
-      scale->x = (float)v7 / (float)(signed int)this->m_flashWidth;
-      scale->y = (float)((float)v8 * v12) / (float)(signed int)this->m_flashHeight;
-      v6 = (signed int)(float)((float)v6 * v12);
+      offset->y = (float)((float)(int)this->m_targetHeight - (float)((float)m_targetHeight * v12)) * 0.5;
+      scale->x = (float)v7 / (float)(int)this->m_flashWidth;
+      scale->y = (float)((float)v8 * v12) / (float)(int)this->m_flashHeight;
+      v6 = (int)(float)((float)v6 * v12);
     }
   }
   else
   {
-    v11 = UFG::qVector2::msZero.y;
+    y = UFG::qVector2::msZero.y;
     offset->x = UFG::qVector2::msZero.x;
-    offset->y = v11;
-    scale->x = (float)v7 / (float)(signed int)this->m_flashWidth;
-    scale->y = (float)v8 / (float)(signed int)this->m_flashHeight;
+    offset->y = y;
+    scale->x = (float)v7 / (float)(int)this->m_flashWidth;
+    scale->y = (float)v8 / (float)(int)this->m_flashHeight;
   }
   v13 = (float)v6 + offset->y;
   offset->x = (float)v5 + offset->x;
@@ -595,445 +565,434 @@ void __fastcall UFG::UIScreenManagerBase::getViewportOffsetAndScale(UFG::UIScree
 // RVA: 0xA29D10
 void __fastcall UFG::UIScreenManagerBase::baseQuit(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rdi
-  int *v2; // rax
-  int *v3; // rbx
+  int *p_mNext; // rax
+  int *i; // rbx
   _QWORD *v4; // rdx
   __int64 v5; // rcx
   _QWORD *v6; // rax
-  signed __int64 i; // rax
-  _QWORD *v8; // rdx
-  __int64 v9; // rcx
-  _QWORD *v10; // rax
-  signed __int64 j; // rax
-  _QWORD *v12; // rdx
-  __int64 v13; // rcx
-  _QWORD *v14; // rax
-  signed __int64 k; // rax
-  _QWORD *v16; // rdx
-  __int64 v17; // rcx
-  _QWORD *v18; // rax
-  signed __int64 l; // rax
-  _QWORD *v20; // rdx
-  __int64 v21; // rcx
-  _QWORD *v22; // rax
-  signed __int64 m; // rax
-  _QWORD *v24; // rdx
-  __int64 v25; // rcx
-  _QWORD *v26; // rax
-  UFG::UIInputHandler *v27; // rbx
-  Scaleform::GFx::Loader *v28; // rcx
-  Scaleform::GFx::DrawText **v29; // rax
-  signed __int64 v30; // rcx
+  UFG::UIScreenManagerBase *j; // rax
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *p_m_screenStack; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *mNext; // rax
+  UFG::UIScreenManagerBase *k; // rax
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v12; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v13; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v14; // rax
+  UFG::UIScreenManagerBase *m; // rax
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v16; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v17; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v18; // rax
+  UFG::UIScreenManagerBase *n; // rax
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v20; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v21; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v22; // rax
+  UFG::UIScreenManagerBase *ii; // rax
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v24; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v25; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v26; // rax
+  char *m_inputHandler; // rbx
+  Scaleform::GFx::Loader *m_gfxMovieLoader; // rcx
+  Scaleform::GFx::DrawText **m_drawText; // rax
+  __int64 v30; // rcx
 
-  v1 = this;
-  v2 = (int *)&this->m_commandQueue.mNode.mNext[-1].mNext;
-  v3 = &this->m_defaultControllerMask;
-  if ( v2 != &this->m_defaultControllerMask )
+  p_mNext = (int *)&this->m_commandQueue.mNode.mNext[-1].mNext;
+  for ( i = &this->m_defaultControllerMask; p_mNext != i; p_mNext = (int *)&this->m_commandQueue.mNode.mNext[-1].mNext )
   {
-    do
-    {
-      v4 = v2 + 2;
-      v5 = *((_QWORD *)v2 + 1);
-      v6 = (_QWORD *)*((_QWORD *)v2 + 2);
-      *(_QWORD *)(v5 + 8) = v6;
-      *v6 = v5;
-      *v4 = v4;
-      v4[1] = v4;
-      if ( v4 != (_QWORD *)8 )
-        (*(void (__fastcall **)(_QWORD *, signed __int64))*(v4 - 1))(v4 - 1, 1i64);
-      v2 = (int *)&v1->m_commandQueue.mNode.mNext[-1].mNext;
-    }
-    while ( v2 != v3 );
+    v4 = p_mNext + 2;
+    v5 = *((_QWORD *)p_mNext + 1);
+    v6 = (_QWORD *)*((_QWORD *)p_mNext + 2);
+    *(_QWORD *)(v5 + 8) = v6;
+    *v6 = v5;
+    *v4 = v4;
+    v4[1] = v4;
+    if ( v4 != (_QWORD *)8 )
+      (*(void (__fastcall **)(_QWORD *, __int64))*(v4 - 1))(v4 - 1, 1i64);
   }
-  for ( i = (signed __int64)&v1->m_screenCommandQueue.mNode.mNext[-1].mNext;
-        (UFG::qNode<UFG::UICommand,UFG::UICommand> **)i != &v1->m_commandQueue.mNode.mNext;
-        i = (signed __int64)&v1->m_screenCommandQueue.mNode.mNext[-1].mNext )
+  for ( j = (UFG::UIScreenManagerBase *)&this->m_screenCommandQueue.mNode.mNext[-1].mNext;
+        j != (UFG::UIScreenManagerBase *)&this->m_commandQueue.mNode.mNext;
+        j = (UFG::UIScreenManagerBase *)&this->m_screenCommandQueue.mNode.mNext[-1].mNext )
   {
-    v8 = (_QWORD *)(i + 8);
-    v9 = *(_QWORD *)(i + 8);
-    v10 = *(_QWORD **)(i + 16);
-    *(_QWORD *)(v9 + 8) = v10;
-    *v10 = v9;
-    *v8 = v8;
-    v8[1] = v8;
-    if ( v8 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v8 - 1))(v8 - 1, 1i64);
+    p_m_screenStack = &j->m_screenStack;
+    mPrev = j->m_screenStack.mNode.mPrev;
+    mNext = j->m_screenStack.mNode.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_screenStack->mNode.mPrev = &p_m_screenStack->mNode;
+    p_m_screenStack->mNode.mNext = &p_m_screenStack->mNode;
+    if ( p_m_screenStack != (UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))p_m_screenStack[-1].mNode.mNext->mPrev)(
+        &p_m_screenStack[-1].mNode.mNext,
+        1i64);
   }
-  for ( j = (signed __int64)&v1->m_pendingMessages.mNode.mNext[-1].mNext;
-        (UFG::qNode<UFG::UICommand,UFG::UICommand> **)j != &v1->m_screenCommandQueue.mNode.mNext;
-        j = (signed __int64)&v1->m_pendingMessages.mNode.mNext[-1].mNext )
+  for ( k = (UFG::UIScreenManagerBase *)&this->m_pendingMessages.mNode.mNext[-1].mNext;
+        k != (UFG::UIScreenManagerBase *)&this->m_screenCommandQueue.mNode.mNext;
+        k = (UFG::UIScreenManagerBase *)&this->m_pendingMessages.mNode.mNext[-1].mNext )
   {
-    v12 = (_QWORD *)(j + 8);
-    v13 = *(_QWORD *)(j + 8);
-    v14 = *(_QWORD **)(j + 16);
-    *(_QWORD *)(v13 + 8) = v14;
-    *v14 = v13;
-    *v12 = v12;
-    v12[1] = v12;
-    if ( v12 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v12 - 1))(v12 - 1, 1i64);
+    v12 = &k->m_screenStack;
+    v13 = k->m_screenStack.mNode.mPrev;
+    v14 = k->m_screenStack.mNode.mNext;
+    v13->mNext = v14;
+    v14->mPrev = v13;
+    v12->mNode.mPrev = &v12->mNode;
+    v12->mNode.mNext = &v12->mNode;
+    if ( v12 != (UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))v12[-1].mNode.mNext->mPrev)(
+        &v12[-1].mNode.mNext,
+        1i64);
   }
-  EnterCriticalSection(&v1->mScreenStackLock.cs);
-  for ( k = (signed __int64)&v1->m_screenStack.mNode.mNext[-1].mNext;
-        (UFG::UIScreenManagerBase *)k != v1;
-        k = (signed __int64)&v1->m_screenStack.mNode.mNext[-1].mNext )
+  EnterCriticalSection(&this->mScreenStackLock.cs);
+  for ( m = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+        m != this;
+        m = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext )
   {
-    v16 = (_QWORD *)(k + 8);
-    v17 = *(_QWORD *)(k + 8);
-    v18 = *(_QWORD **)(k + 16);
-    *(_QWORD *)(v17 + 8) = v18;
-    *v18 = v17;
-    *v16 = v16;
-    v16[1] = v16;
-    if ( v16 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v16 - 1))(v16 - 1, 1i64);
+    v16 = &m->m_screenStack;
+    v17 = m->m_screenStack.mNode.mPrev;
+    v18 = m->m_screenStack.mNode.mNext;
+    v17->mNext = v18;
+    v18->mPrev = v17;
+    v16->mNode.mPrev = &v16->mNode;
+    v16->mNode.mNext = &v16->mNode;
+    if ( v16 != (UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))v16[-1].mNode.mNext->mPrev)(
+        &v16[-1].mNode.mNext,
+        1i64);
   }
-  for ( l = (signed __int64)&v1->m_overlayStack.mNode.mNext[-1].mNext;
-        (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)l != &v1->m_screenStack.mNode.mNext;
-        l = (signed __int64)&v1->m_overlayStack.mNode.mNext[-1].mNext )
+  for ( n = (UFG::UIScreenManagerBase *)&this->m_overlayStack.mNode.mNext[-1].mNext;
+        n != (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext;
+        n = (UFG::UIScreenManagerBase *)&this->m_overlayStack.mNode.mNext[-1].mNext )
   {
-    v20 = (_QWORD *)(l + 8);
-    v21 = *(_QWORD *)(l + 8);
-    v22 = *(_QWORD **)(l + 16);
-    *(_QWORD *)(v21 + 8) = v22;
-    *v22 = v21;
-    *v20 = v20;
-    v20[1] = v20;
-    if ( v20 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v20 - 1))(v20 - 1, 1i64);
+    v20 = &n->m_screenStack;
+    v21 = n->m_screenStack.mNode.mPrev;
+    v22 = n->m_screenStack.mNode.mNext;
+    v21->mNext = v22;
+    v22->mPrev = v21;
+    v20->mNode.mPrev = &v20->mNode;
+    v20->mNode.mNext = &v20->mNode;
+    if ( v20 != (UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))v20[-1].mNode.mNext->mPrev)(
+        &v20[-1].mNode.mNext,
+        1i64);
   }
-  for ( m = (signed __int64)&v1->mPendingPoppedScreens.mNode.mNext[-1].mNext;
-        (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> **)m != &v1->mPendingOverlayLoads.mNode.mNext;
-        m = (signed __int64)&v1->mPendingPoppedScreens.mNode.mNext[-1].mNext )
+  for ( ii = (UFG::UIScreenManagerBase *)&this->mPendingPoppedScreens.mNode.mNext[-1].mNext;
+        ii != (UFG::UIScreenManagerBase *)&this->mPendingOverlayLoads.mNode.mNext;
+        ii = (UFG::UIScreenManagerBase *)&this->mPendingPoppedScreens.mNode.mNext[-1].mNext )
   {
-    v24 = (_QWORD *)(m + 8);
-    v25 = *(_QWORD *)(m + 8);
-    v26 = *(_QWORD **)(m + 16);
-    *(_QWORD *)(v25 + 8) = v26;
-    *v26 = v25;
-    *v24 = v24;
-    v24[1] = v24;
-    if ( v24 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v24 - 1))(v24 - 1, 1i64);
+    v24 = &ii->m_screenStack;
+    v25 = ii->m_screenStack.mNode.mPrev;
+    v26 = ii->m_screenStack.mNode.mNext;
+    v25->mNext = v26;
+    v26->mPrev = v25;
+    v24->mNode.mPrev = &v24->mNode;
+    v24->mNode.mNext = &v24->mNode;
+    if ( v24 != (UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))v24[-1].mNode.mNext->mPrev)(
+        &v24[-1].mNode.mNext,
+        1i64);
   }
-  LeaveCriticalSection(&v1->mScreenStackLock.cs);
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&v1->mPendingScreenLoads);
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&v1->mPendingOverlayLoads);
-  v27 = v1->m_inputHandler;
-  if ( v27 )
+  LeaveCriticalSection(&this->mScreenStackLock.cs);
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&this->mPendingScreenLoads);
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&this->mPendingOverlayLoads);
+  m_inputHandler = (char *)this->m_inputHandler;
+  if ( m_inputHandler )
   {
-    UFG::UIInputHandler::~UIInputHandler(v1->m_inputHandler);
-    UFG::qMemoryPool::Free(&gScaleformMemoryPool, v27);
-    v1->m_inputHandler = 0i64;
+    UFG::UIInputHandler::~UIInputHandler(this->m_inputHandler);
+    UFG::qMemoryPool::Free(&gScaleformMemoryPool, m_inputHandler);
+    this->m_inputHandler = 0i64;
   }
-  v28 = v1->m_gfxMovieLoader;
-  if ( v28 )
+  m_gfxMovieLoader = this->m_gfxMovieLoader;
+  if ( m_gfxMovieLoader )
   {
-    ((void (__fastcall *)(Scaleform::GFx::Loader *, signed __int64))v28->vfptr->~StateBag)(v28, 1i64);
-    v1->m_gfxMovieLoader = 0i64;
+    ((void (__fastcall *)(Scaleform::GFx::Loader *, __int64))m_gfxMovieLoader->vfptr->~StateBag)(m_gfxMovieLoader, 1i64);
+    this->m_gfxMovieLoader = 0i64;
   }
-  v29 = v1->m_drawText;
+  m_drawText = this->m_drawText;
   v30 = 4i64;
   do
   {
-    *v29 = 0i64;
-    v29[1] = 0i64;
-    v29[2] = 0i64;
-    v29 += 8;
-    *(v29 - 5) = 0i64;
-    *(v29 - 4) = 0i64;
-    *(v29 - 3) = 0i64;
-    *(v29 - 2) = 0i64;
-    *(v29 - 1) = 0i64;
+    *m_drawText = 0i64;
+    m_drawText[1] = 0i64;
+    m_drawText[2] = 0i64;
+    m_drawText += 8;
+    *(m_drawText - 5) = 0i64;
+    *(m_drawText - 4) = 0i64;
+    *(m_drawText - 3) = 0i64;
+    *(m_drawText - 2) = 0i64;
+    *(m_drawText - 1) = 0i64;
     --v30;
   }
   while ( v30 );
-  Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v1->m_gfxDrawTextManager->vfptr);
-  v1->m_gfxDrawTextManager = 0i64;
-  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v1->m_gfxFileOpener);
-  v1->m_gfxFileOpener = 0i64;
-  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v1->m_translator);
-  v1->m_translator = 0i64;
+  Scaleform::RefCountNTSImpl::Release(this->m_gfxDrawTextManager);
+  this->m_gfxDrawTextManager = 0i64;
+  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)this->m_gfxFileOpener);
+  this->m_gfxFileOpener = 0i64;
+  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)this->m_translator);
+  this->m_translator = 0i64;
 }
 
 // File Line: 562
 // RVA: 0xA25E00
 void __fastcall UFG::UIScreenManagerBase::CheckPendingMessages(UFG::UIScreenManagerBase *this, UFG::UIScreen *screen)
 {
-  UFG::UIScreenManagerBase *v2; // rbx
-  unsigned int v3; // ebp
-  Scaleform::GFx::Movie *v4; // r14
+  unsigned int mScreenUID; // ebp
+  Scaleform::GFx::Movie *pObject; // r14
   UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *i; // rdi
-  __int64 *v6; // rdx
-  __int64 v7; // rcx
-  __int64 *v8; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mNext; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v8; // rax
   __int64 *v9; // rax
-  __int64 v10; // rax
-  __int64 **j; // rsi
+  __int64 **v10; // rax
+  __int64 **v11; // rsi
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v12; // rdx
-  __int64 v13; // rcx
-  _QWORD *v14; // rax
-  signed __int64 v15; // rax
-  signed int v16; // ecx
-  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *v17; // rdx
+  __int64 *v13; // rcx
+  __int64 *v14; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> **p_mNext; // rax
+  int v16; // ecx
+  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *p_m_commandQueue; // rdx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v18; // rcx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v19; // rax
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v20; // rax
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v21; // rax
-  __int64 k; // rax
+  __int64 **j; // rax
   _QWORD *v23; // rdx
-  __int64 v24; // rcx
-  _QWORD *v25; // rax
+  __int64 *v24; // rcx
+  __int64 *v25; // rax
   __int64 *v26; // rcx
   __int64 **v27; // rax
-  __int64 v28; // [rsp+0h] [rbp-58h]
-  __int64 v29; // [rsp+20h] [rbp-38h]
-  __int64 *v30; // [rsp+28h] [rbp-30h]
-  __int64 **v31; // [rsp+30h] [rbp-28h]
+  _QWORD v28[5]; // [rsp+0h] [rbp-58h] BYREF
+  __int64 *v29; // [rsp+28h] [rbp-30h] BYREF
+  __int64 **v30; // [rsp+30h] [rbp-28h]
 
-  v29 = -2i64;
-  v2 = this;
-  v3 = screen->mScreenUID;
-  v4 = screen->mRenderable->m_movie.pObject;
+  v28[4] = -2i64;
+  mScreenUID = screen->mScreenUID;
+  pObject = screen->mRenderable->m_movie.pObject;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->m_pendingMessagesMutex);
-  v30 = (__int64 *)&v30;
-  v31 = &v30;
-  for ( i = &v2->m_pendingMessages;
-        &v2->m_pendingMessages.mNode.mNext[-1].mNext != &v2->m_screenCommandQueue.mNode.mNext;
-        v30 = v6 )
+  v29 = (__int64 *)&v29;
+  v30 = &v29;
+  for ( i = &this->m_pendingMessages;
+        &this->m_pendingMessages.mNode.mNext[-1].mNext != &this->m_screenCommandQueue.mNode.mNext;
+        v29 = (__int64 *)mNext )
   {
-    v6 = (__int64 *)v2->m_pendingMessages.mNode.mNext;
-    v7 = *v6;
-    v8 = (__int64 *)v6[1];
-    *(_QWORD *)(v7 + 8) = v8;
-    *v8 = v7;
-    *v6 = (__int64)v6;
-    v6[1] = (__int64)v6;
-    v9 = v30;
-    v30[1] = (__int64)v6;
-    *v6 = (__int64)v9;
-    v6[1] = (__int64)&v30;
+    mNext = this->m_pendingMessages.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v8 = mNext->mNext;
+    mPrev->mNext = v8;
+    v8->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v9 = v29;
+    v29[1] = (__int64)mNext;
+    mNext->mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)v9;
+    mNext->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v29;
   }
-  v10 = (__int64)(v31 - 1);
-  for ( j = (__int64 **)(&v28 + 4); v31 - 1 != j; v10 = (__int64)(v31 - 1) )
+  v10 = v30 - 1;
+  v11 = (__int64 **)&v28[4];
+  while ( v30 - 1 != v11 )
   {
-    v12 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 8);
-    v13 = *(_QWORD *)(v10 + 8);
-    v14 = *(_QWORD **)(v10 + 16);
-    *(_QWORD *)(v13 + 8) = v14;
-    *v14 = v13;
+    v12 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 1);
+    v13 = v10[1];
+    v14 = v10[2];
+    v13[1] = (__int64)v14;
+    *v14 = (__int64)v13;
     v12->mPrev = v12;
     v12->mNext = v12;
-    v15 = (signed __int64)&v12[-1].mNext;
-    if ( LODWORD(v12[2].mNext) != v3 )
+    p_mNext = &v12[-1].mNext;
+    if ( LODWORD(v12[2].mNext) != mScreenUID )
     {
-      if ( *(_DWORD *)(v15 + 24) != 7 )
+      if ( *((_DWORD *)p_mNext + 6) != 7 )
       {
         v21 = i->mNode.mPrev;
         v21->mNext = v12;
         v12->mPrev = v21;
         v12->mNext = &i->mNode;
         i->mNode.mPrev = v12;
-        continue;
+        goto LABEL_21;
       }
-      if ( v4 != *(Scaleform::GFx::Movie **)(v15 + 96) )
+      if ( pObject != (Scaleform::GFx::Movie *)p_mNext[12] )
       {
         v20 = i->mNode.mPrev;
         v20->mNext = v12;
         v12->mPrev = v20;
         v12->mNext = &i->mNode;
         i->mNode.mPrev = v12;
-        continue;
+        goto LABEL_21;
       }
-      *(_DWORD *)(v15 + 48) = v3;
-      if ( !UFG::gTweakerUpdateUI || !v2->m_updateUI )
+      *((_DWORD *)p_mNext + 12) = mScreenUID;
+      if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
       {
 LABEL_13:
-        (**(void (__fastcall ***)(signed __int64, signed __int64))v15)(v15, 1i64);
-        continue;
+        ((void (__fastcall *)(UFG::qNode<UFG::UICommand,UFG::UICommand> **, __int64))(*p_mNext)->mPrev)(p_mNext, 1i64);
+        goto LABEL_21;
       }
-      v17 = &v2->m_commandQueue;
+      p_m_commandQueue = &this->m_commandQueue;
       goto LABEL_12;
     }
-    if ( !UFG::gTweakerUpdateUI || !v2->m_updateUI )
+    if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
       goto LABEL_13;
-    v16 = *(_DWORD *)(v15 + 24);
+    v16 = *((_DWORD *)p_mNext + 6);
     if ( v16 >= 0 )
     {
       if ( v16 <= 4 )
       {
-        v17 = &v2->m_screenCommandQueue;
+        p_m_commandQueue = &this->m_screenCommandQueue;
         goto LABEL_12;
       }
       if ( v16 <= 7 )
       {
-        v17 = &v2->m_commandQueue;
+        p_m_commandQueue = &this->m_commandQueue;
 LABEL_12:
-        v18 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v15 + 8);
-        v19 = v17->mNode.mPrev;
+        v18 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(p_mNext + 1);
+        v19 = p_m_commandQueue->mNode.mPrev;
         v19->mNext = v18;
         v18->mPrev = v19;
-        v18->mNext = &v17->mNode;
-        v17->mNode.mPrev = v18;
-        continue;
+        v18->mNext = &p_m_commandQueue->mNode;
+        p_m_commandQueue->mNode.mPrev = v18;
       }
     }
+LABEL_21:
+    v10 = v30 - 1;
   }
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->m_pendingMessagesMutex);
-  for ( k = (__int64)(v31 - 1); v31 - 1 != j; k = (__int64)(v31 - 1) )
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->m_pendingMessagesMutex);
+  for ( j = v30 - 1; v30 - 1 != v11; j = v30 - 1 )
   {
-    v23 = (_QWORD *)(k + 8);
-    v24 = *(_QWORD *)(k + 8);
-    v25 = *(_QWORD **)(k + 16);
-    *(_QWORD *)(v24 + 8) = v25;
-    *v25 = v24;
+    v23 = j + 1;
+    v24 = j[1];
+    v25 = j[2];
+    v24[1] = (__int64)v25;
+    *v25 = (__int64)v24;
     *v23 = v23;
     v23[1] = v23;
     if ( v23 != (_QWORD *)8 )
-      (*(void (__fastcall **)(_QWORD *, signed __int64))*(v23 - 1))(v23 - 1, 1i64);
+      (*(void (__fastcall **)(_QWORD *, __int64))*(v23 - 1))(v23 - 1, 1i64);
   }
-  v26 = v30;
-  v27 = v31;
-  v30[1] = (__int64)v31;
+  v26 = v29;
+  v27 = v30;
+  v29[1] = (__int64)v30;
   *v27 = v26;
-}all **)(_QWORD *, signed __int64))*(v23 - 1))(v23 - 1, 1i64);
-  }
-  v26 = v30;
-  v27
+}
 
 // File Line: 610
 // RVA: 0xA328C0
 void __fastcall UFG::UIScreenManagerBase::updatePendingLoads(UFG::UIScreenManagerBase *this, float elapsed)
 {
-  UFG::UIScreenManagerBase *v2; // rbp
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v3; // rsi
-  UFG::UIScreen *v4; // r14
-  Scaleform::GFx::Movie *v5; // rbx
-  Scaleform::RefCountImplCoreVtbl *v6; // rdi
-  void *v7; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mNext; // rsi
+  UFG::UIScreen *mPrev; // r14
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rdi
+  void *CurrentThreadID; // rax
   __int64 v8; // rdx
   __int64 v9; // r9
-  int v10; // eax
+  int mPrev_high; // eax
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v11; // rcx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v12; // rdx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v13; // rcx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v14; // rax
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v15; // rdx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v16; // rax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v17; // rcx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v18; // rdx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v19; // rax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v20; // r15
-  UFG::UIScreen *v21; // r12
-  Scaleform::GFx::Movie *v22; // rbx
-  Scaleform::RefCountImplCoreVtbl *v23; // rdi
-  void *v24; // rax
-  __int64 v25; // rdx
-  __int64 v26; // r9
-  int v27; // eax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v28; // rcx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v29; // rdx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v30; // rcx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v31; // rax
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v32; // rcx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v33; // rax
-  signed __int64 v34; // r11
-  signed __int64 v35; // rsi
-  signed __int64 v36; // rdi
-  __int64 *v37; // r14
-  signed __int64 v38; // r10
-  __int64 v39; // rdx
-  _QWORD *v40; // r9
-  __int64 *v41; // r8
-  _QWORD *v42; // rax
-  __int64 v43; // rcx
-  _QWORD *v44; // rax
-  _QWORD *v45; // rax
-  __int64 v46; // rax
-  __int64 *v47; // r14
-  signed __int64 v48; // r10
-  _QWORD *v49; // r9
-  __int64 v50; // rdx
-  __int64 *v51; // r8
-  _QWORD *v52; // rax
-  __int64 v53; // rcx
-  _QWORD *v54; // rax
-  __int64 **v55; // rax
-  __int64 v56; // rax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v57; // rcx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v58; // rdx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v59; // rax
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v60; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v61; // r9
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v62; // r8
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v63; // rax
-  signed __int64 v64; // [rsp+20h] [rbp-48h]
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v15; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v16; // rcx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v17; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v18; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v19; // r15
+  UFG::UIScreen *v20; // r12
+  Scaleform::GFx::Movie *v21; // rbx
+  Scaleform::RefCountImplCoreVtbl *v22; // rdi
+  void *v23; // rax
+  __int64 v24; // rdx
+  __int64 v25; // r9
+  int v26; // eax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v27; // rcx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v28; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v29; // rcx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v30; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v31; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // r11
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v33; // rsi
+  __int64 v34; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v35; // r14
+  __int64 v36; // r10
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v37; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v38; // r8
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v39; // rax
+  __int64 v40; // rcx
+  _QWORD *v41; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v42; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v43; // rax
+  __int64 *v44; // r14
+  __int64 v45; // r10
+  __int64 v46; // rdx
+  __int64 *v47; // r8
+  _QWORD *v48; // rax
+  __int64 v49; // rcx
+  _QWORD *v50; // rax
+  __int64 **v51; // rax
+  __int64 v52; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v53; // rcx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v54; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v55; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v56; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v57; // r9
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v58; // r8
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v59; // rax
 
-  v64 = -2i64;
-  v2 = this;
   if ( (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)this->mPendingScreenLoads.mNode.mNext != &this->mPendingScreenLoads )
   {
-    v3 = this->mPendingScreenLoads.mNode.mNext;
-    v4 = (UFG::UIScreen *)v3[1].mPrev;
-    if ( v4->mRenderable->mIsLoaded )
+    mNext = this->mPendingScreenLoads.mNode.mNext;
+    mPrev = (UFG::UIScreen *)mNext[1].mPrev;
+    if ( mPrev->mRenderable->mIsLoaded )
     {
-      v5 = v4->mRenderable->m_movie.pObject;
-      v6 = v5->vfptr;
-      v7 = UFG::qGetCurrentThreadID();
-      v6[27].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, (unsigned int)v7);
-      v10 = HIDWORD(v3[2].mPrev);
-      if ( v10 <= 0 )
+      pObject = mPrev->mRenderable->m_movie.pObject;
+      vfptr = pObject->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr;
+      CurrentThreadID = UFG::qGetCurrentThreadID();
+      vfptr[27].__vecDelDtor(pObject, (unsigned int)CurrentThreadID);
+      mPrev_high = HIDWORD(mNext[2].mPrev);
+      if ( mPrev_high <= 0 )
       {
-        UFG::UIScreenManagerBase::CheckPendingMessages(v2, v4);
-        v12 = v2->mPendingScreenLoads.mNode.mNext;
+        UFG::UIScreenManagerBase::CheckPendingMessages(this, mPrev);
+        v12 = this->mPendingScreenLoads.mNode.mNext;
         v13 = v12->mPrev;
         v14 = v12->mNext;
         v13->mNext = v14;
         v14->mPrev = v13;
         v12->mPrev = v12;
         v12->mNext = v12;
-        if ( LOBYTE(v3[2].mPrev) )
+        if ( LOBYTE(mNext[2].mPrev) )
         {
-          UFG::UIScreenManagerBase::shutdownScreen(v2, (UFG::UIScreen *)v3[1].mPrev);
+          UFG::UIScreenManagerBase::shutdownScreen(this, (UFG::UIScreen *)mNext[1].mPrev);
         }
         else
         {
-          EnterCriticalSection(&v2->mScreenStackLock.cs);
-          v15 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v4->mPrev;
-          v16 = v2->m_screenStack.mNode.mPrev;
-          v16->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v4->mPrev;
-          v15->mPrev = v16;
-          v15->mNext = &v2->m_screenStack.mNode;
-          v2->m_screenStack.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v4->mPrev;
-          LeaveCriticalSection(&v2->mScreenStackLock.cs);
-          UFG::UIScreenManagerBase::initViewport(v2, v4);
-          (*((void (__fastcall **)(UFG::UIScreen *, UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *))&v4->vfptr->__vecDelDtor
+          EnterCriticalSection(&this->mScreenStackLock.cs);
+          v15 = this->m_screenStack.mNode.mPrev;
+          v15->mNext = &mPrev->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+          mPrev->mPrev = v15;
+          mPrev->mNext = &this->m_screenStack.mNode;
+          this->m_screenStack.mNode.mPrev = &mPrev->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+          LeaveCriticalSection(&this->mScreenStackLock.cs);
+          UFG::UIScreenManagerBase::initViewport(this, mPrev);
+          (*((void (__fastcall **)(UFG::UIScreen *, UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *))&mPrev->vfptr->__vecDelDtor
            + 1))(
-            v4,
-            v3[1].mNext);
+            mPrev,
+            mNext[1].mNext);
         }
-        v17 = v3[1].mNext;
-        if ( v17 )
-          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, signed __int64))v17->mPrev->mPrev)(
-            v17,
+        v16 = mNext[1].mNext;
+        if ( v16 )
+          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64))v16->mPrev->mPrev)(
+            v16,
             1i64);
-        v18 = v3->mPrev;
-        v19 = v3->mNext;
-        v18->mNext = v19;
-        v19->mPrev = v18;
-        v3->mPrev = v3;
-        v3->mNext = v3;
-        operator delete[](v3);
+        v17 = mNext->mPrev;
+        v18 = mNext->mNext;
+        v17->mNext = v18;
+        v18->mPrev = v17;
+        mNext->mPrev = mNext;
+        mNext->mNext = mNext;
+        operator delete[](mNext);
       }
       else
       {
-        HIDWORD(v3[2].mPrev) = v10 - 1;
-        v11 = v3[1].mPrev[6].mPrev;
+        HIDWORD(mNext[2].mPrev) = mPrev_high - 1;
+        v11 = mNext[1].mPrev[6].mPrev;
         if ( LOBYTE(v11[22].mPrev) )
         {
           LOBYTE(v9) = 1;
-          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, signed __int64, __int64, signed __int64))v11[20].mPrev->mPrev[12].mPrev)(
+          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, __int64, __int64, __int64))v11[20].mPrev->mPrev[12].mPrev)(
             v11[20].mPrev,
             v8,
             2i64,
@@ -1043,217 +1002,202 @@ void __fastcall UFG::UIScreenManagerBase::updatePendingLoads(UFG::UIScreenManage
       }
     }
   }
-  if ( (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)v2->mPendingOverlayLoads.mNode.mNext != &v2->mPendingOverlayLoads )
+  if ( (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)this->mPendingOverlayLoads.mNode.mNext != &this->mPendingOverlayLoads )
   {
-    v20 = v2->mPendingOverlayLoads.mNode.mNext;
-    v21 = (UFG::UIScreen *)v20[1].mPrev;
-    if ( v21->mRenderable->mIsLoaded )
+    v19 = this->mPendingOverlayLoads.mNode.mNext;
+    v20 = (UFG::UIScreen *)v19[1].mPrev;
+    if ( v20->mRenderable->mIsLoaded )
     {
-      v22 = v21->mRenderable->m_movie.pObject;
-      v23 = v22->vfptr;
-      v24 = UFG::qGetCurrentThreadID();
-      v23[27].__vecDelDtor((Scaleform::RefCountImplCore *)&v22->vfptr, (unsigned int)v24);
-      v27 = HIDWORD(v20[2].mPrev);
-      if ( v27 <= 0 )
+      v21 = v20->mRenderable->m_movie.pObject;
+      v22 = v21->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr;
+      v23 = UFG::qGetCurrentThreadID();
+      v22[27].__vecDelDtor(v21, (unsigned int)v23);
+      v26 = HIDWORD(v19[2].mPrev);
+      if ( v26 <= 0 )
       {
-        UFG::UIScreenManagerBase::CheckPendingMessages(v2, v21);
-        v29 = v2->mPendingOverlayLoads.mNode.mNext;
-        v30 = v29->mPrev;
-        v31 = v29->mNext;
-        v30->mNext = v31;
-        v31->mPrev = v30;
-        v29->mPrev = v29;
-        v29->mNext = v29;
-        if ( LOBYTE(v20[2].mPrev) )
+        UFG::UIScreenManagerBase::CheckPendingMessages(this, v20);
+        v28 = this->mPendingOverlayLoads.mNode.mNext;
+        v29 = v28->mPrev;
+        v30 = v28->mNext;
+        v29->mNext = v30;
+        v30->mPrev = v29;
+        v28->mPrev = v28;
+        v28->mNext = v28;
+        if ( LOBYTE(v19[2].mPrev) )
         {
-          UFG::UIScreenManagerBase::shutdownScreen(v2, (UFG::UIScreen *)v20[1].mPrev);
+          UFG::UIScreenManagerBase::shutdownScreen(this, (UFG::UIScreen *)v19[1].mPrev);
         }
         else
         {
-          EnterCriticalSection(&v2->mScreenStackLock.cs);
-          v32 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v21->mPrev;
-          v33 = v2->m_overlayStack.mNode.mPrev;
-          v33->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v21->mPrev;
-          v32->mPrev = v33;
-          v32->mNext = &v2->m_overlayStack.mNode;
-          v2->m_overlayStack.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v21->mPrev;
-          v34 = (signed __int64)&v2->m_overlayStack.mNode.mNext[-1].mNext;
-          v35 = (signed __int64)&v2->m_screenStack.mNode.mNext;
+          EnterCriticalSection(&this->mScreenStackLock.cs);
+          v31 = this->m_overlayStack.mNode.mPrev;
+          v31->mNext = &v20->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+          v20->mPrev = v31;
+          v20->mNext = &this->m_overlayStack.mNode;
+          this->m_overlayStack.mNode.mPrev = &v20->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+          p_mNext = &this->m_overlayStack.mNode.mNext[-1].mNext;
+          v33 = &this->m_screenStack.mNode.mNext;
           do
           {
-            v36 = 0i64;
-            while ( v34 != v35 )
+            v34 = 0i64;
+            while ( p_mNext != v33 )
             {
-              v37 = (__int64 *)(v34 + 8);
-              v38 = *(_QWORD *)(v34 + 16) - 8i64;
-              if ( v38 == v35 )
+              v35 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+              v36 = (__int64)&p_mNext[2][-1].mNext;
+              if ( (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v36 == v33 )
                 break;
-              if ( *(_DWORD *)(v34 + 124) <= *(_DWORD *)(v38 + 124) )
+              if ( *((_DWORD *)p_mNext + 31) <= *(_DWORD *)(v36 + 124) )
               {
-                v34 = *(_QWORD *)(v34 + 16) - 8i64;
+                p_mNext = &p_mNext[2][-1].mNext;
               }
               else
               {
-                v39 = *v37;
-                v40 = *(_QWORD **)(v34 + 16);
-                v41 = *(__int64 **)(v38 + 16);
-                v42 = *(_QWORD **)(v34 + 16);
-                *(_QWORD *)(v39 + 8) = v42;
-                *v42 = v39;
-                *v37 = (__int64)v37;
-                *(_QWORD *)(v34 + 16) = v34 + 8;
-                v43 = *(_QWORD *)(v38 + 8);
-                v44 = *(_QWORD **)(v38 + 16);
-                *(_QWORD *)(v43 + 8) = v44;
-                *v44 = v43;
-                *v40 = v40;
-                v40[1] = v40;
-                v45 = *(_QWORD **)(v39 + 8);
-                *(_QWORD *)(v39 + 8) = v38 + 8;
-                *v40 = v39;
-                v40[1] = v45;
-                *v45 = v38 + 8;
-                v46 = *v41;
-                *(_QWORD *)(v46 + 8) = v37;
-                *v37 = v46;
-                *(_QWORD *)(v34 + 16) = v41;
-                *v41 = (__int64)v37;
-                v36 = v38;
+                v37 = v35->mPrev;
+                v38 = *(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)(v36 + 16);
+                v39 = p_mNext[2];
+                v37->mNext = v39;
+                v39->mPrev = v37;
+                v35->mPrev = v35;
+                p_mNext[2] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+                v40 = *(_QWORD *)(v36 + 8);
+                v41 = *(_QWORD **)(v36 + 16);
+                *(_QWORD *)(v40 + 8) = v41;
+                *v41 = v40;
+                *(_QWORD *)(v36 + 8) = v36 + 8;
+                *(_QWORD *)(v36 + 16) = v36 + 8;
+                v42 = v37->mNext;
+                v37->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v36 + 8);
+                *(_QWORD *)(v36 + 8) = v37;
+                *(_QWORD *)(v36 + 16) = v42;
+                v42->mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v36 + 8);
+                v43 = v38->mPrev;
+                v43->mNext = v35;
+                v35->mPrev = v43;
+                p_mNext[2] = v38;
+                v38->mPrev = v35;
+                v34 = v36;
               }
             }
-            v34 = 0i64;
-            if ( !v36 || v36 == v35 )
+            p_mNext = 0i64;
+            if ( !v34 || (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v34 == v33 )
               break;
             do
             {
-              v47 = (__int64 *)(v36 + 8);
-              v48 = *(_QWORD *)(v36 + 8) - 8i64;
-              if ( v48 == v35 )
+              v44 = (__int64 *)(v34 + 8);
+              v45 = *(_QWORD *)(v34 + 8) - 8i64;
+              if ( (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v45 == v33 )
                 break;
-              if ( *(_DWORD *)(v48 + 124) <= *(_DWORD *)(v36 + 124) )
+              if ( *(_DWORD *)(v45 + 124) <= *(_DWORD *)(v34 + 124) )
               {
-                v36 = *(_QWORD *)(v36 + 8) - 8i64;
+                v34 = *(_QWORD *)(v34 + 8) - 8i64;
               }
               else
               {
-                v49 = *(_QWORD **)(v36 + 8);
-                v50 = **(_QWORD **)(v36 + 8);
-                v51 = *(__int64 **)(v36 + 16);
-                v52 = *(_QWORD **)(v48 + 16);
-                *(_QWORD *)(v50 + 8) = v52;
-                *v52 = v50;
-                *v49 = v49;
-                v49[1] = v49;
-                v53 = *v47;
-                v54 = *(_QWORD **)(v36 + 16);
-                *(_QWORD *)(v53 + 8) = v54;
-                *v54 = v53;
-                *v47 = (__int64)v47;
-                *(_QWORD *)(v36 + 16) = v36 + 8;
-                v55 = *(__int64 ***)(v50 + 8);
-                *(_QWORD *)(v50 + 8) = v47;
-                *v47 = v50;
-                *(_QWORD *)(v36 + 16) = v55;
-                *v55 = v47;
-                v56 = *v51;
-                *(_QWORD *)(v56 + 8) = v48 + 8;
-                *v49 = v56;
-                v49[1] = v51;
-                *v51 = v48 + 8;
-                v34 = v48;
+                v46 = **(_QWORD **)(v34 + 8);
+                v47 = *(__int64 **)(v34 + 16);
+                v48 = *(_QWORD **)(v45 + 16);
+                *(_QWORD *)(v46 + 8) = v48;
+                *v48 = v46;
+                *(_QWORD *)(v45 + 8) = v45 + 8;
+                *(_QWORD *)(v45 + 16) = v45 + 8;
+                v49 = *v44;
+                v50 = *(_QWORD **)(v34 + 16);
+                *(_QWORD *)(v49 + 8) = v50;
+                *v50 = v49;
+                *v44 = (__int64)v44;
+                *(_QWORD *)(v34 + 16) = v34 + 8;
+                v51 = *(__int64 ***)(v46 + 8);
+                *(_QWORD *)(v46 + 8) = v44;
+                *v44 = v46;
+                *(_QWORD *)(v34 + 16) = v51;
+                *v51 = v44;
+                v52 = *v47;
+                *(_QWORD *)(v52 + 8) = v45 + 8;
+                *(_QWORD *)(v45 + 8) = v52;
+                *(_QWORD *)(v45 + 16) = v47;
+                *v47 = v45 + 8;
+                p_mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v45;
               }
             }
-            while ( v36 != v35 );
+            while ( (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v34 != v33 );
           }
-          while ( v34 );
-          LeaveCriticalSection(&v2->mScreenStackLock.cs);
-          UFG::UIScreenManagerBase::initViewport(v2, 0i64);
-          (*((void (__fastcall **)(UFG::UIScreen *, UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *))&v21->vfptr->__vecDelDtor
+          while ( p_mNext );
+          LeaveCriticalSection(&this->mScreenStackLock.cs);
+          UFG::UIScreenManagerBase::initViewport(this, 0i64);
+          (*((void (__fastcall **)(UFG::UIScreen *, UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *))&v20->vfptr->__vecDelDtor
            + 1))(
-            v21,
-            v20[1].mNext);
+            v20,
+            v19[1].mNext);
         }
-        v57 = v20[1].mNext;
-        if ( v57 )
-          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, signed __int64))v57->mPrev->mPrev)(
-            v57,
+        v53 = v19[1].mNext;
+        if ( v53 )
+          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64))v53->mPrev->mPrev)(
+            v53,
             1i64);
-        v58 = v20->mPrev;
-        v59 = v20->mNext;
-        v58->mNext = v59;
-        v59->mPrev = v58;
-        v20->mPrev = v20;
-        v20->mNext = v20;
-        operator delete[](v20);
+        v54 = v19->mPrev;
+        v55 = v19->mNext;
+        v54->mNext = v55;
+        v55->mPrev = v54;
+        v19->mPrev = v19;
+        v19->mNext = v19;
+        operator delete[](v19);
       }
       else
       {
-        HIDWORD(v20[2].mPrev) = v27 - 1;
-        v28 = v20[1].mPrev[6].mPrev;
-        if ( LOBYTE(v28[22].mPrev) )
+        HIDWORD(v19[2].mPrev) = v26 - 1;
+        v27 = v19[1].mPrev[6].mPrev;
+        if ( LOBYTE(v27[22].mPrev) )
         {
-          LOBYTE(v26) = 1;
-          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, signed __int64, __int64, signed __int64))v28[20].mPrev->mPrev[12].mPrev)(
-            v28[20].mPrev,
-            v25,
+          LOBYTE(v25) = 1;
+          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, __int64, __int64))v27[20].mPrev->mPrev[12].mPrev)(
+            v27[20].mPrev,
+            v24,
             2i64,
-            v26,
-            v64);
+            v25);
         }
       }
     }
   }
-  if ( (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> **)&v2->mPendingPoppedScreens.mNode.mNext[-1].mNext != &v2->mPendingOverlayLoads.mNode.mNext )
+  if ( (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> **)&this->mPendingPoppedScreens.mNode.mNext[-1].mNext != &this->mPendingOverlayLoads.mNode.mNext )
   {
-    v60 = v2->mPendingPoppedScreens.mNode.mNext;
-    if ( ((__int64 (__cdecl *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *))v60[5].mNext[20].mPrev->mPrev[14].mNext)(v60[5].mNext[20].mPrev) )
+    v56 = this->mPendingPoppedScreens.mNode.mNext;
+    if ( ((__int64 (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *))v56[5].mNext[20].mPrev->mPrev[14].mNext)(v56[5].mNext[20].mPrev) )
     {
-      EnterCriticalSection(&v2->mScreenStackLock.cs);
-      v61 = v2->mPendingPoppedScreens.mNode.mNext;
-      v62 = v61->mPrev;
-      v63 = v61->mNext;
-      v62->mNext = v63;
-      v63->mPrev = v62;
-      v61->mPrev = v61;
-      v61->mNext = v61;
-      LeaveCriticalSection(&v2->mScreenStackLock.cs);
-      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, signed __int64))v60[-1].mNext->mPrev)(
-        &v60[-1].mNext,
+      EnterCriticalSection(&this->mScreenStackLock.cs);
+      v57 = this->mPendingPoppedScreens.mNode.mNext;
+      v58 = v57->mPrev;
+      v59 = v57->mNext;
+      v58->mNext = v59;
+      v59->mPrev = v58;
+      v57->mPrev = v57;
+      v57->mNext = v57;
+      LeaveCriticalSection(&this->mScreenStackLock.cs);
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, __int64))v56[-1].mNext->mPrev)(
+        &v56[-1].mNext,
         1i64);
     }
   }
-},UFG::UIScreen> **, signed __int64))v60[-1].mNext->mPrev)(
-        &v60[-1].mNext,
-        1i64);
-    }
-  }
 }
 
 // File Line: 718
 // RVA: 0xA331D0
 void __fastcall UFG::UIScreenManagerBase::updateScreenStack(UFG::UIScreenManagerBase *this, float elapsed)
 {
-  UFG::UIScreenManagerBase *v2; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v3; // rsi
-  UFG::UIScreenManagerBase *v4; // rbx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **i; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rsi
+  UFG::UIScreenManagerBase *i; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
 
-  v2 = this;
   if ( this->m_renderUI && UFG::gTweakerRenderUI )
   {
-    v3 = &this->m_screenStack.mNode.mNext;
-    v4 = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
-    if ( v4 != this )
+    p_mNext = &this->m_screenStack.mNode.mNext;
+    for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+          i != this;
+          i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
     {
-      do
-      {
-        v4->vfptr->isInputEnabled(v4);
-        v4 = (UFG::UIScreenManagerBase *)&v4->m_screenStack.mNode.mNext[-1].mNext;
-      }
-      while ( v4 != v2 );
+      i->vfptr->isInputEnabled(i);
     }
-    for ( i = &v2->m_overlayStack.mNode.mNext[-1].mNext; i != v3; i = &i[2][-1].mNext )
-      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*i)[1].mNext)(i);
+    for ( j = &this->m_overlayStack.mNode.mNext[-1].mNext; j != p_mNext; j = &j[2][-1].mNext )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*j)[1].mNext)(j);
   }
 }
 
@@ -1262,20 +1206,19 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenStack(UFG::UIScreenManager
 void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *this, float elapsed)
 {
   float v2; // xmm7_4
-  UFG::UIScreenManagerBase *v3; // rdi
   AMD_HD3D *v4; // rcx
-  __m128 *v5; // xmm0_8
-  signed __int64 v6; // rsi
+  float v5; // xmm0_4
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rsi
   UFG::UIScreen *i; // rbx
   UFG::UIScreen *j; // rbx
   UFG::UIFlowRoot *v9; // rcx
   UFG::allocator::free_link *v10; // rax
-  UFG::qNode<UFG::UITween,UFG::UITween> *v11; // rsi
+  UFG::qNode<UFG::UITween,UFG::UITween> *mNext; // rsi
   UFG::UIScreenManagerBase *v12; // rbp
   UFG::allocator::free_link *v13; // rax
   UFG::allocator::free_link *v14; // r14
-  int v15; // ebx
-  int v16; // xmm6_4
+  int mPrev_high; // ebx
+  int mPrev; // xmm6_4
   const char *v17; // rdx
   UFG::qNode<UFG::UITween,UFG::UITween> *v18; // rcx
   UFG::allocator::free_link *v19; // rax
@@ -1283,37 +1226,37 @@ void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *t
   UFG::qNode<UFG::UITween,UFG::UITween> *v21; // rax
 
   v2 = elapsed;
-  v3 = this;
-  if ( *(_QWORD *)&this->m_targetWidth != *(_QWORD *)&Render::GetBackBufferTarget()->mWidth
-    || (v5 = (__m128 *)LODWORD(lastViewportScale), lastViewportScale != UFG::gUIViewportScale) )
+  if ( this->m_targetWidth != Render::GetBackBufferTarget()->mWidth
+    || this->m_targetHeight != Render::GetBackBufferTarget()->mHeight
+    || lastViewportScale != UFG::gUIViewportScale )
   {
-    UFG::UIScreenManagerBase::initViewport(v3, 0i64);
-    v5 = (__m128 *)LODWORD(UFG::gUIViewportScale);
+    UFG::UIScreenManagerBase::initViewport(this, 0i64);
+    v5 = UFG::gUIViewportScale;
     lastViewportScale = UFG::gUIViewportScale;
-    if ( v3->mScaleViewportInCode == 1 )
+    if ( this->mScaleViewportInCode )
     {
-      v6 = (signed __int64)&v3->m_screenStack.mNode.mNext;
-      for ( i = (UFG::UIScreen *)&v3->m_screenStack.mNode.mNext[-1].mNext;
-            i != (UFG::UIScreen *)v3;
+      p_mNext = &this->m_screenStack.mNode.mNext;
+      for ( i = (UFG::UIScreen *)&this->m_screenStack.mNode.mNext[-1].mNext;
+            i != (UFG::UIScreen *)this;
             i = (UFG::UIScreen *)&i->mNext[-1].mNext )
       {
-        UFG::UIScreen::updateViewportScale(i, *(float *)&v5);
+        UFG::UIScreen::updateViewportScale(i, v5);
       }
-      for ( j = (UFG::UIScreen *)&v3->m_overlayStack.mNode.mNext[-1].mNext;
-            j != (UFG::UIScreen *)v6;
+      for ( j = (UFG::UIScreen *)&this->m_overlayStack.mNode.mNext[-1].mNext;
+            j != (UFG::UIScreen *)p_mNext;
             j = (UFG::UIScreen *)&j->mNext[-1].mNext )
       {
-        UFG::UIScreen::updateViewportScale(j, *(float *)&v5);
+        UFG::UIScreen::updateViewportScale(j, v5);
       }
     }
   }
   if ( elapsed > 1.0 )
     v2 = *(float *)&FLOAT_1_0;
   _(v4);
-  if ( UFG::gTweakerUpdateUI && v3->m_updateUI )
+  if ( UFG::gTweakerUpdateUI && this->m_updateUI )
   {
-    if ( v3->vfptr->isInputEnabled(v3) )
-      UFG::UIInputHandler::handleInput(v3->m_inputHandler, v2);
+    if ( this->vfptr->isInputEnabled(this) )
+      UFG::UIInputHandler::handleInput(this->m_inputHandler, v2);
     v9 = UFG::LazyInitGet<UFG::UIFlowRoot>::m_instance;
     if ( !UFG::LazyInitGet<UFG::UIFlowRoot>::m_instance )
     {
@@ -1338,24 +1281,23 @@ void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *t
       UFG::LazyInitGet<UFG::UIFlowRoot>::m_instance = (UFG::UIFlowRoot *)v10;
       v9 = (UFG::UIFlowRoot *)v10;
     }
-    ((void (*)(void))v9->vfptr->flowUpdate)();
-    v11 = v3->m_activeTweens.mNode.mNext;
-    if ( v11 != (UFG::qNode<UFG::UITween,UFG::UITween> *)&v3->m_activeTweens )
+    ((void (__fastcall *)(UFG::UIFlowRoot *))v9->vfptr->flowUpdate)(v9);
+    mNext = this->m_activeTweens.mNode.mNext;
+    if ( mNext != (UFG::qNode<UFG::UITween,UFG::UITween> *)&this->m_activeTweens )
     {
       do
       {
-        v12 = (UFG::UIScreenManagerBase *)v11->mNext;
-        *(float *)&v5 = UFG::UITween::Update((UFG::UITween *)v11, v2, v5);
-        if ( *(float *)&v5 >= 1.0 )
+        v12 = (UFG::UIScreenManagerBase *)mNext->mNext;
+        if ( UFG::UITween::Update((UFG::UITween *)mNext, v2) >= 1.0 )
         {
           v13 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x70ui64, "UICommand", 0i64, 1u);
           v14 = v13;
           if ( v13 )
           {
-            v15 = HIDWORD(v11[4].mPrev);
-            v16 = (int)v11[4].mPrev;
-            v17 = (const char *)v11[3].mPrev;
-            v18 = v11[1].mPrev;
+            mPrev_high = HIDWORD(mNext[4].mPrev);
+            mPrev = (int)mNext[4].mPrev;
+            v17 = (const char *)mNext[3].mPrev;
+            v18 = mNext[1].mPrev;
             v19 = v13 + 1;
             v19->mNext = v19;
             v19[1].mNext = v19;
@@ -1370,118 +1312,109 @@ void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *t
             v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessageTweenComplete::`vftable;
             v14[7].mNext = (UFG::allocator::free_link *)v18;
             UFG::qString::qString((UFG::qString *)&v14[8], v17);
-            LODWORD(v14[13].mNext) = v16;
-            HIDWORD(v14[13].mNext) = v15;
+            LODWORD(v14[13].mNext) = mPrev;
+            HIDWORD(v14[13].mNext) = mPrev_high;
           }
           else
           {
             v14 = 0i64;
           }
-          UFG::UIScreenManagerBase::queueMessageEx(v3, (UFG::UIMessage *)v14);
-          v20 = v11->mPrev;
-          v21 = v11->mNext;
+          UFG::UIScreenManagerBase::queueMessageEx(this, (UFG::UIMessage *)v14);
+          v20 = mNext->mPrev;
+          v21 = mNext->mNext;
           v20->mNext = v21;
           v21->mPrev = v20;
-          v11->mPrev = v11;
-          v11->mNext = v11;
-          UFG::UITween::~UITween((UFG::UITween *)v11);
-          operator delete[](v11);
+          mNext->mPrev = mNext;
+          mNext->mNext = mNext;
+          UFG::UITween::~UITween((UFG::UITween *)mNext);
+          operator delete[](mNext);
         }
-        v11 = (UFG::qNode<UFG::UITween,UFG::UITween> *)v12;
+        mNext = (UFG::qNode<UFG::UITween,UFG::UITween> *)v12;
       }
-      while ( v12 != (UFG::UIScreenManagerBase *)&v3->m_activeTweens );
+      while ( v12 != (UFG::UIScreenManagerBase *)&this->m_activeTweens );
     }
-    UFG::UIScreenManagerBase::updatePendingLoads(v3, v2);
-    UFG::UIScreenManagerBase::updateCommandQueue(v3, v2);
-    UFG::UIScreenManagerBase::updateScreenCommandQueue(v3, v2);
-    UFG::UIScreenManagerBase::updateScreenStack(v3, v2);
-    Scaleform::GFx::DrawTextManager::Capture(v3->m_gfxDrawTextManager, 1);
-    UFG::UIScreenManagerBase::debugRender(v3);
+    UFG::UIScreenManagerBase::updatePendingLoads(this, v2);
+    UFG::UIScreenManagerBase::updateCommandQueue(this, v2);
+    UFG::UIScreenManagerBase::updateScreenCommandQueue(this, v2);
+    UFG::UIScreenManagerBase::updateScreenStack(this, v2);
+    Scaleform::GFx::DrawTextManager::Capture(this->m_gfxDrawTextManager, 1);
+    UFG::UIScreenManagerBase::debugRender(this);
   }
 }
 
 // File Line: 900
 // RVA: 0xA31820
-UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePushScreen(UFG::UIScreenManagerBase *this, const char *fileName, int controllerMask)
+UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePushScreen(
+        UFG::UIScreenManagerBase *this,
+        char *fileName,
+        int controllerMask)
 {
-  int v3; // ebx
-  const char *v4; // rsi
-  UFG::UIScreenManagerBase *v5; // rdi
   UFG::allocator::free_link *v6; // rax
   __int64 v7; // rax
   __int64 v8; // rbx
-  signed int v9; // eax
-  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *v10; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> **v11; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v12; // rax
+  int v9; // eax
+  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *p_m_screenCommandQueue; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v3 = controllerMask;
-  v4 = fileName;
-  v5 = this;
   v6 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0xC0ui64, "UIScreenManagerBase::UICommandScreenPush", 0i64, 1u);
   if ( v6 )
   {
-    UFG::UICommandScreenPush::UICommandScreenPush((UFG::UICommandScreenPush *)v6, v4, v5->mScreenUIDCounter, v3);
+    UFG::UICommandScreenPush::UICommandScreenPush(
+      (UFG::UICommandScreenPush *)v6,
+      fileName,
+      this->mScreenUIDCounter,
+      controllerMask);
     v8 = v7;
   }
   else
   {
     v8 = 0i64;
   }
-  if ( UFG::gTweakerUpdateUI && v5->m_updateUI )
+  if ( UFG::gTweakerUpdateUI && this->m_updateUI )
   {
     v9 = *(_DWORD *)(v8 + 24);
     if ( v9 >= 0 )
     {
       if ( v9 <= 4 )
       {
-        v10 = &v5->m_screenCommandQueue;
+        p_m_screenCommandQueue = &this->m_screenCommandQueue;
         goto LABEL_11;
       }
       if ( v9 <= 7 )
       {
-        v10 = &v5->m_commandQueue;
+        p_m_screenCommandQueue = &this->m_commandQueue;
 LABEL_11:
-        v11 = (UFG::qNode<UFG::UICommand,UFG::UICommand> **)(v8 + 8);
-        v12 = v10->mNode.mPrev;
-        v12->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v8 + 8);
-        *v11 = v12;
-        v11[1] = &v10->mNode;
-        v10->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v8 + 8);
-        goto LABEL_14;
+        mPrev = p_m_screenCommandQueue->mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v8 + 8);
+        *(_QWORD *)(v8 + 8) = mPrev;
+        *(_QWORD *)(v8 + 16) = p_m_screenCommandQueue;
+        p_m_screenCommandQueue->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v8 + 8);
       }
     }
   }
   else if ( v8 )
   {
-    (**(void (__fastcall ***)(__int64, signed __int64))v8)(v8, 1i64);
+    (**(void (__fastcall ***)(__int64, __int64))v8)(v8, 1i64);
   }
-LABEL_14:
-  ++v5->mScreenUIDCounter;
+  ++this->mScreenUIDCounter;
   return (UFG::UICommand *)v8;
 }
 
 // File Line: 920
 // RVA: 0xA31600
-UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManagerBase *this, unsigned int screenUID)
+UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopScreen(
+        UFG::UIScreenManagerBase *this,
+        unsigned int screenUID)
 {
-  unsigned int v2; // esi
-  UFG::UIScreenManagerBase *v3; // rdi
   UFG::allocator::free_link *v4; // rax
   UFG::allocator::free_link *v5; // rbx
   UFG::allocator::free_link *v6; // rax
-  signed int v7; // eax
-  bool v8; // zf
-  bool v9; // sf
-  unsigned __int8 v10; // of
+  int mNext; // eax
+  bool v8; // cc
   UFG::allocator::free_link *result; // rax
-  _QWORD *v12; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v13; // rcx
-  _QWORD *v14; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v15; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v10; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v2 = screenUID;
-  v3 = this;
   v4 = UFG::qMemoryPool::Allocate(
          &gScaleformMemoryPool,
          0x30ui64,
@@ -1500,43 +1433,39 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopScreen(U
     v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandScreenPop::`vftable;
     LODWORD(v5[3].mNext) = 1;
     LOBYTE(v5[5].mNext) = 0;
-    HIDWORD(v5[5].mNext) = v2;
+    HIDWORD(v5[5].mNext) = screenUID;
   }
   else
   {
     v5 = 0i64;
   }
-  if ( !UFG::gTweakerUpdateUI || !v3->m_updateUI )
+  if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
   {
     if ( v5 )
-      ((void (__fastcall *)(UFG::allocator::free_link *, signed __int64))v5->mNext->mNext)(v5, 1i64);
+      ((void (__fastcall *)(UFG::allocator::free_link *, __int64))v5->mNext->mNext)(v5, 1i64);
     return v5;
   }
-  v7 = (signed int)v5[3].mNext;
-  if ( v7 < 0 )
+  mNext = (int)v5[3].mNext;
+  if ( mNext < 0 )
     return v5;
-  if ( v7 <= 4 )
+  if ( mNext <= 4 )
   {
-    v14 = &v5[1].mNext;
-    v15 = v3->m_screenCommandQueue.mNode.mPrev;
-    v15->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
-    *v14 = v15;
-    v14[1] = (char *)v3 + 248;
-    v3->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    mPrev = this->m_screenCommandQueue.mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v5[1].mNext = (UFG::allocator::free_link *)mPrev;
+    v5[2].mNext = (UFG::allocator::free_link *)&this->m_screenCommandQueue;
+    this->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
     return v5;
   }
-  v10 = __OFSUB__(v7, 7);
-  v8 = v7 == 7;
-  v9 = v7 - 7 < 0;
+  v8 = mNext <= 7;
   result = v5;
-  if ( (unsigned __int8)(v9 ^ v10) | v8 )
+  if ( v8 )
   {
-    v12 = &v5[1].mNext;
-    v13 = v3->m_commandQueue.mNode.mPrev;
-    v13->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
-    *v12 = v13;
-    v12[1] = (char *)v3 + 232;
-    v3->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v10 = this->m_commandQueue.mNode.mPrev;
+    v10->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v5[1].mNext = (UFG::allocator::free_link *)v10;
+    v5[2].mNext = (UFG::allocator::free_link *)&this->m_commandQueue;
+    this->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
   }
   return result;
 }
@@ -1545,21 +1474,15 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopScreen(U
 // RVA: 0xA31300
 UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopAllScreens(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rdi
   UFG::allocator::free_link *v2; // rax
   UFG::allocator::free_link *v3; // rbx
   UFG::allocator::free_link *v4; // rax
-  signed int v5; // eax
-  bool v6; // zf
-  bool v7; // sf
-  unsigned __int8 v8; // of
+  int mNext; // eax
+  bool v6; // cc
   UFG::allocator::free_link *result; // rax
-  _QWORD *v10; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v11; // rcx
-  _QWORD *v12; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v13; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v8; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v1 = this;
   v2 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x30ui64, "UIScreenManagerBase::UICommandScreenPop", 0i64, 1u);
   v3 = v2;
   if ( v2 )
@@ -1579,61 +1502,52 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopAllScree
   {
     v3 = 0i64;
   }
-  if ( !UFG::gTweakerUpdateUI || !v1->m_updateUI )
+  if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
   {
     if ( v3 )
-      ((void (__fastcall *)(UFG::allocator::free_link *, signed __int64))v3->mNext->mNext)(v3, 1i64);
+      ((void (__fastcall *)(UFG::allocator::free_link *, __int64))v3->mNext->mNext)(v3, 1i64);
     return v3;
   }
-  v5 = (signed int)v3[3].mNext;
-  if ( v5 < 0 )
+  mNext = (int)v3[3].mNext;
+  if ( mNext < 0 )
     return v3;
-  if ( v5 <= 4 )
+  if ( mNext <= 4 )
   {
-    v12 = &v3[1].mNext;
-    v13 = v1->m_screenCommandQueue.mNode.mPrev;
-    v13->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
-    *v12 = v13;
-    v12[1] = (char *)v1 + 248;
-    v1->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
+    mPrev = this->m_screenCommandQueue.mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
+    v3[1].mNext = (UFG::allocator::free_link *)mPrev;
+    v3[2].mNext = (UFG::allocator::free_link *)&this->m_screenCommandQueue;
+    this->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
     return v3;
   }
-  v8 = __OFSUB__(v5, 7);
-  v6 = v5 == 7;
-  v7 = v5 - 7 < 0;
+  v6 = mNext <= 7;
   result = v3;
-  if ( (unsigned __int8)(v7 ^ v8) | v6 )
+  if ( v6 )
   {
-    v10 = &v3[1].mNext;
-    v11 = v1->m_commandQueue.mNode.mPrev;
-    v11->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
-    *v10 = v11;
-    v10[1] = (char *)v1 + 232;
-    v1->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
+    v8 = this->m_commandQueue.mNode.mPrev;
+    v8->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
+    v3[1].mNext = (UFG::allocator::free_link *)v8;
+    v3[2].mNext = (UFG::allocator::free_link *)&this->m_commandQueue;
+    this->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v3[1];
   }
   return result;
 }
 
 // File Line: 990
 // RVA: 0xA31720
-UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePushOverlay(UFG::UIScreenManagerBase *this, const char *fileName, int priority, int controllerMask)
+UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePushOverlay(
+        UFG::UIScreenManagerBase *this,
+        char *fileName,
+        unsigned int priority,
+        int controllerMask)
 {
-  int v4; // ebx
-  int v5; // esi
-  const char *v6; // rbp
-  UFG::UIScreenManagerBase *v7; // rdi
   UFG::allocator::free_link *v8; // rax
   __int64 v9; // rax
   __int64 v10; // rbx
-  signed int v11; // eax
-  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *v12; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> **v13; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v14; // rax
+  int v11; // eax
+  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *p_m_screenCommandQueue; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v4 = controllerMask;
-  v5 = priority;
-  v6 = fileName;
-  v7 = this;
   v8 = UFG::qMemoryPool::Allocate(
          &gScaleformMemoryPool,
          0xC0ui64,
@@ -1642,124 +1556,113 @@ UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePushOverlay(UFG::UIScr
          1u);
   if ( v8 )
   {
-    UFG::UICommandOverlayPush::UICommandOverlayPush((UFG::UICommandOverlayPush *)v8, v6, v7->mScreenUIDCounter, v5, v4);
+    UFG::UICommandOverlayPush::UICommandOverlayPush(
+      (UFG::UICommandOverlayPush *)v8,
+      fileName,
+      this->mScreenUIDCounter,
+      priority,
+      controllerMask);
     v10 = v9;
   }
   else
   {
     v10 = 0i64;
   }
-  if ( UFG::gTweakerUpdateUI && v7->m_updateUI )
+  if ( UFG::gTweakerUpdateUI && this->m_updateUI )
   {
     v11 = *(_DWORD *)(v10 + 24);
     if ( v11 >= 0 )
     {
       if ( v11 <= 4 )
       {
-        v12 = &v7->m_screenCommandQueue;
+        p_m_screenCommandQueue = &this->m_screenCommandQueue;
         goto LABEL_11;
       }
       if ( v11 <= 7 )
       {
-        v12 = &v7->m_commandQueue;
+        p_m_screenCommandQueue = &this->m_commandQueue;
 LABEL_11:
-        v13 = (UFG::qNode<UFG::UICommand,UFG::UICommand> **)(v10 + 8);
-        v14 = v12->mNode.mPrev;
-        v14->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 8);
-        *v13 = v14;
-        v13[1] = &v12->mNode;
-        v12->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 8);
-        goto LABEL_14;
+        mPrev = p_m_screenCommandQueue->mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 8);
+        *(_QWORD *)(v10 + 8) = mPrev;
+        *(_QWORD *)(v10 + 16) = p_m_screenCommandQueue;
+        p_m_screenCommandQueue->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v10 + 8);
       }
     }
   }
   else if ( v10 )
   {
-    (**(void (__fastcall ***)(__int64, signed __int64))v10)(v10, 1i64);
+    (**(void (__fastcall ***)(__int64, __int64))v10)(v10, 1i64);
   }
-LABEL_14:
-  ++v7->mScreenUIDCounter;
+  ++this->mScreenUIDCounter;
   return (UFG::UICommand *)v10;
 }
 
 // File Line: 1008
 // RVA: 0xA31530
-UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManagerBase *this, const char *fileName)
+UFG::UICommand *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManagerBase *this, char *fileName)
 {
-  const char *v2; // rbx
-  UFG::UIScreenManagerBase *v3; // rdi
   UFG::allocator::free_link *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rbx
-  signed int v7; // eax
-  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *v8; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> **v9; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v10; // rax
+  int v7; // eax
+  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *p_m_screenCommandQueue; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v2 = fileName;
-  v3 = this;
   v4 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0xB0ui64, "UIScreenManagerBase::UICommandOverlayPop", 0i64, 1u);
   if ( v4 )
   {
-    UFG::UICommandOverlayPop::UICommandOverlayPop((UFG::UICommandOverlayPop *)v4, v2);
+    UFG::UICommandOverlayPop::UICommandOverlayPop((UFG::UICommandOverlayPop *)v4, fileName);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  if ( UFG::gTweakerUpdateUI && v3->m_updateUI )
+  if ( UFG::gTweakerUpdateUI && this->m_updateUI )
   {
     v7 = *(_DWORD *)(v6 + 24);
     if ( v7 >= 0 )
     {
       if ( v7 <= 4 )
       {
-        v8 = &v3->m_screenCommandQueue;
+        p_m_screenCommandQueue = &this->m_screenCommandQueue;
         goto LABEL_10;
       }
       if ( v7 <= 7 )
       {
-        v8 = &v3->m_commandQueue;
+        p_m_screenCommandQueue = &this->m_commandQueue;
 LABEL_10:
-        v9 = (UFG::qNode<UFG::UICommand,UFG::UICommand> **)(v6 + 8);
-        v10 = v8->mNode.mPrev;
-        v10->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v6 + 8);
-        *v9 = v10;
-        v9[1] = &v8->mNode;
-        v8->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v6 + 8);
-        return (UFG::UICommand *)v6;
+        mPrev = p_m_screenCommandQueue->mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v6 + 8);
+        *(_QWORD *)(v6 + 8) = mPrev;
+        *(_QWORD *)(v6 + 16) = p_m_screenCommandQueue;
+        p_m_screenCommandQueue->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)(v6 + 8);
       }
     }
   }
   else if ( v6 )
   {
-    (**(void (__fastcall ***)(__int64, signed __int64))v6)(v6, 1i64);
+    (**(void (__fastcall ***)(__int64, __int64))v6)(v6, 1i64);
   }
   return (UFG::UICommand *)v6;
 }
 
 // File Line: 1024
 // RVA: 0xA31410
-UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManagerBase *this, unsigned int screenUID)
+UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(
+        UFG::UIScreenManagerBase *this,
+        unsigned int screenUID)
 {
-  unsigned int v2; // esi
-  UFG::UIScreenManagerBase *v3; // rdi
   UFG::allocator::free_link *v4; // rax
   UFG::allocator::free_link *v5; // rbx
   UFG::allocator::free_link *v6; // rax
-  signed int v7; // eax
-  bool v8; // zf
-  bool v9; // sf
-  unsigned __int8 v10; // of
+  int mNext; // eax
+  bool v8; // cc
   UFG::allocator::free_link *result; // rax
-  _QWORD *v12; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v13; // rcx
-  _QWORD *v14; // rcx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v15; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v10; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rax
 
-  v2 = screenUID;
-  v3 = this;
   v4 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0xB0ui64, "UIScreenManagerBase::UICommandOverlayPop", 0i64, 1u);
   v5 = v4;
   if ( v4 )
@@ -1771,7 +1674,7 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(
     LODWORD(v5[3].mNext) = -1;
     v5[4].mNext = 0i64;
     v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandOverlayPop::`vftable;
-    LODWORD(v5[5].mNext) = v2;
+    LODWORD(v5[5].mNext) = screenUID;
     BYTE4(v5[5].mNext) = 0;
     LODWORD(v5[3].mNext) = 4;
   }
@@ -1779,55 +1682,48 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(
   {
     v5 = 0i64;
   }
-  if ( !UFG::gTweakerUpdateUI || !v3->m_updateUI )
+  if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
   {
     if ( v5 )
-      ((void (__fastcall *)(UFG::allocator::free_link *, signed __int64))v5->mNext->mNext)(v5, 1i64);
+      ((void (__fastcall *)(UFG::allocator::free_link *, __int64))v5->mNext->mNext)(v5, 1i64);
     return v5;
   }
-  v7 = (signed int)v5[3].mNext;
-  if ( v7 < 0 )
+  mNext = (int)v5[3].mNext;
+  if ( mNext < 0 )
     return v5;
-  if ( v7 <= 4 )
+  if ( mNext <= 4 )
   {
-    v14 = &v5[1].mNext;
-    v15 = v3->m_screenCommandQueue.mNode.mPrev;
-    v15->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
-    *v14 = v15;
-    v14[1] = (char *)v3 + 248;
-    v3->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    mPrev = this->m_screenCommandQueue.mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v5[1].mNext = (UFG::allocator::free_link *)mPrev;
+    v5[2].mNext = (UFG::allocator::free_link *)&this->m_screenCommandQueue;
+    this->m_screenCommandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
     return v5;
   }
-  v10 = __OFSUB__(v7, 7);
-  v8 = v7 == 7;
-  v9 = v7 - 7 < 0;
+  v8 = mNext <= 7;
   result = v5;
-  if ( (unsigned __int8)(v9 ^ v10) | v8 )
+  if ( v8 )
   {
-    v12 = &v5[1].mNext;
-    v13 = v3->m_commandQueue.mNode.mPrev;
-    v13->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
-    *v12 = v13;
-    v12[1] = (char *)v3 + 232;
-    v3->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v10 = this->m_commandQueue.mNode.mPrev;
+    v10->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
+    v5[1].mNext = (UFG::allocator::free_link *)v10;
+    v5[2].mNext = (UFG::allocator::free_link *)&this->m_commandQueue;
+    this->m_commandQueue.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v5[1];
   }
   return result;
 }
 
 // File Line: 1041
 // RVA: 0xA30FE0
-UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManagerBase *this, unsigned int messageId, unsigned int receiverUID)
+UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queueMessage(
+        UFG::UIScreenManagerBase *this,
+        unsigned int messageId,
+        unsigned int receiverUID)
 {
-  unsigned int v3; // esi
-  unsigned int v4; // ebp
-  UFG::UIScreenManagerBase *v5; // rdi
   UFG::allocator::free_link *v6; // rax
   UFG::allocator::free_link *v7; // rbx
   UFG::allocator::free_link *v8; // rax
 
-  v3 = receiverUID;
-  v4 = messageId;
-  v5 = this;
   v6 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x38ui64, "UIScreenManagerBase::UIMessage", 0i64, 1u);
   v7 = v6;
   if ( v6 )
@@ -1839,9 +1735,9 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queueMessage(UFG
     LODWORD(v7[3].mNext) = -1;
     v7[4].mNext = 0i64;
     v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
-    LODWORD(v7[5].mNext) = v4;
+    LODWORD(v7[5].mNext) = messageId;
     HIDWORD(v7[5].mNext) = 0;
-    LODWORD(v7[6].mNext) = v3;
+    LODWORD(v7[6].mNext) = receiverUID;
     LODWORD(v7[3].mNext) = 5;
     HIDWORD(v7[6].mNext) = -1;
   }
@@ -1849,62 +1745,58 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queueMessage(UFG
   {
     v7 = 0i64;
   }
-  UFG::UIScreenManagerBase::queueMessageEx(v5, (UFG::UIMessage *)v7);
+  UFG::UIScreenManagerBase::queueMessageEx(this, (UFG::UIMessage *)v7);
   return v7;
 }
 
 // File Line: 1056
 // RVA: 0xA310B0
-UFG::UIMessage *__fastcall UFG::UIScreenManagerBase::queueMessageEx(UFG::UIScreenManagerBase *this, UFG::UIMessage *message)
+UFG::UIMessage *__fastcall UFG::UIScreenManagerBase::queueMessageEx(
+        UFG::UIScreenManagerBase *this,
+        UFG::UIMessage *message)
 {
-  unsigned int v2; // er9
+  unsigned int m_receiverUID; // r9d
   char v3; // r8
-  UFG::UIMessage *v4; // rdi
-  UFG::UIScreenManagerBase *v5; // rsi
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v6; // rdx
-  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *v7; // rcx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v8; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mNext; // rdx
+  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *p_mPendingScreenLoads; // rcx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mPrev; // rax
   UFG::UIScreenManagerBase *v9; // rdx
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v10; // rax
-  signed __int64 i; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> **i; // rcx
   int v12; // eax
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v13; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v14; // rax
-  __int64 v16; // rdx
-  char *v17; // rax
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v13; // rax
+  __int64 v15; // rdx
+  char *p_mNext; // rax
+  __int64 v17; // rcx
   __int64 v18; // rcx
-  __int64 v19; // rcx
-  signed int v20; // eax
-  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *v21; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v22; // rax
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v23; // rcx
+  UFG::UICommand::UICommandType m_commandType; // eax
+  UFG::qList<UFG::UICommand,UFG::UICommand,1,0> *p_m_screenCommandQueue; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *v21; // rax
 
-  v2 = message->m_receiverUID;
+  m_receiverUID = message->m_receiverUID;
   v3 = 0;
-  v4 = message;
-  v5 = this;
-  if ( v2 == -1 )
+  if ( m_receiverUID == -1 )
   {
-    if ( message->m_commandType == 7 )
+    if ( message->m_commandType == UICOMMAND_FLASH_COMMAND )
     {
-      v16 = *(_QWORD *)&message[1].m_messageId;
-      v17 = (char *)&this->m_screenStack.mNode.mNext[-1].mNext;
-      if ( v17 == (char *)this )
+      v15 = *(_QWORD *)&message[1].m_messageId;
+      p_mNext = (char *)&this->m_screenStack.mNode.mNext[-1].mNext;
+      if ( p_mNext == (char *)this )
       {
 LABEL_30:
-        v17 = (char *)&v5->m_overlayStack.mNode.mNext[-1].mNext;
-        if ( v17 == (char *)&v5->m_screenStack.mNode.mNext )
+        p_mNext = (char *)&this->m_overlayStack.mNode.mNext[-1].mNext;
+        if ( p_mNext == (char *)&this->m_screenStack.mNode.mNext )
           goto LABEL_22;
         while ( 1 )
         {
-          v19 = *((_QWORD *)v17 + 12);
-          if ( v19 )
+          v18 = *((_QWORD *)p_mNext + 12);
+          if ( v18 )
           {
-            if ( *(_QWORD *)(v19 + 320) == v16 )
+            if ( *(_QWORD *)(v18 + 320) == v15 )
               break;
           }
-          v17 = (char *)(*((_QWORD *)v17 + 2) - 8i64);
-          if ( v17 == (char *)&v5->m_screenStack.mNode.mNext )
+          p_mNext = (char *)(*((_QWORD *)p_mNext + 2) - 8i64);
+          if ( p_mNext == (char *)&this->m_screenStack.mNode.mNext )
             goto LABEL_22;
         }
       }
@@ -1912,57 +1804,55 @@ LABEL_30:
       {
         while ( 1 )
         {
-          v18 = *((_QWORD *)v17 + 12);
-          if ( v18 )
+          v17 = *((_QWORD *)p_mNext + 12);
+          if ( v17 )
           {
-            if ( *(_QWORD *)(v18 + 320) == v16 )
+            if ( *(_QWORD *)(v17 + 320) == v15 )
               break;
           }
-          v17 = (char *)(*((_QWORD *)v17 + 2) - 8i64);
-          if ( v17 == (char *)v5 )
+          p_mNext = (char *)(*((_QWORD *)p_mNext + 2) - 8i64);
+          if ( p_mNext == (char *)this )
             goto LABEL_30;
         }
       }
-      v4->m_receiverUID = *((_DWORD *)v17 + 28);
+      message->m_receiverUID = *((_DWORD *)p_mNext + 28);
     }
   }
   else
   {
-    v6 = this->mPendingScreenLoads.mNode.mNext;
-    v7 = &this->mPendingScreenLoads;
-    while ( v6 != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v7 )
+    mNext = this->mPendingScreenLoads.mNode.mNext;
+    p_mPendingScreenLoads = &this->mPendingScreenLoads;
+    while ( mNext != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)p_mPendingScreenLoads )
     {
-      v8 = v6[1].mPrev;
-      v6 = v6->mNext;
-      if ( LODWORD(v8[7].mPrev) == v2 )
+      mPrev = mNext[1].mPrev;
+      mNext = mNext->mNext;
+      if ( LODWORD(mPrev[7].mPrev) == m_receiverUID )
         v3 = 1;
     }
-    v9 = (UFG::UIScreenManagerBase *)v5->mPendingOverlayLoads.mNode.mNext;
-    while ( v9 != (UFG::UIScreenManagerBase *)&v5->mPendingOverlayLoads )
+    v9 = (UFG::UIScreenManagerBase *)this->mPendingOverlayLoads.mNode.mNext;
+    while ( v9 != (UFG::UIScreenManagerBase *)&this->mPendingOverlayLoads )
     {
       v10 = v9->m_screenStack.mNode.mNext;
       v9 = (UFG::UIScreenManagerBase *)v9->m_screenStack.mNode.mPrev;
-      if ( LODWORD(v10[7].mPrev) == v2 )
+      if ( LODWORD(v10[7].mPrev) == m_receiverUID )
         v3 = 1;
     }
-    for ( i = (signed __int64)&v5->m_screenCommandQueue.mNode.mNext[-1].mNext;
-          (UFG::qNode<UFG::UICommand,UFG::UICommand> **)i != &v5->m_commandQueue.mNode.mNext;
-          i = *(_QWORD *)(i + 16) - 8i64 )
+    for ( i = &this->m_screenCommandQueue.mNode.mNext[-1].mNext; i != &this->m_commandQueue.mNode.mNext; i = &i[2][-1].mNext )
     {
-      v12 = *(_DWORD *)(i + 24);
+      v12 = *((_DWORD *)i + 6);
       if ( v12 )
       {
         if ( v12 == 2 )
         {
-          if ( *(_DWORD *)(i + 172) == v2 )
+          if ( *((_DWORD *)i + 43) == m_receiverUID )
             v3 = 1;
         }
-        else if ( v12 == 3 && *(_DWORD *)(i + 168) == v2 )
+        else if ( v12 == 3 && *((_DWORD *)i + 42) == m_receiverUID )
         {
           v3 = 1;
         }
       }
-      else if ( *(_DWORD *)(i + 168) == v2 )
+      else if ( *((_DWORD *)i + 42) == m_receiverUID )
       {
         v3 = 1;
       }
@@ -1970,165 +1860,167 @@ LABEL_30:
     if ( v3 )
     {
 LABEL_22:
-      if ( UFG::gTweakerUpdateUI && v5->m_updateUI )
+      if ( UFG::gTweakerUpdateUI && this->m_updateUI )
       {
-        UFG::qMutex::Lock((LPCRITICAL_SECTION)&v5->m_pendingMessagesMutex);
-        v13 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-        v14 = v5->m_pendingMessages.mNode.mPrev;
-        v14->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-        v13->mPrev = v14;
-        v13->mNext = &v5->m_pendingMessages.mNode;
-        v5->m_pendingMessages.mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-        UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v5->m_pendingMessagesMutex);
-        return v4;
+        UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->m_pendingMessagesMutex);
+        v13 = this->m_pendingMessages.mNode.mPrev;
+        v13->mNext = &message->UFG::qNode<UFG::UICommand,UFG::UICommand>;
+        message->mPrev = v13;
+        message->mNext = &this->m_pendingMessages.mNode;
+        this->m_pendingMessages.mNode.mPrev = &message->UFG::qNode<UFG::UICommand,UFG::UICommand>;
+        UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->m_pendingMessagesMutex);
+        return message;
       }
       goto LABEL_44;
     }
   }
-  if ( !UFG::gTweakerUpdateUI || !v5->m_updateUI )
+  if ( !UFG::gTweakerUpdateUI || !this->m_updateUI )
   {
 LABEL_44:
-    v4->vfptr->__vecDelDtor((UFG::UICommand *)&v4->vfptr, 1u);
-    return v4;
+    message->vfptr->__vecDelDtor(message, 1i64);
+    return message;
   }
-  v20 = v4->m_commandType;
-  if ( v20 >= 0 )
+  m_commandType = message->m_commandType;
+  if ( m_commandType >= UICOMMAND_SCREEN_PUSH )
   {
-    if ( v20 <= 4 )
+    if ( m_commandType <= UICOMMAND_OVERLAY_POP )
     {
-      v21 = &v5->m_screenCommandQueue;
+      p_m_screenCommandQueue = &this->m_screenCommandQueue;
       goto LABEL_42;
     }
-    if ( v20 <= 7 )
+    if ( m_commandType <= UICOMMAND_FLASH_COMMAND )
     {
-      v21 = &v5->m_commandQueue;
+      p_m_screenCommandQueue = &this->m_commandQueue;
 LABEL_42:
-      v22 = v21->mNode.mPrev;
-      v23 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-      v22->mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-      v23->mPrev = v22;
-      v23->mNext = &v21->mNode;
-      v21->mNode.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&v4->mPrev;
-      return v4;
+      v21 = p_m_screenCommandQueue->mNode.mPrev;
+      v21->mNext = &message->UFG::qNode<UFG::UICommand,UFG::UICommand>;
+      message->mPrev = v21;
+      message->mNext = &p_m_screenCommandQueue->mNode;
+      p_m_screenCommandQueue->mNode.mPrev = &message->UFG::qNode<UFG::UICommand,UFG::UICommand>;
+      return message;
     }
   }
-  return v4;
+  return message;
 }
 
 // File Line: 1170
 // RVA: 0xA30E40
-UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::pushScreen(UFG::UIScreenManagerBase *this, UFG::UICommandScreenPush *pushScreenCommand)
+UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::pushScreen(
+        UFG::UIScreenManagerBase *this,
+        UFG::UICommandScreenPush *pushScreenCommand)
 {
-  UFG::UICommandScreenPush *v2; // rsi
-  UFG::UIScreenManagerBase *v3; // rbx
-  unsigned int v4; // er15
-  int v5; // ebp
-  UFG::UIScreen *v6; // rdi
+  unsigned int m_screenUID; // r15d
+  int m_controllerMask; // ebp
+  UFG::UIScreen *m_preCreatedInstance; // rdi
   UFG::UIMessage *v7; // r14
   int v8; // ecx
-  signed __int64 v9; // rax
-  int v10; // eax
-  int v11; // er9
-  int v12; // er8
-  signed __int64 i; // rax
-  signed __int64 v14; // rdx
+  UFG::UIScreenManagerBase *p_mNext; // rax
+  int m_defaultControllerMask; // eax
+  int m_maxScreenLimit; // r9d
+  int v12; // r8d
+  UFG::UIScreenManagerBase *i; // rax
+  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *p_mPendingScreenLoads; // rdx
   int v15; // ecx
-  UFG::UIScreenManagerBase *v16; // rax
-  signed __int64 v17; // rax
+  UFG::UIScreenManagerBase *mNext; // rax
+  UFG::UIScreenManagerBase *mPrev; // rax
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v18; // rax
   UFG::allocator::free_link *v19; // rax
   UFG::UIMessage *v20; // rax
 
-  v2 = pushScreenCommand;
-  v3 = this;
-  v4 = pushScreenCommand->m_screenUID;
-  v5 = pushScreenCommand->m_controllerMask;
-  v6 = pushScreenCommand->m_preCreatedInstance;
-  if ( !v6 )
-    v6 = (UFG::UIScreen *)UFG::UIScreenFactory::createScreen(this->m_screenFactory, pushScreenCommand->m_screenName);
-  v6->mScreenUID = v4;
+  m_screenUID = pushScreenCommand->m_screenUID;
+  m_controllerMask = pushScreenCommand->m_controllerMask;
+  m_preCreatedInstance = pushScreenCommand->m_preCreatedInstance;
+  if ( !m_preCreatedInstance )
+    m_preCreatedInstance = (UFG::UIScreen *)UFG::UIScreenFactory::createScreen(
+                                              this->m_screenFactory,
+                                              pushScreenCommand->m_screenName);
+  m_preCreatedInstance->mScreenUID = m_screenUID;
   v7 = 0i64;
-  if ( v5 == -1 )
+  if ( m_controllerMask == -1 )
   {
     v8 = 0;
-    v9 = (signed __int64)&v3->m_screenStack.mNode.mNext[-1].mNext;
-    if ( (UFG::UIScreenManagerBase *)v9 == v3 )
-      goto LABEL_26;
+    p_mNext = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+    if ( p_mNext == this )
+      goto LABEL_9;
     do
     {
       ++v8;
-      v9 = *(_QWORD *)(v9 + 16) - 8i64;
+      p_mNext = (UFG::UIScreenManagerBase *)&p_mNext->m_screenStack.mNode.mNext[-1].mNext;
     }
-    while ( (UFG::UIScreenManagerBase *)v9 != v3 );
+    while ( p_mNext != this );
     if ( v8 <= 0 )
-LABEL_26:
-      v10 = v3->m_defaultControllerMask;
+LABEL_9:
+      m_defaultControllerMask = this->m_defaultControllerMask;
     else
-      v10 = HIDWORD(v3->m_screenStack.mNode.mPrev[6].mNext);
-    v6->mControllerMask = v10;
+      m_defaultControllerMask = HIDWORD(this->m_screenStack.mNode.mPrev[6].mNext);
+    m_preCreatedInstance->mControllerMask = m_defaultControllerMask;
   }
   else
   {
-    v6->mControllerMask = v5;
+    m_preCreatedInstance->mControllerMask = m_controllerMask;
   }
-  v6->mDimToApplyType = v2->m_dimType;
-  UFG::UIScreenManagerBase::dimPreviousScreen(v3, v2->m_dimType, v6);
-  v11 = v3->m_maxScreenLimit;
-  if ( v11 > 0 )
+  m_preCreatedInstance->mDimToApplyType = pushScreenCommand->m_dimType;
+  UFG::UIScreenManagerBase::dimPreviousScreen(this, pushScreenCommand->m_dimType, m_preCreatedInstance);
+  m_maxScreenLimit = this->m_maxScreenLimit;
+  if ( m_maxScreenLimit > 0 )
   {
     v12 = 0;
-    for ( i = (signed __int64)&v3->m_screenStack.mNode.mNext[-1].mNext;
-          (UFG::UIScreenManagerBase *)i != v3;
-          i = *(_QWORD *)(i + 16) - 8i64 )
+    for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+          i != this;
+          i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
     {
       ++v12;
     }
-    v14 = (signed __int64)&v3->mPendingScreenLoads;
+    p_mPendingScreenLoads = &this->mPendingScreenLoads;
     v15 = 0;
-    v16 = (UFG::UIScreenManagerBase *)v3->mPendingScreenLoads.mNode.mNext;
-    if ( v16 != (UFG::UIScreenManagerBase *)&v3->mPendingScreenLoads )
+    mNext = (UFG::UIScreenManagerBase *)this->mPendingScreenLoads.mNode.mNext;
+    if ( mNext != (UFG::UIScreenManagerBase *)&this->mPendingScreenLoads )
     {
       do
       {
         ++v15;
-        v16 = (UFG::UIScreenManagerBase *)v16->m_screenStack.mNode.mPrev;
+        mNext = (UFG::UIScreenManagerBase *)mNext->m_screenStack.mNode.mPrev;
       }
-      while ( v16 != (UFG::UIScreenManagerBase *)v14 );
+      while ( mNext != (UFG::UIScreenManagerBase *)p_mPendingScreenLoads );
     }
-    if ( v15 + v12 >= v11 )
+    if ( v15 + v12 >= m_maxScreenLimit )
     {
-      v17 = (signed __int64)&v3->m_screenStack.mNode.mNext[-1].mNext;
-      if ( (UFG::UIScreenManagerBase *)v17 == v3 )
+      mPrev = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+      if ( mPrev == this )
       {
-        v18 = v3->mPendingScreenLoads.mNode.mNext;
-        if ( v18 == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v14 )
+        v18 = this->mPendingScreenLoads.mNode.mNext;
+        if ( v18 == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)p_mPendingScreenLoads )
           goto LABEL_21;
-        v17 = (signed __int64)v18[1].mPrev;
+        mPrev = (UFG::UIScreenManagerBase *)v18[1].mPrev;
       }
-      UFG::UIScreenManagerBase::queuePopScreen(v3, *(_DWORD *)(v17 + 112));
+      UFG::UIScreenManagerBase::queuePopScreen(this, (unsigned int)mPrev->mPendingPoppedScreens.mNode.mPrev);
     }
   }
 LABEL_21:
   v19 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x68ui64, "UICommand", 0i64, 1u);
   if ( v19 )
   {
-    UFG::UIMessageScreenPushed::UIMessageScreenPushed((UFG::UIMessageScreenPushed *)v19, v2->m_screenName, v4);
+    UFG::UIMessageScreenPushed::UIMessageScreenPushed(
+      (UFG::UIMessageScreenPushed *)v19,
+      pushScreenCommand->m_screenName,
+      m_screenUID);
     v7 = v20;
   }
-  UFG::UIScreenManagerBase::queueMessageEx(v3, v7);
-  return v6;
+  UFG::UIScreenManagerBase::queueMessageEx(this, v7);
+  return m_preCreatedInstance;
 }
 
 // File Line: 1230
 // RVA: 0xA309A0
-void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *this, UFG::UICommandScreenPop *popScreenCommand)
+void __fastcall UFG::UIScreenManagerBase::popScreen(
+        UFG::UIScreenManagerBase *this,
+        UFG::UICommandScreenPop *popScreenCommand)
 {
-  UFG::UIScreenManagerBase *v2; // r14
-  _RTL_CRITICAL_SECTION *v3; // rbx
-  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v4; // r13
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v5; // rsi
+  Scaleform::Lock *p_mScreenStackLock; // rbx
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *p_mPendingPoppedScreens; // r13
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *mPrev; // rsi
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v6; // rcx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v7; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *mNext; // rax
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // rdx
   int v10; // ecx
@@ -2137,42 +2029,39 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *i; // rbx
   UFG::allocator::free_link *v14; // rax
   int v15; // edx
-  UFG::allocator::free_link *v16; // rcx
-  unsigned int v17; // ebx
-  UFG::allocator::free_link *v18; // rax
-  UFG::allocator::free_link *v19; // rdx
-  UFG::allocator::free_link *v20; // rax
-  signed __int64 v21; // rsi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v22; // rdi
-  __int64 v23; // rcx
-  _QWORD *v24; // rax
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v25; // rax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v26; // rcx
-  signed __int64 v27; // rbx
+  unsigned int m_screenUID; // ebx
+  UFG::allocator::free_link *v17; // rax
+  UFG::allocator::free_link *v18; // rdx
+  UFG::allocator::free_link *v19; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rsi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v21; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v22; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v23; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v24; // rcx
+  UFG::UIScreenManagerBase *v25; // rbx
 
-  v2 = this;
   if ( popScreenCommand->m_popAll )
   {
     if ( (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext != this )
     {
-      v3 = &this->mScreenStackLock.cs;
-      v4 = &this->mPendingPoppedScreens;
+      p_mScreenStackLock = &this->mScreenStackLock;
+      p_mPendingPoppedScreens = &this->mPendingPoppedScreens;
       do
       {
-        EnterCriticalSection(v3);
-        v5 = v2->m_screenStack.mNode.mPrev;
-        v6 = v5->mPrev;
-        v7 = v5->mNext;
-        v6->mNext = v7;
-        v7->mPrev = v6;
-        v5->mPrev = v5;
-        v5->mNext = v5;
-        LeaveCriticalSection(v3);
+        EnterCriticalSection(&p_mScreenStackLock->cs);
+        mPrev = this->m_screenStack.mNode.mPrev;
+        v6 = mPrev->mPrev;
+        mNext = mPrev->mNext;
+        v6->mNext = mNext;
+        mNext->mPrev = v6;
+        mPrev->mPrev = mPrev;
+        mPrev->mNext = mPrev;
+        LeaveCriticalSection(&p_mScreenStackLock->cs);
         v8 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x40ui64, "UICommand", 0i64, 1u);
         v9 = v8;
         if ( v8 )
         {
-          v10 = (int)v5[6].mNext;
+          v10 = (int)mPrev[6].mNext;
           v11 = v8 + 1;
           v11->mNext = v11;
           v11[1].mNext = v11;
@@ -2191,31 +2080,30 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
         {
           v9 = 0i64;
         }
-        UFG::UIScreenManagerBase::queueMessageEx(v2, (UFG::UIMessage *)v9);
-        ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, _QWORD))v5[5].mNext[20].mPrev->mPrev[14].mPrev)(
-          v5[5].mNext[20].mPrev,
+        UFG::UIScreenManagerBase::queueMessageEx(this, (UFG::UIMessage *)v9);
+        ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, _QWORD))mPrev[5].mNext[20].mPrev->mPrev[14].mPrev)(
+          mPrev[5].mNext[20].mPrev,
           0i64);
-        EnterCriticalSection(v3);
-        v12 = v4->mNode.mPrev;
-        v12->mNext = v5;
-        v5->mPrev = v12;
-        v5->mNext = &v4->mNode;
-        v4->mNode.mPrev = v5;
-        LeaveCriticalSection(v3);
+        EnterCriticalSection(&p_mScreenStackLock->cs);
+        v12 = p_mPendingPoppedScreens->mNode.mPrev;
+        v12->mNext = mPrev;
+        mPrev->mPrev = v12;
+        mPrev->mNext = &p_mPendingPoppedScreens->mNode;
+        p_mPendingPoppedScreens->mNode.mPrev = mPrev;
+        LeaveCriticalSection(&p_mScreenStackLock->cs);
       }
-      while ( (UFG::UIScreenManagerBase *)&v2->m_screenStack.mNode.mNext[-1].mNext != v2 );
+      while ( (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext != this );
     }
-    for ( i = v2->mPendingScreenLoads.mNode.mNext;
-          i != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&v2->mPendingScreenLoads;
+    for ( i = this->mPendingScreenLoads.mNode.mNext;
+          i != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&this->mPendingScreenLoads;
           i = i->mNext )
     {
       v14 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x40ui64, "UICommand", 0i64, 1u);
       if ( v14 )
       {
         v15 = (int)i[1].mPrev[7].mPrev;
-        v16 = v14 + 1;
-        v16->mNext = v16;
-        v16[1].mNext = v16;
+        v14[1].mNext = v14 + 1;
+        v14[2].mNext = v14 + 1;
         v14->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
         LODWORD(v14[3].mNext) = -1;
         v14[4].mNext = 0i64;
@@ -2231,143 +2119,140 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
       {
         v14 = 0i64;
       }
-      UFG::UIScreenManagerBase::queueMessageEx(v2, (UFG::UIMessage *)v14);
+      UFG::UIScreenManagerBase::queueMessageEx(this, (UFG::UIMessage *)v14);
       LOBYTE(i[2].mPrev) = 1;
     }
   }
   else
   {
-    v17 = popScreenCommand->m_screenUID;
-    v18 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x40ui64, "UICommand", 0i64, 1u);
-    v19 = v18;
-    if ( v18 )
+    m_screenUID = popScreenCommand->m_screenUID;
+    v17 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x40ui64, "UICommand", 0i64, 1u);
+    v18 = v17;
+    if ( v17 )
     {
-      v20 = v18 + 1;
-      v20->mNext = v20;
-      v20[1].mNext = v20;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
-      LODWORD(v19[3].mNext) = -1;
-      v19[4].mNext = 0i64;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
-      LODWORD(v19[5].mNext) = UI_HASH_SCREEN_POPPED_35;
-      HIDWORD(v19[5].mNext) = 0;
-      v19[6].mNext = (UFG::allocator::free_link *)-1i64;
-      LODWORD(v19[3].mNext) = 5;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable;
-      LODWORD(v19[7].mNext) = v17;
+      v19 = v17 + 1;
+      v19->mNext = v19;
+      v19[1].mNext = v19;
+      v18->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
+      LODWORD(v18[3].mNext) = -1;
+      v18[4].mNext = 0i64;
+      v18->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
+      LODWORD(v18[5].mNext) = UI_HASH_SCREEN_POPPED_35;
+      HIDWORD(v18[5].mNext) = 0;
+      v18[6].mNext = (UFG::allocator::free_link *)-1i64;
+      LODWORD(v18[3].mNext) = 5;
+      v18->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable;
+      LODWORD(v18[7].mNext) = m_screenUID;
     }
     else
     {
-      v19 = 0i64;
+      v18 = 0i64;
     }
-    UFG::UIScreenManagerBase::queueMessageEx(v2, (UFG::UIMessage *)v19);
-    v21 = (signed __int64)&v2->m_screenStack.mNode.mPrev[-1].mNext;
-    if ( (UFG::UIScreenManagerBase *)v21 == v2 )
+    UFG::UIScreenManagerBase::queueMessageEx(this, (UFG::UIMessage *)v18);
+    p_mNext = &this->m_screenStack.mNode.mPrev[-1].mNext;
+    if ( p_mNext == (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this )
     {
 LABEL_23:
-      v26 = v2->mPendingScreenLoads.mNode.mPrev;
-      if ( v26 != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&v2->mPendingScreenLoads )
+      v24 = this->mPendingScreenLoads.mNode.mPrev;
+      if ( v24 != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&this->mPendingScreenLoads )
       {
-        while ( LODWORD(v26[1].mPrev[7].mPrev) != v17 && v17 != -1 )
+        while ( LODWORD(v24[1].mPrev[7].mPrev) != m_screenUID && m_screenUID != -1 )
         {
-          v26 = v26->mPrev;
-          if ( v26 == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&v2->mPendingScreenLoads )
+          v24 = v24->mPrev;
+          if ( v24 == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)&this->mPendingScreenLoads )
             goto LABEL_29;
         }
-        LOBYTE(v26[2].mPrev) = 1;
+        LOBYTE(v24[2].mPrev) = 1;
       }
     }
     else
     {
-      while ( *(_DWORD *)(v21 + 112) != v17 && v17 != -1 )
+      while ( *((_DWORD *)p_mNext + 28) != m_screenUID && m_screenUID != -1 )
       {
-        v21 = *(_QWORD *)(v21 + 8) - 8i64;
-        if ( (UFG::UIScreenManagerBase *)v21 == v2 )
+        p_mNext = &p_mNext[1][-1].mNext;
+        if ( p_mNext == (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this )
           goto LABEL_23;
       }
-      EnterCriticalSection(&v2->mScreenStackLock.cs);
-      v22 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)(v21 + 8);
-      v23 = *(_QWORD *)(v21 + 8);
-      v24 = *(_QWORD **)(v21 + 16);
-      *(_QWORD *)(v23 + 8) = v24;
-      *v24 = v23;
-      *v22 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)v22;
-      v22[1] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)v22;
-      LeaveCriticalSection(&v2->mScreenStackLock.cs);
-      (*(void (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)(*(_QWORD *)(v21 + 96) + 320i64) + 224i64))(
-        *(_QWORD *)(*(_QWORD *)(v21 + 96) + 320i64),
+      EnterCriticalSection(&this->mScreenStackLock.cs);
+      v21 = p_mNext[1];
+      v22 = p_mNext[2];
+      v21->mNext = v22;
+      v22->mPrev = v21;
+      p_mNext[1] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      p_mNext[2] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      LeaveCriticalSection(&this->mScreenStackLock.cs);
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, _QWORD))p_mNext[12][20].mPrev->mPrev[14].mPrev)(
+        p_mNext[12][20].mPrev,
         0i64);
-      EnterCriticalSection(&v2->mScreenStackLock.cs);
-      v25 = v2->mPendingPoppedScreens.mNode.mPrev;
-      v25->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v21 + 8);
-      *v22 = v25;
-      *(_QWORD *)(v21 + 16) = (char *)v2 + 112;
-      v2->mPendingPoppedScreens.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v21 + 8);
-      LeaveCriticalSection(&v2->mScreenStackLock.cs);
+      EnterCriticalSection(&this->mScreenStackLock.cs);
+      v23 = this->mPendingPoppedScreens.mNode.mPrev;
+      v23->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      p_mNext[1] = v23;
+      p_mNext[2] = &this->mPendingPoppedScreens.mNode;
+      this->mPendingPoppedScreens.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      LeaveCriticalSection(&this->mScreenStackLock.cs);
     }
   }
 LABEL_29:
-  v27 = (signed __int64)&v2->m_screenStack.mNode.mPrev[-1].mNext;
-  if ( !v2->mIsMidSwitch
-    && (UFG::UIScreenManagerBase *)v27 != v2
-    && ((*(unsigned __int8 (__fastcall **)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*(_QWORD *)v27 + 72i64))(&v2->m_screenStack.mNode.mPrev[-1].mNext)
-     || (*(unsigned __int8 (__fastcall **)(signed __int64))(*(_QWORD *)v27 + 88i64))(v27)) )
+  v25 = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mPrev[-1].mNext;
+  if ( !this->mIsMidSwitch
+    && v25 != this
+    && (v25->vfptr[1].isInputEnabled((UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mPrev[-1].mNext)
+     || ((unsigned __int8 (__fastcall *)(UFG::UIScreenManagerBase *))v25->vfptr[1].~UIScreenManagerBase)(v25)) )
   {
-    (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v27 + 64i64))(v27, 0i64);
+    v25->vfptr[1].enableInput(v25, 0);
   }
 }
 
 // File Line: 1308
 // RVA: 0xA322A0
-UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::switchScreen(UFG::UIScreenManagerBase *this, UFG::UICommandScreenSwitch *switchScreenCommand)
+UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::switchScreen(
+        UFG::UIScreenManagerBase *this,
+        UFG::UICommandScreenSwitch *switchScreenCommand)
 {
-  UFG::UICommandScreenSwitch *v2; // rbx
-  UFG::UIScreenManagerBase *v3; // rdi
-  unsigned int v4; // eax
-  int v5; // ecx
-  unsigned int v6; // eax
+  unsigned int m_screenUIDToPop; // eax
+  int m_controllerMask; // ecx
+  unsigned int m_screenUIDToPush; // eax
   UFG::UIScreen *v7; // r8
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v8; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v9; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mNext; // rcx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v10; // rcx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v11; // rax
-  UFG::UICommandScreenPop popScreenCommand; // [rsp+20h] [rbp-D8h]
+  UFG::UICommandScreenPop popScreenCommand; // [rsp+20h] [rbp-D8h] BYREF
   __int64 v14; // [rsp+50h] [rbp-A8h]
-  UFG::UICommandScreenPush pushScreenCommand; // [rsp+60h] [rbp-98h]
+  UFG::UICommandScreenPush pushScreenCommand; // [rsp+60h] [rbp-98h] BYREF
 
   v14 = -2i64;
-  v2 = switchScreenCommand;
-  v3 = this;
   this->mIsMidSwitch = 1;
-  v4 = switchScreenCommand->m_screenUIDToPop;
-  popScreenCommand.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&popScreenCommand.mPrev;
-  popScreenCommand.mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&popScreenCommand.mPrev;
+  m_screenUIDToPop = switchScreenCommand->m_screenUIDToPop;
+  popScreenCommand.mPrev = &popScreenCommand.UFG::qNode<UFG::UICommand,UFG::UICommand>;
+  popScreenCommand.mNext = &popScreenCommand.UFG::qNode<UFG::UICommand,UFG::UICommand>;
   popScreenCommand.m_commandData = 0i64;
   popScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPop::`vftable;
-  popScreenCommand.m_commandType = 1;
+  popScreenCommand.m_commandType = UICOMMAND_SCREEN_POP;
   popScreenCommand.m_popAll = 0;
-  popScreenCommand.m_screenUID = v4;
+  popScreenCommand.m_screenUID = m_screenUIDToPop;
   UFG::UIScreenManagerBase::popScreen(this, &popScreenCommand);
-  v5 = v2->m_controllerMask;
-  v6 = v2->m_screenUIDToPush;
-  pushScreenCommand.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&pushScreenCommand.mPrev;
-  pushScreenCommand.mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&pushScreenCommand.mPrev;
+  m_controllerMask = switchScreenCommand->m_controllerMask;
+  m_screenUIDToPush = switchScreenCommand->m_screenUIDToPush;
+  pushScreenCommand.mPrev = &pushScreenCommand.UFG::qNode<UFG::UICommand,UFG::UICommand>;
+  pushScreenCommand.mNext = &pushScreenCommand.UFG::qNode<UFG::UICommand,UFG::UICommand>;
   *(_QWORD *)&pushScreenCommand.m_commandType = 0i64;
   pushScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPush::`vftable;
-  *(_DWORD *)&pushScreenCommand.m_screenName[120] = v6;
-  *(_DWORD *)&pushScreenCommand.m_screenName[124] = v5;
+  *(_DWORD *)&pushScreenCommand.m_screenName[120] = m_screenUIDToPush;
+  *(_DWORD *)&pushScreenCommand.m_screenName[124] = m_controllerMask;
   *(_QWORD *)&pushScreenCommand.m_screenUID = 0i64;
   LODWORD(pushScreenCommand.m_preCreatedInstance) = UFG::UIScreen::mDefaultDim;
-  UFG::qStringCopy((char *)&pushScreenCommand.m_commandData, 128, v2->m_screenName, -1);
-  pushScreenCommand.m_commandType = 0;
-  *(_QWORD *)&pushScreenCommand.m_screenUID = v2->m_preCreatedInstance;
-  LODWORD(pushScreenCommand.m_preCreatedInstance) = v2->m_dimType;
-  v7 = UFG::UIScreenManagerBase::pushScreen(v3, &pushScreenCommand);
-  v3->mIsMidSwitch = 0;
-  v8 = pushScreenCommand.mPrev;
-  v9 = pushScreenCommand.mNext;
+  UFG::qStringCopy((char *)&pushScreenCommand.m_commandData, 128, switchScreenCommand->m_screenName, -1);
+  pushScreenCommand.m_commandType = UICOMMAND_SCREEN_PUSH;
+  *(_QWORD *)&pushScreenCommand.m_screenUID = switchScreenCommand->m_preCreatedInstance;
+  LODWORD(pushScreenCommand.m_preCreatedInstance) = switchScreenCommand->m_dimType;
+  v7 = UFG::UIScreenManagerBase::pushScreen(this, &pushScreenCommand);
+  this->mIsMidSwitch = 0;
+  mPrev = pushScreenCommand.mPrev;
+  mNext = pushScreenCommand.mNext;
   pushScreenCommand.mPrev->mNext = pushScreenCommand.mNext;
-  v9->mPrev = v8;
+  mNext->mPrev = mPrev;
   v10 = popScreenCommand.mPrev;
   v11 = popScreenCommand.mNext;
   popScreenCommand.mPrev->mNext = popScreenCommand.mNext;
@@ -2377,171 +2262,169 @@ UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::switchScreen(UFG::UIScreenMa
 
 // File Line: 1327
 // RVA: 0xA30D80
-UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::pushOverlay(UFG::UIScreenManagerBase *this, UFG::UICommandOverlayPush *pushOverlayCommand)
+UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::pushOverlay(
+        UFG::UIScreenManagerBase *this,
+        UFG::UICommandOverlayPush *pushOverlayCommand)
 {
-  _DWORD *v2; // r8
-  unsigned int v3; // esi
-  unsigned int v4; // ebp
-  int v5; // edi
-  UFG::UIScreenManagerBase *v6; // rbx
-  int v7; // eax
+  _DWORD *m_preCreatedInstance; // r8
+  unsigned int m_screenUID; // esi
+  unsigned int m_priority; // ebp
+  int m_controllerMask; // edi
+  int m_defaultControllerMask; // eax
   int v8; // eax
-  signed __int64 v9; // rcx
+  UFG::UIScreenManagerBase *p_mNext; // rcx
 
-  v2 = pushOverlayCommand->m_preCreatedInstance;
-  v3 = pushOverlayCommand->m_screenUID;
-  v4 = pushOverlayCommand->m_priority;
-  v5 = pushOverlayCommand->m_controllerMask;
-  v6 = this;
-  if ( !v2 )
-    v2 = UFG::UIScreenFactory::createScreen(this->m_screenFactory, pushOverlayCommand->m_screenName);
-  v2[28] = v3;
-  v2[31] = v4;
-  if ( v5 == -1 )
+  m_preCreatedInstance = pushOverlayCommand->m_preCreatedInstance;
+  m_screenUID = pushOverlayCommand->m_screenUID;
+  m_priority = pushOverlayCommand->m_priority;
+  m_controllerMask = pushOverlayCommand->m_controllerMask;
+  if ( !m_preCreatedInstance )
+    m_preCreatedInstance = UFG::UIScreenFactory::createScreen(this->m_screenFactory, pushOverlayCommand->m_screenName);
+  m_preCreatedInstance[28] = m_screenUID;
+  m_preCreatedInstance[31] = m_priority;
+  if ( m_controllerMask == -1 )
   {
-    v7 = v6->m_defaultControllerMask;
-    if ( v7 == -1 )
+    m_defaultControllerMask = this->m_defaultControllerMask;
+    if ( m_defaultControllerMask == -1 )
     {
       v8 = 0;
-      v9 = (signed __int64)&v6->m_screenStack.mNode.mNext[-1].mNext;
-      if ( (UFG::UIScreenManagerBase *)v9 != v6 )
+      p_mNext = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+      if ( p_mNext != this )
       {
         do
         {
           ++v8;
-          v9 = *(_QWORD *)(v9 + 16) - 8i64;
+          p_mNext = (UFG::UIScreenManagerBase *)&p_mNext->m_screenStack.mNode.mNext[-1].mNext;
         }
-        while ( (UFG::UIScreenManagerBase *)v9 != v6 );
+        while ( p_mNext != this );
         if ( v8 > 0 )
-          v2[29] = HIDWORD(v6->m_screenStack.mNode.mPrev[6].mNext);
+          m_preCreatedInstance[29] = HIDWORD(this->m_screenStack.mNode.mPrev[6].mNext);
       }
     }
     else
     {
-      v2[29] = v7;
+      m_preCreatedInstance[29] = m_defaultControllerMask;
     }
   }
   else
   {
-    v2[29] = v5;
+    m_preCreatedInstance[29] = m_controllerMask;
   }
-  return (UFG::UIScreen *)v2;
+  return (UFG::UIScreen *)m_preCreatedInstance;
 }
 
 // File Line: 1373
 // RVA: 0xA30750
-void __fastcall UFG::UIScreenManagerBase::popOverlay(UFG::UIScreenManagerBase *this, UFG::UICommandOverlayPop *popOverlayCommand)
+void __fastcall UFG::UIScreenManagerBase::popOverlay(
+        UFG::UIScreenManagerBase *this,
+        UFG::UICommandOverlayPop *popOverlayCommand)
 {
-  UFG::UIScreenManagerBase *v2; // rbp
-  unsigned int v3; // er14
-  const char *v4; // rsi
-  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *v5; // rsi
+  unsigned int m_screenUID; // r14d
+  char *m_screenName; // rsi
+  UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *p_mPendingPoppedScreens; // rsi
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v6; // rdi
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v7; // rcx
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v8; // rax
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v9; // rax
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v10; // rax
-  signed __int64 i; // rbp
-  signed __int64 v12; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v13; // rsi
-  __int64 v14; // rcx
-  _QWORD *v15; // rax
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v16; // rax
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v17; // rbx
-  signed __int64 v18; // rbp
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v19; // rdi
+  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *i; // rbp
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v13; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v14; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v15; // rax
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mNext; // rbx
+  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *p_mPendingOverlayLoads; // rbp
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mPrev; // rdi
 
-  v2 = this;
-  v3 = popOverlayCommand->m_screenUID;
-  v4 = popOverlayCommand->m_screenName;
-  if ( v3 != -1 || (unsigned int)UFG::qStringCompare(v4, &customWorldMapCaption, -1) )
+  m_screenUID = popOverlayCommand->m_screenUID;
+  m_screenName = popOverlayCommand->m_screenName;
+  if ( m_screenUID != -1 || (unsigned int)UFG::qStringCompare(m_screenName, &customCaption, -1) )
   {
-    v12 = (signed __int64)&v2->m_overlayStack.mNode.mNext[-1].mNext;
-    if ( (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v12 == &v2->m_screenStack.mNode.mNext )
+    p_mNext = &this->m_overlayStack.mNode.mNext[-1].mNext;
+    if ( p_mNext == &this->m_screenStack.mNode.mNext )
     {
 LABEL_16:
-      v17 = v2->mPendingOverlayLoads.mNode.mNext;
-      v18 = (signed __int64)&v2->mPendingOverlayLoads;
-      if ( v17 != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v18 )
+      mNext = this->mPendingOverlayLoads.mNode.mNext;
+      p_mPendingOverlayLoads = &this->mPendingOverlayLoads;
+      if ( mNext != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)p_mPendingOverlayLoads )
       {
         while ( 1 )
         {
-          v19 = v17[1].mPrev;
-          if ( LODWORD(v19[7].mPrev) == v3
-            || (unsigned int)UFG::qStringCompare(v4, &customWorldMapCaption, -1)
-            && !(unsigned int)UFG::qStringCompare((const char *)&v19[1].mNext, v4, -1) )
+          mPrev = mNext[1].mPrev;
+          if ( LODWORD(mPrev[7].mPrev) == m_screenUID
+            || (unsigned int)UFG::qStringCompare(m_screenName, &customCaption, -1)
+            && !(unsigned int)UFG::qStringCompare((const char *)&mPrev[1].mNext, m_screenName, -1) )
           {
             break;
           }
-          v17 = v17->mNext;
-          if ( v17 == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v18 )
+          mNext = mNext->mNext;
+          if ( mNext == (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)p_mPendingOverlayLoads )
             return;
         }
-        LOBYTE(v17[2].mPrev) = 1;
+        LOBYTE(mNext[2].mPrev) = 1;
       }
     }
     else
     {
-      while ( *(_DWORD *)(v12 + 112) != v3
-           && (!(unsigned int)UFG::qStringCompare(v4, &customWorldMapCaption, -1)
-            || (unsigned int)UFG::qStringCompare((const char *)(v12 + 24), v4, -1)) )
+      while ( *((_DWORD *)p_mNext + 28) != m_screenUID
+           && (!(unsigned int)UFG::qStringCompare(m_screenName, &customCaption, -1)
+            || (unsigned int)UFG::qStringCompare((const char *)p_mNext + 24, m_screenName, -1)) )
       {
-        v12 = *(_QWORD *)(v12 + 16) - 8i64;
-        if ( (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v12 == &v2->m_screenStack.mNode.mNext )
+        p_mNext = &p_mNext[2][-1].mNext;
+        if ( p_mNext == &this->m_screenStack.mNode.mNext )
           goto LABEL_16;
       }
-      EnterCriticalSection(&v2->mScreenStackLock.cs);
-      v13 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)(v12 + 8);
-      v14 = *(_QWORD *)(v12 + 8);
-      v15 = *(_QWORD **)(v12 + 16);
-      *(_QWORD *)(v14 + 8) = v15;
-      *v15 = v14;
-      *v13 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)v13;
-      v13[1] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)v13;
-      LeaveCriticalSection(&v2->mScreenStackLock.cs);
-      (*(void (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)(*(_QWORD *)(v12 + 96) + 320i64) + 224i64))(
-        *(_QWORD *)(*(_QWORD *)(v12 + 96) + 320i64),
+      EnterCriticalSection(&this->mScreenStackLock.cs);
+      v13 = p_mNext[1];
+      v14 = p_mNext[2];
+      v13->mNext = v14;
+      v14->mPrev = v13;
+      p_mNext[1] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      p_mNext[2] = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      LeaveCriticalSection(&this->mScreenStackLock.cs);
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, _QWORD))p_mNext[12][20].mPrev->mPrev[14].mPrev)(
+        p_mNext[12][20].mPrev,
         0i64);
-      EnterCriticalSection(&v2->mScreenStackLock.cs);
-      v16 = v2->mPendingPoppedScreens.mNode.mPrev;
-      v16->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v12 + 8);
-      *v13 = v16;
-      *(_QWORD *)(v12 + 16) = (char *)v2 + 112;
-      v2->mPendingPoppedScreens.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(v12 + 8);
-      LeaveCriticalSection(&v2->mScreenStackLock.cs);
+      EnterCriticalSection(&this->mScreenStackLock.cs);
+      v15 = this->mPendingPoppedScreens.mNode.mPrev;
+      v15->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      p_mNext[1] = v15;
+      p_mNext[2] = &this->mPendingPoppedScreens.mNode;
+      this->mPendingPoppedScreens.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)(p_mNext + 1);
+      LeaveCriticalSection(&this->mScreenStackLock.cs);
     }
   }
   else
   {
-    if ( &v2->m_overlayStack.mNode.mNext[-1].mNext != &v2->m_screenStack.mNode.mNext )
+    if ( &this->m_overlayStack.mNode.mNext[-1].mNext != &this->m_screenStack.mNode.mNext )
     {
-      v5 = &v2->mPendingPoppedScreens;
+      p_mPendingPoppedScreens = &this->mPendingPoppedScreens;
       do
       {
-        EnterCriticalSection(&v2->mScreenStackLock.cs);
-        v6 = v2->m_overlayStack.mNode.mPrev;
+        EnterCriticalSection(&this->mScreenStackLock.cs);
+        v6 = this->m_overlayStack.mNode.mPrev;
         v7 = v6->mPrev;
         v8 = v6->mNext;
         v7->mNext = v8;
         v8->mPrev = v7;
         v6->mPrev = v6;
         v6->mNext = v6;
-        LeaveCriticalSection(&v2->mScreenStackLock.cs);
+        LeaveCriticalSection(&this->mScreenStackLock.cs);
         ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, _QWORD))v6[5].mNext[20].mPrev->mPrev[14].mPrev)(
           v6[5].mNext[20].mPrev,
           0i64);
-        EnterCriticalSection(&v2->mScreenStackLock.cs);
-        v9 = v5->mNode.mPrev;
+        EnterCriticalSection(&this->mScreenStackLock.cs);
+        v9 = p_mPendingPoppedScreens->mNode.mPrev;
         v9->mNext = v6;
         v6->mPrev = v9;
-        v6->mNext = &v5->mNode;
-        v5->mNode.mPrev = v6;
-        LeaveCriticalSection(&v2->mScreenStackLock.cs);
+        v6->mNext = &p_mPendingPoppedScreens->mNode;
+        p_mPendingPoppedScreens->mNode.mPrev = v6;
+        LeaveCriticalSection(&this->mScreenStackLock.cs);
       }
-      while ( &v2->m_overlayStack.mNode.mNext[-1].mNext != &v2->m_screenStack.mNode.mNext );
+      while ( &this->m_overlayStack.mNode.mNext[-1].mNext != &this->m_screenStack.mNode.mNext );
     }
-    v10 = v2->mPendingOverlayLoads.mNode.mNext;
-    for ( i = (signed __int64)&v2->mPendingOverlayLoads;
+    v10 = this->mPendingOverlayLoads.mNode.mNext;
+    for ( i = &this->mPendingOverlayLoads;
           v10 != (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)i;
           v10 = v10->mNext )
     {
@@ -2554,54 +2437,49 @@ LABEL_16:
 // RVA: 0xA2F500
 bool __fastcall UFG::UIScreenManagerBase::handleMessage(UFG::UIScreenManagerBase *this, UFG::UIMessage *msg)
 {
-  UFG::UIMessage *v2; // rdi
-  UFG::UIScreenManagerBase *v3; // rsi
   UFG::UIFlowRoot *v4; // rax
   bool result; // al
-  UFG::UIScreen *v6; // rbx
-  unsigned int v7; // er14
-  void (__fastcall *v8)(const char *, unsigned int, unsigned int, unsigned int); // rax
+  UFG::UIScreen *p_mNext; // rbx
+  unsigned int m_receiverUID; // r14d
+  void (__fastcall *m_audioCallback)(const char *, unsigned int, unsigned int, unsigned int); // rax
 
-  v2 = msg;
-  v3 = this;
   v4 = UFG::LazyInitGet<UFG::UIFlowRoot>::get();
-  if ( v4->vfptr->flowHandleMessage((UFG::UIFlow *)&v4->vfptr, v2->m_messageId, v2) )
+  if ( v4->vfptr->flowHandleMessage(v4, msg->m_messageId, msg) )
     return 1;
-  result = UFG::UIScreenManagerBase::handleMessage(v3, v2, &v3->m_screenStack, v3->m_eatInputForScreens);
+  result = UFG::UIScreenManagerBase::handleMessage(this, msg, &this->m_screenStack, this->m_eatInputForScreens);
   if ( !result )
   {
-    v6 = (UFG::UIScreen *)&v3->m_overlayStack.mNode.mPrev[-1].mNext;
-    v7 = v2->m_receiverUID;
-    if ( v6 == (UFG::UIScreen *)&v3->m_screenStack.mNode.mNext )
+    p_mNext = (UFG::UIScreen *)&this->m_overlayStack.mNode.mPrev[-1].mNext;
+    m_receiverUID = msg->m_receiverUID;
+    if ( p_mNext == (UFG::UIScreen *)&this->m_screenStack.mNode.mNext )
     {
-LABEL_18:
-      result = 0;
+      return 0;
     }
     else
     {
       while ( 1 )
       {
-        if ( (v2->m_receiverUID == -1 || v6->mScreenUID == v7)
-          && (v2->m_commandType != 6
-           || v6->mInputEnabled >= 0
-           && !v6->vfptr->isDimmed(v6)
-           && !v6->vfptr->isDimming(v6)
-           && !v6->vfptr->isUnDimming(v6)
-           && (v2->m_messageType || v6->mControllerMask & HIDWORD(v2[1].vfptr))) )
+        if ( (msg->m_receiverUID == -1 || p_mNext->mScreenUID == m_receiverUID)
+          && (msg->m_commandType != UICOMMAND_INPUT
+           || p_mNext->mInputEnabled >= 0
+           && !p_mNext->vfptr->isDimmed(p_mNext)
+           && !p_mNext->vfptr->isDimming(p_mNext)
+           && !p_mNext->vfptr->isUnDimming(p_mNext)
+           && (msg->m_messageType || (p_mNext->mControllerMask & HIDWORD(msg[1].vfptr)) != 0)) )
         {
-          if ( v2->m_commandType == 6 )
-            UFG::UIScreen::handleInput(v6, v2->m_messageId, v2);
-          if ( v6->vfptr->handleMessage(v6, v2->m_messageId, v2) )
+          if ( msg->m_commandType == UICOMMAND_INPUT )
+            UFG::UIScreen::handleInput(p_mNext, msg->m_messageId, msg);
+          if ( p_mNext->vfptr->handleMessage(p_mNext, msg->m_messageId, msg) )
             break;
         }
-        v6 = (UFG::UIScreen *)&v6->mPrev[-1].mNext;
-        if ( v6 == (UFG::UIScreen *)&v3->m_screenStack.mNode.mNext )
-          goto LABEL_18;
+        p_mNext = (UFG::UIScreen *)&p_mNext->mPrev[-1].mNext;
+        if ( p_mNext == (UFG::UIScreen *)&this->m_screenStack.mNode.mNext )
+          return 0;
       }
-      v8 = v3->m_audioCallback;
-      if ( v8 )
-        v8(v6->m_screenName, v6->m_screenNameHash, v2->m_messageId, v2->m_resultId);
-      result = 1;
+      m_audioCallback = this->m_audioCallback;
+      if ( m_audioCallback )
+        m_audioCallback(p_mNext->m_screenName, p_mNext->m_screenNameHash, msg->m_messageId, msg->m_resultId);
+      return 1;
     }
   }
   return result;
@@ -2609,64 +2487,62 @@ LABEL_18:
 
 // File Line: 1496
 // RVA: 0xA2F650
-char __fastcall UFG::UIScreenManagerBase::handleMessage(UFG::UIScreenManagerBase *this, UFG::UIMessage *msg, UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *stack, bool eatInput)
+char __fastcall UFG::UIScreenManagerBase::handleMessage(
+        UFG::UIScreenManagerBase *this,
+        UFG::UIMessage *msg,
+        UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *stack,
+        bool eatInput)
 {
-  unsigned int v4; // er14
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v5; // r15
+  unsigned int m_receiverUID; // r14d
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // r15
   char *v6; // rbx
-  bool v7; // bp
-  UFG::UIMessage *v8; // rdi
-  UFG::UIScreenManagerBase *v9; // r13
   bool v10; // si
   bool v11; // zf
-  void (__fastcall *v13)(const char *, unsigned int, unsigned int, unsigned int); // rax
+  void (__fastcall *m_audioCallback)(const char *, unsigned int, unsigned int, unsigned int); // rax
 
-  v4 = msg->m_receiverUID;
-  v5 = &stack[-1].mNode.mNext;
+  m_receiverUID = msg->m_receiverUID;
+  p_mNext = &stack[-1].mNode.mNext;
   v6 = (char *)&stack->mNode.mPrev[-1].mNext;
-  v7 = eatInput;
-  v8 = msg;
-  v9 = this;
   if ( v6 == (char *)&stack[-1].mNode.mNext )
     return 0;
   while ( 1 )
   {
-    if ( v8->m_receiverUID != -1 && *((_DWORD *)v6 + 28) != v4 )
+    if ( msg->m_receiverUID != -1 && *((_DWORD *)v6 + 28) != m_receiverUID )
       goto LABEL_19;
-    v10 = v8->m_commandType == 6;
-    if ( v8->m_commandType == 6
-      && (*((_DWORD *)v6 + 30) < 0
+    v10 = msg->m_commandType == UICOMMAND_INPUT;
+    if ( msg->m_commandType == UICOMMAND_INPUT
+      && (*((int *)v6 + 30) < 0
        || (*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)v6 + 72i64))(v6)
        || (*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)v6 + 88i64))(v6)
        || (*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)v6 + 80i64))(v6)
-       || v8->m_messageType == UIMESSAGE_PAD_INPUT && !(*((_DWORD *)v6 + 29) & HIDWORD(v8[1].vfptr))) )
+       || msg->m_messageType == UIMESSAGE_PAD_INPUT && (*((_DWORD *)v6 + 29) & HIDWORD(msg[1].vfptr)) == 0) )
     {
-      v11 = v7 == 0;
+      v11 = !eatInput;
       goto LABEL_18;
     }
-    if ( v8->m_commandType == 6 )
-      UFG::UIScreen::handleInput((UFG::UIScreen *)v6, v8->m_messageId, v8);
+    if ( msg->m_commandType == UICOMMAND_INPUT )
+      UFG::UIScreen::handleInput((UFG::UIScreen *)v6, msg->m_messageId, msg);
     if ( (*(unsigned __int8 (__fastcall **)(char *, _QWORD, UFG::UIMessage *))(*(_QWORD *)v6 + 32i64))(
            v6,
-           v8->m_messageId,
-           v8) )
+           msg->m_messageId,
+           msg) )
     {
       break;
     }
-    if ( !v10 || !v7 )
+    if ( !v10 || !eatInput )
       goto LABEL_19;
-    v11 = v8->m_messageType == 3;
+    v11 = msg->m_messageType == UIMESSAGE_MOUSE_INPUT;
 LABEL_18:
     if ( !v11 )
       return 1;
 LABEL_19:
     v6 = (char *)(*((_QWORD *)v6 + 1) - 8i64);
-    if ( v6 == (char *)v5 )
+    if ( v6 == (char *)p_mNext )
       return 0;
   }
-  v13 = v9->m_audioCallback;
-  if ( v13 )
-    v13(v6 + 24, *((_DWORD *)v6 + 22), v8->m_messageId, v8->m_resultId);
+  m_audioCallback = this->m_audioCallback;
+  if ( m_audioCallback )
+    m_audioCallback(v6 + 24, *((_DWORD *)v6 + 22), msg->m_messageId, msg->m_resultId);
   return 1;
 }
 
@@ -2674,32 +2550,26 @@ LABEL_19:
 // RVA: 0xA32820
 void __fastcall UFG::UIScreenManagerBase::updateCommandQueue(UFG::UIScreenManagerBase *this, float elapsed)
 {
-  int *v2; // rsi
-  UFG::UIScreenManagerBase *v3; // rdi
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v4; // rbx
+  int *p_m_defaultControllerMask; // rsi
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mNext; // rbx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v5; // rax
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v6; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rcx
 
-  v2 = &this->m_defaultControllerMask;
-  v3 = this;
-  if ( (int *)&this->m_commandQueue.mNode.mNext[-1].mNext != &this->m_defaultControllerMask )
+  p_m_defaultControllerMask = &this->m_defaultControllerMask;
+  while ( (int *)&this->m_commandQueue.mNode.mNext[-1].mNext != p_m_defaultControllerMask )
   {
-    do
-    {
-      v4 = v3->m_commandQueue.mNode.mNext;
-      v5 = v4->mNext;
-      v6 = v4->mPrev;
-      v6->mNext = v5;
-      v5->mPrev = v6;
-      v4->mPrev = v4;
-      v4->mNext = v4;
-      if ( (unsigned int)(LODWORD(v4[1].mPrev) - 5) <= 2 )
-        UFG::UIScreenManagerBase::handleMessage(v3, (UFG::UIMessage *)&v4[-1].mNext);
-      ((void (__fastcall *)(UFG::qNode<UFG::UICommand,UFG::UICommand> **, signed __int64))v4[-1].mNext->mPrev)(
-        &v4[-1].mNext,
-        1i64);
-    }
-    while ( (int *)&v3->m_commandQueue.mNode.mNext[-1].mNext != v2 );
+    mNext = this->m_commandQueue.mNode.mNext;
+    v5 = mNext->mNext;
+    mPrev = mNext->mPrev;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    if ( (unsigned int)(LODWORD(mNext[1].mPrev) - 5) <= 2 )
+      UFG::UIScreenManagerBase::handleMessage(this, (UFG::UIMessage *)&mNext[-1].mNext);
+    ((void (__fastcall *)(UFG::qNode<UFG::UICommand,UFG::UICommand> **, __int64))mNext[-1].mNext->mPrev)(
+      &mNext[-1].mNext,
+      1i64);
   }
 }
 
@@ -2707,12 +2577,11 @@ void __fastcall UFG::UIScreenManagerBase::updateCommandQueue(UFG::UIScreenManage
 // RVA: 0xA32D40
 void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreenManagerBase *this, float elapsed)
 {
-  UFG::UIScreenManagerBase *v2; // rsi
-  UFG::qNode<UFG::UICommand,UFG::UICommand> **v3; // r14
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v4; // rdx
-  UFG::qNode<UFG::UICommand,UFG::UICommand> *v5; // rcx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *p_mNext; // r14
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mNext; // rdx
+  UFG::qNode<UFG::UICommand,UFG::UICommand> *mPrev; // rcx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v6; // rax
-  signed __int64 v7; // rdi
+  UFG::qNode<UFG::UICommand,UFG::UICommand> **v7; // rdi
   int v8; // ecx
   int v9; // ecx
   int v10; // ecx
@@ -2720,42 +2589,41 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
   UFG::UIScreen *v12; // rbp
   UFG::allocator::free_link *v13; // rbx
   UFG::allocator::free_link *v14; // rax
-  UFG::allocator::free_link *v15; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v15; // rdx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v16; // rax
   UFG::allocator::free_link *v17; // rbx
-  Scaleform::GFx::Loader *v18; // rax
+  Scaleform::GFx::Loader *m_gfxMovieLoader; // rax
   int v19; // eax
   UFG::allocator::free_link *v20; // rbx
   UFG::allocator::free_link *v21; // rax
-  UFG::allocator::free_link *v22; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v22; // rdx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v23; // rax
   Scaleform::GFx::Loader *v24; // rax
   int v25; // eax
   UFG::allocator::free_link *v26; // rbx
   UFG::allocator::free_link *v27; // rax
-  UFG::allocator::free_link *v28; // rdx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v28; // rdx
   UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v29; // rax
   Scaleform::GFx::Loader *v30; // rax
   int v31; // eax
-  char dest; // [rsp+40h] [rbp-628h]
-  char text; // [rsp+240h] [rbp-428h]
-  char v34; // [rsp+440h] [rbp-228h]
+  char dest[512]; // [rsp+40h] [rbp-628h] BYREF
+  char text[512]; // [rsp+240h] [rbp-428h] BYREF
+  char v34[512]; // [rsp+440h] [rbp-228h] BYREF
 
-  v2 = this;
-  v3 = &this->m_commandQueue.mNode.mNext;
+  p_mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->m_commandQueue.mNode.mNext;
   if ( &this->m_screenCommandQueue.mNode.mNext[-1].mNext != &this->m_commandQueue.mNode.mNext )
   {
     while ( 1 )
     {
-      v4 = v2->m_screenCommandQueue.mNode.mNext;
-      v5 = v4->mPrev;
-      v6 = v4->mNext;
-      v5->mNext = v6;
-      v6->mPrev = v5;
-      v4->mPrev = v4;
-      v4->mNext = v4;
-      v7 = (signed __int64)&v4[-1].mNext;
-      v8 = (int)v4[1].mPrev;
+      mNext = this->m_screenCommandQueue.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v6 = mNext->mNext;
+      mPrev->mNext = v6;
+      v6->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      v7 = &mNext[-1].mNext;
+      v8 = (int)mNext[1].mPrev;
       if ( !v8 )
         break;
       v9 = v8 - 1;
@@ -2768,13 +2636,13 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
           if ( v11 )
           {
             if ( v11 == 1 )
-              UFG::UIScreenManagerBase::popOverlay(v2, (UFG::UICommandOverlayPop *)&v4[-1].mNext);
-            goto LABEL_30;
+              UFG::UIScreenManagerBase::popOverlay(this, (UFG::UICommandOverlayPop *)&mNext[-1].mNext);
+            goto LABEL_28;
           }
-          v12 = UFG::UIScreenManagerBase::pushOverlay(v2, (UFG::UICommandOverlayPush *)&v4[-1].mNext);
-          v13 = *(UFG::allocator::free_link **)(v7 + 32);
+          v12 = UFG::UIScreenManagerBase::pushOverlay(this, (UFG::UICommandOverlayPush *)&mNext[-1].mNext);
+          v13 = (UFG::allocator::free_link *)v7[4];
           v14 = UFG::qMalloc(0x28ui64, "UIScreenManagerBase::updateScreenCommandQueue", 0i64);
-          v15 = v14;
+          v15 = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v14;
           if ( v14 )
           {
             v14->mNext = v14;
@@ -2788,28 +2656,28 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
           {
             v15 = 0i64;
           }
-          v16 = v2->mPendingOverlayLoads.mNode.mPrev;
-          v16->mNext = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v15;
-          v15->mNext = (UFG::allocator::free_link *)v16;
-          v15[1].mNext = (UFG::allocator::free_link *)&v2->mPendingOverlayLoads;
-          v2->mPendingOverlayLoads.mNode.mPrev = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v15;
-          UFG::qSPrintf(&dest, "%s%s.gfx", v2->m_screenFactory->m_rootDir, v7 + 40);
+          v16 = this->mPendingOverlayLoads.mNode.mPrev;
+          v16->mNext = v15;
+          v15->mPrev = v16;
+          v15->mNext = &this->mPendingOverlayLoads.mNode;
+          this->mPendingOverlayLoads.mNode.mPrev = v15;
+          UFG::qSPrintf(dest, "%s%s.gfx", this->m_screenFactory->m_rootDir, (const char *)v7 + 40);
           v17 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x168ui64, "UIScreen::load", 0i64, 1u);
           if ( v17 )
           {
-            v18 = v2->m_gfxMovieLoader;
+            m_gfxMovieLoader = this->m_gfxMovieLoader;
             v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
             v17[1].mNext = 0i64;
             LOBYTE(v17[2].mNext) = 0;
             v17[39].mNext = 0i64;
             v17[40].mNext = 0i64;
-            v17[41].mNext = (UFG::allocator::free_link *)v18;
+            v17[41].mNext = (UFG::allocator::free_link *)m_gfxMovieLoader;
             v17[42].mNext = 0i64;
             v17[43].mNext = 0i64;
             LOBYTE(v17[44].mNext) = 1;
             BYTE1(v17[44].mNext) = 0;
-            v19 = UFG::qStringLength(&dest);
-            UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, &dest, v19);
+            v19 = UFG::qStringLength(dest);
+            UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, dest, v19);
           }
           else
           {
@@ -2818,10 +2686,10 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
         }
         else
         {
-          v12 = UFG::UIScreenManagerBase::switchScreen(v2, (UFG::UICommandScreenSwitch *)&v4[-1].mNext);
-          v20 = *(UFG::allocator::free_link **)(v7 + 32);
+          v12 = UFG::UIScreenManagerBase::switchScreen(this, (UFG::UICommandScreenSwitch *)&mNext[-1].mNext);
+          v20 = (UFG::allocator::free_link *)v7[4];
           v21 = UFG::qMalloc(0x28ui64, "UIScreenManagerBase::updateScreenCommandQueue", 0i64);
-          v22 = v21;
+          v22 = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v21;
           if ( v21 )
           {
             v21->mNext = v21;
@@ -2835,16 +2703,16 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
           {
             v22 = 0i64;
           }
-          v23 = v2->mPendingScreenLoads.mNode.mPrev;
-          v23->mNext = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v22;
-          v22->mNext = (UFG::allocator::free_link *)v23;
-          v22[1].mNext = (UFG::allocator::free_link *)&v2->mPendingScreenLoads;
-          v2->mPendingScreenLoads.mNode.mPrev = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v22;
-          UFG::qSPrintf(&text, "%s%s.gfx", v2->m_screenFactory->m_rootDir, v7 + 44);
+          v23 = this->mPendingScreenLoads.mNode.mPrev;
+          v23->mNext = v22;
+          v22->mPrev = v23;
+          v22->mNext = &this->mPendingScreenLoads.mNode;
+          this->mPendingScreenLoads.mNode.mPrev = v22;
+          UFG::qSPrintf(text, "%s%s.gfx", this->m_screenFactory->m_rootDir, (const char *)v7 + 44);
           v17 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x168ui64, "UIScreen::load", 0i64, 1u);
           if ( v17 )
           {
-            v24 = v2->m_gfxMovieLoader;
+            v24 = this->m_gfxMovieLoader;
             v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
             v17[1].mNext = 0i64;
             LOBYTE(v17[2].mNext) = 0;
@@ -2855,26 +2723,26 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
             v17[43].mNext = 0i64;
             LOBYTE(v17[44].mNext) = 1;
             BYTE1(v17[44].mNext) = 0;
-            v25 = UFG::qStringLength(&text);
-            UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, &text, v25);
+            v25 = UFG::qStringLength(text);
+            UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, text, v25);
           }
           else
           {
             v17 = 0i64;
           }
         }
-        goto LABEL_29;
+        goto LABEL_27;
       }
-      UFG::UIScreenManagerBase::popScreen(v2, (UFG::UICommandScreenPop *)&v4[-1].mNext);
-LABEL_30:
-      (**(void (__fastcall ***)(signed __int64, signed __int64))v7)(v7, 1i64);
-      if ( &v2->m_screenCommandQueue.mNode.mNext[-1].mNext == v3 )
+      UFG::UIScreenManagerBase::popScreen(this, (UFG::UICommandScreenPop *)&mNext[-1].mNext);
+LABEL_28:
+      ((void (__fastcall *)(UFG::qNode<UFG::UICommand,UFG::UICommand> **, __int64))(*v7)->mPrev)(v7, 1i64);
+      if ( (UFG::qNode<UFG::UICommand,UFG::UICommand> *)((char *)this->m_screenCommandQueue.mNode.mNext - 8) == p_mNext )
         return;
     }
-    v12 = UFG::UIScreenManagerBase::pushScreen(v2, (UFG::UICommandScreenPush *)&v4[-1].mNext);
-    v26 = *(UFG::allocator::free_link **)(v7 + 32);
+    v12 = UFG::UIScreenManagerBase::pushScreen(this, (UFG::UICommandScreenPush *)&mNext[-1].mNext);
+    v26 = (UFG::allocator::free_link *)v7[4];
     v27 = UFG::qMalloc(0x28ui64, "UIScreenManagerBase::updateScreenCommandQueue", 0i64);
-    v28 = v27;
+    v28 = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v27;
     if ( v27 )
     {
       v27->mNext = v27;
@@ -2888,16 +2756,16 @@ LABEL_30:
     {
       v28 = 0i64;
     }
-    v29 = v2->mPendingScreenLoads.mNode.mPrev;
-    v29->mNext = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v28;
-    v28->mNext = (UFG::allocator::free_link *)v29;
-    v28[1].mNext = (UFG::allocator::free_link *)&v2->mPendingScreenLoads;
-    v2->mPendingScreenLoads.mNode.mPrev = (UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *)v28;
-    UFG::qSPrintf(&v34, "%s%s.gfx", v2->m_screenFactory->m_rootDir, v7 + 40);
+    v29 = this->mPendingScreenLoads.mNode.mPrev;
+    v29->mNext = v28;
+    v28->mPrev = v29;
+    v28->mNext = &this->mPendingScreenLoads.mNode;
+    this->mPendingScreenLoads.mNode.mPrev = v28;
+    UFG::qSPrintf(v34, "%s%s.gfx", this->m_screenFactory->m_rootDir, (const char *)v7 + 40);
     v17 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x168ui64, "UIScreen::load", 0i64, 1u);
     if ( v17 )
     {
-      v30 = v2->m_gfxMovieLoader;
+      v30 = this->m_gfxMovieLoader;
       v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
       v17[1].mNext = 0i64;
       LOBYTE(v17[2].mNext) = 0;
@@ -2908,34 +2776,28 @@ LABEL_30:
       v17[43].mNext = 0i64;
       LOBYTE(v17[44].mNext) = 1;
       BYTE1(v17[44].mNext) = 0;
-      v31 = UFG::qStringLength(&v34);
-      UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, &v34, v31);
+      v31 = UFG::qStringLength(v34);
+      UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, v34, v31);
     }
     else
     {
       v17 = 0i64;
     }
-LABEL_29:
+LABEL_27:
     UFG::UIScreen::load(v12, (UFG::UIScreenRenderable *)v17);
-    goto LABEL_30;
+    goto LABEL_28;
   }
-}  UFG::qStringCopy((char *)&v17[2].mNext + 1, 256, &v34, v31);
-    }
- 
+} UFG::qStringCopy((char *)&v17[2].mN
 
 // File Line: 1724
 // RVA: 0xA2BA30
 UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManagerBase *this, const char *fileName)
 {
-  const char *v2; // rdi
-  UFG::UIScreenManagerBase *v3; // rbx
   UFG::UIScreen *result; // rax
 
-  v2 = fileName;
-  v3 = this;
   result = (UFG::UIScreen *)UFG::UIScreenManagerBase::getScreenFromStack(this, fileName, &this->m_screenStack);
   if ( !result )
-    result = UFG::UIScreenManagerBase::getScreenFromPendingStack(v3, v2, &v3->mPendingScreenLoads);
+    return UFG::UIScreenManagerBase::getScreenFromPendingStack(this, fileName, &this->mPendingScreenLoads);
   return result;
 }
 
@@ -2943,15 +2805,11 @@ UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManag
 // RVA: 0xA2B9A0
 UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManagerBase *this, const char *fileName)
 {
-  const char *v2; // rdi
-  UFG::UIScreenManagerBase *v3; // rbx
   UFG::UIScreen *result; // rax
 
-  v2 = fileName;
-  v3 = this;
   result = (UFG::UIScreen *)UFG::UIScreenManagerBase::getScreenFromStack(this, fileName, &this->m_overlayStack);
   if ( !result )
-    result = UFG::UIScreenManagerBase::getScreenFromPendingStack(v3, v2, &v3->mPendingOverlayLoads);
+    return UFG::UIScreenManagerBase::getScreenFromPendingStack(this, fileName, &this->mPendingOverlayLoads);
   return result;
 }
 
@@ -2959,52 +2817,48 @@ UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenMana
 // RVA: 0xA2BB60
 signed __int64 __fastcall UFG::UIScreenManagerBase::getScreenUID(UFG::UIScreenManagerBase *this, const char *fileName)
 {
-  const char *v2; // rdi
-  UFG::UIScreenManagerBase *v3; // rbx
-  unsigned int *v4; // rax
-  signed __int64 result; // rax
+  unsigned int *ScreenFromStack; // rax
 
-  v2 = fileName;
-  v3 = this;
-  v4 = (unsigned int *)UFG::UIScreenManagerBase::getScreenFromStack(this, fileName, &this->m_screenStack);
-  if ( v4
-    || (v4 = (unsigned int *)UFG::UIScreenManagerBase::getScreenFromPendingStack(v3, v2, &v3->mPendingScreenLoads)) != 0i64 )
-  {
-    result = v4[28];
-  }
+  ScreenFromStack = (unsigned int *)UFG::UIScreenManagerBase::getScreenFromStack(this, fileName, &this->m_screenStack);
+  if ( ScreenFromStack )
+    return ScreenFromStack[28];
+  ScreenFromStack = (unsigned int *)UFG::UIScreenManagerBase::getScreenFromPendingStack(
+                                      this,
+                                      fileName,
+                                      &this->mPendingScreenLoads);
+  if ( ScreenFromStack )
+    return ScreenFromStack[28];
   else
-  {
-    result = 0xFFFFFFFFi64;
-  }
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 1814
 // RVA: 0xA2B9E0
-UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManagerBase *this, unsigned int screenUID)
+UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getScreen(
+        UFG::UIScreenManagerBase *this,
+        unsigned int screenUID)
 {
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **result; // rax
-  UFG::UIScreenManagerBase *v3; // rax
+  UFG::UIScreenManagerBase *mNext; // rax
 
   result = &this->m_screenStack.mNode.mNext[-1].mNext;
   if ( result == (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this )
   {
 LABEL_4:
-    v3 = (UFG::UIScreenManagerBase *)this->mPendingScreenLoads.mNode.mNext;
-    if ( v3 == (UFG::UIScreenManagerBase *)&this->mPendingScreenLoads )
+    mNext = (UFG::UIScreenManagerBase *)this->mPendingScreenLoads.mNode.mNext;
+    if ( mNext == (UFG::UIScreenManagerBase *)&this->mPendingScreenLoads )
     {
-LABEL_7:
-      result = 0i64;
+      return 0i64;
     }
     else
     {
-      while ( LODWORD(v3->m_screenStack.mNode.mNext[7].mPrev) != screenUID )
+      while ( LODWORD(mNext->m_screenStack.mNode.mNext[7].mPrev) != screenUID )
       {
-        v3 = (UFG::UIScreenManagerBase *)v3->m_screenStack.mNode.mPrev;
-        if ( v3 == (UFG::UIScreenManagerBase *)&this->mPendingScreenLoads )
-          goto LABEL_7;
+        mNext = (UFG::UIScreenManagerBase *)mNext->m_screenStack.mNode.mPrev;
+        if ( mNext == (UFG::UIScreenManagerBase *)&this->mPendingScreenLoads )
+          return 0i64;
       }
-      result = &v3->m_screenStack.mNode.mNext->mPrev;
+      return (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)mNext->m_screenStack.mNode.mNext;
     }
   }
   else
@@ -3021,21 +2875,22 @@ LABEL_7:
 
 // File Line: 1845
 // RVA: 0xA2BAE0
-UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getScreenFromStack(UFG::UIScreenManagerBase *this, const char *screenName, UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *stack)
+UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getScreenFromStack(
+        UFG::UIScreenManagerBase *this,
+        const char *screenName,
+        UFG::qList<UFG::UIScreen,UFG::UIScreen,1,0> *stack)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v3; // rdi
-  const char *v4; // rsi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rdi
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v5; // rbx
 
-  v3 = &stack[-1].mNode.mNext;
-  v4 = screenName;
+  p_mNext = &stack[-1].mNode.mNext;
   v5 = &stack->mNode.mNext[-1].mNext;
   if ( v5 == &stack[-1].mNode.mNext )
     return 0i64;
-  while ( (unsigned int)UFG::qStringCompare((const char *)v5 + 24, v4, -1) )
+  while ( (unsigned int)UFG::qStringCompare((const char *)v5 + 24, screenName, -1) )
   {
     v5 = &v5[2][-1].mNext;
-    if ( v5 == v3 )
+    if ( v5 == p_mNext )
       return 0i64;
   }
   return v5;
@@ -3043,39 +2898,39 @@ UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::g
 
 // File Line: 1903
 // RVA: 0xA2BA70
-UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *__fastcall UFG::UIScreenManagerBase::getScreenFromPendingStack(UFG::UIScreenManagerBase *this, const char *screenName, UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *stack)
+UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *__fastcall UFG::UIScreenManagerBase::getScreenFromPendingStack(
+        UFG::UIScreenManagerBase *this,
+        const char *screenName,
+        UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *stack)
 {
-  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *v3; // rbx
-  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *v4; // rdi
-  const char *v5; // rbp
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v6; // rsi
+  UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *mNext; // rbx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mPrev; // rsi
 
-  v3 = (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)stack->mNode.mNext;
-  v4 = stack;
-  v5 = screenName;
-  if ( v3 == stack )
+  mNext = (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)stack->mNode.mNext;
+  if ( mNext == stack )
     return 0i64;
   while ( 1 )
   {
-    v6 = v3[1].mNode.mPrev;
-    if ( !(unsigned int)UFG::qStringCompare((const char *)&v6[1].mNext, v5, -1) )
+    mPrev = mNext[1].mNode.mPrev;
+    if ( !(unsigned int)UFG::qStringCompare((const char *)&mPrev[1].mNext, screenName, -1) )
       break;
-    v3 = (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)v3->mNode.mNext;
-    if ( v3 == v4 )
+    mNext = (UFG::qList<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad,1,0> *)mNext->mNode.mNext;
+    if ( mNext == stack )
       return 0i64;
   }
-  return v6;
+  return mPrev;
 }
 
 // File Line: 1995
 // RVA: 0xA2BEF0
-UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getTopScreen(UFG::UIScreenManagerBase *this)
+UFG::qNode<UFG::UIScreen,UFG::UIScreen> **__fastcall UFG::UIScreenManagerBase::getTopScreen(
+        UFG::UIScreenManagerBase *this)
 {
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **result; // rax
 
   result = &this->m_screenStack.mNode.mPrev[-1].mNext;
   if ( result == (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this )
-    result = 0i64;
+    return 0i64;
   return result;
 }
 
@@ -3097,69 +2952,65 @@ bool __fastcall UFG::UIScreenManagerBase::areOverlaysPending(UFG::UIScreenManage
 // RVA: 0xA2A8E0
 void __fastcall UFG::UIScreenManagerBase::debugRender(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rdi
-  Render::DebugDrawContext *v2; // rsi
-  UFG::UIGfxTranslator *v3; // rax
-  const char *v4; // rax
-  signed __int64 v5; // rbx
+  Render::DebugDrawContext *Context; // rsi
+  UFG::UIGfxTranslator *m_translator; // rax
+  const char *LanguageString; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rbx
   int v6; // ebp
-  int i; // er14
-  int v8; // eax
+  int i; // r14d
+  int AVMVersion; // eax
   const char *v9; // r9
-  signed __int64 j; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
   int v11; // eax
   const char *v12; // r9
-  char dest; // [rsp+30h] [rbp-28h]
+  char dest[16]; // [rsp+30h] [rbp-28h] BYREF
 
-  v1 = this;
   if ( UFG::gUIPrint )
   {
-    v2 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
-    v3 = v1->m_translator;
-    if ( !UFG::gUIShowIconsInBlankLoc || v3->mLanguage )
-      v4 = UFG::UILanguages::getLanguageString(v3->mLanguage);
+    Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
+    m_translator = this->m_translator;
+    if ( !UFG::gUIShowIconsInBlankLoc || m_translator->mLanguage )
+      LanguageString = UFG::UILanguages::getLanguageString(m_translator->mLanguage);
     else
-      v4 = "English";
-    Render::DebugDrawContext::DrawTextA(v2, 50, 400, &UFG::qColour::White, "Language: %s", v4);
-    Render::DebugDrawContext::DrawTextA(v2, 50, 415, &UFG::qColour::White, "Overlays:");
-    v5 = (signed __int64)&v1->m_overlayStack.mNode.mPrev[-1].mNext;
+      LanguageString = "English";
+    Render::DebugDrawContext::DrawTextA(Context, 50, 400, &UFG::qColour::White, "Language: %s", LanguageString);
+    Render::DebugDrawContext::DrawTextA(Context, 50, 415, &UFG::qColour::White, "Overlays:");
+    p_mNext = &this->m_overlayStack.mNode.mPrev[-1].mNext;
     v6 = 430;
-    for ( i = 430;
-          (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v5 != &v1->m_screenStack.mNode.mNext;
-          v5 = *(_QWORD *)(v5 + 8) - 8i64 )
+    for ( i = 430; p_mNext != &this->m_screenStack.mNode.mNext; p_mNext = &p_mNext[1][-1].mNext )
     {
-      UFG::qSPrintf(&dest, 16, "%d", *(unsigned int *)(v5 + 112));
-      Render::DebugDrawContext::DrawTextA(v2, 50, i, &UFG::qColour::Grey, &dest);
-      UFG::qSPrintf(&dest, 16, "%d", *(unsigned int *)(v5 + 120));
-      Render::DebugDrawContext::DrawTextA(v2, 75, i, &UFG::qColour::Grey, &dest);
-      v8 = Scaleform::GFx::Movie::GetAVMVersion(*(Scaleform::GFx::Movie **)(*(_QWORD *)(v5 + 96) + 320i64));
+      UFG::qSPrintf(dest, 16, "%d", *((unsigned int *)p_mNext + 28));
+      Render::DebugDrawContext::DrawTextA(Context, 50, i, &UFG::qColour::Grey, dest);
+      UFG::qSPrintf(dest, 16, "%d", *((unsigned int *)p_mNext + 30));
+      Render::DebugDrawContext::DrawTextA(Context, 75, i, &UFG::qColour::Grey, dest);
+      AVMVersion = Scaleform::GFx::Movie::GetAVMVersion((Scaleform::GFx::Movie *)p_mNext[12][20].mPrev);
       v9 = "AS3";
-      if ( v8 == 1 )
+      if ( AVMVersion == 1 )
         v9 = "AS2";
-      UFG::qSPrintf(&dest, 16, "%s", v9);
-      Render::DebugDrawContext::DrawTextA(v2, 95, i, &UFG::qColour::Grey, &dest);
-      Render::DebugDrawContext::DrawTextA(v2, 125, i, &UFG::qColour::Grey, (const char *)(v5 + 24));
+      UFG::qSPrintf(dest, 16, "%s", v9);
+      Render::DebugDrawContext::DrawTextA(Context, 95, i, &UFG::qColour::Grey, dest);
+      Render::DebugDrawContext::DrawTextA(Context, 125, i, &UFG::qColour::Grey, (const char *)p_mNext + 24);
       i += 15;
     }
-    Render::DebugDrawContext::DrawTextA(v2, 250, 415, &UFG::qColour::White, "Screens:");
-    for ( j = (signed __int64)&v1->m_screenStack.mNode.mPrev[-1].mNext;
-          (UFG::UIScreenManagerBase *)j != v1;
-          j = *(_QWORD *)(j + 8) - 8i64 )
+    Render::DebugDrawContext::DrawTextA(Context, 250, 415, &UFG::qColour::White, "Screens:");
+    for ( j = &this->m_screenStack.mNode.mPrev[-1].mNext;
+          j != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)this;
+          j = &j[1][-1].mNext )
     {
-      UFG::qSPrintf(&dest, 16, "%d", *(unsigned int *)(j + 112));
-      Render::DebugDrawContext::DrawTextA(v2, 250, v6, &UFG::qColour::Grey, &dest);
-      UFG::qSPrintf(&dest, 16, "%d", *(unsigned int *)(j + 120));
-      Render::DebugDrawContext::DrawTextA(v2, 275, v6, &UFG::qColour::Grey, &dest);
-      v11 = Scaleform::GFx::Movie::GetAVMVersion(*(Scaleform::GFx::Movie **)(*(_QWORD *)(j + 96) + 320i64));
+      UFG::qSPrintf(dest, 16, "%d", *((unsigned int *)j + 28));
+      Render::DebugDrawContext::DrawTextA(Context, 250, v6, &UFG::qColour::Grey, dest);
+      UFG::qSPrintf(dest, 16, "%d", *((unsigned int *)j + 30));
+      Render::DebugDrawContext::DrawTextA(Context, 275, v6, &UFG::qColour::Grey, dest);
+      v11 = Scaleform::GFx::Movie::GetAVMVersion((Scaleform::GFx::Movie *)j[12][20].mPrev);
       v12 = "AS3";
       if ( v11 == 1 )
         v12 = "AS2";
-      UFG::qSPrintf(&dest, 16, "%s", v12);
-      Render::DebugDrawContext::DrawTextA(v2, 295, v6, &UFG::qColour::Grey, &dest);
-      Render::DebugDrawContext::DrawTextA(v2, 325, v6, &UFG::qColour::Grey, (const char *)(j + 24));
+      UFG::qSPrintf(dest, 16, "%s", v12);
+      Render::DebugDrawContext::DrawTextA(Context, 295, v6, &UFG::qColour::Grey, dest);
+      Render::DebugDrawContext::DrawTextA(Context, 325, v6, &UFG::qColour::Grey, (const char *)j + 24);
       v6 += 15;
     }
-    v1->m_currentNumDrawText = 0;
+    this->m_currentNumDrawText = 0;
   }
   else
   {
@@ -3171,201 +3022,200 @@ void __fastcall UFG::UIScreenManagerBase::debugRender(UFG::UIScreenManagerBase *
 // RVA: 0xA31B60
 void __fastcall UFG::UIScreenManagerBase::renderScreens(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rsi
-  _RTL_CRITICAL_SECTION *v2; // rbx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **i; // rdi
-  signed __int64 v4; // rdi
-  signed __int64 j; // rbp
+  Scaleform::Lock *p_mScreenStackLock; // rbx
+  UFG::UIScreenManagerBase *i; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rdi
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> **j; // rbp
   Scaleform::GFx::Resource **v6; // rsi
   hkDynamicClassNameRegistry **v7; // rax
-  Scaleform::Render::ContextImpl::RenderNotify *v8; // rax
-  Scaleform::Render::ContextImpl::RTHandle v9; // [rsp+50h] [rbp+8h]
-  Scaleform::Render::RenderBuffer *v10; // [rsp+58h] [rbp+10h]
+  Scaleform::Render::ContextImpl::RenderNotify *expected_type; // rax
+  Scaleform::Render::ContextImpl::RTHandle v9; // [rsp+50h] [rbp+8h] BYREF
+  Scaleform::Render::RenderBuffer *v10; // [rsp+58h] [rbp+10h] BYREF
   Scaleform::Lock *v11; // [rsp+60h] [rbp+18h]
 
-  v1 = this;
-  v2 = &this->mScreenStackLock.cs;
+  p_mScreenStackLock = &this->mScreenStackLock;
   v11 = &this->mScreenStackLock;
   EnterCriticalSection(&this->mScreenStackLock.cs);
-  for ( i = &v1->m_screenStack.mNode.mNext[-1].mNext;
-        i != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)v1;
-        i = &i[2][-1].mNext )
+  for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+        i != this;
+        i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
   {
-    if ( !i[12]->mNext )
-      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*i)[1].mPrev)(i);
+    if ( !i->mPendingOverlayLoads.mNode.mPrev->mNext )
+      ((void (__fastcall *)(UFG::UIScreenManagerBase *))i->vfptr->enableInput)(i);
   }
-  v4 = (signed __int64)&v1->mPendingPoppedScreens.mNode.mNext[-1].mNext;
-  for ( j = (signed __int64)&v1->mPendingOverlayLoads.mNode.mNext; v4 != j; v4 = *(_QWORD *)(v4 + 16) - 8i64 )
+  p_mNext = &this->mPendingPoppedScreens.mNode.mNext[-1].mNext;
+  for ( j = &this->mPendingOverlayLoads.mNode.mNext;
+        p_mNext != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)j;
+        p_mNext = &p_mNext[2][-1].mNext )
   {
-    v6 = (Scaleform::GFx::Resource **)(*(__int64 (__cdecl **)(_QWORD))(**(_QWORD **)(*(_QWORD *)(v4 + 96) + 320i64)
-                                                                     + 208i64))(*(_QWORD *)(*(_QWORD *)(v4 + 96) + 320i64));
+    v6 = (Scaleform::GFx::Resource **)((__int64 (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *))p_mNext[12][20].mPrev->mPrev[13].mPrev)(p_mNext[12][20].mPrev);
     if ( *v6 )
       Scaleform::Render::RenderBuffer::AddRef(*v6);
     v9.pData.pObject = (Scaleform::Render::ContextImpl::RTHandle::HandleData *)*v6;
     v7 = (hkDynamicClassNameRegistry **)UFG::UIScreenManager::s_instance->vfptr->getRenderer2D(
-                                          (UFG::UIScreenManagerBase *)UFG::UIScreenManager::s_instance,
-                                          (Scaleform::Ptr<Scaleform::Render::Renderer2D> *)&v10);
-    v8 = (Scaleform::Render::ContextImpl::RenderNotify *)SSUnaryParam::get_expected_type(*v7);
-    Scaleform::Render::ContextImpl::RTHandle::NextCapture(&v9, v8);
+                                          UFG::UIScreenManager::s_instance,
+                                          &v10);
+    expected_type = (Scaleform::Render::ContextImpl::RenderNotify *)SSUnaryParam::get_expected_type(*v7);
+    Scaleform::Render::ContextImpl::RTHandle::NextCapture(&v9, expected_type);
     if ( v10 )
       Scaleform::RefCountImpl::Release(v10);
     Scaleform::Render::ContextImpl::RTHandle::~RTHandle(&v9);
   }
-  LeaveCriticalSection(v2);
+  LeaveCriticalSection(&p_mScreenStackLock->cs);
 }
 
 // File Line: 2151
 // RVA: 0xA31AE0
 void __fastcall UFG::UIScreenManagerBase::renderOverlays(UFG::UIScreenManagerBase *this)
 {
-  UFG::UIScreenManagerBase *v1; // rsi
-  _RTL_CRITICAL_SECTION *v2; // rbx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v3; // rdi
-  signed __int64 i; // rsi
+  Scaleform::Lock *p_mScreenStackLock; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **i; // rsi
 
-  v1 = this;
-  v2 = &this->mScreenStackLock.cs;
+  p_mScreenStackLock = &this->mScreenStackLock;
   EnterCriticalSection(&this->mScreenStackLock.cs);
-  v3 = &v1->m_overlayStack.mNode.mNext[-1].mNext;
-  for ( i = (signed __int64)&v1->m_screenStack.mNode.mNext;
-        v3 != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)i;
-        v3 = &v3[2][-1].mNext )
+  p_mNext = &this->m_overlayStack.mNode.mNext[-1].mNext;
+  for ( i = &this->m_screenStack.mNode.mNext; p_mNext != i; p_mNext = &p_mNext[2][-1].mNext )
   {
-    if ( !v3[12]->mNext )
-      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*v3)[1].mPrev)(v3);
+    if ( !p_mNext[12]->mNext )
+      ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **))(*p_mNext)[1].mPrev)(p_mNext);
   }
-  LeaveCriticalSection(v2);
+  LeaveCriticalSection(&p_mScreenStackLock->cs);
 }
 
 // File Line: 2170
 // RVA: 0xA2FDF0
 void __fastcall UFG::UIScreenManagerBase::initCustomRendering(UFG::UIScreenManagerBase *this)
 {
-  unsigned int v1; // eax
-  UFG::qResourceData *v2; // rax
-  UFG::qResourceData *v3; // rbx
-  UFG::qResourceWarehouse *v4; // rax
-  unsigned int v5; // eax
-  UFG::qResourceData *v6; // rax
-  UFG::qResourceData *v7; // rbx
-  UFG::qResourceWarehouse *v8; // rax
-  unsigned int v9; // eax
+  UFG::qResourceData *v1; // rax
+  UFG::qResourceData *v2; // rbx
+  UFG::qResourceWarehouse *v3; // rax
+  UFG::qResourceData *v4; // rax
+  UFG::qResourceData *v5; // rbx
+  UFG::qResourceWarehouse *v6; // rax
+  UFG::qResourceData *v7; // rax
+  UFG::qResourceData *v8; // rbx
+  UFG::qResourceWarehouse *v9; // rax
   UFG::qResourceData *v10; // rax
   UFG::qResourceData *v11; // rbx
   UFG::qResourceWarehouse *v12; // rax
-  unsigned int v13; // eax
-  UFG::qResourceData *v14; // rax
-  UFG::qResourceData *v15; // rbx
-  UFG::qResourceWarehouse *v16; // rax
 
-  v1 = UFG::qStringHash32("UIrasterState_Mask_Clear_SetBit0", 0xFFFFFFFF);
-  UFG::gUIrasterState_Mask_Clear_SetBit0_UID = v1;
-  v2 = Illusion::Factory::NewRasterState("UIrasterState_Mask_Clear_SetBit0", v1, 0i64, 0i64, 0i64);
-  LODWORD(v2[1].mNode.mParent) = 458752;
-  HIWORD(v2[1].mNode.mParent) = 1;
-  *(_DWORD *)((char *)v2[1].mNode.mChild + 6) = 519;
-  WORD2(v2[1].mNode.mChild[0]) = 255;
-  BYTE3(v2[1].mNode.mChild[0]) = 1;
-  v3 = v2;
-  v4 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v4, v3);
-  v5 = UFG::qStringHash32("UIrasterState_Mask_Clear_SetBit1", 0xFFFFFFFF);
-  UFG::gUIrasterState_Mask_Clear_SetBit1_UID = v5;
-  v6 = Illusion::Factory::NewRasterState("UIrasterState_Mask_Clear_SetBit1", v5, 0i64, 0i64, 0i64);
-  LODWORD(v6[1].mNode.mParent) = 458752;
-  HIWORD(v6[1].mNode.mParent) = 1;
-  *(_DWORD *)((char *)v6[1].mNode.mChild + 6) = 519;
-  WORD2(v6[1].mNode.mChild[0]) = -1;
-  BYTE3(v6[1].mNode.mChild[0]) = 1;
-  v7 = v6;
-  v8 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v8, v7);
-  v9 = UFG::qStringHash32("UIrasterState_Mask_End", 0xFFFFFFFF);
-  UFG::gUIrasterState_Mask_End_UID = v9;
-  v10 = Illusion::Factory::NewRasterState("UIrasterState_Mask_End", v9, 0i64, 0i64, 0i64);
+  UFG::gUIrasterState_Mask_Clear_SetBit0_UID = UFG::qStringHash32("UIrasterState_Mask_Clear_SetBit0", 0xFFFFFFFF);
+  v1 = Illusion::Factory::NewRasterState(
+         "UIrasterState_Mask_Clear_SetBit0",
+         UFG::gUIrasterState_Mask_Clear_SetBit0_UID,
+         0i64,
+         0i64,
+         0i64);
+  LODWORD(v1[1].mNode.mParent) = 458752;
+  HIWORD(v1[1].mNode.mParent) = 1;
+  *(_DWORD *)((char *)v1[1].mNode.mChild + 6) = 519;
+  WORD2(v1[1].mNode.mChild[0]) = 255;
+  BYTE3(v1[1].mNode.mChild[0]) = 1;
+  v2 = v1;
+  v3 = UFG::qResourceWarehouse::Instance();
+  UFG::qResourceWarehouse::Add(v3, v2);
+  UFG::gUIrasterState_Mask_Clear_SetBit1_UID = UFG::qStringHash32("UIrasterState_Mask_Clear_SetBit1", 0xFFFFFFFF);
+  v4 = Illusion::Factory::NewRasterState(
+         "UIrasterState_Mask_Clear_SetBit1",
+         UFG::gUIrasterState_Mask_Clear_SetBit1_UID,
+         0i64,
+         0i64,
+         0i64);
+  LODWORD(v4[1].mNode.mParent) = 458752;
+  HIWORD(v4[1].mNode.mParent) = 1;
+  *(_DWORD *)((char *)v4[1].mNode.mChild + 6) = 519;
+  WORD2(v4[1].mNode.mChild[0]) = -1;
+  BYTE3(v4[1].mNode.mChild[0]) = 1;
+  v5 = v4;
+  v6 = UFG::qResourceWarehouse::Instance();
+  UFG::qResourceWarehouse::Add(v6, v5);
+  UFG::gUIrasterState_Mask_End_UID = UFG::qStringHash32("UIrasterState_Mask_End", 0xFFFFFFFF);
+  v7 = Illusion::Factory::NewRasterState("UIrasterState_Mask_End", UFG::gUIrasterState_Mask_End_UID, 0i64, 0i64, 0i64);
+  LODWORD(v7[1].mNode.mParent) = 458752;
+  BYTE6(v7[1].mNode.mParent) = 1;
+  *(_DWORD *)((char *)v7[1].mNode.mChild + 6) = 2;
+  WORD2(v7[1].mNode.mChild[0]) = -1;
+  v8 = v7;
+  v9 = UFG::qResourceWarehouse::Instance();
+  UFG::qResourceWarehouse::Add(v9, v8);
+  UFG::gUIrasterState_Mask2_End_UID = UFG::qStringHash32("UIrasterState_Mask_End2", 0xFFFFFFFF);
+  v10 = Illusion::Factory::NewRasterState(
+          "UIrasterState_Mask_End2",
+          UFG::gUIrasterState_Mask2_End_UID,
+          0i64,
+          0i64,
+          0i64);
   LODWORD(v10[1].mNode.mParent) = 458752;
   BYTE6(v10[1].mNode.mParent) = 1;
-  *(_DWORD *)((char *)v10[1].mNode.mChild + 6) = 2;
+  *(_DWORD *)((char *)v10[1].mNode.mChild + 6) = 514;
   WORD2(v10[1].mNode.mChild[0]) = -1;
   v11 = v10;
   v12 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v12, v11);
-  v13 = UFG::qStringHash32("UIrasterState_Mask_End2", 0xFFFFFFFF);
-  UFG::gUIrasterState_Mask2_End_UID = v13;
-  v14 = Illusion::Factory::NewRasterState("UIrasterState_Mask_End2", v13, 0i64, 0i64, 0i64);
-  LODWORD(v14[1].mNode.mParent) = 458752;
-  BYTE6(v14[1].mNode.mParent) = 1;
-  *(_DWORD *)((char *)v14[1].mNode.mChild + 6) = 514;
-  WORD2(v14[1].mNode.mChild[0]) = -1;
-  v15 = v14;
-  v16 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v16, v15);
 }
 
 // File Line: 2275
 // RVA: 0xA2A850
 void __fastcall UFG::UIScreenManagerBase::customPreRender(UFG::UIScreenManagerBase *this, Render::View *view)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v2; // r14
-  Render::View *v3; // rsi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v4; // rbx
-  UFG::UIScreenManagerBase *i; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // r14
+  UFG::UIScreenManagerBase *i; // rbx
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
 
-  v2 = &this->m_screenStack.mNode.mNext;
-  v3 = view;
-  v4 = &this->m_screenStack.mNode.mNext[-1].mNext;
-  for ( i = this; v4 != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)i; v4 = &v4[2][-1].mNext )
-    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*v4)[2].mNext)(v4, v3);
-  for ( j = &i->m_overlayStack.mNode.mNext[-1].mNext; j != v2; j = &j[2][-1].mNext )
-    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*j)[2].mNext)(j, v3);
+  p_mNext = &this->m_screenStack.mNode.mNext;
+  for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+        i != this;
+        i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
+  {
+    ((void (__fastcall *)(UFG::UIScreenManagerBase *, Render::View *))i->vfptr->~UIScreenManagerBase)(i, view);
+  }
+  for ( j = &this->m_overlayStack.mNode.mNext[-1].mNext; j != p_mNext; j = &j[2][-1].mNext )
+    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*j)[2].mNext)(j, view);
 }
 
 // File Line: 2287
 // RVA: 0xA29390
-void __usercall UFG::UIScreenManagerBase::advance(UFG::UIScreenManagerBase *this@<rcx>, float elapsed@<xmm1>, __int64 a3@<rdx>, __int64 a4@<r9>, __int64 a5@<r8>)
+void __fastcall UFG::UIScreenManagerBase::advance(
+        UFG::UIScreenManagerBase *this,
+        float elapsed,
+        __int64 a3,
+        __int64 a4)
 {
-  UFG::UIScreenManagerBase *v5; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v6; // rsi
-  UFG::UIScreenManagerBase *v7; // rbx
-  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *v8; // rcx
-  signed __int64 i; // rbx
-  __int64 v10; // rcx
+  __int64 v4; // rdx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // rsi
+  UFG::UIScreenManagerBase *i; // rbx
+  UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v10; // rcx
 
-  v5 = this;
   if ( this->m_renderUI && UFG::gTweakerRenderUI )
   {
-    v6 = &this->m_screenStack.mNode.mNext;
-    v7 = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
-    if ( v7 != this )
+    p_mNext = &this->m_screenStack.mNode.mNext;
+    for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+          i != this;
+          i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
     {
-      do
-      {
-        v8 = v7->mPendingOverlayLoads.mNode.mPrev;
-        if ( LOBYTE(v8[22].mPrev) )
-        {
-          LOBYTE(a4) = 1;
-          ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, signed __int64, __int64))v8[20].mPrev->mPrev[12].mPrev)(
-            v8[20].mPrev,
-            a3,
-            2i64,
-            a4);
-        }
-        v7 = (UFG::UIScreenManagerBase *)&v7->m_screenStack.mNode.mNext[-1].mNext;
-      }
-      while ( v7 != v5 );
-    }
-    for ( i = (signed __int64)&v5->m_overlayStack.mNode.mNext[-1].mNext;
-          (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)i != v6;
-          i = *(_QWORD *)(i + 16) - 8i64 )
-    {
-      v10 = *(_QWORD *)(i + 96);
-      if ( *(_BYTE *)(v10 + 352) )
+      mPrev = i->mPendingOverlayLoads.mNode.mPrev;
+      if ( LOBYTE(mPrev[22].mPrev) )
       {
         LOBYTE(a4) = 1;
-        (*(void (__fastcall **)(_QWORD, __int64, signed __int64, __int64))(**(_QWORD **)(v10 + 320) + 192i64))(
-          *(_QWORD *)(v10 + 320),
-          a3,
+        ((void (__fastcall *)(UFG::qNode<UFG::UIPendingScreenLoad,UFG::UIPendingScreenLoad> *, __int64, __int64, __int64))mPrev[20].mPrev->mPrev[12].mPrev)(
+          mPrev[20].mPrev,
+          v4,
+          2i64,
+          a4);
+      }
+    }
+    for ( j = &this->m_overlayStack.mNode.mNext[-1].mNext; j != p_mNext; j = &j[2][-1].mNext )
+    {
+      v10 = j[12];
+      if ( LOBYTE(v10[22].mPrev) )
+      {
+        LOBYTE(a4) = 1;
+        ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> *, __int64, __int64, __int64))v10[20].mPrev->mPrev[12].mPrev)(
+          v10[20].mPrev,
+          v4,
           2i64,
           a4);
       }
@@ -3377,73 +3227,66 @@ void __usercall UFG::UIScreenManagerBase::advance(UFG::UIScreenManagerBase *this
 // RVA: 0xA2A7C0
 void __fastcall UFG::UIScreenManagerBase::customPostRender(UFG::UIScreenManagerBase *this, Render::View *view)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v2; // r14
-  Render::View *v3; // rsi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v4; // rbx
-  UFG::UIScreenManagerBase *i; // rdi
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **p_mNext; // r14
+  UFG::UIScreenManagerBase *i; // rbx
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **j; // rbx
 
-  v2 = &this->m_screenStack.mNode.mNext;
-  v3 = view;
-  v4 = &this->m_screenStack.mNode.mNext[-1].mNext;
-  for ( i = this; v4 != (UFG::qNode<UFG::UIScreen,UFG::UIScreen> **)i; v4 = &v4[2][-1].mNext )
-    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*v4)[3].mPrev)(v4, v3);
-  for ( j = &i->m_overlayStack.mNode.mNext[-1].mNext; j != v2; j = &j[2][-1].mNext )
-    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*j)[3].mPrev)(j, v3);
+  p_mNext = &this->m_screenStack.mNode.mNext;
+  for ( i = (UFG::UIScreenManagerBase *)&this->m_screenStack.mNode.mNext[-1].mNext;
+        i != this;
+        i = (UFG::UIScreenManagerBase *)&i->m_screenStack.mNode.mNext[-1].mNext )
+  {
+    ((void (__fastcall *)(UFG::UIScreenManagerBase *, Render::View *))i->vfptr[1].update)(i, view);
+  }
+  for ( j = &this->m_overlayStack.mNode.mNext[-1].mNext; j != p_mNext; j = &j[2][-1].mNext )
+    ((void (__fastcall *)(UFG::qNode<UFG::UIScreen,UFG::UIScreen> **, Render::View *))(*j)[3].mPrev)(j, view);
 }
 
 // File Line: 2323
 // RVA: 0xA32220
 void __fastcall UFG::UIScreenManagerBase::shutdownScreen(UFG::UIScreenManagerBase *this, UFG::UIScreen *screen)
 {
-  UFG::UIScreen *v2; // rsi
-  UFG::UIScreenManagerBase *v3; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v4; // rcx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v5; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *mPrev; // rax
 
-  v2 = screen;
-  v3 = this;
-  screen->mRenderable->m_movie.pObject->vfptr[28].__vecDelDtor(
-    (Scaleform::RefCountImplCore *)screen->mRenderable->m_movie.pObject,
-    0);
-  EnterCriticalSection(&v3->mScreenStackLock.cs);
-  v4 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v2->mPrev;
-  v5 = v3->mPendingPoppedScreens.mNode.mPrev;
-  v5->mNext = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v2->mPrev;
-  v4->mPrev = v5;
-  v4->mNext = &v3->mPendingPoppedScreens.mNode;
-  v3->mPendingPoppedScreens.mNode.mPrev = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&v2->mPrev;
-  LeaveCriticalSection(&v3->mScreenStackLock.cs);
+  screen->mRenderable->m_movie.pObject->vfptr[28].__vecDelDtor(screen->mRenderable->m_movie.pObject, 0);
+  EnterCriticalSection(&this->mScreenStackLock.cs);
+  mPrev = this->mPendingPoppedScreens.mNode.mPrev;
+  mPrev->mNext = &screen->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  screen->mPrev = mPrev;
+  screen->mNext = &this->mPendingPoppedScreens.mNode;
+  this->mPendingPoppedScreens.mNode.mPrev = &screen->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  LeaveCriticalSection(&this->mScreenStackLock.cs);
 }
 
 // File Line: 2432
 // RVA: 0xA2ACF0
-void __fastcall UFG::UIScreenManagerBase::dimPreviousScreen(UFG::UIScreenManagerBase *this, UFG::UIScreen::eDimType dimType, UFG::UIScreen *newScreen)
+void __fastcall UFG::UIScreenManagerBase::dimPreviousScreen(
+        UFG::UIScreenManagerBase *this,
+        unsigned int dimType,
+        UFG::UIScreen *newScreen)
 {
-  UFG::UIScreen::eDimType v3; // edi
-  char *v4; // rbx
+  char *p_mNext; // rbx
 
-  v3 = dimType;
-  v4 = (char *)&this->m_screenStack.mNode.mPrev[-1].mNext;
-  if ( v4 == (char *)this )
+  p_mNext = (char *)&this->m_screenStack.mNode.mPrev[-1].mNext;
+  if ( p_mNext == (char *)this )
   {
 LABEL_4:
-    v4 = (char *)&this->m_screenStack.mNode.mPrev[-1].mNext;
+    p_mNext = (char *)&this->m_screenStack.mNode.mPrev[-1].mNext;
   }
   else
   {
-    while ( *((_DWORD *)v4 + 29) != newScreen->mControllerMask )
+    while ( *((_DWORD *)p_mNext + 29) != newScreen->mControllerMask )
     {
-      v4 = (char *)(*((_QWORD *)v4 + 1) - 8i64);
-      if ( v4 == (char *)this )
+      p_mNext = (char *)(*((_QWORD *)p_mNext + 1) - 8i64);
+      if ( p_mNext == (char *)this )
         goto LABEL_4;
     }
   }
-  if ( v4 != (char *)this
-    && (!(*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)v4 + 72i64))(v4)
-     || (*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)v4 + 80i64))(v4)) )
+  if ( p_mNext != (char *)this
+    && (!(*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)p_mNext + 72i64))(p_mNext)
+     || (*(unsigned __int8 (__fastcall **)(char *))(*(_QWORD *)p_mNext + 80i64))(p_mNext)) )
   {
-    (*(void (__fastcall **)(char *, _QWORD, _QWORD))(*(_QWORD *)v4 + 56i64))(v4, (unsigned int)v3, 0i64);
+    (*(void (__fastcall **)(char *, _QWORD, _QWORD))(*(_QWORD *)p_mNext + 56i64))(p_mNext, dimType, 0i64);
   }
 }
 
@@ -3451,13 +3294,13 @@ LABEL_4:
 // RVA: 0xA31F20
 void __fastcall UFG::UIScreenManagerBase::setFontScale(UFG::UIScreenManagerBase *this, float scale)
 {
-  UFG::UIGfxTranslator *v2; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
 
-  v2 = this->m_translator;
-  if ( v2 )
+  m_translator = this->m_translator;
+  if ( m_translator )
   {
-    v2->mFontScale = scale;
-    UFG::UIGfxTranslator::createFontMap(v2);
+    m_translator->mFontScale = scale;
+    UFG::UIGfxTranslator::createFontMap(m_translator);
   }
 }
 

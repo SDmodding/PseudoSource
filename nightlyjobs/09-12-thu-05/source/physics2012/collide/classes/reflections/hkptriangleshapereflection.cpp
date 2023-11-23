@@ -39,23 +39,24 @@ hkClass *__fastcall hkpTriangleShape::staticClass()
 
 // File Line: 92
 // RVA: 0xCEC050
-void __fastcall finishLoadedObjecthkpTriangleShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTriangleShape(hkpTriangleShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpTriangleShape::hkpTriangleShape);
+  if ( p )
+    hkpTriangleShape::hkpTriangleShape(p, finishing);
 }
 
 // File Line: 98
 // RVA: 0xCEC070
-void __fastcall cleanupLoadedObjecthkpTriangleShape(void *p)
+void __fastcall cleanupLoadedObjecthkpTriangleShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 102
 // RVA: 0xCEC080
 hkBaseObjectVtbl *__fastcall getVtablehkpTriangleShape()
 {
-  hkpTriangleShape v1; // [rsp+20h] [rbp-78h]
+  hkpTriangleShape v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpTriangleShape::hkpTriangleShape(&v1, 0);
   return v1.vfptr;
@@ -72,8 +73,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpTriangleShapeTypeInfo__()
   hkpTriangleShapeTypeInfo.m_typeName = "hkpTriangleShape";
   hkpTriangleShapeTypeInfo.m_vtable = result;
   hkpTriangleShapeTypeInfo.m_scopedName = "!hkpTriangleShape";
-  hkpTriangleShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTriangleShape;
-  hkpTriangleShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTriangleShape;
+  hkpTriangleShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTriangleShape;
+  hkpTriangleShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTriangleShape;
   return result;
 }
 

@@ -1,26 +1,29 @@
 // File Line: 175
 // RVA: 0x158380
-UFG::qSafePointer<UFG::DUIWindow,UFG::DUIWindow> *__fastcall UFG::DUIManager::CreateWindow(UFG::DUIManager *this, UFG::qSafePointer<UFG::DUIWindow,UFG::DUIWindow> *result, const char *type_name, const char *context_name, const char *group_tag)
+UFG::qSafePointer<UFG::DUIWindow,UFG::DUIWindow> *__fastcall UFG::DUIManager::CreateWindow(
+        UFG::DUIManager *this,
+        UFG::qSafePointer<UFG::DUIWindow,UFG::DUIWindow> *result,
+        const char *type_name,
+        const char *context_name,
+        const char *group_tag)
 {
-  UFG::qSafePointer<UFG::DUIWindow,UFG::DUIWindow> *v5; // rbx
-  UFG::DUIWindow *v6; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::DUIWindow *WindowInternal; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *p_mNode; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *mPrev; // rax
 
-  v5 = result;
-  v6 = UFG::DUIManager::CreateWindowInternal(this, type_name, context_name, group_tag);
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->m_pPointer = v6;
-  if ( v6 )
+  WindowInternal = UFG::DUIManager::CreateWindowInternal(this, type_name, context_name, group_tag);
+  result->mPrev = result;
+  result->mNext = result;
+  result->m_pPointer = WindowInternal;
+  if ( WindowInternal )
   {
-    v7 = &v6->m_SafePointerList.mNode;
-    v8 = v6->m_SafePointerList.mNode.mPrev;
-    v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v5->mPrev = v8;
-    v5->mNext = v7;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::DUIWindow>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+    p_mNode = &WindowInternal->m_SafePointerList.mNode;
+    mPrev = WindowInternal->m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::DUIWindow>::mPrev;
+    mPrev->mNext = result;
+    result->mPrev = mPrev;
+    result->mNext = p_mNode;
+    p_mNode->mPrev = result;
   }
-  return v5;
+  return result;
 }
 

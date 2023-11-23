@@ -35,27 +35,25 @@ void __fastcall finishLoadedObjecthkaMeshBindingMapping(void *p, int finishing)
 
 // File Line: 71
 // RVA: 0xB1D8A0
-void __fastcall cleanupLoadedObjecthkaMeshBindingMapping(void *p)
+void __fastcall cleanupLoadedObjecthkaMeshBindingMapping(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       2 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -77,7 +75,7 @@ void dynamic_initializer_for__hkaMeshBindingClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 117
@@ -89,23 +87,24 @@ hkClass *__fastcall hkaMeshBinding::staticClass()
 
 // File Line: 124
 // RVA: 0xB1D910
-void __fastcall finishLoadedObjecthkaMeshBinding(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaMeshBinding(hkaMeshBinding *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaMeshBinding::hkaMeshBinding);
+  if ( p )
+    hkaMeshBinding::hkaMeshBinding(p, finishing);
 }
 
 // File Line: 130
 // RVA: 0xB1D930
-void __fastcall cleanupLoadedObjecthkaMeshBinding(void *p)
+void __fastcall cleanupLoadedObjecthkaMeshBinding(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 134
 // RVA: 0xB1D940
 hkBaseObjectVtbl *__fastcall getVtablehkaMeshBinding()
 {
-  hkaMeshBinding v1; // [rsp+20h] [rbp-58h]
+  hkaMeshBinding v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkaMeshBinding::hkaMeshBinding(&v1, 0);
   return v1.vfptr;
@@ -122,8 +121,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaMeshBindingTypeInfo__()
   hkaMeshBindingTypeInfo.m_typeName = "hkaMeshBinding";
   hkaMeshBindingTypeInfo.m_vtable = result;
   hkaMeshBindingTypeInfo.m_scopedName = "!hkaMeshBinding";
-  hkaMeshBindingTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaMeshBinding;
-  hkaMeshBindingTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaMeshBinding;
+  hkaMeshBindingTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaMeshBinding;
+  hkaMeshBindingTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaMeshBinding;
   return result;
 }
 

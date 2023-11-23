@@ -1,156 +1,147 @@
 // File Line: 27
 // RVA: 0xCC22F0
-void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::clear(hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this, int numNodes)
+void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::clear(
+        hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this,
+        int numNodes)
 {
-  int v2; // edi
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *v3; // rbx
-  int v4; // eax
+  int m_capacityAndFlags; // eax
 
-  v2 = numNodes;
-  v3 = this;
   *(_QWORD *)&this->m_root = 0i64;
   this->m_size = 0;
   this->m_prng.m_x = 123456789;
   this->m_prng.m_y = 234567891;
   this->m_prng.m_z = 345678912;
   *(_QWORD *)&this->m_prng.m_w = 456789123i64;
-  v4 = this->m_nodes.m_capacityAndFlags;
+  m_capacityAndFlags = this->m_nodes.m_capacityAndFlags;
   this->m_nodes.m_size = 0;
-  if ( v4 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_nodes.m_data,
-      24 * (v4 & 0x3FFFFFFF));
-  v3->m_nodes.m_data = 0i64;
-  v3->m_nodes.m_capacityAndFlags = 2147483648;
-  if ( !v3->m_nodes.m_size )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 24);
-  ++v3->m_nodes.m_size;
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::preAllocateNodes(v3, v2);
+      24 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_nodes.m_data = 0i64;
+  this->m_nodes.m_capacityAndFlags = 0x80000000;
+  if ( !this->m_nodes.m_size )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_nodes.m_data, 24);
+  ++this->m_nodes.m_size;
+  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::preAllocateNodes(this, numNodes);
 }
 
 // File Line: 40
 // RVA: 0xCC23A0
-void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::preAllocateNodes(hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this, int count)
+void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::preAllocateNodes(
+        hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this,
+        int count)
 {
-  signed __int64 v2; // rsi
+  __int64 m_size; // rsi
   int v3; // eax
-  int v4; // er9
+  int v4; // r9d
   int v5; // ebp
-  int v6; // edi
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *v7; // rbx
   int v8; // eax
-  int v9; // er8
-  signed __int64 v10; // rdx
-  signed __int64 v11; // r9
-  signed __int64 v12; // rdx
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int v9; // r8d
+  __int64 v10; // rdx
+  __int64 v11; // r9
+  __int64 v12; // rdx
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
   if ( count )
   {
-    v2 = this->m_nodes.m_size;
+    m_size = this->m_nodes.m_size;
     v3 = this->m_nodes.m_capacityAndFlags & 0x3FFFFFFF;
-    v4 = v2 + count;
-    v5 = v2 + count - 1;
-    v6 = count;
-    v7 = this;
-    if ( v3 < (signed int)v2 + count )
+    v4 = m_size + count;
+    v5 = m_size + count - 1;
+    if ( v3 < (int)m_size + count )
     {
       v8 = 2 * v3;
       if ( v4 < v8 )
         v4 = v8;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, v4, 24);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_nodes.m_data, v4, 24);
     }
-    v7->m_nodes.m_size += v6;
-    v9 = v2;
-    if ( v2 < v5 )
+    this->m_nodes.m_size += count;
+    v9 = m_size;
+    if ( m_size < v5 )
     {
-      v10 = v2;
-      v11 = v5 - v2;
+      v10 = m_size;
+      v11 = v5 - m_size;
       do
       {
-        ++v10;
-        *((_DWORD *)&v7->m_nodes.m_data[v10] - 2) = v9 + 1;
-        *((_DWORD *)&v7->m_nodes.m_data[v10] - 4) = v9++;
+        this->m_nodes.m_data[v10++].m_parent = v9 + 1;
+        this->m_nodes.m_data[v10 - 1].m_children[0] = v9++;
         --v11;
       }
       while ( v11 );
     }
     v12 = v5;
-    v7->m_nodes.m_data[v12].m_parent = v7->m_free;
-    v7->m_nodes.m_data[v12].m_children[0] = v5;
-    v7->m_free = v2;
+    this->m_nodes.m_data[v12].m_parent = this->m_free;
+    this->m_nodes.m_data[v12].m_children[0] = v5;
+    this->m_free = m_size;
   }
 }
 
 // File Line: 60
 // RVA: 0xCBFDD0
-__int64 __fastcall hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::insert(hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *this, hkGeometryProcessingInternals::ClusterQueueNode *value)
+__int64 __fastcall hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::insert(
+        hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *this,
+        hkGeometryProcessingInternals::ClusterQueueNode *value)
 {
-  hkGeometryProcessingInternals::ClusterQueueNode *v2; // rdi
-  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *v3; // rbx
-  __int64 v4; // rsi
-  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v5; // rdx
-  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v6; // r14
-  int v7; // er10
-  signed __int64 v8; // rdi
-  int v9; // er11
-  signed __int64 v10; // r8
-  int v11; // ecx
-  int v12; // eax
+  __int64 m_free; // rsi
+  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *m_data; // rdx
+  int m_root; // r10d
+  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v7; // rdi
+  int m_value; // r11d
+  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v9; // r8
+  int v10; // ecx
+  int v11; // eax
 
-  v2 = value;
-  v3 = this;
   if ( !this->m_free )
     hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::preAllocateNodes(
       this,
       16);
-  v4 = v3->m_free;
-  v5 = v3->m_nodes.m_data;
-  v3->m_free = v3->m_nodes.m_data[v4].m_parent;
-  v5[v4].m_value = *v2;
-  v6 = v3->m_nodes.m_data;
-  v7 = v3->m_root;
-  v8 = (signed __int64)&v3->m_nodes.m_data[v4];
-  if ( v7 )
+  m_free = this->m_free;
+  m_data = this->m_nodes.m_data;
+  this->m_free = this->m_nodes.m_data[m_free].m_parent;
+  m_data[m_free].m_value = *value;
+  m_root = this->m_root;
+  v7 = &this->m_nodes.m_data[m_free];
+  if ( m_root )
   {
-    v9 = *(_DWORD *)(v8 + 4);
+    m_value = v7->m_value.m_value;
     while ( 1 )
     {
-      v10 = (signed __int64)&v6[v7];
-      v11 = v6[v7].m_value.m_value;
-      v12 = v9 >= v11 ? (unsigned __int8)(v11 < v9) : -1;
-      if ( !*(_DWORD *)(v10 + 4i64 * (v12 >= 0) + 8) )
+      v9 = &this->m_nodes.m_data[m_root];
+      v10 = v9->m_value.m_value;
+      v11 = m_value >= v10 ? v10 < m_value : -1;
+      if ( !v9->m_children[v11 >= 0] )
         break;
-      v7 = *(_DWORD *)(v10 + 4i64 * (v12 >= 0) + 8);
+      m_root = v9->m_children[v11 >= 0];
     }
-    *(_DWORD *)(v10 + 4i64 * (v12 >= 0) + 8) = v4;
-    *(_DWORD *)(v8 + 16) = v7;
+    v9->m_children[v11 >= 0] = m_free;
+    v7->m_parent = m_root;
   }
   else
   {
-    v3->m_root = v4;
-    *(_DWORD *)(v8 + 16) = 0;
+    this->m_root = m_free;
+    v7->m_parent = 0;
   }
-  *(_QWORD *)(v8 + 8) = 0i64;
-  ++v3->m_size;
-  return (unsigned int)v4;
+  *(_QWORD *)v7->m_children = 0i64;
+  ++this->m_size;
+  return (unsigned int)m_free;
 }
 
 // File Line: 224
 // RVA: 0xCEA8C0
-void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::traverseMinMax<hkgpCgoInternal::ErrorCollector>(hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this, hkgpCgoInternal::ErrorCollector *functor, int root)
+void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::traverseMinMax<hkgpCgoInternal::ErrorCollector>(
+        hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this,
+        hkgpCgoInternal::ErrorCollector *functor,
+        int root)
 {
-  hkgpCgoInternal::ErrorCollector *v3; // rbx
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::Node *v4; // rsi
-  signed __int64 v5; // rdi
-  int v6; // er8
-  hkgpCgoInternal::EdgeInfo *v7; // rbp
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *v8; // [rsp+40h] [rbp+8h]
+  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::Node *m_data; // rsi
+  __int64 v5; // rdi
+  int v6; // r8d
+  hkgpCgoInternal::EdgeInfo *m_value; // rbp
+  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *i; // [rsp+40h] [rbp+8h]
 
-  v8 = this;
-  v3 = functor;
-  while ( 1 )
+  for ( i = this; ; this = i )
   {
     if ( !root )
     {
@@ -158,77 +149,76 @@ void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeIn
       if ( !root )
         break;
     }
-    v4 = this->m_nodes.m_data;
+    m_data = this->m_nodes.m_data;
     v5 = root;
     v6 = this->m_nodes.m_data[root].m_children[0];
     if ( v6 )
       hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::traverseMinMax<hkgpCgoInternal::ErrorCollector>(
         this,
-        v3,
+        functor,
         v6);
-    v7 = v4[v5].m_value;
-    if ( v7->m_error < 3.40282e38 )
+    m_value = m_data[v5].m_value;
+    if ( m_value->m_error < 3.40282e38 )
     {
-      if ( v3->m_values.m_size == (v3->m_values.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 4);
-      v3->m_values.m_data[v3->m_values.m_size++] = v7->m_error;
+      if ( functor->m_values.m_size == (functor->m_values.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&functor->m_values.m_data, 4);
+      functor->m_values.m_data[functor->m_values.m_size++] = m_value->m_error;
     }
-    root = v4[v5].m_children[1];
+    root = m_data[v5].m_children[1];
     if ( !root )
       break;
-    this = v8;
   }
 }
 
 // File Line: 253
 // RVA: 0xCEAA50
-void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::insertNode(hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this, int nodeIndex)
+void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::insertNode(
+        hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16> *this,
+        int nodeIndex)
 {
-  int v2; // er11
-  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::Node *v3; // r9
-  int v4; // esi
-  signed __int64 v5; // rdi
-  hkgpCgoInternal::EdgeInfo *v6; // r10
-  signed __int64 v7; // rbx
+  int m_root; // r11d
+  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::Node *m_data; // r9
+  __int64 v5; // rdi
+  hkgpCgoInternal::EdgeInfo *m_value; // r10
+  hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeInfo,int,16>::Node *v7; // rbx
   hkgpCgoInternal::EdgeInfo *v8; // rcx
-  signed int v9; // eax
-  float v10; // xmm0_4
+  int v9; // eax
+  float m_error; // xmm0_4
   float v11; // xmm1_4
-  signed int v12; // eax
+  signed int m_index; // eax
   signed int v13; // edx
   unsigned __int64 v14; // rcx
 
-  v2 = this->m_root;
-  v3 = this->m_nodes.m_data;
-  v4 = nodeIndex;
+  m_root = this->m_root;
+  m_data = this->m_nodes.m_data;
   v5 = nodeIndex;
-  if ( v2 )
+  if ( m_root )
   {
-    v6 = v3[nodeIndex].m_value;
+    m_value = m_data[nodeIndex].m_value;
     while ( 1 )
     {
-      v7 = (signed __int64)&v3[v2];
-      v8 = v3[v2].m_value;
-      if ( v6 == v8 )
+      v7 = &m_data[m_root];
+      v8 = v7->m_value;
+      if ( m_value == v7->m_value )
       {
         v9 = 0;
       }
       else
       {
-        v10 = v6->m_error;
+        m_error = m_value->m_error;
         v11 = v8->m_error;
-        if ( v10 >= v11 )
+        if ( m_error >= v11 )
         {
-          if ( v10 <= v11 )
+          if ( m_error <= v11 )
           {
-            v12 = v6->m_edge.m_index;
+            m_index = m_value->m_edge.m_index;
             v13 = v8->m_edge.m_index;
-            if ( v12 >= v13 )
+            if ( m_index >= v13 )
             {
-              if ( v12 <= v13 )
+              if ( m_index <= v13 )
               {
                 v14 = v8->m_edge.m_triangle->m_index;
-                v9 = v6->m_edge.m_triangle->m_index >= v14 ? (unsigned __int8)(v6->m_edge.m_triangle->m_index > v14) : -1;
+                v9 = m_value->m_edge.m_triangle->m_index >= v14 ? m_value->m_edge.m_triangle->m_index > v14 : -1;
               }
               else
               {
@@ -250,102 +240,100 @@ void __fastcall hkSortedTree<hkgpCgoInternal::EdgeInfo *,hkgpCgoInternal::EdgeIn
           v9 = -1;
         }
       }
-      if ( !*(_DWORD *)(v7 + 4i64 * (v9 >= 0) + 8) )
+      if ( !v7->m_children[v9 >= 0] )
         break;
-      v2 = *(_DWORD *)(v7 + 4i64 * (v9 >= 0) + 8);
+      m_root = v7->m_children[v9 >= 0];
     }
-    *(_DWORD *)(v7 + 4i64 * (v9 >= 0) + 8) = v4;
-    v3[v5].m_parent = v2;
-    *(_QWORD *)v3[v5].m_children = 0i64;
+    v7->m_children[v9 >= 0] = nodeIndex;
+    m_data[v5].m_parent = m_root;
+    *(_QWORD *)m_data[v5].m_children = 0i64;
   }
   else
   {
     this->m_root = nodeIndex;
-    *(_QWORD *)&v3[nodeIndex].m_children[1] = 0i64;
-    v3[nodeIndex].m_children[0] = 0;
+    *(_QWORD *)&m_data[nodeIndex].m_children[1] = 0i64;
+    m_data[nodeIndex].m_children[0] = 0;
   }
 }
 
 // File Line: 287
 // RVA: 0xCC18C0
-void __fastcall hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::removeNode(hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *this, int nodeIndex)
+void __fastcall hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::removeNode(
+        hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *this,
+        int nodeIndex)
 {
-  int v2; // ebx
-  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16> *v3; // r11
-  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v4; // rcx
-  __int64 v5; // rdi
-  signed int *v6; // rax
-  int *v7; // r10
+  hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *m_data; // rcx
+  __int64 m_parent; // rdi
+  int *v6; // rax
+  int *m_children; // r10
   __int64 v8; // rcx
   unsigned int v9; // ecx
-  int v10; // edx
-  int v11; // er8
-  unsigned int v12; // ecx
+  unsigned int v10; // edx
+  int v11; // r8d
+  unsigned int m_w; // ecx
   bool v13; // sf
-  int v14; // er8
+  unsigned int v14; // r8d
   int v15; // edx
   hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkSortedTreeBase::CompareValues,int,16>::Node *v16; // rbp
-  signed int v17; // er8
+  signed int v17; // r8d
   int v18; // edx
   __int64 v19; // rcx
   __int64 v20; // r8
-  signed __int64 v21; // r14
+  int *v21; // r14
   int i; // ecx
   __int64 v23; // rcx
   __int64 v24; // rcx
 
-  v2 = nodeIndex;
-  v3 = this;
-  v4 = this->m_nodes.m_data;
-  v5 = v4[nodeIndex].m_parent;
-  v6 = (signed int *)&v4[nodeIndex];
-  if ( (_DWORD)v5 )
+  m_data = this->m_nodes.m_data;
+  m_parent = m_data[nodeIndex].m_parent;
+  v6 = (int *)&m_data[nodeIndex];
+  if ( (_DWORD)m_parent )
   {
-    v7 = v4[v5].m_children;
-    if ( *v7 != nodeIndex )
-      v7 = &v4[v5].m_children[1];
+    m_children = m_data[m_parent].m_children;
+    if ( *m_children != nodeIndex )
+      m_children = &m_data[m_parent].m_children[1];
   }
   else
   {
-    v7 = &v3->m_root;
+    m_children = &this->m_root;
   }
   v8 = v6[2];
   if ( (_DWORD)v8 )
   {
     if ( v6[3] )
     {
-      v9 = v3->m_prng.m_y ^ 32 * v3->m_prng.m_y ^ ((v3->m_prng.m_y ^ 32 * v3->m_prng.m_y) >> 7);
-      v10 = v3->m_prng.m_z + v3->m_prng.m_c;
+      v9 = this->m_prng.m_y ^ (32 * this->m_prng.m_y) ^ ((this->m_prng.m_y ^ (32 * this->m_prng.m_y)) >> 7);
+      v10 = this->m_prng.m_z + this->m_prng.m_c;
       v11 = v9 ^ (v9 << 22);
-      v12 = v3->m_prng.m_w;
-      v13 = (signed int)(v12 + v10) < 0;
-      v3->m_prng.m_y = v11;
-      v3->m_prng.m_z = v12;
-      v3->m_prng.m_x += 1411392427;
-      v14 = v3->m_prng.m_x + v11;
-      v15 = (v12 + v10) & 0x7FFFFFFF;
-      v3->m_prng.m_c = v13;
-      v3->m_prng.m_w = v15;
-      v16 = v3->m_nodes.m_data;
-      v17 = ((unsigned int)(v15 + v14) >> 1) & 1;
+      m_w = this->m_prng.m_w;
+      v13 = (int)(m_w + v10) < 0;
+      this->m_prng.m_y = v11;
+      this->m_prng.m_z = m_w;
+      this->m_prng.m_x += 1411392427;
+      v14 = this->m_prng.m_x + v11;
+      v15 = (m_w + v10) & 0x7FFFFFFF;
+      this->m_prng.m_c = v13;
+      this->m_prng.m_w = v15;
+      v16 = this->m_nodes.m_data;
+      v17 = ((v15 + v14) >> 1) & 1;
       v18 = 1 - v17;
       v19 = v17;
       v20 = v6[v17 + 2];
-      v21 = (signed __int64)&v6[v19];
-      for ( i = v3->m_nodes.m_data->m_children[v20 + v18 + 4 * v20]; i; i = v16->m_children[i + v18 + 4i64 * i] )
+      v21 = &v6[v19];
+      for ( i = this->m_nodes.m_data->m_children[4 * v20 + v20 + v18]; i; i = v16->m_children[4 * i + i + v18] )
         LODWORD(v20) = i;
-      v16->m_children[v18 + 4i64 * (signed int)v20 + (signed int)v20] = v6[v18 + 2];
-      v3->m_nodes.m_data[v6[v18 + 2]].m_parent = v20;
-      v23 = *(signed int *)(v21 + 8);
-      *v7 = v23;
-      v3->m_nodes.m_data[v23].m_parent = v5;
+      v16->m_children[4 * (int)v20 + v18 + (int)v20] = v6[v18 + 2];
+      this->m_nodes.m_data[v6[v18 + 2]].m_parent = v20;
+      v23 = v21[2];
+      *m_children = v23;
+      this->m_nodes.m_data[v23].m_parent = m_parent;
       v6[4] = 0;
-      v6[2] = v2;
+      v6[2] = nodeIndex;
     }
     else
     {
-      *v7 = v8;
-      v3->m_nodes.m_data[v8].m_parent = v5;
+      *m_children = v8;
+      this->m_nodes.m_data[v8].m_parent = m_parent;
       v6[4] = 0;
       v6[2] = nodeIndex;
     }
@@ -355,12 +343,12 @@ void __fastcall hkSortedTree<hkGeometryProcessingInternals::ClusterQueueNode,hkS
     v24 = v6[3];
     if ( (_DWORD)v24 )
     {
-      *v7 = v24;
-      v3->m_nodes.m_data[v24].m_parent = v5;
+      *m_children = v24;
+      this->m_nodes.m_data[v24].m_parent = m_parent;
     }
     else
     {
-      *v7 = 0;
+      *m_children = 0;
     }
     v6[4] = 0;
     v6[2] = nodeIndex;

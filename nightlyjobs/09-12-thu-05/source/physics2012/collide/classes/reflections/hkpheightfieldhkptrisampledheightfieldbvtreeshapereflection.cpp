@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpTriSampledHeightFieldBvTreeShapeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 68
@@ -28,23 +28,26 @@ hkClass *__fastcall hkpTriSampledHeightFieldBvTreeShape::staticClass()
 
 // File Line: 75
 // RVA: 0xCECB20
-void __fastcall finishLoadedObjecthkpTriSampledHeightFieldBvTreeShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTriSampledHeightFieldBvTreeShape(
+        hkpTriSampledHeightFieldBvTreeShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvTreeShape);
+  if ( p )
+    hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvTreeShape(p, finishing);
 }
 
 // File Line: 81
 // RVA: 0xCECB40
-void __fastcall cleanupLoadedObjecthkpTriSampledHeightFieldBvTreeShape(void *p)
+void __fastcall cleanupLoadedObjecthkpTriSampledHeightFieldBvTreeShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 85
 // RVA: 0xCECB50
 hkBaseObjectVtbl *__fastcall getVtablehkpTriSampledHeightFieldBvTreeShape()
 {
-  hkpTriSampledHeightFieldBvTreeShape v1; // [rsp+20h] [rbp-58h]
+  hkpTriSampledHeightFieldBvTreeShape v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvTreeShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpTriSampledHeightFieldBvTreeShapeTy
   hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_typeName = "hkpTriSampledHeightFieldBvTreeShape";
   hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_vtable = result;
   hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_scopedName = "!hkpTriSampledHeightFieldBvTreeShape";
-  hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTriSampledHeightFieldBvTreeShape;
-  hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTriSampledHeightFieldBvTreeShape;
+  hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTriSampledHeightFieldBvTreeShape;
+  hkpTriSampledHeightFieldBvTreeShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTriSampledHeightFieldBvTreeShape;
   return result;
 }
 

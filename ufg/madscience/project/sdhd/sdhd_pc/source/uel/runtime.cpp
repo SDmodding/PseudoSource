@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__UFG::UELRuntime::msFragmentBindings__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::UELRuntime::msFragmentBindings.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::UELRuntime::msFragmentBindings__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UELRuntime::msFragmentBindings__);
 }
 
 // File Line: 13
@@ -11,7 +11,7 @@ __int64 dynamic_initializer_for__UFG::UELRuntime::msFragmentBindings__()
 __int64 dynamic_initializer_for__UFG::UELRuntime::msParameterBindings__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::UELRuntime::msParameterBindings.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::UELRuntime::msParameterBindings__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UELRuntime::msParameterBindings__);
 }
 
 // File Line: 14
@@ -19,7 +19,7 @@ __int64 dynamic_initializer_for__UFG::UELRuntime::msParameterBindings__()
 __int64 dynamic_initializer_for__UFG::UELRuntime::msEnumBindings__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::UELRuntime::msEnumBindings.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::UELRuntime::msEnumBindings__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UELRuntime::msEnumBindings__);
 }
 
 // File Line: 15
@@ -27,7 +27,7 @@ __int64 dynamic_initializer_for__UFG::UELRuntime::msEnumBindings__()
 __int64 dynamic_initializer_for__UFG::UELRuntime::msInvocableBindings__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::UELRuntime::msInvocableBindings.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::UELRuntime::msInvocableBindings__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UELRuntime::msInvocableBindings__);
 }
 
 // File Line: 20
@@ -59,20 +59,20 @@ void __fastcall UFG::UELRuntime::Init(AMD_HD3D *a1)
 // RVA: 0x5BD450
 void UFG::UELRuntime::Shutdown(void)
 {
-  Render::SkinningCacheNode *v0; // rbx
+  Render::SkinningCacheNode *Head; // rbx
   Render::SkinningCacheNode *v1; // rbx
-  unsigned int v2; // ebx
+  unsigned int i; // ebx
 
   while ( UFG::UELRuntime::msInvocableBindings.mTree.mCount )
   {
-    v0 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::UELRuntime::msInvocableBindings);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::UELRuntime::msInvocableBindings);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::UELRuntime::msInvocableBindings,
-      &v0->mNode);
-    if ( v0 )
+      &Head->mNode);
+    if ( Head )
     {
-      `eh vector destructor iterator(&v0[1], 8ui64, 8, (void (__fastcall *)(void *))_);
-      operator delete[](v0);
+      `eh vector destructor iterator(&Head[1], 8ui64, 8, (void (__fastcall *)(void *))_);
+      operator delete[](Head);
     }
   }
   UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::DeleteAll(&UFG::UELRuntime::msParameterBindings);
@@ -87,13 +87,8 @@ void UFG::UELRuntime::Shutdown(void)
   }
   operator delete[](UFG::UELRuntime::msRuntime);
   UFG::UELRuntime::msRuntime = 0i64;
-  v2 = 0;
-  if ( UEL::Value::msStringTable.size )
-  {
-    do
-      operator delete[](UEL::Value::msStringTable.p[v2++]);
-    while ( v2 < UEL::Value::msStringTable.size );
-  }
+  for ( i = 0; i < UEL::Value::msStringTable.size; ++i )
+    operator delete[](UEL::Value::msStringTable.p[i]);
   if ( UEL::Value::msStringTable.p )
     operator delete[](UEL::Value::msStringTable.p);
   UEL::Value::msStringTable.p = 0i64;
@@ -104,96 +99,92 @@ void UFG::UELRuntime::Shutdown(void)
 // RVA: 0x5BD290
 void __fastcall UFG::UELRuntime::SetFragmentTable(BinPtrArray<UEL::FragmentExpression,0,0> *table)
 {
-  BinPtrArray<UEL::FragmentExpression,0,0> *v1; // rdi
   unsigned int v2; // ebx
   UFG::allocator::free_link *v3; // rdx
-  __int64 v4; // rax
-  signed __int64 v5; // rcx
-  signed __int64 v6; // r8
-  signed __int64 v7; // rax
+  __int64 mOffset; // rax
+  char *v5; // rcx
+  __int64 v6; // r8
+  char *v7; // rax
   __int64 v8; // rcx
-  signed __int64 v9; // rcx
+  char *v9; // rcx
   __int64 v10; // rax
-  signed __int64 v11; // rax
-  signed __int64 v12; // rcx
+  char *v11; // rax
+  char *v12; // rcx
   __int64 v13; // rax
-  signed __int64 v14; // rax
+  char *v14; // rax
   __int64 v15; // rax
-  signed __int64 v16; // rax
-  signed __int64 v17; // rcx
+  char *v16; // rax
+  char *v17; // rcx
   __int64 v18; // rax
-  signed __int64 v19; // r8
+  char *v19; // r8
   int v20; // ecx
-  int v21; // eax
-  UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *v22; // rdi
-  Render::SkinningCacheNode *v23; // rbx
-  int v24; // [rsp+50h] [rbp+8h]
-  __int16 v25; // [rsp+58h] [rbp+10h]
-  int v26; // [rsp+5Ch] [rbp+14h]
-  UFG::allocator::free_link *v27; // [rsp+60h] [rbp+18h]
-  __int16 *v28; // [rsp+68h] [rbp+20h]
+  UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *mFragmentBindings; // rdi
+  Render::SkinningCacheNode *Head; // rbx
+  int v23; // [rsp+50h] [rbp+8h]
+  __int16 v24; // [rsp+58h] [rbp+10h] BYREF
+  int v25; // [rsp+5Ch] [rbp+14h]
+  UFG::allocator::free_link *v26; // [rsp+60h] [rbp+18h]
+  __int16 *v27; // [rsp+68h] [rbp+20h]
 
-  v1 = table;
   UFG::UELRuntime::FragmentTable = table;
   if ( table )
   {
     v2 = 0;
-    if ( table->mCount & 0x7FFFFFFF )
+    if ( (table->mCount & 0x7FFFFFFF) != 0 )
     {
       do
       {
         v3 = UFG::qMalloc(0x38ui64, UFG::gGlobalNewName, 0i64);
-        v27 = v3;
+        v26 = v3;
         if ( v3 )
         {
-          v28 = &v25;
-          v4 = v1->mData.mOffset;
-          if ( v4 )
-            v5 = (signed __int64)&v1->mData + v4;
+          v27 = &v24;
+          mOffset = table->mData.mOffset;
+          if ( mOffset )
+            v5 = (char *)&table->mData + mOffset;
           else
             v5 = 0i64;
           v6 = 8i64 * v2;
-          v7 = v6 + v5;
-          v8 = *(_QWORD *)(v6 + v5);
+          v7 = &v5[v6];
+          v8 = *(_QWORD *)&v5[v6];
           if ( v8 )
-            v9 = v7 + v8;
+            v9 = &v7[v8];
           else
             v9 = 0i64;
-          v25 = *(_WORD *)(v9 + 12);
-          v26 = *(_DWORD *)(v9 + 16);
-          v10 = v1->mData.mOffset;
+          v24 = *((_WORD *)v9 + 6);
+          v25 = *((_DWORD *)v9 + 4);
+          v10 = table->mData.mOffset;
           if ( v10 )
-            v11 = (signed __int64)&v1->mData + v10;
+            v11 = (char *)&table->mData + v10;
           else
             v11 = 0i64;
-          v12 = v6 + v11;
-          v13 = *(_QWORD *)(v6 + v11);
+          v12 = &v11[v6];
+          v13 = *(_QWORD *)&v11[v6];
           if ( v13 )
-            v14 = v12 + v13;
+            v14 = &v12[v13];
           else
             v14 = 0i64;
-          v24 = *(_DWORD *)(v14 + 96);
-          v15 = v1->mData.mOffset;
+          v23 = *((_DWORD *)v14 + 24);
+          v15 = table->mData.mOffset;
           if ( v15 )
-            v16 = (signed __int64)&v1->mData + v15;
+            v16 = (char *)&table->mData + v15;
           else
             v16 = 0i64;
-          v17 = v6 + v16;
-          v18 = *(_QWORD *)(v6 + v16);
-          v19 = v18 + v17;
+          v17 = &v16[v6];
+          v18 = *(_QWORD *)&v16[v6];
+          v19 = &v17[v18];
           if ( !v18 )
             v19 = 0i64;
-          v20 = *(_DWORD *)(v19 + 100);
-          v21 = v24;
+          v20 = *((_DWORD *)v19 + 25);
           v3->mNext = 0i64;
           v3[1].mNext = 0i64;
           v3[2].mNext = 0i64;
-          LODWORD(v3[3].mNext) = v21;
+          LODWORD(v3[3].mNext) = v23;
           LODWORD(v3[4].mNext) = -1;
           BYTE4(v3[4].mNext) = v20;
           LODWORD(v3[5].mNext) = v2;
-          WORD2(v3[5].mNext) = v25;
-          LODWORD(v3[6].mNext) = v26;
+          WORD2(v3[5].mNext) = v24;
+          LODWORD(v3[6].mNext) = v25;
         }
         else
         {
@@ -202,22 +193,22 @@ void __fastcall UFG::UELRuntime::SetFragmentTable(BinPtrArray<UEL::FragmentExpre
         UFG::qBaseTreeRB::Add(&UFG::UELRuntime::msRuntime->mFragmentBindings->mTree, (UFG::qBaseNodeRB *)v3);
         ++v2;
       }
-      while ( v2 < (v1->mCount & 0x7FFFFFFFu) );
+      while ( v2 < (table->mCount & 0x7FFFFFFFu) );
     }
   }
   else
   {
-    v22 = (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)UFG::UELRuntime::msRuntime->mFragmentBindings;
+    mFragmentBindings = (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)UFG::UELRuntime::msRuntime->mFragmentBindings;
     if ( UFG::UELRuntime::msRuntime->mFragmentBindings->mTree.mCount )
     {
       do
       {
-        v23 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(v22);
-        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v22->mTree, &v23->mNode);
-        if ( v23 )
-          operator delete[](v23);
+        Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(mFragmentBindings);
+        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&mFragmentBindings->mTree, &Head->mNode);
+        if ( Head )
+          operator delete[](Head);
       }
-      while ( v22->mTree.mCount );
+      while ( mFragmentBindings->mTree.mCount );
     }
   }
 }

@@ -7,13 +7,10 @@ void __fastcall UFG::AudioEventCallbackObject::~AudioEventCallbackObject(UFG::Au
 
 // File Line: 121
 // RVA: 0x592D40
-void __fastcall UFG::AudioEventExternalSourceInfo::AudioEventExternalSourceInfo(UFG::AudioEventExternalSourceInfo *this, unsigned int numExternals)
+void __fastcall UFG::AudioEventExternalSourceInfo::AudioEventExternalSourceInfo(
+        UFG::AudioEventExternalSourceInfo *this,
+        unsigned int numExternals)
 {
-  unsigned int v2; // edi
-  UFG::AudioEventExternalSourceInfo *v3; // rsi
-
-  v2 = numExternals;
-  v3 = this;
   this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable;
   this->m_externals.p = 0i64;
   *(_QWORD *)&this->m_externals.size = 0i64;
@@ -21,83 +18,83 @@ void __fastcall UFG::AudioEventExternalSourceInfo::AudioEventExternalSourceInfo(
     &this->m_externals,
     numExternals,
     "qArray.Reallocate(Constructor)");
-  v3->m_externals.size = v2;
-  v3->m_numExternals = v2;
+  this->m_externals.size = numExternals;
+  this->m_numExternals = numExternals;
 }
 
 // File Line: 126
 // RVA: 0x593E40
-void __fastcall UFG::AudioEventExternalSourceInfo::~AudioEventExternalSourceInfo(UFG::AudioEventExternalSourceInfo *this)
+void __fastcall UFG::AudioEventExternalSourceInfo::~AudioEventExternalSourceInfo(
+        UFG::AudioEventExternalSourceInfo *this)
 {
-  UFG::AudioEventExternalSourceInfo *v1; // rbx
-  UFG::ExternalSourceInfoNode *v2; // rdx
-  UFG::ExternalSourceInfoNode *v3; // rdx
+  char *p; // rdx
+  char *v3; // rdx
 
-  v1 = this;
   this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable;
-  v2 = this->m_externals.p;
-  if ( v2 )
-    UFG::qMemoryPool::Free(&g_AudioComponentPool, v2);
-  v1->m_externals.p = 0i64;
-  *(_QWORD *)&v1->m_externals.size = 0i64;
-  v3 = v1->m_externals.p;
+  p = (char *)this->m_externals.p;
+  if ( p )
+    UFG::qMemoryPool::Free(&g_AudioComponentPool, p);
+  this->m_externals.p = 0i64;
+  *(_QWORD *)&this->m_externals.size = 0i64;
+  v3 = (char *)this->m_externals.p;
   if ( v3 )
     UFG::qMemoryPool::Free(&g_AudioComponentPool, v3);
-  v1->m_externals.p = 0i64;
-  *(_QWORD *)&v1->m_externals.size = 0i64;
+  this->m_externals.p = 0i64;
+  *(_QWORD *)&this->m_externals.size = 0i64;
 }
 
 // File Line: 311
 // RVA: 0x141880
 char *__fastcall UFG::AudioDialogEvent::operator new(unsigned __int64 size)
 {
-  char *v1; // rbx
+  char *mFreeListHead; // rbx
 
-  v1 = UFG::gAudioEventPool.mFreeListHead;
+  mFreeListHead = UFG::gAudioEventPool.mFreeListHead;
   if ( UFG::gAudioEventPool.mFreeListHead )
   {
     UFG::gAudioEventPool.mFreeListHead = *(char **)UFG::gAudioEventPool.mFreeListHead;
     if ( UFG::gAudioEventPool.mMostSlotsAllocated <= ++UFG::gAudioEventPool.mNumSlotsAllocated )
     {
       UFG::gAudioEventPool.mMostSlotsAllocated = UFG::gAudioEventPool.mNumSlotsAllocated;
-      return v1;
+      return mFreeListHead;
     }
   }
   else
   {
     UFG::qFixedAllocator::ReportFull(&UFG::gAudioEventPool);
   }
-  return v1;
+  return mFreeListHead;
 }
 
 // File Line: 331
 // RVA: 0x141260
 void __fastcall UFG::AudioEventController::~AudioEventController(UFG::AudioEventController *this)
 {
-  UFG::AudioEvent *v1; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v1 = this->m_pEvent;
-  if ( v1 )
-    JUMPOUT(v1->m_pController, 0i64, UFG::AudioEvent::Destroy);
+  m_pEvent = this->m_pEvent;
+  if ( m_pEvent )
+  {
+    if ( m_pEvent->m_pController )
+      UFG::AudioEvent::Destroy(m_pEvent);
+  }
 }
 
 // File Line: 335
 // RVA: 0x14A060
 char __fastcall UFG::AudioEventController::Play(UFG::AudioEventController *this, unsigned int fadeInDurationMs)
 {
-  UFG::AudioEventController *v2; // rbx
-  UFG::AudioEvent *v3; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v2 = this;
-  v3 = this->m_pEvent;
-  if ( !v3 )
+  m_pEvent = this->m_pEvent;
+  if ( !m_pEvent )
     return 0;
-  if ( !v3->vfptr->Play(v3, 0) )
+  if ( !m_pEvent->vfptr->Play(m_pEvent, 0) )
   {
-    *((_BYTE *)v2->m_pEvent + 144) |= 4u;
-    if ( v2->m_pEvent )
-      v2->m_pEvent->m_pController = 0i64;
-    v2->m_pEvent = 0i64;
+    *((_BYTE *)this->m_pEvent + 144) |= 4u;
+    if ( this->m_pEvent )
+      this->m_pEvent->m_pController = 0i64;
+    this->m_pEvent = 0i64;
     return 0;
   }
   return 1;
@@ -108,7 +105,7 @@ char __fastcall UFG::AudioEventController::Play(UFG::AudioEventController *this,
 void __fastcall UFG::StopAllEventsOfIdFunctor::Do(UFG::StopAllEventsOfIdFunctor *this, UFG::AudioEvent *pAe)
 {
   if ( pAe->m_uEventId == this->id )
-    UFG::AudioEvent::StopAndForget(pAe, (signed int)this->fadeLength);
+    UFG::AudioEvent::StopAndForget(pAe, (int)this->fadeLength);
 }
 
 // File Line: 476
@@ -122,7 +119,7 @@ void __fastcall UFG::DestroyEventFunctor::Do(UFG::DestroyEventFunctor *this, UFG
 // RVA: 0x144F40
 void __fastcall UFG::StopAndForgetFunctor::Do(UFG::StopAndForgetFunctor *this, UFG::AudioEvent *pAe)
 {
-  UFG::AudioEvent::StopAndForget(pAe, (signed int)this->fadeLength);
+  UFG::AudioEvent::StopAndForget(pAe, (int)this->fadeLength);
 }
 
 // File Line: 500
@@ -136,41 +133,34 @@ void __fastcall UFG::ResumeFunctor::Do(UFG::ResumeFunctor *this, UFG::AudioEvent
 // RVA: 0x144E40
 void __fastcall UFG::IsIdPlayingFunctor::Do(UFG::IsIdPlayingFunctor *this, UFG::AudioEvent *pAe)
 {
-  unsigned int v2; // eax
+  unsigned int playingId; // eax
 
-  v2 = this->playingId;
-  if ( !v2 || pAe->m_uEventId == v2 )
-  {
-    if ( *((_BYTE *)pAe + 144) & 0x40 )
-      ++this->playingCount;
-  }
+  playingId = this->playingId;
+  if ( (!playingId || pAe->m_uEventId == playingId) && (*((_BYTE *)pAe + 144) & 0x40) != 0 )
+    ++this->playingCount;
 }
 
 // File Line: 545
 // RVA: 0x144D90
 void __fastcall UFG::FindOldestEventFunctor::Do(UFG::FindOldestEventFunctor *this, UFG::AudioEvent *pAe)
 {
-  UFG::AudioEvent *v2; // rbx
-  UFG::FindOldestEventFunctor *v3; // rdi
   float v4; // xmm6_4
   float v5; // xmm7_4
-  int out_puPosition; // [rsp+50h] [rbp+8h]
-  int v7; // [rsp+58h] [rbp+10h]
+  int out_puPosition; // [rsp+50h] [rbp+8h] BYREF
+  int v7; // [rsp+58h] [rbp+10h] BYREF
 
-  v2 = pAe;
-  v3 = this;
-  if ( pAe->m_uEventId == this->playingId && *((_BYTE *)pAe + 144) & 0x40 )
+  if ( pAe->m_uEventId == this->playingId && (*((_BYTE *)pAe + 144) & 0x40) != 0 )
   {
     if ( this->oldestAudioEvent )
     {
       v4 = 0.0;
       v5 = 0.0;
-      if ( AK::SoundEngine::GetSourcePlayPosition(pAe->m_uPlayingId, &out_puPosition, 0) == 1 )
+      if ( AK::SoundEngine::GetSourcePlayPosition(pAe->m_uPlayingId, &out_puPosition, 0) == AK_Success )
         v5 = (float)out_puPosition;
-      if ( AK::SoundEngine::GetSourcePlayPosition(v3->oldestAudioEvent->m_uPlayingId, &v7, 0) == 1 )
+      if ( AK::SoundEngine::GetSourcePlayPosition(this->oldestAudioEvent->m_uPlayingId, &v7, 0) == AK_Success )
         v4 = (float)v7;
       if ( v5 > v4 )
-        v3->oldestAudioEvent = v2;
+        this->oldestAudioEvent = pAe;
     }
     else
     {

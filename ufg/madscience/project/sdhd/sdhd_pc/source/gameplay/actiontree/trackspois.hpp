@@ -2,24 +2,19 @@
 // RVA: 0x29CC20
 void __fastcall POIBehaviourActiveTrack::~POIBehaviourActiveTrack(POIBehaviourActiveTrack *this)
 {
-  POIBehaviourActiveTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&POIBehaviourActiveTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 31
@@ -33,24 +28,19 @@ const char *__fastcall POIBehaviourActiveTrack::GetClassname(POIBehaviourActiveT
 // RVA: 0x29CE30
 void __fastcall POIManagementTrack::~POIManagementTrack(POIManagementTrack *this)
 {
-  POIManagementTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&POIManagementTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 42
@@ -64,24 +54,19 @@ __int64 __fastcall POIManagementTrack::GetClassNameUID(POIManagementTrack *this)
 // RVA: 0x29CC90
 void __fastcall POIDisableSelfTrack::~POIDisableSelfTrack(POIDisableSelfTrack *this)
 {
-  POIDisableSelfTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&POIDisableSelfTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 54
@@ -95,34 +80,26 @@ const char *__fastcall POIDisableSelfTrack::GetClassname(POIDisableSelfTrack *th
 // RVA: 0x29CD00
 void __fastcall POIEnableChildTrack::~POIEnableChildTrack(POIEnableChildTrack *this)
 {
-  POIEnableChildTrack *v1; // rbx
   char *v2; // rcx
-  ExpressionParameterFloat *v3; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v4; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable;
-  if ( !(~LOBYTE(this->m_ChildName.mOffset) & 1) )
+  if ( (this->m_ChildName.mOffset & 1) != 0 && (this->m_ChildName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( this->m_ChildName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v2 = (char *)&this->m_ChildName + (this->m_ChildName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v2 != BinString::sEmptyString )
-        operator delete[](v2);
-    }
+    v2 = (char *)&this->m_ChildName + (this->m_ChildName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v2 != BinString::sEmptyString )
+      operator delete[](v2);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v3 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v3->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v4 = (char *)v3 + (v3->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v4 != BinString::sEmptyString )
-        operator delete[](v4);
-    }
+    v4 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v4 != BinString::sEmptyString )
+      operator delete[](v4);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 76

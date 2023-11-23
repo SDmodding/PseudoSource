@@ -4,7 +4,7 @@ __int64 __fastcall isalpha(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -15,7 +15,7 @@ __int64 __fastcall isalpha(int c)
   else
     v3 = isctype_l(v1, 259, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -25,7 +25,7 @@ __int64 __fastcall isupper(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -36,7 +36,7 @@ __int64 __fastcall isupper(int c)
   else
     v3 = isctype_l(v1, 1, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -46,7 +46,7 @@ __int64 __fastcall islower(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -57,7 +57,7 @@ __int64 __fastcall islower(int c)
   else
     v3 = isctype_l(v1, 2, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -67,7 +67,7 @@ __int64 __fastcall isdigit(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -78,7 +78,7 @@ __int64 __fastcall isdigit(int c)
   else
     v3 = isctype_l(v1, 4, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -88,7 +88,7 @@ __int64 __fastcall isxdigit(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -99,7 +99,7 @@ __int64 __fastcall isxdigit(int c)
   else
     v3 = isctype_l(v1, 128, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -109,7 +109,7 @@ __int64 __fastcall isspace(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -120,7 +120,7 @@ __int64 __fastcall isspace(int c)
   else
     v3 = isctype_l(v1, 8, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -130,7 +130,7 @@ __int64 __fastcall ispunct(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -141,7 +141,7 @@ __int64 __fastcall ispunct(int c)
   else
     v3 = isctype_l(v1, 16, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -151,7 +151,7 @@ __int64 __fastcall isalnum(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -162,7 +162,7 @@ __int64 __fastcall isalnum(int c)
   else
     v3 = isctype_l(v1, 263, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -172,7 +172,7 @@ __int64 __fastcall isprint(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -183,7 +183,7 @@ __int64 __fastcall isprint(int c)
   else
     v3 = isctype_l(v1, 343, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -193,7 +193,7 @@ __int64 __fastcall isgraph(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -204,7 +204,7 @@ __int64 __fastcall isgraph(int c)
   else
     v3 = isctype_l(v1, 279, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 
@@ -214,7 +214,7 @@ __int64 __fastcall iscntrl(int c)
 {
   __int64 v1; // rbx
   unsigned int v3; // ecx
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = c;
   if ( !_locale_changed )
@@ -225,7 +225,7 @@ __int64 __fastcall iscntrl(int c)
   else
     v3 = isctype_l(v1, 32, &v4.localeinfo);
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return v3;
 }
 

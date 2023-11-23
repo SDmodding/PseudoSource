@@ -28,33 +28,31 @@ hkClass *__fastcall hkpPhysicsSystemWithContacts::staticClass()
 
 // File Line: 65
 // RVA: 0xE0B3C0
-void __fastcall finishLoadedObjecthkpPhysicsSystemWithContacts(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPhysicsSystemWithContacts(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 80);
+    v3 = p + 10;
     v3[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpPhysicsSystemWithContacts::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpPhysicsSystemWithContacts::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xE0B400
-void __fastcall cleanupLoadedObjecthkpPhysicsSystemWithContacts(void *p)
+void __fastcall cleanupLoadedObjecthkpPhysicsSystemWithContacts(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xE0B410
 void **__fastcall getVtablehkpPhysicsSystemWithContacts()
 {
-  hkStringPtr v1; // [rsp+70h] [rbp-38h]
+  hkStringPtr v1; // [rsp+70h] [rbp-38h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpPhysicsSystemWithContacts::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpPhysicsSystemWithContactsTypeInfo__()
   hkpPhysicsSystemWithContactsTypeInfo.m_typeName = "hkpPhysicsSystemWithContacts";
   hkpPhysicsSystemWithContactsTypeInfo.m_vtable = result;
   hkpPhysicsSystemWithContactsTypeInfo.m_scopedName = "!hkpPhysicsSystemWithContacts";
-  hkpPhysicsSystemWithContactsTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPhysicsSystemWithContacts;
-  hkpPhysicsSystemWithContactsTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPhysicsSystemWithContacts;
+  hkpPhysicsSystemWithContactsTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPhysicsSystemWithContacts;
+  hkpPhysicsSystemWithContactsTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPhysicsSystemWithContacts;
   return result;
 }
 

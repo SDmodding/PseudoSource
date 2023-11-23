@@ -63,17 +63,17 @@ hkClass *__fastcall hkpVehicleDefaultBrake::staticClass()
 
 // File Line: 113
 // RVA: 0xE25490
-void __fastcall finishLoadedObjecthkpVehicleDefaultBrake(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultBrake(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultBrake::`vftable;
+    *p = &hkpVehicleDefaultBrake::`vftable;
 }
 
 // File Line: 119
 // RVA: 0xE254B0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultBrake(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultBrake(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 123
@@ -94,8 +94,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultBrakeTypeInfo__()
   hkpVehicleDefaultBrakeTypeInfo.m_typeName = "hkpVehicleDefaultBrake";
   hkpVehicleDefaultBrakeTypeInfo.m_vtable = result;
   hkpVehicleDefaultBrakeTypeInfo.m_scopedName = "!hkpVehicleDefaultBrake";
-  hkpVehicleDefaultBrakeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultBrake;
-  hkpVehicleDefaultBrakeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultBrake;
+  hkpVehicleDefaultBrakeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultBrake;
+  hkpVehicleDefaultBrakeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultBrake;
   return result;
 }
 

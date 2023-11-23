@@ -28,30 +28,30 @@ hkClass *__fastcall hkaiInvertedAabbVolume::staticClass()
 
 // File Line: 67
 // RVA: 0xBB6840
-void __fastcall finishLoadedObjecthkaiInvertedAabbVolume(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiInvertedAabbVolume(hkGeometry *p, hkFinishLoadedObjectFlag finishing)
 {
   hkGeometry *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkGeometry *)((char *)p + 48);
+    v2 = p + 1;
     v2[-1].vfptr = (hkBaseObjectVtbl *)&hkaiInvertedAabbVolume::`vftable;
-    hkGeometry::hkGeometry(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkGeometry::hkGeometry(v2, finishing);
   }
 }
 
 // File Line: 73
 // RVA: 0xBB6870
-void __fastcall cleanupLoadedObjecthkaiInvertedAabbVolume(void *p)
+void __fastcall cleanupLoadedObjecthkaiInvertedAabbVolume(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xBB6880
 void **__fastcall getVtablehkaiInvertedAabbVolume()
 {
-  hkGeometry v1; // [rsp+50h] [rbp-38h]
+  hkGeometry v1; // [rsp+50h] [rbp-38h] BYREF
 
   hkGeometry::hkGeometry(&v1, 0);
   return &hkaiInvertedAabbVolume::`vftable;
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkaiInvertedAabbVolumeTypeInfo__()
   hkaiInvertedAabbVolumeTypeInfo.m_typeName = "hkaiInvertedAabbVolume";
   hkaiInvertedAabbVolumeTypeInfo.m_vtable = result;
   hkaiInvertedAabbVolumeTypeInfo.m_scopedName = "!hkaiInvertedAabbVolume";
-  hkaiInvertedAabbVolumeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiInvertedAabbVolume;
-  hkaiInvertedAabbVolumeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiInvertedAabbVolume;
+  hkaiInvertedAabbVolumeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiInvertedAabbVolume;
+  hkaiInvertedAabbVolumeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiInvertedAabbVolume;
   return result;
 }
 

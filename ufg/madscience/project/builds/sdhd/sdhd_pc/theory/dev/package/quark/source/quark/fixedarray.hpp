@@ -1,6 +1,7 @@
 // File Line: 52
 // RVA: 0x32A1D0
-void __fastcall UFG::qFixedArray<PedFormationPairing,10>::qFixedArray<PedFormationPairing,10>(UFG::qFixedArray<PedFormationPairing,10> *this)
+void __fastcall UFG::qFixedArray<PedFormationPairing,10>::qFixedArray<PedFormationPairing,10>(
+        UFG::qFixedArray<PedFormationPairing,10> *this)
 {
   *(_QWORD *)&this->p[0].m_MyPosition.x = 0i64;
   *(_QWORD *)&this->p[1].m_MyPosition.x = 0i64;
@@ -47,7 +48,8 @@ void __fastcall UFG::qFixedArray<PedFormationPairing,10>::qFixedArray<PedFormati
 
 // File Line: 70
 // RVA: 0x332FB0
-void __fastcall UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>::~qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>(UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4> *this)
+void __fastcall UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>::~qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>(
+        UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4> *this)
 {
   this->size = 0;
   `eh vector destructor iterator(

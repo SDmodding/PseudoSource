@@ -2,30 +2,28 @@
 // RVA: 0x12C59E8
 void __fastcall type_info::_Type_info_dtor(type_info *_This)
 {
-  type_info *v1; // rbx
-  void *v2; // rax
-  __type_info_node *v3; // rcx
+  void *M_data; // rax
+  __type_info_node *Next; // rcx
   __type_info_node *v4; // rdx
 
-  v1 = _This;
   lock(14);
-  v2 = v1->_M_data;
-  if ( v2 )
+  M_data = _This->_M_data;
+  if ( M_data )
   {
-    v3 = _type_info_root_node._Next;
+    Next = _type_info_root_node._Next;
     v4 = &_type_info_root_node;
     while ( _type_info_root_node._Next )
     {
-      if ( _type_info_root_node._Next->_MemPtr == v2 )
+      if ( _type_info_root_node._Next->_MemPtr == M_data )
       {
         v4->_Next = _type_info_root_node._Next->_Next;
-        free(v3);
+        free(Next);
         break;
       }
       v4 = _type_info_root_node._Next;
     }
-    free(v1->_M_data);
-    v1->_M_data = 0i64;
+    free(_This->_M_data);
+    _This->_M_data = 0i64;
   }
   unlock(14);
 }

@@ -62,7 +62,7 @@ void dynamic_initializer_for__hkaiEdgeGeometryFaceClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 125
@@ -116,17 +116,17 @@ hkClass *__fastcall hkaiEdgeGeometry::staticClass()
 
 // File Line: 189
 // RVA: 0xB47D20
-void __fastcall finishLoadedObjecthkaiEdgeGeometry(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiEdgeGeometry(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiEdgeGeometry::`vftable;
+    *p = &hkaiEdgeGeometry::`vftable;
 }
 
 // File Line: 195
 // RVA: 0xB47D40
-void __fastcall cleanupLoadedObjecthkaiEdgeGeometry(void *p)
+void __fastcall cleanupLoadedObjecthkaiEdgeGeometry(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 199
@@ -147,8 +147,8 @@ void **dynamic_initializer_for__hkaiEdgeGeometryTypeInfo__()
   hkaiEdgeGeometryTypeInfo.m_typeName = "hkaiEdgeGeometry";
   hkaiEdgeGeometryTypeInfo.m_vtable = result;
   hkaiEdgeGeometryTypeInfo.m_scopedName = "!hkaiEdgeGeometry";
-  hkaiEdgeGeometryTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiEdgeGeometry;
-  hkaiEdgeGeometryTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiEdgeGeometry;
+  hkaiEdgeGeometryTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiEdgeGeometry;
+  hkaiEdgeGeometryTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiEdgeGeometry;
   return result;
 }
 

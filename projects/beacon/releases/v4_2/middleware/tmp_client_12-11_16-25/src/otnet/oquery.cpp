@@ -2,15 +2,12 @@
 // RVA: 0xECC2E4
 void __fastcall OSuite::ZOQuery::ZOQuery(OSuite::ZOQuery *this)
 {
-  OSuite::ZOQuery *v1; // rbx
-
-  this->m_eMode = 0;
-  v1 = this;
+  this->m_eMode = QM_NONE;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOQuery::`vftable;
   OSuite::ZString::ZString(&this->m_entityName);
-  OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZString,OSuite::ZString>(&v1->m_queryMap, 0x10ui64);
+  OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZString,OSuite::ZString>(&this->m_queryMap, 0x10ui64);
   OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZString,OSuite::ZString>(
-    &v1->m_functionParameters,
+    &this->m_functionParameters,
     0x10ui64);
 }
 
@@ -18,68 +15,62 @@ void __fastcall OSuite::ZOQuery::ZOQuery(OSuite::ZOQuery *this)
 // RVA: 0xECC32C
 void __fastcall OSuite::ZOQuery::~ZOQuery(OSuite::ZOQuery *this)
 {
-  OSuite::ZOQuery *v1; // rbx
-  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v2; // rcx
+  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *m_pLists; // rcx
   OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v3; // rcx
 
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOQuery::`vftable;
   this->m_functionParameters.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
-  v2 = this->m_functionParameters.m_pLists;
-  if ( v2 )
+  m_pLists = this->m_functionParameters.m_pLists;
+  if ( m_pLists )
   {
-    if ( LODWORD(v2[-1].m_Comparer.vfptr) )
-      v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 3u);
+    if ( LODWORD(m_pLists[-1].m_Comparer.vfptr) )
+      m_pLists->vfptr->__vecDelDtor(m_pLists, 3u);
     else
-      Illusion::ShaderParam::operator delete(&v2[-1].m_Comparer.vfptr);
+      Illusion::ShaderParam::operator delete(&m_pLists[-1].m_Comparer.OSuite::ZObject);
   }
-  v3 = v1->m_queryMap.m_pLists;
-  v1->m_queryMap.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
+  v3 = this->m_queryMap.m_pLists;
+  this->m_queryMap.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   if ( v3 )
   {
     if ( LODWORD(v3[-1].m_Comparer.vfptr) )
-      v3->vfptr->__vecDelDtor((OSuite::ZObject *)&v3->vfptr, 3u);
+      v3->vfptr->__vecDelDtor(v3, 3u);
     else
-      Illusion::ShaderParam::operator delete(&v3[-1].m_Comparer.vfptr);
+      Illusion::ShaderParam::operator delete(&v3[-1].m_Comparer.OSuite::ZObject);
   }
-  OSuite::ZString::~ZString(&v1->m_entityName);
+  OSuite::ZString::~ZString(&this->m_entityName);
 }
 
 // File Line: 67
 // RVA: 0xECC464
 OSuite::ZOQuery *__fastcall OSuite::ZOQuery::Filter(OSuite::ZOQuery *this, const char *filterString)
 {
-  OSuite::ZOQuery *v2; // rbx
-  OSuite::ZString key; // [rsp+20h] [rbp-48h]
-  OSuite::ZString result; // [rsp+38h] [rbp-30h]
+  OSuite::ZString key; // [rsp+20h] [rbp-48h] BYREF
+  OSuite::ZString result; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = this;
   if ( filterString )
   {
     result.m_pString = 0i64;
     OSuite::ZOQuery::SanitizeString(this, &result, filterString, 1);
     OSuite::ZString::ZString(&key, "$filter");
-    OSuite::TMap<OSuite::ZString,OSuite::ZString>::Insert(&v2->m_queryMap, &key, &result);
+    OSuite::TMap<OSuite::ZString,OSuite::ZString>::Insert(&this->m_queryMap, &key, &result);
     OSuite::ZString::~ZString(&key);
     OSuite::ZString::~ZString(&result);
   }
-  return v2;
+  return this;
 }
 
 // File Line: 82
 // RVA: 0xECC420
 OSuite::ZOQuery *__fastcall OSuite::ZOQuery::Filter(OSuite::ZOQuery *this, OSuite::ZOFilter *filterExpression)
 {
-  OSuite::ZOQuery *v2; // rbx
   OSuite::ZString *v3; // rax
   const char *v4; // rax
   OSuite::ZOQuery *v5; // rbx
-  OSuite::ZString result; // [rsp+20h] [rbp-28h]
+  OSuite::ZString result; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = this;
   v3 = OSuite::ZOFilter::ToString(filterExpression, &result);
   v4 = OSuite::ZString::c_str(v3);
-  v5 = OSuite::ZOQuery::Filter(v2, v4);
+  v5 = OSuite::ZOQuery::Filter(this, v4);
   OSuite::ZString::~ZString(&result);
   return v5;
 }
@@ -88,69 +79,62 @@ OSuite::ZOQuery *__fastcall OSuite::ZOQuery::Filter(OSuite::ZOQuery *this, OSuit
 // RVA: 0xECC3E0
 OSuite::ZOQuery *__fastcall OSuite::ZOQuery::EntitySet(OSuite::ZOQuery *this, const char *entitySetName)
 {
-  OSuite::ZOQuery *v2; // rbx
-  OSuite::ZString that; // [rsp+20h] [rbp-28h]
+  OSuite::ZString that; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = this;
   if ( entitySetName )
   {
     OSuite::ZString::ZString(&that, entitySetName);
-    OSuite::ZString::operator=(&v2->m_entityName, &that);
+    OSuite::ZString::operator=(&this->m_entityName, &that);
     OSuite::ZString::~ZString(&that);
-    v2->m_eMode = 1;
+    this->m_eMode = QM_ENTITYSET;
   }
-  return v2;
+  return this;
 }
 
 // File Line: 199
 // RVA: 0xECC6D4
-OSuite::ZOQuery *__fastcall OSuite::ZOQuery::ServiceOperation(OSuite::ZOQuery *this, const char *serviceOperation, OSuite::TMap<OSuite::ZString,OSuite::ZString> *params)
+OSuite::ZOQuery *__fastcall OSuite::ZOQuery::ServiceOperation(
+        OSuite::ZOQuery *this,
+        const char *serviceOperation,
+        OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *> *params)
 {
-  OSuite::TMap<OSuite::ZString,OSuite::ZString> *v3; // rdi
-  OSuite::ZOQuery *v4; // rbx
   OSuite::ZString *v5; // rax
   OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator *v6; // rax
-  OSuite::ZString v8; // [rsp+20h] [rbp-E0h]
-  OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator result; // [rsp+38h] [rbp-C8h]
+  OSuite::ZString v8; // [rsp+20h] [rbp-E0h] BYREF
+  OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator result; // [rsp+38h] [rbp-C8h] BYREF
   void **v10; // [rsp+C0h] [rbp-40h]
-  OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator v11; // [rsp+C8h] [rbp-38h]
+  OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator v11; // [rsp+C8h] [rbp-38h] BYREF
 
-  v3 = params;
-  v4 = this;
   if ( serviceOperation )
   {
-    this->m_eMode = 2;
+    this->m_eMode = QM_FUNCTIONIMPORT;
     OSuite::ZString::ZString(&v8, serviceOperation);
-    OSuite::ZString::operator=(&v4->m_entityName, v5);
+    OSuite::ZString::operator=(&this->m_entityName, v5);
     OSuite::ZString::~ZString(&v8);
     v11.m_pMap = 0i64;
     v11.m_iterator.m_iterator.m_parents.m_pList = 0i64;
-    _mm_store_si128((__m128i *)&v11.m_iterator.m_iterator.m_pList, (__m128i)0i64);
-    v6 = OSuite::TMap<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>::Iterator(
-           (OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *> *)v3,
-           &result);
+    *(_OWORD *)&v11.m_iterator.m_iterator.m_pList = 0i64;
+    v6 = OSuite::TMap<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>::Iterator(params, &result);
     v10 = &OSuite::TConstIterator<OSuite::TMap<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>::ZIterator,OSuite::ZUsageTracker::ZResourceUsage *,OSuite::ZString>::`vftable;
     v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
     v11.m_pMap = v6->m_pMap;
     v11.m_iCurrentHash = v6->m_iCurrentHash;
-    v11.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
-    OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(
-      (OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v11.m_iterator.m_iterator.vfptr,
-      (OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v6->m_iterator.m_iterator.vfptr);
+    v11.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(&v11.m_iterator.m_iterator, &v6->m_iterator.m_iterator);
     result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
     v11.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
     result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
-    result.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    result.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
     result.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
     result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
     if ( result.m_iterator.m_iterator.m_parents.m_pList )
       result.m_iterator.m_iterator.m_parents.m_pList->vfptr->__vecDelDtor(
-        (OSuite::ZObject *)result.m_iterator.m_iterator.m_parents.m_pList,
+        result.m_iterator.m_iterator.m_parents.m_pList,
         1u);
     while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v11.m_iterator.m_iterator) )
     {
       OSuite::TMap<OSuite::ZString,OSuite::ZString>::Insert(
-        &v4->m_functionParameters,
+        &this->m_functionParameters,
         (OSuite::ZString *)&v11.m_iterator.m_iterator.m_pElement[1].m_pLeft,
         (OSuite::ZString *)&v11.m_iterator.m_iterator.m_pElement[2]);
       OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator::Next(&v11);
@@ -158,42 +142,38 @@ OSuite::ZOQuery *__fastcall OSuite::ZOQuery::ServiceOperation(OSuite::ZOQuery *t
     v10 = &OSuite::TConstIterator<OSuite::TMap<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>::ZIterator,OSuite::ZUsageTracker::ZResourceUsage *,OSuite::ZString>::`vftable;
     v11.m_iterator.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
     v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
-    v11.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    v11.m_iterator.vfptr = (OSuite::TOrderedMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *,OSuite::TOperatorComparer<void *> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
     v11.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
     v11.m_iterator.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
     if ( v11.m_iterator.m_iterator.m_parents.m_pList )
-      v11.m_iterator.m_iterator.m_parents.m_pList->vfptr->__vecDelDtor(
-        (OSuite::ZObject *)v11.m_iterator.m_iterator.m_parents.m_pList,
-        1u);
+      v11.m_iterator.m_iterator.m_parents.m_pList->vfptr->__vecDelDtor(v11.m_iterator.m_iterator.m_parents.m_pList, 1u);
   }
-  return v4;
+  return this;
 }
 
 // File Line: 223
 // RVA: 0xECC4E8
-OSuite::ZString *__fastcall OSuite::ZOQuery::SanitizeString(OSuite::ZOQuery *this, OSuite::ZString *result, const char *inputString, bool keepSingleQuotes)
+OSuite::ZString *__fastcall OSuite::ZOQuery::SanitizeString(
+        OSuite::ZOQuery *this,
+        OSuite::ZString *result,
+        const char *inputString,
+        bool keepSingleQuotes)
 {
-  OSuite::ZString *v4; // rdi
-  bool v5; // r15
-  const char *v6; // r14
   size_t v7; // rbx
   size_t v8; // rsi
   char v9; // dl
   const char *v10; // rdx
-  OSuite::ZStringBuilder v12; // [rsp+20h] [rbp-40h]
+  OSuite::ZStringBuilder v12; // [rsp+20h] [rbp-40h] BYREF
 
   v12.m_Chars.m_pList = 0i64;
-  v4 = result;
-  v5 = keepSingleQuotes;
-  v6 = inputString;
   OSuite::ZStringBuilder::ZStringBuilder(&v12, 0x100ui64);
   v7 = 0i64;
-  v8 = strlen(v6);
+  v8 = strlen(inputString);
   if ( v8 )
   {
     do
     {
-      v9 = v6[v7];
+      v9 = inputString[v7];
       switch ( v9 )
       {
         case 32:
@@ -206,7 +186,7 @@ OSuite::ZString *__fastcall OSuite::ZOQuery::SanitizeString(OSuite::ZOQuery *thi
           v10 = "%2A";
           break;
         case 39:
-          if ( v5 )
+          if ( keepSingleQuotes )
             goto LABEL_44;
           v10 = "%27%27";
           break;
@@ -269,8 +249,8 @@ LABEL_45:
     }
     while ( v7 < v8 );
   }
-  OSuite::ZStringBuilder::ToString(&v12, v4);
+  OSuite::ZStringBuilder::ToString(&v12, result);
   OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v12);
-  return v4;
+  return result;
 }
 

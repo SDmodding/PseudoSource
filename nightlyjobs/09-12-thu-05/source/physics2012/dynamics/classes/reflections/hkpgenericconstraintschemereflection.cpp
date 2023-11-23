@@ -63,15 +63,19 @@ hkClass *__fastcall hkpGenericConstraintDataScheme::staticClass()
 
 // File Line: 119
 // RVA: 0xD4FBB0
-void __fastcall finishLoadedObjecthkpGenericConstraintDataScheme(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpGenericConstraintDataScheme(
+        hkpGenericConstraintDataScheme *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpGenericConstraintDataScheme::hkpGenericConstraintDataScheme);
+  if ( p )
+    hkpGenericConstraintDataScheme::hkpGenericConstraintDataScheme(p, finishing);
 }
 
 // File Line: 125
 // RVA: 0xD4FBD0
-void __fastcall cleanupLoadedObjecthkpGenericConstraintDataScheme(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpGenericConstraintDataScheme(hkpGenericConstraintDataScheme *p)
 {
-  hkpGenericConstraintDataScheme::~hkpGenericConstraintDataScheme((hkpGenericConstraintDataScheme *)p);
+  hkpGenericConstraintDataScheme::~hkpGenericConstraintDataScheme(p);
 }
 

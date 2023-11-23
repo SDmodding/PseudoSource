@@ -2,14 +2,12 @@
 // RVA: 0x5C4B70
 void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCockFight *this)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v1; // rax
-  hkgpIndexedMeshDefinitions::Edge *v2; // rdx
-  hkgpIndexedMesh::EdgeBarrier *v3; // rcx
-  UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
+  hkgpIndexedMeshDefinitions::Edge *v1; // rdx
+  hkgpIndexedMesh::EdgeBarrier *v2; // rcx
+  UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -17,7 +15,7 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
   this->mScreenUID = -1;
   *(_QWORD *)&this->mControllerMask = 15i64;
   *(_QWORD *)&this->mPriority = 0i64;
-  this->mDimToApplyType = 0;
+  this->mDimToApplyType = eDIM_INVALID;
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
@@ -27,7 +25,7 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable;
-  this->mState = 0;
+  this->mState = STATE_INIT;
   this->mIsReady = 0;
   this->mSelectedFighterIndex = 1;
   this->mFighterArray.p = 0i64;
@@ -48,7 +46,7 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
   *(_QWORD *)&this->mCurrentBet = 0i64;
   this->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gActiveControllerNum);
-  if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v3, v2) )
+  if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v2, v1) )
   {
     UFG::qWiseSymbol::create_from_string(&result, "mg_cockfight");
     UFG::TiDo::LoadWwiseBank(&result);
@@ -60,21 +58,20 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
 // RVA: 0x5CA310
 void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKScreenCockFight *v1; // rdi
   unsigned int v2; // eax
   UFG::UIScreenTextureManager *v3; // rax
   unsigned int v4; // esi
-  signed __int64 v5; // rbp
-  UFG::qString *v6; // rbx
-  unsigned int v7; // er8
-  signed __int64 v8; // rdx
-  unsigned int v9; // eax
+  __int64 v5; // rbp
+  UFG::UIHKCockData *v6; // rbx
+  unsigned int v7; // r8d
+  __int64 v8; // rdx
+  unsigned int size; // eax
   hkgpIndexedMeshDefinitions::Edge *v10; // rdx
   hkgpIndexedMesh::EdgeBarrier *v11; // rcx
-  UFG::UIHKHelpBarWidget *v12; // rbx
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rbx
   unsigned int v13; // eax
-  UFG::qString *v14; // rcx
-  unsigned int *v15; // rbx
+  UFG::qString *p; // rcx
+  unsigned int *p_mStringHash32; // rbx
   UFG::qString *v16; // rcx
   unsigned int *v17; // rbx
   UFG::qString *v18; // rcx
@@ -86,10 +83,9 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   UFG::qString *v24; // rcx
   unsigned int *v25; // rbx
   UFG::UIHKCockData **v26; // rcx
-  UFG::qWiseSymbol result; // [rsp+68h] [rbp+10h]
-  UFG::qString *v28; // [rsp+70h] [rbp+18h]
+  UFG::qWiseSymbol result; // [rsp+68h] [rbp+10h] BYREF
+  UFG::UIHKCockData *v28; // [rsp+70h] [rbp+18h]
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable;
   if ( UFG::gInputSystem )
   {
@@ -103,48 +99,48 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   v3 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v3, "CockFight");
   v4 = 0;
-  if ( v1->mFighterArray.size )
+  if ( this->mFighterArray.size )
   {
     v5 = 8i64;
     do
     {
-      v6 = &v1->mFighterArray.p[v4]->name;
+      v6 = this->mFighterArray.p[v4];
       v28 = v6;
       if ( v6 )
       {
-        UFG::qString::~qString(v6 + 2);
-        UFG::qString::~qString(v6 + 1);
-        UFG::qString::~qString(v6);
+        UFG::qString::~qString(&v6->breed);
+        UFG::qString::~qString(&v6->trainer);
+        UFG::qString::~qString(&v6->name);
         operator delete[](v6);
       }
       v7 = ++v4;
-      if ( v4 != v1->mFighterArray.size )
+      if ( v4 != this->mFighterArray.size )
       {
         v8 = v5;
         do
         {
-          *(UFG::UIHKCockData **)((char *)v1->mFighterArray.p + v8 - 8) = *(UFG::UIHKCockData **)((char *)v1->mFighterArray.p
-                                                                                                + v8);
+          *(UFG::UIHKCockData **)((char *)this->mFighterArray.p + v8 - 8) = *(UFG::UIHKCockData **)((char *)this->mFighterArray.p
+                                                                                                  + v8);
           ++v7;
           v8 += 8i64;
         }
-        while ( v7 != v1->mFighterArray.size );
+        while ( v7 != this->mFighterArray.size );
       }
-      v9 = v1->mFighterArray.size;
-      if ( v9 > 1 )
-        v1->mFighterArray.size = v9 - 1;
+      size = this->mFighterArray.size;
+      if ( size > 1 )
+        this->mFighterArray.size = size - 1;
       else
-        v1->mFighterArray.size = 0;
+        this->mFighterArray.size = 0;
       v5 += 8i64;
     }
-    while ( v4 < v1->mFighterArray.size );
+    while ( v4 < this->mFighterArray.size );
   }
-  UFG::SetInputMode(v1->mSavedControllerMode, UFG::gActiveControllerNum);
+  UFG::SetInputMode(this->mSavedControllerMode, UFG::gActiveControllerNum);
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
   {
-    v12 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+    p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
     v13 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
-    UFG::UIHKHelpBarWidget::Hide(v12, v13);
+    UFG::UIHKHelpBarWidget::Hide(p_HelpBar, v13);
   }
   UFG::UIHKScreenCockFight::mMinBet = -1;
   UFG::UIHKScreenCockFight::mMaxBet = -1;
@@ -155,20 +151,20 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
     UFG::TiDo::UnloadWwiseBank(&result);
     _((AMD_HD3D *)result.mUID);
   }
-  v14 = v1->mBird2Types.p;
-  if ( v14 )
+  p = this->mBird2Types.p;
+  if ( p )
   {
-    v15 = &v14[-1].mStringHash32;
+    p_mStringHash32 = &p[-1].mStringHash32;
     `eh vector destructor iterator(
-      v14,
+      p,
       0x28ui64,
-      v14[-1].mStringHash32,
+      p[-1].mStringHash32,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    operator delete[](v15);
+    operator delete[](p_mStringHash32);
   }
-  v1->mBird2Types.p = 0i64;
-  *(_QWORD *)&v1->mBird2Types.size = 0i64;
-  v16 = v1->mTrainer2Names.p;
+  this->mBird2Types.p = 0i64;
+  *(_QWORD *)&this->mBird2Types.size = 0i64;
+  v16 = this->mTrainer2Names.p;
   if ( v16 )
   {
     v17 = &v16[-1].mStringHash32;
@@ -179,9 +175,9 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v17);
   }
-  v1->mTrainer2Names.p = 0i64;
-  *(_QWORD *)&v1->mTrainer2Names.size = 0i64;
-  v18 = v1->mBird2Names.p;
+  this->mTrainer2Names.p = 0i64;
+  *(_QWORD *)&this->mTrainer2Names.size = 0i64;
+  v18 = this->mBird2Names.p;
   if ( v18 )
   {
     v19 = &v18[-1].mStringHash32;
@@ -192,9 +188,9 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v19);
   }
-  v1->mBird2Names.p = 0i64;
-  *(_QWORD *)&v1->mBird2Names.size = 0i64;
-  v20 = v1->mBird1Types.p;
+  this->mBird2Names.p = 0i64;
+  *(_QWORD *)&this->mBird2Names.size = 0i64;
+  v20 = this->mBird1Types.p;
   if ( v20 )
   {
     v21 = &v20[-1].mStringHash32;
@@ -205,9 +201,9 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v21);
   }
-  v1->mBird1Types.p = 0i64;
-  *(_QWORD *)&v1->mBird1Types.size = 0i64;
-  v22 = v1->mTrainer1Names.p;
+  this->mBird1Types.p = 0i64;
+  *(_QWORD *)&this->mBird1Types.size = 0i64;
+  v22 = this->mTrainer1Names.p;
   if ( v22 )
   {
     v23 = &v22[-1].mStringHash32;
@@ -218,9 +214,9 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v23);
   }
-  v1->mTrainer1Names.p = 0i64;
-  *(_QWORD *)&v1->mTrainer1Names.size = 0i64;
-  v24 = v1->mBird1Names.p;
+  this->mTrainer1Names.p = 0i64;
+  *(_QWORD *)&this->mTrainer1Names.size = 0i64;
+  v24 = this->mBird1Names.p;
   if ( v24 )
   {
     v25 = &v24[-1].mStringHash32;
@@ -231,26 +227,24 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v25);
   }
-  v1->mBird1Names.p = 0i64;
-  *(_QWORD *)&v1->mBird1Names.size = 0i64;
-  v26 = v1->mFighterArray.p;
+  this->mBird1Names.p = 0i64;
+  *(_QWORD *)&this->mBird1Names.size = 0i64;
+  v26 = this->mFighterArray.p;
   if ( v26 )
     operator delete[](v26);
-  v1->mFighterArray.p = 0i64;
-  *(_QWORD *)&v1->mFighterArray.size = 0i64;
-  UFG::UIHKMinigameScreen::~UIHKMinigameScreen((UFG::UIHKMinigameScreen *)&v1->vfptr);
+  this->mFighterArray.p = 0i64;
+  *(_QWORD *)&this->mFighterArray.size = 0i64;
+  UFG::UIHKMinigameScreen::~UIHKMinigameScreen(this);
 }
 
 // File Line: 98
 // RVA: 0x6300A0
 void __fastcall UFG::UIHKScreenCockFight::init(UFG::UIHKScreenCockFight *this, UFG::UICommandData *data)
 {
-  UFG::UIHKScreenCockFight *v2; // rbx
   UFG::Controller *v3; // rcx
   UFG::GameStatTracker *v4; // rax
 
-  v2 = this;
-  UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
+  UFG::UIScreen::init(this, data);
   if ( UFG::gInputSystem && UFG::gActiveControllerNum != -1 )
   {
     v3 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum];
@@ -259,19 +253,18 @@ void __fastcall UFG::UIHKScreenCockFight::init(UFG::UIHKScreenCockFight *this, U
     UFG::SetInputMode(IM_UI_ONLY, v3->mControllerIndex);
     ++UFG::UI::gUIInputLocked;
   }
-  v2->mMovie = v2->mRenderable->m_movie.pObject;
+  this->mMovie = this->mRenderable->m_movie.pObject;
   v4 = UFG::GameStatTracker::Instance();
-  v2->mWeiMoney = UFG::GameStatTracker::GetStat(v4, Money);
-  v2->mCurrentBet = UFG::UIHKScreenCockFight::mMinBet;
-  UFG::UIHKScreenCockFight::PopulateFighterList(v2);
-  UFG::UIHKScreenCockFight::ShowHelpBar(v2);
+  this->mWeiMoney = UFG::GameStatTracker::GetStat(v4, Money);
+  this->mCurrentBet = UFG::UIHKScreenCockFight::mMinBet;
+  UFG::UIHKScreenCockFight::PopulateFighterList(this);
+  UFG::UIHKScreenCockFight::ShowHelpBar(this);
 }
 
 // File Line: 119
 // RVA: 0x5F6700
 void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKScreenCockFight *v1; // r13
   UFG::qString *v2; // rax
   UFG::qString *v3; // rax
   UFG::qString *v4; // rax
@@ -296,63 +289,62 @@ void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCoc
   UFG::UIHKCockData *v23; // r14
   int v24; // eax
   int v25; // eax
-  signed __int64 v26; // rdx
-  UFG::qArray<UFG::UIHKCockData *,0> *v27; // rsi
-  __int64 v28; // r12
+  UFG::qString *v26; // rdx
+  UFG::qArray<UFG::UIHKCockData *,0> *p_mFighterArray; // rsi
+  __int64 size; // r12
   unsigned int v29; // edi
-  unsigned int v30; // edx
+  unsigned int capacity; // edx
   unsigned int v31; // ebx
   unsigned int v32; // edx
   __int64 v33; // r15
   unsigned int v34; // edi
   unsigned int v35; // eax
-  UFG::qString v36; // [rsp+38h] [rbp-28h]
+  UFG::qString v36; // [rsp+38h] [rbp-28h] BYREF
 
-  v1 = this;
   UFG::qString::qString(&v36, "Rhode Island Leghorn");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird1Types, v2, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird1Types, v2, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Jersey Giant");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird1Types, v3, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird1Types, v3, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Buckeye Brahma");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird2Types, v4, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird2Types, v4, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Croad Langshan");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird2Types, v5, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird2Types, v5, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Dou Gai An");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird1Names, v6, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird1Names, v6, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Chow Tai");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird1Names, v7, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird1Names, v7, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Huo Yuanjia");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird1Names, v8, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird1Names, v8, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Guk Hei");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird2Names, v9, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird2Names, v9, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Sun Tzu");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird2Names, v10, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird2Names, v10, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Leung Kwan");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mBird2Names, v11, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mBird2Names, v11, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Lin Hong");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mTrainer1Names, v12, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mTrainer1Names, v12, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Zhang Ming");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mTrainer1Names, v13, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mTrainer1Names, v13, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Wu Zhi");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mTrainer1Names, v14, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mTrainer1Names, v14, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Huang Ya");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mTrainer2Names, v15, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mTrainer2Names, v15, "qArray.Add");
   UFG::qString::~qString(&v36);
   UFG::qString::qString(&v36, "Cai Wen");
-  UFG::qArray<UFG::qString,0>::Add(&v1->mTrainer2Names, v16, "qArray.Add");
+  UFG::qArray<UFG::qString,0>::Add(&this->mTrainer2Names, v16, "qArray.Add");
   UFG::qString::~qString(&v36);
   v17 = (UFG::qString *)UFG::qMalloc(0x80ui64, "Fighter1", 0i64);
   v18 = (UFG::UIHKCockData *)v17;
@@ -366,13 +358,13 @@ void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCoc
   {
     v18 = 0i64;
   }
-  v19 = UFG::qRandom(v1->mBird1Names.size, &UFG::qDefaultSeed);
-  UFG::qString::Set(&v18->name, v1->mBird1Names.p[v19].mData, v1->mBird1Names.p[v19].mLength, 0i64, 0);
-  v20 = UFG::qRandom(v1->mTrainer1Names.size, &UFG::qDefaultSeed);
-  UFG::qString::Set(&v18->trainer, v1->mTrainer1Names.p[v20].mData, v1->mTrainer1Names.p[v20].mLength, 0i64, 0);
-  v21 = UFG::qRandom(v1->mBird1Types.size, &UFG::qDefaultSeed);
-  UFG::qString::Set(&v18->breed, v1->mBird1Types.p[v21].mData, v1->mBird1Types.p[v21].mLength, 0i64, 0);
-  v18->record = UFG::qRandom(7, &UFG::qDefaultSeed);
+  v19 = UFG::qRandom(this->mBird1Names.size, (unsigned int *)&UFG::qDefaultSeed);
+  UFG::qString::Set(&v18->name, this->mBird1Names.p[v19].mData, this->mBird1Names.p[v19].mLength, 0i64, 0);
+  v20 = UFG::qRandom(this->mTrainer1Names.size, (unsigned int *)&UFG::qDefaultSeed);
+  UFG::qString::Set(&v18->trainer, this->mTrainer1Names.p[v20].mData, this->mTrainer1Names.p[v20].mLength, 0i64, 0);
+  v21 = UFG::qRandom(this->mBird1Types.size, (unsigned int *)&UFG::qDefaultSeed);
+  UFG::qString::Set(&v18->breed, this->mBird1Types.p[v21].mData, this->mBird1Types.p[v21].mLength, 0i64, 0);
+  v18->record = UFG::qRandom(7u, (unsigned int *)&UFG::qDefaultSeed);
   v22 = (UFG::qString *)UFG::qMalloc(0x80ui64, "Fighter2", 0i64);
   v23 = (UFG::UIHKCockData *)v22;
   if ( v22 )
@@ -385,22 +377,22 @@ void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCoc
   {
     v23 = 0i64;
   }
-  v24 = UFG::qRandom(v1->mBird2Names.size, &UFG::qDefaultSeed);
-  UFG::qString::Set(&v23->name, v1->mBird2Names.p[v24].mData, v1->mBird2Names.p[v24].mLength, 0i64, 0);
-  v25 = UFG::qRandom(v1->mTrainer2Names.size, &UFG::qDefaultSeed);
-  UFG::qString::Set(&v23->trainer, v1->mTrainer2Names.p[v25].mData, v1->mTrainer2Names.p[v25].mLength, 0i64, 0);
-  v26 = (signed __int64)&v1->mBird2Types.p[(unsigned int)UFG::qRandom(v1->mBird2Types.size, &UFG::qDefaultSeed)];
-  UFG::qString::Set(&v23->breed, *(const char **)(v26 + 24), *(_DWORD *)(v26 + 20), 0i64, 0);
-  v23->record = UFG::qRandom(5, &UFG::qDefaultSeed);
-  v27 = &v1->mFighterArray;
-  v28 = v1->mFighterArray.size;
-  v29 = v28 + 1;
-  v30 = v1->mFighterArray.capacity;
+  v24 = UFG::qRandom(this->mBird2Names.size, (unsigned int *)&UFG::qDefaultSeed);
+  UFG::qString::Set(&v23->name, this->mBird2Names.p[v24].mData, this->mBird2Names.p[v24].mLength, 0i64, 0);
+  v25 = UFG::qRandom(this->mTrainer2Names.size, (unsigned int *)&UFG::qDefaultSeed);
+  UFG::qString::Set(&v23->trainer, this->mTrainer2Names.p[v25].mData, this->mTrainer2Names.p[v25].mLength, 0i64, 0);
+  v26 = &this->mBird2Types.p[(unsigned int)UFG::qRandom(this->mBird2Types.size, (unsigned int *)&UFG::qDefaultSeed)];
+  UFG::qString::Set(&v23->breed, v26->mData, v26->mLength, 0i64, 0);
+  v23->record = UFG::qRandom(5u, (unsigned int *)&UFG::qDefaultSeed);
+  p_mFighterArray = &this->mFighterArray;
+  size = this->mFighterArray.size;
+  v29 = size + 1;
+  capacity = this->mFighterArray.capacity;
   v31 = 1;
-  if ( (signed int)v28 + 1 > v30 )
+  if ( (int)size + 1 > capacity )
   {
-    if ( v30 )
-      v32 = 2 * v30;
+    if ( capacity )
+      v32 = 2 * capacity;
     else
       v32 = 1;
     for ( ; v32 < v29; v32 *= 2 )
@@ -408,18 +400,18 @@ void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCoc
     if ( v32 <= 2 )
       v32 = 2;
     if ( v32 - v29 > 0x10000 )
-      v32 = v28 + 65537;
+      v32 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v1->mFighterArray,
+      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mFighterArray,
       v32,
       "qArray.Add");
   }
-  v27->size = v29;
-  v1->mFighterArray.p[v28] = v18;
-  v33 = v27->size;
+  p_mFighterArray->size = v29;
+  this->mFighterArray.p[size] = v18;
+  v33 = p_mFighterArray->size;
   v34 = v33 + 1;
-  v35 = v1->mFighterArray.capacity;
-  if ( (signed int)v33 + 1 > v35 )
+  v35 = this->mFighterArray.capacity;
+  if ( (int)v33 + 1 > v35 )
   {
     if ( v35 )
       v31 = 2 * v35;
@@ -430,64 +422,58 @@ void __fastcall UFG::UIHKScreenCockFight::PopulateFighterList(UFG::UIHKScreenCoc
     if ( v31 - v34 > 0x10000 )
       v31 = v33 + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v1->mFighterArray,
+      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mFighterArray,
       v31,
       "qArray.Add");
   }
-  v27->size = v34;
-  v1->mFighterArray.p[v33] = v23;
-  UFG::UIHKScreenCockFight::RefreshFighterList(v1);
+  p_mFighterArray->size = v34;
+  this->mFighterArray.p[v33] = v23;
+  UFG::UIHKScreenCockFight::RefreshFighterList(this);
 }
 
 // File Line: 163
 // RVA: 0x5FFFD0
 void __fastcall UFG::UIHKScreenCockFight::RefreshFighterList(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKScreenCockFight *v1; // rbx
   __int64 v2; // rax
   UFG::qString *v3; // rdi
-  Scaleform::GFx::Movie *v4; // rcx
+  Scaleform::GFx::Movie *mMovie; // rcx
   UFG::qString *v5; // rcx
-  unsigned int i; // er14
-  __int64 v7; // rsi
-  __int64 v8; // rsi
-  __int64 v9; // rsi
-  double v10; // xmm6_8
+  unsigned int i; // r14d
+  char *mData; // rsi
+  char *v8; // rsi
+  char *v9; // rsi
+  double record; // xmm6_8
   __int64 v11; // rax
   UFG::qString *v12; // rdi
   Scaleform::GFx::Movie *v13; // rcx
   UFG::qString *v14; // rcx
-  char ptr; // [rsp+30h] [rbp-A8h]
-  __int64 v16; // [rsp+40h] [rbp-98h]
-  unsigned int v17; // [rsp+48h] [rbp-90h]
-  __int64 v18; // [rsp+50h] [rbp-88h]
-  __int64 v19; // [rsp+58h] [rbp-80h]
-  char v20; // [rsp+60h] [rbp-78h]
-  char v21; // [rsp+68h] [rbp-70h]
-  __int64 v22; // [rsp+70h] [rbp-68h]
-  __int64 v23; // [rsp+78h] [rbp-60h]
-  unsigned int v24; // [rsp+80h] [rbp-58h]
-  __int64 v25; // [rsp+88h] [rbp-50h]
-  char v26; // [rsp+98h] [rbp-40h]
-  __int64 v27; // [rsp+A8h] [rbp-30h]
-  unsigned int v28; // [rsp+B0h] [rbp-28h]
-  double v29; // [rsp+B8h] [rbp-20h]
-  __int64 v30; // [rsp+C8h] [rbp-10h]
-  UFG::qString v31; // [rsp+D0h] [rbp-8h]
-  __int64 v32; // [rsp+F8h] [rbp+20h]
-  __int64 v33; // [rsp+138h] [rbp+60h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-A8h] BYREF
+  char v16[8]; // [rsp+60h] [rbp-78h] BYREF
+  char v17[8]; // [rsp+68h] [rbp-70h] BYREF
+  __int64 v18; // [rsp+70h] [rbp-68h]
+  __int64 v19; // [rsp+78h] [rbp-60h]
+  int v20; // [rsp+80h] [rbp-58h]
+  char *v21; // [rsp+88h] [rbp-50h]
+  char v22[16]; // [rsp+98h] [rbp-40h] BYREF
+  __int64 v23; // [rsp+A8h] [rbp-30h]
+  int v24; // [rsp+B0h] [rbp-28h]
+  double v25; // [rsp+B8h] [rbp-20h]
+  __int64 v26; // [rsp+C8h] [rbp-10h]
+  UFG::qString v27; // [rsp+D0h] [rbp-8h] BYREF
+  UFG::qString v28; // [rsp+F8h] [rbp+20h] BYREF
+  __int64 v29; // [rsp+138h] [rbp+60h]
 
-  v30 = -2i64;
-  v1 = this;
-  UFG::qString::qString((UFG::qString *)&v32, "CockFight_ClearFighterList");
+  v26 = -2i64;
+  UFG::qString::qString(&v28, "CockFight_ClearFighterList");
   v3 = (UFG::qString *)v2;
-  v33 = v2;
-  if ( !v1->mMovie )
-    v1->mMovie = v1->mRenderable->m_movie.pObject;
-  v4 = v1->mMovie;
-  if ( v4 )
+  v29 = v2;
+  if ( !this->mMovie )
+    this->mMovie = this->mRenderable->m_movie.pObject;
+  mMovie = this->mMovie;
+  if ( mMovie )
   {
-    Scaleform::GFx::Movie::Invoke(v4, *(const char **)(v2 + 24), 0i64, 0i64, 0);
+    Scaleform::GFx::Movie::Invoke(mMovie, *(const char **)(v2 + 24), 0i64, 0i64, 0);
     v5 = v3;
   }
   else
@@ -495,53 +481,56 @@ void __fastcall UFG::UIHKScreenCockFight::RefreshFighterList(UFG::UIHKScreenCock
     v5 = (UFG::qString *)v2;
   }
   UFG::qString::~qString(v5);
-  for ( i = 0; i < v1->mFighterArray.size; ++i )
+  for ( i = 0; i < this->mFighterArray.size; ++i )
   {
     `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    v7 = (__int64)v1->mFighterArray.p[i]->name.mData;
-    if ( (v17 >> 6) & 1 )
+    mData = this->mFighterArray.p[i]->name.mData;
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v18);
-      v16 = 0i64;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
+        &ptr,
+        ptr.mValue);
+      ptr.pObjectInterface = 0i64;
     }
-    v17 = 6;
-    v18 = v7;
-    v8 = (__int64)v1->mFighterArray.p[i]->trainer.mData;
-    if ( ((unsigned int)v23 >> 6) & 1 )
+    ptr.Type = VT_String;
+    ptr.mValue.pString = mData;
+    v8 = this->mFighterArray.p[i]->trainer.mData;
+    if ( (v19 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v22 + 16i64))(v22, &v20, v19);
-      v22 = 0i64;
+      (*(void (__fastcall **)(__int64, char *, unsigned __int64))(*(_QWORD *)v18 + 16i64))(v18, v16, ptr.DataAux);
+      v18 = 0i64;
     }
-    LODWORD(v23) = 6;
-    v19 = v8;
-    v9 = (__int64)v1->mFighterArray.p[i]->breed.mData;
-    if ( (v24 >> 6) & 1 )
+    LODWORD(v19) = 6;
+    ptr.DataAux = (unsigned __int64)v8;
+    v9 = this->mFighterArray.p[i]->breed.mData;
+    if ( (v20 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v23 + 16i64))(v23, &v21, v25);
+      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v19 + 16i64))(v19, v17, v21);
+      v19 = 0i64;
+    }
+    v20 = 6;
+    v21 = v9;
+    record = (double)this->mFighterArray.p[i]->record;
+    if ( (v24 & 0x40) != 0 )
+    {
+      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v23 + 16i64))(
+        v23,
+        v22,
+        COERCE_DOUBLE(*(_QWORD *)&v25));
       v23 = 0i64;
     }
-    v24 = 6;
-    v25 = v9;
-    v10 = (double)v1->mFighterArray.p[i]->record;
-    if ( (v28 >> 6) & 1 )
-    {
-      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v27 + 16i64))(
-        v27,
-        &v26,
-        COERCE_DOUBLE(*(_QWORD *)&v29));
-      v27 = 0i64;
-    }
-    v28 = 5;
-    v29 = v10;
-    Scaleform::GFx::Movie::Invoke(v1->mMovie, "CockFight_AddFighter", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
+    v24 = 5;
+    v25 = record;
+    Scaleform::GFx::Movie::Invoke(this->mMovie, "CockFight_AddFighter", 0i64, &ptr, 4u);
     `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
-  UFG::qString::qString(&v31, "CockFight_GotoFighterSelect");
+  UFG::qString::qString(&v27, "CockFight_GotoFighterSelect");
   v12 = (UFG::qString *)v11;
-  v33 = v11;
-  if ( !v1->mMovie )
-    v1->mMovie = v1->mRenderable->m_movie.pObject;
-  v13 = v1->mMovie;
+  v29 = v11;
+  if ( !this->mMovie )
+    this->mMovie = this->mRenderable->m_movie.pObject;
+  v13 = this->mMovie;
   if ( v13 )
   {
     Scaleform::GFx::Movie::Invoke(v13, *(const char **)(v11 + 24), 0i64, 0i64, 0);
@@ -552,19 +541,19 @@ void __fastcall UFG::UIHKScreenCockFight::RefreshFighterList(UFG::UIHKScreenCock
     v14 = (UFG::qString *)v11;
   }
   UFG::qString::~qString(v14);
-  v1->mState = 1;
+  this->mState = STATE_BRIGHTNESS;
 }
 
 // File Line: 225
 // RVA: 0x5ED520
 void __fastcall UFG::UIHKScreenCockFight::IncreaseBet(UFG::UIHKScreenCockFight *this)
 {
-  unsigned int v1; // eax
+  unsigned int mCurrentBet; // eax
 
   this->mCurrentBet += UFG::UIHKScreenCockFight::mBetMultiple;
-  v1 = this->mCurrentBet;
-  if ( v1 > UFG::UIHKScreenCockFight::mMaxBet || v1 > this->mWeiMoney )
-    this->mCurrentBet = v1 - UFG::UIHKScreenCockFight::mBetMultiple;
+  mCurrentBet = this->mCurrentBet;
+  if ( mCurrentBet > UFG::UIHKScreenCockFight::mMaxBet || mCurrentBet > this->mWeiMoney )
+    this->mCurrentBet = mCurrentBet - UFG::UIHKScreenCockFight::mBetMultiple;
   UFG::UIHKScreenCockFight::UpdateBetAmount(this);
 }
 
@@ -572,102 +561,88 @@ void __fastcall UFG::UIHKScreenCockFight::IncreaseBet(UFG::UIHKScreenCockFight *
 // RVA: 0x61A120
 void __fastcall UFG::UIHKScreenCockFight::UpdateBetAmount(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKScreenCockFight *v1; // rbx
-  double v2; // xmm6_8
-  double v3; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v2; // xmm6_8
+  double mWeiMoney; // xmm6_8
   double v4; // xmm6_8
   double v5; // xmm6_8
-  char ptr; // [rsp+30h] [rbp-C8h]
-  __int64 v7; // [rsp+40h] [rbp-B8h]
-  unsigned int v8; // [rsp+48h] [rbp-B0h]
-  double v9; // [rsp+50h] [rbp-A8h]
-  char v10; // [rsp+60h] [rbp-98h]
-  __int64 v11; // [rsp+70h] [rbp-88h]
-  double v12; // [rsp+78h] [rbp-80h]
-  char v13; // [rsp+88h] [rbp-70h]
-  __int64 v14; // [rsp+98h] [rbp-60h]
-  unsigned int v15; // [rsp+A0h] [rbp-58h]
-  double v16; // [rsp+A8h] [rbp-50h]
-  char v17; // [rsp+B8h] [rbp-40h]
-  __int64 v18; // [rsp+C8h] [rbp-30h]
-  unsigned int v19; // [rsp+D0h] [rbp-28h]
-  double v20; // [rsp+D8h] [rbp-20h]
-  __int64 v21; // [rsp+E8h] [rbp-10h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-C8h] BYREF
+  char v7[16]; // [rsp+60h] [rbp-98h] BYREF
+  __int64 v8; // [rsp+70h] [rbp-88h]
+  double v9; // [rsp+78h] [rbp-80h]
+  char v10[16]; // [rsp+88h] [rbp-70h] BYREF
+  __int64 v11; // [rsp+98h] [rbp-60h]
+  int v12; // [rsp+A0h] [rbp-58h]
+  double v13; // [rsp+A8h] [rbp-50h]
+  char v14[16]; // [rsp+B8h] [rbp-40h] BYREF
+  __int64 v15; // [rsp+C8h] [rbp-30h]
+  int v16; // [rsp+D0h] [rbp-28h]
+  double v17; // [rsp+D8h] [rbp-20h]
+  __int64 v18; // [rsp+E8h] [rbp-10h]
 
-  v21 = -2i64;
-  v1 = this;
+  v18 = -2i64;
   `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v2 = (double)(signed int)v1->mCurrentBet;
-  if ( (v8 >> 6) & 1 )
+  v2.NValue = (double)(int)this->mCurrentBet;
+  if ( (ptr.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v7 + 16i64))(v7, &ptr, COERCE_DOUBLE(*(_QWORD *)&v9));
-    v7 = 0i64;
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+      ptr.pObjectInterface,
+      &ptr,
+      ptr.mValue);
+    ptr.pObjectInterface = 0i64;
   }
-  v8 = 5;
-  v9 = v2;
-  v3 = (double)(signed int)v1->mWeiMoney;
-  if ( (LODWORD(v12) >> 6) & 1 )
+  ptr.Type = VT_Number;
+  ptr.mValue = v2;
+  mWeiMoney = (double)(int)this->mWeiMoney;
+  if ( (LOBYTE(v9) & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v11 + 16i64))(
-      v11,
-      &v10,
-      COERCE_DOUBLE(*(_QWORD *)&v12));
+    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v8 + 16i64))(v8, v7, COERCE_DOUBLE(*(_QWORD *)&v9));
+    v8 = 0i64;
+  }
+  v9 = mWeiMoney;
+  v4 = (double)(int)UFG::UIHKScreenCockFight::mMinBet;
+  if ( (v12 & 0x40) != 0 )
+  {
+    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v11 + 16i64))(v11, v10, COERCE_DOUBLE(*(_QWORD *)&v13));
     v11 = 0i64;
   }
-  v12 = v3;
-  v4 = (double)(signed int)UFG::UIHKScreenCockFight::mMinBet;
-  if ( (v15 >> 6) & 1 )
+  v12 = 5;
+  v13 = v4;
+  v5 = (double)(int)UFG::UIHKScreenCockFight::mMaxBet;
+  if ( (v16 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v14 + 16i64))(
-      v14,
-      &v13,
-      COERCE_DOUBLE(*(_QWORD *)&v16));
-    v14 = 0i64;
+    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v15 + 16i64))(v15, v14, COERCE_DOUBLE(*(_QWORD *)&v17));
+    v15 = 0i64;
   }
-  v15 = 5;
-  v16 = v4;
-  v5 = (double)(signed int)UFG::UIHKScreenCockFight::mMaxBet;
-  if ( (v19 >> 6) & 1 )
-  {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v18 + 16i64))(
-      v18,
-      &v17,
-      COERCE_DOUBLE(*(_QWORD *)&v20));
-    v18 = 0i64;
-  }
-  v19 = 5;
-  v20 = v5;
-  Scaleform::GFx::Movie::Invoke(v1->mMovie, "CockFight_UpdateBetAmount", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
+  v16 = 5;
+  v17 = v5;
+  Scaleform::GFx::Movie::Invoke(this->mMovie, "CockFight_UpdateBetAmount", 0i64, &ptr, 4u);
   `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 251
 // RVA: 0x621E60
-bool __fastcall UFG::UIHKScreenCockFight::handleMessage(UFG::UIHKScreenCockFight *this, unsigned int msgId, UFG::UIMessage *msg)
+bool __fastcall UFG::UIHKScreenCockFight::handleMessage(
+        UFG::UIHKScreenCockFight *this,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  UFG::UIMessage *v3; // rbp
-  unsigned int v4; // esi
-  UFG::UIHKScreenCockFight *v5; // rbx
   __int32 v6; // ecx
-  int v7; // ecx
+  __int32 v7; // ecx
   UFG::qString *v8; // rax
-  int v9; // eax
-  unsigned int v10; // ecx
+  int SelectedFighterIndexFromFlash; // eax
+  unsigned int mWeiMoney; // ecx
   UFG::qString *v11; // rax
   __int32 v12; // ecx
   UFG::qString *v14; // rax
   __int32 v15; // ecx
   UFG::qString *v16; // rax
   __int32 v17; // ecx
-  unsigned int v18; // ecx
+  unsigned int mCurrentBet; // ecx
   __int64 v19; // rcx
-  UFG::UIHKCockData **v20; // rax
-  UFG::qString v21; // [rsp+38h] [rbp-60h]
-  UFG::qString v22; // [rsp+60h] [rbp-38h]
+  UFG::UIHKCockData **p; // rax
+  UFG::qString v21; // [rsp+38h] [rbp-60h] BYREF
+  UFG::qString v22; // [rsp+60h] [rbp-38h] BYREF
 
-  v3 = msg;
-  v4 = msgId;
-  v5 = this;
   if ( msgId == UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
   {
     v6 = this->mState - 1;
@@ -679,44 +654,34 @@ bool __fastcall UFG::UIHKScreenCockFight::handleMessage(UFG::UIHKScreenCockFight
         if ( v7 == 2 )
         {
           if ( UFG::HudAudio::m_instance )
-            UFG::AudioEntity::CreateAndPlayEvent(
-              (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-              0x4A3D1F6Cu,
-              0i64,
-              0,
-              0i64);
-          v5->mFinished = 1;
+            UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x4A3D1F6Cu, 0i64, 0, 0i64);
+          this->mFinished = 1;
         }
-        return UFG::UIHKMinigameScreen::handleMessage((UFG::UIHKMinigameScreen *)&v5->vfptr, v4, v3);
+        return UFG::UIHKMinigameScreen::handleMessage(this, msgId, msg);
       }
-      v5->mIsReady = 1;
-      v5->mState = 3;
+      this->mIsReady = 1;
+      this->mState = STATE_UISCALE;
       UFG::qString::qString(&v21, "CockFight_HideScreen");
-      UFG::UIHKScreenCockFight::Invoke(v5, v8);
-      UFG::UIHKScreenCockFight::HideHelpBar(v5);
+      UFG::UIHKScreenCockFight::Invoke(this, v8);
+      UFG::UIHKScreenCockFight::HideHelpBar(this);
     }
     else
     {
-      v9 = UFG::UIHKScreenCockFight::GetSelectedFighterIndexFromFlash(v5);
-      v5->mSelectedFighterIndex = v9;
-      v5->mSelectedFighter = v5->mFighterArray.p[v9];
-      v10 = v5->mWeiMoney;
-      if ( v10 > UFG::UIHKScreenCockFight::mMinBet )
-        v10 = UFG::UIHKScreenCockFight::mMinBet;
-      v5->mCurrentBet = v10;
-      UFG::UIHKScreenCockFight::UpdateBetAmount(v5);
+      SelectedFighterIndexFromFlash = UFG::UIHKScreenCockFight::GetSelectedFighterIndexFromFlash(this);
+      this->mSelectedFighterIndex = SelectedFighterIndexFromFlash;
+      this->mSelectedFighter = this->mFighterArray.p[SelectedFighterIndexFromFlash];
+      mWeiMoney = this->mWeiMoney;
+      if ( mWeiMoney > UFG::UIHKScreenCockFight::mMinBet )
+        mWeiMoney = UFG::UIHKScreenCockFight::mMinBet;
+      this->mCurrentBet = mWeiMoney;
+      UFG::UIHKScreenCockFight::UpdateBetAmount(this);
       UFG::qString::qString(&v22, "CockFight_GotoPlaceBet");
-      UFG::UIHKScreenCockFight::Invoke(v5, v11);
-      v5->mState = 2;
+      UFG::UIHKScreenCockFight::Invoke(this, v11);
+      this->mState = STATE_VOLUME;
     }
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0x4A3D1F6Cu,
-        0i64,
-        0,
-        0i64);
-    return UFG::UIHKMinigameScreen::handleMessage((UFG::UIHKMinigameScreen *)&v5->vfptr, v4, v3);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x4A3D1F6Cu, 0i64, 0, 0i64);
+    return UFG::UIHKMinigameScreen::handleMessage(this, msgId, msg);
   }
   if ( msgId == UI_HASH_THUMBSTICK_LEFT_LEFT_30 || msgId == UI_HASH_DPAD_LEFT_PRESSED_30 )
   {
@@ -726,35 +691,25 @@ bool __fastcall UFG::UIHKScreenCockFight::handleMessage(UFG::UIHKScreenCockFight
       if ( v17 == 1 )
       {
         if ( UFG::HudAudio::m_instance )
-          UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-            0xEDB4A8C7,
-            0i64,
-            0,
-            0i64);
-        v5->mCurrentBet -= UFG::UIHKScreenCockFight::mBetMultiple;
-        v18 = v5->mCurrentBet;
-        if ( v18 < UFG::UIHKScreenCockFight::mMinBet )
-          v18 = UFG::UIHKScreenCockFight::mMinBet;
-        v5->mCurrentBet = v18;
-        UFG::UIHKScreenCockFight::UpdateBetAmount(v5);
+          UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
+        this->mCurrentBet -= UFG::UIHKScreenCockFight::mBetMultiple;
+        mCurrentBet = this->mCurrentBet;
+        if ( mCurrentBet < UFG::UIHKScreenCockFight::mMinBet )
+          mCurrentBet = UFG::UIHKScreenCockFight::mMinBet;
+        this->mCurrentBet = mCurrentBet;
+        UFG::UIHKScreenCockFight::UpdateBetAmount(this);
       }
       return 1;
     }
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xEDB4A8C7,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
     UFG::qString::qString(&v22, "CockFight_PrevFighter");
 LABEL_48:
-    UFG::UIHKScreenCockFight::Invoke(v5, v16);
-    v19 = (unsigned int)UFG::UIHKScreenCockFight::GetSelectedFighterIndexFromFlash(v5);
-    v20 = v5->mFighterArray.p;
-    v5->mSelectedFighterIndex = v19;
-    v5->mSelectedFighter = v20[v19];
+    UFG::UIHKScreenCockFight::Invoke(this, v16);
+    v19 = (unsigned int)UFG::UIHKScreenCockFight::GetSelectedFighterIndexFromFlash(this);
+    p = this->mFighterArray.p;
+    this->mSelectedFighterIndex = v19;
+    this->mSelectedFighter = p[v19];
     return 1;
   }
   if ( msgId == UI_HASH_THUMBSTICK_LEFT_RIGHT_30 || msgId == UI_HASH_DPAD_RIGHT_PRESSED_30 )
@@ -765,56 +720,36 @@ LABEL_48:
       if ( v15 == 1 )
       {
         if ( UFG::HudAudio::m_instance )
-          UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-            0xEDB4A8C7,
-            0i64,
-            0,
-            0i64);
-        UFG::UIHKScreenCockFight::IncreaseBet(v5);
+          UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
+        UFG::UIHKScreenCockFight::IncreaseBet(this);
       }
       return 1;
     }
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xEDB4A8C7,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
     UFG::qString::qString(&v22, "CockFight_NextFighter");
     goto LABEL_48;
   }
   if ( msgId != UI_HASH_BUTTON_BACK_PRESSED_30 )
-    return UFG::UIHKMinigameScreen::handleMessage((UFG::UIHKMinigameScreen *)&v5->vfptr, v4, v3);
+    return UFG::UIHKMinigameScreen::handleMessage(this, msgId, msg);
   v12 = this->mState - 1;
   if ( v12 )
   {
     if ( v12 != 1 )
       return 0;
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xA4E5BFBD,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xA4E5BFBD, 0i64, 0, 0i64);
     UFG::qString::qString(&v22, "CockFight_GotoFighterSelect");
-    UFG::UIHKScreenCockFight::Invoke(v5, v14);
-    v5->mCurrentBet = 0;
-    v5->mState = 1;
-    UFG::UIHKScreenCockFight::ShowHelpBar(v5);
+    UFG::UIHKScreenCockFight::Invoke(this, v14);
+    this->mCurrentBet = 0;
+    this->mState = STATE_BRIGHTNESS;
+    UFG::UIHKScreenCockFight::ShowHelpBar(this);
   }
   else if ( UFG::UIHK_NISOverlay::m_curtains.m_state == STATE_CURTAIN_HIDDEN )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xA4E5BFBD,
-        0i64,
-        0,
-        0i64);
-    v5->mFinished = 1;
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xA4E5BFBD, 0i64, 0, 0i64);
+    this->mFinished = 1;
   }
   return 1;
 }
@@ -823,57 +758,53 @@ LABEL_48:
 // RVA: 0x605860
 void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight *this, bool win)
 {
-  bool v2; // si
-  UFG::UIHKScreenCockFight *v3; // rbx
-  int v4; // ebx
+  int NValue; // ebx
   UFG::GameStatTracker *v5; // rax
   int v6; // edi
   UFG::GameStatTracker *v7; // rax
   UFG::GameStatTracker *v8; // rax
   UFG::GameStatTracker *v9; // rax
   UFG::OSuiteLeaderboardManager *v10; // rax
-  UFG::OSuiteLeaderboardData *v11; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
   UFG::qSymbol *v12; // rbx
   UFG::qSymbol *v13; // rax
   UFG::GameStatTracker *v14; // rax
   UFG::qSymbol *v15; // rbx
   UFG::qSymbol *v16; // rax
   UFG::GameStatTracker *v17; // rax
-  int v18; // ebx
+  int Stat; // ebx
   UFG::GameStatTracker *v19; // rax
   int v20; // edi
   UFG::OSuiteLeaderboardManager *v21; // rax
   UFG::OSuiteLeaderboardData *v22; // rax
-  Scaleform::GFx::Value pval; // [rsp+38h] [rbp-31h]
-  char ptr; // [rsp+68h] [rbp-1h]
-  __int64 v25; // [rsp+78h] [rbp+Fh]
-  unsigned int v26; // [rsp+80h] [rbp+17h]
-  __int64 v27; // [rsp+88h] [rbp+1Fh]
-  UFG::qSymbol v28; // [rsp+D0h] [rbp+67h]
-  UFG::qSymbol result; // [rsp+D8h] [rbp+6Fh]
+  Scaleform::GFx::Value pval; // [rsp+38h] [rbp-31h] BYREF
+  Scaleform::GFx::Value ptr; // [rsp+68h] [rbp-1h] BYREF
+  UFG::qSymbol v25; // [rsp+D0h] [rbp+67h] BYREF
+  UFG::qSymbol result; // [rsp+D8h] [rbp+6Fh] BYREF
 
-  v2 = win;
-  v3 = this;
-  this->mState = 4;
+  this->mState = NUM_CALIBRATION_STATES;
   `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  if ( (v26 >> 6) & 1 )
+  if ( (ptr.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v25 + 16i64))(v25, &ptr, v27);
-    v25 = 0i64;
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+      ptr.pObjectInterface,
+      &ptr,
+      ptr.mValue);
+    ptr.pObjectInterface = 0i64;
   }
-  v26 = 2;
-  LOBYTE(v27) = v2;
-  Scaleform::GFx::Movie::Invoke(v3->mMovie, "CockFight_GotoResults", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  UFG::UIHKScreenCockFight::ShowHelpBar(v3);
+  ptr.Type = VT_Boolean;
+  ptr.mValue.BValue = win;
+  Scaleform::GFx::Movie::Invoke(this->mMovie, "CockFight_GotoResults", 0i64, &ptr, 1u);
+  UFG::UIHKScreenCockFight::ShowHelpBar(this);
   pval.pObjectInterface = 0i64;
-  pval.Type = 0;
-  Scaleform::GFx::Movie::GetVariable(v3->mMovie, &pval, "gPlayerPocket");
-  v4 = (signed int)pval.mValue.NValue;
+  pval.Type = VT_Undefined;
+  Scaleform::GFx::Movie::GetVariable(this->mMovie, &pval, "gPlayerPocket");
+  NValue = (int)pval.mValue.NValue;
   v5 = UFG::GameStatTracker::Instance();
-  v6 = (unsigned __int64)UFG::GameStatTracker::GetStat(v5, Money) - v4;
+  v6 = UFG::GameStatTracker::GetStat(v5, Money) - NValue;
   v7 = UFG::GameStatTracker::Instance();
-  UFG::GameStatTracker::SetStat(v7, Money, v4);
-  if ( v2 )
+  UFG::GameStatTracker::SetStat(v7, Money, NValue);
+  if ( win )
   {
     if ( v6 < 0 )
       v6 = -v6;
@@ -882,10 +813,12 @@ void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight 
     v9 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::ApplyDelta(v9, GamblingEarnings, v6);
     v10 = UFG::OSuiteLeaderboardManager::Instance();
-    v11 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v10, "StatAwardsMogul");
-    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v11, v6);
+    LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                            v10,
+                                            "StatAwardsMogul");
+    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(LeaderboardDataUsingLeaderboardName, v6);
     v12 = UFG::qSymbol::create_from_string(&result, "Winning");
-    v13 = UFG::qSymbol::create_from_string(&v28, "CockFight");
+    v13 = UFG::qSymbol::create_from_string(&v25, "CockFight");
     UFG::GameStatAction::Money::SendTransactionTelemetry(v13, v12, v6);
     UFG::AchievementTrophyManager::UnlockAchievementTrophy(19);
     if ( v6 >= 50000 )
@@ -898,25 +831,25 @@ void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight 
     v14 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::ApplyDelta(v14, GamblingLoss, v6);
     v15 = UFG::qSymbol::create_from_string(&result, "Lost");
-    v16 = UFG::qSymbol::create_from_string(&v28, "CockFight");
+    v16 = UFG::qSymbol::create_from_string(&v25, "CockFight");
     UFG::GameStatAction::Money::SendTransactionTelemetry(v16, v15, v6);
   }
   v17 = UFG::GameStatTracker::Instance();
-  v18 = UFG::GameStatTracker::GetStat(v17, GamblingLoss);
+  Stat = UFG::GameStatTracker::GetStat(v17, GamblingLoss);
   v19 = UFG::GameStatTracker::Instance();
-  v20 = (unsigned __int64)UFG::GameStatTracker::GetStat(v19, GamblingEarnings) - v18;
+  v20 = UFG::GameStatTracker::GetStat(v19, GamblingEarnings) - Stat;
   v21 = UFG::OSuiteLeaderboardManager::Instance();
   v22 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v21, "StatAwardsGambler");
   UFG::DataSynchronizer::SetMaxToGlobalSnapshot(v22, v20);
-  if ( ((unsigned int)pval.Type >> 6) & 1 )
+  if ( (pval.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
       pval.pObjectInterface,
       &pval,
-      *(_QWORD *)&pval.mValue.NValue);
+      pval.mValue);
     pval.pObjectInterface = 0i64;
   }
-  pval.Type = 0;
+  pval.Type = VT_Undefined;
   `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
@@ -924,163 +857,108 @@ void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight 
 // RVA: 0x5E8D40
 __int64 __fastcall UFG::UIHKScreenCockFight::GetSelectedFighterIndexFromFlash(UFG::UIHKScreenCockFight *this)
 {
-  unsigned int v1; // ebx
-  Scaleform::GFx::Value pval; // [rsp+28h] [rbp-40h]
+  unsigned int NValue; // ebx
+  Scaleform::GFx::Value pval; // [rsp+28h] [rbp-40h] BYREF
 
   pval.pObjectInterface = 0i64;
-  pval.Type = 0;
+  pval.Type = VT_Undefined;
   Scaleform::GFx::Movie::GetVariable(this->mMovie, &pval, "gFighterIndex");
-  v1 = (signed int)pval.mValue.NValue;
-  if ( ((unsigned int)pval.Type >> 6) & 1 )
+  NValue = (int)pval.mValue.NValue;
+  if ( (pval.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
       pval.pObjectInterface,
       &pval,
-      *(_QWORD *)&pval.mValue.NValue);
+      pval.mValue);
     pval.pObjectInterface = 0i64;
   }
-  return v1;
+  return NValue;
 }
 
 // File Line: 413
 // RVA: 0x5EDEA0
 void __fastcall UFG::UIHKScreenCockFight::Invoke(UFG::UIHKScreenCockFight *this, UFG::qString *cmd)
 {
-  UFG::qString *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rcx
-  UFG::qString *v4; // rcx
+  Scaleform::GFx::Movie *mMovie; // rcx
 
-  v2 = cmd;
   if ( !this->mMovie )
     this->mMovie = this->mRenderable->m_movie.pObject;
-  v3 = this->mMovie;
-  if ( v3 )
+  mMovie = this->mMovie;
+  if ( mMovie )
   {
-    Scaleform::GFx::Movie::Invoke(v3, cmd->mData, 0i64, 0i64, 0);
-    v4 = v2;
+    Scaleform::GFx::Movie::Invoke(mMovie, cmd->mData, 0i64, 0i64, 0);
+    UFG::qString::~qString(cmd);
   }
   else
   {
-    v4 = cmd;
+    UFG::qString::~qString(cmd);
   }
-  UFG::qString::~qString(v4);
 }
 
 // File Line: 432
 // RVA: 0x60DA10
 void __fastcall UFG::UIHKScreenCockFight::ShowHelpBar(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKScreenCockFight::eState v1; // ecx
-  int v2; // ecx
-  int v3; // ecx
+  UFG::UIHKScreenCockFight::eState mState; // ecx
+  __int32 v2; // ecx
+  __int32 v3; // ecx
   UFG::UIHKHelpBarWidget *v4; // rsi
   unsigned int v5; // ebx
   UFG::UIHKScreenGlobalOverlay *v6; // rax
-  signed __int64 v7; // rdi
-  UFG::UIHKHelpBarWidget *v8; // rdi
-  unsigned int v9; // ebx
-  UFG::UIHKHelpBarWidget *v10; // rdi
-  unsigned int v11; // ebx
-  UFG::UIHKHelpBarWidget *v12; // rdi
-  unsigned int v13; // ebx
-  UFG::UIHKHelpBarData data; // [rsp+20h] [rbp-D8h]
-  __int64 v15; // [rsp+268h] [rbp+170h]
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rdi
+  unsigned int v8; // ebx
+  UFG::UIHKHelpBarData data; // [rsp+20h] [rbp-D8h] BYREF
+  __int64 v10; // [rsp+268h] [rbp+170h]
 
-  v15 = -2i64;
+  v10 = -2i64;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis
     || UFG::UIHKScreenGlobalOverlay::mThis == (UFG::UIHKScreenGlobalOverlay *)-144i64 )
   {
     return;
   }
-  v1 = this->mState;
-  if ( v1 == STATE_INIT )
+  mState = this->mState;
+  if ( mState == STATE_INIT )
   {
-    v12 = &gHelpBarSentinel;
+    p_HelpBar = &gHelpBarSentinel;
     if ( UFG::UIHKScreenGlobalOverlay::mThis )
-      v12 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
-    v13 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
-    UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
-    data.id = v13;
-    *(_QWORD *)&data.priority = 0i64;
-    _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
-    *(_QWORD *)&data.Buttons[4] = 0i64;
-    UFG::qString::Set(data.Captions, "$COMMON_ACCEPT_UPPERCASE");
-    UFG::qString::Set(&data.Captions[1], "$COMMON_BACK_UPPERCASE");
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 32), &customWorldMapCaption);
-    *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
-    *(_QWORD *)data.MessageIds = 0i64;
-    *(_QWORD *)&data.MessageIds[2] = 0i64;
-    UFG::UIHKHelpBarWidget::Show(v12, &data);
-    UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator(
-      &data.Captions[5].mStringHash32,
-      0x28ui64,
-      6,
-      (void (__fastcall *)(void *))UFG::qString::~qString);
-    goto LABEL_21;
+      p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+    goto LABEL_20;
   }
-  v2 = v1 - 1;
+  v2 = mState - 1;
   if ( !v2 )
   {
-    v10 = &gHelpBarSentinel;
+    p_HelpBar = &gHelpBarSentinel;
     if ( UFG::UIHKScreenGlobalOverlay::mThis )
-      v10 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
-    v11 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
-    UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
-    data.id = v11;
-    *(_QWORD *)&data.priority = 0i64;
-    _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
-    *(_QWORD *)&data.Buttons[4] = 0i64;
-    UFG::qString::Set(data.Captions, "$COMMON_ACCEPT_UPPERCASE");
-    UFG::qString::Set(&data.Captions[1], "$COMMON_BACK_UPPERCASE");
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 32), &customWorldMapCaption);
-    *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
-    *(_QWORD *)data.MessageIds = 0i64;
-    *(_QWORD *)&data.MessageIds[2] = 0i64;
-    UFG::UIHKHelpBarWidget::Show(v10, &data);
-    UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator(
-      &data.Captions[5].mStringHash32,
-      0x28ui64,
-      6,
-      (void (__fastcall *)(void *))UFG::qString::~qString);
-    goto LABEL_21;
+      p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+    goto LABEL_20;
   }
   v3 = v2 - 1;
   if ( !v3 )
   {
-    v8 = &gHelpBarSentinel;
+    p_HelpBar = &gHelpBarSentinel;
     if ( UFG::UIHKScreenGlobalOverlay::mThis )
-      v8 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
-    v9 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
+      p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+LABEL_20:
+    v8 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
     UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
-    data.id = v9;
+    data.id = v8;
     *(_QWORD *)&data.priority = 0i64;
-    _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
+    *(__m128i *)data.Buttons = _mm_load_si128((const __m128i *)&_xmm);
     *(_QWORD *)&data.Buttons[4] = 0i64;
     UFG::qString::Set(data.Captions, "$COMMON_ACCEPT_UPPERCASE");
     UFG::qString::Set(&data.Captions[1], "$COMMON_BACK_UPPERCASE");
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 32), &customWorldMapCaption);
-    *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
-    *(_QWORD *)data.MessageIds = 0i64;
-    *(_QWORD *)&data.MessageIds[2] = 0i64;
-    UFG::UIHKHelpBarWidget::Show(v8, &data);
+    UFG::qString::Set((UFG::qString *)&data.Captions[1].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[2].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[3].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[4].mStringHash32, &customCaption);
+    memset(&data.Icons[5].mStringHash32, 0, 24);
+    UFG::UIHKHelpBarWidget::Show(p_HelpBar, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
     `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-LABEL_21:
     `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     return;
   }
@@ -1093,17 +971,15 @@ LABEL_21:
     UFG::UIHKHelpBarData::UIHKHelpBarData(&data);
     data.id = v5;
     *(_QWORD *)&data.priority = 0i64;
-    _mm_store_si128((__m128i *)data.Buttons, _mm_load_si128((const __m128i *)&_xmm));
+    *(__m128i *)data.Buttons = _mm_load_si128((const __m128i *)&_xmm);
     *(_QWORD *)&data.Buttons[4] = 0i64;
     UFG::qString::Set(data.Captions, "$COMMON_EXIT_UPPERCASE");
-    UFG::qString::Set(&data.Captions[1], &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[2] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[3] + 32), &customWorldMapCaption);
-    UFG::qString::Set((UFG::qString *)((char *)&data.Captions[4] + 32), &customWorldMapCaption);
-    *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
-    *(_QWORD *)data.MessageIds = 0i64;
-    *(_QWORD *)&data.MessageIds[2] = 0i64;
+    UFG::qString::Set(&data.Captions[1], &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[1].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[2].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[3].mStringHash32, &customCaption);
+    UFG::qString::Set((UFG::qString *)&data.Captions[4].mStringHash32, &customCaption);
+    memset(&data.Icons[5].mStringHash32, 0, 24);
     UFG::UIHKHelpBarWidget::Show(v4, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
     `eh vector destructor iterator(
@@ -1115,24 +991,23 @@ LABEL_21:
     v6 = UFG::UIHKScreenGlobalOverlay::mThis;
     if ( !UFG::UIHKScreenGlobalOverlay::mThis )
       v6 = &gGlobalOverlaySentinel;
-    v7 = (signed __int64)&v6->HelpBar;
-    *(_BYTE *)(v7 + 1) |= COERCE_FLOAT(COERCE_UNSIGNED_INT(v6->HelpBar.mYOffset - -20.0) & _xmm) > 0.001;
-    *(_DWORD *)(v7 + 612) = -1046478848;
+    v6->HelpBar.mChanged |= COERCE_FLOAT(COERCE_UNSIGNED_INT(v6->HelpBar.mYOffset - -20.0) & _xmm) > 0.001;
+    v6->HelpBar.mYOffset = -20.0;
   }
-}
+}NED_INT(v6->HelpBa
 
 // File Line: 496
 // RVA: 0x5ECF60
 void __fastcall UFG::UIHKScreenCockFight::HideHelpBar(UFG::UIHKScreenCockFight *this)
 {
-  UFG::UIHKHelpBarWidget *v1; // rbx
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rbx
   unsigned int v2; // eax
 
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
   {
-    v1 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+    p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
     v2 = UFG::qStringHash32("COCKFIGHT", 0xFFFFFFFF);
-    UFG::UIHKHelpBarWidget::Hide(v1, v2);
+    UFG::UIHKHelpBarWidget::Hide(p_HelpBar, v2);
   }
 }
 

@@ -2,38 +2,36 @@
 // RVA: 0xA905B0
 void __fastcall CAkSplitterBus::PlayerSlot::Term(CAkSplitterBus::PlayerSlot *this)
 {
-  CAkSplitterBus::PlayerSlot *v1; // rbx
-  CAkVPLMixBusNode *v2; // rcx
+  CAkVPLMixBusNode *m_pFeedbackMixBus; // rcx
   CAkVPLMixBusNode *v3; // rdi
   int v4; // esi
-  CAkVPLMixBusNode *v5; // rdi
+  CAkVPLMixBusNode *m_pAudioMixBus; // rdi
   int v6; // esi
 
-  v1 = this;
-  v2 = this->m_pFeedbackMixBus;
-  if ( v2 )
+  m_pFeedbackMixBus = this->m_pFeedbackMixBus;
+  if ( m_pFeedbackMixBus )
   {
-    CAkVPLMixBusNode::Disconnect(v2);
-    v3 = v1->m_pFeedbackMixBus;
+    CAkVPLMixBusNode::Disconnect(m_pFeedbackMixBus);
+    v3 = this->m_pFeedbackMixBus;
     v4 = g_LEngineDefaultPoolId;
     if ( v3 )
     {
       CAkVPLMixBusNode::~CAkVPLMixBusNode(v3);
       AK::MemoryMgr::Free(v4, v3);
     }
-    v1->m_pFeedbackMixBus = 0i64;
+    this->m_pFeedbackMixBus = 0i64;
   }
-  if ( v1->m_pAudioMixBus )
+  if ( this->m_pAudioMixBus )
   {
-    CAkVPLMixBusNode::Disconnect(v1->m_pAudioMixBus);
-    v5 = v1->m_pAudioMixBus;
+    CAkVPLMixBusNode::Disconnect(this->m_pAudioMixBus);
+    m_pAudioMixBus = this->m_pAudioMixBus;
     v6 = g_LEngineDefaultPoolId;
-    if ( v1->m_pAudioMixBus )
+    if ( this->m_pAudioMixBus )
     {
-      CAkVPLMixBusNode::~CAkVPLMixBusNode(v5);
-      AK::MemoryMgr::Free(v6, v5);
+      CAkVPLMixBusNode::~CAkVPLMixBusNode(m_pAudioMixBus);
+      AK::MemoryMgr::Free(v6, m_pAudioMixBus);
     }
-    v1->m_pAudioMixBus = 0i64;
+    this->m_pAudioMixBus = 0i64;
   }
 }
 
@@ -48,6 +46,7 @@ void __fastcall CAkSplitterBus::CAkSplitterBus(CAkSplitterBus *this)
 
 // File Line: 57
 // RVA: 0xA8FA00
+// attributes: thunk
 void __fastcall CAkSplitterBus::~CAkSplitterBus(CAkSplitterBus *this)
 {
   CAkSplitterBus::Term(this);
@@ -55,168 +54,149 @@ void __fastcall CAkSplitterBus::~CAkSplitterBus(CAkSplitterBus *this)
 
 // File Line: 62
 // RVA: 0xA90540
-signed __int64 __fastcall CAkSplitterBus::Term(CAkSplitterBus *this)
+__int64 __fastcall CAkSplitterBus::Term(CAkSplitterBus *this)
 {
-  __int64 v1; // rdi
-  CAkSplitterBus *v2; // rbx
+  __int64 i; // rdi
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_aBusses.m_uLength )
+  for ( i = 0i64; (unsigned int)i < this->m_aBusses.m_uLength; i = (unsigned int)(i + 1) )
+    CAkSplitterBus::PlayerSlot::Term(&this->m_aBusses.m_pItems[i]);
+  if ( this->m_aBusses.m_pItems )
   {
-    do
-    {
-      CAkSplitterBus::PlayerSlot::Term(&v2->m_aBusses.m_pItems[v1]);
-      v1 = (unsigned int)(v1 + 1);
-    }
-    while ( (unsigned int)v1 < v2->m_aBusses.m_uLength );
-  }
-  if ( v2->m_aBusses.m_pItems )
-  {
-    v2->m_aBusses.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v2->m_aBusses.m_pItems);
-    v2->m_aBusses.m_pItems = 0i64;
-    v2->m_aBusses.m_ulReserved = 0;
+    this->m_aBusses.m_uLength = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, this->m_aBusses.m_pItems);
+    this->m_aBusses.m_pItems = 0i64;
+    this->m_aBusses.m_ulReserved = 0;
   }
   return 1i64;
 }
 
 // File Line: 72
 // RVA: 0xA8FA10
-signed __int64 __fastcall CAkSplitterBus::AddBus(CAkSplitterBus *this, char in_iPlayerID, unsigned int in_iDeviceID, unsigned int in_MixingFormat)
+__int64 __fastcall CAkSplitterBus::AddBus(
+        CAkSplitterBus *this,
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iDeviceID,
+        unsigned int in_MixingFormat)
 {
-  __int64 v4; // rbp
-  unsigned int v5; // er12
-  unsigned __int8 v6; // r8
-  unsigned int v7; // er15
+  __int64 m_iMaxDevices; // rbp
+  unsigned __int8 m_iMaxPlayers; // r8
+  unsigned int v7; // r15d
   unsigned __int8 v8; // al
   bool v9; // r13
-  CAkSplitterBus *v10; // rdi
   unsigned int v11; // esi
-  bool v12; // r14
-  int v13; // er15
-  int v14; // ecx
-  int v15; // er14
-  size_t v16; // r13
-  __int64 v17; // r15
-  int v18; // ebp
-  signed int v19; // edx
-  unsigned int v20; // er10
-  int v21; // er11
-  signed __int64 v22; // r8
-  __int64 v23; // rax
-  bool v24; // zf
-  signed __int64 v25; // rsi
-  CAkBusFX *v26; // rax
-  CAkVPLMixBusNode *v27; // rdi
-  unsigned int v28; // ebp
-  int v29; // ebx
-  bool v31; // [rsp+70h] [rbp+8h]
-  unsigned __int8 v32; // [rsp+78h] [rbp+10h]
-  unsigned int v33; // [rsp+88h] [rbp+20h]
+  int v12; // r15d
+  int v13; // ecx
+  int v14; // r14d
+  size_t v15; // r13
+  __int64 v16; // r15
+  int v17; // ebp
+  int v18; // edx
+  unsigned int v19; // r10d
+  int i; // r11d
+  __int64 v21; // r8
+  __int64 v22; // rax
+  bool v23; // zf
+  CAkSplitterBus::PlayerSlot *v24; // rsi
+  CAkBusFX *v25; // rax
+  CAkVPLMixBusNode *v26; // rdi
+  unsigned int v27; // ebp
+  int v28; // ebx
+  bool v30; // [rsp+70h] [rbp+8h]
 
-  v33 = in_MixingFormat;
-  v32 = in_iPlayerID;
-  v4 = (unsigned __int8)this->m_iMaxDevices;
-  v5 = in_iDeviceID;
-  v6 = this->m_iMaxPlayers;
+  m_iMaxDevices = (unsigned __int8)this->m_iMaxDevices;
+  m_iMaxPlayers = this->m_iMaxPlayers;
   v7 = in_MixingFormat;
   v8 = in_iPlayerID;
-  v9 = (unsigned __int8)in_iPlayerID >= v6;
-  v10 = this;
+  v9 = in_iPlayerID >= m_iMaxPlayers;
   v11 = 0;
-  v31 = (unsigned __int8)in_iPlayerID >= v6;
+  v30 = in_iPlayerID >= m_iMaxPlayers;
   if ( this->m_iMaxDevices )
   {
     do
     {
-      if ( this->m_aBusses.m_pItems[v11].m_DeviceID == v5 )
+      if ( this->m_aBusses.m_pItems[v11].m_DeviceID == in_iDeviceID )
         break;
       ++v11;
     }
-    while ( v11 < (unsigned int)v4 );
+    while ( v11 < (unsigned int)m_iMaxDevices );
     v8 = in_iPlayerID;
   }
-  v12 = v11 == (_DWORD)v4;
-  if ( (unsigned __int8)in_iPlayerID >= v6 || v12 )
+  if ( in_iPlayerID >= m_iMaxPlayers || v11 == (_DWORD)m_iMaxDevices )
   {
-    v13 = v6;
-    v14 = v8 + 1;
-    if ( v6 > v14 )
-      LOBYTE(v14) = v6;
-    v10->m_iMaxPlayers = v14;
-    if ( v12 )
-      v10->m_iMaxDevices = v4 + 1;
+    v12 = m_iMaxPlayers;
+    v13 = v8 + 1;
+    if ( m_iMaxPlayers > v13 )
+      LOBYTE(v13) = m_iMaxPlayers;
+    this->m_iMaxPlayers = v13;
+    if ( v11 == (_DWORD)m_iMaxDevices )
+      this->m_iMaxDevices = m_iMaxDevices + 1;
     if ( !AkArray<CAkSplitterBus::PlayerSlot,CAkSplitterBus::PlayerSlot &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::Resize(
-            &v10->m_aBusses,
-            (unsigned __int8)v10->m_iMaxDevices * (unsigned __int8)v14) )
+            &this->m_aBusses,
+            (unsigned __int8)this->m_iMaxDevices * (unsigned __int8)v13) )
       return 2i64;
-    if ( v12 )
+    if ( v11 == (_DWORD)m_iMaxDevices )
     {
-      v15 = v13 - 1;
-      if ( v13 - 1 >= 0 )
+      v14 = v12 - 1;
+      if ( v12 - 1 >= 0 )
       {
-        v16 = 24 * v4;
-        v17 = (unsigned int)(v4 * v15);
-        v18 = -(signed int)v4;
+        v15 = 24 * m_iMaxDevices;
+        v16 = (unsigned int)(m_iMaxDevices * v14);
+        v17 = -(int)m_iMaxDevices;
         do
         {
           memmove(
-            &v10->m_aBusses.m_pItems[v15 * (unsigned int)(unsigned __int8)v10->m_iMaxDevices],
-            &v10->m_aBusses.m_pItems[v17],
-            v16);
-          v17 = (unsigned int)(v18 + v17);
-          --v15;
+            &this->m_aBusses.m_pItems[v14 * (unsigned int)(unsigned __int8)this->m_iMaxDevices],
+            &this->m_aBusses.m_pItems[v16],
+            v15);
+          v16 = (unsigned int)(v17 + v16);
+          --v14;
         }
-        while ( v15 >= 0 );
-        v9 = v31;
+        while ( v14 >= 0 );
+        v9 = v30;
       }
-      v19 = 0;
-      if ( v10->m_iMaxPlayers > 0u )
+      v18 = 0;
+      if ( this->m_iMaxPlayers )
       {
         do
-          v10->m_aBusses.m_pItems[++v19 * (unsigned int)(unsigned __int8)v10->m_iMaxDevices - 1].m_DeviceID = v5;
-        while ( v19 < (unsigned __int8)v10->m_iMaxPlayers );
+          this->m_aBusses.m_pItems[++v18 * (unsigned int)(unsigned __int8)this->m_iMaxDevices - 1].m_DeviceID = in_iDeviceID;
+        while ( v18 < (unsigned __int8)this->m_iMaxPlayers );
       }
     }
     if ( v9 )
     {
-      v20 = 0;
-      v21 = (unsigned __int8)v10->m_iMaxDevices * ((unsigned __int8)v10->m_iMaxPlayers - 1);
-      if ( v10->m_iMaxDevices )
+      v19 = 0;
+      for ( i = (unsigned __int8)this->m_iMaxDevices * ((unsigned __int8)this->m_iMaxPlayers - 1);
+            v19 < (unsigned __int8)this->m_iMaxDevices;
+            this->m_aBusses.m_pItems[v22].m_DeviceID = this->m_aBusses.m_pItems[v21].m_DeviceID )
       {
-        do
-        {
-          v22 = v20;
-          v23 = v20++ + v21;
-          v10->m_aBusses.m_pItems[v23].m_DeviceID = v10->m_aBusses.m_pItems[v22].m_DeviceID;
-        }
-        while ( v20 < (unsigned __int8)v10->m_iMaxDevices );
+        v21 = v19;
+        v22 = v19 + i;
+        ++v19;
       }
     }
-    v7 = v33;
+    v7 = in_MixingFormat;
   }
-  v24 = v10->m_aBusses.m_pItems[v11 + (unsigned __int8)v10->m_iMaxDevices * v32].m_pFeedbackMixBus == 0i64;
-  v25 = (signed __int64)&v10->m_aBusses.m_pItems[v11 + (unsigned __int8)v10->m_iMaxDevices * v32];
-  if ( !v24 )
+  v23 = this->m_aBusses.m_pItems[v11 + (unsigned __int8)this->m_iMaxDevices * in_iPlayerID].m_pFeedbackMixBus == 0i64;
+  v24 = &this->m_aBusses.m_pItems[v11 + (unsigned __int8)this->m_iMaxDevices * in_iPlayerID];
+  if ( !v23 )
     return 1i64;
-  v26 = (CAkBusFX *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x550ui64);
-  v27 = (CAkVPLMixBusNode *)v26;
-  if ( v26 )
+  v25 = (CAkBusFX *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x550ui64);
+  v26 = (CAkVPLMixBusNode *)v25;
+  if ( v25 )
   {
-    CAkBusFX::CAkBusFX(v26);
-    v27->m_BusContext.m_pBus = 0i64;
-    *(_DWORD *)(v25 + 20) = v7;
-    v28 = CAkVPLMixBusNode::Init(v27, v7, v7, 8u, 0i64);
-    if ( v28 != 1 )
+    CAkBusFX::CAkBusFX(v25);
+    v26->m_BusContext.m_pBus = 0i64;
+    v24->m_MixingFormat = v7;
+    v27 = CAkVPLMixBusNode::Init(v26, v7, v7, 8u, 0i64);
+    if ( v27 != 1 )
     {
-      v29 = g_LEngineDefaultPoolId;
-      CAkVPLMixBusNode::~CAkVPLMixBusNode(v27);
-      AK::MemoryMgr::Free(v29, v27);
-      return v28;
+      v28 = g_LEngineDefaultPoolId;
+      CAkVPLMixBusNode::~CAkVPLMixBusNode(v26);
+      AK::MemoryMgr::Free(v28, v26);
+      return v27;
     }
-    CAkVPLMixBusNode::Connect(v27);
-    *(_QWORD *)(v25 + 8) = v27;
+    CAkVPLMixBusNode::Connect(v26);
+    v24->m_pFeedbackMixBus = v26;
     return 1i64;
   }
   return 2i64;
@@ -224,444 +204,439 @@ signed __int64 __fastcall CAkSplitterBus::AddBus(CAkSplitterBus *this, char in_i
 
 // File Line: 154
 // RVA: 0xA90420
-signed __int64 __fastcall CAkSplitterBus::RemoveBus(CAkSplitterBus *this, char in_iPlayerID, unsigned int in_iDeviceID)
+__int64 __fastcall CAkSplitterBus::RemoveBus(
+        CAkSplitterBus *this,
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iDeviceID)
 {
-  unsigned __int8 v3; // r10
-  CAkSplitterBus *v4; // r9
-  unsigned int v6; // edx
+  unsigned int m_iMaxDevices; // edx
   unsigned int v7; // ecx
-  unsigned int *v8; // rax
+  unsigned int *p_m_DeviceID; // rax
 
-  v3 = in_iPlayerID;
-  v4 = this;
-  if ( (unsigned __int8)in_iPlayerID >= this->m_iMaxPlayers )
+  if ( in_iPlayerID >= (unsigned int)this->m_iMaxPlayers )
     return 2i64;
-  v6 = (unsigned __int8)this->m_iMaxDevices;
+  m_iMaxDevices = (unsigned __int8)this->m_iMaxDevices;
   v7 = 0;
-  if ( v4->m_iMaxDevices )
+  if ( this->m_iMaxDevices )
   {
-    v8 = &v4->m_aBusses.m_pItems->m_DeviceID;
+    p_m_DeviceID = &this->m_aBusses.m_pItems->m_DeviceID;
     do
     {
-      if ( *v8 == in_iDeviceID )
+      if ( *p_m_DeviceID == in_iDeviceID )
         break;
       ++v7;
-      v8 += 6;
+      p_m_DeviceID += 6;
     }
-    while ( v7 < v6 );
+    while ( v7 < m_iMaxDevices );
   }
-  if ( v7 == v6 )
+  if ( v7 == m_iMaxDevices )
     return 2i64;
-  CAkSplitterBus::PlayerSlot::Term(&v4->m_aBusses.m_pItems[v7 + v6 * v3]);
+  CAkSplitterBus::PlayerSlot::Term(&this->m_aBusses.m_pItems[v7 + m_iMaxDevices * in_iPlayerID]);
   return 1i64;
 }
 
 // File Line: 177
 // RVA: 0xA90180
-void __fastcall CAkSplitterBus::MixFeedbackBuffer(CAkSplitterBus *this, AkRunningVPL *io_runningVPL, unsigned int in_uPlayers)
+void __fastcall CAkSplitterBus::MixFeedbackBuffer(
+        CAkSplitterBus *this,
+        AkRunningVPL *io_runningVPL,
+        unsigned int in_uPlayers)
 {
   CAkVPLSrcNode *v3; // rbx
-  AkRunningVPL *v4; // rsi
   unsigned int v5; // edx
-  CAkSplitterBus *v6; // r15
-  CAkPBI *v7; // rbx
+  CAkPBI *m_pCtx; // rbx
   char v8; // cl
-  AkFeedbackParams *v9; // rdi
+  AkFeedbackParams *m_pFeedbackInfo; // rdi
   bool v10; // r13
   __int128 v11; // xmm1
-  int v12; // er14
+  int v12; // r14d
   __int128 v13; // xmm1
-  int v14; // ecx
+  int m_uChannelMask; // ecx
   unsigned __int64 v15; // rcx
-  signed __int64 v16; // rax
+  __int64 v16; // rax
   void *v17; // rsp
   unsigned __int8 v18; // bl
-  int v19; // esi
+  int i; // esi
   unsigned int v20; // eax
-  int v21; // er10
-  int v22; // er8
+  int v21; // r10d
+  int v22; // r8d
   __int64 v23; // rcx
   __int64 v24; // rax
   __int64 v25; // rax
-  signed __int64 v26; // rcx
-  unsigned int v27; // er9
-  unsigned int v28; // er8
-  CAkSplitterBus::PlayerSlot *v29; // r11
+  __int64 v26; // rcx
+  unsigned int m_iMaxDevices; // r9d
+  unsigned int v28; // r8d
+  CAkSplitterBus::PlayerSlot *m_pItems; // r11
   __int64 v30; // rax
-  CAkVPLMixBusNode *v31; // rcx
-  AkAudioMix out_pMix; // [rsp+20h] [rbp+0h]
-  unsigned int v33; // [rsp+A0h] [rbp+80h]
+  CAkVPLMixBusNode *m_pFeedbackMixBus; // rcx
+  AkAudioMix out_pMix; // [rsp+20h] [rbp+0h] BYREF
 
-  v33 = in_uPlayers;
   v3 = io_runningVPL->pCbx->m_pSources[0];
-  v4 = io_runningVPL;
   v5 = 0;
-  v6 = this;
   if ( v3 )
-    v7 = v3->m_pCtx;
+    m_pCtx = v3->m_pCtx;
   else
-    v7 = 0i64;
-  if ( !(*((_BYTE *)v7 + 374) & 0x40) )
+    m_pCtx = 0i64;
+  if ( (*((_BYTE *)m_pCtx + 374) & 0x40) == 0 )
   {
-    CAkPBI::ValidateFeedbackParameters(v7);
+    CAkPBI::ValidateFeedbackParameters(m_pCtx);
     v5 = 0;
   }
-  v8 = *((_BYTE *)v7 + 371);
-  v9 = v7->m_pFeedbackInfo;
+  v8 = *((_BYTE *)m_pCtx + 371);
+  m_pFeedbackInfo = m_pCtx->m_pFeedbackInfo;
   v10 = (v8 & 0xC) == 4 && (v8 & 3) == 1;
-  v11 = *(_OWORD *)&v4->state.uMaxFrames;
+  v11 = *(_OWORD *)&io_runningVPL->state.uMaxFrames;
   v12 = 0;
-  out_pMix.Next.vector[0] = *(__m128 *)&v4->state.pData;
+  out_pMix.Next.vector[0] = *(__m128 *)&io_runningVPL->state.pData;
   *(_OWORD *)&out_pMix.Next.aVolumes[4] = v11;
-  v13 = *(_OWORD *)&v4->state.posInfo.uFileEnd;
-  out_pMix.Previous.vector[0] = *(__m128 *)&v4->state.pMarkers;
+  v13 = *(_OWORD *)&io_runningVPL->state.posInfo.uFileEnd;
+  out_pMix.Previous.vector[0] = *(__m128 *)&io_runningVPL->state.pMarkers;
   *(_OWORD *)&out_pMix.Previous.aVolumes[4] = v13;
-  v14 = v9->m_uChannelMask;
-  if ( v9->m_uChannelMask )
+  m_uChannelMask = m_pFeedbackInfo->m_uChannelMask;
+  if ( m_pFeedbackInfo->m_uChannelMask )
   {
     do
     {
       ++v12;
-      v14 &= v14 - 1;
+      m_uChannelMask &= m_uChannelMask - 1;
     }
-    while ( v14 );
+    while ( m_uChannelMask );
   }
-  v15 = (unsigned __int64)(v12 * (unsigned int)(unsigned __int8)v6->m_iMaxPlayers) << 6;
+  v15 = (unsigned __int64)(v12 * (unsigned int)(unsigned __int8)this->m_iMaxPlayers) << 6;
   v16 = v15 + 15;
   if ( v15 + 15 <= v15 )
-    v16 = 1152921504606846960i64;
-  v17 = alloca(v16);
+    v16 = 0xFFFFFFFFFFFFFF0i64;
+  v17 = alloca(v16 & 0xFFFFFFFFFFFFFFF0ui64);
   if ( !v10 )
   {
-    AkFeedbackParams::CopyVolumes(v9, 0, &out_pMix);
+    AkFeedbackParams::CopyVolumes(m_pFeedbackInfo, 0, &out_pMix);
     v5 = 0;
   }
   v18 = 0;
-  v19 = *(_DWORD *)&v9->m_usCompanyID;
-  if ( v6->m_iMaxPlayers )
+  for ( i = *(_DWORD *)&m_pFeedbackInfo->m_usCompanyID; v18 < (unsigned int)this->m_iMaxPlayers; ++v18 )
   {
-    do
+    v20 = in_uPlayers;
+    v21 = v18;
+    if ( _bittest((const int *)&v20, v18) )
     {
-      v20 = v33;
-      v21 = v18;
-      if ( _bittest((const signed int *)&v20, v18) )
+      if ( v10 )
       {
-        if ( v10 )
+        v22 = v18 * (*((_WORD *)m_pFeedbackInfo + 27) & 0xF);
+        if ( (*((_WORD *)m_pFeedbackInfo + 27) & 0xF) != 0 )
         {
-          v22 = v18 * (*((_WORD *)v9 + 27) & 0xF);
-          if ( *((_WORD *)v9 + 27) & 0xF )
+          do
           {
-            do
-            {
-              v23 = v5 + v22;
-              v24 = v5++;
-              v25 = (v12 * (unsigned int)v18 + v24) << 6;
-              v26 = (v23 + 1) << 6;
-              *(__m128 *)((char *)out_pMix.Next.vector + v25) = *(__m128 *)((char *)&v9->m_pOutput + v26);
-              *(_OWORD *)((char *)&out_pMix.Next.aVolumes[4] + v25) = *(_OWORD *)((char *)&v9->m_LPF + v26);
-              *(__m128 *)((char *)out_pMix.Previous.vector + v25) = *(__m128 *)((char *)v9->m_fNextAttenuation + v26);
-              *(_OWORD *)((char *)&out_pMix.Previous.aVolumes[4] + v25) = *(_OWORD *)((char *)&v9->m_usCompanyID + v26);
-            }
-            while ( v5 < (*((_WORD *)v9 + 27) & 0xFu) );
+            v23 = v5 + v22;
+            v24 = v5++;
+            v25 = (v12 * (unsigned int)v18 + v24) << 6;
+            v26 = (v23 + 1) << 6;
+            *(__m128 *)((char *)out_pMix.Next.vector + v25) = *(__m128 *)((char *)&m_pFeedbackInfo->m_pOutput + v26);
+            *(_OWORD *)((char *)&out_pMix.Next.aVolumes[4] + v25) = *(_OWORD *)((char *)&m_pFeedbackInfo->m_LPF + v26);
+            *(__m128 *)((char *)out_pMix.Previous.vector + v25) = *(__m128 *)((char *)m_pFeedbackInfo->m_fNextAttenuation
+                                                                            + v26);
+            *(_OWORD *)((char *)&out_pMix.Previous.aVolumes[4] + v25) = *(_OWORD *)((char *)&m_pFeedbackInfo->m_fNextAttenuation[4]
+                                                                                  + v26);
           }
-          v5 = 0;
+          while ( v5 < (*((_WORD *)m_pFeedbackInfo + 27) & 0xFu) );
         }
-        v27 = (unsigned __int8)v6->m_iMaxDevices;
-        v28 = 0;
-        if ( v6->m_iMaxDevices )
-        {
-          v29 = v6->m_aBusses.m_pItems;
-          v30 = v18 * v27;
-          while ( v29[v30].m_DeviceID != v19 )
-          {
-            ++v28;
-            v30 = (unsigned int)(v30 + 1);
-            if ( v28 >= v27 )
-              goto LABEL_31;
-          }
-          v31 = v29[v30].m_pFeedbackMixBus;
-          if ( v31 )
-          {
-            if ( !v10 )
-              v21 = 0;
-            CAkVPLMixBusNode::ConsumeBuffer(v31, (AkVPLState *)&out_pMix, &out_pMix + (unsigned int)(v21 * v12));
-          }
-LABEL_31:
-          v5 = 0;
-        }
+        v5 = 0;
       }
-      ++v18;
+      m_iMaxDevices = (unsigned __int8)this->m_iMaxDevices;
+      v28 = 0;
+      if ( this->m_iMaxDevices )
+      {
+        m_pItems = this->m_aBusses.m_pItems;
+        v30 = v18 * m_iMaxDevices;
+        while ( m_pItems[v30].m_DeviceID != i )
+        {
+          ++v28;
+          v30 = (unsigned int)(v30 + 1);
+          if ( v28 >= m_iMaxDevices )
+            goto LABEL_31;
+        }
+        m_pFeedbackMixBus = m_pItems[v30].m_pFeedbackMixBus;
+        if ( m_pFeedbackMixBus )
+        {
+          if ( !v10 )
+            v21 = 0;
+          CAkVPLMixBusNode::ConsumeBuffer(
+            m_pFeedbackMixBus,
+            (AkVPLState *)&out_pMix,
+            &out_pMix + (unsigned int)(v21 * v12));
+        }
+LABEL_31:
+        v5 = 0;
+      }
     }
-    while ( v18 < v6->m_iMaxPlayers );
   }
-  AkFeedbackParams::StampOldVolumes(v9);
+  AkFeedbackParams::StampOldVolumes(m_pFeedbackInfo);
 }
 
 // File Line: 237
 // RVA: 0xA8FE20
-void __fastcall CAkSplitterBus::MixAudioBuffer(CAkSplitterBus *this, AkRunningVPL *io_runningVPL, unsigned int in_uPlayers)
+void __fastcall CAkSplitterBus::MixAudioBuffer(
+        CAkSplitterBus *this,
+        AkRunningVPL *io_runningVPL,
+        unsigned int in_uPlayers)
 {
-  unsigned int v3; // er15
+  unsigned int v3; // r15d
   CAkVPLSrcNode *v4; // rdi
-  AkRunningVPL *v5; // rsi
   CAkSplitterBus *v6; // r13
-  CAkPBI *v7; // rdi
-  AkFeedbackParams *v8; // r14
-  float v9; // er9
+  CAkPBI *m_pCtx; // rdi
+  unsigned __int64 m_pFeedbackInfo; // r14
+  int v9; // r9d
   int v10; // ecx
   unsigned __int64 v11; // rcx
-  signed __int64 v12; // rax
+  __int64 v12; // rax
   signed __int64 v13; // rax
   void *v14; // rsp
   char v15; // cl
   void *v16; // rsp
-  AkAudioMix *v17; // r11
+  AkAudioMix *p_out_pMix; // r11
   bool v18; // r10
-  AkFeedbackVPLData *v19; // rax
-  unsigned __int64 v20; // r8
-  unsigned __int16 v21; // cx
-  float v22; // edx
-  unsigned __int16 v23; // ax
-  float v24; // ecx
+  AkFeedbackVPLData *pFeedbackData; // rax
+  unsigned __int64 pData; // r8
+  __int16 uMaxFrames; // cx
+  int v22; // edx
+  unsigned __int16 uValidFrames; // ax
+  int v24; // ecx
   unsigned __int16 v25; // ax
   unsigned __int8 v26; // al
-  int v27; // er12
+  int v27; // r12d
   unsigned int v28; // edx
-  int v29; // er8
+  int v29; // r8d
   __int64 v30; // r9
   __int64 v31; // rcx
   __int64 v32; // rax
   __int64 v33; // rax
-  signed __int64 v34; // rcx
-  int v35; // er15
-  CAkSplitterBus::PlayerSlot *v36; // rdi
+  __int64 v34; // rcx
+  int v35; // r15d
+  CAkSplitterBus::PlayerSlot *m_pItems; // rdi
   CAkBusFX *v37; // rax
   CAkBusFX *v38; // r14
-  CAkVPLMixBusNode *v39; // rcx
-  unsigned int v40; // er8
+  CAkVPLMixBusNode *m_pAudioMixBus; // rcx
+  unsigned int m_MixingFormat; // edx
   CAkVPLMixBusNode *v41; // r14
-  int v42; // er13
+  int v42; // r13d
   int v43; // ecx
-  AkAudioMix out_pMix; // [rsp+30h] [rbp+0h]
+  AkAudioMix out_pMix; // [rsp+30h] [rbp+0h] BYREF
   __int64 v45; // [rsp+70h] [rbp+40h]
-  CAkSplitterBus *v46; // [rsp+E0h] [rbp+B0h]
   unsigned __int8 v47; // [rsp+E8h] [rbp+B8h]
-  unsigned int v48; // [rsp+F0h] [rbp+C0h]
   bool v49; // [rsp+F8h] [rbp+C8h]
 
-  v48 = in_uPlayers;
-  v46 = this;
   v3 = in_uPlayers;
   v4 = io_runningVPL->pCbx->m_pSources[0];
-  v5 = io_runningVPL;
   v6 = this;
   if ( v4 )
-    v7 = v4->m_pCtx;
+    m_pCtx = v4->m_pCtx;
   else
-    v7 = 0i64;
-  if ( !(*((_BYTE *)v7 + 374) & 0x40) )
-    CAkPBI::ValidateFeedbackParameters(v7);
-  v8 = v7->m_pFeedbackInfo;
-  v9 = 0.0;
-  out_pMix.Next.volumes.fFrontLeft = 0.0;
-  v10 = v8->m_uChannelMask;
-  *(_QWORD *)&out_pMix.Next.aVolumes[4] = v8;
+    m_pCtx = 0i64;
+  if ( (*((_BYTE *)m_pCtx + 374) & 0x40) == 0 )
+    CAkPBI::ValidateFeedbackParameters(m_pCtx);
+  m_pFeedbackInfo = (unsigned __int64)m_pCtx->m_pFeedbackInfo;
+  v9 = 0;
+  out_pMix.Next.vector[0].m128_i32[0] = 0;
+  v10 = *(unsigned __int16 *)(m_pFeedbackInfo + 52);
+  out_pMix.Next.vector[1].m128_u64[0] = m_pFeedbackInfo;
   if ( v10 )
   {
     do
     {
-      ++LODWORD(v9);
+      ++v9;
       v10 &= v10 - 1;
     }
     while ( v10 );
-    out_pMix.Next.volumes.fFrontLeft = v9;
+    out_pMix.Next.vector[0].m128_i32[0] = v9;
   }
-  v11 = (unsigned __int64)(LODWORD(v9) * (unsigned int)(unsigned __int8)v6->m_iMaxPlayers) << 6;
+  v11 = (unsigned __int64)(v9 * (unsigned int)(unsigned __int8)v6->m_iMaxPlayers) << 6;
   v12 = v11 + 15;
   if ( v11 + 15 <= v11 )
-    v12 = 1152921504606846960i64;
+    v12 = 0xFFFFFFFFFFFFFF0i64;
   v13 = v12 & 0xFFFFFFFFFFFFFFF0ui64;
   v14 = alloca(v13);
-  v15 = *((_BYTE *)v7 + 371);
+  v15 = *((_BYTE *)m_pCtx + 371);
   v16 = alloca(v13);
-  v17 = &out_pMix;
-  *(_QWORD *)&out_pMix.Next.aVolumes[2] = &out_pMix;
+  p_out_pMix = &out_pMix;
+  out_pMix.Next.vector[0].m128_u64[1] = (unsigned __int64)&out_pMix;
   v18 = (v15 & 0xC) == 4 && (v15 & 3) == 1;
-  v19 = v5->pFeedbackData;
+  pFeedbackData = io_runningVPL->pFeedbackData;
   out_pMix.Previous.vector[0].m128_u64[0] = 0i64;
-  LOWORD(out_pMix.Previous.aVolumes[6]) = 0;
+  out_pMix.Previous.vector[1].m128_i16[4] = 0;
   v45 = 0i64;
-  v20 = (unsigned __int64)v19->LPFBuffer.pData;
+  pData = (unsigned __int64)pFeedbackData->LPFBuffer.pData;
   v49 = v18;
-  if ( v19->LPFBuffer.pData )
+  if ( pFeedbackData->LPFBuffer.pData )
   {
-    v21 = v19->LPFBuffer.uMaxFrames;
-    LODWORD(v22) = v8->m_uChannelMask;
-    v23 = v19->LPFBuffer.uValidFrames;
-    LOWORD(out_pMix.Previous.aVolumes[4]) = v21;
-    out_pMix.Previous.volumes.fCenter = v22;
-    out_pMix.Previous.vector[0].m128_u64[0] = v20;
+    uMaxFrames = pFeedbackData->LPFBuffer.uMaxFrames;
+    v22 = *(unsigned __int16 *)(m_pFeedbackInfo + 52);
+    uValidFrames = pFeedbackData->LPFBuffer.uValidFrames;
+    out_pMix.Previous.vector[1].m128_i16[0] = uMaxFrames;
+    out_pMix.Previous.vector[0].m128_i32[2] = v22;
+    out_pMix.Previous.vector[0].m128_u64[0] = pData;
   }
   else
   {
-    LODWORD(v24) = v8->m_uChannelMask;
-    out_pMix.Previous.vector[0].m128_u64[0] = (unsigned __int64)v5->state.pData;
-    v25 = v5->state.uMaxFrames;
-    out_pMix.Previous.volumes.fCenter = v24;
-    LOWORD(out_pMix.Previous.aVolumes[4]) = v25;
-    v23 = v5->state.uValidFrames;
+    v24 = *(unsigned __int16 *)(m_pFeedbackInfo + 52);
+    out_pMix.Previous.vector[0].m128_u64[0] = (unsigned __int64)io_runningVPL->state.pData;
+    v25 = io_runningVPL->state.uMaxFrames;
+    out_pMix.Previous.vector[0].m128_i32[2] = v24;
+    out_pMix.Previous.vector[1].m128_i16[0] = v25;
+    uValidFrames = io_runningVPL->state.uValidFrames;
   }
-  HIWORD(out_pMix.Previous.aVolumes[4]) = v23;
+  out_pMix.Previous.vector[1].m128_i16[1] = uValidFrames;
   if ( !v18 )
   {
-    AkFeedbackParams::CopyVolumes(v8, 0, &out_pMix);
-    v9 = out_pMix.Next.volumes.fFrontLeft;
+    AkFeedbackParams::CopyVolumes((AkFeedbackParams *)m_pFeedbackInfo, 0, &out_pMix);
+    v9 = out_pMix.Next.vector[0].m128_i32[0];
     v18 = v49;
-    v17 = *(AkAudioMix **)&out_pMix.Next.aVolumes[2];
+    p_out_pMix = (AkAudioMix *)out_pMix.Next.vector[0].m128_u64[1];
   }
   v26 = 0;
   v27 = 0;
   v47 = 0;
   if ( v6->m_iMaxPlayers )
   {
-    while ( !_bittest((const signed int *)&v3, v26) )
+    while ( !_bittest((const int *)&v3, v26) )
     {
       v27 += (unsigned __int8)v6->m_iMaxDevices;
       v26 = v47;
 LABEL_46:
-      v9 = out_pMix.Next.volumes.fFrontLeft;
+      v9 = out_pMix.Next.vector[0].m128_i32[0];
       v18 = v49;
-      v17 = *(AkAudioMix **)&out_pMix.Next.aVolumes[2];
+      p_out_pMix = (AkAudioMix *)out_pMix.Next.vector[0].m128_u64[1];
       v47 = ++v26;
-      if ( v26 >= v6->m_iMaxPlayers )
+      if ( v26 >= (unsigned int)v6->m_iMaxPlayers )
         goto LABEL_47;
     }
     if ( v18 )
     {
       v28 = 0;
-      v29 = v26 * (*((_WORD *)v8 + 27) & 0xF);
-      if ( *((_WORD *)v8 + 27) & 0xF )
+      v29 = v26 * (*(_WORD *)(m_pFeedbackInfo + 54) & 0xF);
+      if ( (*(_WORD *)(m_pFeedbackInfo + 54) & 0xF) != 0 )
       {
-        v30 = (unsigned int)v26 * LODWORD(v9);
+        v30 = (unsigned int)v26 * v9;
         do
         {
           v31 = v28 + v29;
           v32 = v28++;
           v33 = (v30 + v32) << 6;
           v34 = (v31 + 1) << 6;
-          *(__m128 *)((char *)v17->Next.vector + v33) = *(__m128 *)((char *)&v8->m_pOutput + v34);
-          *(_OWORD *)((char *)&v17->Next.aVolumes[4] + v33) = *(_OWORD *)((char *)&v8->m_LPF + v34);
-          *(__m128 *)((char *)v17->Previous.vector + v33) = *(__m128 *)((char *)v8->m_fNextAttenuation + v34);
-          *(_OWORD *)((char *)&v17->Previous.aVolumes[4] + v33) = *(_OWORD *)((char *)&v8->m_usCompanyID + v34);
+          *(__m128 *)((char *)p_out_pMix->Next.vector + v33) = *(__m128 *)(v34 + m_pFeedbackInfo);
+          *(_OWORD *)((char *)&p_out_pMix->Next.aVolumes[4] + v33) = *(_OWORD *)(v34 + m_pFeedbackInfo + 16);
+          *(__m128 *)((char *)p_out_pMix->Previous.vector + v33) = *(__m128 *)(v34 + m_pFeedbackInfo + 32);
+          *(_OWORD *)((char *)&p_out_pMix->Previous.aVolumes[4] + v33) = *(_OWORD *)(v34 + m_pFeedbackInfo + 48);
         }
-        while ( v28 < (*((_WORD *)v8 + 27) & 0xFu) );
+        while ( v28 < (*(_WORD *)(m_pFeedbackInfo + 54) & 0xFu) );
       }
       v26 = v47;
     }
     v35 = 0;
-    if ( v6->m_iMaxDevices <= 0u )
+    if ( !v6->m_iMaxDevices )
     {
 LABEL_45:
-      v3 = v48;
+      v3 = in_uPlayers;
       goto LABEL_46;
     }
     while ( 1 )
     {
-      v36 = v6->m_aBusses.m_pItems;
+      m_pItems = v6->m_aBusses.m_pItems;
       if ( v6->m_aBusses.m_pItems[v27].m_pFeedbackMixBus )
       {
-        if ( !v36[v27].m_pAudioMixBus )
+        if ( !m_pItems[v27].m_pAudioMixBus )
         {
           v37 = (CAkBusFX *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x550ui64);
           v38 = v37;
-          v36[v27].m_pAudioMixBus = (CAkVPLMixBusNode *)v37;
+          m_pItems[v27].m_pAudioMixBus = (CAkVPLMixBusNode *)v37;
           if ( v37 )
           {
             CAkBusFX::CAkBusFX(v37);
             v38[1].m_PanningVolumes[0].Next.vector[0].m128_u64[0] = 0i64;
           }
-          v39 = v36[v27].m_pAudioMixBus;
-          if ( !v39 )
+          m_pAudioMixBus = m_pItems[v27].m_pAudioMixBus;
+          if ( !m_pAudioMixBus )
             goto LABEL_43;
-          v40 = v36[v27].m_MixingFormat;
-          if ( (unsigned int)CAkVPLMixBusNode::Init(v39, v40, v40, 0x400u, 0i64) != 1 )
+          m_MixingFormat = m_pItems[v27].m_MixingFormat;
+          if ( (unsigned int)CAkVPLMixBusNode::Init(m_pAudioMixBus, m_MixingFormat, m_MixingFormat, 0x400u, 0i64) != 1 )
           {
-            v41 = v36[v27].m_pAudioMixBus;
+            v41 = m_pItems[v27].m_pAudioMixBus;
             v42 = g_LEngineDefaultPoolId;
             if ( v41 )
             {
-              CAkVPLMixBusNode::~CAkVPLMixBusNode(v36[v27].m_pAudioMixBus);
+              CAkVPLMixBusNode::~CAkVPLMixBusNode(m_pItems[v27].m_pAudioMixBus);
               AK::MemoryMgr::Free(v42, v41);
             }
-            v6 = v46;
-            v36[v27].m_pAudioMixBus = 0i64;
+            v6 = this;
+            m_pItems[v27].m_pAudioMixBus = 0i64;
             goto LABEL_43;
           }
-          CAkVPLMixBusNode::Connect(v36[v27].m_pAudioMixBus);
+          CAkVPLMixBusNode::Connect(m_pItems[v27].m_pAudioMixBus);
           v18 = v49;
         }
         v43 = v47;
         if ( !v18 )
           v43 = 0;
         CAkVPLMixBusNode::ConsumeBuffer(
-          v36[v27].m_pAudioMixBus,
+          m_pItems[v27].m_pAudioMixBus,
           (AkVPLState *)&out_pMix.Previous,
-          (AkAudioMix *)(*(_QWORD *)&out_pMix.Next.aVolumes[2]
-                       + ((unsigned __int64)(unsigned int)(v43 * LODWORD(out_pMix.Next.volumes.fFrontLeft)) << 6)));
+          (AkAudioMix *)(out_pMix.Next.vector[0].m128_u64[1]
+                       + ((unsigned __int64)(unsigned int)(v43 * out_pMix.Next.vector[0].m128_i32[0]) << 6)));
       }
       ++v27;
 LABEL_43:
       v18 = v49;
       if ( ++v35 >= (unsigned int)(unsigned __int8)v6->m_iMaxDevices )
       {
-        v8 = *(AkFeedbackParams **)&out_pMix.Next.aVolumes[4];
+        m_pFeedbackInfo = out_pMix.Next.vector[1].m128_u64[0];
         v26 = v47;
         goto LABEL_45;
       }
     }
   }
 LABEL_47:
-  AkFeedbackParams::StampOldVolumes(v8);
+  AkFeedbackParams::StampOldVolumes((AkFeedbackParams *)m_pFeedbackInfo);
 }
 
 // File Line: 334
 // RVA: 0xA8FCD0
-void __fastcall CAkSplitterBus::GetBuffer(CAkSplitterBus *this, char in_iPlayerID, unsigned int in_iDeviceID, AkAudioBufferBus **out_pAudioBuffer, AkAudioBufferBus **out_pFeedbackBuffer)
+void __fastcall CAkSplitterBus::GetBuffer(
+        CAkSplitterBus *this,
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iDeviceID,
+        AkAudioBufferBus **out_pAudioBuffer,
+        AkAudioBufferBus **out_pFeedbackBuffer)
 {
-  unsigned int v5; // er10
-  unsigned int v6; // er11
-  unsigned int *v7; // rax
+  unsigned int v5; // r10d
+  unsigned int m_iMaxDevices; // r11d
+  unsigned int *p_m_DeviceID; // rax
   CAkSplitterBus::PlayerSlot *v8; // rbx
-  CAkVPLMixBusNode *v9; // rcx
-  CAkVPLMixBusNode *v10; // rcx
+  CAkVPLMixBusNode *m_pFeedbackMixBus; // rcx
 
   v5 = 0;
   *out_pAudioBuffer = 0i64;
   *out_pFeedbackBuffer = 0i64;
-  if ( (unsigned __int8)in_iPlayerID < this->m_iMaxPlayers )
+  if ( in_iPlayerID < (unsigned int)this->m_iMaxPlayers )
   {
-    v6 = (unsigned __int8)this->m_iMaxDevices;
+    m_iMaxDevices = (unsigned __int8)this->m_iMaxDevices;
     if ( this->m_iMaxDevices )
     {
-      v7 = &this->m_aBusses.m_pItems->m_DeviceID;
+      p_m_DeviceID = &this->m_aBusses.m_pItems->m_DeviceID;
       do
       {
-        if ( *v7 == in_iDeviceID )
+        if ( *p_m_DeviceID == in_iDeviceID )
           break;
         ++v5;
-        v7 += 6;
+        p_m_DeviceID += 6;
       }
-      while ( v5 < v6 );
+      while ( v5 < m_iMaxDevices );
     }
-    if ( v5 != v6 )
+    if ( v5 != m_iMaxDevices )
     {
-      v8 = &this->m_aBusses.m_pItems[v5 + v6 * (unsigned __int8)in_iPlayerID];
-      v9 = v8->m_pAudioMixBus;
-      if ( v9 )
-        CAkVPLMixBusNode::GetResultingBuffer(v9, out_pAudioBuffer);
-      v10 = v8->m_pFeedbackMixBus;
-      if ( v10 )
-        CAkVPLMixBusNode::GetResultingBuffer(v10, out_pFeedbackBuffer);
+      v8 = &this->m_aBusses.m_pItems[v5 + m_iMaxDevices * in_iPlayerID];
+      if ( v8->m_pAudioMixBus )
+        CAkVPLMixBusNode::GetResultingBuffer(v8->m_pAudioMixBus, out_pAudioBuffer);
+      m_pFeedbackMixBus = v8->m_pFeedbackMixBus;
+      if ( m_pFeedbackMixBus )
+        CAkVPLMixBusNode::GetResultingBuffer(m_pFeedbackMixBus, out_pFeedbackBuffer);
     }
   }
 }
@@ -670,28 +645,20 @@ void __fastcall CAkSplitterBus::GetBuffer(CAkSplitterBus *this, char in_iPlayerI
 // RVA: 0xA903C0
 void __fastcall CAkSplitterBus::ReleaseBuffers(CAkSplitterBus *this)
 {
-  __int64 v1; // rbx
-  CAkSplitterBus *v2; // rdi
-  CAkVPLMixBusNode *v3; // rcx
-  signed __int64 v4; // rsi
-  CAkVPLMixBusNode *v5; // rcx
+  __int64 i; // rbx
+  CAkVPLMixBusNode *m_pAudioMixBus; // rcx
+  CAkSplitterBus::PlayerSlot *v4; // rsi
+  CAkVPLMixBusNode *m_pFeedbackMixBus; // rcx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_aBusses.m_uLength )
+  for ( i = 0i64; (unsigned int)i < this->m_aBusses.m_uLength; i = (unsigned int)(i + 1) )
   {
-    do
-    {
-      v3 = v2->m_aBusses.m_pItems[v1].m_pAudioMixBus;
-      v4 = (signed __int64)&v2->m_aBusses.m_pItems[v1];
-      if ( v3 )
-        CAkVPLMixBusNode::ReleaseBuffer(v3);
-      v5 = *(CAkVPLMixBusNode **)(v4 + 8);
-      if ( v5 )
-        CAkVPLMixBusNode::ReleaseBuffer(v5);
-      v1 = (unsigned int)(v1 + 1);
-    }
-    while ( (unsigned int)v1 < v2->m_aBusses.m_uLength );
+    m_pAudioMixBus = this->m_aBusses.m_pItems[i].m_pAudioMixBus;
+    v4 = &this->m_aBusses.m_pItems[i];
+    if ( m_pAudioMixBus )
+      CAkVPLMixBusNode::ReleaseBuffer(m_pAudioMixBus);
+    m_pFeedbackMixBus = v4->m_pFeedbackMixBus;
+    if ( m_pFeedbackMixBus )
+      CAkVPLMixBusNode::ReleaseBuffer(m_pFeedbackMixBus);
   }
 }
 

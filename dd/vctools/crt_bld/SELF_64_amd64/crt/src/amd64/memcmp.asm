@@ -11,7 +11,7 @@ int __cdecl memcmp(const void *Buf1, const void *Buf2, size_t Size)
   v3 = (_BYTE *)Buf2 - (_BYTE *)Buf1;
   if ( Size < 8 )
     goto mcmp30;
-  for ( ; (unsigned __int8)Buf1 & 7; --Size )
+  for ( ; ((unsigned __int8)Buf1 & 7) != 0; --Size )
   {
     v4 = *(_BYTE *)Buf1 < *((_BYTE *)Buf1 + v3);
     if ( *(_BYTE *)Buf1 != *((_BYTE *)Buf1 + v3) )

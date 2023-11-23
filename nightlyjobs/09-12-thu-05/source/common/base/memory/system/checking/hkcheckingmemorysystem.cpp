@@ -1,13 +1,18 @@
 // File Line: 33
 // RVA: 0xC5C650
-void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::blockAlloc(hkCheckingMemorySystem::AllocatorForwarder *this, int numBytes)
+void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::blockAlloc(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        int numBytes)
 {
   return hkCheckingMemorySystem::checkedAlloc(this->m_parent, 0, &this->m_context, numBytes);
 }
 
 // File Line: 38
 // RVA: 0xC5C670
-void __fastcall hkCheckingMemorySystem::AllocatorForwarder::blockFree(hkCheckingMemorySystem::AllocatorForwarder *this, void *p, int numBytes)
+void __fastcall hkCheckingMemorySystem::AllocatorForwarder::blockFree(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        void *p,
+        int numBytes)
 {
   if ( p )
     hkCheckingMemorySystem::checkedFree(this->m_parent, 0, &this->m_context, p, numBytes);
@@ -15,67 +20,74 @@ void __fastcall hkCheckingMemorySystem::AllocatorForwarder::blockFree(hkChecking
 
 // File Line: 50
 // RVA: 0xC5C6A0
-void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::bufAlloc(hkCheckingMemorySystem::AllocatorForwarder *this, int *reqNumInOut)
+void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::bufAlloc(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        int *reqNumInOut)
 {
   return hkCheckingMemorySystem::checkedAlloc(this->m_parent, 1u, &this->m_context, *reqNumInOut);
 }
 
 // File Line: 55
 // RVA: 0xC5C6C0
-void __fastcall hkCheckingMemorySystem::AllocatorForwarder::bufFree(hkCheckingMemorySystem::AllocatorForwarder *this, void *p, int num)
+void __fastcall hkCheckingMemorySystem::AllocatorForwarder::bufFree(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        void *p,
+        int num)
 {
   hkCheckingMemorySystem::checkedFree(this->m_parent, 1u, &this->m_context, p, num);
 }
 
 // File Line: 60
 // RVA: 0xC5C6F0
-void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::bufRealloc(hkCheckingMemorySystem::AllocatorForwarder *this, void *pold, int oldNum, int *reqNumInOut)
+void *__fastcall hkCheckingMemorySystem::AllocatorForwarder::bufRealloc(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        void *pold,
+        int oldNum,
+        int *reqNumInOut)
 {
-  int numBytes; // ebp
-  int *v5; // rbx
-  hkCheckingMemorySystem::AllocatorForwarder *v6; // r15
-  void *v7; // r14
   void *v8; // rax
-  int v9; // er8
+  int v9; // r8d
   void *v10; // rdi
 
-  numBytes = oldNum;
-  v5 = reqNumInOut;
-  v6 = this;
-  v7 = pold;
   v8 = hkCheckingMemorySystem::checkedAlloc(this->m_parent, 1u, &this->m_context, *reqNumInOut);
-  v9 = numBytes;
-  if ( *v5 < numBytes )
-    v9 = *v5;
+  v9 = oldNum;
+  if ( *reqNumInOut < oldNum )
+    v9 = *reqNumInOut;
   v10 = v8;
-  hkMemUtil::memCpy(v8, v7, v9);
-  hkCheckingMemorySystem::checkedFree(v6->m_parent, 1u, &v6->m_context, v7, numBytes);
+  hkMemUtil::memCpy(v8, pold, v9);
+  hkCheckingMemorySystem::checkedFree(this->m_parent, 1u, &this->m_context, pold, oldNum);
   return v10;
 }
 
 // File Line: 68
 // RVA: 0xC5C780
-void __fastcall hkCheckingMemorySystem::AllocatorForwarder::getMemoryStatistics(hkCheckingMemorySystem::AllocatorForwarder *this, hkMemoryAllocator::MemoryStatistics *u)
+void __fastcall hkCheckingMemorySystem::AllocatorForwarder::getMemoryStatistics(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        hkMemoryAllocator::MemoryStatistics *u)
 {
-  __int64 v2; // r8
+  __int64 m_currentInUse; // r8
 
   u->m_available = 0i64;
-  v2 = this->m_parent->m_currentInUse;
-  u->m_inUse = v2;
-  u->m_allocated = v2;
+  m_currentInUse = this->m_parent->m_currentInUse;
+  u->m_inUse = m_currentInUse;
+  u->m_allocated = m_currentInUse;
   u->m_peakInUse = this->m_parent->m_peakInUse;
 }
 
 // File Line: 76
 // RVA: 0xC5C7B0
-__int64 __fastcall hkCheckingMemorySystem::AllocatorForwarder::getAllocatedSize(hkCheckingMemorySystem::AllocatorForwarder *this, const void *obj, int numBytes)
+__int64 __fastcall hkCheckingMemorySystem::AllocatorForwarder::getAllocatedSize(
+        hkCheckingMemorySystem::AllocatorForwarder *this,
+        const void *obj,
+        unsigned int numBytes)
 {
-  return (unsigned int)numBytes;
+  return numBytes;
 }
 
 // File Line: 81
 // RVA: 0xC5C7C0
-void __fastcall hkCheckingMemorySystem::AllocatorForwarder::resetPeakMemoryStatistics(hkCheckingMemorySystem::AllocatorForwarder *this)
+void __fastcall hkCheckingMemorySystem::AllocatorForwarder::resetPeakMemoryStatistics(
+        hkCheckingMemorySystem::AllocatorForwarder *this)
 {
   this->m_parent->m_peakInUse = this->m_parent->m_currentInUse;
 }
@@ -84,77 +96,76 @@ void __fastcall hkCheckingMemorySystem::AllocatorForwarder::resetPeakMemoryStati
 // RVA: 0xC5C7E0
 void __fastcall hkCheckingMemorySystem::hkCheckingMemorySystem(hkCheckingMemorySystem *this)
 {
-  hkCheckingMemorySystem *v1; // rbx
-  hkStackTracer *v2; // rcx
-  unsigned __int64 v3; // rax
+  hkStackTracer *p_m_stackTracer; // rcx
+  unsigned __int64 TickCounter; // rax
 
-  v1 = this;
-  v2 = &this->m_stackTracer;
-  v2[-1].vfptr = (hkStackTracerVtbl *)&hkCheckingMemorySystem::`vftable;
-  hkStackTracer::hkStackTracer(v2);
-  v1->m_callTree.m_nodes.m_data = 0i64;
-  v1->m_callTree.m_nodes.m_size = 0;
-  v1->m_callTree.m_nodes.m_capacityAndFlags = 2147483648;
-  v1->m_callTree.m_allocator = 0i64;
-  *(_QWORD *)&v1->m_callTree.m_rootNode = -1i64;
-  hkCriticalSection::hkCriticalSection(&v1->m_section, 0);
-  v1->m_baseAllocator = 0i64;
-  hkPaddedAllocator::hkPaddedAllocator(&v1->m_paddedAllocator);
-  hkDelayedFreeAllocator::hkDelayedFreeAllocator(&v1->m_delayedFreeAllocator);
-  hkRecallAllocator::hkRecallAllocator(&v1->m_debugAllocator, 0i64);
-  hkStatsAllocator::hkStatsAllocator(&v1->m_callTreeAllocator, 0i64);
-  v1->m_bookmarks.m_data = 0i64;
-  v1->m_bookmarks.m_size = 0;
-  v1->m_bookmarks.m_capacityAndFlags = 2147483648;
-  v1->m_allocators.m_data = 0i64;
-  v1->m_allocators.m_size = 0;
-  v1->m_allocators.m_capacityAndFlags = 2147483648;
-  v1->m_checkFlags.m_storage = 30;
-  v1->m_activePointers.m_elem = 0i64;
-  v1->m_activePointers.m_numElems = 0;
-  v1->m_activePointers.m_hashMod = -1;
-  v1->m_outputFunc = 0i64;
-  v1->m_outputFuncArg = 0i64;
-  hkMemorySystem::FrameInfo::FrameInfo(&v1->m_frameInfo, 0);
-  hkMemoryRouter::hkMemoryRouter(&v1->m_mainRouter);
-  v3 = hkStopwatch::getTickCounter();
-  v1->m_sumAllocatedStackMemory = 0i64;
-  v1->m_timeOfConstruction = v3;
-  v1->m_allocOrder = 0i64;
+  p_m_stackTracer = &this->m_stackTracer;
+  p_m_stackTracer[-1].vfptr = (hkStackTracerVtbl *)&hkCheckingMemorySystem::`vftable;
+  hkStackTracer::hkStackTracer(p_m_stackTracer);
+  this->m_callTree.m_nodes.m_data = 0i64;
+  this->m_callTree.m_nodes.m_size = 0;
+  this->m_callTree.m_nodes.m_capacityAndFlags = 0x80000000;
+  this->m_callTree.m_allocator = 0i64;
+  *(_QWORD *)&this->m_callTree.m_rootNode = -1i64;
+  hkCriticalSection::hkCriticalSection(&this->m_section, 0);
+  this->m_baseAllocator = 0i64;
+  hkPaddedAllocator::hkPaddedAllocator(&this->m_paddedAllocator);
+  hkDelayedFreeAllocator::hkDelayedFreeAllocator(&this->m_delayedFreeAllocator);
+  hkRecallAllocator::hkRecallAllocator(&this->m_debugAllocator, 0i64);
+  hkStatsAllocator::hkStatsAllocator(&this->m_callTreeAllocator, 0i64);
+  this->m_bookmarks.m_data = 0i64;
+  this->m_bookmarks.m_size = 0;
+  this->m_bookmarks.m_capacityAndFlags = 0x80000000;
+  this->m_allocators.m_data = 0i64;
+  this->m_allocators.m_size = 0;
+  this->m_allocators.m_capacityAndFlags = 0x80000000;
+  this->m_checkFlags.m_storage = 30;
+  this->m_activePointers.m_elem = 0i64;
+  this->m_activePointers.m_numElems = 0;
+  this->m_activePointers.m_hashMod = -1;
+  this->m_outputFunc = 0i64;
+  this->m_outputFuncArg = 0i64;
+  hkMemorySystem::FrameInfo::FrameInfo(&this->m_frameInfo, 0);
+  hkMemoryRouter::hkMemoryRouter(&this->m_mainRouter);
+  TickCounter = hkStopwatch::getTickCounter();
+  this->m_sumAllocatedStackMemory = 0i64;
+  this->m_timeOfConstruction = TickCounter;
+  this->m_allocOrder = 0i64;
 }
 
 // File Line: 105
 // RVA: 0xC5C910
-void __fastcall hkCheckingMemorySystem::init(hkCheckingMemorySystem *this, hkMemoryAllocator *raw, void (__fastcall *output)(const char *, void *), void *outputUserData, hkCheckingMemorySystem::CheckBits checks)
+void __fastcall hkCheckingMemorySystem::init(
+        hkCheckingMemorySystem *this,
+        hkMemoryAllocator *raw,
+        void (__fastcall *output)(const char *, void *),
+        void *outputUserData,
+        int checks)
 {
-  hkMemoryAllocator *v5; // rbp
-  hkCheckingMemorySystem *v6; // rdi
-  hkMemoryAllocator *v7; // rsi
+  hkMemoryAllocator *p_m_delayedFreeAllocator; // rsi
 
-  v5 = raw;
-  v6 = this;
   this->m_outputFunc = output;
   this->m_outputFuncArg = outputUserData;
   this->m_rawAllocator = raw;
   this->m_checkFlags.m_storage = checks;
-  v7 = raw;
-  if ( checks & 0x10 )
+  p_m_delayedFreeAllocator = raw;
+  if ( (checks & 0x10) != 0 )
   {
-    v7 = (hkMemoryAllocator *)&this->m_delayedFreeAllocator.vfptr;
+    p_m_delayedFreeAllocator = &this->m_delayedFreeAllocator;
     hkDelayedFreeAllocator::init(&this->m_delayedFreeAllocator, raw, 0i64);
   }
-  if ( v6->m_checkFlags.m_storage & 8 )
+  if ( (this->m_checkFlags.m_storage & 8) != 0 )
   {
-    hkPaddedAllocator::init(&v6->m_paddedAllocator, v7, 0i64);
-    v7 = (hkMemoryAllocator *)&v6->m_paddedAllocator.vfptr;
+    hkPaddedAllocator::init(&this->m_paddedAllocator, p_m_delayedFreeAllocator, 0i64);
+    p_m_delayedFreeAllocator = &this->m_paddedAllocator;
   }
-  if ( v6->m_checkFlags.m_storage & 4 )
+  if ( (this->m_checkFlags.m_storage & 4) != 0 )
   {
-    hkStatsAllocator::init(&v6->m_callTreeAllocator, v5);
-    v6->m_callTree.m_allocator = (hkMemoryAllocator *)&v6->m_callTreeAllocator.vfptr;
+    hkStatsAllocator::init(&this->m_callTreeAllocator, raw);
+    this->m_callTree.m_allocator = &this->m_callTreeAllocator;
   }
-  v6->m_baseAllocator = v7;
-  hkRecallAllocator::init(&v6->m_debugAllocator, v5);
+  this->m_baseAllocator = p_m_delayedFreeAllocator;
+  hkRecallAllocator::init(&this->m_debugAllocator, raw);
 }
 
 // File Line: 132
@@ -169,21 +180,19 @@ hkBool *__fastcall hkCheckingMemorySystem::isInit(hkCheckingMemorySystem *this, 
 // RVA: 0xC5FD30
 char *__fastcall flagsToString(char *buf, hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int> flags)
 {
-  char *v2; // r14
   char *v3; // rbx
-  const char **v4; // rsi
-  signed __int64 v5; // rbp
+  char **v4; // rsi
+  __int64 v5; // rbp
   int v6; // eax
   int v8; // [rsp+20h] [rbp-48h]
-  const char *v9; // [rsp+28h] [rbp-40h]
+  const char *v9; // [rsp+28h] [rbp-40h] BYREF
   int v10; // [rsp+30h] [rbp-38h]
   const char *v11; // [rsp+38h] [rbp-30h]
   int v12; // [rsp+40h] [rbp-28h]
   const char *v13; // [rsp+48h] [rbp-20h]
-  unsigned int v14; // [rsp+78h] [rbp+10h]
+  unsigned int m_storage; // [rsp+78h] [rbp+10h]
 
-  v14 = flags.m_storage;
-  v2 = buf;
+  m_storage = flags.m_storage;
   v8 = 1;
   v9 = "Heap";
   v10 = 4;
@@ -191,496 +200,480 @@ char *__fastcall flagsToString(char *buf, hkFlags<enum hkCheckingMemorySystem::A
   v12 = 8;
   *buf = 0;
   v3 = buf;
-  v4 = &v9;
+  v4 = (char **)&v9;
   v13 = "Solver";
   v5 = 3i64;
   do
   {
-    if ( flags.m_storage & *(_DWORD *)(v4 - 1) )
+    if ( (flags.m_storage & *(_DWORD *)(v4 - 1)) != 0 )
     {
-      if ( v3 != v2 )
+      if ( v3 != buf )
         *v3++ = 124;
       hkString::strCpy(v3, *v4);
       v6 = hkString::strLen(*v4);
-      flags.m_storage = v14;
+      flags.m_storage = m_storage;
       v3 += v6;
     }
     v4 += 2;
     --v5;
   }
   while ( v5 );
-  return v2;
+  return buf;
 }
 
 // File Line: 168
 // RVA: 0xC5FBE0
-void __fastcall hkCheckingMemorySystem::danger(hkCheckingMemorySystem *this, const char *message, const void *ptr, hkCheckingMemorySystem::AllocInfo *info)
+void __fastcall hkCheckingMemorySystem::danger(
+        hkCheckingMemorySystem *this,
+        const char *message,
+        const void *ptr,
+        hkCheckingMemorySystem::AllocInfo *info)
 {
-  hkCheckingMemorySystem *v4; // r14
-  hkCheckingMemorySystem::AllocInfo *v5; // rsi
-  const void *v6; // rbx
-  const char *v7; // rdi
   double v8; // xmm6_8
   const char *v9; // rax
   int v10; // eax
-  void *context; // [rsp+20h] [rbp-2B8h]
-  char v12; // [rsp+40h] [rbp-298h]
-  char buf; // [rsp+140h] [rbp-198h]
-  unsigned __int64 addrs; // [rsp+1C0h] [rbp-118h]
+  int context; // [rsp+20h] [rbp-2B8h]
+  char v12[256]; // [rsp+40h] [rbp-298h] BYREF
+  char buf[128]; // [rsp+140h] [rbp-198h] BYREF
+  unsigned __int64 addrs[34]; // [rsp+1C0h] [rbp-118h] BYREF
 
-  v4 = this;
-  v5 = info;
-  v6 = ptr;
-  v7 = message;
   EnterCriticalSection(&this->m_section.m_section);
-  v8 = hkStopwatch::secondsFromTicks(v5->m_time - v4->m_timeOfConstruction);
-  v9 = flagsToString(&buf, v5->m_flags);
-  LODWORD(context) = v5->m_size;
+  v8 = hkStopwatch::secondsFromTicks(info->m_time - this->m_timeOfConstruction);
+  v9 = flagsToString(buf, info->m_flags);
+  context = info->m_size;
   hkString::snprintf(
-    &v12,
+    v12,
     256,
     "\nAddress=0x%p size=%i flags=%s thread=%I64u time=%.2f\n",
-    v6,
+    ptr,
     context,
     v9,
-    v5->m_threadId,
+    info->m_threadId,
     v8);
-  v4->m_outputFunc(v7, v4->m_outputFuncArg);
-  v4->m_outputFunc(&v12, v4->m_outputFuncArg);
-  v10 = hkStackTracer::CallTree::getCallStack(&v4->m_callTree, v5->m_traceId, &addrs, 32);
-  hkStackTracer::dumpStackTrace(&v4->m_stackTracer, &addrs, v10, v4->m_outputFunc, v4->m_outputFuncArg);
-  v4->m_outputFunc("-------------------------------------------------------------------\n\n", v4->m_outputFuncArg);
-  LeaveCriticalSection(&v4->m_section.m_section);
+  this->m_outputFunc(message, this->m_outputFuncArg);
+  this->m_outputFunc(v12, this->m_outputFuncArg);
+  v10 = hkStackTracer::CallTree::getCallStack(&this->m_callTree, info->m_traceId, addrs, 32);
+  hkStackTracer::dumpStackTrace(&this->m_stackTracer, addrs, v10, this->m_outputFunc, this->m_outputFuncArg);
+  this->m_outputFunc("-------------------------------------------------------------------\n\n", this->m_outputFuncArg);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 221
 // RVA: 0xC5EAD0
 void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem *this)
 {
-  hkMemoryAllocator *v1; // rdx
-  int v2; // edi
-  hkCheckingMemorySystem *v3; // rbx
+  hkMemoryAllocator *m_rawAllocator; // rdx
+  int m_numElems; // edi
   int v4; // edi
-  int v5; // er9
-  int v6; // er9
-  int v7; // er9
-  __int64 v8; // r8
-  int v9; // edx
-  __int64 v10; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v11; // rax
-  int v12; // edi
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v13; // rax
-  signed __int64 v14; // rsi
-  hkCheckingMemorySystem::AllocInfo *v15; // r12
-  unsigned __int64 v16; // r13
-  hkCheckingMemorySystem::AllocInfo *v17; // r15
-  hkCheckingMemorySystem::AllocInfo *v18; // r14
-  __int64 v19; // rcx
-  bool v20; // zf
-  __int64 v21; // rcx
-  unsigned __int64 v22; // rax
-  int v23; // eax
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v24; // rdx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v25; // rax
-  hkCheckingMemorySystem::AllocInfo *v26; // rdx
-  hkCheckingMemorySystem::AllocInfo *v27; // r8
-  hkCheckingMemorySystem::AllocInfo *v28; // r9
-  hkCheckingMemorySystem::AllocInfo *v29; // r10
-  hkCheckingMemorySystem::AllocInfo *v30; // r11
-  hkCheckingMemorySystem::AllocInfo *v31; // r14
-  hkCheckingMemorySystem::AllocInfo *v32; // rsi
-  int v33; // ecx
-  hkCheckingMemorySystem::AllocInfo **v34; // rax
-  __int64 v35; // rdx
-  hkArrayBase<hkCheckingMemorySystem::AllocInfo> *v36; // rax
-  unsigned __int64 v37; // rcx
-  __int64 v38; // r8
-  __int64 v39; // r8
-  int v40; // edx
-  __int64 v41; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v42; // rax
-  signed int v43; // edi
-  int v44; // er9
-  int v45; // ecx
-  __int64 v46; // rdx
-  int v47; // er15
-  __int64 v48; // r12
-  __int64 v49; // r13
-  __int64 v50; // rcx
-  int v51; // er8
-  bool v52; // al
-  char v53; // dl
-  const char *v54; // r14
-  const char *v55; // rdi
-  allocTimeComparison cmpLess; // [rsp+30h] [rbp-D0h]
-  int v57; // [rsp+38h] [rbp-C8h]
-  int v58; // [rsp+3Ch] [rbp-C4h]
-  _DWORD *v59; // [rsp+40h] [rbp-C0h]
-  int v60; // [rsp+48h] [rbp-B8h]
-  int v61; // [rsp+4Ch] [rbp-B4h]
-  _QWORD *array; // [rsp+50h] [rbp-B0h]
-  int v63; // [rsp+58h] [rbp-A8h]
-  int v64; // [rsp+5Ch] [rbp-A4h]
-  int *pArr; // [rsp+60h] [rbp-A0h]
-  int v66; // [rsp+68h] [rbp-98h]
-  int v67; // [rsp+6Ch] [rbp-94h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v68; // [rsp+70h] [rbp-90h]
-  hkCheckingMemorySystem::AllocInfo v69; // [rsp+80h] [rbp-80h]
-  hkStringBuf v70; // [rsp+C0h] [rbp-40h]
-  hkResult result; // [rsp+190h] [rbp+90h]
-  hkCheckingMemorySystem::AllocInfo *v72; // [rsp+198h] [rbp+98h]
-  __int64 v73; // [rsp+1A0h] [rbp+A0h]
+  __int64 m_hashMod; // r8
+  int v6; // edx
+  __int64 v7; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v9; // edi
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v10; // rax
+  __int64 v11; // rsi
+  hkCheckingMemorySystem::AllocInfo *v12; // r12
+  unsigned __int64 v13; // r13
+  hkCheckingMemorySystem::AllocInfo *v14; // r15
+  hkCheckingMemorySystem::AllocInfo *v15; // r14
+  __int64 v16; // rcx
+  bool v17; // zf
+  __int64 v18; // rcx
+  unsigned __int64 Key; // rax
+  unsigned int inserted; // eax
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v21; // rdx
+  __int64 val_low; // rax
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v23; // rax
+  hkCheckingMemorySystem::AllocInfo *v24; // rdx
+  hkCheckingMemorySystem::AllocInfo *v25; // r8
+  hkCheckingMemorySystem::AllocInfo *v26; // r9
+  hkCheckingMemorySystem::AllocInfo *v27; // r10
+  hkCheckingMemorySystem::AllocInfo *v28; // r11
+  hkCheckingMemorySystem::AllocInfo *v29; // r14
+  hkCheckingMemorySystem::AllocInfo *v30; // rsi
+  int v31; // ecx
+  hkCheckingMemorySystem::AllocInfo **v32; // rax
+  __int64 v33; // rdx
+  hkArrayBase<hkCheckingMemorySystem::AllocInfo> *m_allocs; // rax
+  unsigned __int64 v35; // rcx
+  const void *v36; // r8
+  __int64 v37; // r8
+  int v38; // edx
+  __int64 v39; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v40; // rax
+  int v41; // edi
+  int v42; // ecx
+  __int64 v43; // rdx
+  int v44; // r15d
+  __int64 v45; // r12
+  __int64 v46; // r13
+  __int64 v47; // rcx
+  int v48; // r8d
+  bool v49; // al
+  bool v50; // dl
+  char *v51; // r14
+  char *m_name; // rdi
+  allocTimeComparison cmpLess; // [rsp+30h] [rbp-D0h] BYREF
+  int v54; // [rsp+38h] [rbp-C8h]
+  int v55; // [rsp+3Ch] [rbp-C4h]
+  _DWORD *v56; // [rsp+40h] [rbp-C0h] BYREF
+  int v57; // [rsp+48h] [rbp-B8h]
+  int v58; // [rsp+4Ch] [rbp-B4h]
+  _QWORD *array; // [rsp+50h] [rbp-B0h] BYREF
+  int v60; // [rsp+58h] [rbp-A8h]
+  int v61; // [rsp+5Ch] [rbp-A4h]
+  int *pArr; // [rsp+60h] [rbp-A0h] BYREF
+  int v63; // [rsp+68h] [rbp-98h]
+  int v64; // [rsp+6Ch] [rbp-94h]
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v65; // [rsp+70h] [rbp-90h] BYREF
+  hkCheckingMemorySystem::AllocInfo v66; // [rsp+80h] [rbp-80h] BYREF
+  hkStringBuf v67; // [rsp+C0h] [rbp-40h] BYREF
+  const void *result; // [rsp+190h] [rbp+90h] BYREF
+  hkCheckingMemorySystem::AllocInfo *v69; // [rsp+198h] [rbp+98h]
+  __int64 v70; // [rsp+1A0h] [rbp+A0h]
 
-  v1 = this->m_rawAllocator;
-  `anonymous namespace::SummaryAllocator::s_allocator = this->m_rawAllocator;
-  v2 = this->m_activePointers.m_numElems;
-  v3 = this;
+  m_rawAllocator = this->m_rawAllocator;
+  `anonymous namespace::SummaryAllocator::s_allocator = m_rawAllocator;
+  m_numElems = this->m_activePointers.m_numElems;
   array = 0i64;
-  v63 = 0;
-  v64 = 2147483648;
-  v4 = v2 & 0x7FFFFFFF;
-  if ( v4 > 0 )
+  v60 = 0;
+  v61 = 0x80000000;
+  v4 = m_numElems & 0x7FFFFFFF;
+  if ( v4 )
   {
-    v5 = v4;
-    if ( v4 < 0 )
-      v5 = 0;
-    hkArrayUtil::_reserve(&result, v1, &array, v5, 8);
-    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
+    hkArrayUtil::_reserve((hkResult *)&result, m_rawAllocator, (const void **)&array, v4, 8);
+    m_rawAllocator = `anonymous namespace::SummaryAllocator::s_allocator;
   }
   cmpLess.m_allocs = 0i64;
+  v54 = 0;
+  v55 = 0x80000000;
+  if ( v4 > 0 )
+  {
+    hkArrayUtil::_reserve((hkResult *)&result, m_rawAllocator, (const void **)&cmpLess.m_allocs, v4, 56);
+    m_rawAllocator = `anonymous namespace::SummaryAllocator::s_allocator;
+  }
+  v56 = 0i64;
   v57 = 0;
-  v58 = 2147483648;
+  v58 = 0x80000000;
   if ( v4 > 0 )
   {
-    v6 = v4;
-    if ( v4 < 0 )
-      v6 = 0;
-    hkArrayUtil::_reserve(&result, v1, &cmpLess, v6, 56);
-    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
+    hkArrayUtil::_reserve((hkResult *)&result, m_rawAllocator, (const void **)&v56, v4, 4);
+    m_rawAllocator = `anonymous namespace::SummaryAllocator::s_allocator;
   }
-  v59 = 0i64;
-  v60 = 0;
-  v61 = 2147483648;
-  if ( v4 > 0 )
+  v65.m_elem = 0i64;
+  v65.m_numElems = 0;
+  v65.m_hashMod = -1;
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::reserve(&v65, m_rawAllocator, v4);
+  m_hashMod = this->m_activePointers.m_hashMod;
+  v6 = 0;
+  v7 = 0i64;
+  if ( m_hashMod >= 0 )
   {
-    v7 = v4;
-    if ( v4 < 0 )
-      v7 = 0;
-    hkArrayUtil::_reserve(&result, v1, &v59, v7, 4);
-    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
-  }
-  v68.m_elem = 0i64;
-  v68.m_numElems = 0;
-  v68.m_hashMod = -1;
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::reserve(&v68, v1, v4);
-  v8 = v3->m_activePointers.m_hashMod;
-  v9 = 0;
-  v10 = 0i64;
-  if ( v8 >= 0 )
-  {
-    v11 = v3->m_activePointers.m_elem;
+    m_elem = this->m_activePointers.m_elem;
     do
     {
-      if ( v11->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
-      ++v10;
-      ++v9;
-      ++v11;
+      ++v7;
+      ++v6;
+      ++m_elem;
     }
-    while ( v10 <= v8 );
+    while ( v7 <= m_hashMod );
   }
-  v12 = v9;
-  if ( v9 <= v3->m_activePointers.m_hashMod )
+  v9 = v6;
+  if ( v6 <= this->m_activePointers.m_hashMod )
   {
     do
     {
-      v13 = v3->m_activePointers.m_elem;
-      v14 = (signed __int64)v12 << 6;
-      v15 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v13->val.m_threadId + v14);
-      v16 = *(unsigned __int64 *)((char *)&v13->val.m_allocOrder + v14);
-      v17 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v13->val.m_time + v14);
-      v18 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v13->val.m_bookmarkIndex + v14);
-      *(_QWORD *)&result.m_enum = *(const void **)((char *)&v13->val.m_tagData + v14);
-      v69.m_tagData = *(const void **)&result.m_enum;
-      v19 = *(_QWORD *)((char *)&v13->val.m_flags.m_storage + v14);
-      v69.m_threadId = (unsigned __int64)v15;
-      *(_QWORD *)&v69.m_flags.m_storage = v19;
-      v20 = HIDWORD(v19) == -1;
-      v72 = (hkCheckingMemorySystem::AllocInfo *)v19;
-      v21 = *(_QWORD *)((char *)&v13->val.m_size + v14);
-      v69.m_allocOrder = v16;
-      v69.m_time = (unsigned __int64)v17;
-      v73 = v21;
-      *(_QWORD *)&v69.m_size = v21;
-      *(_QWORD *)&v69.m_bookmarkIndex = v18;
-      if ( !v20 || (_DWORD)v18 != -1 )
+      v10 = this->m_activePointers.m_elem;
+      v11 = (__int64)v9 << 6;
+      v12 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v10->val.m_threadId + v11);
+      v13 = *(unsigned __int64 *)((char *)&v10->val.m_allocOrder + v11);
+      v14 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v10->val.m_time + v11);
+      v15 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v10->val.m_bookmarkIndex + v11);
+      result = *(const void **)((char *)&v10->val.m_tagData + v11);
+      v66.m_tagData = result;
+      v16 = *(_QWORD *)((char *)&v10->val.m_flags.m_storage + v11);
+      v66.m_threadId = (unsigned __int64)v12;
+      *(_QWORD *)&v66.m_flags.m_storage = v16;
+      v17 = HIDWORD(v16) == -1;
+      v69 = (hkCheckingMemorySystem::AllocInfo *)v16;
+      v18 = *(_QWORD *)((char *)&v10->val.m_size + v11);
+      v66.m_allocOrder = v13;
+      v66.m_time = (unsigned __int64)v14;
+      v70 = v18;
+      *(_QWORD *)&v66.m_size = v18;
+      *(_QWORD *)&v66.m_bookmarkIndex = v15;
+      if ( !v17 || (_DWORD)v15 != -1 )
       {
-        v22 = hkCheckingMemorySystem::AllocInfo::getKey(&v69);
-        v23 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findOrInsertKey(
-                                  &v68,
-                                  `anonymous namespace::SummaryAllocator::s_allocator,
-                                  v22,
-                                  0xFFFFFFFFFFFFFFFFui64);
-        v24 = &v68.m_elem[v23];
-        if ( LODWORD(v24->val) != -1 )
+        Key = hkCheckingMemorySystem::AllocInfo::getKey(&v66);
+        inserted = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findOrInsertKey(
+                                   &v65,
+                                   `anonymous namespace::SummaryAllocator::s_allocator,
+                                   Key,
+                                   0xFFFFFFFFFFFFFFFFui64);
+        v21 = &v65.m_elem[inserted];
+        val_low = SLODWORD(v21->val);
+        if ( (_DWORD)val_low != -1 )
         {
-          v35 = SLODWORD(v24->val);
-          ++v59[v35];
-          v36 = cmpLess.m_allocs;
-          v37 = 7 * v35;
-          if ( v17 < (&cmpLess.m_allocs[1].m_data)[7 * v35] )
+          v33 = SLODWORD(v21->val);
+          ++v56[val_low];
+          m_allocs = cmpLess.m_allocs;
+          v35 = 7 * v33;
+          if ( v14 < (&cmpLess.m_allocs[1].m_data)[7 * v33] )
           {
-            v38 = *(_QWORD *)&result.m_enum;
-            (&cmpLess.m_allocs->m_data)[v37] = v15;
-            *(_QWORD *)((char *)&v36->m_size + v37 * 8) = v16;
-            (&v36[1].m_data)[v37] = v17;
-            *(_QWORD *)((char *)&v36[1].m_size + v37 * 8) = v38;
-            (&v36[2].m_data)[v37] = v72;
-            *(_QWORD *)((char *)&v36[2].m_size + v37 * 8) = v73;
-            (&v36[3].m_data)[v37] = v18;
-            array[v35] = *(unsigned __int64 *)((char *)&v3->m_activePointers.m_elem->key + v14);
+            v36 = result;
+            (&cmpLess.m_allocs->m_data)[v35] = v12;
+            *(_QWORD *)((char *)&m_allocs->m_size + v35 * 8) = v13;
+            (&m_allocs[1].m_data)[v35] = v14;
+            *(_QWORD *)((char *)&m_allocs[1].m_size + v35 * 8) = v36;
+            (&m_allocs[2].m_data)[v35] = v69;
+            *(_QWORD *)((char *)&m_allocs[2].m_size + v35 * 8) = v70;
+            (&m_allocs[3].m_data)[v35] = v15;
+            array[v33] = *(unsigned __int64 *)((char *)&this->m_activePointers.m_elem->key + v11);
           }
-          goto LABEL_27;
+          goto LABEL_21;
         }
-        v24->val = v63;
-        v13 = v3->m_activePointers.m_elem;
+        v21->val = v60;
+        v10 = this->m_activePointers.m_elem;
       }
-      array[v63] = *(unsigned __int64 *)((char *)&v13->key + v14);
-      v25 = v3->m_activePointers.m_elem;
-      ++v63;
-      v26 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_threadId + v14);
-      v27 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_allocOrder + v14);
-      v28 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_time + v14);
-      v29 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_tagData + v14);
-      v30 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_flags.m_storage + v14);
-      v31 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_size + v14);
-      v32 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v25->val.m_bookmarkIndex + v14);
-      v33 = v57;
-      v34 = &(&cmpLess.m_allocs->m_data)[7 * v57];
-      if ( v34 )
+      array[v60] = *(unsigned __int64 *)((char *)&v10->key + v11);
+      v23 = this->m_activePointers.m_elem;
+      ++v60;
+      v24 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_threadId + v11);
+      v25 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_allocOrder + v11);
+      v26 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_time + v11);
+      v27 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_tagData + v11);
+      v28 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_flags.m_storage + v11);
+      v29 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_size + v11);
+      v30 = *(hkCheckingMemorySystem::AllocInfo **)((char *)&v23->val.m_bookmarkIndex + v11);
+      v31 = v54;
+      v32 = &(&cmpLess.m_allocs->m_data)[7 * v54];
+      if ( v32 )
       {
-        *v34 = v26;
-        v34[1] = v27;
-        v34[2] = v28;
-        v34[3] = v29;
-        v34[4] = v30;
-        v34[5] = v31;
-        v34[6] = v32;
-        v33 = v57;
+        *v32 = v24;
+        v32[1] = v25;
+        v32[2] = v26;
+        v32[3] = v27;
+        v32[4] = v28;
+        v32[5] = v29;
+        v32[6] = v30;
+        v31 = v54;
       }
-      v57 = v33 + 1;
-      v59[v60++] = 1;
-LABEL_27:
-      v39 = v3->m_activePointers.m_hashMod;
-      v40 = v12 + 1;
-      v41 = v12 + 1;
-      if ( v41 <= v39 )
+      v54 = v31 + 1;
+      v56[v57++] = 1;
+LABEL_21:
+      v37 = this->m_activePointers.m_hashMod;
+      v38 = v9 + 1;
+      v39 = v9 + 1;
+      if ( v39 <= v37 )
       {
-        v42 = &v3->m_activePointers.m_elem[(signed __int64)v40];
+        v40 = &this->m_activePointers.m_elem[(__int64)v38];
         do
         {
-          if ( v42->key != -1i64 )
+          if ( v40->key != -1i64 )
             break;
-          ++v41;
+          ++v39;
+          ++v38;
           ++v40;
-          ++v42;
         }
-        while ( v41 <= v39 );
+        while ( v39 <= v37 );
       }
-      v12 = v40;
+      v9 = v38;
     }
-    while ( v40 <= v3->m_activePointers.m_hashMod );
+    while ( v38 <= this->m_activePointers.m_hashMod );
   }
-  v43 = v57;
+  v41 = v54;
   pArr = 0i64;
-  v66 = 0;
-  v67 = 2147483648;
-  if ( v57 > 0 )
+  v63 = 0;
+  v64 = 0x80000000;
+  if ( v54 > 0 )
+    hkArrayUtil::_reserve(
+      (hkResult *)&result,
+      `anonymous namespace::SummaryAllocator::s_allocator,
+      (const void **)&pArr,
+      v54,
+      4);
+  v63 = v41;
+  v42 = 0;
+  if ( v41 > 0 )
   {
-    v44 = v57;
-    if ( v57 < 0 )
-      v44 = 0;
-    hkArrayUtil::_reserve(&result, `anonymous namespace::SummaryAllocator::s_allocator, &pArr, v44, 4);
-  }
-  v66 = v43;
-  v45 = 0;
-  if ( v43 > 0 )
-  {
-    v46 = 0i64;
+    v43 = 0i64;
     do
     {
-      ++v46;
-      pArr[v46 - 1] = v45;
-      v43 = v66;
-      ++v45;
+      pArr[v43++] = v42;
+      v41 = v63;
+      ++v42;
     }
-    while ( v45 < v66 );
+    while ( v42 < v63 );
   }
-  if ( v43 > 1 )
+  if ( v41 > 1 )
   {
     hkAlgorithm::quickSortRecursive<int,`anonymous namespace::allocTimeComparison>(
       pArr,
       0,
-      v43 - 1,
+      v41 - 1,
       (allocTimeComparison)&cmpLess);
-    v43 = v66;
+    v41 = v63;
   }
-  v47 = 0;
-  if ( v43 > 0 )
+  v44 = 0;
+  if ( v41 > 0 )
   {
-    v48 = 0i64;
+    v45 = 0i64;
     while ( 1 )
     {
-      v49 = pArr[v48];
-      v50 = SLODWORD((&cmpLess.m_allocs[3].m_data)[7 * v49]);
-      v51 = v50 + 1;
-      v52 = (signed int)v50 >= 0 && (signed int)v50 < v3->m_bookmarks.m_size;
-      v53 = v51 < 0 || v51 >= v3->m_bookmarks.m_size ? 0 : 1;
-      if ( v52 )
+      v46 = pArr[v45];
+      v47 = SLODWORD((&cmpLess.m_allocs[3].m_data)[7 * v46]);
+      v48 = v47 + 1;
+      v49 = (int)v47 >= 0 && (int)v47 < this->m_bookmarks.m_size;
+      v50 = v48 >= 0 && v48 < this->m_bookmarks.m_size;
+      if ( v49 )
         break;
-      if ( v53 )
+      if ( v50 )
       {
-        v54 = "(unknown)";
-LABEL_55:
-        if ( v53 )
-          v55 = v3->m_bookmarks.m_data[v51].m_name;
+        v51 = "(unknown)";
+LABEL_47:
+        if ( v50 )
+          m_name = this->m_bookmarks.m_data[v48].m_name;
         else
-          v55 = "(unknown)";
-        v3->m_outputFunc("Between bookmarks\n[", v3->m_outputFuncArg);
-        v3->m_outputFunc(v54, v3->m_outputFuncArg);
-        v3->m_outputFunc("] and \n[", v3->m_outputFuncArg);
-        v3->m_outputFunc(v55, v3->m_outputFuncArg);
-        v3->m_outputFunc("]\n", v3->m_outputFuncArg);
+          m_name = "(unknown)";
+        this->m_outputFunc("Between bookmarks\n[", this->m_outputFuncArg);
+        this->m_outputFunc(v51, this->m_outputFuncArg);
+        this->m_outputFunc("] and \n[", this->m_outputFuncArg);
+        this->m_outputFunc(m_name, this->m_outputFuncArg);
+        this->m_outputFunc("]\n", this->m_outputFuncArg);
       }
-      v70.m_string.m_capacityAndFlags = -2147483520;
-      v70.m_string.m_size = 1;
-      v70.m_string.m_data = v70.m_string.m_storage;
-      v70.m_string.m_storage[0] = 0;
-      hkStringBuf::printf(&v70, "Memory Leaked (%i times with this stack):\n", (unsigned int)v59[v49]);
+      v67.m_string.m_capacityAndFlags = -2147483520;
+      v67.m_string.m_size = 1;
+      v67.m_string.m_data = v67.m_string.m_storage;
+      v67.m_string.m_storage[0] = 0;
+      hkStringBuf::printf(&v67, "Memory Leaked (%i times with this stack):\n", (unsigned int)v56[v46]);
       hkCheckingMemorySystem::danger(
-        v3,
-        v70.m_string.m_data,
-        (const void *)array[v49],
-        (hkCheckingMemorySystem::AllocInfo *)cmpLess.m_allocs + v49);
-      v70.m_string.m_size = 0;
-      if ( v70.m_string.m_capacityAndFlags >= 0 )
+        this,
+        v67.m_string.m_data,
+        (const void *)array[v46],
+        (hkCheckingMemorySystem::AllocInfo *)cmpLess.m_allocs + v46);
+      v67.m_string.m_size = 0;
+      if ( v67.m_string.m_capacityAndFlags >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          v70.m_string.m_data,
-          v70.m_string.m_capacityAndFlags & 0x3FFFFFFF);
-      ++v47;
-      ++v48;
-      if ( v47 >= v66 )
-        goto LABEL_62;
+          &hkContainerTempAllocator::s_alloc,
+          v67.m_string.m_data,
+          v67.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+      ++v44;
+      ++v45;
+      if ( v44 >= v63 )
+        goto LABEL_54;
     }
-    v54 = v3->m_bookmarks.m_data[v50].m_name;
-    goto LABEL_55;
+    v51 = this->m_bookmarks.m_data[v47].m_name;
+    goto LABEL_47;
   }
-LABEL_62:
-  v66 = 0;
-  if ( v67 >= 0 )
+LABEL_54:
+  v63 = 0;
+  if ( v64 >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
       pArr,
-      4 * v67);
+      4 * v64);
   pArr = 0i64;
-  v67 = 2147483648;
+  v64 = 0x80000000;
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v68,
+    &v65,
     `anonymous namespace::SummaryAllocator::s_allocator);
-  v60 = 0;
-  if ( v61 >= 0 )
-    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace::SummaryAllocator::s_allocator,
-      v59,
-      4 * v61);
-  v59 = 0i64;
-  v61 = 2147483648;
   v57 = 0;
   if ( v58 >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
+      v56,
+      4 * v58);
+  v56 = 0i64;
+  v58 = 0x80000000;
+  v54 = 0;
+  if ( v55 >= 0 )
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       cmpLess.m_allocs,
-      56 * (v58 & 0x3FFFFFFF));
+      56 * (v55 & 0x3FFFFFFF));
   cmpLess.m_allocs = 0i64;
-  v63 = 0;
-  v58 = 2147483648;
-  if ( v64 >= 0 )
+  v60 = 0;
+  v55 = 0x80000000;
+  if ( v61 >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
       array,
-      8 * v64);
+      8 * v61);
 }
 
 // File Line: 309
 // RVA: 0xC5FDF0
-void __fastcall breadthFirstSearch(int startIndex, hkArrayBase<int> *connectTo, hkArrayBase<int> *connectStart, hkArrayBase<hkBool> *visited, hkArray<int,SummaryAllocator> *owned)
+void __fastcall breadthFirstSearch(
+        int startIndex,
+        hkArrayBase<int> *connectTo,
+        hkArrayBase<int> *connectStart,
+        hkArrayBase<hkBool> *visited,
+        hkArray<int,SummaryAllocator> *owned)
 {
-  int v5; // edi
-  __int64 v6; // r14
-  hkArrayBase<hkBool> *v7; // r12
+  __int64 m_size; // r14
   hkArrayBase<int> *v8; // r11
-  int v9; // er10
+  int v9; // r10d
   __int64 v10; // r13
-  int *v11; // rdx
+  int *m_data; // rdx
   __int64 v12; // rdi
   __int64 v13; // r9
   __int64 v14; // r8
-  signed __int64 v15; // r15
+  __int64 v15; // r15
   __int64 v16; // rbp
   __int64 v17; // rsi
-  hkArrayBase<int> *v18; // [rsp+68h] [rbp+10h]
   hkArrayBase<int> *v19; // [rsp+70h] [rbp+18h]
 
   v19 = connectStart;
-  v18 = connectTo;
-  v5 = startIndex;
-  v6 = owned->m_size;
+  m_size = owned->m_size;
   visited->m_data[startIndex].m_bool = 1;
-  v7 = visited;
   v8 = connectTo;
   if ( owned->m_size == (owned->m_capacityAndFlags & 0x3FFFFFFF) )
   {
-    hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, owned, 4);
+    hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, (const void **)&owned->m_data, 4);
     connectStart = v19;
-    v8 = v18;
+    v8 = connectTo;
   }
-  owned->m_data[owned->m_size++] = v5;
+  owned->m_data[owned->m_size++] = startIndex;
   v9 = owned->m_size;
-  if ( (signed int)v6 < v9 )
+  if ( (int)m_size < v9 )
   {
-    v10 = v6;
+    v10 = m_size;
     do
     {
-      v11 = connectStart->m_data;
+      m_data = connectStart->m_data;
       v12 = 0i64;
       v13 = owned->m_data[v10];
       v14 = connectStart->m_data[v13];
-      v15 = (signed __int64)&v8->m_data[v14];
-      v16 = v11[v13 + 1] - (signed int)v14;
-      if ( v11[v13 + 1] - (signed int)v14 > 0 )
+      v15 = (__int64)&v8->m_data[v14];
+      v16 = m_data[v13 + 1] - (int)v14;
+      if ( m_data[v13 + 1] - (int)v14 > 0 )
       {
         do
         {
-          v17 = *(signed int *)(v15 + 4 * v12);
-          if ( !v7->m_data[v17].m_bool )
+          v17 = *(int *)(v15 + 4 * v12);
+          if ( !visited->m_data[v17].m_bool )
           {
-            v7->m_data[v17].m_bool = 1;
+            visited->m_data[v17].m_bool = 1;
             if ( owned->m_size == (owned->m_capacityAndFlags & 0x3FFFFFFF) )
-              hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, owned, 4);
+              hkArrayUtil::_reserveMore(
+                `anonymous namespace::SummaryAllocator::s_allocator,
+                (const void **)&owned->m_data,
+                4);
             owned->m_data[owned->m_size++] = v17;
             v9 = owned->m_size;
           }
           ++v12;
         }
         while ( v12 < v16 );
-        v8 = v18;
+        v8 = connectTo;
       }
       connectStart = v19;
-      LODWORD(v6) = v6 + 1;
+      LODWORD(m_size) = m_size + 1;
       ++v10;
     }
-    while ( (signed int)v6 < v9 );
+    while ( (int)m_size < v9 );
   }
 }
 
@@ -688,481 +681,475 @@ void __fastcall breadthFirstSearch(int startIndex, hkArrayBase<int> *connectTo, 
 // RVA: 0xC5FF50
 void __fastcall setVisited(hkArrayBase<int> *owned, hkArrayBase<hkBool> *visited, hkBool value)
 {
-  int v3; // er10
+  int v3; // r10d
   __int64 v4; // r11
-  char v5; // [rsp+18h] [rbp+18h]
+  char m_bool; // [rsp+18h] [rbp+18h]
 
   v3 = 0;
-  v5 = value.m_bool;
+  m_bool = value.m_bool;
   if ( owned->m_size > 0 )
   {
     v4 = 0i64;
     while ( 1 )
     {
       ++v3;
-      ++v4;
-      visited->m_data[owned->m_data[v4 - 1]] = value;
+      visited->m_data[owned->m_data[v4++]] = value;
       if ( v3 >= owned->m_size )
         break;
-      value.m_bool = v5;
+      value.m_bool = m_bool;
     }
   }
 }
 
 // File Line: 361
 // RVA: 0xC5FA30
-void __fastcall hkCheckingMemorySystem::dumpLeak(hkCheckingMemorySystem *this, hkArrayBase<int> *owned, hkArrayBase<unsigned __int64> *addrs, hkArrayBase<hkCheckingMemorySystem::AllocInfo> *allocs)
+void __fastcall hkCheckingMemorySystem::dumpLeak(
+        hkCheckingMemorySystem *this,
+        hkArrayBase<int> *owned,
+        hkArrayBase<unsigned __int64> *addrs,
+        hkArrayBase<hkCheckingMemorySystem::AllocInfo> *allocs)
 {
-  _RTL_CRITICAL_SECTION *v4; // rbx
-  hkCheckingMemorySystem *v5; // r13
-  hkArrayBase<hkCheckingMemorySystem::AllocInfo> *v6; // r12
-  hkArrayBase<unsigned __int64> *v7; // rdi
-  hkArrayBase<int> *v8; // r14
-  signed int v9; // er15
-  signed __int64 v10; // rbp
+  hkCriticalSection *p_m_section; // rbx
+  int v9; // r15d
+  __int64 v10; // rbp
   __int64 v11; // rsi
-  unsigned __int64 v12; // rdi
-  signed __int64 v13; // rsi
+  const void *v12; // rdi
+  hkCheckingMemorySystem::AllocInfo *v13; // rsi
   const char *v14; // rax
   __int64 v15; // [rsp+20h] [rbp-158h]
-  char buf; // [rsp+40h] [rbp-138h]
-  char v17; // [rsp+C0h] [rbp-B8h]
+  char buf[128]; // [rsp+40h] [rbp-138h] BYREF
+  char v17[128]; // [rsp+C0h] [rbp-B8h] BYREF
   hkCriticalSection *v18; // [rsp+180h] [rbp+8h]
-  hkArrayBase<unsigned __int64> *v19; // [rsp+190h] [rbp+18h]
 
-  v19 = addrs;
-  v4 = &this->m_section.m_section;
-  v5 = this;
-  v6 = allocs;
-  v7 = addrs;
-  v8 = owned;
+  p_m_section = &this->m_section;
   v18 = &this->m_section;
   EnterCriticalSection(&this->m_section.m_section);
-  hkString::snprintf(&buf, 128, "ROOT - %d reached", (unsigned int)(v8->m_size - 1));
-  hkCheckingMemorySystem::danger(v5, &buf, (const void *)v7->m_data[*v8->m_data], &v6->m_data[*v8->m_data]);
+  hkString::snprintf(buf, 128, "ROOT - %d reached", (unsigned int)(owned->m_size - 1));
+  hkCheckingMemorySystem::danger(
+    this,
+    buf,
+    (const void *)addrs->m_data[*owned->m_data],
+    &allocs->m_data[*owned->m_data]);
   v9 = 1;
-  if ( v8->m_size > 1 )
+  if ( owned->m_size > 1 )
   {
     v10 = 1i64;
     do
     {
-      v11 = v8->m_data[v10];
-      v12 = v19->m_data[v11];
-      v13 = (signed __int64)&v6->m_data[v11];
-      v14 = flagsToString(&v17, *(hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int> *)(v13 + 32));
-      LODWORD(v15) = *(_DWORD *)(v13 + 40);
+      v11 = owned->m_data[v10];
+      v12 = (const void *)addrs->m_data[v11];
+      v13 = &allocs->m_data[v11];
+      v14 = flagsToString(v17, v13->m_flags);
+      LODWORD(v15) = v13->m_size;
       hkString::snprintf(
-        &buf,
+        buf,
         128,
         "REACHED Address=0x%p size=%i flags=%s thread=%i\n",
         v12,
         v15,
         v14,
-        *(_QWORD *)v13);
-      v5->m_outputFunc(&buf, v5->m_outputFuncArg);
+        v13->m_threadId);
+      this->m_outputFunc(buf, this->m_outputFuncArg);
       ++v9;
       ++v10;
     }
-    while ( v9 < v8->m_size );
-    v4 = &v18->m_section;
+    while ( v9 < owned->m_size );
+    p_m_section = v18;
   }
-  LeaveCriticalSection(v4);
+  LeaveCriticalSection(&p_m_section->m_section);
 }
 
 // File Line: 385
 // RVA: 0xC5F180
 void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySystem *this)
 {
-  hkMemoryAllocator *v1; // rdx
+  hkMemoryAllocator *m_rawAllocator; // rdx
   __int64 v2; // r13
-  int v3; // eax
+  int m_capacityAndFlags; // eax
   hkCheckingMemorySystem *v4; // r15
   bool v5; // zf
-  bool v6; // sf
-  int v7; // esi
-  int v8; // edi
-  int v9; // er9
-  int v10; // eax
-  int v11; // eax
-  int v12; // er9
-  __int64 v13; // r8
-  int v14; // edx
-  __int64 v15; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v16; // rax
-  int v17; // er8
-  __int64 v18; // r9
-  __int64 v19; // r10
-  signed __int64 v20; // rdx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v21; // rcx
-  hkCheckingMemorySystem::AllocInfo *v22; // rdi
-  __int64 v23; // rax
-  int v24; // edx
-  __int64 v25; // rdi
-  __int64 v26; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v27; // rax
-  __int64 v28; // rbx
-  __int64 v29; // r12
-  __int64 v30; // rsi
-  hkCheckingMemorySystem::AllocInfo *v31; // r9
-  _QWORD *v32; // r8
-  int *v33; // rcx
-  int v34; // eax
-  unsigned __int64 v35; // r15
-  int v36; // er14
-  __int64 v37; // rbx
-  __int64 v38; // rsi
-  unsigned __int64 v39; // rcx
-  int v40; // ecx
-  int v41; // er9
-  hkBool *v42; // rdi
-  int v43; // eax
-  unsigned __int64 v44; // rcx
-  int v45; // eax
-  int v46; // er9
-  signed __int64 v47; // rcx
-  int v48; // edi
-  __int64 v49; // rdx
-  int *v50; // rdx
-  int v51; // er8
-  int v52; // ebx
-  __int64 v53; // rdi
-  int v54; // ebx
-  int v55; // er14
-  __int64 v56; // rsi
-  hkArray<int,SummaryAllocator> owned; // [rsp+30h] [rbp-59h]
-  hkArray<int,SummaryAllocator> v58; // [rsp+40h] [rbp-49h]
-  hkArrayBase<int> connectStart; // [rsp+50h] [rbp-39h]
-  hkArrayBase<int> connectTo; // [rsp+60h] [rbp-29h]
-  hkArrayBase<hkBool> visited; // [rsp+70h] [rbp-19h]
-  hkArrayBase<hkCheckingMemorySystem::AllocInfo> allocs; // [rsp+80h] [rbp-9h]
-  char *array; // [rsp+90h] [rbp+7h]
-  int v64; // [rsp+98h] [rbp+Fh]
-  int v65; // [rsp+9Ch] [rbp+13h]
-  hkCheckingMemorySystem *v66; // [rsp+F0h] [rbp+67h]
-  int v67; // [rsp+F8h] [rbp+6Fh]
-  hkResult result; // [rsp+100h] [rbp+77h]
-  __int64 v69; // [rsp+108h] [rbp+7Fh]
+  int v6; // esi
+  int m_size; // edi
+  int v8; // eax
+  int v9; // eax
+  int v10; // r9d
+  __int64 m_hashMod; // r8
+  int v12; // edx
+  __int64 v13; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v15; // r8d
+  __int64 v16; // r9
+  __int64 v17; // r10
+  __int64 v18; // rdx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v19; // rcx
+  hkCheckingMemorySystem::AllocInfo *v20; // rdi
+  __int64 v21; // rax
+  int v22; // edx
+  __int64 v23; // rdi
+  __int64 v24; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v25; // rax
+  __int64 v26; // rbx
+  __int64 v27; // r12
+  __int64 v28; // rsi
+  hkCheckingMemorySystem::AllocInfo *m_data; // r9
+  unsigned __int64 *v30; // r8
+  int *v31; // rcx
+  __int64 v32; // kr00_8
+  unsigned __int64 v33; // r15
+  int v34; // r14d
+  __int64 v35; // rbx
+  __int64 v36; // rsi
+  unsigned __int64 v37; // rcx
+  int v38; // ecx
+  hkBool *v39; // rdi
+  int v40; // eax
+  unsigned __int64 v41; // rcx
+  int v42; // eax
+  signed __int64 v43; // rcx
+  int v44; // edi
+  __int64 v45; // rdx
+  int *v46; // rdx
+  int v47; // r8d
+  int v48; // ebx
+  __int64 v49; // rdi
+  int v50; // ebx
+  int v51; // r14d
+  __int64 v52; // rsi
+  hkArray<int,SummaryAllocator> owned; // [rsp+30h] [rbp-59h] BYREF
+  hkArray<int,SummaryAllocator> v54; // [rsp+40h] [rbp-49h] BYREF
+  hkArrayBase<int> connectStart; // [rsp+50h] [rbp-39h] BYREF
+  hkArrayBase<int> connectTo; // [rsp+60h] [rbp-29h] BYREF
+  hkArrayBase<hkBool> visited; // [rsp+70h] [rbp-19h] BYREF
+  hkArrayBase<hkCheckingMemorySystem::AllocInfo> allocs; // [rsp+80h] [rbp-9h] BYREF
+  hkArrayBase<unsigned __int64> array[5]; // [rsp+90h] [rbp+7h] BYREF
+  hkCheckingMemorySystem *v60; // [rsp+F0h] [rbp+67h] BYREF
+  int v61; // [rsp+F8h] [rbp+6Fh]
+  __int64 result; // [rsp+100h] [rbp+77h] BYREF
+  __int64 v63; // [rsp+108h] [rbp+7Fh]
 
-  v66 = this;
-  v1 = this->m_rawAllocator;
+  v60 = this;
+  m_rawAllocator = this->m_rawAllocator;
   v2 = 0i64;
-  v3 = 2147483648;
-  `anonymous namespace::SummaryAllocator::s_allocator = this->m_rawAllocator;
+  m_capacityAndFlags = 0x80000000;
+  `anonymous namespace::SummaryAllocator::s_allocator = m_rawAllocator;
   v4 = this;
   v5 = (this->m_activePointers.m_numElems & 0x7FFFFFFF) == 0;
-  v6 = (this->m_activePointers.m_numElems & 0x7FFFFFFF) < 0;
-  v7 = this->m_activePointers.m_numElems & 0x7FFFFFFF;
-  array = 0i64;
-  v64 = 0;
-  v65 = 2147483648;
+  v6 = this->m_activePointers.m_numElems & 0x7FFFFFFF;
+  array[0].m_data = 0i64;
+  array[0].m_size = 0;
+  array[0].m_capacityAndFlags = 0x80000000;
   allocs.m_data = 0i64;
   allocs.m_size = 0;
-  v67 = v7;
-  allocs.m_capacityAndFlags = 2147483648;
+  v61 = v6;
+  allocs.m_capacityAndFlags = 0x80000000;
   connectTo.m_data = 0i64;
-  v8 = 0;
+  m_size = 0;
   connectTo.m_size = 0;
-  connectTo.m_capacityAndFlags = 2147483648;
+  connectTo.m_capacityAndFlags = 0x80000000;
   connectStart.m_data = 0i64;
   connectStart.m_size = 0;
-  connectStart.m_capacityAndFlags = 2147483648;
-  if ( !v6 && !v5 )
+  connectStart.m_capacityAndFlags = 0x80000000;
+  if ( !v5 )
   {
-    v9 = v7;
-    if ( v7 < 0 )
-      v9 = 0;
-    hkArrayUtil::_reserve(&result, v1, &array, v9, 8);
-    v3 = allocs.m_capacityAndFlags;
-    v8 = connectTo.m_size;
+    hkArrayUtil::_reserve((hkResult *)&result, m_rawAllocator, (const void **)&array[0].m_data, v6, 8);
+    m_capacityAndFlags = allocs.m_capacityAndFlags;
+    m_size = connectTo.m_size;
   }
-  v10 = v3 & 0x3FFFFFFF;
-  v64 = v7;
-  if ( v10 < v7 )
+  v8 = m_capacityAndFlags & 0x3FFFFFFF;
+  array[0].m_size = v6;
+  if ( v8 < v6 )
   {
-    v11 = 2 * v10;
-    v12 = v7;
-    if ( v7 < v11 )
-      v12 = v11;
-    hkArrayUtil::_reserve(&result, `anonymous namespace::SummaryAllocator::s_allocator, &allocs, v12, 56);
-    v8 = connectTo.m_size;
+    v9 = 2 * v8;
+    v10 = v6;
+    if ( v6 < v9 )
+      v10 = v9;
+    hkArrayUtil::_reserve(
+      (hkResult *)&result,
+      `anonymous namespace::SummaryAllocator::s_allocator,
+      (const void **)&allocs.m_data,
+      v10,
+      56);
+    m_size = connectTo.m_size;
   }
-  v13 = v4->m_activePointers.m_hashMod;
-  allocs.m_size = v7;
-  v14 = 0;
-  v15 = 0i64;
-  if ( v13 >= 0 )
+  m_hashMod = v4->m_activePointers.m_hashMod;
+  allocs.m_size = v6;
+  v12 = 0;
+  v13 = 0i64;
+  if ( m_hashMod >= 0 )
   {
-    v16 = v4->m_activePointers.m_elem;
+    m_elem = v4->m_activePointers.m_elem;
     do
     {
-      if ( v16->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
-      ++v15;
-      ++v14;
-      ++v16;
+      ++v13;
+      ++v12;
+      ++m_elem;
     }
-    while ( v15 <= v13 );
+    while ( v13 <= m_hashMod );
   }
-  v17 = v14;
-  if ( v14 <= v4->m_activePointers.m_hashMod )
+  v15 = v12;
+  if ( v12 <= v4->m_activePointers.m_hashMod )
   {
-    v18 = 0i64;
-    v19 = 0i64;
+    v16 = 0i64;
+    v17 = 0i64;
     do
     {
-      v20 = (signed __int64)v17 << 6;
-      *(_QWORD *)&array[v19] = *(unsigned __int64 *)((char *)&v4->m_activePointers.m_elem->key + v20);
-      v21 = v4->m_activePointers.m_elem;
-      v22 = &allocs.m_data[v18];
-      v22->m_threadId = *(unsigned __int64 *)((char *)&v21->val.m_threadId + v20);
-      v22->m_allocOrder = *(unsigned __int64 *)((char *)&v21->val.m_allocOrder + v20);
-      v22->m_time = *(unsigned __int64 *)((char *)&v21->val.m_time + v20);
-      v22->m_tagData = *(const void **)((char *)&v21->val.m_tagData + v20);
-      *(_QWORD *)&v22->m_flags.m_storage = *(_QWORD *)((char *)&v21->val.m_flags.m_storage + v20);
-      *(_QWORD *)&v22->m_size = *(_QWORD *)((char *)&v21->val.m_size + v20);
-      v23 = *(_QWORD *)((char *)&v21->val.m_bookmarkIndex + v20);
-      v24 = v17 + 1;
-      *(_QWORD *)&v22->m_bookmarkIndex = v23;
-      v25 = v4->m_activePointers.m_hashMod;
-      v26 = v17 + 1;
-      if ( v26 <= v25 )
+      v18 = (__int64)v15 << 6;
+      array[0].m_data[v17] = *(unsigned __int64 *)((char *)&v4->m_activePointers.m_elem->key + v18);
+      v19 = v4->m_activePointers.m_elem;
+      v20 = &allocs.m_data[v16];
+      v20->m_threadId = *(unsigned __int64 *)((char *)&v19->val.m_threadId + v18);
+      v20->m_allocOrder = *(unsigned __int64 *)((char *)&v19->val.m_allocOrder + v18);
+      v20->m_time = *(unsigned __int64 *)((char *)&v19->val.m_time + v18);
+      v20->m_tagData = *(const void **)((char *)&v19->val.m_tagData + v18);
+      *(_QWORD *)&v20->m_flags.m_storage = *(_QWORD *)((char *)&v19->val.m_flags.m_storage + v18);
+      *(_QWORD *)&v20->m_size = *(_QWORD *)((char *)&v19->val.m_size + v18);
+      v21 = *(_QWORD *)((char *)&v19->val.m_bookmarkIndex + v18);
+      v22 = v15 + 1;
+      *(_QWORD *)&v20->m_bookmarkIndex = v21;
+      v23 = v4->m_activePointers.m_hashMod;
+      v24 = v15 + 1;
+      if ( v24 <= v23 )
       {
-        v27 = &v4->m_activePointers.m_elem[(signed __int64)v24];
+        v25 = &v4->m_activePointers.m_elem[(__int64)v22];
         do
         {
-          if ( v27->key != -1i64 )
+          if ( v25->key != -1i64 )
             break;
-          ++v26;
           ++v24;
-          ++v27;
+          ++v22;
+          ++v25;
         }
-        while ( v26 <= v25 );
+        while ( v24 <= v23 );
       }
-      v17 = v24;
-      v19 += 8i64;
-      ++v18;
+      v15 = v22;
+      ++v17;
+      ++v16;
     }
-    while ( v24 <= v4->m_activePointers.m_hashMod );
-    v8 = connectTo.m_size;
+    while ( v22 <= v4->m_activePointers.m_hashMod );
+    m_size = connectTo.m_size;
   }
-  v28 = 0i64;
-  v29 = v7;
-  *(_QWORD *)&result.m_enum = 0i64;
-  if ( v7 > 0 )
+  v26 = 0i64;
+  v27 = v6;
+  result = 0i64;
+  if ( v6 > 0 )
   {
-    v30 = 0i64;
-    v69 = 0i64;
+    v28 = 0i64;
+    v63 = 0i64;
     do
     {
       if ( connectStart.m_size == (connectStart.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectStart, 4);
-      connectStart.m_data[connectStart.m_size] = v8;
-      ++connectStart.m_size;
-      v31 = allocs.m_data;
-      v32 = array;
-      v8 = connectTo.m_size;
-      v33 = *(int **)&array[8 * v28];
-      v34 = *(int *)((char *)&allocs.m_data->m_size + v30);
-      v58.m_data = *(int **)&array[8 * v28];
-      owned.m_data = (int *)(v34 / 8);
-      if ( (_QWORD)owned.m_data > 0i64 )
+        hkArrayUtil::_reserveMore(
+          `anonymous namespace::SummaryAllocator::s_allocator,
+          (const void **)&connectStart.m_data,
+          4);
+      connectStart.m_data[connectStart.m_size++] = m_size;
+      m_data = allocs.m_data;
+      v30 = array[0].m_data;
+      m_size = connectTo.m_size;
+      v31 = (int *)array[0].m_data[v26];
+      v32 = *(int *)((char *)&allocs.m_data->m_size + v28);
+      v54.m_data = v31;
+      owned.m_data = (int *)(((BYTE4(v32) & 7) + (int)v32) >> 3);
+      if ( (__int64)owned.m_data > 0 )
       {
         do
         {
-          v35 = *(_QWORD *)&v33[2 * v2];
-          v36 = 0;
-          v37 = 0i64;
-          v38 = 0i64;
+          v33 = *(_QWORD *)&v31[2 * v2];
+          v34 = 0;
+          v35 = 0i64;
+          v36 = 0i64;
           do
           {
-            v39 = v32[v37];
-            if ( v35 >= v39 && v35 < v39 + v31[v38].m_size )
+            v37 = v30[v35];
+            if ( v33 >= v37 && v33 < v37 + m_data[v36].m_size )
             {
-              if ( v8 == (connectTo.m_capacityAndFlags & 0x3FFFFFFF) )
+              if ( m_size == (connectTo.m_capacityAndFlags & 0x3FFFFFFF) )
               {
-                hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectTo, 4);
-                v8 = connectTo.m_size;
+                hkArrayUtil::_reserveMore(
+                  `anonymous namespace::SummaryAllocator::s_allocator,
+                  (const void **)&connectTo.m_data,
+                  4);
+                m_size = connectTo.m_size;
               }
-              connectTo.m_data[v8] = v36;
-              v32 = array;
-              v31 = allocs.m_data;
-              v8 = connectTo.m_size++ + 1;
+              connectTo.m_data[m_size] = v34;
+              v30 = array[0].m_data;
+              m_data = allocs.m_data;
+              m_size = ++connectTo.m_size;
             }
-            ++v37;
+            ++v35;
+            ++v34;
             ++v36;
-            ++v38;
           }
-          while ( v37 < v29 );
-          v33 = v58.m_data;
+          while ( v35 < v27 );
+          v31 = v54.m_data;
           ++v2;
         }
-        while ( v2 < (_QWORD)owned.m_data );
-        v28 = *(_QWORD *)&result.m_enum;
-        v30 = v69;
+        while ( v2 < (__int64)owned.m_data );
+        v26 = result;
+        v28 = v63;
       }
-      ++v28;
-      v30 += 56i64;
+      ++v26;
+      v28 += 56i64;
       v2 = 0i64;
-      *(_QWORD *)&result.m_enum = v28;
-      v69 = v30;
+      result = v26;
+      v63 = v28;
     }
-    while ( v28 < v29 );
-    v7 = v67;
-    v4 = v66;
+    while ( v26 < v27 );
+    v6 = v61;
+    v4 = v60;
   }
   if ( connectStart.m_size == (connectStart.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectStart, 4);
-  connectStart.m_data[connectStart.m_size] = v8;
-  ++connectStart.m_size;
-  v40 = 0;
+    hkArrayUtil::_reserveMore(
+      `anonymous namespace::SummaryAllocator::s_allocator,
+      (const void **)&connectStart.m_data,
+      4);
+  connectStart.m_data[connectStart.m_size++] = m_size;
+  v38 = 0;
   visited.m_size = 0;
   visited.m_data = 0i64;
-  visited.m_capacityAndFlags = 2147483648;
-  if ( v7 > 0 )
+  visited.m_capacityAndFlags = 0x80000000;
+  if ( v6 > 0 )
   {
-    v41 = v7;
-    if ( v7 < 0 )
-      v41 = v2;
-    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace::SummaryAllocator::s_allocator, &visited, v41, 1);
-    v40 = visited.m_size;
+    hkArrayUtil::_reserve(
+      (hkResult *)&v60,
+      `anonymous namespace::SummaryAllocator::s_allocator,
+      (const void **)&visited.m_data,
+      v6,
+      1);
+    v38 = visited.m_size;
   }
-  v42 = &visited.m_data[v40];
-  v43 = v7 - v40;
-  v44 = v7 - v40;
+  v39 = &visited.m_data[v38];
+  v40 = v6 - v38;
+  v41 = v6 - v38;
+  if ( v40 > 0 )
+    memset(v39, 0, v41);
+  v42 = 0;
+  visited.m_size = v6;
+  v54.m_data = 0i64;
+  v54.m_capacityAndFlags = 0x80000000;
+  v54.m_size = 0;
+  if ( v6 > 0 )
+  {
+    hkArrayUtil::_reserve(
+      (hkResult *)&v60,
+      `anonymous namespace::SummaryAllocator::s_allocator,
+      (const void **)&v54.m_data,
+      v6,
+      1);
+    v42 = v54.m_size;
+  }
+  v43 = v6 - v42;
   if ( v43 > 0 )
-    memset(v42, 0, v44);
-  v45 = 0;
-  visited.m_size = v7;
-  v58.m_data = 0i64;
-  v58.m_capacityAndFlags = 2147483648;
-  v58.m_size = 0;
-  if ( v7 > 0 )
-  {
-    v46 = v7;
-    if ( v7 < 0 )
-      v46 = v2;
-    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace::SummaryAllocator::s_allocator, &v58, v46, 1);
-    v45 = v58.m_size;
-  }
-  v47 = v7 - v45;
-  if ( v47 > 0 )
-    memset((char *)v58.m_data + v45, 1, v47);
-  v58.m_size = v7;
-  v48 = v2;
+    memset((char *)v54.m_data + v42, 1, v43);
+  v54.m_size = v6;
+  v44 = 0;
   if ( connectTo.m_size > 0 )
   {
-    v49 = 0i64;
+    v45 = 0i64;
     do
     {
-      ++v48;
-      ++v49;
-      *((_BYTE *)v58.m_data + connectTo.m_data[v49 - 1]) = 0;
+      ++v44;
+      *((_BYTE *)v54.m_data + connectTo.m_data[v45++]) = 0;
     }
-    while ( v48 < connectTo.m_size );
+    while ( v44 < connectTo.m_size );
   }
-  v50 = 0i64;
-  v51 = 2147483648;
+  v46 = 0i64;
+  v47 = 0x80000000;
   owned.m_size = 0;
-  v52 = 0;
-  v53 = 0i64;
+  v48 = 0;
+  v49 = 0i64;
   owned.m_data = 0i64;
-  owned.m_capacityAndFlags = 2147483648;
-  if ( v29 > 0 )
+  owned.m_capacityAndFlags = 0x80000000;
+  if ( v27 > 0 )
   {
     do
     {
-      if ( *((_BYTE *)v58.m_data + v53) )
+      if ( *((_BYTE *)v54.m_data + v49) )
       {
         owned.m_size = 0;
-        breadthFirstSearch(v52, &connectTo, &connectStart, &visited, &owned);
-        hkCheckingMemorySystem::dumpLeak(
-          v4,
-          (hkArrayBase<int> *)&owned.m_data,
-          (hkArrayBase<unsigned __int64> *)&array,
-          &allocs);
+        breadthFirstSearch(v48, &connectTo, &connectStart, &visited, &owned);
+        hkCheckingMemorySystem::dumpLeak(v4, &owned, array, &allocs);
       }
-      ++v53;
-      ++v52;
+      ++v49;
+      ++v48;
     }
-    while ( v53 < v29 );
-    v51 = owned.m_capacityAndFlags;
-    v50 = owned.m_data;
+    while ( v49 < v27 );
+    v47 = owned.m_capacityAndFlags;
+    v46 = owned.m_data;
   }
-  owned.m_size = v2;
-  if ( v51 >= 0 )
+  owned.m_size = 0;
+  if ( v47 >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
-      v50,
-      4 * v51);
-  v58.m_size = v2;
-  if ( v58.m_capacityAndFlags >= 0 )
+      v46,
+      4 * v47);
+  v54.m_size = 0;
+  if ( v54.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
-      v58.m_data,
-      v58.m_capacityAndFlags & 0x3FFFFFFF);
+      v54.m_data,
+      v54.m_capacityAndFlags & 0x3FFFFFFF);
   owned.m_data = 0i64;
-  owned.m_capacityAndFlags = 2147483648;
-  v58.m_data = 0i64;
-  v58.m_size = 0;
-  v58.m_capacityAndFlags = 2147483648;
+  owned.m_capacityAndFlags = 0x80000000;
+  v54.m_data = 0i64;
+  v54.m_size = 0;
+  v54.m_capacityAndFlags = 0x80000000;
   while ( 1 )
   {
-    v54 = 0;
-    v55 = 0;
-    v56 = 0i64;
+    v50 = 0;
+    v51 = 0;
+    v52 = 0i64;
     owned.m_size = 0;
-    if ( v29 <= 0 )
+    if ( v27 <= 0 )
       break;
     do
     {
-      if ( !visited.m_data[v56].m_bool )
+      if ( !visited.m_data[v52].m_bool )
       {
-        v58.m_size = 0;
-        breadthFirstSearch(v55, &connectTo, &connectStart, &visited, &v58);
-        setVisited((hkArrayBase<int> *)&v58.m_data, &visited, 0);
-        if ( v58.m_size >= v54
-          && (v54 != v58.m_size || allocs.m_data[*v58.m_data].m_allocOrder < allocs.m_data[*owned.m_data].m_allocOrder) )
+        v54.m_size = 0;
+        breadthFirstSearch(v51, &connectTo, &connectStart, &visited, &v54);
+        setVisited(&v54, &visited, 0);
+        if ( v54.m_size >= v50
+          && (v50 != v54.m_size || allocs.m_data[*v54.m_data].m_allocOrder < allocs.m_data[*owned.m_data].m_allocOrder) )
         {
           hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
             (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&owned,
-            (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v58);
-          v54 = owned.m_size;
+            (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v54);
+          v50 = owned.m_size;
         }
       }
-      ++v56;
-      ++v55;
+      ++v52;
+      ++v51;
     }
-    while ( v56 < v29 );
-    if ( v54 <= 0 )
+    while ( v52 < v27 );
+    if ( v50 <= 0 )
       break;
-    setVisited((hkArrayBase<int> *)&owned.m_data, &visited, (hkBool)1);
-    hkCheckingMemorySystem::dumpLeak(
-      v4,
-      (hkArrayBase<int> *)&owned.m_data,
-      (hkArrayBase<unsigned __int64> *)&array,
-      &allocs);
+    setVisited(&owned, &visited, (hkBool)1);
+    hkCheckingMemorySystem::dumpLeak(v4, &owned, array, &allocs);
   }
-  v58.m_size = v2;
-  if ( v58.m_capacityAndFlags >= 0 )
+  v54.m_size = 0;
+  if ( v54.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
-      v58.m_data,
-      4 * v58.m_capacityAndFlags);
-  v58.m_data = 0i64;
-  v58.m_capacityAndFlags = 2147483648;
+      v54.m_data,
+      4 * v54.m_capacityAndFlags);
+  v54.m_data = 0i64;
+  v54.m_capacityAndFlags = 0x80000000;
   if ( owned.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
       owned.m_data,
       4 * owned.m_capacityAndFlags);
-  visited.m_size = v2;
+  visited.m_size = 0;
   if ( visited.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
       visited.m_data,
       visited.m_capacityAndFlags & 0x3FFFFFFF);
   visited.m_data = 0i64;
-  visited.m_capacityAndFlags = 2147483648;
+  visited.m_capacityAndFlags = 0x80000000;
   connectStart.m_size = 0;
   if ( connectStart.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
@@ -1170,7 +1157,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
       connectStart.m_data,
       4 * connectStart.m_capacityAndFlags);
   connectStart.m_data = 0i64;
-  connectStart.m_capacityAndFlags = 2147483648;
+  connectStart.m_capacityAndFlags = 0x80000000;
   connectTo.m_size = 0;
   if ( connectTo.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
@@ -1178,7 +1165,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
       connectTo.m_data,
       4 * connectTo.m_capacityAndFlags);
   connectTo.m_data = 0i64;
-  connectTo.m_capacityAndFlags = 2147483648;
+  connectTo.m_capacityAndFlags = 0x80000000;
   allocs.m_size = 0;
   if ( allocs.m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
@@ -1186,84 +1173,80 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
       allocs.m_data,
       56 * (allocs.m_capacityAndFlags & 0x3FFFFFFF));
   allocs.m_data = 0i64;
-  allocs.m_capacityAndFlags = 2147483648;
-  v64 = 0;
-  if ( v65 >= 0 )
+  allocs.m_capacityAndFlags = 0x80000000;
+  array[0].m_size = 0;
+  if ( array[0].m_capacityAndFlags >= 0 )
     `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
       `anonymous namespace::SummaryAllocator::s_allocator,
-      array,
-      8 * v65);
+      array[0].m_data,
+      8 * array[0].m_capacityAndFlags);
 }
 
 // File Line: 526
 // RVA: 0xC5C9F0
 hkResult *__fastcall hkCheckingMemorySystem::quit(hkCheckingMemorySystem *this, hkResult *result)
 {
-  hkCheckingMemorySystem *v2; // rdi
-  hkResult *v3; // r14
-  void *v4; // rdx
+  void *m_outputFuncArg; // rdx
   int i; // esi
-  int v6; // er8
-  hkMemoryAllocator *v7; // rcx
-  int v8; // er8
+  int m_capacityAndFlags; // r8d
+  hkMemoryAllocator *m_rawAllocator; // rcx
+  int v8; // r8d
   hkMemoryAllocator *v9; // rcx
 
-  v2 = this;
-  result->m_enum = 0;
-  v3 = result;
+  result->m_enum = HK_SUCCESS;
   EnterCriticalSection(&this->m_section.m_section);
-  if ( v2->m_allocators.m_size )
-    v2->m_outputFunc("A thread did not clean up its allocators.\n", v2->m_outputFuncArg);
-  v4 = v2->m_outputFuncArg;
-  if ( v2->m_activePointers.m_numElems & 0x7FFFFFFF )
+  if ( this->m_allocators.m_size )
+    this->m_outputFunc("A thread did not clean up its allocators.\n", this->m_outputFuncArg);
+  m_outputFuncArg = this->m_outputFuncArg;
+  if ( (this->m_activePointers.m_numElems & 0x7FFFFFFF) != 0 )
   {
-    v3->m_enum = 1;
-    v2->m_outputFunc(
+    result->m_enum = HK_FAILURE;
+    this->m_outputFunc(
       "**************************************************************\n"
       "* BEGIN MEMORY LEAK REPORT                                   *\n"
       "**************************************************************\n",
-      v4);
-    hkCheckingMemorySystem::leakReportByTime(v2);
-    v2->m_outputFunc(
+      m_outputFuncArg);
+    hkCheckingMemorySystem::leakReportByTime(this);
+    this->m_outputFunc(
       "**************************************************************\n"
       "* END MEMORY LEAK REPORT                                     *\n"
       "**************************************************************\n",
-      v2->m_outputFuncArg);
+      this->m_outputFuncArg);
   }
   else
   {
-    v2->m_outputFunc(
+    this->m_outputFunc(
       "**************************************************************\n"
       "* NO HAVOK MEMORY LEAKS FOUND                                *\n"
       "**************************************************************\n",
-      v4);
+      m_outputFuncArg);
   }
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v2->m_activePointers,
-    v2->m_rawAllocator);
-  for ( i = 0; i < v2->m_bookmarks.m_size; ++i )
-    hkCheckingMemorySystem::Bookmark::clear(&v2->m_bookmarks.m_data[i], v2->m_rawAllocator);
-  v6 = v2->m_bookmarks.m_capacityAndFlags;
-  v7 = v2->m_rawAllocator;
-  v2->m_bookmarks.m_size = 0;
-  if ( v6 >= 0 )
-    v7->vfptr->bufFree(v7, v2->m_bookmarks.m_data, 16 * v6);
-  v2->m_bookmarks.m_data = 0i64;
-  v2->m_bookmarks.m_capacityAndFlags = 2147483648;
-  if ( v2->m_checkFlags.m_storage & 4 )
-    hkStackTracer::CallTree::quit(&v2->m_callTree);
-  hkPaddedAllocator::quit(&v2->m_paddedAllocator);
-  hkDelayedFreeAllocator::quit(&v2->m_delayedFreeAllocator);
-  v8 = v2->m_allocators.m_capacityAndFlags;
-  v9 = v2->m_rawAllocator;
-  v2->m_allocators.m_size = 0;
+    &this->m_activePointers,
+    this->m_rawAllocator);
+  for ( i = 0; i < this->m_bookmarks.m_size; ++i )
+    hkCheckingMemorySystem::Bookmark::clear(&this->m_bookmarks.m_data[i], this->m_rawAllocator);
+  m_capacityAndFlags = this->m_bookmarks.m_capacityAndFlags;
+  m_rawAllocator = this->m_rawAllocator;
+  this->m_bookmarks.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
+    m_rawAllocator->vfptr->bufFree(m_rawAllocator, this->m_bookmarks.m_data, 16 * m_capacityAndFlags);
+  this->m_bookmarks.m_data = 0i64;
+  this->m_bookmarks.m_capacityAndFlags = 0x80000000;
+  if ( (this->m_checkFlags.m_storage & 4) != 0 )
+    hkStackTracer::CallTree::quit(&this->m_callTree);
+  hkPaddedAllocator::quit(&this->m_paddedAllocator);
+  hkDelayedFreeAllocator::quit(&this->m_delayedFreeAllocator);
+  v8 = this->m_allocators.m_capacityAndFlags;
+  v9 = this->m_rawAllocator;
+  this->m_allocators.m_size = 0;
   if ( v8 >= 0 )
-    v9->vfptr->bufFree(v9, v2->m_allocators.m_data, 8 * v8);
-  v2->m_allocators.m_data = 0i64;
-  v2->m_allocators.m_capacityAndFlags = 2147483648;
-  v2->m_baseAllocator = 0i64;
-  LeaveCriticalSection(&v2->m_section.m_section);
-  return v3;
+    v9->vfptr->bufFree(v9, this->m_allocators.m_data, 8 * v8);
+  this->m_allocators.m_data = 0i64;
+  this->m_allocators.m_capacityAndFlags = 0x80000000;
+  this->m_baseAllocator = 0i64;
+  LeaveCriticalSection(&this->m_section.m_section);
+  return result;
 }
 
 // File Line: 587
@@ -1275,88 +1258,70 @@ hkMemoryAllocator *__fastcall hkCheckingMemorySystem::getUncachedLockedHeapAlloc
 
 // File Line: 592
 // RVA: 0xC5D410
-hkResult *__fastcall hkCheckingMemorySystem::getAllocationCallStack(hkCheckingMemorySystem *this, hkResult *result, const void *ptr, unsigned __int64 *callStack, int *stackSize, unsigned __int64 *allocSize)
+hkResult *__fastcall hkCheckingMemorySystem::getAllocationCallStack(
+        hkCheckingMemorySystem *this,
+        hkResult *result,
+        unsigned __int64 ptr,
+        unsigned __int64 *callStack,
+        int *stackSize,
+        unsigned __int64 *allocSize)
 {
-  hkResult *v6; // rdi
-  hkCheckingMemorySystem *v7; // rbx
-  unsigned __int64 *v8; // rbp
-  int v9; // eax
-  signed __int64 v10; // rdx
-  unsigned __int64 v11; // rcx
-  __int64 v12; // ST20_8
-  __int64 v13; // ST28_8
-  __int64 v14; // ST30_8
-  __int64 v15; // ST38_8
-  __int64 v16; // rax
-  int v17; // edx
-  hkStackTracer::CallTree *v18; // rcx
-  int v19; // eax
+  int Key; // eax
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v10; // rdx
+  unsigned __int64 m_size; // rcx
+  int v12; // edx
+  hkStackTracer::CallTree *p_m_callTree; // rcx
+  int v14; // eax
 
-  v6 = result;
-  v7 = this;
-  v8 = callStack;
-  v9 = (unsigned __int64)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                           &this->m_activePointers,
-                           (unsigned __int64)ptr);
-  if ( v9 > v7->m_activePointers.m_hashMod )
+  Key = (unsigned int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                        &this->m_activePointers,
+                        ptr);
+  if ( Key > this->m_activePointers.m_hashMod )
   {
-    v6->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
-    v10 = (signed __int64)&v7->m_activePointers.m_elem[(signed __int64)v9];
-    v11 = *(signed int *)(v10 + 48);
-    v12 = *(_QWORD *)(v10 + 8);
-    v13 = *(_QWORD *)(v10 + 16);
-    v14 = *(_QWORD *)(v10 + 24);
-    v15 = *(_QWORD *)(v10 + 32);
-    v16 = *(_QWORD *)(v10 + 56);
-    v17 = *(_QWORD *)(v10 + 40) >> 32;
-    *allocSize = v11;
-    v18 = &v7->m_callTree;
-    if ( v8 )
-      v19 = hkStackTracer::CallTree::getCallStack(v18, v17, v8, *stackSize);
+    v10 = &this->m_activePointers.m_elem[(__int64)Key];
+    m_size = v10->val.m_size;
+    v12 = HIDWORD(*(_QWORD *)&v10->val.m_flags.m_storage);
+    *allocSize = m_size;
+    p_m_callTree = &this->m_callTree;
+    if ( callStack )
+      v14 = hkStackTracer::CallTree::getCallStack(p_m_callTree, v12, callStack, *stackSize);
     else
-      v19 = hkStackTracer::CallTree::getCallStackSize(v18, v17);
-    v6->m_enum = 0;
-    *stackSize = v19;
+      v14 = hkStackTracer::CallTree::getCallStackSize(p_m_callTree, v12);
+    result->m_enum = HK_SUCCESS;
+    *stackSize = v14;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 616
 // RVA: 0xC5D510
-void __fastcall hkCheckingMemorySystem::setHeapScrubValues(hkCheckingMemorySystem *this, unsigned int allocValue, unsigned int freeValue)
+void __fastcall hkCheckingMemorySystem::setHeapScrubValues(
+        hkCheckingMemorySystem *this,
+        unsigned int allocValue,
+        unsigned int freeValue)
 {
-  hkCheckingMemorySystem *v3; // rbx
-  unsigned int v4; // esi
-  unsigned int v5; // ebp
-
-  v3 = this;
-  v4 = freeValue;
-  v5 = allocValue;
   EnterCriticalSection(&this->m_section.m_section);
-  hkPaddedAllocator::setScrubValues(&v3->m_paddedAllocator, v5, v4);
-  LeaveCriticalSection(&v3->m_section.m_section);
+  hkPaddedAllocator::setScrubValues(&this->m_paddedAllocator, allocValue, freeValue);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 623
 // RVA: 0xC5F8A0
-hkCheckingMemorySystem::AllocatorForwarder *__fastcall hkCheckingMemorySystem::newAllocator(hkCheckingMemorySystem *this, hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int> flags, unsigned __int64 tid)
+hkCheckingMemorySystem::AllocatorForwarder *__fastcall hkCheckingMemorySystem::newAllocator(
+        hkCheckingMemorySystem *this,
+        hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int> flags,
+        unsigned __int64 tid)
 {
-  hkCheckingMemorySystem *v3; // rbp
-  unsigned __int64 v4; // rsi
   _QWORD *v5; // rax
   hkCheckingMemorySystem::AllocatorForwarder *v6; // rdi
-  unsigned int v8; // [rsp+38h] [rbp+10h]
 
-  v8 = flags.m_storage;
-  v3 = this;
-  v4 = tid;
   EnterCriticalSection(&this->m_section.m_section);
-  v5 = (_QWORD *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, signed __int64))&v3->m_rawAllocator->vfptr->__vecDelDtor
-                  + 1))(
-                   v3->m_rawAllocator,
+  v5 = (_QWORD *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, __int64))&this->m_rawAllocator->vfptr->__vecDelDtor + 1))(
+                   this->m_rawAllocator,
                    40i64);
   v6 = (hkCheckingMemorySystem::AllocatorForwarder *)v5;
   if ( v5 )
@@ -1370,13 +1335,13 @@ hkCheckingMemorySystem::AllocatorForwarder *__fastcall hkCheckingMemorySystem::n
   {
     v6 = 0i64;
   }
-  v6->m_parent = v3;
-  v6->m_context.threadId = v4;
-  v6->m_context.flags.m_storage = v8;
-  if ( v3->m_allocators.m_size == (v3->m_allocators.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore(v3->m_rawAllocator, &v3->m_allocators, 8);
-  v3->m_allocators.m_data[v3->m_allocators.m_size++] = v6;
-  LeaveCriticalSection(&v3->m_section.m_section);
+  v6->m_parent = this;
+  v6->m_context.threadId = tid;
+  v6->m_context.flags = flags;
+  if ( this->m_allocators.m_size == (this->m_allocators.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(this->m_rawAllocator, (const void **)&this->m_allocators.m_data, 8);
+  this->m_allocators.m_data[this->m_allocators.m_size++] = v6;
+  LeaveCriticalSection(&this->m_section.m_section);
   return v6;
 }
 
@@ -1384,293 +1349,270 @@ hkCheckingMemorySystem::AllocatorForwarder *__fastcall hkCheckingMemorySystem::n
 // RVA: 0xC5F970
 void __fastcall hkCheckingMemorySystem::deleteAllocator(hkCheckingMemorySystem *this, hkMemoryAllocator *a)
 {
-  __int64 v2; // r9
+  __int64 m_size; // r9
   int v3; // ebx
-  hkCheckingMemorySystem *v4; // rdi
   __int64 v5; // r8
-  hkCheckingMemorySystem::AllocatorForwarder **v6; // rcx
+  hkCheckingMemorySystem::AllocatorForwarder **m_data; // rcx
   hkMemoryAllocator **v7; // rax
-  signed __int64 v8; // rsi
-  __int64 v9; // rax
+  __int64 v8; // rax
 
-  v2 = this->m_allocators.m_size;
+  m_size = this->m_allocators.m_size;
   v3 = 0;
-  v4 = this;
   v5 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     __debugbreak();
   }
   else
   {
-    v6 = this->m_allocators.m_data;
-    v7 = (hkMemoryAllocator **)v6;
+    m_data = this->m_allocators.m_data;
+    v7 = m_data;
     while ( *v7 != a )
     {
       ++v5;
       ++v3;
       ++v7;
-      if ( v5 >= v2 )
+      if ( v5 >= m_size )
         goto LABEL_5;
     }
-    v8 = v3;
-    ((void (__fastcall *)(hkCheckingMemorySystem::AllocatorForwarder *, _QWORD, __int64))v6[v8]->vfptr->__vecDelDtor)(
-      v6[v8],
+    ((void (__fastcall *)(hkCheckingMemorySystem::AllocatorForwarder *, _QWORD, __int64))m_data[v3]->vfptr->__vecDelDtor)(
+      m_data[v3],
       0i64,
       v5);
-    v4->m_rawAllocator->vfptr->blockFree(v4->m_rawAllocator, v4->m_allocators.m_data[v8], 40);
-    v9 = --v4->m_allocators.m_size;
-    if ( (_DWORD)v9 != v3 )
-      v4->m_allocators.m_data[v8] = v4->m_allocators.m_data[v9];
+    this->m_rawAllocator->vfptr->blockFree(this->m_rawAllocator, this->m_allocators.m_data[v3], 40);
+    v8 = --this->m_allocators.m_size;
+    if ( (_DWORD)v8 != v3 )
+      this->m_allocators.m_data[v3] = this->m_allocators.m_data[v8];
   }
 }
 
 // File Line: 651
 // RVA: 0xC5CBC0
-unsigned __int64 __fastcall hkCheckingMemorySystem::checkedAlloc(hkCheckingMemorySystem *this, unsigned int isBuf, hkCheckingMemorySystem::AllocationContext *context, int numBytes)
+unsigned __int64 __fastcall hkCheckingMemorySystem::checkedAlloc(
+        hkCheckingMemorySystem *this,
+        unsigned int isBuf,
+        hkCheckingMemorySystem::AllocationContext *context,
+        int numBytes)
 {
-  hkCheckingMemorySystem *v4; // rdi
   __int64 v5; // rbp
-  hkCheckingMemorySystem::AllocationContext *v6; // rsi
-  unsigned int v7; // edx
-  int v8; // ecx
-  bool v9; // zf
-  bool v10; // sf
-  unsigned __int8 v11; // of
-  unsigned __int64 v12; // rsi
-  hkMemoryAllocator *v13; // rdx
-  unsigned __int64 v14; // rax
-  __int128 v16; // [rsp+20h] [rbp-88h]
-  __int128 v17; // [rsp+30h] [rbp-78h]
-  __int128 v18; // [rsp+40h] [rbp-68h]
-  __int64 v19; // [rsp+50h] [rbp-58h]
-  __int128 v20; // [rsp+60h] [rbp-48h]
-  __int128 v21; // [rsp+70h] [rbp-38h]
-  __int128 v22; // [rsp+80h] [rbp-28h]
-  __int64 v23; // [rsp+90h] [rbp-18h]
+  unsigned int m_storage; // edx
+  int curInUse; // ecx
+  bool v9; // cc
+  unsigned __int64 v10; // rsi
+  hkMemoryAllocator *m_rawAllocator; // rdx
+  unsigned __int64 m_peakInUse; // rax
+  hkCheckingMemorySystem::AllocInfo v14; // [rsp+20h] [rbp-88h]
+  hkCheckingMemorySystem::AllocInfo v15; // [rsp+60h] [rbp-48h] BYREF
 
-  v4 = this;
   v5 = numBytes;
-  v6 = context;
   EnterCriticalSection(&this->m_section.m_section);
-  if ( (signed int)v5 < 0 )
+  if ( (int)v5 < 0 )
   {
-    v4->m_outputFunc("Negative size to allocate\n", v4->m_outputFuncArg);
+    this->m_outputFunc("Negative size to allocate\n", this->m_outputFuncArg);
     __debugbreak();
   }
-  v7 = v6->flags.m_storage;
-  if ( v7 & 4 )
+  m_storage = context->flags.m_storage;
+  if ( (m_storage & 4) != 0 )
   {
-    v6->curInUse += v5;
-    v8 = v6->curInUse;
-    v11 = __OFSUB__(v6->peakInUse, v8);
-    v9 = v6->peakInUse == v8;
-    v10 = v6->peakInUse - v8 < 0;
+    context->curInUse += v5;
+    curInUse = context->curInUse;
+    v9 = context->peakInUse <= curInUse;
   }
   else
   {
-    if ( !(v7 & 8) )
+    if ( (m_storage & 8) == 0 )
       goto LABEL_10;
-    v11 = __OFSUB__(v6->peakInUse, (_DWORD)v5);
-    v9 = v6->peakInUse == (_DWORD)v5;
-    v10 = v6->peakInUse - (signed int)v5 < 0;
-    v8 = v5;
+    v9 = context->peakInUse <= (int)v5;
+    curInUse = v5;
   }
-  if ( !((unsigned __int8)(v10 ^ v11) | v9) )
-    v8 = v6->peakInUse;
-  v6->peakInUse = v8;
+  if ( !v9 )
+    curInUse = context->peakInUse;
+  context->peakInUse = curInUse;
 LABEL_10:
-  LODWORD(v18) = v7;
-  *((_QWORD *)&v18 + 1) = (unsigned int)v5;
-  *(_QWORD *)&v16 = v6->threadId;
-  *((_QWORD *)&v17 + 1) = 0i64;
-  *((_QWORD *)&v16 + 1) = v4->m_allocOrder;
-  v4->m_allocOrder = *((_QWORD *)&v16 + 1) + 1i64;
-  *(_QWORD *)&v17 = hkStopwatch::getTickCounter();
-  LODWORD(v19) = v4->m_bookmarks.m_size - 1;
-  v12 = (*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&v4->m_baseAllocator->vfptr->__vecDelDtor + 1))(
-          v4->m_baseAllocator,
+  v14.m_flags.m_storage = m_storage;
+  *(_QWORD *)&v14.m_size = (unsigned int)v5;
+  v14.m_threadId = context->threadId;
+  v14.m_allocOrder = this->m_allocOrder;
+  this->m_allocOrder = v14.m_allocOrder + 1;
+  *(_OWORD *)&v14.m_time = hkStopwatch::getTickCounter();
+  v14.m_bookmarkIndex = this->m_bookmarks.m_size - 1;
+  v10 = (*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&this->m_baseAllocator->vfptr->__vecDelDtor + 1))(
+          this->m_baseAllocator,
           (unsigned int)v5);
-  if ( v4->m_checkFlags.m_storage & 4 )
-    DWORD1(v18) = hkStackTracer::CallTree::insertCallStack(&v4->m_callTree, &v4->m_stackTracer);
+  if ( (this->m_checkFlags.m_storage & 4) != 0 )
+    v14.m_traceId = hkStackTracer::CallTree::insertCallStack(&this->m_callTree, &this->m_stackTracer);
   else
-    DWORD1(v18) = -1;
-  v13 = v4->m_rawAllocator;
-  v20 = v16;
-  v21 = v17;
-  v22 = v18;
-  v23 = v19;
+    v14.m_traceId = -1;
+  m_rawAllocator = this->m_rawAllocator;
+  v15 = v14;
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::insert(
-    &v4->m_activePointers,
-    v13,
-    v12,
-    (hkCheckingMemorySystem::AllocInfo *)&v20);
-  v14 = v4->m_peakInUse;
-  v4->m_currentInUse += v5;
-  if ( v4->m_currentInUse > v14 )
-    v14 = v4->m_currentInUse;
-  v4->m_peakInUse = v14;
-  LeaveCriticalSection(&v4->m_section.m_section);
-  return v12;
+    &this->m_activePointers,
+    m_rawAllocator,
+    v10,
+    &v15);
+  m_peakInUse = this->m_peakInUse;
+  this->m_currentInUse += v5;
+  if ( this->m_currentInUse > m_peakInUse )
+    m_peakInUse = this->m_currentInUse;
+  this->m_peakInUse = m_peakInUse;
+  LeaveCriticalSection(&this->m_section.m_section);
+  return v10;
 }
 
 // File Line: 699
 // RVA: 0xC5CD40
-void __fastcall hkCheckingMemorySystem::checkedFree(hkCheckingMemorySystem *this, unsigned int isBuf, hkCheckingMemorySystem::AllocationContext *context, void *p, int numBytes)
+void __fastcall hkCheckingMemorySystem::checkedFree(
+        hkCheckingMemorySystem *this,
+        unsigned int isBuf,
+        hkCheckingMemorySystem::AllocationContext *context,
+        void *p,
+        unsigned int numBytes)
 {
-  hkCheckingMemorySystem *v5; // rdi
-  void *v6; // rbp
-  hkCheckingMemorySystem::AllocationContext *v7; // rsi
-  Dummy *v8; // r12
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v9; // rcx
-  signed __int64 v10; // rdx
+  Dummy *Key; // r12
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rcx
+  __int64 v10; // rdx
   __int64 v11; // r8
   __int64 v12; // r13
   unsigned __int64 v13; // rax
   __int64 v14; // rax
-  hkMemoryAllocator *v15; // rcx
-  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-78h]
-  __int64 v17; // [rsp+A0h] [rbp+8h]
-  __int64 v18; // [rsp+B0h] [rbp+18h]
+  hkMemoryAllocator *m_baseAllocator; // rcx
+  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-78h] BYREF
+  unsigned __int64 v17; // [rsp+A0h] [rbp+8h]
+  int v18; // [rsp+B0h] [rbp+18h]
 
-  v5 = this;
-  v6 = p;
-  v7 = context;
   EnterCriticalSection(&this->m_section.m_section);
-  if ( v7->flags.m_storage & 4 )
-    v7->curInUse -= numBytes;
-  if ( v6 )
+  if ( (context->flags.m_storage & 4) != 0 )
+    context->curInUse -= numBytes;
+  if ( p )
   {
-    v8 = hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-           &v5->m_activePointers,
-           (unsigned __int64)v6);
-    if ( (signed int)v8 > v5->m_activePointers.m_hashMod )
+    Key = hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+            &this->m_activePointers,
+            (unsigned __int64)p);
+    if ( (int)Key > this->m_activePointers.m_hashMod )
     {
-      v5->m_outputFunc("Freeing block not from this allocator", v5->m_outputFuncArg);
+      this->m_outputFunc("Freeing block not from this allocator", this->m_outputFuncArg);
       __debugbreak();
     }
-    v9 = v5->m_activePointers.m_elem;
-    v10 = (signed __int64)(signed int)v8 << 6;
-    v11 = *(_QWORD *)((char *)&v9->val.m_size + v10);
-    v12 = *(_QWORD *)((char *)&v9->val.m_flags.m_storage + v10);
-    v17 = *(unsigned __int64 *)((char *)&v9->val.m_threadId + v10);
-    info.m_threadId = *(unsigned __int64 *)((char *)&v9->val.m_threadId + v10);
-    info.m_allocOrder = *(unsigned __int64 *)((char *)&v9->val.m_allocOrder + v10);
-    v13 = *(unsigned __int64 *)((char *)&v9->val.m_time + v10);
+    m_elem = this->m_activePointers.m_elem;
+    v10 = (__int64)(int)Key << 6;
+    v11 = *(_QWORD *)((char *)&m_elem->val.m_size + v10);
+    v12 = *(_QWORD *)((char *)&m_elem->val.m_flags.m_storage + v10);
+    v17 = *(unsigned __int64 *)((char *)&m_elem->val.m_threadId + v10);
+    info.m_threadId = v17;
+    info.m_allocOrder = *(unsigned __int64 *)((char *)&m_elem->val.m_allocOrder + v10);
+    v13 = *(unsigned __int64 *)((char *)&m_elem->val.m_time + v10);
     *(_QWORD *)&info.m_flags.m_storage = v12;
     info.m_time = v13;
     v18 = v11;
-    info.m_tagData = *(const void **)((char *)&v9->val.m_tagData + v10);
-    v14 = *(_QWORD *)((char *)&v9->val.m_bookmarkIndex + v10);
+    info.m_tagData = *(const void **)((char *)&m_elem->val.m_tagData + v10);
+    v14 = *(_QWORD *)((char *)&m_elem->val.m_bookmarkIndex + v10);
     *(_QWORD *)&info.m_size = v11;
     *(_QWORD *)&info.m_bookmarkIndex = v14;
     if ( (_DWORD)v11 != numBytes )
     {
-      hkCheckingMemorySystem::danger(v5, "Freeing block of incorrect size", v6, &info);
+      hkCheckingMemorySystem::danger(this, "Freeing block of incorrect size", p, &info);
       __debugbreak();
     }
-    if ( (_DWORD)v12 != v7->flags.m_storage )
+    if ( (unsigned int)v12 != context->flags.m_storage )
     {
-      hkCheckingMemorySystem::danger(v5, "Freeing block with different tag", v6, &info);
+      hkCheckingMemorySystem::danger(this, "Freeing block with different tag", p, &info);
       __debugbreak();
     }
-    if ( v7->flags.m_storage & 4 && v17 != v7->threadId )
+    if ( (context->flags.m_storage & 4) != 0 && v17 != context->threadId )
     {
-      hkCheckingMemorySystem::danger(v5, "Freeing block from a different thread", v6, &info);
+      hkCheckingMemorySystem::danger(this, "Freeing block from a different thread", p, &info);
       __debugbreak();
     }
     if ( info.m_locks )
     {
-      hkCheckingMemorySystem::danger(v5, "Freeing locked block", v6, &info);
+      hkCheckingMemorySystem::danger(this, "Freeing locked block", p, &info);
       __debugbreak();
     }
-    if ( v5->m_checkFlags.m_storage & 4 )
-      hkStackTracer::CallTree::releaseCallStack(&v5->m_callTree, info.m_traceId);
+    if ( (this->m_checkFlags.m_storage & 4) != 0 )
+      hkStackTracer::CallTree::releaseCallStack(&this->m_callTree, info.m_traceId);
     hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::remove(
-      &v5->m_activePointers,
-      v8);
-    v15 = v5->m_baseAllocator;
-    v5->m_currentInUse -= (signed int)v18;
-    v15->vfptr->blockFree(v15, v6, numBytes);
+      &this->m_activePointers,
+      Key);
+    m_baseAllocator = this->m_baseAllocator;
+    this->m_currentInUse -= v18;
+    m_baseAllocator->vfptr->blockFree(m_baseAllocator, p, numBytes);
   }
   else if ( numBytes )
   {
-    v5->m_outputFunc("Given nonzero bytes to free with an null address\n", v5->m_outputFuncArg);
+    this->m_outputFunc("Given nonzero bytes to free with an null address\n", this->m_outputFuncArg);
     __debugbreak();
   }
-  LeaveCriticalSection(&v5->m_section.m_section);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 755
 // RVA: 0xC5D570
 __int64 __fastcall hkCheckingMemorySystem::isOk(hkCheckingMemorySystem *this)
 {
-  hkCheckingMemorySystem *v1; // rdi
-  unsigned int v2; // er14
-  __int64 v3; // r8
+  unsigned int v2; // r14d
+  __int64 m_hashMod; // r8
   int v4; // edx
   __int64 v5; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v6; // rax
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
   int v7; // esi
-  signed __int64 v8; // rdx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v8; // rdx
   __int64 v9; // rcx
-  const void *v10; // rbp
-  unsigned __int64 v11; // rax
+  const void *key; // rbp
+  unsigned __int64 m_allocOrder; // rax
   __int64 v12; // r8
   int v13; // edx
   __int64 v14; // rcx
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v15; // rax
-  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-58h]
+  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-58h] BYREF
 
-  v1 = this;
   EnterCriticalSection(&this->m_section.m_section);
   v2 = 1;
-  if ( v1->m_checkFlags.m_storage & 8 )
+  if ( (this->m_checkFlags.m_storage & 8) != 0 )
   {
-    v3 = v1->m_activePointers.m_hashMod;
+    m_hashMod = this->m_activePointers.m_hashMod;
     v4 = 0;
     v5 = 0i64;
-    if ( v3 >= 0 )
+    if ( m_hashMod >= 0 )
     {
-      v6 = v1->m_activePointers.m_elem;
+      m_elem = this->m_activePointers.m_elem;
       do
       {
-        if ( v6->key != -1i64 )
+        if ( m_elem->key != -1i64 )
           break;
         ++v5;
         ++v4;
-        ++v6;
+        ++m_elem;
       }
-      while ( v5 <= v3 );
+      while ( v5 <= m_hashMod );
     }
     v7 = v4;
-    if ( v4 <= v1->m_activePointers.m_hashMod )
+    if ( v4 <= this->m_activePointers.m_hashMod )
     {
       do
       {
-        v8 = (signed __int64)&v1->m_activePointers.m_elem[(signed __int64)v7];
-        v9 = *(_QWORD *)(v8 + 48);
-        v10 = *(const void **)v8;
-        info.m_threadId = *(_QWORD *)(v8 + 8);
-        v11 = *(_QWORD *)(v8 + 16);
+        v8 = &this->m_activePointers.m_elem[(__int64)v7];
+        v9 = *(_QWORD *)&v8->val.m_size;
+        key = (const void *)v8->key;
+        info.m_threadId = v8->val.m_threadId;
+        m_allocOrder = v8->val.m_allocOrder;
         *(_QWORD *)&info.m_size = v9;
-        info.m_allocOrder = v11;
-        info.m_time = *(_QWORD *)(v8 + 24);
-        info.m_tagData = *(const void **)(v8 + 32);
-        *(_QWORD *)&info.m_flags.m_storage = *(_QWORD *)(v8 + 40);
-        *(_QWORD *)&info.m_bookmarkIndex = *(_QWORD *)(v8 + 56);
-        if ( !hkPaddedAllocator::isOk(&v1->m_paddedAllocator, v10, v9) )
+        info.m_allocOrder = m_allocOrder;
+        info.m_time = v8->val.m_time;
+        info.m_tagData = v8->val.m_tagData;
+        *(_QWORD *)&info.m_flags.m_storage = *(_QWORD *)&v8->val.m_flags.m_storage;
+        *(_QWORD *)&info.m_bookmarkIndex = *(_QWORD *)&v8->val.m_bookmarkIndex;
+        if ( !hkPaddedAllocator::isOk(&this->m_paddedAllocator, key, v9) )
         {
-          hkCheckingMemorySystem::danger(v1, "Damaged block:\n", v10, &info);
+          hkCheckingMemorySystem::danger(this, "Damaged block:\n", key, &info);
           v2 = 0;
         }
-        v12 = v1->m_activePointers.m_hashMod;
+        v12 = this->m_activePointers.m_hashMod;
         v13 = v7 + 1;
         v14 = v7 + 1;
         if ( v14 <= v12 )
         {
-          v15 = &v1->m_activePointers.m_elem[(signed __int64)v13];
+          v15 = &this->m_activePointers.m_elem[(__int64)v13];
           do
           {
             if ( v15->key != -1i64 )
@@ -1683,36 +1625,37 @@ __int64 __fastcall hkCheckingMemorySystem::isOk(hkCheckingMemorySystem *this)
         }
         v7 = v13;
       }
-      while ( v13 <= v1->m_activePointers.m_hashMod );
+      while ( v13 <= this->m_activePointers.m_hashMod );
     }
   }
-  if ( v1->m_checkFlags.m_storage & 0x10 && !hkDelayedFreeAllocator::isOk(&v1->m_delayedFreeAllocator) )
+  if ( (this->m_checkFlags.m_storage & 0x10) != 0 && !hkDelayedFreeAllocator::isOk(&this->m_delayedFreeAllocator) )
     v2 = 0;
-  LeaveCriticalSection(&v1->m_section.m_section);
+  LeaveCriticalSection(&this->m_section.m_section);
   return v2;
 }
 
 // File Line: 785
 // RVA: 0xC5CF40
-hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemorySystem *this, hkResult *result, hkMemorySnapshot *snapshot)
+hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(
+        hkCheckingMemorySystem *this,
+        hkResult *result,
+        hkMemorySnapshot *snapshot)
 {
-  _RTL_CRITICAL_SECTION *v3; // rbx
-  hkCheckingMemorySystem *v4; // r14
-  hkMemorySnapshot *v5; // rdi
-  int v6; // er13
+  hkCriticalSection *p_m_section; // rbx
+  int v6; // r13d
   int v7; // esi
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v8; // r10
-  __int64 v9; // r9
-  signed int v10; // edx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *p_m_activePointers; // r10
+  __int64 m_hashMod; // r9
+  int v10; // edx
   __int64 v11; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v12; // rax
-  signed int v13; // er12
-  signed __int64 v14; // r13
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v13; // r12d
+  __int64 v14; // r13
   char *v15; // rcx
   bool v16; // zf
   char *v17; // rsi
   __int64 v18; // r15
-  char *v19; // rcx
+  char *address; // rcx
   char *v20; // rax
   char *v21; // r9
   int v22; // esi
@@ -1728,19 +1671,19 @@ hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemoryS
   __int64 v32; // r9
   __int64 v33; // rcx
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v34; // rax
-  hkStackTracer::CallTree::Node *v35; // r12
-  int v36; // er15
-  int *v37; // rsi
+  hkStackTracer::CallTree::Node *m_data; // r12
+  int v36; // r15d
+  hkRecallAllocator::Header *m_head; // rsi
   char *v38; // r9
   char *v39; // rax
-  int v40; // er15
+  int v40; // r15d
   __int64 v41; // rsi
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v42; // r15
-  int v43; // eax
+  int MemSize; // eax
   int solver; // [rsp+30h] [rbp-D0h]
   int parent; // [rsp+34h] [rbp-CCh]
   int debug; // [rsp+38h] [rbp-C8h]
-  hkPaddedAllocator::Allocation resulta; // [rsp+40h] [rbp-C0h]
+  hkPaddedAllocator::Allocation resulta; // [rsp+40h] [rbp-C0h] BYREF
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v49; // [rsp+50h] [rbp-B0h]
   __int64 v50; // [rsp+58h] [rbp-A8h]
   __int64 v51; // [rsp+60h] [rbp-A0h]
@@ -1755,62 +1698,58 @@ hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemoryS
   __int64 v60; // [rsp+A8h] [rbp-58h]
   __int64 v61; // [rsp+B0h] [rbp-50h]
   __int64 v62; // [rsp+C0h] [rbp-40h]
-  unsigned __int64 addrs; // [rsp+D0h] [rbp-30h]
+  unsigned __int64 addrs[134]; // [rsp+D0h] [rbp-30h] BYREF
   int v64; // [rsp+510h] [rbp+410h]
-  hkResult *v65; // [rsp+518h] [rbp+418h]
   int id; // [rsp+528h] [rbp+428h]
 
-  v65 = result;
-  v3 = &this->m_section.m_section;
-  v4 = this;
-  v5 = snapshot;
+  p_m_section = &this->m_section;
   EnterCriticalSection(&this->m_section.m_section);
-  v6 = hkMemorySnapshot::addProvider(v5, "<System>", -1);
+  v6 = hkMemorySnapshot::addProvider(snapshot, "<System>", -1);
   id = v6;
   v7 = v6;
-  parent = hkMemorySnapshot::addProvider(v5, "hkStatsAllocator(CallTree)", v6);
+  parent = hkMemorySnapshot::addProvider(snapshot, "hkStatsAllocator(CallTree)", v6);
   v64 = v6;
-  if ( v4->m_checkFlags.m_storage & 0x10 )
+  if ( (this->m_checkFlags.m_storage & 0x10) != 0 )
   {
-    v7 = hkDelayedFreeAllocator::addToSnapshot(&v4->m_delayedFreeAllocator, v5, v6);
+    v7 = hkDelayedFreeAllocator::addToSnapshot(&this->m_delayedFreeAllocator, snapshot, v6);
     v64 = v7;
   }
-  if ( v4->m_checkFlags.m_storage & 8 )
+  if ( (this->m_checkFlags.m_storage & 8) != 0 )
   {
-    v7 = hkMemorySnapshot::addProvider(v5, "hkPaddedAllocator", v7);
+    v7 = hkMemorySnapshot::addProvider(snapshot, "hkPaddedAllocator", v7);
     v64 = v7;
   }
-  debug = hkMemorySnapshot::addProvider(v5, "hkRecallAllocator", v6);
-  solver = hkMemorySnapshot::addProvider(v5, "hkCheckingMemorySystem", -1);
-  hkMemorySnapshot::addParentProvider(v5, solver, v7);
-  hkMemorySnapshot::addParentProvider(v5, solver, parent);
-  hkMemorySnapshot::setRouterWiring(v5, solver, solver, solver, debug, solver);
-  v8 = &v4->m_activePointers;
-  v9 = v4->m_activePointers.m_hashMod;
+  debug = hkMemorySnapshot::addProvider(snapshot, "hkRecallAllocator", v6);
+  solver = hkMemorySnapshot::addProvider(snapshot, "hkCheckingMemorySystem", -1);
+  hkMemorySnapshot::addParentProvider(snapshot, solver, v7);
+  hkMemorySnapshot::addParentProvider(snapshot, solver, parent);
+  hkMemorySnapshot::setRouterWiring(snapshot, solver, solver, solver, debug, solver);
+  p_m_activePointers = &this->m_activePointers;
+  m_hashMod = this->m_activePointers.m_hashMod;
   v10 = 0;
   v11 = 0i64;
-  v49 = &v4->m_activePointers;
-  if ( (signed int)v9 >= 0 )
+  v49 = &this->m_activePointers;
+  if ( (int)m_hashMod >= 0 )
   {
-    v12 = v8->m_elem;
+    m_elem = p_m_activePointers->m_elem;
     do
     {
-      if ( v12->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
       ++v11;
       ++v10;
-      ++v12;
+      ++m_elem;
     }
-    while ( v11 <= v9 );
+    while ( v11 <= m_hashMod );
   }
   v13 = v10;
-  if ( v10 <= (signed int)v9 )
+  if ( v10 <= (int)m_hashMod )
   {
     do
     {
-      v14 = (signed __int64)v13 << 6;
-      v15 = (char *)v8->m_elem + v14;
-      v16 = (v4->m_checkFlags.m_storage & 8) == 0;
+      v14 = (__int64)v13 << 6;
+      v15 = (char *)p_m_activePointers->m_elem + v14;
+      v16 = (this->m_checkFlags.m_storage & 8) == 0;
       v17 = *(char **)v15;
       v18 = *((_QWORD *)v15 + 6);
       v57 = *((_QWORD *)v15 + 1);
@@ -1821,32 +1760,37 @@ hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemoryS
       v62 = *((_QWORD *)v15 + 7);
       if ( v16 )
       {
-        hkMemorySnapshot::addItem(v5, id, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, v17, v18);
+        hkMemorySnapshot::addItem(snapshot, id, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, v17, v18);
       }
       else
       {
-        hkPaddedAllocator::getUnderlyingAllocation(&v4->m_paddedAllocator, &resulta, v17, v18);
+        hkPaddedAllocator::getUnderlyingAllocation(&this->m_paddedAllocator, &resulta, v17, v18);
         hkMemorySnapshot::addItem(
-          v5,
+          snapshot,
           id,
           (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1,
           resulta.address,
           resulta.size);
-        v19 = (char *)resulta.address;
+        address = (char *)resulta.address;
         if ( resulta.address != v17 )
         {
-          hkMemorySnapshot::addItem(v5, v64, 0, resulta.address, (_DWORD)v17 - LODWORD(resulta.address));
-          v19 = (char *)resulta.address;
+          hkMemorySnapshot::addItem(snapshot, v64, 0, resulta.address, (_DWORD)v17 - LODWORD(resulta.address));
+          address = (char *)resulta.address;
         }
-        v20 = &v19[resulta.size];
-        v21 = &v17[(signed int)v18];
+        v20 = &address[resulta.size];
+        v21 = &v17[(int)v18];
         if ( v20 != v21 )
-          hkMemorySnapshot::addItem(v5, v64, 0, v21, (_DWORD)v20 - (_DWORD)v21);
+          hkMemorySnapshot::addItem(snapshot, v64, 0, v21, (_DWORD)v20 - (_DWORD)v21);
       }
-      v22 = hkMemorySnapshot::addItem(v5, solver, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, v17, v18);
-      if ( v4->m_checkFlags.m_storage & 4 )
+      v22 = hkMemorySnapshot::addItem(
+              snapshot,
+              solver,
+              (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1,
+              v17,
+              v18);
+      if ( (this->m_checkFlags.m_storage & 4) != 0 )
       {
-        v23 = (unsigned __int64 *)((char *)&v4->m_activePointers.m_elem->key + v14);
+        v23 = (unsigned __int64 *)((char *)&this->m_activePointers.m_elem->key + v14);
         v24 = v23[1];
         v53 = v23[4];
         v25 = v23[5];
@@ -1860,16 +1804,16 @@ hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemoryS
         v29 = v23[7];
         v52 = v28;
         v56 = v29;
-        v30 = hkStackTracer::CallTree::getCallStack(&v4->m_callTree, v54[1], &addrs, 128);
-        hkMemorySnapshot::setCallStack(v5, v22, &addrs, v30);
+        v30 = hkStackTracer::CallTree::getCallStack(&this->m_callTree, v54[1], addrs, 128);
+        hkMemorySnapshot::setCallStack(snapshot, v22, addrs, v30);
       }
-      v8 = &v4->m_activePointers;
+      p_m_activePointers = &this->m_activePointers;
       v31 = v13 + 1;
-      v32 = v4->m_activePointers.m_hashMod;
+      v32 = this->m_activePointers.m_hashMod;
       v33 = v13 + 1;
       if ( v33 <= v32 )
       {
-        v34 = &v8->m_elem[(signed __int64)v31];
+        v34 = &p_m_activePointers->m_elem[(__int64)v31];
         do
         {
           if ( v34->key != -1i64 )
@@ -1882,473 +1826,409 @@ hkResult *__fastcall hkCheckingMemorySystem::getMemorySnapshot(hkCheckingMemoryS
       }
       v13 = v31;
     }
-    while ( v31 <= (signed int)v32 );
+    while ( v31 <= (int)v32 );
     v6 = id;
-    v3 = &v4->m_section.m_section;
+    p_m_section = &this->m_section;
   }
-  v35 = v4->m_callTree.m_nodes.m_data;
-  v36 = 24 * (v4->m_callTree.m_nodes.m_capacityAndFlags & 0x3FFFFFFF);
-  hkMemorySnapshot::addItem(
-    v5,
-    parent,
-    (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1,
-    v4->m_callTree.m_nodes.m_data,
-    v36);
-  v37 = (int *)v4->m_debugAllocator.m_head;
-  if ( v37 )
+  m_data = this->m_callTree.m_nodes.m_data;
+  v36 = 24 * (this->m_callTree.m_nodes.m_capacityAndFlags & 0x3FFFFFFF);
+  hkMemorySnapshot::addItem(snapshot, parent, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, m_data, v36);
+  m_head = this->m_debugAllocator.m_head;
+  if ( m_head )
   {
     do
     {
-      hkMemorySnapshot::addItem(v5, v6, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, v37, v37[2]);
-      hkMemorySnapshot::addItem(v5, debug, 0, v37, 16);
-      hkMemorySnapshot::addItem(v5, debug, (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1, v37 + 4, v37[3]);
-      v38 = (char *)v37 + v37[3] + 16;
-      v39 = (char *)v37 + v37[2];
+      hkMemorySnapshot::addItem(
+        snapshot,
+        v6,
+        (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1,
+        m_head,
+        m_head->m_requestedSize);
+      hkMemorySnapshot::addItem(snapshot, debug, 0, m_head, 16);
+      hkMemorySnapshot::addItem(
+        snapshot,
+        debug,
+        (hkEnum<enum hkMemorySnapshot::StatusBits,signed char>)1,
+        &m_head[1],
+        m_head->m_payloadSize);
+      v38 = (char *)&m_head[1] + m_head->m_payloadSize;
+      v39 = (char *)m_head + m_head->m_requestedSize;
       if ( v38 != v39 )
-        hkMemorySnapshot::addItem(v5, debug, 0, v38, (_DWORD)v39 - (_DWORD)v38);
-      v37 = *(int **)v37;
+        hkMemorySnapshot::addItem(snapshot, debug, 0, v38, (_DWORD)v39 - (_DWORD)v38);
+      m_head = m_head->m_next;
     }
-    while ( v37 );
-    v3 = &v4->m_section.m_section;
+    while ( m_head );
+    p_m_section = &this->m_section;
   }
-  hkMemorySnapshot::addItem(v5, solver, 0, v35, v36);
-  hkMemorySnapshot::addItem(v5, solver, 0, v4->m_allocators.m_data, 8 * v4->m_allocators.m_capacityAndFlags);
+  hkMemorySnapshot::addItem(snapshot, solver, 0, m_data, v36);
+  hkMemorySnapshot::addItem(snapshot, solver, 0, this->m_allocators.m_data, 8 * this->m_allocators.m_capacityAndFlags);
   v40 = 0;
-  if ( v4->m_allocators.m_size > 0 )
+  if ( this->m_allocators.m_size > 0 )
   {
     v41 = 0i64;
     do
     {
-      hkMemorySnapshot::addItem(v5, solver, 0, v4->m_allocators.m_data[v41], 40);
+      hkMemorySnapshot::addItem(snapshot, solver, 0, this->m_allocators.m_data[v41], 40);
       ++v40;
       ++v41;
     }
-    while ( v40 < v4->m_allocators.m_size );
+    while ( v40 < this->m_allocators.m_size );
   }
   v42 = v49;
-  v43 = hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::getMemSize(v49);
-  hkMemorySnapshot::addItem(v5, solver, 0, v42->m_elem, v43);
-  v65->m_enum = 0;
-  LeaveCriticalSection(v3);
-  return v65;
-}
+  MemSize = hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::getMemSize(v49);
+  hkMemorySnapshot::addItem(snapshot, solver, 0, v42->m_elem, MemSize);
+  result->m_enum = HK_SUCCESS;
+  LeaveCriticalSection(&p_m_section->m_section);
+  return result;
+}stem::AllocInfo,hkMapOpe
 
 // File Line: 862
 // RVA: 0xC5D810
-signed __int64 __fastcall hkCheckingMemorySystem::findBaseAddress(hkCheckingMemorySystem *this, const void *pquery, int nbytes)
+unsigned __int64 __fastcall hkCheckingMemorySystem::findBaseAddress(
+        hkCheckingMemorySystem *this,
+        unsigned __int64 pquery,
+        int nbytes)
 {
-  _RTL_CRITICAL_SECTION *v3; // rbx
-  hkCheckingMemorySystem *v4; // r14
+  hkCriticalSection *p_m_section; // rbx
   __int64 v5; // r12
-  const void *v6; // r13
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v7; // r14
-  signed int v8; // eax
-  signed __int64 v9; // r15
-  signed __int64 v10; // rdi
-  signed __int64 v11; // rdx
-  __int64 v12; // ST20_8
-  __int64 v13; // ST28_8
-  __int64 v14; // ST30_8
-  __int64 v15; // ST38_8
-  __int64 v16; // ST40_8
-  __int64 v17; // ST50_8
-  signed int v18; // ebp
-  signed int v19; // esi
-  signed int v20; // eax
-  signed __int64 v21; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v22; // rax
-  signed int v23; // edx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v24; // r9
-  signed __int64 v25; // rcx
-  __int64 v26; // ST20_8
-  __int64 v27; // ST28_8
-  __int64 v28; // ST30_8
-  __int64 v29; // ST38_8
-  __int64 v30; // ST40_8
-  __int64 v31; // ST50_8
-  signed __int64 v32; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v33; // rax
-  signed __int64 v34; // rdx
-  __int64 v35; // ST20_8
-  __int64 v36; // ST28_8
-  __int64 v37; // ST30_8
-  __int64 v38; // ST38_8
-  __int64 v39; // ST40_8
-  __int64 v40; // ST50_8
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *p_m_activePointers; // r14
+  int Key; // eax
+  __int64 m_hashMod; // r15
+  unsigned __int64 v10; // rdi
+  int v11; // ebp
+  int i; // esi
+  int v13; // eax
+  __int64 v14; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v16; // edx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v17; // r9
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v18; // rcx
+  __int64 v19; // rcx
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v20; // rax
 
-  v3 = &this->m_section.m_section;
-  v4 = this;
+  p_m_section = &this->m_section;
   v5 = nbytes;
-  v6 = pquery;
   EnterCriticalSection(&this->m_section.m_section);
-  v7 = &v4->m_activePointers;
-  v8 = (unsigned __int64)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                           v7,
-                           (unsigned __int64)v6);
-  v9 = v7->m_hashMod;
-  if ( v8 <= (signed int)v9 )
+  p_m_activePointers = &this->m_activePointers;
+  Key = (unsigned int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                        p_m_activePointers,
+                        pquery);
+  m_hashMod = p_m_activePointers->m_hashMod;
+  if ( Key <= (int)m_hashMod )
   {
     v10 = -1i64;
-    v11 = (signed __int64)&v7->m_elem[(signed __int64)v8];
-    v12 = *(_QWORD *)(v11 + 8);
-    if ( (signed int)v5 <= *(_DWORD *)(v11 + 48) )
-      v10 = (signed __int64)v6;
-    v13 = *(_QWORD *)(v11 + 16);
-    v14 = *(_QWORD *)(v11 + 24);
-    v15 = *(_QWORD *)(v11 + 32);
-    v16 = *(_QWORD *)(v11 + 40);
-    v17 = *(_QWORD *)(v11 + 56);
+    if ( (int)v5 <= p_m_activePointers->m_elem[(__int64)Key].val.m_size )
+      v10 = pquery;
     goto LABEL_24;
   }
-  v10 = ((unsigned __int64)v6 + 15) & 0xFFFFFFFFFFFFFFF0ui64;
-  v18 = 0;
-  v19 = 0;
-  do
+  v10 = (pquery + 15) & 0xFFFFFFFFFFFFFFF0ui64;
+  v11 = 0;
+  for ( i = 0; i < 50; ++i )
   {
     v10 -= 16i64;
-    v20 = (unsigned __int64)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                              v7,
-                              v10);
-    if ( v20 <= (signed int)v9 )
+    v13 = (unsigned int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                          p_m_activePointers,
+                          v10);
+    if ( v13 <= (int)m_hashMod )
     {
-      v34 = (signed __int64)&v7->m_elem[(signed __int64)v20];
-      v35 = *(_QWORD *)(v34 + 8);
-      v36 = *(_QWORD *)(v34 + 16);
-      v37 = *(_QWORD *)(v34 + 24);
-      v38 = *(_QWORD *)(v34 + 32);
-      v39 = *(_QWORD *)(v34 + 40);
-      v40 = *(_QWORD *)(v34 + 56);
-      if ( (unsigned __int64)v6 + v5 <= v10 + *(signed int *)(v34 + 48) )
+      if ( v5 + pquery <= v10 + p_m_activePointers->m_elem[(__int64)v13].val.m_size )
         goto LABEL_24;
       goto LABEL_23;
     }
-    ++v19;
   }
-  while ( v19 < 50 );
-  v21 = 0i64;
-  if ( (signed int)v9 >= 0 )
+  v14 = 0i64;
+  if ( (int)m_hashMod >= 0 )
   {
-    v22 = v7->m_elem;
+    m_elem = p_m_activePointers->m_elem;
     do
     {
-      if ( v22->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
-      ++v21;
-      ++v18;
-      ++v22;
+      ++v14;
+      ++v11;
+      ++m_elem;
     }
-    while ( v21 <= v9 );
+    while ( v14 <= m_hashMod );
   }
-  v23 = v18;
-  if ( v18 > (signed int)v9 )
+  v16 = v11;
+  if ( v11 > (int)m_hashMod )
   {
 LABEL_23:
     v10 = -1i64;
     goto LABEL_24;
   }
-  v24 = v7->m_elem;
+  v17 = p_m_activePointers->m_elem;
   while ( 1 )
   {
-    v25 = (signed __int64)&v24[(signed __int64)v23];
-    v10 = *(_QWORD *)v25;
-    if ( *(_QWORD *)v25 <= (unsigned __int64)v6 )
+    v18 = &v17[(__int64)v16];
+    v10 = v18->key;
+    if ( v18->key <= pquery && v5 + pquery <= v10 + v18->val.m_size )
+      break;
+    v19 = ++v16;
+    if ( v16 <= m_hashMod )
     {
-      v26 = *(_QWORD *)(v25 + 8);
-      v27 = *(_QWORD *)(v25 + 16);
-      v28 = *(_QWORD *)(v25 + 24);
-      v29 = *(_QWORD *)(v25 + 32);
-      v30 = *(_QWORD *)(v25 + 40);
-      v31 = *(_QWORD *)(v25 + 56);
-      if ( (unsigned __int64)v6 + v5 <= v10 + *(signed int *)(v25 + 48) )
-        break;
-    }
-    v32 = ++v23;
-    if ( v23 <= v9 )
-    {
-      v33 = &v24[(signed __int64)v23];
+      v20 = &v17[(__int64)v16];
       do
       {
-        if ( v33->key != -1i64 )
+        if ( v20->key != -1i64 )
           break;
-        ++v32;
-        ++v23;
-        ++v33;
+        ++v19;
+        ++v16;
+        ++v20;
       }
-      while ( v32 <= v9 );
+      while ( v19 <= m_hashMod );
     }
-    if ( v23 > (signed int)v9 )
+    if ( v16 > (int)m_hashMod )
       goto LABEL_23;
   }
 LABEL_24:
-  LeaveCriticalSection(v3);
+  LeaveCriticalSection(&p_m_section->m_section);
   return v10;
 }
 
 // File Line: 931
 // RVA: 0xC5DA40
-void __fastcall hkCheckingMemorySystem::lockBaseAddress(hkCheckingMemorySystem *this, const void *p)
+void __fastcall hkCheckingMemorySystem::lockBaseAddress(hkCheckingMemorySystem *this, unsigned __int64 p)
 {
-  _RTL_CRITICAL_SECTION *v2; // rsi
-  hkCheckingMemorySystem *v3; // rbx
-  const void *v4; // rdi
+  hkCriticalSection *p_m_section; // rsi
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v5; // rdi
   __int64 v6; // rax
-  unsigned __int64 v7; // r8
-  unsigned __int64 v8; // r9
-  const void *v9; // r10
+  unsigned __int64 m_allocOrder; // r8
+  unsigned __int64 m_time; // r9
+  const void *m_tagData; // r10
   __int64 v10; // r11
   __int64 v11; // rbx
 
-  v2 = &this->m_section.m_section;
-  v3 = this;
-  v4 = p;
+  p_m_section = &this->m_section;
   EnterCriticalSection(&this->m_section.m_section);
-  v5 = &v3->m_activePointers.m_elem[(signed __int64)(signed int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                                                                  &v3->m_activePointers,
-                                                                  (unsigned __int64)v4)];
+  v5 = &this->m_activePointers.m_elem[(__int64)(int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                                                      &this->m_activePointers,
+                                                      p)];
   v6 = *(_QWORD *)&v5->val.m_size;
-  v7 = v5->val.m_allocOrder;
-  v8 = v5->val.m_time;
-  v9 = v5->val.m_tagData;
+  m_allocOrder = v5->val.m_allocOrder;
+  m_time = v5->val.m_time;
+  m_tagData = v5->val.m_tagData;
   v10 = *(_QWORD *)&v5->val.m_flags.m_storage;
   v11 = *(_QWORD *)&v5->val.m_bookmarkIndex;
   v5->val.m_threadId = v5->val.m_threadId;
-  v5->val.m_allocOrder = v7;
-  v5->val.m_time = v8;
-  v5->val.m_tagData = v9;
+  v5->val.m_allocOrder = m_allocOrder;
+  v5->val.m_time = m_time;
+  v5->val.m_tagData = m_tagData;
   *(_QWORD *)&v5->val.m_flags.m_storage = v10;
   *(_QWORD *)&v5->val.m_size = v6 + 0x100000000i64;
   *(_QWORD *)&v5->val.m_bookmarkIndex = v11;
-  LeaveCriticalSection(v2);
+  LeaveCriticalSection(&p_m_section->m_section);
 }
 
 // File Line: 943
 // RVA: 0xC5DAF0
-void __fastcall hkCheckingMemorySystem::unlockBaseAddress(hkCheckingMemorySystem *this, const void *p)
+void __fastcall hkCheckingMemorySystem::unlockBaseAddress(hkCheckingMemorySystem *this, unsigned __int64 p)
 {
-  _RTL_CRITICAL_SECTION *v2; // rsi
-  hkCheckingMemorySystem *v3; // rbx
-  const void *v4; // rdi
+  hkCriticalSection *p_m_section; // rsi
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v5; // rdi
   __int64 v6; // rax
-  unsigned __int64 v7; // r8
-  unsigned __int64 v8; // r9
-  const void *v9; // r10
+  unsigned __int64 m_allocOrder; // r8
+  unsigned __int64 m_time; // r9
+  const void *m_tagData; // r10
   __int64 v10; // r11
   __int64 v11; // rbx
 
-  v2 = &this->m_section.m_section;
-  v3 = this;
-  v4 = p;
+  p_m_section = &this->m_section;
   EnterCriticalSection(&this->m_section.m_section);
-  v5 = &v3->m_activePointers.m_elem[(signed __int64)(signed int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                                                                  &v3->m_activePointers,
-                                                                  (unsigned __int64)v4)];
+  v5 = &this->m_activePointers.m_elem[(__int64)(int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                                                      &this->m_activePointers,
+                                                      p)];
   v6 = *(_QWORD *)&v5->val.m_size;
-  v7 = v5->val.m_allocOrder;
-  v8 = v5->val.m_time;
-  v9 = v5->val.m_tagData;
+  m_allocOrder = v5->val.m_allocOrder;
+  m_time = v5->val.m_time;
+  m_tagData = v5->val.m_tagData;
   v10 = *(_QWORD *)&v5->val.m_flags.m_storage;
   v11 = *(_QWORD *)&v5->val.m_bookmarkIndex;
   v5->val.m_threadId = v5->val.m_threadId;
-  v5->val.m_allocOrder = v7;
-  v5->val.m_time = v8;
-  v5->val.m_tagData = v9;
+  v5->val.m_allocOrder = m_allocOrder;
+  v5->val.m_time = m_time;
+  v5->val.m_tagData = m_tagData;
   *(_QWORD *)&v5->val.m_flags.m_storage = v10;
   *(_QWORD *)&v5->val.m_size = v6 - 0x100000000i64;
   *(_QWORD *)&v5->val.m_bookmarkIndex = v11;
-  LeaveCriticalSection(v2);
+  LeaveCriticalSection(&p_m_section->m_section);
 }
 
 // File Line: 956
 // RVA: 0xC5DBA0
-void __fastcall hkCheckingMemorySystem::tagAddress(hkCheckingMemorySystem *this, const void *baseAddress, const void *data)
+void __fastcall hkCheckingMemorySystem::tagAddress(
+        hkCheckingMemorySystem *this,
+        unsigned __int64 baseAddress,
+        const void *data)
 {
-  const void *v3; // rdi
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v4; // r11
-  unsigned __int64 v5; // rdx
-  unsigned __int64 v6; // r8
+  unsigned __int64 m_allocOrder; // rdx
+  unsigned __int64 m_time; // r8
   __int64 v7; // r9
   __int64 v8; // r10
-  const void *v9; // ST38_8
-  __int64 v10; // rax
+  __int64 v9; // rax
 
-  v3 = data;
-  v4 = &this->m_activePointers.m_elem[(signed __int64)(signed int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
-                                                                    &this->m_activePointers,
-                                                                    (unsigned __int64)baseAddress)];
-  v5 = v4->val.m_allocOrder;
-  v6 = v4->val.m_time;
+  v4 = &this->m_activePointers.m_elem[(__int64)(int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::findKey(
+                                                      &this->m_activePointers,
+                                                      baseAddress)];
+  m_allocOrder = v4->val.m_allocOrder;
+  m_time = v4->val.m_time;
   v7 = *(_QWORD *)&v4->val.m_size;
   v8 = *(_QWORD *)&v4->val.m_bookmarkIndex;
-  v9 = v4->val.m_tagData;
-  v10 = *(_QWORD *)&v4->val.m_flags.m_storage;
+  v9 = *(_QWORD *)&v4->val.m_flags.m_storage;
   v4->val.m_threadId = v4->val.m_threadId;
-  v4->val.m_allocOrder = v5;
-  v4->val.m_time = v6;
-  v4->val.m_tagData = v3;
-  *(_QWORD *)&v4->val.m_flags.m_storage = v10;
+  v4->val.m_allocOrder = m_allocOrder;
+  v4->val.m_time = m_time;
+  v4->val.m_tagData = data;
+  *(_QWORD *)&v4->val.m_flags.m_storage = v9;
   *(_QWORD *)&v4->val.m_size = v7;
   *(_QWORD *)&v4->val.m_bookmarkIndex = v8;
 }
 
 // File Line: 976
 // RVA: 0xC5DCE0
-hkMemoryRouter *__fastcall hkCheckingMemorySystem::mainInit(hkCheckingMemorySystem *this, hkMemorySystem::FrameInfo *info, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+hkMemoryRouter *__fastcall hkCheckingMemorySystem::mainInit(
+        hkCheckingMemorySystem *this,
+        hkMemorySystem::FrameInfo *info,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkCheckingMemorySystem *v3; // rbx
-
-  v3 = this;
   this->m_frameInfo = (hkMemorySystem::FrameInfo)info->m_solverBufferSize;
-  if ( !(flags.m_storage & 1) )
+  if ( (flags.m_storage & 1) == 0 )
     return &this->m_mainRouter;
   ((void (__fastcall *)(hkCheckingMemorySystem *, hkMemoryRouter *, const char *, _QWORD))this->vfptr->threadInit)(
     this,
     &this->m_mainRouter,
     "main",
     (unsigned int)flags.m_storage);
-  return &v3->m_mainRouter;
+  return &this->m_mainRouter;
 }
 
 // File Line: 990
 // RVA: 0xC5DD30
-hkResult *__fastcall hkCheckingMemorySystem::mainQuit(hkCheckingMemorySystem *this, hkResult *result, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+hkResult *__fastcall hkCheckingMemorySystem::mainQuit(
+        hkCheckingMemorySystem *this,
+        hkResult *result,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkResult *v3; // rbx
-  hkCheckingMemorySystem *v4; // rdi
   hkResult *v5; // rax
 
-  v3 = result;
-  v4 = this;
-  if ( flags.m_storage & 1 )
+  if ( (flags.m_storage & 1) != 0 )
   {
     ((void (__fastcall *)(hkCheckingMemorySystem *, hkMemoryRouter *))this->vfptr->threadQuit)(
       this,
       &this->m_mainRouter);
-    hkCheckingMemorySystem::quit(v4, v3);
-    v5 = v3;
+    hkCheckingMemorySystem::quit(this, result);
+    return result;
   }
   else
   {
     v5 = result;
-    result->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
   return v5;
 }
 
 // File Line: 1005
 // RVA: 0xC5DD90
-void __fastcall hkCheckingMemorySystem::threadInit(hkCheckingMemorySystem *this, hkMemoryRouter *router, const char *name, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+void __fastcall hkCheckingMemorySystem::threadInit(
+        hkCheckingMemorySystem *this,
+        hkMemoryRouter *router,
+        const char *name,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkCheckingMemorySystem *v4; // rsi
-  hkMemoryRouter *v5; // rdi
-  unsigned __int64 v6; // rax
+  unsigned __int64 MyThreadId; // rax
   char v7; // r8
   unsigned __int64 v8; // rbp
   hkCheckingMemorySystem::AllocatorForwarder *v9; // rax
   hkCheckingMemorySystem::AllocatorForwarder *v10; // rax
-  int v11; // [rsp+48h] [rbp+20h]
+  char m_storage; // [rsp+48h] [rbp+20h]
 
-  v11 = flags.m_storage;
-  v4 = this;
-  v5 = router;
+  m_storage = flags.m_storage;
   EnterCriticalSection(&this->m_section.m_section);
-  v6 = hkThread::getMyThreadId();
-  v7 = v11;
-  v8 = v6;
-  if ( v11 & 1 )
+  MyThreadId = hkThread::getMyThreadId();
+  v7 = m_storage;
+  v8 = MyThreadId;
+  if ( (m_storage & 1) != 0 )
   {
     v9 = hkCheckingMemorySystem::newAllocator(
-           v4,
+           this,
            (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)1,
-           v6);
-    v7 = v11;
-    v5->m_heap = (hkMemoryAllocator *)&v9->vfptr;
-    v5->m_debug = (hkMemoryAllocator *)&v4->m_debugAllocator.vfptr;
-    v5->m_temp = 0i64;
-    v5->m_solver = 0i64;
+           MyThreadId);
+    v7 = m_storage;
+    router->m_heap = v9;
+    router->m_debug = &this->m_debugAllocator;
+    router->m_temp = 0i64;
+    router->m_solver = 0i64;
   }
-  if ( v7 & 2 )
+  if ( (v7 & 2) != 0 )
   {
     v10 = hkCheckingMemorySystem::newAllocator(
-            v4,
+            this,
             (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)2,
             v8);
-    hkLifoAllocator::init(
-      &v5->m_stack,
-      (hkMemoryAllocator *)&v10->vfptr,
-      (hkMemoryAllocator *)&v10->vfptr,
-      (hkMemoryAllocator *)&v10->vfptr);
-    v5->m_temp = (hkMemoryAllocator *)hkCheckingMemorySystem::newAllocator(
-                                        v4,
-                                        (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)4,
-                                        v8);
-    v5->m_solver = (hkMemoryAllocator *)hkCheckingMemorySystem::newAllocator(
-                                          v4,
-                                          (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)8,
-                                          v8);
+    hkLifoAllocator::init(&router->m_stack, v10, v10, v10);
+    router->m_temp = hkCheckingMemorySystem::newAllocator(
+                       this,
+                       (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)4,
+                       v8);
+    router->m_solver = hkCheckingMemorySystem::newAllocator(
+                         this,
+                         (hkFlags<enum hkCheckingMemorySystem::AllocatorBits,unsigned int>)8,
+                         v8);
   }
-  LeaveCriticalSection(&v4->m_section.m_section);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 1041
 // RVA: 0xC5DE70
-void __fastcall hkCheckingMemorySystem::threadQuit(hkCheckingMemorySystem *this, hkMemoryRouter *router, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+void __fastcall hkCheckingMemorySystem::threadQuit(
+        hkCheckingMemorySystem *this,
+        hkMemoryRouter *router,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkCheckingMemorySystem *v3; // rsi
-  hkMemoryRouter *v4; // rdi
   char v5; // al
-  hkMemoryAllocator *v6; // rdx
-  __int128 allocators; // [rsp+20h] [rbp-28h]
-  __int64 v8; // [rsp+30h] [rbp-18h]
-  int v9; // [rsp+60h] [rbp+18h]
+  hkMemoryAllocator *m_solver; // rdx
+  hkMemoryAllocator *allocators[5]; // [rsp+20h] [rbp-28h] BYREF
+  char m_storage; // [rsp+60h] [rbp+18h]
 
-  v9 = flags.m_storage;
-  v3 = this;
-  v4 = router;
+  m_storage = flags.m_storage;
   EnterCriticalSection(&this->m_section.m_section);
-  v5 = v9;
-  if ( v9 & 2 )
+  v5 = m_storage;
+  if ( (m_storage & 2) != 0 )
   {
-    allocators = 0ui64;
-    v8 = 0i64;
-    hkLifoAllocator::quit(&v4->m_stack, (hkMemoryAllocator **)&allocators);
-    hkCheckingMemorySystem::deleteAllocator(v3, (hkMemoryAllocator *)allocators);
-    hkCheckingMemorySystem::deleteAllocator(v3, v4->m_temp);
-    v6 = v4->m_solver;
-    v4->m_temp = 0i64;
-    hkCheckingMemorySystem::deleteAllocator(v3, v6);
-    v5 = v9;
-    v4->m_solver = 0i64;
+    memset(allocators, 0, 24);
+    hkLifoAllocator::quit(&router->m_stack, allocators);
+    hkCheckingMemorySystem::deleteAllocator(this, allocators[0]);
+    hkCheckingMemorySystem::deleteAllocator(this, router->m_temp);
+    m_solver = router->m_solver;
+    router->m_temp = 0i64;
+    hkCheckingMemorySystem::deleteAllocator(this, m_solver);
+    v5 = m_storage;
+    router->m_solver = 0i64;
   }
-  if ( v5 & 1 )
+  if ( (v5 & 1) != 0 )
   {
-    hkCheckingMemorySystem::deleteAllocator(v3, v4->m_heap);
-    hkMemUtil::memSet(v4, 0, 128);
+    hkCheckingMemorySystem::deleteAllocator(this, router->m_heap);
+    hkMemUtil::memSet(router, 0, 0x80u);
   }
-  LeaveCriticalSection(&v3->m_section.m_section);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 1066
 // RVA: 0xC5DF40
-void __fastcall hkCheckingMemorySystem::getMemoryStatistics(hkCheckingMemorySystem *this, hkMemorySystem::MemoryStatistics *stats)
+void __fastcall hkCheckingMemorySystem::getMemoryStatistics(
+        hkCheckingMemorySystem *this,
+        hkMemorySystem::MemoryStatistics *stats)
 {
-  hkMemorySystem::MemoryStatistics *v2; // rsi
-  hkCheckingMemorySystem *v3; // rbp
   int v4; // edi
   hkMemorySystem::MemoryStatistics::Entry *v5; // rbx
-  hkStringPtr *v6; // rbx
-  signed __int64 v7; // rbx
-  hkStringPtr *v8; // rcx
-  hkStringPtr *v9; // rbx
-  signed __int64 v10; // rbx
-  hkStringPtr *v11; // rcx
-  hkStringPtr *v12; // rbx
-  signed __int64 v13; // rbx
-  hkStringPtr *v14; // rcx
+  hkMemorySystem::MemoryStatistics::Entry *v6; // rbx
+  hkMemorySystem::MemoryStatistics::Entry *v7; // rbx
+  hkMemorySystem::MemoryStatistics::Entry *v8; // rbx
+  hkMemorySystem::MemoryStatistics::Entry *v9; // rbx
+  hkMemorySystem::MemoryStatistics::Entry *v10; // rbx
+  hkMemorySystem::MemoryStatistics::Entry *v11; // rbx
 
-  v2 = stats;
-  v3 = this;
   v4 = stats->m_entries.m_size - 1;
   if ( v4 >= 0 )
   {
@@ -2361,62 +2241,55 @@ void __fastcall hkCheckingMemorySystem::getMemoryStatistics(hkCheckingMemorySyst
     }
     while ( v4 >= 0 );
   }
-  v2->m_entries.m_size = 0;
-  if ( !(v2->m_entries.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 56);
-  v6 = &v2->m_entries.m_data[v2->m_entries.m_size].m_allocatorName;
+  stats->m_entries.m_size = 0;
+  if ( (stats->m_entries.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&stats->m_entries.m_data, 56);
+  v6 = &stats->m_entries.m_data[stats->m_entries.m_size];
   if ( v6 )
   {
-    hkStringPtr::hkStringPtr(v6);
-    v6[1].m_stringAndFlag = (const char *)-1i64;
-    v6[2].m_stringAndFlag = (const char *)-1i64;
-    v6[3].m_stringAndFlag = (const char *)-1i64;
-    v6[4].m_stringAndFlag = (const char *)-1i64;
-    v6[5].m_stringAndFlag = (const char *)-1i64;
-    v6[6].m_stringAndFlag = (const char *)-1i64;
+    hkStringPtr::hkStringPtr(&v6->m_allocatorName);
+    v6->m_allocatorStats.m_allocated = -1i64;
+    v6->m_allocatorStats.m_inUse = -1i64;
+    v6->m_allocatorStats.m_peakInUse = -1i64;
+    v6->m_allocatorStats.m_available = -1i64;
+    v6->m_allocatorStats.m_totalAvailable = -1i64;
+    v6->m_allocatorStats.m_largestBlock = -1i64;
   }
-  v7 = (signed __int64)&v2->m_entries.m_data[v2->m_entries.m_size];
-  v8 = &v2->m_entries.m_data[v2->m_entries.m_size++].m_allocatorName;
-  hkStringPtr::operator=(v8, "System");
-  v3->m_baseAllocator->vfptr->getMemoryStatistics(v3->m_baseAllocator, (hkMemoryAllocator::MemoryStatistics *)(v7 + 8));
-  if ( v2->m_entries.m_size == (v2->m_entries.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 56);
-  v9 = &v2->m_entries.m_data[v2->m_entries.m_size].m_allocatorName;
-  if ( v9 )
+  v7 = &stats->m_entries.m_data[stats->m_entries.m_size++];
+  hkStringPtr::operator=(&v7->m_allocatorName, "System");
+  this->m_baseAllocator->vfptr->getMemoryStatistics(this->m_baseAllocator, &v7->m_allocatorStats);
+  if ( stats->m_entries.m_size == (stats->m_entries.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&stats->m_entries.m_data, 56);
+  v8 = &stats->m_entries.m_data[stats->m_entries.m_size];
+  if ( v8 )
   {
-    hkStringPtr::hkStringPtr(v9);
-    v9[1].m_stringAndFlag = (const char *)-1i64;
-    v9[2].m_stringAndFlag = (const char *)-1i64;
-    v9[3].m_stringAndFlag = (const char *)-1i64;
-    v9[4].m_stringAndFlag = (const char *)-1i64;
-    v9[5].m_stringAndFlag = (const char *)-1i64;
-    v9[6].m_stringAndFlag = (const char *)-1i64;
+    hkStringPtr::hkStringPtr(&v8->m_allocatorName);
+    v8->m_allocatorStats.m_allocated = -1i64;
+    v8->m_allocatorStats.m_inUse = -1i64;
+    v8->m_allocatorStats.m_peakInUse = -1i64;
+    v8->m_allocatorStats.m_available = -1i64;
+    v8->m_allocatorStats.m_totalAvailable = -1i64;
+    v8->m_allocatorStats.m_largestBlock = -1i64;
   }
-  v10 = (signed __int64)&v2->m_entries.m_data[v2->m_entries.m_size];
-  v11 = &v2->m_entries.m_data[v2->m_entries.m_size++].m_allocatorName;
-  hkStringPtr::operator=(v11, "Heap");
-  v3->m_paddedAllocator.vfptr->getMemoryStatistics(
-    (hkMemoryAllocator *)&v3->m_paddedAllocator.vfptr,
-    (hkMemoryAllocator::MemoryStatistics *)(v10 + 8));
-  if ( v2->m_entries.m_size == (v2->m_entries.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 56);
-  v12 = &v2->m_entries.m_data[v2->m_entries.m_size].m_allocatorName;
-  if ( v12 )
+  v9 = &stats->m_entries.m_data[stats->m_entries.m_size++];
+  hkStringPtr::operator=(&v9->m_allocatorName, "Heap");
+  this->m_paddedAllocator.vfptr->getMemoryStatistics(&this->m_paddedAllocator, &v9->m_allocatorStats);
+  if ( stats->m_entries.m_size == (stats->m_entries.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&stats->m_entries.m_data, 56);
+  v10 = &stats->m_entries.m_data[stats->m_entries.m_size];
+  if ( v10 )
   {
-    hkStringPtr::hkStringPtr(v12);
-    v12[1].m_stringAndFlag = (const char *)-1i64;
-    v12[2].m_stringAndFlag = (const char *)-1i64;
-    v12[3].m_stringAndFlag = (const char *)-1i64;
-    v12[4].m_stringAndFlag = (const char *)-1i64;
-    v12[5].m_stringAndFlag = (const char *)-1i64;
-    v12[6].m_stringAndFlag = (const char *)-1i64;
+    hkStringPtr::hkStringPtr(&v10->m_allocatorName);
+    v10->m_allocatorStats.m_allocated = -1i64;
+    v10->m_allocatorStats.m_inUse = -1i64;
+    v10->m_allocatorStats.m_peakInUse = -1i64;
+    v10->m_allocatorStats.m_available = -1i64;
+    v10->m_allocatorStats.m_totalAvailable = -1i64;
+    v10->m_allocatorStats.m_largestBlock = -1i64;
   }
-  v13 = (signed __int64)&v2->m_entries.m_data[v2->m_entries.m_size];
-  v14 = &v2->m_entries.m_data[v2->m_entries.m_size++].m_allocatorName;
-  hkStringPtr::operator=(v14, "Debug");
-  v3->m_debugAllocator.vfptr->getMemoryStatistics(
-    (hkMemoryAllocator *)&v3->m_debugAllocator.vfptr,
-    (hkMemoryAllocator::MemoryStatistics *)(v13 + 8));
+  v11 = &stats->m_entries.m_data[stats->m_entries.m_size++];
+  hkStringPtr::operator=(&v11->m_allocatorName, "Debug");
+  this->m_debugAllocator.vfptr->getMemoryStatistics(&this->m_debugAllocator, &v11->m_allocatorStats);
 }
 
 // File Line: 1086
@@ -2425,187 +2298,172 @@ void __fastcall hkCheckingMemorySystem::printStatistics(hkCheckingMemorySystem *
 {
   hkCheckingMemorySystem *v2; // r13
   hkOstream *v3; // r12
-  int v4; // er15
-  hkMemoryAllocatorVtbl *v5; // rax
-  unsigned int v6; // er14
+  int v4; // r15d
+  hkMemoryAllocatorVtbl *vfptr; // rax
+  unsigned int v6; // r14d
   unsigned int v7; // esi
   unsigned int v8; // edi
-  signed int v9; // edx
+  int v9; // edx
   __int64 v10; // rcx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v11; // rax
-  __int64 v12; // r8
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *p_m_activePointers; // rax
+  __int64 m_hashMod; // r8
   __int64 v13; // r9
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v14; // rax
-  signed int v15; // er11
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v15; // r11d
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v16; // rsi
   unsigned int v17; // ebx
   __int64 v18; // r13
-  unsigned int v19; // er12
+  unsigned int v19; // r12d
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v20; // rcx
   __int64 v21; // r10
   __int64 v22; // rax
   __int64 v23; // rax
-  unsigned int i; // ecx
+  unsigned int v24; // ecx
   int v25; // edx
   __int64 v26; // rcx
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v27; // rax
-  hkMemoryAllocator *v28; // rcx
-  int v29; // er14
-  hkMemoryAllocatorVtbl *v30; // rax
-  int v31; // edi
-  hkMemoryAllocatorVtbl *v32; // rax
-  int v33; // edi
-  hkMemoryAllocatorVtbl *v34; // rax
-  __int64 v35; // rsi
-  unsigned int v36; // edi
-  int v37; // esi
-  int *v38; // rdx
-  signed __int64 v39; // r8
+  hkMemoryAllocator *m_rawAllocator; // rcx
+  unsigned int v29; // r14d
+  int v30; // edi
+  hkMemoryAllocatorVtbl *v31; // rax
+  int v32; // edi
+  __int64 MemSize; // rsi
+  unsigned int v34; // edi
+  int v35; // esi
+  char *v36; // rdx
+  __int64 v37; // r8
+  int v38; // eax
+  int v39; // ecx
   int v40; // eax
   int v41; // ecx
-  int v42; // eax
-  int v43; // ecx
-  unsigned int v44; // er13
-  signed int v45; // er14
-  __int64 v46; // r12
-  int v47; // edi
-  int v48; // ST20_4
-  _RTL_CRITICAL_SECTION *v49; // rbx
-  unsigned int v50; // edi
-  char *v51; // r14
-  signed __int64 v52; // r12
-  unsigned int v53; // esi
-  __int64 v54; // r14
-  hkCheckingMemorySystem::AllocatorForwarder *v55; // rsi
-  const char *v56; // rax
-  __int64 v57; // [rsp+20h] [rbp-E0h]
-  __int64 *v58; // [rsp+28h] [rbp-D8h]
-  __int64 v59; // [rsp+30h] [rbp-D0h]
-  __int64 dst; // [rsp+38h] [rbp-C8h]
-  __int64 v61; // [rsp+40h] [rbp-C0h]
-  __int64 v62; // [rsp+48h] [rbp-B8h]
-  __int64 v63; // [rsp+50h] [rbp-B0h]
-  __int64 v64; // [rsp+58h] [rbp-A8h]
-  __int64 v65; // [rsp+60h] [rbp-A0h]
+  unsigned int v42; // r13d
+  int v43; // r14d
+  __int64 v44; // r12
+  int v45; // edi
+  __int64 v46; // r9
+  _RTL_CRITICAL_SECTION *v47; // rbx
+  unsigned int v48; // edi
+  unsigned int *v49; // r14
+  __int64 v50; // r12
+  unsigned int v51; // esi
+  __int64 v52; // r14
+  hkCheckingMemorySystem::AllocatorForwarder *v53; // rsi
+  const char *v54; // rax
+  __int64 v55; // [rsp+20h] [rbp-E0h]
+  __int64 v56; // [rsp+28h] [rbp-D8h]
+  unsigned int v57; // [rsp+30h] [rbp-D0h]
+  unsigned int v58; // [rsp+34h] [rbp-CCh]
+  __int64 dst[6]; // [rsp+38h] [rbp-C8h] BYREF
   LPCRITICAL_SECTION lpCriticalSection; // [rsp+68h] [rbp-98h]
-  __int64 v67; // [rsp+70h] [rbp-90h]
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v68; // [rsp+78h] [rbp-88h]
-  unsigned __int64 v69; // [rsp+80h] [rbp-80h]
-  unsigned __int64 v70; // [rsp+88h] [rbp-78h]
-  unsigned __int64 v71; // [rsp+90h] [rbp-70h]
-  const void *v72; // [rsp+98h] [rbp-68h]
-  __int64 v73; // [rsp+A0h] [rbp-60h]
-  __int64 v74; // [rsp+A8h] [rbp-58h]
-  __int64 v75; // [rsp+B0h] [rbp-50h]
-  __int64 v76; // [rsp+B8h] [rbp-48h]
-  __int64 v77; // [rsp+C0h] [rbp-40h]
-  __int64 v78; // [rsp+C8h] [rbp-38h]
-  __int64 v79; // [rsp+D0h] [rbp-30h]
-  __int64 v80; // [rsp+D8h] [rbp-28h]
-  __int64 v81; // [rsp+E0h] [rbp-20h]
-  hkStringBuf v82; // [rsp+F0h] [rbp-10h]
-  char buf[4]; // [rsp+190h] [rbp+90h]
-  char v84; // [rsp+1B8h] [rbp+B8h]
-  int Dst[56]; // [rsp+210h] [rbp+110h]
-  hkCheckingMemorySystem *v86; // [rsp+300h] [rbp+200h]
-  hkOstream *v87; // [rsp+308h] [rbp+208h]
-  unsigned int v88; // [rsp+318h] [rbp+218h]
+  __int64 v61; // [rsp+70h] [rbp-90h]
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> > *v62; // [rsp+78h] [rbp-88h]
+  unsigned __int64 m_threadId; // [rsp+80h] [rbp-80h] BYREF
+  unsigned __int64 m_allocOrder; // [rsp+88h] [rbp-78h]
+  unsigned __int64 m_time; // [rsp+90h] [rbp-70h]
+  __int64 m_tagData; // [rsp+98h] [rbp-68h]
+  __int64 v67; // [rsp+A0h] [rbp-60h]
+  __int64 v68; // [rsp+A8h] [rbp-58h]
+  __int64 v69; // [rsp+B0h] [rbp-50h]
+  __int64 v70[7]; // [rsp+B8h] [rbp-48h] BYREF
+  char v71[160]; // [rsp+F0h] [rbp-10h] BYREF
+  _DWORD buf[32]; // [rsp+190h] [rbp+90h] BYREF
+  int Dst[56]; // [rsp+210h] [rbp+110h] BYREF
+  unsigned int v76; // [rsp+318h] [rbp+218h]
 
-  v87 = ostr;
-  v86 = this;
   v2 = this;
   v3 = ostr;
   lpCriticalSection = &this->m_section.m_section;
   EnterCriticalSection(&this->m_section.m_section);
   hkOstream::printf(v3, "hkCheckingMemorySystem memory overview:\n=======================================\n");
   memset(Dst, 0, 0xA0ui64);
-  memset(&v82, 0, 0xA0ui64);
-  memset(buf, 0, 0x80ui64);
+  memset(v71, 0, sizeof(v71));
+  memset(buf, 0, sizeof(buf));
   v4 = 0;
-  v5 = v2->m_debugAllocator.vfptr;
-  v67 = 0i64;
+  vfptr = v2->m_debugAllocator.vfptr;
+  v61 = 0i64;
   v6 = 0;
+  v58 = 0;
   v7 = 0;
-  v88 = 0;
+  v76 = 0;
   v8 = 0;
-  v76 = -1i64;
-  v77 = -1i64;
-  v78 = -1i64;
-  v79 = -1i64;
-  v80 = -1i64;
-  v81 = -1i64;
-  v5->getMemoryStatistics((hkMemoryAllocator *)&v2->m_debugAllocator.vfptr, (hkMemoryAllocator::MemoryStatistics *)&v76);
+  memset(v70, 255, 48);
+  vfptr->getMemoryStatistics(&v2->m_debugAllocator, (hkMemoryAllocator::MemoryStatistics *)v70);
   v9 = 0;
   v10 = 0i64;
-  v59 = (unsigned int)v76;
-  v11 = &v2->m_activePointers;
-  v12 = v2->m_activePointers.m_hashMod;
-  v68 = &v2->m_activePointers;
-  v13 = v12;
-  if ( (signed int)v12 >= 0 )
+  v57 = v70[0];
+  p_m_activePointers = &v2->m_activePointers;
+  m_hashMod = v2->m_activePointers.m_hashMod;
+  v62 = &v2->m_activePointers;
+  v13 = m_hashMod;
+  if ( (int)m_hashMod >= 0 )
   {
-    v14 = v11->m_elem;
+    m_elem = p_m_activePointers->m_elem;
     do
     {
-      if ( v14->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
       ++v10;
       ++v9;
-      ++v14;
+      ++m_elem;
     }
-    while ( v10 <= v12 );
-    v11 = &v2->m_activePointers;
+    while ( v10 <= m_hashMod );
+    p_m_activePointers = &v2->m_activePointers;
   }
   v15 = v9;
-  if ( v9 <= (signed int)v12 )
+  if ( v9 <= (int)m_hashMod )
   {
-    v16 = v11->m_elem;
+    v16 = p_m_activePointers->m_elem;
     v17 = 0;
     v18 = 0i64;
     v19 = 0;
     do
     {
-      v20 = &v16[(signed __int64)v15];
+      v20 = &v16[(__int64)v15];
       v21 = *(_QWORD *)&v20->val.m_flags.m_storage;
-      v12 = *(_QWORD *)&v20->val.m_size;
-      v69 = v20->val.m_threadId;
-      v70 = v20->val.m_allocOrder;
-      v71 = v20->val.m_time;
-      v72 = v20->val.m_tagData;
-      v75 = *(_QWORD *)&v20->val.m_bookmarkIndex;
-      if ( v21 & 1 )
+      m_hashMod = *(_QWORD *)&v20->val.m_size;
+      m_threadId = v20->val.m_threadId;
+      m_allocOrder = v20->val.m_allocOrder;
+      m_time = v20->val.m_time;
+      m_tagData = (__int64)v20->val.m_tagData;
+      v69 = *(_QWORD *)&v20->val.m_bookmarkIndex;
+      if ( (v21 & 1) != 0 )
       {
-        v6 += v12;
-        if ( (signed int)v12 > 640 )
+        v6 += m_hashMod;
+        if ( (int)m_hashMod > 640 )
         {
           v23 = 0i64;
-          for ( i = v12; i; i >>= 1 )
+          v24 = m_hashMod;
+          do
+          {
             ++v23;
-          ++*(_DWORD *)&buf[4 * v23];
-          v18 += (signed int)v12;
+            v24 >>= 1;
+          }
+          while ( v24 );
+          ++buf[v23];
+          v18 += (int)m_hashMod;
         }
-        else if ( (_DWORD)v12 )
+        else if ( (_DWORD)m_hashMod )
         {
-          v22 = ((signed int)v12 - 1) / 16;
+          v22 = ((int)m_hashMod - 1) / 16;
           ++Dst[v22];
-          *((_DWORD *)&v82.m_string.m_data + v22) += v12;
+          *(_DWORD *)&v71[4 * v22] += m_hashMod;
         }
         else
         {
           ++Dst[0];
         }
       }
-      if ( v21 & 2 )
-        v17 += v12;
-      if ( v21 & 4 )
-        v19 += v12;
-      if ( v21 & 8 )
-        v8 += v12;
+      if ( (v21 & 2) != 0 )
+        v17 += m_hashMod;
+      if ( (v21 & 4) != 0 )
+        v19 += m_hashMod;
+      if ( (v21 & 8) != 0 )
+        v8 += m_hashMod;
       v25 = v15 + 1;
       v26 = v15 + 1;
       if ( v26 <= v13 )
       {
-        v27 = &v16[(signed __int64)v25];
+        v27 = &v16[(__int64)v25];
         do
         {
           if ( v27->key != -1i64 )
@@ -2618,192 +2476,169 @@ void __fastcall hkCheckingMemorySystem::printStatistics(hkCheckingMemorySystem *
       }
       v15 = v25;
     }
-    while ( v25 <= v68->m_hashMod );
-    v67 = v18;
-    v2 = v86;
-    v88 = v19;
-    v3 = v87;
-    HIDWORD(v59) = v6;
+    while ( v25 <= v62->m_hashMod );
+    v61 = v18;
+    v2 = this;
+    v76 = v19;
+    v3 = ostr;
+    v58 = v6;
     v7 = v17;
   }
-  v28 = v2->m_rawAllocator;
-  v69 = -1i64;
-  v70 = -1i64;
-  v71 = -1i64;
-  v72 = (const void *)-1i64;
-  v73 = -1i64;
-  v74 = -1i64;
-  ((void (__fastcall *)(hkMemoryAllocator *, unsigned __int64 *, __int64, __int64))v28->vfptr->getMemoryStatistics)(
-    v28,
-    &v69,
-    v12,
+  m_rawAllocator = v2->m_rawAllocator;
+  m_threadId = -1i64;
+  m_allocOrder = -1i64;
+  m_time = -1i64;
+  m_tagData = -1i64;
+  v67 = -1i64;
+  v68 = -1i64;
+  ((void (__fastcall *)(hkMemoryAllocator *, unsigned __int64 *, __int64, __int64))m_rawAllocator->vfptr->getMemoryStatistics)(
+    m_rawAllocator,
+    &m_threadId,
+    m_hashMod,
     v13);
   hkOstream::printf(v3, "\n    Allocation totals:\n\n");
   hkOstream::printf(v3, "%20i allocated by heap\n", v6);
-  hkOstream::printf(v3, "%20i allocated by debug\n", (unsigned int)v59);
+  hkOstream::printf(v3, "%20i allocated by debug\n", v57);
   hkOstream::printf(v3, "%20i allocated by stack\n", v7);
-  hkOstream::printf(v3, "%20i allocated by temp\n", v88);
+  hkOstream::printf(v3, "%20i allocated by temp\n", v76);
   hkOstream::printf(v3, "%20i allocated by solver\n", v8);
-  v29 = HIDWORD(v59) + v59 + v7 + v8 + v88;
-  if ( v2->m_checkFlags.m_storage & 0x10 )
+  v29 = v58 + v57 + v7 + v8 + v76;
+  if ( (v2->m_checkFlags.m_storage & 0x10) != 0 )
   {
-    dst = -1i64;
-    v30 = v2->m_delayedFreeAllocator.vfptr;
-    v61 = -1i64;
-    v62 = -1i64;
-    v63 = -1i64;
-    v64 = -1i64;
-    v65 = -1i64;
-    v30->getMemoryStatistics(
-      (hkMemoryAllocator *)&v2->m_delayedFreeAllocator.vfptr,
-      (hkMemoryAllocator::MemoryStatistics *)&dst);
-    v31 = dst - v61;
-    hkOstream::printf(v3, "%20i in delayed frees\n", (unsigned int)(dst - v61));
-    v29 += v31;
+    memset(dst, 255, sizeof(dst));
+    v2->m_delayedFreeAllocator.vfptr->getMemoryStatistics(
+      &v2->m_delayedFreeAllocator,
+      (hkMemoryAllocator::MemoryStatistics *)dst);
+    v30 = LODWORD(dst[0]) - LODWORD(dst[1]);
+    hkOstream::printf(v3, "%20i in delayed frees\n", (unsigned int)(LODWORD(dst[0]) - LODWORD(dst[1])));
+    v29 += v30;
   }
-  if ( v2->m_checkFlags.m_storage & 8 )
+  if ( (v2->m_checkFlags.m_storage & 8) != 0 )
   {
-    v32 = v2->m_paddedAllocator.vfptr;
-    dst = -1i64;
-    v61 = -1i64;
-    v62 = -1i64;
-    v63 = -1i64;
-    v64 = -1i64;
-    v65 = -1i64;
-    v32->getMemoryStatistics(
-      (hkMemoryAllocator *)&v2->m_paddedAllocator.vfptr,
-      (hkMemoryAllocator::MemoryStatistics *)&dst);
-    v33 = dst - v61;
-    hkOstream::printf(v3, "%20i in allocation padding\n", (unsigned int)(dst - v61));
-    v29 += v33;
+    v31 = v2->m_paddedAllocator.vfptr;
+    memset(dst, 255, sizeof(dst));
+    v31->getMemoryStatistics(&v2->m_paddedAllocator, (hkMemoryAllocator::MemoryStatistics *)dst);
+    v32 = LODWORD(dst[0]) - LODWORD(dst[1]);
+    hkOstream::printf(v3, "%20i in allocation padding\n", (unsigned int)(LODWORD(dst[0]) - LODWORD(dst[1])));
+    v29 += v32;
   }
-  if ( v2->m_checkFlags.m_storage & 4 )
+  if ( (v2->m_checkFlags.m_storage & 4) != 0 )
   {
-    dst = -1i64;
-    v34 = v2->m_callTreeAllocator.vfptr;
-    v61 = -1i64;
-    v62 = -1i64;
-    v63 = -1i64;
-    v64 = -1i64;
-    v65 = -1i64;
-    v34->getMemoryStatistics(
-      (hkMemoryAllocator *)&v2->m_callTreeAllocator.vfptr,
-      (hkMemoryAllocator::MemoryStatistics *)&dst);
-    hkOstream::printf(v3, "%20i in callstacks\n", dst);
-    v29 += dst;
+    memset(dst, 255, sizeof(dst));
+    v2->m_callTreeAllocator.vfptr->getMemoryStatistics(
+      &v2->m_callTreeAllocator,
+      (hkMemoryAllocator::MemoryStatistics *)dst);
+    hkOstream::printf(v3, "%20i in callstacks\n", dst[0]);
+    v29 += LODWORD(dst[0]);
   }
-  v35 = (unsigned int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::getMemSize(&v2->m_activePointers);
-  hkOstream::printf(v3, "%20i in active pointer map\n", v35);
-  v36 = 8 * (5 * v2->m_allocators.m_size + (v2->m_allocators.m_capacityAndFlags & 0x3FFFFFFF));
-  hkOstream::printf(v3, "%20i in allocator forwarders\n", v36);
+  MemSize = (unsigned int)hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64>>::getMemSize(&v2->m_activePointers);
+  hkOstream::printf(v3, "%20i in active pointer map\n", MemSize);
+  v34 = 8 * (5 * v2->m_allocators.m_size + (v2->m_allocators.m_capacityAndFlags & 0x3FFFFFFF));
+  hkOstream::printf(v3, "%20i in allocator forwarders\n", v34);
   hkOstream::printf(v3, "%20s\n", "-------");
-  hkOstream::printf(v3, "%20i computed total\n", v29 + v36 + (unsigned int)v35);
-  hkOstream::printf(v3, "%20i reported total\n", (unsigned int)v69);
+  hkOstream::printf(v3, "%20i computed total\n", v29 + v34 + (_DWORD)MemSize);
+  hkOstream::printf(v3, "%20i reported total\n", (unsigned int)m_threadId);
   hkOstream::printf(v3, "\n    Heap small block (<=%i) summary:\n\n", 640i64);
-  v37 = 0;
-  v38 = (int *)((char *)&v82.m_string.m_data + 4);
-  v39 = 8i64;
+  v35 = 0;
+  v36 = &v71[4];
+  v37 = 8i64;
   do
   {
-    v40 = *(v38 - 1);
-    v41 = *v38;
-    v38 += 5;
-    if ( v37 > v40 )
-      v40 = v37;
-    v37 = *(v38 - 2);
+    v38 = *((_DWORD *)v36 - 1);
+    v39 = *(_DWORD *)v36;
+    v36 += 20;
+    if ( v35 > v38 )
+      v38 = v35;
+    v35 = *((_DWORD *)v36 - 2);
+    if ( v38 > v39 )
+      v39 = v38;
+    v40 = *((_DWORD *)v36 - 4);
+    if ( v39 > v40 )
+      v40 = v39;
+    v41 = *((_DWORD *)v36 - 3);
     if ( v40 > v41 )
       v41 = v40;
-    v42 = *(v38 - 4);
-    if ( v41 > v42 )
-      v42 = v41;
-    v43 = *(v38 - 3);
-    if ( v42 > v43 )
-      v43 = v42;
-    if ( v43 > v37 )
-      v37 = v43;
-    --v39;
+    if ( v41 > v35 )
+      v35 = v41;
+    --v37;
   }
-  while ( v39 );
-  v44 = 0;
-  v45 = 16;
-  v46 = 0i64;
+  while ( v37 );
+  v42 = 0;
+  v43 = 16;
+  v44 = 0i64;
   do
   {
-    memset(&dst, 0, 0x29ui64);
-    v47 = *(_DWORD *)((char *)&v82.m_string.m_data + v46 * 4);
-    hkString::memSet(&dst, 62, 40 * v47 / v37);
-    v58 = &dst;
-    v48 = Dst[v46] * v45 / 1024;
-    hkOstream::printf(v87, "%20i * %6i = %4ik : %s\n", (unsigned int)v45);
-    v45 += 16;
-    v44 += v47;
-    ++v46;
+    memset(dst, 0, 0x29ui64);
+    v45 = *(_DWORD *)&v71[v44 * 4];
+    hkString::memSet(dst, 62, 40 * v45 / v35);
+    v46 = (unsigned int)Dst[v44];
+    LODWORD(v55) = (int)v46 * v43 / 1024;
+    hkOstream::printf(ostr, "%20i * %6i = %4ik : %s\n", (unsigned int)v43, v46, v55, (const char *)dst);
+    v43 += 16;
+    v42 += v45;
+    ++v44;
   }
-  while ( v45 < 656 );
-  hkOstream::printf(v87, "%20s\n", "-------");
-  hkOstream::printf(v87, "%20i bytes total\n", v44);
-  hkOstream::printf(v87, "\n    Heap large block (>%i) summary:\n\n", 640i64);
-  v49 = lpCriticalSection;
-  v50 = 1024;
-  v51 = &v84;
-  v52 = 22i64;
+  while ( v43 < 656 );
+  hkOstream::printf(ostr, "%20s\n", "-------");
+  hkOstream::printf(ostr, "%20i bytes total\n", v42);
+  hkOstream::printf(ostr, "\n    Heap large block (>%i) summary:\n\n", 640i64);
+  v47 = lpCriticalSection;
+  v48 = 1024;
+  v49 = &buf[10];
+  v50 = 22i64;
   do
   {
-    v53 = *(_DWORD *)v51;
-    if ( *(_DWORD *)v51 )
+    v51 = *v49;
+    if ( *v49 )
     {
-      v82.m_string.m_capacityAndFlags = -2147483520;
-      v82.m_string.m_size = 1;
-      v82.m_string.m_data = v82.m_string.m_storage;
-      v82.m_string.m_storage[0] = 0;
-      hkStringBuf::printf(&v82, "<=%i", v50);
-      LODWORD(v57) = (signed int)(v50 * v53) / 1024;
-      hkOstream::printf(v87, "%20s * %6i = %4ik\n", v82.m_string.m_data, v53, v57);
-      v82.m_string.m_size = 0;
-      if ( v82.m_string.m_capacityAndFlags >= 0 )
+      *(_DWORD *)&v71[12] = -2147483520;
+      *(_DWORD *)&v71[8] = 1;
+      *(_QWORD *)v71 = &v71[16];
+      v71[16] = 0;
+      hkStringBuf::printf((hkStringBuf *)v71, "<=%i", v48);
+      LODWORD(v55) = (int)(v48 * v51) / 1024;
+      hkOstream::printf(ostr, "%20s * %6i = %4ik\n", *(const char **)v71, v51, v55);
+      *(_DWORD *)&v71[8] = 0;
+      if ( *(int *)&v71[12] >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          v82.m_string.m_data,
-          v82.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+          &hkContainerTempAllocator::s_alloc,
+          *(void **)v71,
+          *(_DWORD *)&v71[12] & 0x3FFFFFFF);
     }
-    v50 = __ROL4__(v50, 1);
-    v51 += 4;
-    --v52;
+    v48 = __ROL4__(v48, 1);
+    ++v49;
+    --v50;
   }
-  while ( v52 );
-  hkOstream::printf(v87, "%20s\n", "-------");
-  hkOstream::printf(v87, "%20i bytes total\n", v67);
-  hkOstream::printf(v87, "\n    Threads summary:\n\n");
-  if ( v86->m_allocators.m_size > 0 )
+  while ( v50 );
+  hkOstream::printf(ostr, "%20s\n", "-------");
+  hkOstream::printf(ostr, "%20i bytes total\n", v61);
+  hkOstream::printf(ostr, "\n    Threads summary:\n\n");
+  if ( this->m_allocators.m_size > 0 )
   {
-    v54 = 0i64;
+    v52 = 0i64;
     do
     {
-      v55 = v86->m_allocators.m_data[v54];
-      if ( v55->m_context.flags.m_storage & 0xC )
+      v53 = this->m_allocators.m_data[v52];
+      if ( (v53->m_context.flags.m_storage & 0xC) != 0 )
       {
-        v56 = flagsToString(buf, v55->m_context.flags);
-        LODWORD(v58) = v55->m_context.peakInUse;
-        hkOstream::printf(
-          v87,
-          "%10s Thread %I64u, %6s, peak %i\n",
-          &customWorldMapCaption,
-          v55->m_context.threadId,
-          v56,
-          v58);
+        v54 = flagsToString((char *)buf, v53->m_context.flags);
+        LODWORD(v56) = v53->m_context.peakInUse;
+        hkOstream::printf(ostr, "%10s Thread %I64u, %6s, peak %i\n", &customCaption, v53->m_context.threadId, v54, v56);
       }
       ++v4;
-      ++v54;
+      ++v52;
     }
-    while ( v4 < v86->m_allocators.m_size );
-    v49 = lpCriticalSection;
+    while ( v4 < this->m_allocators.m_size );
+    v47 = lpCriticalSection;
   }
-  LeaveCriticalSection(v49);
+  LeaveCriticalSection(v47);
 }
 
 // File Line: 1260
 // RVA: 0xC5EAB0
-void __fastcall hkCheckingMemorySystem::getHeapStatistics(hkCheckingMemorySystem *this, hkMemoryAllocator::MemoryStatistics *stats)
+void __fastcall hkCheckingMemorySystem::getHeapStatistics(
+        hkCheckingMemorySystem *this,
+        hkMemoryAllocator::MemoryStatistics *stats)
 {
   this->m_baseAllocator->vfptr->getMemoryStatistics(this->m_baseAllocator, stats);
 }
@@ -2812,62 +2647,64 @@ void __fastcall hkCheckingMemorySystem::getHeapStatistics(hkCheckingMemorySystem
 // RVA: 0xC5E930
 void __fastcall hkCheckingMemorySystem::advanceFrame(hkCheckingMemorySystem *this)
 {
-  hkCheckingMemorySystem *v1; // rsi
-  __int64 v2; // r9
-  signed int v3; // er8
+  __int64 m_hashMod; // r9
+  int v3; // r8d
   __int64 v4; // rdx
-  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v5; // rax
-  signed int v6; // edi
-  signed __int64 v7; // r8
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v6; // edi
+  hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v7; // r8
   __int64 v8; // rcx
-  unsigned __int64 v9; // rax
+  unsigned __int64 m_allocOrder; // rax
   __int64 v10; // r9
   int v11; // edx
   __int64 v12; // rcx
   hkMapBase<unsigned __int64,hkCheckingMemorySystem::AllocInfo,hkMapOperations<unsigned __int64> >::Pair *v13; // rax
-  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-48h]
+  hkCheckingMemorySystem::AllocInfo info; // [rsp+20h] [rbp-48h] BYREF
 
-  v1 = this;
   EnterCriticalSection(&this->m_section.m_section);
-  v2 = v1->m_activePointers.m_hashMod;
+  m_hashMod = this->m_activePointers.m_hashMod;
   v3 = 0;
   v4 = 0i64;
-  if ( (signed int)v2 >= 0 )
+  if ( (int)m_hashMod >= 0 )
   {
-    v5 = v1->m_activePointers.m_elem;
+    m_elem = this->m_activePointers.m_elem;
     do
     {
-      if ( v5->key != -1i64 )
+      if ( m_elem->key != -1i64 )
         break;
       ++v4;
       ++v3;
-      ++v5;
+      ++m_elem;
     }
-    while ( v4 <= v2 );
+    while ( v4 <= m_hashMod );
   }
   v6 = v3;
-  if ( v3 <= (signed int)v2 )
+  if ( v3 <= (int)m_hashMod )
   {
     do
     {
-      v7 = (signed __int64)&v1->m_activePointers.m_elem[(signed __int64)v6];
-      v8 = *(_QWORD *)(v7 + 40);
-      info.m_threadId = *(_QWORD *)(v7 + 8);
-      v9 = *(_QWORD *)(v7 + 16);
+      v7 = &this->m_activePointers.m_elem[(__int64)v6];
+      v8 = *(_QWORD *)&v7->val.m_flags.m_storage;
+      info.m_threadId = v7->val.m_threadId;
+      m_allocOrder = v7->val.m_allocOrder;
       *(_QWORD *)&info.m_flags.m_storage = v8;
-      info.m_allocOrder = v9;
-      info.m_time = *(_QWORD *)(v7 + 24);
-      info.m_tagData = *(const void **)(v7 + 32);
-      *(_QWORD *)&info.m_size = *(_QWORD *)(v7 + 48);
-      *(_QWORD *)&info.m_bookmarkIndex = *(_QWORD *)(v7 + 56);
-      if ( v8 & 4 )
-        hkCheckingMemorySystem::danger(v1, "A temp allocation lived past a frame advance", *(const void **)v7, &info);
-      v10 = v1->m_activePointers.m_hashMod;
+      info.m_allocOrder = m_allocOrder;
+      info.m_time = v7->val.m_time;
+      info.m_tagData = v7->val.m_tagData;
+      *(_QWORD *)&info.m_size = *(_QWORD *)&v7->val.m_size;
+      *(_QWORD *)&info.m_bookmarkIndex = *(_QWORD *)&v7->val.m_bookmarkIndex;
+      if ( (v8 & 4) != 0 )
+        hkCheckingMemorySystem::danger(
+          this,
+          "A temp allocation lived past a frame advance",
+          (const void *)v7->key,
+          &info);
+      v10 = this->m_activePointers.m_hashMod;
       v11 = v6 + 1;
       v12 = v6 + 1;
       if ( v12 <= v10 )
       {
-        v13 = &v1->m_activePointers.m_elem[(signed __int64)v11];
+        v13 = &this->m_activePointers.m_elem[(__int64)v11];
         do
         {
           if ( v13->key != -1i64 )
@@ -2880,21 +2717,18 @@ void __fastcall hkCheckingMemorySystem::advanceFrame(hkCheckingMemorySystem *thi
       }
       v6 = v11;
     }
-    while ( v11 <= (signed int)v10 );
+    while ( v11 <= (int)v10 );
   }
-  LeaveCriticalSection(&v1->m_section.m_section);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 1285
 // RVA: 0xC5EA60
 void __fastcall hkCheckingMemorySystem::garbageCollectShared(hkCheckingMemorySystem *this)
 {
-  hkCheckingMemorySystem *v1; // rbx
-
-  v1 = this;
   EnterCriticalSection(&this->m_section.m_section);
-  ((void (*)(void))v1->m_delayedFreeAllocator.vfptr[1].__vecDelDtor)();
-  LeaveCriticalSection(&v1->m_section.m_section);
+  ((void (__fastcall *)(hkDelayedFreeAllocator *))this->m_delayedFreeAllocator.vfptr[1].__vecDelDtor)(&this->m_delayedFreeAllocator);
+  LeaveCriticalSection(&this->m_section.m_section);
 }
 
 // File Line: 1295
@@ -2908,100 +2742,91 @@ __int64 __fastcall hkCheckingMemorySystem::isCheckCallstackEnabled(hkCheckingMem
 // RVA: 0xC5DCC0
 void __fastcall hkCheckingMemorySystem::setCheckCallstackEnabled(hkCheckingMemorySystem *this, bool enabled)
 {
-  this->m_checkFlags.m_storage &= 0xFFFFFFFB;
-  this->m_checkFlags.m_storage |= enabled != 0 ? 4 : 0;
+  this->m_checkFlags.m_storage &= ~4u;
+  this->m_checkFlags.m_storage |= enabled ? 4 : 0;
 }
 
 // File Line: 1305
 // RVA: 0xC5DC20
 void __fastcall hkCheckingMemorySystem::addBookmark(hkCheckingMemorySystem *this, const char *bookmarkName)
 {
-  signed int *v2; // rbx
-  const char *v3; // rsi
-  hkCheckingMemorySystem *v4; // rdi
-  _QWORD *v5; // rax
+  hkArrayBase<hkCheckingMemorySystem::Bookmark> *p_m_bookmarks; // rbx
+  hkCheckingMemorySystem::Bookmark *v5; // rax
 
-  v2 = (signed int *)&this->m_bookmarks;
-  v3 = bookmarkName;
-  v4 = this;
+  p_m_bookmarks = &this->m_bookmarks;
   if ( this->m_bookmarks.m_size == (this->m_bookmarks.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore(this->m_rawAllocator, v2, 16);
-  v5 = (_QWORD *)(*(_QWORD *)v2 + 16i64 * v2[2]);
+    hkArrayUtil::_reserveMore(this->m_rawAllocator, (const void **)&p_m_bookmarks->m_data, 16);
+  v5 = &p_m_bookmarks->m_data[p_m_bookmarks->m_size];
   if ( v5 )
   {
-    *v5 = 0i64;
-    v5[1] = 0i64;
+    v5->m_name = 0i64;
+    v5->m_time = 0i64;
   }
   hkCheckingMemorySystem::Bookmark::set(
-    (hkCheckingMemorySystem::Bookmark *)(*(_QWORD *)v2 + 16i64 * (++v2[2] - 1)),
-    v4->m_rawAllocator,
-    v3);
+    &p_m_bookmarks->m_data[p_m_bookmarks->m_size++],
+    this->m_rawAllocator,
+    bookmarkName);
 }
 
 // File Line: 1311
 // RVA: 0xC5FB90
-__int64 __fastcall hkCheckingMemorySystem::findPrecedingBookmark(hkCheckingMemorySystem *this, unsigned __int64 timeStamp)
+__int64 __fastcall hkCheckingMemorySystem::findPrecedingBookmark(
+        hkCheckingMemorySystem *this,
+        unsigned __int64 timeStamp)
 {
-  __int64 v2; // r11
-  int v3; // er9
+  __int64 m_size; // r11
+  int v3; // r9d
   __int64 v4; // r8
-  unsigned __int64 *v5; // rax
+  unsigned __int64 *i; // rax
 
-  v2 = this->m_bookmarks.m_size;
+  m_size = this->m_bookmarks.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( (signed int)v2 <= 0 )
-    return (unsigned int)v2;
-  v5 = &this->m_bookmarks.m_data->m_time;
-  while ( *v5 <= timeStamp )
+  if ( (int)m_size <= 0 )
+    return (unsigned int)m_size;
+  for ( i = &this->m_bookmarks.m_data->m_time; *i <= timeStamp; i += 2 )
   {
     ++v4;
     ++v3;
-    v5 += 2;
-    if ( v4 >= v2 )
-      return (unsigned int)v2;
+    if ( v4 >= m_size )
+      return (unsigned int)m_size;
   }
   return (unsigned int)(v3 - 1);
 }
 
 // File Line: 1325
 // RVA: 0xC5D750
-void __fastcall hkCheckingMemorySystem::Bookmark::set(hkCheckingMemorySystem::Bookmark *this, hkMemoryAllocator *alloc, const char *name)
+void __fastcall hkCheckingMemorySystem::Bookmark::set(
+        hkCheckingMemorySystem::Bookmark *this,
+        hkMemoryAllocator *alloc,
+        const char *name)
 {
-  hkCheckingMemorySystem::Bookmark *v3; // rdi
-  const char *v4; // rsi
-  hkMemoryAllocator *v5; // rbx
   unsigned int v6; // ebp
   char *v7; // rax
 
-  v3 = this;
-  v4 = name;
-  v5 = alloc;
-  v6 = (unsigned __int64)hkString::strLen(name) + 1;
-  v7 = (char *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&v5->vfptr->__vecDelDtor + 1))(v5, v6);
-  v3->m_name = v7;
+  v6 = hkString::strLen(name) + 1;
+  v7 = (char *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&alloc->vfptr->__vecDelDtor + 1))(alloc, v6);
+  this->m_name = v7;
   if ( v7 )
-    hkString::memCpy(v7, v4, v6);
-  v3->m_time = hkStopwatch::getTickCounter();
+    hkString::memCpy(v7, name, v6);
+  this->m_time = hkStopwatch::getTickCounter();
 }
 
 // File Line: 1337
 // RVA: 0xC5D7C0
-void __fastcall hkCheckingMemorySystem::Bookmark::clear(hkCheckingMemorySystem::Bookmark *this, hkMemoryAllocator *alloc)
+void __fastcall hkCheckingMemorySystem::Bookmark::clear(
+        hkCheckingMemorySystem::Bookmark *this,
+        hkMemoryAllocator *alloc)
 {
-  hkCheckingMemorySystem::Bookmark *v2; // rbx
-  char *v3; // rcx
-  hkMemoryAllocator *v4; // rdi
+  char *m_name; // rcx
   int v5; // eax
 
-  v2 = this;
-  v3 = this->m_name;
-  v4 = alloc;
-  if ( v3 )
+  m_name = this->m_name;
+  if ( m_name )
   {
-    v5 = hkString::strLen(v3);
-    v4->vfptr->blockFree(v4, v2->m_name, v5 + 1);
-    v2->m_name = 0i64;
+    v5 = hkString::strLen(m_name);
+    alloc->vfptr->blockFree(alloc, this->m_name, v5 + 1);
+    this->m_name = 0i64;
   }
 }
 
@@ -3009,13 +2834,13 @@ void __fastcall hkCheckingMemorySystem::Bookmark::clear(hkCheckingMemorySystem::
 // RVA: 0xC5D720
 unsigned __int64 __fastcall hkCheckingMemorySystem::AllocInfo::getKey(hkCheckingMemorySystem::AllocInfo *this)
 {
-  unsigned int v1; // edx
-  BOOL v2; // er8
+  unsigned int m_traceId; // edx
+  BOOL v2; // r8d
 
-  v1 = this->m_traceId;
-  v2 = v1 == -1;
-  if ( v1 == -1 )
-    v1 = this->m_bookmarkIndex;
-  return v1 | ((unsigned __int64)(unsigned int)v2 << 32);
+  m_traceId = this->m_traceId;
+  v2 = m_traceId == -1;
+  if ( m_traceId == -1 )
+    m_traceId = this->m_bookmarkIndex;
+  return m_traceId | ((unsigned __int64)v2 << 32);
 }
 

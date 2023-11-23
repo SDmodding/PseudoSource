@@ -3,12 +3,20 @@
 void UFG::TSUI_HUD_MissionHealth::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("MissionHealth");
-  SSClass::register_method_func(v0, "set_visible", UFG::TSUI_HUD_MissionHealth::MthdC_set_visible, 1, 0);
-  SSClass::register_method_func(v0, "set_caption", UFG::TSUI_HUD_MissionHealth::MthdC_set_caption, 1, 0);
-  SSClass::register_method_func(v0, "set_value", UFG::TSUI_HUD_MissionHealth::MthdC_set_value, 1, 0);
-  SSClass::register_method_func(v0, "set_success", UFG::TSUI_HUD_MissionHealth::MthdC_set_success, 1, 0);
+  SSClass::register_method_func(v0, "set_visible", UFG::TSUI_HUD_MissionHealth::MthdC_set_visible, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_caption", UFG::TSUI_HUD_MissionHealth::MthdC_set_caption, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_value", UFG::TSUI_HUD_MissionHealth::MthdC_set_value, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_success", UFG::TSUI_HUD_MissionHealth::MthdC_set_success, 1, rebindc);
 }
 
 // File Line: 43

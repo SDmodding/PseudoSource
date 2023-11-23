@@ -2,36 +2,26 @@
 // RVA: 0x12DC088
 int __fastcall mbsnbicmp_l(const char *s1, const char *s2, unsigned __int64 n, localeinfo_struct *plocinfo)
 {
-  const char *v4; // rsi
-  const char *v5; // rdi
-  unsigned __int64 v6; // rbx
   int result; // eax
   __int64 v8; // r8
-  __int64 v9; // rax
-  __int64 v10; // rdx
+  __int64 v9; // rdx
+  __int16 v10; // ax
   __int16 v11; // ax
-  __int16 v12; // ax
-  __int64 v13; // [rsp+20h] [rbp-28h]
-  __int64 v14; // [rsp+28h] [rbp-20h]
-  __int64 v15; // [rsp+30h] [rbp-18h]
-  char v16; // [rsp+38h] [rbp-10h]
+  _LocaleUpdate v12; // [rsp+20h] [rbp-28h] BYREF
 
-  v4 = s1;
-  v5 = s2;
-  v6 = n;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v13, plocinfo);
-  if ( !v6 )
+  _LocaleUpdate::_LocaleUpdate(&v12, plocinfo);
+  if ( !n )
   {
 LABEL_37:
     result = 0;
     goto LABEL_39;
   }
-  if ( !*(_DWORD *)(v14 + 8) )
+  if ( !v12.localeinfo.mbcinfo->ismbcodepage )
   {
-    result = strnicmp(v4, v5, v6);
+    result = strnicmp(s1, s2, n);
     goto LABEL_39;
   }
-  if ( !v4 || !v5 )
+  if ( !s1 || !s2 )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
@@ -40,29 +30,33 @@ LABEL_37:
   }
   while ( 1 )
   {
-    v8 = *(unsigned __int8 *)v4;
-    --v6;
-    ++v4;
-    if ( !(*(_BYTE *)(v8 + v14 + 25) & 4) )
+    v8 = *(unsigned __int8 *)s1;
+    --n;
+    ++s1;
+    if ( (v12.localeinfo.mbcinfo->mbctype[v8 + 1] & 4) == 0 )
     {
-      if ( *(_BYTE *)((unsigned __int16)v8 + v14 + 25) & 0x10 )
-        LOWORD(v8) = *(unsigned __int8 *)((unsigned __int16)v8 + v14 + 281);
+      if ( (v12.localeinfo.mbcinfo->mbctype[(unsigned __int16)v8 + 1] & 0x10) != 0 )
+        LOWORD(v8) = (unsigned __int8)v12.localeinfo.mbcinfo->mbcasemap[(unsigned __int16)v8];
       goto LABEL_21;
     }
-    if ( v6 )
+    if ( n )
     {
-      if ( *v4 )
+      if ( *s1 )
       {
-        v11 = *(unsigned __int8 *)v4++;
-        LOWORD(v8) = v11 | ((_WORD)v8 << 8);
-        if ( (unsigned __int16)v8 < *(_WORD *)(v14 + 12) || (unsigned __int16)v8 > *(_WORD *)(v14 + 14) )
+        v10 = *(unsigned __int8 *)s1++;
+        LOWORD(v8) = v10 | ((_WORD)v8 << 8);
+        if ( (unsigned __int16)v8 < v12.localeinfo.mbcinfo->mbulinfo[0]
+          || (unsigned __int16)v8 > v12.localeinfo.mbcinfo->mbulinfo[1] )
         {
-          if ( (unsigned __int16)v8 >= *(_WORD *)(v14 + 18) && (unsigned __int16)v8 <= *(_WORD *)(v14 + 20) )
-            LOWORD(v8) = *(_WORD *)(v14 + 22) + v8;
+          if ( (unsigned __int16)v8 >= v12.localeinfo.mbcinfo->mbulinfo[3]
+            && (unsigned __int16)v8 <= v12.localeinfo.mbcinfo->mbulinfo[4] )
+          {
+            LOWORD(v8) = v12.localeinfo.mbcinfo->mbulinfo[5] + v8;
+          }
         }
         else
         {
-          LOWORD(v8) = *(_WORD *)(v14 + 16) + v8;
+          LOWORD(v8) = v12.localeinfo.mbcinfo->mbulinfo[2] + v8;
         }
       }
       else
@@ -70,57 +64,60 @@ LABEL_37:
         LOWORD(v8) = 0;
       }
 LABEL_21:
-      v10 = *(unsigned __int8 *)v5++;
-      if ( *(_BYTE *)(v10 + v14 + 25) & 4 )
+      v9 = *(unsigned __int8 *)s2++;
+      if ( (v12.localeinfo.mbcinfo->mbctype[v9 + 1] & 4) != 0 )
       {
-        if ( v6 )
+        if ( n )
         {
-          --v6;
-          if ( *v5 )
+          --n;
+          if ( *s2 )
           {
-            v12 = *(unsigned __int8 *)v5++;
-            LOWORD(v10) = v12 | ((_WORD)v10 << 8);
-            if ( (unsigned __int16)v10 < *(_WORD *)(v14 + 12) || (unsigned __int16)v10 > *(_WORD *)(v14 + 14) )
+            v11 = *(unsigned __int8 *)s2++;
+            LOWORD(v9) = v11 | ((_WORD)v9 << 8);
+            if ( (unsigned __int16)v9 < v12.localeinfo.mbcinfo->mbulinfo[0]
+              || (unsigned __int16)v9 > v12.localeinfo.mbcinfo->mbulinfo[1] )
             {
-              if ( (unsigned __int16)v10 >= *(_WORD *)(v14 + 18) && (unsigned __int16)v10 <= *(_WORD *)(v14 + 20) )
-                LOWORD(v10) = *(_WORD *)(v14 + 22) + v10;
+              if ( (unsigned __int16)v9 >= v12.localeinfo.mbcinfo->mbulinfo[3]
+                && (unsigned __int16)v9 <= v12.localeinfo.mbcinfo->mbulinfo[4] )
+              {
+                LOWORD(v9) = v12.localeinfo.mbcinfo->mbulinfo[5] + v9;
+              }
             }
             else
             {
-              LOWORD(v10) = *(_WORD *)(v14 + 16) + v10;
+              LOWORD(v9) = v12.localeinfo.mbcinfo->mbulinfo[2] + v9;
             }
           }
           else
           {
-            LOWORD(v10) = 0;
+            LOWORD(v9) = 0;
           }
         }
         else
         {
-          LOWORD(v10) = 0;
+          LOWORD(v9) = 0;
         }
       }
-      else if ( *(_BYTE *)((unsigned __int16)v10 + v14 + 25) & 0x10 )
+      else if ( (v12.localeinfo.mbcinfo->mbctype[(unsigned __int16)v9 + 1] & 0x10) != 0 )
       {
-        LOWORD(v10) = *(unsigned __int8 *)((unsigned __int16)v10 + v14 + 281);
+        LOWORD(v9) = (unsigned __int8)v12.localeinfo.mbcinfo->mbcasemap[(unsigned __int16)v9];
       }
       goto $test_0;
     }
-    v9 = *(unsigned __int8 *)v5;
     LOWORD(v8) = 0;
-    if ( *(_BYTE *)(v9 + v14 + 25) & 4 )
+    if ( (v12.localeinfo.mbcinfo->mbctype[*(unsigned __int8 *)s2 + 1] & 4) != 0 )
       goto LABEL_37;
-    LOWORD(v10) = *(unsigned __int8 *)v5;
+    LOWORD(v9) = *(unsigned __int8 *)s2;
 $test_0:
-    if ( (_WORD)v10 != (_WORD)v8 )
+    if ( (_WORD)v9 != (_WORD)v8 )
       break;
-    if ( !(_WORD)v8 || !v6 )
+    if ( !(_WORD)v8 || !n )
       goto LABEL_37;
   }
-  result = (unsigned __int16)v10 < (unsigned __int16)v8 ? 1 : -1;
+  result = (unsigned __int16)v9 < (unsigned __int16)v8 ? 1 : -1;
 LABEL_39:
-  if ( v16 )
-    *(_DWORD *)(v15 + 200) &= 0xFFFFFFFD;
+  if ( v12.updated )
+    v12.ptd->_ownlocale &= ~2u;
   return result;
 }
 

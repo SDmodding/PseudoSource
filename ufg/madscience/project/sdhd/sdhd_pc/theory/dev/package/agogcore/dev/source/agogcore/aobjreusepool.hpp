@@ -1,22 +1,20 @@
 // File Line: 60
 // RVA: 0x103E80
-void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(AObjBlock<SSInvokedExpression> *this, unsigned int size)
+void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(
+        AObjBlock<SSInvokedExpression> *this,
+        unsigned int size)
 {
-  AObjBlock<SSInvokedExpression> *v2; // rbx
-  int v3; // esi
   char *v4; // rax
-  signed __int64 v5; // rax
-  unsigned __int8 v6; // cf
+  __int64 v5; // rax
+  bool v6; // cf
   unsigned __int64 v7; // rax
-  signed __int64 v8; // rdi
+  SSInvokedExpression *v8; // rdi
   AErrMsg *v9; // rax
-  AErrMsg err_msg; // [rsp+48h] [rbp-80h]
-  AErrMsg v11; // [rsp+80h] [rbp-48h]
-  eAErrAction action_p; // [rsp+D8h] [rbp+10h]
+  AErrMsg err_msg; // [rsp+48h] [rbp-80h] BYREF
+  AErrMsg v11; // [rsp+80h] [rbp-48h] BYREF
+  eAErrAction action_p; // [rsp+D8h] [rbp+10h] BYREF
 
-  v2 = this;
   this->i_size = size;
-  v3 = size;
   if ( size )
   {
     v5 = 112i64 * size;
@@ -34,19 +32,19 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
   }
   if ( v4 )
   {
-    *(_DWORD *)v4 = v3;
-    v8 = (signed __int64)(v4 + 8);
+    *(_DWORD *)v4 = size;
+    v8 = (SSInvokedExpression *)(v4 + 8);
     `eh vector constructor iterator(
       v4 + 8,
       0x70ui64,
-      v3,
+      size,
       (void (__fastcall *)(void *))SSInvokedExpression::SSInvokedExpression);
   }
   else
   {
     v8 = 0i64;
   }
-  v2->i_objects_a = (SSInvokedExpression *)v8;
+  this->i_objects_a = v8;
   if ( `AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>::`3::_test && !v8 )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
@@ -65,7 +63,7 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
     {
       __debugbreak();
     }
-    if ( action_p != 3 )
+    if ( action_p != AErrAction_ignore )
       __debugbreak();
   }
 }
@@ -74,57 +72,51 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
 // RVA: 0x223660
 void __fastcall AObjReusePool<AStringRef>::~AObjReusePool<AStringRef>(AObjReusePool<AStringRef> *this)
 {
-  AObjReusePool<AStringRef> *v1; // rsi
-  AObjBlock<AStringRef> **v2; // rbx
-  unsigned __int64 v3; // rbp
+  AObjBlock<AStringRef> **i_array_p; // rbx
+  AObjBlock<AStringRef> **v3; // rbp
   void **v4; // rdi
-  void **v5; // rbx
+  AObjBlock<AStringRef> *i_block_p; // rbx
 
-  v1 = this;
-  v2 = this->i_exp_blocks.i_array_p;
-  v3 = (unsigned __int64)&v2[this->i_exp_blocks.i_count];
-  for ( this->i_exp_blocks.i_count = 0; (unsigned __int64)v2 < v3; ++v2 )
+  i_array_p = this->i_exp_blocks.i_array_p;
+  v3 = &i_array_p[this->i_exp_blocks.i_count];
+  for ( this->i_exp_blocks.i_count = 0; i_array_p < v3; ++i_array_p )
   {
-    v4 = (void **)*v2;
-    if ( *v2 )
+    v4 = (void **)*i_array_p;
+    if ( *i_array_p )
     {
       operator delete[](v4[1]);
       operator delete[](v4);
     }
   }
-  v5 = (void **)v1->i_block_p;
-  if ( v5 )
+  i_block_p = this->i_block_p;
+  if ( i_block_p )
   {
-    operator delete[](v5[1]);
-    operator delete[](v5);
+    operator delete[](i_block_p->i_objects_a);
+    operator delete[](i_block_p);
   }
-  AMemory::c_free_func(v1->i_exp_blocks.i_array_p);
-  AMemory::c_free_func(v1->i_exp_pool.i_array_p);
-  AMemory::c_free_func(v1->i_pool.i_array_p);
+  AMemory::c_free_func(this->i_exp_blocks.i_array_p);
+  AMemory::c_free_func(this->i_exp_pool.i_array_p);
+  AMemory::c_free_func(this->i_pool.i_array_p);
 }
 
 // File Line: 377
 // RVA: 0x10D640
 void __fastcall AObjReusePool<SSBoolean>::append_block(AObjReusePool<SSBoolean> *this, unsigned int size)
 {
-  unsigned int v2; // esi
-  AObjReusePool<SSBoolean> *v3; // rdi
   char *v4; // rax
   AObjBlock<SSBoolean> *v5; // rax
   AObjBlock<SSBoolean> *v6; // rbx
   AErrMsg *v7; // rax
-  APArray<SSBoolean,SSBoolean,ACompareAddress<SSBoolean> > *v8; // rcx
-  AErrMsg err_msg; // [rsp+48h] [rbp-80h]
-  AErrMsg v10; // [rsp+80h] [rbp-48h]
-  char *action_p; // [rsp+D0h] [rbp+8h]
+  AObjReusePool<SSBoolean> *p_i_exp_pool; // rcx
+  AErrMsg err_msg; // [rsp+48h] [rbp-80h] BYREF
+  AErrMsg v10; // [rsp+80h] [rbp-48h] BYREF
+  char *action_p; // [rsp+D0h] [rbp+8h] BYREF
 
-  v2 = size;
-  v3 = this;
   v4 = UFG::qMalloc(0x10ui64, "tObjBlock", 0i64);
   action_p = v4;
   if ( v4 )
   {
-    AObjBlock<SSBoolean>::AObjBlock<SSBoolean>((AObjBlock<SSBoolean> *)v4, v2);
+    AObjBlock<SSBoolean>::AObjBlock<SSBoolean>((AObjBlock<SSBoolean> *)v4, size);
     v6 = v5;
   }
   else
@@ -147,18 +139,18 @@ void __fastcall AObjReusePool<SSBoolean>::append_block(AObjReusePool<SSBoolean> 
     if ( (_DWORD)action_p != 3 )
       __debugbreak();
   }
-  if ( v3->i_block_p )
+  if ( this->i_block_p )
   {
     APArray<AObjBlock<SSBoolean>,AObjBlock<SSBoolean>,ACompareAddress<AObjBlock<SSBoolean>>>::append(
-      &v3->i_exp_blocks,
+      &this->i_exp_blocks,
       v6);
-    v8 = &v3->i_exp_pool;
+    p_i_exp_pool = (AObjReusePool<SSBoolean> *)&this->i_exp_pool;
   }
   else
   {
-    v3->i_block_p = v6;
-    v8 = &v3->i_pool;
+    this->i_block_p = v6;
+    p_i_exp_pool = this;
   }
-  APArray<SSBoolean,SSBoolean,ACompareAddress<SSBoolean>>::append_all(v8, v6->i_objects_a, v2);
+  APArray<SSBoolean,SSBoolean,ACompareAddress<SSBoolean>>::append_all(&p_i_exp_pool->i_pool, v6->i_objects_a, size);
 }
 

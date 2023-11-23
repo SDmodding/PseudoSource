@@ -7,459 +7,456 @@ void __fastcall UFG::UIAmbientMapBlipData::UIAmbientMapBlipData(UFG::UIAmbientMa
 
 // File Line: 66
 // RVA: 0xCD400
-void __usercall UFG::UIAmbientMapBlipData::UpdateIcon(UFG::UIAmbientMapBlipData *this@<rcx>, UFG::UIMapBlipManager *iconManager@<rdx>, bool isWorldMap@<r8b>, float a4@<xmm0>)
+void __fastcall UFG::UIAmbientMapBlipData::UpdateIcon(
+        UFG::UIAmbientMapBlipData *this,
+        UFG::UIMapBlipManager *iconManager,
+        bool isWorldMap)
 {
-  bool v4; // si
-  UFG::UIMapBlipManager *v5; // rax
-  UFG::UIAmbientMapBlipData *v6; // rdi
-  unsigned int v7; // edx
-  UFG::UIMapBlip *v8; // rbx
-  UFG::UIMapBlipTypeManager *v9; // rax
-  unsigned int v10; // er9
-  UFG::UIHKMinimapBlipType *v11; // r11
-  unsigned int v12; // edx
-  unsigned int v13; // er9
-  unsigned int v14; // er8
-  unsigned int v15; // er10
-  UFG::UIHKMinimapBlipType *v16; // rdx
-  bool v17; // al
-  UFG::UIMapBlipTypeManager *v18; // rax
-  unsigned int v19; // er9
-  UFG::UIHKMinimapBlipType *v20; // r11
-  unsigned int v21; // edx
-  unsigned int v22; // er9
-  unsigned int v23; // er8
-  unsigned int v24; // er10
-  UFG::GameStatTracker *v25; // rax
-  UFG::GameStat::BoolStat v26; // edx
-  bool v27; // zf
-  UFG::UIMapBlipTypeManager *v28; // rax
-  unsigned int v29; // er9
-  unsigned int v30; // edx
-  unsigned int v31; // er9
-  unsigned int v32; // er10
-  UFG::UIMapBlipTypeManager *v33; // rax
-  unsigned int v34; // er9
-  unsigned int v35; // edx
-  unsigned int v36; // er9
-  unsigned int v37; // er10
-  UFG::UIMapBlipTypeManager *v38; // rax
-  unsigned int v39; // er9
-  unsigned int v40; // edx
-  unsigned int v41; // er9
-  unsigned int v42; // er10
-  UFG::GameStatTracker *v43; // rax
-  UFG::UIMapBlipTypeManager *v44; // rax
-  unsigned int v45; // er9
-  unsigned int v46; // edx
-  unsigned int v47; // er9
-  unsigned int v48; // er10
-  UFG::UIMapBlipTypeManager *v49; // rax
-  unsigned int v50; // er9
-  unsigned int v51; // edx
-  unsigned int v52; // er9
-  unsigned int v53; // er10
-  UFG::UIMapBlipTypeManager *v54; // rax
-  unsigned int v55; // er9
-  unsigned int v56; // edx
-  unsigned int v57; // er9
-  unsigned int v58; // er10
-  UFG::UIHKMinimapBlipType *v59; // rdx
+  unsigned int mUID; // edx
+  UFG::UIMapBlip *v7; // rbx
+  UFG::UIMapBlipTypeManager *v8; // rax
+  unsigned int v9; // r9d
+  UFG::UIHKMinimapBlipType *v10; // r11
+  unsigned int v11; // edx
+  unsigned int v12; // r9d
+  int v13; // r8d
+  unsigned int v14; // r10d
+  UFG::UIHKMinimapBlipType *v15; // rdx
+  bool IsCollected; // al
+  UFG::UIMapBlipTypeManager *v17; // rax
+  unsigned int v18; // r9d
+  UFG::UIHKMinimapBlipType *p; // r11
+  unsigned int v20; // edx
+  unsigned int v21; // r9d
+  int v22; // r8d
+  unsigned int v23; // r10d
+  UFG::GameStatTracker *v24; // rax
+  UFG::GameStat::BoolStat v25; // edx
+  bool mVisible; // zf
+  UFG::UIMapBlipTypeManager *v27; // rax
+  unsigned int v28; // r9d
+  unsigned int v29; // edx
+  unsigned int v30; // r9d
+  unsigned int v31; // r10d
+  UFG::UIMapBlipTypeManager *Instance; // rax
+  unsigned int mNumTypes; // r9d
+  unsigned int v34; // edx
+  unsigned int v35; // r9d
+  unsigned int v36; // r10d
+  UFG::UIMapBlipTypeManager *v37; // rax
+  unsigned int v38; // r9d
+  unsigned int v39; // edx
+  unsigned int v40; // r9d
+  unsigned int v41; // r10d
+  UFG::GameStatTracker *v42; // rax
+  UFG::UIMapBlipTypeManager *v43; // rax
+  unsigned int v44; // r9d
+  unsigned int v45; // edx
+  unsigned int v46; // r9d
+  unsigned int v47; // r10d
+  UFG::UIMapBlipTypeManager *v48; // rax
+  unsigned int v49; // r9d
+  unsigned int v50; // edx
+  unsigned int v51; // r9d
+  unsigned int v52; // r10d
+  UFG::UIMapBlipTypeManager *v53; // rax
+  unsigned int v54; // r9d
+  unsigned int v55; // edx
+  unsigned int v56; // r9d
+  unsigned int v57; // r10d
+  UFG::UIHKMinimapBlipType *v58; // rdx
 
   if ( iconManager )
   {
-    v4 = isWorldMap;
-    v5 = iconManager;
-    v6 = this;
-    v7 = this->mID.mUID;
-    if ( v7 )
+    mUID = this->mID.mUID;
+    if ( mUID )
     {
-      v8 = (UFG::UIMapBlip *)UFG::qBaseTreeRB::Get(&v5->mIconList.mIconData.mTree, v7);
-      if ( v8 )
+      v7 = (UFG::UIMapBlip *)UFG::qBaseTreeRB::Get(&iconManager->mIconList.mIconData.mTree, mUID);
+      if ( v7 )
       {
-        if ( v6->mCollectibleType )
+        if ( this->mCollectibleType )
         {
-          switch ( v6->mCollectibleType )
+          switch ( this->mCollectibleType )
           {
-            case 1:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_SPY_CAM:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 8;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableSpyCamIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
-                if ( !(_S14 & 8) )
+                this->mIconTypeSetAsCollected = 1;
+                if ( (_S14 & 8) == 0 )
                 {
                   _S14 |= 8u;
                   UFG::qSymbolUC::create_from_string(&security_camera_collected, "security_camera_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_51_::_dynamic_atexit_destructor_for__security_camera_collected__);
                 }
-                v33 = UFG::UIMapBlipTypeManager::getInstance();
+                Instance = UFG::UIMapBlipTypeManager::getInstance();
                 if ( security_camera_collected.mUID != -1 )
                 {
-                  v34 = v33->mNumTypes;
-                  if ( v34 )
+                  mNumTypes = Instance->mNumTypes;
+                  if ( mNumTypes )
                   {
-                    v20 = v33->mData.p;
-                    v35 = 0;
-                    v36 = v34 - 1;
+                    p = Instance->mData.p;
+                    v34 = 0;
+                    v35 = mNumTypes - 1;
                     do
                     {
-                      v23 = v35 + ((v36 - v35) >> 1);
-                      v37 = v20[v35 + ((v36 - v35) >> 1)].TypeNameSymbol.mUID;
-                      if ( v37 >= security_camera_collected.mUID )
+                      v22 = v34 + ((v35 - v34) >> 1);
+                      v36 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v36 >= security_camera_collected.mUID )
                       {
-                        if ( v37 <= security_camera_collected.mUID )
+                        if ( v36 <= security_camera_collected.mUID )
                           goto LABEL_130;
-                        v36 = v23 - 1;
+                        v35 = v22 - 1;
                       }
                       else
                       {
-                        v35 = v23 + 1;
+                        v34 = v22 + 1;
                       }
                     }
-                    while ( v35 <= v36 );
+                    while ( v34 <= v35 );
                   }
                 }
               }
               return;
-            case 2:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_HEALTH_SHRINE:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 6;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableHealthShrineIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
-                if ( !(_S14 & 2) )
+                this->mIconTypeSetAsCollected = 1;
+                if ( (_S14 & 2) == 0 )
                 {
                   _S14 |= 2u;
                   UFG::qSymbolUC::create_from_string(&shrine_collected, "shrine_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_25_::_dynamic_atexit_destructor_for__shrine_collected__);
                 }
-                v18 = UFG::UIMapBlipTypeManager::getInstance();
+                v17 = UFG::UIMapBlipTypeManager::getInstance();
                 if ( shrine_collected.mUID != -1 )
                 {
-                  v19 = v18->mNumTypes;
-                  if ( v19 )
+                  v18 = v17->mNumTypes;
+                  if ( v18 )
                   {
-                    v20 = v18->mData.p;
-                    v21 = 0;
-                    v22 = v19 - 1;
+                    p = v17->mData.p;
+                    v20 = 0;
+                    v21 = v18 - 1;
                     do
                     {
-                      v23 = v21 + ((v22 - v21) >> 1);
-                      v24 = v20[v21 + ((v22 - v21) >> 1)].TypeNameSymbol.mUID;
-                      if ( v24 >= shrine_collected.mUID )
+                      v22 = v20 + ((v21 - v20) >> 1);
+                      v23 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v23 >= shrine_collected.mUID )
                       {
-                        if ( v24 <= shrine_collected.mUID )
+                        if ( v23 <= shrine_collected.mUID )
                           goto LABEL_130;
-                        v22 = v23 - 1;
+                        v21 = v22 - 1;
                       }
                       else
                       {
-                        v21 = v23 + 1;
+                        v20 = v22 + 1;
                       }
                     }
-                    while ( v21 <= v22 );
+                    while ( v20 <= v21 );
                   }
                 }
               }
               return;
-            case 3:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_LOCKBOX:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 7;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableLockboxIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
-                if ( !(_S14 & 0x10) )
+                this->mIconTypeSetAsCollected = 1;
+                if ( (_S14 & 0x10) == 0 )
                 {
                   _S14 |= 0x10u;
                   UFG::qSymbolUC::create_from_string(&lockbox_collected, "lockbox_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_64_::_dynamic_atexit_destructor_for__lockbox_collected__);
                 }
-                v38 = UFG::UIMapBlipTypeManager::getInstance();
+                v37 = UFG::UIMapBlipTypeManager::getInstance();
                 if ( lockbox_collected.mUID != -1 )
                 {
-                  v39 = v38->mNumTypes;
-                  if ( v39 )
+                  v38 = v37->mNumTypes;
+                  if ( v38 )
                   {
-                    v20 = v38->mData.p;
-                    v40 = 0;
-                    v41 = v39 - 1;
+                    p = v37->mData.p;
+                    v39 = 0;
+                    v40 = v38 - 1;
                     do
                     {
-                      v23 = v40 + ((v41 - v40) >> 1);
-                      v42 = v20[v40 + ((v41 - v40) >> 1)].TypeNameSymbol.mUID;
-                      if ( v42 >= lockbox_collected.mUID )
+                      v22 = v39 + ((v40 - v39) >> 1);
+                      v41 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v41 >= lockbox_collected.mUID )
                       {
-                        if ( v42 <= lockbox_collected.mUID )
+                        if ( v41 <= lockbox_collected.mUID )
                           goto LABEL_130;
-                        v41 = v23 - 1;
+                        v40 = v22 - 1;
                       }
                       else
                       {
-                        v40 = v23 + 1;
+                        v39 = v22 + 1;
                       }
                     }
-                    while ( v40 <= v41 );
+                    while ( v39 <= v40 );
                   }
                 }
               }
               return;
-            case 4:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_SAFE_HOUSE:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
                 goto LABEL_21;
-              if ( !(_S14 & 1) )
+              if ( (_S14 & 1) == 0 )
               {
                 _S14 |= 1u;
                 UFG::qSymbolUC::create_from_string(&safe_house_unlocked, "safe_house_unlocked");
                 atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_18_::_dynamic_atexit_destructor_for__safe_house_unlocked__);
               }
-              v9 = UFG::UIMapBlipTypeManager::getInstance();
+              v8 = UFG::UIMapBlipTypeManager::getInstance();
               if ( safe_house_unlocked.mUID == -1 )
                 goto LABEL_21;
-              v10 = v9->mNumTypes;
-              if ( !v10 )
+              v9 = v8->mNumTypes;
+              if ( !v9 )
                 goto LABEL_21;
-              v11 = v9->mData.p;
-              v12 = 0;
-              v13 = v10 - 1;
+              v10 = v8->mData.p;
+              v11 = 0;
+              v12 = v9 - 1;
               while ( 1 )
               {
-                v14 = v12 + ((v13 - v12) >> 1);
-                v15 = v11[v12 + ((v13 - v12) >> 1)].TypeNameSymbol.mUID;
-                if ( v15 >= safe_house_unlocked.mUID )
+                v13 = v11 + ((v12 - v11) >> 1);
+                v14 = *(unsigned int *)((char *)&v10->TypeNameSymbol.mUID + (unsigned int)(112 * v13));
+                if ( v14 >= safe_house_unlocked.mUID )
                 {
-                  if ( v15 <= safe_house_unlocked.mUID )
+                  if ( v14 <= safe_house_unlocked.mUID )
                   {
-                    v16 = &v11[v14];
-                    if ( v16 )
-                      UFG::UIMapBlip::SetType(v8, v16, a4);
+                    v15 = (UFG::UIHKMinimapBlipType *)((char *)v10 + (unsigned int)(112 * v13));
+                    if ( v15 )
+                      UFG::UIMapBlip::SetType(v7, v15);
                     goto LABEL_21;
                   }
-                  v13 = v14 - 1;
+                  v12 = v13 - 1;
                 }
                 else
                 {
-                  v12 = v14 + 1;
+                  v11 = v13 + 1;
                 }
-                if ( v12 > v13 )
+                if ( v11 > v12 )
                   goto LABEL_21;
               }
-            case 5:
-            case 6:
-            case 7:
+            case COLLECTIBLE_UNDERCOVER_SAFE_HOUSE:
+            case COLLECTIBLE_HIDING_SPOT:
+            case COLLECTIBLE_HIDING_SPOT_GARAGE:
               goto LABEL_21;
-            case 9:
-              v43 = UFG::GameStatTracker::Instance();
-              if ( (unsigned __int8)UFG::GameStatTracker::GetStat(v43, EnableJumpIndicators) )
+            case COLLECTIBLE_BOOST_REGION:
+              v42 = UFG::GameStatTracker::Instance();
+              if ( UFG::GameStatTracker::GetStat(v42, EnableJumpIndicators) )
                 goto LABEL_38;
 LABEL_21:
-              v17 = UFG::UIAmbientMapBlipData::IsCollected(v6);
-              v8->mChanged |= v8->mVisible != v17;
-              v8->mVisible = v17;
+              IsCollected = UFG::UIAmbientMapBlipData::IsCollected(this);
+              v7->mChanged |= v7->mVisible != IsCollected;
+              v7->mVisible = IsCollected;
               return;
-            case 0xA:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_MELEE_UPGRADE:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 9;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableJadeStatueIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
-                if ( !(_S14 & 4) )
+                this->mIconTypeSetAsCollected = 1;
+                if ( (_S14 & 4) == 0 )
                 {
                   _S14 |= 4u;
                   UFG::qSymbolUC::create_from_string(&shrine_collected_0, "melee_upgrade_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_38_::_dynamic_atexit_destructor_for__shrine_collected__);
                 }
-                v28 = UFG::UIMapBlipTypeManager::getInstance();
+                v27 = UFG::UIMapBlipTypeManager::getInstance();
                 if ( shrine_collected_0.mUID != -1 )
                 {
-                  v29 = v28->mNumTypes;
-                  if ( v29 )
+                  v28 = v27->mNumTypes;
+                  if ( v28 )
                   {
-                    v20 = v28->mData.p;
-                    v30 = 0;
-                    v31 = v29 - 1;
+                    p = v27->mData.p;
+                    v29 = 0;
+                    v30 = v28 - 1;
                     do
                     {
-                      v23 = v30 + ((v31 - v30) >> 1);
-                      v32 = v20[v30 + ((v31 - v30) >> 1)].TypeNameSymbol.mUID;
-                      if ( v32 >= shrine_collected_0.mUID )
+                      v22 = v29 + ((v30 - v29) >> 1);
+                      v31 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v31 >= shrine_collected_0.mUID )
                       {
-                        if ( v32 <= shrine_collected_0.mUID )
+                        if ( v31 <= shrine_collected_0.mUID )
                           goto LABEL_130;
-                        v31 = v23 - 1;
+                        v30 = v22 - 1;
                       }
                       else
                       {
-                        v30 = v23 + 1;
+                        v29 = v22 + 1;
                       }
                     }
-                    while ( v30 <= v31 );
+                    while ( v29 <= v30 );
                   }
                 }
               }
               return;
-            case 0xB:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_GHOST_ORB:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 12;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableDLC01CollectibleIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
-                if ( !(_S14 & 0x20) )
+                this->mIconTypeSetAsCollected = 1;
+                if ( (_S14 & 0x20) == 0 )
                 {
                   _S14 |= 0x20u;
                   UFG::qSymbolUC::create_from_string(&ghost_orb_collected, "ghost_orb_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_83_::_dynamic_atexit_destructor_for__ghost_orb_collected__);
                 }
-                v44 = UFG::UIMapBlipTypeManager::getInstance();
+                v43 = UFG::UIMapBlipTypeManager::getInstance();
                 if ( ghost_orb_collected.mUID != -1 )
                 {
-                  v45 = v44->mNumTypes;
-                  if ( v45 )
+                  v44 = v43->mNumTypes;
+                  if ( v44 )
                   {
-                    v20 = v44->mData.p;
-                    v46 = 0;
-                    v47 = v45 - 1;
+                    p = v43->mData.p;
+                    v45 = 0;
+                    v46 = v44 - 1;
                     do
                     {
-                      v23 = v46 + ((v47 - v46) >> 1);
-                      v48 = v20[v46 + ((v47 - v46) >> 1)].TypeNameSymbol.mUID;
-                      if ( v48 >= ghost_orb_collected.mUID )
+                      v22 = v45 + ((v46 - v45) >> 1);
+                      v47 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v47 >= ghost_orb_collected.mUID )
                       {
-                        if ( v48 <= ghost_orb_collected.mUID )
+                        if ( v47 <= ghost_orb_collected.mUID )
                           goto LABEL_130;
-                        v47 = v23 - 1;
+                        v46 = v22 - 1;
                       }
                       else
                       {
-                        v46 = v23 + 1;
+                        v45 = v22 + 1;
                       }
                     }
-                    while ( v46 <= v47 );
+                    while ( v45 <= v46 );
                   }
                 }
               }
               return;
-            case 0xC:
-              if ( !UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_BOMB_BAG:
+              if ( !UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 14;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableDLC03CollectibleIndicators;
                 goto LABEL_37;
               }
-              v8->mChanged |= v8->mVisible != v4;
-              v8->mVisible = v4;
-              if ( v4 && !v6->mIconTypeSetAsCollected )
+              v7->mChanged |= v7->mVisible != isWorldMap;
+              v7->mVisible = isWorldMap;
+              if ( isWorldMap && !this->mIconTypeSetAsCollected )
               {
-                v6->mIconTypeSetAsCollected = 1;
+                this->mIconTypeSetAsCollected = 1;
                 if ( (_S14 & 0x80u) == 0 )
                 {
                   _S14 |= 0x80u;
                   UFG::qSymbolUC::create_from_string(&evidence_bag_collected, "evidence_bag_collected");
                   atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_109_::_dynamic_atexit_destructor_for__evidence_bag_collected__);
                 }
-                v54 = UFG::UIMapBlipTypeManager::getInstance();
+                v53 = UFG::UIMapBlipTypeManager::getInstance();
                 if ( evidence_bag_collected.mUID != -1 )
                 {
-                  v55 = v54->mNumTypes;
-                  if ( v55 )
+                  v54 = v53->mNumTypes;
+                  if ( v54 )
                   {
-                    v20 = v54->mData.p;
-                    v56 = 0;
-                    v57 = v55 - 1;
+                    p = v53->mData.p;
+                    v55 = 0;
+                    v56 = v54 - 1;
                     do
                     {
-                      v23 = v56 + ((v57 - v56) >> 1);
-                      v58 = v20[v56 + ((v57 - v56) >> 1)].TypeNameSymbol.mUID;
-                      if ( v58 >= evidence_bag_collected.mUID )
+                      v22 = v55 + ((v56 - v55) >> 1);
+                      v57 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                      if ( v57 >= evidence_bag_collected.mUID )
                       {
-                        if ( v58 <= evidence_bag_collected.mUID )
+                        if ( v57 <= evidence_bag_collected.mUID )
                           goto LABEL_130;
-                        v57 = v23 - 1;
+                        v56 = v22 - 1;
                       }
                       else
                       {
-                        v56 = v23 + 1;
+                        v55 = v22 + 1;
                       }
                     }
-                    while ( v56 <= v57 );
+                    while ( v55 <= v56 );
                   }
                 }
               }
               return;
-            case 0xD:
-              if ( UFG::UIAmbientMapBlipData::IsCollected(v6) )
+            case COLLECTIBLE_ZODIAC:
+              if ( UFG::UIAmbientMapBlipData::IsCollected(this) )
               {
-                v8->mChanged |= v8->mVisible != v4;
-                v8->mVisible = v4;
-                if ( v4 && !v6->mIconTypeSetAsCollected )
+                v7->mChanged |= v7->mVisible != isWorldMap;
+                v7->mVisible = isWorldMap;
+                if ( isWorldMap && !this->mIconTypeSetAsCollected )
                 {
-                  v6->mIconTypeSetAsCollected = 1;
-                  if ( !(_S14 & 0x40) )
+                  this->mIconTypeSetAsCollected = 1;
+                  if ( (_S14 & 0x40) == 0 )
                   {
                     _S14 |= 0x40u;
                     UFG::qSymbolUC::create_from_string(&fire_statue_collected, "fire_statue_collected");
                     atexit(UFG::UIAmbientMapBlipData::UpdateIcon_::_96_::_dynamic_atexit_destructor_for__fire_statue_collected__);
                   }
-                  v49 = UFG::UIMapBlipTypeManager::getInstance();
+                  v48 = UFG::UIMapBlipTypeManager::getInstance();
                   if ( fire_statue_collected.mUID != -1 )
                   {
-                    v50 = v49->mNumTypes;
-                    if ( v50 )
+                    v49 = v48->mNumTypes;
+                    if ( v49 )
                     {
-                      v20 = v49->mData.p;
-                      v51 = 0;
-                      v52 = v50 - 1;
+                      p = v48->mData.p;
+                      v50 = 0;
+                      v51 = v49 - 1;
                       while ( 1 )
                       {
-                        v23 = v51 + ((v52 - v51) >> 1);
-                        v53 = v20[v51 + ((v52 - v51) >> 1)].TypeNameSymbol.mUID;
-                        if ( v53 >= fire_statue_collected.mUID )
+                        v22 = v50 + ((v51 - v50) >> 1);
+                        v52 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v22));
+                        if ( v52 >= fire_statue_collected.mUID )
                         {
-                          if ( v53 <= fire_statue_collected.mUID )
+                          if ( v52 <= fire_statue_collected.mUID )
                           {
 LABEL_130:
-                            v59 = &v20[v23];
-                            if ( v59 )
-                              UFG::UIMapBlip::SetType(v8, v59, a4);
+                            v58 = (UFG::UIHKMinimapBlipType *)((char *)p + (unsigned int)(112 * v22));
+                            if ( v58 )
+                              UFG::UIMapBlip::SetType(v7, v58);
                             return;
                           }
-                          v52 = v23 - 1;
+                          v51 = v22 - 1;
                         }
                         else
                         {
-                          v51 = v23 + 1;
+                          v50 = v22 + 1;
                         }
-                        if ( v51 > v52 )
+                        if ( v50 > v51 )
                           return;
                       }
                     }
@@ -468,21 +465,21 @@ LABEL_130:
               }
               else
               {
-                v25 = UFG::GameStatTracker::Instance();
-                v26 = 13;
+                v24 = UFG::GameStatTracker::Instance();
+                v25 = EnableDLC02CollectibleIndicators;
 LABEL_37:
-                if ( (unsigned __int8)UFG::GameStatTracker::GetStat(v25, v26) )
+                if ( UFG::GameStatTracker::GetStat(v24, v25) )
                 {
 LABEL_38:
-                  v27 = v8->mVisible == 1;
-                  v8->mVisible = 1;
+                  mVisible = v7->mVisible;
+                  v7->mVisible = 1;
                 }
                 else
                 {
-                  v27 = v8->mVisible == 0;
-                  v8->mVisible = 0;
+                  mVisible = !v7->mVisible;
+                  v7->mVisible = 0;
                 }
-                v8->mChanged |= !v27;
+                v7->mChanged |= !mVisible;
               }
               break;
             default:
@@ -491,8 +488,8 @@ LABEL_38:
         }
         else
         {
-          v8->mChanged |= v8->mVisible != 1;
-          v8->mVisible = 1;
+          v7->mChanged |= !v7->mVisible;
+          v7->mVisible = 1;
         }
       }
     }
@@ -510,65 +507,50 @@ __int64 __fastcall UFG::UIAmbientMapBlipData::GetID(UFG::UIAmbientMapBlipData *t
 // RVA: 0xC49E0
 const char *__fastcall UFG::UIAmbientMapBlipData::GetType(UFG::UIAmbientMapBlipData *this)
 {
-  const char *v2; // [rsp+0h] [rbp-78h]
-  const char *v3; // [rsp+8h] [rbp-70h]
-  const char *v4; // [rsp+10h] [rbp-68h]
-  const char *v5; // [rsp+18h] [rbp-60h]
-  const char *v6; // [rsp+20h] [rbp-58h]
-  const char *v7; // [rsp+28h] [rbp-50h]
-  const char *v8; // [rsp+30h] [rbp-48h]
-  const char *v9; // [rsp+38h] [rbp-40h]
-  const char *v10; // [rsp+40h] [rbp-38h]
-  const char *v11; // [rsp+48h] [rbp-30h]
-  const char *v12; // [rsp+50h] [rbp-28h]
-  const char *v13; // [rsp+58h] [rbp-20h]
-  const char *v14; // [rsp+60h] [rbp-18h]
-  const char *v15; // [rsp+68h] [rbp-10h]
+  __int64 v2[15]; // [rsp+0h] [rbp-78h]
 
-  v2 = "Generic_Interactive_Object";
-  v3 = "security_camera";
-  v4 = "shrine";
-  v5 = "lockbox";
-  v6 = "safe_house";
-  v7 = "undercover_safe_house";
-  v8 = "hiding_spot";
-  v9 = "hiding_spot_garage";
-  v10 = "bus_stop";
-  v11 = "jump";
-  v12 = "melee_upgrade";
-  v13 = "ghost_orb";
-  v14 = "fire_statue";
-  v15 = "evidence_bag";
-  return (&v2)[this->mCollectibleType];
+  v2[0] = (__int64)"Generic_Interactive_Object";
+  v2[1] = (__int64)"security_camera";
+  v2[2] = (__int64)"shrine";
+  v2[3] = (__int64)"lockbox";
+  v2[4] = (__int64)"safe_house";
+  v2[5] = (__int64)"undercover_safe_house";
+  v2[6] = (__int64)"hiding_spot";
+  v2[7] = (__int64)"hiding_spot_garage";
+  v2[8] = (__int64)"bus_stop";
+  v2[9] = (__int64)"jump";
+  v2[10] = (__int64)"melee_upgrade";
+  v2[11] = (__int64)"ghost_orb";
+  v2[12] = (__int64)"fire_statue";
+  v2[13] = (__int64)"evidence_bag";
+  return (const char *)v2[this->mCollectibleType];
 }
 
 // File Line: 366
 // RVA: 0xC5BF0
 bool __fastcall UFG::UIAmbientMapBlipData::IsCollected(UFG::UIAmbientMapBlipData *this)
 {
-  UFG::UIAmbientMapBlipData *v1; // rbx
   UFG::GameStatTracker *v2; // rax
   UFG::GameStat::MapBoolStat v3; // edx
-  UFG::PersistentData::MapBool *v4; // rax
-  UFG::UIAmbientMapBlipData::eZoneInfo v6; // ecx
-  int v7; // ecx
-  int v8; // ecx
+  UFG::PersistentData::MapBool *MapBool; // rax
+  UFG::UIAmbientMapBlipData::eZoneInfo mZoneInfo; // ecx
+  __int32 v7; // ecx
+  __int32 v8; // ecx
   UFG::UIAmbientMapBlipData::eZoneInfo v9; // ecx
-  int v10; // ecx
-  int v11; // ecx
+  __int32 v10; // ecx
+  __int32 v11; // ecx
 
-  v1 = this;
   switch ( this->mCollectibleType )
   {
-    case 1:
+    case COLLECTIBLE_SPY_CAM:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 31;
+      v3 = Collectible_SpyCam;
       goto LABEL_3;
-    case 2:
-      v6 = this->mZoneInfo;
-      if ( v6 )
+    case COLLECTIBLE_HEALTH_SHRINE:
+      mZoneInfo = this->mZoneInfo;
+      if ( mZoneInfo )
       {
-        v7 = v6 - 1;
+        v7 = mZoneInfo - 1;
         if ( v7 )
         {
           v8 = v7 - 1;
@@ -577,90 +559,90 @@ bool __fastcall UFG::UIAmbientMapBlipData::IsCollected(UFG::UIAmbientMapBlipData
             if ( v8 != 1 )
               return 0;
             v2 = UFG::GameStatTracker::Instance();
-            v3 = 26;
+            v3 = Collectible_HealthShrineNP;
           }
           else
           {
             v2 = UFG::GameStatTracker::Instance();
-            v3 = 25;
+            v3 = Collectible_HealthShrineKT;
           }
         }
         else
         {
           v2 = UFG::GameStatTracker::Instance();
-          v3 = 24;
+          v3 = Collectible_HealthShrineCN;
         }
       }
       else
       {
         v2 = UFG::GameStatTracker::Instance();
-        v3 = 23;
+        v3 = Collectible_HealthShrineAB;
       }
       goto LABEL_3;
-    case 3:
+    case COLLECTIBLE_LOCKBOX:
       v9 = this->mZoneInfo;
       if ( v9 == SPHERE )
       {
         v2 = UFG::GameStatTracker::Instance();
-        v3 = 27;
+        v3 = Collectible_LockBoxAB;
         goto LABEL_3;
       }
       v10 = v9 - 1;
       if ( !v10 )
       {
         v2 = UFG::GameStatTracker::Instance();
-        v3 = 28;
+        v3 = Collectible_LockBoxCN;
         goto LABEL_3;
       }
       v11 = v10 - 1;
       if ( !v11 )
       {
         v2 = UFG::GameStatTracker::Instance();
-        v3 = 29;
+        v3 = Collectible_LockBoxKT;
         goto LABEL_3;
       }
       if ( v11 == 1 )
       {
         v2 = UFG::GameStatTracker::Instance();
-        v3 = 30;
+        v3 = Collectible_LockBoxNP;
 LABEL_3:
-        v4 = UFG::GameStatTracker::GetMapBool(v2, v3);
-        return UFG::PersistentData::MapBool::GetStatus(v4, &v1->mID);
+        MapBool = UFG::GameStatTracker::GetMapBool(v2, v3);
+        return UFG::PersistentData::MapBool::GetStatus(MapBool, &this->mID);
       }
       return 0;
-    case 4:
-    case 5:
+    case COLLECTIBLE_SAFE_HOUSE:
+    case COLLECTIBLE_UNDERCOVER_SAFE_HOUSE:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 12;
+      v3 = Collectible_Safehouse;
       goto LABEL_3;
-    case 6:
-    case 7:
+    case COLLECTIBLE_HIDING_SPOT:
+    case COLLECTIBLE_HIDING_SPOT_GARAGE:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 5;
+      v3 = Collectible_HidingSpot;
       goto LABEL_3;
-    case 8:
+    case COLLECTIBLE_BUS_STOP:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 3;
+      v3 = Collectible_BusStop;
       goto LABEL_3;
-    case 9:
+    case COLLECTIBLE_BOOST_REGION:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 1;
+      v3 = Collectible_BoostRegion;
       goto LABEL_3;
-    case 0xA:
+    case COLLECTIBLE_MELEE_UPGRADE:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 6;
+      v3 = Collectible_Melee;
       goto LABEL_3;
-    case 0xB:
+    case COLLECTIBLE_GHOST_ORB:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 34;
+      v3 = Collectible_DLC_01;
       goto LABEL_3;
-    case 0xC:
+    case COLLECTIBLE_BOMB_BAG:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 36;
+      v3 = Collectible_DLC_03;
       goto LABEL_3;
-    case 0xD:
+    case COLLECTIBLE_ZODIAC:
       v2 = UFG::GameStatTracker::Instance();
-      v3 = 35;
+      v3 = Collectible_DLC_02;
       goto LABEL_3;
     default:
       return 0;
@@ -669,172 +651,175 @@ LABEL_3:
 
 // File Line: 500
 // RVA: 0xCEAF0
-signed __int64 __fastcall UFG::UIAmbientMapBlipData::XMLConvertBlipType(const char *type)
+__int64 __fastcall UFG::UIAmbientMapBlipData::XMLConvertBlipType(const char *type)
 {
-  const char *v1; // rbx
   int v3; // eax
   unsigned int v4; // ecx
 
-  v1 = type;
   if ( !UFG::qStringCompareInsensitive(type, "HidingSpot", -1) )
     return 6i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "HealthShrine", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "HealthShrine", -1) )
     return 2i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "LockBox", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "LockBox", -1) )
     return 3i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "SpyCam", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "SpyCam", -1) )
     return 1i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "BusStop", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "BusStop", -1) )
     return 8i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "Safehouse", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "Safehouse", -1) )
     return 4i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "UndercoverSafehouse", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "UndercoverSafehouse", -1) )
     return 5i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "BoostRegion", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "BoostRegion", -1) )
     return 9i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "MeleeUpgrade", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "MeleeUpgrade", -1) )
     return 10i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "GhostOrb", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "GhostOrb", -1) )
     return 11i64;
-  if ( !UFG::qStringCompareInsensitive(v1, "BombBag", -1) )
+  if ( !UFG::qStringCompareInsensitive(type, "BombBag", -1) )
     return 12i64;
-  v3 = UFG::qStringCompareInsensitive(v1, "ZodiacStatue", -1);
+  v3 = UFG::qStringCompareInsensitive(type, "ZodiacStatue", -1);
   v4 = 0;
   if ( !v3 )
-    v4 = 13;
+    return 13;
   return v4;
 }
 
 // File Line: 597
 // RVA: 0xCEF70
-UFG::UIAmbientMapBlipManager *__fastcall UFG::UIAmbientMapBlipManager::getInstance(float a1)
+UFG::UIAmbientMapBlipManager *__fastcall UFG::UIAmbientMapBlipManager::getInstance()
 {
   UFG::UIAmbientMapBlipManager *result; // rax
-  char *v2; // rax
+  char *v1; // rax
 
   result = sUIAmbientMapBlipManager;
   if ( !sUIAmbientMapBlipManager )
   {
-    v2 = UFG::qMalloc((unsigned int)((_DWORD)sUIAmbientMapBlipManager + 24), "UIAmbientMapBlipManager", 0i64);
-    if ( v2 )
+    v1 = UFG::qMalloc((unsigned int)((_DWORD)sUIAmbientMapBlipManager + 24), "UIAmbientMapBlipManager", 0i64);
+    if ( v1 )
     {
-      *((_QWORD *)v2 + 1) = 0i64;
-      *(_QWORD *)v2 = 0i64;
-      *((_QWORD *)v2 + 2) = 0i64;
+      *((_QWORD *)v1 + 1) = 0i64;
+      *(_QWORD *)v1 = 0i64;
+      *((_QWORD *)v1 + 2) = 0i64;
     }
     else
     {
-      v2 = 0i64;
+      v1 = 0i64;
     }
-    sUIAmbientMapBlipManager = (UFG::UIAmbientMapBlipManager *)v2;
-    UFG::UIAmbientMapBlipManager::Init((UFG::UIAmbientMapBlipManager *)v2, a1);
-    result = sUIAmbientMapBlipManager;
+    sUIAmbientMapBlipManager = (UFG::UIAmbientMapBlipManager *)v1;
+    UFG::UIAmbientMapBlipManager::Init((UFG::UIAmbientMapBlipManager *)v1);
+    return sUIAmbientMapBlipManager;
   }
   return result;
 }
 
 // File Line: 611
 // RVA: 0xC4F70
-void __usercall UFG::UIAmbientMapBlipManager::Init(UFG::UIAmbientMapBlipManager *this@<rcx>, float a2@<xmm0>)
+void __fastcall UFG::UIAmbientMapBlipManager::Init(UFG::UIAmbientMapBlipManager *this)
 {
-  UFG::UIAmbientMapBlipManager *v2; // rsi
-  UFG::UIAmbientMapBlipData *v3; // rcx
-  bool *v4; // rbx
-  SimpleXML::XMLDocument *v5; // rax
-  SimpleXML::XMLDocument *v6; // rbp
-  SimpleXML::XMLNode *v7; // rax
-  SimpleXML::XMLDocument *v8; // rcx
+  UFG::UIAmbientMapBlipData *p; // rcx
+  bool *p_mIconTypeSetAsCollected; // rbx
+  SimpleXML::XMLDocument *v4; // rax
+  SimpleXML::XMLDocument *v5; // rbp
+  SimpleXML::XMLNode *Node; // rax
+  SimpleXML::XMLDocument *v7; // rcx
   SimpleXML::XMLNode *i; // rdi
-  char *v10; // rax
-  unsigned int v11; // er15
-  char *v12; // rbx
-  char *v13; // r14
-  UFG::UIAmbientMapBlipData::eCollectibleType v14; // ebx
-  UFG::qWiseSymbol *v15; // rax
-  int v16; // ecx
-  UFG::UIAmbientMapBlipData::eZoneInfo v17; // eax
-  UFG::UIAmbientMapBlipData item; // [rsp+28h] [rbp-A0h]
-  UFG::qString v19; // [rsp+48h] [rbp-80h]
-  UFG::qWiseSymbol result; // [rsp+D0h] [rbp+8h]
+  char *Name; // rax
+  unsigned int Attribute; // r15d
+  char *v11; // rbx
+  double v12; // xmm0_8
+  float v13; // xmm6_4
+  double v14; // xmm0_8
+  float v15; // xmm7_4
+  double v16; // xmm0_8
+  char *v17; // r14
+  UFG::UIAmbientMapBlipData::eCollectibleType v18; // ebx
+  UFG::qWiseSymbol *v19; // rax
+  int v20; // ecx
+  UFG::UIAmbientMapBlipData::eZoneInfo v21; // eax
+  UFG::UIAmbientMapBlipData item; // [rsp+28h] [rbp-A0h] BYREF
+  UFG::qString v23; // [rsp+48h] [rbp-80h] BYREF
+  UFG::qWiseSymbol result; // [rsp+D0h] [rbp+8h] BYREF
 
-  v2 = this;
-  UFG::qString::qString(&v19, "Data\\UI\\Game\\ui_ambient_map_blips.xml");
-  v3 = v2->mData.p;
-  if ( v3 )
+  UFG::qString::qString(&v23, "Data\\UI\\Game\\ui_ambient_map_blips.xml");
+  p = this->mData.p;
+  if ( p )
   {
-    v4 = &v3[-1].mIconTypeSetAsCollected;
+    p_mIconTypeSetAsCollected = &p[-1].mIconTypeSetAsCollected;
     `eh vector destructor iterator(
-      v3,
+      p,
       0x1Cui64,
-      *(_DWORD *)&v3[-1].mIconTypeSetAsCollected,
+      *(_DWORD *)&p[-1].mIconTypeSetAsCollected,
       (void (__fastcall *)(void *))_);
-    operator delete[](v4);
+    operator delete[](p_mIconTypeSetAsCollected);
   }
-  v2->mData.p = 0i64;
-  *(_QWORD *)&v2->mData.size = 0i64;
-  v2->mCount = 0;
-  v5 = SimpleXML::XMLDocument::Open(v19.mData, 1ui64, 0i64);
-  v6 = v5;
-  if ( v5 )
+  this->mData.p = 0i64;
+  *(_QWORD *)&this->mData.size = 0i64;
+  this->mCount = 0;
+  v4 = SimpleXML::XMLDocument::Open(v23.mData, 1ui64, 0i64);
+  v5 = v4;
+  if ( v4 )
   {
-    v7 = SimpleXML::XMLDocument::GetNode(v5, "ambient_blips", 0i64);
-    v8 = v6;
-    if ( v7 )
+    Node = SimpleXML::XMLDocument::GetNode(v4, "ambient_blips", 0i64);
+    v7 = v5;
+    if ( Node )
     {
-      for ( i = SimpleXML::XMLDocument::GetChildNode(v6, 0i64, v7); i; i = SimpleXML::XMLDocument::GetNode(v6, 0i64, i) )
+      for ( i = SimpleXML::XMLDocument::GetChildNode(v5, 0i64, Node); i; i = SimpleXML::XMLDocument::GetNode(
+                                                                               v5,
+                                                                               0i64,
+                                                                               i) )
       {
-        if ( i )
+        Name = SimpleXML::XMLNode::GetName(i);
+        if ( !UFG::qStringCompareInsensitive(Name, "blip", -1) )
         {
-          v10 = SimpleXML::XMLNode::GetName(i);
-          if ( !UFG::qStringCompareInsensitive(v10, "blip", -1) )
+          Attribute = SimpleXML::XMLNode::GetAttribute(i, "nameID", 0);
+          v11 = SimpleXML::XMLNode::GetAttribute(i, "type", "invalid");
+          v12 = SimpleXML::XMLNode::GetAttribute(i, "pos_x", 0.0);
+          v13 = *(float *)&v12;
+          v14 = SimpleXML::XMLNode::GetAttribute(i, "pos_y", 0.0);
+          v15 = *(float *)&v14;
+          v16 = SimpleXML::XMLNode::GetAttribute(i, "pos_z", 0.0);
+          v17 = SimpleXML::XMLNode::GetAttribute(i, "zone", "invalid");
+          v18 = UFG::UIAmbientMapBlipData::XMLConvertBlipType(v11);
+          if ( v18 != COLLECTIBLE_BUS_STOP )
           {
-            v11 = SimpleXML::XMLNode::GetAttribute(i, "nameID", 0);
-            v12 = SimpleXML::XMLNode::GetAttribute(i, "type", "invalid");
-            SimpleXML::XMLNode::GetAttribute(i, "pos_x", 0.0);
-            SimpleXML::XMLNode::GetAttribute(i, "pos_y", 0.0);
-            SimpleXML::XMLNode::GetAttribute(i, "pos_z", 0.0);
-            v13 = SimpleXML::XMLNode::GetAttribute(i, "zone", "invalid");
-            v14 = UFG::UIAmbientMapBlipData::XMLConvertBlipType(v12);
-            if ( v14 != 8 )
+            v19 = UFG::qSymbol::qSymbol(&result, Attribute);
+            item.mCollectibleType = v18;
+            item.mID.mUID = v19->mUID;
+            item.mIconTypeSetAsCollected = 0;
+            item.mPosition.x = v13;
+            item.mPosition.y = v15;
+            item.mPosition.z = *(float *)&v16;
+            v20 = v17[1] | (*v17 << 8);
+            switch ( v20 )
             {
-              v15 = UFG::qSymbol::qSymbol(&result, v11);
-              item.mCollectibleType = v14;
-              item.mID.mUID = v15->mUID;
-              item.mIconTypeSetAsCollected = 0;
-              item.mPosition.x = a2;
-              item.mPosition.y = a2;
-              item.mPosition.z = a2;
-              v16 = v13[1] | (*v13 << 8);
-              switch ( v16 )
-              {
-                case 20048:
-                  item.mZoneInfo = 3;
-                  break;
-                case 16706:
-                  item.mZoneInfo = 0;
-                  break;
-                case 19284:
-                  item.mZoneInfo = 2;
-                  break;
-                default:
-                  v17 = 4;
-                  if ( v16 == 17230 )
-                    v17 = 1;
-                  item.mZoneInfo = v17;
-                  break;
-              }
-              UFG::qArray<UFG::UIAmbientMapBlipData,0>::Add(&v2->mData, &item, "qArray.Add");
-              ++v2->mCount;
+              case 20048:
+                item.mZoneInfo = BOX;
+                break;
+              case 16706:
+                item.mZoneInfo = SPHERE;
+                break;
+              case 19284:
+                item.mZoneInfo = TRIANGLE;
+                break;
+              default:
+                v21 = CAPSULE;
+                if ( v20 == 17230 )
+                  v21 = CYLINDER;
+                item.mZoneInfo = v21;
+                break;
             }
+            UFG::qArray<UFG::UIAmbientMapBlipData,0>::Add(&this->mData, &item, "qArray.Add");
+            ++this->mCount;
           }
         }
       }
-      v8 = v6;
+      v7 = v5;
     }
-    SimpleXML::XMLDocument::~XMLDocument(v8);
-    operator delete[](v6);
+    SimpleXML::XMLDocument::~XMLDocument(v7);
+    operator delete[](v5);
   }
-  UFG::qString::~qString(&v19);
+  UFG::qString::~qString(&v23);
 }
 
 // File Line: 671
@@ -855,39 +840,39 @@ void __fastcall UFG::UIAmbientMapBlipManager::HandleScreenInit(UFG::UIAmbientMap
 
 // File Line: 728
 // RVA: 0xC0D80
-UFG::UIAmbientMapBlipData *__fastcall UFG::UIAmbientMapBlipManager::GetBlipData(UFG::UIAmbientMapBlipManager *this, int index)
+UFG::UIAmbientMapBlipData *__fastcall UFG::UIAmbientMapBlipManager::GetBlipData(
+        UFG::UIAmbientMapBlipManager *this,
+        int index)
 {
   return &this->mData.p[index];
 }
 
 // File Line: 734
 // RVA: 0xCBF90
-void __fastcall UFG::UIAmbientMapBlipManager::Update(UFG::UIAmbientMapBlipManager *this, float elapsed, UFG::UIMapBlipManager *iconMan, bool isWorldMap)
+void __fastcall UFG::UIAmbientMapBlipManager::Update(
+        UFG::UIAmbientMapBlipManager *this,
+        float elapsed,
+        UFG::UIMapBlipManager *iconMan,
+        bool isWorldMap)
 {
-  bool v4; // r14
   float v5; // xmm2_4
-  UFG::UIMapBlipManager *v6; // rbp
-  UFG::UIAmbientMapBlipManager *v7; // rdi
-  int v8; // esi
+  int mCount; // esi
   int i; // ebx
   UFG::UIAmbientMapBlipData *v10; // rcx
 
-  v4 = isWorldMap;
   v5 = this->mUpdateTimer - elapsed;
-  v6 = iconMan;
-  v7 = this;
   this->mUpdateTimer = v5;
   if ( v5 <= 0.0 )
   {
     this->mUpdateTimer = 2.0;
     if ( iconMan )
     {
-      v8 = this->mCount;
-      for ( i = 0; i < v8; ++i )
+      mCount = this->mCount;
+      for ( i = 0; i < mCount; ++i )
       {
-        v10 = &v7->mData.p[i];
+        v10 = &this->mData.p[i];
         if ( v10 )
-          UFG::UIAmbientMapBlipData::UpdateIcon(v10, v6, v4, 0.0);
+          UFG::UIAmbientMapBlipData::UpdateIcon(v10, iconMan, isWorldMap, 0.0);
       }
     }
   }

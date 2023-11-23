@@ -1,14 +1,14 @@
 // File Line: 18
 // RVA: 0xC83B20
-hkStdioStreamReader *__fastcall hkStdioStreamReader::open(const char *nameIn)
+hkStdioStreamReader *__fastcall hkStdioStreamReader::open(char *nameIn)
 {
   const wchar_t **v1; // rax
   __int64 v2; // rbx
   _iobuf *v3; // rdi
-  _QWORD **v4; // rax
+  _QWORD **Value; // rax
   hkStdioStreamReader *v5; // rax
   __int64 v6; // rax
-  hkUtf8::WideFromUtf8 v8; // [rsp+20h] [rbp-18h]
+  hkUtf8::WideFromUtf8 v8; // [rsp+20h] [rbp-18h] BYREF
 
   hkUtf8::WideFromUtf8::WideFromUtf8(&v8, nameIn);
   v2 = 0i64;
@@ -16,17 +16,17 @@ hkStdioStreamReader *__fastcall hkStdioStreamReader::open(const char *nameIn)
   v8.m_wide.m_size = 0;
   if ( v8.m_wide.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       v8.m_wide.m_data,
       2 * (v8.m_wide.m_capacityAndFlags & 0x3FFFFFFF));
   if ( !v3 )
     return 0i64;
-  v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v5 = (hkStdioStreamReader *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(v4[11], 32i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v5 = (hkStdioStreamReader *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 32i64);
   if ( v5 )
   {
     hkStdioStreamReader::hkStdioStreamReader(v5, v3);
-    v2 = v6;
+    return (hkStdioStreamReader *)v6;
   }
   return (hkStdioStreamReader *)v2;
 }
@@ -45,28 +45,24 @@ void __fastcall hkStdioStreamReader::hkStdioStreamReader(hkStdioStreamReader *th
 // RVA: 0xC83C00
 void __fastcall hkStdioStreamReader::~hkStdioStreamReader(hkStdioStreamReader *this)
 {
-  hkStdioStreamReader *v1; // rbx
-  _iobuf *v2; // rcx
+  _iobuf *m_handle; // rcx
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkStdioStreamReader::`vftable;
-  v2 = (_iobuf *)this->m_handle;
-  if ( v2 )
-    fclose(v2);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  m_handle = (_iobuf *)this->m_handle;
+  if ( m_handle )
+    fclose(m_handle);
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 45
 // RVA: 0xC83C40
 unsigned __int64 __fastcall hkStdioStreamReader::read(hkStdioStreamReader *this, void *buf, int nbytes)
 {
-  hkStdioStreamReader *v3; // rbx
   unsigned __int64 result; // rax
 
-  v3 = this;
   result = fread(buf, 1ui64, nbytes, (_iobuf *)this->m_handle);
-  if ( (signed int)result <= 0 )
-    v3->m_isOk.m_bool = 0;
+  if ( (int)result <= 0 )
+    this->m_isOk.m_bool = 0;
   return result;
 }
 
@@ -82,40 +78,34 @@ hkBool *__fastcall hkStdioStreamReader::isOk(hkStdioStreamReader *this, hkBool *
 // RVA: 0xC83C90
 __int64 __fastcall hkStdioStreamReader::peek(hkStdioStreamReader *this, void *buf, int nbytes)
 {
-  _iobuf *v3; // rbx
-  hkStdioStreamReader *v4; // rsi
+  _iobuf *m_handle; // rbx
   unsigned int v5; // edi
 
-  v3 = (_iobuf *)this->m_handle;
-  v4 = this;
-  v5 = fread(buf, 1ui64, nbytes, (_iobuf *)this->m_handle);
-  if ( fseek(v3, -v5, 1) < 0 || !v5 )
-    v4->m_isOk.m_bool = 0;
+  m_handle = (_iobuf *)this->m_handle;
+  v5 = fread(buf, 1ui64, nbytes, m_handle);
+  if ( fseek(m_handle, -v5, 1) < 0 || !v5 )
+    this->m_isOk.m_bool = 0;
   return v5;
 }
 
 // File Line: 74
 // RVA: 0xC83D00
-hkResult *__fastcall hkStdioStreamReader::seek(hkStdioStreamReader *this, hkResult *result, int offset, hkSeekableStreamReader::SeekWhence whence)
+hkResult *__fastcall hkStdioStreamReader::seek(hkStdioStreamReader *this, hkResult *result, int offset, int whence)
 {
-  hkStdioStreamReader *v4; // rdi
-  hkResult *v5; // rbx
   bool v6; // zf
   hkResult *v7; // rax
 
-  v4 = this;
-  v5 = result;
   v6 = fseek((_iobuf *)this->m_handle, offset, whence) == 0;
-  v7 = v5;
+  v7 = result;
   if ( v6 )
   {
-    v4->m_isOk.m_bool = 1;
-    v5->m_enum = 0;
+    this->m_isOk.m_bool = 1;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
-    v5->m_enum = 1;
-    v4->m_isOk.m_bool = 0;
+    result->m_enum = HK_FAILURE;
+    this->m_isOk.m_bool = 0;
   }
   return v7;
 }

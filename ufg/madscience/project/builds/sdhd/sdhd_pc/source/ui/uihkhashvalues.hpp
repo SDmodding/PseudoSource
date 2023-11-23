@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_OVER___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAME_OVER", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAME_OVER", -1);
   UI_HASH_GAME_OVER_3 = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NIS_START___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NIS_START", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NIS_START", -1);
   UI_HASH_NIS_START_3 = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_PAUSE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAME_PAUSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAME_PAUSE", -1);
   UI_HASH_GAME_PAUSE_3 = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_UNPAUSE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAME_UNPAUSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAME_UNPAUSE", -1);
   UI_HASH_GAME_UNPAUSE_3 = result;
   return result;
 }
@@ -48,7 +48,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_LOADED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_LOADED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_LOADED", -1);
   UI_HASH_WIDGET_LOADED_3 = result;
   return result;
 }
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_DEACTIVATED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_DEACTIVATED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_DEACTIVATED", -1);
   UI_HASH_WIDGET_DEACTIVATED_3 = result;
   return result;
 }
@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_FADE_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_FADE_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_FADE_IN", -1);
   UI_HASH_WIDGET_FADE_IN_3 = result;
   return result;
 }
@@ -81,7 +81,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_FADE_OUT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_FADE_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_FADE_OUT", -1);
   UI_HASH_WIDGET_FADE_OUT_3 = result;
   return result;
 }
@@ -92,7 +92,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_SCROLL_NEXT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_SCROLL_NEXT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_SCROLL_NEXT", -1);
   UI_HASH_WIDGET_SCROLL_NEXT_3 = result;
   return result;
 }
@@ -103,7 +103,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_SCROLL_PREV___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_SCROLL_PREV", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_SCROLL_PREV", -1);
   UI_HASH_WIDGET_SCROLL_PREV_3 = result;
   return result;
 }
@@ -114,7 +114,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WIDGET_ANIM_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("WIDGET_ANIM_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("WIDGET_ANIM_DONE", -1);
   UI_HASH_WIDGET_ANIM_DONE_3 = result;
   return result;
 }
@@ -125,7 +125,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OBJECTIVES_FADE_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OBJECTIVES_FADE_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OBJECTIVES_FADE_IN", -1);
   UI_HASH_OBJECTIVES_FADE_IN_3 = result;
   return result;
 }
@@ -136,7 +136,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OBJECTIVES_FADE_OUT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OBJECTIVES_FADE_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OBJECTIVES_FADE_OUT", -1);
   UI_HASH_OBJECTIVES_FADE_OUT_3 = result;
   return result;
 }
@@ -147,7 +147,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PERKGOALS_FADE_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PERKGOALS_FADE_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PERKGOALS_FADE_IN", -1);
   UI_HASH_PERKGOALS_FADE_IN_3 = result;
   return result;
 }
@@ -158,7 +158,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PERKGOALS_FADE_OUT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PERKGOALS_FADE_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PERKGOALS_FADE_OUT", -1);
   UI_HASH_PERKGOALS_FADE_OUT_3 = result;
   return result;
 }
@@ -169,7 +169,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OBJECTIVE_FLASHER_FADE_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OBJECTIVE_FLASHER_FADE_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OBJECTIVE_FLASHER_FADE_IN", -1);
   UI_HASH_OBJECTIVE_FLASHER_FADE_IN_3 = result;
   return result;
 }
@@ -180,7 +180,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OBJECTIVE_FLASHER_FADE_OUT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OBJECTIVE_FLASHER_FADE_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OBJECTIVE_FLASHER_FADE_OUT", -1);
   UI_HASH_OBJECTIVE_FLASHER_FADE_OUT_3 = result;
   return result;
 }
@@ -191,7 +191,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MENU_OPTION_SELECTED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MENU_OPTION_SELECTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MENU_OPTION_SELECTED", -1);
   UI_HASH_MENU_OPTION_SELECTED_3 = result;
   return result;
 }
@@ -202,7 +202,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMBAT_METER_INTRO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("COMBAT_METER_INTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("COMBAT_METER_INTRO", -1);
   UI_HASH_COMBAT_METER_INTRO_3 = result;
   return result;
 }
@@ -213,7 +213,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMBAT_METER_OUTRO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("COMBAT_METER_OUTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("COMBAT_METER_OUTRO", -1);
   UI_HASH_COMBAT_METER_OUTRO_3 = result;
   return result;
 }
@@ -224,7 +224,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_INTRO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_INTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_INTRO", -1);
   UI_HASH_PDA_INTRO_3 = result;
   return result;
 }
@@ -235,7 +235,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETFINISHED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETFINISHED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETFINISHED", -1);
   UI_HASH_SETFINISHED_3 = result;
   return result;
 }
@@ -246,7 +246,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETWON___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETWON", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETWON", -1);
   UI_HASH_SETWON_3 = result;
   return result;
 }
@@ -257,7 +257,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETFAILED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETFAILED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETFAILED", -1);
   UI_HASH_SETFAILED_3 = result;
   return result;
 }
@@ -268,7 +268,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAYSOUND___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAYSOUND", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAYSOUND", -1);
   UI_HASH_PLAYSOUND_3 = result;
   return result;
 }
@@ -279,7 +279,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAYDIALOGUE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAYDIALOGUE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAYDIALOGUE", -1);
   UI_HASH_PLAYDIALOGUE_3 = result;
   return result;
 }
@@ -290,7 +290,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MODIFYRTPC___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MODIFYRTPC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MODIFYRTPC", -1);
   UI_HASH_MODIFYRTPC_3 = result;
   return result;
 }
@@ -301,7 +301,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SENDSTIMULUS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SENDSTIMULUS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SENDSTIMULUS", -1);
   UI_HASH_SENDSTIMULUS_3 = result;
   return result;
 }
@@ -312,7 +312,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETTUTORIAL1___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETTUTORIAL1", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETTUTORIAL1", -1);
   UI_HASH_SETTUTORIAL1_3 = result;
   return result;
 }
@@ -323,7 +323,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETTUTORIAL2___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETTUTORIAL2", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETTUTORIAL2", -1);
   UI_HASH_SETTUTORIAL2_3 = result;
   return result;
 }
@@ -334,7 +334,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETTUTORIAL3___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETTUTORIAL3", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETTUTORIAL3", -1);
   UI_HASH_SETTUTORIAL3_3 = result;
   return result;
 }
@@ -345,7 +345,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETTUTORIAL4___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETTUTORIAL4", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETTUTORIAL4", -1);
   UI_HASH_SETTUTORIAL4_3 = result;
   return result;
 }
@@ -356,7 +356,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETBUGPLANTINGCALIBRATION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETBUGPLANTINGCALIBRATION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETBUGPLANTINGCALIBRATION", -1);
   UI_HASH_SETBUGPLANTINGCALIBRATION_3 = result;
   return result;
 }
@@ -367,7 +367,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SETBUGPLANTINGSCREWING___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SETBUGPLANTINGSCREWING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SETBUGPLANTINGSCREWING", -1);
   UI_HASH_SETBUGPLANTINGSCREWING_3 = result;
   return result;
 }
@@ -378,7 +378,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_POKERDICEWIN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("POKERDICEWIN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("POKERDICEWIN", -1);
   UI_HASH_POKERDICEWIN_3 = result;
   return result;
 }
@@ -389,7 +389,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_POKERDICELOSE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("POKERDICELOSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("POKERDICELOSE", -1);
   UI_HASH_POKERDICELOSE_3 = result;
   return result;
 }
@@ -400,7 +400,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HOUSEHOLDS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("HOUSEHOLDS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("HOUSEHOLDS", -1);
   UI_HASH_HOUSEHOLDS_3 = result;
   return result;
 }
@@ -411,7 +411,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ENABLECONTROLS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ENABLECONTROLS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ENABLECONTROLS", -1);
   UI_HASH_ENABLECONTROLS_3 = result;
   return result;
 }
@@ -422,7 +422,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DISABLECONTROLS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DISABLECONTROLS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DISABLECONTROLS", -1);
   UI_HASH_DISABLECONTROLS_3 = result;
   return result;
 }
@@ -433,7 +433,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CLEANUPMINIGAME___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CLEANUPMINIGAME", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CLEANUPMINIGAME", -1);
   UI_HASH_CLEANUPMINIGAME_3 = result;
   return result;
 }
@@ -444,7 +444,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KARAOKEINSTRUM1___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KARAOKEINSTRUM1", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KARAOKEINSTRUM1", -1);
   UI_HASH_KARAOKEINSTRUM1_3 = result;
   return result;
 }
@@ -455,7 +455,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KARAOKEINSTRUM2___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KARAOKEINSTRUM2", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KARAOKEINSTRUM2", -1);
   UI_HASH_KARAOKEINSTRUM2_3 = result;
   return result;
 }
@@ -466,7 +466,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KARAOKEINSTRUM3___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KARAOKEINSTRUM3", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KARAOKEINSTRUM3", -1);
   UI_HASH_KARAOKEINSTRUM3_3 = result;
   return result;
 }
@@ -477,7 +477,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KARAOKEINSTRUMGUITAR___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KARAOKEINSTRUMGUITAR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KARAOKEINSTRUMGUITAR", -1);
   UI_HASH_KARAOKEINSTRUMGUITAR_3 = result;
   return result;
 }
@@ -488,7 +488,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KARAOKEINSTRUMOFF___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KARAOKEINSTRUMOFF", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KARAOKEINSTRUMOFF", -1);
   UI_HASH_KARAOKEINSTRUMOFF_3 = result;
   return result;
 }
@@ -499,7 +499,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RESUME___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RESUME", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RESUME", -1);
   UI_HASH_RESUME_3 = result;
   return result;
 }
@@ -510,7 +510,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ACCEPTFINISHEDPLAYING___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ACCEPTFINISHEDPLAYING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ACCEPTFINISHEDPLAYING", -1);
   UI_HASH_ACCEPTFINISHEDPLAYING_3 = result;
   return result;
 }
@@ -521,7 +521,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SELECTFINISHEDPLAYING___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SELECTFINISHEDPLAYING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SELECTFINISHEDPLAYING", -1);
   UI_HASH_SELECTFINISHEDPLAYING_3 = result;
   return result;
 }
@@ -532,7 +532,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SELECTED_ITEM_CHANGED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SELECTED_ITEM_CHANGED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SELECTED_ITEM_CHANGED", -1);
   UI_HASH_SELECTED_ITEM_CHANGED_3 = result;
   return result;
 }
@@ -576,7 +576,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FLOW_MAIN_STORY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("flow_main_story", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("flow_main_story", -1);
   UI_HASH_FLOW_MAIN_STORY_3 = result;
   return result;
 }
@@ -587,7 +587,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FLOW_GHOST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("flow_ghost", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("flow_ghost", -1);
   UI_HASH_FLOW_GHOST_3 = result;
   return result;
 }
@@ -598,7 +598,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FLOW_CNY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("flow_cny", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("flow_cny", -1);
   UI_HASH_FLOW_CNY_3 = result;
   return result;
 }
@@ -609,7 +609,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_RESUME___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gameresume", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gameresume", -1);
   UI_HASH_GAME_RESUME_3 = result;
   return result;
 }
@@ -620,7 +620,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_JOIN_MULTIPLAYER___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("joinmultiplayergame", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("joinmultiplayergame", -1);
   UI_HASH_JOIN_MULTIPLAYER_3 = result;
   return result;
 }
@@ -631,7 +631,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LEAVE_MULTIPLAYER___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("leavemultiplayergame", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("leavemultiplayergame", -1);
   UI_HASH_LEAVE_MULTIPLAYER_3 = result;
   return result;
 }
@@ -642,7 +642,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_RESTART___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gamerestart", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gamerestart", -1);
   UI_HASH_GAME_RESTART_3 = result;
   return result;
 }
@@ -653,7 +653,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_STUDIO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadstudio", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadstudio", -1);
   UI_HASH_LOAD_STUDIO_3 = result;
   return result;
 }
@@ -664,7 +664,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_FREEROAM___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadfreeroam", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadfreeroam", -1);
   UI_HASH_LOAD_FREEROAM_3 = result;
   return result;
 }
@@ -675,7 +675,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_SAVEGAME___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadsavegame", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadsavegame", -1);
   UI_HASH_LOAD_SAVEGAME_3 = result;
   return result;
 }
@@ -686,7 +686,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_MULTIPLAYER_FREEROAM___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadmultiplayerfreeroam", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadmultiplayerfreeroam", -1);
   UI_HASH_LOAD_MULTIPLAYER_FREEROAM_3 = result;
   return result;
 }
@@ -697,7 +697,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RUNTEST_RELOAD___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("runtest_reload", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("runtest_reload", -1);
   UI_HASH_RUNTEST_RELOAD_3 = result;
   return result;
 }
@@ -708,7 +708,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RUNTEST_ASIS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("runtest_asis", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("runtest_asis", -1);
   UI_HASH_RUNTEST_ASIS_3 = result;
   return result;
 }
@@ -719,7 +719,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_OFFLINEINFOCAST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadofflineinfocast", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadofflineinfocast", -1);
   UI_HASH_LOAD_OFFLINEINFOCAST_3 = result;
   return result;
 }
@@ -730,7 +730,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_STAGINGINFOCAST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadstaginginfocast", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadstaginginfocast", -1);
   UI_HASH_LOAD_STAGINGINFOCAST_3 = result;
   return result;
 }
@@ -741,7 +741,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_ACTIVEINFOCAST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("loadactiveinfocast", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("loadactiveinfocast", -1);
   UI_HASH_LOAD_ACTIVEINFOCAST_3 = result;
   return result;
 }
@@ -752,7 +752,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CREDITS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("credits", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("credits", -1);
   UI_HASH_CREDITS_3 = result;
   return result;
 }
@@ -763,7 +763,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_STATS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("stats", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("stats", -1);
   UI_HASH_STATS_3 = result;
   return result;
 }
@@ -774,7 +774,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_STEAM_ACHIEVEMENT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("steam_achievement", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("steam_achievement", -1);
   UI_HASH_STEAM_ACHIEVEMENT_3 = result;
   return result;
 }
@@ -785,7 +785,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACE_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("face_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("face_upgrades", -1);
   UI_HASH_FACE_UPGRADES_3 = result;
   return result;
 }
@@ -796,7 +796,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_POLICE_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("police_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("police_upgrades", -1);
   UI_HASH_POLICE_UPGRADES_3 = result;
   return result;
 }
@@ -807,7 +807,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TRIAD_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("triad_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("triad_upgrades", -1);
   UI_HASH_TRIAD_UPGRADES_3 = result;
   return result;
 }
@@ -818,7 +818,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MELEE_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("melee_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("melee_upgrades", -1);
   UI_HASH_MELEE_UPGRADES_3 = result;
   return result;
 }
@@ -829,7 +829,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HEALTH_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("health_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("health_upgrades", -1);
   UI_HASH_HEALTH_UPGRADES_3 = result;
   return result;
 }
@@ -840,7 +840,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAMETRACKER_COLLECTIBLES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gametracker_collectibles", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gametracker_collectibles", -1);
   UI_HASH_GAMETRACKER_COLLECTIBLES_3 = result;
   return result;
 }
@@ -851,7 +851,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAMETRACKER_ASSETS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gametracker_assets", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gametracker_assets", -1);
   UI_HASH_GAMETRACKER_ASSETS_3 = result;
   return result;
 }
@@ -862,7 +862,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAMETRACKER_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gametracker_upgrades", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gametracker_upgrades", -1);
   UI_HASH_GAMETRACKER_UPGRADES_3 = result;
   return result;
 }
@@ -873,7 +873,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SOCIALHUB___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("socialhub", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("socialhub", -1);
   UI_HASH_SOCIALHUB_3 = result;
   return result;
 }
@@ -884,7 +884,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SS_SPAWN_OBJ___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ss_spawn_obj", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ss_spawn_obj", -1);
   UI_HASH_SS_SPAWN_OBJ_3 = result;
   return result;
 }
@@ -895,7 +895,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MINIGAME_TELEPORT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("minigame_teleport", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("minigame_teleport", -1);
   UI_HASH_MINIGAME_TELEPORT_3 = result;
   return result;
 }
@@ -906,7 +906,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUGPLANT_TELEPORT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("bugplant_teleport", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("bugplant_teleport", -1);
   UI_HASH_BUGPLANT_TELEPORT_3 = result;
   return result;
 }
@@ -917,7 +917,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOCKPICK_TELEPORT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("lockpick_teleport", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("lockpick_teleport", -1);
   UI_HASH_LOCKPICK_TELEPORT_3 = result;
   return result;
 }
@@ -928,7 +928,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PHONETRACE_TELEPORT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("phonetrace_teleport", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("phonetrace_teleport", -1);
   UI_HASH_PHONETRACE_TELEPORT_3 = result;
   return result;
 }
@@ -939,7 +939,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RESET_PLAYER_STATE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("reset_player_state", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("reset_player_state", -1);
   UI_HASH_RESET_PLAYER_STATE_3 = result;
   return result;
 }
@@ -950,7 +950,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RESET_VEHICLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("reset_vehicle", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("reset_vehicle", -1);
   UI_HASH_RESET_VEHICLE_3 = result;
   return result;
 }
@@ -961,7 +961,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCREEN_PUSH___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("screenpush", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("screenpush", -1);
   UI_HASH_SCREEN_PUSH_3 = result;
   return result;
 }
@@ -972,7 +972,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_WORLD_MAP___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("worldmap", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("worldmap", -1);
   UI_HASH_WORLD_MAP_3 = result;
   return result;
 }
@@ -983,7 +983,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_LOG___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("gamelog", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("gamelog", -1);
   UI_HASH_GAME_LOG_3 = result;
   return result;
 }
@@ -994,7 +994,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TRAFFIC_CHEAT_POPULATION_STATS___
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("traffic_population_stats", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("traffic_population_stats", -1);
   UI_HASH_TRAFFIC_CHEAT_POPULATION_STATS_3 = result;
   return result;
 }
@@ -1005,7 +1005,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TRAFFIC_CHEAT_AVAILABLE_VEHICLES_
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("traffic_available_vehicles", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("traffic_available_vehicles", -1);
   UI_HASH_TRAFFIC_CHEAT_AVAILABLE_VEHICLES_3 = result;
   return result;
 }
@@ -1016,7 +1016,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TRAFFIC_VEHICLE_BLIPS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("traffic_vehicle_blips", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("traffic_vehicle_blips", -1);
   UI_HASH_TRAFFIC_VEHICLE_BLIPS_3 = result;
   return result;
 }
@@ -1027,7 +1027,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACETRACKER___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("facetracker", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("facetracker", -1);
   UI_HASH_FACETRACKER_3 = result;
   return result;
 }
@@ -1038,7 +1038,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SS_GENERIC_CALL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ss_generic_call", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ss_generic_call", -1);
   UI_HASH_SS_GENERIC_CALL_3 = result;
   return result;
 }
@@ -1049,7 +1049,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_EXIT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("exit", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("exit", -1);
   UI_HASH_EXIT_3 = result;
   return result;
 }
@@ -1060,7 +1060,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DURANGO_HELP___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("durangohelp", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("durangohelp", -1);
   UI_HASH_DURANGO_HELP_3 = result;
   return result;
 }
@@ -1071,7 +1071,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ADVANCE_MISSION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ADVANCE_MISSION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ADVANCE_MISSION", -1);
   UI_HASH_ADVANCE_MISSION_3 = result;
   return result;
 }
@@ -1082,7 +1082,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMPLETE_MISSION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("COMPLETE_MISSION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("COMPLETE_MISSION", -1);
   UI_HASH_COMPLETE_MISSION_3 = result;
   return result;
 }
@@ -1093,7 +1093,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RESTART_MISSION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RESTART_MISSION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RESTART_MISSION", -1);
   UI_HASH_RESTART_MISSION_3 = result;
   return result;
 }
@@ -1104,7 +1104,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RESTORE_CHECKPOINT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RESTORE_CHECKPOINT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RESTORE_CHECKPOINT", -1);
   UI_HASH_RESTORE_CHECKPOINT_3 = result;
   return result;
 }
@@ -1115,7 +1115,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CANCEL_MISSION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CANCEL_MISSION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CANCEL_MISSION", -1);
   UI_HASH_CANCEL_MISSION_3 = result;
   return result;
 }
@@ -1126,7 +1126,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GOD_EVERYTHING_MODE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GOD_EVERYTHING_MODE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GOD_EVERYTHING_MODE", -1);
   UI_HASH_GOD_EVERYTHING_MODE_3 = result;
   return result;
 }
@@ -1137,7 +1137,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GOD_MODE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GOD_MODE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GOD_MODE", -1);
   UI_HASH_GOD_MODE_3 = result;
   return result;
 }
@@ -1148,7 +1148,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DEATH_TOUCH___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DEATH_TOUCH", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DEATH_TOUCH", -1);
   UI_HASH_DEATH_TOUCH_3 = result;
   return result;
 }
@@ -1159,7 +1159,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ADVANCE_TOD_HOUR___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ADVANCE_TOD_HOUR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ADVANCE_TOD_HOUR", -1);
   UI_HASH_ADVANCE_TOD_HOUR_3 = result;
   return result;
 }
@@ -1170,7 +1170,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FALLBACK_TOD_HOUR___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FALLBACK_TOD_HOUR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FALLBACK_TOD_HOUR", -1);
   UI_HASH_FALLBACK_TOD_HOUR_3 = result;
   return result;
 }
@@ -1181,7 +1181,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAX_FACE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAX_FACE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAX_FACE", -1);
   UI_HASH_MAX_FACE_3 = result;
   return result;
 }
@@ -1192,7 +1192,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAX_FACE_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAX_FACE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAX_FACE_LEVEL", -1);
   UI_HASH_MAX_FACE_LEVEL_3 = result;
   return result;
 }
@@ -1203,7 +1203,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAX_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAX_UPGRADES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAX_UPGRADES", -1);
   UI_HASH_MAX_UPGRADES_3 = result;
   return result;
 }
@@ -1214,7 +1214,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PURGE_ALL_UPGRADES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PURGE_ALL_UPGRADES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PURGE_ALL_UPGRADES", -1);
   UI_HASH_PURGE_ALL_UPGRADES_3 = result;
   return result;
 }
@@ -1225,7 +1225,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAYER_INVULNERABLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAYER_INVULNERABLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAYER_INVULNERABLE", -1);
   UI_HASH_PLAYER_INVULNERABLE_3 = result;
   return result;
 }
@@ -1236,7 +1236,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAYER_SUICIDE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAYER_SUICIDE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAYER_SUICIDE", -1);
   UI_HASH_PLAYER_SUICIDE_3 = result;
   return result;
 }
@@ -1247,7 +1247,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RELOAD_WEAPON___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RELOAD_WEAPON", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RELOAD_WEAPON", -1);
   UI_HASH_RELOAD_WEAPON_3 = result;
   return result;
 }
@@ -1258,7 +1258,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNLIMITED_AMMO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNLIMITED_AMMO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNLIMITED_AMMO", -1);
   UI_HASH_UNLIMITED_AMMO_3 = result;
   return result;
 }
@@ -1269,7 +1269,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DISABLE_COP_SYSTEM___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DISABLE_COP_SYSTEM", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DISABLE_COP_SYSTEM", -1);
   UI_HASH_DISABLE_COP_SYSTEM_3 = result;
   return result;
 }
@@ -1280,7 +1280,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FREE_AIM_MODE_TOGGLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FREE_AIM_MODE_TOGGLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FREE_AIM_MODE_TOGGLE", -1);
   UI_HASH_FREE_AIM_MODE_TOGGLE_3 = result;
   return result;
 }
@@ -1291,7 +1291,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TOGGLE_MISSION_SCORING_DISPLAY___
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("TOGGLE_MISSION_SCORING_DISPLAY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("TOGGLE_MISSION_SCORING_DISPLAY", -1);
   UI_HASH_TOGGLE_MISSION_SCORING_DISPLAY_3 = result;
   return result;
 }
@@ -1302,7 +1302,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SIMULATE_STATUE_COLLECTIBLE_PICKU
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SIMULATE_STATUE_COLLECTIBLE_PICKUP", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SIMULATE_STATUE_COLLECTIBLE_PICKUP", -1);
   UI_HASH_SIMULATE_STATUE_COLLECTIBLE_PICKUP_3 = result;
   return result;
 }
@@ -1313,7 +1313,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_STATUE_OFFENSIVE_LEVEL__
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_STATUE_OFFENSIVE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_STATUE_OFFENSIVE_LEVEL", -1);
   UI_HASH_INCREASE_STATUE_OFFENSIVE_LEVEL_3 = result;
   return result;
 }
@@ -1324,7 +1324,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_STATUE_DEFENSIVE_LEVEL__
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_STATUE_DEFENSIVE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_STATUE_DEFENSIVE_LEVEL", -1);
   UI_HASH_INCREASE_STATUE_DEFENSIVE_LEVEL_3 = result;
   return result;
 }
@@ -1335,7 +1335,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SIMULATE_VEHICLERAM_UPGRADE_PICKU
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SIMULATE_VEHICLERAM_UPGRADE_PICKUP", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SIMULATE_VEHICLERAM_UPGRADE_PICKUP", -1);
   UI_HASH_SIMULATE_VEHICLERAM_UPGRADE_PICKUP_3 = result;
   return result;
 }
@@ -1346,7 +1346,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SIMULATE_TRIAD_UPGRADE_POINT___3(
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SIMULATE_TRIAD_UPGRADE_POINT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SIMULATE_TRIAD_UPGRADE_POINT", -1);
   UI_HASH_SIMULATE_TRIAD_UPGRADE_POINT_3 = result;
   return result;
 }
@@ -1357,7 +1357,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_TRIAD_OFFENSIVE_LEVEL___
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_TRIAD_OFFENSIVE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_TRIAD_OFFENSIVE_LEVEL", -1);
   UI_HASH_INCREASE_TRIAD_OFFENSIVE_LEVEL_3 = result;
   return result;
 }
@@ -1368,7 +1368,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_TRIAD_DEFENSIVE_LEVEL___
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_TRIAD_DEFENSIVE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_TRIAD_DEFENSIVE_LEVEL", -1);
   UI_HASH_INCREASE_TRIAD_DEFENSIVE_LEVEL_3 = result;
   return result;
 }
@@ -1379,7 +1379,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SIMULATE_COP_UPGRADE_POINT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SIMULATE_COP_UPGRADE_POINT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SIMULATE_COP_UPGRADE_POINT", -1);
   UI_HASH_SIMULATE_COP_UPGRADE_POINT_3 = result;
   return result;
 }
@@ -1390,7 +1390,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CORRUPT_FUTURE_SAVEGAME___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CORRUPT_FUTURE_SAVEGAME", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CORRUPT_FUTURE_SAVEGAME", -1);
   UI_HASH_CORRUPT_FUTURE_SAVEGAME_3 = result;
   return result;
 }
@@ -1401,7 +1401,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_COP_DRIVING_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_COP_DRIVING_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_COP_DRIVING_LEVEL", -1);
   UI_HASH_INCREASE_COP_DRIVING_LEVEL_3 = result;
   return result;
 }
@@ -1412,7 +1412,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_COP_SHOOTING_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_COP_SHOOTING_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_COP_SHOOTING_LEVEL", -1);
   UI_HASH_INCREASE_COP_SHOOTING_LEVEL_3 = result;
   return result;
 }
@@ -1423,7 +1423,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_FACE_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_FACE_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_FACE_LEVEL", -1);
   UI_HASH_INCREASE_FACE_LEVEL_3 = result;
   return result;
 }
@@ -1434,7 +1434,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INCREASE_HEAT_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INCREASE_HEAT_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INCREASE_HEAT_LEVEL", -1);
   UI_HASH_INCREASE_HEAT_LEVEL_3 = result;
   return result;
 }
@@ -1445,7 +1445,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FREE_MONEY_SMALL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FREE_MONEY_SMALL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FREE_MONEY_SMALL", -1);
   UI_HASH_FREE_MONEY_SMALL_3 = result;
   return result;
 }
@@ -1456,7 +1456,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FREE_MONEY_LARGE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FREE_MONEY_LARGE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FREE_MONEY_LARGE", -1);
   UI_HASH_FREE_MONEY_LARGE_3 = result;
   return result;
 }
@@ -1467,7 +1467,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNLOCK_ALL_TROPHIES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNLOCK_ALL_TROPHIES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNLOCK_ALL_TROPHIES", -1);
   UI_HASH_UNLOCK_ALL_TROPHIES_3 = result;
   return result;
 }
@@ -1478,7 +1478,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNLOCK_ALL_DLC___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNLOCK_ALL_DLC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNLOCK_ALL_DLC", -1);
   UI_HASH_UNLOCK_ALL_DLC_3 = result;
   return result;
 }
@@ -1489,7 +1489,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PAUSE_SCREEN_INIT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PAUSE_SCREEN_INIT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PAUSE_SCREEN_INIT", -1);
   UI_HASH_PAUSE_SCREEN_INIT_3 = result;
   return result;
 }
@@ -1500,7 +1500,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PAUSE_SCREEN_EXIT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PAUSE_SCREEN_EXIT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PAUSE_SCREEN_EXIT", -1);
   UI_HASH_PAUSE_SCREEN_EXIT_3 = result;
   return result;
 }
@@ -1511,7 +1511,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAIN_MENU___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAIN_MENU", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAIN_MENU", -1);
   UI_HASH_MAIN_MENU_3 = result;
   return result;
 }
@@ -1522,7 +1522,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DEBUG_NIS_MENU___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DEBUG_NIS_MENU", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DEBUG_NIS_MENU", -1);
   UI_HASH_DEBUG_NIS_MENU_3 = result;
   return result;
 }
@@ -1533,7 +1533,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DEBUG_LANGUAGE_LIST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DEBUG_LANGUAGE_LIST", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DEBUG_LANGUAGE_LIST", -1);
   UI_HASH_DEBUG_LANGUAGE_LIST_3 = result;
   return result;
 }
@@ -1544,7 +1544,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_QUIT_TO_MAIN_MENU___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("QUIT_TO_MAIN_MENU", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("QUIT_TO_MAIN_MENU", -1);
   UI_HASH_QUIT_TO_MAIN_MENU_3 = result;
   return result;
 }
@@ -1555,7 +1555,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NIS_PAUSE_SCREEN_INIT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NIS_PAUSE_SCREEN_INIT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NIS_PAUSE_SCREEN_INIT", -1);
   UI_HASH_NIS_PAUSE_SCREEN_INIT_3 = result;
   return result;
 }
@@ -1566,7 +1566,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NIS_PAUSE_SCREEN_EXIT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NIS_PAUSE_SCREEN_EXIT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NIS_PAUSE_SCREEN_EXIT", -1);
   UI_HASH_NIS_PAUSE_SCREEN_EXIT_3 = result;
   return result;
 }
@@ -1577,7 +1577,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DELETE_GAME_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DELETE_GAME_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DELETE_GAME_COMPLETE", -1);
   UI_HASH_DELETE_GAME_COMPLETE_3 = result;
   return result;
 }
@@ -1588,7 +1588,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_SAVE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_save", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_save", -1);
   UI_HASH_MEMCARD_SAVE_3 = result;
   return result;
 }
@@ -1599,7 +1599,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_LOAD___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_load", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_load", -1);
   UI_HASH_MEMCARD_LOAD_3 = result;
   return result;
 }
@@ -1610,7 +1610,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_LOAD_GHOST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_load_ghost", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_load_ghost", -1);
   UI_HASH_MEMCARD_LOAD_GHOST_3 = result;
   return result;
 }
@@ -1621,7 +1621,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_LOAD_CNY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_load_cny", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_load_cny", -1);
   UI_HASH_MEMCARD_LOAD_CNY_3 = result;
   return result;
 }
@@ -1632,7 +1632,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_CONTINUE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_continue", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_continue", -1);
   UI_HASH_MEMCARD_CONTINUE_3 = result;
   return result;
 }
@@ -1643,7 +1643,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_CONTINUE_GHOST___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_continue_ghost", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_continue_ghost", -1);
   UI_HASH_MEMCARD_CONTINUE_GHOST_3 = result;
   return result;
 }
@@ -1654,7 +1654,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MEMCARD_CONTINUE_CNY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("memcard_continue_cny", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("memcard_continue_cny", -1);
   UI_HASH_MEMCARD_CONTINUE_CNY_3 = result;
   return result;
 }
@@ -1665,7 +1665,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVE_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("save_complete", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("save_complete", -1);
   UI_HASH_SAVE_COMPLETE_3 = result;
   return result;
 }
@@ -1676,7 +1676,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("load_complete", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("load_complete", -1);
   UI_HASH_LOAD_COMPLETE_3 = result;
   return result;
 }
@@ -1687,7 +1687,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PHOTO_DELETED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("photo_deleted", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("photo_deleted", -1);
   UI_HASH_PHOTO_DELETED_3 = result;
   return result;
 }
@@ -1698,7 +1698,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HIDE_SYNCING_DIALOG___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("HIDE_SYNCING_DIALOG", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("HIDE_SYNCING_DIALOG", -1);
   UI_HASH_HIDE_SYNCING_DIALOG_3 = result;
   return result;
 }
@@ -1709,7 +1709,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_OK_AUTOSAVE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_OK_AUTOSAVE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_OK_AUTOSAVE", -1);
   UI_HASH_DIALOG_OK_AUTOSAVE_3 = result;
   return result;
 }
@@ -1720,7 +1720,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_ICON_SAVELOAD___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_ICON_SAVELOAD", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_ICON_SAVELOAD", -1);
   UI_HASH_DIALOG_ICON_SAVELOAD_3 = result;
   return result;
 }
@@ -1731,7 +1731,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_OK_NOT_SIGNED_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_OK_NOT_SIGNED_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_OK_NOT_SIGNED_IN", -1);
   UI_HASH_DIALOG_OK_NOT_SIGNED_IN_3 = result;
   return result;
 }
@@ -1742,7 +1742,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_CANCEL_NOT_SIGNED_IN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_CANCEL_NOT_SIGNED_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_CANCEL_NOT_SIGNED_IN", -1);
   UI_HASH_DIALOG_CANCEL_NOT_SIGNED_IN_3 = result;
   return result;
 }
@@ -1753,7 +1753,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PHOTO_LOADED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PHOTO_LOADED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PHOTO_LOADED", -1);
   UI_HASH_PHOTO_LOADED_3 = result;
   return result;
 }
@@ -1764,7 +1764,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MONEY_POPUP_FINISHED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MONEY_POPUP_FINISHED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MONEY_POPUP_FINISHED", -1);
   UI_HASH_MONEY_POPUP_FINISHED_3 = result;
   return result;
 }
@@ -1775,7 +1775,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SNIPER_INTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SNIPER_INTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SNIPER_INTRO_COMPLETE", -1);
   UI_HASH_SNIPER_INTRO_COMPLETE_3 = result;
   return result;
 }
@@ -1786,7 +1786,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SNIPER_OUTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SNIPER_OUTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SNIPER_OUTRO_COMPLETE", -1);
   UI_HASH_SNIPER_OUTRO_COMPLETE_3 = result;
   return result;
 }
@@ -1797,7 +1797,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UPDATE_SOCIAL_TARGETS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UPDATE_SOCIAL_TARGETS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UPDATE_SOCIAL_TARGETS", -1);
   UI_HASH_UPDATE_SOCIAL_TARGETS_3 = result;
   return result;
 }
@@ -1808,7 +1808,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RACEHUD_LOADED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RACEHUD_LOADED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RACEHUD_LOADED", -1);
   UI_HASH_RACEHUD_LOADED_3 = result;
   return result;
 }
@@ -1819,7 +1819,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CASE_ANIM_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CASE_ANIM_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CASE_ANIM_DONE", -1);
   UI_HASH_CASE_ANIM_DONE_3 = result;
   return result;
 }
@@ -1830,7 +1830,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_EXIT_FROM_TRANSIT_SCREEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("EXIT_FROM_TRANSIT_SCREEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("EXIT_FROM_TRANSIT_SCREEN", -1);
   UI_HASH_EXIT_FROM_TRANSIT_SCREEN_3 = result;
   return result;
 }
@@ -1841,7 +1841,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_EXIT_FROM_TRANSIT_VEHICLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("EXIT_FROM_TRANSIT_VEHICLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("EXIT_FROM_TRANSIT_VEHICLE", -1);
   UI_HASH_EXIT_FROM_TRANSIT_VEHICLE_3 = result;
   return result;
 }
@@ -1852,7 +1852,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_EXIT_FROM_TAXI_SCREEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("EXIT_FROM_TAXI_SCREEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("EXIT_FROM_TAXI_SCREEN", -1);
   UI_HASH_EXIT_FROM_TAXI_SCREEN_3 = result;
   return result;
 }
@@ -1863,7 +1863,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_EXIT_FROM_TAXI_VEHICLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("EXIT_FROM_TAXI_VEHICLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("EXIT_FROM_TAXI_VEHICLE", -1);
   UI_HASH_EXIT_FROM_TAXI_VEHICLE_3 = result;
   return result;
 }
@@ -1874,7 +1874,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PARKADE_OPEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PARKADE_OPEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PARKADE_OPEN", -1);
   UI_HASH_PARKADE_OPEN_3 = result;
   return result;
 }
@@ -1885,7 +1885,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CLOSE_SCREEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CLOSE_SCREEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CLOSE_SCREEN", -1);
   UI_HASH_CLOSE_SCREEN_3 = result;
   return result;
 }
@@ -1896,7 +1896,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAIN_MENU_STATE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAIN_MENU_STATE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAIN_MENU_STATE", -1);
   UI_HASH_MAIN_MENU_STATE_3 = result;
   return result;
 }
@@ -1907,7 +1907,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DISPLAY_IMAGE_LOADED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DISPLAY_IMAGE_LOADED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DISPLAY_IMAGE_LOADED", -1);
   UI_HASH_DISPLAY_IMAGE_LOADED_3 = result;
   return result;
 }
@@ -1918,7 +1918,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TIMED_GAME_RESULT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("TIMED_GAME_RESULT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("TIMED_GAME_RESULT", -1);
   UI_HASH_TIMED_GAME_RESULT_3 = result;
   return result;
 }
@@ -1929,7 +1929,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TIMED_GAME_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("TIMED_GAME_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("TIMED_GAME_OUTRO_DONE", -1);
   UI_HASH_TIMED_GAME_OUTRO_DONE_3 = result;
   return result;
 }
@@ -1940,7 +1940,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ACTION_RESULT_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ACTION_RESULT_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ACTION_RESULT_DONE", -1);
   UI_HASH_ACTION_RESULT_DONE_3 = result;
   return result;
 }
@@ -1951,7 +1951,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_CAMERA_SUCCESS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_CAMERA_SUCCESS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_CAMERA_SUCCESS", -1);
   UI_HASH_PDA_CAMERA_SUCCESS_3 = result;
   return result;
 }
@@ -1962,7 +1962,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_CAMERA_FAIL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_CAMERA_FAIL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_CAMERA_FAIL", -1);
   UI_HASH_PDA_CAMERA_FAIL_3 = result;
   return result;
 }
@@ -1973,7 +1973,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_CAMERA_DESTROY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_CAMERA_DESTROY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_CAMERA_DESTROY", -1);
   UI_HASH_PDA_CAMERA_DESTROY_3 = result;
   return result;
 }
@@ -1984,7 +1984,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_CAMERA_NO_PHOTOS_COMPLETE___3
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_CAMERA_NO_PHOTOS_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_CAMERA_NO_PHOTOS_COMPLETE", -1);
   UI_HASH_PDA_CAMERA_NO_PHOTOS_COMPLETE_3 = result;
   return result;
 }
@@ -1995,7 +1995,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_PHONE_SUCCESS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_PHONE_SUCCESS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_PHONE_SUCCESS", -1);
   UI_HASH_PDA_PHONE_SUCCESS_3 = result;
   return result;
 }
@@ -2006,7 +2006,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_PHONE_FAIL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_PHONE_FAIL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_PHONE_FAIL", -1);
   UI_HASH_PDA_PHONE_FAIL_3 = result;
   return result;
 }
@@ -2017,7 +2017,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PDA_SLOT_SELECTED_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PDA_SLOT_SELECTED_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PDA_SLOT_SELECTED_COMPLETE", -1);
   UI_HASH_PDA_SLOT_SELECTED_COMPLETE_3 = result;
   return result;
 }
@@ -2028,7 +2028,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_BRIGHTNESS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_BRIGHTNESS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_BRIGHTNESS", -1);
   UI_HASH_OPTIONS_BRIGHTNESS_3 = result;
   return result;
 }
@@ -2039,7 +2039,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_SCALE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_SCALE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_SCALE", -1);
   UI_HASH_OPTIONS_SCALE_3 = result;
   return result;
 }
@@ -2050,7 +2050,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_RESOLUTION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_RESOLUTION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_RESOLUTION", -1);
   UI_HASH_OPTIONS_RESOLUTION_3 = result;
   return result;
 }
@@ -2061,7 +2061,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_FULLSCREEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_FULLSCREEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_FULLSCREEN", -1);
   UI_HASH_OPTIONS_FULLSCREEN_3 = result;
   return result;
 }
@@ -2072,7 +2072,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VSYNC___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VSYNC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VSYNC", -1);
   UI_HASH_OPTIONS_VSYNC_3 = result;
   return result;
 }
@@ -2083,7 +2083,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_QUALITY_AA___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_QUALITY_AA", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_QUALITY_AA", -1);
   UI_HASH_OPTIONS_QUALITY_AA_3 = result;
   return result;
 }
@@ -2094,7 +2094,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_HIGH_RES_TEXTURES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_HIGH_RES_TEXTURES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_HIGH_RES_TEXTURES", -1);
   UI_HASH_OPTIONS_HIGH_RES_TEXTURES_3 = result;
   return result;
 }
@@ -2105,7 +2105,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_SHADOW_RESOLUTION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_SHADOW_RESOLUTION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_SHADOW_RESOLUTION", -1);
   UI_HASH_OPTIONS_SHADOW_RESOLUTION_3 = result;
   return result;
 }
@@ -2116,7 +2116,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_SHADOW_FILTERING___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_SHADOW_FILTERING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_SHADOW_FILTERING", -1);
   UI_HASH_OPTIONS_SHADOW_FILTERING_3 = result;
   return result;
 }
@@ -2127,7 +2127,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_SSAO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_SSAO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_SSAO", -1);
   UI_HASH_OPTIONS_SSAO_3 = result;
   return result;
 }
@@ -2138,7 +2138,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_QUALITY_MOTION_BLUR___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_QUALITY_MOTION_BLUR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_QUALITY_MOTION_BLUR", -1);
   UI_HASH_OPTIONS_QUALITY_MOTION_BLUR_3 = result;
   return result;
 }
@@ -2149,7 +2149,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_ENABLE_3D___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_ENABLE_3D", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_ENABLE_3D", -1);
   UI_HASH_OPTIONS_ENABLE_3D_3 = result;
   return result;
 }
@@ -2160,7 +2160,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_FPS_LIMITER___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_FPS_LIMITER", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_FPS_LIMITER", -1);
   UI_HASH_OPTIONS_FPS_LIMITER_3 = result;
   return result;
 }
@@ -2171,7 +2171,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_3D_DEPTH___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_3D_DEPTH", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_3D_DEPTH", -1);
   UI_HASH_OPTIONS_3D_DEPTH_3 = result;
   return result;
 }
@@ -2182,7 +2182,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_3D_CONVERGENCE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_3D_CONVERGENCE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_3D_CONVERGENCE", -1);
   UI_HASH_OPTIONS_3D_CONVERGENCE_3 = result;
   return result;
 }
@@ -2193,7 +2193,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_SUBTITLES___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_SUBTITLES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_SUBTITLES", -1);
   UI_HASH_OPTIONS_SUBTITLES_3 = result;
   return result;
 }
@@ -2204,7 +2204,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VIBRATION___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VIBRATION", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VIBRATION", -1);
   UI_HASH_OPTIONS_VIBRATION_3 = result;
   return result;
 }
@@ -2215,7 +2215,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_GAME_HINTS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_GAME_HINTS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_GAME_HINTS", -1);
   UI_HASH_OPTIONS_GAME_HINTS_3 = result;
   return result;
 }
@@ -2226,7 +2226,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_CONTEXT_HELP___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_CONTEXT_HELP", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_CONTEXT_HELP", -1);
   UI_HASH_OPTIONS_CONTEXT_HELP_3 = result;
   return result;
 }
@@ -2237,7 +2237,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_HUD___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_HUD", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_HUD", -1);
   UI_HASH_OPTIONS_HUD_3 = result;
   return result;
 }
@@ -2248,7 +2248,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_INVERT_Y___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_INVERT_Y", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_INVERT_Y", -1);
   UI_HASH_OPTIONS_INVERT_Y_3 = result;
   return result;
 }
@@ -2259,7 +2259,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_INVERT_X___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_INVERT_X", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_INVERT_X", -1);
   UI_HASH_OPTIONS_INVERT_X_3 = result;
   return result;
 }
@@ -2270,7 +2270,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_AIM_PITCH___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_AIM_PITCH", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_AIM_PITCH", -1);
   UI_HASH_OPTIONS_AIM_PITCH_3 = result;
   return result;
 }
@@ -2281,7 +2281,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_AIM_YAW___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_AIM_YAW", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_AIM_YAW", -1);
   UI_HASH_OPTIONS_AIM_YAW_3 = result;
   return result;
 }
@@ -2292,7 +2292,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_AIM_SOFT_LOCK___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_AIM_SOFT_LOCK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_AIM_SOFT_LOCK", -1);
   UI_HASH_OPTIONS_AIM_SOFT_LOCK_3 = result;
   return result;
 }
@@ -2303,7 +2303,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_CAMERA_PITCH___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_PITCH", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_PITCH", -1);
   UI_HASH_OPTIONS_CAMERA_PITCH_3 = result;
   return result;
 }
@@ -2314,7 +2314,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_CAMERA_YAW___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_YAW", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_YAW", -1);
   UI_HASH_OPTIONS_CAMERA_YAW_3 = result;
   return result;
 }
@@ -2325,7 +2325,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_CAMERA_FREE_LOOK___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_FREE_LOOK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_CAMERA_FREE_LOOK", -1);
   UI_HASH_OPTIONS_CAMERA_FREE_LOOK_3 = result;
   return result;
 }
@@ -2336,7 +2336,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_GAME_INPUT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_GAME_INPUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_GAME_INPUT", -1);
   UI_HASH_OPTIONS_GAME_INPUT_3 = result;
   return result;
 }
@@ -2347,7 +2347,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_MOUSE_INPUT_RAW___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_MOUSE_INPUT_RAW", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_MOUSE_INPUT_RAW", -1);
   UI_HASH_OPTIONS_MOUSE_INPUT_RAW_3 = result;
   return result;
 }
@@ -2358,7 +2358,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_MOUSE_SENSITIVITY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_MOUSE_SENSITIVITY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_MOUSE_SENSITIVITY", -1);
   UI_HASH_OPTIONS_MOUSE_SENSITIVITY_3 = result;
   return result;
 }
@@ -2369,7 +2369,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_WORLD_DENSITY___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_WORLD_DENSITY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_WORLD_DENSITY", -1);
   UI_HASH_OPTIONS_WORLD_DENSITY_3 = result;
   return result;
 }
@@ -2380,7 +2380,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_GRAPHICS_LEVEL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_GRAPHICS_LEVEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_GRAPHICS_LEVEL", -1);
   UI_HASH_OPTIONS_GRAPHICS_LEVEL_3 = result;
   return result;
 }
@@ -2391,7 +2391,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_LOW_RES_BUFFERS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_LOW_RES_BUFFERS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_LOW_RES_BUFFERS", -1);
   UI_HASH_OPTIONS_LOW_RES_BUFFERS_3 = result;
   return result;
 }
@@ -2402,7 +2402,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VOLUME_SFX___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_SFX", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_SFX", -1);
   UI_HASH_OPTIONS_VOLUME_SFX_3 = result;
   return result;
 }
@@ -2413,7 +2413,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VOLUME_DIALOGUE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_DIALOGUE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_DIALOGUE", -1);
   UI_HASH_OPTIONS_VOLUME_DIALOGUE_3 = result;
   return result;
 }
@@ -2424,7 +2424,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VOLUME_MUSIC___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_MUSIC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_MUSIC", -1);
   UI_HASH_OPTIONS_VOLUME_MUSIC_3 = result;
   return result;
 }
@@ -2435,7 +2435,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_RETICLE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_RETICLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_RETICLE", -1);
   UI_HASH_OPTIONS_RETICLE_3 = result;
   return result;
 }
@@ -2446,7 +2446,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_VOLUME_CAR_MUSIC___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_CAR_MUSIC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_VOLUME_CAR_MUSIC", -1);
   UI_HASH_OPTIONS_VOLUME_CAR_MUSIC_3 = result;
   return result;
 }
@@ -2457,7 +2457,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_DISABLE_SOCIAL___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_DISABLE_SOCIAL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_DISABLE_SOCIAL", -1);
   UI_HASH_OPTIONS_DISABLE_SOCIAL_3 = result;
   return result;
 }
@@ -2468,7 +2468,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTIONS_GPS_ARROWS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTIONS_GPS_ARROWS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTIONS_GPS_ARROWS", -1);
   UI_HASH_OPTIONS_GPS_ARROWS_3 = result;
   return result;
 }
@@ -2479,7 +2479,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTION_INTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTION_INTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTION_INTRO_COMPLETE", -1);
   UI_HASH_OPTION_INTRO_COMPLETE_3 = result;
   return result;
 }
@@ -2490,7 +2490,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTION_OUTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTION_OUTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTION_OUTRO_COMPLETE", -1);
   UI_HASH_OPTION_OUTRO_COMPLETE_3 = result;
   return result;
 }
@@ -2501,7 +2501,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTION_NETWORK_ENABLED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTION_NETWORK_ENABLED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTION_NETWORK_ENABLED", -1);
   UI_HASH_OPTION_NETWORK_ENABLED_3 = result;
   return result;
 }
@@ -2512,7 +2512,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CONTROLLERS___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CONTROLLERS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CONTROLLERS", -1);
   UI_HASH_CONTROLLERS_3 = result;
   return result;
 }
@@ -2523,7 +2523,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NETWORK_EULA___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NETWORK_EULA", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NETWORK_EULA", -1);
   UI_HASH_NETWORK_EULA_3 = result;
   return result;
 }
@@ -2534,7 +2534,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NETWORK_HIDE_MENU___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NETWORK_HIDE_MENU", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NETWORK_HIDE_MENU", -1);
   UI_HASH_NETWORK_HIDE_MENU_3 = result;
   return result;
 }
@@ -2545,7 +2545,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NETWORK_OPTIONS_OPEN___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NETWORK_OPTIONS_OPEN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NETWORK_OPTIONS_OPEN", -1);
   UI_HASH_NETWORK_OPTIONS_OPEN_3 = result;
   return result;
 }
@@ -2556,7 +2556,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NETWORK_OPTIONS_CLOSED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NETWORK_OPTIONS_CLOSED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NETWORK_OPTIONS_CLOSED", -1);
   UI_HASH_NETWORK_OPTIONS_CLOSED_3 = result;
   return result;
 }
@@ -2567,7 +2567,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MULTI_LEADERBOARD_DOWNLOADED___3(
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MULTI_LEADERBOARD_DOWNLOADED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MULTI_LEADERBOARD_DOWNLOADED", -1);
   UI_HASH_MULTI_LEADERBOARD_DOWNLOADED_3 = result;
   return result;
 }
@@ -2578,7 +2578,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REWARDS_COMPLETE_MSG_INTRO_DONE__
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REWARDS_COMPLETE_MSG_INTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REWARDS_COMPLETE_MSG_INTRO_DONE", -1);
   UI_HASH_REWARDS_COMPLETE_MSG_INTRO_DONE_3 = result;
   return result;
 }
@@ -2589,7 +2589,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACE_LEVELUP_INTRO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FACE_LEVELUP_INTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FACE_LEVELUP_INTRO", -1);
   UI_HASH_FACE_LEVELUP_INTRO_3 = result;
   return result;
 }
@@ -2600,7 +2600,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACE_LEVELUP_MSG_INTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FACE_LEVELUP_MSG_INTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FACE_LEVELUP_MSG_INTRO_DONE", -1);
   UI_HASH_FACE_LEVELUP_MSG_INTRO_DONE_3 = result;
   return result;
 }
@@ -2611,7 +2611,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REWARDS_COMPLETE_MSG_OUTRO_DONE__
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REWARDS_COMPLETE_MSG_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REWARDS_COMPLETE_MSG_OUTRO_DONE", -1);
   UI_HASH_REWARDS_COMPLETE_MSG_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2622,7 +2622,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACE_LEVELUP_MSG_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FACE_LEVELUP_MSG_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FACE_LEVELUP_MSG_OUTRO_DONE", -1);
   UI_HASH_FACE_LEVELUP_MSG_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2633,7 +2633,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REWARDS_INTRO___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REWARDS_INTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REWARDS_INTRO", -1);
   UI_HASH_REWARDS_INTRO_3 = result;
   return result;
 }
@@ -2644,7 +2644,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REWARDS_REWARDS_INTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REWARDS_REWARDS_INTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REWARDS_REWARDS_INTRO_DONE", -1);
   UI_HASH_REWARDS_REWARDS_INTRO_DONE_3 = result;
   return result;
 }
@@ -2655,7 +2655,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REWARDS_REWARDS_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REWARDS_REWARDS_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REWARDS_REWARDS_OUTRO_DONE", -1);
   UI_HASH_REWARDS_REWARDS_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2666,7 +2666,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FACE_BAR_FINISHED_ANIMATING___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FACE_BAR_FINISHED_ANIMATING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FACE_BAR_FINISHED_ANIMATING", -1);
   UI_HASH_FACE_BAR_FINISHED_ANIMATING_3 = result;
   return result;
 }
@@ -2677,7 +2677,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CHALLENGE_UNLOCKED___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CHALLENGE_UNLOCKED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CHALLENGE_UNLOCKED", -1);
   UI_HASH_CHALLENGE_UNLOCKED_3 = result;
   return result;
 }
@@ -2688,7 +2688,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TUTORIAL_OVERLAY_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("TUTORIAL_OVERLAY_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("TUTORIAL_OVERLAY_OUTRO_DONE", -1);
   UI_HASH_TUTORIAL_OVERLAY_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2699,7 +2699,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HINT_TEXT_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("HINT_TEXT_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("HINT_TEXT_OUTRO_DONE", -1);
   UI_HASH_HINT_TEXT_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2710,7 +2710,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_RADIO_OUTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RADIO_OUTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RADIO_OUTRO_COMPLETE", -1);
   UI_HASH_RADIO_OUTRO_COMPLETE_3 = result;
   return result;
 }
@@ -2721,7 +2721,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CASE_INFO_INTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CASE_INFO_INTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CASE_INFO_INTRO_DONE", -1);
   UI_HASH_CASE_INFO_INTRO_DONE_3 = result;
   return result;
 }
@@ -2732,7 +2732,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CASE_INFO_OUTRO_DONE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CASE_INFO_OUTRO_DONE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CASE_INFO_OUTRO_DONE", -1);
   UI_HASH_CASE_INFO_OUTRO_DONE_3 = result;
   return result;
 }
@@ -2743,7 +2743,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FIGHTCLUB_INTRO_COMPLETE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FIGHTCLUB_INTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FIGHTCLUB_INTRO_COMPLETE", -1);
   UI_HASH_FIGHTCLUB_INTRO_COMPLETE_3 = result;
   return result;
 }
@@ -2754,7 +2754,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_CHANGE_TAB___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_CHANGE_TAB", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_CHANGE_TAB", -1);
   UI_HASH_MOUSE_CHANGE_TAB_3 = result;
   return result;
 }
@@ -2765,7 +2765,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_SELECT_SLOT___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_SELECT_SLOT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_SELECT_SLOT", -1);
   UI_HASH_MOUSE_SELECT_SLOT_3 = result;
   return result;
 }
@@ -2778,7 +2778,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_List___3()
 
   v0 = UFG::qStringHash32("List", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_List_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_List___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_List___3);
 }
 
 // File Line: 365
@@ -2789,7 +2789,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Description___3()
 
   v0 = UFG::qStringHash32("Description", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Description_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Description___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Description___3);
 }
 
 // File Line: 366
@@ -2800,7 +2800,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_CaseName___3()
 
   v0 = UFG::qStringHash32("CaseName", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_CaseName_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_CaseName___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_CaseName___3);
 }
 
 // File Line: 367
@@ -2811,7 +2811,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Lead1___3()
 
   v0 = UFG::qStringHash32("Lead1", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Lead1_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Lead1___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Lead1___3);
 }
 
 // File Line: 368
@@ -2822,7 +2822,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Lead2___3()
 
   v0 = UFG::qStringHash32("Lead2", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Lead2_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Lead2___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Lead2___3);
 }
 
 // File Line: 369
@@ -2833,7 +2833,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Lead3___3()
 
   v0 = UFG::qStringHash32("Lead3", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Lead3_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Lead3___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Lead3___3);
 }
 
 // File Line: 370
@@ -2844,7 +2844,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Lead4___3()
 
   v0 = UFG::qStringHash32("Lead4", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Lead4_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Lead4___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Lead4___3);
 }
 
 // File Line: 371
@@ -2855,7 +2855,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Lead5___3()
 
   v0 = UFG::qStringHash32("Lead5", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Lead5_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Lead5___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Lead5___3);
 }
 
 // File Line: 373
@@ -2866,7 +2866,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Name___3()
 
   v0 = UFG::qStringHash32("Name", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Name_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Name___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Name___3);
 }
 
 // File Line: 374
@@ -2877,7 +2877,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Portrait___3()
 
   v0 = UFG::qStringHash32("Portrait", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Portrait_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Portrait___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Portrait___3);
 }
 
 // File Line: 375
@@ -2888,7 +2888,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Info___3()
 
   v0 = UFG::qStringHash32("Info", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Info_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Info___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Info___3);
 }
 
 // File Line: 377
@@ -2899,7 +2899,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Vehicle___3()
 
   v0 = UFG::qStringHash32("Vehicle", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Vehicle_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Vehicle___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Vehicle___3);
 }
 
 // File Line: 378
@@ -2910,7 +2910,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Clothes___3()
 
   v0 = UFG::qStringHash32("Clothing", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Clothes_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Clothes___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Clothes___3);
 }
 
 // File Line: 379
@@ -2921,7 +2921,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Boat___3()
 
   v0 = UFG::qStringHash32("Boat", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Boat_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Boat___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Boat___3);
 }
 
 // File Line: 381
@@ -2932,7 +2932,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_normal___3()
 
   v0 = UFG::qStringHash32("normal", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_normal_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_normal___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_normal___3);
 }
 
 // File Line: 382
@@ -2943,7 +2943,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_complete___3()
 
   v0 = UFG::qStringHash32("complete", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_complete_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_complete___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_complete___3);
 }
 
 // File Line: 383
@@ -2954,7 +2954,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_incomplete___3()
 
   v0 = UFG::qStringHash32("incomplete", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_incomplete_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_incomplete___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_incomplete___3);
 }
 
 // File Line: 384
@@ -2965,7 +2965,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_danger___3()
 
   v0 = UFG::qStringHash32("danger", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_danger_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_danger___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_danger___3);
 }
 
 // File Line: 387
@@ -2974,7 +2974,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REGION_CHANGE___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REGION_CHANGE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REGION_CHANGE", -1);
   UI_HASH_REGION_CHANGE_3 = result;
   return result;
 }
@@ -2985,7 +2985,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REGION_SHOW___3()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REGION_SHOW", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REGION_SHOW", -1);
   UI_HASH_REGION_SHOW_3 = result;
   return result;
 }
@@ -3075,7 +3075,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_none___3()
 
   v0 = UFG::qStringHash32("none", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_none_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_none___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_none___3);
 }
 
 // File Line: 405
@@ -3086,7 +3086,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Face___3()
 
   v0 = UFG::qStringHash32("FACE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Face_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Face___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Face___3);
 }
 
 // File Line: 406
@@ -3097,7 +3097,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Police___3()
 
   v0 = UFG::qStringHash32("POLICE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Police_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Police___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Police___3);
 }
 
 // File Line: 407
@@ -3108,7 +3108,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Triad___3()
 
   v0 = UFG::qStringHash32("TRIAD", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Triad_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Triad___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Triad___3);
 }
 
 // File Line: 408
@@ -3119,7 +3119,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Melee___3()
 
   v0 = UFG::qStringHash32("MELEE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Melee_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Melee___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Melee___3);
 }
 
 // File Line: 409
@@ -3130,7 +3130,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Health___3()
 
   v0 = UFG::qStringHash32("HEALTH", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Health_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Health___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Health___3);
 }
 
 // File Line: 412
@@ -3141,7 +3141,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Default___3()
 
   v0 = UFG::qStringHash32("DEFAULT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Default_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Default___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Default___3);
 }
 
 // File Line: 413
@@ -3152,7 +3152,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Event___3()
 
   v0 = UFG::qStringHash32("EVENT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Event_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Event___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Event___3);
 }
 
 // File Line: 414
@@ -3163,7 +3163,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Mission___3()
 
   v0 = UFG::qStringHash32("MISSION", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Mission_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Mission___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Mission___3);
 }
 
 // File Line: 415
@@ -3174,7 +3174,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_MissionSomber___3()
 
   v0 = UFG::qStringHash32("MISSION_SOMBER", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_MissionSomber_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_MissionSomber___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_MissionSomber___3);
 }
 
 // File Line: 416
@@ -3185,7 +3185,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_MissionAlt___3()
 
   v0 = UFG::qStringHash32("MISSION_ALT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_MissionAlt_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_MissionAlt___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_MissionAlt___3);
 }
 
 // File Line: 417
@@ -3196,7 +3196,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Job___3()
 
   v0 = UFG::qStringHash32("JOB", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Job_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Job___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Job___3);
 }
 
 // File Line: 418
@@ -3207,7 +3207,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Case___3()
 
   v0 = UFG::qStringHash32("CASE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Case_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Case___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Case___3);
 }
 
 // File Line: 419
@@ -3218,7 +3218,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_CaseLead___3()
 
   v0 = UFG::qStringHash32("CASE_LEAD", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_CaseLead_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_CaseLead___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_CaseLead___3);
 }
 
 // File Line: 420
@@ -3229,7 +3229,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_UndercoverCase___3()
 
   v0 = UFG::qStringHash32("UNDERCOVER_CASE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_UndercoverCase_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_UndercoverCase___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_UndercoverCase___3);
 }
 
 // File Line: 421
@@ -3240,7 +3240,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Favour___3()
 
   v0 = UFG::qStringHash32("FAVOUR", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Favour_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Favour___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Favour___3);
 }
 
 // File Line: 422
@@ -3251,7 +3251,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Date___3()
 
   v0 = UFG::qStringHash32("DATE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Date_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Date___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Date___3);
 }
 
 // File Line: 423
@@ -3262,7 +3262,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Race___3()
 
   v0 = UFG::qStringHash32("RACE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Race_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Race___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Race___3);
 }
 
 // File Line: 424
@@ -3273,7 +3273,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Reward___3()
 
   v0 = UFG::qStringHash32("REWARD", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Reward_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Reward___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Reward___3);
 }
 
 // File Line: 425
@@ -3284,7 +3284,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_MTriadWars___3()
 
   v0 = UFG::qStringHash32("TRIAD_WARS", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_MTriadWars_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_MTriadWars___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_MTriadWars___3);
 }
 
 // File Line: 426
@@ -3295,7 +3295,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_DLCPolice___3()
 
   v0 = UFG::qStringHash32("DLC_POLICE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_DLCPolice_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_DLCPolice___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_DLCPolice___3);
 }
 
 // File Line: 427
@@ -3306,7 +3306,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_DLCTriad___3()
 
   v0 = UFG::qStringHash32("DLC_TRIAD", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_DLCTriad_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_DLCTriad___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_DLCTriad___3);
 }
 
 // File Line: 428
@@ -3317,7 +3317,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_DLC___3()
 
   v0 = UFG::qStringHash32("DLC", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_DLC_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_DLC___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_DLC___3);
 }
 
 // File Line: 429
@@ -3328,7 +3328,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GhostMission___3()
 
   v0 = UFG::qStringHash32("GhostMission", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GhostMission_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GhostMission___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GhostMission___3);
 }
 
 // File Line: 430
@@ -3339,7 +3339,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GhostEvent___3()
 
   v0 = UFG::qStringHash32("GhostEvent", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GhostEvent_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GhostEvent___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GhostEvent___3);
 }
 
 // File Line: 431
@@ -3350,7 +3350,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_CNYMission___3()
 
   v0 = UFG::qStringHash32("CNYMission", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_CNYMission_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_CNYMission___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_CNYMission___3);
 }
 
 // File Line: 432
@@ -3361,7 +3361,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Other___3()
 
   v0 = UFG::qStringHash32("OTHER", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Other_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Other___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Other___3);
 }
 
 // File Line: 435
@@ -3370,7 +3370,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MISSION_COMPLETE_SHOW_ACCEPT___3(
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MISSION_COMPLETE_SHOW_ACCEPT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MISSION_COMPLETE_SHOW_ACCEPT", -1);
   UI_HASH_MISSION_COMPLETE_SHOW_ACCEPT_3 = result;
   return result;
 }
@@ -3381,7 +3381,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MISSION_COMPLETE_SHOW_UPGRADES_AV
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MISSION_COMPLETE_SHOW_UPGRADES_AVAILABLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MISSION_COMPLETE_SHOW_UPGRADES_AVAILABLE", -1);
   UI_HASH_MISSION_COMPLETE_SHOW_UPGRADES_AVAILABLE_3 = result;
   return result;
 }
@@ -3394,7 +3394,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_HealthShrine___3()
 
   v0 = UFG::qStringHash32("Collectible_HealthShrine", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_HealthShrine_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_HealthShrine___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_HealthShrine___3);
 }
 
 // File Line: 440
@@ -3405,7 +3405,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_LockBox___3()
 
   v0 = UFG::qStringHash32("Collectible_LockBox", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_LockBox_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_LockBox___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_LockBox___3);
 }
 
 // File Line: 441
@@ -3416,7 +3416,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_SecurityCamera___3()
 
   v0 = UFG::qStringHash32("Collectible_SecurityCamera", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_SecurityCamera_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_SecurityCamera___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_SecurityCamera___3);
 }
 
 // File Line: 442
@@ -3427,7 +3427,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_Jump___3()
 
   v0 = UFG::qStringHash32("Collectible_Jump", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_Jump_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_Jump___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_Jump___3);
 }
 
 // File Line: 443
@@ -3438,7 +3438,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_Caption___3()
 
   v0 = UFG::qStringHash32("Collectible_Caption", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_Caption_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_Caption___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_Caption___3);
 }
 
 // File Line: 444
@@ -3449,7 +3449,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_01___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_01", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_01_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_01___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_01___3);
 }
 
 // File Line: 445
@@ -3460,7 +3460,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_02___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_02", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_02_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_02___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_02___3);
 }
 
 // File Line: 446
@@ -3471,7 +3471,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_03___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_03", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_03_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_03___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_03___3);
 }
 
 // File Line: 447
@@ -3482,7 +3482,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_04___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_04", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_04_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_04___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_04___3);
 }
 
 // File Line: 448
@@ -3493,7 +3493,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_05___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_05", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_05_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_05___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_05___3);
 }
 
 // File Line: 449
@@ -3504,7 +3504,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_06___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_06", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_06_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_06___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_06___3);
 }
 
 // File Line: 450
@@ -3515,7 +3515,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_07___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_07", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_07_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_07___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_07___3);
 }
 
 // File Line: 451
@@ -3526,7 +3526,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_08___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_08", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_08_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_08___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_08___3);
 }
 
 // File Line: 452
@@ -3537,7 +3537,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_09___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_09", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_09_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_09___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_09___3);
 }
 
 // File Line: 453
@@ -3548,7 +3548,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_10___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_10", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_10_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_10___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_10___3);
 }
 
 // File Line: 454
@@ -3559,7 +3559,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_11___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_11", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_11_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_11___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_11___3);
 }
 
 // File Line: 455
@@ -3570,7 +3570,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_12___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_12", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_12_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_12___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_12___3);
 }
 
 // File Line: 456
@@ -3581,7 +3581,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_13___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_13", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_13_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_13___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_13___3);
 }
 
 // File Line: 457
@@ -3592,7 +3592,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_14___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_14", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_14_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_14___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_14___3);
 }
 
 // File Line: 458
@@ -3603,7 +3603,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_15___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_15", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_15_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_15___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_15___3);
 }
 
 // File Line: 459
@@ -3614,7 +3614,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_16___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_16", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_16_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_16___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_16___3);
 }
 
 // File Line: 460
@@ -3625,7 +3625,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_17___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_17", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_17_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_17___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_17___3);
 }
 
 // File Line: 461
@@ -3636,7 +3636,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_18___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_18", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_18_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_18___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_18___3);
 }
 
 // File Line: 462
@@ -3647,7 +3647,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_19___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_19", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_19_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_19___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_19___3);
 }
 
 // File Line: 463
@@ -3658,7 +3658,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Collectible_DLC_20___3()
 
   v0 = UFG::qStringHash32("Collectible_DLC_20", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Collectible_DLC_20_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_20___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Collectible_DLC_20___3);
 }
 
 // File Line: 464
@@ -3669,7 +3669,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Upgrade_Melee___3()
 
   v0 = UFG::qStringHash32("Upgrade_Melee", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Upgrade_Melee_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Upgrade_Melee___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Upgrade_Melee___3);
 }
 
 // File Line: 465
@@ -3680,7 +3680,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Upgrade_Gun___3()
 
   v0 = UFG::qStringHash32("Upgrade_Gun", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Upgrade_Gun_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Upgrade_Gun___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Upgrade_Gun___3);
 }
 
 // File Line: 466
@@ -3691,7 +3691,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_TriadWars___3()
 
   v0 = UFG::qStringHash32("TriadWars", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_TriadWars_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_TriadWars___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_TriadWars___3);
 }
 
 // File Line: 467
@@ -3702,7 +3702,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Hint___3()
 
   v0 = UFG::qStringHash32("Hint", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Hint_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Hint___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Hint___3);
 }
 
 // File Line: 468
@@ -3713,7 +3713,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Chat___3()
 
   v0 = UFG::qStringHash32("Chat", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Chat_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Chat___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Chat___3);
 }
 
 // File Line: 469
@@ -3724,7 +3724,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Food___3()
 
   v0 = UFG::qStringHash32("Food", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Food_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Food___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Food___3);
 }
 
 // File Line: 470
@@ -3735,7 +3735,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Tea___3()
 
   v0 = UFG::qStringHash32("Tea", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Tea_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Tea___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Tea___3);
 }
 
 // File Line: 471
@@ -3746,7 +3746,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Massage___3()
 
   v0 = UFG::qStringHash32("Massage", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Massage_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Massage___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Massage___3);
 }
 
 // File Line: 472
@@ -3757,7 +3757,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Clothing___3()
 
   v0 = UFG::qStringHash32("Clothing", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Clothing_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Clothing___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Clothing___3);
 }
 
 // File Line: 473
@@ -3768,7 +3768,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Weapon___3()
 
   v0 = UFG::qStringHash32("Weapon", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Weapon_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Weapon___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Weapon___3);
 }
 
 // File Line: 474
@@ -3779,7 +3779,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Extortion___3()
 
   v0 = UFG::qStringHash32("Extortion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Extortion_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Extortion___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Extortion___3);
 }
 
 // File Line: 475
@@ -3790,7 +3790,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Bribe___3()
 
   v0 = UFG::qStringHash32("Bribe", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Bribe_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Bribe___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Bribe___3);
 }
 
 // File Line: 476
@@ -3801,7 +3801,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Purchase___3()
 
   v0 = UFG::qStringHash32("Purchase", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Purchase_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Purchase___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Purchase___3);
 }
 
 // File Line: 477
@@ -3812,7 +3812,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Drink___3()
 
   v0 = UFG::qStringHash32("Drink", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Drink_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Drink___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Drink___3);
 }
 
 // File Line: 478
@@ -3823,7 +3823,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Informant___3()
 
   v0 = UFG::qStringHash32("Informant", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Informant_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Informant___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Informant___3);
 }
 
 // File Line: 481
@@ -3834,7 +3834,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_NorthPointPark___3()
 
   v0 = UFG::qStringHash32("NorthPointPark", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_NorthPointPark_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointPark___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointPark___3);
 }
 
 // File Line: 482
@@ -3845,7 +3845,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_NorthPointTemple___3()
 
   v0 = UFG::qStringHash32("NorthPointTemple", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_NorthPointTemple_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointTemple___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointTemple___3);
 }
 
 // File Line: 483
@@ -3856,7 +3856,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_ChopShop___3()
 
   v0 = UFG::qStringHash32("ChopShop", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_ChopShop_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_ChopShop___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_ChopShop___3);
 }
 
 // File Line: 484
@@ -3867,7 +3867,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_NightMarket___3()
 
   v0 = UFG::qStringHash32("NightMarket", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_NightMarket_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_NightMarket___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_NightMarket___3);
 }
 
 // File Line: 485
@@ -3878,7 +3878,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_BamBamClub___3()
 
   v0 = UFG::qStringHash32("BamBamClub", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_BamBamClub_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_BamBamClub___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_BamBamClub___3);
 }
 
 // File Line: 486
@@ -3889,7 +3889,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_NorthPointWaterfront___3()
 
   v0 = UFG::qStringHash32("NorthPointWaterfront", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_NorthPointWaterfront_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointWaterfront___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointWaterfront___3);
 }
 
 // File Line: 487
@@ -3900,7 +3900,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_NorthPointResidential___3()
 
   v0 = UFG::qStringHash32("NorthPointResidential", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_NorthPointResidential_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointResidential___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_NorthPointResidential___3);
 }
 
 // File Line: 488
@@ -3911,7 +3911,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_MinibusDepot___3()
 
   v0 = UFG::qStringHash32("MinibusDepot", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_MinibusDepot_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_MinibusDepot___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_MinibusDepot___3);
 }
 
 // File Line: 489
@@ -3922,7 +3922,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_TopGlamour___3()
 
   v0 = UFG::qStringHash32("TopGlamour", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_TopGlamour_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_TopGlamour___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_TopGlamour___3);
 }
 
 // File Line: 490
@@ -3933,7 +3933,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Sweatshop___3()
 
   v0 = UFG::qStringHash32("Sweatshop", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Sweatshop_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Sweatshop___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Sweatshop___3);
 }
 
 // File Line: 491
@@ -3944,7 +3944,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_TimeSquare___3()
 
   v0 = UFG::qStringHash32("TimeSquare", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_TimeSquare_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_TimeSquare___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_TimeSquare___3);
 }
 
 // File Line: 492
@@ -3955,7 +3955,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_CentralResidential___3()
 
   v0 = UFG::qStringHash32("CentralResidential", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_CentralResidential_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_CentralResidential___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_CentralResidential___3);
 }
 
 // File Line: 493
@@ -3966,7 +3966,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_CentralFinancial___3()
 
   v0 = UFG::qStringHash32("CentralFinancial", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_CentralFinancial_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_CentralFinancial___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_CentralFinancial___3);
 }
 
 // File Line: 494
@@ -3977,7 +3977,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Soho___3()
 
   v0 = UFG::qStringHash32("Soho", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Soho_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Soho___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Soho___3);
 }
 
 // File Line: 495
@@ -3988,7 +3988,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_DockYards___3()
 
   v0 = UFG::qStringHash32("DockYards", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_DockYards_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_DockYards___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_DockYards___3);
 }
 
 // File Line: 496
@@ -3999,7 +3999,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_KennedyTown___3()
 
   v0 = UFG::qStringHash32("KennedyTown", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_KennedyTown_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_KennedyTown___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_KennedyTown___3);
 }
 
 // File Line: 497
@@ -4010,7 +4010,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_Aberdeen___3()
 
   v0 = UFG::qStringHash32("Aberdeen", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_Aberdeen_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_Aberdeen___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_Aberdeen___3);
 }
 
 // File Line: 498
@@ -4021,7 +4021,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_AberdeenIsland___3()
 
   v0 = UFG::qStringHash32("AberdeenIsland", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_AberdeenIsland_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_AberdeenIsland___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_AberdeenIsland___3);
 }
 
 // File Line: 501
@@ -4032,7 +4032,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GameLogType_Invalid___3()
 
   v0 = UFG::qStringHash32("GameLogType_Invalid", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GameLogType_Invalid_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Invalid___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Invalid___3);
 }
 
 // File Line: 502
@@ -4043,7 +4043,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GameLogType_Hint___3()
 
   v0 = UFG::qStringHash32("GameLogType_Hint", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GameLogType_Hint_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Hint___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Hint___3);
 }
 
 // File Line: 503
@@ -4054,7 +4054,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GameLogType_Objective___3()
 
   v0 = UFG::qStringHash32("GameLogType_Objective", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GameLogType_Objective_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Objective___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_Objective___3);
 }
 
 // File Line: 504
@@ -4065,7 +4065,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_GameLogType_RewardsUpgrades___3()
 
   v0 = UFG::qStringHash32("GameLogType_RewardsUpgrades", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_GameLogType_RewardsUpgrades_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_RewardsUpgrades___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_GameLogType_RewardsUpgrades___3);
 }
 
 // File Line: 507
@@ -4076,7 +4076,7 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_ShortcutButton_WorldMapTerritores
 
   v0 = UFG::qStringHash32("shortcut_map_territories", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_ShortcutButton_WorldMapTerritores_3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_ShortcutButton_WorldMapTerritores___3);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_ShortcutButton_WorldMapTerritores___3);
 }
 
 // File Line: 509

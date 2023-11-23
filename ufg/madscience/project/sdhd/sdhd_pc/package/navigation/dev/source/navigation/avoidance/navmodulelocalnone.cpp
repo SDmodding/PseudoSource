@@ -2,82 +2,77 @@
 // RVA: 0x266730
 void __fastcall UFG::NavModuleLocalNone::Update(UFG::NavModuleLocalNone *this, float dt)
 {
-  UFG::NavModuleLocalNone *v2; // rbx
-  UFG::TransformNodeComponent *v3; // rdi
-  float v4; // xmm8_4
+  UFG::TransformNodeComponent *m_pSimObject; // rdi
+  float m_fAdjustedSpeed; // xmm8_4
   float v5; // xmm3_4
-  __m128 v6; // xmm4
+  __m128 y_low; // xmm4
   __m128 v7; // xmm1
   float v8; // xmm5_4
-  float v9; // xmm1_4
-  __m128 v10; // xmm3
-  __m128 v11; // xmm5
-  float v12; // xmm6_4
-  float v13; // xmm2_4
-  float v14; // xmm3_4
-  float v15; // xmm4_4
-  float v16; // [rsp+20h] [rbp-48h]
-  float v17; // [rsp+24h] [rbp-44h]
-  float v18; // [rsp+28h] [rbp-40h]
+  float y; // xmm1_4
+  __m128 v10; // xmm5
+  float v11; // xmm6_4
+  float v12; // xmm2_4
+  float v13; // xmm3_4
+  float v14; // xmm4_4
+  float x; // [rsp+20h] [rbp-48h]
+  float z; // [rsp+28h] [rbp-40h]
 
-  v2 = this;
-  v3 = (UFG::TransformNodeComponent *)this->m_navComponent->m_pSimObject;
-  if ( v3 )
-    v3 = (UFG::TransformNodeComponent *)v3->mChildren.mNode.mNext;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v6 = (__m128)LODWORD(v2->m_adjustedWaypoint.m_navPosition.m_vPosition.y);
-  v4 = v2->m_fAdjustedSpeed;
-  v5 = v2->m_adjustedWaypoint.m_navPosition.m_vPosition.x - v3->mWorldTransform.v3.x;
-  v6.m128_f32[0] = v6.m128_f32[0] - v3->mWorldTransform.v3.y;
-  v7 = v6;
-  v7.m128_f32[0] = (float)(v6.m128_f32[0] * v6.m128_f32[0]) + (float)(v5 * v5);
-  LODWORD(v8) = (unsigned __int128)_mm_sqrt_ps(v7);
+  m_pSimObject = (UFG::TransformNodeComponent *)this->m_navComponent->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::TransformNodeComponent *)m_pSimObject->mChildren.mNode.mNext;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimObject);
+  y_low = (__m128)LODWORD(this->m_adjustedWaypoint.m_navPosition.m_vPosition.y);
+  m_fAdjustedSpeed = this->m_fAdjustedSpeed;
+  v5 = this->m_adjustedWaypoint.m_navPosition.m_vPosition.x - m_pSimObject->mWorldTransform.v3.x;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - m_pSimObject->mWorldTransform.v3.y;
+  v7 = y_low;
+  v7.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v5 * v5);
+  v8 = _mm_sqrt_ps(v7).m128_f32[0];
   if ( v8 <= 0.0 )
   {
-    v9 = UFG::qVector3::msZero.y;
-    v16 = UFG::qVector3::msZero.x;
-    v18 = UFG::qVector3::msZero.z;
+    y = UFG::qVector3::msZero.y;
+    x = UFG::qVector3::msZero.x;
+    z = UFG::qVector3::msZero.z;
   }
   else
   {
-    v18 = (float)((float)(1.0 / v8) * 0.0) * v4;
-    v9 = (float)((float)(1.0 / v8) * v6.m128_f32[0]) * v4;
-    v16 = (float)((float)(1.0 / v8) * v5) * v4;
+    z = (float)((float)(1.0 / v8) * 0.0) * m_fAdjustedSpeed;
+    y = (float)((float)(1.0 / v8) * y_low.m128_f32[0]) * m_fAdjustedSpeed;
+    x = (float)((float)(1.0 / v8) * v5) * m_fAdjustedSpeed;
   }
-  v17 = v9;
-  v10 = (__m128)LODWORD(v9);
-  v11 = v10;
-  v11.m128_f32[0] = (float)((float)(v10.m128_f32[0] * v10.m128_f32[0]) + (float)(v16 * v16)) + (float)(v18 * v18);
-  if ( v11.m128_f32[0] == 0.0 )
-    v12 = 0.0;
+  v10 = (__m128)LODWORD(y);
+  v10.m128_f32[0] = (float)((float)(v10.m128_f32[0] * v10.m128_f32[0]) + (float)(x * x)) + (float)(z * z);
+  if ( v10.m128_f32[0] == 0.0 )
+    v11 = 0.0;
   else
-    v12 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v11));
-  v13 = v16 * v12;
-  v14 = v9 * v12;
-  v15 = v18 * v12;
-  if ( v4 <= 0.0 )
+    v11 = 1.0 / _mm_sqrt_ps(v10).m128_f32[0];
+  v12 = x * v11;
+  v13 = y * v11;
+  v14 = z * v11;
+  if ( m_fAdjustedSpeed <= 0.0 )
   {
-    v2->m_steerData.m_fLocalSpeed = 0.0;
+    this->m_steerData.m_fLocalSpeed = 0.0;
   }
   else
   {
-    v2->m_steerData.m_vDesiredDirection.x = v13;
-    v2->m_steerData.m_vDesiredDirection.y = v14;
-    v2->m_steerData.m_vDesiredDirection.z = v15;
-    v2->m_steerData.m_vClampedDirection.x = v13;
-    v2->m_steerData.m_vClampedDirection.y = v14;
-    v2->m_steerData.m_vClampedDirection.z = v15;
-    v2->m_steerData.m_vLocalDirection.x = v13;
-    v2->m_steerData.m_vLocalDirection.y = v14;
-    v2->m_steerData.m_vLocalDirection.z = v15;
-    v2->m_steerData.m_fLocalSpeed = v2->m_fAdjustedSpeed;
+    this->m_steerData.m_vDesiredDirection.x = v12;
+    this->m_steerData.m_vDesiredDirection.y = v13;
+    this->m_steerData.m_vDesiredDirection.z = v14;
+    this->m_steerData.m_vClampedDirection.x = v12;
+    this->m_steerData.m_vClampedDirection.y = v13;
+    this->m_steerData.m_vClampedDirection.z = v14;
+    this->m_steerData.m_vLocalDirection.x = v12;
+    this->m_steerData.m_vLocalDirection.y = v13;
+    this->m_steerData.m_vLocalDirection.z = v14;
+    this->m_steerData.m_fLocalSpeed = this->m_fAdjustedSpeed;
   }
 }
 
 // File Line: 58
 // RVA: 0x2673C0
+// attributes: thunk
 void __fastcall UFG::NavModuleLocalNone::UpdateSteering(UFG::NavModuleLocalFlowField *this, float dt)
 {
-  UFG::NavModuleLocal::UpdateAdjustedWaypointAndSpeed((UFG::NavModuleLocal *)&this->vfptr, dt);
+  UFG::NavModuleLocal::UpdateAdjustedWaypointAndSpeed(this, dt);
 }
 

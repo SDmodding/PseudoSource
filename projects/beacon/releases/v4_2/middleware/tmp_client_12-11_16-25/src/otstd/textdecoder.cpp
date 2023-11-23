@@ -1,55 +1,58 @@
 // File Line: 40
 // RVA: 0xEEB56C
-__int64 __fastcall OSuite::ZTextDecoder::Z8BitFeeder::Feed(OSuite::ZTextDecoder::Z8BitFeeder *this, char nChar)
+__int64 __fastcall OSuite::ZTextDecoder::Z8BitFeeder::Feed(
+        OSuite::ZTextDecoder::Z8BitFeeder *this,
+        unsigned __int8 nChar)
 {
-  return (unsigned int)this->m_pTable->convert[(unsigned __int8)nChar];
+  return (unsigned int)this->m_pTable->convert[nChar];
 }
 
 // File Line: 58
 // RVA: 0xEEB5A4
-signed __int64 __fastcall OSuite::ZTextDecoder::ZUtf16BigFeeder::Feed(OSuite::ZTextDecoder::ZUtf16BigFeeder *this, char nChar)
+__int64 __fastcall OSuite::ZTextDecoder::ZUtf16BigFeeder::Feed(
+        OSuite::ZTextDecoder::ZUtf16BigFeeder *this,
+        unsigned __int8 nChar)
 {
-  signed __int64 result; // rax
-  int v3; // eax
+  int m_nChar; // eax
 
   if ( this->m_nStage )
   {
-    v3 = this->m_nChar;
+    m_nChar = this->m_nChar;
     this->m_nStage = 0;
-    result = (unsigned __int8)nChar | (unsigned int)(v3 << 8);
+    return nChar | (unsigned int)(m_nChar << 8);
   }
   else
   {
     this->m_nStage = 1;
-    this->m_nChar = (unsigned __int8)nChar;
-    result = 0xFFFFFFFFi64;
+    this->m_nChar = nChar;
+    return 0xFFFFFFFFi64;
   }
-  return result;
 }
 
 // File Line: 85
 // RVA: 0xEEB5CC
-signed __int64 __fastcall OSuite::ZTextDecoder::ZUtf16LittleFeeder::Feed(OSuite::ZTextDecoder::ZUtf16LittleFeeder *this, char nChar)
+__int64 __fastcall OSuite::ZTextDecoder::ZUtf16LittleFeeder::Feed(
+        OSuite::ZTextDecoder::ZUtf16LittleFeeder *this,
+        unsigned __int8 nChar)
 {
-  signed __int64 result; // rax
-
   if ( this->m_nStage )
   {
     this->m_nStage = 0;
-    result = this->m_nChar | ((unsigned int)(unsigned __int8)nChar << 8);
+    return this->m_nChar | (nChar << 8);
   }
   else
   {
-    this->m_nChar = (unsigned __int8)nChar;
+    this->m_nChar = nChar;
     this->m_nStage = 1;
-    result = 0xFFFFFFFFi64;
+    return 0xFFFFFFFFi64;
   }
-  return result;
 }
 
 // File Line: 112
 // RVA: 0xEEB5F0
-signed __int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::Feed(OSuite::ZTextDecoder::ZUtf8Feeder *this, char nChar)
+__int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::Feed(
+        OSuite::ZTextDecoder::ZUtf8Feeder *this,
+        unsigned __int8 nChar)
 {
   int v3; // eax
 
@@ -63,16 +66,16 @@ signed __int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::Feed(OSuite::ZTextD
     }
     if ( this->m_nStage != 3 )
     {
-      if ( nChar >= 0 )
-        return (unsigned __int8)nChar;
-      if ( (nChar & 0xE0) == -64 )
+      if ( (nChar & 0x80u) == 0 )
+        return nChar;
+      if ( (nChar & 0xE0) == 0xC0 )
       {
         this->m_nStage = 1;
         v3 = (nChar & 0x1F) << 6;
       }
       else
       {
-        if ( (nChar & 0xF0) != -32 )
+        if ( (nChar & 0xF0) != 0xE0 )
           return 0xFFFFFFFFi64;
         this->m_nStage = 2;
         v3 = (nChar & 0xF) << 12;
@@ -88,7 +91,7 @@ signed __int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::Feed(OSuite::ZTextD
 
 // File Line: 199
 // RVA: 0xEEB674
-__int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::utf8indexof(const char *pszString, unsigned __int64 nCharacterIndex)
+__int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::utf8indexof(char *pszString, unsigned __int64 nCharacterIndex)
 {
   char v2; // r8
   __int64 i; // rdx
@@ -99,22 +102,22 @@ __int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::utf8indexof(const char *ps
   for ( i = 0i64; *pszString; v2 = *pszString )
   {
     ++pszString;
-    if ( v2 & 0x80 )
+    if ( (v2 & 0x80) != 0 )
     {
-      if ( (v2 & 0xE0) == -64 )
+      if ( (v2 & 0xE0) == 0xC0 )
       {
         v4 = *pszString++;
-        if ( (v4 & 0xC0) != -128 )
+        if ( (v4 & 0xC0) != 0x80 )
           return i;
         i += 2i64;
       }
-      else if ( (v2 & 0xF0) == -32 )
+      else if ( (v2 & 0xF0) == 0xE0 )
       {
-        if ( (*pszString & 0xC0) != -128 )
+        if ( (*pszString & 0xC0) != 0x80 )
           return i;
         v5 = pszString[1];
         pszString += 2;
-        if ( (v5 & 0xC0) != -128 )
+        if ( (v5 & 0xC0) != 0x80 )
           return i;
         i += 3i64;
       }
@@ -131,24 +134,20 @@ __int64 __fastcall OSuite::ZTextDecoder::ZUtf8Feeder::utf8indexof(const char *ps
 // RVA: 0xEEB288
 void __fastcall OSuite::ZTextDecoder::ZTextDecoder(OSuite::ZTextDecoder *this, OSuite::ZString *sEncoding)
 {
-  OSuite::ZString *v2; // rsi
-  OSuite::ZTextDecoder *v3; // rdi
-  OSuite::ZString *v4; // rbx
+  OSuite::ZString *p_m_sEncoding; // rsi
   __int64 v5; // rax
   const char ***v6; // rbx
   const char **v7; // rcx
   __int64 v8; // rax
-  OSuite::ZString that; // [rsp+20h] [rbp-40h]
-  OSuite::ZString result; // [rsp+38h] [rbp-28h]
+  OSuite::ZString that; // [rsp+20h] [rbp-40h] BYREF
+  OSuite::ZString result; // [rsp+38h] [rbp-28h] BYREF
 
   this->m_nChar = -1;
-  v2 = &this->m_sEncoding;
+  p_m_sEncoding = &this->m_sEncoding;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable;
-  v3 = this;
-  v4 = sEncoding;
   OSuite::ZString::ZString(&this->m_sEncoding);
   result.m_pString = 0i64;
-  OSuite::ZString::ToLower(v4, &result);
+  OSuite::ZString::ToLower(sEncoding, &result);
   if ( OSuite::ZString::operator==(&result, "utf-8") )
   {
     v5 = OSuite::ZObject::operator new(0x18ui64);
@@ -159,8 +158,8 @@ LABEL_4:
       *(_QWORD *)(v5 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZObject};
       *(_DWORD *)(v5 + 16) = 0;
 LABEL_6:
-      v3->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v5;
-      OSuite::ZString::operator=(v2, &result);
+      this->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v5;
+      OSuite::ZString::operator=(p_m_sEncoding, &result);
       goto LABEL_21;
     }
     goto LABEL_5;
@@ -182,13 +181,12 @@ LABEL_6:
       if ( !conversiontables[0] )
       {
 LABEL_15:
-        v3->m_pFeeder = 0i64;
+        this->m_pFeeder = 0i64;
         goto LABEL_21;
       }
       while ( !OSuite::ZString::operator==(&result, **v6) )
       {
-        ++v6;
-        if ( !*v6 )
+        if ( !*++v6 )
           goto LABEL_15;
       }
       v5 = OSuite::ZObject::operator new(0x18ui64);
@@ -213,9 +211,9 @@ LABEL_5:
     *(_QWORD *)v8 = &OSuite::ZTextDecoder::ZUtf16BigFeeder::`vftable{for `OSuite::ZTextDecoder::IFeeder};
     *(_QWORD *)(v8 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZObject};
   }
-  v3->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v8;
+  this->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v8;
   OSuite::ZString::ZString(&that, "utf-16be");
-  OSuite::ZString::operator=(v2, &that);
+  OSuite::ZString::operator=(p_m_sEncoding, &that);
   OSuite::ZString::~ZString(&that);
 LABEL_21:
   OSuite::ZString::~ZString(&result);
@@ -225,43 +223,36 @@ LABEL_21:
 // RVA: 0xEEB480
 void __fastcall OSuite::ZTextDecoder::~ZTextDecoder(OSuite::ZTextDecoder *this)
 {
-  OSuite::ZTextDecoder *v1; // rbx
-  OSuite::ZTextDecoder::IFeeder *v2; // rcx
+  OSuite::ZTextDecoder::IFeeder *m_pFeeder; // rcx
 
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable;
-  v2 = this->m_pFeeder;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor(v2, 1u);
-  OSuite::ZString::~ZString(&v1->m_sEncoding);
+  m_pFeeder = this->m_pFeeder;
+  if ( m_pFeeder )
+    m_pFeeder->vfptr->__vecDelDtor(m_pFeeder, 1u);
+  OSuite::ZString::~ZString(&this->m_sEncoding);
 }
 
 // File Line: 304
 // RVA: 0xEEB57C
 void __fastcall OSuite::ZTextDecoder::Feed(OSuite::ZTextDecoder *this, __int64 nChar)
 {
-  OSuite::ZTextDecoder *v2; // rbx
-  OSuite::ZTextDecoder::IFeeder *v3; // rcx
+  OSuite::ZTextDecoder::IFeeder *m_pFeeder; // rcx
   int v4; // eax
 
-  v2 = this;
-  v3 = this->m_pFeeder;
-  if ( v3 )
-    v4 = v3->vfptr->Feed(v3, nChar);
+  m_pFeeder = this->m_pFeeder;
+  if ( m_pFeeder )
+    v4 = m_pFeeder->vfptr->Feed(m_pFeeder, nChar);
   else
     v4 = (unsigned __int8)nChar;
-  v2->m_nChar = v4;
+  this->m_nChar = v4;
 }
 
 // File Line: 323
 // RVA: 0xEEB54C
 OSuite::ZString *__fastcall OSuite::ZTextDecoder::Encoding(OSuite::ZTextDecoder *this, OSuite::ZString *result)
 {
-  OSuite::ZString *v2; // rbx
-
-  v2 = result;
   OSuite::ZString::ZString(result, &this->m_sEncoding);
-  return v2;
+  return result;
 }
 
 // File Line: 329
@@ -282,17 +273,17 @@ __int64 __fastcall OSuite::ZTextDecoder::utf8len(const char *pszString)
     while ( 1 )
     {
       v3 = *v2++;
-      if ( !(v3 & 0x80) )
+      if ( (v3 & 0x80) == 0 )
         goto LABEL_9;
-      if ( (v3 & 0xE0) == -64 )
+      if ( (v3 & 0xE0) == 0xC0 )
         break;
-      if ( (v3 & 0xF0) == -32 )
+      if ( (v3 & 0xF0) == 0xE0 )
       {
-        if ( (*v2 & 0xC0) != -128 )
+        if ( (*v2 & 0xC0) != 0x80 )
           return v1;
         v6 = v2[1];
         v2 += 2;
-        v5 = (v6 & 0xC0) == -128;
+        v5 = (v6 & 0xC0) == 0x80;
 LABEL_8:
         if ( !v5 )
           return v1;
@@ -303,7 +294,7 @@ LABEL_9:
         return v1;
     }
     v4 = *v2++;
-    v5 = (v4 & 0xC0) == -128;
+    v5 = (v4 & 0xC0) == 0x80;
     goto LABEL_8;
   }
   return v1;
@@ -311,6 +302,7 @@ LABEL_9:
 
 // File Line: 335
 // RVA: 0xEEB66C
+// attributes: thunk
 unsigned __int64 __fastcall OSuite::ZTextDecoder::utf8indexof(const char *pszString, unsigned __int64 nCharacterIndex)
 {
   return OSuite::ZTextDecoder::ZUtf8Feeder::utf8indexof(pszString, nCharacterIndex);

@@ -3,7 +3,7 @@
 __int64 UFG::_dynamic_initializer_for__gSym_M_WheelL01__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_WheelL01, 0xE0335D38);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_WheelL01__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_WheelL01__);
 }
 
 // File Line: 65
@@ -11,7 +11,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_WheelL01__()
 __int64 UFG::_dynamic_initializer_for__gSym_M_WheelR01__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_WheelR01, 0xF7AF1A62);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_WheelR01__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_WheelR01__);
 }
 
 // File Line: 66
@@ -19,7 +19,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_WheelR01__()
 __int64 UFG::_dynamic_initializer_for__gSym_M_WheelL02__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_WheelL02, 0xED707BE1);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_WheelL02__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_WheelL02__);
 }
 
 // File Line: 67
@@ -27,7 +27,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_WheelL02__()
 __int64 UFG::_dynamic_initializer_for__gSym_M_WheelR02__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_WheelR02, 0xFAEC3CBB);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_WheelR02__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_WheelR02__);
 }
 
 // File Line: 68
@@ -35,7 +35,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_WheelR02__()
 __int64 UFG::_dynamic_initializer_for__gSym_M_Wheel01__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_Wheel01, 0x1BF0B5Eu);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_Wheel01__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_Wheel01__);
 }
 
 // File Line: 69
@@ -43,7 +43,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_Wheel01__()
 __int64 UFG::_dynamic_initializer_for__gSym_M_Wheel02__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_M_Wheel02, 0xCFC2D87u);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_M_Wheel02__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_M_Wheel02__);
 }
 
 // File Line: 70
@@ -51,7 +51,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_M_Wheel02__()
 __int64 UFG::_dynamic_initializer_for__gSym_E_CTC_Spark01__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_E_CTC_Spark01, 0x28196922u);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_E_CTC_Spark01__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_E_CTC_Spark01__);
 }
 
 // File Line: 71
@@ -59,22 +59,22 @@ __int64 UFG::_dynamic_initializer_for__gSym_E_CTC_Spark01__()
 __int64 UFG::_dynamic_initializer_for__gSym_E_CTC_Spark02__()
 {
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gSym_E_CTC_Spark02, 0x255A4FFBu);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSym_E_CTC_Spark02__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSym_E_CTC_Spark02__);
 }
 
 // File Line: 153
 // RVA: 0x1582BC0
 __int64 UFG::_dynamic_initializer_for__gEffectMapping__()
 {
-  `eh vector constructor iterator(gEffectMapping, 4ui64, 39, (void (__fastcall *)(void *))BackInfo::BackInfo);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gEffectMapping__);
+  `eh vector constructor iterator((char *)gEffectMapping, 4ui64, 39, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gEffectMapping__);
 }
 
 // File Line: 157
 // RVA: 0x157B8D0
 __int64 dynamic_initializer_for__UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList__);
 }
 
 // File Line: 158
@@ -88,7 +88,7 @@ const char *__fastcall UFG::VehicleEffectsComponent::GetTypeName(UFG::VehicleEff
 // RVA: 0x67E0C0
 void UFG::VehicleEffectsComponent::Initialize(void)
 {
-  UFG::qWiseSymbol result; // [rsp+30h] [rbp+10h]
+  UFG::qWiseSymbol result; // [rsp+30h] [rbp+10h] BYREF
 
   gEffectMapping[0] = (UFG::qSymbol)UFG::qSymbol::qSymbol(&result, 0x68B2D88Bu)->mUID;
   dword_1424358C4 = UFG::qSymbol::qSymbol(&result, 0xDE47AAE4)->mUID;
@@ -133,461 +133,449 @@ void UFG::VehicleEffectsComponent::Initialize(void)
 
 // File Line: 269
 // RVA: 0x66AFD0
-void __fastcall UFG::VehicleEffectsComponent::VehicleEffectsComponent(UFG::VehicleEffectsComponent *this, UFG::SceneObjectProperties *pSceneObj, component_VehicleEffects *data)
+void __fastcall UFG::VehicleEffectsComponent::VehicleEffectsComponent(
+        UFG::VehicleEffectsComponent *this,
+        UFG::SceneObjectProperties *pSceneObj,
+        component_VehicleEffects *data)
 {
-  component_VehicleEffects *v3; // rbx
-  UFG::SceneObjectProperties *v4; // rsi
-  UFG::VehicleEffectsComponent *v5; // r14
-  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v6; // rdi
-  UFG::TransformNodeComponent *v7; // rbp
-  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v8; // rax
-  UFG::qSafeArray<UFG::WheelModelsBinding,4> *v9; // rcx
-  UFG::qSafeArray<UFG::PhysicsSurfaceProperties *,4> *v10; // rdx
-  UFG::qSafeArray<unsigned long,4> *v11; // rax
-  signed __int64 v12; // rdi
-  UFG::qMemoryPool *v13; // rax
-  UFG::allocator::free_link *v14; // rax
-  UFG::TransformNodeComponent *v15; // rax
-  UFG::qMemoryPool *v16; // rax
-  UFG::allocator::free_link *v17; // rax
-  UFG::TransformNodeComponent *v18; // rax
-  UFG::qMemoryPool *v19; // rax
-  UFG::allocator::free_link *v20; // rax
-  UFG::TransformNodeComponent *v21; // rax
-  UFG::qMemoryPool *v22; // rax
-  UFG::allocator::free_link *v23; // rax
-  UFG::TransformNodeComponent *v24; // rax
+  UFG::TransformNodeComponent *v6; // rbp
+  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *mPrev; // rax
+  UFG::qSafeArray<UFG::WheelModelsBinding,4> *p_mWheelModelBindings; // rcx
+  UFG::qSafeArray<UFG::PhysicsSurfaceProperties *,4> *p_mLastPhysicsSurfacProperty; // rdx
+  UFG::qSafeArray<unsigned long,4> *p_mRimSparksEffect; // rax
+  __int64 v11; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::allocator::free_link *v13; // rax
+  UFG::TransformNodeComponent *v14; // rax
+  UFG::qMemoryPool *v15; // rax
+  UFG::allocator::free_link *v16; // rax
+  UFG::TransformNodeComponent *v17; // rax
+  UFG::qMemoryPool *v18; // rax
+  UFG::allocator::free_link *v19; // rax
+  UFG::TransformNodeComponent *v20; // rax
+  UFG::qMemoryPool *v21; // rax
+  UFG::allocator::free_link *v22; // rax
+  UFG::TransformNodeComponent *v23; // rax
 
-  v3 = data;
-  v4 = pSceneObj;
-  v5 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, pSceneObj->m_NameUID);
-  v6 = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&v5->mPrev;
-  v6->mPrev = v6;
-  v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable;
-  v5->mDamageTransferUID = -1;
+  UFG::SimComponent::SimComponent(this, pSceneObj->m_NameUID);
+  this->mPrev = &this->UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent>;
+  this->mNext = &this->UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable;
+  this->mDamageTransferUID = -1;
   `eh vector constructor iterator(
-    v5->mEffectStatusTable,
+    this->mEffectStatusTable,
     0x18ui64,
     39,
     (void (__fastcall *)(void *))UFG::EffectStatus::EffectStatus);
-  UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0>::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0>(&v5->mWaterFloatingTrackerComponent);
-  UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0>::RebindingComponentHandle<UFG::CompositeDrawableComponent,0>(&v5->mDrawableComponent);
-  UFG::RebindingComponentHandle<Render::FXSimComponent,0>::RebindingComponentHandle<Render::FXSimComponent,0>(&v5->mFXComponent);
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&v5->mMoverComponent);
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&v5->mRoadSpaceComponent);
-  UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0>::RebindingComponentHandle<UFG::VehicleDriverInterface,0>(&v5->mVehicleDriverComponent);
-  v7 = 0i64;
-  v5->mWheelBoneId.p = 0i64;
-  *(_QWORD *)&v5->mWheelBoneId.size = 0i64;
-  v5->mEffectGroup.mUID = -1;
-  *(_QWORD *)&v5->mLevelOfDetail = 0i64;
-  v5->mNumQueuedHeadlightChanges = 0;
-  v5->mPreTurnLane = 0i64;
-  v5->mSpeedLevel = 1;
-  v5->mRigUID = -1;
-  v5->mVandalizedDamage = 0;
-  v5->mDamageRig = 0i64;
-  v5->mInitialGrimePercentage = 0.0;
-  v5->mInitialGrimeFactor = 1.0;
-  v5->mExtinguishFireCountdown = -1.0;
-  v5->mAirTime = 0.0;
-  v5->mHeadlightFlashesLength = 0.69999999;
-  v5->mIsOffGround = 0;
-  v5->mFramesOffGround = 0;
-  *((_DWORD *)v5 + 471) &= 0xFFFFFF00;
-  v8 = UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev;
-  UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&v5->mPrev;
-  v6->mPrev = v8;
-  v5->mNext = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList;
-  UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&v5->mPrev;
+  UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0>::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0>(&this->mWaterFloatingTrackerComponent);
+  UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0>::RebindingComponentHandle<UFG::CompositeDrawableComponent,0>(&this->mDrawableComponent);
+  UFG::RebindingComponentHandle<Render::FXSimComponent,0>::RebindingComponentHandle<Render::FXSimComponent,0>(&this->mFXComponent);
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&this->mMoverComponent);
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&this->mRoadSpaceComponent);
+  UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0>::RebindingComponentHandle<UFG::VehicleDriverInterface,0>(&this->mVehicleDriverComponent);
+  v6 = 0i64;
+  this->mWheelBoneId.p = 0i64;
+  *(_QWORD *)&this->mWheelBoneId.size = 0i64;
+  this->mEffectGroup.mUID = -1;
+  *(_QWORD *)&this->mLevelOfDetail = 0i64;
+  this->mNumQueuedHeadlightChanges = 0;
+  this->mPreTurnLane = 0i64;
+  this->mSpeedLevel = 1;
+  this->mRigUID = -1;
+  this->mVandalizedDamage = 0;
+  this->mDamageRig = 0i64;
+  this->mInitialGrimePercentage = 0.0;
+  this->mInitialGrimeFactor = 1.0;
+  this->mExtinguishFireCountdown = -1.0;
+  this->mAirTime = 0.0;
+  this->mHeadlightFlashesLength = 0.69999999;
+  this->mIsOffGround = 0;
+  this->mFramesOffGround = 0;
+  *((_DWORD *)this + 471) &= 0xFFFFFF00;
+  mPrev = UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev;
+  UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList;
+  UFG::VehicleEffectsComponent::s_VehicleEffectsComponentList.mNode.mPrev = &this->UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v5->vfptr,
+    this,
     UFG::VehicleEffectsComponent::_VehicleEffectsComponentTypeUID,
     "VehicleEffectsComponent");
-  UFG::VehicleEffectsComponent::PropertiesLoad(v5, v4, v3);
-  v9 = &v5->mWheelModelBindings;
-  v10 = &v5->mLastPhysicsSurfacProperty;
-  v11 = &v5->mRimSparksEffect;
-  v12 = 4i64;
+  UFG::VehicleEffectsComponent::PropertiesLoad(this, pSceneObj, data);
+  p_mWheelModelBindings = &this->mWheelModelBindings;
+  p_mLastPhysicsSurfacProperty = &this->mLastPhysicsSurfacProperty;
+  p_mRimSparksEffect = &this->mRimSparksEffect;
+  v11 = 4i64;
   do
   {
-    v11[-1].array[0] = -1;
-    v11->array[0] = -1;
-    v11[1].array[0] = -1;
-    v11[2].array[0] = -1;
-    v10->array[0] = 0i64;
-    v11[-2].array[0] = -1;
-    v11[-12].array[0] = 0;
-    v9->array[0].mModelBindings[0] = 0i64;
-    v9->array[0].mModelBindings[1] = 0i64;
-    v9->array[0].mModelBindings[2] = 0i64;
-    v10 = (UFG::qSafeArray<UFG::PhysicsSurfaceProperties *,4> *)((char *)v10 + 8);
-    v11 = (UFG::qSafeArray<unsigned long,4> *)((char *)v11 + 4);
-    v9 = (UFG::qSafeArray<UFG::WheelModelsBinding,4> *)((char *)v9 + 24);
-    --v12;
+    p_mRimSparksEffect[-1].array[0] = -1;
+    p_mRimSparksEffect->array[0] = -1;
+    p_mRimSparksEffect[1].array[0] = -1;
+    p_mRimSparksEffect[2].array[0] = -1;
+    p_mLastPhysicsSurfacProperty->array[0] = 0i64;
+    p_mRimSparksEffect[-2].array[0] = -1;
+    p_mRimSparksEffect[-12].array[0] = 0;
+    p_mWheelModelBindings->array[0].mModelBindings[0] = 0i64;
+    p_mWheelModelBindings->array[0].mModelBindings[1] = 0i64;
+    p_mWheelModelBindings->array[0].mModelBindings[2] = 0i64;
+    p_mLastPhysicsSurfacProperty = (UFG::qSafeArray<UFG::PhysicsSurfaceProperties *,4> *)((char *)p_mLastPhysicsSurfacProperty
+                                                                                        + 8);
+    p_mRimSparksEffect = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mRimSparksEffect + 4);
+    p_mWheelModelBindings = (UFG::qSafeArray<UFG::WheelModelsBinding,4> *)((char *)p_mWheelModelBindings + 24);
+    --v11;
   }
-  while ( v12 );
-  memset(&v5->mTransformNodes, 0, sizeof(v5->mTransformNodes));
-  v13 = UFG::GetSimulationMemoryPool();
-  v14 = UFG::qMemoryPool::Allocate(v13, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
-  if ( v14 )
-    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v14, 0xCA5C386E, 0i64, 0);
+  while ( v11 );
+  memset(&this->mTransformNodes, 0, sizeof(this->mTransformNodes));
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v13 = UFG::qMemoryPool::Allocate(
+          SimulationMemoryPool,
+          0x110ui64,
+          "VehicleEffectsComponent.TransformNodeComponent",
+          0i64,
+          1u);
+  if ( v13 )
+    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v13, 0xCA5C386E, 0i64, 0);
   else
-    v15 = 0i64;
-  v5->mTransformNodes.array[0] = v15;
-  v16 = UFG::GetSimulationMemoryPool();
-  v17 = UFG::qMemoryPool::Allocate(v16, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
-  if ( v17 )
-    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v17, 0xF40235F6, 0i64, 0);
+    v14 = 0i64;
+  this->mTransformNodes.array[0] = v14;
+  v15 = UFG::GetSimulationMemoryPool();
+  v16 = UFG::qMemoryPool::Allocate(v15, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
+  if ( v16 )
+    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v16, 0xF40235F6, 0i64, 0);
   else
-    v18 = 0i64;
-  v5->mTransformNodes.array[1] = v18;
-  v19 = UFG::GetSimulationMemoryPool();
-  v20 = UFG::qMemoryPool::Allocate(v19, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
-  if ( v20 )
-    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v20, 0x8CCC0D4C, 0i64, 0);
+    v17 = 0i64;
+  this->mTransformNodes.array[1] = v17;
+  v18 = UFG::GetSimulationMemoryPool();
+  v19 = UFG::qMemoryPool::Allocate(v18, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
+  if ( v19 )
+    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v19, 0x8CCC0D4C, 0i64, 0);
   else
-    v21 = 0i64;
-  v5->mTransformNodes.array[2] = v21;
-  v22 = UFG::GetSimulationMemoryPool();
-  v23 = UFG::qMemoryPool::Allocate(v22, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
-  if ( v23 )
+    v20 = 0i64;
+  this->mTransformNodes.array[2] = v20;
+  v21 = UFG::GetSimulationMemoryPool();
+  v22 = UFG::qMemoryPool::Allocate(v21, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
+  if ( v22 )
   {
-    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v23, 0xE57C3F77, 0i64, 0);
-    v7 = v24;
+    UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v22, 0xE57C3F77, 0i64, 0);
+    v6 = v23;
   }
-  v5->mTransformNodes.array[3] = v7;
-  v5->mHeadlightFlareOnTime = (float)((float)(UFG::qRandom(1.0, &UFG::qDefaultSeed) * 3600.0) * 0.15000001) + 61200.0;
-  v5->mHeadlightFlareOffTime = 25200.0 - (float)((float)(UFG::qRandom(1.0, &UFG::qDefaultSeed) * 3600.0) * 0.15000001);
-  UFG::qMemSet(v5->mSprayEffects, 0, 0x50u);
+  this->mTransformNodes.array[3] = v6;
+  this->mHeadlightFlareOnTime = (float)((float)(UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed) * 3600.0)
+                                      * 0.15000001)
+                              + 61200.0;
+  this->mHeadlightFlareOffTime = 25200.0
+                               - (float)((float)(UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed) * 3600.0)
+                                       * 0.15000001);
+  UFG::qMemSet(this->mSprayEffects, 0, 0x50u);
 }
 
 // File Line: 314
 // RVA: 0x687A70
-void __fastcall UFG::VehicleEffectsComponent::PropertiesLoad(UFG::VehicleEffectsComponent *this, UFG::SceneObjectProperties *pSceneObj, component_VehicleEffects *data)
+void __fastcall UFG::VehicleEffectsComponent::PropertiesLoad(
+        UFG::VehicleEffectsComponent *this,
+        UFG::SceneObjectProperties *pSceneObj,
+        component_VehicleEffects *data)
 {
-  UFG::VehicleEffectsComponent *v3; // rbx
   const char *v4; // rsi
-  component_VehicleEffects *v5; // rdi
-  UFG::SceneObjectProperties *v6; // rbp
-  float v7; // xmm0_4
-  UFG::qPropertySet *v8; // rcx
+  float GrimeFactor; // xmm0_4
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v9; // rax
-  char *v10; // rcx
+  char *MemImagePtr; // rcx
   __int64 v11; // rax
-  float v12; // xmm0_4
+  float InitialDirtSeed; // xmm0_4
 
-  v3 = this;
-  this->mSpeedLevelThreshold[0] = data->Speed0;
+  *(_OWORD *)this->mSpeedLevelThreshold = *(_OWORD *)&data->Speed0;
   v4 = 0i64;
-  this->mSpeedLevelThreshold[1] = data->Speed1;
-  v5 = data;
-  this->mSpeedLevelThreshold[2] = data->Speed2;
-  v6 = pSceneObj;
-  this->mSpeedLevelThreshold[3] = data->Speed3;
-  *((_DWORD *)this + 471) ^= (*((_DWORD *)this + 471) ^ 32 * (data->headlightsAlwaysOn != 0)) & 0x20;
-  *((_DWORD *)this + 471) ^= ((unsigned __int8)*((_DWORD *)this + 471) ^ (unsigned __int8)((data->headlightsAlwaysOff != 0) << 6)) & 0x40;
-  v7 = data->GrimeFactor;
-  if ( v7 <= 0.0 )
+  *((_DWORD *)this + 471) ^= (*((_DWORD *)this + 471) ^ (32 * data->headlightsAlwaysOn)) & 0x20;
+  *((_DWORD *)this + 471) ^= ((unsigned __int8)*((_DWORD *)this + 471) ^ (data->headlightsAlwaysOff << 6)) & 0x40;
+  GrimeFactor = data->GrimeFactor;
+  if ( GrimeFactor <= 0.0 )
   {
-    v7 = 0.0;
+    GrimeFactor = 0.0;
   }
-  else if ( v7 >= 1.0 )
+  else if ( GrimeFactor >= 1.0 )
   {
-    v7 = *(float *)&FLOAT_1_0;
+    GrimeFactor = *(float *)&FLOAT_1_0;
   }
-  this->mInitialGrimeFactor = v7;
-  *((_DWORD *)this + 471) ^= (*((_DWORD *)this + 471) ^ 8
-                                                      * (UFG::qRandom(1.0, &UFG::qDefaultSeed) <= data->headlightsInRainProbability)) & 8;
-  v3->mEffectGroup.mUID = v5->EffectGroupName.mUID;
-  v8 = v6->mpWritableProperties;
-  if ( !v8 )
-    v8 = v6->mpConstProperties;
+  this->mInitialGrimeFactor = GrimeFactor;
+  *((_DWORD *)this + 471) ^= (*((_DWORD *)this + 471) ^ (8
+                                                       * (UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed) <= data->headlightsInRainProbability))) & 8;
+  this->mEffectGroup.mUID = data->EffectGroupName.mUID;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   v9 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v8,
-         (UFG::qSymbol *)&component_BaseAnimation::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_BaseAnimation::sPropertyName,
          DEPTH_RECURSE);
   if ( v9 )
-    v10 = UFG::qPropertySet::GetMemImagePtr(v9);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v9);
   else
-    v10 = 0i64;
-  v3->mDamageTransferUID = v5->DamageTransfer.mUID;
-  v11 = *((_QWORD *)v10 + 1);
+    MemImagePtr = 0i64;
+  this->mDamageTransferUID = data->DamageTransfer.mUID;
+  v11 = *((_QWORD *)MemImagePtr + 1);
   if ( v11 )
-    v4 = &v10[v11 + 8];
-  v3->mRigUID = UFG::qStringHashUpper32(v4, 0xFFFFFFFF);
-  v12 = v5->InitialDirtSeed;
-  if ( v12 <= 0.0 )
-    v3->mInitialGrimePercentage = 0.0;
+    v4 = &MemImagePtr[v11 + 8];
+  this->mRigUID = UFG::qStringHashUpper32(v4, -1);
+  InitialDirtSeed = data->InitialDirtSeed;
+  if ( InitialDirtSeed <= 0.0 )
+    this->mInitialGrimePercentage = 0.0;
   else
-    v3->mInitialGrimePercentage = UFG::qRandom(v12, &UFG::qDefaultSeed);
+    this->mInitialGrimePercentage = UFG::qRandom(InitialDirtSeed, (unsigned int *)&UFG::qDefaultSeed);
 }
 
 // File Line: 340
 // RVA: 0x68CB10
 void __fastcall UFG::VehicleEffectsComponent::Suspend(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-
-  v1 = this;
   UFG::VehicleEffectsComponent::TurnOffEffects(this, 1);
-  v1->m_Flags |= 2u;
+  this->m_Flags |= 2u;
 }
 
 // File Line: 347
 // RVA: 0x689A90
 void __fastcall UFG::SimComponent::Restore(UFG::SimComponent *this)
 {
-  this->m_Flags &= 0xFFFDu;
+  this->m_Flags &= ~2u;
 }
 
 // File Line: 354
 // RVA: 0x675430
 void __fastcall UFG::VehicleEffectsComponent::CreateWheelDamageBinding(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // r13
-  UFG::SimObjectGame *v2; // rcx
-  UFG::SimComponent *v3; // rbp
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  UFG::SimComponent *m_pComponent; // rbp
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObjectGame *v6; // rcx
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // dx
-  unsigned int v9; // er8
+  UFG::SimComponent *ComponentOfType; // rax
+  __int16 v8; // dx
+  unsigned int v9; // r8d
   __int64 v10; // rdi
   __int64 v11; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rdx
   __int64 v13; // rsi
-  __int64 v14; // rbx
-  signed __int64 v15; // rbx
+  __int64 mPrev_high; // rbx
+  __int64 v15; // rbx
   unsigned int *v16; // rdi
   unsigned int v17; // edx
-  unsigned int v18; // er8
-  signed int v19; // eax
+  unsigned int v18; // r8d
+  int v19; // eax
   float v20; // xmm1_4
   __int64 v21; // rax
-  signed __int64 v22; // rcx
-  unsigned int v23; // er12
+  __int64 v22; // rcx
+  unsigned int v23; // r12d
   __int64 v24; // r14
-  signed __int64 v25; // r15
+  __int64 v25; // r15
   __int64 v26; // rax
-  signed __int64 v27; // rcx
-  signed __int64 v28; // rsi
+  __int64 v27; // rcx
+  __int64 v28; // rsi
   unsigned int *v29; // rbx
   __int64 v30; // rdi
-  ModelType::ModelBindingRigid *v31; // rax
+  ModelType::ModelBindingRigid *RigidModelBinding; // rax
   unsigned int v32; // edx
   ModelType::ModelBindingRigid *v33; // rbp
   unsigned int v34; // [rsp+20h] [rbp-88h]
   UFG::SimComponent *v35; // [rsp+28h] [rbp-80h]
   UFG::SimComponent *v36; // [rsp+30h] [rbp-78h]
-  signed __int64 v37; // [rsp+38h] [rbp-70h]
+  __int64 v37; // [rsp+38h] [rbp-70h]
   unsigned int *v38; // [rsp+40h] [rbp-68h]
   __int64 v39; // [rsp+48h] [rbp-60h]
   unsigned int model_index; // [rsp+B0h] [rbp+8h]
-  unsigned int wheelIndex; // [rsp+B8h] [rbp+10h]
+  unsigned int wheelIndex; // [rsp+B8h] [rbp+10h] BYREF
   unsigned int v42; // [rsp+C0h] [rbp+18h]
   unsigned int v43; // [rsp+C8h] [rbp+20h]
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( v2 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v4 = v2->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = v2->m_Components.p[10].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[10].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v3 = v2->m_Components.p[7].m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p[7].m_pComponent;
       }
       else
       {
-        if ( (v4 >> 12) & 1 )
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::StreamedResourceComponent::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pSimObject,
+                                UFG::StreamedResourceComponent::_TypeUID);
         else
-          v5 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v2->vfptr,
-                 UFG::StreamedResourceComponent::_TypeUID);
-        v3 = v5;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::StreamedResourceComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
     }
     else
     {
-      v3 = v2->m_Components.p[10].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[10].m_pComponent;
     }
   }
   else
   {
-    v3 = 0i64;
+    m_pComponent = 0i64;
   }
-  v6 = (UFG::SimObjectGame *)v1->m_pSimObject;
-  v36 = v3;
+  v6 = (UFG::SimObjectGame *)this->m_pSimObject;
+  v36 = m_pComponent;
   if ( v6 )
   {
     v8 = v6->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    if ( (v8 & 0x4000) != 0 )
     {
-      v7 = v6->m_Components.p[14].m_pComponent;
+      ComponentOfType = v6->m_Components.p[14].m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( v8 >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
+      if ( (v8 & 0x2000) != 0 )
       {
-        v7 = v6->m_Components.p[9].m_pComponent;
+        ComponentOfType = v6->m_Components.p[9].m_pComponent;
       }
-      else if ( (v8 >> 12) & 1 )
+      else if ( (v8 & 0x1000) != 0 )
       {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CompositeDrawableComponent::_TypeUID);
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CompositeDrawableComponent::_TypeUID);
       }
       else
       {
-        v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::CompositeDrawableComponent::_TypeUID);
+        ComponentOfType = UFG::SimObject::GetComponentOfType(v6, UFG::CompositeDrawableComponent::_TypeUID);
       }
     }
     else
     {
-      v7 = v6->m_Components.p[14].m_pComponent;
+      ComponentOfType = v6->m_Components.p[14].m_pComponent;
     }
   }
   else
   {
-    v7 = 0i64;
+    ComponentOfType = 0i64;
   }
   v9 = 0;
-  v35 = v7;
-  model_index = 0;
-  if ( v3[4].m_TypeUID )
+  v35 = ComponentOfType;
+  for ( model_index = 0; v9 < m_pComponent[4].m_TypeUID; model_index = v9 )
   {
-    do
+    v10 = v9;
+    v11 = *((unsigned int *)&m_pComponent[4].m_pSimObject + 4 * v9);
+    if ( (_DWORD)v11 != -1 )
     {
-      v10 = v9;
-      v11 = *((unsigned int *)&v3[4].m_pSimObject + 4 * v9);
-      if ( (_DWORD)v11 != -1 )
+      mNext = m_pComponent[4].m_SafePointerList.mNode.mNext;
+      v13 = *((_QWORD *)&mNext[v9 + 3].mNext->mPrev + v11);
+      v39 = v13;
+      if ( *(_DWORD *)(v13 + 60) == -1233990156 )
       {
-        v12 = v3[4].m_SafePointerList.mNode.mNext;
-        v13 = *((_QWORD *)&v12[v9 + 3].mNext->mPrev + v11);
-        v39 = v13;
-        if ( *(_DWORD *)(v13 + 60) == -1233990156 )
+        mPrev_high = HIDWORD(mNext[2].mPrev);
+        UFG::TrueCrowdDataBase::Instance();
+        v15 = 80 * v10 + 1292 * mPrev_high;
+        v16 = (unsigned int *)((char *)UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mBoneUID
+                             + v15);
+        v38 = v16;
+        UFG::TrueCrowdDataBase::Instance();
+        v17 = *(unsigned int *)((char *)&UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mBoneUID[16]
+                              + v15);
+        v18 = 0;
+        v34 = v17;
+        while ( 1 )
         {
-          v14 = HIDWORD(v12[2].mPrev);
-          UFG::TrueCrowdDataBase::Instance();
-          v15 = 80 * v10 + 1292 * v14;
-          v16 = (unsigned int *)((char *)UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mBoneUID
-                               + v15);
-          v38 = (unsigned int *)((char *)UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mBoneUID
-                               + v15);
-          UFG::TrueCrowdDataBase::Instance();
-          v17 = *(unsigned int *)((char *)&UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mNumBoneUIDs
-                                + v15);
-          v18 = 0;
-          v34 = *(unsigned int *)((char *)&UFG::TrueCrowdDataBase::sTrueCrowdDataBase->mDefinition.mEntities[0].mComponents[0].mNumBoneUIDs
-                                + v15);
-          while ( 1 )
+          v19 = *(unsigned __int16 *)(v13 + 56);
+          v43 = v18;
+          v20 = (float)v19;
+          if ( (float)v19 >= 3.0 )
+            v20 = FLOAT_3_0;
+          if ( (float)(int)v18 >= v20 )
+            break;
+          v21 = *(_QWORD *)(v13 + 64);
+          if ( v21 )
+            v22 = v21 + v13 + 64;
+          else
+            v22 = 0i64;
+          v23 = 0;
+          v24 = v18;
+          v42 = 0;
+          v25 = v22 + 16i64 * v18;
+          v37 = v25;
+          if ( *(_DWORD *)v25 )
           {
-            v19 = *(unsigned __int16 *)(v13 + 56);
-            v43 = v18;
-            v20 = (float)v19;
-            if ( (float)v19 >= 3.0 )
-              v20 = FLOAT_3_0;
-            if ( (float)(signed int)v18 >= v20 )
-              break;
-            v21 = *(_QWORD *)(v13 + 64);
-            if ( v21 )
-              v22 = v21 + v13 + 64;
-            else
-              v22 = 0i64;
-            v23 = 0;
-            v24 = v18;
-            v42 = 0;
-            v25 = v22 + 16i64 * v18;
-            v37 = v25;
-            if ( *(_DWORD *)v25 )
+            do
             {
-              do
+              v26 = *(_QWORD *)(v25 + 8);
+              if ( v26 )
+                v27 = v26 + v25 + 8;
+              else
+                v27 = 0i64;
+              v28 = v27 + 16i64 * v23;
+              if ( v17 )
               {
-                v26 = *(_QWORD *)(v25 + 8);
-                if ( v26 )
-                  v27 = v26 + v25 + 8;
-                else
-                  v27 = 0i64;
-                v28 = v27 + 16i64 * v23;
-                if ( v17 )
+                v29 = v16;
+                v30 = v17;
+                do
                 {
-                  v29 = v16;
-                  v30 = v17;
-                  do
-                  {
-                    v31 = ModelType::FindRigidModelBinding(
-                            *((ModelType **)&v35[22].m_SafePointerList.mNode.mNext + v24),
-                            *(_DWORD *)(v28 + 8),
-                            *v29,
-                            model_index);
-                    v32 = *v29;
-                    v33 = v31;
-                    wheelIndex = 0;
-                    if ( UFG::VehicleEffectsComponent::GetWheelIndexFromBoneID(v1, v32, &wheelIndex) )
-                      v1->mWheelModelBindings.array[0].mModelBindings[v24
-                                                                    + 2i64 * (signed int)wheelIndex
-                                                                    + (signed int)wheelIndex] = v33;
-                    ++v29;
-                    --v30;
-                  }
-                  while ( v30 );
-                  v25 = v37;
-                  v23 = v42;
-                  v17 = v34;
-                  v16 = v38;
+                  RigidModelBinding = ModelType::FindRigidModelBinding(
+                                        *((ModelType **)&v35[22].m_SafePointerList.mNode.mNext + v24),
+                                        *(_DWORD *)(v28 + 8),
+                                        *v29,
+                                        model_index);
+                  v32 = *v29;
+                  v33 = RigidModelBinding;
+                  wheelIndex = 0;
+                  if ( UFG::VehicleEffectsComponent::GetWheelIndexFromBoneID(this, v32, &wheelIndex) )
+                    *((_QWORD *)&this->mWheelModelBindings.array[0].mModelBindings[2 * (int)wheelIndex]
+                    + v24
+                    + (int)wheelIndex) = v33;
+                  ++v29;
+                  --v30;
                 }
-                v42 = ++v23;
+                while ( v30 );
+                v25 = v37;
+                v23 = v42;
+                v17 = v34;
+                v16 = v38;
               }
-              while ( v23 < *(_DWORD *)v25 );
-              v18 = v43;
-              v13 = v39;
+              v42 = ++v23;
             }
-            ++v18;
+            while ( v23 < *(_DWORD *)v25 );
+            v18 = v43;
+            v13 = v39;
           }
-          v9 = model_index;
-          v3 = v36;
+          ++v18;
         }
+        v9 = model_index;
+        m_pComponent = v36;
       }
-      model_index = ++v9;
     }
-    while ( v9 < v3[4].m_TypeUID );
+    ++v9;
   }
 }
 
 // File Line: 401
 // RVA: 0x67CAE0
-void __fastcall UFG::VehicleEffectsComponent::HandleResourceLoadedEvent(UFG::VehicleEffectsComponent *this, UFG::ResourceRequest *request, bool loaded)
+void __fastcall UFG::VehicleEffectsComponent::HandleResourceLoadedEvent(
+        UFG::VehicleEffectsComponent *this,
+        UFG::ResourceRequest *request,
+        bool loaded)
 {
-  UFG::VehicleEffectsComponent *v3; // rbx
   UFG::qResourceWarehouse *v4; // rax
-  UFG::qResourceInventory *v5; // rax
+  UFG::qResourceInventory *Inventory; // rax
 
-  v3 = this;
   if ( loaded )
   {
     if ( !this->mDamageRig )
     {
       v4 = UFG::qResourceWarehouse::Instance();
-      v5 = UFG::qResourceWarehouse::GetInventory(v4, 0x39BC0A7Eu);
-      if ( v5 )
+      Inventory = UFG::qResourceWarehouse::GetInventory(v4, 0x39BC0A7Eu);
+      if ( Inventory )
       {
-        if ( v5->mNode.mUID == 0x39BC0A7E && (__int64)v5->vfptr->Get(v5, v3->mRigUID) )
+        if ( Inventory->mNode.mUID == 0x39BC0A7E && Inventory->vfptr->Get(Inventory, this->mRigUID) )
         {
-          UFG::VehicleEffectsComponent::CreateDamageRig(v3);
-          UFG::VehicleEffectsComponent::BindEffectMarkers(v3);
+          UFG::VehicleEffectsComponent::CreateDamageRig(this);
+          UFG::VehicleEffectsComponent::BindEffectMarkers(this);
         }
       }
     }
-    if ( v3->mDamageRig )
-      UFG::VehicleEffectsComponent::CreateWheelDamageBinding(v3);
+    if ( this->mDamageRig )
+      UFG::VehicleEffectsComponent::CreateWheelDamageBinding(this);
   }
   else
   {
@@ -597,81 +585,80 @@ void __fastcall UFG::VehicleEffectsComponent::HandleResourceLoadedEvent(UFG::Veh
 
 // File Line: 443
 // RVA: 0x688310
-UFG::SimComponent *__fastcall UFG::VehicleEffectsComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *sceneObject, bool required)
+UFG::VehicleEffectsComponent *__fastcall UFG::VehicleEffectsComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *sceneObject,
+        bool required)
 {
-  bool v2; // bp
-  UFG::SceneObjectProperties *v3; // rbx
-  UFG::qPropertySet *v4; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v5; // rax
   UFG::SimComponent *v6; // rsi
-  char *v7; // rdi
-  UFG::qMemoryPool *v9; // rax
+  char *MemImagePtr; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
   UFG::SimComponent *v11; // rax
-  UFG::SimObject *v12; // rdx
-  unsigned __int16 v13; // cx
+  UFG::SimObject *m_pSimObject; // rdx
+  __int16 m_Flags; // cx
   unsigned int v14; // ebx
-  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = required;
-  v3 = sceneObject;
-  v4 = sceneObject->mpWritableProperties;
-  if ( !v4 )
-    v4 = v3->mpConstProperties;
+  mpWritableProperties = sceneObject->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = sceneObject->mpConstProperties;
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_VehicleEffects::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_VehicleEffects::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
-    v7 = UFG::qPropertySet::GetMemImagePtr(v5);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
   else
-    v7 = 0i64;
-  if ( !v2 && !v7 )
+    MemImagePtr = 0i64;
+  if ( !required && !MemImagePtr )
     return 0i64;
-  v9 = UFG::GetSimulationMemoryPool();
-  v10 = UFG::qMemoryPool::Allocate(v9, 0x760ui64, "VehicleEffectsComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x760ui64, "VehicleEffectsComponent", 0i64, 1u);
   if ( v10 )
   {
     UFG::VehicleEffectsComponent::VehicleEffectsComponent(
       (UFG::VehicleEffectsComponent *)v10,
-      v3,
-      (component_VehicleEffects *)v7);
+      sceneObject,
+      (component_VehicleEffects *)MemImagePtr);
     v6 = v11;
   }
-  v12 = v3->m_pSimObject;
-  v13 = v12->m_Flags;
-  if ( (v13 >> 14) & 1 || (v13 & 0x8000u) == 0 )
+  m_pSimObject = sceneObject->m_pSimObject;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags >= 0 )
     v14 = -1;
   else
     v14 = 32;
-  UFG::SimObjectModifier::SimObjectModifier(&v15, v12, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v15, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v15, v6, v14);
   UFG::SimObjectModifier::Close(&v15);
   UFG::SimObjectModifier::~SimObjectModifier(&v15);
-  return v6;
+  return (UFG::VehicleEffectsComponent *)v6;
 }
 
 // File Line: 468
 // RVA: 0x67E4A0
-void __fastcall UFG::VehicleEffectsComponent::InitializeEffect_New(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id)
+void __fastcall UFG::VehicleEffectsComponent::InitializeEffect_New(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffectId id)
 {
-  UFG::VehicleEffectsComponent *v2; // r12
   __int64 v3; // r14
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl **v4; // r15
+  _DWORD *v4; // r15
   UFG::CharacterAnimationComponent *v5; // rdi
-  unsigned int v6; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v7; // rbp
   unsigned int v8; // ebx
   UFG::qBaseTreeRB *v9; // rax
   UFG::qBaseTreeRB *v10; // rsi
-  unsigned int v11; // edx
+  unsigned int mParent_high; // edx
   UFG::qBaseTreeRB *v12; // rax
   UFG::qBaseTreeRB *v13; // r13
   UFG::allocator::free_link *v14; // rax
-  __int64 v15; // rax
-  __int64 v16; // r15
-  UFG::qBaseTreeRB *v17; // rbx
+  UFG::VehicleEffectState *v15; // rax
+  UFG::VehicleEffectState *v16; // r15
+  UFG::qBaseTreeRB *Head; // rbx
   UFG::allocator::free_link *v18; // rax
   UFG::qBaseNodeRB *v19; // rax
   UFG::qBaseNodeRB *v20; // rax
@@ -681,65 +668,64 @@ void __fastcall UFG::VehicleEffectsComponent::InitializeEffect_New(UFG::VehicleE
   UFG::allocator::free_link *v24; // rax
   UFG::qBaseNodeRB *v25; // rax
   UFG::qBaseNodeRB *v26; // rax
-  signed __int64 v27; // rsi
-  UFG::SimObjectCVBase *v28; // rcx
-  unsigned __int16 v29; // dx
-  UFG::CharacterAnimationComponent *v30; // rax
-  Creature *v31; // rdi
+  UFG::VehicleEffectState **p_mInternalState; // rsi
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // rdi
   UFG::qBaseTreeRB *j; // rbx
   unsigned int v33; // edx
-  signed int v34; // eax
+  int BoneID; // eax
   unsigned int v35; // edx
-  signed int v36; // eax
+  int v36; // eax
   unsigned int v37; // edx
-  signed int v38; // eax
-  DamageRig *v39; // rcx
+  int v38; // eax
+  DamageRig *mDamageRig; // rcx
   char *v40; // rax
   unsigned int v41; // edx
-  UFG::qSymbol symbol; // [rsp+80h] [rbp+8h]
+  UFG::qSymbol symbol; // [rsp+80h] [rbp+8h] BYREF
   __int64 v43; // [rsp+90h] [rbp+18h]
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl **v44; // [rsp+98h] [rbp+20h]
+  _DWORD *v44; // [rsp+98h] [rbp+20h]
 
-  v2 = this;
-  if ( *((_BYTE *)this + 1884) >= 0 )
+  if ( *((char *)this + 1884) >= 0 )
   {
     this->mEffectStatusTable[id].mState = 1;
     return;
   }
   v3 = id;
   v43 = id;
-  v4 = &(&this->vfptr)[(signed int)id + 2i64 * (signed int)id + 23];
+  v4 = (_DWORD *)((char *)this->mEffectStatusTable + 16 * id + 8 * id);
   v44 = v4;
   v5 = 0i64;
-  if ( *(_DWORD *)v4 == 1 )
-    *(_DWORD *)v4 = 0;
-  if ( !*(_DWORD *)v4 )
+  if ( *v4 == 1 )
+    *v4 = 0;
+  if ( !*v4 )
   {
-    v6 = this->mEffectGroup.mUID;
-    if ( v6 != -1 )
+    mUID = this->mEffectGroup.mUID;
+    if ( mUID != -1 )
     {
       v7 = 0i64;
       v8 = gEffectMapping[v3].mUID;
-      if ( !v6 )
-        goto LABEL_71;
-      v9 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mVehicleEffectTemplates.mTree, v6);
+      if ( !mUID )
+        goto LABEL_70;
+      v9 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mVehicleEffectTemplates.mTree, mUID);
       v10 = v9;
       if ( !v9 )
-        goto LABEL_71;
-      v11 = HIDWORD(v9->mNULL.mParent);
-      if ( v11 )
+        goto LABEL_70;
+      mParent_high = HIDWORD(v9->mNULL.mParent);
+      if ( mParent_high )
       {
-        v12 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mVehicleEffectTemplates.mTree, v11);
+        v12 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mVehicleEffectTemplates.mTree, mParent_high);
         if ( v12 )
         {
           if ( !v8 )
             goto LABEL_13;
-          v7 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v12 + 40), v8);
+          v7 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)v12->mNULL.mChild, v8);
         }
       }
       if ( v8 )
       {
-        v13 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v10 + 40), v8);
+        v13 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)v10->mNULL.mChild, v8);
         goto LABEL_15;
       }
 LABEL_13:
@@ -751,7 +737,7 @@ LABEL_15:
         if ( v14 )
         {
           symbol.mUID = v8;
-          UFG::VehicleEffectState::VehicleEffectState((UFG::VehicleEffectState *)v14, (__int64)&symbol);
+          UFG::VehicleEffectState::VehicleEffectState((UFG::VehicleEffectState *)v14, &symbol.mUID);
           v16 = v15;
         }
         else
@@ -760,34 +746,34 @@ LABEL_15:
         }
         if ( v7 )
         {
-          v17 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)v7->mNULL.mChild);
-          if ( v17 )
+          Head = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)v7->mNULL.mChild);
+          if ( Head )
           {
             do
             {
               v18 = UFG::qMalloc(0x78ui64, "VehicleEffect", 0i64);
               if ( v18 )
-                UFG::VehicleEffect::VehicleEffect((UFG::VehicleEffect *)v18, (UFG::VehicleEffect *)v17);
+                UFG::VehicleEffect::VehicleEffect((UFG::VehicleEffect *)v18, (UFG::VehicleEffect *)Head);
               else
                 v19 = 0i64;
-              UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)(v16 + 40), v19);
-              v17 = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)((char *)v7 + 40), &v17->mRoot);
+              UFG::qBaseTreeRB::Add(&v16->mEffects.mTree, v19);
+              Head = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)v7->mNULL.mChild, &Head->mRoot);
             }
-            while ( v17 );
+            while ( Head );
             v3 = v43;
           }
           v20 = v7[1].mNULL.mChild[0];
           if ( v20 )
-            *(_QWORD *)(v16 + 112) = v20;
+            v16->mPhantom = (UFG::VehiclePhantom *)v20;
         }
         if ( v13 )
         {
           for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)v13->mNULL.mChild);
                 i;
-                i = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)((char *)v13 + 40), &i->mNode) )
+                i = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)v13->mNULL.mChild, &i->mNode) )
           {
             v22 = i->mName.mUID;
-            if ( v22 && (v23 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v16 + 40), v22)) != 0i64 )
+            if ( v22 && (v23 = UFG::qBaseTreeRB::Get(&v16->mEffects.mTree, v22)) != 0i64 )
             {
               UFG::VehicleEffect::operator=((UFG::VehicleEffect *)v23, i);
             }
@@ -799,162 +785,154 @@ LABEL_15:
                 UFG::VehicleEffect::VehicleEffect((UFG::VehicleEffect *)v24, i);
               else
                 v25 = 0i64;
-              UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)(v16 + 40), v25);
+              UFG::qBaseTreeRB::Add(&v16->mEffects.mTree, v25);
             }
           }
           v26 = v13[1].mNULL.mChild[0];
           if ( v26 )
-            *(_QWORD *)(v16 + 112) = v26;
+            v16->mPhantom = (UFG::VehiclePhantom *)v26;
         }
-        v27 = (signed __int64)v2 + 24 * (v3 + 8);
-        *(_QWORD *)v27 = v16;
-        v28 = (UFG::SimObjectCVBase *)v2->m_pSimObject;
-        if ( v28 )
+        p_mInternalState = &this->mEffectStatusTable[v3].mInternalState;
+        *p_mInternalState = v16;
+        m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+        if ( m_pSimObject )
         {
-          v29 = v28->m_Flags;
-          if ( (v29 >> 14) & 1 )
+          m_Flags = m_pSimObject->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
           {
-            v30 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v28);
+            ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
           }
-          else if ( (v29 & 0x8000u) == 0 )
+          else if ( (m_Flags & 0x2000) != 0 )
           {
-            if ( (v29 >> 13) & 1 )
-            {
-              v30 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v28);
-            }
-            else if ( (v29 >> 12) & 1 )
-            {
-              v30 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v28->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
-            else
-            {
-              v30 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v28->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
+            ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+          }
+          else if ( (m_Flags & 0x1000) != 0 )
+          {
+            ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                      m_pSimObject,
+                                                                      UFG::CharacterAnimationComponent::_TypeUID);
           }
           else
           {
-            v30 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v28);
+            ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                      m_pSimObject,
+                                                                      UFG::CharacterAnimationComponent::_TypeUID);
           }
-          v5 = v30;
+          v5 = ComponentOfTypeHK;
         }
-        v31 = v5->mCreature;
-        for ( j = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)(*(_QWORD *)v27 + 40i64));
+        mCreature = v5->mCreature;
+        for ( j = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*p_mInternalState)->mEffects);
               j;
-              j = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)(*(_QWORD *)v27 + 40i64), &j->mRoot) )
+              j = UFG::qBaseTreeRB::GetNext(&(*p_mInternalState)->mEffects.mTree, &j->mRoot) )
         {
           v33 = HIDWORD(j->mNULL.mChild[0]);
-          if ( v33 != -1 && v31->mPose.mRigHandle.mData )
-            v34 = Skeleton::GetBoneID(v31->mPose.mRigHandle.mUFGSkeleton, v33);
+          if ( v33 == -1 || !mCreature->mPose.mRigHandle.mData )
+            BoneID = -1;
           else
-            v34 = -1;
-          LODWORD(j->mNULL.mChild[0]) = v34;
+            BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, v33);
+          LODWORD(j->mNULL.mChild[0]) = BoneID;
           v35 = HIDWORD(j[1].mRoot.mChild[1]);
-          if ( v35 != -1 && v31->mPose.mRigHandle.mData )
-            v36 = Skeleton::GetBoneID(v31->mPose.mRigHandle.mUFGSkeleton, v35);
-          else
+          if ( v35 == -1 || !mCreature->mPose.mRigHandle.mData )
             v36 = -1;
+          else
+            v36 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, v35);
           LODWORD(j[1].mRoot.mChild[1]) = v36;
           v37 = HIDWORD(j[1].mRoot.mChild[0]);
-          if ( v37 != -1 && v31->mPose.mRigHandle.mData )
-            v38 = Skeleton::GetBoneID(v31->mPose.mRigHandle.mUFGSkeleton, v37);
-          else
+          if ( v37 == -1 || !mCreature->mPose.mRigHandle.mData )
             v38 = -1;
+          else
+            v38 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, v37);
           LODWORD(j[1].mRoot.mChild[0]) = v38;
-          v39 = v2->mDamageRig;
-          if ( !v39 )
+          mDamageRig = this->mDamageRig;
+          if ( !mDamageRig )
           {
-            v40 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->m_pSimObject->m_Name);
+            v40 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->m_pSimObject->m_Name);
             UFG::qPrintf("vehicle %s missing mDamageRig. resources unloaded?\n", v40);
-            v39 = v2->mDamageRig;
-            if ( !v39 )
+            mDamageRig = this->mDamageRig;
+            if ( !mDamageRig )
               continue;
           }
           v41 = HIDWORD(j[1].mRoot.mChild[0]);
           if ( v41 != -1 )
-            DamageRig::GetDamageMarkerIndex(v39, v41, (unsigned int *)j[1].mNULL.mChild);
+            DamageRig::GetDamageMarkerIndex(mDamageRig, v41, (unsigned int *)j[1].mNULL.mChild);
         }
-        *(_DWORD *)v44 = 4;
+        *v44 = 4;
         return;
       }
-LABEL_71:
-      *(_DWORD *)v4 = 2;
-      return;
+LABEL_70:
+      *v4 = 2;
     }
   }
 }
 
 // File Line: 587
 // RVA: 0x68E350
-void __fastcall UFG::VehicleEffectsComponent::TurnOnEffect_New(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id)
+void __fastcall UFG::VehicleEffectsComponent::TurnOnEffect_New(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffectId id)
 {
-  signed __int64 v2; // rsi
-  UFG::VehicleEffectsComponent *v3; // rdi
-  signed __int64 v4; // rbx
-  UFG::EffectStatus::State v5; // eax
-  signed __int64 v6; // rsi
+  __int64 v2; // rsi
+  __int64 v4; // rbx
+  UFG::EffectStatus::State mState; // eax
+  __int64 v6; // rsi
   UFG::VehicleEffect *i; // rbx
-  int v8; // er8
+  int mMarker; // r8d
   unsigned int v9; // edx
-  Render::FXSimComponent *v10; // rcx
-  UFG::SimObject *v11; // rax
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  UFG::SimObject *m_pSimObject; // rax
   UFG::SimComponent *v12; // rcx
-  UFG::VehiclePhantom *v13; // rsi
+  UFG::VehiclePhantom *mPhantom; // rsi
   UFG::SimComponent *v14; // rax
-  SkeletalPose *v15; // rbx
-  UFG::PhysicsVehicle *v16; // rdi
-  int v17; // eax
-  UFG::qMatrix44 matrixMS; // [rsp+30h] [rbp-48h]
+  SkeletalPose *vfptr; // rbx
+  UFG::PhysicsVehicle *mPrev; // rdi
+  int BoneID; // eax
+  UFG::qMatrix44 matrixMS; // [rsp+30h] [rbp-48h] BYREF
 
   v2 = id;
-  v3 = this;
   v4 = id;
   if ( this->mEffectStatusTable[id].mState == UNINITIALIZED )
     UFG::VehicleEffectsComponent::InitializeEffect_New(this, id);
-  v5 = v3->mEffectStatusTable[v4].mState;
-  if ( v5 == 4 )
+  mState = this->mEffectStatusTable[v4].mState;
+  if ( mState == 4 )
   {
     v6 = v2;
-    v3->mEffectStatusTable[v4].mState = 3;
-    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v3->mEffectStatusTable[v6].mInternalState->mEffects);
+    this->mEffectStatusTable[v4].mState = 3;
+    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mEffectStatusTable[v6].mInternalState->mEffects);
           i;
           i = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(
-                                      &v3->mEffectStatusTable[v6].mInternalState->mEffects.mTree,
+                                      &this->mEffectStatusTable[v6].mInternalState->mEffects.mTree,
                                       &i->mNode) )
     {
-      UFG::VehicleEffectsComponent::UpdateEffectSpeed(v3, i);
-      v8 = i->mMarker;
+      UFG::VehicleEffectsComponent::UpdateEffectSpeed(this, i);
+      mMarker = i->mMarker;
       v9 = i->mBoundEffect[i->mSpeed];
-      v10 = (Render::FXSimComponent *)v3->mFXComponent.m_pSimComponent;
-      if ( v10 && v8 != -1 && i->mEffectRef == -1 && v9 )
-        i->mEffectRef = Render::FXSimComponent::AttachEffect(v10, v9, v8, 0i64);
+      m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+      if ( m_pSimComponent && mMarker != -1 && i->mEffectRef == -1 && v9 )
+        i->mEffectRef = Render::FXSimComponent::AttachEffect(m_pSimComponent, v9, mMarker, 0i64);
     }
-    v11 = v3->m_pSimObject;
-    if ( v11 )
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
     {
-      if ( !((LOBYTE(v11->m_Flags) >> 1) & 1) )
+      if ( (m_pSimObject->m_Flags & 2) == 0 )
       {
-        v12 = v3->mDrawableComponent.m_pSimComponent;
-        v13 = v3->mEffectStatusTable[v6].mInternalState->mPhantom;
+        v12 = this->mDrawableComponent.m_pSimComponent;
+        mPhantom = this->mEffectStatusTable[v6].mInternalState->mPhantom;
         if ( v12 )
         {
-          v14 = v3->mMoverComponent.m_pSimComponent;
+          v14 = this->mMoverComponent.m_pSimComponent;
           if ( v14 )
           {
-            if ( v13 )
+            if ( mPhantom )
             {
-              v15 = (SkeletalPose *)v12[21].vfptr;
-              if ( v15 )
+              vfptr = (SkeletalPose *)v12[21].vfptr;
+              if ( vfptr )
               {
-                v16 = (UFG::PhysicsVehicle *)v14[10].m_SafePointerList.mNode.mPrev;
-                if ( v16 )
+                mPrev = (UFG::PhysicsVehicle *)v14[10].m_SafePointerList.mNode.mPrev;
+                if ( mPrev )
                 {
-                  v17 = Skeleton::GetBoneID(v15->mRigHandle.mUFGSkeleton, v13->mMarkerUID);
-                  SkeletalPose::GetPositionMS(v15, v17, &matrixMS);
-                  UFG::PhysicsVehicle::ActivateVolume(v16, 0x914EB7E3, &v13->mHalfExtents, &matrixMS, 2.0);
+                  BoneID = Skeleton::GetBoneID(vfptr->mRigHandle.mUFGSkeleton, mPhantom->mMarkerUID);
+                  SkeletalPose::GetPositionMS(vfptr, BoneID, &matrixMS);
+                  UFG::PhysicsVehicle::ActivateVolume(mPrev, 0x914EB7E3, &mPhantom->mHalfExtents, &matrixMS, 2.0);
                 }
               }
             }
@@ -963,52 +941,50 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnEffect_New(UFG::VehicleEffec
       }
     }
   }
-  else if ( v5 == 1 )
+  else if ( mState == 1 )
   {
-    *((_DWORD *)&v3->mEffectStatusTable[v4] + 4) |= 1u;
+    *((_DWORD *)&this->mEffectStatusTable[v4] + 4) |= 1u;
   }
 }
 
 // File Line: 657
 // RVA: 0x68D840
-void __fastcall UFG::VehicleEffectsComponent::TurnOffEffect_New(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id)
+void __fastcall UFG::VehicleEffectsComponent::TurnOffEffect_New(UFG::VehicleEffectsComponent *this, int id)
 {
-  UFG::VehicleEffectsComponent *v2; // r14
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl **v3; // rsi
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl **v4; // r15
+  UFG::qSafePointerNode<UFG::SimComponent> *v3; // rsi
+  UFG::VehicleEffectState **p_mInternalState; // r15
   UFG::qBaseTreeRB *i; // rbx
-  Render::FXSimComponent *v6; // rcx
-  unsigned int v7; // edx
-  UFG::qBaseNodeRB *v8; // rax
-  UFG::qBaseNodeRB *v9; // rdi
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  unsigned int mUID; // edx
+  UFG::qBaseNodeRB *mParent; // rax
+  int *v9; // rdi
 
-  v2 = this;
-  v3 = &(&this->vfptr)[3 * id];
-  if ( *((_DWORD *)v3 + 46) == 3 )
+  v3 = (UFG::VehicleEffectsComponent *)((char *)this + 24 * id);
+  if ( LODWORD(v3[7].m_SafePointerList.mNode.mNext) == 3 )
   {
-    *((_DWORD *)v3 + 46) = 4;
-    v4 = &(&this->vfptr)[3 * ((signed int)id + 8i64)];
-    for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(&this->vfptr)[3 * ((signed int)id + 8i64)][5]);
+    LODWORD(v3[7].m_SafePointerList.mNode.mNext) = 4;
+    p_mInternalState = &this->mEffectStatusTable[id].mInternalState;
+    for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*p_mInternalState)->mEffects);
           i;
-          i = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)&(*v4)[5], &i->mRoot) )
+          i = UFG::qBaseTreeRB::GetNext(&(*p_mInternalState)->mEffects.mTree, &i->mRoot) )
     {
-      v6 = (Render::FXSimComponent *)v2->mFXComponent.m_pSimComponent;
-      if ( v6 )
+      m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+      if ( m_pSimComponent )
       {
-        v7 = i[1].mRoot.mUID;
-        if ( v7 != -1 )
+        mUID = i[1].mRoot.mUID;
+        if ( mUID != -1 )
         {
-          Render::FXSimComponent::DetachEffect(v6, v7, 0);
+          Render::FXSimComponent::DetachEffect(m_pSimComponent, mUID, FXKILLOPTION_DEFAULT);
           i[1].mRoot.mUID = -1;
         }
       }
       i[1].mRoot.mUID = -1;
-      v8 = i[1].mNULL.mParent;
-      if ( v8 )
+      mParent = i[1].mNULL.mParent;
+      if ( mParent )
       {
-        --LODWORD(v8->mParent);
-        v9 = i[1].mNULL.mParent;
-        if ( SLODWORD(v9->mParent) <= 0 )
+        --LODWORD(mParent->mParent);
+        v9 = (int *)i[1].mNULL.mParent;
+        if ( *v9 <= 0 )
         {
           if ( v9 )
           {
@@ -1021,59 +997,49 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOffEffect_New(UFG::VehicleEffe
       }
     }
   }
-  *((_DWORD *)v3 + 50) &= 0xFFFFFFFE;
-  if ( *((_DWORD *)v3 + 46) == 1 )
-    *((_DWORD *)v3 + 46) = 0;
+  LODWORD(v3[8].m_SafePointerList.mNode.mPrev) &= ~1u;
+  if ( LODWORD(v3[7].m_SafePointerList.mNode.mNext) == 1 )
+    LODWORD(v3[7].m_SafePointerList.mNode.mNext) = 0;
 }
 
 // File Line: 704
 // RVA: 0x68E280
 void __fastcall UFG::VehicleEffectsComponent::TurnOnDisabledEffect(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rdi
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
-  UFG::WaterFloatingTrackerComponent *v5; // rbx
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::WaterFloatingTrackerComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( !v2 )
-    goto LABEL_15;
-  v3 = v2->m_Flags;
-  if ( (v3 >> 14) & 1 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( !m_pSimObject )
+    goto LABEL_14;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_8;
+  if ( m_Flags >= 0 )
   {
-    v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-LABEL_11:
-    v5 = (UFG::WaterFloatingTrackerComponent *)v4;
-    goto LABEL_12;
-  }
-  if ( (v3 & 0x8000u) == 0 )
-  {
-    if ( (v3 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) == 0 && (m_Flags & 0x1000) == 0 )
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      goto LABEL_10;
     }
-    else if ( (v3 >> 12) & 1 )
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
-    else
-    {
-      v4 = UFG::SimObject::GetComponentOfType(
-             (UFG::SimObject *)&v2->vfptr,
-             UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
+LABEL_8:
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                        m_pSimObject,
+                        UFG::WaterFloatingTrackerComponent::_TypeUID);
+LABEL_10:
+    m_pComponent = (UFG::WaterFloatingTrackerComponent *)ComponentOfType;
     goto LABEL_11;
   }
-  v5 = (UFG::WaterFloatingTrackerComponent *)v2->m_Components.p[35].m_pComponent;
-LABEL_12:
-  if ( !v5
-    || !UFG::WaterFloatingTrackerComponent::IsInWater(v5)
-    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(v5, 0.64999998) )
+  m_pComponent = (UFG::WaterFloatingTrackerComponent *)m_pSimObject->m_Components.p[35].m_pComponent;
+LABEL_11:
+  if ( !m_pComponent
+    || !UFG::WaterFloatingTrackerComponent::IsInWater(m_pComponent)
+    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(m_pComponent, 0.64999998) )
   {
-LABEL_15:
-    UFG::VehicleEffectsComponent::TurnOffEffect_New(v1, FX_DISABLED);
+LABEL_14:
+    UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 18);
   }
 }
 
@@ -1081,41 +1047,30 @@ LABEL_15:
 // RVA: 0x68D950
 void __fastcall UFG::VehicleEffectsComponent::TurnOffEffects(UFG::VehicleEffectsComponent *this, bool headlights)
 {
-  bool v2; // bp
-  UFG::VehicleEffectsComponent *v3; // rsi
-  UFG::VehicleEffectId v4; // ebx
+  int v4; // ebx
   _BYTE *v5; // rdi
   unsigned int v6; // edi
-  unsigned int *v7; // rbx
+  UFG::qSafeArray<unsigned long,4> *p_mSkidEmitters; // rbx
   unsigned int v8; // edx
   unsigned int v9; // edx
   unsigned int v10; // edx
   unsigned int v11; // edx
-  unsigned int v12; // edx
+  unsigned int mDropletEffectRef; // edx
 
-  v2 = headlights;
-  v3 = this;
   v4 = 0;
   v5 = (char *)this->mEffectStatusTable + 16;
   do
   {
-    if ( *((_DWORD *)v5 - 4) == 3 || *v5 & 1 )
+    if ( *((_DWORD *)v5 - 4) == 3 || (*v5 & 1) != 0 )
     {
       if ( (unsigned int)(v4 - 2) > 3 && v4 )
       {
-        if ( (unsigned int)(v4 - 6) <= 1 )
-        {
-          if ( v2 == 1 )
-            UFG::VehicleEffectsComponent::TurnOffEffect_New(v3, v4);
-        }
-        else
-        {
-          UFG::VehicleEffectsComponent::TurnOffEffect_New(v3, v4);
-        }
+        if ( (unsigned int)(v4 - 6) > 1 || headlights )
+          UFG::VehicleEffectsComponent::TurnOffEffect_New(this, v4);
       }
-      else if ( v2 == 1 )
+      else if ( headlights )
       {
-        UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, v4);
+        UFG::VehicleEffectsComponent::TurnOffLightEffects(this, (UFG::VehicleEffectId)v4);
       }
     }
     ++v4;
@@ -1123,126 +1078,124 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOffEffects(UFG::VehicleEffects
   }
   while ( (unsigned int)v4 < 0x27 );
   v6 = 0;
-  if ( v3->mNumWheels > 0 )
+  if ( this->mNumWheels )
   {
-    v7 = v3->mSkidEmitters.array;
+    p_mSkidEmitters = &this->mSkidEmitters;
     do
     {
-      if ( *((_BYTE *)v3 + 1884) < 0 )
+      if ( *((char *)this + 1884) < 0 )
       {
-        v8 = v7[44];
+        v8 = p_mSkidEmitters[11].array[0];
         if ( v8 != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, v8, 0);
-          v7[44] = -1;
+          Render::FXManager::KillEffect(&Render::gFXManager, v8, FXKILLOPTION_DEFAULT);
+          p_mSkidEmitters[11].array[0] = -1;
         }
-        if ( *v7 )
+        if ( p_mSkidEmitters->array[0] )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, *v7, 0);
-          *v7 = 0;
+          Render::FXManager::KillEffect(&Render::gFXManager, p_mSkidEmitters->array[0], FXKILLOPTION_DEFAULT);
+          p_mSkidEmitters->array[0] = 0;
         }
       }
-      v9 = v7[48];
+      v9 = p_mSkidEmitters[12].array[0];
       if ( v9 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v9, 0);
-        v7[48] = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v9, FXKILLOPTION_DEFAULT);
+        p_mSkidEmitters[12].array[0] = -1;
       }
-      v10 = v7[52];
+      v10 = p_mSkidEmitters[13].array[0];
       if ( v10 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v10, 0);
-        v7[52] = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v10, FXKILLOPTION_DEFAULT);
+        p_mSkidEmitters[13].array[0] = -1;
       }
-      v11 = v7[56];
+      v11 = p_mSkidEmitters[14].array[0];
       if ( v11 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v11, 0);
-        v7[56] = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v11, FXKILLOPTION_DEFAULT);
+        p_mSkidEmitters[14].array[0] = -1;
       }
       ++v6;
-      ++v7;
+      p_mSkidEmitters = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mSkidEmitters + 4);
     }
-    while ( v6 < v3->mNumWheels );
+    while ( v6 < this->mNumWheels );
   }
-  Render::FXManager::KillEffect(&Render::gFXManager, v3->mSprayEffects[0].mDropletEffectRef, 0);
-  v12 = v3->mSprayEffects[1].mDropletEffectRef;
-  v3->mSprayEffects[0].mDropletEffectRef = -1;
-  Render::FXManager::KillEffect(&Render::gFXManager, v12, 0);
-  v3->mSprayEffects[1].mDropletEffectRef = -1;
+  Render::FXManager::KillEffect(&Render::gFXManager, this->mSprayEffects[0].mDropletEffectRef, FXKILLOPTION_DEFAULT);
+  mDropletEffectRef = this->mSprayEffects[1].mDropletEffectRef;
+  this->mSprayEffects[0].mDropletEffectRef = -1;
+  Render::FXManager::KillEffect(&Render::gFXManager, mDropletEffectRef, FXKILLOPTION_DEFAULT);
+  this->mSprayEffects[1].mDropletEffectRef = -1;
 }
 
 // File Line: 787
 // RVA: 0x66D450
 void __fastcall UFG::VehicleEffectsComponent::~VehicleEffectsComponent(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
   UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v2; // r14
-  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v3; // rcx
-  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v4; // rax
-  UFG::TransformNodeComponent *v5; // rcx
+  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *mPrev; // rcx
+  UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *mNext; // rax
+  UFG::TransformNodeComponent *mTransform; // rcx
   UFG::TransformNodeComponent *v6; // rcx
-  UFG::qSafeArray<UFG::TransformNodeComponent *,16> *v7; // rdi
-  signed __int64 v8; // rsi
-  DamageRig *v9; // rdi
-  unsigned int *v10; // rcx
+  UFG::qSafeArray<UFG::TransformNodeComponent *,16> *p_mTransformNodes; // rdi
+  __int64 v8; // rsi
+  DamageRig *mDamageRig; // rdi
+  unsigned int *p; // rcx
   UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v11; // rcx
   UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v12; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable;
   if ( this == UFG::VehicleEffectsComponent::s_VehicleEffectsComponentpCurrentIterator )
     UFG::VehicleEffectsComponent::s_VehicleEffectsComponentpCurrentIterator = (UFG::VehicleEffectsComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::VehicleEffectsComponent::TurnOffEffects(v1, 1);
-  UFG::VehicleEffectsComponent::TurnOffFire(v1);
-  v5 = v1->mSprayEffects[0].mTransform;
-  if ( v5 )
+  UFG::VehicleEffectsComponent::TurnOffEffects(this, 1);
+  UFG::VehicleEffectsComponent::TurnOffFire(this);
+  mTransform = this->mSprayEffects[0].mTransform;
+  if ( mTransform )
   {
-    v5->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v5->vfptr, 1u);
-    v1->mSprayEffects[0].mTransform = 0i64;
+    mTransform->vfptr->__vecDelDtor(mTransform, 1u);
+    this->mSprayEffects[0].mTransform = 0i64;
   }
-  v6 = v1->mSprayEffects[1].mTransform;
+  v6 = this->mSprayEffects[1].mTransform;
   if ( v6 )
   {
-    v6->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v6->vfptr, 1u);
-    v1->mSprayEffects[1].mTransform = 0i64;
+    v6->vfptr->__vecDelDtor(v6, 1u);
+    this->mSprayEffects[1].mTransform = 0i64;
   }
-  v7 = &v1->mTransformNodes;
+  p_mTransformNodes = &this->mTransformNodes;
   v8 = 16i64;
   do
   {
-    if ( v7->array[0] )
-      v7->array[0]->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v7->array[0]->vfptr, 1u);
-    v7 = (UFG::qSafeArray<UFG::TransformNodeComponent *,16> *)((char *)v7 + 8);
+    if ( p_mTransformNodes->array[0] )
+      p_mTransformNodes->array[0]->vfptr->__vecDelDtor(p_mTransformNodes->array[0], 1u);
+    p_mTransformNodes = (UFG::qSafeArray<UFG::TransformNodeComponent *,16> *)((char *)p_mTransformNodes + 8);
     --v8;
   }
   while ( v8 );
-  v9 = v1->mDamageRig;
-  if ( v9 )
+  mDamageRig = this->mDamageRig;
+  if ( mDamageRig )
   {
-    DamageRig::~DamageRig(v1->mDamageRig);
-    operator delete[](v9);
+    DamageRig::~DamageRig(this->mDamageRig);
+    operator delete[](mDamageRig);
   }
-  v10 = v1->mWheelBoneId.p;
-  if ( v10 )
-    operator delete[](v10);
-  v1->mWheelBoneId.p = 0i64;
-  *(_QWORD *)&v1->mWheelBoneId.size = 0i64;
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mVehicleDriverComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mRoadSpaceComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mMoverComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mFXComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mDrawableComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mWaterFloatingTrackerComponent);
+  p = this->mWheelBoneId.p;
+  if ( p )
+    operator delete[](p);
+  this->mWheelBoneId.p = 0i64;
+  *(_QWORD *)&this->mWheelBoneId.size = 0i64;
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mVehicleDriverComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mRoadSpaceComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mMoverComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mFXComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mDrawableComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mWaterFloatingTrackerComponent);
   `eh vector destructor iterator(
-    v1->mEffectStatusTable,
+    this->mEffectStatusTable,
     0x18ui64,
     39,
     (void (__fastcall *)(void *))UFG::EffectStatus::~EffectStatus);
@@ -1252,110 +1205,109 @@ void __fastcall UFG::VehicleEffectsComponent::~VehicleEffectsComponent(UFG::Vehi
   v12->mPrev = v11;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 823
 // RVA: 0x6838A0
-void __fastcall UFG::VehicleEffectsComponent::OnAttach(UFG::VehicleEffectsComponent *this, UFG::SimObject *object)
+void __fastcall UFG::VehicleEffectsComponent::OnAttach(
+        UFG::VehicleEffectsComponent *this,
+        UFG::SimObjectVehicle *object)
 {
-  UFG::VehicleEffectsComponent *v2; // rbx
-  UFG::SimObjectVehicle *v3; // rdi
-  UFG::RebindingComponentHandle<Render::FXSimComponent,0> *v4; // rbx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rcx
+  UFG::RebindingComponentHandle<Render::FXSimComponent,0> *p_mFXComponent; // rbx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rdx
 
-  v2 = this;
-  v3 = (UFG::SimObjectVehicle *)object;
   UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0>::Bind<UFG::SimObjectVehicle>(
     &this->mWaterFloatingTrackerComponent,
-    (UFG::SimObjectVehicle *)object);
+    object);
   UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0>::Bind<UFG::SimObjectVehicle>(
-    &v2->mDrawableComponent,
-    v3);
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::Bind<UFG::SimObjectVehicle>(&v2->mMoverComponent, v3);
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::Bind<UFG::SimObjectVehicle>(&v2->mRoadSpaceComponent, v3);
+    &this->mDrawableComponent,
+    object);
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::Bind<UFG::SimObjectVehicle>(
+    &this->mMoverComponent,
+    object);
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::Bind<UFG::SimObjectVehicle>(
+    &this->mRoadSpaceComponent,
+    object);
   UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0>::Bind<UFG::SimObjectVehicle>(
-    &v2->mVehicleDriverComponent,
-    v3);
-  v4 = &v2->mFXComponent;
-  if ( v4->m_pSimComponent )
+    &this->mVehicleDriverComponent,
+    object);
+  p_mFXComponent = &this->mFXComponent;
+  if ( p_mFXComponent->m_pSimComponent )
   {
-    v5 = v4->mNext;
-    v6 = v4->mPrev;
-    v6->mNext = v5;
-    v5->mPrev = v6;
-    v4->m_pSimComponent = 0i64;
+    mNext = p_mFXComponent->mNext;
+    mPrev = p_mFXComponent->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mFXComponent->m_pSimComponent = 0i64;
 LABEL_7:
-    v4->m_pSimObject = 0i64;
-    v4->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
-    v4->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
+    p_mFXComponent->m_pSimObject = 0i64;
+    p_mFXComponent->mNext = p_mFXComponent;
+    p_mFXComponent->mPrev = p_mFXComponent;
     goto LABEL_8;
   }
-  if ( v4->m_pSimObject
-    && ((UFG::RebindingComponentHandle<Render::FXSimComponent,0> *)v4->mPrev != v4
-     || (UFG::RebindingComponentHandle<Render::FXSimComponent,0> *)v4->mNext != v4) )
+  if ( p_mFXComponent->m_pSimObject
+    && (p_mFXComponent->mPrev != p_mFXComponent || p_mFXComponent->mNext != p_mFXComponent) )
   {
-    v7 = v4->mNext;
-    v8 = v4->mPrev;
+    v7 = p_mFXComponent->mNext;
+    v8 = p_mFXComponent->mPrev;
     v8->mNext = v7;
     v7->mPrev = v8;
     goto LABEL_7;
   }
 LABEL_8:
-  v4->m_Changed = 1;
-  v4->m_pSimObject = (UFG::SimObject *)&v3->vfptr;
-  v4->m_TypeUID = Render::FXSimComponent::_TypeUID;
-  UFG::RebindingComponentHandle<Render::FXSimComponent,0>::BindInternal<UFG::SimObjectVehicle>(v4, v3);
+  p_mFXComponent->m_Changed = 1;
+  p_mFXComponent->m_pSimObject = object;
+  p_mFXComponent->m_TypeUID = Render::FXSimComponent::_TypeUID;
+  UFG::RebindingComponentHandle<Render::FXSimComponent,0>::BindInternal<UFG::SimObjectVehicle>(p_mFXComponent, object);
 }
 
 // File Line: 838
 // RVA: 0x674850
 void __fastcall UFG::VehicleEffectsComponent::CreateDamageRig(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rdi
   UFG::qResourceData *v2; // rax
   UFG::qResourceData *v3; // rbx
   UFG::allocator::free_link *v4; // rax
   DamageRig *v5; // rax
   DamageRig *v6; // rcx
-  unsigned int v7; // edx
+  unsigned int mDamageTransferUID; // edx
   UFG::qBaseTreeRB *v8; // rbp
-  unsigned int v9; // eax
-  int v10; // er12
+  unsigned int mPrev; // eax
+  int v10; // r12d
   unsigned __int64 v11; // rax
   unsigned __int64 v12; // kr00_8
-  unsigned int i; // er14
-  signed __int64 v14; // rsi
+  unsigned int i; // r14d
+  unsigned __int64 v14; // rsi
   __m128 v15; // xmm1
-  DamageRig::DamageMarker *v16; // rcx
+  DamageRig::DamageMarker *mDamageMarkers; // rcx
   unsigned int v17; // edx
   float v18; // xmm0_4
   UFG::qBaseTreeRB *v19; // rax
-  unsigned int v20; // eax
+  unsigned int mTypeUID; // eax
   unsigned int v21; // esi
   unsigned __int64 v22; // rax
   unsigned __int64 v23; // kr10_8
-  unsigned int j; // er13
-  signed __int64 v25; // r14
+  unsigned int j; // r13d
+  unsigned __int64 v25; // r14
   __m128 v26; // xmm1
-  DamageRig::TriggeredMarker *v27; // rcx
+  DamageRig::TriggeredMarker *mTriggeredMarkers; // rcx
   unsigned __int64 v28; // rax
-  __int64 v29; // r8
+  __int64 k; // r8
   float v30; // xmm0_4
   UFG::qBaseTreeRB *v31; // rax
-  UFG::qBaseNodeRB *v32; // rax
-  UFG::SimObjectGame *v33; // rcx
-  unsigned __int16 v34; // dx
-  UFG::VehicleLookComponent *v35; // rax
+  UFG::qBaseNodeRB *Skeleton; // rax
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   unsigned int uid; // [rsp+80h] [rbp+8h]
-  ModelType *v37; // [rsp+88h] [rbp+10h]
+  ModelType *mNext; // [rsp+88h] [rbp+10h]
 
-  v1 = this;
-  v37 = (ModelType *)this->mDrawableComponent.m_pSimComponent[22].m_SafePointerList.mNode.mNext;
-  v2 = UFG::qResourceInventory::Get((UFG::qResourceInventory *)&UFG::gRigInventory.vfptr, this->mRigUID);
+  mNext = (ModelType *)this->mDrawableComponent.m_pSimComponent[22].m_SafePointerList.mNode.mNext;
+  v2 = UFG::qResourceInventory::Get(&UFG::gRigInventory, this->mRigUID);
   v3 = v2;
   if ( LODWORD(v2[2].mResourceHandles.mNode.mPrev) || v2[2].mTypeUID )
   {
@@ -1369,225 +1321,182 @@ void __fastcall UFG::VehicleEffectsComponent::CreateDamageRig(UFG::VehicleEffect
     {
       v6 = 0i64;
     }
-    v1->mDamageRig = v6;
-    v6->mGrimeFactor = v1->mInitialGrimeFactor;
-    v1->mDamageRig->mNumDamageMarkers = (unsigned int)v3[2].mResourceHandles.mNode.mPrev;
-    v1->mDamageRig->mNumTriggeredMarkers = v3[2].mTypeUID;
-    v7 = v1->mDamageTransferUID;
-    if ( v7 )
-      v8 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mDamageTransferNodes.mTree, v7);
+    this->mDamageRig = v6;
+    v6->mGrimeFactor = this->mInitialGrimeFactor;
+    this->mDamageRig->mNumDamageMarkers = (unsigned int)v3[2].mResourceHandles.mNode.mPrev;
+    this->mDamageRig->mNumTriggeredMarkers = v3[2].mTypeUID;
+    mDamageTransferUID = this->mDamageTransferUID;
+    if ( mDamageTransferUID )
+      v8 = UFG::qBaseTreeRB::Get(&UFG::VehicleEffectManager::m_Instance->mDamageTransferNodes.mTree, mDamageTransferUID);
     else
       v8 = 0i64;
-    v9 = (unsigned int)v3[2].mResourceHandles.mNode.mPrev;
-    v10 = LODWORD(v3[1].mNode.mChild[0][1].mChild[1]) - v9 - v3[2].mTypeUID;
-    if ( v9 )
+    mPrev = (unsigned int)v3[2].mResourceHandles.mNode.mPrev;
+    v10 = LODWORD(v3[1].mNode.mChild[0][1].mChild[1]) - mPrev - v3[2].mTypeUID;
+    if ( mPrev )
     {
-      v12 = v9;
-      v11 = 36i64 * v9;
+      v12 = mPrev;
+      v11 = 36i64 * mPrev;
       if ( !is_mul_ok(v12, 0x24ui64) )
         v11 = -1i64;
-      v1->mDamageRig->mDamageMarkers = (DamageRig::DamageMarker *)UFG::qMalloc(v11, "DamageMarker", 0i64);
+      this->mDamageRig->mDamageMarkers = (DamageRig::DamageMarker *)UFG::qMalloc(v11, "DamageMarker", 0i64);
       for ( i = 0; i < LODWORD(v3[2].mResourceHandles.mNode.mPrev); ++i )
       {
         v14 = i;
-        v1->mDamageRig->mDamageMarkers[v14].mValue = 0.0;
-        v1->mDamageRig->mDamageMarkers[v14].mSignal = 0.0;
-        v1->mDamageRig->mDamageMarkers[v14].mTransferredDamage = 0.0;
-        v1->mDamageRig->mDamageMarkers[v14].mBoneIndex = *((_DWORD *)&v3[2].mResourceHandles.mNode.mNext->mPrev + i);
+        this->mDamageRig->mDamageMarkers[v14].mValue = 0.0;
+        this->mDamageRig->mDamageMarkers[v14].mSignal = 0.0;
+        this->mDamageRig->mDamageMarkers[v14].mTransferredDamage = 0.0;
+        this->mDamageRig->mDamageMarkers[v14].mBoneIndex = *((_DWORD *)&v3[2].mResourceHandles.mNode.mNext->mPrev + i);
         v15 = *(__m128 *)(*(_QWORD *)&v3[1].mNode.mChild[0][1].mUID
-                        + 48i64 * *((signed int *)&v3[2].mResourceHandles.mNode.mNext->mPrev + i));
-        v16 = v1->mDamageRig->mDamageMarkers;
-        LODWORD(v16[v14].mPosition.x) = v15.m128_i32[0];
-        LODWORD(v16[v14].mPosition.y) = (unsigned __int128)_mm_shuffle_ps(v15, v15, 85);
-        LODWORD(v16[v14].mPosition.z) = (unsigned __int128)_mm_shuffle_ps(v15, v15, 170);
+                        + 48i64 * *((int *)&v3[2].mResourceHandles.mNode.mNext->mPrev + i));
+        mDamageMarkers = this->mDamageRig->mDamageMarkers;
+        LODWORD(mDamageMarkers[v14].mPosition.x) = v15.m128_i32[0];
+        LODWORD(mDamageMarkers[v14].mPosition.y) = _mm_shuffle_ps(v15, v15, 85).m128_u32[0];
+        LODWORD(mDamageMarkers[v14].mPosition.z) = _mm_shuffle_ps(v15, v15, 170).m128_u32[0];
         v17 = *(_DWORD *)(*(_QWORD *)&v3[1].mNode.mUID
                         + 4i64 * *((unsigned int *)&v3[2].mResourceHandles.mNode.mNext->mPrev + i));
-        v1->mDamageRig->mDamageMarkers[v14].mNameUID = v17;
+        this->mDamageRig->mDamageMarkers[v14].mNameUID = v17;
         v18 = *(float *)&FLOAT_1_0;
         if ( v8 )
         {
-          if ( v17 && (v19 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v8 + 32), v17)) != 0i64 )
+          if ( v17 && (v19 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&v8->mNULL, v17)) != 0i64 )
             v18 = *(float *)&v19->mNULL.mChild[1];
           else
             v18 = *(float *)&v8[1].mNULL.mParent;
         }
-        v1->mDamageRig->mDamageMarkers[i].mDamageScalar = v18;
+        this->mDamageRig->mDamageMarkers[i].mDamageScalar = v18;
       }
     }
-    v20 = v3[2].mTypeUID;
-    if ( v20 )
+    mTypeUID = v3[2].mTypeUID;
+    if ( mTypeUID )
     {
       v21 = 0;
-      v23 = v20;
-      v22 = 48i64 * v20;
+      v23 = mTypeUID;
+      v22 = 48i64 * mTypeUID;
       if ( !is_mul_ok(v23, 0x30ui64) )
         v22 = -1i64;
-      v1->mDamageRig->mTriggeredMarkers = (DamageRig::TriggeredMarker *)UFG::qMalloc(v22, "TriggeredMarker", 0i64);
+      this->mDamageRig->mTriggeredMarkers = (DamageRig::TriggeredMarker *)UFG::qMalloc(v22, "TriggeredMarker", 0i64);
       for ( j = 0; j < v3[2].mTypeUID; ++j )
       {
         v25 = j;
-        v1->mDamageRig->mTriggeredMarkers[v25].mValue = 0.0;
-        v1->mDamageRig->mTriggeredMarkers[v25].mSignal = 0.0;
-        v1->mDamageRig->mTriggeredMarkers[v25].mBoneIndex = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[4] + 4i64 * j);
+        this->mDamageRig->mTriggeredMarkers[v25].mValue = 0.0;
+        this->mDamageRig->mTriggeredMarkers[v25].mSignal = 0.0;
+        this->mDamageRig->mTriggeredMarkers[v25].mBoneIndex = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[4] + 4i64 * j);
         v26 = *(__m128 *)(*(_QWORD *)&v3[1].mNode.mChild[0][1].mUID
-                        + 48i64 * *(signed int *)(*(_QWORD *)&v3[2].mDebugName[4] + 4i64 * j));
-        v27 = v1->mDamageRig->mTriggeredMarkers;
-        LODWORD(v27[v25].mPosition.x) = v26.m128_i32[0];
-        LODWORD(v27[v25].mPosition.y) = (unsigned __int128)_mm_shuffle_ps(v26, v26, 85);
-        LODWORD(v27[v25].mPosition.z) = (unsigned __int128)_mm_shuffle_ps(v26, v26, 170);
+                        + 48i64 * *(int *)(*(_QWORD *)&v3[2].mDebugName[4] + 4i64 * j));
+        mTriggeredMarkers = this->mDamageRig->mTriggeredMarkers;
+        LODWORD(mTriggeredMarkers[v25].mPosition.x) = v26.m128_i32[0];
+        LODWORD(mTriggeredMarkers[v25].mPosition.y) = _mm_shuffle_ps(v26, v26, 85).m128_u32[0];
+        LODWORD(mTriggeredMarkers[v25].mPosition.z) = _mm_shuffle_ps(v26, v26, 170).m128_u32[0];
         uid = *(_DWORD *)(*(_QWORD *)&v3[1].mNode.mUID
                         + 4i64 * *(unsigned int *)(*(_QWORD *)&v3[2].mDebugName[4] + 4i64 * j));
-        v1->mDamageRig->mTriggeredMarkers[v25].mNameUID = uid;
-        v1->mDamageRig->mTriggeredMarkers[v25].mNumTriggers = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[28] + 4i64 * j);
-        v28 = 4i64 * v1->mDamageRig->mTriggeredMarkers[j].mNumTriggers;
-        if ( !is_mul_ok(v1->mDamageRig->mTriggeredMarkers[j].mNumTriggers, 4ui64) )
+        this->mDamageRig->mTriggeredMarkers[v25].mNameUID = uid;
+        this->mDamageRig->mTriggeredMarkers[v25].mNumTriggers = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[28] + 4i64 * j);
+        v28 = 4i64 * this->mDamageRig->mTriggeredMarkers[j].mNumTriggers;
+        if ( !is_mul_ok(this->mDamageRig->mTriggeredMarkers[j].mNumTriggers, 4ui64) )
           v28 = -1i64;
-        v1->mDamageRig->mTriggeredMarkers[j].mTriggerIndices = (unsigned int *)UFG::qMalloc(v28, "TriggerIndices", 0i64);
-        v29 = 0i64;
-        if ( *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[28] + 4i64 * j) )
+        this->mDamageRig->mTriggeredMarkers[j].mTriggerIndices = (unsigned int *)UFG::qMalloc(
+                                                                                   v28,
+                                                                                   "TriggerIndices",
+                                                                                   0i64);
+        for ( k = 0i64;
+              (unsigned int)k < *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[28] + 4i64 * j);
+              k = (unsigned int)(k + 1) )
         {
-          do
-          {
-            v1->mDamageRig->mTriggeredMarkers[j].mTriggerIndices[v29] = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[20]
-                                                                                  + 4i64 * v21++)
-                                                                      - v10;
-            v29 = (unsigned int)(v29 + 1);
-          }
-          while ( (unsigned int)v29 < *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[28] + 4i64 * j) );
+          this->mDamageRig->mTriggeredMarkers[j].mTriggerIndices[k] = *(_DWORD *)(*(_QWORD *)&v3[2].mDebugName[20]
+                                                                                + 4i64 * v21++)
+                                                                    - v10;
         }
         v30 = *(float *)&FLOAT_1_0;
         if ( v8 )
         {
-          if ( uid && (v31 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v8 + 32), uid)) != 0i64 )
+          if ( uid && (v31 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&v8->mNULL, uid)) != 0i64 )
             v30 = *(float *)&v31->mNULL.mChild[1];
           else
             v30 = *(float *)&v8[1].mNULL.mParent;
         }
-        v1->mDamageRig->mTriggeredMarkers[j].mDamageScalar = v30;
+        this->mDamageRig->mTriggeredMarkers[j].mDamageScalar = v30;
       }
     }
-    v32 = ModelType::GetSkeleton(v37);
-    DamageRig::SetDetachableBones(v1->mDamageRig, (Skeleton *)v32);
-    v33 = (UFG::SimObjectGame *)v1->m_pSimObject;
-    if ( v33 )
+    Skeleton = ModelType::GetSkeleton(mNext);
+    DamageRig::SetDetachableBones(this->mDamageRig, (Skeleton *)Skeleton);
+    m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v34 = v33->m_Flags;
-      if ( (v34 >> 14) & 1 )
-      {
-        v35 = (UFG::VehicleLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v33,
-                                             UFG::VehicleLookComponent::_TypeUID);
-      }
-      else if ( (v34 & 0x8000u) == 0 )
-      {
-        if ( (v34 >> 13) & 1 )
-        {
-          v35 = (UFG::VehicleLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v33,
-                                               UFG::VehicleLookComponent::_TypeUID);
-        }
-        else if ( (v34 >> 12) & 1 )
-        {
-          v35 = (UFG::VehicleLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v33,
-                                               UFG::VehicleLookComponent::_TypeUID);
-        }
-        else
-        {
-          v35 = (UFG::VehicleLookComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v33->vfptr,
-                                               UFG::VehicleLookComponent::_TypeUID);
-        }
-      }
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::VehicleLookComponent::_TypeUID);
       else
-      {
-        v35 = (UFG::VehicleLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v33,
-                                             UFG::VehicleLookComponent::_TypeUID);
-      }
-      if ( v35 )
-        v35->mVehicleEffectsComponent = v1;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::VehicleLookComponent::_TypeUID);
+      if ( ComponentOfTypeHK )
+        ComponentOfTypeHK[2].m_BoundComponentHandles.mNode.mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)this;
     }
-    v1->mVandalizedDamage = 0;
+    this->mVandalizedDamage = 0;
   }
 }
 
 // File Line: 954
 // RVA: 0x67B960
-char __fastcall UFG::VehicleEffectsComponent::GetWheelIndexFromBoneID(UFG::VehicleEffectsComponent *this, unsigned int boneId, unsigned int *wheelIndex)
+char __fastcall UFG::VehicleEffectsComponent::GetWheelIndexFromBoneID(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int boneId,
+        unsigned int *wheelIndex)
 {
-  UFG::VehicleEffectsComponent *v3; // rdi
-  UFG::SimObjectCVBase *v4; // rcx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
   unsigned int v5; // ebx
-  unsigned int *v6; // r14
-  unsigned int v7; // esi
-  UFG::CharacterAnimationComponent *v8; // rax
-  unsigned __int16 v9; // dx
-  Creature *v10; // rcx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
+  Creature *mCreature; // rcx
   int v11; // eax
-  unsigned int v12; // edx
-  unsigned int *v13; // rcx
+  unsigned int mNumWheels; // edx
+  unsigned int *i; // rcx
 
-  v3 = this;
-  v4 = (UFG::SimObjectCVBase *)this->m_pSimObject;
+  m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
   v5 = 0;
-  v6 = wheelIndex;
-  v7 = boneId;
-  if ( v4 )
+  if ( m_pSimObject )
   {
-    v9 = v4->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
-    else if ( (v9 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v9 >> 13) & 1 )
-      {
-        v8 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v4);
-      }
-      else if ( (v9 >> 12) & 1 )
-      {
-        v8 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v8 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
   }
   else
   {
-    v8 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  v10 = v8->mCreature;
-  if ( !v10 )
+  mCreature = ComponentOfTypeHK->mCreature;
+  if ( !mCreature )
     return 0;
-  if ( !v10->mPose.mRigHandle.mData )
+  if ( !mCreature->mPose.mRigHandle.mData )
     return 0;
-  v11 = Skeleton::GetBoneID(v10->mPose.mRigHandle.mUFGSkeleton, v7);
+  v11 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, boneId);
   if ( v11 == -1 )
     return 0;
-  v12 = v3->mNumWheels;
-  if ( !v12 )
+  mNumWheels = this->mNumWheels;
+  if ( !mNumWheels )
     return 0;
-  v13 = v3->mWheelBoneId.p;
-  while ( *v13 != v11 )
+  for ( i = this->mWheelBoneId.p; *i != v11; ++i )
   {
-    ++v5;
-    ++v13;
-    if ( v5 >= v12 )
+    if ( ++v5 >= mNumWheels )
       return 0;
   }
-  *v6 = v5;
+  *wheelIndex = v5;
   return 1;
 }
 
@@ -1595,32 +1504,31 @@ char __fastcall UFG::VehicleEffectsComponent::GetWheelIndexFromBoneID(UFG::Vehic
 // RVA: 0x673430
 void __fastcall UFG::VehicleEffectsComponent::BindEffectMarkers(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-  UFG::SimObjectCVBase *v2; // rcx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
   UFG::CharacterAnimationComponent *v3; // rax
-  unsigned __int16 v4; // dx
-  Creature *v5; // rdi
-  unsigned int v6; // er15
-  __int64 v7; // r14
+  __int16 m_Flags; // dx
+  Creature *mCreature; // rdi
+  unsigned int BoneID; // r15d
+  __int64 size; // r14
   unsigned int v8; // ebp
-  unsigned int *v9; // rax
-  unsigned int v10; // er15
+  unsigned int *p; // rax
+  unsigned int v10; // r15d
   __int64 v11; // r14
   unsigned int v12; // ebp
   unsigned int *v13; // rax
-  unsigned int v14; // er15
+  unsigned int v14; // r15d
   __int64 v15; // r14
   unsigned int v16; // ebp
   unsigned int *v17; // rax
-  unsigned int v18; // er15
+  unsigned int v18; // r15d
   __int64 v19; // r14
   unsigned int v20; // ebp
   unsigned int *v21; // rax
-  unsigned int v22; // er15
+  unsigned int v22; // r15d
   __int64 v23; // r14
   unsigned int v24; // ebp
   unsigned int *v25; // rax
-  unsigned int v26; // er15
+  unsigned int v26; // r15d
   __int64 v27; // r14
   unsigned int v28; // ebp
   unsigned int *v29; // rax
@@ -1628,137 +1536,137 @@ void __fastcall UFG::VehicleEffectsComponent::BindEffectMarkers(UFG::VehicleEffe
   unsigned int v31; // eax
   unsigned int v32; // eax
   unsigned int v33; // ecx
-  UFG::qSafeArray<unsigned long,4> *v34; // rax
+  UFG::qSafeArray<unsigned long,4> *p_mSkidEmitters; // rax
 
-  v1 = this;
   if ( this->mDamageRig && this->mDrawableComponent.m_pSimComponent )
   {
-    v2 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-    if ( v2 )
+    m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v4 = v2->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v3 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+        v3 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
       }
-      else if ( (v4 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v4 >> 13) & 1 )
-          v3 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-        else
-          v3 = (UFG::CharacterAnimationComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v2->vfptr,
-                                                                       UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+        v3 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
       }
       else
       {
-        v3 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+        v3 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                                ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                    m_pSimObject,
+                                                    UFG::CharacterAnimationComponent::_TypeUID)
+                                                : UFG::SimObject::GetComponentOfType(
+                                                    m_pSimObject,
+                                                    UFG::CharacterAnimationComponent::_TypeUID));
       }
     }
     else
     {
       v3 = 0i64;
     }
-    v5 = v3->mCreature;
-    if ( v5 )
+    mCreature = v3->mCreature;
+    if ( mCreature )
     {
       if ( !v3->mTemporaryRig && v3->mRigHandle.mData )
       {
-        *((_DWORD *)v1 + 471) |= 0x80u;
-        if ( v5->mPose.mRigHandle.mData )
+        *((_DWORD *)this + 471) |= 0x80u;
+        if ( mCreature->mPose.mRigHandle.mData )
         {
-          v6 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelL01.mUID);
-          if ( v6 != -1 )
+          BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelL01.mUID);
+          if ( BoneID != -1 )
           {
-            v7 = v1->mWheelBoneId.size;
-            v8 = v7 + 1;
-            if ( (unsigned int)(v7 + 1) > v1->mWheelBoneId.capacity )
+            size = this->mWheelBoneId.size;
+            v8 = size + 1;
+            if ( (unsigned int)(size + 1) > this->mWheelBoneId.capacity )
               UFG::qArray<long,0>::Reallocate(
-                (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
-                4 * ((v8 >> 2) + ((((_BYTE)v7 + 1) & 3) != 0)),
+                (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
+                4 * ((v8 >> 2) + ((((_BYTE)size + 1) & 3) != 0)),
                 "qArray.Add");
-            v9 = v1->mWheelBoneId.p;
-            v1->mWheelBoneId.size = v8;
-            v9[v7] = v6;
+            p = this->mWheelBoneId.p;
+            this->mWheelBoneId.size = v8;
+            p[size] = BoneID;
           }
-          if ( v5->mPose.mRigHandle.mData )
+          if ( mCreature->mPose.mRigHandle.mData )
           {
-            v10 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelR01.mUID);
+            v10 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelR01.mUID);
             if ( v10 != -1 )
             {
-              v11 = v1->mWheelBoneId.size;
+              v11 = this->mWheelBoneId.size;
               v12 = v11 + 1;
-              if ( (unsigned int)(v11 + 1) > v1->mWheelBoneId.capacity )
+              if ( (unsigned int)(v11 + 1) > this->mWheelBoneId.capacity )
                 UFG::qArray<long,0>::Reallocate(
-                  (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
+                  (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
                   4 * ((v12 >> 2) + ((((_BYTE)v11 + 1) & 3) != 0)),
                   "qArray.Add");
-              v13 = v1->mWheelBoneId.p;
-              v1->mWheelBoneId.size = v12;
+              v13 = this->mWheelBoneId.p;
+              this->mWheelBoneId.size = v12;
               v13[v11] = v10;
             }
-            if ( v5->mPose.mRigHandle.mData )
+            if ( mCreature->mPose.mRigHandle.mData )
             {
-              v14 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelL02.mUID);
+              v14 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelL02.mUID);
               if ( v14 != -1 )
               {
-                v15 = v1->mWheelBoneId.size;
+                v15 = this->mWheelBoneId.size;
                 v16 = v15 + 1;
-                if ( (unsigned int)(v15 + 1) > v1->mWheelBoneId.capacity )
+                if ( (unsigned int)(v15 + 1) > this->mWheelBoneId.capacity )
                   UFG::qArray<long,0>::Reallocate(
-                    (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
+                    (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
                     4 * ((v16 >> 2) + ((((_BYTE)v15 + 1) & 3) != 0)),
                     "qArray.Add");
-                v17 = v1->mWheelBoneId.p;
-                v1->mWheelBoneId.size = v16;
+                v17 = this->mWheelBoneId.p;
+                this->mWheelBoneId.size = v16;
                 v17[v15] = v14;
               }
-              if ( v5->mPose.mRigHandle.mData )
+              if ( mCreature->mPose.mRigHandle.mData )
               {
-                v18 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelR02.mUID);
+                v18 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_WheelR02.mUID);
                 if ( v18 != -1 )
                 {
-                  v19 = v1->mWheelBoneId.size;
+                  v19 = this->mWheelBoneId.size;
                   v20 = v19 + 1;
-                  if ( (unsigned int)(v19 + 1) > v1->mWheelBoneId.capacity )
+                  if ( (unsigned int)(v19 + 1) > this->mWheelBoneId.capacity )
                     UFG::qArray<long,0>::Reallocate(
-                      (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
+                      (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
                       4 * ((v20 >> 2) + ((((_BYTE)v19 + 1) & 3) != 0)),
                       "qArray.Add");
-                  v21 = v1->mWheelBoneId.p;
-                  v1->mWheelBoneId.size = v20;
+                  v21 = this->mWheelBoneId.p;
+                  this->mWheelBoneId.size = v20;
                   v21[v19] = v18;
                 }
-                if ( v5->mPose.mRigHandle.mData )
+                if ( mCreature->mPose.mRigHandle.mData )
                 {
-                  v22 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_Wheel01.mUID);
+                  v22 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_Wheel01.mUID);
                   if ( v22 != -1 )
                   {
-                    v23 = v1->mWheelBoneId.size;
+                    v23 = this->mWheelBoneId.size;
                     v24 = v23 + 1;
-                    if ( (unsigned int)(v23 + 1) > v1->mWheelBoneId.capacity )
+                    if ( (unsigned int)(v23 + 1) > this->mWheelBoneId.capacity )
                       UFG::qArray<long,0>::Reallocate(
-                        (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
+                        (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
                         4 * ((v24 >> 2) + ((((_BYTE)v23 + 1) & 3) != 0)),
                         "qArray.Add");
-                    v25 = v1->mWheelBoneId.p;
-                    v1->mWheelBoneId.size = v24;
+                    v25 = this->mWheelBoneId.p;
+                    this->mWheelBoneId.size = v24;
                     v25[v23] = v22;
                   }
-                  if ( v5->mPose.mRigHandle.mData )
+                  if ( mCreature->mPose.mRigHandle.mData )
                   {
-                    v26 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_M_Wheel02.mUID);
+                    v26 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_M_Wheel02.mUID);
                     if ( v26 != -1 )
                     {
-                      v27 = v1->mWheelBoneId.size;
+                      v27 = this->mWheelBoneId.size;
                       v28 = v27 + 1;
-                      if ( (unsigned int)(v27 + 1) > v1->mWheelBoneId.capacity )
+                      if ( (unsigned int)(v27 + 1) > this->mWheelBoneId.capacity )
                         UFG::qArray<long,0>::Reallocate(
-                          (UFG::qArray<unsigned long,0> *)&v1->mWheelBoneId,
+                          (UFG::qArray<unsigned long,0> *)&this->mWheelBoneId,
                           4 * ((v28 >> 2) + ((((_BYTE)v27 + 1) & 3) != 0)),
                           "qArray.Add");
-                      v29 = v1->mWheelBoneId.p;
-                      v1->mWheelBoneId.size = v28;
+                      v29 = this->mWheelBoneId.p;
+                      this->mWheelBoneId.size = v28;
                       v29[v27] = v26;
                     }
                   }
@@ -1767,249 +1675,253 @@ void __fastcall UFG::VehicleEffectsComponent::BindEffectMarkers(UFG::VehicleEffe
             }
           }
         }
-        if ( v5->mPose.mRigHandle.mData )
+        if ( mCreature->mPose.mRigHandle.mData )
         {
-          v30 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_E_CTC_Spark01.mUID);
+          v30 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_E_CTC_Spark01.mUID);
           if ( v30 != -1 )
-            v1->mBumperBoneId.array[3] = v30;
-          if ( v5->mPose.mRigHandle.mData )
+            this->mBumperBoneId.array[3] = v30;
+          if ( mCreature->mPose.mRigHandle.mData )
           {
-            v31 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, gSym_E_CTC_Spark02.mUID);
+            v31 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, gSym_E_CTC_Spark02.mUID);
             if ( v31 != -1 )
-              v1->mBumperBoneId.array[2] = v31;
+              this->mBumperBoneId.array[2] = v31;
           }
         }
-        v32 = v1->mWheelBoneId.size;
+        v32 = this->mWheelBoneId.size;
         v33 = 0;
-        v1->mNumWheels = v32;
+        this->mNumWheels = v32;
         if ( v32 )
         {
-          v34 = &v1->mSkidEmitters;
+          p_mSkidEmitters = &this->mSkidEmitters;
           do
           {
-            v34->array[0] = 0;
+            p_mSkidEmitters->array[0] = 0;
             ++v33;
-            v34 = (UFG::qSafeArray<unsigned long,4> *)((char *)v34 + 4);
+            p_mSkidEmitters = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mSkidEmitters + 4);
           }
-          while ( v33 < v1->mNumWheels );
+          while ( v33 < this->mNumWheels );
         }
       }
     }
   }
-}
+}     ++v33;
+            p_mSkidEmitters = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mSkidEmitters + 4);
+          }
+          while ( v33 < this->mNumWheels );
+        }
+      }
+    }
+ 
 
 // File Line: 1026
 // RVA: 0x684470
 void __fastcall UFG::VehicleEffectsComponent::OnDetach(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-  DamageRig *v2; // rdi
-  UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0> *v3; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
+  DamageRig *mDamageRig; // rdi
+  UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0> *p_mWaterFloatingTrackerComponent; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *v8; // rdx
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *p_mMoverComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rax
-  UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0> *v13; // rdx
+  UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0> *p_mDrawableComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v17; // rax
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *v18; // rdx
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *p_mRoadSpaceComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v19; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v20; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v21; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v22; // rax
-  UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0> *v23; // rdx
+  UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0> *p_mVehicleDriverComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v24; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v25; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v26; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v27; // rax
 
-  v1 = this;
   UFG::VehicleEffectsComponent::TurnOffEffects(this, 1);
-  UFG::VehicleEffectsComponent::TurnOffFire(v1);
-  v2 = v1->mDamageRig;
-  if ( v2 )
+  UFG::VehicleEffectsComponent::TurnOffFire(this);
+  mDamageRig = this->mDamageRig;
+  if ( mDamageRig )
   {
-    DamageRig::~DamageRig(v2);
-    operator delete[](v2);
-    v1->mDamageRig = 0i64;
+    DamageRig::~DamageRig(mDamageRig);
+    operator delete[](mDamageRig);
+    this->mDamageRig = 0i64;
   }
-  v3 = &v1->mWaterFloatingTrackerComponent;
-  if ( v1->mWaterFloatingTrackerComponent.m_pSimComponent )
+  p_mWaterFloatingTrackerComponent = &this->mWaterFloatingTrackerComponent;
+  if ( this->mWaterFloatingTrackerComponent.m_pSimComponent )
   {
-    v4 = v3->mPrev;
-    v5 = v1->mWaterFloatingTrackerComponent.mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v1->mWaterFloatingTrackerComponent.m_pSimComponent = 0i64;
+    mPrev = p_mWaterFloatingTrackerComponent->mPrev;
+    mNext = this->mWaterFloatingTrackerComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mWaterFloatingTrackerComponent.m_pSimComponent = 0i64;
 LABEL_9:
-    v1->mWaterFloatingTrackerComponent.m_pSimObject = 0i64;
-    v1->mWaterFloatingTrackerComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mWaterFloatingTrackerComponent.mPrev;
-    v3->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
+    this->mWaterFloatingTrackerComponent.m_pSimObject = 0i64;
+    this->mWaterFloatingTrackerComponent.mNext = &this->mWaterFloatingTrackerComponent;
+    p_mWaterFloatingTrackerComponent->mPrev = p_mWaterFloatingTrackerComponent;
     goto LABEL_10;
   }
-  if ( v1->mWaterFloatingTrackerComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0> *)v3->mPrev != v3
-     || (UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent,0> *)v1->mWaterFloatingTrackerComponent.mNext != &v1->mWaterFloatingTrackerComponent) )
+  if ( this->mWaterFloatingTrackerComponent.m_pSimObject
+    && (p_mWaterFloatingTrackerComponent->mPrev != p_mWaterFloatingTrackerComponent
+     || this->mWaterFloatingTrackerComponent.mNext != &this->mWaterFloatingTrackerComponent) )
   {
-    v6 = v3->mPrev;
-    v7 = v1->mWaterFloatingTrackerComponent.mNext;
+    v6 = p_mWaterFloatingTrackerComponent->mPrev;
+    v7 = this->mWaterFloatingTrackerComponent.mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
     goto LABEL_9;
   }
 LABEL_10:
-  v1->mWaterFloatingTrackerComponent.m_Changed = 1;
-  v8 = &v1->mMoverComponent;
-  if ( v1->mMoverComponent.m_pSimComponent )
+  this->mWaterFloatingTrackerComponent.m_Changed = 1;
+  p_mMoverComponent = &this->mMoverComponent;
+  if ( this->mMoverComponent.m_pSimComponent )
   {
-    v9 = v8->mPrev;
-    v10 = v1->mMoverComponent.mNext;
+    v9 = p_mMoverComponent->mPrev;
+    v10 = this->mMoverComponent.mNext;
     v9->mNext = v10;
     v10->mPrev = v9;
-    v1->mMoverComponent.m_pSimComponent = 0i64;
+    this->mMoverComponent.m_pSimComponent = 0i64;
 LABEL_16:
-    v1->mMoverComponent.m_pSimObject = 0i64;
-    v1->mMoverComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mMoverComponent.mPrev;
-    v8->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v8->mPrev;
+    this->mMoverComponent.m_pSimObject = 0i64;
+    this->mMoverComponent.mNext = &this->mMoverComponent;
+    p_mMoverComponent->mPrev = p_mMoverComponent;
     goto LABEL_17;
   }
-  if ( v1->mMoverComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *)v8->mPrev != v8
-     || (UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *)v1->mMoverComponent.mNext != &v1->mMoverComponent) )
+  if ( this->mMoverComponent.m_pSimObject
+    && (p_mMoverComponent->mPrev != p_mMoverComponent || this->mMoverComponent.mNext != &this->mMoverComponent) )
   {
-    v11 = v8->mPrev;
-    v12 = v1->mMoverComponent.mNext;
+    v11 = p_mMoverComponent->mPrev;
+    v12 = this->mMoverComponent.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
     goto LABEL_16;
   }
 LABEL_17:
-  v1->mMoverComponent.m_Changed = 1;
-  v13 = &v1->mDrawableComponent;
-  if ( v1->mDrawableComponent.m_pSimComponent )
+  this->mMoverComponent.m_Changed = 1;
+  p_mDrawableComponent = &this->mDrawableComponent;
+  if ( this->mDrawableComponent.m_pSimComponent )
   {
-    v14 = v13->mPrev;
-    v15 = v1->mDrawableComponent.mNext;
+    v14 = p_mDrawableComponent->mPrev;
+    v15 = this->mDrawableComponent.mNext;
     v14->mNext = v15;
     v15->mPrev = v14;
-    v1->mDrawableComponent.m_pSimComponent = 0i64;
+    this->mDrawableComponent.m_pSimComponent = 0i64;
 LABEL_23:
-    v1->mDrawableComponent.m_pSimObject = 0i64;
-    v1->mDrawableComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mDrawableComponent.mPrev;
-    v13->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v13->mPrev;
+    this->mDrawableComponent.m_pSimObject = 0i64;
+    this->mDrawableComponent.mNext = &this->mDrawableComponent;
+    p_mDrawableComponent->mPrev = p_mDrawableComponent;
     goto LABEL_24;
   }
-  if ( v1->mDrawableComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0> *)v13->mPrev != v13
-     || (UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent,0> *)v1->mDrawableComponent.mNext != &v1->mDrawableComponent) )
+  if ( this->mDrawableComponent.m_pSimObject
+    && (p_mDrawableComponent->mPrev != p_mDrawableComponent
+     || this->mDrawableComponent.mNext != &this->mDrawableComponent) )
   {
-    v16 = v13->mPrev;
-    v17 = v1->mDrawableComponent.mNext;
+    v16 = p_mDrawableComponent->mPrev;
+    v17 = this->mDrawableComponent.mNext;
     v16->mNext = v17;
     v17->mPrev = v16;
     goto LABEL_23;
   }
 LABEL_24:
-  v1->mDrawableComponent.m_Changed = 1;
-  v18 = &v1->mRoadSpaceComponent;
-  if ( v1->mRoadSpaceComponent.m_pSimComponent )
+  this->mDrawableComponent.m_Changed = 1;
+  p_mRoadSpaceComponent = &this->mRoadSpaceComponent;
+  if ( this->mRoadSpaceComponent.m_pSimComponent )
   {
-    v19 = v18->mPrev;
-    v20 = v1->mRoadSpaceComponent.mNext;
+    v19 = p_mRoadSpaceComponent->mPrev;
+    v20 = this->mRoadSpaceComponent.mNext;
     v19->mNext = v20;
     v20->mPrev = v19;
-    v1->mRoadSpaceComponent.m_pSimComponent = 0i64;
+    this->mRoadSpaceComponent.m_pSimComponent = 0i64;
 LABEL_30:
-    v1->mRoadSpaceComponent.m_pSimObject = 0i64;
-    v1->mRoadSpaceComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mRoadSpaceComponent.mPrev;
-    v18->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v18->mPrev;
+    this->mRoadSpaceComponent.m_pSimObject = 0i64;
+    this->mRoadSpaceComponent.mNext = &this->mRoadSpaceComponent;
+    p_mRoadSpaceComponent->mPrev = p_mRoadSpaceComponent;
     goto LABEL_31;
   }
-  if ( v1->mRoadSpaceComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *)v18->mPrev != v18
-     || (UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *)v1->mRoadSpaceComponent.mNext != &v1->mRoadSpaceComponent) )
+  if ( this->mRoadSpaceComponent.m_pSimObject
+    && (p_mRoadSpaceComponent->mPrev != p_mRoadSpaceComponent
+     || this->mRoadSpaceComponent.mNext != &this->mRoadSpaceComponent) )
   {
-    v21 = v18->mPrev;
-    v22 = v1->mRoadSpaceComponent.mNext;
+    v21 = p_mRoadSpaceComponent->mPrev;
+    v22 = this->mRoadSpaceComponent.mNext;
     v21->mNext = v22;
     v22->mPrev = v21;
     goto LABEL_30;
   }
 LABEL_31:
-  v1->mRoadSpaceComponent.m_Changed = 1;
-  v23 = &v1->mVehicleDriverComponent;
-  if ( v1->mVehicleDriverComponent.m_pSimComponent )
+  this->mRoadSpaceComponent.m_Changed = 1;
+  p_mVehicleDriverComponent = &this->mVehicleDriverComponent;
+  if ( this->mVehicleDriverComponent.m_pSimComponent )
   {
-    v24 = v23->mPrev;
-    v25 = v1->mVehicleDriverComponent.mNext;
+    v24 = p_mVehicleDriverComponent->mPrev;
+    v25 = this->mVehicleDriverComponent.mNext;
     v24->mNext = v25;
     v25->mPrev = v24;
-    v1->mVehicleDriverComponent.m_pSimComponent = 0i64;
+    this->mVehicleDriverComponent.m_pSimComponent = 0i64;
 LABEL_37:
-    v1->mVehicleDriverComponent.m_pSimObject = 0i64;
-    v1->mVehicleDriverComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mVehicleDriverComponent.mPrev;
-    v23->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v23->mPrev;
+    this->mVehicleDriverComponent.m_pSimObject = 0i64;
+    this->mVehicleDriverComponent.mNext = &this->mVehicleDriverComponent;
+    p_mVehicleDriverComponent->mPrev = p_mVehicleDriverComponent;
     goto LABEL_38;
   }
-  if ( v1->mVehicleDriverComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0> *)v23->mPrev != v23
-     || (UFG::RebindingComponentHandle<UFG::VehicleDriverInterface,0> *)v1->mVehicleDriverComponent.mNext != &v1->mVehicleDriverComponent) )
+  if ( this->mVehicleDriverComponent.m_pSimObject
+    && (p_mVehicleDriverComponent->mPrev != p_mVehicleDriverComponent
+     || this->mVehicleDriverComponent.mNext != &this->mVehicleDriverComponent) )
   {
-    v26 = v23->mPrev;
-    v27 = v1->mVehicleDriverComponent.mNext;
+    v26 = p_mVehicleDriverComponent->mPrev;
+    v27 = this->mVehicleDriverComponent.mNext;
     v26->mNext = v27;
     v27->mPrev = v26;
     goto LABEL_37;
   }
 LABEL_38:
-  v1->mVehicleDriverComponent.m_Changed = 1;
-}>mPrev = v26;
-    goto LABEL_37;
-  }
-LABEL_38:
-  v1->mVehicleDriverComponent.m_Changed = 1;
+  this->mVehicleDriverComponent.m_Changed = 1;
 }
 
 // File Line: 1044
 // RVA: 0x698A80
-void __fastcall UFG::VehicleEffectsComponent::UpdateSkidTransform(UFG::VehicleEffectsComponent *this, unsigned int wheelIndex, UFG::qMatrix44 *wheelTransform, UFG::qMatrix44 *rootXform, float wheelRad)
+void __fastcall UFG::VehicleEffectsComponent::UpdateSkidTransform(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int wheelIndex,
+        UFG::qMatrix44 *wheelTransform,
+        UFG::qMatrix44 *rootXform,
+        float wheelRad)
 {
   UFG::TransformNodeComponent *v5; // rcx
-  float v6; // xmm0_4
-  float v7; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
   float v8; // xmm3_4
   float v9; // xmm4_4
-  float v10; // xmm5_4
+  float z; // xmm5_4
   float v11; // xmm2_4
   float v12; // xmm0_4
   float v13; // xmm1_4
   float v14; // xmm1_4
   float v15; // xmm1_4
   float v16; // xmm0_4
-  UFG::qMatrix44 m; // [rsp+20h] [rbp-48h]
+  UFG::qMatrix44 m; // [rsp+20h] [rbp-48h] BYREF
 
   v5 = this->mTransformNodes.array[wheelIndex + 4];
   if ( v5 )
   {
-    v6 = rootXform->v0.x;
-    v7 = rootXform->v0.y;
+    x = rootXform->v0.x;
+    y = rootXform->v0.y;
     v8 = rootXform->v2.x;
     m.v0.w = 0.0;
     m.v1.w = 0.0;
     m.v2.w = 0.0;
     v9 = rootXform->v2.y;
-    v10 = rootXform->v2.z;
+    z = rootXform->v2.z;
     v11 = wheelTransform->v3.z;
-    m.v0.x = v6;
+    m.v0.x = x;
     v12 = rootXform->v0.z;
-    m.v0.y = v7;
+    m.v0.y = y;
     v13 = rootXform->v1.x;
     m.v0.z = v12;
     m.v1.y = rootXform->v1.y;
@@ -2019,10 +1931,10 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSkidTransform(UFG::VehicleEf
     m.v2.y = v9;
     m.v1.z = v14;
     v15 = wheelTransform->v3.y;
-    m.v2.z = v10;
+    m.v2.z = z;
     v16 = wheelTransform->v3.x - (float)(v8 * wheelRad);
     m.v3.y = v15 - (float)(v9 * wheelRad);
-    m.v3.z = v11 - (float)(v10 * wheelRad);
+    m.v3.z = v11 - (float)(z * wheelRad);
     m.v3.x = v16;
     LODWORD(m.v3.w) = (_DWORD)FLOAT_1_0;
     UFG::TransformNodeComponent::SetLocalTransform(v5, &m);
@@ -2031,21 +1943,22 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSkidTransform(UFG::VehicleEf
 
 // File Line: 1063
 // RVA: 0x695200
-void __fastcall UFG::VehicleEffectsComponent::UpdateBumperTransform(UFG::VehicleEffectsComponent *this, unsigned int wheelIndex, Creature *creature)
+void __fastcall UFG::VehicleEffectsComponent::UpdateBumperTransform(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int wheelIndex,
+        Creature *creature)
 {
-  Creature *v3; // r9
-  int v4; // er8
+  int v4; // r8d
   UFG::TransformNodeComponent **v5; // rbx
-  UFG::qVector3 result; // [rsp+20h] [rbp-18h]
+  UFG::qVector3 result; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = creature;
   v4 = this->mBumperBoneId.array[wheelIndex];
   if ( v4 != -1 )
   {
     v5 = (UFG::TransformNodeComponent **)&(&this->vfptr)[wheelIndex + 12];
     if ( v5[178] )
     {
-      Creature::GetTranslation(v3, &result, v4);
+      Creature::GetTranslation(creature, &result, v4);
       UFG::TransformNodeComponent::SetLocalTranslation(v5[178], &result);
     }
   }
@@ -2053,12 +1966,17 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateBumperTransform(UFG::Vehicle
 
 // File Line: 1077
 // RVA: 0x695B40
-void __fastcall UFG::VehicleEffectsComponent::UpdateDirectionalTransform(UFG::VehicleEffectsComponent *this, unsigned int wheelIndex, UFG::qMatrix44 *wheelTransform, UFG::qMatrix44 *rootXform, float wheelRad)
+void __fastcall UFG::VehicleEffectsComponent::UpdateDirectionalTransform(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int wheelIndex,
+        UFG::qMatrix44 *wheelTransform,
+        UFG::qMatrix44 *rootXform,
+        float wheelRad)
 {
   UFG::TransformNodeComponent *v5; // rcx
-  float v6; // xmm7_4
-  float v7; // xmm8_4
-  float v8; // xmm9_4
+  float x; // xmm7_4
+  float y; // xmm8_4
+  float z; // xmm9_4
   float v9; // xmm2_4
   float v10; // xmm5_4
   float v11; // xmm4_4
@@ -2068,20 +1986,19 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateDirectionalTransform(UFG::Ve
   float v15; // xmm1_4
   float v16; // xmm0_4
   float v17; // xmm1_4
-  UFG::qMatrix44 m; // [rsp+20h] [rbp-88h]
+  UFG::qMatrix44 m; // [rsp+20h] [rbp-88h] BYREF
 
   v5 = this->mTransformNodes.array[wheelIndex + 8];
   if ( v5 )
   {
-    v6 = wheelTransform->v1.x;
-    v7 = wheelTransform->v1.y;
-    v8 = wheelTransform->v1.z;
-    if ( (float)((float)((float)(wheelTransform->v1.y * rootXform->v1.y) + (float)(v6 * rootXform->v1.x))
-               + (float)(wheelTransform->v1.z * rootXform->v1.z)) < 0.0 )
+    x = wheelTransform->v1.x;
+    y = wheelTransform->v1.y;
+    z = wheelTransform->v1.z;
+    if ( (float)((float)((float)(y * rootXform->v1.y) + (float)(x * rootXform->v1.x)) + (float)(z * rootXform->v1.z)) < 0.0 )
     {
-      v6 = v6 * -1.0;
-      v7 = v7 * -1.0;
-      v8 = v8 * -1.0;
+      x = x * -1.0;
+      y = y * -1.0;
+      z = z * -1.0;
     }
     v9 = rootXform->v2.x;
     v10 = rootXform->v2.z;
@@ -2092,15 +2009,15 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateDirectionalTransform(UFG::Ve
     m.v2.x = v9;
     m.v2.y = v11;
     m.v2.z = v10;
-    m.v1.x = v6;
-    m.v1.y = v7;
-    m.v1.z = v8;
-    m.v0.x = (float)(v10 * v7) - (float)(v11 * v8);
+    m.v1.x = x;
+    m.v1.y = y;
+    m.v1.z = z;
+    m.v0.x = (float)(v10 * y) - (float)(v11 * z);
     v12 = v9;
-    m.v0.y = (float)(v9 * v8) - (float)(v10 * v6);
+    m.v0.y = (float)(v9 * z) - (float)(v10 * x);
     v13 = v9;
     v14 = wheelTransform->v3.z;
-    v15 = (float)(v11 * v6) - (float)(v12 * v7);
+    v15 = (float)(v11 * x) - (float)(v12 * y);
     v16 = wheelTransform->v3.x;
     m.v0.z = v15;
     v17 = wheelTransform->v3.y - (float)(v11 * wheelRad);
@@ -2114,12 +2031,13 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateDirectionalTransform(UFG::Ve
 
 // File Line: 1107
 // RVA: 0x681FF0
-UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTransform(UFG::VehicleEffectsComponent *this, unsigned int transformIndex)
+UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTransform(
+        UFG::VehicleEffectsComponent *this,
+        int transformIndex)
 {
   __int64 v2; // rsi
-  UFG::VehicleEffectsComponent *v3; // rdi
   __int64 v4; // r14
-  UFG::qMemoryPool *v5; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v6; // rax
   UFG::TransformNodeComponent *v7; // rax
   UFG::TransformNodeComponent *v8; // rbx
@@ -2128,43 +2046,47 @@ UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTran
   __int64 v11; // r15
   UFG::SimObject *v12; // rsi
   UFG::TransformNodeComponent *v13; // rsi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rax
   float v16; // xmm6_4
   UFG::SimObjectCVBase *v17; // rcx
-  unsigned __int16 v18; // dx
-  UFG::CharacterAnimationComponent *v19; // rax
+  __int16 v18; // dx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
   Creature *v20; // rcx
   UFG::CharacterAnimationComponent *v21; // rbx
   UFG::TransformNodeComponent *v22; // rax
   __int64 v23; // r15
   UFG::SimObject *v24; // rsi
-  UFG::TransformNodeComponent *v25; // rsi
-  float v26; // xmm6_4
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  float WheelRadius; // xmm6_4
   UFG::SimObjectCVBase *v27; // rcx
-  unsigned __int16 v28; // dx
-  UFG::CharacterAnimationComponent *v29; // rax
+  __int16 v28; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
   Creature *v30; // rcx
   UFG::TransformNodeComponent *v31; // rax
   UFG::TransformNodeComponent *v32; // rbx
   unsigned int v33; // esi
-  UFG::SimObjectCVBase *v34; // rcx
-  unsigned __int16 v35; // dx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v36; // rax
-  Creature *v37; // r8
-  UFG::qMatrix44 rootXform; // [rsp+18h] [rbp-59h]
+  Creature *mCreature; // r8
+  UFG::qMatrix44 rootXform; // [rsp+18h] [rbp-59h] BYREF
   __int64 v40; // [rsp+58h] [rbp-19h]
-  UFG::qMatrix44 transform; // [rsp+68h] [rbp-9h]
+  UFG::qMatrix44 transform; // [rsp+68h] [rbp-9h] BYREF
   UFG::allocator::free_link *v42; // [rsp+D8h] [rbp+67h]
 
   v40 = -2i64;
-  v2 = (signed int)transformIndex;
-  v3 = this;
-  v4 = (signed int)transformIndex;
+  v2 = transformIndex;
+  v4 = transformIndex;
   if ( !this->mTransformNodes.array[transformIndex] )
   {
-    v5 = UFG::GetSimulationMemoryPool();
-    v6 = UFG::qMemoryPool::Allocate(v5, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
+    SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+    v6 = UFG::qMemoryPool::Allocate(
+           SimulationMemoryPool,
+           0x110ui64,
+           "VehicleEffectsComponent.TransformNodeComponent",
+           0i64,
+           1u);
     v42 = v6;
     if ( (unsigned int)v2 > 3 )
     {
@@ -2181,34 +2103,35 @@ UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTran
           {
             v32 = 0i64;
           }
-          v3->mTransformNodes.array[v2] = v32;
+          this->mTransformNodes.array[v2] = v32;
           v33 = v2 - 12;
-          v34 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
-          if ( v34 )
+          m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+          if ( m_pSimObject )
           {
-            v35 = v34->m_Flags;
-            if ( (v35 >> 14) & 1 )
+            m_Flags = m_pSimObject->m_Flags;
+            if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
             {
-              v36 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v34);
+              v36 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
             }
-            else if ( (v35 & 0x8000u) == 0 )
+            else if ( (m_Flags & 0x2000) != 0 )
             {
-              if ( (v35 >> 13) & 1 )
-                v36 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v34);
-              else
-                v36 = (UFG::CharacterAnimationComponent *)((v35 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                               (UFG::SimObjectGame *)&v34->vfptr,
-                                                                               UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v34->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+              v36 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
             }
             else
             {
-              v36 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v34);
+              v36 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                                       ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                           m_pSimObject,
+                                                           UFG::CharacterAnimationComponent::_TypeUID)
+                                                       : UFG::SimObject::GetComponentOfType(
+                                                           m_pSimObject,
+                                                           UFG::CharacterAnimationComponent::_TypeUID));
             }
             if ( v36 )
             {
-              v37 = v36->mCreature;
-              if ( v37 )
-                UFG::VehicleEffectsComponent::UpdateBumperTransform(v3, v33, v37);
+              mCreature = v36->mCreature;
+              if ( mCreature )
+                UFG::VehicleEffectsComponent::UpdateBumperTransform(this, v33, mCreature);
             }
           }
         }
@@ -2219,69 +2142,47 @@ UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTran
             UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v6, 0, 0i64, 0);
           else
             v22 = 0i64;
-          v3->mTransformNodes.array[v2] = v22;
+          this->mTransformNodes.array[v2] = v22;
           v23 = (unsigned int)(v2 - 8);
-          v24 = v3->m_pSimObject;
+          v24 = this->m_pSimObject;
           if ( v24 )
-            v25 = v24->m_pTransformNodeComponent;
+            m_pTransformNodeComponent = v24->m_pTransformNodeComponent;
           else
-            v25 = 0i64;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v25);
-          rootXform.v0.x = v25->mWorldTransform.v0.x;
-          rootXform.v0.y = v25->mWorldTransform.v0.y;
-          rootXform.v0.z = v25->mWorldTransform.v0.z;
-          rootXform.v0.w = v25->mWorldTransform.v0.w;
-          rootXform.v1.x = v25->mWorldTransform.v1.x;
-          rootXform.v1.y = v25->mWorldTransform.v1.y;
-          rootXform.v1.z = v25->mWorldTransform.v1.z;
-          rootXform.v1.w = v25->mWorldTransform.v1.w;
-          rootXform.v2.x = v25->mWorldTransform.v2.x;
-          rootXform.v2.y = v25->mWorldTransform.v2.y;
-          rootXform.v2.z = v25->mWorldTransform.v2.z;
-          rootXform.v2.w = v25->mWorldTransform.v2.w;
-          rootXform.v3.x = v25->mWorldTransform.v3.x;
-          rootXform.v3.y = v25->mWorldTransform.v3.y;
-          rootXform.v3.z = v25->mWorldTransform.v3.z;
-          rootXform.v3.w = v25->mWorldTransform.v3.w;
-          v26 = UFG::PhysicsMoverInterface::GetWheelRadius((UFG::PhysicsMoverInterface *)v3->mMoverComponent.m_pSimComponent);
-          v27 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
+            m_pTransformNodeComponent = 0i64;
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          rootXform = m_pTransformNodeComponent->mWorldTransform;
+          WheelRadius = UFG::PhysicsMoverInterface::GetWheelRadius((UFG::PhysicsMoverInterface *)this->mMoverComponent.m_pSimComponent);
+          v27 = (UFG::SimObjectCVBase *)this->m_pSimObject;
           if ( v27 )
           {
             v28 = v27->m_Flags;
-            if ( (v28 >> 14) & 1 )
+            if ( (v28 & 0x4000) != 0 || v28 < 0 )
             {
-              v29 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v27);
+              ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v27);
             }
-            else if ( (v28 & 0x8000u) == 0 )
+            else if ( (v28 & 0x2000) != 0 )
             {
-              if ( (v28 >> 13) & 1 )
-              {
-                v29 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v27);
-              }
-              else if ( (v28 >> 12) & 1 )
-              {
-                v29 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v27->vfptr,
-                                                            UFG::CharacterAnimationComponent::_TypeUID);
-              }
-              else
-              {
-                v29 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                            (UFG::SimObject *)&v27->vfptr,
-                                                            UFG::CharacterAnimationComponent::_TypeUID);
-              }
+              ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v27);
+            }
+            else if ( (v28 & 0x1000) != 0 )
+            {
+              ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                        v27,
+                                                                        UFG::CharacterAnimationComponent::_TypeUID);
             }
             else
             {
-              v29 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v27);
+              ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                        v27,
+                                                                        UFG::CharacterAnimationComponent::_TypeUID);
             }
-            v21 = v29;
+            v21 = ComponentOfTypeHK;
           }
           v30 = v21->mCreature;
           if ( v30 )
           {
-            Creature::GetTransform(v30, v3->mWheelBoneId.p[v23], &transform);
-            UFG::VehicleEffectsComponent::UpdateDirectionalTransform(v3, v23, &transform, &rootXform, v26);
+            Creature::GetTransform(v30, this->mWheelBoneId.p[v23], &transform);
+            UFG::VehicleEffectsComponent::UpdateDirectionalTransform(this, v23, &transform, &rootXform, WheelRadius);
           }
         }
       }
@@ -2292,79 +2193,57 @@ UFG::TransformNodeComponent *__fastcall UFG::VehicleEffectsComponent::ObtainTran
           UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v6, 0, 0i64, 0);
         else
           v10 = 0i64;
-        v3->mTransformNodes.array[v2] = v10;
+        this->mTransformNodes.array[v2] = v10;
         v11 = (unsigned int)(v2 - 4);
-        v12 = v3->m_pSimObject;
+        v12 = this->m_pSimObject;
         if ( v12 )
           v13 = v12->m_pTransformNodeComponent;
         else
           v13 = 0i64;
         UFG::TransformNodeComponent::UpdateWorldTransform(v13);
-        rootXform.v0.x = v13->mWorldTransform.v0.x;
-        rootXform.v0.y = v13->mWorldTransform.v0.y;
-        rootXform.v0.z = v13->mWorldTransform.v0.z;
-        rootXform.v0.w = v13->mWorldTransform.v0.w;
-        rootXform.v1.x = v13->mWorldTransform.v1.x;
-        rootXform.v1.y = v13->mWorldTransform.v1.y;
-        rootXform.v1.z = v13->mWorldTransform.v1.z;
-        rootXform.v1.w = v13->mWorldTransform.v1.w;
-        rootXform.v2.x = v13->mWorldTransform.v2.x;
-        rootXform.v2.y = v13->mWorldTransform.v2.y;
-        rootXform.v2.z = v13->mWorldTransform.v2.z;
-        rootXform.v2.w = v13->mWorldTransform.v2.w;
-        rootXform.v3.x = v13->mWorldTransform.v3.x;
-        rootXform.v3.y = v13->mWorldTransform.v3.y;
-        rootXform.v3.z = v13->mWorldTransform.v3.z;
-        rootXform.v3.w = v13->mWorldTransform.v3.w;
-        v14 = v3->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-        if ( !v14 )
-          goto LABEL_72;
+        rootXform = v13->mWorldTransform;
+        mPrev = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+        if ( !mPrev )
+          goto LABEL_19;
         v15 = 0i64;
-        if ( BYTE4(v14[37].mNext) & 7 )
-          v15 = v3->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+        if ( (BYTE4(mPrev[37].mNext) & 7) != 0 )
+          v15 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
         if ( v15 )
           v16 = *((float *)&v15[62].mPrev + 1);
         else
-LABEL_72:
+LABEL_19:
           v16 = FLOAT_0_27000001;
-        v17 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
+        v17 = (UFG::SimObjectCVBase *)this->m_pSimObject;
         if ( v17 )
         {
           v18 = v17->m_Flags;
-          if ( (v18 >> 14) & 1 )
+          if ( (v18 & 0x4000) != 0 || v18 < 0 )
           {
-            v19 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v17);
+            ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v17);
           }
-          else if ( (v18 & 0x8000u) == 0 )
+          else if ( (v18 & 0x2000) != 0 )
           {
-            if ( (v18 >> 13) & 1 )
-            {
-              v19 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v17);
-            }
-            else if ( (v18 >> 12) & 1 )
-            {
-              v19 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v17->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
-            else
-            {
-              v19 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v17->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
+            ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v17);
+          }
+          else if ( (v18 & 0x1000) != 0 )
+          {
+            ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                    v17,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
           }
           else
           {
-            v19 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v17);
+            ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                    v17,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
           }
-          v9 = v19;
+          v9 = ComponentOfType;
         }
         v20 = v9->mCreature;
         if ( v20 )
         {
-          Creature::GetTransform(v20, v3->mWheelBoneId.p[v11], &transform);
-          UFG::VehicleEffectsComponent::UpdateSkidTransform(v3, v11, &transform, &rootXform, v16);
+          Creature::GetTransform(v20, this->mWheelBoneId.p[v11], &transform);
+          UFG::VehicleEffectsComponent::UpdateSkidTransform(this, v11, &transform, &rootXform, v16);
         }
       }
     }
@@ -2379,53 +2258,51 @@ LABEL_72:
       {
         v8 = 0i64;
       }
-      v3->mTransformNodes.array[v2] = v8;
+      this->mTransformNodes.array[v2] = v8;
     }
   }
-  return v3->mTransformNodes.array[v4];
+  return this->mTransformNodes.array[v4];
 }
 
 // File Line: 1208
 // RVA: 0x696B30
-void __fastcall UFG::VehicleEffectsComponent::UpdateEffectStateMachine(UFG::VehicleEffectsComponent *this, bool didSpeedLevelChange)
+void __fastcall UFG::VehicleEffectsComponent::UpdateEffectStateMachine(
+        UFG::VehicleEffectsComponent *this,
+        bool didSpeedLevelChange)
 {
-  bool v2; // r12
-  UFG::VehicleEffectsComponent *v3; // rsi
-  UFG::VehicleEffectState **v4; // r14
-  signed int v5; // ebx
+  UFG::VehicleEffectState **p_mInternalState; // r14
+  int v5; // ebx
   unsigned int v6; // ebp
   __int64 v7; // r15
   int v8; // eax
   UFG::qBaseTreeRB *i; // rbx
   unsigned int v10; // edx
-  DamageRig *v11; // rcx
-  Render::FXSimComponent *v12; // rcx
-  unsigned int v13; // edx
-  UFG::qBaseNodeRB *v14; // rax
-  UFG::qBaseNodeRB *v15; // rdi
+  DamageRig *mDamageRig; // rcx
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  unsigned int mUID; // edx
+  UFG::qBaseNodeRB *mParent; // rax
+  int *v15; // rdi
   UFG::VehicleEffect *j; // rbx
-  float health_output; // [rsp+60h] [rbp+8h]
+  float health_output; // [rsp+60h] [rbp+8h] BYREF
 
-  v2 = didSpeedLevelChange;
-  v3 = this;
-  if ( *((_BYTE *)this + 1884) < 0 )
+  if ( *((char *)this + 1884) < 0 )
   {
-    v4 = &this->mEffectStatusTable[0].mInternalState;
+    p_mInternalState = &this->mEffectStatusTable[0].mInternalState;
     v5 = 57469;
     v6 = 0;
     v7 = 0i64;
     do
     {
-      v8 = *((_DWORD *)v4 - 2);
+      v8 = *((_DWORD *)p_mInternalState - 2);
       if ( v8 == 1 )
       {
-        UFG::VehicleEffectsComponent::InitializeEffect_New(v3, (UFG::VehicleEffectId)v6);
-        if ( (_BYTE)v4[1] & 1 )
+        UFG::VehicleEffectsComponent::InitializeEffect_New(this, (UFG::VehicleEffectId)v6);
+        if ( ((_BYTE)p_mInternalState[1] & 1) != 0 )
         {
           if ( v6 <= 0xF && _bittest(&v5, v6) )
-            UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, (UFG::VehicleEffectId)v6);
+            UFG::VehicleEffectsComponent::TurnOnLightEffects(this, (UFG::VehicleEffectId)v6);
           else
-            UFG::VehicleEffectsComponent::TurnOnEffect_New(v3, (UFG::VehicleEffectId)v6);
+            UFG::VehicleEffectsComponent::TurnOnEffect_New(this, (UFG::VehicleEffectId)v6);
         }
         goto LABEL_34;
       }
@@ -2433,33 +2310,33 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateEffectStateMachine(UFG::Vehi
       {
         if ( v6 <= 0xF && _bittest(&v5, v6) )
         {
-          for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*v4)->mEffects);
+          for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*p_mInternalState)->mEffects);
                 i;
-                i = UFG::qBaseTreeRB::GetNext(&(*v4)->mEffects.mTree, &i->mRoot) )
+                i = UFG::qBaseTreeRB::GetNext(&(*p_mInternalState)->mEffects.mTree, &i->mRoot) )
           {
             v10 = HIDWORD(i[1].mRoot.mChild[0]);
-            v11 = v3->mDamageRig;
+            mDamageRig = this->mDamageRig;
             health_output = 0.0;
-            DamageRig::GetTriggerMarkerHealth(v11, v10, &health_output);
+            DamageRig::GetTriggerMarkerHealth(mDamageRig, v10, &health_output);
             if ( health_output > 0.33000001 )
             {
-              v12 = (Render::FXSimComponent *)v3->mFXComponent.m_pSimComponent;
-              if ( v12 )
+              m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+              if ( m_pSimComponent )
               {
-                v13 = i[1].mRoot.mUID;
-                if ( v13 != -1 )
+                mUID = i[1].mRoot.mUID;
+                if ( mUID != -1 )
                 {
-                  Render::FXSimComponent::DetachEffect(v12, v13, 0);
+                  Render::FXSimComponent::DetachEffect(m_pSimComponent, mUID, FXKILLOPTION_DEFAULT);
                   i[1].mRoot.mUID = -1;
                 }
               }
               i[1].mRoot.mUID = -1;
-              v14 = i[1].mNULL.mParent;
-              if ( v14 )
+              mParent = i[1].mNULL.mParent;
+              if ( mParent )
               {
-                --LODWORD(v14->mParent);
-                v15 = i[1].mNULL.mParent;
-                if ( SLODWORD(v15->mParent) <= 0 )
+                --LODWORD(mParent->mParent);
+                v15 = (int *)i[1].mNULL.mParent;
+                if ( *v15 <= 0 )
                 {
                   if ( v15 )
                   {
@@ -2470,21 +2347,26 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateEffectStateMachine(UFG::Vehi
                 }
                 i[1].mNULL.mParent = 0i64;
               }
-              if ( !(v7 & 0xFFFFFFFFFFFFFFFAui64) && v7 != 1 )
-                DamageRig::RemoveSignal(v3->mDamageRig, HIDWORD(i[1].mRoot.mChild[0]), 2.0);
+              if ( (v7 & 0xFFFFFFFFFFFFFFFAui64) == 0 && v7 != 1 )
+                DamageRig::RemoveSignal(this->mDamageRig, HIDWORD(i[1].mRoot.mChild[0]), 2.0);
             }
           }
         }
         else
         {
-          if ( !v2 || !((v6 - 33) & 0xFFFFFFFA) && v6 != 37 )
+          if ( !didSpeedLevelChange || ((v6 - 33) & 0xFFFFFFFA) == 0 && v6 != 37 )
             goto LABEL_34;
-          for ( j = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*v4)->mEffects);
+          for ( j = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*p_mInternalState)->mEffects);
                 j;
-                j = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(&(*v4)->mEffects.mTree, &j->mNode) )
+                j = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(&(*p_mInternalState)->mEffects.mTree, &j->mNode) )
           {
-            UFG::VehicleEffectsComponent::UpdateEffectSpeed(v3, j);
-            UFG::VehicleEffectsComponent::StartEffect(v3, &j->mEffectRef, j->mBoundEffect[j->mSpeed], j->mMarker, 0i64);
+            UFG::VehicleEffectsComponent::UpdateEffectSpeed(this, j);
+            UFG::VehicleEffectsComponent::StartEffect(
+              this,
+              &j->mEffectRef,
+              j->mBoundEffect[j->mSpeed],
+              j->mMarker,
+              0i64);
           }
         }
         v5 = 57469;
@@ -2492,23 +2374,24 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateEffectStateMachine(UFG::Vehi
 LABEL_34:
       ++v6;
       ++v7;
-      v4 += 3;
+      p_mInternalState += 3;
     }
     while ( v6 < 0x27 );
   }
-}
+}   }
+LABEL_34:
+      ++v6;
+    
 
 // File Line: 1276
 // RVA: 0x69B080
 void __fastcall UFG::VehicleEffectsComponent::UpdateTransforms(UFG::VehicleEffectsComponent *this, float deltaTime)
 {
-  UFG::VehicleEffectsComponent *v2; // rdi
-  float v3; // xmm6_4
-  UFG::WaterFloatingTrackerComponent *v4; // rbx
-  UFG::SimObjectVehicle *v5; // r14
+  UFG::WaterFloatingTrackerComponent *m_pSimComponent; // rbx
+  UFG::SimObjectVehicle *m_pSimObject; // r14
   bool v6; // bp
   int v7; // esi
-  float v8; // xmm0_4
+  float m_SecondsSinceMidnight; // xmm0_4
   char v9; // al
   bool v10; // r12
   bool v11; // cf
@@ -2516,59 +2399,57 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateTransforms(UFG::VehicleEffec
   bool v13; // r15
   bool v14; // r8
   float v15; // xmm1_4
-  signed int v16; // edx
+  unsigned int v16; // edx
   float *v17; // rax
-  signed __int64 v18; // rcx
+  __int64 v18; // rcx
   float v19; // xmm1_4
-  int v20; // ebx
+  int VehicleOrientation; // ebx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v21; // rcx
-  UFG::WaterFloatingTrackerComponent *v22; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v23; // rcx
+  UFG::WaterFloatingTrackerComponent *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v24; // rax
   UFG::SimObject *v25; // rbx
-  UFG::TransformNodeComponent *v26; // rbx
-  float v27; // xmm7_4
-  float v28; // xmm8_4
-  float v29; // xmm9_4
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  float x; // xmm7_4
+  float y; // xmm8_4
+  float z; // xmm9_4
   UFG::TransformNodeComponent *v30; // rbx
-  signed __int64 v31; // rbx
-  UFG::BaseCameraComponent *v32; // rax
-  signed __int64 v33; // rax
-  __m128 v34; // xmm2
-  UFG::VehicleEffectsComponent::Lod v35; // eax
+  UFG::qVector4 *v31; // rbx
+  UFG::BaseCameraComponent *mCurrentCamera; // rax
+  UFG::Camera *p_mCamera; // rax
+  __m128 y_low; // xmm2
+  UFG::VehicleEffectsComponent::Lod mLevelOfDetail; // eax
   float v36; // xmm0_4
   UFG::VehicleEffectsComponent::Lod v37; // ecx
 
-  v2 = this;
-  v3 = deltaTime;
-  if ( (LOBYTE(this->m_Flags) >> 1) & 1 )
+  if ( (this->m_Flags & 2) != 0 )
     return;
-  v4 = (UFG::WaterFloatingTrackerComponent *)this->mWaterFloatingTrackerComponent.m_pSimComponent;
-  v5 = (UFG::SimObjectVehicle *)this->m_pSimObject;
-  if ( v4
-    && UFG::WaterFloatingTrackerComponent::IsInWater(v4)
-    && UFG::WaterFloatingTrackerComponent::IsSubmerged(v4, 0.25) )
+  m_pSimComponent = (UFG::WaterFloatingTrackerComponent *)this->mWaterFloatingTrackerComponent.m_pSimComponent;
+  m_pSimObject = (UFG::SimObjectVehicle *)this->m_pSimObject;
+  if ( m_pSimComponent
+    && UFG::WaterFloatingTrackerComponent::IsInWater(m_pSimComponent)
+    && UFG::WaterFloatingTrackerComponent::IsSubmerged(m_pSimComponent, 0.25) )
   {
-    UFG::VehicleEffectsComponent::TurnOffFire(v2);
-    if ( UFG::WaterFloatingTrackerComponent::IsSubmerged(v4, 0.89999998) )
-      UFG::VehicleEffectsComponent::TurnOffEffects(v2, 0);
+    UFG::VehicleEffectsComponent::TurnOffFire(this);
+    if ( UFG::WaterFloatingTrackerComponent::IsSubmerged(m_pSimComponent, 0.89999998) )
+      UFG::VehicleEffectsComponent::TurnOffEffects(this, 0);
     return;
   }
   v6 = 0;
   v7 = 0;
-  v8 = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight;
-  if ( v8 < 21600.0 || (v9 = 1, v8 > 64800.0) )
+  m_SecondsSinceMidnight = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight;
+  if ( m_SecondsSinceMidnight < 21600.0 || (v9 = 1, m_SecondsSinceMidnight > 64800.0) )
     v9 = 0;
   v10 = v9 == 0;
-  v11 = 1.0 < UFG::TimeOfDayManager::GetInstance()->m_WeatherState;
-  v12 = v2->mMoverComponent.m_pSimComponent;
+  v11 = UFG::TimeOfDayManager::GetInstance()->m_WeatherState > 1.0;
+  v12 = this->mMoverComponent.m_pSimComponent;
   v13 = v11;
   v14 = 0;
   if ( v12 )
   {
     v15 = *((float *)&v12[10].m_BoundComponentHandles.mNode.mPrev + 1);
     v16 = 3;
-    v17 = &v2->mSpeedLevelThreshold[3];
+    v17 = &this->mSpeedLevelThreshold[3];
     v18 = 3i64;
     v19 = v15 * 3.5999999;
     v6 = COERCE_FLOAT(LODWORD(v19) & _xmm) > 5.0;
@@ -2579,187 +2460,185 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateTransforms(UFG::VehicleEffec
       if ( --v18 < 0 )
         goto LABEL_17;
     }
-    if ( v2->mSpeedLevel != v16 )
+    if ( this->mSpeedLevel != v16 )
     {
-      v2->mSpeedLevel = v16;
+      this->mSpeedLevel = v16;
       v14 = 1;
     }
   }
 LABEL_17:
-  UFG::VehicleEffectsComponent::UpdateEffectStateMachine(v2, v14);
-  v20 = UFG::VehicleUtility::GetVehicleOrientation(v5, 0, 0i64);
-  if ( v6 != 1
-    || (v21 = v2->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev) == 0i64
+  UFG::VehicleEffectsComponent::UpdateEffectStateMachine(this, v14);
+  VehicleOrientation = UFG::VehicleUtility::GetVehicleOrientation(m_pSimObject, 0, 0i64);
+  if ( !v6
+    || (v21 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev) == 0i64
     || HIDWORD(v21[34].mPrev) != 3
-    || (v22 = (UFG::WaterFloatingTrackerComponent *)v21[2].mNext) != 0i64
-    && UFG::WaterFloatingTrackerComponent::IsInWater(v22)
-    || v20 )
+    || (mNext = (UFG::WaterFloatingTrackerComponent *)v21[2].mNext) != 0i64
+    && UFG::WaterFloatingTrackerComponent::IsInWater(mNext)
+    || VehicleOrientation )
   {
-    v2->mIsOffGround = 0;
+    this->mIsOffGround = 0;
   }
   else
   {
-    v23 = v2->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-    if ( v23 )
+    mPrev = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+    if ( mPrev )
     {
       v24 = 0i64;
-      if ( BYTE4(v23[37].mNext) & 7 )
-        v24 = v2->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-      if ( v24 && (LODWORD(v24[68].mNext) >> 3) & 1 )
+      if ( (BYTE4(mPrev[37].mNext) & 7) != 0 )
+        v24 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+      if ( v24 && ((__int64)v24[68].mNext & 8) != 0 )
       {
-        ++v2->mFramesOffGround;
-        if ( !v2->mIsOffGround && v2->mFramesOffGround > 3 )
+        ++this->mFramesOffGround;
+        if ( !this->mIsOffGround && this->mFramesOffGround > 3 )
         {
-          v2->mIsOffGround = 1;
-          UFG::VehicleEffectsComponent::TurnOnEffect_New(v2, FX_WHEELEDVEHICLEJUMP);
-          UFG::VehicleEffectsComponent::TurnOffEffect_New(v2, FX_WHEELEDVEHICLEIMPACT);
+          this->mIsOffGround = 1;
+          UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_WHEELEDVEHICLEJUMP);
+          UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 38);
         }
         goto LABEL_36;
       }
     }
-    if ( v2->mIsOffGround == 1 )
+    if ( this->mIsOffGround )
     {
-      v2->mIsOffGround = 0;
-      UFG::VehicleEffectsComponent::TurnOffEffect_New(v2, FX_WHEELEDVEHICLEJUMP);
-      if ( v2->mFramesOffGround > 0x19 )
-        UFG::VehicleEffectsComponent::TurnOnEffect_New(v2, FX_WHEELEDVEHICLEIMPACT);
+      this->mIsOffGround = 0;
+      UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 37);
+      if ( this->mFramesOffGround > 0x19 )
+        UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_WHEELEDVEHICLEIMPACT);
     }
   }
-  v2->mFramesOffGround = 0;
+  this->mFramesOffGround = 0;
 LABEL_36:
-  v25 = v2->m_pSimObject;
+  v25 = this->m_pSimObject;
   if ( v25 )
-    v26 = v25->m_pTransformNodeComponent;
+    m_pTransformNodeComponent = v25->m_pTransformNodeComponent;
   else
-    v26 = 0i64;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v26);
-  v27 = v26->mWorldTransform.v3.x;
-  v28 = v26->mWorldTransform.v3.y;
-  v29 = v26->mWorldTransform.v3.z;
+    m_pTransformNodeComponent = 0i64;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+  y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+  z = m_pTransformNodeComponent->mWorldTransform.v3.z;
   if ( LocalPlayer )
   {
     v30 = LocalPlayer->m_pTransformNodeComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(LocalPlayer->m_pTransformNodeComponent);
-    v31 = (signed __int64)&v30->mWorldTransform.v3;
+    UFG::TransformNodeComponent::UpdateWorldTransform(v30);
+    v31 = &v30->mWorldTransform.v3;
   }
   else
   {
-    v32 = UFG::Director::Get()->mCurrentCamera;
-    if ( v32 )
-      v33 = (signed __int64)&v32->mCamera;
+    mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+    if ( mCurrentCamera )
+      p_mCamera = &mCurrentCamera->mCamera;
     else
-      v33 = 0i64;
-    v31 = v33 + 176;
+      p_mCamera = 0i64;
+    v31 = &p_mCamera->mTransformation.v3;
   }
-  v34 = (__m128)*(unsigned int *)(v31 + 4);
-  v35 = v2->mLevelOfDetail;
-  v34.m128_f32[0] = (float)((float)((float)(v34.m128_f32[0] - v28) * (float)(v34.m128_f32[0] - v28))
-                          + (float)((float)(*(float *)v31 - v27) * (float)(*(float *)v31 - v27)))
-                  + (float)((float)(*(float *)(v31 + 8) - v29) * (float)(*(float *)(v31 + 8) - v29));
-  LODWORD(v36) = (unsigned __int128)_mm_sqrt_ps(v34);
+  y_low = (__m128)LODWORD(v31->y);
+  mLevelOfDetail = this->mLevelOfDetail;
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - y) * (float)(y_low.m128_f32[0] - y))
+                            + (float)((float)(v31->x - x) * (float)(v31->x - x)))
+                    + (float)((float)(v31->z - z) * (float)(v31->z - z));
+  v36 = _mm_sqrt_ps(y_low).m128_f32[0];
   if ( v36 <= 50.0 )
   {
     LOBYTE(v7) = v36 <= 30.0;
-    v2->mLevelOfDetail = v7 + 2;
+    this->mLevelOfDetail = v7 + 2;
   }
   else
   {
-    v2->mLevelOfDetail = 1;
+    this->mLevelOfDetail = LOD_LOW;
   }
-  v37 = v2->mLevelOfDetail;
-  if ( v37 != v35 && v37 == 1 )
-    UFG::VehicleEffectsComponent::TurnOffEffects(v2, 0);
-  UFG::VehicleEffectsComponent::ManageHeadlights(v2, v3, v13);
-  switch ( v2->mLevelOfDetail )
+  v37 = this->mLevelOfDetail;
+  if ( v37 != mLevelOfDetail && v37 == LOD_LOW )
+    UFG::VehicleEffectsComponent::TurnOffEffects(this, 0);
+  UFG::VehicleEffectsComponent::ManageHeadlights(this, deltaTime, v13);
+  switch ( this->mLevelOfDetail )
   {
-    case 1:
-      UFG::VehicleEffectsComponent::UpdateLowDetailEffects(v2, v3, v6);
+    case LOD_LOW:
+      UFG::VehicleEffectsComponent::UpdateLowDetailEffects(this, deltaTime, v6);
       break;
-    case 2:
-      UFG::VehicleEffectsComponent::ManageDamageEffects(v2, v3);
-      UFG::VehicleEffectsComponent::UpdateMedDetailEffects(v2, v3, v6);
+    case LOD_MEDIUM:
+      UFG::VehicleEffectsComponent::ManageDamageEffects(this, deltaTime);
+      UFG::VehicleEffectsComponent::UpdateMedDetailEffects(this, deltaTime, v6);
       break;
-    case 3:
-      UFG::VehicleEffectsComponent::ManageSignalLights(v2, v3);
-      UFG::VehicleEffectsComponent::ManageDamageEffects(v2, v3);
-      UFG::VehicleEffectsComponent::UpdateHighDetailEffects(v2, v3, v6, v10);
+    case LOD_HIGH:
+      UFG::VehicleEffectsComponent::ManageSignalLights(this, deltaTime);
+      UFG::VehicleEffectsComponent::ManageDamageEffects(this, deltaTime);
+      UFG::VehicleEffectsComponent::UpdateHighDetailEffects(this, deltaTime, v6, v10);
       break;
   }
 }
 
 // File Line: 1443
 // RVA: 0x67FFA0
-void __fastcall UFG::VehicleEffectsComponent::ManageHeadlights(UFG::VehicleEffectsComponent *this, float deltaTime, bool isRaining)
+void __fastcall UFG::VehicleEffectsComponent::ManageHeadlights(
+        UFG::VehicleEffectsComponent *this,
+        float deltaTime,
+        bool isRaining)
 {
-  bool v3; // bl
-  UFG::VehicleEffectsComponent *v4; // rdi
-  UFG::TimeOfDayManager *v5; // rax
-  float v6; // xmm7_4
+  UFG::TimeOfDayManager *Instance; // rax
+  float m_SecondsSinceMidnight; // xmm7_4
   bool v7; // bl
   bool v8; // zf
   float v9; // xmm6_4
-  bool v10; // cf
+  bool v10; // cc
   int v11; // eax
-  UFG::SimComponent *v12; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v3 = isRaining;
-  v4 = this;
-  v5 = UFG::TimeOfDayManager::GetInstance();
-  v6 = v5->m_SecondsSinceMidnight;
-  v7 = v3 && *((_BYTE *)v4 + 1884) & 8
+  Instance = UFG::TimeOfDayManager::GetInstance();
+  m_SecondsSinceMidnight = Instance->m_SecondsSinceMidnight;
+  v7 = isRaining && (*((_BYTE *)this + 1884) & 8) != 0
     || (unsigned __int8)Render::FXManager::IsInBetweenTime(
                           &Render::gFXManager,
-                          v5->m_SecondsSinceMidnight,
+                          Instance->m_SecondsSinceMidnight,
                           HEADLIGHT_ON_TIME,
                           HEADLIGHT_OFF_TIME);
-  v8 = v4->mNumQueuedHeadlightChanges == 0;
-  if ( v4->mNumQueuedHeadlightChanges )
+  v8 = this->mNumQueuedHeadlightChanges == 0;
+  if ( this->mNumQueuedHeadlightChanges )
   {
-    v9 = deltaTime + v4->mHeadlightFlashesTimer;
-    v10 = v9 < v4->mHeadlightFlashesLength;
-    v8 = v9 == v4->mHeadlightFlashesLength;
-    v4->mHeadlightFlashesTimer = v9;
-    if ( !v10 && !v8 )
+    v9 = deltaTime + this->mHeadlightFlashesTimer;
+    v10 = v9 <= this->mHeadlightFlashesLength;
+    this->mHeadlightFlashesTimer = v9;
+    if ( !v10 )
     {
-      if ( v4->mEffectStatusTable[4].mState == 3 || v4->mEffectStatusTable[5].mState == 3 )
-        UFG::VehicleEffectsComponent::TurnOffHeadlights(v4);
+      if ( this->mEffectStatusTable[4].mState == 3 || this->mEffectStatusTable[5].mState == 3 )
+        UFG::VehicleEffectsComponent::TurnOffHeadlights(this);
       else
-        UFG::VehicleEffectsComponent::TurnOnHeadlights(v4, v7);
-      --v4->mNumQueuedHeadlightChanges;
-      v4->mHeadlightFlashesTimer = 0.0;
+        UFG::VehicleEffectsComponent::TurnOnHeadlights(this, v7);
+      --this->mNumQueuedHeadlightChanges;
+      this->mHeadlightFlashesTimer = 0.0;
     }
-    v8 = v4->mNumQueuedHeadlightChanges == 0;
+    v8 = this->mNumQueuedHeadlightChanges == 0;
   }
   if ( v8 )
   {
-    v11 = *((_DWORD *)v4 + 471);
-    if ( !(v11 & 0x10) )
+    v11 = *((_DWORD *)this + 471);
+    if ( (v11 & 0x10) == 0 )
     {
-      if ( v11 & 0x20 )
+      if ( (v11 & 0x20) != 0 )
       {
 LABEL_25:
-        UFG::VehicleEffectsComponent::TurnOnHeadlights(v4, v7);
+        UFG::VehicleEffectsComponent::TurnOnHeadlights(this, v7);
         return;
       }
-      if ( v11 & 0x40 )
+      if ( (v11 & 0x40) != 0 )
       {
 LABEL_18:
-        UFG::VehicleEffectsComponent::TurnOffHeadlights(v4);
+        UFG::VehicleEffectsComponent::TurnOffHeadlights(this);
         return;
       }
-      if ( (v11 & 0x80u) != 0 && v4->mEffectStatusTable[7].mState != 3 )
+      if ( (v11 & 0x80u) != 0 && this->mEffectStatusTable[7].mState != 3 )
       {
-        v12 = v4->mVehicleDriverComponent.m_pSimComponent;
-        if ( v12 )
+        m_pSimComponent = this->mVehicleDriverComponent.m_pSimComponent;
+        if ( m_pSimComponent )
         {
-          if ( !((LODWORD(v12[4].vfptr) - 2) & 0xFFFFFFFD) )
+          if ( ((LODWORD(m_pSimComponent[4].vfptr) - 2) & 0xFFFFFFFD) == 0 )
           {
             if ( !v7
               && !(unsigned __int8)Render::FXManager::IsInBetweenTime(
                                      &Render::gFXManager,
-                                     v6,
-                                     v4->mHeadlightFlareOnTime,
-                                     v4->mHeadlightFlareOffTime) )
+                                     m_SecondsSinceMidnight,
+                                     this->mHeadlightFlareOnTime,
+                                     this->mHeadlightFlareOffTime) )
             {
               goto LABEL_18;
             }
@@ -2775,20 +2654,18 @@ LABEL_18:
 // RVA: 0x6800F0
 void __fastcall UFG::VehicleEffectsComponent::ManageSignalLights(UFG::VehicleEffectsComponent *this, float deltaTime)
 {
-  UFG::SimComponent *v2; // rdi
-  UFG::VehicleEffectsComponent *v3; // rbx
-  UFG::RoadNetworkLane *v4; // rbp
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rsi
-  float v6; // xmm6_4
-  UFG::RoadNetworkLocation *v7; // rax
+  UFG::SimComponent *m_pSimComponent; // rdi
+  UFG::RoadNetworkLane *mPrev; // rbp
+  UFG::RoadNetworkLane *mNext; // rsi
+  float Length; // xmm6_4
+  UFG::RoadNetworkLocation *Name; // rax
   float v8; // xmm6_4
-  int v9; // eax
-  UFG::RoadNetworkLane *v10; // rax
+  int TurnDirection; // eax
+  UFG::RoadNetworkLane *mPreTurnLane; // rax
   float v11; // xmm1_4
 
-  v2 = this->mRoadSpaceComponent.m_pSimComponent;
-  v3 = this;
-  if ( !v2 || !LOBYTE(v2[8].m_Flags) )
+  m_pSimComponent = this->mRoadSpaceComponent.m_pSimComponent;
+  if ( !m_pSimComponent || !LOBYTE(m_pSimComponent[8].m_Flags) )
   {
     if ( !this->mPreTurnLane )
       return;
@@ -2796,10 +2673,10 @@ void __fastcall UFG::VehicleEffectsComponent::ManageSignalLights(UFG::VehicleEff
   }
   if ( this->mEffectStatusTable[14].mState == 3 || this->mEffectStatusTable[15].mState == 3 )
   {
-    v10 = this->mPreTurnLane;
-    if ( !v10 )
+    mPreTurnLane = this->mPreTurnLane;
+    if ( !mPreTurnLane )
       return;
-    if ( (UFG::RoadNetworkLane *)v2[6].m_BoundComponentHandles.mNode.mNext == v10 )
+    if ( (UFG::RoadNetworkLane *)m_pSimComponent[6].m_BoundComponentHandles.mNode.mNext == mPreTurnLane )
       return;
     v11 = this->mSignalTimer - deltaTime;
     this->mSignalTimer = v11;
@@ -2807,31 +2684,31 @@ void __fastcall UFG::VehicleEffectsComponent::ManageSignalLights(UFG::VehicleEff
       return;
 LABEL_16:
     UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_LEFTTURN);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, FX_RIGHTTURN);
-    v3->mPreTurnLane = 0i64;
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_RIGHTTURN);
+    this->mPreTurnLane = 0i64;
     return;
   }
-  if ( this->mLevelOfDetail == 3 )
+  if ( this->mLevelOfDetail == LOD_HIGH )
   {
-    v4 = (UFG::RoadNetworkLane *)v2[7].m_SafePointerList.mNode.mPrev;
-    v5 = v2[6].m_BoundComponentHandles.mNode.mNext;
-    if ( v5 )
+    mPrev = (UFG::RoadNetworkLane *)m_pSimComponent[7].m_SafePointerList.mNode.mPrev;
+    mNext = (UFG::RoadNetworkLane *)m_pSimComponent[6].m_BoundComponentHandles.mNode.mNext;
+    if ( mNext )
     {
-      if ( v4 )
+      if ( mPrev )
       {
-        if ( v5 != (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)v4 )
+        if ( mNext != mPrev )
         {
-          v6 = UFG::RoadNetworkLane::GetLength((UFG::RoadNetworkLane *)v2[6].m_BoundComponentHandles.mNode.mNext);
-          v7 = Scaleform::GFx::AS3::Instances::fl::XML::GetName((UFG::RoadNetworkGuide *)&v2[5].m_BoundComponentHandles.mNode.mNext);
-          v8 = v6 - UFG::RoadNetworkLocation::GetDistanceAlongSpline(v7);
-          v9 = UFG::RoadNetworkLane::GetTurnDirection(v4);
+          Length = UFG::RoadNetworkLane::GetLength((UFG::RoadNetworkLane *)m_pSimComponent[6].m_BoundComponentHandles.mNode.mNext);
+          Name = Scaleform::GFx::AS3::Instances::fl::XML::GetName((UFG::RoadNetworkGuide *)&m_pSimComponent[5].m_BoundComponentHandles.mNode.mNext);
+          v8 = Length - UFG::RoadNetworkLocation::GetDistanceAlongSpline(Name);
+          TurnDirection = UFG::RoadNetworkLane::GetTurnDirection(mPrev);
           if ( v8 < 10.0 )
           {
-            if ( v9 )
+            if ( TurnDirection )
             {
-              UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, (UFG::VehicleEffectId)((v9 != 1) + 14));
-              v3->mPreTurnLane = (UFG::RoadNetworkLane *)v5;
-              v3->mSignalTimer = 3.0;
+              UFG::VehicleEffectsComponent::TurnOnLightEffects(this, (UFG::VehicleEffectId)((TurnDirection != 1) + 14));
+              this->mPreTurnLane = mNext;
+              this->mSignalTimer = 3.0;
             }
           }
         }
@@ -2844,29 +2721,29 @@ LABEL_16:
 // RVA: 0x67FE40
 void __fastcall UFG::VehicleEffectsComponent::ManageDamageEffects(UFG::VehicleEffectsComponent *this, float deltaTime)
 {
-  UFG::SimComponent *v2; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
   UFG::VehicleEffectsComponent *v3; // rbx
   float v4; // xmm1_4
   float v5; // xmm6_4
-  signed int v6; // edi
+  int v6; // edi
   UFG::VehicleEffectId *v7; // rsi
   UFG::VehicleEffectId v8; // edx
   float v9; // xmm1_4
 
-  v2 = this->mMoverComponent.m_pSimComponent;
+  m_pSimComponent = this->mMoverComponent.m_pSimComponent;
   v3 = this;
-  if ( HIDWORD(v2[2].m_BoundComponentHandles.mNode.mPrev) == 2 )
+  if ( HIDWORD(m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev) == 2 )
   {
-    if ( *((_BYTE *)this + 1884) & 1 )
+    if ( (*((_BYTE *)this + 1884) & 1) != 0 )
     {
       v9 = this->mExtinguishFireCountdown - deltaTime;
       this->mExtinguishFireCountdown = v9;
       if ( v9 < 0.0 )
         UFG::VehicleEffectsComponent::TurnOffFire(this);
     }
-    v8 = 22;
+    v8 = FX_SMOLDERING;
     this = v3;
-    if ( v3->mLevelOfDetail != 3 )
+    if ( v3->mLevelOfDetail != LOD_HIGH )
     {
       UFG::VehicleEffectsComponent::TurnOffEffect_New(v3, FX_SMOLDERING);
       return;
@@ -2875,10 +2752,10 @@ LABEL_14:
     UFG::VehicleEffectsComponent::TurnOnEffect_New(this, v8);
     return;
   }
-  v4 = *(float *)&v2[2].m_BoundComponentHandles.mNode.mPrev;
+  v4 = *(float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev;
   if ( v4 >= 1.0 )
   {
-    v5 = *(float *)&v2[3].vfptr;
+    v5 = *(float *)&m_pSimComponent[3].vfptr;
     v6 = 0;
     v7 = sDestructStates;
     do
@@ -2891,7 +2768,7 @@ LABEL_14:
     while ( (unsigned int)v6 < 3 );
     return;
   }
-  if ( *(float *)&v2[13].m_BoundComponentHandles.mNode.mPrev >= 0.0 )
+  if ( *(float *)&m_pSimComponent[13].m_BoundComponentHandles.mNode.mPrev >= 0.0 )
   {
     UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_DAMAGE);
     UFG::VehicleEffectsComponent::TurnOffEffect_New(v3, FX_ENGINEDAMAGE);
@@ -2906,33 +2783,33 @@ LABEL_14:
   }
   if ( v4 >= UFG::PhysicsMoverInterface::mRipeForTakedownThreshold )
   {
-    v8 = 28;
+    v8 = FX_DAMAGE;
     goto LABEL_14;
   }
 }
 
 // File Line: 1611
 // RVA: 0x695260
-void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(UFG::VehicleEffectsComponent *this, UFG::PhysicsBoat *physicsBoat)
+void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(
+        UFG::VehicleEffectsComponent *this,
+        UFG::PhysicsBoat *physicsBoat)
 {
-  UFG::PhysicsBoat *v2; // r12
-  UFG::VehicleEffectsComponent *v3; // rdi
-  UFG::SimObjectCVBase *v4; // rcx
-  UFG::CharacterAnimationComponent *v5; // rax
-  unsigned __int16 v6; // dx
-  Creature *v7; // r14
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
+  Creature *mCreature; // r14
   float v8; // xmm6_4
-  signed int v9; // ebx
-  UFG::qMatrix44 *v10; // r15
+  int v9; // ebx
+  UFG::qMatrix44 *p_transform; // r15
   __int64 v11; // rsi
-  int v12; // eax
+  int BoneID; // eax
   char v13; // al
   float v14; // xmm15_4
   float v15; // xmm7_4
-  float v16; // xmm1_4
-  float v17; // xmm12_4
-  float v18; // xmm13_4
-  float v19; // xmm14_4
+  float mBuoyancyRatio; // xmm1_4
+  float x; // xmm12_4
+  float y; // xmm13_4
+  float z; // xmm14_4
   float v20; // xmm3_4
   float v21; // xmm2_4
   float v22; // xmm1_4
@@ -2966,7 +2843,7 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(UFG::VehicleEffects
   float v50; // [rsp+28h] [rbp-B0h]
   float v51; // [rsp+2Ch] [rbp-ACh]
   __int64 v52; // [rsp+30h] [rbp-A8h]
-  UFG::qMatrix44 transform; // [rsp+40h] [rbp-98h]
+  UFG::qMatrix44 transform; // [rsp+40h] [rbp-98h] BYREF
   float v54; // [rsp+88h] [rbp-50h]
   float v55; // [rsp+8Ch] [rbp-4Ch]
   float v56; // [rsp+90h] [rbp-48h]
@@ -2976,76 +2853,67 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(UFG::VehicleEffects
   float v60; // [rsp+108h] [rbp+30h]
   float v61; // [rsp+10Ch] [rbp+34h]
   float v62; // [rsp+110h] [rbp+38h]
-  UFG::qMatrix44 v63; // [rsp+118h] [rbp+40h]
+  UFG::qMatrix44 v63; // [rsp+118h] [rbp+40h] BYREF
 
   v52 = -2i64;
-  v2 = physicsBoat;
-  v3 = this;
-  v4 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-  if ( v4 )
+  m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v6 = v4->m_Flags;
-    if ( (v6 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
-    else if ( (v6 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v6 >> 13) & 1 )
-      {
-        v5 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v4);
-      }
-      else if ( (v6 >> 12) & 1 )
-      {
-        v5 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
   }
   else
   {
-    v5 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  v7 = v5->mCreature;
-  if ( !(_S24_1 & 1) )
+  mCreature = ComponentOfTypeHK->mCreature;
+  if ( (_S24_1 & 1) == 0 )
   {
     _S24_1 |= 1u;
-    buoyanceBoneNames[0] = UFG::qStringHashUpper32("E_SprayFrontL", 0xFFFFFFFF);
-    dword_142438D6C = UFG::qStringHashUpper32("E_SprayFrontR", 0xFFFFFFFF);
-    dword_142438D70 = UFG::qStringHashUpper32("E_SprayRearL", 0xFFFFFFFF);
-    dword_142438D74 = UFG::qStringHashUpper32("E_SprayRearR", 0xFFFFFFFF);
+    buoyanceBoneNames[0] = UFG::qStringHashUpper32("E_SprayFrontL", -1);
+    dword_142438D6C = UFG::qStringHashUpper32("E_SprayFrontR", -1);
+    dword_142438D70 = UFG::qStringHashUpper32("E_SprayRearL", -1);
+    dword_142438D74 = UFG::qStringHashUpper32("E_SprayRearR", -1);
   }
   v8 = 0.0;
-  if ( v7 )
+  if ( mCreature )
   {
     v9 = 0;
-    v10 = &transform;
+    p_transform = &transform;
     v11 = 0i64;
     do
     {
-      *(float *)((char *)&v48 + v11 * 4) = UFG::PhysicsBoat::GetFloatBuoyancy(v2, v9);
-      if ( v7->mPose.mRigHandle.mData )
-        v12 = Skeleton::GetBoneID(v7->mPose.mRigHandle.mUFGSkeleton, buoyanceBoneNames[v11]);
+      *(float *)((char *)&v48 + v11 * 4) = UFG::PhysicsBoat::GetFloatBuoyancy(physicsBoat, v9);
+      if ( mCreature->mPose.mRigHandle.mData )
+        BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, buoyanceBoneNames[v11]);
       else
-        v12 = -1;
-      Creature::GetTransform(v7, v12, v10);
-      v8 = v8 + UFG::PhysicsBoat::GetFloatBuoyancy(v2, v9++);
-      ++v10;
+        BoneID = -1;
+      Creature::GetTransform(mCreature, BoneID, p_transform);
+      v8 = v8 + UFG::PhysicsBoat::GetFloatBuoyancy(physicsBoat, v9++);
+      ++p_transform;
       ++v11;
     }
     while ( v9 < 4 );
-    Creature::GetTransform(v7, 0, &v63);
+    Creature::GetTransform(mCreature, 0, &v63);
   }
   else
   {
@@ -3053,49 +2921,49 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(UFG::VehicleEffects
   }
   if ( v63.v3.z >= 0.0 || (v13 = 1, v8 <= 0.1) )
     v13 = 0;
-  *((_DWORD *)v3 + 471) &= 0xFFFFFFFB;
-  *((_DWORD *)v3 + 471) |= 4 * (v13 & 1);
+  *((_DWORD *)this + 471) &= ~4u;
+  *((_DWORD *)this + 471) |= 4 * (v13 & 1);
   Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-  v3->mSprayEffects[0].mBuoyancyRatio = 0.0;
+  this->mSprayEffects[0].mBuoyancyRatio = 0.0;
   v14 = v50;
   v15 = v48;
   if ( (float)(v50 + v48) > 0.0 )
-    v3->mSprayEffects[0].mBuoyancyRatio = (float)(v48 / (float)(v50 + v48)) * 0.1;
-  v16 = v3->mSprayEffects[0].mBuoyancyRatio;
-  v17 = transform.v3.x;
-  v18 = transform.v3.y;
-  v19 = transform.v3.z;
-  v20 = (float)(v59 - transform.v3.z) * v16;
-  v21 = transform.v3.x + (float)((float)(v57 - transform.v3.x) * v16);
-  v22 = transform.v3.y + (float)((float)(v58 - transform.v3.y) * v16);
+    this->mSprayEffects[0].mBuoyancyRatio = (float)(v48 / (float)(v50 + v48)) * 0.1;
+  mBuoyancyRatio = this->mSprayEffects[0].mBuoyancyRatio;
+  x = transform.v3.x;
+  y = transform.v3.y;
+  z = transform.v3.z;
+  v20 = (float)(v59 - transform.v3.z) * mBuoyancyRatio;
+  v21 = transform.v3.x + (float)((float)(v57 - transform.v3.x) * mBuoyancyRatio);
+  v22 = transform.v3.y + (float)((float)(v58 - transform.v3.y) * mBuoyancyRatio);
   v23 = transform.v3.z + v20;
-  v3->mSprayEffects[0].mWaterLinePosition.x = v21;
-  v3->mSprayEffects[0].mWaterLinePosition.y = v22;
-  v3->mSprayEffects[0].mWaterLinePosition.z = v23;
-  v3->mSprayEffects[1].mBuoyancyRatio = 0.0;
+  this->mSprayEffects[0].mWaterLinePosition.x = v21;
+  this->mSprayEffects[0].mWaterLinePosition.y = v22;
+  this->mSprayEffects[0].mWaterLinePosition.z = v23;
+  this->mSprayEffects[1].mBuoyancyRatio = 0.0;
   v24 = v49;
   if ( (float)(v51 + v49) > 0.0 )
-    v3->mSprayEffects[1].mBuoyancyRatio = (float)(v49 / (float)(v51 + v49)) * 0.1;
-  v25 = v3->mSprayEffects[1].mBuoyancyRatio;
+    this->mSprayEffects[1].mBuoyancyRatio = (float)(v49 / (float)(v51 + v49)) * 0.1;
+  v25 = this->mSprayEffects[1].mBuoyancyRatio;
   v26 = v54;
   v27 = v55;
   v28 = v56;
   v29 = v54 + (float)((float)(v60 - v54) * v25);
   v30 = v55 + (float)((float)(v61 - v55) * v25);
-  v3->mSprayEffects[1].mWaterLinePosition.x = v29;
-  v3->mSprayEffects[1].mWaterLinePosition.y = v30;
-  v3->mSprayEffects[0].mWaterLinePosition.z = 0.0;
-  v3->mSprayEffects[1].mWaterLinePosition.z = 0.0;
-  if ( *((_BYTE *)v3 + 1884) & 4 )
+  this->mSprayEffects[1].mWaterLinePosition.x = v29;
+  this->mSprayEffects[1].mWaterLinePosition.y = v30;
+  this->mSprayEffects[0].mWaterLinePosition.z = 0.0;
+  this->mSprayEffects[1].mWaterLinePosition.z = 0.0;
+  if ( (*((_BYTE *)this + 1884) & 4) != 0 )
   {
-    v31 = (float)((float)((float)(v17 + v26) + v57) + v60) * 0.25;
-    v32 = (float)((float)((float)(v18 + v27) + v58) + v61) * 0.25;
-    v33 = (float)((float)((float)(v19 + v28) + v59) + v62) * 0.25;
+    v31 = (float)((float)((float)(x + v26) + v57) + v60) * 0.25;
+    v32 = (float)((float)((float)(y + v27) + v58) + v61) * 0.25;
+    v33 = (float)((float)((float)(z + v28) + v59) + v62) * 0.25;
     v34 = 1.0 / v8;
     v35 = 1.0 - (float)(v15 * (float)(1.0 / v8));
-    v36 = (float)(v17 - v31) * v35;
-    v37 = (float)(v18 - v32) * v35;
-    v38 = (float)(v19 - v33) * v35;
+    v36 = (float)(x - v31) * v35;
+    v37 = (float)(y - v32) * v35;
+    v38 = (float)(z - v33) * v35;
     v39 = 1.0 - (float)(v24 * (float)(1.0 / v8));
     v40 = v14 * (float)(1.0 / v8);
     v41 = (float)((float)(v57 - v31) * (float)(1.0 - v40)) + (float)((float)((float)(v26 - v31) * v39) + v36);
@@ -3105,37 +2973,37 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateBuoyancy(UFG::VehicleEffects
     v45 = v61 - v32;
     v46 = v62 - v33;
     v47 = 1.0 - (float)(v51 * v34);
-    v3->mSprayVector.x = (float)(v44 * v47) + v41;
-    v3->mSprayVector.y = (float)(v45 * v47) + v42;
-    v3->mSprayVector.z = (float)(v46 * v47) + v43;
+    this->mSprayVector.x = (float)(v44 * v47) + v41;
+    this->mSprayVector.y = (float)(v45 * v47) + v42;
+    this->mSprayVector.z = (float)(v46 * v47) + v43;
   }
 }
 
 // File Line: 1714
 // RVA: 0x699A20
-void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEffectsComponent *this, UFG::HullSprayEffects *sEffect, unsigned int markerId, UFG::PhysicsBoat *physicsBoat)
+void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(
+        UFG::VehicleEffectsComponent *this,
+        UFG::HullSprayEffects *sEffect,
+        unsigned int markerId,
+        UFG::PhysicsBoat *physicsBoat)
 {
-  UFG::PhysicsBoat *v4; // r13
-  unsigned int v5; // er12
-  UFG::HullSprayEffects *v6; // rdi
-  UFG::VehicleEffectsComponent *v7; // r14
   bool v8; // bp
   int v9; // edx
-  signed __int64 v10; // rbx
-  UFG::VehicleEffectState *v11; // rax
-  UFG::qBaseTreeRB *v12; // r15
-  UFG::qBaseTreeRB *v13; // rbx
-  UFG::qBaseTreeRB *v14; // rax
-  unsigned int v15; // edx
+  __int64 v10; // rbx
+  UFG::VehicleEffectState *mInternalState; // rax
+  UFG::qBaseTreeRB *p_mTree; // r15
+  UFG::VehicleEffect *Head; // rbx
+  UFG::VehicleEffect *mEffectState; // rax
+  unsigned int mEffectRef; // edx
   UFG::VehicleEffect *v16; // rsi
-  Render::FXOverride *v17; // rax
-  Render::FXOverride *v18; // rbp
+  Render::FXOverride *m_pPointer; // rax
+  int *p_mReferenceCount; // rbp
   UFG::VehicleEffect *v19; // rsi
-  float v20; // xmm0_4
-  float v21; // xmm1_4
-  UFG::TransformNodeComponent *v22; // rcx
-  float v23; // xmm0_4
-  float v24; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
+  UFG::TransformNodeComponent *mTransform; // rcx
+  float z; // xmm0_4
+  float w; // xmm1_4
   float v25; // xmm0_4
   float v26; // xmm1_4
   float v27; // xmm0_4
@@ -3146,15 +3014,15 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEff
   float v32; // xmm1_4
   float v33; // xmm0_4
   float v34; // xmm1_4
-  UFG::allocator::free_link *v35; // rax
+  UFG::allocator::free_link *Override; // rax
   float v36; // xmm3_4
   float v37; // xmm4_4
-  __m128 v38; // xmm5
+  __m128 y_low; // xmm5
   float v39; // xmm6_4
   __m128 v40; // xmm2
   float v41; // xmm1_4
   float v42; // xmm8_4
-  __m128 v43; // xmm2
+  __m128 x_low; // xmm2
   float v44; // xmm9_4
   float v45; // xmm4_4
   float v46; // xmm5_4
@@ -3163,56 +3031,52 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEff
   float v49; // xmm2_4
   Render::FXOverride *v50; // rax
   UFG::TransformNodeComponent *v51; // r8
-  unsigned int v52; // edx
+  unsigned int mDropletEffectRef; // edx
   Render::FXOverride *v53; // rax
-  Render::FXOverride *v54; // rbx
-  UFG::qMatrix44 m; // [rsp+30h] [rbp-A8h]
+  int *v54; // rbx
+  UFG::qMatrix44 m; // [rsp+30h] [rbp-A8h] BYREF
   bool v56; // [rsp+E0h] [rbp+8h]
 
-  v4 = physicsBoat;
-  v5 = markerId;
-  v6 = sEffect;
-  v7 = this;
   v8 = this->mVehicleDriverComponent.m_pSimComponent
-    && ((unsigned __int8 (*)(void))this->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)();
+    && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))this->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)(this->mVehicleDriverComponent.m_pSimComponent);
   v56 = v8;
-  v9 = 34 - (v8 != 0);
+  v9 = 34 - v8;
   v10 = v9;
-  if ( v7->mEffectStatusTable[v9].mState == UNINITIALIZED )
-    UFG::VehicleEffectsComponent::InitializeEffect_New(v7, (UFG::VehicleEffectId)v9);
-  v11 = v7->mEffectStatusTable[v10].mInternalState;
-  if ( v11 )
+  if ( this->mEffectStatusTable[v9].mState == UNINITIALIZED )
+    UFG::VehicleEffectsComponent::InitializeEffect_New(this, (UFG::VehicleEffectId)v9);
+  mInternalState = this->mEffectStatusTable[v10].mInternalState;
+  if ( mInternalState )
   {
-    v12 = &v11->mEffects.mTree;
-    v13 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v11->mEffects);
-    if ( v13 )
+    p_mTree = &mInternalState->mEffects.mTree;
+    Head = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&mInternalState->mEffects);
+    if ( Head )
     {
       do
       {
-        if ( HIDWORD(v13->mNULL.mChild[0]) == v5 )
+        if ( Head->mMarkerHash.mUID == markerId )
         {
-          v14 = (UFG::qBaseTreeRB *)v6->mEffectState;
-          if ( v14 )
+          mEffectState = sEffect->mEffectState;
+          if ( mEffectState )
           {
-            if ( v14 != v13 )
+            if ( mEffectState != Head )
             {
-              v15 = v14[1].mRoot.mUID;
-              if ( v15 != -1 )
+              mEffectRef = mEffectState->mEffectRef;
+              if ( mEffectRef != -1 )
               {
-                Render::FXManager::KillEffect(&Render::gFXManager, v15, 0);
-                v6->mEffectState->mEffectRef = -1;
-                v16 = v6->mEffectState;
-                v17 = v16->mEffectOverride.m_pPointer;
-                if ( v17 )
+                Render::FXManager::KillEffect(&Render::gFXManager, mEffectRef, FXKILLOPTION_DEFAULT);
+                sEffect->mEffectState->mEffectRef = -1;
+                v16 = sEffect->mEffectState;
+                m_pPointer = v16->mEffectOverride.m_pPointer;
+                if ( m_pPointer )
                 {
-                  --v17->mReferenceCount;
-                  v18 = v16->mEffectOverride.m_pPointer;
-                  if ( v18->mReferenceCount <= 0 )
+                  --m_pPointer->mReferenceCount;
+                  p_mReferenceCount = &v16->mEffectOverride.m_pPointer->mReferenceCount;
+                  if ( *p_mReferenceCount <= 0 )
                   {
-                    if ( v18 )
+                    if ( p_mReferenceCount )
                     {
                       Render::FXOverride::~FXOverride(v16->mEffectOverride.m_pPointer);
-                      operator delete[](v18);
+                      operator delete[](p_mReferenceCount);
                     }
                     v16->mEffectOverride.m_pPointer = 0i64;
                   }
@@ -3221,87 +3085,89 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEff
               }
             }
           }
-          v6->mEffectState = (UFG::VehicleEffect *)v13;
+          sEffect->mEffectState = Head;
         }
-        v13 = UFG::qBaseTreeRB::GetNext(v12, &v13->mRoot);
+        Head = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(p_mTree, &Head->mNode);
       }
-      while ( v13 );
+      while ( Head );
       v8 = v56;
     }
   }
-  v19 = v6->mEffectState;
+  v19 = sEffect->mEffectState;
   if ( v19 )
   {
-    if ( *((_BYTE *)v7 + 1884) & 4 )
+    if ( (*((_BYTE *)this + 1884) & 4) != 0 )
     {
-      v20 = v4->mBodyTransform.v0.x;
-      v21 = v4->mBodyTransform.v0.y;
-      v22 = v6->mTransform;
+      x = physicsBoat->mBodyTransform.v0.x;
+      y = physicsBoat->mBodyTransform.v0.y;
+      mTransform = sEffect->mTransform;
       m.v3.w = 1.0;
-      m.v0.x = v20;
-      v23 = v4->mBodyTransform.v0.z;
-      m.v0.y = v21;
-      v24 = v4->mBodyTransform.v0.w;
-      m.v0.z = v23;
-      m.v1.x = v4->mBodyTransform.v1.x;
-      v25 = v4->mBodyTransform.v1.z;
-      m.v0.w = v24;
-      v26 = v4->mBodyTransform.v1.y;
+      m.v0.x = x;
+      z = physicsBoat->mBodyTransform.v0.z;
+      m.v0.y = y;
+      w = physicsBoat->mBodyTransform.v0.w;
+      m.v0.z = z;
+      m.v1.x = physicsBoat->mBodyTransform.v1.x;
+      v25 = physicsBoat->mBodyTransform.v1.z;
+      m.v0.w = w;
+      v26 = physicsBoat->mBodyTransform.v1.y;
       m.v1.z = v25;
-      v27 = v4->mBodyTransform.v2.x;
+      v27 = physicsBoat->mBodyTransform.v2.x;
       m.v1.y = v26;
-      v28 = v4->mBodyTransform.v1.w;
+      v28 = physicsBoat->mBodyTransform.v1.w;
       m.v2.x = v27;
-      v29 = v4->mBodyTransform.v2.z;
+      v29 = physicsBoat->mBodyTransform.v2.z;
       m.v1.w = v28;
-      v30 = v4->mBodyTransform.v2.y;
+      v30 = physicsBoat->mBodyTransform.v2.y;
       m.v2.z = v29;
-      v31 = v6->mWaterLinePosition.x;
+      v31 = sEffect->mWaterLinePosition.x;
       m.v2.y = v30;
-      v32 = v4->mBodyTransform.v2.w;
+      v32 = physicsBoat->mBodyTransform.v2.w;
       m.v3.x = v31;
-      v33 = v6->mWaterLinePosition.z;
+      v33 = sEffect->mWaterLinePosition.z;
       m.v2.w = v32;
-      v34 = v6->mWaterLinePosition.y;
+      v34 = sEffect->mWaterLinePosition.y;
       m.v3.z = v33;
       m.v3.y = v34;
-      UFG::TransformNodeComponent::SetWorldTransform(v22, &m);
-      if ( v19->mRequestedSpeed != v7->mSpeedLevel || v19->mEffectRef == -1 )
+      UFG::TransformNodeComponent::SetWorldTransform(mTransform, &m);
+      if ( v19->mRequestedSpeed != this->mSpeedLevel || v19->mEffectRef == -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v19->mEffectRef, 0);
+        Render::FXManager::KillEffect(&Render::gFXManager, v19->mEffectRef, FXKILLOPTION_DEFAULT);
         v19->mEffectRef = -1;
-        UFG::VehicleEffectsComponent::UpdateEffectSpeed(v7, v19);
-        v35 = Render::FXOverride::CreateOverride("VehicleEffectsComponent::Spray Override", 0i64);
-        FX::SharedPointer<Render::FXOverride>::Set(&v19->mEffectOverride, (Render::FXOverride *)v35);
+        UFG::VehicleEffectsComponent::UpdateEffectSpeed(this, v19);
+        Override = Render::FXOverride::CreateOverride("VehicleEffectsComponent::Spray Override", 0i64);
+        FX::SharedPointer<Render::FXOverride>::Set(&v19->mEffectOverride, (Render::FXOverride *)Override);
         v19->mEffectRef = Render::FXManager::CreateEffect(
                             &Render::gFXManager,
                             v19->mBoundEffect[v19->mSpeed],
-                            v6->mTransform,
+                            sEffect->mTransform,
                             0xFFFFFFFF,
                             v19->mEffectOverride.m_pPointer);
       }
-      v38 = (__m128)LODWORD(m.v3.y);
+      y_low = (__m128)LODWORD(m.v3.y);
       v36 = 0.0;
-      v37 = m.v3.x - v4->mBodyTransform.v3.x;
-      v38.m128_f32[0] = m.v3.y - v4->mBodyTransform.v3.y;
-      v39 = m.v3.z - v4->mBodyTransform.v3.z;
-      v40 = v38;
-      v40.m128_f32[0] = (float)((float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v37 * v37)) + (float)(v39 * v39);
+      v37 = m.v3.x - physicsBoat->mBodyTransform.v3.x;
+      y_low.m128_f32[0] = m.v3.y - physicsBoat->mBodyTransform.v3.y;
+      v39 = m.v3.z - physicsBoat->mBodyTransform.v3.z;
+      v40 = y_low;
+      v40.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v37 * v37))
+                      + (float)(v39 * v39);
       if ( v40.m128_f32[0] == 0.0 )
         v41 = 0.0;
       else
-        v41 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v40));
-      v42 = v7->mSprayVector.y;
-      v43 = (__m128)LODWORD(v7->mSprayVector.x);
-      v44 = v7->mSprayVector.z;
+        v41 = 1.0 / _mm_sqrt_ps(v40).m128_f32[0];
+      v42 = this->mSprayVector.y;
+      x_low = (__m128)LODWORD(this->mSprayVector.x);
+      v44 = this->mSprayVector.z;
       v45 = v37 * v41;
-      v46 = v38.m128_f32[0] * v41;
+      v46 = y_low.m128_f32[0] * v41;
       v47 = v39 * v41;
-      v48 = v43;
-      v48.m128_f32[0] = (float)((float)(v43.m128_f32[0] * v43.m128_f32[0]) + (float)(v42 * v42)) + (float)(v44 * v44);
+      v48 = x_low;
+      v48.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v42 * v42))
+                      + (float)(v44 * v44);
       if ( v48.m128_f32[0] != 0.0 )
-        v36 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v48));
-      v49 = (float)((float)((float)((float)((float)(v43.m128_f32[0] * v36) * v45) + (float)((float)(v42 * v36) * v46))
+        v36 = 1.0 / _mm_sqrt_ps(v48).m128_f32[0];
+      v49 = (float)((float)((float)((float)((float)(x_low.m128_f32[0] * v36) * v45) + (float)((float)(v42 * v36) * v46))
                           + (float)((float)(v44 * v36) * v47))
                   * 1.35)
           + 1.0;
@@ -3312,40 +3178,40 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEff
         v50->sizeScale = v49;
       if ( v8 && v49 > 1.075 && v19->mSpeed > 1 )
       {
-        if ( !((v6->mDropletEffectRef + 1) & 0xFFFFFFFE) )
+        if ( ((sEffect->mDropletEffectRef + 1) & 0xFFFFFFFE) == 0 )
         {
-          v51 = v6->mTransform;
-          if ( v5 == -875726393 )
-            v6->mDropletEffectRef = Render::FXManager::CreateEffect(
-                                      &Render::gFXManager,
-                                      0x57EBAD32u,
-                                      v51,
-                                      0xFFFFFFFF,
-                                      0i64);
+          v51 = sEffect->mTransform;
+          if ( markerId == -875726393 )
+            sEffect->mDropletEffectRef = Render::FXManager::CreateEffect(
+                                           &Render::gFXManager,
+                                           0x57EBAD32u,
+                                           v51,
+                                           0xFFFFFFFF,
+                                           0i64);
           else
-            v6->mDropletEffectRef = Render::FXManager::CreateEffect(
-                                      &Render::gFXManager,
-                                      0xCDC1D02A,
-                                      v51,
-                                      0xFFFFFFFF,
-                                      0i64);
+            sEffect->mDropletEffectRef = Render::FXManager::CreateEffect(
+                                           &Render::gFXManager,
+                                           0xCDC1D02A,
+                                           v51,
+                                           0xFFFFFFFF,
+                                           0i64);
         }
         return;
       }
-      v52 = v6->mDropletEffectRef;
-      if ( v52 == -1 )
+      mDropletEffectRef = sEffect->mDropletEffectRef;
+      if ( mDropletEffectRef == -1 )
         return;
     }
     else
     {
-      Render::FXManager::KillEffect(&Render::gFXManager, v19->mEffectRef, 0);
+      Render::FXManager::KillEffect(&Render::gFXManager, v19->mEffectRef, FXKILLOPTION_DEFAULT);
       v19->mEffectRef = -1;
       v53 = v19->mEffectOverride.m_pPointer;
       if ( v53 )
       {
         --v53->mReferenceCount;
-        v54 = v19->mEffectOverride.m_pPointer;
-        if ( v54->mReferenceCount <= 0 )
+        v54 = &v19->mEffectOverride.m_pPointer->mReferenceCount;
+        if ( *v54 <= 0 )
         {
           if ( v54 )
           {
@@ -3356,28 +3222,30 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateSprayEffects(UFG::VehicleEff
         }
         v19->mEffectOverride.m_pPointer = 0i64;
       }
-      v52 = v6->mDropletEffectRef;
+      mDropletEffectRef = sEffect->mDropletEffectRef;
     }
-    Render::FXManager::KillEffect(&Render::gFXManager, v52, 0);
-    v6->mDropletEffectRef = -1;
+    Render::FXManager::KillEffect(&Render::gFXManager, mDropletEffectRef, FXKILLOPTION_DEFAULT);
+    sEffect->mDropletEffectRef = -1;
   }
 }
 
 // File Line: 1810
 // RVA: 0x696F60
-void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(UFG::VehicleEffectsComponent *this, float deltaTime, bool isMoving, bool isNightTime)
+void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(
+        UFG::VehicleEffectsComponent *this,
+        float deltaTime,
+        bool isMoving,
+        bool isNightTime)
 {
-  bool v4; // r14
-  UFG::VehicleEffectsComponent *v5; // rdi
-  UFG::SimObject *v6; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rsi
-  UFG::qMemoryPool *v8; // rax
+  UFG::SimObject *m_pSimObject; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rsi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v9; // rax
   UFG::qMemoryPool *v10; // rax
   UFG::allocator::free_link *v11; // rax
   int v12; // ebx
-  float v13; // xmm0_4
-  UFG::VehicleEffectId v14; // edx
+  float mAirTime; // xmm0_4
+  int v14; // edx
   float v15; // xmm10_4
   float v16; // xmm11_4
   float v17; // xmm12_4
@@ -3386,36 +3254,36 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(UFG::Vehic
   float v20; // xmm14_4
   float v21; // xmm15_4
   float v22; // xmm0_4
-  float v23; // xmm8_4
-  float v24; // xmm7_4
-  float v25; // xmm6_4
+  float x; // xmm8_4
+  float y; // xmm7_4
+  float z; // xmm6_4
   float v26; // xmm0_4
   float v27; // xmm1_4
   float v28; // xmm2_4
   float v29; // xmm3_4
-  float v30; // xmm9_4
+  float WheelRadius; // xmm9_4
   UFG::SimObjectCVBase *v31; // rcx
-  UFG::CharacterAnimationComponent *v32; // rax
-  unsigned __int16 v33; // dx
-  Creature *v34; // r14
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
+  Creature *mCreature; // r14
   __int64 v35; // rbx
   UFG::TransformNodeComponent **v36; // rsi
   UFG::TransformNodeComponent *v37; // rcx
-  unsigned int v38; // ecx
-  int v39; // er15
-  signed int v40; // eax
+  unsigned int mNumWheels; // ecx
+  int v39; // r15d
+  int v40; // eax
   int v41; // esi
   __int64 v42; // r13
   __int64 v43; // r14
   unsigned int *v44; // rbx
-  signed __int64 v45; // r14
-  UFG::SimComponent *v46; // rcx
+  __int64 v45; // r14
+  UFG::SimComponent *m_pSimComponent; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v47; // rax
   UFG::PhysicsWheeledVehicle *v48; // rcx
   float v49; // xmm6_4
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v50; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v51; // rax
-  unsigned int v52; // eax
+  unsigned int Effect; // eax
   UFG::TransformNodeComponent *v53; // rax
   UFG::SimComponent *v54; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v55; // rdx
@@ -3423,16 +3291,16 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(UFG::Vehic
   UFG::SimComponent *v57; // rbx
   UFG::PhysicsVehicle *v58; // rcx
   float v59; // xmm1_4
-  __m128 v60; // xmm0
+  __m128 y_low; // xmm0
   float v61; // xmm2_4
   float v62; // xmm10_4
-  __int128 v63; // xmm0
+  float m_WeatherSurfaceWetness; // xmm0_4
   bool v64; // dl
   UFG::PhysicsSurfaceProperties **v65; // r12
   unsigned int *v66; // rbx
-  signed __int64 v67; // r8
-  signed __int64 v68; // r9
-  signed __int64 v69; // r13
+  __int64 v67; // r8
+  __int64 v68; // r9
+  __int64 v69; // r13
   UFG::SimComponent *v70; // rdx
   float v71; // xmm7_4
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v72; // rcx
@@ -3441,19 +3309,19 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(UFG::Vehic
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v75; // rax
   bool v76; // zf
   UFG::PhysicsWheeledVehicle *v77; // rcx
-  unsigned __int64 v78; // rsi
+  unsigned __int64 SurfacePropertyHandleUidUnderWheel; // rsi
   UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v79; // rcx
-  const char *v80; // rax
+  const char *TypeName; // rax
   unsigned int v81; // edx
   UFG::SimComponent *v82; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v83; // rax
   UFG::PhysicsWheeledVehicle *v84; // rcx
   unsigned int v85; // edx
   UFG::PhysicsSurfaceProperties *v86; // rsi
-  unsigned int v87; // er14
+  unsigned int mUID; // r14d
   UFG::TransformNodeComponent *v88; // rax
-  UFG::qMatrix44 rootXform; // [rsp+30h] [rbp-A8h]
-  UFG::qVector3 result; // [rsp+70h] [rbp-68h]
+  UFG::qMatrix44 rootXform; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qVector3 result; // [rsp+70h] [rbp-68h] BYREF
   float v91; // [rsp+7Ch] [rbp-5Ch]
   float v92; // [rsp+80h] [rbp-58h]
   int v93; // [rsp+84h] [rbp-54h]
@@ -3469,174 +3337,178 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateHighDetailEffects(UFG::Vehic
   __int64 v103; // [rsp+B0h] [rbp-28h]
   __int64 v104; // [rsp+B8h] [rbp-20h]
   __int64 v105; // [rsp+C0h] [rbp-18h]
-  UFG::qMatrix44 transform; // [rsp+C8h] [rbp-10h]
+  UFG::qMatrix44 transform; // [rsp+C8h] [rbp-10h] BYREF
   UFG::allocator::free_link *v107; // [rsp+1D8h] [rbp+100h]
 
   v105 = -2i64;
-  v4 = isMoving;
-  v5 = this;
-  v6 = this->m_pSimObject;
-  if ( v6 )
-    v6 = (UFG::SimObject *)v6->m_pTransformNodeComponent;
-  if ( this->mMoverComponent.m_pSimComponent && v6 && *((_BYTE *)this + 1884) < 0 )
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pTransformNodeComponent;
+  if ( this->mMoverComponent.m_pSimComponent && m_pSimObject && *((char *)this + 1884) < 0 )
   {
-    v7 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-    if ( v7 && !(BYTE4(v7[37].mNext) & 7) )
+    mPrev = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+    if ( mPrev && (BYTE4(mPrev[37].mNext) & 7) == 0 )
     {
       if ( !this->mSprayEffects[0].mTransform )
       {
-        v8 = UFG::GetSimulationMemoryPool();
-        v9 = UFG::qMemoryPool::Allocate(v8, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
+        SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+        v9 = UFG::qMemoryPool::Allocate(
+               SimulationMemoryPool,
+               0x110ui64,
+               "VehicleEffectsComponent.TransformNodeComponent",
+               0i64,
+               1u);
         v107 = v9;
         if ( v9 )
           UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v9, 0xADF7E713, 0i64, 0);
-        v5->mSprayEffects[0].mTransform = (UFG::TransformNodeComponent *)v9;
+        this->mSprayEffects[0].mTransform = (UFG::TransformNodeComponent *)v9;
       }
-      if ( !v5->mSprayEffects[1].mTransform )
+      if ( !this->mSprayEffects[1].mTransform )
       {
         v10 = UFG::GetSimulationMemoryPool();
         v11 = UFG::qMemoryPool::Allocate(v10, 0x110ui64, "VehicleEffectsComponent.TransformNodeComponent", 0i64, 1u);
         v107 = v11;
         if ( v11 )
           UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v11, 0x290B50E6u, 0i64, 0);
-        v5->mSprayEffects[1].mTransform = (UFG::TransformNodeComponent *)v11;
+        this->mSprayEffects[1].mTransform = (UFG::TransformNodeComponent *)v11;
       }
-      v12 = *((_DWORD *)v5 + 471) >> 2;
-      UFG::VehicleEffectsComponent::UpdateBuoyancy(v5, (UFG::PhysicsBoat *)v7);
-      UFG::VehicleEffectsComponent::UpdateSprayEffects(v5, v5->mSprayEffects, 0xCBCD79C7, (UFG::PhysicsBoat *)v7);
-      UFG::VehicleEffectsComponent::UpdateSprayEffects(v5, &v5->mSprayEffects[1], 0xBB5202BD, (UFG::PhysicsBoat *)v7);
-      if ( v12 & 1 )
+      v12 = *((_DWORD *)this + 471) >> 2;
+      UFG::VehicleEffectsComponent::UpdateBuoyancy(this, (UFG::PhysicsBoat *)mPrev);
+      UFG::VehicleEffectsComponent::UpdateSprayEffects(this, this->mSprayEffects, 0xCBCD79C7, (UFG::PhysicsBoat *)mPrev);
+      UFG::VehicleEffectsComponent::UpdateSprayEffects(
+        this,
+        &this->mSprayEffects[1],
+        0xBB5202BD,
+        (UFG::PhysicsBoat *)mPrev);
+      if ( (v12 & 1) != 0 )
       {
-        if ( *((_BYTE *)v5 + 1884) & 4 )
+        if ( (*((_BYTE *)this + 1884) & 4) != 0 )
           goto LABEL_26;
       }
-      else if ( *((_BYTE *)v5 + 1884) & 4 )
+      else if ( (*((_BYTE *)this + 1884) & 4) != 0 )
       {
-        if ( v5->mAirTime <= 0.33000001 )
+        if ( this->mAirTime <= 0.33000001 )
           goto LABEL_27;
-        UFG::VehicleEffectsComponent::TurnOffEffect_New(v5, FX_EXITWATER);
-        if ( *(float *)&v7[6].mPrev[10].mNext[35].mNext < -3.0 )
-          UFG::VehicleEffectsComponent::TurnOnEffect_New(v5, FX_ENTERWATER);
+        UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 36);
+        if ( *(float *)&mPrev[6].mPrev[10].mNext[35].mNext < -3.0 )
+          UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_ENTERWATER);
 LABEL_26:
-        v5->mAirTime = 0.0;
+        this->mAirTime = 0.0;
 LABEL_27:
-        if ( *((_BYTE *)v5 + 1884) & 4 && v4 )
-          UFG::VehicleEffectsComponent::TurnOnExhaust(v5);
+        if ( (*((_BYTE *)this + 1884) & 4) != 0 && isMoving )
+          UFG::VehicleEffectsComponent::TurnOnExhaust(this);
         else
-          UFG::VehicleEffectsComponent::TurnOffExhaust(v5);
+          UFG::VehicleEffectsComponent::TurnOffExhaust(this);
         v14 = 12;
-LABEL_165:
-        UFG::VehicleEffectsComponent::TurnOffEffect_New(v5, v14);
+LABEL_164:
+        UFG::VehicleEffectsComponent::TurnOffEffect_New(this, v14);
         return;
       }
-      v13 = v5->mAirTime;
-      if ( v13 <= 0.33000001 && (float)(v13 + deltaTime) > 0.33000001 )
+      mAirTime = this->mAirTime;
+      if ( mAirTime <= 0.33000001 && (float)(mAirTime + deltaTime) > 0.33000001 )
       {
-        UFG::VehicleEffectsComponent::TurnOffEffect_New(v5, FX_ENTERWATER);
-        UFG::VehicleEffectsComponent::TurnOnEffect_New(v5, FX_EXITWATER);
+        UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 35);
+        UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_EXITWATER);
       }
-      v5->mAirTime = deltaTime + v5->mAirTime;
+      this->mAirTime = deltaTime + this->mAirTime;
       goto LABEL_27;
     }
     UFG::VehicleEffectsComponent::DoRimAndBumperSparks(this, isMoving);
-    if ( v5->mVehicleDriverComponent.m_pSimComponent
-      && v5->mVehicleDriverComponent.m_pSimComponent[3].m_BoundComponentHandles.mNode.mNext )
+    if ( this->mVehicleDriverComponent.m_pSimComponent
+      && this->mVehicleDriverComponent.m_pSimComponent[3].m_BoundComponentHandles.mNode.mNext )
     {
-      UFG::VehicleEffectsComponent::TurnOnExhaust(v5);
+      UFG::VehicleEffectsComponent::TurnOnExhaust(this);
     }
     else
     {
-      UFG::VehicleEffectsComponent::TurnOffExhaust(v5);
+      UFG::VehicleEffectsComponent::TurnOffExhaust(this);
     }
-    if ( v5->mVehicleDriverComponent.m_pSimComponent
-      && v5->mVehicleDriverComponent.m_pSimComponent[3].m_BoundComponentHandles.mNode.mNext
-      && UFG::PhysicsMoverInterface::AreAllWheelsOnGround((UFG::PhysicsMoverInterface *)v5->mMoverComponent.m_pSimComponent) )
+    if ( this->mVehicleDriverComponent.m_pSimComponent
+      && this->mVehicleDriverComponent.m_pSimComponent[3].m_BoundComponentHandles.mNode.mNext
+      && UFG::PhysicsMoverInterface::AreAllWheelsOnGround((UFG::PhysicsMoverInterface *)this->mMoverComponent.m_pSimComponent) )
     {
-      UFG::VehicleEffectsComponent::TurnOnEffect_New(v5, FX_DRAGGING);
+      UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_DRAGGING);
     }
     else
     {
-      UFG::VehicleEffectsComponent::TurnOffEffect_New(v5, FX_DRAGGING);
+      UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 23);
     }
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v6);
-    v15 = *(float *)&v6[1].vfptr;
-    v16 = *((float *)&v6[1].vfptr + 1);
-    v17 = *(float *)&v6[1].m_SafePointerList.mNode.mPrev;
-    v18 = *((float *)&v6[1].m_SafePointerList.mNode.mPrev + 1);
-    rootXform.v0.x = *(float *)&v6[1].vfptr;
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
+    v15 = *(float *)&m_pSimObject[1].vfptr;
+    v16 = *((float *)&m_pSimObject[1].vfptr + 1);
+    v17 = *(float *)&m_pSimObject[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v18 = *((float *)&m_pSimObject[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev
+          + 1);
+    rootXform.v0.x = v15;
     rootXform.v0.y = v16;
     rootXform.v0.z = v17;
     rootXform.v0.w = v18;
-    v19 = *(float *)&v6[1].m_SafePointerList.mNode.mNext;
-    v20 = *((float *)&v6[1].m_SafePointerList.mNode.mNext + 1);
-    v21 = *(float *)&v6[1].m_SafePointerWithCallbackList.mNode.mPrev;
-    v22 = *((float *)&v6[1].m_SafePointerWithCallbackList.mNode.mPrev + 1);
-    rootXform.v1.x = *(float *)&v6[1].m_SafePointerList.mNode.mNext;
+    v19 = *(float *)&m_pSimObject[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mNext;
+    v20 = *((float *)&m_pSimObject[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mNext
+          + 1);
+    v21 = *(float *)&m_pSimObject[1].m_SafePointerWithCallbackList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::mNode.mPrev;
+    v22 = *((float *)&m_pSimObject[1].m_SafePointerWithCallbackList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::mNode.mPrev
+          + 1);
+    rootXform.v1.x = v19;
     rootXform.v1.y = v20;
     rootXform.v1.z = v21;
     rootXform.v1.w = v22;
-    v23 = *(float *)&v6[1].m_SafePointerWithCallbackList.mNode.mNext;
-    v24 = *((float *)&v6[1].m_SafePointerWithCallbackList.mNode.mNext + 1);
-    v25 = *(float *)&v6[1].mNode.mParent;
-    v26 = *((float *)&v6[1].mNode.mParent + 1);
-    rootXform.v2.x = *(float *)&v6[1].m_SafePointerWithCallbackList.mNode.mNext;
-    rootXform.v2.y = v24;
-    rootXform.v2.z = v25;
+    x = *(float *)&m_pSimObject[1].m_SafePointerWithCallbackList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::mNode.mNext;
+    y = *((float *)&m_pSimObject[1].m_SafePointerWithCallbackList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::mNode.mNext
+        + 1);
+    z = *(float *)&m_pSimObject[1].mNode.mParent;
+    v26 = *((float *)&m_pSimObject[1].mNode.mParent + 1);
+    rootXform.v2.x = x;
+    rootXform.v2.y = y;
+    rootXform.v2.z = z;
     rootXform.v2.w = v26;
-    v27 = *((float *)v6[1].mNode.mChild + 1);
-    v28 = *(float *)&v6[1].mNode.mChild[1];
-    v29 = *((float *)&v6[1].mNode.mChild[1] + 1);
-    rootXform.v3.x = *(float *)v6[1].mNode.mChild;
+    v27 = *((float *)m_pSimObject[1].mNode.mChild + 1);
+    v28 = *(float *)&m_pSimObject[1].mNode.mChild[1];
+    v29 = *((float *)&m_pSimObject[1].mNode.mChild[1] + 1);
+    rootXform.v3.x = *(float *)m_pSimObject[1].mNode.mChild;
     rootXform.v3.y = v27;
     rootXform.v3.z = v28;
     rootXform.v3.w = v29;
-    v30 = UFG::PhysicsMoverInterface::GetWheelRadius((UFG::PhysicsMoverInterface *)v5->mMoverComponent.m_pSimComponent);
-    v31 = (UFG::SimObjectCVBase *)v5->m_pSimObject;
+    WheelRadius = UFG::PhysicsMoverInterface::GetWheelRadius((UFG::PhysicsMoverInterface *)this->mMoverComponent.m_pSimComponent);
+    v31 = (UFG::SimObjectCVBase *)this->m_pSimObject;
     if ( v31 )
     {
-      v33 = v31->m_Flags;
-      if ( (v33 >> 14) & 1 )
+      m_Flags = v31->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v32 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v31);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v31);
       }
-      else if ( (v33 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v33 >> 13) & 1 )
-        {
-          v32 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v31);
-        }
-        else if ( (v33 >> 12) & 1 )
-        {
-          v32 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v31->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v32 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v31->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v31);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v31,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v32 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v31);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v31,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
     }
     else
     {
-      v32 = 0i64;
+      ComponentOfTypeHK = 0i64;
     }
-    v34 = v32->mCreature;
-    if ( v34 )
+    mCreature = ComponentOfTypeHK->mCreature;
+    if ( mCreature )
     {
       v35 = 0i64;
-      if ( v5->mNumWheels )
+      if ( this->mNumWheels )
       {
-        v36 = &v5->mTransformNodes.array[4];
+        v36 = &this->mTransformNodes.array[4];
         while ( 1 )
         {
-          Creature::GetTransform(v34, v5->mWheelBoneId.p[v35], &transform);
+          Creature::GetTransform(mCreature, this->mWheelBoneId.p[v35], &transform);
           UFG::TransformNodeComponent::SetLocalTransform(*(v36 - 4), &transform);
           v37 = *v36;
           if ( *v36 )
@@ -3647,27 +3519,27 @@ LABEL_165:
             result.z = v19;
             v91 = v20;
             v92 = v21;
-            v94 = v23;
-            v95 = v24;
-            v96 = v25;
-            v98 = transform.v3.x - (float)(v23 * v30);
-            v99 = transform.v3.y - (float)(v24 * v30);
-            v100 = transform.v3.z - (float)(v25 * v30);
+            v94 = x;
+            v95 = y;
+            v96 = z;
+            v98 = transform.v3.x - (float)(x * WheelRadius);
+            v99 = transform.v3.y - (float)(y * WheelRadius);
+            v100 = transform.v3.z - (float)(z * WheelRadius);
             result.y = 0.0;
             v93 = 0;
             v97 = 0;
             v101 = 1065353216;
-            UFG::TransformNodeComponent::SetLocalTransform(v37, (UFG::qMatrix44 *)((char *)&rootXform + 56));
+            UFG::TransformNodeComponent::SetLocalTransform(v37, (UFG::qMatrix44 *)&rootXform.v3.z);
           }
-          UFG::VehicleEffectsComponent::UpdateDirectionalTransform(v5, v35, &transform, &rootXform, v30);
-          UFG::VehicleEffectsComponent::UpdateBumperTransform(v5, v35, v34);
+          UFG::VehicleEffectsComponent::UpdateDirectionalTransform(this, v35, &transform, &rootXform, WheelRadius);
+          UFG::VehicleEffectsComponent::UpdateBumperTransform(this, v35, mCreature);
           v35 = (unsigned int)(v35 + 1);
           ++v36;
-          if ( (unsigned int)v35 >= v5->mNumWheels )
+          if ( (unsigned int)v35 >= this->mNumWheels )
             break;
-          v25 = rootXform.v2.z;
-          v24 = rootXform.v2.y;
-          v23 = rootXform.v2.x;
+          z = rootXform.v2.z;
+          y = rootXform.v2.y;
+          x = rootXform.v2.x;
           v21 = rootXform.v1.z;
           v20 = rootXform.v1.y;
           v19 = rootXform.v1.x;
@@ -3677,133 +3549,134 @@ LABEL_165:
         }
       }
     }
-    v38 = v5->mNumWheels;
-    v39 = (v38 == 4) + 1;
-    LODWORD(v107) = (v38 == 4) + 1;
+    mNumWheels = this->mNumWheels;
+    v39 = (mNumWheels == 4) + 1;
+    LODWORD(v107) = v39;
     v40 = 1;
-    if ( v38 == 4 )
+    if ( mNumWheels == 4 )
       v40 = 3;
-    v41 = (v38 == 4) + 1;
+    v41 = (mNumWheels == 4) + 1;
     v42 = v39;
     v43 = v40;
     *(_QWORD *)&rootXform.v2.z = v40;
-    if ( v39 <= (signed __int64)v40 )
+    if ( v39 <= (__int64)v40 )
     {
-      v44 = &v5->mSkidEmitters.array[v39];
-      v45 = v40 - (signed __int64)v39 + 1;
+      v44 = &this->mSkidEmitters.array[v39];
+      v45 = v40 - (__int64)v39 + 1;
       while ( 1 )
       {
-        v46 = v5->mMoverComponent.m_pSimComponent;
-        if ( *(float *)((char *)v44 + (_QWORD)((char *)v46 - 1248i64 - (_QWORD)v5)) >= 1.0 )
-          goto LABEL_168;
-        v47 = v46[10].m_SafePointerList.mNode.mPrev;
+        m_pSimComponent = this->mMoverComponent.m_pSimComponent;
+        if ( *(float *)((char *)v44 + (_QWORD)((char *)m_pSimComponent - 1248i64 - (_QWORD)this)) >= 1.0 )
+          goto LABEL_73;
+        v47 = m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
         if ( !v47 )
-          goto LABEL_169;
+          goto LABEL_68;
         v48 = 0i64;
-        if ( BYTE4(v47[37].mNext) & 7 )
+        if ( (BYTE4(v47[37].mNext) & 7) != 0 )
           v48 = (UFG::PhysicsWheeledVehicle *)v47;
-        if ( v48 && UFG::PhysicsWheeledVehicle::IsWheelOnGround(v48, v41) != 1 )
+        if ( v48 && !UFG::PhysicsWheeledVehicle::IsWheelOnGround(v48, v41) )
         {
-LABEL_168:
+LABEL_73:
           v49 = 0.0;
         }
         else
         {
-LABEL_169:
+LABEL_68:
           v49 = 0.0;
-          v50 = v5->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+          v50 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
           if ( v50 )
           {
             v51 = 0i64;
-            if ( BYTE4(v50[37].mNext) & 7 )
-              v51 = v5->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+            if ( (BYTE4(v50[37].mNext) & 7) != 0 )
+              v51 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
             if ( v51 )
-              v49 = *(float *)((char *)v44 + (_QWORD)((char *)v51 - 592i64 - (_QWORD)v5));
+              v49 = *(float *)((char *)v44 + (_QWORD)((char *)v51 - 592i64 - (_QWORD)this));
           }
         }
-        v52 = *v44;
+        Effect = *v44;
         if ( *v44 )
-          goto LABEL_78;
+          goto LABEL_77;
         if ( v49 > 0.02 )
           break;
-LABEL_79:
+LABEL_78:
         ++v41;
         ++v44;
         if ( !--v45 )
         {
-          v39 = (signed int)v107;
+          v39 = (int)v107;
           v43 = *(_QWORD *)&rootXform.v2.z;
-          goto LABEL_81;
+          goto LABEL_80;
         }
       }
-      v53 = UFG::VehicleEffectsComponent::ObtainTransform(v5, v41 + 4);
-      v52 = Render::FXManager::CreateEffect(&Render::gFXManager, 0xAEF3C51E, v53, 0xFFFFFFFF, 0i64);
-      *v44 = v52;
-LABEL_78:
-      Render::FXManager::SetTrackStrength(&Render::gFXManager, v52, v49 * 0.40000001);
-      goto LABEL_79;
+      v53 = UFG::VehicleEffectsComponent::ObtainTransform(this, v41 + 4);
+      Effect = Render::FXManager::CreateEffect(&Render::gFXManager, 0xAEF3C51E, v53, 0xFFFFFFFF, 0i64);
+      *v44 = Effect;
+LABEL_77:
+      Render::FXManager::SetTrackStrength(&Render::gFXManager, Effect, v49 * 0.40000001);
+      goto LABEL_78;
     }
-LABEL_81:
-    v54 = v5->mMoverComponent.m_pSimComponent;
+LABEL_80:
+    v54 = this->mMoverComponent.m_pSimComponent;
     v55 = v54[10].m_SafePointerList.mNode.mPrev;
     if ( v55 )
     {
       v56 = 0i64;
-      if ( BYTE4(v55[37].mNext) & 7 )
+      if ( (BYTE4(v55[37].mNext) & 7) != 0 )
         v56 = (UFG::PhysicsWheeledVehicle *)v54[10].m_SafePointerList.mNode.mPrev;
       if ( v56 )
         UFG::PhysicsWheeledVehicle::GetRPM(v56);
     }
-    v57 = v5->mMoverComponent.m_pSimComponent;
+    v57 = this->mMoverComponent.m_pSimComponent;
     v58 = (UFG::PhysicsVehicle *)v57[10].m_SafePointerList.mNode.mPrev;
-    if ( !v58 || (unsigned __int8)UFG::PhysicsVehicle::IsSuspended(v58) )
+    if ( !v58 || UFG::PhysicsVehicle::IsSuspended(v58) )
     {
       v61 = UFG::qVector3::msZero.x;
       result = UFG::qVector3::msZero;
-      v60 = (__m128)LODWORD(UFG::qVector3::msZero.y);
+      y_low = (__m128)LODWORD(UFG::qVector3::msZero.y);
       v59 = UFG::qVector3::msZero.z;
     }
     else
     {
       UFG::PhysicsVehicle::GetVelocity((UFG::PhysicsVehicle *)v57[10].m_SafePointerList.mNode.mPrev, &result);
       v59 = result.z;
-      v60 = (__m128)LODWORD(result.y);
+      y_low = (__m128)LODWORD(result.y);
       v61 = result.x;
     }
-    v60.m128_f32[0] = (float)((float)(v60.m128_f32[0] * v60.m128_f32[0]) + (float)(v61 * v61)) + (float)(v59 * v59);
-    LODWORD(v62) = (unsigned __int128)_mm_sqrt_ps(v60);
-    v63 = LODWORD(UFG::TimeOfDayManager::GetInstance()->m_WeatherSurfaceWetness);
-    LOBYTE(v107) = *(float *)&v63 > 0.85000002;
-    v64 = v5->mSpeedLevel > 1 && *(float *)&v63 > 0.85000002;
-    UFG::VehicleEffectsComponent::DoWetSurfaceEffects(v5, v64);
+    y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v61 * v61))
+                      + (float)(v59 * v59);
+    LODWORD(v62) = _mm_sqrt_ps(y_low).m128_u32[0];
+    m_WeatherSurfaceWetness = UFG::TimeOfDayManager::GetInstance()->m_WeatherSurfaceWetness;
+    LOBYTE(v107) = m_WeatherSurfaceWetness > 0.85000002;
+    v64 = this->mSpeedLevel > 1 && m_WeatherSurfaceWetness > 0.85000002;
+    UFG::VehicleEffectsComponent::DoWetSurfaceEffects(this, v64);
     if ( v42 > v43 )
     {
-LABEL_163:
+LABEL_162:
       v14 = 24;
-      if ( BYTE4(v5->mMoverComponent.m_pSimComponent[14].vfptr) & 2 )
+      if ( (BYTE4(this->mMoverComponent.m_pSimComponent[14].vfptr) & 2) != 0 )
       {
-        UFG::VehicleEffectsComponent::TurnOnEffect_New(v5, FX_ROOFSLIDING);
+        UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_ROOFSLIDING);
         return;
       }
-      goto LABEL_165;
+      goto LABEL_164;
     }
-    v65 = &v5->mLastPhysicsSurfacProperty.array[v42];
-    v66 = &v5->mSkidEffect.array[v42];
-    v67 = -752i64 - (_QWORD)v5;
-    v104 = -752i64 - (_QWORD)v5;
-    v68 = -736i64 - (_QWORD)v5;
-    v102 = -736i64 - (_QWORD)v5;
-    v103 = -1424i64 - (_QWORD)v5;
+    v65 = &this->mLastPhysicsSurfacProperty.array[v42];
+    v66 = &this->mSkidEffect.array[v42];
+    v67 = -752i64 - (_QWORD)this;
+    v104 = -752i64 - (_QWORD)this;
+    v68 = -736i64 - (_QWORD)this;
+    v102 = -736i64 - (_QWORD)this;
+    v103 = -1424i64 - (_QWORD)this;
     v69 = v43 - v42 + 1;
     while ( 1 )
     {
-      v70 = v5->mMoverComponent.m_pSimComponent;
+      v70 = this->mMoverComponent.m_pSimComponent;
       v71 = 0.0;
       v72 = v70[10].m_SafePointerList.mNode.mPrev;
       if ( v72 )
       {
         v73 = 0i64;
-        if ( BYTE4(v72[37].mNext) & 7 )
+        if ( (BYTE4(v72[37].mNext) & 7) != 0 )
           v73 = v70[10].m_SafePointerList.mNode.mPrev;
         if ( v73 )
           v71 = *(float *)((char *)v66 + (_QWORD)v73 + v67);
@@ -3812,25 +3685,25 @@ LABEL_163:
       if ( v72 )
       {
         v75 = 0i64;
-        if ( BYTE4(v72[37].mNext) & 7 )
+        if ( (BYTE4(v72[37].mNext) & 7) != 0 )
           v75 = v70[10].m_SafePointerList.mNode.mPrev;
         if ( v75 )
           v74 = *(float *)((char *)v66 + (_QWORD)v75 + v68);
       }
       if ( !v72 )
-        goto LABEL_170;
+        goto LABEL_110;
       v76 = (BYTE4(v72[37].mNext) & 7) == 0;
       v77 = 0i64;
       if ( !v76 )
         v77 = (UFG::PhysicsWheeledVehicle *)v70[10].m_SafePointerList.mNode.mPrev;
       if ( v77 )
-        v78 = UFG::PhysicsWheeledVehicle::GetSurfacePropertyHandleUidUnderWheel(v77, v39);
+        SurfacePropertyHandleUidUnderWheel = UFG::PhysicsWheeledVehicle::GetSurfacePropertyHandleUidUnderWheel(v77, v39);
       else
-LABEL_170:
-        v78 = 0i64;
+LABEL_110:
+        SurfacePropertyHandleUidUnderWheel = 0i64;
       UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&rootXform);
-      v80 = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v79);
-      *(_QWORD *)&rootXform.v1.x = UFG::qStringHash64(v80, 0xFFFFFFFFFFFFFFFFui64);
+      TypeName = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v79);
+      *(_QWORD *)&rootXform.v1.x = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
       if ( (_BYTE)v107 )
       {
         UFG::PhysicsPropertyManager::GetSurfaceProperties(
@@ -3840,118 +3713,121 @@ LABEL_170:
       }
       else
       {
-        UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)&rootXform, *(unsigned __int64 *)&rootXform.v1.x, v78);
+        UFG::qReflectHandleBase::Init(
+          (UFG::qReflectHandleBase *)&rootXform,
+          *(unsigned __int64 *)&rootXform.v1.x,
+          SurfacePropertyHandleUidUnderWheel);
         if ( !*(_QWORD *)&rootXform.v2.x )
           UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&rootXform);
       }
-      if ( *(UFG::PhysicsSurfaceProperties **)&rootXform.v2.x != *v65 && *((_BYTE *)v5 + 1884) < 0 )
+      if ( *(UFG::PhysicsSurfaceProperties **)&rootXform.v2.x != *v65 && *((char *)this + 1884) < 0 )
       {
         if ( *v66 != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, *v66, 0);
+          Render::FXManager::KillEffect(&Render::gFXManager, *v66, FXKILLOPTION_DEFAULT);
           *v66 = -1;
         }
         v81 = *(v66 - 44);
         if ( v81 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, v81, 0);
+          Render::FXManager::KillEffect(&Render::gFXManager, v81, FXKILLOPTION_DEFAULT);
           *(v66 - 44) = 0;
         }
       }
       if ( v71 != 1.0 )
-        goto LABEL_171;
+        goto LABEL_131;
       if ( v74 != 1.0 )
-        goto LABEL_171;
-      v82 = v5->mMoverComponent.m_pSimComponent;
+        goto LABEL_131;
+      v82 = this->mMoverComponent.m_pSimComponent;
       if ( *(float *)((char *)v66 + (_QWORD)v82 + v103) >= 1.0 )
-        goto LABEL_171;
+        goto LABEL_131;
       v83 = v82[10].m_SafePointerList.mNode.mPrev;
       if ( !v83 )
-        goto LABEL_172;
+        goto LABEL_129;
       v84 = 0i64;
-      if ( BYTE4(v83[37].mNext) & 7 )
+      if ( (BYTE4(v83[37].mNext) & 7) != 0 )
         v84 = (UFG::PhysicsWheeledVehicle *)v83;
-      if ( v84 && !UFG::PhysicsWheeledVehicle::IsWheelOnGround(v84, v39) )
+      if ( !v84 || UFG::PhysicsWheeledVehicle::IsWheelOnGround(v84, v39) )
       {
-LABEL_171:
+LABEL_129:
+        UFG::VehicleEffectsComponent::TurnOnSkidSmoke(
+          this,
+          v39,
+          *(UFG::PhysicsSurfaceProperties **)&rootXform.v2.x,
+          TireSmoke_Burnout);
+      }
+      else
+      {
+LABEL_131:
         if ( v71 <= 0.25 && v74 <= 0.25 )
         {
-          if ( *((_BYTE *)v5 + 1884) < 0 )
+          if ( *((char *)this + 1884) < 0 )
           {
             if ( *v66 != -1 )
             {
-              Render::FXManager::KillEffect(&Render::gFXManager, *v66, 0);
+              Render::FXManager::KillEffect(&Render::gFXManager, *v66, FXKILLOPTION_DEFAULT);
               *v66 = -1;
             }
             v85 = *(v66 - 44);
             if ( v85 )
             {
-              Render::FXManager::KillEffect(&Render::gFXManager, v85, 0);
+              Render::FXManager::KillEffect(&Render::gFXManager, v85, FXKILLOPTION_DEFAULT);
               *(v66 - 44) = 0;
             }
           }
-          goto LABEL_162;
+          goto LABEL_161;
         }
         v86 = *(UFG::PhysicsSurfaceProperties **)&rootXform.v2.x;
         if ( v62 >= 2.5 )
         {
           if ( v74 <= v71 )
           {
-            if ( *((_BYTE *)v5 + 1884) >= 0 || v5->mLevelOfDetail != 3 || *v66 != -1 )
-              goto LABEL_162;
-            if ( v5->mVehicleDriverComponent.m_pSimComponent
-              && ((unsigned __int8 (*)(void))v5->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)() )
+            if ( *((char *)this + 1884) >= 0 || this->mLevelOfDetail != LOD_HIGH || *v66 != -1 )
+              goto LABEL_161;
+            if ( this->mVehicleDriverComponent.m_pSimComponent
+              && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))this->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)(this->mVehicleDriverComponent.m_pSimComponent) )
             {
-              v87 = v86->mDriftEffectUID.mUID;
+              mUID = v86->mDriftEffectUID.mUID;
             }
             else
             {
-              v87 = v86->mAIDriftEffectUID.mUID;
+              mUID = v86->mAIDriftEffectUID.mUID;
             }
           }
           else
           {
-            if ( *((_BYTE *)v5 + 1884) >= 0 || v5->mLevelOfDetail != 3 || *v66 != -1 )
-              goto LABEL_162;
-            if ( v5->mVehicleDriverComponent.m_pSimComponent
-              && ((unsigned __int8 (*)(void))v5->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)() )
+            if ( *((char *)this + 1884) >= 0 || this->mLevelOfDetail != LOD_HIGH || *v66 != -1 )
+              goto LABEL_161;
+            if ( this->mVehicleDriverComponent.m_pSimComponent
+              && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))this->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)(this->mVehicleDriverComponent.m_pSimComponent) )
             {
-              v87 = v86->mSkidEffectUID.mUID;
+              mUID = v86->mSkidEffectUID.mUID;
             }
             else
             {
-              v87 = v86->mAISkidEffectUID.mUID;
+              mUID = v86->mAISkidEffectUID.mUID;
             }
           }
         }
         else
         {
-          if ( *((_BYTE *)v5 + 1884) >= 0 || v5->mLevelOfDetail != 3 || *v66 != -1 )
-            goto LABEL_162;
-          if ( v5->mVehicleDriverComponent.m_pSimComponent
-            && ((unsigned __int8 (*)(void))v5->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)() )
+          if ( *((char *)this + 1884) >= 0 || this->mLevelOfDetail != LOD_HIGH || *v66 != -1 )
+            goto LABEL_161;
+          if ( this->mVehicleDriverComponent.m_pSimComponent
+            && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))this->mVehicleDriverComponent.m_pSimComponent->vfptr[15].__vecDelDtor)(this->mVehicleDriverComponent.m_pSimComponent) )
           {
-            v87 = v86->mSlipEffectUID.mUID;
+            mUID = v86->mSlipEffectUID.mUID;
           }
           else
           {
-            v87 = v86->mAISlipEffectUID.mUID;
+            mUID = v86->mAISlipEffectUID.mUID;
           }
         }
-        v88 = UFG::VehicleEffectsComponent::ObtainTransform(v5, v39 + 8);
-        *v66 = Render::FXManager::CreateEffect(&Render::gFXManager, v87, v88, 0xFFFFFFFF, 0i64);
+        v88 = UFG::VehicleEffectsComponent::ObtainTransform(this, v39 + 8);
+        *v66 = Render::FXManager::CreateEffect(&Render::gFXManager, mUID, v88, 0xFFFFFFFF, 0i64);
         *v65 = v86;
       }
-      else
-      {
-LABEL_172:
-        UFG::VehicleEffectsComponent::TurnOnSkidSmoke(
-          v5,
-          v39,
-          *(UFG::PhysicsSurfaceProperties **)&rootXform.v2.x,
-          TireSmoke_Burnout);
-      }
-LABEL_162:
+LABEL_161:
       UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&rootXform);
       ++v39;
       ++v66;
@@ -3960,34 +3836,35 @@ LABEL_162:
       v67 = v104;
       v68 = v102;
       if ( !v69 )
-        goto LABEL_163;
+        goto LABEL_162;
     }
   }
 }
 
 // File Line: 2044
 // RVA: 0x697EF0
-void __fastcall UFG::VehicleEffectsComponent::UpdateMedDetailEffects(UFG::VehicleEffectsComponent *this, float deltaTime, bool isMoving)
+void __fastcall UFG::VehicleEffectsComponent::UpdateMedDetailEffects(
+        UFG::VehicleEffectsComponent *this,
+        float deltaTime,
+        bool isMoving)
 {
-  UFG::VehicleEffectsComponent *v3; // rbx
-  bool v4; // r13
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
   float v6; // xmm0_4
-  UFG::SimObject *v7; // rsi
+  UFG::SimObject *m_pSimObject; // rsi
   unsigned int v8; // edi
-  UFG::TransformNodeComponent *v9; // rsi
-  float v10; // xmm1_4
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  float x; // xmm1_4
   float v11; // xmm10_4
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rcx
-  float v13; // xmm11_4
-  float v14; // xmm12_4
+  float y; // xmm11_4
+  float z; // xmm12_4
   float v15; // xmm13_4
   float v16; // xmm14_4
   float v17; // xmm15_4
   float v18; // xmm7_4
   float v19; // xmm8_4
   float v20; // xmm9_4
-  float v21; // xmm0_4
+  float w; // xmm0_4
   float v22; // xmm1_4
   float v23; // xmm0_4
   float v24; // xmm0_4
@@ -3995,58 +3872,54 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateMedDetailEffects(UFG::Vehicl
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v26; // rax
   float wheelRad; // xmm6_4
   UFG::SimObjectCVBase *v28; // rcx
-  UFG::CharacterAnimationComponent *v29; // rax
-  unsigned __int16 v30; // dx
-  Creature *v31; // r12
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
+  Creature *mCreature; // r12
   __int64 v32; // rsi
-  int *v33; // r15
+  UFG::qSafeArray<unsigned long,4> *p_mBumperBoneId; // r15
   UFG::TransformNodeComponent **v34; // r14
   UFG::TransformNodeComponent *v35; // rcx
-  UFG::qMatrix44 rootXform; // [rsp+30h] [rbp-D0h]
-  UFG::qMatrix44 m; // [rsp+70h] [rbp-90h]
-  UFG::qVector3 result; // [rsp+B0h] [rbp-50h]
-  UFG::qMatrix44 transform; // [rsp+C0h] [rbp-40h]
-  float v40; // [rsp+1D8h] [rbp+D8h]
+  UFG::qMatrix44 rootXform; // [rsp+30h] [rbp-D0h] BYREF
+  UFG::qMatrix44 m; // [rsp+70h] [rbp-90h] BYREF
+  UFG::qVector3 result; // [rsp+B0h] [rbp-50h] BYREF
+  UFG::qMatrix44 transform; // [rsp+C0h] [rbp-40h] BYREF
 
-  v40 = deltaTime;
-  v3 = this;
-  v4 = isMoving;
-  v5 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+  mPrev = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
   v6 = deltaTime;
-  if ( !v5 || BYTE4(v5[37].mNext) & 7 )
+  if ( !mPrev || (BYTE4(mPrev[37].mNext) & 7) != 0 )
   {
-    UFG::VehicleEffectsComponent::DoRimAndBumperSparks(v3, isMoving);
-    v7 = v3->m_pSimObject;
+    UFG::VehicleEffectsComponent::DoRimAndBumperSparks(this, isMoving);
+    m_pSimObject = this->m_pSimObject;
     v8 = 0;
-    if ( v7 )
-      v9 = v7->m_pTransformNodeComponent;
+    if ( m_pSimObject )
+      m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
     else
-      v9 = 0i64;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v9);
-    v10 = v9->mWorldTransform.v3.x;
-    v11 = v9->mWorldTransform.v0.x;
-    v12 = v3->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-    v13 = v9->mWorldTransform.v0.y;
-    v14 = v9->mWorldTransform.v0.z;
-    v15 = v9->mWorldTransform.v1.x;
-    v16 = v9->mWorldTransform.v1.y;
-    v17 = v9->mWorldTransform.v1.z;
-    v18 = v9->mWorldTransform.v2.x;
-    v19 = v9->mWorldTransform.v2.y;
-    v20 = v9->mWorldTransform.v2.z;
-    rootXform.v0.w = v9->mWorldTransform.v0.w;
-    v21 = v9->mWorldTransform.v1.w;
-    rootXform.v3.x = v10;
-    v22 = v9->mWorldTransform.v3.z;
-    rootXform.v1.w = v21;
-    v23 = v9->mWorldTransform.v2.w;
+      m_pTransformNodeComponent = 0i64;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+    v11 = m_pTransformNodeComponent->mWorldTransform.v0.x;
+    v12 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+    y = m_pTransformNodeComponent->mWorldTransform.v0.y;
+    z = m_pTransformNodeComponent->mWorldTransform.v0.z;
+    v15 = m_pTransformNodeComponent->mWorldTransform.v1.x;
+    v16 = m_pTransformNodeComponent->mWorldTransform.v1.y;
+    v17 = m_pTransformNodeComponent->mWorldTransform.v1.z;
+    v18 = m_pTransformNodeComponent->mWorldTransform.v2.x;
+    v19 = m_pTransformNodeComponent->mWorldTransform.v2.y;
+    v20 = m_pTransformNodeComponent->mWorldTransform.v2.z;
+    rootXform.v0.w = m_pTransformNodeComponent->mWorldTransform.v0.w;
+    w = m_pTransformNodeComponent->mWorldTransform.v1.w;
+    rootXform.v3.x = x;
+    v22 = m_pTransformNodeComponent->mWorldTransform.v3.z;
+    rootXform.v1.w = w;
+    v23 = m_pTransformNodeComponent->mWorldTransform.v2.w;
     rootXform.v0.x = v11;
     rootXform.v2.w = v23;
-    v24 = v9->mWorldTransform.v3.y;
-    rootXform.v0.y = v13;
+    v24 = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    rootXform.v0.y = y;
     rootXform.v3.y = v24;
-    v25 = v9->mWorldTransform.v3.w;
-    rootXform.v0.z = v14;
+    v25 = m_pTransformNodeComponent->mWorldTransform.v3.w;
+    rootXform.v0.z = z;
     rootXform.v3.w = v25;
     rootXform.v1.x = v15;
     rootXform.v1.y = v16;
@@ -4056,62 +3929,55 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateMedDetailEffects(UFG::Vehicl
     rootXform.v2.z = v20;
     rootXform.v3.z = v22;
     if ( !v12 )
-      goto LABEL_37;
+      goto LABEL_11;
     v26 = 0i64;
-    if ( BYTE4(v12[37].mNext) & 7 )
+    if ( (BYTE4(v12[37].mNext) & 7) != 0 )
       v26 = v12;
     if ( v26 )
       wheelRad = *((float *)&v26[62].mPrev + 1);
     else
-LABEL_37:
+LABEL_11:
       wheelRad = FLOAT_0_27000001;
-    v28 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
+    v28 = (UFG::SimObjectCVBase *)this->m_pSimObject;
     if ( v28 )
     {
-      v30 = v28->m_Flags;
-      if ( (v30 >> 14) & 1 )
+      m_Flags = v28->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v29 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v28);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v28);
       }
-      else if ( (v30 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v30 >> 13) & 1 )
-        {
-          v29 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v28);
-        }
-        else if ( (v30 >> 12) & 1 )
-        {
-          v29 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v28->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v29 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v28->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v28);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v28,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v29 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v28);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v28,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
     }
     else
     {
-      v29 = 0i64;
+      ComponentOfTypeHK = 0i64;
     }
-    v31 = v29->mCreature;
-    if ( v31 )
+    mCreature = ComponentOfTypeHK->mCreature;
+    if ( mCreature )
     {
       v32 = 0i64;
-      if ( v3->mNumWheels > 0 )
+      if ( this->mNumWheels )
       {
-        v33 = (int *)&v3->mBumperBoneId;
-        v34 = &v3->mTransformNodes.array[4];
+        p_mBumperBoneId = &this->mBumperBoneId;
+        v34 = &this->mTransformNodes.array[4];
         while ( 1 )
         {
-          Creature::GetTransform(v31, v3->mWheelBoneId.p[v8], &transform);
+          Creature::GetTransform(mCreature, this->mWheelBoneId.p[v8], &transform);
           UFG::TransformNodeComponent::SetLocalTransform(*(v34 - 4), &transform);
           v35 = *v34;
           if ( *v34 )
@@ -4127,24 +3993,24 @@ LABEL_37:
             m.v3.y = transform.v3.y - (float)(v19 * wheelRad);
             m.v3.z = transform.v3.z - (float)(v20 * wheelRad);
             m.v0.x = v11;
-            m.v0.y = v13;
-            m.v0.z = v14;
+            m.v0.y = y;
+            m.v0.z = z;
             m.v1.x = v15;
             m.v1.y = v16;
             m.v1.z = v17;
             UFG::TransformNodeComponent::SetLocalTransform(v35, &m);
           }
-          UFG::VehicleEffectsComponent::UpdateDirectionalTransform(v3, v8, &transform, &rootXform, wheelRad);
-          if ( *v33 != -1 && v3->mTransformNodes.array[v32 + 12] )
+          UFG::VehicleEffectsComponent::UpdateDirectionalTransform(this, v8, &transform, &rootXform, wheelRad);
+          if ( p_mBumperBoneId->array[0] != -1 && this->mTransformNodes.array[v32 + 12] )
           {
-            Creature::GetTranslation(v31, &result, *v33);
-            UFG::TransformNodeComponent::SetLocalTranslation(v3->mTransformNodes.array[v32 + 12], &result);
+            Creature::GetTranslation(mCreature, &result, p_mBumperBoneId->array[0]);
+            UFG::TransformNodeComponent::SetLocalTranslation(this->mTransformNodes.array[v32 + 12], &result);
           }
           ++v8;
           ++v32;
           ++v34;
-          ++v33;
-          if ( v8 >= v3->mNumWheels )
+          p_mBumperBoneId = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mBumperBoneId + 4);
+          if ( v8 >= this->mNumWheels )
             break;
           v20 = rootXform.v2.z;
           v19 = rootXform.v2.y;
@@ -4152,94 +4018,99 @@ LABEL_37:
           v17 = rootXform.v1.z;
           v16 = rootXform.v1.y;
           v15 = rootXform.v1.x;
-          v14 = rootXform.v0.z;
-          v13 = rootXform.v0.y;
+          z = rootXform.v0.z;
+          y = rootXform.v0.y;
           v11 = rootXform.v0.x;
         }
       }
     }
-    v6 = v40;
+    v6 = deltaTime;
   }
-  UFG::VehicleEffectsComponent::UpdateLowDetailEffects(v3, v6, v4);
+  UFG::VehicleEffectsComponent::UpdateLowDetailEffects(this, v6, isMoving);
 }
 
 // File Line: 2087
 // RVA: 0x697D10
-void __fastcall UFG::VehicleEffectsComponent::UpdateLowDetailEffects(UFG::VehicleEffectsComponent *this, float deltaTime, bool isMoving)
+void __fastcall UFG::VehicleEffectsComponent::UpdateLowDetailEffects(
+        UFG::VehicleEffectsComponent *this,
+        float deltaTime,
+        bool isMoving)
 {
-  UFG::VehicleEffectsComponent *v3; // rsi
-  bool v4; // bp
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::VehicleEffect *v6; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::VehicleEffect *mEffectState; // rax
   unsigned int v7; // ebx
-  unsigned int v8; // edx
+  unsigned int mEffectRef; // edx
   UFG::VehicleEffect *v9; // rax
   UFG::VehicleEffect *v10; // r14
-  Render::FXOverride *v11; // rax
-  Render::FXOverride *v12; // rdi
+  Render::FXOverride *m_pPointer; // rax
+  int *p_mReferenceCount; // rdi
   UFG::VehicleEffect *v13; // rax
   unsigned int v14; // edx
   UFG::VehicleEffect *v15; // rax
   UFG::VehicleEffect *v16; // r14
   Render::FXOverride *v17; // rax
-  Render::FXOverride *v18; // rdi
-  unsigned int *v19; // rdi
+  int *v18; // rdi
+  UFG::qSafeArray<unsigned long,4> *p_mWetSurfaceEffect; // rdi
 
-  v3 = this;
-  v4 = isMoving;
-  v5 = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
-  if ( v5 && !(BYTE4(v5[37].mNext) & 7) )
+  mPrev = this->mMoverComponent.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+  if ( mPrev && (BYTE4(mPrev[37].mNext) & 7) == 0 )
   {
-    v6 = v3->mSprayEffects[0].mEffectState;
+    mEffectState = this->mSprayEffects[0].mEffectState;
     v7 = 0;
-    if ( v6 )
+    if ( mEffectState )
     {
-      v8 = v6->mEffectRef;
-      if ( v8 != -1 )
+      mEffectRef = mEffectState->mEffectRef;
+      if ( mEffectRef != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v8, 0);
-        Render::FXManager::KillEffect(&Render::gFXManager, v3->mSprayEffects[0].mDropletEffectRef, 0);
-        v9 = v3->mSprayEffects[0].mEffectState;
-        v3->mSprayEffects[0].mDropletEffectRef = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, mEffectRef, FXKILLOPTION_DEFAULT);
+        Render::FXManager::KillEffect(
+          &Render::gFXManager,
+          this->mSprayEffects[0].mDropletEffectRef,
+          FXKILLOPTION_DEFAULT);
+        v9 = this->mSprayEffects[0].mEffectState;
+        this->mSprayEffects[0].mDropletEffectRef = -1;
         v9->mEffectRef = -1;
-        v10 = v3->mSprayEffects[0].mEffectState;
-        v11 = v10->mEffectOverride.m_pPointer;
-        if ( v11 )
+        v10 = this->mSprayEffects[0].mEffectState;
+        m_pPointer = v10->mEffectOverride.m_pPointer;
+        if ( m_pPointer )
         {
-          --v11->mReferenceCount;
-          v12 = v10->mEffectOverride.m_pPointer;
-          if ( v12->mReferenceCount <= 0 )
+          --m_pPointer->mReferenceCount;
+          p_mReferenceCount = &v10->mEffectOverride.m_pPointer->mReferenceCount;
+          if ( *p_mReferenceCount <= 0 )
           {
-            if ( v12 )
+            if ( p_mReferenceCount )
             {
               Render::FXOverride::~FXOverride(v10->mEffectOverride.m_pPointer);
-              operator delete[](v12);
+              operator delete[](p_mReferenceCount);
             }
             v10->mEffectOverride.m_pPointer = 0i64;
           }
           v10->mEffectOverride.m_pPointer = 0i64;
         }
-        v3->mSprayEffects[0].mEffectState = 0i64;
+        this->mSprayEffects[0].mEffectState = 0i64;
       }
     }
-    v13 = v3->mSprayEffects[1].mEffectState;
+    v13 = this->mSprayEffects[1].mEffectState;
     if ( v13 )
     {
       v14 = v13->mEffectRef;
       if ( v14 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v14, 0);
-        Render::FXManager::KillEffect(&Render::gFXManager, v3->mSprayEffects[1].mDropletEffectRef, 0);
-        v15 = v3->mSprayEffects[1].mEffectState;
-        v3->mSprayEffects[1].mDropletEffectRef = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v14, FXKILLOPTION_DEFAULT);
+        Render::FXManager::KillEffect(
+          &Render::gFXManager,
+          this->mSprayEffects[1].mDropletEffectRef,
+          FXKILLOPTION_DEFAULT);
+        v15 = this->mSprayEffects[1].mEffectState;
+        this->mSprayEffects[1].mDropletEffectRef = -1;
         v15->mEffectRef = -1;
-        v16 = v3->mSprayEffects[1].mEffectState;
+        v16 = this->mSprayEffects[1].mEffectState;
         v17 = v16->mEffectOverride.m_pPointer;
         if ( v17 )
         {
           --v17->mReferenceCount;
-          v18 = v16->mEffectOverride.m_pPointer;
-          if ( v18->mReferenceCount <= 0 )
+          v18 = &v16->mEffectOverride.m_pPointer->mReferenceCount;
+          if ( *v18 <= 0 )
           {
             if ( v18 )
             {
@@ -4250,27 +4121,27 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateLowDetailEffects(UFG::Vehicl
           }
           v16->mEffectOverride.m_pPointer = 0i64;
         }
-        v3->mSprayEffects[1].mEffectState = 0i64;
+        this->mSprayEffects[1].mEffectState = 0i64;
       }
     }
-    if ( v4 )
-      UFG::VehicleEffectsComponent::TurnOnEffect_New(v3, FX_AILOWLODEXHAUST);
+    if ( isMoving )
+      UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_AILOWLODEXHAUST);
     else
-      UFG::VehicleEffectsComponent::TurnOffEffect_New(v3, FX_AILOWLODEXHAUST);
-    if ( v3->mNumWheels > 0 )
+      UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 12);
+    if ( this->mNumWheels )
     {
-      v19 = v3->mWetSurfaceEffect.array;
+      p_mWetSurfaceEffect = &this->mWetSurfaceEffect;
       do
       {
-        if ( *v19 != -1 )
+        if ( p_mWetSurfaceEffect->array[0] != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, *v19, 0);
-          *v19 = -1;
+          Render::FXManager::KillEffect(&Render::gFXManager, p_mWetSurfaceEffect->array[0], FXKILLOPTION_DEFAULT);
+          p_mWetSurfaceEffect->array[0] = -1;
         }
         ++v7;
-        ++v19;
+        p_mWetSurfaceEffect = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mWetSurfaceEffect + 4);
       }
-      while ( v7 < v3->mNumWheels );
+      while ( v7 < this->mNumWheels );
     }
   }
 }
@@ -4279,79 +4150,85 @@ void __fastcall UFG::VehicleEffectsComponent::UpdateLowDetailEffects(UFG::Vehicl
 // RVA: 0x676BE0
 void __fastcall UFG::VehicleEffectsComponent::DoRimAndBumperSparks(UFG::VehicleEffectsComponent *this, bool isMoving)
 {
-  bool v2; // bp
-  UFG::VehicleEffectsComponent *v3; // rsi
   unsigned int v4; // edi
-  unsigned int *v5; // rbx
-  signed __int64 v6; // r14
-  UFG::SimComponent *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::qSafeArray<unsigned long,4> *p_mRimSparksEffect; // rbx
+  __int64 v6; // r14
+  UFG::SimComponent *m_pSimComponent; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rax
   UFG::PhysicsWheeledVehicle *v9; // rcx
   char v10; // r8
   UFG::TransformNodeComponent *v11; // rax
   UFG::TransformNodeComponent *v12; // rax
   unsigned int v13; // edx
 
-  v2 = isMoving;
-  v3 = this;
   v4 = 0;
   if ( this->mNumWheels )
   {
-    v5 = this->mRimSparksEffect.array;
+    p_mRimSparksEffect = &this->mRimSparksEffect;
     v6 = -1440i64 - (_QWORD)this;
     do
     {
-      if ( !v2 )
-        goto LABEL_25;
-      v7 = v3->mMoverComponent.m_pSimComponent;
-      if ( *(float *)((char *)&v7->vfptr + (_QWORD)v5 + v6) < 1.0 )
-        goto LABEL_25;
-      v8 = v7[10].m_SafePointerList.mNode.mPrev;
-      if ( !v8 )
-        goto LABEL_26;
+      if ( !isMoving )
+        goto LABEL_11;
+      m_pSimComponent = this->mMoverComponent.m_pSimComponent;
+      if ( *(float *)((char *)&m_pSimComponent->vfptr + (_QWORD)p_mRimSparksEffect + v6) < 1.0 )
+        goto LABEL_11;
+      mPrev = m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+      if ( !mPrev )
+        goto LABEL_10;
       v9 = 0i64;
-      if ( BYTE4(v8[37].mNext) & 7 )
-        v9 = (UFG::PhysicsWheeledVehicle *)v8;
+      if ( (BYTE4(mPrev[37].mNext) & 7) != 0 )
+        v9 = (UFG::PhysicsWheeledVehicle *)mPrev;
       if ( v9 && !UFG::PhysicsWheeledVehicle::IsWheelOnGround(v9, v4) )
-LABEL_25:
+LABEL_11:
         v10 = 0;
       else
-LABEL_26:
+LABEL_10:
         v10 = 1;
-      v3->mDamageRig->mWheelModelBindingState[v4].mBlown = 1.0 <= *(float *)((char *)v5
-                                                                           + v6
-                                                                           + (unsigned __int64)v3->mMoverComponent.m_pSimComponent);
+      this->mDamageRig->mWheelModelBindingState[v4].mBlown = *(float *)((char *)p_mRimSparksEffect->array
+                                                                      + v6
+                                                                      + (unsigned __int64)this->mMoverComponent.m_pSimComponent) >= 1.0;
       if ( v10 )
       {
-        if ( *v5 == -1 )
+        if ( p_mRimSparksEffect->array[0] == -1 )
         {
-          v11 = UFG::VehicleEffectsComponent::ObtainTransform(v3, v4 + 8);
-          *v5 = Render::FXManager::CreateEffect(&Render::gFXManager, 0xB3802F87, v11, 0xFFFFFFFF, 0i64);
+          v11 = UFG::VehicleEffectsComponent::ObtainTransform(this, v4 + 8);
+          p_mRimSparksEffect->array[0] = Render::FXManager::CreateEffect(
+                                           &Render::gFXManager,
+                                           0xB3802F87,
+                                           v11,
+                                           0xFFFFFFFF,
+                                           0i64);
         }
-        if ( v5[4] == -1 && *(v5 - 8) != -1 )
+        if ( p_mRimSparksEffect[1].array[0] == -1 && p_mRimSparksEffect[-2].array[0] != -1 )
         {
-          v12 = UFG::VehicleEffectsComponent::ObtainTransform(v3, v4 + 12);
-          v5[4] = Render::FXManager::CreateEffect(&Render::gFXManager, 0x6E5A366Fu, v12, 0xFFFFFFFF, 0i64);
+          v12 = UFG::VehicleEffectsComponent::ObtainTransform(this, v4 + 12);
+          p_mRimSparksEffect[1].array[0] = Render::FXManager::CreateEffect(
+                                             &Render::gFXManager,
+                                             0x6E5A366Fu,
+                                             v12,
+                                             0xFFFFFFFF,
+                                             0i64);
         }
       }
       else
       {
-        if ( *v5 != -1 )
+        if ( p_mRimSparksEffect->array[0] != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, *v5, 0);
-          *v5 = -1;
+          Render::FXManager::KillEffect(&Render::gFXManager, p_mRimSparksEffect->array[0], FXKILLOPTION_DEFAULT);
+          p_mRimSparksEffect->array[0] = -1;
         }
-        v13 = v5[4];
+        v13 = p_mRimSparksEffect[1].array[0];
         if ( v13 != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, v13, 0);
-          v5[4] = -1;
+          Render::FXManager::KillEffect(&Render::gFXManager, v13, FXKILLOPTION_DEFAULT);
+          p_mRimSparksEffect[1].array[0] = -1;
         }
       }
       ++v4;
-      ++v5;
+      p_mRimSparksEffect = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mRimSparksEffect + 4);
     }
-    while ( v4 < v3->mNumWheels );
+    while ( v4 < this->mNumWheels );
   }
 }
 
@@ -4359,64 +4236,68 @@ LABEL_26:
 // RVA: 0x677250
 void __fastcall UFG::VehicleEffectsComponent::DoWetSurfaceEffects(UFG::VehicleEffectsComponent *this, bool playFXs)
 {
-  bool v2; // bp
-  UFG::VehicleEffectsComponent *v3; // rsi
   unsigned int v4; // edi
-  unsigned int *v5; // rbx
-  signed __int64 v6; // r14
-  UFG::SimComponent *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::qSafeArray<unsigned long,4> *p_mWetSurfaceEffect; // rbx
+  __int64 v6; // r14
+  UFG::SimComponent *m_pSimComponent; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rax
   UFG::PhysicsWheeledVehicle *v9; // rcx
   UFG::TransformNodeComponent *v10; // rax
 
-  v2 = playFXs;
-  v3 = this;
   v4 = 0;
   if ( this->mNumWheels )
   {
-    v5 = this->mWetSurfaceEffect.array;
+    p_mWetSurfaceEffect = &this->mWetSurfaceEffect;
     v6 = -1472i64 - (_QWORD)this;
     do
     {
-      if ( v2 != 1 )
-        goto LABEL_17;
-      v7 = v3->mMoverComponent.m_pSimComponent;
-      if ( *(float *)((char *)&v7->vfptr + (_QWORD)v5 + v6) >= 1.0 )
-        goto LABEL_17;
-      v8 = v7[10].m_SafePointerList.mNode.mPrev;
-      if ( !v8 )
-        goto LABEL_18;
+      if ( !playFXs )
+        goto LABEL_12;
+      m_pSimComponent = this->mMoverComponent.m_pSimComponent;
+      if ( *(float *)((char *)&m_pSimComponent->vfptr + (_QWORD)p_mWetSurfaceEffect + v6) >= 1.0 )
+        goto LABEL_12;
+      mPrev = m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+      if ( !mPrev )
+        goto LABEL_10;
       v9 = 0i64;
-      if ( BYTE4(v8[37].mNext) & 7 )
-        v9 = (UFG::PhysicsWheeledVehicle *)v8;
-      if ( v9 && UFG::PhysicsWheeledVehicle::IsWheelOnGround(v9, v4) != 1 )
+      if ( (BYTE4(mPrev[37].mNext) & 7) != 0 )
+        v9 = (UFG::PhysicsWheeledVehicle *)mPrev;
+      if ( v9 && !UFG::PhysicsWheeledVehicle::IsWheelOnGround(v9, v4) )
       {
-LABEL_17:
-        if ( *v5 != -1 )
+LABEL_12:
+        if ( p_mWetSurfaceEffect->array[0] != -1 )
         {
-          Render::FXManager::KillEffect(&Render::gFXManager, *v5, 0);
-          *v5 = -1;
+          Render::FXManager::KillEffect(&Render::gFXManager, p_mWetSurfaceEffect->array[0], FXKILLOPTION_DEFAULT);
+          p_mWetSurfaceEffect->array[0] = -1;
         }
       }
       else
       {
-LABEL_18:
-        if ( *v5 == -1 )
+LABEL_10:
+        if ( p_mWetSurfaceEffect->array[0] == -1 )
         {
-          v10 = UFG::VehicleEffectsComponent::ObtainTransform(v3, v4 + 8);
-          *v5 = Render::FXManager::CreateEffect(&Render::gFXManager, 0x3245CF8Fu, v10, 0xFFFFFFFF, 0i64);
+          v10 = UFG::VehicleEffectsComponent::ObtainTransform(this, v4 + 8);
+          p_mWetSurfaceEffect->array[0] = Render::FXManager::CreateEffect(
+                                            &Render::gFXManager,
+                                            0x3245CF8Fu,
+                                            v10,
+                                            0xFFFFFFFF,
+                                            0i64);
         }
       }
       ++v4;
-      ++v5;
+      p_mWetSurfaceEffect = (UFG::qSafeArray<unsigned long,4> *)((char *)p_mWetSurfaceEffect + 4);
     }
-    while ( v4 < v3->mNumWheels );
+    while ( v4 < this->mNumWheels );
   }
 }
 
 // File Line: 2196
 // RVA: 0x688440
-void __fastcall UFG::VehicleEffectsComponent::QueueHeadlightFlashes(UFG::VehicleEffectsComponent *this, unsigned int numFlashes, float flashLength)
+void __fastcall UFG::VehicleEffectsComponent::QueueHeadlightFlashes(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int numFlashes,
+        float flashLength)
 {
   this->mHeadlightFlashesLength = flashLength;
   this->mHeadlightFlashesTimer = 0.0;
@@ -4425,229 +4306,240 @@ void __fastcall UFG::VehicleEffectsComponent::QueueHeadlightFlashes(UFG::Vehicle
 
 // File Line: 2268
 // RVA: 0x68C2D0
-void __fastcall UFG::VehicleEffectsComponent::StartEffect(UFG::VehicleEffectsComponent *this, unsigned int *effect, unsigned int effect_id, unsigned int bone_id, UFG::qMatrix44 *offsetMatrix)
+void __fastcall UFG::VehicleEffectsComponent::StartEffect(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int *effect,
+        unsigned int effect_id,
+        int bone_id,
+        UFG::qMatrix44 *offsetMatrix)
 {
-  Render::FXSimComponent *v5; // rcx
+  Render::FXSimComponent *m_pSimComponent; // rcx
 
-  v5 = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
-  if ( v5 && bone_id != -1 && *effect == -1 )
+  m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+  if ( m_pSimComponent && bone_id != -1 && *effect == -1 )
   {
     if ( effect_id )
-      *effect = Render::FXSimComponent::AttachEffect(v5, effect_id, bone_id, offsetMatrix);
+      *effect = Render::FXSimComponent::AttachEffect(m_pSimComponent, effect_id, bone_id, offsetMatrix);
   }
 }
 
 // File Line: 2289
 // RVA: 0x686D80
-void __fastcall UFG::VehicleEffectsComponent::PlayCollisionFX(UFG::VehicleEffectsComponent *this, UFG::Event *thisEvent, float magnitude)
+void __fastcall UFG::VehicleEffectsComponent::PlayCollisionFX(
+        UFG::VehicleEffectsComponent *this,
+        UFG::Event *thisEvent,
+        float magnitude)
 {
-  float v3; // xmm6_4
-  UFG::Event *v4; // rdi
-  UFG::VehicleEffectsComponent *v5; // rsi
-  UFG::SimObjectGame *v6; // rbx
+  UFG::SimObjectGame *m_pSimObject; // rbx
   float v7; // xmm8_4
-  DamageRig *v8; // rcx
-  unsigned __int16 v9; // cx
-  UFG::SimComponent *v10; // r14
-  UFG::SimComponent *v11; // rax
-  UFG::PhysicsVehicle *v12; // rcx
-  float v13; // xmm1_4
-  __m128 v14; // xmm0
-  float v15; // xmm2_4
-  UFG::EventVtbl *v16; // rax
+  DamageRig *mDamageRig; // rcx
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // r14
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::PhysicsVehicle *mPrev; // rcx
+  float z; // xmm1_4
+  __m128 y_low; // xmm0
+  float x; // xmm2_4
+  UFG::EventVtbl *vfptr; // rax
   __int64 v17; // rcx
   UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v18; // rcx
-  const char *v19; // rax
-  unsigned __int64 v20; // r8
+  const char *TypeName; // rax
+  unsigned __int64 mUserData1; // r8
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v21; // rcx
   const char *v22; // rax
   unsigned __int64 v23; // r8
-  UFG::qReflectObject *v24; // rdx
+  __int64 v24; // rdx
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v25; // rcx
   const char *v26; // rax
-  unsigned __int64 v27; // r8
-  unsigned int v28; // er10
-  UFG::SimComponent *v29; // rax
-  UFG::TransformNodeComponent *v30; // rbx
+  unsigned __int64 mNameUID; // r8
+  unsigned int v28; // r10d
+  UFG::SimComponent *m_pSimComponent; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v31; // xmm3
   UFG::qVector4 v32; // xmm2
-  __int128 v33; // xmm1
+  UFG::qVector4 v33; // xmm1
   float v34; // xmm0_4
   float v35; // xmm5_4
   float v36; // xmm2_4
   float v37; // xmm6_4
-  UFG::qVector3 result; // [rsp+50h] [rbp-A8h]
-  UFG::qReflectHandleBase v39; // [rsp+60h] [rbp-98h]
+  UFG::qVector3 result; // [rsp+50h] [rbp-A8h] BYREF
+  UFG::qReflectHandleBase v39; // [rsp+60h] [rbp-98h] BYREF
   float v40; // [rsp+88h] [rbp-70h]
   float v41; // [rsp+8Ch] [rbp-6Ch]
   float v42; // [rsp+90h] [rbp-68h]
-  UFG::qReflectHandleBase v43; // [rsp+98h] [rbp-60h]
-  __int128 v44; // [rsp+C8h] [rbp-30h]
-  __int64 v45; // [rsp+D8h] [rbp-20h]
+  UFG::qMatrix44 v43; // [rsp+98h] [rbp-60h] BYREF
+  __int64 v44; // [rsp+D8h] [rbp-20h]
 
-  v45 = -2i64;
-  v3 = magnitude;
-  v4 = thisEvent;
-  v5 = this;
-  if ( this->mLevelOfDetail != 3 || *(UFG::EventVtbl **)&thisEvent[2].m_EventUID == thisEvent[2].vfptr )
+  v44 = -2i64;
+  if ( this->mLevelOfDetail != LOD_HIGH || *(UFG::EventVtbl **)&thisEvent[2].m_EventUID == thisEvent[2].vfptr )
     return;
-  v6 = (UFG::SimObjectGame *)this->m_pSimObject;
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
   v7 = *(float *)&FLOAT_1_0;
-  if ( !(*((_BYTE *)this + 1884) & 2)
+  if ( (*((_BYTE *)this + 1884) & 2) == 0
     && (unsigned int)UFG::VehicleUtility::GetVehicleOrientation((UFG::SimObjectVehicle *)this->m_pSimObject, 0, 0i64) == 5 )
   {
-    v8 = v5->mDamageRig;
-    if ( v8 )
+    mDamageRig = this->mDamageRig;
+    if ( mDamageRig )
     {
-      DamageRig::SetAllDamageMarkers(v8, v5, 1.0, 1, 0);
-      *((_DWORD *)v5 + 471) |= 2u;
+      DamageRig::SetAllDamageMarkers(mDamageRig, this, 1.0, 1, 0);
+      *((_DWORD *)this + 471) |= 2u;
     }
   }
-  if ( v6 )
+  if ( m_pSimObject )
   {
-    v9 = v6->m_Flags;
-    if ( !((v9 >> 14) & 1) )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) == 0 )
     {
-      if ( (v9 & 0x8000u) == 0 )
+      if ( m_Flags >= 0 )
       {
-        if ( (v9 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
           goto LABEL_26;
-        if ( (v9 >> 12) & 1 )
-          v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::PhysicsMoverInterface::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pSimObject,
+                                UFG::PhysicsMoverInterface::_TypeUID);
         else
-          v11 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::PhysicsMoverInterface::_TypeUID);
-        v10 = v11;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::PhysicsMoverInterface::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v10 = v6->m_Components.p[34].m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p[34].m_pComponent;
       }
-      if ( v10 )
+      if ( m_pComponent )
       {
-        v12 = (UFG::PhysicsVehicle *)v10[10].m_SafePointerList.mNode.mPrev;
-        if ( !v12 || (unsigned __int8)UFG::PhysicsVehicle::IsSuspended(v12) )
+        mPrev = (UFG::PhysicsVehicle *)m_pComponent[10].m_SafePointerList.mNode.mPrev;
+        if ( !mPrev || UFG::PhysicsVehicle::IsSuspended(mPrev) )
         {
-          v15 = UFG::qVector3::msZero.x;
-          v14 = (__m128)LODWORD(UFG::qVector3::msZero.y);
-          v13 = UFG::qVector3::msZero.z;
+          x = UFG::qVector3::msZero.x;
+          y_low = (__m128)LODWORD(UFG::qVector3::msZero.y);
+          z = UFG::qVector3::msZero.z;
         }
         else
         {
-          UFG::PhysicsVehicle::GetVelocity((UFG::PhysicsVehicle *)v10[10].m_SafePointerList.mNode.mPrev, &result);
-          v13 = result.z;
-          v14 = (__m128)LODWORD(result.y);
-          v15 = result.x;
+          UFG::PhysicsVehicle::GetVelocity(
+            (UFG::PhysicsVehicle *)m_pComponent[10].m_SafePointerList.mNode.mPrev,
+            &result);
+          z = result.z;
+          y_low = (__m128)LODWORD(result.y);
+          x = result.x;
         }
-        v14.m128_f32[0] = (float)((float)(v14.m128_f32[0] * v14.m128_f32[0]) + (float)(v15 * v15)) + (float)(v13 * v13);
-        if ( COERCE_FLOAT(_mm_sqrt_ps(v14)) < 0.5 )
+        y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x)) + (float)(z * z);
+        if ( _mm_sqrt_ps(y_low).m128_f32[0] < 0.5 )
         {
-          v16 = v4[2].vfptr;
-          v17 = *(_QWORD *)&v4[2].m_EventUID;
-          if ( v16 )
+          vfptr = thisEvent[2].vfptr;
+          v17 = *(_QWORD *)&thisEvent[2].m_EventUID;
+          if ( vfptr )
           {
-            if ( (WORD2(v16[9].__vecDelDtor) >> 14) & 1 )
+            if ( (WORD2(vfptr[9].__vecDelDtor) & 0x4000) != 0 )
               return;
           }
-          if ( v17 && (*(_WORD *)(v17 + 76) >> 14) & 1 )
+          if ( v17 && (*(_WORD *)(v17 + 76) & 0x4000) != 0 )
             return;
         }
       }
     }
   }
 LABEL_26:
-  if ( v3 > 5.0 )
+  if ( magnitude > 5.0 )
   {
-    UFG::qReflectHandleBase::qReflectHandleBase(&v43);
-    v19 = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v18);
-    v43.mTypeUID = UFG::qStringHash64(v19, 0xFFFFFFFFFFFFFFFFui64);
-    if ( (UFG::SimObjectGame *)v4[2].vfptr == v6 )
+    UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v43);
+    TypeName = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v18);
+    *(_QWORD *)&v43.v1.x = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+    if ( (UFG::SimObjectGame *)thisEvent[2].vfptr == m_pSimObject )
     {
-      v20 = v4[3].mUserData1;
-      if ( !v20 )
+      mUserData1 = thisEvent[3].mUserData1;
+      if ( !mUserData1 )
       {
         UFG::qReflectHandleBase::qReflectHandleBase(&v39);
         v26 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v25);
         v39.mTypeUID = UFG::qStringHash64(v26, 0xFFFFFFFFFFFFFFFFui64);
-        UFG::qReflectHandleBase::Init(&v39, v39.mTypeUID, (unsigned __int64)v4[3].m_NamePTR);
-        v27 = v39.mNameUID;
+        UFG::qReflectHandleBase::Init(&v39, v39.mTypeUID, (unsigned __int64)thisEvent[3].m_NamePTR);
+        mNameUID = v39.mNameUID;
         if ( !v39.mNameUID )
         {
           UFG::PhysicsPropertyManager::GetDefaultObjectProperties((UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v39);
-          v27 = v39.mNameUID;
+          mNameUID = v39.mNameUID;
         }
-        UFG::qReflectHandleBase::Init(&v43, v43.mTypeUID, *(_QWORD *)(v27 + 320));
-        if ( !v43.mData )
+        UFG::qReflectHandleBase::Init(
+          (UFG::qReflectHandleBase *)&v43,
+          *(unsigned __int64 *)&v43.v1.x,
+          *(_QWORD *)(mNameUID + 320));
+        if ( !*(_QWORD *)&v43.v2.x )
           UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&v43);
         goto LABEL_41;
       }
     }
     else
     {
-      v20 = v4[3].mUserData0;
-      if ( !v20 )
+      mUserData1 = thisEvent[3].mUserData0;
+      if ( !mUserData1 )
       {
         UFG::qReflectHandleBase::qReflectHandleBase(&v39);
         v22 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v21);
         v39.mTypeUID = UFG::qStringHash64(v22, 0xFFFFFFFFFFFFFFFFui64);
-        UFG::qReflectHandleBase::Init(&v39, v39.mTypeUID, *(_QWORD *)&v4[3].m_EventUID);
+        UFG::qReflectHandleBase::Init(&v39, v39.mTypeUID, *(_QWORD *)&thisEvent[3].m_EventUID);
         v23 = v39.mNameUID;
         if ( !v39.mNameUID )
         {
           UFG::PhysicsPropertyManager::GetDefaultObjectProperties((UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v39);
           v23 = v39.mNameUID;
         }
-        UFG::qReflectHandleBase::Init(&v43, v43.mTypeUID, *(_QWORD *)(v23 + 320));
-        if ( !v43.mData )
+        UFG::qReflectHandleBase::Init(
+          (UFG::qReflectHandleBase *)&v43,
+          *(unsigned __int64 *)&v43.v1.x,
+          *(_QWORD *)(v23 + 320));
+        if ( !*(_QWORD *)&v43.v2.x )
           UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&v43);
 LABEL_41:
         UFG::qReflectHandleBase::~qReflectHandleBase(&v39);
         goto LABEL_42;
       }
     }
-    UFG::qReflectHandleBase::Init(&v43, v43.mTypeUID, v20);
-    v24 = v43.mData;
-    if ( v43.mData )
+    UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)&v43, *(unsigned __int64 *)&v43.v1.x, mUserData1);
+    v24 = *(_QWORD *)&v43.v2.x;
+    if ( *(_QWORD *)&v43.v2.x )
       goto LABEL_43;
     UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&v43);
 LABEL_42:
-    v24 = v43.mData;
-    if ( !v43.mData )
+    v24 = *(_QWORD *)&v43.v2.x;
+    if ( !*(_QWORD *)&v43.v2.x )
     {
 LABEL_47:
-      UFG::qReflectHandleBase::~qReflectHandleBase(&v43);
+      UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v43);
       goto LABEL_48;
     }
 LABEL_43:
     v28 = -1721903414;
-    v29 = v5->mMoverComponent.m_pSimComponent;
-    if ( v29 && BYTE4(v29[14].vfptr) & 8 )
+    m_pSimComponent = this->mMoverComponent.m_pSimComponent;
+    if ( m_pSimComponent && (BYTE4(m_pSimComponent[14].vfptr) & 8) != 0 )
       v28 = -875922004;
     Render::ImpactManager::HandleImpactEvent(
       &Render::gImpactManager,
       v28,
-      HIDWORD(v24[1].mBaseNode.mChildren[0]),
-      (UFG::qVector3 *)((char *)&v4[1].vfptr + 4),
-      (UFG::qVector3 *)&v4[1].mNext,
-      (UFG::qVector3 *)&v4[1].mNext,
-      (Render::FXSimComponent *)v5->mFXComponent.m_pSimComponent,
+      *(_DWORD *)(v24 + 108),
+      (UFG::qVector3 *)((char *)&thisEvent[1].vfptr + 4),
+      (UFG::qVector3 *)&thisEvent[1].mNext,
+      (UFG::qVector3 *)&thisEvent[1].mNext,
+      (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent,
       0,
       0i64);
     goto LABEL_47;
   }
 LABEL_48:
-  if ( COERCE_FLOAT(*(&v4[1].m_EventUID + 1) & _xmm) > 10.0 && v5->mDamageRig )
+  if ( COERCE_FLOAT(*(&thisEvent[1].m_EventUID + 1) & _xmm) > 10.0 && this->mDamageRig )
   {
-    v30 = v5->m_pSimObject->m_pTransformNodeComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v30);
-    v31 = v30->mWorldTransform.v1;
-    v32 = v30->mWorldTransform.v2;
-    v33 = (__int128)v30->mWorldTransform.v3;
-    v43.0 = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase>)v30->mWorldTransform.v0;
-    *(UFG::qVector4 *)&v43.mTypeUID = v31;
-    *(UFG::qVector4 *)&v43.mData = v32;
-    v44 = v33;
-    UFG::qInverseAffine((UFG::qMatrix44 *)&v39, (UFG::qMatrix44 *)&v43);
-    v34 = COERCE_FLOAT(*(&v4[1].m_EventUID + 1) & _xmm) * 0.25;
+    m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    v31 = m_pTransformNodeComponent->mWorldTransform.v1;
+    v32 = m_pTransformNodeComponent->mWorldTransform.v2;
+    v33 = m_pTransformNodeComponent->mWorldTransform.v3;
+    v43.v0 = m_pTransformNodeComponent->mWorldTransform.v0;
+    v43.v1 = v31;
+    v43.v2 = v32;
+    v43.v3 = v33;
+    UFG::qInverseAffine((UFG::qMatrix44 *)&v39, &v43);
+    v34 = COERCE_FLOAT(*(&thisEvent[1].m_EventUID + 1) & _xmm) * 0.25;
     if ( v34 <= 0.0 )
     {
       v34 = 0.0;
@@ -4655,9 +4547,9 @@ LABEL_48:
     else if ( v34 >= 1.0 )
     {
 LABEL_55:
-      v35 = *((float *)&v4[1].vfptr + 1);
-      v36 = *(float *)&v4[1].mPrev;
-      v37 = *((float *)&v4[1].mPrev + 1);
+      v35 = *((float *)&thisEvent[1].vfptr + 1);
+      v36 = *(float *)&thisEvent[1].mPrev;
+      v37 = *((float *)&thisEvent[1].mPrev + 1);
       result.x = (float)((float)((float)(*(float *)&v39.mTypeUID * v36) + (float)(*(float *)&v39.mPrev * v35))
                        + (float)(*(float *)&v39.mNameUID * v37))
                + v40;
@@ -4668,7 +4560,7 @@ LABEL_55:
                        + (float)(*(float *)&v39.mData * v37))
                + v42;
       if ( v7 > 0.0 )
-        DamageRig::ApplyDamageForce(v5->mDamageRig, &result, v7, *(const float *)&v4[1].m_NamePTR, v5);
+        DamageRig::ApplyDamageForce(this->mDamageRig, &result, v7, *(float *)&thisEvent[1].m_NamePTR, this);
       return;
     }
     v7 = v34;
@@ -4678,64 +4570,62 @@ LABEL_55:
 
 // File Line: 2433
 // RVA: 0x681B80
-void __fastcall UFG::VehicleEffectsComponent::MeleeBasedDamage(UFG::VehicleEffectsComponent *this, UFG::qVector3 *position, float speed, float magnitude)
+void __fastcall UFG::VehicleEffectsComponent::MeleeBasedDamage(
+        UFG::VehicleEffectsComponent *this,
+        UFG::qVector3 *position,
+        float speed,
+        float magnitude)
 {
-  UFG::qVector3 *v4; // rsi
-  float v5; // xmm8_4
-  UFG::VehicleEffectsComponent *vehicle; // rdi
-  UFG::TransformNodeComponent *v7; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v8; // xmm2
   UFG::qVector4 v9; // xmm1
   UFG::qVector4 v10; // xmm0
   float v11; // xmm8_4
-  float v12; // xmm4_4
-  float v13; // xmm5_4
-  float v14; // xmm3_4
-  float v15; // xmm2_4
-  UFG::qVector3 force_position; // [rsp+30h] [rbp-B8h]
-  UFG::qMatrix44 d; // [rsp+40h] [rbp-A8h]
-  UFG::qMatrix44 m; // [rsp+80h] [rbp-68h]
+  float y; // xmm5_4
+  float v13; // xmm3_4
+  float v14; // xmm2_4
+  UFG::qVector3 force_position; // [rsp+30h] [rbp-B8h] BYREF
+  UFG::qMatrix44 d; // [rsp+40h] [rbp-A8h] BYREF
+  UFG::qMatrix44 m; // [rsp+80h] [rbp-68h] BYREF
 
-  v4 = position;
-  v5 = speed;
-  vehicle = this;
-  if ( this->mLevelOfDetail == 3 && this->mDamageRig )
+  if ( this->mLevelOfDetail == LOD_HIGH && this->mDamageRig )
   {
-    v7 = this->m_pSimObject->m_pTransformNodeComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-    v8 = v7->mWorldTransform.v2;
-    v9 = v7->mWorldTransform.v3;
-    v10 = v7->mWorldTransform.v0;
-    m.v1 = v7->mWorldTransform.v1;
+    m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    v8 = m_pTransformNodeComponent->mWorldTransform.v2;
+    v9 = m_pTransformNodeComponent->mWorldTransform.v3;
+    v10 = m_pTransformNodeComponent->mWorldTransform.v0;
+    m.v1 = m_pTransformNodeComponent->mWorldTransform.v1;
     m.v2 = v8;
     m.v0 = v10;
     m.v3 = v9;
     UFG::qInverseAffine(&d, &m);
-    v11 = COERCE_FLOAT(LODWORD(v5) & _xmm) * 0.25;
-    v12 = v4->x;
-    v13 = v4->y;
-    v9.x = d.v2.z * v4->z;
-    v14 = (float)((float)((float)(d.v0.y * v4->x) + (float)(d.v1.y * v13)) + (float)(d.v2.y * v4->z)) + d.v3.y;
-    force_position.x = (float)((float)((float)(d.v0.x * v4->x) + (float)(d.v1.x * v13)) + (float)(d.v2.x * v4->z))
+    v11 = COERCE_FLOAT(LODWORD(speed) & _xmm) * 0.25;
+    y = position->y;
+    v13 = (float)((float)((float)(d.v0.y * position->x) + (float)(d.v1.y * y)) + (float)(d.v2.y * position->z)) + d.v3.y;
+    v8.x = (float)((float)((float)(d.v0.z * position->x) + (float)(d.v1.z * y)) + (float)(d.v2.z * position->z))
+         + d.v3.z;
+    force_position.x = (float)((float)((float)(d.v0.x * position->x) + (float)(d.v1.x * y))
+                             + (float)(d.v2.x * position->z))
                      + d.v3.x;
-    force_position.y = v14;
-    force_position.z = (float)((float)((float)(d.v0.z * v12) + (float)(d.v1.z * v13)) + v9.x) + d.v3.z;
+    force_position.y = v13;
+    force_position.z = v8.x;
     if ( v11 <= 0.0 )
     {
       v11 = 0.0;
     }
     else
     {
-      v15 = *(float *)&FLOAT_1_0;
+      v14 = *(float *)&FLOAT_1_0;
       if ( v11 >= 1.0 )
       {
 LABEL_8:
-        DamageRig::ApplyDamageForce(vehicle->mDamageRig, &force_position, v15, 5.0, vehicle);
-        ++vehicle->mVandalizedDamage;
+        DamageRig::ApplyDamageForce(this->mDamageRig, &force_position, v14, 5.0, this);
+        ++this->mVandalizedDamage;
         return;
       }
     }
-    v15 = v11;
+    v14 = v11;
     if ( v11 <= 0.0 )
       return;
     goto LABEL_8;
@@ -4744,126 +4634,121 @@ LABEL_8:
 
 // File Line: 2463
 // RVA: 0x67EF90
-bool __fastcall UFG::VehicleEffectsComponent::IsGlassBroken(UFG::VehicleEffectsComponent *this, UFG::eVehicleWindowTypeEnum eWindow)
+bool __fastcall UFG::VehicleEffectsComponent::IsGlassBroken(
+        UFG::VehicleEffectsComponent *this,
+        UFG::eVehicleWindowTypeEnum eWindow)
 {
   unsigned int v2; // edx
-  DamageRig *v3; // rcx
-  float health_output; // [rsp+30h] [rbp+8h]
+  DamageRig *mDamageRig; // rcx
+  float health_output; // [rsp+30h] [rbp+8h] BYREF
 
-  if ( this->mLevelOfDetail != 3 )
+  if ( this->mLevelOfDetail != LOD_HIGH )
     return 0;
   switch ( eWindow )
   {
-    case 1:
+    case eVEHICLE_WINDOW_TYPE_REAR:
       v2 = 0xE922CA23;
       break;
-    case 2:
+    case eVEHICLE_WINDOW_TYPE_FRONT_LEFT:
       v2 = -1352122595;
       break;
-    case 3:
+    case eVEHICLE_WINDOW_TYPE_FRONT_RIGHT:
       v2 = -1714731334;
       break;
-    case 4:
+    case eVEHICLE_WINDOW_TYPE_REAR_LEFT:
       v2 = 133101843;
       break;
-    case 5:
+    case eVEHICLE_WINDOW_TYPE_REAR_RIGHT:
       v2 = 275955273;
       break;
     default:
       v2 = -98124545;
       break;
   }
-  v3 = this->mDamageRig;
-  if ( !v3 )
+  mDamageRig = this->mDamageRig;
+  if ( !mDamageRig )
     return 0;
   health_output = 0.0;
-  DamageRig::GetTriggerMarkerHealth(v3, v2, &health_output);
+  DamageRig::GetTriggerMarkerHealth(mDamageRig, v2, &health_output);
   return health_output >= 0.66000003;
 }
 
 // File Line: 2523
 // RVA: 0x67EDB0
-bool __fastcall UFG::VehicleEffectsComponent::IsGlassBroken(UFG::VehicleEffectsComponent *this, UFG::qVector3 *position)
+bool __fastcall UFG::VehicleEffectsComponent::IsGlassBroken(
+        UFG::VehicleEffectsComponent *this,
+        UFG::qVector3 *position)
 {
   bool v2; // zf
-  UFG::qVector3 *v3; // rsi
-  UFG::VehicleEffectsComponent *v4; // rdi
-  UFG::SimObjectCVBase *v5; // rcx
-  unsigned __int16 v6; // r8
-  UFG::CharacterAnimationComponent *v7; // rax
-  UFG::TransformNodeComponent *v8; // rbx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v9; // xmm2
   UFG::qVector4 v10; // xmm1
   UFG::qVector4 v11; // xmm0
-  DamageRig *v12; // rcx
-  float v13; // xmm4_4
-  float v14; // xmm5_4
+  DamageRig *mDamageRig; // rcx
+  float x; // xmm4_4
+  float y; // xmm5_4
   float v15; // xmm3_4
-  UFG::qVector3 positiona; // [rsp+20h] [rbp-49h]
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-39h]
-  UFG::qMatrix44 m; // [rsp+70h] [rbp+7h]
-  float health_output; // [rsp+D0h] [rbp+67h]
+  UFG::qVector3 positiona; // [rsp+20h] [rbp-49h] BYREF
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-39h] BYREF
+  UFG::qMatrix44 m; // [rsp+70h] [rbp+7h] BYREF
+  float health_output; // [rsp+D0h] [rbp+67h] BYREF
 
-  v2 = this->mLevelOfDetail == 3;
-  v3 = position;
-  v4 = this;
+  v2 = this->mLevelOfDetail == LOD_HIGH;
   health_output = 0.0;
   if ( v2 )
   {
-    v5 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-    if ( v5 )
+    m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v6 >> 13) & 1 )
-        {
-          v7 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-        }
-        else if ( (v6 >> 12) & 1 )
-        {
-          v7 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     (UFG::SimObjectGame *)&v5->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v7 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v5->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  m_pSimObject,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  m_pSimObject,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      if ( v7 )
+      if ( ComponentOfTypeHK )
       {
-        v8 = v4->m_pSimObject->m_pTransformNodeComponent;
-        UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-        v9 = v8->mWorldTransform.v2;
-        v10 = v8->mWorldTransform.v3;
-        v11 = v8->mWorldTransform.v0;
-        m.v1 = v8->mWorldTransform.v1;
+        m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+        v9 = m_pTransformNodeComponent->mWorldTransform.v2;
+        v10 = m_pTransformNodeComponent->mWorldTransform.v3;
+        v11 = m_pTransformNodeComponent->mWorldTransform.v0;
+        m.v1 = m_pTransformNodeComponent->mWorldTransform.v1;
         m.v2 = v9;
         m.v0 = v11;
         m.v3 = v10;
         UFG::qInverseAffine(&d, &m);
-        v12 = v4->mDamageRig;
-        v13 = v3->x;
-        v14 = v3->y;
-        v10.x = d.v2.z * v3->z;
-        v15 = (float)((float)((float)(d.v0.y * v3->x) + (float)(d.v1.y * v14)) + (float)(d.v2.y * v3->z)) + d.v3.y;
-        positiona.x = (float)((float)((float)(d.v0.x * v3->x) + (float)(d.v1.x * v14)) + (float)(d.v2.x * v3->z))
+        mDamageRig = this->mDamageRig;
+        x = position->x;
+        y = position->y;
+        v10.x = d.v2.z * position->z;
+        v15 = (float)((float)((float)(d.v0.y * position->x) + (float)(d.v1.y * y)) + (float)(d.v2.y * position->z))
+            + d.v3.y;
+        positiona.x = (float)((float)((float)(d.v0.x * position->x) + (float)(d.v1.x * y))
+                            + (float)(d.v2.x * position->z))
                     + d.v3.x;
         positiona.y = v15;
-        positiona.z = (float)((float)((float)(d.v0.z * v13) + (float)(d.v1.z * v14)) + v10.x) + d.v3.z;
-        if ( v12 )
-          DamageRig::GetTriggerMarkerHealth(v12, &positiona, &health_output);
+        positiona.z = (float)((float)((float)(d.v0.z * x) + (float)(d.v1.z * y)) + v10.x) + d.v3.z;
+        if ( mDamageRig )
+          DamageRig::GetTriggerMarkerHealth(mDamageRig, &positiona, &health_output);
       }
     }
   }
@@ -4872,25 +4757,27 @@ bool __fastcall UFG::VehicleEffectsComponent::IsGlassBroken(UFG::VehicleEffectsC
 
 // File Line: 2550
 // RVA: 0x673AE0
-void __fastcall UFG::VehicleEffectsComponent::BreakGlass(UFG::VehicleEffectsComponent *this, UFG::eVehicleWindowTypeEnum eWindow)
+void __fastcall UFG::VehicleEffectsComponent::BreakGlass(
+        UFG::VehicleEffectsComponent *this,
+        UFG::eVehicleWindowTypeEnum eWindow)
 {
   unsigned int v2; // edx
 
   switch ( eWindow )
   {
-    case 1:
+    case eVEHICLE_WINDOW_TYPE_REAR:
       v2 = -383595997;
       break;
-    case 2:
+    case eVEHICLE_WINDOW_TYPE_FRONT_LEFT:
       v2 = -1352122595;
       break;
-    case 3:
+    case eVEHICLE_WINDOW_TYPE_FRONT_RIGHT:
       v2 = -1714731334;
       break;
-    case 4:
+    case eVEHICLE_WINDOW_TYPE_REAR_LEFT:
       v2 = 133101843;
       break;
-    case 5:
+    case eVEHICLE_WINDOW_TYPE_REAR_RIGHT:
       v2 = 275955273;
       break;
     default:
@@ -4898,85 +4785,76 @@ void __fastcall UFG::VehicleEffectsComponent::BreakGlass(UFG::VehicleEffectsComp
       break;
   }
   if ( this->mDamageRig )
-    DamageRig::ActivateTriggerMarker(this->mDamageRig, v2, this, this->mLevelOfDetail == 3);
+    DamageRig::ActivateTriggerMarker(this->mDamageRig, v2, this, this->mLevelOfDetail == LOD_HIGH);
 }
 
 // File Line: 2604
 // RVA: 0x673900
 void __fastcall UFG::VehicleEffectsComponent::BreakGlass(UFG::VehicleEffectsComponent *this, UFG::qVector3 *position)
 {
-  UFG::VehicleEffectsComponent *v2; // rdi
-  UFG::SimObjectCVBase *v3; // rcx
-  UFG::qVector3 *v4; // rsi
-  unsigned __int16 v5; // r8
-  UFG::CharacterAnimationComponent *v6; // rax
-  UFG::TransformNodeComponent *v7; // rbx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v8; // xmm2
   UFG::qVector4 v9; // xmm1
   UFG::qVector4 v10; // xmm0
-  DamageRig *v11; // rcx
-  float v12; // xmm4_4
-  float v13; // xmm5_4
+  DamageRig *mDamageRig; // rcx
+  float x; // xmm4_4
+  float y; // xmm5_4
   float v14; // xmm3_4
-  UFG::qVector3 positiona; // [rsp+20h] [rbp-A8h]
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-98h]
-  UFG::qMatrix44 m; // [rsp+70h] [rbp-58h]
+  UFG::qVector3 positiona; // [rsp+20h] [rbp-A8h] BYREF
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-98h] BYREF
+  UFG::qMatrix44 m; // [rsp+70h] [rbp-58h] BYREF
 
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-  v4 = position;
-  if ( v3 )
+  m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v3->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    if ( v6 )
+    if ( ComponentOfTypeHK )
     {
-      v7 = v2->m_pSimObject->m_pTransformNodeComponent;
-      UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-      v8 = v7->mWorldTransform.v2;
-      v9 = v7->mWorldTransform.v3;
-      v10 = v7->mWorldTransform.v0;
-      m.v1 = v7->mWorldTransform.v1;
+      m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      v8 = m_pTransformNodeComponent->mWorldTransform.v2;
+      v9 = m_pTransformNodeComponent->mWorldTransform.v3;
+      v10 = m_pTransformNodeComponent->mWorldTransform.v0;
+      m.v1 = m_pTransformNodeComponent->mWorldTransform.v1;
       m.v2 = v8;
       m.v0 = v10;
       m.v3 = v9;
       UFG::qInverseAffine(&d, &m);
-      v11 = v2->mDamageRig;
-      v12 = v4->x;
-      v13 = v4->y;
-      v9.x = d.v2.z * v4->z;
-      v14 = (float)((float)((float)(d.v0.y * v4->x) + (float)(d.v1.y * v13)) + (float)(d.v2.y * v4->z)) + d.v3.y;
-      positiona.x = (float)((float)((float)(d.v0.x * v4->x) + (float)(d.v1.x * v13)) + (float)(d.v2.x * v4->z)) + d.v3.x;
+      mDamageRig = this->mDamageRig;
+      x = position->x;
+      y = position->y;
+      v9.x = d.v2.z * position->z;
+      v14 = (float)((float)((float)(d.v0.y * position->x) + (float)(d.v1.y * y)) + (float)(d.v2.y * position->z))
+          + d.v3.y;
+      positiona.x = (float)((float)((float)(d.v0.x * position->x) + (float)(d.v1.x * y)) + (float)(d.v2.x * position->z))
+                  + d.v3.x;
       positiona.y = v14;
-      positiona.z = (float)((float)((float)(d.v0.z * v12) + (float)(d.v1.z * v13)) + v9.x) + d.v3.z;
-      if ( v11 )
-        DamageRig::ActivateTriggerMarker(v11, &positiona, v2, v2->mLevelOfDetail == 3);
+      positiona.z = (float)((float)((float)(d.v0.z * x) + (float)(d.v1.z * y)) + v9.x) + d.v3.z;
+      if ( mDamageRig )
+        DamageRig::ActivateTriggerMarker(mDamageRig, &positiona, this, this->mLevelOfDetail == LOD_HIGH);
     }
   }
 }
@@ -4985,80 +4863,76 @@ void __fastcall UFG::VehicleEffectsComponent::BreakGlass(UFG::VehicleEffectsComp
 // RVA: 0x675F30
 void __fastcall UFG::VehicleEffectsComponent::DamageGlass(UFG::VehicleEffectsComponent *this, UFG::qVector3 *position)
 {
-  UFG::VehicleEffectsComponent *v2; // rbx
-  UFG::SimObjectCVBase *v3; // rcx
-  UFG::qVector3 *v4; // rdi
-  unsigned __int16 v5; // r8
-  UFG::CharacterAnimationComponent *v6; // rax
-  UFG::TransformNodeComponent *v7; // rcx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rcx
   UFG::qVector4 v8; // xmm2
   UFG::qVector4 v9; // xmm1
   UFG::qVector4 v10; // xmm0
-  DamageRig *v11; // rcx
-  float v12; // xmm4_4
-  float v13; // xmm5_4
+  DamageRig *mDamageRig; // rcx
+  float x; // xmm4_4
+  float y; // xmm5_4
   float v14; // xmm3_4
-  UFG::qVector3 positiona; // [rsp+30h] [rbp-49h]
-  UFG::qMatrix44 d; // [rsp+40h] [rbp-39h]
-  UFG::qMatrix44 m; // [rsp+80h] [rbp+7h]
-  unsigned int index; // [rsp+E0h] [rbp+67h]
+  UFG::qVector3 positiona; // [rsp+30h] [rbp-49h] BYREF
+  UFG::qMatrix44 d; // [rsp+40h] [rbp-39h] BYREF
+  UFG::qMatrix44 m; // [rsp+80h] [rbp+7h] BYREF
+  unsigned int index; // [rsp+E0h] [rbp+67h] BYREF
 
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-  v4 = position;
-  if ( v3 )
+  m_pSimObject = (UFG::SimObjectCVBase *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v3->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v3->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    if ( v6 )
+    if ( ComponentOfTypeHK )
     {
-      v7 = v2->m_pSimObject->m_pTransformNodeComponent;
-      v8 = v7->mLocalTransform.v2;
-      v9 = v7->mLocalTransform.v3;
-      v10 = v7->mLocalTransform.v0;
-      m.v1 = v7->mLocalTransform.v1;
+      m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+      v8 = m_pTransformNodeComponent->mLocalTransform.v2;
+      v9 = m_pTransformNodeComponent->mLocalTransform.v3;
+      v10 = m_pTransformNodeComponent->mLocalTransform.v0;
+      m.v1 = m_pTransformNodeComponent->mLocalTransform.v1;
       m.v2 = v8;
       m.v0 = v10;
       m.v3 = v9;
       UFG::qInverseAffine(&d, &m);
-      v11 = v2->mDamageRig;
-      v12 = v4->x;
-      v13 = v4->y;
-      v9.x = d.v2.z * v4->z;
-      v14 = (float)((float)((float)(d.v0.y * v4->x) + (float)(d.v1.y * v13)) + (float)(d.v2.y * v4->z)) + d.v3.y;
-      positiona.x = (float)((float)((float)(d.v0.x * v4->x) + (float)(d.v1.x * v13)) + (float)(d.v2.x * v4->z)) + d.v3.x;
+      mDamageRig = this->mDamageRig;
+      x = position->x;
+      y = position->y;
+      v9.x = d.v2.z * position->z;
+      v14 = (float)((float)((float)(d.v0.y * position->x) + (float)(d.v1.y * y)) + (float)(d.v2.y * position->z))
+          + d.v3.y;
+      positiona.x = (float)((float)((float)(d.v0.x * position->x) + (float)(d.v1.x * y)) + (float)(d.v2.x * position->z))
+                  + d.v3.x;
       positiona.y = v14;
-      positiona.z = (float)((float)((float)(d.v0.z * v12) + (float)(d.v1.z * v13)) + v9.x) + d.v3.z;
-      if ( v11 )
+      positiona.z = (float)((float)((float)(d.v0.z * x) + (float)(d.v1.z * y)) + v9.x) + d.v3.z;
+      if ( mDamageRig )
       {
-        if ( DamageRig::GetTriggerMarkerIndex(v11, &positiona, &index) == 1 )
-          DamageRig::ApplyTriggerMarkerDamageByIndex(v2->mDamageRig, index, 0.34999999, v2, v2->mLevelOfDetail == 3);
+        if ( DamageRig::GetTriggerMarkerIndex(mDamageRig, &positiona, &index) == 1 )
+          DamageRig::ApplyTriggerMarkerDamageByIndex(
+            this->mDamageRig,
+            index,
+            0.34999999,
+            this,
+            this->mLevelOfDetail == LOD_HIGH);
       }
     }
   }
@@ -5066,18 +4940,19 @@ void __fastcall UFG::VehicleEffectsComponent::DamageGlass(UFG::VehicleEffectsCom
 
 // File Line: 2660
 // RVA: 0x673B60
-void __fastcall UFG::VehicleEffectsComponent::BreakGlassFX(UFG::VehicleEffectsComponent *this, const unsigned int damageBoneID, const float magnitude)
+void __fastcall UFG::VehicleEffectsComponent::BreakGlassFX(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int damageBoneID,
+        float magnitude)
 {
-  unsigned int v3; // er8
   UFG::VehicleEffectId v4; // edx
 
-  v3 = damageBoneID;
   if ( magnitude >= 0.2 )
   {
-    v4 = 31;
+    v4 = FX_WINDOWBREAKMD;
     if ( magnitude >= 0.30000001 )
-      v4 = 32;
-    UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(this, v4, v3);
+      v4 = FX_WINDOWBREAKLG;
+    UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(this, v4, damageBoneID);
   }
   else
   {
@@ -5087,7 +4962,9 @@ void __fastcall UFG::VehicleEffectsComponent::BreakGlassFX(UFG::VehicleEffectsCo
 
 // File Line: 2678
 // RVA: 0x68BC90
-void __fastcall UFG::VehicleEffectsComponent::ShatterGlassFX(UFG::VehicleEffectsComponent *this, const unsigned int damageBoneID)
+void __fastcall UFG::VehicleEffectsComponent::ShatterGlassFX(
+        UFG::VehicleEffectsComponent *this,
+        unsigned int damageBoneID)
 {
   UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(this, FX_WINDOWSHATTER, damageBoneID);
 }
@@ -5096,62 +4973,51 @@ void __fastcall UFG::VehicleEffectsComponent::ShatterGlassFX(UFG::VehicleEffects
 // RVA: 0x68E590
 void __fastcall UFG::VehicleEffectsComponent::TurnOnFire(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rdi
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
-  UFG::WaterFloatingTrackerComponent *v5; // rbx
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::WaterFloatingTrackerComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::VehicleEffectId *v6; // rbx
-  signed __int64 v7; // rsi
+  __int64 v7; // rsi
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( !v2 )
-    goto LABEL_15;
-  v3 = v2->m_Flags;
-  if ( (v3 >> 14) & 1 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( !m_pSimObject )
+    goto LABEL_14;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_8;
+  if ( m_Flags >= 0 )
   {
-    v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-LABEL_11:
-    v5 = (UFG::WaterFloatingTrackerComponent *)v4;
-    goto LABEL_12;
-  }
-  if ( (v3 & 0x8000u) == 0 )
-  {
-    if ( (v3 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) == 0 && (m_Flags & 0x1000) == 0 )
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      goto LABEL_10;
     }
-    else if ( (v3 >> 12) & 1 )
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
-    else
-    {
-      v4 = UFG::SimObject::GetComponentOfType(
-             (UFG::SimObject *)&v2->vfptr,
-             UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
+LABEL_8:
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                        m_pSimObject,
+                        UFG::WaterFloatingTrackerComponent::_TypeUID);
+LABEL_10:
+    m_pComponent = (UFG::WaterFloatingTrackerComponent *)ComponentOfType;
     goto LABEL_11;
   }
-  v5 = (UFG::WaterFloatingTrackerComponent *)v2->m_Components.p[35].m_pComponent;
-LABEL_12:
-  if ( !v5
-    || !UFG::WaterFloatingTrackerComponent::IsInWater(v5)
-    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(v5, 0.25) )
+  m_pComponent = (UFG::WaterFloatingTrackerComponent *)m_pSimObject->m_Components.p[35].m_pComponent;
+LABEL_11:
+  if ( !m_pComponent
+    || !UFG::WaterFloatingTrackerComponent::IsInWater(m_pComponent)
+    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(m_pComponent, 0.25) )
   {
-LABEL_15:
+LABEL_14:
     v6 = sDestructStates;
     v7 = 3i64;
     do
     {
-      UFG::VehicleEffectsComponent::TurnOnEffect_New(v1, *v6);
-      ++v6;
+      UFG::VehicleEffectsComponent::TurnOnEffect_New(this, *v6++);
       --v7;
     }
     while ( v7 );
-    *((_DWORD *)v1 + 471) |= 1u;
-    v1->mExtinguishFireCountdown = 10.0;
+    *((_DWORD *)this + 471) |= 1u;
+    this->mExtinguishFireCountdown = 10.0;
   }
 }
 
@@ -5159,52 +5025,50 @@ LABEL_15:
 // RVA: 0x68DB50
 void __fastcall UFG::VehicleEffectsComponent::TurnOffFire(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rsi
   UFG::VehicleEffectId *v2; // r14
-  signed __int64 v3; // r12
+  __int64 v3; // r12
   __int64 v4; // rdx
-  signed __int64 v5; // rbp
-  signed __int64 v6; // r15
+  UFG::qSafePointerNode<UFG::SimComponent> *v5; // rbp
+  UFG::VehicleEffectState **p_mInternalState; // r15
   UFG::qBaseTreeRB *i; // rbx
-  Render::FXSimComponent *v8; // rcx
-  unsigned int v9; // edx
-  UFG::qBaseNodeRB *v10; // rax
-  UFG::qBaseNodeRB *v11; // rdi
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  unsigned int mUID; // edx
+  UFG::qBaseNodeRB *mParent; // rax
+  int *v11; // rdi
   UFG::SimComponent *v12; // rax
-  UFG::PhysicsVehicle *v13; // rcx
+  UFG::PhysicsVehicle *mPrev; // rcx
 
-  v1 = this;
   v2 = sDestructStates;
   v3 = 3i64;
   do
   {
-    v4 = *(signed int *)v2;
-    v5 = (signed __int64)v1 + 24 * v4;
-    if ( *(_DWORD *)(v5 + 184) == 3 )
+    v4 = *(int *)v2;
+    v5 = (UFG::VehicleEffectsComponent *)((char *)this + 24 * v4);
+    if ( LODWORD(v5[7].m_SafePointerList.mNode.mNext) == 3 )
     {
-      *(_DWORD *)(v5 + 184) = 4;
-      v6 = (signed __int64)v1 + 24 * (v4 + 8);
-      for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(&v1->vfptr)[3 * (v4 + 8)][5]);
+      LODWORD(v5[7].m_SafePointerList.mNode.mNext) = 4;
+      p_mInternalState = &this->mEffectStatusTable[v4].mInternalState;
+      for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&(*p_mInternalState)->mEffects);
             i;
-            i = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)(*(_QWORD *)v6 + 40i64), &i->mRoot) )
+            i = UFG::qBaseTreeRB::GetNext(&(*p_mInternalState)->mEffects.mTree, &i->mRoot) )
       {
-        v8 = (Render::FXSimComponent *)v1->mFXComponent.m_pSimComponent;
-        if ( v8 )
+        m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+        if ( m_pSimComponent )
         {
-          v9 = i[1].mRoot.mUID;
-          if ( v9 != -1 )
+          mUID = i[1].mRoot.mUID;
+          if ( mUID != -1 )
           {
-            Render::FXSimComponent::DetachEffect(v8, v9, 0);
+            Render::FXSimComponent::DetachEffect(m_pSimComponent, mUID, FXKILLOPTION_DEFAULT);
             i[1].mRoot.mUID = -1;
           }
         }
         i[1].mRoot.mUID = -1;
-        v10 = i[1].mNULL.mParent;
-        if ( v10 )
+        mParent = i[1].mNULL.mParent;
+        if ( mParent )
         {
-          --LODWORD(v10->mParent);
-          v11 = i[1].mNULL.mParent;
-          if ( SLODWORD(v11->mParent) <= 0 )
+          --LODWORD(mParent->mParent);
+          v11 = (int *)i[1].mNULL.mParent;
+          if ( *v11 <= 0 )
           {
             if ( v11 )
             {
@@ -5217,91 +5081,81 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOffFire(UFG::VehicleEffectsCom
         }
       }
     }
-    if ( *(_DWORD *)(v5 + 184) == 1 )
-      *(_DWORD *)(v5 + 184) = 0;
-    *(_DWORD *)(v5 + 200) &= 0xFFFFFFFE;
+    if ( LODWORD(v5[7].m_SafePointerList.mNode.mNext) == 1 )
+      LODWORD(v5[7].m_SafePointerList.mNode.mNext) = 0;
+    LODWORD(v5[8].m_SafePointerList.mNode.mPrev) &= ~1u;
     ++v2;
     --v3;
   }
   while ( v3 );
-  v12 = v1->mMoverComponent.m_pSimComponent;
+  v12 = this->mMoverComponent.m_pSimComponent;
   if ( v12 )
   {
-    v13 = (UFG::PhysicsVehicle *)v12[10].m_SafePointerList.mNode.mPrev;
-    if ( v13 )
-      UFG::PhysicsVehicle::DeactivateVolume(v13);
+    mPrev = (UFG::PhysicsVehicle *)v12[10].m_SafePointerList.mNode.mPrev;
+    if ( mPrev )
+      UFG::PhysicsVehicle::DeactivateVolume(mPrev);
   }
-  *((_DWORD *)v1 + 471) &= 0xFFFFFFFE;
+  *((_DWORD *)this + 471) &= ~1u;
 }
 
 // File Line: 2720
 // RVA: 0x68E0B0
 void __fastcall UFG::VehicleEffectsComponent::TurnOnDestroyedEffect(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rdi
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
-  UFG::WaterFloatingTrackerComponent *v5; // rbx
-  DamageRig *v6; // rax
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::WaterFloatingTrackerComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
+  DamageRig *mDamageRig; // rax
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( !v2 )
-    goto LABEL_15;
-  v3 = v2->m_Flags;
-  if ( (v3 >> 14) & 1 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( !m_pSimObject )
+    goto LABEL_14;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_8;
+  if ( m_Flags >= 0 )
   {
-    v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-LABEL_11:
-    v5 = (UFG::WaterFloatingTrackerComponent *)v4;
-    goto LABEL_12;
-  }
-  if ( (v3 & 0x8000u) == 0 )
-  {
-    if ( (v3 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) == 0 && (m_Flags & 0x1000) == 0 )
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::WaterFloatingTrackerComponent::_TypeUID);
+      goto LABEL_10;
     }
-    else if ( (v3 >> 12) & 1 )
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
-    else
-    {
-      v4 = UFG::SimObject::GetComponentOfType(
-             (UFG::SimObject *)&v2->vfptr,
-             UFG::WaterFloatingTrackerComponent::_TypeUID);
-    }
+LABEL_8:
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                        m_pSimObject,
+                        UFG::WaterFloatingTrackerComponent::_TypeUID);
+LABEL_10:
+    m_pComponent = (UFG::WaterFloatingTrackerComponent *)ComponentOfType;
     goto LABEL_11;
   }
-  v5 = (UFG::WaterFloatingTrackerComponent *)v2->m_Components.p[35].m_pComponent;
-LABEL_12:
-  if ( !v5
-    || !UFG::WaterFloatingTrackerComponent::IsInWater(v5)
-    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(v5, 0.64999998) )
+  m_pComponent = (UFG::WaterFloatingTrackerComponent *)m_pSimObject->m_Components.p[35].m_pComponent;
+LABEL_11:
+  if ( !m_pComponent
+    || !UFG::WaterFloatingTrackerComponent::IsInWater(m_pComponent)
+    || !UFG::WaterFloatingTrackerComponent::IsSubmerged(m_pComponent, 0.64999998) )
   {
-LABEL_15:
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_PLAYERHEADLIGHTS);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_TRAFFICHEADLIGHTS);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, 0);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_BRAKELIGHTS);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_REVERSE);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_LEFTTURN);
-    UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_RIGHTTURN);
-    UFG::VehicleEffectsComponent::TurnOffEffects(v1, 1);
-    UFG::VehicleEffectsComponent::TurnOnEffect_New(v1, FX_DESTROYEDVEHICLE);
-    UFG::VehicleEffectsComponent::TurnOnFire(v1);
-    v6 = v1->mDamageRig;
-    if ( v6 )
+LABEL_14:
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_PLAYERHEADLIGHTS);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_TRAFFICHEADLIGHTS);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_NIGHTTIME);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_BRAKELIGHTS);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_REVERSE);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_LEFTTURN);
+    UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_RIGHTTURN);
+    UFG::VehicleEffectsComponent::TurnOffEffects(this, 1);
+    UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_DESTROYEDVEHICLE);
+    UFG::VehicleEffectsComponent::TurnOnFire(this);
+    mDamageRig = this->mDamageRig;
+    if ( mDamageRig )
     {
-      v6->mBurnedOut = 1;
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0xECBE6F49, v1, 1);
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0x1533EA92u, v1, 1);
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0x2AFADC8u, v1, 1);
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0xE1FD4990, v1, 1);
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0x1870CC4Bu, v1, 1);
-      DamageRig::ActivateTriggerMarker(v1->mDamageRig, 0xFEC8B11u, v1, 1);
+      mDamageRig->mBurnedOut = 1;
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0xECBE6F49, this, 1);
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0x1533EA92u, this, 1);
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0x2AFADC8u, this, 1);
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0xE1FD4990, this, 1);
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0x1870CC4Bu, this, 1);
+      DamageRig::ActivateTriggerMarker(this->mDamageRig, 0xFEC8B11u, this, 1);
     }
   }
 }
@@ -5317,7 +5171,7 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnScriptedLights(UFG::VehicleE
 // RVA: 0x68DFF0
 void __fastcall UFG::VehicleEffectsComponent::TurnOffScriptedLights(UFG::VehicleEffectsComponent *this)
 {
-  *((_DWORD *)this + 471) &= 0xFFFFFFEF;
+  *((_DWORD *)this + 471) &= ~0x10u;
 }
 
 // File Line: 2784
@@ -5331,7 +5185,7 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnTaxiLight(UFG::VehicleEffect
 // RVA: 0x68E000
 void __fastcall UFG::VehicleEffectsComponent::TurnOffTaxiLight(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_TAXILIGHTS);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 17);
 }
 
 // File Line: 2798
@@ -5345,48 +5199,45 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnInteriorLight(UFG::VehicleEf
 // RVA: 0x68DD10
 void __fastcall UFG::VehicleEffectsComponent::TurnOffInteriorLight(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_INTERIORLIGHTS);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 16);
 }
 
 // File Line: 2812
 // RVA: 0x68E770
 void __fastcall UFG::VehicleEffectsComponent::TurnOnHeadlights(UFG::VehicleEffectsComponent *this, bool isNightTime)
 {
-  bool v2; // di
-  UFG::VehicleEffectsComponent *v3; // rbx
-  UFG::SimComponent *v4; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
 
-  v2 = isNightTime;
-  v3 = this;
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_DAYTIME);
-  v4 = v3->mVehicleDriverComponent.m_pSimComponent;
-  if ( v4 && ((unsigned __int8 (*)(void))v4->vfptr[15].__vecDelDtor)() )
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 1);
+  m_pSimComponent = this->mVehicleDriverComponent.m_pSimComponent;
+  if ( m_pSimComponent
+    && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[15].__vecDelDtor)(m_pSimComponent) )
   {
-    if ( v2 )
+    if ( isNightTime )
     {
-      UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, FX_PLAYERHEADLIGHTS);
-      UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, 0);
+      UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_PLAYERHEADLIGHTS);
+      UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_NIGHTTIME);
     }
     else
     {
-      UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, FX_PLAYERHEADLIGHTS);
-      UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, 0);
+      UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_PLAYERHEADLIGHTS);
+      UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_NIGHTTIME);
     }
-    UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, FX_PLAYERHEADLIGHTFLARES);
+    UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_PLAYERHEADLIGHTFLARES);
   }
   else
   {
-    if ( v2 )
+    if ( isNightTime )
     {
-      UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, FX_TRAFFICHEADLIGHTS);
-      UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, 0);
+      UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_TRAFFICHEADLIGHTS);
+      UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_NIGHTTIME);
     }
     else
     {
-      UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, FX_TRAFFICHEADLIGHTS);
-      UFG::VehicleEffectsComponent::TurnOffLightEffects(v3, 0);
+      UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_TRAFFICHEADLIGHTS);
+      UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_NIGHTTIME);
     }
-    UFG::VehicleEffectsComponent::TurnOnLightEffects(v3, FX_TRAFFICHEADLIGHTFLARES);
+    UFG::VehicleEffectsComponent::TurnOnLightEffects(this, FX_TRAFFICHEADLIGHTFLARES);
   }
 }
 
@@ -5394,16 +5245,13 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnHeadlights(UFG::VehicleEffec
 // RVA: 0x68DCA0
 void __fastcall UFG::VehicleEffectsComponent::TurnOffHeadlights(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-
-  v1 = this;
   UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_PLAYERHEADLIGHTS);
-  UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_PLAYERHEADLIGHTFLARES);
-  UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_TRAFFICHEADLIGHTS);
-  UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, FX_TRAFFICHEADLIGHTFLARES);
-  UFG::VehicleEffectsComponent::TurnOffLightEffects(v1, 0);
-  if ( v1->mVehicleDriverComponent.m_pSimComponent )
-    UFG::VehicleEffectsComponent::TurnOnEffect_New(v1, FX_DAYTIME);
+  UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_PLAYERHEADLIGHTFLARES);
+  UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_TRAFFICHEADLIGHTS);
+  UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_TRAFFICHEADLIGHTFLARES);
+  UFG::VehicleEffectsComponent::TurnOffLightEffects(this, FX_NIGHTTIME);
+  if ( this->mVehicleDriverComponent.m_pSimComponent )
+    UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_DAYTIME);
 }
 
 // File Line: 2871
@@ -5431,25 +5279,23 @@ bool __fastcall UFG::VehicleEffectsComponent::AreCopLightsOn(UFG::VehicleEffects
 // RVA: 0x68E020
 void __fastcall UFG::VehicleEffectsComponent::TurnOnCopLights(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-  UFG::SimObject *v2; // r9
-  UFG::StimulusParameters stimulus_parameters; // [rsp+20h] [rbp-28h]
+  UFG::SimObject *m_pSimObject; // r9
+  UFG::StimulusParameters stimulus_parameters; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = this;
   if ( this->mEffectStatusTable[FX_COPHEADLIGHTS].mState != 3 )
   {
     UFG::VehicleEffectsComponent::TurnOnEffect_New(this, FX_COPHEADLIGHTS);
-    v2 = v1->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
     stimulus_parameters.m_MaxStimulusDuration = -1.0;
     stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-    stimulus_parameters.m_StimulusEmissionType = 1;
+    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_CONTINUOUS;
     UFG::StimulusManager::BeginStimulus(
       UFG::StimulusManager::s_pInstance,
       eSTIMULUS_POLICE_PURSUIT_VEHICLE,
       &stimulus_parameters,
-      v2);
-    UFG::VehicleEffectsComponent::TurnOffHeadlights(v1);
+      m_pSimObject);
+    UFG::VehicleEffectsComponent::TurnOffHeadlights(this);
   }
 }
 
@@ -5457,17 +5303,14 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnCopLights(UFG::VehicleEffect
 // RVA: 0x68D7F0
 void __fastcall UFG::VehicleEffectsComponent::TurnOffCopLights(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-
-  v1 = this;
   if ( this->mEffectStatusTable[7].mState == 3 )
   {
     UFG::VehicleEffectsComponent::TurnOffHeadlights(this);
-    UFG::VehicleEffectsComponent::TurnOffEffect_New(v1, FX_COPHEADLIGHTS);
+    UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_COPHEADLIGHTS);
     UFG::StimulusManager::EndStimulus(
       UFG::StimulusManager::s_pInstance,
       eSTIMULUS_POLICE_PURSUIT_VEHICLE,
-      v1->m_pSimObject);
+      this->m_pSimObject);
   }
 }
 
@@ -5475,31 +5318,28 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOffCopLights(UFG::VehicleEffec
 // RVA: 0x68E500
 void __fastcall UFG::VehicleEffectsComponent::TurnOnExhaust(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-  UFG::SimComponent *v2; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
   bool v3; // cl
   UFG::VehicleEffectId v4; // edx
-  UFG::VehicleEffectId v5; // edx
 
-  v1 = this;
-  if ( this->mLevelOfDetail == 3 )
+  if ( this->mLevelOfDetail == LOD_HIGH )
   {
-    v2 = this->mVehicleDriverComponent.m_pSimComponent;
-    v3 = v2 && ((unsigned __int8 (*)(void))v2->vfptr[15].__vecDelDtor)();
-    if ( *(float *)&v1->mMoverComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev <= 0.5 )
+    m_pSimComponent = this->mVehicleDriverComponent.m_pSimComponent;
+    v3 = m_pSimComponent
+      && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[15].__vecDelDtor)(m_pSimComponent);
+    if ( *(float *)&this->mMoverComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev <= 0.5 )
     {
-      v5 = 10;
+      v4 = FX_AIEXHAUST_CLEAN;
       if ( v3 )
-        v5 = 8;
-      UFG::VehicleEffectsComponent::TurnOnEffect_New(v1, v5);
+        v4 = FX_EXHAUST_CLEAN;
     }
     else
     {
-      v4 = 11;
+      v4 = FX_AIEXHAUST_DIRTY;
       if ( v3 )
-        v4 = 9;
-      UFG::VehicleEffectsComponent::TurnOnEffect_New(v1, v4);
+        v4 = FX_EXHAUST_DIRTY;
     }
+    UFG::VehicleEffectsComponent::TurnOnEffect_New(this, v4);
   }
 }
 
@@ -5507,82 +5347,76 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnExhaust(UFG::VehicleEffectsC
 // RVA: 0x68DB10
 void __fastcall UFG::VehicleEffectsComponent::TurnOffExhaust(UFG::VehicleEffectsComponent *this)
 {
-  UFG::VehicleEffectsComponent *v1; // rbx
-
-  v1 = this;
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, FX_AIEXHAUST_CLEAN);
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(v1, FX_AIEXHAUST_DIRTY);
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(v1, FX_EXHAUST_CLEAN);
-  UFG::VehicleEffectsComponent::TurnOffEffect_New(v1, FX_EXHAUST_DIRTY);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 10);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 11);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 8);
+  UFG::VehicleEffectsComponent::TurnOffEffect_New(this, 9);
 }
 
 // File Line: 2967
 // RVA: 0x68EB40
-void __fastcall UFG::VehicleEffectsComponent::TurnOnSkidSmoke(UFG::VehicleEffectsComponent *this, unsigned int wheelId, UFG::PhysicsSurfaceProperties *properties, UFG::VehicleEffectsComponent::TireSmokeEffect tireSmokeFX)
+void __fastcall UFG::VehicleEffectsComponent::TurnOnSkidSmoke(
+        UFG::VehicleEffectsComponent *this,
+        int wheelId,
+        UFG::PhysicsSurfaceProperties *properties,
+        UFG::VehicleEffectsComponent::TireSmokeEffect tireSmokeFX)
 {
-  UFG::VehicleEffectsComponent::TireSmokeEffect v4; // ebx
-  UFG::PhysicsSurfaceProperties *v5; // rdi
   __int64 v6; // r14
-  UFG::VehicleEffectsComponent *v7; // rsi
-  UFG::SimComponent *v8; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
   bool v9; // cl
   int v10; // ebx
   int v11; // ebx
-  int v12; // ebx
-  unsigned int v13; // ebx
-  UFG::TransformNodeComponent *v14; // rax
+  unsigned int mUID; // ebx
+  UFG::TransformNodeComponent *v13; // rax
 
-  v4 = tireSmokeFX;
-  v5 = properties;
-  v6 = (signed int)wheelId;
-  v7 = this;
-  if ( *((_BYTE *)this + 1884) < 0 && this->mLevelOfDetail == 3 && this->mSkidEffect.array[wheelId] == -1 )
+  v6 = wheelId;
+  if ( *((char *)this + 1884) < 0 && this->mLevelOfDetail == LOD_HIGH && this->mSkidEffect.array[wheelId] == -1 )
   {
-    v8 = this->mVehicleDriverComponent.m_pSimComponent;
-    v9 = v8 && ((unsigned __int8 (*)(void))v8->vfptr[15].__vecDelDtor)();
-    v10 = v4 - 1;
+    m_pSimComponent = this->mVehicleDriverComponent.m_pSimComponent;
+    v9 = m_pSimComponent
+      && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[15].__vecDelDtor)(m_pSimComponent);
+    v10 = tireSmokeFX - 1;
     if ( v10 )
     {
       v11 = v10 - 1;
       if ( v11 )
       {
-        v12 = v11 - 2;
-        if ( v12 && v12 == 4 )
+        if ( v11 == 6 )
         {
           if ( v9 )
-            v13 = v5->mDriftEffectUID.mUID;
+            mUID = properties->mDriftEffectUID.mUID;
           else
-            v13 = v5->mAIDriftEffectUID.mUID;
+            mUID = properties->mAIDriftEffectUID.mUID;
         }
         else if ( v9 )
         {
-          v13 = v5->mSkidEffectUID.mUID;
+          mUID = properties->mSkidEffectUID.mUID;
         }
         else
         {
-          v13 = v5->mAISkidEffectUID.mUID;
+          mUID = properties->mAISkidEffectUID.mUID;
         }
       }
       else if ( v9 )
       {
-        v13 = v5->mSlipEffectUID.mUID;
+        mUID = properties->mSlipEffectUID.mUID;
       }
       else
       {
-        v13 = v5->mAISlipEffectUID.mUID;
+        mUID = properties->mAISlipEffectUID.mUID;
       }
     }
     else if ( v9 )
     {
-      v13 = v5->mBurnoutEffectUID.mUID;
+      mUID = properties->mBurnoutEffectUID.mUID;
     }
     else
     {
-      v13 = v5->mAIBurnoutEffectUID.mUID;
+      mUID = properties->mAIBurnoutEffectUID.mUID;
     }
-    v14 = UFG::VehicleEffectsComponent::ObtainTransform(v7, (signed int)v6 + 8);
-    v7->mSkidEffect.array[v6] = Render::FXManager::CreateEffect(&Render::gFXManager, v13, v14, 0xFFFFFFFF, 0i64);
-    v7->mLastPhysicsSurfacProperty.array[v6] = v5;
+    v13 = UFG::VehicleEffectsComponent::ObtainTransform(this, (int)v6 + 8);
+    this->mSkidEffect.array[v6] = Render::FXManager::CreateEffect(&Render::gFXManager, mUID, v13, 0xFFFFFFFF, 0i64);
+    this->mLastPhysicsSurfacProperty.array[v6] = properties;
   }
 }
 
@@ -5590,11 +5424,9 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnSkidSmoke(UFG::VehicleEffect
 // RVA: 0x673860
 void __fastcall UFG::VehicleEffectsComponent::BlowTire(UFG::VehicleEffectsComponent *this, int tireIndex)
 {
-  UFG::VehicleEffectsComponent *v2; // rbx
   __int64 v3; // rdi
 
-  v2 = this;
-  if ( this->mLevelOfDetail == 3 )
+  if ( this->mLevelOfDetail == LOD_HIGH )
   {
     v3 = tireIndex;
     Render::FXManager::CreateEffect(
@@ -5603,106 +5435,111 @@ void __fastcall UFG::VehicleEffectsComponent::BlowTire(UFG::VehicleEffectsCompon
       this->mTransformNodes.array[tireIndex],
       0xFFFFFFFF,
       0i64);
-    if ( (float)(*((float *)&v2->mMoverComponent.m_pSimComponent[10].m_BoundComponentHandles.mNode.mPrev + 1) * 3.5999999) > 5.0 )
-      Render::FXManager::CreateEffect(&Render::gFXManager, 0xDE5F3838, v2->mTransformNodes.array[v3], 0xFFFFFFFF, 0i64);
+    if ( (float)(*((float *)&this->mMoverComponent.m_pSimComponent[10].m_BoundComponentHandles.mNode.mPrev + 1)
+               * 3.5999999) > 5.0 )
+      Render::FXManager::CreateEffect(
+        &Render::gFXManager,
+        0xDE5F3838,
+        this->mTransformNodes.array[v3],
+        0xFFFFFFFF,
+        0i64);
   }
 }
 
 // File Line: 3053
 // RVA: 0x696A70
-void __fastcall UFG::VehicleEffectsComponent::UpdateEffectSpeed(UFG::VehicleEffectsComponent *this, UFG::VehicleEffect *pEffect)
+void __fastcall UFG::VehicleEffectsComponent::UpdateEffectSpeed(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffect *pEffect)
 {
-  unsigned int v2; // eax
-  UFG::VehicleEffect *v3; // rdi
+  unsigned int mSpeedLevel; // eax
   __int64 v4; // rbx
   unsigned int *i; // r8
-  unsigned int v6; // edx
-  Render::FXSimComponent *v7; // rcx
-  Render::FXOverride *v8; // rax
+  unsigned int mEffectRef; // edx
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  Render::FXOverride *m_pPointer; // rax
   Render::FXOverride *v9; // rsi
 
-  v2 = this->mSpeedLevel;
-  v3 = pEffect;
-  if ( pEffect->mRequestedSpeed != v2 )
+  mSpeedLevel = this->mSpeedLevel;
+  if ( pEffect->mRequestedSpeed != mSpeedLevel )
   {
-    pEffect->mRequestedSpeed = v2;
+    pEffect->mRequestedSpeed = mSpeedLevel;
     v4 = this->mSpeedLevel;
     for ( i = &pEffect->mBoundEffect[v4]; *i == -1; --i )
       LODWORD(v4) = v4 - 1;
     if ( (_DWORD)v4 != pEffect->mSpeed )
     {
-      v6 = pEffect->mEffectRef;
-      if ( v6 != -1 )
+      mEffectRef = pEffect->mEffectRef;
+      if ( mEffectRef != -1 )
       {
-        v7 = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
-        if ( v7 )
+        m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+        if ( m_pSimComponent )
         {
-          Render::FXSimComponent::DetachEffect(v7, v6, 0);
-          v3->mEffectRef = -1;
+          Render::FXSimComponent::DetachEffect(m_pSimComponent, mEffectRef, FXKILLOPTION_DEFAULT);
+          pEffect->mEffectRef = -1;
         }
-        v8 = v3->mEffectOverride.m_pPointer;
-        if ( v8 )
+        m_pPointer = pEffect->mEffectOverride.m_pPointer;
+        if ( m_pPointer )
         {
-          --v8->mReferenceCount;
-          v9 = v3->mEffectOverride.m_pPointer;
+          --m_pPointer->mReferenceCount;
+          v9 = pEffect->mEffectOverride.m_pPointer;
           if ( v9->mReferenceCount <= 0 )
           {
             if ( v9 )
             {
-              Render::FXOverride::~FXOverride(v3->mEffectOverride.m_pPointer);
+              Render::FXOverride::~FXOverride(pEffect->mEffectOverride.m_pPointer);
               operator delete[](v9);
             }
-            v3->mEffectOverride.m_pPointer = 0i64;
+            pEffect->mEffectOverride.m_pPointer = 0i64;
           }
-          v3->mEffectOverride.m_pPointer = 0i64;
+          pEffect->mEffectOverride.m_pPointer = 0i64;
         }
       }
-      v3->mSpeed = v4;
+      pEffect->mSpeed = v4;
     }
   }
 }
 
 // File Line: 3085
 // RVA: 0x68E690
-void __fastcall UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id, unsigned int damageboneID)
+void __fastcall UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffectId id,
+        unsigned int damageboneID)
 {
-  signed int v3; // esi
-  unsigned int v4; // er14
-  UFG::VehicleEffectsComponent *v5; // rdi
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl **v6; // rbx
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v7; // rax
+  int v3; // esi
+  UFG::qSafePointerNode<UFG::SimComponent> *v6; // rbx
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rax
   UFG::qBaseTreeRB *v8; // rbp
   UFG::VehicleEffect *i; // rbx
-  Render::FXSimComponent *v10; // rcx
+  Render::FXSimComponent *m_pSimComponent; // rcx
   unsigned int v11; // edx
-  int v12; // er8
+  int mDamageBone; // r8d
 
   v3 = -1;
-  v4 = damageboneID;
-  v5 = this;
-  v6 = &(&this->vfptr)[3 * id];
-  if ( !*((_DWORD *)v6 + 46) )
+  v6 = (UFG::VehicleEffectsComponent *)((char *)this + 24 * id);
+  if ( !LODWORD(v6[7].m_SafePointerList.mNode.mNext) )
     UFG::VehicleEffectsComponent::InitializeEffect_New(this, id);
-  v7 = v6[24];
-  if ( v7 )
+  vfptr = v6[8].vfptr;
+  if ( vfptr )
   {
-    v8 = (UFG::qBaseTreeRB *)&v7[5];
-    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v7[5]);
+    v8 = (UFG::qBaseTreeRB *)&vfptr[5];
+    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&vfptr[5]);
           i;
           i = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(v8, &i->mNode) )
     {
-      if ( i->mDamageBone == v4 )
+      if ( i->mDamageBone == damageboneID )
       {
-        UFG::VehicleEffectsComponent::UpdateEffectSpeed(v5, i);
-        v10 = (Render::FXSimComponent *)v5->mFXComponent.m_pSimComponent;
+        UFG::VehicleEffectsComponent::UpdateEffectSpeed(this, i);
+        m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
         v11 = i->mBoundEffect[i->mSpeed];
-        v12 = i->mDamageBone;
-        if ( v10 )
+        mDamageBone = i->mDamageBone;
+        if ( m_pSimComponent )
         {
-          if ( v12 != -1 && v3 == -1 )
+          if ( mDamageBone != -1 && v3 == -1 )
           {
             if ( v11 )
-              v3 = Render::FXSimComponent::AttachEffect(v10, v11, v12, 0i64);
+              v3 = Render::FXSimComponent::AttachEffect(m_pSimComponent, v11, mDamageBone, 0i64);
           }
         }
       }
@@ -5712,114 +5549,112 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOnGenericEffectByDamageBoneID(
 
 // File Line: 3107
 // RVA: 0x68E850
-void __fastcall UFG::VehicleEffectsComponent::TurnOnLightEffects(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id)
+void __fastcall UFG::VehicleEffectsComponent::TurnOnLightEffects(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffectId id)
 {
-  UFG::VehicleEffectId v2; // esi
-  UFG::VehicleEffectsComponent *v3; // rdi
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   __int64 v5; // r14
-  UFG::EffectStatus::State v6; // eax
+  UFG::EffectStatus::State mState; // eax
   bool v7; // si
   UFG::VehicleEffect *i; // rbx
-  DamageRig *v9; // rcx
-  unsigned int v10; // edx
-  Render::FXSimComponent *v11; // rcx
+  DamageRig *mDamageRig; // rcx
+  unsigned int mUID; // edx
+  Render::FXSimComponent *m_pSimComponent; // rcx
   unsigned int v12; // edx
-  int v13; // er8
-  float health_output; // [rsp+58h] [rbp+10h]
+  int mMarker; // r8d
+  float health_output; // [rsp+58h] [rbp+10h] BYREF
 
-  v2 = id;
-  v3 = this;
   v4 = id;
   v5 = id;
   if ( this->mEffectStatusTable[id].mState == UNINITIALIZED )
     UFG::VehicleEffectsComponent::InitializeEffect_New(this, id);
-  v6 = v3->mEffectStatusTable[v4].mState;
-  if ( v6 == 4 )
+  mState = this->mEffectStatusTable[v4].mState;
+  if ( mState == 4 )
   {
-    v3->mEffectStatusTable[v4].mState = 3;
-    v7 = (unsigned int)(v2 - 2) <= 3 || v2 == FX_NIGHTTIME;
-    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v3->mEffectStatusTable[v5].mInternalState->mEffects);
+    this->mEffectStatusTable[v4].mState = 3;
+    v7 = (unsigned int)(id - 2) <= 3 || id == FX_NIGHTTIME;
+    for ( i = (UFG::VehicleEffect *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mEffectStatusTable[v5].mInternalState->mEffects);
           i;
           i = (UFG::VehicleEffect *)UFG::qBaseTreeRB::GetNext(
-                                      &v3->mEffectStatusTable[v5].mInternalState->mEffects.mTree,
+                                      &this->mEffectStatusTable[v5].mInternalState->mEffects.mTree,
                                       &i->mNode) )
     {
-      v9 = v3->mDamageRig;
-      if ( v9 && !v9->mBurnedOut )
+      mDamageRig = this->mDamageRig;
+      if ( mDamageRig && !mDamageRig->mBurnedOut )
       {
-        v10 = i->mDamageAffectorHash.mUID;
+        mUID = i->mDamageAffectorHash.mUID;
         health_output = 0.0;
-        DamageRig::GetTriggerMarkerHealth(v9, v10, &health_output);
-        if ( v7 == 1 )
-          DamageRig::SetSignal(v3->mDamageRig, i->mDamageAffectorHash.mUID, 2.0);
+        DamageRig::GetTriggerMarkerHealth(mDamageRig, mUID, &health_output);
+        if ( v7 )
+          DamageRig::SetSignal(this->mDamageRig, i->mDamageAffectorHash.mUID, 2.0);
         if ( health_output <= 0.33000001 )
         {
-          UFG::VehicleEffectsComponent::UpdateEffectSpeed(v3, i);
-          v11 = (Render::FXSimComponent *)v3->mFXComponent.m_pSimComponent;
+          UFG::VehicleEffectsComponent::UpdateEffectSpeed(this, i);
+          m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
           v12 = i->mBoundEffect[i->mSpeed];
-          v13 = i->mMarker;
-          if ( v11 )
+          mMarker = i->mMarker;
+          if ( m_pSimComponent )
           {
-            if ( v13 != -1 && i->mEffectRef == -1 )
+            if ( mMarker != -1 && i->mEffectRef == -1 )
             {
               if ( v12 )
-                i->mEffectRef = Render::FXSimComponent::AttachEffect(v11, v12, v13, 0i64);
+                i->mEffectRef = Render::FXSimComponent::AttachEffect(m_pSimComponent, v12, mMarker, 0i64);
             }
           }
         }
       }
     }
   }
-  else if ( v6 == 1 )
+  else if ( mState == 1 )
   {
-    *((_DWORD *)&v3->mEffectStatusTable[v4] + 4) |= 1u;
+    *((_DWORD *)&this->mEffectStatusTable[v4] + 4) |= 1u;
   }
 }
 
 // File Line: 3145
 // RVA: 0x68DD20
-void __fastcall UFG::VehicleEffectsComponent::TurnOffLightEffects(UFG::VehicleEffectsComponent *this, UFG::VehicleEffectId id)
+void __fastcall UFG::VehicleEffectsComponent::TurnOffLightEffects(
+        UFG::VehicleEffectsComponent *this,
+        UFG::VehicleEffectId id)
 {
-  UFG::VehicleEffectsComponent *v2; // rdi
-  signed __int64 v3; // rbp
+  __int64 v3; // rbp
   bool v4; // r14
-  signed __int64 v5; // r15
+  __int64 v5; // r15
   UFG::qBaseTreeRB *i; // rbx
-  Render::FXSimComponent *v7; // rcx
-  unsigned int v8; // edx
-  UFG::qBaseNodeRB *v9; // rax
-  UFG::qBaseNodeRB *v10; // rsi
-  DamageRig *v11; // rcx
+  Render::FXSimComponent *m_pSimComponent; // rcx
+  unsigned int mUID; // edx
+  UFG::qBaseNodeRB *mParent; // rax
+  int *v10; // rsi
+  DamageRig *mDamageRig; // rcx
 
-  v2 = this;
   v3 = id;
   if ( this->mEffectStatusTable[id].mState == 3 )
   {
     this->mEffectStatusTable[id].mState = 4;
-    v4 = !(id & 0xFFFFFFFA) && id != 1;
+    v4 = (id & 0xFFFFFFFA) == 0 && id != FX_DAYTIME;
     v5 = id;
     for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mEffectStatusTable[id].mInternalState->mEffects);
           i;
-          i = UFG::qBaseTreeRB::GetNext(&v2->mEffectStatusTable[v5].mInternalState->mEffects.mTree, &i->mRoot) )
+          i = UFG::qBaseTreeRB::GetNext(&this->mEffectStatusTable[v5].mInternalState->mEffects.mTree, &i->mRoot) )
     {
-      v7 = (Render::FXSimComponent *)v2->mFXComponent.m_pSimComponent;
-      if ( v7 )
+      m_pSimComponent = (Render::FXSimComponent *)this->mFXComponent.m_pSimComponent;
+      if ( m_pSimComponent )
       {
-        v8 = i[1].mRoot.mUID;
-        if ( v8 != -1 )
+        mUID = i[1].mRoot.mUID;
+        if ( mUID != -1 )
         {
-          Render::FXSimComponent::DetachEffect(v7, v8, 0);
+          Render::FXSimComponent::DetachEffect(m_pSimComponent, mUID, FXKILLOPTION_DEFAULT);
           i[1].mRoot.mUID = -1;
         }
       }
       i[1].mRoot.mUID = -1;
-      v9 = i[1].mNULL.mParent;
-      if ( v9 )
+      mParent = i[1].mNULL.mParent;
+      if ( mParent )
       {
-        --LODWORD(v9->mParent);
-        v10 = i[1].mNULL.mParent;
-        if ( SLODWORD(v10->mParent) <= 0 )
+        --LODWORD(mParent->mParent);
+        v10 = (int *)i[1].mNULL.mParent;
+        if ( *v10 <= 0 )
         {
           if ( v10 )
           {
@@ -5830,28 +5665,28 @@ void __fastcall UFG::VehicleEffectsComponent::TurnOffLightEffects(UFG::VehicleEf
         }
         i[1].mNULL.mParent = 0i64;
       }
-      v11 = v2->mDamageRig;
-      if ( v11 && v4 == 1 )
-        DamageRig::RemoveSignal(v11, HIDWORD(i[1].mRoot.mChild[0]), 2.0);
+      mDamageRig = this->mDamageRig;
+      if ( mDamageRig && v4 )
+        DamageRig::RemoveSignal(mDamageRig, HIDWORD(i[1].mRoot.mChild[0]), 2.0);
     }
   }
-  *((_DWORD *)&v2->mEffectStatusTable[v3] + 4) &= 0xFFFFFFFE;
-  if ( v2->mEffectStatusTable[v3].mState == 1 )
-    v2->mEffectStatusTable[v3].mState = 0;
+  *((_DWORD *)&this->mEffectStatusTable[v3] + 4) &= ~1u;
+  if ( this->mEffectStatusTable[v3].mState == 1 )
+    this->mEffectStatusTable[v3].mState = UNINITIALIZED;
 }
 
 // File Line: 3192
 // RVA: 0x66C7F0
 void __fastcall UFG::EffectStatus::~EffectStatus(UFG::EffectStatus *this)
 {
-  UFG::VehicleEffectState *v1; // rdi
+  UFG::VehicleEffectState *mInternalState; // rdi
 
-  v1 = this->mInternalState;
-  if ( v1 )
+  mInternalState = this->mInternalState;
+  if ( mInternalState )
   {
-    UFG::qTreeRB<UFG::VehicleEffect,UFG::VehicleEffect,1>::DeleteAll(&v1->mEffects);
-    UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mEffects);
-    operator delete[](v1);
+    UFG::qTreeRB<UFG::VehicleEffect,UFG::VehicleEffect,1>::DeleteAll(&mInternalState->mEffects);
+    UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&mInternalState->mEffects);
+    operator delete[](mInternalState);
   }
 }
 

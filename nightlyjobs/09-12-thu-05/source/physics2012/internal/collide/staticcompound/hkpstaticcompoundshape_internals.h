@@ -1,40 +1,40 @@
 // File Line: 133
 // RVA: 0xDC7460
-void __fastcall hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollectorWrapper::addHit(hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollectorWrapper *this, unsigned int key)
+void __fastcall hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollectorWrapper::addHit(
+        hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollectorWrapper *this,
+        unsigned int key)
 {
-  hkpStaticCompoundShape_Internals *v2; // r9
-  hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollectorWrapper *v3; // rbx
-  unsigned int v4; // eax
-  hkpStaticCompoundShape::Instance *v5; // r8
+  hkpStaticCompoundShape_Internals *m_compound; // r9
+  unsigned int m_instanceFlags; // eax
+  hkpStaticCompoundShape::Instance *m_instance; // r8
   unsigned int v6; // edi
   char v7; // cl
-  signed int v8; // edx
+  int v8; // edx
   int v9; // ecx
   bool v10; // zf
   bool v11; // al
 
-  v2 = this->m_compound;
-  v3 = this;
-  v4 = this->m_instanceFlags;
-  v5 = this->m_instance;
-  v6 = key | (this->m_instanceId << v2->m_numBitsForChildShapeKey);
-  if ( !(v4 & 0x10) )
+  m_compound = this->m_compound;
+  m_instanceFlags = this->m_instanceFlags;
+  m_instance = this->m_instance;
+  v6 = key | (this->m_instanceId << m_compound->m_numBitsForChildShapeKey);
+  if ( (m_instanceFlags & 0x10) == 0 )
   {
     if ( key >= 0x25 )
     {
-      if ( v4 & 0x40 )
+      if ( (m_instanceFlags & 0x40) != 0 )
       {
-        v11 = hkpShapeKeyTable::exists(&v2->m_disabledLargeShapeKeyTable, v6);
+        v11 = hkpShapeKeyTable::exists(&m_compound->m_disabledLargeShapeKeyTable, v6);
         v9 = 0;
-        v10 = v11 == 0;
+        v10 = !v11;
         goto LABEL_10;
       }
     }
-    else if ( v4 & 0x20 )
+    else if ( (m_instanceFlags & 0x20) != 0 )
     {
       if ( key >= 0xD )
       {
-        v5 = (hkpStaticCompoundShape::Instance *)((char *)v5 + 32);
+        m_instance = (hkpStaticCompoundShape::Instance *)((char *)m_instance + 32);
         v7 = key - 13;
       }
       else
@@ -43,19 +43,17 @@ void __fastcall hkpStaticCompoundShape_Internals::AabbCastQuery::AabbCastCollect
       }
       v8 = 1 << v7;
       v9 = 0;
-      v10 = (v8 & v5->m_transform.m_translation.m_quad.m128_i32[3] & 0xC0FFFFFF) == 0;
+      v10 = (v8 & m_instance->m_transform.m_translation.m_quad.m128_i32[3] & 0xC0FFFFFF) == 0;
 LABEL_10:
       LOBYTE(v9) = v10;
       if ( !v9 )
         return;
-      goto LABEL_11;
     }
-LABEL_11:
-    ((void (__fastcall *)(hkpAabbCastCollector *, _QWORD, hkpStaticCompoundShape::Instance *))v3->m_collector->vfptr->addHit)(
-      v3->m_collector,
+    ((void (__fastcall *)(hkpAabbCastCollector *, _QWORD, hkpStaticCompoundShape::Instance *))this->m_collector->vfptr->addHit)(
+      this->m_collector,
       v6,
-      v5);
-    v3->m_earlyOutFraction = v3->m_collector->m_earlyOutFraction;
+      m_instance);
+    this->m_earlyOutFraction = this->m_collector->m_earlyOutFraction;
   }
 }
 

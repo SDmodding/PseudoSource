@@ -4,7 +4,7 @@ void *_getgmtimebuf()
 {
   _tiddata *v0; // rax
   _tiddata *v1; // rbx
-  void *v3; // rax
+  LPVOID v3; // rax
 
   v0 = getptd_noexit();
   v1 = v0;

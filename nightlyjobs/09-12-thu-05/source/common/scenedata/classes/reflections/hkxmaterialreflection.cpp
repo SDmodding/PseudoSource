@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxMaterialTextureStageClass__()
     &hkxMaterialTextureStage_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 163
@@ -46,16 +46,14 @@ void __fastcall finishLoadedObjecthkxMaterialTextureStage(void *p, int finishing
 
 // File Line: 176
 // RVA: 0xE32160
-void __fastcall cleanupLoadedObjecthkxMaterialTextureStage(void *p)
+void __fastcall cleanupLoadedObjecthkxMaterialTextureStage(hkReferencedObject **p)
 {
-  _QWORD *v1; // rbx
   hkReferencedObject *v2; // rcx
 
-  v1 = p;
-  v2 = *(hkReferencedObject **)p;
+  v2 = *p;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  *v1 = 0i64;
+  *p = 0i64;
 }
 
 // File Line: 212
@@ -130,7 +128,7 @@ void dynamic_initializer_for__hkxMaterialClass__()
     &hkxMaterial_Default,
     0i64,
     0,
-    5u);
+    5);
 }
 
 // File Line: 308
@@ -142,30 +140,30 @@ hkClass *__fastcall hkxMaterial::staticClass()
 
 // File Line: 315
 // RVA: 0xE321B0
-void __fastcall finishLoadedObjecthkxMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMaterial(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 32);
+    v2 = p + 4;
     v2[-4].m_stringAndFlag = (const char *)&hkxMaterial::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 321
 // RVA: 0xE321E0
-void __fastcall cleanupLoadedObjecthkxMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkxMaterial(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 325
 // RVA: 0xE321F0
 void **__fastcall getVtablehkxMaterial()
 {
-  hkStringPtr v1; // [rsp+40h] [rbp-C8h]
+  hkStringPtr v1; // [rsp+40h] [rbp-C8h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkxMaterial::`vftable;
@@ -182,8 +180,8 @@ void **dynamic_initializer_for__hkxMaterialTypeInfo__()
   hkxMaterialTypeInfo.m_typeName = "hkxMaterial";
   hkxMaterialTypeInfo.m_vtable = result;
   hkxMaterialTypeInfo.m_scopedName = "!hkxMaterial";
-  hkxMaterialTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMaterial;
-  hkxMaterialTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMaterial;
+  hkxMaterialTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMaterial;
+  hkxMaterialTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMaterial;
   return result;
 }
 

@@ -14,16 +14,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::StatModifierTypeBa
 
   v0 = UFG::qStringHash64("UFG::StatModifierTypeBase", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory,
     "UFG::StatModifierTypeBase",
     v0);
   UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StatModifierTypeBase>::`vftable;
   UFG::qReflectInventory<UFG::StatModifierTypeBase>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::StatModifierTypeBase_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::StatModifierTypeBase_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 12
@@ -70,7 +68,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RangedWeaponStatMo
 
   v0 = UFG::qStringHash64("UFG::RangedWeaponStatModifierType", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory,
     "UFG::RangedWeaponStatModifierType",
     v0);
   UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RangedWeaponStatModifierType>::`vftable;
@@ -78,8 +76,8 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RangedWeaponStatMo
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
     v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RangedWeaponStatModifierType_UFG::StatModifierTypeBase_::sInventory__);
+    &UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RangedWeaponStatModifierType_UFG::StatModifierTypeBase_::sInventory__);
 }
 
 // File Line: 16
@@ -91,7 +89,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ThrownWeaponStatMo
 
   v0 = UFG::qStringHash64("UFG::ThrownWeaponStatModifierType", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory,
     "UFG::ThrownWeaponStatModifierType",
     v0);
   UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ThrownWeaponStatModifierType>::`vftable;
@@ -99,8 +97,8 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ThrownWeaponStatMo
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
     v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::ThrownWeaponStatModifierType_UFG::StatModifierTypeBase_::sInventory__);
+    &UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::ThrownWeaponStatModifierType_UFG::StatModifierTypeBase_::sInventory__);
 }
 
 // File Line: 17
@@ -126,16 +124,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::UpgradeType_UFG::q
 
   v0 = UFG::qStringHash64("UFG::UpgradeType", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory,
     "UFG::UpgradeType",
     v0);
   UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::UpgradeType>::`vftable;
   UFG::qReflectInventory<UFG::UpgradeType>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::UpgradeType_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::UpgradeType_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 20
@@ -189,16 +185,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketCoreLevel_UF
 
   v0 = UFG::qStringHash64("UFG::RacketCoreLevel", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory,
     "UFG::RacketCoreLevel",
     v0);
   UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCoreLevel>::`vftable;
   UFG::qReflectInventory<UFG::RacketCoreLevel>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketCoreLevel_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketCoreLevel_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 26
@@ -210,16 +204,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketCorePrefabs_
 
   v0 = UFG::qStringHash64("UFG::RacketCorePrefabs", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory,
     "UFG::RacketCorePrefabs",
     v0);
   UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCorePrefabs>::`vftable;
   UFG::qReflectInventory<UFG::RacketCorePrefabs>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketCorePrefabs_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketCorePrefabs_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 27
@@ -231,21 +223,20 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketLevel_UFG::q
 
   v0 = UFG::qStringHash64("UFG::RacketLevel", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory,
     "UFG::RacketLevel",
     v0);
   UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketLevel>::`vftable;
   UFG::qReflectInventory<UFG::RacketLevel>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketLevel_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::RacketLevel_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 28
 // RVA: 0x40C8B0
-const char *__fastcall UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject>::GetTypeName(UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject> *this)
+const char *__fastcall UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject>::GetTypeName(
+        UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject> *this)
 {
   return "UFG::RacketType";
 }
@@ -266,21 +257,20 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::TurfBlock_UFG::qRe
 
   v0 = UFG::qStringHash64("UFG::TurfBlock", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory,
     "UFG::TurfBlock",
     v0);
   UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::TurfBlock>::`vftable;
   UFG::qReflectInventory<UFG::TurfBlock>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::TurfBlock_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::TurfBlock_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 32
 // RVA: 0x40C8C0
-const char *__fastcall UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject>::GetStaticTypeName(UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject> *this)
+const char *__fastcall UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject>::GetStaticTypeName(
+        UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject> *this)
 {
   return "UFG::TurfTemplate";
 }
@@ -293,7 +283,7 @@ void __fastcall UFG::RacketType::GetWorldSize(UFG::RacketType::eSize size, UFG::
   float v3; // xmm1_4
   float v4; // xmm0_4
 
-  if ( size == 1 )
+  if ( size == MEDIUM )
   {
     outSize->x = UFG::TurfManager::TURF_LOT_SIZE * 2.0;
     v4 = UFG::TurfManager::TURF_LOT_SIZE;
@@ -325,7 +315,7 @@ void __fastcall UFG::RacketType::GetWorldPositionOffset(UFG::RacketType::eSize s
   float v4; // xmm1_4
 
   v2 = UFG::TurfManager::TURF_LOT_SIZE;
-  if ( size != 1 )
+  if ( size != MEDIUM )
   {
     if ( (unsigned int)(size - 2) <= 1 )
     {

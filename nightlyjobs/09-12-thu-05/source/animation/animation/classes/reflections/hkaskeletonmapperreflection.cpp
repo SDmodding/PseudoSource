@@ -28,30 +28,30 @@ hkClass *__fastcall hkaSkeletonMapper::staticClass()
 
 // File Line: 79
 // RVA: 0xB1C6A0
-void __fastcall finishLoadedObjecthkaSkeletonMapper(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaSkeletonMapper(char *p, hkFinishLoadedObjectFlag finishing)
 {
   hkaSkeletonMapperData *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkaSkeletonMapperData *)((char *)p + 16);
+    v2 = (hkaSkeletonMapperData *)(p + 16);
     *(_QWORD *)&v2[-1].m_keepUnmappedLocal.m_bool = &hkaSkeletonMapper::`vftable;
-    hkaSkeletonMapperData::hkaSkeletonMapperData(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkaSkeletonMapperData::hkaSkeletonMapperData(v2, finishing);
   }
 }
 
 // File Line: 85
 // RVA: 0xB1C6D0
-void __fastcall cleanupLoadedObjecthkaSkeletonMapper(void *p)
+void __fastcall cleanupLoadedObjecthkaSkeletonMapper(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 89
 // RVA: 0xB1C6E0
 void **__fastcall getVtablehkaSkeletonMapper()
 {
-  hkaSkeletonMapperData v1; // [rsp+30h] [rbp-B8h]
+  hkaSkeletonMapperData v1; // [rsp+30h] [rbp-B8h] BYREF
 
   hkaSkeletonMapperData::hkaSkeletonMapperData(&v1, 0);
   return &hkaSkeletonMapper::`vftable;
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkaSkeletonMapperTypeInfo__()
   hkaSkeletonMapperTypeInfo.m_typeName = "hkaSkeletonMapper";
   hkaSkeletonMapperTypeInfo.m_vtable = result;
   hkaSkeletonMapperTypeInfo.m_scopedName = "!hkaSkeletonMapper";
-  hkaSkeletonMapperTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaSkeletonMapper;
-  hkaSkeletonMapperTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaSkeletonMapper;
+  hkaSkeletonMapperTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaSkeletonMapper;
+  hkaSkeletonMapperTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaSkeletonMapper;
   return result;
 }
 

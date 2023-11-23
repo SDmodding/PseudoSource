@@ -8,7 +8,7 @@ void dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::WorldToolsWin
   UFG::SerializeOperation::SerializeOperation(
     &UFG::qReflectObjectType<UFG::Editor::WorldToolsWindow,UFG::DUIWindow>::sDeserializeOp,
     v0,
-    UFG::OnLoadClass<UFG::Editor::WorldToolsWindow>,
+    (void (__fastcall *)(char *))UFG::OnLoadClass<UFG::Editor::WorldToolsWindow>,
     (void (__fastcall *)(char *))UFG::OnUnloadClass<UITest::HandleArrayTest>);
 }
 

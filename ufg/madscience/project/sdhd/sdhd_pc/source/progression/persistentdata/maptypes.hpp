@@ -25,7 +25,9 @@ void __fastcall UFG::PersistentData::KeyBinary::KeyBinary(UFG::PersistentData::K
 
 // File Line: 293
 // RVA: 0x42C720
-UFG::PersistentData::MapFloat::Iterator *__fastcall UFG::PersistentData::MapInt::GetIterator(UFG::PersistentData::MapFloat *this, UFG::PersistentData::MapFloat::Iterator *result)
+UFG::PersistentData::MapFloat::Iterator *__fastcall UFG::PersistentData::MapInt::GetIterator(
+        UFG::PersistentData::MapFloat *this,
+        UFG::PersistentData::MapFloat::Iterator *result)
 {
   result->mIndex = 0;
   result->mList = this;

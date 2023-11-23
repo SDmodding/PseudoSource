@@ -2,73 +2,67 @@
 // RVA: 0xA890F0
 void __fastcall CAkSwitchCntr::CAkSwitchCntr(CAkSwitchCntr *this, unsigned int in_ulID)
 {
-  CAkSwitchCntr *v2; // rdi
-
-  v2 = this;
-  CAkMultiPlayNode::CAkMultiPlayNode((CAkMultiPlayNode *)&this->vfptr, in_ulID);
-  CAkSwitchAware::CAkSwitchAware((CAkSwitchAware *)&v2->vfptr);
-  v2->pNextItemPrepare = 0i64;
-  v2->m_uPreparationCount = 0;
-  *(_QWORD *)&v2->m_eGroupType = 0i64;
-  v2->m_ulDefaultSwitch = 0;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkSwitchCntr::`vftable{for `CAkMultiPlayNode};
-  v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkSwitchAware};
-  v2->vfptr = (CAkPreparationAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkPreparationAware};
-  *(_QWORD *)&v2->m_SwitchList.m_ulMinNumListItems = 0i64;
-  v2->m_SwitchList.m_ulNumListItems = 0;
-  *(_QWORD *)&v2->m_listParameters.m_ulMinNumListItems = 0i64;
-  v2->m_listParameters.m_ulNumListItems = 0;
-  *(_QWORD *)&v2->m_listSwitchContPlayback.m_ulMinNumListItems = 0i64;
-  v2->m_listSwitchContPlayback.m_ulNumListItems = 0;
+  CAkMultiPlayNode::CAkMultiPlayNode(this, in_ulID);
+  CAkSwitchAware::CAkSwitchAware(&this->CAkSwitchAware);
+  this->pNextItemPrepare = 0i64;
+  this->m_uPreparationCount = 0;
+  *(_QWORD *)&this->m_eGroupType = 0i64;
+  this->m_ulDefaultSwitch = 0;
+  this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr = (CAkIndexableVtbl *)&CAkSwitchCntr::`vftable{for `CAkMultiPlayNode};
+  this->CAkSwitchAware::vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkSwitchAware};
+  this->CAkPreparationAware::vfptr = (CAkPreparationAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkPreparationAware};
+  *(_QWORD *)&this->m_SwitchList.m_ulMinNumListItems = 0i64;
+  this->m_SwitchList.m_ulNumListItems = 0;
+  *(_QWORD *)&this->m_listParameters.m_ulMinNumListItems = 0i64;
+  this->m_listParameters.m_ulNumListItems = 0;
+  *(_QWORD *)&this->m_listSwitchContPlayback.m_ulMinNumListItems = 0i64;
+  this->m_listSwitchContPlayback.m_ulNumListItems = 0;
 }
 
 // File Line: 50
 // RVA: 0xA89190
 void __fastcall CAkSwitchCntr::~CAkSwitchCntr(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // rdi
   CAkSwitchAware *v2; // rcx
 
-  v1 = this;
-  v2 = (CAkSwitchAware *)&this->vfptr;
+  v2 = &this->CAkSwitchAware;
   v2[-23].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkMultiPlayNode};
   v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkSwitchAware};
   v2[1].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkPreparationAware};
   CAkSwitchAware::UnsubscribeSwitches(v2);
-  CAkSwitchCntr::ClearSwitches(v1);
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::Term(&v1->m_listSwitchContPlayback);
-  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault> *)&v1->m_listParameters.m_pFirst);
-  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault> *)&v1->m_SwitchList.m_pFirst);
-  CAkMultiPlayNode::Term((CAkMultiPlayNode *)&v1->vfptr);
-  CAkSwitchAware::~CAkSwitchAware((CAkSwitchAware *)&v1->vfptr);
-  CAkMultiPlayNode::~CAkMultiPlayNode((CAkMultiPlayNode *)&v1->vfptr);
+  CAkSwitchCntr::ClearSwitches(this);
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::Term(&this->m_listSwitchContPlayback);
+  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term(&this->m_listParameters);
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::Term(&this->m_SwitchList);
+  CAkMultiPlayNode::Term(this);
+  CAkSwitchAware::~CAkSwitchAware(&this->CAkSwitchAware);
+  CAkMultiPlayNode::~CAkMultiPlayNode(this);
 }
 
 // File Line: 55
 // RVA: 0xA8A850
 int __fastcall CAkSwitchCntr::SetInitialValues(CAkSwitchCntr *this, char *in_pData, unsigned int in_ulDataSize)
 {
-  CAkSwitchCntr *v3; // r13
   int result; // eax
-  AkGroupType v5; // er8
-  char *v6; // rax
+  char *v5; // rax
+  AkGroupType v6; // r8d
   unsigned int v7; // edx
   unsigned int v8; // ebx
   char v9; // di
   AKRESULT v10; // edi
   unsigned int v11; // esi
-  CAkKeyList<unsigned long,CAkSwitchPackage,2,ArrayPoolDefault> *v12; // r14
+  CAkKeyList<unsigned long,CAkSwitchPackage,2,ArrayPoolDefault> *p_m_SwitchList; // r14
   char *v13; // r10
-  int v14; // er12
+  int v14; // r12d
   unsigned int v15; // ebx
   unsigned int v16; // edx
   CAkSwitchPackage *v17; // rsi
-  unsigned int v18; // er15
+  unsigned int v18; // r15d
   unsigned int *v19; // rax
-  int v20; // er14
+  int v20; // r14d
   unsigned int v21; // ebx
-  unsigned int *v22; // rax
-  signed __int64 v23; // rcx
+  unsigned int *m_pItems; // rax
+  __int64 v23; // rcx
   unsigned int *v24; // rdx
   unsigned int *v25; // rax
   __int64 v26; // rbx
@@ -77,75 +71,67 @@ int __fastcall CAkSwitchCntr::SetInitialValues(CAkSwitchCntr *this, char *in_pDa
   unsigned int v29; // edx
   char *v30; // r10
   char v31; // di
-  unsigned int v32; // er9
+  unsigned int v32; // r9d
   char v33; // cl
   char v34; // al
-  int v35; // er8
+  int v35; // r8d
   char *v36; // r10
   int v37; // eax
-  __int64 v38; // ST28_8
-  unsigned int v39; // [rsp+20h] [rbp-58h]
-  int v40; // [rsp+30h] [rbp-48h]
-  __int64 v41; // [rsp+40h] [rbp-38h]
-  int v42; // [rsp+48h] [rbp-30h]
-  char *io_rpData; // [rsp+98h] [rbp+20h]
-  unsigned int io_rulDataSize; // [rsp+A0h] [rbp+28h]
-  unsigned int v45; // [rsp+A8h] [rbp+30h]
+  unsigned int v38; // [rsp+20h] [rbp-58h]
+  AkSwitchNodeParams v39; // [rsp+28h] [rbp-50h]
+  AkSwitchNodeParams v40; // [rsp+40h] [rbp-38h] BYREF
+  char *io_rpData; // [rsp+98h] [rbp+20h] BYREF
+  unsigned int io_rulDataSize; // [rsp+A0h] [rbp+28h] BYREF
+  unsigned int v43; // [rsp+A8h] [rbp+30h]
 
   io_rulDataSize = in_ulDataSize;
   io_rpData = in_pData + 4;
-  v3 = this;
-  result = CAkParameterNodeBase::SetNodeBaseParams((CAkParameterNodeBase *)&this->vfptr, &io_rpData, &io_rulDataSize, 0);
+  result = CAkParameterNodeBase::SetNodeBaseParams(this, &io_rpData, &io_rulDataSize, 0);
   if ( result == 1 )
   {
-    v5 = *(_DWORD *)io_rpData;
-    v6 = io_rpData + 4;
-    io_rpData = v6;
-    v7 = *(_DWORD *)v6;
-    v6 += 4;
-    io_rpData = v6;
-    v8 = *(_DWORD *)v6;
-    v6 += 4;
-    io_rpData = v6;
-    v9 = *v6;
-    io_rpData = v6 + 1;
+    v5 = io_rpData;
+    v6 = *(_DWORD *)io_rpData;
+    io_rpData += 4;
+    v7 = *((_DWORD *)v5 + 1);
+    io_rpData = v5 + 8;
+    v8 = *((_DWORD *)v5 + 2);
+    io_rpData = v5 + 12;
+    v9 = v5[12];
+    io_rpData = v5 + 13;
     result = 1;
-    if ( v7 != v3->m_ulGroupID || v5 != v3->m_eGroupType )
+    if ( v7 != this->m_ulGroupID || v6 != this->m_eGroupType )
     {
-      v3->m_ulGroupID = v7;
-      v3->m_eGroupType = v5;
-      result = CAkSwitchAware::SubscribeSwitch((CAkSwitchAware *)&v3->vfptr, v7, v5);
+      this->m_ulGroupID = v7;
+      this->m_eGroupType = v6;
+      result = CAkSwitchAware::SubscribeSwitch(&this->CAkSwitchAware, v7, v6);
     }
     if ( result == 1 )
     {
-      *((_BYTE *)&v3->0 + 83) &= 0x7Fu;
-      v3->m_ulDefaultSwitch = v8;
-      *((_BYTE *)&v3->0 + 83) |= (v9 != 0) << 7;
-      result = CAkParentNode<CAkParameterNode>::SetChildren(
-                 (CAkParentNode<CAkParameterNode> *)&v3->vfptr,
-                 &io_rpData,
-                 &io_rulDataSize);
+      *((_BYTE *)&this->CAkParameterNodeBase + 83) &= ~0x80u;
+      this->m_ulDefaultSwitch = v8;
+      *((_BYTE *)&this->CAkParameterNodeBase + 83) |= (v9 != 0) << 7;
+      result = CAkParentNode<CAkParameterNode>::SetChildren(this, &io_rpData, &io_rulDataSize);
       v10 = result;
       if ( result == 1 )
       {
         v11 = *(_DWORD *)io_rpData;
         io_rpData += 4;
-        v12 = &v3->m_SwitchList;
-        v39 = v11;
+        p_m_SwitchList = &this->m_SwitchList;
+        v38 = v11;
         CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::Reserve(
-          (CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault> *)&v3->m_SwitchList.m_pFirst,
+          &this->m_SwitchList,
           v11);
         v13 = io_rpData;
         v14 = 0;
         v15 = 0;
-        v45 = 0;
+        v43 = 0;
         if ( v11 )
         {
           while ( 1 )
           {
             v16 = *(_DWORD *)v13;
             io_rpData = v13 + 4;
-            v17 = CAkKeyList<unsigned long,CAkSwitchPackage,2,ArrayPoolDefault>::Set(v12, v16);
+            v17 = CAkKeyList<unsigned long,CAkSwitchPackage,2,ArrayPoolDefault>::Set(p_m_SwitchList, v16);
             if ( !v17 )
               return 2;
             v13 = io_rpData + 4;
@@ -163,51 +149,51 @@ int __fastcall CAkSwitchCntr::SetInitialValues(CAkSwitchCntr *this, char *in_pDa
             if ( v18 )
               break;
 LABEL_27:
-            v45 = ++v15;
-            if ( v15 >= v39 )
+            v43 = ++v15;
+            if ( v15 >= v38 )
               goto LABEL_30;
-            v12 = &v3->m_SwitchList;
+            p_m_SwitchList = &this->m_SwitchList;
           }
           while ( 1 )
           {
             v21 = *(_DWORD *)v13;
             v13 += 4;
-            v10 = 57;
+            v10 = AK_InvalidSwitchType;
             io_rpData = v13;
-            v22 = v17->m_list.m_pItems;
-            v23 = (signed __int64)&v17->m_list.m_pItems[v17->m_list.m_uLength];
+            m_pItems = v17->m_list.m_pItems;
+            v23 = (__int64)&v17->m_list.m_pItems[v17->m_list.m_uLength];
             if ( v17->m_list.m_pItems != (unsigned int *)v23 )
             {
               do
               {
-                if ( *v22 == v21 )
+                if ( *m_pItems == v21 )
                   break;
-                ++v22;
+                ++m_pItems;
               }
-              while ( v22 != (unsigned int *)v23 );
+              while ( m_pItems != (unsigned int *)v23 );
             }
             v24 = 0i64;
-            if ( v22 != (unsigned int *)v23 )
-              v24 = v22;
+            if ( m_pItems != (unsigned int *)v23 )
+              v24 = m_pItems;
             if ( !v24 )
             {
               v25 = AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault>::AddLast(&v17->m_list);
               if ( v25 )
               {
                 *v25 = v21;
-                v10 = 1;
+                v10 = AK_Success;
               }
               else
               {
-                v10 = 2;
+                v10 = AK_Fail;
               }
               v13 = io_rpData;
             }
-            if ( v10 != 1 )
+            if ( v10 != AK_Success )
               return v10;
             if ( ++v20 >= v18 )
             {
-              v15 = v45;
+              v15 = v43;
               goto LABEL_27;
             }
           }
@@ -219,28 +205,23 @@ LABEL_30:
           return v10;
         v27 = (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 24 * v26);
         v28 = v27;
-        v3->m_listParameters.m_pvMemStart = v27;
+        this->m_listParameters.m_pvMemStart = v27;
         if ( v27 )
         {
-          v3->m_listParameters.m_ulMinNumListItems = v26;
-          v3->m_listParameters.m_pFree = v27;
+          this->m_listParameters.m_ulMinNumListItems = v26;
+          this->m_listParameters.m_pFree = v27;
           v29 = 0;
-          if ( (_DWORD)v26 )
+          do
           {
-            do
-            {
-              ++v29;
-              v28->pNextListItem = v28 + 1;
-              ++v28;
-            }
-            while ( v29 < v3->m_listParameters.m_ulMinNumListItems );
+            ++v29;
+            v28->pNextListItem = v28 + 1;
+            ++v28;
           }
+          while ( v29 < this->m_listParameters.m_ulMinNumListItems );
           v28[-1].pNextListItem = 0i64;
         }
         v30 = io_rpData;
-        if ( !(_DWORD)v26 )
-          return v10;
-        v31 = v40;
+        v31 = *((_BYTE *)&v39 + 8);
         while ( 1 )
         {
           v32 = *(_DWORD *)v30;
@@ -250,23 +231,21 @@ LABEL_30:
           v34 = v30[5];
           io_rpData = v30 + 6;
           v35 = *(_DWORD *)(v30 + 6);
-          v36 = v30 + 10;
-          io_rpData = v36;
-          v36 += 4;
-          v31 = v31 & 0xE0 | v35 & 7 | 8 * ((v33 != 0) | 2 * (v34 != 0));
+          io_rpData = v30 + 10;
+          v36 = v30 + 14;
+          v31 = v31 & 0xE0 | v35 & 7 | (8 * ((v33 != 0) | (2 * (v34 != 0))));
           v37 = *((_DWORD *)v36 - 1);
           io_rpData = v36;
-          LODWORD(v38) = v37;
-          HIDWORD(v38) = *(_DWORD *)v36;
-          LOBYTE(v40) = v31;
-          v41 = v38;
+          v39.FadeOutTime = v37;
+          v39.FadeInTime = *(_DWORD *)v36;
+          *((_BYTE *)&v39 + 8) = v31;
+          v40 = v39;
           io_rpData = v36 + 4;
-          v42 = v40;
           result = 2
                  - (CAkKeyList<unsigned long,AkSwitchNodeParams,2,ArrayPoolDefault>::Set(
-                      &v3->m_listParameters,
+                      &this->m_listParameters,
                       v32,
-                      (AkSwitchNodeParams *)&v41) != 0i64);
+                      &v40) != 0i64);
           if ( result != 1 )
             break;
           if ( ++v14 >= (unsigned int)v26 )
@@ -283,32 +262,30 @@ LABEL_30:
 // RVA: 0xA89790
 AKRESULT __fastcall CAkSwitchCntr::Init(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // rbx
   AKRESULT result; // eax
 
-  v1 = this;
-  result = CAkMultiPlayNode::Init((CAkMultiPlayNode *)&this->vfptr);
-  if ( result == 1 )
+  result = CAkMultiPlayNode::Init(this);
+  if ( result == AK_Success )
   {
-    v1->m_SwitchList.m_ulMaxNumListItems = -1;
-    v1->m_SwitchList.m_ulNumListItems = 0;
-    v1->m_SwitchList.m_pFree = 0i64;
-    v1->m_SwitchList.m_pvMemStart = 0i64;
-    v1->m_SwitchList.m_pFirst = 0i64;
-    v1->m_SwitchList.m_pLast = 0i64;
-    v1->m_listParameters.m_ulNumListItems = 0;
-    v1->m_listParameters.m_pFree = 0i64;
-    v1->m_listParameters.m_pvMemStart = 0i64;
-    v1->m_listParameters.m_pFirst = 0i64;
-    v1->m_listParameters.m_pLast = 0i64;
-    v1->m_listParameters.m_ulMaxNumListItems = -1;
-    v1->m_listSwitchContPlayback.m_ulNumListItems = 0;
-    v1->m_listSwitchContPlayback.m_pFree = 0i64;
-    v1->m_listSwitchContPlayback.m_pvMemStart = 0i64;
-    v1->m_listSwitchContPlayback.m_pFirst = 0i64;
-    v1->m_listSwitchContPlayback.m_pLast = 0i64;
-    v1->m_listSwitchContPlayback.m_ulMaxNumListItems = -1;
-    result = 1;
+    this->m_SwitchList.m_ulMaxNumListItems = -1;
+    this->m_SwitchList.m_ulNumListItems = 0;
+    this->m_SwitchList.m_pFree = 0i64;
+    this->m_SwitchList.m_pvMemStart = 0i64;
+    this->m_SwitchList.m_pFirst = 0i64;
+    this->m_SwitchList.m_pLast = 0i64;
+    this->m_listParameters.m_ulNumListItems = 0;
+    this->m_listParameters.m_pFree = 0i64;
+    this->m_listParameters.m_pvMemStart = 0i64;
+    this->m_listParameters.m_pFirst = 0i64;
+    this->m_listParameters.m_pLast = 0i64;
+    this->m_listParameters.m_ulMaxNumListItems = -1;
+    this->m_listSwitchContPlayback.m_ulNumListItems = 0;
+    this->m_listSwitchContPlayback.m_pFree = 0i64;
+    this->m_listSwitchContPlayback.m_pvMemStart = 0i64;
+    this->m_listSwitchContPlayback.m_pFirst = 0i64;
+    this->m_listSwitchContPlayback.m_pLast = 0i64;
+    this->m_listSwitchContPlayback.m_ulMaxNumListItems = -1;
+    return 1;
   }
   return result;
 }
@@ -317,38 +294,35 @@ AKRESULT __fastcall CAkSwitchCntr::Init(CAkSwitchCntr *this)
 // RVA: 0xA898B0
 void __fastcall CAkSwitchCntr::OnPreRelease(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // rbx
-
-  v1 = this;
   CAkSwitchCntr::CleanSwitchContPlayback(this);
-  CAkParameterNodeBase::FlushStateTransitions((CAkParameterNodeBase *)&v1->vfptr);
+  CAkParameterNodeBase::FlushStateTransitions(this);
 }
 
 // File Line: 206
 // RVA: 0xA89450
 void __fastcall CAkSwitchCntr::CleanSwitchContPlayback(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // r14
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *i; // rbx
-  CAkRegisteredObj *v3; // rdi
+  CAkRegisteredObj *GameObject; // rdi
   int v4; // ecx
   int v5; // esi
 
-  v1 = this;
   if ( this->m_listSwitchContPlayback.m_ulMaxNumListItems )
   {
     for ( i = this->m_listSwitchContPlayback.m_pFirst; i; i = i->pNextListItem )
     {
       CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, i->Item.UserParameters.m_PlayingID);
-      ((void (__fastcall *)(CAkSwitchCntr *, signed __int64))v1->vfptr[9].Category)(v1, 3i64);
-      v3 = i->Item.GameObject;
-      v4 = *((_DWORD *)v3 + 30) ^ (*((_DWORD *)v3 + 30) ^ (*((_DWORD *)v3 + 30) - 1)) & 0x3FFFFFFF;
-      *((_DWORD *)v3 + 30) = v4;
-      if ( !(v4 & 0x3FFFFFFF) )
+      ((void (__fastcall *)(CAkSwitchCntr *, __int64))this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr[9].Category)(
+        this,
+        3i64);
+      GameObject = i->Item.GameObject;
+      v4 = *((_DWORD *)GameObject + 30) ^ (*((_DWORD *)GameObject + 30) ^ (*((_DWORD *)GameObject + 30) - 1)) & 0x3FFFFFFF;
+      *((_DWORD *)GameObject + 30) = v4;
+      if ( (v4 & 0x3FFFFFFF) == 0 )
       {
         v5 = g_DefaultPoolId;
-        CAkRegisteredObj::~CAkRegisteredObj(v3);
-        AK::MemoryMgr::Free(v5, v3);
+        CAkRegisteredObj::~CAkRegisteredObj(GameObject);
+        AK::MemoryMgr::Free(v5, GameObject);
       }
     }
   }
@@ -358,21 +332,19 @@ void __fastcall CAkSwitchCntr::CleanSwitchContPlayback(CAkSwitchCntr *this)
 // RVA: 0xA895B0
 void __fastcall CAkSwitchCntr::Create(unsigned int in_ulID)
 {
-  unsigned int v1; // ebx
   CAkSwitchCntr *v2; // rax
   CAkSwitchCntr *v3; // rax
   CAkSwitchCntr *v4; // rbx
 
-  v1 = in_ulID;
   v2 = (CAkSwitchCntr *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x178ui64);
   if ( v2 )
   {
-    CAkSwitchCntr::CAkSwitchCntr(v2, v1);
+    CAkSwitchCntr::CAkSwitchCntr(v2, in_ulID);
     v4 = v3;
     if ( v3 )
     {
-      if ( CAkSwitchCntr::Init(v3) != 1 )
-        v4->vfptr->Release((CAkIndexable *)&v4->vfptr);
+      if ( CAkSwitchCntr::Init(v3) != AK_Success )
+        v4->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr->Release(v4);
     }
   }
 }
@@ -381,193 +353,195 @@ void __fastcall CAkSwitchCntr::Create(unsigned int in_ulID)
 // RVA: 0xA89C70
 __int64 __fastcall CAkSwitchCntr::PlayInternal(CAkSwitchCntr *this, AkPBIParams *in_rPBIParams)
 {
-  CAkSwitchCntr *v2; // r14
-  AkPBIParams *v3; // r13
   bool v4; // bl
   AKRESULT v5; // edi
-  unsigned int v6; // eax
-  int v7; // er12
+  unsigned int SwitchToUse; // eax
+  int v7; // r12d
   bool v8; // zf
-  unsigned int v9; // esi
-  AkExternalSourceArray *v10; // r15
-  int v11; // eax
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v12; // rcx
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v13; // rax
+  unsigned int m_ulDefaultSwitch; // esi
+  CAkRegisteredObj *pExternalSrcs; // r15
+  unsigned int v11; // eax
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pLast; // rcx
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pFree; // rax
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v14; // rcx
-  CAkSwitchCntr::SwitchContPlaybackItem *v15; // rbx
-  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v16; // rax
+  CAkSwitchCntr::SwitchContPlaybackItem *p_Item; // rbx
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
   CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v17; // rcx
-  signed __int64 v18; // r15
-  int v19; // eax
-  unsigned int v20; // er8
-  CAkRegisteredObj *v21; // rdx
+  CAkSwitchPackage *v18; // r15
+  unsigned int v19; // eax
+  unsigned int key; // r8d
+  CAkRegisteredObj *pGameObj; // rdx
   bool v22; // si
-  unsigned int *v23; // rbx
+  unsigned int *m_pItems; // rbx
   char v24; // r12
   CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v25; // rax
   unsigned int v26; // edx
-  CAkParameterNode *v27; // rax
+  CAkParameterNode *NodePtrAndAddRef; // rax
   CAkParameterNode *v28; // rsi
   AKRESULT v29; // eax
   CAkContinuationList *v30; // rax
-  CAkContinuationList *v31; // rcx
+  CAkContinuationList *m_pT; // rcx
   AKRESULT v32; // eax
   AKRESULT v33; // eax
-  SafeContinuationList in_rSafeContList; // [rsp+20h] [rbp-E0h]
-  int v36; // [rsp+28h] [rbp-D8h]
-  int v37; // [rsp+2Ch] [rbp-D4h]
+  SafeContinuationList in_rSafeContList; // [rsp+20h] [rbp-E0h] BYREF
+  int FadeOutTime; // [rsp+28h] [rbp-D8h]
+  int FadeInTime; // [rsp+2Ch] [rbp-D4h]
   int v38; // [rsp+30h] [rbp-D0h]
-  CAkSwitchCntr::SwitchContPlaybackItem __that; // [rsp+40h] [rbp-C0h]
-  ContParams *in_pFrom; // [rsp+D0h] [rbp-30h]
-  int v41; // [rsp+D8h] [rbp-28h]
-  AkContParamsAndPath in_rContParams; // [rsp+E0h] [rbp-20h]
-  bool v43; // [rsp+160h] [rbp+60h]
-  bool v44; // [rsp+168h] [rbp+68h]
-  __int64 v45; // [rsp+170h] [rbp+70h]
-  __int64 v46; // [rsp+178h] [rbp+78h]
+  AkPBIParams __that; // [rsp+40h] [rbp-C0h] BYREF
+  AkContParamsAndPath in_rContParams; // [rsp+E0h] [rbp-20h] BYREF
+  bool v41; // [rsp+160h] [rbp+60h]
+  bool v42; // [rsp+168h] [rbp+68h]
+  AkSwitchHistItem v43; // [rsp+170h] [rbp+70h] BYREF
+  __int64 v44; // [rsp+178h] [rbp+78h]
 
-  v2 = this;
-  v3 = in_rPBIParams;
-  v4 = in_rPBIParams->eType != 0;
-  v5 = 2;
-  v43 = in_rPBIParams->eType != 0;
-  v6 = CAkSwitchAware::GetSwitchToUse(
-         (CAkSwitchAware *)&this->vfptr,
-         in_rPBIParams->pGameObj,
-         this->m_ulGroupID,
-         this->m_eGroupType);
+  v4 = in_rPBIParams->eType != PBI;
+  v5 = AK_Fail;
+  v41 = v4;
+  SwitchToUse = CAkSwitchAware::GetSwitchToUse(
+                  &this->CAkSwitchAware,
+                  in_rPBIParams->pGameObj,
+                  this->m_ulGroupID,
+                  this->m_eGroupType);
   v7 = 0;
-  v8 = *((_BYTE *)&v2->0 + 83) >= 0;
-  v46 = 0i64;
-  v9 = v6;
+  v8 = *((_BYTE *)&this->CAkParameterNodeBase + 83) >= 0;
+  v44 = 0i64;
+  m_ulDefaultSwitch = SwitchToUse;
   if ( !v8 )
   {
-    v10 = v3->userParams.m_CustomParam.pExternalSrcs;
-    __that.ePlaybackState = v3->ePlaybackState;
-    __that.GameObject = v3->pGameObj;
-    __that.UserParameters.m_PlayingID = v3->userParams.m_PlayingID;
-    __that.UserParameters.m_CustomParam.customParam = v3->userParams.m_CustomParam.customParam;
-    __that.UserParameters.m_CustomParam.ui32Reserved = v3->userParams.m_CustomParam.ui32Reserved;
-    if ( v10 )
-      ++v10->m_cRefCount;
-    __that.PlayHist.HistArray.uiArraySize = v3->playHistory.HistArray.uiArraySize;
-    v11 = *(_DWORD *)v3->playHistory.HistArray.aCntrHist;
-    __that.UserParameters.m_CustomParam.pExternalSrcs = v10;
-    *(_DWORD *)__that.PlayHist.HistArray.aCntrHist = v11;
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[2] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[2];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[4] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[4];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[6] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[6];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[8] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[8];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[10] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[10];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[12] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[12];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[14] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[14];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[16] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[16];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[18] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[18];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[20] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[20];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[22] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[22];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[24] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[24];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[26] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[26];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[28] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[28];
-    *(_DWORD *)&__that.PlayHist.HistArray.aCntrHist[30] = *(_DWORD *)&v3->playHistory.HistArray.aCntrHist[30];
-    __that.PlayHist.arrayIsContinuous.m_iBitArray = v3->playHistory.arrayIsContinuous.m_iBitArray;
-    if ( !((unsigned __int8 (__fastcall *)(CAkSwitchCntr *, signed __int64))v2->vfptr[9].Release)(v2, 3i64)
-      || !CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::CanAddOne(&v2->m_listSwitchContPlayback) )
+    pExternalSrcs = (CAkRegisteredObj *)in_rPBIParams->userParams.m_CustomParam.pExternalSrcs;
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[22] = in_rPBIParams->ePlaybackState;
+    __that.userParams.m_CustomParam.customParam = (__int64)in_rPBIParams->pGameObj;
+    LODWORD(__that.pTransitionParameters) = in_rPBIParams->userParams.m_PlayingID;
+    *(_QWORD *)&__that.eType = in_rPBIParams->userParams.m_CustomParam.customParam;
+    LODWORD(__that.pInstigator) = in_rPBIParams->userParams.m_CustomParam.ui32Reserved;
+    if ( pExternalSrcs )
+      ++LODWORD(pExternalSrcs->m_pListModifiedNodes);
+    __that.userParams.m_CustomParam.ui32Reserved = in_rPBIParams->playHistory.HistArray.uiArraySize;
+    v11 = *(_DWORD *)in_rPBIParams->playHistory.HistArray.aCntrHist;
+    __that.pGameObj = pExternalSrcs;
+    *(&__that.userParams.m_CustomParam.ui32Reserved + 1) = v11;
+    __that.userParams.m_CustomParam.pExternalSrcs = *(AkExternalSourceArray **)&in_rPBIParams->playHistory.HistArray.aCntrHist[2];
+    __that.userParams.m_PlayingID = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[6];
+    *(&__that.userParams.m_PlayingID + 1) = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[8];
+    __that.playHistory.HistArray.uiArraySize = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[10];
+    *(_DWORD *)__that.playHistory.HistArray.aCntrHist = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[12];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[2] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[14];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[4] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[16];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[6] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[18];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[8] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[20];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[10] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[22];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[12] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[24];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[14] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[26];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[16] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[28];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[18] = *(_DWORD *)&in_rPBIParams->playHistory.HistArray.aCntrHist[30];
+    *(_DWORD *)&__that.playHistory.HistArray.aCntrHist[20] = in_rPBIParams->playHistory.arrayIsContinuous.m_iBitArray;
+    if ( !((unsigned __int8 (__fastcall *)(CAkSwitchCntr *, __int64))this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr[9].Release)(
+            this,
+            3i64)
+      || !CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::CanAddOne(&this->m_listSwitchContPlayback) )
     {
       goto LABEL_11;
     }
-    v12 = v2->m_listSwitchContPlayback.m_pLast;
-    v13 = v2->m_listSwitchContPlayback.m_pFree;
-    if ( v12 )
-      v12->pNextListItem = v13;
+    m_pLast = this->m_listSwitchContPlayback.m_pLast;
+    m_pFree = this->m_listSwitchContPlayback.m_pFree;
+    if ( m_pLast )
+      m_pLast->pNextListItem = m_pFree;
     else
-      v2->m_listSwitchContPlayback.m_pFirst = v13;
-    v14 = v2->m_listSwitchContPlayback.m_pFree;
-    v2->m_listSwitchContPlayback.m_pLast = v14;
-    v2->m_listSwitchContPlayback.m_pFree = v14->pNextListItem;
+      this->m_listSwitchContPlayback.m_pFirst = m_pFree;
+    v14 = this->m_listSwitchContPlayback.m_pFree;
+    this->m_listSwitchContPlayback.m_pLast = v14;
+    this->m_listSwitchContPlayback.m_pFree = v14->pNextListItem;
     v14->pNextListItem = 0i64;
-    ++v2->m_listSwitchContPlayback.m_ulNumListItems;
-    v15 = &v2->m_listSwitchContPlayback.m_pLast->Item;
-    CAkSwitchCntr::SwitchContPlaybackItem::operator=(v15, &__that);
-    if ( !v15 )
+    ++this->m_listSwitchContPlayback.m_ulNumListItems;
+    p_Item = &this->m_listSwitchContPlayback.m_pLast->Item;
+    CAkSwitchCntr::SwitchContPlaybackItem::operator=(p_Item, (CAkSwitchCntr::SwitchContPlaybackItem *)&__that);
+    if ( !p_Item )
     {
-      v10 = __that.UserParameters.m_CustomParam.pExternalSrcs;
+      pExternalSrcs = __that.pGameObj;
 LABEL_11:
-      ((void (__fastcall *)(CAkSwitchCntr *, signed __int64))v2->vfptr[9].Category)(v2, 3i64);
-      if ( v10 )
-        AkExternalSourceArray::Release(v10);
+      ((void (__fastcall *)(CAkSwitchCntr *, __int64))this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr[9].Category)(
+        this,
+        3i64);
+      if ( pExternalSrcs )
+        AkExternalSourceArray::Release((AkExternalSourceArray *)pExternalSrcs);
       return (unsigned int)v5;
     }
-    *((_DWORD *)__that.GameObject + 30) ^= (*((_DWORD *)__that.GameObject + 30) ^ (*((_DWORD *)__that.GameObject + 30)
-                                                                                 + 1)) & 0x3FFFFFFF;
-    CAkPlayingMgr::AddItemActiveCount(g_pPlayingMgr, v3->userParams.m_PlayingID);
-    if ( __that.UserParameters.m_CustomParam.pExternalSrcs )
-      AkExternalSourceArray::Release(__that.UserParameters.m_CustomParam.pExternalSrcs);
-    v4 = v43;
+    *(_DWORD *)(__that.userParams.m_CustomParam.customParam + 120) ^= (*(_DWORD *)(__that.userParams.m_CustomParam.customParam
+                                                                                 + 120) ^ (*(_DWORD *)(__that.userParams.m_CustomParam.customParam + 120)
+                                                                                         + 1)) & 0x3FFFFFFF;
+    CAkPlayingMgr::AddItemActiveCount(g_pPlayingMgr, in_rPBIParams->userParams.m_PlayingID);
+    if ( __that.pGameObj )
+      AkExternalSourceArray::Release((AkExternalSourceArray *)__that.pGameObj);
+    v4 = v41;
   }
-  SafeContinuationList::SafeContinuationList(&in_rSafeContList, v3, (CAkMultiPlayNode *)&v2->vfptr);
-  v16 = v2->m_SwitchList.m_pFirst;
-  v17 = v16;
-  if ( !v16 )
+  SafeContinuationList::SafeContinuationList(&in_rSafeContList, in_rPBIParams, this);
+  m_pFirst = this->m_SwitchList.m_pFirst;
+  v17 = m_pFirst;
+  if ( !m_pFirst )
     goto LABEL_21;
-  while ( v17->Item.key != v9 )
+  while ( v17->Item.key != m_ulDefaultSwitch )
   {
     v17 = v17->pNextListItem;
     if ( !v17 )
       goto LABEL_21;
   }
-  v18 = (signed __int64)&v17->Item.item;
+  v18 = &v17->Item.item;
   if ( v17 == (CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *)-16i64 )
   {
 LABEL_21:
-    v9 = v2->m_ulDefaultSwitch;
-    if ( !v16 )
+    m_ulDefaultSwitch = this->m_ulDefaultSwitch;
+    if ( !m_pFirst )
       goto LABEL_24;
-    while ( v16->Item.key != v9 )
+    while ( m_pFirst->Item.key != m_ulDefaultSwitch )
     {
-      v16 = v16->pNextListItem;
-      if ( !v16 )
+      m_pFirst = m_pFirst->pNextListItem;
+      if ( !m_pFirst )
         goto LABEL_24;
     }
-    v18 = (signed __int64)&v16->Item.item;
-    if ( v16 == (CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *)-16i64 )
+    v18 = &m_pFirst->Item.item;
+    if ( m_pFirst == (CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *)-16i64 )
     {
 LABEL_24:
       if ( v4 )
         goto LABEL_79;
-      v5 = 1;
+      v5 = AK_Success;
       goto LABEL_76;
     }
   }
-  CAkRegistryMgr::GetSwitchHistItem(g_pRegistryMgr, (CAkRegisteredObj *)&v45, (__int64)v3->pGameObj, v2->key);
-  if ( (_DWORD)v45 == v9 )
+  CAkRegistryMgr::GetSwitchHistItem(
+    g_pRegistryMgr,
+    (CAkRegisteredObj *)&v43,
+    (__int64)in_rPBIParams->pGameObj,
+    this->key);
+  if ( v43.LastSwitch == m_ulDefaultSwitch )
   {
-    v19 = HIDWORD(v45) + 1;
+    v19 = v43.NumPlayBack + 1;
   }
   else
   {
-    LODWORD(v45) = v9;
+    v43.LastSwitch = m_ulDefaultSwitch;
     v19 = 1;
   }
-  v20 = v2->key;
-  v21 = v3->pGameObj;
-  HIDWORD(v45) = v19;
+  key = this->key;
+  pGameObj = in_rPBIParams->pGameObj;
+  v43.NumPlayBack = v19;
   v22 = v19 == 1;
-  v44 = v19 == 1;
-  CAkRegistryMgr::SetSwitchHistItem(g_pRegistryMgr, v21, v20, (AkSwitchHistItem *)&v45);
-  if ( !v4 && !*(_DWORD *)(v18 + 8) )
+  v42 = v19 == 1;
+  CAkRegistryMgr::SetSwitchHistItem(g_pRegistryMgr, pGameObj, key, &v43);
+  if ( !v4 && !v18->m_list.m_uLength )
   {
-    v5 = 1;
+    v5 = AK_Success;
     goto LABEL_76;
   }
-  v23 = *(unsigned int **)v18;
-  if ( *(_QWORD *)v18 == *(_QWORD *)v18 + 4i64 * *(unsigned int *)(v18 + 8) )
+  m_pItems = v18->m_list.m_pItems;
+  if ( v18->m_list.m_pItems == &v18->m_list.m_pItems[v18->m_list.m_uLength] )
     goto LABEL_71;
   v24 = v38;
   do
   {
-    AkPBIParams::AkPBIParams((AkPBIParams *)&__that, v3);
-    v25 = v2->m_listParameters.m_pFirst;
-    v26 = *v23;
+    AkPBIParams::AkPBIParams(&__that, in_rPBIParams);
+    v25 = this->m_listParameters.m_pFirst;
+    v26 = *m_pItems;
     if ( !v25 )
       goto LABEL_38;
     while ( v25->Item.key != v26 )
@@ -576,130 +550,118 @@ LABEL_24:
       if ( !v25 )
         goto LABEL_38;
     }
-    if ( v25 != (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
-    {
-      v36 = v25->Item.item.FadeOutTime;
-      v37 = v25->Item.item.FadeInTime;
-      v38 = *((_DWORD *)&v25->Item.item + 2);
-      v24 = v38;
-    }
-    else
+    if ( v25 == (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
     {
 LABEL_38:
       v24 &= 0xE0u;
     }
-    if ( (v22 || !(v24 & 8)) && (!v41 || !(_DWORD)v46) )
+    else
     {
-      v27 = (CAkParameterNode *)CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v26, 0);
-      v28 = v27;
-      if ( !v27 )
+      FadeOutTime = v25->Item.item.FadeOutTime;
+      FadeInTime = v25->Item.item.FadeInTime;
+      v38 = *((_DWORD *)&v25->Item.item + 2);
+      v24 = v38;
+    }
+    if ( (v22 || (v24 & 8) == 0) && (!__that.sequenceID || !(_DWORD)v44) )
+    {
+      NodePtrAndAddRef = (CAkParameterNode *)CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v26, AkNodeType_Default);
+      v28 = NodePtrAndAddRef;
+      if ( !NodePtrAndAddRef )
       {
 LABEL_66:
-        v22 = v44;
+        v22 = v42;
         goto LABEL_67;
       }
-      if ( !v43 )
+      if ( !v41 )
       {
-        v29 = (unsigned int)CAkParameterNode::HandleInitialDelay(v27, (AkPBIParams *)&__that);
+        v29 = (unsigned int)CAkParameterNode::HandleInitialDelay(NodePtrAndAddRef, &__that);
         v5 = v29;
-        if ( v29 == 3 )
+        if ( v29 == AK_PartialSuccess )
         {
-          v5 = 1;
+          v5 = AK_Success;
           goto LABEL_64;
         }
-        if ( v29 == 1 )
-          v5 = ((unsigned int (__fastcall *)(CAkParameterNode *, CAkSwitchCntr::SwitchContPlaybackItem *))v28->vfptr[19].Category)(
-                 v28,
-                 &__that);
+        if ( v29 == AK_Success )
+          v5 = ((unsigned int (__fastcall *)(CAkParameterNode *, AkPBIParams *))v28->vfptr[19].Category)(v28, &__that);
 LABEL_63:
-        if ( v5 != 1 )
+        if ( v5 != AK_Success )
         {
 LABEL_65:
-          v28->vfptr->Release((CAkIndexable *)&v28->vfptr);
+          v28->vfptr->Release(v28);
           goto LABEL_66;
         }
 LABEL_64:
-        LODWORD(v46) = v46 + 1;
+        LODWORD(v44) = v44 + 1;
         goto LABEL_65;
       }
-      AkContParamsAndPath::AkContParamsAndPath(&in_rContParams, in_pFrom);
-      if ( *(_DWORD *)(v18 + 8) == 1 )
+      AkContParamsAndPath::AkContParamsAndPath(&in_rContParams, __that.pContinuousParams);
+      if ( v18->m_list.m_uLength == 1 )
       {
         CAkMultiPlayNode::ContGetList(
-          (CAkMultiPlayNode *)&v2->vfptr,
-          in_pFrom->spContList.m_pT,
+          this,
+          __that.pContinuousParams->spContList.m_pT,
           &in_rContParams.m_continuousParams.spContList);
         goto LABEL_57;
       }
       v30 = CAkContinuationList::Create();
-      v31 = in_rContParams.m_continuousParams.spContList.m_pT;
+      m_pT = in_rContParams.m_continuousParams.spContList.m_pT;
       in_rContParams.m_continuousParams.spContList.m_pT = v30;
-      if ( v31 )
+      if ( m_pT )
       {
-        CAkContinuationList::Release(v31);
+        CAkContinuationList::Release(m_pT);
         v30 = in_rContParams.m_continuousParams.spContList.m_pT;
       }
       if ( v30 )
       {
-        v5 = CAkMultiPlayNode::AddMultiplayItem(
-               (CAkMultiPlayNode *)&v2->vfptr,
-               &in_rContParams,
-               (AkPBIParams *)&__that,
-               &in_rSafeContList);
-        if ( v5 == 1 )
+        v5 = CAkMultiPlayNode::AddMultiplayItem(this, &in_rContParams, &__that, &in_rSafeContList);
+        if ( v5 == AK_Success )
         {
 LABEL_57:
-          in_pFrom = (ContParams *)&in_rContParams;
-          v32 = (unsigned int)CAkParameterNode::HandleInitialDelay(v28, (AkPBIParams *)&__that);
+          __that.pContinuousParams = (ContParams *)&in_rContParams;
+          v32 = (unsigned int)CAkParameterNode::HandleInitialDelay(v28, &__that);
           v5 = v32;
-          if ( v32 == 3 )
+          if ( v32 == AK_PartialSuccess )
           {
-            v5 = 1;
+            v5 = AK_Success;
           }
-          else if ( v32 == 1 )
+          else if ( v32 == AK_Success )
           {
-            v5 = ((unsigned int (__fastcall *)(CAkParameterNode *, CAkSwitchCntr::SwitchContPlaybackItem *))v28->vfptr[19].Category)(
-                   v28,
-                   &__that);
+            v5 = ((unsigned int (__fastcall *)(CAkParameterNode *, AkPBIParams *))v28->vfptr[19].Category)(v28, &__that);
           }
-          goto LABEL_62;
         }
       }
       else
       {
-        v5 = 52;
+        v5 = AK_InsufficientMemory;
       }
-LABEL_62:
       AkContParamsAndPath::~AkContParamsAndPath(&in_rContParams);
       goto LABEL_63;
     }
 LABEL_67:
-    if ( *(_QWORD *)&__that.PlayHist.HistArray.aCntrHist[2] )
-      AkExternalSourceArray::Release(*(AkExternalSourceArray **)&__that.PlayHist.HistArray.aCntrHist[2]);
-    ++v23;
+    if ( __that.userParams.m_CustomParam.pExternalSrcs )
+      AkExternalSourceArray::Release(__that.userParams.m_CustomParam.pExternalSrcs);
+    ++m_pItems;
   }
-  while ( v23 != (unsigned int *)(*(_QWORD *)v18 + 4i64 * *(unsigned int *)(v18 + 8)) );
-  v7 = v46;
+  while ( m_pItems != &v18->m_list.m_pItems[v18->m_list.m_uLength] );
+  v7 = v44;
 LABEL_71:
-  if ( !v43 )
+  if ( !v41 )
     goto LABEL_76;
   if ( v7 )
     goto LABEL_73;
 LABEL_79:
-  if ( *((_BYTE *)&v2->0 + 83) < 0 )
+  if ( *((char *)&this->CAkParameterNodeBase + 83) < 0 )
   {
 LABEL_73:
     if ( in_rSafeContList.m_spBackupContinuationList.m_pT )
     {
-      v33 = CAkMultiPlayNode::ContUnrefList(
-              (CAkMultiPlayNode *)&v2->vfptr,
-              in_rSafeContList.m_spBackupContinuationList.m_pT);
+      v33 = CAkMultiPlayNode::ContUnrefList(this, in_rSafeContList.m_spBackupContinuationList.m_pT);
       goto LABEL_75;
     }
   }
   else
   {
-    v33 = CAkMultiPlayNode::PlayAndContinueAlternateMultiPlay((CAkMultiPlayNode *)&v2->vfptr, v3);
+    v33 = CAkMultiPlayNode::PlayAndContinueAlternateMultiPlay(this, in_rPBIParams);
 LABEL_75:
     v5 = v33;
 LABEL_76:
@@ -711,37 +673,33 @@ LABEL_76:
 
 // File Line: 403
 // RVA: 0xA89610
-signed __int64 __fastcall CAkSwitchCntr::ExecuteAction(CAkSwitchCntr *this, ActionParams *in_rAction)
+__int64 __fastcall CAkSwitchCntr::ExecuteAction(CAkSwitchCntr *this, ActionParams *in_rAction)
 {
-  ActionParams *v2; // rbx
-  CAkSwitchCntr *v3; // rdi
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v5; // rax
   unsigned int v6; // ecx
   CAkRegisteredObj *j; // rdx
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v8; // rax
-  unsigned int v9; // ecx
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
+  unsigned int playingID; // ecx
   CAkRegisteredObj *i; // rdx
 
-  v2 = in_rAction;
-  v3 = this;
   switch ( in_rAction->eType )
   {
-    case 0:
+    case ActionParamType_Stop:
       goto LABEL_5;
-    case 1:
-      v8 = this->m_listSwitchContPlayback.m_pFirst;
-      v9 = in_rAction->playingID;
-      for ( i = in_rAction->pGameObj; v8; v8 = v8->pNextListItem )
+    case ActionParamType_Pause:
+      m_pFirst = this->m_listSwitchContPlayback.m_pFirst;
+      playingID = in_rAction->playingID;
+      for ( i = in_rAction->pGameObj; m_pFirst; m_pFirst = m_pFirst->pNextListItem )
       {
-        if ( (!i || i == v8->Item.GameObject)
-          && (!v9 || v8->Item.UserParameters.m_PlayingID == v9)
-          && v8->Item.ePlaybackState != 1 )
+        if ( (!i || i == m_pFirst->Item.GameObject)
+          && (!playingID || m_pFirst->Item.UserParameters.m_PlayingID == playingID)
+          && m_pFirst->Item.ePlaybackState != PB_Paused )
         {
-          v8->Item.ePlaybackState = 1;
+          m_pFirst->Item.ePlaybackState = PB_Paused;
         }
       }
       break;
-    case 2:
+    case ActionParamType_Resume:
       v5 = this->m_listSwitchContPlayback.m_pFirst;
       v6 = in_rAction->playingID;
       for ( j = in_rAction->pGameObj; v5; v5 = v5->pNextListItem )
@@ -749,43 +707,39 @@ signed __int64 __fastcall CAkSwitchCntr::ExecuteAction(CAkSwitchCntr *this, Acti
         if ( (!j || j == v5->Item.GameObject) && (!v6 || v5->Item.UserParameters.m_PlayingID == v6) )
         {
           if ( v5->Item.ePlaybackState )
-            v5->Item.ePlaybackState = 0;
+            v5->Item.ePlaybackState = PB_Playing;
         }
       }
       break;
-    case 3:
+    case ActionParamType_Break:
 LABEL_5:
       CAkSwitchCntr::StopContSwitchInst(this, in_rAction->pGameObj, in_rAction->playingID);
-      return CAkActiveParent<CAkParameterNode>::ExecuteAction((CAkActiveParent<CAkParameterNode> *)&v3->vfptr, v2);
+      break;
   }
-  return CAkActiveParent<CAkParameterNode>::ExecuteAction((CAkActiveParent<CAkParameterNode> *)&v3->vfptr, v2);
+  return CAkActiveParent<CAkParameterNode>::ExecuteAction(this, in_rAction);
 }
 
 // File Line: 421
 // RVA: 0xA896E0
-signed __int64 __fastcall CAkSwitchCntr::ExecuteActionExcept(CAkSwitchCntr *this, ActionParamsExcept *in_rAction)
+__int64 __fastcall CAkSwitchCntr::ExecuteActionExcept(CAkSwitchCntr *this, ActionParamsExcept *in_rAction)
 {
-  ActionParamsExcept *v2; // rbx
-  CAkSwitchCntr *v3; // rdi
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v4; // rax
   CAkRegisteredObj *j; // r8
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v6; // rax
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
   CAkRegisteredObj *i; // rcx
 
-  v2 = in_rAction;
-  v3 = this;
   if ( in_rAction->eType )
   {
-    if ( in_rAction->eType == 1 )
+    if ( in_rAction->eType == ActionParamType_Pause )
     {
-      v6 = this->m_listSwitchContPlayback.m_pFirst;
-      for ( i = in_rAction->pGameObj; v6; v6 = v6->pNextListItem )
+      m_pFirst = this->m_listSwitchContPlayback.m_pFirst;
+      for ( i = in_rAction->pGameObj; m_pFirst; m_pFirst = m_pFirst->pNextListItem )
       {
-        if ( (!i || i == v6->Item.GameObject) && v6->Item.ePlaybackState != 1 )
-          v6->Item.ePlaybackState = 1;
+        if ( (!i || i == m_pFirst->Item.GameObject) && m_pFirst->Item.ePlaybackState != PB_Paused )
+          m_pFirst->Item.ePlaybackState = PB_Paused;
       }
     }
-    else if ( in_rAction->eType == 2 )
+    else if ( in_rAction->eType == ActionParamType_Resume )
     {
       v4 = this->m_listSwitchContPlayback.m_pFirst;
       for ( j = in_rAction->pGameObj; v4; v4 = v4->pNextListItem )
@@ -793,7 +747,7 @@ signed __int64 __fastcall CAkSwitchCntr::ExecuteActionExcept(CAkSwitchCntr *this
         if ( !j || j == v4->Item.GameObject )
         {
           if ( v4->Item.ePlaybackState )
-            v4->Item.ePlaybackState = 0;
+            v4->Item.ePlaybackState = PB_Playing;
         }
       }
     }
@@ -802,137 +756,131 @@ signed __int64 __fastcall CAkSwitchCntr::ExecuteActionExcept(CAkSwitchCntr *this
   {
     CAkSwitchCntr::StopContSwitchInst(this, in_rAction->pGameObj, 0);
   }
-  return CAkActiveParent<CAkParameterNode>::ExecuteActionExcept((CAkActiveParent<CAkParameterNode> *)&v3->vfptr, v2);
+  return CAkActiveParent<CAkParameterNode>::ExecuteActionExcept(this, in_rAction);
 }
 
 // File Line: 440
 // RVA: 0xA8ABF0
-void __fastcall CAkSwitchCntr::StopContSwitchInst(CAkSwitchCntr *this, CAkRegisteredObj *in_pGameObj, unsigned int in_PlayingID)
+void __fastcall CAkSwitchCntr::StopContSwitchInst(
+        CAkSwitchCntr *this,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int in_PlayingID)
 {
-  CAkSwitchCntr *v3; // rbx
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v4; // rax
   char v5; // cl
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v6; // rdi
-  unsigned int v7; // er14
-  CAkRegisteredObj *v8; // rbp
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v9; // rcx
-  CAkRegisteredObj *v10; // rsi
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rcx
+  CAkRegisteredObj *GameObject; // rsi
   int v11; // ecx
   int v12; // edi
-  __m128i v13; // [rsp+20h] [rbp-28h]
-  __m128i v14; // [rsp+30h] [rbp-18h]
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v13; // [rsp+20h] [rbp-28h]
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v14; // [rsp+28h] [rbp-20h]
 
-  v3 = this;
   v4 = 0i64;
   v5 = 0;
-  v6 = v3->m_listSwitchContPlayback.m_pFirst;
-  v7 = in_PlayingID;
-  v8 = in_pGameObj;
-  if ( v6 )
+  m_pFirst = this->m_listSwitchContPlayback.m_pFirst;
+  if ( m_pFirst )
   {
     do
     {
-      if ( v8 && v8 != v6->Item.GameObject || v7 && v6->Item.UserParameters.m_PlayingID != v7 )
+      if ( (!in_pGameObj || in_pGameObj == m_pFirst->Item.GameObject)
+        && (!in_PlayingID || m_pFirst->Item.UserParameters.m_PlayingID == in_PlayingID) )
       {
-        v4 = v6;
-        v6 = v6->pNextListItem;
+        pNextListItem = m_pFirst->pNextListItem;
+        v14 = v4;
+        v13 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_listSwitchContPlayback.m_pFirst )
+          this->m_listSwitchContPlayback.m_pFirst = pNextListItem;
+        else
+          v4->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_listSwitchContPlayback.m_pLast )
+          this->m_listSwitchContPlayback.m_pLast = v4;
+        m_pFirst->pNextListItem = this->m_listSwitchContPlayback.m_pFree;
+        --this->m_listSwitchContPlayback.m_ulNumListItems;
+        this->m_listSwitchContPlayback.m_pFree = m_pFirst;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, m_pFirst->Item.UserParameters.m_PlayingID);
+        ((void (__fastcall *)(CAkSwitchCntr *, __int64))this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr[9].Category)(
+          this,
+          3i64);
+        GameObject = m_pFirst->Item.GameObject;
+        v11 = *((_DWORD *)GameObject + 30) ^ (*((_DWORD *)GameObject + 30) ^ (*((_DWORD *)GameObject + 30) - 1)) & 0x3FFFFFFF;
+        *((_DWORD *)GameObject + 30) = v11;
+        if ( (v11 & 0x3FFFFFFF) == 0 )
+        {
+          v12 = g_DefaultPoolId;
+          CAkRegisteredObj::~CAkRegisteredObj(GameObject);
+          AK::MemoryMgr::Free(v12, GameObject);
+        }
+        v4 = v14;
+        m_pFirst = v13;
+        v5 = 1;
       }
       else
       {
-        v9 = v6->pNextListItem;
-        v13.m128i_i64[1] = (__int64)v4;
-        v13.m128i_i64[0] = (__int64)v6->pNextListItem;
-        if ( v6 == v3->m_listSwitchContPlayback.m_pFirst )
-          v3->m_listSwitchContPlayback.m_pFirst = v9;
-        else
-          v4->pNextListItem = v9;
-        if ( v6 == v3->m_listSwitchContPlayback.m_pLast )
-          v3->m_listSwitchContPlayback.m_pLast = v4;
-        v6->pNextListItem = v3->m_listSwitchContPlayback.m_pFree;
-        --v3->m_listSwitchContPlayback.m_ulNumListItems;
-        v3->m_listSwitchContPlayback.m_pFree = v6;
-        _mm_store_si128(&v14, v13);
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v6->Item.UserParameters.m_PlayingID);
-        ((void (__fastcall *)(CAkSwitchCntr *, signed __int64))v3->vfptr[9].Category)(v3, 3i64);
-        v10 = v6->Item.GameObject;
-        v11 = *((_DWORD *)v10 + 30) ^ (*((_DWORD *)v10 + 30) ^ (*((_DWORD *)v10 + 30) - 1)) & 0x3FFFFFFF;
-        *((_DWORD *)v10 + 30) = v11;
-        if ( !(v11 & 0x3FFFFFFF) )
-        {
-          v12 = g_DefaultPoolId;
-          CAkRegisteredObj::~CAkRegisteredObj(v10);
-          AK::MemoryMgr::Free(v12, v10);
-        }
-        v4 = (CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *)v14.m128i_i64[1];
-        v6 = (CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *)v14.m128i_i64[0];
-        v5 = 1;
+        v4 = m_pFirst;
+        m_pFirst = m_pFirst->pNextListItem;
       }
     }
-    while ( v6 );
+    while ( m_pFirst );
     if ( v5 )
-      CAkRegistryMgr::ClearSwitchHist(g_pRegistryMgr, v3->key, v8);
+      CAkRegistryMgr::ClearSwitchHist(g_pRegistryMgr, this->key, in_pGameObj);
   }
 }
 
 // File Line: 537
 // RVA: 0xA8A540
-void __fastcall CAkSwitchCntr::RemoveChild(CAkSwitchCntr *this, CAkParameterNodeBase *in_pChild, __int64 a3, __int64 a4)
+void __fastcall CAkSwitchCntr::RemoveChild(CAkSwitchCntr *this, CAkParameterNodeBase *in_pChild)
 {
-  unsigned int v4; // edi
-  CAkParameterNodeBase *v5; // r8
-  CAkSwitchCntr *v6; // rbx
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v7; // rcx
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v8; // rdx
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v9; // rax
-  bool v10; // zf
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v11; // rcx
+  unsigned int key; // edi
+  char v3; // r9
+  CAkParameterNodeBase *v4; // r8
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v7; // rdx
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v8; // rax
+  bool v9; // zf
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rcx
 
-  v4 = in_pChild->key;
-  LOBYTE(a4) = 0;
-  v5 = in_pChild;
-  v6 = this;
-  if ( (CAkSwitchCntr *)in_pChild->m_pParentNode == this )
+  key = in_pChild->key;
+  v3 = 0;
+  v4 = in_pChild;
+  if ( in_pChild->m_pParentNode == this )
   {
-    ((void (__fastcall *)(CAkParameterNodeBase *, _QWORD, CAkParameterNodeBase *, __int64))in_pChild->vfptr[1].Release)(
-      in_pChild,
-      0i64,
-      in_pChild,
-      a4);
+    ((void (__fastcall *)(CAkParameterNodeBase *, _QWORD))in_pChild->vfptr[1].Release)(in_pChild, 0i64);
     AkSortedKeyArray<unsigned long,CAkParameterNodeBase *,ArrayPoolDefault,AkChildIDValueGetKey,1>::Unset<unsigned long>(
-      &v6->m_mapChildId,
-      v4);
-    LOBYTE(a4) = 1;
+      &this->m_mapChildId,
+      key);
+    v3 = 1;
   }
-  v7 = v6->m_listParameters.m_pFirst;
-  v8 = 0i64;
-  v9 = v7;
-  if ( v7 )
+  m_pFirst = this->m_listParameters.m_pFirst;
+  v7 = 0i64;
+  v8 = m_pFirst;
+  if ( m_pFirst )
   {
-    while ( v9->Item.key != v4 )
+    while ( v8->Item.key != key )
     {
-      v8 = v9;
-      v9 = v9->pNextListItem;
-      if ( !v9 )
+      v7 = v8;
+      v8 = v8->pNextListItem;
+      if ( !v8 )
         goto LABEL_13;
     }
-    v10 = v9 == v7;
-    v11 = v9->pNextListItem;
-    if ( v10 )
-      v6->m_listParameters.m_pFirst = v11;
+    v9 = v8 == m_pFirst;
+    pNextListItem = v8->pNextListItem;
+    if ( v9 )
+      this->m_listParameters.m_pFirst = pNextListItem;
     else
-      v8->pNextListItem = v11;
-    if ( v9 == v6->m_listParameters.m_pLast )
-      v6->m_listParameters.m_pLast = v8;
-    v9->pNextListItem = v6->m_listParameters.m_pFree;
-    --v6->m_listParameters.m_ulNumListItems;
-    v6->m_listParameters.m_pFree = v9;
+      v7->pNextListItem = pNextListItem;
+    if ( v8 == this->m_listParameters.m_pLast )
+      this->m_listParameters.m_pLast = v7;
+    v8->pNextListItem = this->m_listParameters.m_pFree;
+    --this->m_listParameters.m_ulNumListItems;
+    this->m_listParameters.m_pFree = v8;
   }
 LABEL_13:
-  if ( (_BYTE)a4 )
-    ((void (__fastcall *)(CAkSwitchCntr *, CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *, CAkParameterNodeBase *))v6->vfptr->Release)(
-      v6,
-      v8,
-      v5);
+  if ( v3 )
+    ((void (__fastcall *)(CAkSwitchCntr *, CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *, CAkParameterNodeBase *))this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr->Release)(
+      this,
+      v7,
+      v4);
 }
 
 // File Line: 561
@@ -945,70 +893,67 @@ void __fastcall CAkSwitchCntr::SetSwitch(CAkSwitchCntr *this, unsigned int in_Sw
 
 // File Line: 569
 // RVA: 0xA8A4B0
-signed __int64 __fastcall CAkSwitchCntr::PrepareNodeList(CAkSwitchCntr *this, AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_rNodeList)
+__int64 __fastcall CAkSwitchCntr::PrepareNodeList(
+        CAkSwitchCntr *this,
+        AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_rNodeList)
 {
-  unsigned int *v2; // rdi
-  AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v3; // rsi
+  unsigned int *m_pItems; // rdi
   unsigned int v4; // ebp
   unsigned int *i; // rbx
 
-  v2 = in_rNodeList->m_pItems;
-  v3 = in_rNodeList;
+  m_pItems = in_rNodeList->m_pItems;
   if ( in_rNodeList->m_pItems == &in_rNodeList->m_pItems[in_rNodeList->m_uLength] )
     return 1i64;
   do
   {
-    v4 = CAkParameterNodeBase::PrepareNodeData(*v2);
+    v4 = CAkParameterNodeBase::PrepareNodeData(*m_pItems);
     if ( v4 != 1 )
     {
-      for ( i = v3->m_pItems; i != v2; ++i )
+      for ( i = in_rNodeList->m_pItems; i != m_pItems; ++i )
         CAkParameterNodeBase::UnPrepareNodeData(*i);
     }
-    ++v2;
+    ++m_pItems;
   }
-  while ( v2 != &v3->m_pItems[v3->m_uLength] );
+  while ( m_pItems != &in_rNodeList->m_pItems[in_rNodeList->m_uLength] );
   return v4;
 }
 
 // File Line: 588
 // RVA: 0xA8B290
-void __fastcall CAkSwitchCntr::UnPrepareNodeList(CAkSwitchCntr *this, AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_rNodeList)
+void __fastcall CAkSwitchCntr::UnPrepareNodeList(
+        CAkSwitchCntr *this,
+        AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_rNodeList)
 {
-  unsigned int *v2; // rbx
-  AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *i; // rdi
+  unsigned int *i; // rbx
 
-  v2 = in_rNodeList->m_pItems;
-  for ( i = in_rNodeList; v2 != &i->m_pItems[i->m_uLength]; ++v2 )
-    CAkParameterNodeBase::UnPrepareNodeData(*v2);
+  for ( i = in_rNodeList->m_pItems; i != &in_rNodeList->m_pItems[in_rNodeList->m_uLength]; ++i )
+    CAkParameterNodeBase::UnPrepareNodeData(*i);
 }
 
 // File Line: 596
 // RVA: 0xA89850
 AKRESULT __fastcall CAkSwitchCntr::ModifyActiveState(CAkSwitchCntr *this, unsigned int in_stateID, bool in_bSupported)
 {
-  CAkParameterNodeBase::FXChunk *v3; // r9
+  CAkParameterNodeBase::FXChunk *m_pFXChunk; // r9
   CAkSwitchCntr *v5; // rcx
   AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v6; // rdx
 
   if ( this->key )
   {
-    v3 = this->m_pFXChunk;
-    if ( v3 )
+    m_pFXChunk = this->m_pFXChunk;
+    if ( m_pFXChunk )
     {
-      while ( *(_DWORD *)&v3->aFX[1].bRendered != in_stateID )
+      while ( *(_DWORD *)&m_pFXChunk->aFX[1].bRendered != in_stateID )
       {
-        v3 = (CAkParameterNodeBase::FXChunk *)v3->aFX[0];
-        if ( !v3 )
+        m_pFXChunk = (CAkParameterNodeBase::FXChunk *)m_pFXChunk->aFX[0];
+        if ( !m_pFXChunk )
           return 1;
       }
-      if ( v3 )
-      {
-        v5 = (CAkSwitchCntr *)((char *)this - 192);
-        v6 = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)&v3->aFX[2];
-        if ( in_bSupported )
-          return CAkSwitchCntr::PrepareNodeList(v5, v6);
-        CAkSwitchCntr::UnPrepareNodeList(v5, v6);
-      }
+      v5 = (CAkSwitchCntr *)((char *)this - 192);
+      v6 = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)&m_pFXChunk->aFX[2];
+      if ( in_bSupported )
+        return CAkSwitchCntr::PrepareNodeList(v5, v6);
+      CAkSwitchCntr::UnPrepareNodeList(v5, v6);
     }
   }
   return 1;
@@ -1018,106 +963,99 @@ AKRESULT __fastcall CAkSwitchCntr::ModifyActiveState(CAkSwitchCntr *this, unsign
 // RVA: 0xA8A2F0
 __int64 __fastcall CAkSwitchCntr::PrepareData(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // r14
-  unsigned int v3; // eax
+  unsigned int m_uPreparationCount; // eax
   AKRESULT v4; // ebp
-  CAkPreparedContent *v5; // r15
-  AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v6; // rsi
-  unsigned int *v7; // rcx
-  signed __int64 v8; // rax
-  AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *i; // rdi
+  CAkPreparedContent *PreparedContent; // r15
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rsi
+  unsigned int *m_pItems; // rcx
+  __int64 v8; // rax
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *i; // rdi
   unsigned int *v10; // rcx
-  signed __int64 v11; // rax
+  __int64 v11; // rax
   unsigned int *v12; // rbx
-  AkGroupType v13; // er8
-  unsigned int v14; // edx
+  AkGroupType m_eGroupType; // r8d
+  unsigned int m_ulGroupID; // edx
 
-  v1 = this;
-  if ( !unk_14249E980 )
-    return CAkActiveParent<CAkParameterNode>::PrepareData((CAkActiveParent<CAkParameterNode> *)&this->vfptr);
-  v3 = this->m_uPreparationCount;
-  v4 = 1;
-  if ( v3 )
+  if ( !g_settings.bEnableGameSyncPreparation )
+    return CAkActiveParent<CAkParameterNode>::PrepareData(this);
+  m_uPreparationCount = this->m_uPreparationCount;
+  v4 = AK_Success;
+  if ( m_uPreparationCount )
   {
-    this->m_uPreparationCount = v3 + 1;
+    this->m_uPreparationCount = m_uPreparationCount + 1;
   }
   else
   {
-    v5 = CAkPreparationAware::GetPreparedContent(
-           (CAkPreparationAware *)&this->vfptr,
-           this->m_ulGroupID,
-           this->m_eGroupType);
-    if ( v5 )
+    PreparedContent = CAkPreparationAware::GetPreparedContent(
+                        &this->CAkPreparationAware,
+                        this->m_ulGroupID,
+                        this->m_eGroupType);
+    if ( PreparedContent )
     {
-      v6 = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)v1->m_SwitchList.m_pFirst;
-      if ( !v6 )
-        goto LABEL_29;
+      m_pFirst = this->m_SwitchList.m_pFirst;
+      if ( !m_pFirst )
+        goto LABEL_22;
       do
       {
-        v7 = v5->m_PreparableContentList.m_pItems;
-        v8 = (signed __int64)&v5->m_PreparableContentList.m_pItems[v5->m_PreparableContentList.m_uLength];
-        if ( v5->m_PreparableContentList.m_pItems != (unsigned int *)v8 )
+        m_pItems = PreparedContent->m_PreparableContentList.m_pItems;
+        v8 = (__int64)&PreparedContent->m_PreparableContentList.m_pItems[PreparedContent->m_PreparableContentList.m_uLength];
+        if ( PreparedContent->m_PreparableContentList.m_pItems != (unsigned int *)v8 )
         {
           do
           {
-            if ( *v7 == v6->m_uLength )
+            if ( *m_pItems == m_pFirst->Item.key )
               break;
-            ++v7;
+            ++m_pItems;
           }
-          while ( v7 != (unsigned int *)v8 );
-          if ( v7 != (unsigned int *)v8 )
-            v4 = CAkSwitchCntr::PrepareNodeList(v1, v6 + 1);
+          while ( m_pItems != (unsigned int *)v8 );
+          if ( m_pItems != (unsigned int *)v8 )
+            v4 = CAkSwitchCntr::PrepareNodeList(this, &m_pFirst->Item.item.m_list);
         }
-        if ( v4 != 1 )
+        if ( v4 != AK_Success )
         {
-          for ( i = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)v1->m_SwitchList.m_pFirst;
-                i != v6;
-                i = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)i->m_pItems )
+          for ( i = this->m_SwitchList.m_pFirst; i != m_pFirst; i = i->pNextListItem )
           {
-            v10 = v5->m_PreparableContentList.m_pItems;
-            v11 = (signed __int64)&v5->m_PreparableContentList.m_pItems[v5->m_PreparableContentList.m_uLength];
-            if ( v5->m_PreparableContentList.m_pItems != (unsigned int *)v11 )
+            v10 = PreparedContent->m_PreparableContentList.m_pItems;
+            v11 = (__int64)&PreparedContent->m_PreparableContentList.m_pItems[PreparedContent->m_PreparableContentList.m_uLength];
+            if ( PreparedContent->m_PreparableContentList.m_pItems != (unsigned int *)v11 )
             {
               do
               {
-                if ( *v10 == i->m_uLength )
+                if ( *v10 == i->Item.key )
                   break;
                 ++v10;
               }
               while ( v10 != (unsigned int *)v11 );
               if ( v10 != (unsigned int *)v11 )
               {
-                v12 = i[1].m_pItems;
-                if ( v12 != &v12[i[1].m_uLength] )
+                v12 = i->Item.item.m_list.m_pItems;
+                if ( v12 != &v12[i->Item.item.m_list.m_uLength] )
                 {
                   do
-                  {
-                    CAkParameterNodeBase::UnPrepareNodeData(*v12);
-                    ++v12;
-                  }
-                  while ( v12 != &i[1].m_pItems[i[1].m_uLength] );
+                    CAkParameterNodeBase::UnPrepareNodeData(*v12++);
+                  while ( v12 != &i->Item.item.m_list.m_pItems[i->Item.item.m_list.m_uLength] );
                 }
               }
             }
           }
         }
-        v6 = (AkArray<unsigned long,unsigned long,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)v6->m_pItems;
+        m_pFirst = m_pFirst->pNextListItem;
       }
-      while ( v6 );
-      if ( v4 == 1 )
+      while ( m_pFirst );
+      if ( v4 == AK_Success )
       {
-LABEL_29:
-        v13 = v1->m_eGroupType;
-        v14 = v1->m_ulGroupID;
-        ++v1->m_uPreparationCount;
-        v4 = CAkPreparationAware::SubscribePrepare((CAkPreparationAware *)&v1->vfptr, v14, v13);
-        if ( v4 != 1 )
-          v1->vfptr[10].AddRef((CAkIndexable *)&v1->vfptr);
+LABEL_22:
+        m_eGroupType = this->m_eGroupType;
+        m_ulGroupID = this->m_ulGroupID;
+        ++this->m_uPreparationCount;
+        v4 = CAkPreparationAware::SubscribePrepare(&this->CAkPreparationAware, m_ulGroupID, m_eGroupType);
+        if ( v4 != AK_Success )
+          this->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr[10].AddRef(this);
       }
     }
     else
     {
-      v4 = 52;
+      return 52;
     }
   }
   return (unsigned int)v4;
@@ -1127,62 +1065,57 @@ LABEL_29:
 // RVA: 0xA8B140
 void __fastcall CAkSwitchCntr::UnPrepareData(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // rsi
   CAkParameterNodeBase **v2; // rbx
-  unsigned int v3; // eax
+  unsigned int m_uPreparationCount; // eax
   unsigned int v4; // eax
-  CAkPreparedContent *v5; // r14
+  CAkPreparedContent *PreparedContent; // r14
   CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *i; // rdi
-  unsigned int *v7; // rcx
-  signed __int64 v8; // rax
+  unsigned int *m_pItems; // rcx
+  __int64 v8; // rax
   unsigned int *v9; // rbx
 
-  v1 = this;
-  if ( unk_14249E980 )
+  if ( g_settings.bEnableGameSyncPreparation )
   {
-    v3 = this->m_uPreparationCount;
-    if ( v3 )
+    m_uPreparationCount = this->m_uPreparationCount;
+    if ( m_uPreparationCount )
     {
-      v4 = v3 - 1;
+      v4 = m_uPreparationCount - 1;
       this->m_uPreparationCount = v4;
       if ( !v4 )
       {
-        v5 = CAkPreparationAware::GetPreparedContent(
-               (CAkPreparationAware *)&this->vfptr,
-               this->m_ulGroupID,
-               this->m_eGroupType);
-        if ( v5 )
+        PreparedContent = CAkPreparationAware::GetPreparedContent(
+                            &this->CAkPreparationAware,
+                            this->m_ulGroupID,
+                            this->m_eGroupType);
+        if ( PreparedContent )
         {
-          for ( i = v1->m_SwitchList.m_pFirst; i; i = i->pNextListItem )
+          for ( i = this->m_SwitchList.m_pFirst; i; i = i->pNextListItem )
           {
-            v7 = v5->m_PreparableContentList.m_pItems;
-            v8 = (signed __int64)&v5->m_PreparableContentList.m_pItems[v5->m_PreparableContentList.m_uLength];
-            if ( v5->m_PreparableContentList.m_pItems != (unsigned int *)v8 )
+            m_pItems = PreparedContent->m_PreparableContentList.m_pItems;
+            v8 = (__int64)&PreparedContent->m_PreparableContentList.m_pItems[PreparedContent->m_PreparableContentList.m_uLength];
+            if ( PreparedContent->m_PreparableContentList.m_pItems != (unsigned int *)v8 )
             {
               do
               {
-                if ( *v7 == i->Item.key )
+                if ( *m_pItems == i->Item.key )
                   break;
-                ++v7;
+                ++m_pItems;
               }
-              while ( v7 != (unsigned int *)v8 );
-              if ( v7 != (unsigned int *)v8 )
+              while ( m_pItems != (unsigned int *)v8 );
+              if ( m_pItems != (unsigned int *)v8 )
               {
                 v9 = i->Item.item.m_list.m_pItems;
                 if ( v9 != &v9[i->Item.item.m_list.m_uLength] )
                 {
                   do
-                  {
-                    CAkParameterNodeBase::UnPrepareNodeData(*v9);
-                    ++v9;
-                  }
+                    CAkParameterNodeBase::UnPrepareNodeData(*v9++);
                   while ( v9 != &i->Item.item.m_list.m_pItems[i->Item.item.m_list.m_uLength] );
                 }
               }
             }
           }
         }
-        CAkPreparationAware::UnsubscribePrepare((CAkPreparationAware *)&v1->vfptr, v1->m_ulGroupID, v1->m_eGroupType);
+        CAkPreparationAware::UnsubscribePrepare(&this->CAkPreparationAware, this->m_ulGroupID, this->m_eGroupType);
       }
     }
   }
@@ -1193,137 +1126,125 @@ void __fastcall CAkSwitchCntr::UnPrepareData(CAkSwitchCntr *this)
     {
       do
       {
-        ((void (*)(void))(*v2)->vfptr[10].AddRef)();
+        (*v2)->vfptr[10].AddRef(*v2);
         ++v2;
       }
-      while ( v2 != &v1->m_mapChildId.m_pItems[v1->m_mapChildId.m_uLength] );
+      while ( v2 != &this->m_mapChildId.m_pItems[this->m_mapChildId.m_uLength] );
     }
   }
 }
 
 // File Line: 749
 // RVA: 0xA898D0
-signed __int64 __fastcall CAkSwitchCntr::PerformSwitchChange(CAkSwitchCntr *this, unsigned int in_SwitchTo, CAkRegisteredObj *in_GameObj)
+__int64 __fastcall CAkSwitchCntr::PerformSwitchChange(
+        CAkSwitchCntr *this,
+        unsigned int in_SwitchTo,
+        CAkRegisteredObj *in_GameObj)
 {
-  unsigned int v3; // ebp
-  CAkSwitchCntr *v4; // rdi
-  __int64 v5; // rsi
+  __int64 m_ulNumListItems; // rsi
   CAkRegisteredObj **v6; // r14
-  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v7; // rax
+  CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
   __int64 i; // r8
   CAkRegisteredObj **v9; // rbx
-  signed __int64 result; // rax
 
-  v3 = in_SwitchTo;
-  v4 = this;
   if ( in_GameObj )
   {
     CAkSwitchCntr::PerformSwitchChangeContPerObject(this, in_SwitchTo, in_GameObj);
-    result = 1i64;
+    return 1i64;
   }
   else
   {
-    v5 = this->m_listSwitchContPlayback.m_ulNumListItems;
-    if ( (_DWORD)v5 )
+    m_ulNumListItems = this->m_listSwitchContPlayback.m_ulNumListItems;
+    if ( (_DWORD)m_ulNumListItems )
     {
-      v6 = (CAkRegisteredObj **)AK::MemoryMgr::Malloc(g_DefaultPoolId, (unsigned int)(8 * v5));
+      v6 = (CAkRegisteredObj **)AK::MemoryMgr::Malloc(g_DefaultPoolId, (unsigned int)(8 * m_ulNumListItems));
       if ( v6 )
       {
-        v7 = v4->m_listSwitchContPlayback.m_pFirst;
-        for ( i = 0i64; v7; i = (unsigned int)(i + 1) )
+        m_pFirst = this->m_listSwitchContPlayback.m_pFirst;
+        for ( i = 0i64; m_pFirst; i = (unsigned int)(i + 1) )
         {
-          v6[i] = v7->Item.GameObject;
-          v7 = v7->pNextListItem;
+          v6[i] = m_pFirst->Item.GameObject;
+          m_pFirst = m_pFirst->pNextListItem;
         }
-        if ( (_DWORD)v5 )
+        v9 = v6;
+        do
         {
-          v9 = v6;
-          do
-          {
-            CAkSwitchCntr::PerformSwitchChangeContPerObject(v4, v3, *v9);
-            ++v9;
-            --v5;
-          }
-          while ( v5 );
+          CAkSwitchCntr::PerformSwitchChangeContPerObject(this, in_SwitchTo, *v9++);
+          --m_ulNumListItems;
         }
+        while ( m_ulNumListItems );
         AK::MemoryMgr::Free(g_DefaultPoolId, v6);
-        result = 1i64;
+        return 1i64;
       }
       else
       {
-        result = 2i64;
+        return 2i64;
       }
     }
     else
     {
       CAkRegistryMgr::ClearSwitchHist(g_pRegistryMgr, this->key, 0i64);
-      result = 1i64;
+      return 1i64;
     }
   }
-  return result;
 }
 
 // File Line: 796
 // RVA: 0xA899E0
-signed __int64 __fastcall CAkSwitchCntr::PerformSwitchChangeContPerObject(CAkSwitchCntr *this, unsigned int in_SwitchTo, CAkRegisteredObj *in_GameObj)
+__int64 __fastcall CAkSwitchCntr::PerformSwitchChangeContPerObject(
+        CAkSwitchCntr *this,
+        unsigned int in_SwitchTo,
+        CAkRegisteredObj *in_GameObj)
 {
-  CAkSwitchCntr *v3; // r13
-  unsigned int v4; // ebx
-  CAkRegisteredObj *v5; // rdi
-  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v6; // rax
-  signed int v7; // esi
-  CAkSwitchPackage *v8; // rcx
-  CAkSwitchPackage *v9; // r15
+  unsigned int m_ulDefaultSwitch; // ebx
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
+  unsigned int NumPlayBack; // esi
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v8; // rcx
+  CAkSwitchPackage *p_item; // r15
   CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v10; // rcx
   CAkSwitchPackage *v11; // r14
   AKRESULT v12; // ebp
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::ListItem *v13; // rdi
-  unsigned int v14; // edx
+  unsigned int LastSwitch; // edx
   char v15; // bp
   CAkRegisteredObj *v16; // rax
-  unsigned int *v17; // rbx
+  unsigned int *m_pItems; // rbx
   CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v18; // rax
   unsigned int v19; // edx
   unsigned int *v20; // rax
-  signed __int64 v21; // r8
-  int v23; // ST20_4
-  int v24; // ST24_4
-  char v25; // [rsp+28h] [rbp-50h]
-  AKRESULT v26; // [rsp+80h] [rbp+8h]
-  unsigned int v27; // [rsp+88h] [rbp+10h]
-  CAkRegisteredObj *v28; // [rsp+90h] [rbp+18h]
-  __int64 v29; // [rsp+98h] [rbp+20h]
+  __int64 v21; // r8
+  char v23; // [rsp+28h] [rbp-50h]
+  AKRESULT v24; // [rsp+80h] [rbp+8h]
+  unsigned int v25; // [rsp+88h] [rbp+10h]
+  AkSwitchHistItem v27; // [rsp+98h] [rbp+20h] BYREF
 
-  v28 = in_GameObj;
-  v27 = in_SwitchTo;
-  v3 = this;
-  v4 = in_SwitchTo;
-  v5 = in_GameObj;
-  CAkRegistryMgr::GetSwitchHistItem(g_pRegistryMgr, (CAkRegisteredObj *)&v29, (__int64)in_GameObj, this->key);
-  if ( v4 == (_DWORD)v29 )
+  v25 = in_SwitchTo;
+  m_ulDefaultSwitch = in_SwitchTo;
+  CAkRegistryMgr::GetSwitchHistItem(g_pRegistryMgr, (CAkRegisteredObj *)&v27, (__int64)in_GameObj, this->key);
+  if ( m_ulDefaultSwitch == v27.LastSwitch )
     return 1i64;
-  v6 = v3->m_SwitchList.m_pFirst;
-  v7 = 0;
-  v8 = (CAkSwitchPackage *)v6;
-  if ( v6 )
+  m_pFirst = this->m_SwitchList.m_pFirst;
+  NumPlayBack = 0;
+  v8 = m_pFirst;
+  if ( m_pFirst )
   {
-    while ( v8->m_list.m_uLength != (_DWORD)v29 )
+    while ( v8->Item.key != v27.LastSwitch )
     {
-      v8 = (CAkSwitchPackage *)v8->m_list.m_pItems;
+      v8 = v8->pNextListItem;
       if ( !v8 )
         goto LABEL_5;
     }
-    v9 = v8 + 1;
+    p_item = &v8->Item.item;
   }
   else
   {
 LABEL_5:
-    v9 = 0i64;
+    p_item = 0i64;
   }
-  v10 = v3->m_SwitchList.m_pFirst;
-  if ( !v6 )
+  v10 = this->m_SwitchList.m_pFirst;
+  if ( !m_pFirst )
     goto LABEL_12;
-  while ( v10->Item.key != v4 )
+  while ( v10->Item.key != m_ulDefaultSwitch )
   {
     v10 = v10->pNextListItem;
     if ( !v10 )
@@ -1333,17 +1254,17 @@ LABEL_5:
   if ( v10 == (CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *)-16i64 )
   {
 LABEL_12:
-    v4 = v3->m_ulDefaultSwitch;
-    v27 = v3->m_ulDefaultSwitch;
-    if ( v6 )
+    m_ulDefaultSwitch = this->m_ulDefaultSwitch;
+    v25 = m_ulDefaultSwitch;
+    if ( m_pFirst )
     {
-      while ( v6->Item.key != v4 )
+      while ( m_pFirst->Item.key != m_ulDefaultSwitch )
       {
-        v6 = v6->pNextListItem;
-        if ( !v6 )
+        m_pFirst = m_pFirst->pNextListItem;
+        if ( !m_pFirst )
           goto LABEL_15;
       }
-      v11 = &v6->Item.item;
+      v11 = &m_pFirst->Item.item;
     }
     else
     {
@@ -1351,40 +1272,40 @@ LABEL_15:
       v11 = 0i64;
     }
   }
-  v12 = CAkSwitchCntr::StopPrevious(v3, v9, v11, v5);
-  v26 = v12;
-  CAkRegistryMgr::ClearSwitchHist(g_pRegistryMgr, v3->key, v5);
-  v13 = v3->m_listSwitchContPlayback.m_pFirst;
-  v14 = 0;
-  v29 = 0i64;
+  v12 = CAkSwitchCntr::StopPrevious(this, p_item, v11, in_GameObj);
+  v24 = v12;
+  CAkRegistryMgr::ClearSwitchHist(g_pRegistryMgr, this->key, in_GameObj);
+  v13 = this->m_listSwitchContPlayback.m_pFirst;
+  LastSwitch = 0;
+  v27 = 0i64;
   if ( v13 )
   {
-    v15 = v25;
-    v16 = v28;
+    v15 = v23;
+    v16 = in_GameObj;
     do
     {
       if ( v13->Item.GameObject == v16 )
       {
-        if ( v14 == v4 )
+        if ( LastSwitch == m_ulDefaultSwitch )
         {
-          ++v7;
+          ++NumPlayBack;
         }
         else
         {
-          v14 = v4;
-          LODWORD(v29) = v4;
-          v7 = 1;
+          LastSwitch = m_ulDefaultSwitch;
+          v27.LastSwitch = m_ulDefaultSwitch;
+          NumPlayBack = 1;
         }
-        HIDWORD(v29) = v7;
+        v27.NumPlayBack = NumPlayBack;
         if ( v11 )
         {
-          v17 = v11->m_list.m_pItems;
+          m_pItems = v11->m_list.m_pItems;
           if ( v11->m_list.m_pItems != &v11->m_list.m_pItems[v11->m_list.m_uLength] )
           {
             do
             {
-              v18 = v3->m_listParameters.m_pFirst;
-              v19 = *v17;
+              v18 = this->m_listParameters.m_pFirst;
+              v19 = *m_pItems;
               if ( !v18 )
                 goto LABEL_28;
               while ( v18->Item.key != v19 )
@@ -1393,136 +1314,126 @@ LABEL_15:
                 if ( !v18 )
                   goto LABEL_28;
               }
-              if ( v18 != (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
-              {
-                v23 = v18->Item.item.FadeOutTime;
-                v24 = v18->Item.item.FadeInTime;
-                v15 = *((_DWORD *)&v18->Item.item + 2);
-              }
-              else
-              {
+              if ( v18 == (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
 LABEL_28:
                 v15 &= 0xE0u;
-              }
-              if ( v15 & 0x10
-                && v9
-                && (v20 = v9->m_list.m_pItems,
-                    v21 = (signed __int64)&v9->m_list.m_pItems[v9->m_list.m_uLength],
-                    v9->m_list.m_pItems != (unsigned int *)v21) )
+              else
+                v15 = *((_DWORD *)&v18->Item.item + 2);
+              if ( (v15 & 0x10) != 0
+                && p_item
+                && (v20 = p_item->m_list.m_pItems,
+                    v21 = (__int64)&p_item->m_list.m_pItems[p_item->m_list.m_uLength],
+                    p_item->m_list.m_pItems != (unsigned int *)v21) )
               {
                 while ( *v20 != v19 )
                 {
-                  ++v20;
-                  if ( v20 == (unsigned int *)v21 )
+                  if ( ++v20 == (unsigned int *)v21 )
                     goto LABEL_34;
                 }
               }
               else
               {
 LABEL_34:
-                v26 = CAkSwitchCntr::PlayOnSwitch(v3, v19, &v13->Item);
+                v24 = CAkSwitchCntr::PlayOnSwitch(this, v19, &v13->Item);
               }
-              ++v17;
+              ++m_pItems;
             }
-            while ( v17 != &v11->m_list.m_pItems[v11->m_list.m_uLength] );
-            v7 = HIDWORD(v29);
-            v14 = v29;
+            while ( m_pItems != &v11->m_list.m_pItems[v11->m_list.m_uLength] );
+            NumPlayBack = v27.NumPlayBack;
+            LastSwitch = v27.LastSwitch;
           }
-          v16 = v28;
+          v16 = in_GameObj;
         }
       }
       v13 = v13->pNextListItem;
-      v4 = v27;
+      m_ulDefaultSwitch = v25;
     }
     while ( v13 );
-    v12 = v26;
+    v12 = v24;
   }
-  CAkRegistryMgr::SetSwitchHistItem(g_pRegistryMgr, v28, v3->key, (AkSwitchHistItem *)&v29);
+  CAkRegistryMgr::SetSwitchHistItem(g_pRegistryMgr, in_GameObj, this->key, &v27);
   return (unsigned int)v12;
 }
 
 // File Line: 861
 // RVA: 0xA8A180
-signed __int64 __fastcall CAkSwitchCntr::PlayOnSwitch(CAkSwitchCntr *this, unsigned int in_ID, CAkSwitchCntr::SwitchContPlaybackItem *in_rContItem)
+__int64 __fastcall CAkSwitchCntr::PlayOnSwitch(
+        CAkSwitchCntr *this,
+        unsigned int in_ID,
+        CAkSwitchCntr::SwitchContPlaybackItem *in_rContItem)
 {
-  CAkSwitchCntr *v3; // r14
-  CAkSwitchCntr::SwitchContPlaybackItem *v4; // rsi
-  unsigned int v5; // ebx
-  CAkParameterNode *v6; // rdi
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v7; // rcx
-  int v8; // eax
+  CAkParameterNode *NodePtrAndAddRef; // rdi
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
+  int FadeInTime; // eax
   __int128 v9; // xmm0
   __int128 v10; // xmm1
-  CAkRegisteredObj *v11; // rax
+  CAkRegisteredObj *GameObject; // rax
   __int128 v12; // xmm0
   __int128 v13; // xmm1
-  __int64 v14; // rax
-  AkExternalSourceArray *v15; // rax
-  AkPlaybackState v16; // eax
+  __int64 customParam; // rax
+  AkExternalSourceArray *pExternalSrcs; // rax
+  AkPlaybackState ePlaybackState; // eax
   unsigned int v17; // eax
   unsigned int v18; // ebx
-  signed __int64 v19; // rcx
-  AkPBIParams in_rPBIParams; // [rsp+20h] [rbp-59h]
-  int v22; // [rsp+F8h] [rbp+7Fh]
+  AkSwitchNodeParams *p_item; // rcx
+  AkPBIParams in_rPBIParams; // [rsp+20h] [rbp-59h] BYREF
+  int v22; // [rsp+F8h] [rbp+7Fh] BYREF
   int v23; // [rsp+FCh] [rbp+83h]
 
-  v3 = this;
-  v4 = in_rContItem;
-  v5 = in_ID;
-  v6 = (CAkParameterNode *)CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_ID, 0);
-  if ( !v6 )
+  NodePtrAndAddRef = (CAkParameterNode *)CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_ID, AkNodeType_Default);
+  if ( !NodePtrAndAddRef )
     return 2i64;
-  v7 = v3->m_listParameters.m_pFirst;
+  m_pFirst = this->m_listParameters.m_pFirst;
   v23 = 4;
-  if ( !v7 )
+  if ( !m_pFirst )
     goto LABEL_5;
-  while ( v7->Item.key != v5 )
+  while ( m_pFirst->Item.key != in_ID )
   {
-    v7 = v7->pNextListItem;
-    if ( !v7 )
+    m_pFirst = m_pFirst->pNextListItem;
+    if ( !m_pFirst )
       goto LABEL_5;
   }
-  v19 = (signed __int64)&v7->Item.item;
-  if ( v19 )
-    v8 = *(_DWORD *)(v19 + 4);
+  p_item = &m_pFirst->Item.item;
+  if ( p_item )
+    FadeInTime = p_item->FadeInTime;
   else
 LABEL_5:
-    v8 = 0;
-  v9 = *(_OWORD *)&v4->PlayHist.HistArray.uiArraySize;
-  v10 = *(_OWORD *)&v4->PlayHist.HistArray.aCntrHist[6];
-  v22 = v8;
-  v11 = v4->GameObject;
+    FadeInTime = 0;
+  v9 = *(_OWORD *)&in_rContItem->PlayHist.HistArray.uiArraySize;
+  v10 = *(_OWORD *)&in_rContItem->PlayHist.HistArray.aCntrHist[6];
+  v22 = FadeInTime;
+  GameObject = in_rContItem->GameObject;
   in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = 0i64;
   *(_WORD *)&in_rPBIParams.bIsFirst = 1;
-  in_rPBIParams.pGameObj = v11;
+  in_rPBIParams.pGameObj = GameObject;
   *(_OWORD *)&in_rPBIParams.playHistory.HistArray.uiArraySize = v9;
   *(_OWORD *)&in_rPBIParams.playHistory.HistArray.aCntrHist[6] = v10;
-  v12 = *(_OWORD *)&v4->PlayHist.HistArray.aCntrHist[14];
-  v13 = *(_OWORD *)&v4->PlayHist.HistArray.aCntrHist[22];
+  v12 = *(_OWORD *)&in_rContItem->PlayHist.HistArray.aCntrHist[14];
+  v13 = *(_OWORD *)&in_rContItem->PlayHist.HistArray.aCntrHist[22];
   in_rPBIParams.pTransitionParameters = (TransParams *)&v22;
-  LODWORD(v11) = v4->UserParameters.m_PlayingID;
+  LODWORD(GameObject) = in_rContItem->UserParameters.m_PlayingID;
   in_rPBIParams.bTargetFeedback = 0;
   *(_OWORD *)&in_rPBIParams.playHistory.HistArray.aCntrHist[14] = v12;
   *(_OWORD *)&in_rPBIParams.playHistory.HistArray.aCntrHist[22] = v13;
-  *(_QWORD *)&v12 = *(_QWORD *)&v4->PlayHist.HistArray.aCntrHist[30];
-  in_rPBIParams.userParams.m_PlayingID = (unsigned int)v11;
-  v14 = v4->UserParameters.m_CustomParam.customParam;
-  in_rPBIParams.eType = 0;
+  *(_QWORD *)&v12 = *(_QWORD *)&in_rContItem->PlayHist.HistArray.aCntrHist[30];
+  in_rPBIParams.userParams.m_PlayingID = (unsigned int)GameObject;
+  customParam = in_rContItem->UserParameters.m_CustomParam.customParam;
+  in_rPBIParams.eType = PBI;
   *(_QWORD *)&in_rPBIParams.playHistory.HistArray.aCntrHist[30] = v12;
-  in_rPBIParams.userParams.m_CustomParam.customParam = v14;
-  LODWORD(v14) = v4->UserParameters.m_CustomParam.ui32Reserved;
-  in_rPBIParams.pInstigator = (CAkPBIAware *)&v6->vfptr;
-  in_rPBIParams.userParams.m_CustomParam.ui32Reserved = v14;
-  v15 = v4->UserParameters.m_CustomParam.pExternalSrcs;
-  if ( v15 )
-    ++v15->m_cRefCount;
-  in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = v15;
-  v16 = v4->ePlaybackState;
+  in_rPBIParams.userParams.m_CustomParam.customParam = customParam;
+  LODWORD(customParam) = in_rContItem->UserParameters.m_CustomParam.ui32Reserved;
+  in_rPBIParams.pInstigator = NodePtrAndAddRef;
+  in_rPBIParams.userParams.m_CustomParam.ui32Reserved = customParam;
+  pExternalSrcs = in_rContItem->UserParameters.m_CustomParam.pExternalSrcs;
+  if ( pExternalSrcs )
+    ++pExternalSrcs->m_cRefCount;
+  in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = pExternalSrcs;
+  ePlaybackState = in_rContItem->ePlaybackState;
   in_rPBIParams.uFrameOffset = 0;
   in_rPBIParams.pContinuousParams = 0i64;
   in_rPBIParams.sequenceID = 0;
-  in_rPBIParams.ePlaybackState = v16;
-  v17 = CAkParameterNode::HandleInitialDelay(v6, &in_rPBIParams);
+  in_rPBIParams.ePlaybackState = ePlaybackState;
+  v17 = CAkParameterNode::HandleInitialDelay(NodePtrAndAddRef, &in_rPBIParams);
   v18 = v17;
   if ( v17 == 3 )
   {
@@ -1530,9 +1441,11 @@ LABEL_5:
   }
   else if ( v17 == 1 )
   {
-    v18 = ((__int64 (__fastcall *)(CAkParameterNode *, AkPBIParams *))v6->vfptr[19].Category)(v6, &in_rPBIParams);
+    v18 = ((__int64 (__fastcall *)(CAkParameterNode *, AkPBIParams *))NodePtrAndAddRef->vfptr[19].Category)(
+            NodePtrAndAddRef,
+            &in_rPBIParams);
   }
-  v6->vfptr->Release((CAkIndexable *)&v6->vfptr);
+  NodePtrAndAddRef->vfptr->Release(NodePtrAndAddRef);
   if ( in_rPBIParams.userParams.m_CustomParam.pExternalSrcs )
     AkExternalSourceArray::Release(in_rPBIParams.userParams.m_CustomParam.pExternalSrcs);
   return v18;
@@ -1540,137 +1453,128 @@ LABEL_5:
 
 // File Line: 904
 // RVA: 0xA8AD40
-__int64 __fastcall CAkSwitchCntr::StopOnSwitch(CAkSwitchCntr *this, unsigned int in_ID, AkSwitchNodeParams *in_rSwitchNodeParams, CAkRegisteredObj *in_GameObj)
+__int64 __fastcall CAkSwitchCntr::StopOnSwitch(
+        CAkSwitchCntr *this,
+        unsigned int in_ID,
+        AkSwitchNodeParams *in_rSwitchNodeParams,
+        CAkRegisteredObj *in_GameObj)
 {
-  CAkSwitchCntr *v4; // rbp
-  AkSwitchNodeParams *v5; // r14
-  CAkRegisteredObj *v6; // rsi
   unsigned int v7; // edi
-  CAkParameterNodeBase *v8; // rax
+  CAkParameterNodeBase *NodePtrAndAddRef; // rax
   CAkParameterNodeBase *v9; // rbx
-  CAkIndexableVtbl *v10; // rax
-  int v12; // [rsp+20h] [rbp-38h]
+  CAkIndexableVtbl *vfptr; // rax
+  int v12; // [rsp+20h] [rbp-38h] BYREF
   CAkRegisteredObj *v13; // [rsp+28h] [rbp-30h]
   int v14; // [rsp+30h] [rbp-28h]
-  int v15; // [rsp+34h] [rbp-24h]
+  int FadeOutTime; // [rsp+34h] [rbp-24h]
   int v16; // [rsp+38h] [rbp-20h]
   __int16 v17; // [rsp+3Ch] [rbp-1Ch]
   char v18; // [rsp+3Eh] [rbp-1Ah]
 
-  v4 = this;
-  v5 = in_rSwitchNodeParams;
-  v6 = in_GameObj;
   v7 = 1;
-  v8 = (CAkParameterNodeBase *)CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_ID, 0);
-  v9 = v8;
-  if ( v8 )
+  NodePtrAndAddRef = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_ID, AkNodeType_Default);
+  v9 = NodePtrAndAddRef;
+  if ( NodePtrAndAddRef )
   {
-    CAkAudioMgr::StopPendingAction(g_pAudioMgr, v8, v6, 0);
-    if ( (*((_BYTE *)v5 + 8) & 7) == 1 )
+    CAkAudioMgr::StopPendingAction(g_pAudioMgr, NodePtrAndAddRef, in_GameObj, 0);
+    if ( (*((_BYTE *)in_rSwitchNodeParams + 8) & 7) == 1 )
     {
       v17 = 0;
       v12 = 0;
       v14 = 0;
-      v15 = v5->FadeOutTime;
-      v10 = v9->vfptr;
+      FadeOutTime = in_rSwitchNodeParams->FadeOutTime;
+      vfptr = v9->vfptr;
       v18 = 0;
       v16 = 4;
-      v13 = v6;
-      v7 = (__int64)v10[4].__vecDelDtor((CAkIndexable *)&v9->vfptr, (unsigned int)&v12);
+      v13 = in_GameObj;
+      v7 = (unsigned int)vfptr[4].__vecDelDtor(v9, (unsigned int)&v12);
     }
     else
     {
       ((void (__fastcall *)(CAkParameterNodeBase *, CAkRegisteredObj *, CAkSwitchCntr *, _QWORD))v9->vfptr[4].Category)(
         v9,
-        v6,
-        v4,
+        in_GameObj,
+        this,
         0i64);
     }
-    v9->vfptr->Release((CAkIndexable *)&v9->vfptr);
+    v9->vfptr->Release(v9);
   }
   return v7;
 }
 
 // File Line: 940
 // RVA: 0xA8AE20
-__int64 __fastcall CAkSwitchCntr::StopPrevious(CAkSwitchCntr *this, CAkSwitchPackage *in_pPreviousSwitchPack, CAkSwitchPackage *in_pNextSwitchPack, CAkRegisteredObj *in_GameObj)
+__int64 __fastcall CAkSwitchCntr::StopPrevious(
+        CAkSwitchCntr *this,
+        CAkSwitchPackage *in_pPreviousSwitchPack,
+        CAkSwitchPackage *in_pNextSwitchPack,
+        CAkRegisteredObj *in_GameObj)
 {
-  CAkRegisteredObj *v4; // rbp
-  CAkSwitchPackage *v5; // r15
-  CAkSwitchPackage *v6; // r14
-  CAkSwitchCntr *v7; // rsi
-  unsigned int v8; // er11
-  unsigned int *v9; // rbx
+  unsigned int v8; // r11d
+  unsigned int *m_pItems; // rbx
   char v10; // di
-  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *v11; // rax
+  CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rax
   unsigned int v12; // edx
   unsigned int *v13; // rax
-  signed __int64 v14; // r8
+  unsigned int *v14; // r8
   __int64 result; // rax
-  AkSwitchNodeParams in_rSwitchNodeParams; // [rsp+20h] [rbp-28h]
+  AkSwitchNodeParams in_rSwitchNodeParams; // [rsp+20h] [rbp-28h] BYREF
 
-  v4 = in_GameObj;
-  v5 = in_pNextSwitchPack;
-  v6 = in_pPreviousSwitchPack;
-  v7 = this;
   v8 = 1;
   if ( !in_pPreviousSwitchPack )
     return 1i64;
-  v9 = in_pPreviousSwitchPack->m_list.m_pItems;
+  m_pItems = in_pPreviousSwitchPack->m_list.m_pItems;
   if ( in_pPreviousSwitchPack->m_list.m_pItems == &in_pPreviousSwitchPack->m_list.m_pItems[in_pPreviousSwitchPack->m_list.m_uLength] )
     return 1i64;
   v10 = *((_BYTE *)&in_rSwitchNodeParams + 8);
   do
   {
-    v11 = v7->m_listParameters.m_pFirst;
-    v12 = *v9;
-    if ( !v11 )
+    m_pFirst = this->m_listParameters.m_pFirst;
+    v12 = *m_pItems;
+    if ( !m_pFirst )
       goto LABEL_7;
-    while ( v11->Item.key != v12 )
+    while ( m_pFirst->Item.key != v12 )
     {
-      v11 = v11->pNextListItem;
-      if ( !v11 )
+      m_pFirst = m_pFirst->pNextListItem;
+      if ( !m_pFirst )
         goto LABEL_7;
     }
-    if ( v11 != (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
-    {
-      in_rSwitchNodeParams.FadeOutTime = v11->Item.item.FadeOutTime;
-      in_rSwitchNodeParams.FadeInTime = v11->Item.item.FadeInTime;
-      *((_DWORD *)&in_rSwitchNodeParams + 2) = *((_DWORD *)&v11->Item.item + 2);
-      v10 = *((_BYTE *)&in_rSwitchNodeParams + 8);
-    }
-    else
+    if ( m_pFirst == (CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault>::ListItem *)-12i64 )
     {
 LABEL_7:
       v10 &= 0xE0u;
       *(_QWORD *)&in_rSwitchNodeParams.FadeOutTime = 0i64;
       *((_BYTE *)&in_rSwitchNodeParams + 8) = v10;
     }
-    if ( *((_BYTE *)&v7->0 + 83) < 0
-      && v10 & 0x10
-      && v5
-      && (v13 = v5->m_list.m_pItems,
-          v14 = (signed __int64)&v5->m_list.m_pItems[v5->m_list.m_uLength],
-          v5->m_list.m_pItems != (unsigned int *)v14) )
+    else
+    {
+      in_rSwitchNodeParams = m_pFirst->Item.item;
+      v10 = *((_BYTE *)&in_rSwitchNodeParams + 8);
+    }
+    if ( *((char *)&this->CAkParameterNodeBase + 83) < 0
+      && (v10 & 0x10) != 0
+      && in_pNextSwitchPack
+      && (v13 = in_pNextSwitchPack->m_list.m_pItems,
+          v14 = &in_pNextSwitchPack->m_list.m_pItems[in_pNextSwitchPack->m_list.m_uLength],
+          in_pNextSwitchPack->m_list.m_pItems != v14) )
     {
       while ( *v13 != v12 )
       {
-        ++v13;
-        if ( v13 == (unsigned int *)v14 )
+        if ( ++v13 == v14 )
           goto LABEL_14;
       }
     }
     else
     {
 LABEL_14:
-      result = CAkSwitchCntr::StopOnSwitch(v7, v12, &in_rSwitchNodeParams, v4);
+      result = CAkSwitchCntr::StopOnSwitch(this, v12, &in_rSwitchNodeParams, in_GameObj);
       v8 = result;
       if ( (_DWORD)result != 1 )
         return result;
     }
-    ++v9;
+    ++m_pItems;
   }
-  while ( v9 != &v6->m_list.m_pItems[v6->m_list.m_uLength] );
+  while ( m_pItems != &in_pPreviousSwitchPack->m_list.m_pItems[in_pPreviousSwitchPack->m_list.m_uLength] );
   return v8;
 }
 
@@ -1678,36 +1582,34 @@ LABEL_14:
 // RVA: 0xA89500
 void __fastcall CAkSwitchCntr::ClearSwitches(CAkSwitchCntr *this)
 {
-  CAkSwitchCntr *v1; // rdi
   CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *i; // rbx
-  unsigned int *v3; // rdx
-  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *v4; // rcx
+  unsigned int *m_pItems; // rdx
+  CAkList2<MapStruct<unsigned long,CAkSwitchPackage>,MapStruct<unsigned long,CAkSwitchPackage> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
 
-  v1 = this;
   if ( this->m_SwitchList.m_ulMaxNumListItems )
   {
     for ( i = this->m_SwitchList.m_pFirst; i; i = i->pNextListItem )
     {
-      v3 = i->Item.item.m_list.m_pItems;
-      if ( v3 )
+      m_pItems = i->Item.item.m_list.m_pItems;
+      if ( m_pItems )
       {
         i->Item.item.m_list.m_uLength = 0;
-        AK::MemoryMgr::Free(g_DefaultPoolId, v3);
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
         i->Item.item.m_list.m_pItems = 0i64;
         i->Item.item.m_list.m_ulReserved = 0;
       }
     }
     while ( 1 )
     {
-      v4 = v1->m_SwitchList.m_pFirst;
-      if ( !v4 )
+      m_pFirst = this->m_SwitchList.m_pFirst;
+      if ( !m_pFirst )
         break;
-      v1->m_SwitchList.m_pFirst = v4->pNextListItem;
-      if ( v4 == v1->m_SwitchList.m_pLast )
-        v1->m_SwitchList.m_pLast = 0i64;
-      v4->pNextListItem = v1->m_SwitchList.m_pFree;
-      --v1->m_SwitchList.m_ulNumListItems;
-      v1->m_SwitchList.m_pFree = v4;
+      this->m_SwitchList.m_pFirst = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_SwitchList.m_pLast )
+        this->m_SwitchList.m_pLast = 0i64;
+      m_pFirst->pNextListItem = this->m_SwitchList.m_pFree;
+      --this->m_SwitchList.m_ulNumListItems;
+      this->m_SwitchList.m_pFree = m_pFirst;
     }
   }
 }
@@ -1716,6 +1618,6 @@ void __fastcall CAkSwitchCntr::ClearSwitches(CAkSwitchCntr *this)
 // RVA: 0xA89840
 __int64 __fastcall CAkSwitchCntr::IsContinuousPlayback(CAkSwitchCntr *this)
 {
-  return (unsigned __int8)(*((_BYTE *)&this->0 + 83) >> 7);
+  return *((_BYTE *)&this->CAkParameterNodeBase + 83) >> 7;
 }
 

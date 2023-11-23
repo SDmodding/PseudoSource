@@ -3,43 +3,40 @@
 _iobuf *__fastcall getstream()
 {
   _DWORD *v0; // rbx
-  __int64 v1; // rdi
+  int i; // edi
   _BYTE *v2; // rcx
   char *v3; // rcx
 
   v0 = 0i64;
   lock(1);
-  LODWORD(v1) = 0;
-  while ( (signed int)v1 < nstream )
+  for ( i = 0; i < nstream; ++i )
   {
-    v2 = _piob[(signed int)v1];
+    v2 = _piob[i];
     if ( !v2 )
     {
       v3 = (char *)malloc_crt(0x58ui64);
-      v1 = (signed int)v1;
-      _piob[(signed int)v1] = v3;
+      _piob[i] = v3;
       if ( v3 )
       {
         InitializeCriticalSectionAndSpinCount((LPCRITICAL_SECTION)(v3 + 48), 0xFA0u);
-        EnterCriticalSection((LPCRITICAL_SECTION)((char *)_piob[v1] + 48));
-        v0 = _piob[v1];
+        EnterCriticalSection((LPCRITICAL_SECTION)((char *)_piob[i] + 48));
+        v0 = _piob[i];
         v0[6] = 0;
       }
       break;
     }
-    if ( !(v2[24] & 0x83) && !(*((_DWORD *)v2 + 6) & 0x8000) )
+    if ( (v2[24] & 0x83) == 0 && (*((_DWORD *)v2 + 6) & 0x8000) == 0 )
     {
-      if ( (unsigned int)(v1 - 3) <= 0x10 && !(unsigned int)mtinitlocknum((signed int)v1 + 16) )
+      if ( (unsigned int)(i - 3) <= 0x10 && !(unsigned int)mtinitlocknum(i + 16) )
         break;
-      lock_file2(v1, _piob[(signed int)v1]);
-      if ( !(*((_BYTE *)_piob[(signed int)v1] + 24) & 0x83) )
+      lock_file2(i, (char *)_piob[i]);
+      if ( (*((_BYTE *)_piob[i] + 24) & 0x83) == 0 )
       {
-        v0 = _piob[(signed int)v1];
+        v0 = _piob[i];
         break;
       }
-      unlock_file2(v1, _piob[(signed int)v1]);
+      unlock_file2(i, (char *)_piob[i]);
     }
-    LODWORD(v1) = v1 + 1;
   }
   if ( v0 )
   {

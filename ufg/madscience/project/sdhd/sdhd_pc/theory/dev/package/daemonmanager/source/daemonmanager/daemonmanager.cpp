@@ -37,62 +37,52 @@ bool __fastcall UFG::CompareDaemonsByStage(UFG::Daemon *const *a, UFG::Daemon *c
 // RVA: 0x103240
 void __fastcall UFG::DaemonManager::BeginInitialization(UFG::DaemonManager *this)
 {
-  UFG::DaemonManager *v1; // rbx
   unsigned __int64 v2; // rax
   char *v3; // rax
-  char *v4; // rdi
-  signed __int64 v5; // r9
-  signed __int64 v6; // r8
+  UFG::Daemon **v4; // rdi
+  __int64 i; // r9
+  __int64 v6; // r8
 
-  v1 = this;
-  if ( this->m_aDaemons.capacity < 1 && this->m_aDaemons.size != 1 )
+  if ( !this->m_aDaemons.capacity && this->m_aDaemons.size != 1 )
   {
     v2 = 8i64;
     if ( !is_mul_ok(1ui64, 8ui64) )
       v2 = -1i64;
     v3 = UFG::qMalloc(v2, "DaemonManager", 0i64);
-    v4 = v3;
-    if ( v1->m_aDaemons.p )
+    v4 = (UFG::Daemon **)v3;
+    if ( this->m_aDaemons.p )
     {
-      v5 = 0i64;
-      if ( v1->m_aDaemons.size )
+      for ( i = 0i64; (unsigned int)i < this->m_aDaemons.size; *(_QWORD *)&v3[v6 * 8] = this->m_aDaemons.p[v6] )
       {
-        do
-        {
-          v6 = v5;
-          v5 = (unsigned int)(v5 + 1);
-          *(_QWORD *)&v3[v6 * 8] = v1->m_aDaemons.p[v6];
-        }
-        while ( (unsigned int)v5 < v1->m_aDaemons.size );
+        v6 = i;
+        i = (unsigned int)(i + 1);
       }
-      operator delete[](v1->m_aDaemons.p);
+      operator delete[](this->m_aDaemons.p);
     }
-    v1->m_aDaemons.p = (UFG::Daemon **)v4;
-    v1->m_aDaemons.capacity = 1;
+    this->m_aDaemons.p = v4;
+    this->m_aDaemons.capacity = 1;
   }
 }
 
 // File Line: 61
 // RVA: 0x1035B0
-void __fastcall UFG::DaemonManager::RegisterDaemon(UFG::RoadNetworkVisibleAreaEdgeManager *this, UFG::RoadNetworkVisibleAreaEdge *edge)
+void __fastcall UFG::DaemonManager::RegisterDaemon(
+        UFG::RoadNetworkVisibleAreaEdgeManager *this,
+        UFG::RoadNetworkVisibleAreaEdge *edge)
 {
-  __int64 v2; // rsi
-  UFG::RoadNetworkVisibleAreaEdge *v3; // rbp
-  unsigned int v4; // edx
+  __int64 size; // rsi
+  unsigned int capacity; // edx
   unsigned int v5; // ebx
-  UFG::RoadNetworkVisibleAreaEdgeManager *v6; // rdi
   unsigned int v7; // edx
-  UFG::RoadNetworkVisibleAreaEdge **v8; // rax
+  UFG::RoadNetworkVisibleAreaEdge **p; // rax
 
-  v2 = this->mEdgeCollection.size;
-  v3 = edge;
-  v4 = this->mEdgeCollection.capacity;
-  v5 = v2 + 1;
-  v6 = this;
-  if ( (signed int)v2 + 1 > v4 )
+  size = this->mEdgeCollection.size;
+  capacity = this->mEdgeCollection.capacity;
+  v5 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v4 )
-      v7 = 2 * v4;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v5; v7 *= 2 )
@@ -100,106 +90,86 @@ void __fastcall UFG::DaemonManager::RegisterDaemon(UFG::RoadNetworkVisibleAreaEd
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v5 > 0x10000 )
-      v7 = v2 + 65537;
+      v7 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
       (UFG::qArray<UFG::qReflectInventoryBase *,0> *)this,
       v7,
       "qArray.Add");
   }
-  v8 = v6->mEdgeCollection.p;
-  v6->mEdgeCollection.size = v5;
-  v8[v2] = v3;
+  p = this->mEdgeCollection.p;
+  this->mEdgeCollection.size = v5;
+  p[size] = edge;
 }
 
 // File Line: 68
 // RVA: 0x1034A0
 void __fastcall UFG::DaemonManager::EndInitialization(UFG::DaemonManager *this)
 {
-  UFG::qArray<unsigned long,0> *v1; // rsi
-  unsigned int v2; // ecx
+  unsigned int size; // ecx
   __int64 v3; // rbp
-  unsigned int v4; // edx
-  unsigned int v5; // ebx
-  unsigned int v6; // eax
-  __int64 v7; // rcx
-  __int64 v8; // rdx
-  __int64 v9; // r8
+  unsigned int v4; // ebx
+  __int64 v5; // rcx
+  __int64 v6; // rdx
+  __int64 v7; // r8
 
-  v1 = (UFG::qArray<unsigned long,0> *)this;
   UFG::qArray<UFG::Daemon *,0>::BubbleSortCorrect(&this->m_aDaemons, UFG::CompareDaemonsByStage);
-  v2 = v1[1].size;
-  v3 = v1->size;
-  v4 = 1;
-  v5 = 0;
-  if ( (signed int)(1 - v2) <= 0 )
+  size = this->m_aDaemonMappings.size;
+  v3 = this->m_aDaemons.size;
+  v4 = 0;
+  if ( (int)(1 - size) <= 0 )
   {
-    if ( v2 != 1 )
-      v1[1].size = v2 - 1 < v2;
+    if ( size != 1 )
+      this->m_aDaemonMappings.size = size - 1 < size;
   }
   else
   {
-    v6 = v1[1].capacity;
-    if ( v6 < 1 )
-    {
-      if ( v6 )
-        v4 = 2 * v6;
-      for ( ; v4 < 1; v4 *= 2 )
-        ;
-      if ( v4 <= 4 )
-        v4 = 4;
-      if ( v4 - 1 > 0x10000 )
-        v4 = 65537;
-      UFG::qArray<long,0>::Reallocate(v1 + 1, v4, "DaemonManager");
-    }
-    v1[1].size = 1;
+    if ( !this->m_aDaemonMappings.capacity )
+      UFG::qArray<long,0>::Reallocate((UFG::qArray<unsigned long,0> *)&this->m_aDaemonMappings, 4u, "DaemonManager");
+    this->m_aDaemonMappings.size = 1;
   }
   if ( (_DWORD)v3 )
   {
-    v7 = 0i64;
-    v8 = v3;
+    v5 = 0i64;
+    v6 = v3;
     do
     {
-      ++v7;
-      v1[1].p[v7 - 1] = -1;
-      --v8;
+      this->m_aDaemonMappings.p[v5++] = -1;
+      --v6;
     }
-    while ( v8 );
-    if ( (_DWORD)v3 )
-    {
-      v9 = 0i64;
-      do
-      {
-        v9 += 2i64;
-        v1[1].p[*(unsigned int *)(*(_QWORD *)&v1->p[v9 - 2] + 8i64)] = v5++;
-      }
-      while ( v5 < (unsigned int)v3 );
-    }
+    while ( v6 );
+    v7 = 0i64;
+    do
+      this->m_aDaemonMappings.p[this->m_aDaemons.p[v7++]->m_type] = v4++;
+    while ( v4 < (unsigned int)v3 );
   }
 }
 
 // File Line: 107
 // RVA: 0x1036C0
-void __fastcall UFG::DaemonManager::SubmitQuery(UFG::DaemonManager *this, UFG::DaemonQueryInput *input, UFG::DaemonQueryOutput *output)
+void __fastcall UFG::DaemonManager::SubmitQuery(
+        UFG::DaemonManager *this,
+        UFG::DaemonQueryInput *input,
+        UFG::DaemonQueryOutput *output)
 {
-  __int64 v3; // r9
+  __int64 m_daemonType; // r9
   __int64 v4; // r10
   UFG::Daemon *v5; // rcx
 
-  v3 = (unsigned int)input->m_daemonType;
+  m_daemonType = (unsigned int)input->m_daemonType;
   input->m_pOutput = output;
-  v4 = this->m_aDaemonMappings.p[v3];
+  v4 = this->m_aDaemonMappings.p[m_daemonType];
   if ( (_DWORD)v4 != -1 )
   {
     v5 = this->m_aDaemons.p[v4];
     if ( input->m_mode )
     {
-      output->m_status = 1;
+      output->m_status = Status_Submitted;
       UFG::Daemon::SubmitQueueableQuery(v5, input);
     }
     else
     {
-      output->m_status = 0;
-      ((void (*)(void))v5->vfptr->SubmitImmediateQuery)();
+      output->m_status = Status_Undefined;
+      ((void (__fastcall *)(UFG::Daemon *))v5->vfptr->SubmitImmediateQuery)(v5);
     }
   }
 }
@@ -209,12 +179,16 @@ void __fastcall UFG::DaemonManager::SubmitQuery(UFG::DaemonManager *this, UFG::D
 void __fastcall UFG::DaemonManager::CancelQuery(UFG::DaemonManager *this, UFG::DaemonQueryInput *query)
 {
   __int64 v2; // r9
+  UFG::Daemon *v3; // rcx
 
   if ( query->m_mode )
   {
     v2 = this->m_aDaemonMappings.p[query->m_daemonType];
     if ( (_DWORD)v2 != -1 )
-      ((void (*)(void))this->m_aDaemons.p[v2]->vfptr->CancelQueueableQuery)();
+    {
+      v3 = this->m_aDaemons.p[v2];
+      ((void (__fastcall *)(UFG::Daemon *))v3->vfptr->CancelQueueableQuery)(v3);
+    }
   }
 }
 
@@ -222,22 +196,20 @@ void __fastcall UFG::DaemonManager::CancelQuery(UFG::DaemonManager *this, UFG::D
 // RVA: 0x103660
 void __fastcall UFG::DaemonManager::StartUpdate(UFG::DaemonManager *this, float dt)
 {
-  UFG::DaemonManager *v2; // rsi
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rbx
 
-  v2 = this;
   if ( this->m_aDaemons.size )
   {
-    v3 = this->m_aDaemons.size;
+    size = this->m_aDaemons.size;
     v4 = 0i64;
     do
     {
-      ((void (*)(void))v2->m_aDaemons.p[v4]->vfptr->StartUpdate)();
+      ((void (__fastcall *)(UFG::Daemon *))this->m_aDaemons.p[v4]->vfptr->StartUpdate)(this->m_aDaemons.p[v4]);
       ++v4;
-      --v3;
+      --size;
     }
-    while ( v3 );
+    while ( size );
   }
 }
 
@@ -245,22 +217,20 @@ void __fastcall UFG::DaemonManager::StartUpdate(UFG::DaemonManager *this, float 
 // RVA: 0x1033F0
 void __fastcall UFG::DaemonManager::CompleteUpdate(UFG::DaemonManager *this, float dt)
 {
-  UFG::DaemonManager *v2; // rsi
-  __int64 v3; // rdi
+  __int64 size; // rdi
   __int64 v4; // rbx
 
-  v2 = this;
   if ( this->m_aDaemons.size )
   {
-    v3 = this->m_aDaemons.size;
+    size = this->m_aDaemons.size;
     v4 = 0i64;
     do
     {
-      ((void (*)(void))v2->m_aDaemons.p[v4]->vfptr->CompleteUpdate)();
+      ((void (__fastcall *)(UFG::Daemon *))this->m_aDaemons.p[v4]->vfptr->CompleteUpdate)(this->m_aDaemons.p[v4]);
       ++v4;
-      --v3;
+      --size;
     }
-    while ( v3 );
+    while ( size );
   }
 }
 

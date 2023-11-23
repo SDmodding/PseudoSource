@@ -44,7 +44,8 @@ const char *__fastcall PlayerIsPassengerInVehicleCondition::GetClassname(PlayerI
 
 // File Line: 130
 // RVA: 0x2C1F90
-const char *__fastcall PlayerIsPassengerInVehicleTypeCondition::GetClassname(PlayerIsPassengerInVehicleTypeCondition *this)
+const char *__fastcall PlayerIsPassengerInVehicleTypeCondition::GetClassname(
+        PlayerIsPassengerInVehicleTypeCondition *this)
 {
   return PlayerIsPassengerInVehicleTypeCondition::sClassName;
 }
@@ -74,7 +75,8 @@ void __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::Create()
 
 // File Line: 215
 // RVA: 0x2BF280
-__int64 __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::GetClassNameUID(PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this)
+__int64 __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::GetClassNameUID(
+        PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this)
 {
   return PlayerIsCloseToPassengerSideOfVehicleTypeCondition::sClassNameUID;
 }
@@ -148,14 +150,16 @@ const char *__fastcall VehicleHasPassengerCondition::GetClassname(VehicleHasPass
 
 // File Line: 431
 // RVA: 0x2C00E0
-__int64 __fastcall VehicleHasPassengerWithWeaponCondition::GetClassNameUID(VehicleHasPassengerWithWeaponCondition *this)
+__int64 __fastcall VehicleHasPassengerWithWeaponCondition::GetClassNameUID(
+        VehicleHasPassengerWithWeaponCondition *this)
 {
   return VehicleHasPassengerWithWeaponCondition::sClassNameUID;
 }
 
 // File Line: 465
 // RVA: 0x2C02D0
-__int64 __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::GetClassNameUID(VehicleTargetedForInteractionOnFootDriverSideCondition *this)
+__int64 __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::GetClassNameUID(
+        VehicleTargetedForInteractionOnFootDriverSideCondition *this)
 {
   return VehicleTargetedForInteractionOnFootDriverSideCondition::sClassNameUID;
 }
@@ -233,21 +237,24 @@ void __fastcall PredictiveVehicleDriverPotentialInteractionCondition::Create()
 
 // File Line: 687
 // RVA: 0x2BF370
-__int64 __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::GetClassNameUID(PredictiveVehiclePassengerPotentialInteractionCondition *this)
+__int64 __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::GetClassNameUID(
+        PredictiveVehiclePassengerPotentialInteractionCondition *this)
 {
   return PredictiveVehiclePassengerPotentialInteractionCondition::sClassNameUID;
 }
 
 // File Line: 715
 // RVA: 0x2C2020
-const char *__fastcall PredictiveVehiclePlayerPotentialInteractionCondition::GetClassname(PredictiveVehiclePlayerPotentialInteractionCondition *this)
+const char *__fastcall PredictiveVehiclePlayerPotentialInteractionCondition::GetClassname(
+        PredictiveVehiclePlayerPotentialInteractionCondition *this)
 {
   return PredictiveVehiclePlayerPotentialInteractionCondition::sClassName;
 }
 
 // File Line: 743
 // RVA: 0x2C2030
-const char *__fastcall PredictiveWeaponPotentialInteractionCondition::GetClassname(PredictiveWeaponPotentialInteractionCondition *this)
+const char *__fastcall PredictiveWeaponPotentialInteractionCondition::GetClassname(
+        PredictiveWeaponPotentialInteractionCondition *this)
 {
   return PredictiveWeaponPotentialInteractionCondition::sClassName;
 }

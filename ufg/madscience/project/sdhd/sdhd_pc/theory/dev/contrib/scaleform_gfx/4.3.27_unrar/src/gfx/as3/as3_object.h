@@ -7,44 +7,46 @@ bool __fastcall Scaleform::GFx::AS3::Multiname::IsAnyNamespace(Scaleform::GFx::A
 
 // File Line: 287
 // RVA: 0x781650
-void __fastcall Scaleform::GFx::AS3::PropRef::PropRef(Scaleform::GFx::AS3::PropRef *this, Scaleform::GFx::AS3::Value *_this, Scaleform::GFx::AS3::SlotInfo *si, unsigned __int64 index)
+void __fastcall Scaleform::GFx::AS3::PropRef::PropRef(
+        Scaleform::GFx::AS3::PropRef *this,
+        Scaleform::GFx::AS3::Value *_this,
+        Scaleform::GFx::AS3::SlotInfo *si,
+        unsigned __int64 index)
 {
-  signed int v4; // eax
-  long double v5; // rcx
+  Scaleform::GFx::AS3::Value::V1U VObj; // rcx
 
   this->pSI = si;
   this->SlotIndex = index;
   this->This.Flags = _this->Flags;
   this->This.Bonus.pWeakProxy = _this->Bonus.pWeakProxy;
   this->This.value = _this->value;
-  v4 = _this->Flags & 0x1F;
-  if ( v4 > 9 )
+  if ( (_this->Flags & 0x1F) > 9 )
   {
-    if ( (_this->Flags >> 9) & 1 )
+    if ( (_this->Flags & 0x200) != 0 )
     {
       ++_this->Bonus.pWeakProxy->RefCount;
       return;
     }
-    if ( v4 == 10 )
+    if ( (_this->Flags & 0x1F) == 10 )
     {
-      ++*(_DWORD *)(*(_QWORD *)&_this->value.VNumber + 24i64);
+      ++_this->value.VS._1.VStr->RefCount;
     }
     else
     {
-      if ( v4 <= 10 )
+      if ( (_this->Flags & 0x1F) <= 0xA )
         return;
-      if ( v4 <= 15 )
+      if ( (_this->Flags & 0x1F) <= 0xF )
       {
-        v5 = _this->value.VNumber;
+        VObj = _this->value.VS._1;
       }
       else
       {
-        if ( v4 > 17 )
+        if ( (_this->Flags & 0x1F) > 0x11 )
           return;
-        v5 = *(double *)&_this->value.VS._2.VObj;
+        VObj = (Scaleform::GFx::AS3::Value::V1U)_this->value.VS._2.VObj;
       }
-      if ( v5 != 0.0 )
-        *(_DWORD *)(*(_QWORD *)&v5 + 32i64) = (*(_DWORD *)(*(_QWORD *)&v5 + 32i64) + 1) & 0x8FBFFFFF;
+      if ( VObj.VStr )
+        VObj.VStr->Size = (VObj.VStr->Size + 1) & 0x8FBFFFFF;
     }
   }
 }
@@ -53,8 +55,8 @@ void __fastcall Scaleform::GFx::AS3::PropRef::PropRef(Scaleform::GFx::AS3::PropR
 // RVA: 0x790D50
 bool __fastcall Scaleform::GFx::AS3::PropRef::operator bool(Scaleform::GFx::AS3::PropRef *this)
 {
-  return this->This.Flags & 0x1F
-      && (!((_QWORD)this->pSI & 1) || (_QWORD)this->pSI & 0xFFFFFFFFFFFFFFFEui64)
-      && (!(((unsigned __int8)this->pSI >> 1) & 1) || (_QWORD)this->pSI & 0xFFFFFFFFFFFFFFFDui64);
+  return (this->This.Flags & 0x1F) != 0
+      && (((__int64)this->pSI & 1) == 0 || ((unsigned __int64)this->pSI & 0xFFFFFFFFFFFFFFFEui64) != 0)
+      && (((__int64)this->pSI & 2) == 0 || ((unsigned __int64)this->pSI & 0xFFFFFFFFFFFFFFFDui64) != 0);
 }
 

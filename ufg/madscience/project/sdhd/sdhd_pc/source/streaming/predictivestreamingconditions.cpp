@@ -13,11 +13,8 @@ __int64 dynamic_initializer_for__PlayerIsInVehicleCondition::sClassNameUID__()
 // RVA: 0x3E89D0
 void __fastcall PlayerIsInVehicleCondition::PlayerIsInVehicleCondition(PlayerIsInVehicleCondition *this)
 {
-  PlayerIsInVehicleCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleCondition::`vftable;
 }
 
 // File Line: 36
@@ -43,34 +40,31 @@ __int64 dynamic_initializer_for__PlayerIsInVehicleTypeCondition::sClassNameUID__
 // RVA: 0x3E8A00
 void __fastcall PlayerIsInVehicleTypeCondition::PlayerIsInVehicleTypeCondition(PlayerIsInVehicleTypeCondition *this)
 {
-  PlayerIsInVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 69
 // RVA: 0x3E95E0
 bool __fastcall PlayerIsInVehicleTypeCondition::Match(PlayerIsInVehicleTypeCondition *this, ActionContext *pContext)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // rdx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v4; // rcx
+  __int64 mValue; // rax
+  __int64 v3; // rdx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rcx
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
   {
     v3 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
   }
   else
   {
-    v3 = v2;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+    v3 = mValue;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
   }
-  return v4[v3].m_bIsDriver || v4[v3].m_bIsPassenger;
+  return m_PlayerBoatInfo[v3].m_bIsDriver || m_PlayerBoatInfo[v3].m_bIsPassenger;
 }
 
 // File Line: 96
@@ -86,18 +80,18 @@ __int64 dynamic_initializer_for__PlayerIsDriverInVehicleCondition::sClassNameUID
 
 // File Line: 99
 // RVA: 0x3E8960
-void __fastcall PlayerIsDriverInVehicleCondition::PlayerIsDriverInVehicleCondition(PlayerIsDriverInVehicleCondition *this)
+void __fastcall PlayerIsDriverInVehicleCondition::PlayerIsDriverInVehicleCondition(
+        PlayerIsDriverInVehicleCondition *this)
 {
-  PlayerIsDriverInVehicleCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleCondition::`vftable;
 }
 
 // File Line: 103
 // RVA: 0x3E9570
-_BOOL8 __fastcall PlayerIsDriverInVehicleCondition::Match(PlayerIsDriverInVehicleCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PlayerIsDriverInVehicleCondition::Match(
+        PlayerIsDriverInVehicleCondition *this,
+        ActionContext *pContext)
 {
   return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver;
 }
@@ -115,29 +109,27 @@ __int64 dynamic_initializer_for__PlayerIsDriverInVehicleTypeCondition::sClassNam
 
 // File Line: 132
 // RVA: 0x3E8990
-void __fastcall PlayerIsDriverInVehicleTypeCondition::PlayerIsDriverInVehicleTypeCondition(PlayerIsDriverInVehicleTypeCondition *this)
+void __fastcall PlayerIsDriverInVehicleTypeCondition::PlayerIsDriverInVehicleTypeCondition(
+        PlayerIsDriverInVehicleTypeCondition *this)
 {
-  PlayerIsDriverInVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 136
 // RVA: 0x3E9580
-_BOOL8 __fastcall PlayerIsDriverInVehicleTypeCondition::Match(PlayerIsDriverInVehicleTypeCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PlayerIsDriverInVehicleTypeCondition::Match(
+        PlayerIsDriverInVehicleTypeCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  _BOOL8 result; // rax
+  __int64 mValue; // rax
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bIsDriver;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bIsDriver;
   else
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo[v2].m_bIsDriver;
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo[mValue].m_bIsDriver;
 }
 
 // File Line: 163
@@ -153,18 +145,18 @@ __int64 dynamic_initializer_for__PlayerIsPassengerInVehicleCondition::sClassName
 
 // File Line: 166
 // RVA: 0x3E8A40
-void __fastcall PlayerIsPassengerInVehicleCondition::PlayerIsPassengerInVehicleCondition(PlayerIsPassengerInVehicleCondition *this)
+void __fastcall PlayerIsPassengerInVehicleCondition::PlayerIsPassengerInVehicleCondition(
+        PlayerIsPassengerInVehicleCondition *this)
 {
-  PlayerIsPassengerInVehicleCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleCondition::`vftable;
 }
 
 // File Line: 170
 // RVA: 0x3E9630
-_BOOL8 __fastcall PlayerIsPassengerInVehicleCondition::Match(PlayerIsPassengerInVehicleCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PlayerIsPassengerInVehicleCondition::Match(
+        PlayerIsPassengerInVehicleCondition *this,
+        ActionContext *pContext)
 {
   return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsPassenger;
 }
@@ -182,29 +174,27 @@ __int64 dynamic_initializer_for__PlayerIsPassengerInVehicleTypeCondition::sClass
 
 // File Line: 199
 // RVA: 0x3E8A70
-void __fastcall PlayerIsPassengerInVehicleTypeCondition::PlayerIsPassengerInVehicleTypeCondition(PlayerIsPassengerInVehicleTypeCondition *this)
+void __fastcall PlayerIsPassengerInVehicleTypeCondition::PlayerIsPassengerInVehicleTypeCondition(
+        PlayerIsPassengerInVehicleTypeCondition *this)
 {
-  PlayerIsPassengerInVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 203
 // RVA: 0x3E9640
-_BOOL8 __fastcall PlayerIsPassengerInVehicleTypeCondition::Match(PlayerIsPassengerInVehicleTypeCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PlayerIsPassengerInVehicleTypeCondition::Match(
+        PlayerIsPassengerInVehicleTypeCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  _BOOL8 result; // rax
+  __int64 mValue; // rax
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bIsPassenger;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bIsPassenger;
   else
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo[v2].m_bIsPassenger;
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo[mValue].m_bIsPassenger;
 }
 
 // File Line: 230
@@ -220,40 +210,40 @@ __int64 dynamic_initializer_for__PlayerIsCloseToVehicleTypeCondition::sClassName
 
 // File Line: 238
 // RVA: 0x3E8920
-void __fastcall PlayerIsCloseToVehicleTypeCondition::PlayerIsCloseToVehicleTypeCondition(PlayerIsCloseToVehicleTypeCondition *this)
+void __fastcall PlayerIsCloseToVehicleTypeCondition::PlayerIsCloseToVehicleTypeCondition(
+        PlayerIsCloseToVehicleTypeCondition *this)
 {
-  PlayerIsCloseToVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 242
 // RVA: 0x3E9520
-bool __fastcall PlayerIsCloseToVehicleTypeCondition::Match(PlayerIsCloseToVehicleTypeCondition *this, ActionContext *pContext)
+bool __fastcall PlayerIsCloseToVehicleTypeCondition::Match(
+        PlayerIsCloseToVehicleTypeCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // rdx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v4; // rcx
-  float v5; // xmm1_4
+  __int64 mValue; // rax
+  __int64 v3; // rdx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rcx
+  float m_fDistanceToDriverSide; // xmm1_4
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
   {
     v3 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
   }
   else
   {
-    v3 = v2;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+    v3 = mValue;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
   }
-  v5 = v4[v3].m_fDistanceToDriverSide;
-  if ( v5 >= v4[v3].m_fDistanceToPassengerSide )
-    v5 = v4[v3].m_fDistanceToPassengerSide;
-  return s_fCloseToVehicleDistanceSquared >= v5;
+  m_fDistanceToDriverSide = m_PlayerBoatInfo[v3].m_fDistanceToDriverSide;
+  if ( m_fDistanceToDriverSide >= m_PlayerBoatInfo[v3].m_fDistanceToPassengerSide )
+    m_fDistanceToDriverSide = m_PlayerBoatInfo[v3].m_fDistanceToPassengerSide;
+  return s_fCloseToVehicleDistanceSquared >= m_fDistanceToDriverSide;
 }
 
 // File Line: 270
@@ -269,36 +259,36 @@ __int64 dynamic_initializer_for__PlayerIsCloseToDriverSideOfVehicleTypeCondition
 
 // File Line: 278
 // RVA: 0x3E88A0
-void __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::PlayerIsCloseToDriverSideOfVehicleTypeCondition(PlayerIsCloseToDriverSideOfVehicleTypeCondition *this)
+void __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::PlayerIsCloseToDriverSideOfVehicleTypeCondition(
+        PlayerIsCloseToDriverSideOfVehicleTypeCondition *this)
 {
-  PlayerIsCloseToDriverSideOfVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToDriverSideOfVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToDriverSideOfVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 282
 // RVA: 0x3E9480
-bool __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::Match(PlayerIsCloseToDriverSideOfVehicleTypeCondition *this, ActionContext *pContext)
+bool __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::Match(
+        PlayerIsCloseToDriverSideOfVehicleTypeCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // rdx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v4; // rcx
+  __int64 mValue; // rax
+  __int64 v3; // rdx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rcx
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
   {
     v3 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
   }
   else
   {
-    v3 = v2;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+    v3 = mValue;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
   }
-  return s_fCloseToVehicleDistanceSquared >= v4[v3].m_fDistanceToDriverSide;
+  return s_fCloseToVehicleDistanceSquared >= m_PlayerBoatInfo[v3].m_fDistanceToDriverSide;
 }
 
 // File Line: 310
@@ -314,36 +304,36 @@ __int64 dynamic_initializer_for__PlayerIsCloseToPassengerSideOfVehicleTypeCondit
 
 // File Line: 318
 // RVA: 0x3E88E0
-void __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::PlayerIsCloseToPassengerSideOfVehicleTypeCondition(PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this)
+void __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::PlayerIsCloseToPassengerSideOfVehicleTypeCondition(
+        PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this)
 {
-  PlayerIsCloseToPassengerSideOfVehicleTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToPassengerSideOfVehicleTypeCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToPassengerSideOfVehicleTypeCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 322
 // RVA: 0x3E94D0
-bool __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::Match(PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this, ActionContext *pContext)
+bool __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::Match(
+        PlayerIsCloseToPassengerSideOfVehicleTypeCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // rdx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v4; // rcx
+  __int64 mValue; // rax
+  __int64 v3; // rdx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rcx
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
   {
     v3 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
   }
   else
   {
-    v3 = v2;
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+    v3 = mValue;
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
   }
-  return s_fCloseToVehicleDistanceSquared >= v4[v3].m_fDistanceToPassengerSide;
+  return s_fCloseToVehicleDistanceSquared >= m_PlayerBoatInfo[v3].m_fDistanceToPassengerSide;
 }
 
 // File Line: 350
@@ -359,19 +349,19 @@ __int64 dynamic_initializer_for__PlayerHasOwnedWeaponTypeCondition::sClassNameUI
 
 // File Line: 356
 // RVA: 0x3E8860
-void __fastcall PlayerHasOwnedWeaponTypeCondition::PlayerHasOwnedWeaponTypeCondition(PlayerHasOwnedWeaponTypeCondition *this)
+void __fastcall PlayerHasOwnedWeaponTypeCondition::PlayerHasOwnedWeaponTypeCondition(
+        PlayerHasOwnedWeaponTypeCondition *this)
 {
-  PlayerHasOwnedWeaponTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHasOwnedWeaponTypeCondition::`vftable;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerHasOwnedWeaponTypeCondition::`vftable;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 360
 // RVA: 0x3E9460
-_BOOL8 __fastcall PlayerHasOwnedWeaponTypeCondition::Match(PlayerHasOwnedWeaponTypeCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PlayerHasOwnedWeaponTypeCondition::Match(
+        PlayerHasOwnedWeaponTypeCondition *this,
+        ActionContext *pContext)
 {
   return UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[this->m_eSimObjectWeaponType].m_bOwned;
 }
@@ -389,19 +379,19 @@ __int64 dynamic_initializer_for__PlayerCloseToWeaponTypeCondition::sClassNameUID
 
 // File Line: 388
 // RVA: 0x3E8820
-void __fastcall PlayerCloseToWeaponTypeCondition::PlayerCloseToWeaponTypeCondition(PlayerCloseToWeaponTypeCondition *this)
+void __fastcall PlayerCloseToWeaponTypeCondition::PlayerCloseToWeaponTypeCondition(
+        PlayerCloseToWeaponTypeCondition *this)
 {
-  PlayerCloseToWeaponTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerCloseToWeaponTypeCondition::`vftable;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerCloseToWeaponTypeCondition::`vftable;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 392
 // RVA: 0x3E9440
-bool __fastcall PlayerCloseToWeaponTypeCondition::Match(PlayerCloseToWeaponTypeCondition *this, ActionContext *pContext)
+bool __fastcall PlayerCloseToWeaponTypeCondition::Match(
+        PlayerCloseToWeaponTypeCondition *this,
+        ActionContext *pContext)
 {
   return s_fCloseToWeaponDistanceSquared >= UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[this->m_eSimObjectWeaponType].m_fDistanceSquared;
 }
@@ -421,12 +411,9 @@ __int64 dynamic_initializer_for__WeaponIsOwnedCondition::sClassNameUID__()
 // RVA: 0x3E8F40
 void __fastcall WeaponIsOwnedCondition::WeaponIsOwnedCondition(WeaponIsOwnedCondition *this)
 {
-  WeaponIsOwnedCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsOwnedCondition::`vftable;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsOwnedCondition::`vftable;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 425
@@ -449,19 +436,19 @@ __int64 dynamic_initializer_for__WeaponIsTargetedForInteractionCondition::sClass
 
 // File Line: 453
 // RVA: 0x3E8F80
-void __fastcall WeaponIsTargetedForInteractionCondition::WeaponIsTargetedForInteractionCondition(WeaponIsTargetedForInteractionCondition *this)
+void __fastcall WeaponIsTargetedForInteractionCondition::WeaponIsTargetedForInteractionCondition(
+        WeaponIsTargetedForInteractionCondition *this)
 {
-  WeaponIsTargetedForInteractionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsTargetedForInteractionCondition::`vftable;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsTargetedForInteractionCondition::`vftable;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 457
 // RVA: 0x3E9D50
-_BOOL8 __fastcall WeaponIsTargetedForInteractionCondition::Match(WeaponIsTargetedForInteractionCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall WeaponIsTargetedForInteractionCondition::Match(
+        WeaponIsTargetedForInteractionCondition *this,
+        ActionContext *pContext)
 {
   return UFG::PredictiveStreamingStats::ms_pInstance->m_WeaponInfo[this->m_eSimObjectWeaponType].m_bTargetedForInteractionOnFoot;
 }
@@ -481,29 +468,22 @@ __int64 dynamic_initializer_for__VehicleHasDriverCondition::sClassNameUID__()
 // RVA: 0x3E8D00
 void __fastcall VehicleHasDriverCondition::VehicleHasDriverCondition(VehicleHasDriverCondition *this)
 {
-  VehicleHasDriverCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 491
 // RVA: 0x3E99D0
-__int64 __fastcall VehicleHasDriverCondition::Match(VehicleHasDriverCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall VehicleHasDriverCondition::Match(VehicleHasDriverCondition *this, ActionContext *pContext)
 {
-  unsigned __int8 v2; // al
-  __int64 result; // rax
+  unsigned __int8 mValue; // al
 
-  v2 = this->m_eSimObjectVehicleType.mValue;
-  if ( v2 == 3 )
-    result = *((unsigned __int8 *)&UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
-             + 40 * ((unsigned __int8)this->m_eSimObjectBoatType.mValue + 11i64));
+  mValue = this->m_eSimObjectVehicleType.mValue;
+  if ( mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasDriver;
   else
-    result = *((unsigned __int8 *)&UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
-             + 40 * (v2 + 1i64));
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bHasDriver;
 }
 
 // File Line: 517
@@ -519,32 +499,32 @@ __int64 dynamic_initializer_for__VehicleHasDriverWithWeaponCondition::sClassName
 
 // File Line: 527
 // RVA: 0x3E8D40
-void __fastcall VehicleHasDriverWithWeaponCondition::VehicleHasDriverWithWeaponCondition(VehicleHasDriverWithWeaponCondition *this)
+void __fastcall VehicleHasDriverWithWeaponCondition::VehicleHasDriverWithWeaponCondition(
+        VehicleHasDriverWithWeaponCondition *this)
 {
-  VehicleHasDriverWithWeaponCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverWithWeaponCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverWithWeaponCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 531
 // RVA: 0x3E9A10
-_BOOL8 __fastcall VehicleHasDriverWithWeaponCondition::Match(VehicleHasDriverWithWeaponCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall VehicleHasDriverWithWeaponCondition::Match(
+        VehicleHasDriverWithWeaponCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  __int64 v3; // rdx
-  bool *v4; // rcx
+  __int64 mValue; // rax
+  __int64 m_eSimObjectWeaponType; // rdx
+  bool *m_bHasDriverByWeaponType; // rcx
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this->m_eSimObjectWeaponType;
-  if ( (_DWORD)v2 == 3 )
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasDriverByWeaponType;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  m_eSimObjectWeaponType = this->m_eSimObjectWeaponType;
+  if ( (_DWORD)mValue == 3 )
+    m_bHasDriverByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasDriverByWeaponType;
   else
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[v2].m_bHasDriverByWeaponType;
-  return v4[v3];
+    m_bHasDriverByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bHasDriverByWeaponType;
+  return m_bHasDriverByWeaponType[m_eSimObjectWeaponType];
 }
 
 // File Line: 562
@@ -562,27 +542,22 @@ __int64 dynamic_initializer_for__VehicleHasPassengerCondition::sClassNameUID__()
 // RVA: 0x3E8D80
 void __fastcall VehicleHasPassengerCondition::VehicleHasPassengerCondition(VehicleHasPassengerCondition *this)
 {
-  VehicleHasPassengerCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 574
 // RVA: 0x3E9A50
 _BOOL8 __fastcall VehicleHasPassengerCondition::Match(VehicleHasPassengerCondition *this, ActionContext *pContext)
 {
-  __int64 v2; // rax
-  _BOOL8 result; // rax
+  __int64 mValue; // rax
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasPassenger;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasPassenger;
   else
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[v2].m_bHasPassenger;
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bHasPassenger;
 }
 
 // File Line: 601
@@ -598,32 +573,32 @@ __int64 dynamic_initializer_for__VehicleHasPassengerWithWeaponCondition::sClassN
 
 // File Line: 611
 // RVA: 0x3E8DC0
-void __fastcall VehicleHasPassengerWithWeaponCondition::VehicleHasPassengerWithWeaponCondition(VehicleHasPassengerWithWeaponCondition *this)
+void __fastcall VehicleHasPassengerWithWeaponCondition::VehicleHasPassengerWithWeaponCondition(
+        VehicleHasPassengerWithWeaponCondition *this)
 {
-  VehicleHasPassengerWithWeaponCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerWithWeaponCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerWithWeaponCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 615
 // RVA: 0x3E9A90
-_BOOL8 __fastcall VehicleHasPassengerWithWeaponCondition::Match(VehicleHasPassengerWithWeaponCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall VehicleHasPassengerWithWeaponCondition::Match(
+        VehicleHasPassengerWithWeaponCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  __int64 v3; // rdx
-  bool *v4; // rcx
+  __int64 mValue; // rax
+  __int64 m_eSimObjectWeaponType; // rdx
+  bool *m_bHasPassengerByWeaponType; // rcx
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this->m_eSimObjectWeaponType;
-  if ( (_DWORD)v2 == 3 )
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasPassengerByWeaponType;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  m_eSimObjectWeaponType = this->m_eSimObjectWeaponType;
+  if ( (_DWORD)mValue == 3 )
+    m_bHasPassengerByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bHasPassengerByWeaponType;
   else
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[v2].m_bHasPassengerByWeaponType;
-  return v4[v3];
+    m_bHasPassengerByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bHasPassengerByWeaponType;
+  return m_bHasPassengerByWeaponType[m_eSimObjectWeaponType];
 }
 
 // File Line: 644
@@ -639,29 +614,27 @@ __int64 dynamic_initializer_for__VehicleTargetedForInteractionOnFootDriverSideCo
 
 // File Line: 652
 // RVA: 0x3E8E00
-void __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::VehicleTargetedForInteractionOnFootDriverSideCondition(VehicleTargetedForInteractionOnFootDriverSideCondition *this)
+void __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::VehicleTargetedForInteractionOnFootDriverSideCondition(
+        VehicleTargetedForInteractionOnFootDriverSideCondition *this)
 {
-  VehicleTargetedForInteractionOnFootDriverSideCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootDriverSideCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootDriverSideCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 656
 // RVA: 0x3E9AD0
-_BOOL8 __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::Match(VehicleTargetedForInteractionOnFootDriverSideCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::Match(
+        VehicleTargetedForInteractionOnFootDriverSideCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  _BOOL8 result; // rax
+  __int64 mValue; // rax
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootDriverSide;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootDriverSide;
   else
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[v2].m_bTargetedForInteractionOnFootDriverSide;
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bTargetedForInteractionOnFootDriverSide;
 }
 
 // File Line: 683
@@ -677,29 +650,27 @@ __int64 dynamic_initializer_for__VehicleTargetedForInteractionOnFootPassengerSid
 
 // File Line: 691
 // RVA: 0x3E8E40
-void __fastcall VehicleTargetedForInteractionOnFootPassengerSideCondition::VehicleTargetedForInteractionOnFootPassengerSideCondition(VehicleTargetedForInteractionOnFootPassengerSideCondition *this)
+void __fastcall VehicleTargetedForInteractionOnFootPassengerSideCondition::VehicleTargetedForInteractionOnFootPassengerSideCondition(
+        VehicleTargetedForInteractionOnFootPassengerSideCondition *this)
 {
-  VehicleTargetedForInteractionOnFootPassengerSideCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootPassengerSideCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootPassengerSideCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 695
 // RVA: 0x3E9B10
-_BOOL8 __fastcall VehicleTargetedForInteractionOnFootPassengerSideCondition::Match(VehicleTargetedForInteractionOnFootPassengerSideCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall VehicleTargetedForInteractionOnFootPassengerSideCondition::Match(
+        VehicleTargetedForInteractionOnFootPassengerSideCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rax
-  _BOOL8 result; // rax
+  __int64 mValue; // rax
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v2 == 3 )
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootPassengerSide;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootPassengerSide;
   else
-    result = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[v2].m_bTargetedForInteractionOnFootPassengerSide;
-  return result;
+    return UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[mValue].m_bTargetedForInteractionOnFootPassengerSide;
 }
 
 // File Line: 722
@@ -715,77 +686,73 @@ __int64 dynamic_initializer_for__VehicleTargetedForInteractionOnFootWithWeaponDr
 
 // File Line: 732
 // RVA: 0x3E8E80
-void __fastcall VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition(VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *this)
+void __fastcall VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition(
+        VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *this)
 {
-  VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 736
 // RVA: 0x3E9B50
-char __fastcall VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::Match(VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *this, ActionContext *pContext)
+char __fastcall VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::Match(
+        VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // r10
-  VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition *v3; // rdx
-  __int64 v4; // rcx
-  bool *v5; // rax
-  char result; // al
-  signed __int64 v7; // rcx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v8; // rax
-  float v9; // xmm1_4
+  __int64 mValue; // r10
+  __int64 m_eSimObjectWeaponType; // rcx
+  bool *m_bTargetedForInteractionDriverSideOnFootByWeaponType; // rax
+  __int64 v7; // rcx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rax
+  float m_fDistanceToDriverSide; // xmm1_4
   bool v10; // bl
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  v4 = this->m_eSimObjectWeaponType;
-  if ( (_DWORD)v2 == 3 )
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)v3->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionDriverSideOnFootByWeaponType;
+  m_eSimObjectWeaponType = this->m_eSimObjectWeaponType;
+  if ( (_DWORD)mValue == 3 )
+    m_bTargetedForInteractionDriverSideOnFootByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionDriverSideOnFootByWeaponType;
   else
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(signed int)v2].m_bTargetedForInteractionDriverSideOnFootByWeaponType;
-  if ( v5[v4] )
+    m_bTargetedForInteractionDriverSideOnFootByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(int)mValue].m_bTargetedForInteractionDriverSideOnFootByWeaponType;
+  if ( m_bTargetedForInteractionDriverSideOnFootByWeaponType[m_eSimObjectWeaponType] )
   {
-    v3->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
-    v3->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
-    result = 1;
+    this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
+    this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
+    return 1;
   }
   else if ( UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
          || UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsPassenger
-         || !UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[v4].m_bOwned )
+         || !UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[m_eSimObjectWeaponType].m_bOwned )
   {
-    result = 0;
+    return 0;
   }
   else
   {
-    if ( (_DWORD)v2 == 3 )
+    if ( (_DWORD)mValue == 3 )
     {
-      v7 = (unsigned __int8)v3->m_eSimObjectBoatType.mValue;
-      v8 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+      v7 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
     }
     else
     {
-      v8 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
-      v7 = v2;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+      v7 = mValue;
     }
-    v9 = v8[v7].m_fDistanceToDriverSide;
-    v10 = s_fCloseToVehicleDistanceSquared >= v9;
+    m_fDistanceToDriverSide = m_PlayerBoatInfo[v7].m_fDistanceToDriverSide;
+    v10 = s_fCloseToVehicleDistanceSquared >= m_fDistanceToDriverSide;
     SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
-      (SubPriorityModifierCondition *)&v3->vfptr,
-      v9,
+      this,
+      m_fDistanceToDriverSide,
       s_fCloseToVehicleDistanceSquared,
       s_fCloseToVehicleRequiredDistanceSquared);
-    result = v10;
+    return v10;
   }
-  return result;
 }
 
 // File Line: 806
@@ -801,77 +768,73 @@ __int64 dynamic_initializer_for__VehicleTargetedForInteractionOnFootWithWeaponPa
 
 // File Line: 816
 // RVA: 0x3E8EE0
-void __fastcall VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition(VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *this)
+void __fastcall VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition(
+        VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *this)
 {
-  VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 820
 // RVA: 0x3E9C40
-char __fastcall VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::Match(VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *this, ActionContext *pContext)
+char __fastcall VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::Match(
+        VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // r10
-  VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition *v3; // rdx
-  __int64 v4; // rcx
-  bool *v5; // rax
-  char result; // al
-  signed __int64 v7; // rcx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v8; // rax
-  float v9; // xmm1_4
+  __int64 mValue; // r10
+  __int64 m_eSimObjectWeaponType; // rcx
+  bool *m_bTargetedForInteractionPassengerSideOnFootByWeaponType; // rax
+  __int64 v7; // rcx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rax
+  float m_fDistanceToPassengerSide; // xmm1_4
   bool v10; // bl
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  v4 = this->m_eSimObjectWeaponType;
-  if ( (_DWORD)v2 == 3 )
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)v3->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionPassengerSideOnFootByWeaponType;
+  m_eSimObjectWeaponType = this->m_eSimObjectWeaponType;
+  if ( (_DWORD)mValue == 3 )
+    m_bTargetedForInteractionPassengerSideOnFootByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionPassengerSideOnFootByWeaponType;
   else
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(signed int)v2].m_bTargetedForInteractionPassengerSideOnFootByWeaponType;
-  if ( v5[v4] )
+    m_bTargetedForInteractionPassengerSideOnFootByWeaponType = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(int)mValue].m_bTargetedForInteractionPassengerSideOnFootByWeaponType;
+  if ( m_bTargetedForInteractionPassengerSideOnFootByWeaponType[m_eSimObjectWeaponType] )
   {
-    v3->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
-    v3->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
-    result = 1;
+    this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
+    this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
+    return 1;
   }
   else if ( UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
          || UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsPassenger
-         || !UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[v4].m_bOwned )
+         || !UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[m_eSimObjectWeaponType].m_bOwned )
   {
-    result = 0;
+    return 0;
   }
   else
   {
-    if ( (_DWORD)v2 == 3 )
+    if ( (_DWORD)mValue == 3 )
     {
-      v7 = (unsigned __int8)v3->m_eSimObjectBoatType.mValue;
-      v8 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+      v7 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
     }
     else
     {
-      v8 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
-      v7 = v2;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+      v7 = mValue;
     }
-    v9 = v8[v7].m_fDistanceToPassengerSide;
-    v10 = s_fCloseToVehicleDistanceSquared >= v9;
+    m_fDistanceToPassengerSide = m_PlayerBoatInfo[v7].m_fDistanceToPassengerSide;
+    v10 = s_fCloseToVehicleDistanceSquared >= m_fDistanceToPassengerSide;
     SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
-      (SubPriorityModifierCondition *)&v3->vfptr,
-      v9,
+      this,
+      m_fDistanceToPassengerSide,
       s_fCloseToVehicleDistanceSquared,
       s_fCloseToVehicleRequiredDistanceSquared);
-    result = v10;
+    return v10;
   }
-  return result;
 }
 
 // File Line: 889
@@ -887,27 +850,31 @@ __int64 dynamic_initializer_for__CharacterTypeHasWeaponTypeCondition::sClassName
 
 // File Line: 897
 // RVA: 0x3E87E0
-void __fastcall CharacterTypeHasWeaponTypeCondition::CharacterTypeHasWeaponTypeCondition(CharacterTypeHasWeaponTypeCondition *this)
+void __fastcall CharacterTypeHasWeaponTypeCondition::CharacterTypeHasWeaponTypeCondition(
+        CharacterTypeHasWeaponTypeCondition *this)
 {
-  CharacterTypeHasWeaponTypeCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterTypeHasWeaponTypeCondition::`vftable;
-  v1->m_eCharacterType.mValue = 0;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterTypeHasWeaponTypeCondition::`vftable;
+  this->m_eCharacterType.mValue = 0;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 901
 // RVA: 0x3E9420
-_BOOL8 __fastcall CharacterTypeHasWeaponTypeCondition::Match(CharacterTypeHasWeaponTypeCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall CharacterTypeHasWeaponTypeCondition::Match(
+        CharacterTypeHasWeaponTypeCondition *this,
+        ActionContext *pContext)
 {
   return UFG::PredictiveStreamingStats::ms_pInstance->m_CharacterInfo[(unsigned __int8)this->m_eCharacterType.mValue].m_bHasWeaponTypeEquipped[this->m_eSimObjectWeaponType];
 }
 
 // File Line: 936
 // RVA: 0x3EB230
-void __fastcall SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(SubPriorityModifierCondition *this, const float fDistanceSquared, const float fMaxDistanceSquared, const float fRequiredDistanceSquared)
+void __fastcall SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
+        SubPriorityModifierCondition *this,
+        float fDistanceSquared,
+        const float fMaxDistanceSquared,
+        float fRequiredDistanceSquared)
 {
   float v4; // xmm0_4
   float v5; // xmm1_4
@@ -923,8 +890,7 @@ void __fastcall SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
     v6 = fsqrt(v4 / fMaxDistanceSquared);
     if ( (float)(1.0 - v6) >= 0.0 )
       v5 = 1.0 - v6;
-    this->m_uSubPriority = (signed int)(float)((float)(v5 * v5)
-                                             * (float)SubPriorityModifierCondition::ms_uNumPriorityLevels);
+    this->m_uSubPriority = (int)(float)((float)(v5 * v5) * (float)SubPriorityModifierCondition::ms_uNumPriorityLevels);
   }
   else
   {
@@ -946,73 +912,69 @@ __int64 dynamic_initializer_for__PredictiveVehicleDriverPotentialInteractionCond
 
 // File Line: 980
 // RVA: 0x3E8B80
-void __fastcall PredictiveVehicleDriverPotentialInteractionCondition::PredictiveVehicleDriverPotentialInteractionCondition(PredictiveVehicleDriverPotentialInteractionCondition *this)
+void __fastcall PredictiveVehicleDriverPotentialInteractionCondition::PredictiveVehicleDriverPotentialInteractionCondition(
+        PredictiveVehicleDriverPotentialInteractionCondition *this)
 {
-  PredictiveVehicleDriverPotentialInteractionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehicleDriverPotentialInteractionCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehicleDriverPotentialInteractionCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 984
 // RVA: 0x3E9680
-bool __fastcall PredictiveVehicleDriverPotentialInteractionCondition::Match(PredictiveVehicleDriverPotentialInteractionCondition *this, ActionContext *pContext)
+bool __fastcall PredictiveVehicleDriverPotentialInteractionCondition::Match(
+        PredictiveVehicleDriverPotentialInteractionCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // r10
-  PredictiveVehicleDriverPotentialInteractionCondition *v3; // rdx
-  bool v4; // al
-  bool result; // al
-  signed __int64 v6; // rcx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v7; // rax
-  float v8; // xmm1_4
+  __int64 mValue; // r10
+  bool m_bTargetedForInteractionOnFootDriverSide; // al
+  __int64 v6; // rcx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rax
+  float m_fDistanceToDriverSide; // xmm1_4
   bool v9; // bl
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  if ( (_DWORD)v2 == 3 )
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootDriverSide;
+  if ( (_DWORD)mValue == 3 )
+    m_bTargetedForInteractionOnFootDriverSide = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootDriverSide;
   else
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(signed int)v2].m_bTargetedForInteractionOnFootDriverSide;
-  if ( v4 )
+    m_bTargetedForInteractionOnFootDriverSide = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(int)mValue].m_bTargetedForInteractionOnFootDriverSide;
+  if ( m_bTargetedForInteractionOnFootDriverSide )
   {
     this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
     this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
-    result = 1;
+    return 1;
   }
   else if ( UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
          || UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsPassenger )
   {
-    result = 0;
+    return 0;
   }
   else
   {
-    if ( (_DWORD)v2 == 3 )
+    if ( (_DWORD)mValue == 3 )
     {
       v6 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-      v7 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
     }
     else
     {
-      v7 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
-      v6 = v2;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+      v6 = mValue;
     }
-    v8 = v7[v6].m_fDistanceToDriverSide;
-    v9 = s_fCloseToVehicleDistanceSquared >= v8;
+    m_fDistanceToDriverSide = m_PlayerBoatInfo[v6].m_fDistanceToDriverSide;
+    v9 = s_fCloseToVehicleDistanceSquared >= m_fDistanceToDriverSide;
     SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
-      (SubPriorityModifierCondition *)&v3->vfptr,
-      v8,
+      this,
+      m_fDistanceToDriverSide,
       s_fCloseToVehicleDistanceSquared,
       s_fCloseToVehicleRequiredDistanceSquared);
-    result = v9;
+    return v9;
   }
-  return result;
 }
 
 // File Line: 1049
@@ -1028,73 +990,69 @@ __int64 dynamic_initializer_for__PredictiveVehiclePassengerPotentialInteractionC
 
 // File Line: 1057
 // RVA: 0x3E8BE0
-void __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::PredictiveVehiclePassengerPotentialInteractionCondition(PredictiveVehiclePassengerPotentialInteractionCondition *this)
+void __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::PredictiveVehiclePassengerPotentialInteractionCondition(
+        PredictiveVehiclePassengerPotentialInteractionCondition *this)
 {
-  PredictiveVehiclePassengerPotentialInteractionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePassengerPotentialInteractionCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePassengerPotentialInteractionCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 1061
 // RVA: 0x3E9760
-bool __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::Match(PredictiveVehiclePassengerPotentialInteractionCondition *this, ActionContext *pContext)
+bool __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::Match(
+        PredictiveVehiclePassengerPotentialInteractionCondition *this,
+        ActionContext *pContext)
 {
-  signed __int64 v2; // r10
-  PredictiveVehiclePassengerPotentialInteractionCondition *v3; // rdx
-  bool v4; // al
-  bool result; // al
-  signed __int64 v6; // rcx
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v7; // rax
-  float v8; // xmm1_4
+  __int64 mValue; // r10
+  bool m_bTargetedForInteractionOnFootPassengerSide; // al
+  __int64 v6; // rcx
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rax
+  float m_fDistanceToPassengerSide; // xmm1_4
   bool v9; // bl
 
-  v2 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  v3 = this;
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  if ( (_DWORD)v2 == 3 )
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootPassengerSide;
+  if ( (_DWORD)mValue == 3 )
+    m_bTargetedForInteractionOnFootPassengerSide = UFG::PredictiveStreamingStats::ms_pInstance->m_BoatInfo[(unsigned __int8)this->m_eSimObjectBoatType.mValue].m_bTargetedForInteractionOnFootPassengerSide;
   else
-    v4 = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(signed int)v2].m_bTargetedForInteractionOnFootPassengerSide;
-  if ( v4 )
+    m_bTargetedForInteractionOnFootPassengerSide = UFG::PredictiveStreamingStats::ms_pInstance->m_VehicleInfo[(int)mValue].m_bTargetedForInteractionOnFootPassengerSide;
+  if ( m_bTargetedForInteractionOnFootPassengerSide )
   {
     this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
     this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
-    result = 1;
+    return 1;
   }
   else if ( UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsDriver
          || UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_bIsPassenger )
   {
-    result = 0;
+    return 0;
   }
   else
   {
-    if ( (_DWORD)v2 == 3 )
+    if ( (_DWORD)mValue == 3 )
     {
       v6 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-      v7 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
     }
     else
     {
-      v7 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
-      v6 = v2;
+      m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+      v6 = mValue;
     }
-    v8 = v7[v6].m_fDistanceToPassengerSide;
-    v9 = s_fCloseToVehicleDistanceSquared >= v8;
+    m_fDistanceToPassengerSide = m_PlayerBoatInfo[v6].m_fDistanceToPassengerSide;
+    v9 = s_fCloseToVehicleDistanceSquared >= m_fDistanceToPassengerSide;
     SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
-      (SubPriorityModifierCondition *)&v3->vfptr,
-      v8,
+      this,
+      m_fDistanceToPassengerSide,
       s_fCloseToVehicleDistanceSquared,
       s_fCloseToVehicleRequiredDistanceSquared);
-    result = v9;
+    return v9;
   }
-  return result;
 }
 
 // File Line: 1126
@@ -1110,77 +1068,75 @@ __int64 dynamic_initializer_for__PredictiveVehiclePlayerPotentialInteractionCond
 
 // File Line: 1134
 // RVA: 0x3E8C40
-void __fastcall PredictiveVehiclePlayerPotentialInteractionCondition::PredictiveVehiclePlayerPotentialInteractionCondition(PredictiveVehiclePlayerPotentialInteractionCondition *this)
+void __fastcall PredictiveVehiclePlayerPotentialInteractionCondition::PredictiveVehiclePlayerPotentialInteractionCondition(
+        PredictiveVehiclePlayerPotentialInteractionCondition *this)
 {
-  PredictiveVehiclePlayerPotentialInteractionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePlayerPotentialInteractionCondition::`vftable;
-  *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePlayerPotentialInteractionCondition::`vftable;
+  *(_WORD *)&this->m_eSimObjectVehicleType.mValue = 0;
 }
 
 // File Line: 1138
 // RVA: 0x3E9840
-_BOOL8 __fastcall PredictiveVehiclePlayerPotentialInteractionCondition::Match(PredictiveVehiclePlayerPotentialInteractionCondition *this, ActionContext *pContext)
+_BOOL8 __fastcall PredictiveVehiclePlayerPotentialInteractionCondition::Match(
+        PredictiveVehiclePlayerPotentialInteractionCondition *this,
+        ActionContext *pContext)
 {
-  PredictiveVehiclePlayerPotentialInteractionCondition *v2; // r9
-  __int64 v3; // rax
-  signed __int64 v4; // r8
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v5; // rcx
-  __m128 v6; // xmm0
-  __m128 v7; // xmm1
-  UFG::PredictiveStreamingStats::PlayerVehicleInfo *v8; // rcx
+  __int64 mValue; // rax
+  __int64 v4; // r8
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerBoatInfo; // rcx
+  __m128 m_fDistanceToDriverSide_low; // xmm0
+  __m128 m_fDistanceToPassengerSide_low; // xmm1
+  UFG::PredictiveStreamingStats::PlayerVehicleInfo *m_PlayerVehicleInfo; // rcx
   float v9; // xmm2_4
   bool v10; // dl
   _BOOL8 result; // rax
   float v12; // xmm1_4
   float v13; // xmm0_4
 
-  v2 = this;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  v3 = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
-  if ( (_DWORD)v3 == 3 )
+  mValue = (unsigned __int8)this->m_eSimObjectVehicleType.mValue;
+  if ( (_DWORD)mValue == 3 )
   {
     v4 = (unsigned __int8)this->m_eSimObjectBoatType.mValue;
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
-    v6 = (__m128)LODWORD(v5[v4].m_fDistanceToDriverSide);
-    v7 = (__m128)LODWORD(v5[v4].m_fDistanceToPassengerSide);
+    m_PlayerBoatInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerBoatInfo;
+    m_fDistanceToDriverSide_low = (__m128)LODWORD(m_PlayerBoatInfo[v4].m_fDistanceToDriverSide);
+    m_fDistanceToPassengerSide_low = (__m128)LODWORD(m_PlayerBoatInfo[v4].m_fDistanceToPassengerSide);
   }
   else
   {
-    v8 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
-    v6 = (__m128)LODWORD(v8[v3].m_fDistanceToDriverSide);
-    v7 = (__m128)LODWORD(v8[v3].m_fDistanceToPassengerSide);
+    m_PlayerVehicleInfo = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerVehicleInfo;
+    m_fDistanceToDriverSide_low = (__m128)LODWORD(m_PlayerVehicleInfo[mValue].m_fDistanceToDriverSide);
+    m_fDistanceToPassengerSide_low = (__m128)LODWORD(m_PlayerVehicleInfo[mValue].m_fDistanceToPassengerSide);
   }
-  if ( v6.m128_f32[0] >= v7.m128_f32[0] )
-    v6 = v7;
+  if ( m_fDistanceToDriverSide_low.m128_f32[0] >= m_fDistanceToPassengerSide_low.m128_f32[0] )
+    m_fDistanceToDriverSide_low = m_fDistanceToPassengerSide_low;
   v9 = s_fCloseToVehicleActionHijackDistanceSquared;
-  v10 = s_fCloseToVehicleActionHijackDistanceSquared >= v6.m128_f32[0];
-  if ( v6.m128_f32[0] >= s_fCloseToVehicleActionHijackDistanceSquared )
+  v10 = s_fCloseToVehicleActionHijackDistanceSquared >= m_fDistanceToDriverSide_low.m128_f32[0];
+  if ( m_fDistanceToDriverSide_low.m128_f32[0] >= s_fCloseToVehicleActionHijackDistanceSquared )
   {
-    v6.m128_f32[0] = v6.m128_f32[0] - s_fCloseToVehicleActionHijackDistanceSquared;
+    m_fDistanceToDriverSide_low.m128_f32[0] = m_fDistanceToDriverSide_low.m128_f32[0]
+                                            - s_fCloseToVehicleActionHijackDistanceSquared;
     v12 = 0.0;
-    v2->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-    if ( v6.m128_f32[0] < 0.0 )
-      v6 = 0i64;
-    v6.m128_f32[0] = v6.m128_f32[0] / v9;
-    LODWORD(v13) = (unsigned __int128)_mm_sqrt_ps(v6);
+    this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+    if ( m_fDistanceToDriverSide_low.m128_f32[0] < 0.0 )
+      m_fDistanceToDriverSide_low = 0i64;
+    m_fDistanceToDriverSide_low.m128_f32[0] = m_fDistanceToDriverSide_low.m128_f32[0] / v9;
+    v13 = _mm_sqrt_ps(m_fDistanceToDriverSide_low).m128_f32[0];
     if ( (float)(1.0 - v13) >= 0.0 )
       v12 = 1.0 - v13;
-    v2->m_uSubPriority = (signed int)(float)((float)(v12 * v12)
-                                           * (float)SubPriorityModifierCondition::ms_uNumPriorityLevels);
-    result = v10;
+    this->m_uSubPriority = (int)(float)((float)(v12 * v12) * (float)SubPriorityModifierCondition::ms_uNumPriorityLevels);
+    return v10;
   }
   else
   {
     result = v10;
-    v2->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
-    v2->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
+    this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
+    this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
   }
   return result;
 }
@@ -1198,50 +1154,46 @@ __int64 dynamic_initializer_for__PredictiveWeaponPotentialInteractionCondition::
 
 // File Line: 1185
 // RVA: 0x3E8CA0
-void __fastcall PredictiveWeaponPotentialInteractionCondition::PredictiveWeaponPotentialInteractionCondition(PredictiveWeaponPotentialInteractionCondition *this)
+void __fastcall PredictiveWeaponPotentialInteractionCondition::PredictiveWeaponPotentialInteractionCondition(
+        PredictiveWeaponPotentialInteractionCondition *this)
 {
-  PredictiveWeaponPotentialInteractionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
-  v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
-  v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveWeaponPotentialInteractionCondition::`vftable;
-  v1->m_eSimObjectWeaponType = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
+  this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
+  this->m_uSubPriority = -1;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PredictiveWeaponPotentialInteractionCondition::`vftable;
+  this->m_eSimObjectWeaponType = 0;
 }
 
 // File Line: 1189
 // RVA: 0x3E9930
-bool __fastcall PredictiveWeaponPotentialInteractionCondition::Match(PredictiveWeaponPotentialInteractionCondition *this, ActionContext *pContext)
+bool __fastcall PredictiveWeaponPotentialInteractionCondition::Match(
+        PredictiveWeaponPotentialInteractionCondition *this,
+        ActionContext *pContext)
 {
-  __int64 v2; // rdx
-  UFG::PredictiveStreamingStats::WeaponInfo *v3; // rax
-  float v4; // xmm6_4
-  float v5; // xmm7_4
-  bool result; // al
+  __int64 m_eSimObjectWeaponType; // rdx
+  float v3; // xmm6_4
+  float m_fDistanceSquared; // xmm7_4
 
-  v2 = this->m_eSimObjectWeaponType;
+  m_eSimObjectWeaponType = this->m_eSimObjectWeaponType;
   this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   this->m_uSubPriority = -1;
-  v3 = UFG::PredictiveStreamingStats::ms_pInstance->m_WeaponInfo;
-  if ( v3[v2].m_bOwned || v3[v2].m_bTargetedForInteractionOnFoot )
+  if ( UFG::PredictiveStreamingStats::ms_pInstance->m_WeaponInfo[m_eSimObjectWeaponType] )
   {
     this->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_eRequiredReferencedPriority;
     this->m_uSubPriority = SubPriorityModifierCondition::ms_uTargetedInteractionPriorityLevel;
-    result = 1;
+    return 1;
   }
   else
   {
-    v4 = s_fCloseToWeaponDistanceSquared;
-    v5 = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[v2].m_fDistanceSquared;
+    v3 = s_fCloseToWeaponDistanceSquared;
+    m_fDistanceSquared = UFG::PredictiveStreamingStats::ms_pInstance->m_PlayerInfo.m_PlayerWeaponInfo[m_eSimObjectWeaponType].m_fDistanceSquared;
     SubPriorityModifierCondition::UpdatePriorityForPlayerByDistance(
-      (SubPriorityModifierCondition *)&this->vfptr,
-      v5,
+      this,
+      m_fDistanceSquared,
       s_fCloseToWeaponDistanceSquared,
       s_fCloseToWeaponRequiredDistanceSquared);
-    result = v4 >= v5;
+    return v3 >= m_fDistanceSquared;
   }
-  return result;
 }
 

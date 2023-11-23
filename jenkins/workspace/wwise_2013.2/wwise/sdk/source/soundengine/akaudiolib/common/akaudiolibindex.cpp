@@ -2,50 +2,48 @@
 // RVA: 0xA4D810
 void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
 {
-  AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v1; // rax
-  signed __int64 v2; // rdx
-  CAkAudioLibIndex *v3; // r9
-  signed __int64 v4; // r8
+  AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *p_m_mapIDToPtr; // rax
+  __int64 v2; // rdx
+  __int64 v4; // r8
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v5; // rax
-  signed __int64 v6; // rcx
+  __int64 v6; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v7; // rax
-  signed __int64 v8; // rcx
+  __int64 v8; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v9; // rax
-  signed __int64 v10; // rcx
+  __int64 v10; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v11; // rax
-  signed __int64 v12; // rcx
+  __int64 v12; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v13; // rax
-  signed __int64 v14; // rcx
+  __int64 v14; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v15; // rax
-  signed __int64 v16; // rcx
+  __int64 v16; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v17; // rax
-  signed __int64 v18; // rcx
+  __int64 v18; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v19; // rax
-  signed __int64 v20; // rcx
+  __int64 v20; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v21; // rax
-  signed __int64 v22; // rcx
+  __int64 v22; // rcx
   AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *v23; // rax
 
-  v1 = &this->m_idxAudioNode.m_mapIDToPtr;
+  p_m_mapIDToPtr = &this->m_idxAudioNode.m_mapIDToPtr;
   v2 = 24i64;
   this->m_idxAudioNode.m_mapIDToPtr.m_uiSize = 0;
-  v3 = this;
   v4 = 24i64;
   do
   {
-    v1->m_table[0] = 0i64;
-    v1->m_table[1] = 0i64;
-    v1->m_table[2] = 0i64;
-    v1 = (AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *)((char *)v1 + 64);
-    v1[-1].m_table[189] = 0i64;
-    v1[-1].m_table[190] = 0i64;
-    v1[-1].m_table[191] = 0i64;
-    v1[-1].m_table[192] = 0i64;
-    *(_QWORD *)&v1[-1].m_uiSize = 0i64;
+    p_m_mapIDToPtr->m_table[0] = 0i64;
+    p_m_mapIDToPtr->m_table[1] = 0i64;
+    p_m_mapIDToPtr->m_table[2] = 0i64;
+    p_m_mapIDToPtr = (AkHashListBare<unsigned long,CAkIndexable,193,AkDefaultHashListBarePolicy<unsigned long,CAkIndexable> > *)((char *)p_m_mapIDToPtr + 64);
+    p_m_mapIDToPtr[-1].m_table[189] = 0i64;
+    p_m_mapIDToPtr[-1].m_table[190] = 0i64;
+    p_m_mapIDToPtr[-1].m_table[191] = 0i64;
+    p_m_mapIDToPtr[-1].m_table[192] = 0i64;
+    *(_QWORD *)&p_m_mapIDToPtr[-1].m_uiSize = 0i64;
     --v4;
   }
   while ( v4 );
-  v1->m_table[0] = 0i64;
+  p_m_mapIDToPtr->m_table[0] = 0i64;
   v5 = &this->m_idxBusses.m_mapIDToPtr;
   v6 = 24i64;
   v5->m_uiSize = 0;
@@ -64,9 +62,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v6 );
   v5->m_table[0] = 0i64;
-  v7 = &v3->m_idxCustomStates.m_mapIDToPtr;
+  v7 = &this->m_idxCustomStates.m_mapIDToPtr;
   v8 = 24i64;
-  v3->m_idxCustomStates.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxCustomStates.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v7->m_table[0] = 0i64;
@@ -82,9 +80,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v8 );
   v7->m_table[0] = 0i64;
-  v9 = &v3->m_idxEvents.m_mapIDToPtr;
+  v9 = &this->m_idxEvents.m_mapIDToPtr;
   v10 = 24i64;
-  v3->m_idxEvents.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxEvents.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v9->m_table[0] = 0i64;
@@ -100,9 +98,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v10 );
   v9->m_table[0] = 0i64;
-  v11 = &v3->m_idxActions.m_mapIDToPtr;
+  v11 = &this->m_idxActions.m_mapIDToPtr;
   v12 = 24i64;
-  v3->m_idxActions.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxActions.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v11->m_table[0] = 0i64;
@@ -118,9 +116,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v12 );
   v11->m_table[0] = 0i64;
-  v13 = &v3->m_idxLayers.m_mapIDToPtr;
+  v13 = &this->m_idxLayers.m_mapIDToPtr;
   v14 = 24i64;
-  v3->m_idxLayers.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxLayers.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v13->m_table[0] = 0i64;
@@ -136,9 +134,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v14 );
   v13->m_table[0] = 0i64;
-  v15 = &v3->m_idxAttenuations.m_mapIDToPtr;
+  v15 = &this->m_idxAttenuations.m_mapIDToPtr;
   v16 = 24i64;
-  v3->m_idxAttenuations.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxAttenuations.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v15->m_table[0] = 0i64;
@@ -154,9 +152,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v16 );
   v15->m_table[0] = 0i64;
-  v17 = &v3->m_idxDynamicSequences.m_mapIDToPtr;
+  v17 = &this->m_idxDynamicSequences.m_mapIDToPtr;
   v18 = 24i64;
-  v3->m_idxDynamicSequences.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxDynamicSequences.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v17->m_table[0] = 0i64;
@@ -172,9 +170,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v18 );
   v17->m_table[0] = 0i64;
-  v19 = &v3->m_idxDialogueEvents.m_mapIDToPtr;
+  v19 = &this->m_idxDialogueEvents.m_mapIDToPtr;
   v20 = 24i64;
-  v3->m_idxDialogueEvents.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxDialogueEvents.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v19->m_table[0] = 0i64;
@@ -190,9 +188,9 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v20 );
   v19->m_table[0] = 0i64;
-  v21 = &v3->m_idxFxShareSets.m_mapIDToPtr;
+  v21 = &this->m_idxFxShareSets.m_mapIDToPtr;
   v22 = 24i64;
-  v3->m_idxFxShareSets.m_mapIDToPtr.m_uiSize = 0;
+  this->m_idxFxShareSets.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v21->m_table[0] = 0i64;
@@ -208,8 +206,8 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v22 );
   v21->m_table[0] = 0i64;
-  v23 = &v3->m_idxFxCustom.m_mapIDToPtr;
-  v3->m_idxFxCustom.m_mapIDToPtr.m_uiSize = 0;
+  v23 = &this->m_idxFxCustom.m_mapIDToPtr;
+  this->m_idxFxCustom.m_mapIDToPtr.m_uiSize = 0;
   do
   {
     v23->m_table[0] = 0i64;
@@ -225,7 +223,7 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
   }
   while ( v2 );
   v23->m_table[0] = 0i64;
-}table[192] = 0i64;
+}m_table[192] = 0i64;
     *(_QWORD *)&v23[-1].m_uiSize = 0i64;
     --v2;
   }
@@ -237,78 +235,76 @@ void __fastcall CAkAudioLibIndex::Init(CAkAudioLibIndex *this)
 // RVA: 0xA4DB90
 void __fastcall CAkAudioLibIndex::ReleaseTempObjects(CAkAudioLibIndex *this)
 {
-  CAkAudioLibIndex *v1; // rbp
   CAkIndexable *i; // rsi
   __int64 v3; // rbx
   __int64 v4; // rdi
-  CAkIndexable *v5; // rcx
+  int *v5; // rcx
   CAkIndexable *j; // rdi
-  CAkIndexable *v7; // rcx
+  int *v7; // rcx
 
-  v1 = this;
   EnterCriticalSection(&this->m_idxAudioNode.m_IndexLock.m_csLock);
-  i = v1->m_idxAudioNode.m_mapIDToPtr.m_table[0];
+  i = this->m_idxAudioNode.m_mapIDToPtr.m_table[0];
   LODWORD(v3) = 0;
   LODWORD(v4) = 0;
   if ( i )
-    goto LABEL_25;
-  while ( 1 )
   {
-    v4 = (unsigned int)(v4 + 1);
-    if ( (unsigned int)v4 >= 0xC1 )
-      break;
-    i = v1->m_idxAudioNode.m_mapIDToPtr.m_table[v4];
-    if ( i )
-      goto LABEL_6;
-  }
-  if ( i )
-  {
-LABEL_25:
     do
     {
 LABEL_6:
-      v5 = i;
-      for ( i = i->pNextItem; !i; i = v1->m_idxAudioNode.m_mapIDToPtr.m_table[v4] )
+      v5 = (int *)i;
+      for ( i = i->pNextItem; !i; i = this->m_idxAudioNode.m_mapIDToPtr.m_table[v4] )
       {
         v4 = (unsigned int)(v4 + 1);
         if ( (unsigned int)v4 >= 0xC1 )
           break;
       }
-      if ( (v5->key & 0x80000000) != 0 )
-        ((void (*)(void))v5->vfptr->Release)();
+      if ( v5[4] < 0 )
+        (*(void (__fastcall **)(int *))(*(_QWORD *)v5 + 16i64))(v5);
     }
     while ( i );
   }
-  LeaveCriticalSection(&v1->m_idxAudioNode.m_IndexLock.m_csLock);
-  j = v1->m_idxFxCustom.m_mapIDToPtr.m_table[0];
-  if ( j )
-    goto LABEL_26;
-  while ( 1 )
+  else
   {
-    v3 = (unsigned int)(v3 + 1);
-    if ( (unsigned int)v3 >= 0xC1 )
-      break;
-    j = v1->m_idxFxCustom.m_mapIDToPtr.m_table[v3];
-    if ( j )
-      goto LABEL_17;
+    while ( 1 )
+    {
+      v4 = (unsigned int)(v4 + 1);
+      if ( (unsigned int)v4 >= 0xC1 )
+        break;
+      i = this->m_idxAudioNode.m_mapIDToPtr.m_table[v4];
+      if ( i )
+        goto LABEL_6;
+    }
   }
+  LeaveCriticalSection(&this->m_idxAudioNode.m_IndexLock.m_csLock);
+  j = this->m_idxFxCustom.m_mapIDToPtr.m_table[0];
   if ( j )
   {
-LABEL_26:
     do
     {
 LABEL_17:
-      v7 = j;
-      for ( j = j->pNextItem; !j; j = v1->m_idxFxCustom.m_mapIDToPtr.m_table[v3] )
+      v7 = (int *)j;
+      for ( j = j->pNextItem; !j; j = this->m_idxFxCustom.m_mapIDToPtr.m_table[v3] )
       {
         v3 = (unsigned int)(v3 + 1);
         if ( (unsigned int)v3 >= 0xC1 )
           break;
       }
-      if ( (v7->key & 0x80000000) != 0 )
-        ((void (*)(void))v7->vfptr->Release)();
+      if ( v7[4] < 0 )
+        (*(void (__fastcall **)(int *))(*(_QWORD *)v7 + 16i64))(v7);
     }
     while ( j );
+  }
+  else
+  {
+    while ( 1 )
+    {
+      v3 = (unsigned int)(v3 + 1);
+      if ( (unsigned int)v3 >= 0xC1 )
+        break;
+      j = this->m_idxFxCustom.m_mapIDToPtr.m_table[v3];
+      if ( j )
+        goto LABEL_17;
+    }
   }
 }
 
@@ -316,36 +312,22 @@ LABEL_17:
 // RVA: 0xA4DAE0
 void __fastcall CAkAudioLibIndex::ReleaseDynamicSequences(CAkAudioLibIndex *this)
 {
-  _RTL_CRITICAL_SECTION *v1; // rbp
-  _RTL_CRITICAL_SECTION_DEBUG *i; // rdi
+  CAkIndexItem<CAkDynamicSequence *> *p_m_idxDynamicSequences; // rbp
+  CAkIndexable *i; // rdi
   __int64 v3; // rbx
   unsigned int *v4; // rsi
 
-  v1 = &this->m_idxDynamicSequences.m_IndexLock.m_csLock;
+  p_m_idxDynamicSequences = &this->m_idxDynamicSequences;
   EnterCriticalSection(&this->m_idxDynamicSequences.m_IndexLock.m_csLock);
-  i = v1[1].DebugInfo;
+  i = p_m_idxDynamicSequences->m_mapIDToPtr.m_table[0];
   LODWORD(v3) = 0;
   if ( i )
-    goto LABEL_13;
-  while ( 1 )
   {
-    v3 = (unsigned int)(v3 + 1);
-    if ( (unsigned int)v3 >= 0xC1 )
-      break;
-    i = (_RTL_CRITICAL_SECTION_DEBUG *)*((_QWORD *)&v1[1].DebugInfo + v3);
-    if ( i )
-      goto LABEL_6;
-  }
-  if ( i )
-  {
-LABEL_13:
     do
     {
 LABEL_6:
-      v4 = (unsigned int *)&i->Type;
-      for ( i = (_RTL_CRITICAL_SECTION_DEBUG *)i->CriticalSection;
-            !i;
-            i = (_RTL_CRITICAL_SECTION_DEBUG *)*((_QWORD *)&v1[1].DebugInfo + v3) )
+      v4 = (unsigned int *)i;
+      for ( i = i->pNextItem; !i; i = p_m_idxDynamicSequences->m_mapIDToPtr.m_table[v3] )
       {
         v3 = (unsigned int)(v3 + 1);
         if ( (unsigned int)v3 >= 0xC1 )
@@ -356,30 +338,51 @@ LABEL_6:
     }
     while ( i );
   }
-  LeaveCriticalSection(v1);
+  else
+  {
+    while ( 1 )
+    {
+      v3 = (unsigned int)(v3 + 1);
+      if ( (unsigned int)v3 >= 0xC1 )
+        break;
+      i = p_m_idxDynamicSequences->m_mapIDToPtr.m_table[v3];
+      if ( i )
+        goto LABEL_6;
+    }
+  }
+  LeaveCriticalSection(&p_m_idxDynamicSequences->m_IndexLock.m_csLock);
 }
 
 // File Line: 112
 // RVA: 0xA4D7F0
-CAkIndexable *__fastcall CAkAudioLibIndex::GetNodePtrAndAddRef(CAkAudioLibIndex *this, unsigned int in_ID, AkNodeType in_NodeType)
+CAkParameterNodeBase *__fastcall CAkAudioLibIndex::GetNodePtrAndAddRef(
+        CAkAudioLibIndex *this,
+        unsigned int in_ID,
+        AkNodeType in_NodeType)
 {
   if ( in_NodeType )
     this = (CAkAudioLibIndex *)((char *)this + 1592);
-  return CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef((CAkIndexItem<CAkFxShareSet *> *)this, in_ID);
+  return (CAkParameterNodeBase *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                                   (CAkIndexItem<CAkFxShareSet *> *)this,
+                                   in_ID);
 }
 
 // File Line: 125
 // RVA: 0xA4D7D0
-CAkIndexable *__fastcall CAkAudioLibIndex::GetNodePtrAndAddRef(CAkAudioLibIndex *this, WwiseObjectIDext *in_rIDext)
+CAkParameterNodeBase *__fastcall CAkAudioLibIndex::GetNodePtrAndAddRef(
+        CAkAudioLibIndex *this,
+        WwiseObjectIDext *in_rIDext)
 {
   bool v2; // zf
-  unsigned int v3; // edx
+  unsigned int id; // edx
 
-  v2 = in_rIDext->bIsBus == 0;
-  v3 = in_rIDext->id;
+  v2 = !in_rIDext->bIsBus;
+  id = in_rIDext->id;
   if ( !v2 )
     this = (CAkAudioLibIndex *)((char *)this + 1592);
-  return CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef((CAkIndexItem<CAkFxShareSet *> *)this, v3);
+  return (CAkParameterNodeBase *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                                   (CAkIndexItem<CAkFxShareSet *> *)this,
+                                   id);
 }
 
 // File Line: 143
@@ -390,7 +393,7 @@ CAkAudioLibIndex *__fastcall CAkAudioLibIndex::GetNodeLock(CAkAudioLibIndex *thi
 
   result = this;
   if ( in_NodeType )
-    result = (CAkAudioLibIndex *)((char *)this + 1592);
+    return (CAkAudioLibIndex *)&this->m_idxBusses;
   return result;
 }
 

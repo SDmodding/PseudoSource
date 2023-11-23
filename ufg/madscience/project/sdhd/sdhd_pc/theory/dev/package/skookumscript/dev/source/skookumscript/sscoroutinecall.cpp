@@ -1,23 +1,20 @@
 // File Line: 75
 // RVA: 0x11E020
-SSInvokedCoroutine *__fastcall SSCoroutineCall::invoke_call(SSCoroutineCall *this, SSInstance *receiver_p, SSObjectBase *scope_p, SSInvokedBase *caller_p, SSInstance **result_pp)
+SSInvokedCoroutine *__fastcall SSCoroutineCall::invoke_call(
+        SSCoroutineCall *this,
+        SSInstance *receiver_p,
+        SSObjectBase *scope_p,
+        SSInvokedBase *caller_p,
+        SSInstance **result_pp)
 {
-  SSObjectBase *v5; // rdi
-  SSCoroutineCall *v6; // rbx
   SSInvokedCoroutine *v7; // rsi
 
-  v5 = scope_p;
-  v6 = this;
   v7 = SSInvokedCoroutine::pool_new(this, 0.0, caller_p, receiver_p, 0i64);
-  SSInvokedContextBase::data_append_args_exprs(
-    (SSInvokedContextBase *)&v7->vfptr,
-    (APArrayBase<SSExpressionBase> *)&v6->i_arguments.i_count,
-    (SSInvokableBase *)&v7->i_coroutine_p->vfptr,
-    v5);
+  SSInvokedContextBase::data_append_args_exprs(v7, &this->i_arguments, v7->i_coroutine_p, scope_p);
   if ( result_pp )
-    *result_pp = v7->vfptr->as_instance((SSObjectBase *)&v7->vfptr);
+    *result_pp = v7->vfptr->as_instance(v7);
   if ( SSInvokedCoroutine::on_update(v7) )
-    v7 = 0i64;
+    return 0i64;
   return v7;
 }
 
@@ -25,36 +22,32 @@ SSInvokedCoroutine *__fastcall SSCoroutineCall::invoke_call(SSCoroutineCall *thi
 // RVA: 0x13DAA0
 void __fastcall SSCoroutineCall::track_memory(SSCoroutineCall *this, AMemoryStats *mem_stats_p)
 {
-  SSExpressionBase **v2; // rbx
-  AMemoryStats *v3; // rsi
-  unsigned __int64 v4; // rdi
-  SSCoroutineCall *i; // rbp
+  SSExpressionBase **i_array_p; // rbx
+  SSExpressionBase **i; // rdi
   SSIdentifier **v6; // rbx
-  unsigned __int64 v7; // rdi
-  int j; // er14
+  SSIdentifier **v7; // rdi
+  unsigned int j; // r14d
 
-  v2 = this->i_arguments.i_array_p;
-  v3 = mem_stats_p;
-  v4 = (unsigned __int64)&v2[this->i_arguments.i_count];
-  for ( i = this; (unsigned __int64)v2 < v4; ++v2 )
+  i_array_p = this->i_arguments.i_array_p;
+  for ( i = &i_array_p[this->i_arguments.i_count]; i_array_p < i; ++i_array_p )
   {
-    if ( *v2 )
-      (*v2)->vfptr->track_memory(*v2, v3);
+    if ( *i_array_p )
+      (*i_array_p)->vfptr->track_memory(*i_array_p, mem_stats_p);
   }
-  v6 = i->i_return_args.i_array_p;
-  v7 = (unsigned __int64)&v6[i->i_return_args.i_count];
-  for ( j = 8 * i->i_arguments.i_count; (unsigned __int64)v6 < v7; ++v6 )
+  v6 = this->i_return_args.i_array_p;
+  v7 = &v6[this->i_return_args.i_count];
+  for ( j = 8 * this->i_arguments.i_count; v6 < v7; ++v6 )
   {
     if ( *v6 )
-      (*v6)->vfptr->track_memory((SSExpressionBase *)&(*v6)->vfptr, v3);
+      (*v6)->vfptr->track_memory(*v6, mem_stats_p);
   }
   AMemoryStats::track_memory(
-    v3,
+    mem_stats_p,
     "SSCoroutineCall",
     0x38u,
     0,
-    8 * (i->i_return_args.i_count + i->i_arguments.i_count),
-    j + 8 * i->i_return_args.i_count,
+    8 * (this->i_return_args.i_count + this->i_arguments.i_count),
+    j + 8 * this->i_return_args.i_count,
     1u);
 }
 

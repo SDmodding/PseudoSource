@@ -1,57 +1,60 @@
 // File Line: 65
 // RVA: 0x94EF30
-void __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(Scaleform::Render::Text::SGMLCharIter<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(
+        Scaleform::Render::Text::SGMLCharIter<wchar_t> *this)
 {
   bool v1; // zf
-  const wchar_t *v2; // rdx
+  const wchar_t *pNextChar; // rdx
 
-  v1 = this->DoContentParsing == 0;
-  v2 = this->pNextChar;
-  this->pCurChar = v2;
-  if ( !v1 )
-    JUMPOUT(*v2, 38, Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar);
-  if ( v2 < this->pEnd )
+  v1 = !this->DoContentParsing;
+  pNextChar = this->pNextChar;
+  this->pCurChar = pNextChar;
+  if ( !v1 && *pNextChar == 38 )
   {
-    this->CurChar = *v2;
-    this->pNextChar = v2 + 1;
+    Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(this);
+  }
+  else if ( pNextChar < this->pEnd )
+  {
+    this->CurChar = *pNextChar;
+    this->pNextChar = pNextChar + 1;
   }
 }
 
 // File Line: 88
 // RVA: 0x997DD0
-bool __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::IsSpace(unsigned int c)
+bool __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::IsSpace(unsigned __int16 c)
 {
   unsigned __int64 v1; // rax
   int v2; // edx
   int v4; // edx
 
-  v1 = (unsigned __int64)(unsigned __int16)c >> 8;
+  v1 = (unsigned __int64)c >> 8;
   v2 = Scaleform::UnicodeSpaceBits[v1];
   if ( !Scaleform::UnicodeSpaceBits[v1] )
     return 0;
   if ( v2 == 1 )
     return 1;
-  v4 = Scaleform::UnicodeSpaceBits[v2 + (((unsigned int)(unsigned __int16)c >> 4) & 0xF)];
+  v4 = Scaleform::UnicodeSpaceBits[v2 + ((c >> 4) & 0xF)];
   return _bittest(&v4, c & 0xF) != 0;
 }
 
 // File Line: 117
 // RVA: 0x96C110
-__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(Scaleform::Render::Text::SGMLCharIter<wchar_t> *this)
+__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(
+        Scaleform::Render::Text::SGMLCharIter<wchar_t> *this)
 {
-  const wchar_t *v1; // rax
-  const wchar_t *v2; // r14
-  Scaleform::Render::Text::SGMLCharIter<wchar_t> *v3; // rbx
-  _WORD *v4; // r13
-  signed __int64 v5; // r12
-  signed __int64 v6; // r15
+  const wchar_t *pCurChar; // rax
+  const wchar_t *pEnd; // r14
+  const wchar_t *v4; // r13
+  const wchar_t *v5; // r12
+  __int64 v6; // r15
   const char *v7; // rsi
   wchar_t *v8; // rbp
-  signed __int64 v9; // r14
+  __int64 v9; // r14
   int v10; // eax
   int v11; // edi
   int v12; // eax
-  signed __int64 v13; // r14
+  __int64 v13; // r14
   const char *v14; // rsi
   wchar_t *v15; // rbp
   int v16; // eax
@@ -62,17 +65,17 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscaped
   int v21; // eax
   int v22; // edi
   int v23; // eax
-  signed __int64 v24; // r14
+  __int64 v24; // r14
   const char *v25; // rsi
   wchar_t *v26; // rbp
   int v27; // eax
   int v28; // edi
   int v29; // eax
-  signed __int64 v30; // r12
-  signed __int64 v31; // r15
+  const wchar_t *v30; // r12
+  __int64 v31; // r15
   const char *v32; // rsi
   wchar_t *v33; // rbp
-  signed __int64 v34; // r14
+  __int64 v34; // r14
   int v35; // eax
   int v36; // edi
   int v37; // eax
@@ -81,10 +84,10 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscaped
   int v40; // eax
   int v41; // edi
   int v42; // eax
-  int v43; // edi
-  unsigned __int16 v44; // bp
+  unsigned int v43; // edi
+  wchar_t v44; // bp
   wchar_t v45; // cx
-  wchar_t *v46; // rsi
+  const wchar_t *pNextChar; // rsi
   __int16 v47; // ax
   int v48; // eax
   wchar_t v49; // cx
@@ -93,28 +96,26 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscaped
   int v52; // edi
   const wchar_t *v53; // rax
 
-  v1 = this->pCurChar;
-  v2 = this->pEnd;
-  v3 = this;
-  if ( this->pCurChar < v2 )
+  pCurChar = this->pCurChar;
+  pEnd = this->pEnd;
+  if ( this->pCurChar < pEnd )
   {
-    this->pNextChar = v1;
-    if ( *v1 != 38 )
-      return v3->CurChar;
-    v4 = v1 + 1;
-    v5 = (signed __int64)(v1 + 6);
+    this->pNextChar = pCurChar;
+    if ( *pCurChar != 38 )
+      return this->CurChar;
+    v4 = pCurChar + 1;
+    v5 = pCurChar + 6;
     this->CurChar = 38;
-    this->pNextChar = v1 + 1;
-    if ( v1 + 6 <= v2 )
+    this->pNextChar = pCurChar + 1;
+    if ( pCurChar + 6 <= pEnd )
     {
       v6 = 5i64;
       v7 = "quot;";
-      v8 = (wchar_t *)(v1 + 1);
+      v8 = (wchar_t *)(pCurChar + 1);
       v9 = 5i64;
       do
       {
-        v10 = Scaleform::SFtowlower(*v8);
-        ++v8;
+        v10 = Scaleform::SFtowlower(*v8++);
         v11 = v10;
         v12 = Scaleform::SFtowlower(*v7++);
         if ( !--v9 || !v11 )
@@ -129,17 +130,16 @@ LABEL_12:
       if ( v11 == v12 )
       {
 LABEL_13:
-        v3->CurChar = 34;
-        v3->pNextChar = (const wchar_t *)v5;
-        return v3->CurChar;
+        this->CurChar = 34;
+        this->pNextChar = v5;
+        return this->CurChar;
       }
       v13 = 5i64;
       v14 = "apos;";
-      v15 = v4;
+      v15 = (wchar_t *)v4;
       do
       {
-        v16 = Scaleform::SFtowlower(*v15);
-        ++v15;
+        v16 = Scaleform::SFtowlower(*v15++);
         v17 = v16;
         v18 = Scaleform::SFtowlower(*v14++);
         if ( !--v13 || !v17 )
@@ -151,19 +151,18 @@ LABEL_13:
       if ( v17 == v18 && (v13 || *v14) )
       {
 LABEL_23:
-        v3->CurChar = 39;
-        v3->pNextChar = (const wchar_t *)v5;
-        return v3->CurChar;
+        this->CurChar = 39;
+        this->pNextChar = v5;
+        return this->CurChar;
       }
 LABEL_22:
       if ( v17 == v18 )
         goto LABEL_23;
       v19 = "nbsp;";
-      v20 = v4;
+      v20 = (wchar_t *)v4;
       do
       {
-        v21 = Scaleform::SFtowlower(*v20);
-        ++v20;
+        v21 = Scaleform::SFtowlower(*v20++);
         v22 = v21;
         v23 = Scaleform::SFtowlower(*v19++);
         if ( !--v6 || !v22 )
@@ -175,24 +174,23 @@ LABEL_22:
       if ( v22 == v23 && (v6 || *v19) )
       {
 LABEL_33:
-        v3->CurChar = 160;
-        v3->pNextChar = (const wchar_t *)v5;
-        return v3->CurChar;
+        this->CurChar = 160;
+        this->pNextChar = v5;
+        return this->CurChar;
       }
 LABEL_32:
       if ( v22 == v23 )
         goto LABEL_33;
-      v2 = v3->pEnd;
+      pEnd = this->pEnd;
     }
-    if ( v4 + 4 <= v2 )
+    if ( v4 + 4 <= pEnd )
     {
       v24 = 4i64;
       v25 = "amp;";
-      v26 = v4;
+      v26 = (wchar_t *)v4;
       do
       {
-        v27 = Scaleform::SFtowlower(*v26);
-        ++v26;
+        v27 = Scaleform::SFtowlower(*v26++);
         v28 = v27;
         v29 = Scaleform::SFtowlower(*v25++);
         if ( !--v24 || !v28 )
@@ -207,23 +205,22 @@ LABEL_44:
       if ( v28 == v29 )
       {
 LABEL_45:
-        v3->CurChar = 38;
-        v3->pNextChar = v4 + 4;
-        return v3->CurChar;
+        this->CurChar = 38;
+        this->pNextChar = v4 + 4;
+        return this->CurChar;
       }
-      v2 = v3->pEnd;
+      pEnd = this->pEnd;
     }
-    v30 = (signed __int64)(v4 + 3);
-    if ( v4 + 3 <= v2 )
+    v30 = v4 + 3;
+    if ( v4 + 3 <= pEnd )
     {
       v31 = 3i64;
       v32 = "lt;";
-      v33 = v4;
+      v33 = (wchar_t *)v4;
       v34 = 3i64;
       do
       {
-        v35 = Scaleform::SFtowlower(*v33);
-        ++v33;
+        v35 = Scaleform::SFtowlower(*v33++);
         v36 = v35;
         v37 = Scaleform::SFtowlower(*v32++);
         if ( !--v34 || !v36 )
@@ -238,16 +235,15 @@ LABEL_56:
       if ( v36 == v37 )
       {
 LABEL_57:
-        v3->CurChar = 60;
-        v3->pNextChar = (const wchar_t *)v30;
-        return v3->CurChar;
+        this->CurChar = 60;
+        this->pNextChar = v30;
+        return this->CurChar;
       }
       v38 = "gt;";
-      v39 = v4;
+      v39 = (wchar_t *)v4;
       do
       {
-        v40 = Scaleform::SFtowlower(*v39);
-        ++v39;
+        v40 = Scaleform::SFtowlower(*v39++);
         v41 = v40;
         v42 = Scaleform::SFtowlower(*v38++);
         if ( !--v31 || !v41 )
@@ -259,35 +255,35 @@ LABEL_57:
       if ( v41 == v42 && (v31 || *v38) )
       {
 LABEL_67:
-        v3->CurChar = 62;
-        v3->pNextChar = (const wchar_t *)v30;
-        return v3->CurChar;
+        this->CurChar = 62;
+        this->pNextChar = v30;
+        return this->CurChar;
       }
 LABEL_66:
       if ( v41 == v42 )
         goto LABEL_67;
-      v2 = v3->pEnd;
+      pEnd = this->pEnd;
     }
-    if ( v4 + 2 > v2 || *v4 != 35 )
-      return v3->CurChar;
+    if ( v4 + 2 > pEnd || *v4 != 35 )
+      return this->CurChar;
     v43 = 0;
-    v3->pNextChar = v4 + 1;
+    this->pNextChar = v4 + 1;
     v44 = v4[1];
     if ( Scaleform::SFtowlower(v44 == 120) )
     {
-      v3->pNextChar = v4 + 2;
-      if ( v4 + 2 < v2 )
+      this->pNextChar = v4 + 2;
+      if ( v4 + 2 < pEnd )
       {
         while ( 1 )
         {
-          v45 = *v3->pNextChar;
+          v45 = *this->pNextChar;
           if ( v45 == 59 )
             goto LABEL_87;
           if ( !isxdigit(v45) )
             goto LABEL_91;
-          v46 = (wchar_t *)v3->pNextChar;
+          pNextChar = this->pNextChar;
           v43 *= 16;
-          v47 = Scaleform::SFtowlower(*v46);
+          v47 = Scaleform::SFtowlower(*pNextChar);
           if ( (unsigned __int16)(v47 - 48) <= 9u )
             break;
           if ( (unsigned __int16)(v47 - 97) <= 5u )
@@ -296,8 +292,8 @@ LABEL_66:
             goto LABEL_79;
           }
 LABEL_80:
-          v3->pNextChar = v46 + 1;
-          if ( v46 + 1 >= v3->pEnd )
+          this->pNextChar = pNextChar + 1;
+          if ( pNextChar + 1 >= this->pEnd )
             goto LABEL_87;
         }
         v48 = v47 & 0xF;
@@ -310,67 +306,64 @@ LABEL_79:
     {
       if ( !isdigit(v44) )
         goto LABEL_91;
-      if ( v3->pNextChar < v3->pEnd )
+      if ( this->pNextChar < this->pEnd )
       {
         do
         {
-          v49 = *v3->pNextChar;
+          v49 = *this->pNextChar;
           if ( v49 == 59 )
             break;
           if ( !isdigit(v49) )
             goto LABEL_91;
-          v50 = v3->pNextChar;
+          v50 = this->pNextChar;
           v51 = 5 * v43;
           v52 = *v50 - 48;
-          v3->pNextChar = v50 + 1;
+          this->pNextChar = v50 + 1;
           v43 = v52 + 2 * v51;
         }
-        while ( v50 + 1 < v3->pEnd );
+        while ( v50 + 1 < this->pEnd );
 LABEL_87:
         if ( v43 == -1 )
         {
 LABEL_91:
-          v3->pNextChar = v4;
-          return v3->CurChar;
+          this->pNextChar = v4;
+          return this->CurChar;
         }
       }
     }
-    v53 = v3->pNextChar;
+    v53 = this->pNextChar;
     if ( *v53 == 59 )
-      v3->pNextChar = v53 + 1;
-    v3->CurChar = v43;
-    return v3->CurChar;
+      this->pNextChar = v53 + 1;
+    this->CurChar = v43;
+    return this->CurChar;
   }
   return 0i64;
 }
 
 // File Line: 240
 // RVA: 0x9B7B10
-__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(const wchar_t *wstr, const char *str, unsigned __int64 len)
+__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(
+        wchar_t *wstr,
+        const char *str,
+        unsigned __int64 len)
 {
   unsigned __int64 v3; // rsi
   const char *v4; // rbx
-  wchar_t *v5; // rbp
-  int v6; // er15
-  const char *v7; // r14
+  int v6; // r15d
   int v8; // eax
   int v9; // edi
   int v10; // eax
-  signed __int64 v11; // rax
-  __int64 result; // rax
-  signed __int64 v13; // rax
+  __int64 v11; // rax
+  __int64 v13; // rax
 
   v3 = len;
   v4 = str;
-  v5 = (wchar_t *)wstr;
   if ( len )
   {
     v6 = len;
-    v7 = str;
     do
     {
-      v8 = Scaleform::SFtowlower(*v5);
-      ++v5;
+      v8 = Scaleform::SFtowlower(*wstr++);
       v9 = v8;
       v10 = Scaleform::SFtowlower(*v4++);
       if ( !--v3 || !v9 )
@@ -384,8 +377,8 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(co
     v11 = -1i64;
     do
       ++v11;
-    while ( v7[v11] );
-    result = (unsigned int)(v6 - v11);
+    while ( str[v11] );
+    return (unsigned int)(v6 - v11);
   }
   else
   {
@@ -393,37 +386,39 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(co
     do
       ++v13;
     while ( str[v13] );
-    result = (unsigned int)-(signed int)v13;
+    return (unsigned int)-(int)v13;
   }
-  return result;
 }
 
 // File Line: 266
 // RVA: 0x9B7BD0
-__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(const wchar_t *dst, unsigned __int64 dstlen, const wchar_t *src, unsigned __int64 srclen)
+__int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(
+        const wchar_t *dst,
+        unsigned __int64 dstlen,
+        wchar_t *src,
+        unsigned __int64 srclen)
 {
   unsigned __int64 v4; // rdi
   wchar_t *v5; // rsi
   unsigned __int64 v6; // rbp
-  int v7; // er15
-  int v8; // er12
+  int v7; // r15d
+  int v8; // r12d
   signed __int64 v9; // r14
   int v10; // ebx
   int v11; // eax
 
   v4 = srclen;
-  v5 = (wchar_t *)src;
+  v5 = src;
   v6 = dstlen;
   if ( !dstlen )
-    return (unsigned int)-(signed int)srclen;
+    return (unsigned int)-(int)srclen;
   v7 = dstlen;
   v8 = srclen;
   v9 = (char *)dst - (char *)src;
   do
   {
     v10 = Scaleform::SFtowlower(*(wchar_t *)((char *)v5 + v9));
-    v11 = Scaleform::SFtowlower(*v5);
-    ++v5;
+    v11 = Scaleform::SFtowlower(*v5++);
     if ( !--v6 || !v10 )
       break;
     if ( v10 != v11 )
@@ -438,96 +433,89 @@ __int64 __fastcall Scaleform::Render::Text::SGMLCharIter<wchar_t>::StrCompare(co
 
 // File Line: 353
 // RVA: 0x948AF0
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::~SGMLParser<wchar_t>(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::~SGMLParser<wchar_t>(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pBuffer);
 }
 
 // File Line: 388
 // RVA: 0x959DD0
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(Scaleform::Render::Text::SGMLParser<wchar_t> *this, const wchar_t *pstr, unsigned __int64 sz)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this,
+        const wchar_t *pstr,
+        unsigned __int64 sz)
 {
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v3; // rbx
-  unsigned __int64 v4; // rcx
-  unsigned __int64 v5; // rdi
-  const wchar_t *v6; // rsi
-  wchar_t *v7; // rdx
+  unsigned __int64 BufSize; // rcx
+  wchar_t *pBuffer; // rdx
   unsigned __int64 v8; // r8
   wchar_t *v9; // rax
 
-  v3 = this;
-  v4 = this->BufSize;
-  v5 = sz;
-  v6 = pstr;
-  if ( sz + v3->BufPos > v4 )
+  BufSize = this->BufSize;
+  if ( sz + this->BufPos > BufSize )
   {
-    v7 = v3->pBuffer;
-    v8 = v4 + sz;
-    v3->BufSize = v8;
-    if ( v7 )
-      v9 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(Scaleform::Memory::pGlobalHeap, v7, 2 * v8);
+    pBuffer = this->pBuffer;
+    v8 = BufSize + sz;
+    this->BufSize = v8;
+    if ( pBuffer )
+      v9 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(Scaleform::Memory::pGlobalHeap, pBuffer, 2 * v8);
     else
-      v9 = (wchar_t *)v3->pHeap->vfptr->Alloc(v3->pHeap, 2 * v8, 0i64);
-    v3->pBuffer = v9;
+      v9 = (wchar_t *)this->pHeap->vfptr->Alloc(this->pHeap, 2 * v8, 0i64);
+    this->pBuffer = v9;
   }
-  memmove(&v3->pBuffer[v3->BufPos], v6, 2 * v5);
-  v3->BufPos += v5;
+  memmove(&this->pBuffer[this->BufPos], pstr, 2 * sz);
+  this->BufPos += sz;
 }
 
 // File Line: 417
 // RVA: 0x989A80
-signed __int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNext(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+__int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNext(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
-  signed __int64 result; // rax
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v2; // rdi
+  __int64 result; // rax
   bool v3; // zf
-  const wchar_t *v4; // rcx
+  const wchar_t *pNextChar; // rcx
   const wchar_t *v5; // rcx
   unsigned int v6; // esi
-  unsigned int v7; // eax
+  unsigned int CurChar; // eax
   const wchar_t *v8; // rcx
   unsigned int v9; // eax
-  int v10; // eax
+  int CurState; // eax
   const wchar_t *v11; // rcx
   const wchar_t *v12; // rcx
 
   result = (unsigned int)this->CurState;
-  v2 = this;
   if ( (_DWORD)result != 1 )
   {
-    if ( !_bittest((const signed int *)&result, 0xFu) )
+    if ( (result & 0x8000) == 0 )
     {
-      switch ( (_DWORD)result )
+      switch ( (int)result )
       {
         case 2:
           Scaleform::Render::Text::SGMLParser<wchar_t>::SkipName(this);
           goto $LL34;
         case 3:
-          if ( this->Iter.pCurChar < this->Iter.pEnd )
+          while ( this->Iter.pCurChar < this->Iter.pEnd )
           {
-            do
+            if ( this->Iter.CurChar == 60 )
+              break;
+            v3 = !this->Iter.DoContentParsing;
+            pNextChar = this->Iter.pNextChar;
+            this->Iter.pCurChar = pNextChar;
+            if ( v3 || *pNextChar != 38 )
             {
-              if ( v2->Iter.CurChar == 60 )
-                break;
-              v3 = v2->Iter.DoContentParsing == 0;
-              v4 = v2->Iter.pNextChar;
-              v2->Iter.pCurChar = v4;
-              if ( v3 || *v4 != 38 )
+              if ( pNextChar < this->Iter.pEnd )
               {
-                if ( v4 < v2->Iter.pEnd )
-                {
-                  v2->Iter.CurChar = *v4;
-                  v2->Iter.pNextChar = v4 + 1;
-                }
-              }
-              else
-              {
-                Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+                this->Iter.CurChar = *pNextChar;
+                this->Iter.pNextChar = pNextChar + 1;
               }
             }
-            while ( v2->Iter.pCurChar < v2->Iter.pEnd );
+            else
+            {
+              Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
+            }
           }
-          v2->CurState = 32771;
+          this->CurState = 32771;
           goto LABEL_29;
         case 4:
           if ( this->Iter.pCurChar >= this->Iter.pEnd )
@@ -536,15 +524,15 @@ signed __int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNext(
         case 7:
         case 8:
 $LL34:
-          while ( (unsigned int)(v2->CurState - 7) <= 1 )
-            Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(v2);
+          while ( (unsigned int)(this->CurState - 7) <= 1 )
+            Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(this);
           goto $LN165_0;
         case 9:
 $LN165_0:
-          if ( v2->Iter.CurChar == 62 )
+          if ( this->Iter.CurChar == 62 )
           {
-            Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&v2->Iter);
-            v2->CurState = 32770;
+            Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&this->Iter);
+            this->CurState = 32770;
           }
           goto LABEL_29;
         default:
@@ -552,79 +540,79 @@ $LN165_0:
       }
       do
       {
-        if ( v2->Iter.CurChar == 62 )
+        if ( this->Iter.CurChar == 62 )
           goto LABEL_27;
-        v3 = v2->Iter.DoContentParsing == 0;
-        v5 = v2->Iter.pNextChar;
-        v2->Iter.pCurChar = v5;
+        v3 = !this->Iter.DoContentParsing;
+        v5 = this->Iter.pNextChar;
+        this->Iter.pCurChar = v5;
         if ( v3 || *v5 != 38 )
         {
-          if ( v5 < v2->Iter.pEnd )
+          if ( v5 < this->Iter.pEnd )
           {
-            v2->Iter.CurChar = *v5;
-            v2->Iter.pNextChar = v5 + 1;
+            this->Iter.CurChar = *v5;
+            this->Iter.pNextChar = v5 + 1;
           }
         }
         else
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
         }
       }
-      while ( v2->Iter.pCurChar < v2->Iter.pEnd );
+      while ( this->Iter.pCurChar < this->Iter.pEnd );
 LABEL_26:
-      if ( v2->Iter.CurChar == 62 )
+      if ( this->Iter.CurChar == 62 )
       {
 LABEL_27:
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&v2->Iter);
-        v2->CurState = 32772;
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&this->Iter);
+        this->CurState = 32772;
         goto LABEL_29;
       }
-      v2->CurState = 1;
+      this->CurState = 1;
     }
 LABEL_29:
-    if ( v2->CurState == 1 )
+    if ( this->CurState == 1 )
       return 1i64;
     v6 = 0;
-    if ( v2->Iter.pCurChar < v2->Iter.pEnd )
+    if ( this->Iter.pCurChar < this->Iter.pEnd )
     {
       while ( 1 )
       {
         if ( v6 )
         {
 LABEL_65:
-          v2->CurState = v6;
+          this->CurState = v6;
           return v6;
         }
-        v7 = v2->Iter.CurChar;
-        if ( !v7 )
+        CurChar = this->Iter.CurChar;
+        if ( !CurChar )
           goto LABEL_62;
-        if ( v7 != 47 )
+        if ( CurChar != 47 )
         {
-          if ( v7 == 60 )
+          if ( CurChar == 60 )
           {
-            v3 = v2->Iter.DoContentParsing == 0;
-            v8 = v2->Iter.pNextChar;
-            v2->Iter.pCurChar = v8;
+            v3 = !this->Iter.DoContentParsing;
+            v8 = this->Iter.pNextChar;
+            this->Iter.pCurChar = v8;
             if ( v3 || *v8 != 38 )
             {
-              if ( v8 < v2->Iter.pEnd )
+              if ( v8 < this->Iter.pEnd )
               {
-                v2->Iter.CurChar = *v8;
-                v2->Iter.pNextChar = v8 + 1;
+                this->Iter.CurChar = *v8;
+                this->Iter.pNextChar = v8 + 1;
               }
             }
             else
             {
-              Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+              Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
             }
-            v9 = v2->Iter.CurChar;
+            v9 = this->Iter.CurChar;
             if ( v9 == 33 )
             {
-              Scaleform::Render::Text::SGMLParser<wchar_t>::SkipComment(v2);
+              Scaleform::Render::Text::SGMLParser<wchar_t>::SkipComment(this);
             }
             else if ( v9 == 47 )
             {
-              Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&v2->Iter);
+              Scaleform::Render::Text::SGMLCharIter<wchar_t>::operator++(&this->Iter);
               v6 = 4;
             }
             else
@@ -638,50 +626,50 @@ LABEL_65:
           }
           goto LABEL_63;
         }
-        v10 = v2->CurState;
-        if ( v10 == 9 || v10 == 6 )
+        CurState = this->CurState;
+        if ( CurState == 9 || CurState == 6 )
           break;
         v6 = 3;
 LABEL_63:
-        if ( v2->Iter.pCurChar >= v2->Iter.pEnd )
+        if ( this->Iter.pCurChar >= this->Iter.pEnd )
         {
           if ( !v6 )
             goto LABEL_66;
           goto LABEL_65;
         }
       }
-      v3 = v2->Iter.DoContentParsing == 0;
-      v11 = v2->Iter.pNextChar;
-      v2->Iter.pCurChar = v11;
+      v3 = !this->Iter.DoContentParsing;
+      v11 = this->Iter.pNextChar;
+      this->Iter.pCurChar = v11;
       if ( v3 || *v11 != 38 )
       {
-        if ( v11 < v2->Iter.pEnd )
+        if ( v11 < this->Iter.pEnd )
         {
-          v2->Iter.CurChar = *v11;
-          v2->Iter.pNextChar = v11 + 1;
+          this->Iter.CurChar = *v11;
+          this->Iter.pNextChar = v11 + 1;
         }
       }
       else
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
-      if ( v2->Iter.CurChar == 62 )
+      if ( this->Iter.CurChar == 62 )
       {
-        v3 = v2->Iter.DoContentParsing == 0;
-        v12 = v2->Iter.pNextChar;
-        v2->Iter.pCurChar = v12;
+        v3 = !this->Iter.DoContentParsing;
+        v12 = this->Iter.pNextChar;
+        this->Iter.pCurChar = v12;
         if ( v3 || *v12 != 38 )
         {
-          if ( v12 < v2->Iter.pEnd )
+          if ( v12 < this->Iter.pEnd )
           {
-            v2->Iter.CurChar = *v12;
-            v2->Iter.pNextChar = v12 + 1;
+            this->Iter.CurChar = *v12;
+            this->Iter.pNextChar = v12 + 1;
           }
           v6 = 32773;
         }
         else
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
           v6 = 32773;
         }
         goto LABEL_63;
@@ -691,120 +679,117 @@ LABEL_62:
       goto LABEL_63;
     }
 LABEL_66:
-    v2->CurState = 0x8000;
-    result = (unsigned int)v2->CurState;
+    this->CurState = 0x8000;
+    return (unsigned int)this->CurState;
   }
   return result;
 }
 
 // File Line: 533
 // RVA: 0x989D80
-char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttribute(Scaleform::Render::Text::SGMLParser<wchar_t> *this, const wchar_t **ppattrName, unsigned __int64 *pattrNameSz)
+char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttribute(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this,
+        const wchar_t **ppattrName,
+        unsigned __int64 *pattrNameSz)
 {
-  int v3; // eax
-  unsigned __int64 *v4; // rbp
-  const wchar_t **v5; // r14
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v6; // rdi
+  int CurState; // eax
   char v8; // si
-  unsigned int v9; // ecx
+  unsigned int CurChar; // ecx
   unsigned __int64 v10; // rax
-  int v11; // er8
+  int v11; // r8d
   int v12; // ecx
   bool v13; // zf
-  const wchar_t *v14; // rcx
+  const wchar_t *pNextChar; // rcx
   const wchar_t *v15; // rax
 
-  v3 = this->CurState;
-  v4 = pattrNameSz;
-  v5 = ppattrName;
-  v6 = this;
-  if ( v3 == 1 )
+  CurState = this->CurState;
+  if ( CurState == 1 )
     return 0;
-  if ( v3 == 8 )
+  if ( CurState == 8 )
     Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(this);
   v8 = 0;
-  while ( v6->CurState == 7 )
+  while ( this->CurState == 7 )
   {
-    if ( v6->Iter.pCurChar >= v6->Iter.pEnd )
+    if ( this->Iter.pCurChar >= this->Iter.pEnd )
       break;
-    Scaleform::Render::Text::SGMLParser<wchar_t>::ParseName(v6, v5, v4);
-    while ( v6->Iter.pCurChar < v6->Iter.pEnd )
+    Scaleform::Render::Text::SGMLParser<wchar_t>::ParseName(this, ppattrName, pattrNameSz);
+    while ( this->Iter.pCurChar < this->Iter.pEnd )
     {
-      v9 = v6->Iter.CurChar;
-      v10 = (unsigned __int64)(unsigned __int16)v9 >> 8;
+      CurChar = this->Iter.CurChar;
+      v10 = (unsigned __int64)(unsigned __int16)CurChar >> 8;
       v11 = Scaleform::UnicodeSpaceBits[v10];
       if ( !Scaleform::UnicodeSpaceBits[v10] )
         break;
       if ( v11 != 1 )
       {
-        v12 = Scaleform::UnicodeSpaceBits[v11 + (((unsigned int)(unsigned __int16)v9 >> 4) & 0xF)];
-        if ( !_bittest(&v12, v6->Iter.CurChar & 0xF) )
+        v12 = Scaleform::UnicodeSpaceBits[v11 + (((unsigned __int16)CurChar >> 4) & 0xF)];
+        if ( !_bittest(&v12, this->Iter.CurChar & 0xF) )
           break;
       }
-      v13 = v6->Iter.DoContentParsing == 0;
-      v14 = v6->Iter.pNextChar;
-      v6->Iter.pCurChar = v14;
-      if ( v13 || *v14 != 38 )
+      v13 = !this->Iter.DoContentParsing;
+      pNextChar = this->Iter.pNextChar;
+      this->Iter.pCurChar = pNextChar;
+      if ( v13 || *pNextChar != 38 )
       {
-        if ( v14 < v6->Iter.pEnd )
+        if ( pNextChar < this->Iter.pEnd )
         {
-          v6->Iter.CurChar = *v14;
-          v6->Iter.pNextChar = v14 + 1;
+          this->Iter.CurChar = *pNextChar;
+          this->Iter.pNextChar = pNextChar + 1;
         }
       }
       else
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v6->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
     }
-    if ( v6->Iter.pCurChar < v6->Iter.pEnd )
+    if ( this->Iter.pCurChar < this->Iter.pEnd )
     {
-      if ( v6->Iter.CurChar == 61 )
+      if ( this->Iter.CurChar == 61 )
       {
-        v15 = v6->Iter.pNextChar;
-        v6->Iter.pCurChar = v15;
-        if ( v6->Iter.DoContentParsing && *v15 == 38 )
+        v15 = this->Iter.pNextChar;
+        this->Iter.pCurChar = v15;
+        if ( this->Iter.DoContentParsing && *v15 == 38 )
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v6->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
         }
-        else if ( v15 < v6->Iter.pEnd )
+        else if ( v15 < this->Iter.pEnd )
         {
-          v6->Iter.CurChar = *v15;
-          v6->Iter.pNextChar = v6->Iter.pCurChar + 1;
+          this->Iter.CurChar = *v15;
+          this->Iter.pNextChar = this->Iter.pCurChar + 1;
         }
-        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v6);
-        v6->CurState = 8;
+        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
+        this->CurState = 8;
         v8 = 1;
       }
       else
       {
-        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(v6);
+        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(this);
       }
     }
   }
-  if ( v6->Iter.pCurChar >= v6->Iter.pEnd )
-    v6->CurState = 1;
+  if ( this->Iter.pCurChar >= this->Iter.pEnd )
+    this->CurState = 1;
   return v8;
 }
 
 // File Line: 572
 // RVA: 0x989F20
-__int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttributeValue(Scaleform::Render::Text::SGMLParser<wchar_t> *this, const wchar_t **ppattrValue, unsigned __int64 *pattrValueSz)
+__int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttributeValue(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this,
+        const wchar_t **ppattrValue,
+        unsigned __int64 *pattrValueSz)
 {
   unsigned __int8 v3; // r13
-  const wchar_t **v4; // r12
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v5; // rdi
-  unsigned __int64 *v6; // r14
-  unsigned int v7; // er15
+  unsigned int CurChar; // r15d
   bool v8; // zf
-  const wchar_t *v9; // rcx
+  const wchar_t *pNextChar; // rcx
   char v10; // si
-  bool v11; // al
-  char *i; // rcx
-  unsigned __int64 v13; // rcx
+  bool DoContentParsing; // al
+  const wchar_t *i; // rcx
+  unsigned __int64 BufSize; // rcx
   unsigned int v14; // ebp
-  wchar_t *v15; // rdx
-  signed __int64 v16; // r8
+  wchar_t *pBuffer; // rdx
+  unsigned __int64 v16; // r8
   wchar_t *v17; // rax
   const wchar_t *v18; // rcx
   const wchar_t *v19; // rax
@@ -812,123 +797,120 @@ __int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttribut
   __int64 result; // rax
 
   v3 = 0;
-  v4 = ppattrValue;
-  v5 = this;
-  v6 = pattrValueSz;
   if ( this->CurState == 8 )
   {
-    v7 = this->Iter.CurChar;
-    if ( v7 == 34 || v7 == 39 )
+    CurChar = this->Iter.CurChar;
+    if ( CurChar == 34 || CurChar == 39 )
     {
-      v8 = this->Iter.DoContentParsing == 0;
-      v9 = this->Iter.pNextChar;
-      v5->Iter.pCurChar = v9;
-      if ( v8 || *v9 != 38 )
+      v8 = !this->Iter.DoContentParsing;
+      pNextChar = this->Iter.pNextChar;
+      this->Iter.pCurChar = pNextChar;
+      if ( v8 || *pNextChar != 38 )
       {
-        if ( v9 < v5->Iter.pEnd )
+        if ( pNextChar < this->Iter.pEnd )
         {
-          v5->Iter.CurChar = *v9;
-          v5->Iter.pNextChar = v9 + 1;
+          this->Iter.CurChar = *pNextChar;
+          this->Iter.pNextChar = pNextChar + 1;
         }
       }
       else
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v5->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
       v10 = 0;
-      *v4 = v5->Iter.pCurChar;
-      *v6 = 0i64;
-      v11 = v5->Iter.DoContentParsing;
-      v5->Iter.DoContentParsing = 1;
-      if ( !v11 && *v5->Iter.pCurChar == 38 )
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v5->Iter);
-      for ( i = (char *)v5->Iter.pCurChar; (const wchar_t *)i < v5->Iter.pEnd; i = (char *)v5->Iter.pCurChar )
+      *ppattrValue = this->Iter.pCurChar;
+      *pattrValueSz = 0i64;
+      DoContentParsing = this->Iter.DoContentParsing;
+      this->Iter.DoContentParsing = 1;
+      if ( !DoContentParsing && *this->Iter.pCurChar == 38 )
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
+      for ( i = this->Iter.pCurChar; i < this->Iter.pEnd; i = this->Iter.pCurChar )
       {
-        if ( v5->Iter.CurChar == v7 )
+        if ( this->Iter.CurChar == CurChar )
           break;
-        if ( v5->Iter.DoContentParsing && *(_WORD *)i == 38 )
+        if ( this->Iter.DoContentParsing && *i == 38 )
         {
           if ( !v10 )
           {
-            v5->BufPos = 0i64;
-            Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(v5, *v4, *v6);
+            this->BufPos = 0i64;
+            Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(this, *ppattrValue, *pattrValueSz);
             v10 = 1;
           }
-          v13 = v5->BufSize;
-          v14 = v5->Iter.CurChar;
-          if ( v5->BufPos + 6 > v13 )
+          BufSize = this->BufSize;
+          v14 = this->Iter.CurChar;
+          if ( this->BufPos + 6 > BufSize )
           {
-            v15 = v5->pBuffer;
-            v16 = v13 + 6;
-            v5->BufSize = v13 + 6;
-            if ( v15 )
+            pBuffer = this->pBuffer;
+            v16 = BufSize + 6;
+            this->BufSize = BufSize + 6;
+            if ( pBuffer )
               v17 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                  Scaleform::Memory::pGlobalHeap,
-                                 v15,
+                                 pBuffer,
                                  2 * v16);
             else
-              v17 = (wchar_t *)v5->pHeap->vfptr->Alloc(v5->pHeap, 2 * v16, 0i64);
-            v5->pBuffer = v17;
+              v17 = (wchar_t *)this->pHeap->vfptr->Alloc(this->pHeap, 2 * v16, 0i64);
+            this->pBuffer = v17;
           }
-          v5->pBuffer[v5->BufPos++] = v14;
+          this->pBuffer[this->BufPos++] = v14;
         }
         else if ( v10 )
         {
           Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(
-            v5,
-            v5->Iter.pCurChar,
-            (unsigned int)((_QWORD)((char *)v5->Iter.pNextChar - i) >> 1));
+            this,
+            this->Iter.pCurChar,
+            (unsigned int)(this->Iter.pNextChar - i));
         }
         else
         {
-          *v6 += (unsigned int)((_QWORD)((char *)v5->Iter.pNextChar - i) >> 1);
+          *pattrValueSz += (unsigned int)(this->Iter.pNextChar - i);
         }
-        v8 = v5->Iter.DoContentParsing == 0;
-        v18 = v5->Iter.pNextChar;
-        v5->Iter.pCurChar = v18;
+        v8 = !this->Iter.DoContentParsing;
+        v18 = this->Iter.pNextChar;
+        this->Iter.pCurChar = v18;
         if ( v8 || *v18 != 38 )
         {
-          if ( v18 < v5->Iter.pEnd )
+          if ( v18 < this->Iter.pEnd )
           {
-            v5->Iter.CurChar = *v18;
-            v5->Iter.pNextChar = v18 + 1;
+            this->Iter.CurChar = *v18;
+            this->Iter.pNextChar = v18 + 1;
           }
         }
         else
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v5->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
         }
       }
-      v5->Iter.DoContentParsing = 0;
+      this->Iter.DoContentParsing = 0;
       if ( v10 )
       {
-        *v4 = v5->pBuffer;
-        *v6 = v5->BufPos;
+        *ppattrValue = this->pBuffer;
+        *pattrValueSz = this->BufPos;
       }
-      if ( v5->Iter.pCurChar < v5->Iter.pEnd )
+      if ( this->Iter.pCurChar < this->Iter.pEnd )
       {
-        v19 = v5->Iter.pNextChar;
+        v19 = this->Iter.pNextChar;
         v3 = 1;
-        v5->Iter.pCurChar = v19;
-        if ( v5->Iter.DoContentParsing && *v19 == 38 )
+        this->Iter.pCurChar = v19;
+        if ( this->Iter.DoContentParsing && *v19 == 38 )
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v5->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
         }
-        else if ( v19 < v5->Iter.pEnd )
+        else if ( v19 < this->Iter.pEnd )
         {
-          v5->Iter.CurChar = *v19;
-          v5->Iter.pNextChar = v5->Iter.pCurChar + 1;
+          this->Iter.CurChar = *v19;
+          this->Iter.pNextChar = this->Iter.pCurChar + 1;
         }
-        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v5);
-        v20 = v5->Iter.CurChar;
+        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
+        v20 = this->Iter.CurChar;
         if ( v20 == 62 || v20 == 47 )
-          v5->CurState = 9;
+          this->CurState = 9;
         else
-          v5->CurState = 7;
+          this->CurState = 7;
       }
       else
       {
-        v5->CurState = 1;
+        this->CurState = 1;
       }
     }
     else
@@ -937,495 +919,484 @@ __int64 __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::GetNextAttribut
     }
   }
   result = v3;
-  if ( v5->Iter.pCurChar >= v5->Iter.pEnd )
-    v5->CurState = 1;
+  if ( this->Iter.pCurChar >= this->Iter.pEnd )
+    this->CurState = 1;
   return result;
 }
 
 // File Line: 644
 // RVA: 0x99E8A0
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseName(Scaleform::Render::Text::SGMLParser<wchar_t> *this, const wchar_t **ppname, unsigned __int64 *plen)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseName(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this,
+        const wchar_t **ppname,
+        unsigned __int64 *plen)
 {
   char v3; // si
-  const wchar_t *v4; // r9
-  unsigned __int64 *v5; // r14
-  const wchar_t **v6; // r15
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v7; // rdi
-  unsigned int v8; // ecx
+  const wchar_t *pCurChar; // r9
+  unsigned int CurChar; // ecx
   unsigned __int64 v9; // rax
-  int v10; // er8
+  int v10; // r8d
   int v11; // ecx
-  unsigned __int64 v12; // rcx
+  unsigned __int64 BufSize; // rcx
   unsigned int v13; // ebp
-  wchar_t *v14; // rdx
-  signed __int64 v15; // r8
+  wchar_t *pBuffer; // rdx
+  unsigned __int64 v15; // r8
   wchar_t *v16; // rax
-  const wchar_t *v17; // rcx
+  const wchar_t *pNextChar; // rcx
 
   v3 = 0;
   *ppname = this->Iter.pCurChar;
   *plen = 0i64;
-  v4 = this->Iter.pCurChar;
-  v5 = plen;
-  v6 = ppname;
-  v7 = this;
-  if ( v4 < this->Iter.pEnd )
+  pCurChar = this->Iter.pCurChar;
+  if ( pCurChar < this->Iter.pEnd )
   {
     do
     {
-      v8 = v7->Iter.CurChar;
-      if ( v8 - 60 <= 2 )
+      CurChar = this->Iter.CurChar;
+      if ( CurChar - 60 <= 2 )
         break;
-      if ( v8 == 47 )
+      if ( CurChar == 47 )
         break;
-      v9 = (unsigned __int64)(unsigned __int16)v8 >> 8;
+      v9 = (unsigned __int64)(unsigned __int16)CurChar >> 8;
       v10 = Scaleform::UnicodeSpaceBits[v9];
       if ( Scaleform::UnicodeSpaceBits[v9] )
       {
         if ( v10 == 1 )
           break;
-        v11 = Scaleform::UnicodeSpaceBits[v10 + (((unsigned int)(unsigned __int16)v8 >> 4) & 0xF)];
-        if ( _bittest(&v11, v7->Iter.CurChar & 0xF) )
+        v11 = Scaleform::UnicodeSpaceBits[v10 + (((unsigned __int16)CurChar >> 4) & 0xF)];
+        if ( _bittest(&v11, this->Iter.CurChar & 0xF) )
           break;
       }
-      if ( v7->Iter.DoContentParsing && *v4 == 38 )
+      if ( this->Iter.DoContentParsing && *pCurChar == 38 )
       {
         if ( !v3 )
         {
-          v7->BufPos = 0i64;
-          Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(v7, *v6, *v5);
+          this->BufPos = 0i64;
+          Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(this, *ppname, *plen);
           v3 = 1;
         }
-        v12 = v7->BufSize;
-        v13 = v7->Iter.CurChar;
-        if ( v7->BufPos + 6 > v12 )
+        BufSize = this->BufSize;
+        v13 = this->Iter.CurChar;
+        if ( this->BufPos + 6 > BufSize )
         {
-          v14 = v7->pBuffer;
-          v15 = v12 + 6;
-          v7->BufSize = v12 + 6;
-          if ( v14 )
+          pBuffer = this->pBuffer;
+          v15 = BufSize + 6;
+          this->BufSize = BufSize + 6;
+          if ( pBuffer )
             v16 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                Scaleform::Memory::pGlobalHeap,
-                               v14,
+                               pBuffer,
                                2 * v15);
           else
-            v16 = (wchar_t *)v7->pHeap->vfptr->Alloc(v7->pHeap, 2 * v15, 0i64);
-          v7->pBuffer = v16;
+            v16 = (wchar_t *)this->pHeap->vfptr->Alloc(this->pHeap, 2 * v15, 0i64);
+          this->pBuffer = v16;
         }
-        v7->pBuffer[v7->BufPos++] = v13;
+        this->pBuffer[this->BufPos++] = v13;
       }
       else if ( v3 )
       {
         Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(
-          v7,
-          v7->Iter.pCurChar,
-          (unsigned int)((_QWORD)((char *)v7->Iter.pNextChar - (char *)v4) >> 1));
+          this,
+          this->Iter.pCurChar,
+          (unsigned int)(this->Iter.pNextChar - pCurChar));
       }
       else
       {
-        *v5 += (unsigned int)((_QWORD)((char *)v7->Iter.pNextChar - (char *)v4) >> 1);
+        *plen += (unsigned int)(this->Iter.pNextChar - pCurChar);
       }
-      v17 = v7->Iter.pNextChar;
-      v7->Iter.pCurChar = v17;
-      if ( v7->Iter.DoContentParsing && *v17 == 38 )
+      pNextChar = this->Iter.pNextChar;
+      this->Iter.pCurChar = pNextChar;
+      if ( this->Iter.DoContentParsing && *pNextChar == 38 )
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v7->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
-      else if ( v17 < v7->Iter.pEnd )
+      else if ( pNextChar < this->Iter.pEnd )
       {
-        v7->Iter.CurChar = *v17;
-        v7->Iter.pNextChar = v17 + 1;
+        this->Iter.CurChar = *pNextChar;
+        this->Iter.pNextChar = pNextChar + 1;
       }
-      v4 = v7->Iter.pCurChar;
+      pCurChar = this->Iter.pCurChar;
     }
-    while ( v4 < v7->Iter.pEnd );
+    while ( pCurChar < this->Iter.pEnd );
     if ( v3 )
     {
-      *v6 = v7->pBuffer;
-      *v5 = v7->BufPos;
+      *ppname = this->pBuffer;
+      *plen = this->BufPos;
     }
   }
 }
 
 // File Line: 737
 // RVA: 0x99E090
-bool __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseContent(Scaleform::Render::Text::SGMLParser<wchar_t> *this, const wchar_t **ppContent, unsigned __int64 *pcontentSize)
+bool __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseContent(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this,
+        const wchar_t **ppContent,
+        unsigned __int64 *pcontentSize)
 {
-  unsigned __int64 *v3; // r14
-  const wchar_t **v4; // r12
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v5; // rbx
   char v6; // si
-  bool v7; // al
-  char *v8; // r8
-  unsigned int v9; // ecx
+  bool DoContentParsing; // al
+  const wchar_t *pCurChar; // r8
+  unsigned int CurChar; // ecx
   unsigned __int64 v10; // rax
-  int v11; // er9
+  int v11; // r9d
   int v12; // ecx
-  unsigned __int64 v13; // rcx
-  wchar_t *v14; // rdx
-  signed __int64 v15; // r8
+  unsigned __int64 BufSize; // rcx
+  wchar_t *pBuffer; // rdx
+  unsigned __int64 v15; // r8
   wchar_t *v16; // rax
   unsigned __int64 v17; // rcx
   unsigned int v18; // ebp
   wchar_t *v19; // rdx
-  signed __int64 v20; // r8
+  unsigned __int64 v20; // r8
   wchar_t *v21; // rax
   __int64 v22; // rax
-  const wchar_t *v23; // rcx
+  const wchar_t *pNextChar; // rcx
   const wchar_t *v24; // rax
 
-  v3 = pcontentSize;
-  v4 = ppContent;
-  v5 = this;
   if ( this->CurState == 3 )
   {
     v6 = 0;
     *ppContent = this->Iter.pCurChar;
     *pcontentSize = 0i64;
-    v7 = this->Iter.DoContentParsing;
+    DoContentParsing = this->Iter.DoContentParsing;
     this->Iter.DoContentParsing = 1;
-    if ( !v7 && *this->Iter.pCurChar == 38 )
+    if ( !DoContentParsing && *this->Iter.pCurChar == 38 )
       Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
-    v8 = (char *)v5->Iter.pCurChar;
-    if ( (const wchar_t *)v8 < v5->Iter.pEnd )
+    pCurChar = this->Iter.pCurChar;
+    if ( pCurChar < this->Iter.pEnd )
     {
       do
       {
-        v9 = v5->Iter.CurChar;
-        if ( v9 == 60 && (!v5->Iter.DoContentParsing || *(_WORD *)v8 != 38) )
+        CurChar = this->Iter.CurChar;
+        if ( CurChar == 60 && (!this->Iter.DoContentParsing || *pCurChar != 38) )
           break;
-        if ( (v10 = (unsigned __int64)(unsigned __int16)v9 >> 8, (v11 = Scaleform::UnicodeSpaceBits[v10]) != 0)
+        if ( (v10 = (unsigned __int64)(unsigned __int16)CurChar >> 8, (v11 = Scaleform::UnicodeSpaceBits[v10]) != 0)
           && (v11 == 1
-           || (v12 = Scaleform::UnicodeSpaceBits[v11 + (((unsigned int)(unsigned __int16)v9 >> 4) & 0xF)],
-               _bittest(&v12, v5->Iter.CurChar & 0xF)))
-          && v5->CondenseWhite )
+           || (v12 = Scaleform::UnicodeSpaceBits[v11 + (((unsigned __int16)CurChar >> 4) & 0xF)],
+               _bittest(&v12, this->Iter.CurChar & 0xF)))
+          && this->CondenseWhite )
         {
           if ( !v6 )
           {
-            v5->BufPos = 0i64;
-            Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(v5, *v4, *v3);
+            this->BufPos = 0i64;
+            Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(this, *ppContent, *pcontentSize);
             v6 = 1;
           }
-          v13 = v5->BufSize;
-          if ( v5->BufPos + 6 > v13 )
+          BufSize = this->BufSize;
+          if ( this->BufPos + 6 > BufSize )
           {
-            v14 = v5->pBuffer;
-            v15 = v13 + 6;
-            v5->BufSize = v13 + 6;
-            if ( v14 )
+            pBuffer = this->pBuffer;
+            v15 = BufSize + 6;
+            this->BufSize = BufSize + 6;
+            if ( pBuffer )
               v16 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                  Scaleform::Memory::pGlobalHeap,
-                                 v14,
+                                 pBuffer,
                                  2 * v15);
             else
-              v16 = (wchar_t *)v5->pHeap->vfptr->Alloc(v5->pHeap, 2 * v15, 0i64);
-            v5->pBuffer = v16;
+              v16 = (wchar_t *)this->pHeap->vfptr->Alloc(this->pHeap, 2 * v15, 0i64);
+            this->pBuffer = v16;
           }
-          v5->pBuffer[v5->BufPos++] = 32;
-          Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v5);
+          this->pBuffer[this->BufPos++] = 32;
+          Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
         }
         else
         {
-          if ( v5->Iter.DoContentParsing && *(_WORD *)v8 == 38 )
+          if ( this->Iter.DoContentParsing && *pCurChar == 38 )
           {
             if ( !v6 )
             {
-              v5->BufPos = 0i64;
-              Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(v5, *v4, *v3);
+              this->BufPos = 0i64;
+              Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(this, *ppContent, *pcontentSize);
               v6 = 1;
             }
-            v17 = v5->BufSize;
-            v18 = v5->Iter.CurChar;
-            if ( v5->BufPos + 6 > v17 )
+            v17 = this->BufSize;
+            v18 = this->Iter.CurChar;
+            if ( this->BufPos + 6 > v17 )
             {
-              v19 = v5->pBuffer;
+              v19 = this->pBuffer;
               v20 = v17 + 6;
-              v5->BufSize = v17 + 6;
+              this->BufSize = v17 + 6;
               if ( v19 )
                 v21 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                    Scaleform::Memory::pGlobalHeap,
                                    v19,
                                    2 * v20);
               else
-                v21 = (wchar_t *)v5->pHeap->vfptr->Alloc(v5->pHeap, 2 * v20, 0i64);
-              v5->pBuffer = v21;
+                v21 = (wchar_t *)this->pHeap->vfptr->Alloc(this->pHeap, 2 * v20, 0i64);
+              this->pBuffer = v21;
             }
-            v5->pBuffer[v5->BufPos++] = v18;
+            this->pBuffer[this->BufPos++] = v18;
           }
           else
           {
-            v22 = (_QWORD)((char *)v5->Iter.pNextChar - v8) >> 1;
+            v22 = this->Iter.pNextChar - pCurChar;
             if ( v6 )
-              Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(v5, v5->Iter.pCurChar, (unsigned int)v22);
+              Scaleform::Render::Text::SGMLParser<wchar_t>::AppendToBuf(this, this->Iter.pCurChar, (unsigned int)v22);
             else
-              *v3 += (unsigned int)v22;
+              *pcontentSize += (unsigned int)v22;
           }
-          v23 = v5->Iter.pNextChar;
-          v5->Iter.pCurChar = v23;
-          if ( v5->Iter.DoContentParsing && *v23 == 38 )
+          pNextChar = this->Iter.pNextChar;
+          this->Iter.pCurChar = pNextChar;
+          if ( this->Iter.DoContentParsing && *pNextChar == 38 )
           {
-            Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v5->Iter);
+            Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
           }
-          else if ( v23 < v5->Iter.pEnd )
+          else if ( pNextChar < this->Iter.pEnd )
           {
-            v5->Iter.CurChar = *v23;
-            v5->Iter.pNextChar = v23 + 1;
+            this->Iter.CurChar = *pNextChar;
+            this->Iter.pNextChar = pNextChar + 1;
           }
         }
-        v8 = (char *)v5->Iter.pCurChar;
+        pCurChar = this->Iter.pCurChar;
       }
-      while ( (const wchar_t *)v8 < v5->Iter.pEnd );
+      while ( pCurChar < this->Iter.pEnd );
       if ( v6 )
       {
-        *v4 = v5->pBuffer;
-        *v3 = v5->BufPos;
+        *ppContent = this->pBuffer;
+        *pcontentSize = this->BufPos;
       }
     }
-    v24 = v5->Iter.pCurChar;
-    if ( v24 < v5->Iter.pEnd && (v5->Iter.CurChar != 60 || v5->Iter.DoContentParsing && *v24 == 38) )
-      v5->CurState = 1;
+    v24 = this->Iter.pCurChar;
+    if ( v24 < this->Iter.pEnd && (this->Iter.CurChar != 60 || this->Iter.DoContentParsing && *v24 == 38) )
+      this->CurState = 1;
     else
-      v5->CurState |= 0x8000u;
-    v5->Iter.DoContentParsing = 0;
+      this->CurState |= 0x8000u;
+    this->Iter.DoContentParsing = 0;
   }
-  return v5->CurState != 1;
+  return this->CurState != 1;
 }
 
 // File Line: 801
 // RVA: 0x9B6790
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipName(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipName(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v1; // rdi
-  unsigned int v2; // ecx
+  unsigned int CurChar; // ecx
   unsigned __int64 v3; // rax
-  int v4; // er8
-  int v5; // edx
-  int v6; // ecx
-  bool v7; // zf
-  const wchar_t *v8; // rcx
+  int v4; // r8d
+  int v5; // ecx
+  bool v6; // zf
+  const wchar_t *pNextChar; // rcx
 
-  v1 = this;
   if ( this->CurState == 2 && this->Iter.pCurChar < this->Iter.pEnd )
   {
     do
     {
-      v2 = v1->Iter.CurChar;
-      if ( v2 - 60 <= 2 )
+      CurChar = this->Iter.CurChar;
+      if ( CurChar - 60 <= 2 )
         break;
-      if ( v2 == 47 )
+      if ( CurChar == 47 )
         break;
-      v3 = (unsigned __int64)(unsigned __int16)v2 >> 8;
+      v3 = (unsigned __int64)(unsigned __int16)CurChar >> 8;
       v4 = Scaleform::UnicodeSpaceBits[v3];
       if ( Scaleform::UnicodeSpaceBits[v3] )
       {
         if ( v4 == 1 )
           break;
-        v5 = v2 & 0xF;
-        v6 = Scaleform::UnicodeSpaceBits[v4 + (((unsigned int)(unsigned __int16)v2 >> 4) & 0xF)];
-        if ( _bittest(&v6, v5) )
+        v5 = Scaleform::UnicodeSpaceBits[v4 + (((unsigned __int16)CurChar >> 4) & 0xF)];
+        if ( _bittest(&v5, this->Iter.CurChar & 0xF) )
           break;
       }
-      v7 = v1->Iter.DoContentParsing == 0;
-      v8 = v1->Iter.pNextChar;
-      v1->Iter.pCurChar = v8;
-      if ( v7 || *v8 != 38 )
+      v6 = !this->Iter.DoContentParsing;
+      pNextChar = this->Iter.pNextChar;
+      this->Iter.pCurChar = pNextChar;
+      if ( v6 || *pNextChar != 38 )
       {
-        if ( v8 < v1->Iter.pEnd )
+        if ( pNextChar < this->Iter.pEnd )
         {
-          v1->Iter.CurChar = *v8;
-          v1->Iter.pNextChar = v8 + 1;
+          this->Iter.CurChar = *pNextChar;
+          this->Iter.pNextChar = pNextChar + 1;
         }
       }
       else
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
     }
-    while ( v1->Iter.pCurChar < v1->Iter.pEnd );
+    while ( this->Iter.pCurChar < this->Iter.pEnd );
   }
 }
 
 // File Line: 815
 // RVA: 0x9B68C0
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v1; // rdi
-  unsigned int v2; // edx
+  unsigned int CurChar; // edx
   unsigned __int64 v3; // rax
-  int v4; // er8
+  int v4; // r8d
   int v5; // ecx
   bool v6; // zf
-  const wchar_t *v7; // rcx
+  const wchar_t *pNextChar; // rcx
 
-  v1 = this;
-  while ( v1->Iter.pCurChar < v1->Iter.pEnd )
+  while ( this->Iter.pCurChar < this->Iter.pEnd )
   {
-    v2 = v1->Iter.CurChar;
-    v3 = (unsigned __int64)(unsigned __int16)v2 >> 8;
+    CurChar = this->Iter.CurChar;
+    v3 = (unsigned __int64)(unsigned __int16)CurChar >> 8;
     v4 = Scaleform::UnicodeSpaceBits[v3];
     if ( !Scaleform::UnicodeSpaceBits[v3] )
       break;
     if ( v4 != 1 )
     {
-      v5 = Scaleform::UnicodeSpaceBits[v4 + (((unsigned int)(unsigned __int16)v2 >> 4) & 0xF)];
-      if ( !_bittest(&v5, v1->Iter.CurChar & 0xF) )
+      v5 = Scaleform::UnicodeSpaceBits[v4 + (((unsigned __int16)CurChar >> 4) & 0xF)];
+      if ( !_bittest(&v5, this->Iter.CurChar & 0xF) )
         break;
     }
-    v6 = v1->Iter.DoContentParsing == 0;
-    v7 = v1->Iter.pNextChar;
-    v1->Iter.pCurChar = v7;
-    if ( v6 || *v7 != 38 )
+    v6 = !this->Iter.DoContentParsing;
+    pNextChar = this->Iter.pNextChar;
+    this->Iter.pCurChar = pNextChar;
+    if ( v6 || *pNextChar != 38 )
     {
-      if ( v7 < v1->Iter.pEnd )
+      if ( pNextChar < this->Iter.pEnd )
       {
-        v1->Iter.CurChar = *v7;
-        v1->Iter.pNextChar = v7 + 1;
+        this->Iter.CurChar = *pNextChar;
+        this->Iter.pNextChar = pNextChar + 1;
       }
     }
     else
     {
-      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
+      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
     }
   }
 }
 
 // File Line: 824
 // RVA: 0x9B6360
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipAttribute(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v1; // rdi
-  unsigned int v2; // er8
+  unsigned int CurChar; // r8d
   unsigned __int64 v3; // rax
-  int v4; // er9
+  int v4; // r9d
   int v5; // ecx
   bool v6; // zf
-  const wchar_t *v7; // rcx
+  const wchar_t *pNextChar; // rcx
   unsigned int v8; // eax
   const wchar_t *v9; // rax
   unsigned int v10; // esi
   const wchar_t *v11; // rcx
-  const wchar_t *v12; // rax
+  const wchar_t *pEnd; // rax
   const wchar_t *v13; // rax
   unsigned int v14; // eax
 
-  v1 = this;
   if ( this->CurState == 7 )
   {
     Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
-    while ( v1->Iter.pCurChar < v1->Iter.pEnd )
+    while ( this->Iter.pCurChar < this->Iter.pEnd )
     {
-      v2 = v1->Iter.CurChar;
-      v3 = (unsigned __int64)(unsigned __int16)v2 >> 8;
+      CurChar = this->Iter.CurChar;
+      v3 = (unsigned __int64)(unsigned __int16)CurChar >> 8;
       v4 = Scaleform::UnicodeAlnumBits[v3];
       if ( !Scaleform::UnicodeAlnumBits[v3] )
         break;
       if ( v4 != 1 )
       {
-        v5 = Scaleform::UnicodeAlnumBits[v4 + (((unsigned int)(unsigned __int16)v2 >> 4) & 0xF)];
-        if ( !_bittest(&v5, v2 & 0xF) )
+        v5 = Scaleform::UnicodeAlnumBits[v4 + (((unsigned __int16)CurChar >> 4) & 0xF)];
+        if ( !_bittest(&v5, this->Iter.CurChar & 0xF) )
           break;
       }
-      if ( v2 == 61 )
+      if ( CurChar == 61 )
         break;
-      v6 = v1->Iter.DoContentParsing == 0;
-      v7 = v1->Iter.pNextChar;
-      v1->Iter.pCurChar = v7;
-      if ( v6 || *v7 != 38 )
+      v6 = !this->Iter.DoContentParsing;
+      pNextChar = this->Iter.pNextChar;
+      this->Iter.pCurChar = pNextChar;
+      if ( v6 || *pNextChar != 38 )
       {
-        if ( v7 < v1->Iter.pEnd )
+        if ( pNextChar < this->Iter.pEnd )
         {
-          v1->Iter.CurChar = *v7;
-          v1->Iter.pNextChar = v7 + 1;
+          this->Iter.CurChar = *pNextChar;
+          this->Iter.pNextChar = pNextChar + 1;
         }
       }
       else
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
       }
     }
-    if ( v1->Iter.pCurChar >= v1->Iter.pEnd )
+    if ( this->Iter.pCurChar >= this->Iter.pEnd )
     {
 LABEL_14:
-      v1->CurState = 1;
+      this->CurState = 1;
       return;
     }
-    v8 = v1->Iter.CurChar;
+    v8 = this->Iter.CurChar;
     if ( v8 == 61 )
     {
-      v9 = v1->Iter.pNextChar;
-      v1->Iter.pCurChar = v9;
-      if ( v1->Iter.DoContentParsing && *v9 == 38 )
+      v9 = this->Iter.pNextChar;
+      this->Iter.pCurChar = v9;
+      if ( this->Iter.DoContentParsing && *v9 == 38 )
       {
-        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
-        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v1);
-        v1->CurState = 8;
+        Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
+        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
+        this->CurState = 8;
       }
       else
       {
-        if ( v9 < v1->Iter.pEnd )
+        if ( v9 < this->Iter.pEnd )
         {
-          v1->Iter.CurChar = *v9;
-          v1->Iter.pNextChar = v1->Iter.pCurChar + 1;
+          this->Iter.CurChar = *v9;
+          this->Iter.pNextChar = this->Iter.pCurChar + 1;
         }
-        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v1);
-        v1->CurState = 8;
+        Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
+        this->CurState = 8;
       }
     }
     else if ( v8 == 47 || v8 == 62 )
     {
-      v1->CurState = 9;
+      this->CurState = 9;
     }
     else
     {
-      v1->CurState = 1;
+      this->CurState = 1;
     }
   }
-  if ( v1->CurState == 8 )
+  if ( this->CurState == 8 )
   {
-    v10 = v1->Iter.CurChar;
+    v10 = this->Iter.CurChar;
     if ( v10 == 34 || v10 == 39 )
     {
       while ( 1 )
       {
-        v6 = v1->Iter.DoContentParsing == 0;
-        v11 = v1->Iter.pNextChar;
-        v1->Iter.pCurChar = v11;
+        v6 = !this->Iter.DoContentParsing;
+        v11 = this->Iter.pNextChar;
+        this->Iter.pCurChar = v11;
         if ( v6 || *v11 != 38 )
         {
-          if ( v11 < v1->Iter.pEnd )
+          if ( v11 < this->Iter.pEnd )
           {
-            v1->Iter.CurChar = *v11;
-            v1->Iter.pNextChar = v11 + 1;
+            this->Iter.CurChar = *v11;
+            this->Iter.pNextChar = v11 + 1;
           }
         }
         else
         {
-          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
+          Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
         }
-        v12 = v1->Iter.pEnd;
-        if ( v1->Iter.pCurChar >= v12 )
+        pEnd = this->Iter.pEnd;
+        if ( this->Iter.pCurChar >= pEnd )
           break;
-        if ( v1->Iter.CurChar == v10 )
+        if ( this->Iter.CurChar == v10 )
         {
-          if ( v1->Iter.pCurChar >= v12 )
+          if ( this->Iter.pCurChar >= pEnd )
             goto LABEL_14;
-          v13 = v1->Iter.pNextChar;
-          v1->Iter.pCurChar = v13;
-          if ( v1->Iter.DoContentParsing && *v13 == 38 )
+          v13 = this->Iter.pNextChar;
+          this->Iter.pCurChar = v13;
+          if ( this->Iter.DoContentParsing && *v13 == 38 )
           {
-            Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v1->Iter);
+            Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
           }
-          else if ( v13 < v1->Iter.pEnd )
+          else if ( v13 < this->Iter.pEnd )
           {
-            v1->Iter.CurChar = *v13;
-            v1->Iter.pNextChar = v1->Iter.pCurChar + 1;
+            this->Iter.CurChar = *v13;
+            this->Iter.pNextChar = this->Iter.pCurChar + 1;
           }
-          Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(v1);
-          v14 = v1->Iter.CurChar;
+          Scaleform::Render::Text::SGMLParser<wchar_t>::SkipSpaces(this);
+          v14 = this->Iter.CurChar;
           if ( v14 == 62 || v14 == 47 )
-            v1->CurState = 9;
+            this->CurState = 9;
           else
-            v1->CurState = 7;
+            this->CurState = 7;
           return;
         }
       }
@@ -1436,43 +1407,42 @@ LABEL_14:
 
 // File Line: 880
 // RVA: 0x9B66A0
-void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipComment(Scaleform::Render::Text::SGMLParser<wchar_t> *this)
+void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipComment(
+        Scaleform::Render::Text::SGMLParser<wchar_t> *this)
 {
-  signed int v1; // edi
-  Scaleform::Render::Text::SGMLParser<wchar_t> *v2; // rsi
+  int v1; // edi
   bool v3; // zf
-  const wchar_t *v4; // rcx
-  unsigned int v5; // eax
+  const wchar_t *pNextChar; // rcx
+  unsigned int CurChar; // eax
   const wchar_t *v6; // rax
 
   v1 = 0;
-  v2 = this;
-  while ( v2->Iter.pCurChar < v2->Iter.pEnd )
+  while ( this->Iter.pCurChar < this->Iter.pEnd )
   {
-    if ( !v2->Iter.CurChar || v1 == 3 )
+    if ( !this->Iter.CurChar || v1 == 3 )
       break;
-    v3 = v2->Iter.DoContentParsing == 0;
-    v4 = v2->Iter.pNextChar;
-    v2->Iter.pCurChar = v4;
-    if ( v3 || *v4 != 38 )
+    v3 = !this->Iter.DoContentParsing;
+    pNextChar = this->Iter.pNextChar;
+    this->Iter.pCurChar = pNextChar;
+    if ( v3 || *pNextChar != 38 )
     {
-      if ( v4 < v2->Iter.pEnd )
+      if ( pNextChar < this->Iter.pEnd )
       {
-        v2->Iter.CurChar = *v4;
-        v2->Iter.pNextChar = v4 + 1;
+        this->Iter.CurChar = *pNextChar;
+        this->Iter.pNextChar = pNextChar + 1;
       }
     }
     else
     {
-      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
     }
-    v5 = v2->Iter.CurChar;
-    if ( v5 == 45 )
+    CurChar = this->Iter.CurChar;
+    if ( CurChar == 45 )
     {
       if ( v1 < 2 )
         ++v1;
     }
-    else if ( v5 == 62 )
+    else if ( CurChar == 62 )
     {
       if ( v1 == 2 )
         v1 = 3;
@@ -1482,38 +1452,39 @@ void __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::SkipComment(Scalef
       v1 = 0;
     }
   }
-  if ( v2->Iter.pCurChar < v2->Iter.pEnd && v1 == 3 )
+  if ( this->Iter.pCurChar < this->Iter.pEnd && v1 == 3 )
   {
-    v6 = v2->Iter.pNextChar;
-    v2->Iter.pCurChar = v6;
-    if ( v2->Iter.DoContentParsing && *v6 == 38 )
+    v6 = this->Iter.pNextChar;
+    this->Iter.pCurChar = v6;
+    if ( this->Iter.DoContentParsing && *v6 == 38 )
     {
-      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&v2->Iter);
+      Scaleform::Render::Text::SGMLCharIter<wchar_t>::DecodeEscapedChar(&this->Iter);
     }
-    else if ( v6 < v2->Iter.pEnd )
+    else if ( v6 < this->Iter.pEnd )
     {
-      v2->Iter.CurChar = *v6;
-      v2->Iter.pNextChar = v2->Iter.pCurChar + 1;
+      this->Iter.CurChar = *v6;
+      this->Iter.pNextChar = this->Iter.pCurChar + 1;
     }
   }
 }
 
 // File Line: 904
 // RVA: 0x99E7F0
-char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseInt(int *pdestVal, const wchar_t *pstr, unsigned __int64 len)
+bool __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseInt(
+        int *pdestVal,
+        const wchar_t *pstr,
+        unsigned __int64 len)
 {
   unsigned __int64 v3; // rdi
   const wchar_t *v4; // rbx
-  int *v5; // r15
-  char result; // al
+  bool result; // al
   int v7; // esi
-  signed int v8; // er14
+  int v8; // r14d
   unsigned __int64 v9; // rbp
   int v10; // eax
 
   v3 = len;
   v4 = pstr;
-  v5 = pdestVal;
   if ( !len )
     return 0;
   v7 = 0;
@@ -1541,46 +1512,37 @@ LABEL_7:
       if ( v9 >= v3 )
         goto LABEL_10;
     }
-    result = 0;
+    return 0;
   }
   else
   {
 LABEL_10:
     result = 1;
-    *v5 = v7 * v8;
+    *pdestVal = v7 * v8;
   }
   return result;
 }
 
 // File Line: 931
 // RVA: 0x99E4D0
-char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseHexInt(unsigned int *pdestVal, const wchar_t *pstr, unsigned __int64 len)
+char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseHexInt(
+        unsigned int *pdestVal,
+        wchar_t *pstr,
+        unsigned __int64 len)
 {
-  unsigned __int64 v3; // rbp
-  wchar_t *v4; // rdi
-  unsigned int *v5; // r14
   unsigned int v7; // ebx
   unsigned __int64 v8; // rsi
   __int16 v9; // ax
   int v10; // eax
 
-  v3 = len;
-  v4 = (wchar_t *)pstr;
-  v5 = pdestVal;
   if ( !len )
     return 0;
   v7 = 0;
   v8 = 0i64;
-  if ( !len )
-  {
-LABEL_11:
-    *v5 = v7;
-    return 1;
-  }
-  while ( isxdigit(*v4) )
+  while ( isxdigit(*pstr) )
   {
     v7 *= 16;
-    v9 = Scaleform::SFtowlower(*v4);
+    v9 = Scaleform::SFtowlower(*pstr);
     if ( (unsigned __int16)(v9 - 48) <= 9u )
     {
       v10 = v9 & 0xF;
@@ -1595,20 +1557,25 @@ LABEL_9:
     }
 LABEL_10:
     ++v8;
-    ++v4;
-    if ( v8 >= v3 )
-      goto LABEL_11;
+    ++pstr;
+    if ( v8 >= len )
+    {
+      *pdestVal = v7;
+      return 1;
+    }
   }
   return 0;
 }
 
 // File Line: 953
 // RVA: 0x99E360
-char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseFloat(float *pdestVal, const wchar_t *pstr, unsigned __int64 len)
+bool __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseFloat(
+        float *pdestVal,
+        const wchar_t *pstr,
+        unsigned __int64 len)
 {
   const wchar_t *v3; // rbx
-  float *v4; // rsi
-  char result; // al
+  bool result; // al
   const wchar_t *v6; // rdi
   double v7; // xmm9_8
   double v8; // xmm7_8
@@ -1619,7 +1586,6 @@ char __fastcall Scaleform::Render::Text::SGMLParser<wchar_t>::ParseFloat(float *
   float v13; // xmm0_4
 
   v3 = pstr;
-  v4 = pdestVal;
   if ( !len )
     return 0;
   v6 = &pstr[len];
@@ -1638,17 +1604,16 @@ LABEL_6:
 LABEL_7:
   if ( v3 < v6 )
   {
-    while ( (*v3 - 44) & 0xFFFD )
+    while ( ((*v3 - 44) & 0xFFFD) != 0 )
     {
       if ( !isdigit(*v3) )
         return 0;
-      v10 = *v3;
-      ++v3;
+      v10 = *v3++;
       v9 = (double)(v10 - 48) + v9 * 10.0;
       if ( v3 >= v6 )
         goto LABEL_18;
     }
-    if ( v3 < v6 && !((*v3 - 44) & 0xFFFD) )
+    if ( v3 < v6 && ((*v3 - 44) & 0xFFFD) == 0 )
     {
       v11 = v3 + 1;
       if ( v11 >= v6 )
@@ -1659,8 +1624,7 @@ LABEL_17:
       }
       while ( isdigit(*v11) )
       {
-        v12 = *v11;
-        ++v11;
+        v12 = *v11++;
         v8 = ((double)(v12 - 48) + v8) * 0.1;
         if ( v11 >= v6 )
           goto LABEL_17;
@@ -1671,7 +1635,7 @@ LABEL_17:
 LABEL_18:
   result = 1;
   v13 = v7 * v9;
-  *v4 = v13;
+  *pdestVal = v13;
   return result;
 }
 

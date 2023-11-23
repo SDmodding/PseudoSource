@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpRejectChassisListenerClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,20 +28,20 @@ hkClass *__fastcall hkpRejectChassisListener::staticClass()
 
 // File Line: 65
 // RVA: 0xE24F50
-void __fastcall finishLoadedObjecthkpRejectChassisListener(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpRejectChassisListener(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
+    *p = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
+    p[2] = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
   }
 }
 
 // File Line: 71
 // RVA: 0xE24F80
-void __fastcall cleanupLoadedObjecthkpRejectChassisListener(void *p)
+void __fastcall cleanupLoadedObjecthkpRejectChassisListener(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -62,8 +62,8 @@ void **dynamic_initializer_for__hkpRejectChassisListenerTypeInfo__()
   hkpRejectChassisListenerTypeInfo.m_typeName = "hkpRejectChassisListener";
   hkpRejectChassisListenerTypeInfo.m_vtable = result;
   hkpRejectChassisListenerTypeInfo.m_scopedName = "!hkpRejectChassisListener";
-  hkpRejectChassisListenerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpRejectChassisListener;
-  hkpRejectChassisListenerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpRejectChassisListener;
+  hkpRejectChassisListenerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpRejectChassisListener;
+  hkpRejectChassisListenerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpRejectChassisListener;
   return result;
 }
 

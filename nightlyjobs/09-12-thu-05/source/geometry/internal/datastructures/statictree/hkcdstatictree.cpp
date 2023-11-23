@@ -2,20 +2,16 @@
 // RVA: 0xC98740
 void __fastcall hkcdStaticTree::Codec3Axis::pack(hkAabb *parent, hkAabb *child, hkcdStaticTree::Codec3Axis *nodeOut)
 {
-  hkcdStaticTree::Codec3Axis *v3; // r14
   signed __int64 v4; // r12
   __int64 v5; // rdi
-  hkAabb *v6; // r15
   hkcdStaticTree::Codec3Axis *v7; // rbx
-  signed __int64 v8; // r13
+  __int64 v8; // r13
   char v9; // si
   char v10; // si
-  hkAabb aabbOut; // [rsp+20h] [rbp-48h]
+  hkAabb aabbOut; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = nodeOut;
   v4 = (char *)child - (char *)&aabbOut;
   v5 = 0i64;
-  v6 = parent;
   *(_WORD *)nodeOut->m_xyz = 0;
   nodeOut->m_xyz[2] = 0;
   v7 = nodeOut;
@@ -28,7 +24,7 @@ void __fastcall hkcdStaticTree::Codec3Axis::pack(hkAabb *parent, hkAabb *child, 
       {
         v9 = v7->m_xyz[0];
         v7->m_xyz[0] += 16;
-        hkcdStaticTree::Codec3Axis::unpack(v6, v3, &aabbOut);
+        hkcdStaticTree::Codec3Axis::unpack(parent, nodeOut, &aabbOut);
         if ( *(float *)((char *)&aabbOut.m_min.m_quad.m128_f32[v5] + v4) < aabbOut.m_min.m_quad.m128_f32[v5] )
           break;
         if ( (v7->m_xyz[0] & 0xF0u) >= 0xF0 )
@@ -37,15 +33,15 @@ void __fastcall hkcdStaticTree::Codec3Axis::pack(hkAabb *parent, hkAabb *child, 
       v7->m_xyz[0] = v9;
     }
 LABEL_7:
-    if ( (v7->m_xyz[0] & 0xFu) < 0xF )
+    if ( (v7->m_xyz[0] & 0xF) != 15 )
     {
       while ( 1 )
       {
         v10 = v7->m_xyz[0]++;
-        hkcdStaticTree::Codec3Axis::unpack(v6, v3, &aabbOut);
+        hkcdStaticTree::Codec3Axis::unpack(parent, nodeOut, &aabbOut);
         if ( *(float *)((char *)aabbOut.m_max.m_quad.m128_f32 + v4 + v5 * 4) > aabbOut.m_max.m_quad.m128_f32[v5] )
           break;
-        if ( (v7->m_xyz[0] & 0xFu) >= 0xF )
+        if ( (v7->m_xyz[0] & 0xF) == 15 )
           goto LABEL_12;
       }
       v7->m_xyz[0] = v10;

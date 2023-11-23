@@ -1,19 +1,15 @@
 // File Line: 17
 // RVA: 0xD79A90
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(hkpExtendedMeshShapeBreakableMaterial *this, hkArray<hkpBreakableMaterial *,hkContainerHeapAllocator> *subMaterials, int numBitsPerSubPart, float strength)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkArray<hkpBreakableMaterial *,hkContainerHeapAllocator> *subMaterials,
+        char numBitsPerSubPart,
+        float strength)
 {
-  char v4; // bl
-  hkpExtendedMeshShapeBreakableMaterial *v5; // rdi
-
-  v4 = numBitsPerSubPart;
-  v5 = this;
-  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(
-    (hkpBreakableMultiMaterial *)&this->vfptr,
-    subMaterials,
-    strength);
-  BYTE1(v5->m_typeAndFlags) = 0;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
-  v5->m_typeAndFlags = (v5->m_typeAndFlags | ((unsigned __int8)(32 - v4) << 8)) & 0xFFFFFF4F | 0x40;
+  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(this, subMaterials, strength);
+  BYTE1(this->m_typeAndFlags) = 0;
+  this->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
+  this->m_typeAndFlags = this->m_typeAndFlags & 0xFFFFFF4F | ((unsigned __int8)(32 - numBitsPerSubPart) << 8) | 0x40;
 }
 
 // File Line: 26
@@ -25,67 +21,63 @@ hkClass *__fastcall hkpExtendedMeshShapeBreakableMaterial::getClassType(hkpExten
 
 // File Line: 35
 // RVA: 0xD79B20
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(hkpExtendedMeshShapeBreakableMaterial *this, hkFinishLoadedObjectFlag flag)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkFinishLoadedObjectFlag flag)
 {
-  hkpExtendedMeshShapeBreakableMaterial *v2; // rbx
-
-  v2 = this;
-  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial((hkpBreakableMultiMaterial *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
+  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(this, flag);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 42
 // RVA: 0xD79AF0
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(hkpExtendedMeshShapeBreakableMaterial *this, hkpExtendedMeshShapeBreakableMaterial *other)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkpExtendedMeshShapeBreakableMaterial *other)
 {
-  hkpExtendedMeshShapeBreakableMaterial *v2; // rbx
-
-  v2 = this;
-  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(
-    (hkpBreakableMultiMaterial *)&this->vfptr,
-    (hkpBreakableMultiMaterial *)&other->vfptr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
+  hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(this, other);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 48
 // RVA: 0xD79E50
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::createInverseMapping(hkpExtendedMeshShapeBreakableMaterial *this, hkcdShape *shape)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::createInverseMapping(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkcdShape *shape)
 {
   hkcdShape *v2; // rbx
-  hkpExtendedMeshShapeBreakableMaterial *v3; // rdi
-  hkpBreakableMultiMaterial::InverseMapping *v4; // rbp
-  unsigned int *v5; // rsi
+  hkpBreakableMultiMaterial::InverseMapping *m_pntr; // rbp
+  unsigned int *m_data; // rsi
   int v6; // eax
   __int64 i; // r11
   hkpBreakableMultiMaterial::InverseMappingDescriptor *v8; // rax
-  int v9; // er8
+  int v9; // r8d
   hkpBreakableMultiMaterial::InverseMappingDescriptor *j; // rdi
-  unsigned int *v11; // r10
+  int *v11; // r10
   signed int v12; // edx
-  signed __int64 v13; // rax
+  __int64 v13; // rax
   int v14; // eax
 
   v2 = shape;
-  v3 = this;
-  hkpBreakableMultiMaterial::createInverseMapping((hkpBreakableMultiMaterial *)&this->vfptr, shape);
+  hkpBreakableMultiMaterial::createInverseMapping(this, shape);
   if ( v2->m_type.m_storage == 9 )
     v2 = *(hkcdShape **)&v2[3].m_type.m_storage;
-  v4 = v3->m_inverseMapping.m_pntr;
-  v5 = v4->m_subShapeIds.m_data;
-  v6 = v4->m_descriptors.m_size - 1;
+  m_pntr = this->m_inverseMapping.m_pntr;
+  m_data = m_pntr->m_subShapeIds.m_data;
+  v6 = m_pntr->m_descriptors.m_size - 1;
   for ( i = v6; i >= 0; --i )
   {
-    v8 = v4->m_descriptors.m_data;
+    v8 = m_pntr->m_descriptors.m_data;
     v9 = v8[i].m_numKeys - 1;
     for ( j = &v8[i]; v9 >= 0; *v11 |= v14 - 1 )
     {
-      v11 = &v5[v9 + j->m_offset];
-      v12 = (*v11 & 0x7FFFFFFF) >> (32 - v2[9].m_type.m_storage);
-      if ( (*v11 & 0x80000000) != 0 )
+      v11 = (int *)&m_data[v9 + j->m_offset];
+      v12 = (*v11 & 0x7FFFFFFFu) >> (32 - v2[9].m_type.m_storage);
+      if ( *v11 < 0 )
         v13 = *(_QWORD *)&v2[10].m_type.m_storage + 80i64 * v12;
       else
-        v13 = (signed __int64)&v2[10].vfptr[9 * v12];
-      if ( *(_BYTE *)v13 & 1 )
+        v13 = (__int64)&v2[10].vfptr[9 * v12];
+      if ( (*(_BYTE *)v13 & 1) != 0 )
         v14 = *(_DWORD *)(v13 + 40);
       else
         v14 = *(_DWORD *)(v13 + 32);
@@ -98,17 +90,15 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::createInverseMapping(hkpE
 // RVA: 0xD79B60
 void __fastcall hkpExtendedMeshShapeBreakableMaterial::duplicate(hkpExtendedMeshShapeBreakableMaterial *this)
 {
-  hkpExtendedMeshShapeBreakableMaterial *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkpExtendedMeshShapeBreakableMaterial *v3; // rax
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkpExtendedMeshShapeBreakableMaterial *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(
-                                                  v2[11],
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkpExtendedMeshShapeBreakableMaterial *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                                  Value[11],
                                                   56i64);
   if ( v3 )
-    hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(v3, v1);
+    hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(v3, this);
 }
 
 // File Line: 103
@@ -121,15 +111,18 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::setDefaultMapping(hkpExte
 
 // File Line: 111
 // RVA: 0xD79BB0
-__int64 __fastcall hkpExtendedMeshShapeBreakableMaterial::getSubShapeMaterialIndex(hkpExtendedMeshShapeBreakableMaterial *this, hkcdShape *rootShape, unsigned int subShapeId)
+__int64 __fastcall hkpExtendedMeshShapeBreakableMaterial::getSubShapeMaterialIndex(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkcdShape *rootShape,
+        int subShapeId)
 {
   __int64 v3; // r9
   hkBaseObjectVtbl *v4; // rcx
 
   if ( rootShape->m_type.m_storage == 9 )
     rootShape = *(hkcdShape **)&rootShape[3].m_type.m_storage;
-  v3 = (subShapeId & 0x7FFFFFFF) >> (32 - rootShape[9].m_type.m_storage);
-  if ( (subShapeId & 0x80000000) != 0 )
+  v3 = (subShapeId & 0x7FFFFFFFu) >> (32 - rootShape[9].m_type.m_storage);
+  if ( subShapeId < 0 )
     v4 = (hkBaseObjectVtbl *)(*(_QWORD *)&rootShape[10].m_type.m_storage + 80 * v3);
   else
     v4 = &rootShape[10].vfptr[9 * v3];
@@ -138,40 +131,45 @@ __int64 __fastcall hkpExtendedMeshShapeBreakableMaterial::getSubShapeMaterialInd
 
 // File Line: 120
 // RVA: 0xD79C10
-hkpBreakableMaterial *__fastcall hkpExtendedMeshShapeBreakableMaterial::getShapeKeyMaterial(hkpExtendedMeshShapeBreakableMaterial *this, hkcdShape *shapePpu, unsigned int shapeKey)
+hkpBreakableMaterial *__fastcall hkpExtendedMeshShapeBreakableMaterial::getShapeKeyMaterial(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkcdShape *shapePpu,
+        int shapeKey)
 {
-  hkpExtendedMeshShapeBreakableMaterial *v3; // r10
   __int64 v4; // r9
   __int64 v5; // rcx
 
-  v3 = this;
   if ( shapePpu->m_type.m_storage == 9 )
     shapePpu = *(hkcdShape **)&shapePpu[3].m_type.m_storage;
-  v4 = (shapeKey & 0x7FFFFFFF) >> (32 - shapePpu[9].m_type.m_storage);
-  if ( (shapeKey & 0x80000000) != 0 )
-    v5 = *(signed __int16 *)(*(_QWORD *)&shapePpu[10].m_type.m_storage + 80 * v4 + 2);
+  v4 = (shapeKey & 0x7FFFFFFFu) >> (32 - shapePpu[9].m_type.m_storage);
+  if ( shapeKey < 0 )
+    v5 = *(__int16 *)(*(_QWORD *)&shapePpu[10].m_type.m_storage + 80 * v4 + 2);
   else
     v5 = SWORD1(shapePpu[10].vfptr[9 * v4].__vecDelDtor);
-  return v3->m_subMaterials.m_data[v5].m_pntr;
+  return this->m_subMaterials.m_data[v5].m_pntr;
 }
 
 // File Line: 134
 // RVA: 0xD79C80
-__int64 __fastcall hkpExtendedMeshShapeBreakableMaterial::convertShapeKeyToSubShapeId(hkpExtendedMeshShapeBreakableMaterial *this, unsigned int shapeKey)
+__int64 __fastcall hkpExtendedMeshShapeBreakableMaterial::convertShapeKeyToSubShapeId(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        unsigned int shapeKey)
 {
-  return shapeKey & (-1 << (LOWORD(this->m_typeAndFlags) >> 8));
+  return shapeKey & (-1 << BYTE1(this->m_typeAndFlags));
 }
 
 // File Line: 146
 // RVA: 0xD79CA0
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::convertShapeKeysToSubShapeIds(hkpExtendedMeshShapeBreakableMaterial *this, hkArray<unsigned int,hkContainerHeapAllocator> *shapeKeysInOut)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::convertShapeKeysToSubShapeIds(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkArray<unsigned int,hkContainerHeapAllocator> *shapeKeysInOut)
 {
-  signed int v2; // er8
+  int v2; // r8d
   __int64 v3; // rax
 
-  v2 = -1 << (LOWORD(this->m_typeAndFlags) >> 8);
+  v2 = -1 << BYTE1(this->m_typeAndFlags);
   v3 = shapeKeysInOut->m_size - 1;
-  if ( (signed int)v3 >= 0 )
+  if ( (int)v3 >= 0 )
   {
     do
       shapeKeysInOut->m_data[v3--] &= v2;
@@ -181,75 +179,69 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::convertShapeKeysToSubShap
 
 // File Line: 161
 // RVA: 0xD79CE0
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::getShapeKeysForSubShapes(hkpExtendedMeshShapeBreakableMaterial *this, hkcdShape *__formal, const unsigned int *subShapeIdPtr, int numSubShapeIds, hkpBreakableMaterial::ShapeKeyCollector *collector)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::getShapeKeysForSubShapes(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkcdShape *__formal,
+        const unsigned int *subShapeIdPtr,
+        int numSubShapeIds,
+        hkpBreakableMaterial::ShapeKeyCollector *collector)
 {
   __int64 v5; // rbx
-  const unsigned int *v6; // r15
   __int64 v7; // r14
-  signed int v8; // esi
+  int i; // esi
 
   v5 = 0i64;
-  v6 = subShapeIdPtr;
   v7 = numSubShapeIds;
-  v8 = -1 << (LOWORD(this->m_typeAndFlags) >> 8);
-  if ( numSubShapeIds > 0 )
-  {
-    do
-    {
-      collector->vfptr->addContiguousShapeKeyRange(collector, v8 & v6[v5], (~v8 & v6[v5]) + 1);
-      ++v5;
-    }
-    while ( v5 < v7 );
-  }
+  for ( i = -1 << BYTE1(this->m_typeAndFlags); v5 < v7; ++v5 )
+    collector->vfptr->addContiguousShapeKeyRange(collector, i & subShapeIdPtr[v5], (~i & subShapeIdPtr[v5]) + 1);
 }
 
 // File Line: 181
 // RVA: 0xD79D60
-void __fastcall hkpExtendedMeshShapeBreakableMaterial::getSubShapeMaterialIndices(hkpExtendedMeshShapeBreakableMaterial *this, hkcdShape *rootShape, hkArray<unsigned int,hkContainerHeapAllocator> *subShapeIdsIn, hkArray<short,hkContainerHeapAllocator> *subMaterialsOut)
+void __fastcall hkpExtendedMeshShapeBreakableMaterial::getSubShapeMaterialIndices(
+        hkpExtendedMeshShapeBreakableMaterial *this,
+        hkcdShape *rootShape,
+        hkArray<unsigned int,hkContainerHeapAllocator> *subShapeIdsIn,
+        hkArray<short,hkContainerHeapAllocator> *subMaterialsOut)
 {
-  int v4; // esi
+  int m_size; // esi
   __int64 v5; // r14
-  hkArray<short,hkContainerHeapAllocator> *v6; // rdi
-  int v7; // eax
-  int v8; // er9
-  hkArray<unsigned int,hkContainerHeapAllocator> *v9; // r15
+  int m_capacityAndFlags; // eax
+  int v8; // r9d
   int v10; // eax
-  hkcdShape *v11; // rbx
   int v12; // eax
-  __int16 *v13; // rax
-  signed __int64 v14; // r10
+  __int16 *m_data; // rax
+  __int16 *v14; // r10
   __int64 i; // r8
   __int64 v16; // r9
-  signed __int64 v17; // rax
-  hkResult result; // [rsp+58h] [rbp+10h]
+  hkBaseObjectVtbl *v17; // rax
+  hkResult result; // [rsp+58h] [rbp+10h] BYREF
 
-  v4 = subShapeIdsIn->m_size;
+  m_size = subShapeIdsIn->m_size;
   v5 = subMaterialsOut->m_size;
-  v6 = subMaterialsOut;
-  v7 = subMaterialsOut->m_capacityAndFlags;
-  v8 = v5 + v4;
-  v9 = subShapeIdsIn;
-  v10 = v7 & 0x3FFFFFFF;
-  v11 = rootShape;
-  if ( v10 < (signed int)v5 + v4 )
+  m_capacityAndFlags = subMaterialsOut->m_capacityAndFlags;
+  v8 = v5 + m_size;
+  v10 = m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v10 < (int)v5 + m_size )
   {
     v12 = 2 * v10;
     if ( v8 < v12 )
       v8 = v12;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v8, 2);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&subMaterialsOut->m_data, v8, 2);
   }
-  v13 = v6->m_data;
-  v6->m_size += v4;
-  v14 = (signed __int64)&v13[v5];
-  if ( v11->m_type.m_storage == 9 )
-    v11 = *(hkcdShape **)&v11[3].m_type.m_storage;
-  for ( i = v4 - 1; i >= 0; *(_WORD *)(v14 + 2 * --i + 2) = *(_WORD *)(v17 + 2) )
+  m_data = subMaterialsOut->m_data;
+  subMaterialsOut->m_size += m_size;
+  v14 = &m_data[v5];
+  if ( rootShape->m_type.m_storage == 9 )
+    rootShape = *(hkcdShape **)&rootShape[3].m_type.m_storage;
+  for ( i = m_size - 1; i >= 0; v14[i + 1] = WORD1(v17->__vecDelDtor) )
   {
-    v16 = (v9->m_data[i] & 0x7FFFFFFF) >> (32 - v11[9].m_type.m_storage);
-    if ( (v9->m_data[i] & 0x80000000) != 0 )
-      v17 = *(_QWORD *)&v11[10].m_type.m_storage + 80 * v16;
+    v16 = (subShapeIdsIn->m_data[i] & 0x7FFFFFFF) >> (32 - rootShape[9].m_type.m_storage);
+    if ( (subShapeIdsIn->m_data[i] & 0x80000000) != 0 )
+      v17 = (hkBaseObjectVtbl *)(*(_QWORD *)&rootShape[10].m_type.m_storage + 80 * v16);
     else
-      v17 = (signed __int64)&v11[10].vfptr[9 * v16];
+      v17 = &rootShape[10].vfptr[9 * v16];
+    --i;
   }
 }
 

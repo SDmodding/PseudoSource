@@ -2,9 +2,7 @@
 // RVA: 0xC65840
 void __fastcall hkCpuJobThreadPoolCinfo::hkCpuJobThreadPoolCinfo(hkCpuJobThreadPoolCinfo *this)
 {
-  hkCpuThreadPoolCinfo::hkCpuThreadPoolCinfo(
-    (hkCpuThreadPoolCinfo *)&this->m_workerFunction,
-    hkCpuJobThreadPool::workerFunction);
+  hkCpuThreadPoolCinfo::hkCpuThreadPoolCinfo(this, hkCpuJobThreadPool::workerFunction);
 }
 
 // File Line: 17
@@ -13,12 +11,15 @@ void __fastcall hkCpuJobThreadPool::hkCpuJobThreadPool(hkCpuJobThreadPool *this,
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkCpuJobThreadPool::`vftable;
-  hkCpuThreadPool::hkCpuThreadPool(&this->m_threadPool, (hkCpuThreadPoolCinfo *)&ci->m_workerFunction);
+  hkCpuThreadPool::hkCpuThreadPool(&this->m_threadPool, ci);
 }
 
 // File Line: 21
 // RVA: 0xC658B0
-void __fastcall hkCpuJobThreadPool::processAllJobs(hkCpuJobThreadPool *this, hkJobQueue *queue, __int64 firstJobType_unused)
+void __fastcall hkCpuJobThreadPool::processAllJobs(
+        hkCpuJobThreadPool *this,
+        hkJobQueue *queue,
+        __int64 firstJobType_unused)
 {
   ((void (__fastcall *)(hkCpuThreadPool *, hkJobQueue *, __int64))this->m_threadPool.vfptr[1].__first_virtual_table_function__)(
     &this->m_threadPool,
@@ -58,7 +59,10 @@ void __fastcall hkCpuJobThreadPool::waitForCompletion(hkCpuJobThreadPool *this)
 
 // File Line: 56
 // RVA: 0xC65910
-void __fastcall hkCpuJobThreadPool::appendTimerData(hkCpuJobThreadPool *this, hkArrayBase<hkTimerData> *timerDataOut, hkMemoryAllocator *alloc)
+void __fastcall hkCpuJobThreadPool::appendTimerData(
+        hkCpuJobThreadPool *this,
+        hkArrayBase<hkTimerData> *timerDataOut,
+        hkMemoryAllocator *alloc)
 {
   ((void (__fastcall *)(hkCpuThreadPool *, hkArrayBase<hkTimerData> *, hkMemoryAllocator *))this->m_threadPool.vfptr[4].__vecDelDtor)(
     &this->m_threadPool,
@@ -70,7 +74,7 @@ void __fastcall hkCpuJobThreadPool::appendTimerData(hkCpuJobThreadPool *this, hk
 // RVA: 0xC65930
 void __fastcall hkCpuJobThreadPool::clearTimerData(hkCpuJobThreadPool *this)
 {
-  this->m_threadPool.vfptr[4].__first_virtual_table_function__((hkBaseObject *)&this->m_threadPool);
+  this->m_threadPool.vfptr[4].__first_virtual_table_function__(&this->m_threadPool);
 }
 
 // File Line: 68
@@ -82,8 +86,8 @@ void __fastcall hkCpuJobThreadPool::gcThreadMemoryOnNextCompletion(hkCpuJobThrea
 
 // File Line: 74
 // RVA: 0xC659B0
-void __fastcall hkCpuJobThreadPool::workerFunction(void *workLoad)
+void __fastcall hkCpuJobThreadPool::workerFunction(hkJobQueue *workLoad)
 {
-  hkJobQueue::processAllJobs((hkJobQueue *)workLoad, 1);
+  hkJobQueue::processAllJobs(workLoad, 1);
 }
 

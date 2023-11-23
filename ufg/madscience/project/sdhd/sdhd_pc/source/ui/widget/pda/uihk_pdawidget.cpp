@@ -2,7 +2,7 @@
 // RVA: 0x1567440
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mScreenInvokeQueue__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mScreenInvokeQueue__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mScreenInvokeQueue__);
 }
 
 // File Line: 68
@@ -10,108 +10,96 @@ __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mScreenInvokeQueue__()
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::ObjectiveManager__()
 {
   UFG::UIHKPlayerObjectiveManager::UIHKPlayerObjectiveManager(&UFG::UIHK_PDAWidget::ObjectiveManager);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::ObjectiveManager__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::ObjectiveManager__);
 }
 
 // File Line: 79
 // RVA: 0x15674C0
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mTxtContact__()
 {
-  UFG::qString::qString(&UFG::UIHK_PDAWidget::mTxtContact, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mTxtContact__);
+  UFG::qString::qString(&UFG::UIHK_PDAWidget::mTxtContact, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mTxtContact__);
 }
 
 // File Line: 80
 // RVA: 0x15674F0
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mTxtMsg__()
 {
-  UFG::qString::qString(&UFG::UIHK_PDAWidget::mTxtMsg, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mTxtMsg__);
+  UFG::qString::qString(&UFG::UIHK_PDAWidget::mTxtMsg, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mTxtMsg__);
 }
 
 // File Line: 81
 // RVA: 0x1566F20
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mContactImage__()
 {
-  UFG::qString::qString(&UFG::UIHK_PDAWidget::mContactImage, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mContactImage__);
+  UFG::qString::qString(&UFG::UIHK_PDAWidget::mContactImage, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mContactImage__);
 }
 
 // File Line: 82
 // RVA: 0x1566EF0
 __int64 dynamic_initializer_for__UFG::UIHK_PDAWidget::mContactID__()
 {
-  UFG::qString::qString(&UFG::UIHK_PDAWidget::mContactID, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mContactID__);
+  UFG::qString::qString(&UFG::UIHK_PDAWidget::mContactID, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHK_PDAWidget::mContactID__);
 }
 
 // File Line: 112
 // RVA: 0x5C8670
 void __fastcall UFG::UIHK_PDAWidget::UIHK_PDAWidget(UFG::UIHK_PDAWidget *this, UFG::UIHK_PDACache *cache)
 {
-  UFG::UIHK_PDACache *v2; // rdi
-  UFG::UIHK_PDAWidget *v3; // rsi
-  signed __int64 v4; // [rsp+58h] [rbp+10h]
-  signed __int64 v5; // [rsp+58h] [rbp+10h]
-
-  v2 = cache;
-  v3 = this;
   this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable;
   UFG::UIHK_PDAPhoneContactsWidget::UIHK_PDAPhoneContactsWidget(&this->PhoneContacts);
-  v3->mState = v2->state;
-  v3->mMovie = 0i64;
-  v4 = (signed __int64)&v3->RootMenu;
-  *(_QWORD *)v4 = 0i64;
-  *(_DWORD *)(v4 + 8) = 0;
-  *(_BYTE *)(v4 + 12) = 0;
-  *(_QWORD *)(v4 + 16) = 0i64;
-  UFG::qString::qString(&v3->RootMenu.mSelectedItem);
-  UFG::qString::qString(&v3->RootMenu.mInputLocker.mOwner, "UIHK_PDARootMenuWidget");
-  v3->RootMenu.mInputLocker.mAcquired = 0;
-  v3->TextInbox.mState = 0;
-  UFG::UIHK_PDAIncomingCallWidget::UIHK_PDAIncomingCallWidget(&v3->IncomingCall);
-  v5 = (signed __int64)&v3->IncomingText;
-  *(_DWORD *)v5 = 0;
-  *(_WORD *)(v5 + 4) = 0;
-  *(_BYTE *)(v5 + 6) = 0;
-  *(_QWORD *)(v5 + 8) = 0i64;
-  UFG::qString::qString(&v3->IncomingText.mInputLocker.mOwner, "UIHK_PDAIncomingTextWidget");
-  v3->IncomingText.mInputLocker.mAcquired = 0;
-  v3->Clock.mClockTime = 0;
-  v3->m_objectiveScrollingInProgress = 0;
-  *(_QWORD *)&v3->m_objectiveScrollingTimer = 0i64;
-  *(_QWORD *)&v3->m_R3_timer = 0i64;
-  v3->mRightStickTimer = 0.0;
-  *(_WORD *)&v3->mLeftStickActive = 257;
-  v3->mGPSActivatedFlag = 0;
-  v3->mPDAOpenDelay = 0;
-  v3->mShouldHighlight = 0;
-  v3->mPreLocked = v2->plock;
-  v3->mRootIntro = v2->root;
-  UFG::qString::qString(&v3->mPhoneContact, &v2->caller);
-  v3->mOutgoingCall = v2->outgoing;
-  v3->mAutoAnsCall = v2->answered;
-  v3->mVoiceMail = v2->vmail;
-  v3->mTime = 0.0;
+  this->mState = cache->state;
+  this->mMovie = 0i64;
+  *(_QWORD *)&this->RootMenu.mState = 0i64;
+  this->RootMenu.mRefreshTimer = 0.0;
+  this->RootMenu.mLastScrolledPrev = 0;
+  *(_QWORD *)&this->RootMenu.mIntroIndex = 0i64;
+  UFG::qString::qString(&this->RootMenu.mSelectedItem);
+  UFG::qString::qString(&this->RootMenu.mInputLocker.mOwner, "UIHK_PDARootMenuWidget");
+  this->RootMenu.mInputLocker.mAcquired = 0;
+  this->TextInbox.mState = STATE_IDLE;
+  UFG::UIHK_PDAIncomingCallWidget::UIHK_PDAIncomingCallWidget(&this->IncomingCall);
+  this->IncomingText.mState = STATE_IDLE;
+  *(_WORD *)&this->IncomingText.mMessageRead = 0;
+  this->IncomingText.mIgnoreButtonOnce = 0;
+  *(_QWORD *)&this->IncomingText.mDismissCause = 0i64;
+  UFG::qString::qString(&this->IncomingText.mInputLocker.mOwner, "UIHK_PDAIncomingTextWidget");
+  this->IncomingText.mInputLocker.mAcquired = 0;
+  this->Clock.mClockTime = 0;
+  this->m_objectiveScrollingInProgress = 0;
+  *(_QWORD *)&this->m_objectiveScrollingTimer = 0i64;
+  *(_QWORD *)&this->m_R3_timer = 0i64;
+  this->mRightStickTimer = 0.0;
+  *(_WORD *)&this->mLeftStickActive = 257;
+  this->mGPSActivatedFlag = 0;
+  this->mPDAOpenDelay = 0;
+  this->mShouldHighlight = 0;
+  this->mPreLocked = cache->plock;
+  this->mRootIntro = cache->root;
+  UFG::qString::qString(&this->mPhoneContact, &cache->caller);
+  this->mOutgoingCall = cache->outgoing;
+  this->mAutoAnsCall = cache->answered;
+  this->mVoiceMail = cache->vmail;
+  this->mTime = 0.0;
 }
 
 // File Line: 117
 // RVA: 0x5CDEA0
 void __fastcall UFG::UIHK_PDAWidget::~UIHK_PDAWidget(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rdi
-
-  v1 = this;
   this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable;
   UFG::UIHK_PDAWidget::EndPhoneCall(this, 0);
-  UFG::UIHK_PDAWidget::ForceIdle(v1);
-  UFG::qString::~qString(&v1->mPhoneContact);
-  UFG::UIHK_PDAIncomingTextWidget::~UIHK_PDAIncomingTextWidget(&v1->IncomingText);
-  UFG::UIHK_PDAIncomingCallWidget::~UIHK_PDAIncomingCallWidget(&v1->IncomingCall);
-  UFG::UIHK_PDARootMenuWidget::Deactivate(&v1->RootMenu);
-  UFG::qString::~qString(&v1->RootMenu.mInputLocker.mOwner);
-  UFG::qString::~qString(&v1->RootMenu.mSelectedItem);
-  UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(&v1->PhoneContacts);
+  UFG::UIHK_PDAWidget::ForceIdle(this);
+  UFG::qString::~qString(&this->mPhoneContact);
+  UFG::UIHK_PDAIncomingTextWidget::~UIHK_PDAIncomingTextWidget(&this->IncomingText);
+  UFG::UIHK_PDAIncomingCallWidget::~UIHK_PDAIncomingCallWidget(&this->IncomingCall);
+  UFG::UIHK_PDARootMenuWidget::Deactivate(&this->RootMenu);
+  UFG::qString::~qString(&this->RootMenu.mInputLocker.mOwner);
+  UFG::qString::~qString(&this->RootMenu.mSelectedItem);
+  UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(&this->PhoneContacts);
 }
 
 // File Line: 124
@@ -122,7 +110,7 @@ UFG::UIHK_PDAWidget *__fastcall UFG::UIHK_PDAWidget::Get()
 
   result = (UFG::UIHK_PDAWidget *)UFG::UIHKScreenHud::mInstance;
   if ( UFG::UIHKScreenHud::mInstance )
-    result = UFG::UIHKScreenHud::mInstance->PDA;
+    return UFG::UIHKScreenHud::mInstance->PDA;
   return result;
 }
 
@@ -130,28 +118,25 @@ UFG::UIHK_PDAWidget *__fastcall UFG::UIHK_PDAWidget::Get()
 // RVA: 0x5E9520
 __int64 __fastcall UFG::UIHK_PDAWidget::GetState()
 {
-  UFG::UIHK_PDAWidget *v0; // rcx
-  __int64 result; // rax
+  UFG::UIHK_PDAWidget *PDA; // rcx
 
-  if ( UFG::UIHKScreenHud::mInstance && (v0 = UFG::UIHKScreenHud::mInstance->PDA) != 0i64 )
-    result = (unsigned int)v0->mState;
+  if ( UFG::UIHKScreenHud::mInstance && (PDA = UFG::UIHKScreenHud::mInstance->PDA) != 0i64 )
+    return (unsigned int)PDA->mState;
   else
-    result = (unsigned int)UFG::UIHKScreenHud::PDACache.state;
-  return result;
+    return (unsigned int)UFG::UIHKScreenHud::PDACache.state;
 }
 
 // File Line: 193
 // RVA: 0x637460
 void __fastcall UFG::UIHK_PDAWidget::init(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIHK_PDAWidget *v2; // rsi
-  Scaleform::GFx::Movie *v3; // r13
+  Scaleform::GFx::Movie *pObject; // r13
   __int64 v4; // rdi
-  signed int v5; // er14
+  int v5; // r14d
   UFG::GameStatTracker *v6; // rax
-  UFG::PersistentData::MapBool *v7; // r12
-  unsigned int v8; // er15
-  unsigned int v9; // ebx
+  UFG::PersistentData::MapBool *MapBool; // r12
+  unsigned int Count; // r15d
+  unsigned int i; // ebx
   bool v10; // r15
   UFG::ProgressionTracker *v11; // rax
   UFG::GameStatTracker *v12; // rax
@@ -159,36 +144,32 @@ void __fastcall UFG::UIHK_PDAWidget::init(UFG::UIHK_PDAWidget *this, UFG::UIScre
   unsigned int v14; // ebx
   UFG::qSymbol *v15; // rax
   bool v16; // bl
-  char *v17; // rbx
+  char *mData; // rbx
   char *v18; // rbx
-  Scaleform::GFx::Value value; // [rsp+30h] [rbp-D0h]
-  char ptr; // [rsp+60h] [rbp-A0h]
-  __int64 v21; // [rsp+70h] [rbp-90h]
-  unsigned int v22; // [rsp+78h] [rbp-88h]
-  char *v23; // [rsp+80h] [rbp-80h]
-  char v24; // [rsp+90h] [rbp-70h]
-  __int64 v25; // [rsp+A0h] [rbp-60h]
-  unsigned int v26; // [rsp+A8h] [rbp-58h]
-  char *v27; // [rsp+B0h] [rbp-50h]
-  char v28; // [rsp+C0h] [rbp-40h]
-  __int64 v29; // [rsp+D0h] [rbp-30h]
-  unsigned int v30; // [rsp+D8h] [rbp-28h]
-  char *v31; // [rsp+E0h] [rbp-20h]
-  __int64 v32; // [rsp+120h] [rbp+20h]
-  UFG::qWiseSymbol result; // [rsp+178h] [rbp+78h]
-  __int64 v34; // [rsp+180h] [rbp+80h]
-  __int64 v35; // [rsp+188h] [rbp+88h]
+  Scaleform::GFx::Value value; // [rsp+30h] [rbp-D0h] BYREF
+  Scaleform::GFx::Value ptr; // [rsp+60h] [rbp-A0h] BYREF
+  char v21[16]; // [rsp+90h] [rbp-70h] BYREF
+  __int64 v22; // [rsp+A0h] [rbp-60h]
+  int v23; // [rsp+A8h] [rbp-58h]
+  char *v24; // [rsp+B0h] [rbp-50h]
+  char v25[16]; // [rsp+C0h] [rbp-40h] BYREF
+  __int64 v26; // [rsp+D0h] [rbp-30h]
+  int v27; // [rsp+D8h] [rbp-28h]
+  char *v28; // [rsp+E0h] [rbp-20h]
+  __int64 v29; // [rsp+120h] [rbp+20h]
+  UFG::qWiseSymbol result; // [rsp+178h] [rbp+78h] BYREF
+  __int64 v31; // [rsp+180h] [rbp+80h]
+  __int64 v32; // [rsp+188h] [rbp+88h]
 
-  v32 = -2i64;
-  v2 = this;
-  v3 = screen->mRenderable->m_movie.pObject;
-  if ( v3 )
+  v29 = -2i64;
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
-    this->mMovie = v3;
-    v4 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    this->mMovie = pObject;
+    v4 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
            Scaleform::Memory::pGlobalHeap,
            32i64);
-    v34 = v4;
+    v31 = v4;
     if ( v4 )
     {
       *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable;
@@ -205,37 +186,33 @@ void __fastcall UFG::UIHK_PDAWidget::init(UFG::UIHK_PDAWidget *this, UFG::UIScre
     {
       v4 = 0i64;
     }
-    v35 = v4;
+    v32 = v4;
     *(_DWORD *)(v4 + 24) |= 2u;
-    v3->vfptr->SetState((Scaleform::GFx::StateBag *)&v3->vfptr, State_Filter, (Scaleform::GFx::State *)v4);
+    pObject->Scaleform::GFx::StateBag::vfptr->SetState(
+      &pObject->Scaleform::GFx::StateBag,
+      State_Filter,
+      (Scaleform::GFx::State *)v4);
     UFG::UIHKPlayerObjectiveManager::UpdateObjectives(&UFG::UIHK_PDAWidget::ObjectiveManager);
     v5 = 0;
     v6 = UFG::GameStatTracker::Instance();
-    v7 = UFG::GameStatTracker::GetMapBool(v6, Collectible_Safehouse);
-    v8 = UFG::PersistentData::MapBool::GetCount(v7);
-    v9 = 0;
-    if ( v8 )
+    MapBool = UFG::GameStatTracker::GetMapBool(v6, Collectible_Safehouse);
+    Count = UFG::PersistentData::MapBool::GetCount(MapBool);
+    for ( i = 0; i < Count; ++i )
     {
-      do
-      {
-        if ( UFG::PersistentData::MapBool::GetStatusByIndex(v7, v9) == 1 )
-          ++v5;
-        ++v9;
-      }
-      while ( v9 < v8 );
+      if ( UFG::PersistentData::MapBool::GetStatusByIndex(MapBool, i) )
+        ++v5;
     }
     v10 = 1;
-    if ( UFG::ProgressionTracker::Instance()->mModeType == 2
+    if ( UFG::ProgressionTracker::Instance()->mModeType == ModeType_Challenge
       || (v11 = UFG::ProgressionTracker::Instance(),
           !(unsigned __int8)UFG::ProgressionTracker::IsUICancellationAllowed(v11)) )
     {
       v10 = 0;
     }
     value.pObjectInterface = 0i64;
-    value.Type = 0;
-    value.Type = 5;
+    value.Type = VT_Number;
     value.mValue.NValue = (double)v5;
-    Scaleform::GFx::Movie::SetVariable(v3, "gWallpaperId", &value, 1i64);
+    Scaleform::GFx::Movie::SetVariable(pObject, "gWallpaperId", &value, 1i64);
     v12 = UFG::GameStatTracker::Instance();
     v13 = UFG::GameStatTracker::GetMapBool(v12, Collectible_Bio);
     v14 = 1;
@@ -247,102 +224,105 @@ void __fastcall UFG::UIHK_PDAWidget::init(UFG::UIHK_PDAWidget *this, UFG::UIScre
       if ( ++v14 > 0x2D )
       {
         v16 = 0;
-        goto LABEL_19;
+        goto LABEL_17;
       }
     }
     v16 = 1;
-LABEL_19:
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+LABEL_17:
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 2;
+    value.Type = VT_Boolean;
     value.mValue.BValue = v16;
-    Scaleform::GFx::Movie::SetVariable(v3, "gBiosAvailable", &value, 1i64);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    Scaleform::GFx::Movie::SetVariable(pObject, "gBiosAvailable", &value, 1i64);
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 2;
+    value.Type = VT_Boolean;
     value.mValue.BValue = v10;
-    Scaleform::GFx::Movie::SetVariable(v3, "gSocialHubAvailable", &value, 1i64);
+    Scaleform::GFx::Movie::SetVariable(pObject, "gSocialHubAvailable", &value, 1i64);
     `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    v17 = UFG::UIHK_PDAWidget::mTxtMsg.mData;
-    if ( (v22 >> 6) & 1 )
+    mData = UFG::UIHK_PDAWidget::mTxtMsg.mData;
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v21 + 16i64))(v21, &ptr, v23);
-      v21 = 0i64;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
+        &ptr,
+        ptr.mValue);
+      ptr.pObjectInterface = 0i64;
     }
-    v22 = 6;
-    v23 = v17;
+    ptr.Type = VT_String;
+    ptr.mValue.pString = mData;
     v18 = UFG::UIHK_PDAWidget::mTxtContact.mData;
-    if ( (v26 >> 6) & 1 )
+    if ( (v23 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v25 + 16i64))(v25, &v24, v27);
-      v25 = 0i64;
+      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v22 + 16i64))(v22, v21, v24);
+      v22 = 0i64;
     }
-    v26 = 6;
-    v27 = v18;
-    if ( (v30 >> 6) & 1 )
+    v23 = 6;
+    v24 = v18;
+    if ( (v27 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v29 + 16i64))(v29, &v28, v31);
-      v29 = 0i64;
+      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v26 + 16i64))(v26, v25, v28);
+      v26 = 0i64;
     }
-    v30 = 6;
-    v31 = UFG::UIHK_PDAWidget::mContactImage.mData;
-    Scaleform::GFx::Movie::Invoke(v3, "Phone_SetTextMessage", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-    switch ( v2->mState )
+    v27 = 6;
+    v28 = UFG::UIHK_PDAWidget::mContactImage.mData;
+    Scaleform::GFx::Movie::Invoke(pObject, "Phone_SetTextMessage", 0i64, &ptr, 4u);
+    switch ( this->mState )
     {
       case STATE_ROOT_MENU:
       case STATE_PHONE_CONTACTS:
       case STATE_TEXT_INBOX:
-        UFG::UIHK_PDARootMenuWidget::Activate(&v2->RootMenu, v2->mRootIntro, v2->mPreLocked);
+        UFG::UIHK_PDARootMenuWidget::Activate(&this->RootMenu, this->mRootIntro, this->mPreLocked);
         break;
       case STATE_INCOMING_CALL:
       case STATE_OUTGOING_CALL:
-        UFG::UIHK_PDAWidget::ShowIncomingPhoneCall(v2);
-        if ( v2->mAutoAnsCall )
-          UFG::UIHK_PDAWidget::AnswerPhoneCall(v2);
+        UFG::UIHK_PDAWidget::ShowIncomingPhoneCall(this);
+        if ( this->mAutoAnsCall )
+          UFG::UIHK_PDAWidget::AnswerPhoneCall(this);
         break;
       case STATE_INCOMING_TEXT:
       case STATE_OUTGOING_TEXT:
         UFG::UIHK_PDAIncomingTextWidget::Activate(
-          &v2->IncomingText,
+          &this->IncomingText,
           UFG::UIHK_PDAWidget::mTxtMsg.mData,
           UFG::UIHK_PDAWidget::mTxtContact.mData,
           UFG::UIHK_PDAWidget::mOutgoingTxt,
           UFG::UIHK_PDAWidget::mContactImage.mData);
         break;
       case STATE_DISPLAY_TEXT:
-        UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(&v2->IncomingText);
+        UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(&this->IncomingText);
         break;
       case STATE_READING_TEXT:
       case STATE_WAIT_TO_WRITE_TEXT:
       case STATE_WRITING_TEXT:
         break;
       default:
-        v2->mState = 0;
+        this->mState = STATE_IDLE;
         UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
         break;
     }
     `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 0;
+    value.Type = VT_Undefined;
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v4);
   }
 }
@@ -351,29 +331,20 @@ LABEL_19:
 // RVA: 0x641060
 void __fastcall UFG::UIHK_PDAWidget::update(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen, float elapsed)
 {
-  UFG::UIHK_PDAWidget *v3; // rbx
-  UFG::UIScreen *v4; // rdi
   UFG::UIHKPlayerObjective *v5; // rsi
   unsigned __int8 v6; // dl
   float v7; // xmm0_4
   UFG::GameStatTracker *v8; // rax
-  UFG::UIHK_PDATextInboxWidget *v9; // rcx
-  UFG::ePDAStateEnum v10; // eax
+  UFG::UIHK_PDATextInboxWidget *p_TextInbox; // rcx
+  UFG::ePDAStateEnum mState; // eax
   bool v11; // zf
   bool v12; // zf
-  unsigned int v13; // eax
+  UFG::UIHK_PDAPhoneContactsWidget::eState v13; // eax
 
-  v3 = this;
-  v4 = screen;
   UFG::UIScreenInvokeQueue::Update(&UFG::UIHK_PDAWidget::mScreenInvokeQueue, screen);
   UFG::UIHKPlayerObjectiveManager::UpdatePendingBlips(&UFG::UIHK_PDAWidget::ObjectiveManager);
-  if ( !unk_142432920
-    || UFG::UIScreenManagerBase::getOverlay(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "MissionRewards") )
-  {
+  if ( !unk_142432920 || UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "MissionRewards") )
     goto LABEL_15;
-  }
   unk_142432920 = 0;
   if ( unk_1424329E8 )
   {
@@ -406,178 +377,164 @@ LABEL_13:
   if ( UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(&UFG::UIHK_PDAWidget::ObjectiveManager, v5) )
     goto LABEL_14;
 LABEL_15:
-  if ( v3->m_objectiveScrollingInProgress )
+  if ( this->m_objectiveScrollingInProgress )
   {
-    v7 = elapsed + v3->m_objectiveScrollingTimer;
-    v3->m_objectiveScrollingTimer = v7;
+    v7 = elapsed + this->m_objectiveScrollingTimer;
+    this->m_objectiveScrollingTimer = v7;
     if ( v7 > 8.0 )
-      v3->m_objectiveScrollingInProgress = 0;
+      this->m_objectiveScrollingInProgress = 0;
   }
-  UFG::UIHK_PDAWidget::ProcessCustomInput(v3, v4, elapsed);
+  UFG::UIHK_PDAWidget::ProcessCustomInput(this, screen, elapsed);
   v8 = UFG::GameStatTracker::Instance();
-  if ( (unsigned __int8)UFG::GameStatTracker::GetStat(v8, EnablePDA) && !UFG::UIHK_PDAWidget::mLocked )
+  if ( UFG::GameStatTracker::GetStat(v8, EnablePDA) && !UFG::UIHK_PDAWidget::mLocked )
   {
-    UFG::UIHK_PDARootMenuWidget::Update(&v3->RootMenu, v4, elapsed);
-    UFG::UIHK_PDAPhoneContactsWidget::Update(&v3->PhoneContacts, v4, elapsed);
-    if ( (unsigned int)(v3->IncomingText.mState - 4) <= 1 )
+    UFG::UIHK_PDARootMenuWidget::Update(&this->RootMenu, screen, elapsed);
+    UFG::UIHK_PDAPhoneContactsWidget::Update(&this->PhoneContacts, screen, elapsed);
+    if ( (unsigned int)(this->IncomingText.mState - 4) <= 1 )
     {
-      if ( !v3->IncomingText.mHelpbarShown && v3->IncomingText.mDisplayTime > 1.0 )
+      if ( !this->IncomingText.mHelpbarShown && this->IncomingText.mDisplayTime > 1.0 )
       {
-        UFG::UIHK_PDAIncomingTextWidget::DisplayHelpbar(&v3->IncomingText);
-        v3->IncomingText.mHelpbarShown = 1;
+        UFG::UIHK_PDAIncomingTextWidget::DisplayHelpbar(&this->IncomingText);
+        this->IncomingText.mHelpbarShown = 1;
       }
-      v3->IncomingText.mDisplayTime = elapsed + v3->IncomingText.mDisplayTime;
+      this->IncomingText.mDisplayTime = elapsed + this->IncomingText.mDisplayTime;
     }
-    UFG::UIHK_PDAIncomingCallWidget::Update(&v3->IncomingCall, v4, elapsed);
-    v9 = &v3->TextInbox;
-    if ( v3->TextInbox.mState == 1 )
+    UFG::UIHK_PDAIncomingCallWidget::Update(&this->IncomingCall, screen, elapsed);
+    p_TextInbox = &this->TextInbox;
+    if ( this->TextInbox.mState == STATE_ROOT_MENU )
     {
-      v9->mState = 2;
-      UFG::UIHK_PDATextInboxWidget::Flash_Show(v9, v4);
+      p_TextInbox->mState = STATE_PHONE_CONTACTS;
+      UFG::UIHK_PDATextInboxWidget::Flash_Show(p_TextInbox, screen);
     }
-    else if ( v3->TextInbox.mState == 3 )
+    else if ( this->TextInbox.mState == STATE_TEXT_INBOX )
     {
-      v9->mState = 0;
-      Scaleform::GFx::Movie::Invoke(v4->mRenderable->m_movie.pObject, "TextInbox_Hide", 0i64, 0i64, 0);
+      p_TextInbox->mState = STATE_IDLE;
+      Scaleform::GFx::Movie::Invoke(screen->mRenderable->m_movie.pObject, "TextInbox_Hide", 0i64, 0i64, 0);
     }
-    UFG::UIHK_PDAClockWidget::Update(&v3->Clock, v4);
+    UFG::UIHK_PDAClockWidget::Update(&this->Clock, screen);
   }
-  if ( v3->mShouldHighlight )
+  if ( this->mShouldHighlight )
   {
-    v3->mShouldHighlight = 0;
-    UFG::UIHK_PDAWidget::Flash_UIHighlight_Init(v3, v4);
+    this->mShouldHighlight = 0;
+    UFG::UIHK_PDAWidget::Flash_UIHighlight_Init(this, screen);
   }
-  if ( v3->mState != v3->mPrevState && UFG::UIHKScreenHud::mInstance )
+  if ( this->mState != this->mPrevState && UFG::UIHKScreenHud::mInstance )
     UFG::UIHKScreenHud::mInstance->mUpdateStatGamePosition = 1;
-  v10 = v3->mState;
-  switch ( v10 )
+  mState = this->mState;
+  switch ( mState )
   {
-    case 1:
-      v11 = v3->RootMenu.mState == 0;
+    case STATE_ROOT_MENU:
+      v11 = this->RootMenu.mState == STATE_IDLE;
       goto LABEL_46;
-    case 2:
-      v13 = v3->PhoneContacts.mState;
-      if ( v13 <= 2 )
+    case STATE_PHONE_CONTACTS:
+      v13 = this->PhoneContacts.mState;
+      if ( (unsigned int)v13 <= STATE_PHONE_CONTACTS )
         goto LABEL_42;
-      v12 = v13 == 6;
+      v12 = v13 == STATE_INCOMING_TEXT;
 LABEL_41:
       if ( !v12 )
         goto LABEL_49;
 LABEL_42:
-      UFG::UIHK_PDARootMenuWidget::LeaveSubMenu(&v3->RootMenu, v4);
-      v3->mState = 1;
+      UFG::UIHK_PDARootMenuWidget::LeaveSubMenu(&this->RootMenu, screen);
+      this->mState = STATE_ROOT_MENU;
 LABEL_48:
       UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
       goto LABEL_49;
-    case 3:
-      v12 = v3->TextInbox.mState == 0;
+    case STATE_TEXT_INBOX:
+      v12 = this->TextInbox.mState == STATE_IDLE;
       goto LABEL_41;
   }
-  if ( (unsigned int)(v10 - 6) > 2 )
+  if ( (unsigned int)(mState - 6) > 2 )
     goto LABEL_49;
-  v11 = v3->IncomingText.mState == 0;
+  v11 = this->IncomingText.mState == STATE_IDLE;
 LABEL_46:
   if ( v11 )
   {
-    v3->mState = 0;
+    this->mState = STATE_IDLE;
     goto LABEL_48;
   }
 LABEL_49:
-  v3->mPrevState = v3->mState;
-}.mState == 0;
-LABEL_46:
-  if ( v11 )
-
+  this->mPrevState = this->mState;
+}
 
 // File Line: 392
 // RVA: 0x62EBB0
-bool __fastcall UFG::UIHK_PDAWidget::handleMessage(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen, unsigned int msgId, UFG::UIMessage *msg)
+bool __fastcall UFG::UIHK_PDAWidget::handleMessage(
+        UFG::UIHK_PDAWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  unsigned int v4; // edi
-  UFG::UIHK_PDAWidget *v5; // rbx
   bool result; // al
-  UFG::UIHK_PDARootMenuWidget *v7; // rsi
-  char *v8; // rdi
+  UFG::UIHK_PDARootMenuWidget *p_RootMenu; // rsi
+  char *mData; // rdi
   UFG::UIScreenTextureManager *v9; // rax
 
-  v4 = msgId;
-  v5 = this;
   if ( msgId == UI_HASH_PDA_CAMERA_DESTROY_20 )
   {
     if ( this->mState )
     {
       UFG::ConversationManager::InterruptPlayerConversations(eInterruptType_PDAHangup, 1, 0i64);
-      UFG::UIHK_PDAWidget::DeactivateAll(v5);
-      v5->mState = 0;
+      UFG::UIHK_PDAWidget::DeactivateAll(this);
+      this->mState = STATE_IDLE;
       UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
     }
-LABEL_4:
-    result = 1;
+    return 1;
   }
   else
   {
     switch ( this->mState )
     {
-      case 0:
+      case STATE_IDLE:
         if ( msgId == UI_HASH_PDA_PHONE_SUCCESS_20 )
         {
-          v7 = &this->RootMenu;
+          p_RootMenu = &this->RootMenu;
           if ( UFG::UIHK_PDARootMenuWidget::CanActivate(&this->RootMenu) )
           {
-            if ( v7->mState == STATE_IDLE )
+            if ( p_RootMenu->mState == STATE_IDLE )
             {
-              *(_QWORD *)&v7->mState = 4i64;
-              v5->RootMenu.mRefreshTimer = 0.33333334;
-              v5->RootMenu.mLastScrolledPrev = 0;
-              v5->RootMenu.mIntroIndex = 0;
-              if ( !v5->RootMenu.mInputLocker.mAcquired )
+              *(_QWORD *)&p_RootMenu->mState = 4i64;
+              this->RootMenu.mRefreshTimer = 0.33333334;
+              this->RootMenu.mLastScrolledPrev = 0;
+              this->RootMenu.mIntroIndex = 0;
+              if ( !this->RootMenu.mInputLocker.mAcquired )
               {
                 UFG::SetInputMode_PDA_On(UFG::gActiveControllerNum);
                 ++UFG::UIHKGameplayHelpWidget::mLocked;
                 ++UFG::UIHK_PDAWidget::mInputLocked;
-                v5->RootMenu.mInputLocker.mAcquired = 1;
+                this->RootMenu.mInputLocker.mAcquired = 1;
               }
               if ( UFG::HudAudio::m_instance )
-                UFG::AudioEntity::CreateAndPlayEvent(
-                  (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                  0xF48906FE,
-                  0i64,
-                  0,
-                  0i64);
+                UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xF48906FE, 0i64, 0, 0i64);
             }
-            v5->mState = 1;
+            this->mState = STATE_ROOT_MENU;
             UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
           }
         }
         goto LABEL_14;
-      case 1:
+      case STATE_ROOT_MENU:
         if ( msgId == UI_HASH_LIST_OPTION_SELECTED_30 )
         {
-          if ( this->RootMenu.mState == 2 )
-            this->RootMenu.mState = 6;
-          v8 = this->RootMenu.mSelectedItem.mData;
-          if ( (unsigned int)UFG::qStringCompare(this->RootMenu.mSelectedItem.mData, "$HUD_SMARTPHONE_CONTACTS", -1) )
+          if ( this->RootMenu.mState == STATE_PHONE_CONTACTS )
+            this->RootMenu.mState = STATE_INCOMING_TEXT;
+          mData = this->RootMenu.mSelectedItem.mData;
+          if ( (unsigned int)UFG::qStringCompare(mData, "$HUD_SMARTPHONE_CONTACTS", -1) )
           {
-            if ( (unsigned int)UFG::qStringCompare(v8, "$HUD_SMARTPHONE_MESSAGES", -1) )
+            if ( (unsigned int)UFG::qStringCompare(mData, "$HUD_SMARTPHONE_MESSAGES", -1) )
             {
-              if ( (unsigned int)UFG::qStringCompare(v8, "$HUD_SMARTPHONE_SOCIALHUB", -1) )
+              if ( (unsigned int)UFG::qStringCompare(mData, "$HUD_SMARTPHONE_SOCIALHUB", -1) )
               {
-                if ( (unsigned int)UFG::qStringCompare(v8, "$HUD_SMARTPHONE_BIOS", -1) )
+                if ( (unsigned int)UFG::qStringCompare(mData, "$HUD_SMARTPHONE_BIOS", -1) )
                 {
 LABEL_14:
                   result = 0;
                 }
                 else
                 {
-                  unk_142431A14 = 1;
+                  byte_142431A14 = 1;
                   if ( UFG::HudAudio::m_instance )
-                    UFG::AudioEntity::CreateAndPlayEvent(
-                      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                      0x9E75334E,
-                      0i64,
-                      0,
-                      0i64);
-                  UFG::UIHKScreenCaseComplete::mCaseType = 4;
+                    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x9E75334E, 0i64, 0, 0i64);
+                  UFG::UIHKScreenCaseComplete::mCaseType = CASE_TYPE_BIOS;
                   v9 = UFG::UIScreenTextureManager::Instance();
                   UFG::UIScreenTextureManager::QueueLoadAndPush(v9, "CaseComplete", 0i64);
                   result = 0;
@@ -585,14 +542,9 @@ LABEL_14:
               }
               else
               {
-                unk_142431A14 = 1;
+                byte_142431A14 = 1;
                 if ( UFG::HudAudio::m_instance )
-                  UFG::AudioEntity::CreateAndPlayEvent(
-                    (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                    0x9E75334E,
-                    0i64,
-                    0,
-                    0i64);
+                  UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x9E75334E, 0i64, 0, 0i64);
                 UFG::UI::PauseGame("SocialHub");
                 result = 0;
               }
@@ -600,15 +552,10 @@ LABEL_14:
             else
             {
               if ( UFG::HudAudio::m_instance )
-                UFG::AudioEntity::CreateAndPlayEvent(
-                  (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                  0x9E75334E,
-                  0i64,
-                  0,
-                  0i64);
-              if ( v5->TextInbox.mState == STATE_IDLE )
-                v5->TextInbox.mState = 1;
-              v5->mState = 3;
+                UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x9E75334E, 0i64, 0, 0i64);
+              if ( this->TextInbox.mState == STATE_IDLE )
+                this->TextInbox.mState = STATE_ROOT_MENU;
+              this->mState = STATE_TEXT_INBOX;
               result = 0;
               UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
             }
@@ -616,18 +563,13 @@ LABEL_14:
           else
           {
             if ( UFG::HudAudio::m_instance )
-              UFG::AudioEntity::CreateAndPlayEvent(
-                (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                0x9E75334E,
-                0i64,
-                0,
-                0i64);
-            if ( v5->PhoneContacts.mState == STATE_IDLE )
+              UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x9E75334E, 0i64, 0, 0i64);
+            if ( this->PhoneContacts.mState == STATE_IDLE )
             {
-              v5->PhoneContacts.mState = 1;
-              UFG::UIHK_PDAPhoneContactsWidget::LoadTexturePack(&v5->PhoneContacts);
+              this->PhoneContacts.mState = STATE_ROOT_MENU;
+              UFG::UIHK_PDAPhoneContactsWidget::LoadTexturePack(&this->PhoneContacts);
             }
-            v5->mState = 2;
+            this->mState = STATE_PHONE_CONTACTS;
             result = 0;
             UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
           }
@@ -638,34 +580,37 @@ LABEL_14:
           result = 0;
         }
         break;
-      case 2:
+      case STATE_PHONE_CONTACTS:
         if ( UFG::UIHK_PDAPhoneContactsWidget::HandleMessage(&this->PhoneContacts, screen, msgId) )
-          goto LABEL_4;
+          return 1;
         goto $LN4_69;
-      case 3:
+      case STATE_TEXT_INBOX:
 $LN4_69:
-        if ( v4 != UI_HASH_LIST_OPTION_SELECTED_30 )
+        if ( msgId != UI_HASH_LIST_OPTION_SELECTED_30 )
           goto LABEL_14;
-        return 1;
-      case 4:
-      case 5:
+        result = 1;
+        break;
+      case STATE_INCOMING_CALL:
+      case STATE_OUTGOING_CALL:
         if ( msgId != UI_HASH_PDA_PHONE_SUCCESS_20 || !this->mAutoAnsCall )
           goto LABEL_14;
         UFG::UIHK_PDAWidget::AnswerPhoneCall(this);
-        return 0;
-      case 6:
-      case 8:
+        result = 0;
+        break;
+      case STATE_INCOMING_TEXT:
+      case STATE_OUTGOING_TEXT:
         if ( msgId != UI_HASH_PDA_PHONE_SUCCESS_20 || !UFG::UIHK_PDAWidget::mAutoAnsTxt )
           goto LABEL_14;
         UFG::UIHK_PDAWidget::DisplayTextMessage(this);
-        return 0;
-      case 0xB:
+        result = 0;
+        break;
+      case STATE_WAIT_TO_WRITE_TEXT:
         if ( msgId != UI_HASH_PDA_PHONE_SUCCESS_20 )
           goto LABEL_14;
-        this->mState = 12;
+        this->mState = STATE_WRITING_TEXT;
         result = 0;
         UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
-        return result;
+        break;
       default:
         goto LABEL_14;
     }
@@ -675,10 +620,11 @@ $LN4_69:
 
 // File Line: 532
 // RVA: 0x5FE430
-void __fastcall UFG::UIHK_PDAWidget::ProcessCustomInput(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHK_PDAWidget::ProcessCustomInput(
+        UFG::UIHK_PDAWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIScreen *v3; // rdi
-  UFG::UIHK_PDAWidget *v4; // rbx
   UFG::InputActionData *v5; // rcx
   UFG::InputActionData *v6; // rcx
   UFG::InputActionData *v7; // rcx
@@ -693,7 +639,7 @@ void __fastcall UFG::UIHK_PDAWidget::ProcessCustomInput(UFG::UIHK_PDAWidget *thi
   bool v16; // r15
   UFG::InputActionData *v17; // rcx
   float v18; // xmm2_4
-  float v19; // xmm3_4
+  float mAxisPositionY; // xmm3_4
   UFG::InputActionData *v20; // rcx
   char v21; // [rsp+20h] [rbp-48h]
   char v22; // [rsp+21h] [rbp-47h]
@@ -702,8 +648,6 @@ void __fastcall UFG::UIHK_PDAWidget::ProcessCustomInput(UFG::UIHK_PDAWidget *thi
   char v25; // [rsp+78h] [rbp+10h]
   char v26; // [rsp+88h] [rbp+20h]
 
-  v3 = screen;
-  v4 = this;
   if ( screen->mRenderable->m_shouldRender )
   {
     v5 = UFG::ActionDef_UIL1Pressed.mDataPerController[UFG::gActiveControllerNum];
@@ -733,52 +677,56 @@ void __fastcall UFG::UIHK_PDAWidget::ProcessCustomInput(UFG::UIHK_PDAWidget *thi
     v17 = UFG::ActionDef_UIRightThumbstick.mDataPerController[UFG::gActiveControllerNum];
     v18 = 0.0;
     if ( v17 )
-      v19 = v17->mAxisPositionY;
+      mAxisPositionY = v17->mAxisPositionY;
     else
-      v19 = 0.0;
+      mAxisPositionY = 0.0;
     v20 = UFG::ActionDef_UILeftThumbstick.mDataPerController[UFG::gActiveControllerNum];
     if ( v20 )
       v18 = v20->mAxisPositionY;
     if ( v18 < -0.2 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, screen, UI_HASH_THUMBSTICK_LEFT_UP_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_THUMBSTICK_LEFT_UP_30);
     if ( v18 > 0.2 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_THUMBSTICK_LEFT_DOWN_30);
-    if ( v19 < -0.2 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_THUMBSTICK_RIGHT_UP_30);
-    if ( v19 > 0.2 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_THUMBSTICK_RIGHT_DOWN_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_THUMBSTICK_LEFT_DOWN_30);
+    if ( mAxisPositionY < -0.2 )
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_THUMBSTICK_RIGHT_UP_30);
+    if ( mAxisPositionY > 0.2 )
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_THUMBSTICK_RIGHT_DOWN_30);
     if ( v25 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_DPAD_UP_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_DPAD_UP_PRESSED_30);
     if ( v12 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_DPAD_DOWN_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_DPAD_DOWN_PRESSED_30);
     if ( v14 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_DPAD_LEFT_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_DPAD_LEFT_PRESSED_30);
     if ( v16 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_DPAD_RIGHT_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_DPAD_RIGHT_PRESSED_30);
     if ( v26 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_BUTTON_ACCEPT_RELEASED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_BUTTON_ACCEPT_RELEASED_30);
     if ( v21 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_BUTTON_BACK_RELEASED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_BUTTON_BACK_RELEASED_30);
     if ( v22 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_BUTTON_L1_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_BUTTON_L1_PRESSED_30);
     if ( v23 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_BUTTON_L3_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_BUTTON_L3_PRESSED_30);
     if ( v24 )
-      UFG::UIHK_PDAWidget::HandleCustomInput(v4, v3, UI_HASH_BUTTON_R1_PRESSED_30);
+      UFG::UIHK_PDAWidget::HandleCustomInput(this, screen, UI_HASH_BUTTON_R1_PRESSED_30);
     if ( UFG::gEnableWorldMapAndPDA && v23 && UFG::UIHKTweakables::RenderMinimap )
-      UFG::UIHK_PDAWidget::DisplayObjective(v4);
+      UFG::UIHK_PDAWidget::DisplayObjective(this);
   }
-}
+}:UIHKTweakables::RenderMinimap )
+   
 
 // File Line: 596
 // RVA: 0x5EA850
-void __fastcall UFG::UIHK_PDAWidget::HandleCustomInput(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen, unsigned int msgId)
+void __fastcall UFG::UIHK_PDAWidget::HandleCustomInput(
+        UFG::UIHK_PDAWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId)
 {
-  UFG::ePDAStateEnum v3; // eax
-  UFG::UIHK_PDAIncomingCallWidget *v4; // rcx
+  UFG::ePDAStateEnum mState; // eax
+  UFG::UIHK_PDAIncomingCallWidget *p_IncomingCall; // rcx
 
-  v3 = this->mState;
-  switch ( v3 )
+  mState = this->mState;
+  switch ( mState )
   {
     case STATE_PHONE_CONTACTS:
       UFG::UIHK_PDAPhoneContactsWidget::ProcessInput(&this->PhoneContacts, screen, msgId);
@@ -787,12 +735,12 @@ void __fastcall UFG::UIHK_PDAWidget::HandleCustomInput(UFG::UIHK_PDAWidget *this
       UFG::UIHK_PDATextInboxWidget::HandleMessage(&this->TextInbox, screen, msgId);
       break;
     case STATE_INCOMING_CALL:
-      v4 = &this->IncomingCall;
-      if ( v4->mState == 2 && msgId == UI_HASH_DPAD_UP_PRESSED_30 )
-        UFG::UIHK_PDAIncomingCallWidget::Answer(v4);
+      p_IncomingCall = &this->IncomingCall;
+      if ( p_IncomingCall->mState == STATE_PHONE_CONTACTS && msgId == UI_HASH_DPAD_UP_PRESSED_30 )
+        UFG::UIHK_PDAIncomingCallWidget::Answer(p_IncomingCall);
       break;
     default:
-      if ( (unsigned int)(v3 - 6) <= 2 )
+      if ( (unsigned int)(mState - 6) <= 2 )
         UFG::UIHK_PDAIncomingTextWidget::HandleMessage(&this->IncomingText, screen, msgId);
       break;
   }
@@ -802,15 +750,15 @@ void __fastcall UFG::UIHK_PDAWidget::HandleCustomInput(UFG::UIHK_PDAWidget *this
 // RVA: 0x5F1C70
 void UFG::UIHK_PDAWidget::Lock(void)
 {
-  UFG::UIHK_PDAWidget *v0; // rbx
+  UFG::UIHK_PDAWidget *PDA; // rbx
 
   if ( UFG::UIHKScreenHud::mInstance )
   {
-    v0 = UFG::UIHKScreenHud::mInstance->PDA;
-    if ( v0 )
+    PDA = UFG::UIHKScreenHud::mInstance->PDA;
+    if ( PDA )
     {
-      UFG::UIHK_PDAWidget::ForceIdle(v0);
-      v0->mState = 0;
+      UFG::UIHK_PDAWidget::ForceIdle(PDA);
+      PDA->mState = STATE_IDLE;
       UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
     }
   }
@@ -829,40 +777,39 @@ void UFG::UIHK_PDAWidget::Unlock(void)
 // RVA: 0x5EC970
 bool __fastcall UFG::UIHK_PDAWidget::HasAnswered(UFG::UIHK_PDAWidget *this)
 {
-  return this->IncomingCall.mState == 4;
+  return this->IncomingCall.mState == STATE_INCOMING_CALL;
 }
 
 // File Line: 749
 // RVA: 0x5FE9C0
-char __fastcall UFG::UIHK_PDAWidget::QueueIncomingPhoneCall(UFG::UIHK_PDAWidget *this, const char *contactName, bool outgoing, bool autoCall, bool voiceMail)
+char __fastcall UFG::UIHK_PDAWidget::QueueIncomingPhoneCall(
+        UFG::UIHK_PDAWidget *this,
+        const char *contactName,
+        bool outgoing,
+        bool autoCall,
+        bool voiceMail)
 {
   bool v5; // bl
-  UFG::UIHK_PDAWidget *v6; // rsi
   const char *v7; // r14
-  bool v8; // r12
   const char *v9; // rdi
   unsigned int v10; // edx
   UFG::qSymbol *v11; // rax
-  UFG::qPropertySet *v12; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v13; // rax
   UFG::qPropertyList *v14; // r13
-  unsigned int v15; // er15
+  unsigned int mNumElements; // r15d
   unsigned int v16; // ebp
-  char *v17; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v18; // rbx
   char *v19; // rax
   char *v20; // rax
   unsigned int v21; // eax
-  UFG::UIGfxTranslator *v22; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
   bool v23; // al
-  bool v25; // [rsp+80h] [rbp+18h]
-  UFG::qSymbol result; // [rsp+88h] [rbp+20h]
+  UFG::qSymbol result; // [rsp+88h] [rbp+20h] BYREF
 
-  v25 = outgoing;
   v5 = outgoing;
-  v6 = this;
   v7 = contactName;
-  v8 = autoCall;
   v9 = 0i64;
   if ( (unsigned int)UFG::qStringCompare(contactName, "$PDA_CONTACT_TENG_CASE", -1) )
   {
@@ -876,69 +823,70 @@ char __fastcall UFG::UIHK_PDAWidget::QueueIncomingPhoneCall(UFG::UIHK_PDAWidget 
   {
     v10 = 0x846A3783;                           // Play_pda_ring_teng
 LABEL_6:
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v10, 0i64, 0, 0i64);
-    goto LABEL_7;
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v10, 0i64, 0, 0i64);
   }
-LABEL_7:
   UFG::qString::Set(&UFG::UIHK_PDAWidget::mContactImage, "Portrait_Smartphone_Unknown");
   v11 = UFG::qSymbol::create_from_string(&result, "default-unlockables-contactList-list");
-  v12 = UFG::PropertySetManager::GetPropertySet(v11);
-  v6->mContactData = v12;
-  v13 = UFG::qPropertySet::Get<UFG::qPropertyList>(v12, (UFG::qSymbol *)&qSymbol_List_20.mUID, DEPTH_RECURSE);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v11);
+  this->mContactData = PropertySet;
+  v13 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+          PropertySet,
+          (UFG::qArray<unsigned long,0> *)&qSymbol_List_20,
+          DEPTH_RECURSE);
   v14 = v13;
   if ( v13 )
   {
-    v15 = v13->mNumElements;
+    mNumElements = v13->mNumElements;
     v16 = 0;
-    if ( v15 )
+    if ( mNumElements )
     {
       do
       {
-        v17 = UFG::qPropertyList::GetValuePtr(v14, 0x1Au, v16);
-        if ( !v17 || (v18 = (UFG::qPropertySet *)&v17[*(_QWORD *)v17], !*(_QWORD *)v17) )
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v14, 0x1Au, v16);
+        if ( !ValuePtr || (v18 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr], !*(_QWORD *)ValuePtr) )
           v18 = 0i64;
-        v19 = PropertyUtils::Get<char const *>(v18, (UFG::qSymbol *)&qSymbol_Name_20.mUID, DEPTH_RECURSE);
+        v19 = PropertyUtils::Get<char const *>(v18, (UFG::qArray<unsigned long,0> *)&qSymbol_Name_20, DEPTH_RECURSE);
         UFG::qString::Set(&UFG::UIHK_PDAWidget::mContactID, v19);
         if ( UFG::qString::operator==(&UFG::UIHK_PDAWidget::mContactID, v7) )
         {
-          v20 = PropertyUtils::Get<char const *>(v18, (UFG::qSymbol *)&qSymbol_Portrait_20.mUID, DEPTH_RECURSE);
+          v20 = PropertyUtils::Get<char const *>(
+                  v18,
+                  (UFG::qArray<unsigned long,0> *)&qSymbol_Portrait_20,
+                  DEPTH_RECURSE);
           UFG::qString::Set(&UFG::UIHK_PDAWidget::mContactImage, v20);
         }
         ++v16;
       }
-      while ( v16 < v15 );
-      v5 = v25;
+      while ( v16 < mNumElements );
+      v5 = outgoing;
     }
   }
   if ( v7 )
   {
     if ( *v7 == 36 )
       ++v7;
-    v21 = UFG::qStringHashUpper32(v7, 0xFFFFFFFF);
-    v22 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( !v22
-      || (v9 = (const char *)v22->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v22->vfptr, v21)) == 0i64 )
-    {
+    v21 = UFG::qStringHashUpper32(v7, -1);
+    m_translator = UFG::UIScreenManager::s_instance->m_translator;
+    if ( !m_translator || (v9 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v21)) == 0i64 )
       v9 = v7;
-    }
   }
-  UFG::qString::Set(&v6->mPhoneContact, v9);
+  UFG::qString::Set(&this->mPhoneContact, v9);
   v23 = voiceMail;
-  v6->mOutgoingCall = v5;
-  v6->mAutoAnsCall = v8;
-  v6->mVoiceMail = v23;
-  UFG::UIHK_PDAWidget::ForceIdle(v6);
-  if ( v6->mOutgoingCall )
-    v6->mState = 5;
+  this->mOutgoingCall = v5;
+  this->mAutoAnsCall = autoCall;
+  this->mVoiceMail = v23;
+  UFG::UIHK_PDAWidget::ForceIdle(this);
+  if ( this->mOutgoingCall )
+    this->mState = STATE_OUTGOING_CALL;
   else
-    v6->mState = 4;
+    this->mState = STATE_INCOMING_CALL;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   UFG::UIHK_PDAIncomingCallWidget::Activate(
-    &v6->IncomingCall,
-    v6->mPhoneContact.mData,
+    &this->IncomingCall,
+    this->mPhoneContact.mData,
     UFG::UIHK_PDAWidget::mContactImage.mData,
-    v6->mOutgoingCall,
-    v6->mVoiceMail);
+    this->mOutgoingCall,
+    this->mVoiceMail);
   return 1;
 }
 
@@ -946,37 +894,31 @@ LABEL_7:
 // RVA: 0x610890
 void __fastcall UFG::UIHK_PDAWidget::ShowIncomingPhoneCall(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
-
-  v1 = this;
   UFG::UIHK_PDAWidget::ForceIdle(this);
-  if ( v1->mOutgoingCall )
-    v1->mState = 5;
+  if ( this->mOutgoingCall )
+    this->mState = STATE_OUTGOING_CALL;
   else
-    v1->mState = 4;
+    this->mState = STATE_INCOMING_CALL;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   UFG::UIHK_PDAIncomingCallWidget::Activate(
-    &v1->IncomingCall,
-    v1->mPhoneContact.mData,
+    &this->IncomingCall,
+    this->mPhoneContact.mData,
     UFG::UIHK_PDAWidget::mContactImage.mData,
-    v1->mOutgoingCall,
-    v1->mVoiceMail);
+    this->mOutgoingCall,
+    this->mVoiceMail);
 }
 
 // File Line: 804
 // RVA: 0x5D3B10
 char __fastcall UFG::UIHK_PDAWidget::AnswerPhoneCall(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rdi
-
-  v1 = this;
   UFG::UIHK_PDAIncomingCallWidget::SetCallerName(
     &this->IncomingCall,
     this->mPhoneContact.mData,
     UFG::UIHK_PDAWidget::mContactImage.mData,
     this->mVoiceMail);
-  UFG::UIHK_PDAIncomingCallWidget::Answer(&v1->IncomingCall);
-  v1->mState = STATE_INCOMING_CALL;
+  UFG::UIHK_PDAIncomingCallWidget::Answer(&this->IncomingCall);
+  this->mState = STATE_INCOMING_CALL;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   UFG::ConversationManager::ResumePlayerConversations(eInterruptType_PDAHangup);
   return 1;
@@ -986,29 +928,20 @@ char __fastcall UFG::UIHK_PDAWidget::AnswerPhoneCall(UFG::UIHK_PDAWidget *this)
 // RVA: 0x5D7150
 char __fastcall UFG::UIHK_PDAWidget::EndPhoneCall(UFG::UIHK_PDAWidget *this, bool playSound)
 {
-  bool v2; // si
-  UFG::UIHK_PDAWidget *v3; // rdi
   char result; // al
 
-  v2 = playSound;
-  v3 = this;
   if ( (unsigned int)(this->mState - 4) > 1 )
     return 0;
   if ( UFG::HudAudio::m_instance )
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-      0xD92517u,
-      0i64,
-      0,
-      0i64);
-  if ( v3->IncomingCall.mState )
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xD92517u, 0i64, 0, 0i64);
+  if ( this->IncomingCall.mState )
   {
-    UFG::UIHK_PDAIncomingCallWidget::HangUp(&v3->IncomingCall, v2);
-    v3->IncomingCall.mUpdateTimer = 0;
+    UFG::UIHK_PDAIncomingCallWidget::HangUp(&this->IncomingCall, playSound);
+    this->IncomingCall.mUpdateTimer = 0;
   }
-  UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&v3->IncomingCall, "Deactivate");
-  UFG::UIHK_PDARootMenuWidget::Deactivate(&v3->RootMenu);
-  v3->mState = 0;
+  UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&this->IncomingCall, "Deactivate");
+  UFG::UIHK_PDARootMenuWidget::Deactivate(&this->RootMenu);
+  this->mState = STATE_IDLE;
   result = 1;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   return result;
@@ -1016,33 +949,32 @@ char __fastcall UFG::UIHK_PDAWidget::EndPhoneCall(UFG::UIHK_PDAWidget *this, boo
 
 // File Line: 827
 // RVA: 0x5FEC40
-char __fastcall UFG::UIHK_PDAWidget::QueueIncomingTextMessage(UFG::UIHK_PDAWidget *this, const char *contactName, const char *message, const char *portrait, bool outgoing, bool autoAnswer)
+char __fastcall UFG::UIHK_PDAWidget::QueueIncomingTextMessage(
+        UFG::UIHK_PDAWidget *this,
+        const char *contactName,
+        const char *message,
+        const char *portrait,
+        bool outgoing,
+        bool autoAnswer)
 {
-  UFG::UIHK_PDAWidget *v6; // rsi
-  const char *v7; // rdi
-  const char *v8; // rbx
-
-  v6 = this;
-  v7 = portrait;
-  v8 = message;
   UFG::qString::Set(&UFG::UIHK_PDAWidget::mTxtContact, contactName);
-  UFG::qString::Set(&UFG::UIHK_PDAWidget::mTxtMsg, v8);
+  UFG::qString::Set(&UFG::UIHK_PDAWidget::mTxtMsg, message);
   UFG::UIHK_PDAWidget::mOutgoingTxt = outgoing;
   UFG::UIHK_PDAWidget::mAutoAnsTxt = autoAnswer;
-  UFG::qString::Set(&UFG::UIHK_PDAWidget::mContactImage, v7);
-  UFG::UIHK_PDAWidget::ShowIncomingTextMessage(v6);
+  UFG::qString::Set(&UFG::UIHK_PDAWidget::mContactImage, portrait);
+  UFG::UIHK_PDAWidget::ShowIncomingTextMessage(this);
   return 1;
 }
 
 // File Line: 840
 // RVA: 0x612190
-char __fastcall UFG::UIHK_PDAWidget::StartReadingText(UFG::UIHK_PDAWidget *this)
+bool __fastcall UFG::UIHK_PDAWidget::StartReadingText(UFG::UIHK_PDAWidget *this)
 {
-  char result; // al
+  bool result; // al
 
   if ( this->mState )
     return 0;
-  this->mState = 10;
+  this->mState = STATE_READING_TEXT;
   result = 1;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   return result;
@@ -1056,7 +988,7 @@ char __fastcall UFG::UIHK_PDAWidget::StartWritingText(UFG::UIHK_PDAWidget *this)
 
   if ( this->mState )
     return 0;
-  this->mState = 11;
+  this->mState = STATE_WAIT_TO_WRITE_TEXT;
   result = 1;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   return result;
@@ -1066,19 +998,17 @@ char __fastcall UFG::UIHK_PDAWidget::StartWritingText(UFG::UIHK_PDAWidget *this)
 // RVA: 0x610900
 void __fastcall UFG::UIHK_PDAWidget::ShowIncomingTextMessage(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
-  signed int v2; // eax
+  UFG::ePDAStateEnum v2; // eax
   unsigned int v3; // edx
 
-  v1 = this;
   UFG::UIHK_PDAWidget::ForceIdle(this);
-  v2 = 6;
+  v2 = STATE_INCOMING_TEXT;
   if ( UFG::UIHK_PDAWidget::mOutgoingTxt )
-    v2 = 8;
-  v1->mState = v2;
+    v2 = STATE_OUTGOING_TEXT;
+  this->mState = v2;
   UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   UFG::UIHK_PDAIncomingTextWidget::Activate(
-    &v1->IncomingText,
+    &this->IncomingText,
     UFG::UIHK_PDAWidget::mTxtMsg.mData,
     UFG::UIHK_PDAWidget::mTxtContact.mData,
     UFG::UIHK_PDAWidget::mOutgoingTxt,
@@ -1095,31 +1025,30 @@ void __fastcall UFG::UIHK_PDAWidget::ShowIncomingTextMessage(UFG::UIHK_PDAWidget
       return;
     v3 = 241429984;
   }
-  UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v3, 0i64, 0, 0i64);
+  UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v3, 0i64, 0, 0i64);
 }
 
 // File Line: 881
 // RVA: 0x5D6EB0
 void __fastcall UFG::UIHK_PDAWidget::DisplayTextMessage(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
-
-  v1 = this;
-  if ( this->mState == 2 && this->PhoneContacts.mState )
-    this->PhoneContacts.mState = 6;
+  if ( this->mState == STATE_PHONE_CONTACTS && this->PhoneContacts.mState )
+    this->PhoneContacts.mState = STATE_INCOMING_TEXT;
   if ( !UFG::UIHK_PDAWidget::mLocked )
   {
     UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(&this->IncomingText);
-    v1->mState = 7;
+    this->mState = STATE_DISPLAY_TEXT;
     UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
   }
 }
 
 // File Line: 896
 // RVA: 0x5D6640
-char __fastcall UFG::UIHK_PDAWidget::DismissTextMessage(UFG::UIHK_PDAWidget *this, UFG::UIHK_PDAIncomingTextWidget::eDismissCause dismissCause)
+char __fastcall UFG::UIHK_PDAWidget::DismissTextMessage(
+        UFG::UIHK_PDAWidget *this,
+        UFG::UIHK_PDAIncomingTextWidget::eDismissCause dismissCause)
 {
-  if ( (this->mState - 6) & 0xFFFFFFFD )
+  if ( ((this->mState - 6) & 0xFFFFFFFD) != 0 )
     return 0;
   UFG::UIHK_PDAIncomingTextWidget::DismissMessage(&this->IncomingText, dismissCause);
   return 1;
@@ -1150,61 +1079,49 @@ _BOOL8 __fastcall UFG::UIHK_PDAWidget::IsIdle(UFG::UIHK_PDAWidget *this)
 // RVA: 0x5D6080
 void __fastcall UFG::UIHK_PDAWidget::DeactivateAll(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
-  UFG::UIHK_PDARootMenuWidget *v2; // rcx
-  unsigned int v3; // eax
+  UFG::UIHK_PDARootMenuWidget *p_RootMenu; // rcx
+  UFG::UIHK_PDAPhoneContactsWidget::eState mState; // eax
   int v4; // eax
 
-  v1 = this;
-  v2 = &this->RootMenu;
-  if ( v2->mState )
-    UFG::UIHK_PDARootMenuWidget::Deactivate(v2);
-  v3 = v1->PhoneContacts.mState;
-  if ( v3 > STATE_PHONE_CONTACTS && v3 != STATE_INCOMING_TEXT )
-    v1->PhoneContacts.mState = STATE_INCOMING_TEXT;
-  if ( v1->TextInbox.mState )
+  p_RootMenu = &this->RootMenu;
+  if ( p_RootMenu->mState )
+    UFG::UIHK_PDARootMenuWidget::Deactivate(p_RootMenu);
+  mState = this->PhoneContacts.mState;
+  if ( mState > (unsigned int)STATE_PHONE_CONTACTS && mState != STATE_INCOMING_TEXT )
+    this->PhoneContacts.mState = STATE_INCOMING_TEXT;
+  if ( this->TextInbox.mState )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0x4AAC5E6Bu,
-        0i64,
-        0,
-        0i64);
-    v1->TextInbox.mState = 3;
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x4AAC5E6Bu, 0i64, 0, 0i64);
+    this->TextInbox.mState = STATE_TEXT_INBOX;
   }
-  if ( v1->IncomingCall.mState )
+  if ( this->IncomingCall.mState )
   {
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xD92517u,
-        0i64,
-        0,
-        0i64);
-    if ( v1->IncomingCall.mState )
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xD92517u, 0i64, 0, 0i64);
+    if ( this->IncomingCall.mState )
     {
-      UFG::UIHK_PDAIncomingCallWidget::HangUp(&v1->IncomingCall, 1);
-      v1->IncomingCall.mUpdateTimer = 0;
+      UFG::UIHK_PDAIncomingCallWidget::HangUp(&this->IncomingCall, 1);
+      this->IncomingCall.mUpdateTimer = 0;
     }
-    UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&v1->IncomingCall, "Deactivate");
+    UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&this->IncomingCall, "Deactivate");
   }
-  if ( v1->IncomingText.mState )
+  if ( this->IncomingText.mState )
   {
-    UFG::UIHK_PDAIncomingTextWidget::DismissMessage(&v1->IncomingText, DISMISS_CAUSE_DEACTIVATE);
-    if ( v1->IncomingText.mInputLocker.mAcquired )
+    UFG::UIHK_PDAIncomingTextWidget::DismissMessage(&this->IncomingText, DISMISS_CAUSE_DEACTIVATE);
+    if ( this->IncomingText.mInputLocker.mAcquired )
     {
       if ( UFG::UIHK_PDAWidget::mInputLocked )
       {
         UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
         v4 = UFG::UIHKGameplayHelpWidget::mLocked;
         if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-          v4 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+          v4 = --UFG::UIHKGameplayHelpWidget::mLocked;
         if ( v4 < 1 )
           UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
         --UFG::UIHK_PDAWidget::mInputLocked;
       }
-      v1->IncomingText.mInputLocker.mAcquired = 0;
+      this->IncomingText.mInputLocker.mAcquired = 0;
     }
   }
 }
@@ -1213,51 +1130,49 @@ void __fastcall UFG::UIHK_PDAWidget::DeactivateAll(UFG::UIHK_PDAWidget *this)
 // RVA: 0x5E6510
 void __fastcall UFG::UIHK_PDAWidget::ForceIdle(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
-  Scaleform::GFx::Movie *v2; // rcx
+  Scaleform::GFx::Movie *pObject; // rcx
   int v3; // eax
   UFG::UIScreenTextureManager *v4; // rax
   int v5; // eax
 
-  v1 = this;
-  v2 = UFG::UIHKScreenHud::mInstance->mRenderable->m_movie.pObject;
-  if ( v2 )
-    Scaleform::GFx::Movie::Invoke(v2, "Smartphone_HideAll", 0i64, 0i64, 0);
-  v1->RootMenu.mState = 0;
-  if ( !unk_142431A14 && v1->RootMenu.mInputLocker.mAcquired )
+  pObject = UFG::UIHKScreenHud::mInstance->mRenderable->m_movie.pObject;
+  if ( pObject )
+    Scaleform::GFx::Movie::Invoke(pObject, "Smartphone_HideAll", 0i64, 0i64, 0);
+  this->RootMenu.mState = STATE_IDLE;
+  if ( !byte_142431A14 && this->RootMenu.mInputLocker.mAcquired )
   {
-    if ( UFG::UIHK_PDAWidget::mInputLocked > 0 )
+    if ( UFG::UIHK_PDAWidget::mInputLocked )
     {
       UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
       v3 = UFG::UIHKGameplayHelpWidget::mLocked;
       if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-        v3 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+        v3 = --UFG::UIHKGameplayHelpWidget::mLocked;
       if ( v3 < 1 )
         UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
       --UFG::UIHK_PDAWidget::mInputLocked;
     }
-    v1->RootMenu.mInputLocker.mAcquired = 0;
+    this->RootMenu.mInputLocker.mAcquired = 0;
   }
-  v1->PhoneContacts.mState = 0;
+  this->PhoneContacts.mState = STATE_IDLE;
   v4 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v4, UFG::UIHK_PDAPhoneContactsWidget::gTexturePackFilename);
-  v1->TextInbox.mState = 0;
-  v1->IncomingCall.mState = 0;
-  UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&v1->IncomingCall, "ForceIdle");
-  v1->IncomingText.mState = 0;
-  if ( v1->IncomingText.mInputLocker.mAcquired )
+  this->TextInbox.mState = STATE_IDLE;
+  this->IncomingCall.mState = STATE_IDLE;
+  UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(&this->IncomingCall, "ForceIdle");
+  this->IncomingText.mState = STATE_IDLE;
+  if ( this->IncomingText.mInputLocker.mAcquired )
   {
-    if ( UFG::UIHK_PDAWidget::mInputLocked > 0 )
+    if ( UFG::UIHK_PDAWidget::mInputLocked )
     {
       UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
       v5 = UFG::UIHKGameplayHelpWidget::mLocked;
       if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-        v5 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+        v5 = --UFG::UIHKGameplayHelpWidget::mLocked;
       if ( v5 < 1 )
         UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
       --UFG::UIHK_PDAWidget::mInputLocked;
     }
-    v1->IncomingText.mInputLocker.mAcquired = 0;
+    this->IncomingText.mInputLocker.mAcquired = 0;
   }
 }
 
@@ -1265,18 +1180,16 @@ void __fastcall UFG::UIHK_PDAWidget::ForceIdle(UFG::UIHK_PDAWidget *this)
 // RVA: 0x5D6A80
 void __fastcall UFG::UIHK_PDAWidget::DisplayObjective(UFG::UIHK_PDAWidget *this)
 {
-  UFG::UIHK_PDAWidget *v1; // rbx
   char v2; // r10
   UFG::UIHKPlayerObjective *v3; // rax
   char v4; // dl
-  unsigned int v5; // er8
+  unsigned int v5; // r8d
   unsigned __int8 v6; // r9
-  UFG::Objective *v7; // rcx
-  const char *v8; // rcx
+  UFG::Objective *mObjective; // rcx
+  const char *mData; // rcx
   unsigned __int8 v9; // cl
   UFG::UIHKPlayerObjective *v10; // rdx
 
-  v1 = this;
   if ( this->mGPSActivatedFlag )
   {
     this->mGPSActivatedFlag = 0;
@@ -1331,12 +1244,12 @@ LABEL_20:
   }
   v3 = &obj;
 LABEL_14:
-  v7 = v3->mObjective;
-  if ( v7 )
-    v8 = v7->mCaption.mData;
+  mObjective = v3->mObjective;
+  if ( mObjective )
+    mData = mObjective->mCaption.mData;
   else
-    v8 = v3->alternateCaption.mData;
-  if ( (signed int)UFG::qStringLength(v8) >= 1 )
+    mData = v3->alternateCaption.mData;
+  if ( (int)UFG::qStringLength(mData) >= 1 )
   {
     v4 = unk_1424329EA;
     v2 = unk_1424329E8;
@@ -1346,43 +1259,43 @@ LABEL_14:
 LABEL_27:
   UFG::UIHKPlayerObjectiveManager::ScrollNextObjective(&UFG::UIHK_PDAWidget::ObjectiveManager);
 LABEL_28:
-  v1->m_objectiveScrollingTimer = 0.0;
-  v1->m_objectiveScrollingInProgress = 1;
+  this->m_objectiveScrollingTimer = 0.0;
+  this->m_objectiveScrollingInProgress = 1;
 }
 
 // File Line: 1023
 // RVA: 0x5E5540
 void __fastcall UFG::UIHK_PDAWidget::Flash_UIHighlight_Init(UFG::UIHK_PDAWidget *this, UFG::UIScreen *screen)
 {
-  Scaleform::GFx::Movie *v2; // rbx
-  char ptr; // [rsp+40h] [rbp-68h]
-  __int64 v4; // [rsp+50h] [rbp-58h]
-  unsigned int v5; // [rsp+58h] [rbp-50h]
-  const char *v6; // [rsp+60h] [rbp-48h]
-  char v7; // [rsp+70h] [rbp-38h]
-  __int64 v8; // [rsp+80h] [rbp-28h]
-  unsigned int v9; // [rsp+88h] [rbp-20h]
-  const char *v10; // [rsp+90h] [rbp-18h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value ptr; // [rsp+40h] [rbp-68h] BYREF
+  char v4[16]; // [rsp+70h] [rbp-38h] BYREF
+  __int64 v5; // [rsp+80h] [rbp-28h]
+  int v6; // [rsp+88h] [rbp-20h]
+  const char *v7; // [rsp+90h] [rbp-18h]
 
-  v2 = screen->mRenderable->m_movie.pObject;
-  if ( v2 )
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
     `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    if ( (v5 >> 6) & 1 )
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
-      v4 = 0i64;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
+        &ptr,
+        ptr.mValue);
+      ptr.pObjectInterface = 0i64;
     }
-    v5 = 6;
-    v6 = "mc_Minimap";
-    if ( (v9 >> 6) & 1 )
+    ptr.Type = VT_String;
+    ptr.mValue.pString = "mc_Minimap";
+    if ( (v6 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v8 + 16i64))(v8, &v7, v10);
-      v8 = 0i64;
+      (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v5 + 16i64))(v5, v4, v7);
+      v5 = 0i64;
     }
-    v9 = 6;
-    v10 = "mc_CircleMenu_highlight";
-    Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+    v6 = 6;
+    v7 = "mc_CircleMenu_highlight";
+    Scaleform::GFx::Movie::Invoke(pObject, "UIHighlight_Init", 0i64, &ptr, 2u);
     `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }

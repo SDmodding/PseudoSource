@@ -2,11 +2,10 @@
 // RVA: 0x2627E0
 void __fastcall UFG::NavModuleLocal::NavModuleLocal(UFG::NavModuleLocal *this, UFG::NavComponent *parent)
 {
-  UFG::NavModuleLocal *v2; // rbx
-  float v3; // xmm1_4
-  float v4; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v5; // xmm2_4
-  float v6; // xmm0_4
+  float x; // xmm0_4
   float v7; // xmm2_4
   float v8; // xmm0_4
   float v9; // xmm2_4
@@ -15,12 +14,11 @@ void __fastcall UFG::NavModuleLocal::NavModuleLocal(UFG::NavModuleLocal *this, U
   this->m_navComponent = parent;
   this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable;
   this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
-  v2 = this;
-  v3 = UFG::qVector3::msZero.y;
-  v4 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_adjustedWaypoint.m_navPosition.m_vPosition.x = UFG::qVector3::msZero.x;
-  this->m_adjustedWaypoint.m_navPosition.m_vPosition.y = v3;
-  this->m_adjustedWaypoint.m_navPosition.m_vPosition.z = v4;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.y = y;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.z = z;
   this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_adjustedWaypoint.m_navPosition.m_packedKey = -1i64;
@@ -40,44 +38,41 @@ void __fastcall UFG::NavModuleLocal::NavModuleLocal(UFG::NavModuleLocal *this, U
   this->m_deferrer.mDistanceTolerance = 0.80000001;
   this->m_deferrer.mTimeTolerance = 0.40000001;
   this->m_deferrer.mResult = 0;
-  this->m_deferrer.mTimeSinceLastCheck = UFG::qRandom(0.40000001, &UFG::qDefaultSeed);
+  this->m_deferrer.mTimeSinceLastCheck = UFG::qRandom(0.40000001, (unsigned int *)&UFG::qDefaultSeed);
   v5 = UFG::qVector3::msZero.z;
-  v6 = UFG::qVector3::msZero.x;
-  v2->m_steerData.m_vDesiredDirection.y = UFG::qVector3::msZero.y;
-  v2->m_steerData.m_vDesiredDirection.z = v5;
-  v2->m_steerData.m_vDesiredDirection.x = v6;
+  x = UFG::qVector3::msZero.x;
+  this->m_steerData.m_vDesiredDirection.y = UFG::qVector3::msZero.y;
+  this->m_steerData.m_vDesiredDirection.z = v5;
+  this->m_steerData.m_vDesiredDirection.x = x;
   v7 = UFG::qVector3::msZero.z;
   v8 = UFG::qVector3::msZero.x;
-  v2->m_steerData.m_vClampedDirection.y = UFG::qVector3::msZero.y;
-  v2->m_steerData.m_vClampedDirection.z = v7;
-  v2->m_steerData.m_vClampedDirection.x = v8;
+  this->m_steerData.m_vClampedDirection.y = UFG::qVector3::msZero.y;
+  this->m_steerData.m_vClampedDirection.z = v7;
+  this->m_steerData.m_vClampedDirection.x = v8;
   v9 = UFG::qVector3::msZero.z;
   v10 = UFG::qVector3::msZero.x;
-  v2->m_steerData.m_vLocalDirection.y = UFG::qVector3::msZero.y;
-  v2->m_steerData.m_vLocalDirection.z = v9;
-  v2->m_steerData.m_vLocalDirection.x = v10;
-  v2->m_steerData.m_fLocalSpeed = 0.0;
+  this->m_steerData.m_vLocalDirection.y = UFG::qVector3::msZero.y;
+  this->m_steerData.m_vLocalDirection.z = v9;
+  this->m_steerData.m_vLocalDirection.x = v10;
+  this->m_steerData.m_fLocalSpeed = 0.0;
 }
 
 // File Line: 28
 // RVA: 0x2666E0
 void __fastcall UFG::NavModuleLocal::Update(UFG::NavModuleLocal *this, float dt)
 {
-  UFG::NavModuleLocal *v2; // rbx
-
-  v2 = this;
   if ( UFG::NavModuleLocal::HasInput(this) )
-    UFG::NavModuleLocal::UpdateAdjustedWaypointAndSpeed(v2, dt);
+    UFG::NavModuleLocal::UpdateAdjustedWaypointAndSpeed(this, dt);
   else
-    v2->m_steerData.m_fLocalSpeed = 0.0;
+    this->m_steerData.m_fLocalSpeed = 0.0;
 }
 
 // File Line: 42
 // RVA: 0x265E60
 void __fastcall UFG::NavModuleLocal::Reset(UFG::NavModuleLocal *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm2_4
   float v5; // xmm1_4
@@ -85,11 +80,11 @@ void __fastcall UFG::NavModuleLocal::Reset(UFG::NavModuleLocal *this)
   float v7; // xmm1_4
   float v8; // xmm2_4
 
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_steerData.m_vDesiredDirection.x = UFG::qVector3::msZero.x;
-  this->m_steerData.m_vDesiredDirection.y = v1;
-  this->m_steerData.m_vDesiredDirection.z = v2;
+  this->m_steerData.m_vDesiredDirection.y = y;
+  this->m_steerData.m_vDesiredDirection.z = z;
   v3 = UFG::qVector3::msZero.y;
   v4 = UFG::qVector3::msZero.z;
   this->m_steerData.m_vClampedDirection.x = UFG::qVector3::msZero.x;
@@ -112,29 +107,31 @@ void __fastcall UFG::NavModuleLocal::Reset(UFG::NavModuleLocal *this)
 
 // File Line: 57
 // RVA: 0x264770
-void __fastcall UFG::NavModuleLocal::GetTargetPosition(UFG::NavModuleLocal *this, UFG::NavWaypoint *wp, float distanceAhead)
+void __fastcall UFG::NavModuleLocal::GetTargetPosition(
+        UFG::NavModuleLocal *this,
+        UFG::NavWaypoint *wp,
+        float distanceAhead)
 {
-  UFG::NavModuleLocal *v3; // rsi
   float v4; // xmm0_4
-  UFG::NavComponent *v5; // r8
-  UFG::NavModulePathing *v6; // rax
-  UFG::TransformNodeComponent *v7; // r14
+  UFG::NavComponent *m_navComponent; // r8
+  UFG::NavModulePathing *m_pNavModulePathing; // rax
+  UFG::TransformNodeComponent *m_pSimObject; // r14
   __int64 v8; // rdi
-  float v9; // xmm3_4
-  float v10; // xmm10_4
-  float v11; // xmm15_4
+  float y; // xmm3_4
+  float z; // xmm10_4
+  float x; // xmm15_4
   UFG::NavModulePathing *v12; // rax
   char v13; // bl
-  bool v14; // r8
+  bool m_bValid; // r8
   __int64 v15; // r12
   char v16; // r13
   float v17; // xmm0_4
   hkVector4f v18; // xmm11
   float v19; // xmm0_4
-  signed int v20; // er9
-  signed int v21; // er10
+  int v20; // r9d
+  int v21; // r10d
   char v22; // si
-  signed __int64 v23; // rcx
+  __int64 v23; // rcx
   __m128 v24; // xmm12
   float v25; // xmm13_4
   int v26; // xmm7_4
@@ -156,316 +153,313 @@ void __fastcall UFG::NavModuleLocal::GetTargetPosition(UFG::NavModuleLocal *this
   float v42; // xmm10_4
   __m128 v43; // xmm2
   float v44; // xmm1_4
-  float v45; // xmm4_4
-  float v46; // xmm5_4
-  float v47; // xmm6_4
-  __int64 v48; // rsi
-  __int64 v49; // rbx
-  hkVector4f *v50; // rdi
-  float v51; // xmm6_4
-  float v52; // xmm10_4
-  float v53; // xmm12_4
-  unsigned int v54; // eax
-  unsigned int v55; // edi
-  char v56; // al
-  float v57; // xmm5_4
-  float v58; // xmm4_4
-  float v59; // xmm6_4
-  hkVector4f v60; // xmm0
-  unsigned int v61; // eax
-  char v62; // al
-  float v63; // [rsp+30h] [rbp-90h]
-  float v64; // [rsp+34h] [rbp-8Ch]
-  float v65; // [rsp+38h] [rbp-88h]
-  __m128 v66; // [rsp+40h] [rbp-80h]
-  float v67; // [rsp+50h] [rbp-70h]
-  signed int v68; // [rsp+54h] [rbp-6Ch]
-  __int64 v69; // [rsp+60h] [rbp-60h]
-  float v70; // [rsp+68h] [rbp-58h]
-  float v71; // [rsp+6Ch] [rbp-54h]
-  float v72; // [rsp+70h] [rbp-50h]
-  int v73; // [rsp+74h] [rbp-4Ch]
-  float v74; // [rsp+78h] [rbp-48h]
-  float v75; // [rsp+7Ch] [rbp-44h]
-  float v76; // [rsp+80h] [rbp-40h]
-  UFG::HavokNavPosition v77; // [rsp+90h] [rbp-30h]
-  __int64 v78; // [rsp+D0h] [rbp+10h]
-  __int16 v79; // [rsp+D8h] [rbp+18h]
-  char v80; // [rsp+DAh] [rbp+1Ah]
-  UFG::NavPath *v81; // [rsp+E0h] [rbp+20h]
-  UFG::HavokNavPosition v82; // [rsp+F0h] [rbp+30h]
-  __int64 v83; // [rsp+220h] [rbp+160h]
-  __int64 v84; // [rsp+228h] [rbp+168h]
-  float v85; // [rsp+230h] [rbp+170h]
-  float v86; // [rsp+238h] [rbp+178h]
+  __int64 v45; // rsi
+  __int64 v46; // rbx
+  hkVector4f *v47; // rdi
+  float v48; // xmm6_4
+  float v49; // xmm10_4
+  float v50; // xmm12_4
+  unsigned int v51; // eax
+  unsigned int m_packedKey; // edi
+  char v53; // al
+  float v54; // xmm5_4
+  float v55; // xmm4_4
+  float v56; // xmm6_4
+  hkVector4f v57; // xmm0
+  unsigned int m_aiMeshUid; // eax
+  char v59; // al
+  float v60; // [rsp+30h] [rbp-90h]
+  float v61; // [rsp+34h] [rbp-8Ch]
+  float v62; // [rsp+38h] [rbp-88h]
+  __m128 m_quad; // [rsp+40h] [rbp-80h]
+  float v64; // [rsp+50h] [rbp-70h]
+  int v65; // [rsp+54h] [rbp-6Ch]
+  __int64 v66; // [rsp+60h] [rbp-60h] BYREF
+  int v67; // [rsp+68h] [rbp-58h]
+  float v68; // [rsp+6Ch] [rbp-54h]
+  float v69; // [rsp+70h] [rbp-50h]
+  int size; // [rsp+74h] [rbp-4Ch]
+  float v71; // [rsp+78h] [rbp-48h]
+  float v72; // [rsp+7Ch] [rbp-44h]
+  float v73; // [rsp+80h] [rbp-40h]
+  UFG::HavokNavPosition v74; // [rsp+90h] [rbp-30h] BYREF
+  __int64 v75; // [rsp+D0h] [rbp+10h]
+  __int16 v76; // [rsp+D8h] [rbp+18h]
+  char v77; // [rsp+DAh] [rbp+1Ah]
+  UFG::NavPath *m_pNavPath; // [rsp+E0h] [rbp+20h]
+  UFG::HavokNavPosition v79; // [rsp+F0h] [rbp+30h] BYREF
+  __int64 v80; // [rsp+220h] [rbp+160h]
+  __int64 v81; // [rsp+228h] [rbp+168h]
+  float v82; // [rsp+230h] [rbp+170h]
+  float v83; // [rsp+238h] [rbp+178h]
 
-  v3 = this;
   v4 = cosf(1.5707964);
-  v5 = v3->m_navComponent;
-  v6 = v5->m_pNavModulePathing;
-  v7 = (UFG::TransformNodeComponent *)v5->m_pSimObject;
+  m_navComponent = this->m_navComponent;
+  m_pNavModulePathing = m_navComponent->m_pNavModulePathing;
+  m_pSimObject = (UFG::TransformNodeComponent *)m_navComponent->m_pSimObject;
   v8 = 0i64;
-  v63 = 0.0;
-  v76 = v4;
-  v81 = v6->m_pPath.m_pNavPath;
-  v73 = v81->m_aWaypoints.size;
-  if ( v7 )
-    v7 = (UFG::TransformNodeComponent *)v7->mChildren.mNode.mNext;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-  v9 = v7->mWorldTransform.v3.y;
-  v10 = v7->mWorldTransform.v3.z;
-  v11 = v7->mWorldTransform.v3.x;
-  v12 = v3->m_navComponent->m_pNavModulePathing;
+  v60 = 0.0;
+  v73 = v4;
+  m_pNavPath = m_pNavModulePathing->m_pPath.m_pNavPath;
+  size = m_pNavPath->m_aWaypoints.size;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::TransformNodeComponent *)m_pSimObject->mChildren.mNode.mNext;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimObject);
+  y = m_pSimObject->mWorldTransform.v3.y;
+  z = m_pSimObject->mWorldTransform.v3.z;
+  x = m_pSimObject->mWorldTransform.v3.x;
+  v12 = this->m_navComponent->m_pNavModulePathing;
   v13 = 0;
-  v14 = 0;
+  m_bValid = 0;
   v15 = 0i64;
   v16 = 0;
   v17 = v12->m_vHalfSpaceNormal.x;
-  v86 = v7->mWorldTransform.v3.y;
+  v83 = y;
   v18.m_quad = _mm_unpacklo_ps(
                  _mm_unpacklo_ps((__m128)LODWORD(UFG::qVector3::msZero.x), (__m128)LODWORD(UFG::qVector3::msZero.z)),
                  _mm_unpacklo_ps((__m128)LODWORD(UFG::qVector3::msZero.y), (__m128)(unsigned int)FLOAT_1_0));
-  v72 = v17;
+  v69 = v17;
   v19 = v12->m_vHalfSpaceNormal.y;
-  v64 = v10;
-  LOBYTE(v74) = 0;
+  v61 = z;
+  LOBYTE(v71) = 0;
   v20 = -1;
   v21 = -1;
-  v66 = v18.m_quad;
-  v75 = v19;
-  v65 = UFG::qVector3::msZero.x;
-  v70 = UFG::qVector3::msZero.x;
-  v68 = -1;
-  v77.m_packedKey = -1;
-  v77.m_aiMeshUid = -1;
-  v77.m_hkvMeshPosition = (hkVector4f)v18.m_quad;
-  v67 = UFG::qVector3::msZero.y;
-  v71 = UFG::qVector3::msZero.y;
-  v66.m128_i32[0] = LODWORD(UFG::qVector3::msZero.z);
-  v69 = 0i64;
-  LOWORD(v70) = 0;
-  v72 = UFG::qVector3::msZero.z;
-  v77.m_vPosition = UFG::qVector3::msZero;
-  BYTE2(v70) = 1;
-  v77.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
-  v77.m_bValid = 0;
-  v78 = 0i64;
-  v79 = 0;
-  v80 = 1;
+  m_quad = v18.m_quad;
+  v72 = v19;
+  v62 = UFG::qVector3::msZero.x;
+  HIBYTE(v67) = HIBYTE(UFG::qVector3::msZero.x);
+  v65 = -1;
+  v74.m_packedKey = -1;
+  v74.m_aiMeshUid = -1;
+  v74.m_hkvMeshPosition = (hkVector4f)v18.m_quad;
+  v64 = UFG::qVector3::msZero.y;
+  v68 = UFG::qVector3::msZero.y;
+  m_quad.m128_i32[0] = LODWORD(UFG::qVector3::msZero.z);
+  v66 = 0i64;
+  LOWORD(v67) = 0;
+  v69 = UFG::qVector3::msZero.z;
+  v74.m_vPosition = UFG::qVector3::msZero;
+  BYTE2(v67) = 1;
+  v74.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
+  v74.m_bValid = 0;
+  v75 = 0i64;
+  v76 = 0;
+  v77 = 1;
   v22 = 0;
   do
   {
-    v23 = (signed __int64)&v81->m_aWaypoints.p[v8];
+    v23 = (__int64)&m_pNavPath->m_aWaypoints.p[v8];
     v24 = (__m128)*(unsigned int *)(v23 + 12);
     v25 = *(float *)(v23 + 16);
     v26 = *(int *)(v23 + 8);
     v27 = *(float *)(v23 + 12);
-    v28 = *(float *)(v23 + 16);
-    v71 = *(float *)(v23 + 12);
-    v72 = v28;
-    v70 = *(float *)&v26;
+    v28 = v25;
+    v68 = v27;
+    v69 = v25;
+    v67 = v26;
     v29 = *(_BYTE *)(v23 + 24);
     if ( v29 )
     {
-      LOBYTE(v74) = *(_BYTE *)(v23 + 24);
+      LOBYTE(v71) = *(_BYTE *)(v23 + 24);
       v18.m_quad = *(__m128 *)(v23 + 32);
-      v66 = *(__m128 *)(v23 + 32);
+      m_quad = v18.m_quad;
       v20 = *(_DWORD *)(v23 + 48);
-      v67 = *(float *)(v23 + 48);
+      v64 = *(float *)&v20;
       v21 = *(_DWORD *)(v23 + 52);
-      v68 = *(_DWORD *)(v23 + 52);
+      v65 = v21;
     }
     else
     {
       v29 = 0;
-      LOBYTE(v74) = 0;
+      LOBYTE(v71) = 0;
     }
     v30 = *(_QWORD *)(v23 + 64);
     v32 = v24;
-    v69 = *(_QWORD *)(v23 + 64);
+    v66 = v30;
     v31 = *(_BYTE *)(v23 + 72);
-    v74 = *(float *)&v26;
-    v32.m128_f32[0] = v24.m128_f32[0] - v9;
-    v33 = *(float *)&v26 - v11;
+    v71 = *(float *)&v26;
+    v32.m128_f32[0] = v24.m128_f32[0] - y;
+    v33 = *(float *)&v26 - x;
     v34 = v32;
-    LOBYTE(v70) = v31;
+    LOBYTE(v67) = v31;
     v35 = *(_BYTE *)(v23 + 73);
-    v36 = v25 - v10;
-    BYTE1(v70) = *(_BYTE *)(v23 + 73);
+    v36 = v25 - z;
+    BYTE1(v67) = v35;
     v37 = *(_BYTE *)(v23 + 74);
-    BYTE2(v70) = v37;
+    BYTE2(v67) = v37;
     v34.m128_f32[0] = (float)((float)(v32.m128_f32[0] * v32.m128_f32[0]) + (float)(v33 * v33)) + (float)(v36 * v36);
-    LODWORD(v38) = (unsigned __int128)_mm_sqrt_ps(v34);
-    v39 = v38 + v63;
-    v40 = (float)(v38 + v63) < v85;
-    v41 = (float)(v38 + v63) == v85;
-    v63 = v38 + v63;
-    if ( (float)((float)((float)((float)((float)(v24.m128_f32[0] - v9) * (float)(1.0 / v38)) * v75)
-                       + (float)((float)((float)(*(float *)&v26 - v11) * (float)(1.0 / v38)) * v72))
-               + (float)((float)(v36 * (float)(1.0 / v38)) * 0.0)) < v76
+    v38 = _mm_sqrt_ps(v34).m128_f32[0];
+    v39 = v38 + v60;
+    v40 = (float)(v38 + v60) < v82;
+    v41 = (float)(v38 + v60) == v82;
+    v60 = v38 + v60;
+    if ( (float)((float)((float)((float)((float)(v24.m128_f32[0] - y) * (float)(1.0 / v38)) * v72)
+                       + (float)((float)((float)(*(float *)&v26 - x) * (float)(1.0 / v38)) * v69))
+               + (float)((float)(v36 * (float)(1.0 / v38)) * 0.0)) < v73
       && !v13 )
     {
       v15 = 0i64;
-      v14 = 0;
+      m_bValid = 0;
       v13 = 1;
       v16 = 0;
-      v77.m_bValid = 0;
-      v65 = v11;
-      v77.m_vPosition.x = v11;
-      v78 = 0i64;
-      v79 = 0;
-      v80 = 1;
-      v67 = v86;
-      v77.m_vPosition.y = v86;
-      v66.m128_f32[0] = v64;
-      v77.m_vPosition.z = v64;
-      v39 = v63;
+      v74.m_bValid = 0;
+      v62 = x;
+      v74.m_vPosition.x = x;
+      v75 = 0i64;
+      v76 = 0;
+      v77 = 1;
+      v64 = v83;
+      v74.m_vPosition.y = v83;
+      m_quad.m128_f32[0] = v61;
+      v74.m_vPosition.z = v61;
+      v39 = v60;
     }
     if ( !v40 && !v41 )
     {
       v43 = v32;
-      v42 = v38 - (float)(v39 - v85);
+      v42 = v38 - (float)(v39 - v82);
       v43.m128_f32[0] = (float)((float)(v32.m128_f32[0] * v32.m128_f32[0]) + (float)(v33 * v33)) + (float)(v36 * v36);
       if ( v43.m128_f32[0] == 0.0 )
         v44 = 0.0;
       else
-        v44 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v43));
+        v44 = 1.0 / _mm_sqrt_ps(v43).m128_f32[0];
       v30 = 0i64;
       v29 = 0;
       v37 = 1;
       v31 = 0;
-      LOBYTE(v74) = 0;
-      v69 = 0i64;
-      v45 = (float)(v33 * v44) * v42;
-      v46 = (float)(v32.m128_f32[0] * v44) * v42;
+      LOBYTE(v71) = 0;
+      v66 = 0i64;
       v35 = 0;
       v22 = 1;
-      *(float *)&v26 = v11 + v45;
-      v27 = v86 + v46;
-      v47 = (float)(v36 * v44) * v42;
-      v70 = v11 + v45;
-      v71 = v86 + v46;
-      v28 = v64 + v47;
-      v72 = v64 + v47;
+      *(float *)&v26 = x + (float)((float)(v33 * v44) * v42);
+      v27 = v83 + (float)((float)(v32.m128_f32[0] * v44) * v42);
+      v67 = v26;
+      v68 = v27;
+      v28 = v61 + (float)((float)(v36 * v44) * v42);
+      v69 = v28;
     }
-    v11 = v74;
-    v9 = v24.m128_f32[0];
-    v10 = v25;
+    x = v71;
+    y = v24.m128_f32[0];
+    z = v25;
     v8 = (unsigned int)(v8 + 1);
-    v86 = v24.m128_f32[0];
-    v64 = v25;
+    v83 = v24.m128_f32[0];
+    v61 = v25;
   }
-  while ( !v22 && (signed int)v8 < v73 );
-  v48 = v83;
+  while ( !v22 && (int)v8 < size );
+  v45 = v80;
   v41 = v13 == 0;
-  v49 = v84;
+  v46 = v81;
   if ( v41 )
-    goto LABEL_33;
-  v50 = *(hkVector4f **)(v83 + 8);
-  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
-  v51 = v50[5].m_quad.m128_f32[3];
-  v52 = v50[6].m_quad.m128_f32[0];
-  v53 = v50[5].m_quad.m128_f32[2];
-  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
-  v82.m_vPosition.x = v53;
-  v82.m_vPosition.y = v51;
-  v82.m_vPosition.z = v52;
-  v82.m_bValid = v50[6].m_quad.m128_i8[8];
-  v82.m_hkvMeshPosition = (hkVector4f)v50[7].m_quad;
-  v54 = v50[8].m_quad.m128_u32[0];
-  v55 = -1;
-  v40 = *(float *)(v83 + 172) < *(float *)(v83 + 164);
-  v82.m_packedKey = v54;
-  v56 = *(_BYTE *)(v83 + 176);
-  v82.m_aiMeshUid = -1;
+    goto LABEL_27;
+  v47 = *(hkVector4f **)(v80 + 8);
+  v79.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
+  v48 = v47[5].m_quad.m128_f32[3];
+  v49 = v47[6].m_quad.m128_f32[0];
+  v50 = v47[5].m_quad.m128_f32[2];
+  v79.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
+  v79.m_vPosition.x = v50;
+  v79.m_vPosition.y = v48;
+  v79.m_vPosition.z = v49;
+  v79.m_bValid = v47[6].m_quad.m128_i8[8];
+  v79.m_hkvMeshPosition = (hkVector4f)v47[7].m_quad;
+  v51 = v47[8].m_quad.m128_u32[0];
+  m_packedKey = -1;
+  v40 = *(float *)(v80 + 172) < *(float *)(v80 + 164);
+  v79.m_packedKey = v51;
+  v53 = *(_BYTE *)(v80 + 176);
+  v79.m_aiMeshUid = -1;
   if ( v40
-    || (float)((float)((float)((float)(*(float *)(v83 + 156) - v51) * (float)(*(float *)(v83 + 156) - v51))
-                     + (float)((float)(*(float *)(v83 + 152) - v53) * (float)(*(float *)(v83 + 152) - v53)))
-             + (float)((float)(*(float *)(v83 + 160) - v52) * (float)(*(float *)(v83 + 160) - v52))) > (float)(*(float *)(v83 + 168) * *(float *)(v83 + 168)) )
+    || (float)((float)((float)((float)(*(float *)(v80 + 156) - v48) * (float)(*(float *)(v80 + 156) - v48))
+                     + (float)((float)(*(float *)(v80 + 152) - v50) * (float)(*(float *)(v80 + 152) - v50)))
+             + (float)((float)(*(float *)(v80 + 160) - v49) * (float)(*(float *)(v80 + 160) - v49))) > (float)(*(float *)(v80 + 168) * *(float *)(v80 + 168)) )
   {
-    UFG::HavokNavPosition::`vftable(&v77);
-    UFG::HavokNavPosition::Validate(&v82, 1.0, 1.0, 0.0);
-    v56 = UFG::NavManager::ms_pInstance->vfptr->AIRayCastHits(
+    UFG::HavokNavPosition::`vftable(&v74);
+    UFG::HavokNavPosition::Validate(
+      &v79,
+      COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0),
+      COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0),
+      0.0);
+    v53 = UFG::NavManager::ms_pInstance->vfptr->AIRayCastHits(
             UFG::NavManager::ms_pInstance,
-            &v82,
-            (UFG::HavokNavPosition *)&v69,
-            (UFG::NavParams *)(*(_QWORD *)(v48 + 8) + 188i64),
+            &v79,
+            (UFG::HavokNavPosition *)&v66,
+            (UFG::NavParams *)(*(_QWORD *)(v45 + 8) + 188i64),
             0i64);
-    v37 = BYTE2(v70);
-    v35 = BYTE1(v70);
-    v18.m_quad = v66;
-    v28 = v72;
-    v27 = v71;
-    *(float *)&v26 = v70;
-    v57 = v77.m_vPosition.y;
-    v58 = v77.m_vPosition.x;
-    v31 = LOBYTE(v70);
-    v30 = v69;
-    v21 = v68;
-    v20 = LODWORD(v67);
-    v29 = LOBYTE(v74);
-    v16 = v79;
-    v15 = v78;
-    v14 = v77.m_bValid;
-    *(_BYTE *)(v48 + 176) = v56;
-    *(float *)(v48 + 156) = v51;
-    v59 = v77.m_vPosition.z;
-    *(float *)(v48 + 152) = v53;
-    *(float *)(v48 + 160) = v52;
-    *(_DWORD *)(v48 + 164) = 0;
-    v55 = v77.m_packedKey;
+    v37 = BYTE2(v67);
+    v35 = BYTE1(v67);
+    v18.m_quad = m_quad;
+    v28 = v69;
+    v27 = v68;
+    v26 = v67;
+    v54 = v74.m_vPosition.y;
+    v55 = v74.m_vPosition.x;
+    v31 = v67;
+    v30 = v66;
+    v21 = v65;
+    v20 = LODWORD(v64);
+    v29 = LOBYTE(v71);
+    v16 = v76;
+    v15 = v75;
+    m_bValid = v74.m_bValid;
+    *(_BYTE *)(v45 + 176) = v53;
+    *(float *)(v45 + 156) = v48;
+    v56 = v74.m_vPosition.z;
+    *(float *)(v45 + 152) = v50;
+    *(float *)(v45 + 160) = v49;
+    *(_DWORD *)(v45 + 164) = 0;
+    m_packedKey = v74.m_packedKey;
   }
   else
   {
-    v58 = v65;
-    v57 = v67;
-    v59 = v66.m128_f32[0];
+    v55 = v62;
+    v54 = v64;
+    v56 = m_quad.m128_f32[0];
   }
-  if ( !v56 )
+  if ( !v53 )
   {
-LABEL_33:
-    *(float *)(v49 + 8) = *(float *)&v26;
-    *(float *)(v49 + 12) = v27;
-    *(float *)(v49 + 16) = v28;
+LABEL_27:
+    *(float *)(v46 + 8) = *(float *)&v26;
+    *(float *)(v46 + 12) = v27;
+    *(float *)(v46 + 16) = v28;
     if ( v29 )
     {
-      *(_BYTE *)(v49 + 24) = v29;
-      *(hkVector4f *)(v49 + 32) = (hkVector4f)v18.m_quad;
-      *(_DWORD *)(v49 + 48) = v20;
-      *(_DWORD *)(v49 + 52) = v21;
+      *(_BYTE *)(v46 + 24) = v29;
+      *(hkVector4f *)(v46 + 32) = (hkVector4f)v18.m_quad;
+      *(_DWORD *)(v46 + 48) = v20;
+      *(_DWORD *)(v46 + 52) = v21;
     }
     else
     {
-      *(_BYTE *)(v49 + 24) = 0;
+      *(_BYTE *)(v46 + 24) = 0;
     }
-    *(_QWORD *)(v49 + 64) = v30;
-    *(_BYTE *)(v49 + 72) = v31;
-    *(_BYTE *)(v49 + 73) = v35;
-    *(_BYTE *)(v49 + 74) = v37;
+    *(_QWORD *)(v46 + 64) = v30;
+    *(_BYTE *)(v46 + 72) = v31;
+    *(_BYTE *)(v46 + 73) = v35;
+    *(_BYTE *)(v46 + 74) = v37;
   }
   else
   {
-    *(float *)(v49 + 8) = v58;
-    *(float *)(v49 + 12) = v57;
-    *(float *)(v49 + 16) = v59;
-    if ( v14 )
+    *(float *)(v46 + 8) = v55;
+    *(float *)(v46 + 12) = v54;
+    *(float *)(v46 + 16) = v56;
+    if ( m_bValid )
     {
-      v60.m_quad = (__m128)v77.m_hkvMeshPosition;
-      v61 = v77.m_aiMeshUid;
-      *(_BYTE *)(v49 + 24) = v14;
-      *(hkVector4f *)(v49 + 32) = (hkVector4f)v60.m_quad;
-      *(_DWORD *)(v49 + 52) = v61;
-      *(_DWORD *)(v49 + 48) = v55;
+      v57.m_quad = (__m128)v74.m_hkvMeshPosition;
+      m_aiMeshUid = v74.m_aiMeshUid;
+      *(_BYTE *)(v46 + 24) = m_bValid;
+      *(hkVector4f *)(v46 + 32) = (hkVector4f)v57.m_quad;
+      *(_DWORD *)(v46 + 52) = m_aiMeshUid;
+      *(_DWORD *)(v46 + 48) = m_packedKey;
     }
     else
     {
-      *(_BYTE *)(v49 + 24) = 0;
+      *(_BYTE *)(v46 + 24) = 0;
     }
-    v62 = HIBYTE(v79);
-    *(_QWORD *)(v49 + 64) = v15;
-    *(_BYTE *)(v49 + 72) = v16;
-    *(_BYTE *)(v49 + 73) = v62;
-    *(_BYTE *)(v49 + 74) = v80;
+    v59 = HIBYTE(v76);
+    *(_QWORD *)(v46 + 64) = v15;
+    *(_BYTE *)(v46 + 72) = v16;
+    *(_BYTE *)(v46 + 73) = v59;
+    *(_BYTE *)(v46 + 74) = v77;
   }
 }
 
@@ -474,224 +468,222 @@ LABEL_33:
 void __fastcall UFG::NavModuleLocal::UpdateAdjustedWaypointAndSpeed(UFG::NavModuleLocal *this, float dt)
 {
   UFG::TransformNodeComponent *v2; // rbp
-  UFG::NavModuleLocal *v3; // rbx
-  UFG::NavPath *v4; // rax
-  UFG::NavWaypoint *v5; // rcx
-  hkVector4f v6; // xmm0
-  float v7; // xmm1_4
-  bool v8; // al
-  UFG::NavComponent *v9; // rcx
-  UFG::NavModulePathing *v10; // rax
-  float v11; // xmm1_4
-  UFG::NavObject *v12; // rsi
+  UFG::NavPath *m_pNavPath; // rax
+  UFG::NavWaypoint *p; // rcx
+  float y; // xmm0_4
+  float z; // xmm1_4
+  bool m_bValid; // al
+  UFG::NavComponent *m_navComponent; // rcx
+  UFG::NavModulePathing *m_pNavModulePathing; // rax
+  float m_fDesiredSpeed; // xmm1_4
+  UFG::NavObject *m_pNavObject; // rsi
   UFG::NavComponent *v13; // r14
-  float v14; // xmm4_4
+  float x; // xmm4_4
   float v15; // xmm5_4
   float v16; // xmm2_4
-  __m128 v17; // xmm3
+  __m128 y_low; // xmm3
   __m128 v18; // xmm1
   float v19; // xmm1_4
   UFG::NavWaypoint *v20; // rax
-  float v21; // xmm0_4
-  float v22; // xmm1_4
-  float v23; // xmm2_4
-  UFG::NavComponent *v24; // rax
-  UFG::SimObject *v25; // rcx
-  UFG::qVector2 *v26; // r14
-  UFG::TransformNodeComponent *v27; // rdi
-  float v28; // xmm1_4
-  float v29; // xmm0_4
-  float v30; // xmm1_4
+  float m_fAdjustedSpeed; // xmm0_4
+  float v22; // xmm0_4
+  float v23; // xmm1_4
+  float v24; // xmm2_4
+  UFG::NavComponent *v25; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::qVector2 *p_m_vForward; // r14
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  float v29; // xmm1_4
+  float v30; // xmm0_4
   float v31; // xmm1_4
-  UFG::SimObject *v32; // rcx
-  __m128 v33; // xmm2
-  float v34; // xmm1_4
-  float v35; // xmm1_4
-  float v36; // xmm3_4
-  UFG::qVector2 vOutRadiusCenter; // [rsp+40h] [rbp-38h]
-  UFG::qVector2 vPointB; // [rsp+80h] [rbp+8h]
-  float fOutRadius; // [rsp+88h] [rbp+10h]
-  UFG::qVector2 vPointA; // [rsp+90h] [rbp+18h]
-  UFG::qVector2 vOutRadiusTangent; // [rsp+98h] [rbp+20h]
+  float v32; // xmm0_4
+  float v33; // xmm1_4
+  UFG::SimObject *v34; // rcx
+  __m128 v35; // xmm2
+  float v36; // xmm1_4
+  float v37; // xmm1_4
+  float v38; // xmm3_4
+  float v39; // xmm0_4
+  UFG::qVector2 vOutRadiusCenter; // [rsp+40h] [rbp-38h] BYREF
+  UFG::qVector2 vPointB; // [rsp+80h] [rbp+8h] BYREF
+  float fOutRadius; // [rsp+88h] [rbp+10h] BYREF
+  UFG::qVector2 vPointA; // [rsp+90h] [rbp+18h] BYREF
+  UFG::qVector2 vOutRadiusTangent; // [rsp+98h] [rbp+20h] BYREF
 
   v2 = 0i64;
-  v3 = this;
   this->m_fAdjustedSpeed = 0.0;
   this->m_deferrer.mTimeSinceLastCheck = dt + this->m_deferrer.mTimeSinceLastCheck;
-  v4 = this->m_navComponent->m_pNavModulePathing->m_pPath.m_pNavPath;
-  if ( !v4 || v4->m_aWaypoints.size <= 0 )
+  m_pNavPath = this->m_navComponent->m_pNavModulePathing->m_pPath.m_pNavPath;
+  if ( !m_pNavPath || !m_pNavPath->m_aWaypoints.size )
     return;
-  v5 = v4->m_aWaypoints.p;
-  v6.m_quad.m128_i32[0] = LODWORD(v5->m_navPosition.m_vPosition.y);
-  v7 = v5->m_navPosition.m_vPosition.z;
-  v3->m_adjustedWaypoint.m_navPosition.m_vPosition.x = v5->m_navPosition.m_vPosition.x;
-  LODWORD(v3->m_adjustedWaypoint.m_navPosition.m_vPosition.y) = v6.m_quad.m128_i32[0];
-  v3->m_adjustedWaypoint.m_navPosition.m_vPosition.z = v7;
-  v8 = v5->m_navPosition.m_bValid;
-  if ( v8 )
+  p = m_pNavPath->m_aWaypoints.p;
+  y = p->m_navPosition.m_vPosition.y;
+  z = p->m_navPosition.m_vPosition.z;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.x = p->m_navPosition.m_vPosition.x;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.y = y;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.z = z;
+  m_bValid = p->m_navPosition.m_bValid;
+  if ( m_bValid )
   {
-    v3->m_adjustedWaypoint.m_navPosition.m_bValid = v8;
-    v6.m_quad = (__m128)v5->m_navPosition.m_hkvMeshPosition;
-    v3->m_adjustedWaypoint.m_navPosition.m_hkvMeshPosition = (hkVector4f)v6.m_quad;
-    v3->m_adjustedWaypoint.m_navPosition.m_packedKey = v5->m_navPosition.m_packedKey;
-    v3->m_adjustedWaypoint.m_navPosition.m_aiMeshUid = v5->m_navPosition.m_aiMeshUid;
+    this->m_adjustedWaypoint.m_navPosition.m_bValid = m_bValid;
+    this->m_adjustedWaypoint.m_navPosition.m_hkvMeshPosition = p->m_navPosition.m_hkvMeshPosition;
+    this->m_adjustedWaypoint.m_navPosition.m_packedKey = p->m_navPosition.m_packedKey;
+    this->m_adjustedWaypoint.m_navPosition.m_aiMeshUid = p->m_navPosition.m_aiMeshUid;
   }
   else
   {
-    v3->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
+    this->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
   }
-  v3->m_adjustedWaypoint.m_pNavObject = v5->m_pNavObject;
-  v3->m_adjustedWaypoint.m_stopPoint = v5->m_stopPoint;
-  v3->m_adjustedWaypoint.m_goalPoint = v5->m_goalPoint;
-  v3->m_adjustedWaypoint.m_canSmooth = v5->m_canSmooth;
-  v9 = v3->m_navComponent;
-  v10 = v9->m_pNavModulePathing;
-  if ( v10->m_aGoalPoints.size <= 0 || (v6.m_quad.m128_i32[0] = 0, v11 = v10->m_aGoalPoints.p->m_speed, v11 <= 0.0) )
-    v11 = v9->m_fDesiredSpeed;
-  v12 = v3->m_adjustedWaypoint.m_pNavObject;
-  v3->m_fAdjustedSpeed = v11;
-  if ( !((unsigned __int8 (__fastcall *)(UFG::NavWaypoint *))v3->m_adjustedWaypoint.m_navPosition.vfptr->IsOnMesh)(&v3->m_adjustedWaypoint) )
-    goto LABEL_42;
-  v13 = v3->m_navComponent;
-  v13->m_navPosition.vfptr->GetMeshPosition(
-    (UFG::NavPositionBase *)&v13->m_navPosition.vfptr,
-    (UFG::qVector3 *)&vOutRadiusCenter);
-  v17 = (__m128)LODWORD(vOutRadiusCenter.y);
-  v14 = v13->m_navPosition.m_vPosition.x;
+  this->m_adjustedWaypoint.m_pNavObject = p->m_pNavObject;
+  this->m_adjustedWaypoint.m_stopPoint = p->m_stopPoint;
+  this->m_adjustedWaypoint.m_goalPoint = p->m_goalPoint;
+  this->m_adjustedWaypoint.m_canSmooth = p->m_canSmooth;
+  m_navComponent = this->m_navComponent;
+  m_pNavModulePathing = m_navComponent->m_pNavModulePathing;
+  if ( !m_pNavModulePathing->m_aGoalPoints.size
+    || (m_fDesiredSpeed = m_pNavModulePathing->m_aGoalPoints.p->m_speed, m_fDesiredSpeed <= 0.0) )
+  {
+    m_fDesiredSpeed = m_navComponent->m_fDesiredSpeed;
+  }
+  m_pNavObject = this->m_adjustedWaypoint.m_pNavObject;
+  this->m_fAdjustedSpeed = m_fDesiredSpeed;
+  if ( !((unsigned __int8 (__fastcall *)(UFG::NavWaypoint *))this->m_adjustedWaypoint.m_navPosition.vfptr->IsOnMesh)(&this->m_adjustedWaypoint) )
+    goto LABEL_12;
+  v13 = this->m_navComponent;
+  v13->m_navPosition.vfptr->GetMeshPosition(&v13->m_navPosition, (UFG::qVector3 *)&vOutRadiusCenter);
+  y_low = (__m128)LODWORD(vOutRadiusCenter.y);
+  x = v13->m_navPosition.m_vPosition.x;
   v15 = v13->m_navPosition.m_vPosition.y;
-  v16 = vOutRadiusCenter.x - v14;
-  v17.m128_f32[0] = vOutRadiusCenter.y - v15;
-  v6.m_quad.m128_f32[0] = v16 * v16;
-  v18 = v17;
-  v18.m128_f32[0] = (float)(v17.m128_f32[0] * v17.m128_f32[0]) + (float)(v16 * v16);
-  LODWORD(v19) = (unsigned __int128)_mm_sqrt_ps(v18);
+  v16 = vOutRadiusCenter.x - x;
+  y_low.m128_f32[0] = vOutRadiusCenter.y - v15;
+  v18 = y_low;
+  v18.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v16 * v16);
+  v19 = _mm_sqrt_ps(v18).m128_f32[0];
   if ( v19 <= 0.050000001 )
   {
-LABEL_42:
-    if ( v12 )
+LABEL_12:
+    if ( m_pNavObject )
     {
-      v20 = v12->vfptr->GetAdjustedWaypoint(v12);
-      UFG::NavWaypoint::operator=(&v3->m_adjustedWaypoint, v20);
+      v20 = m_pNavObject->vfptr->GetAdjustedWaypoint(m_pNavObject);
+      UFG::NavWaypoint::operator=(&this->m_adjustedWaypoint, v20);
       goto LABEL_24;
     }
-    v21 = v3->m_fAdjustedSpeed;
-    if ( v3->m_adjustedWaypoint.m_canSmooth )
+    m_fAdjustedSpeed = this->m_fAdjustedSpeed;
+    if ( this->m_adjustedWaypoint.m_canSmooth )
     {
-      v6.m_quad.m128_f32[0] = v21 * 0.5;
-      v22 = FLOAT_1_5;
-      if ( v6.m_quad.m128_f32[0] > 1.5 )
+      v22 = m_fAdjustedSpeed * 0.5;
+      v23 = FLOAT_1_5;
+      if ( v22 > 1.5 )
       {
-        v23 = FLOAT_3_0;
-        if ( v6.m_quad.m128_f32[0] >= 3.0 )
+        v24 = FLOAT_3_0;
+        if ( v22 >= 3.0 )
           goto LABEL_23;
         goto LABEL_22;
       }
     }
     else
     {
-      v22 = FLOAT_0_5;
-      v6.m_quad.m128_f32[0] = v21 * 0.5;
-      if ( v6.m_quad.m128_f32[0] > 0.5 )
+      v23 = FLOAT_0_5;
+      v22 = m_fAdjustedSpeed * 0.5;
+      if ( v22 > 0.5 )
       {
-        v23 = *(float *)&FLOAT_1_0;
-        if ( v6.m_quad.m128_f32[0] >= 1.0 )
+        v24 = *(float *)&FLOAT_1_0;
+        if ( v22 >= 1.0 )
           goto LABEL_23;
         goto LABEL_22;
       }
     }
-    v6.m_quad.m128_f32[0] = v22;
+    v22 = v23;
 LABEL_22:
-    v23 = v6.m_quad.m128_f32[0];
+    v24 = v22;
 LABEL_23:
-    UFG::NavModuleLocal::GetTargetPosition(v3, &v3->m_adjustedWaypoint, v23);
+    UFG::NavModuleLocal::GetTargetPosition(this, &this->m_adjustedWaypoint, v24);
     goto LABEL_24;
   }
-  v6.m_quad.m128_i32[0] = LODWORD(v13->m_navPosition.m_vPosition.z);
-  LODWORD(v3->m_adjustedWaypoint.m_navPosition.m_vPosition.z) = v6.m_quad.m128_i32[0];
-  v3->m_adjustedWaypoint.m_navPosition.m_vPosition.x = (float)(v16 * (float)(1.0 / v19)) + v14;
-  v3->m_adjustedWaypoint.m_navPosition.m_vPosition.y = (float)(v17.m128_f32[0] * (float)(1.0 / v19)) + v15;
-  v3->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.z = v13->m_navPosition.m_vPosition.z;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.x = (float)(v16 * (float)(1.0 / v19)) + x;
+  this->m_adjustedWaypoint.m_navPosition.m_vPosition.y = (float)(y_low.m128_f32[0] * (float)(1.0 / v19)) + v15;
+  this->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
 LABEL_24:
-  v24 = v3->m_navComponent;
-  if ( v24->m_iHasSteeringControl > 0 )
+  v25 = this->m_navComponent;
+  if ( v25->m_iHasSteeringControl > 0 )
   {
-    v25 = v24->m_pSimObject;
-    v26 = &v24->m_vForward;
-    v27 = 0i64;
-    if ( v25 )
-      v27 = v25->m_pTransformNodeComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v27);
-    v28 = v3->m_adjustedWaypoint.m_navPosition.m_vPosition.y;
-    vPointB.x = v3->m_adjustedWaypoint.m_navPosition.m_vPosition.x;
-    v29 = v27->mWorldTransform.v3.x;
-    vPointB.y = v28;
-    v30 = v27->mWorldTransform.v3.y;
-    vPointA.x = v29;
-    v6.m_quad.m128_f32[0] = FLOAT_0_15000001;
-    vPointA.y = v30;
+    m_pSimObject = v25->m_pSimObject;
+    p_m_vForward = &v25->m_vForward;
+    m_pTransformNodeComponent = 0i64;
+    if ( m_pSimObject )
+      m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    v29 = this->m_adjustedWaypoint.m_navPosition.m_vPosition.y;
+    vPointB.x = this->m_adjustedWaypoint.m_navPosition.m_vPosition.x;
+    v30 = m_pTransformNodeComponent->mWorldTransform.v3.x;
+    vPointB.y = v29;
+    v31 = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    vPointA.x = v30;
+    vPointA.y = v31;
     UFG::NavModuleLocal::GetPointDirectionRadius(
       &vPointA,
-      v26,
+      p_m_vForward,
       &vPointB,
       3.4028235e38,
       &vOutRadiusCenter,
       &vOutRadiusTangent,
       &fOutRadius,
       0.15000001);
-    ((void (__fastcall *)(UFG::NavModuleLocal *))v3->vfptr->GetMaxSpeedForRadius)(v3);
-    v31 = v3->m_fAdjustedSpeed;
-    if ( v31 >= 0.15000001 )
-      v31 = FLOAT_0_15000001;
-    v3->m_fAdjustedSpeed = v31;
+    v32 = ((float (__fastcall *)(UFG::NavModuleLocal *))this->vfptr->GetMaxSpeedForRadius)(this);
+    v33 = this->m_fAdjustedSpeed;
+    if ( v33 >= v32 )
+      v33 = v32;
+    this->m_fAdjustedSpeed = v33;
   }
-  if ( v3->m_adjustedWaypoint.m_stopPoint )
+  if ( this->m_adjustedWaypoint.m_stopPoint )
   {
-    v32 = v3->m_navComponent->m_pSimObject;
-    if ( v32 )
-      v2 = v32->m_pTransformNodeComponent;
+    v34 = this->m_navComponent->m_pSimObject;
+    if ( v34 )
+      v2 = v34->m_pTransformNodeComponent;
     UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    v33 = (__m128)LODWORD(v3->m_adjustedWaypoint.m_navPosition.m_vPosition.y);
-    v34 = v3->m_adjustedWaypoint.m_navPosition.m_vPosition.x - v2->mWorldTransform.v3.x;
-    v6.m_quad.m128_f32[0] = (float)(v3->m_adjustedWaypoint.m_navPosition.m_vPosition.z - v2->mWorldTransform.v3.z)
-                          * (float)(v3->m_adjustedWaypoint.m_navPosition.m_vPosition.z - v2->mWorldTransform.v3.z);
-    v33.m128_f32[0] = (float)((float)(v33.m128_f32[0] - v2->mWorldTransform.v3.y)
-                            * (float)(v33.m128_f32[0] - v2->mWorldTransform.v3.y))
-                    + (float)(v34 * v34);
-    v35 = *(float *)&FLOAT_1_0;
-    v33.m128_f32[0] = v33.m128_f32[0] + v6.m_quad.m128_f32[0];
-    LODWORD(v36) = (unsigned __int128)_mm_sqrt_ps(v33);
-    if ( v36 < 1.0 || (v35 = FLOAT_2_0, v36 < 2.0) )
+    v35 = (__m128)LODWORD(this->m_adjustedWaypoint.m_navPosition.m_vPosition.y);
+    v36 = this->m_adjustedWaypoint.m_navPosition.m_vPosition.x - v2->mWorldTransform.v3.x;
+    v35.m128_f32[0] = (float)((float)(v35.m128_f32[0] - v2->mWorldTransform.v3.y)
+                            * (float)(v35.m128_f32[0] - v2->mWorldTransform.v3.y))
+                    + (float)(v36 * v36);
+    v37 = *(float *)&FLOAT_1_0;
+    v35.m128_f32[0] = v35.m128_f32[0]
+                    + (float)((float)(this->m_adjustedWaypoint.m_navPosition.m_vPosition.z - v2->mWorldTransform.v3.z)
+                            * (float)(this->m_adjustedWaypoint.m_navPosition.m_vPosition.z - v2->mWorldTransform.v3.z));
+    v38 = _mm_sqrt_ps(v35).m128_f32[0];
+    if ( v38 < 1.0 || (v37 = FLOAT_2_0, v38 < 2.0) )
     {
-      v6.m_quad.m128_i32[0] = LODWORD(v3->m_fAdjustedSpeed);
-      if ( v6.m_quad.m128_f32[0] >= v35 )
-        v6.m_quad.m128_f32[0] = v35;
-      LODWORD(v3->m_fAdjustedSpeed) = v6.m_quad.m128_i32[0];
+      v39 = this->m_fAdjustedSpeed;
+      if ( v39 >= v37 )
+        v39 = v37;
+      this->m_fAdjustedSpeed = v39;
     }
   }
-  if ( v12 )
-  {
-    v12->vfptr->GetAdjustedSpeed(v12);
-    LODWORD(v3->m_fAdjustedSpeed) = v6.m_quad.m128_i32[0];
-  }
+  if ( m_pNavObject )
+    this->m_fAdjustedSpeed = m_pNavObject->vfptr->GetAdjustedSpeed(m_pNavObject);
 }
 
 // File Line: 260
 // RVA: 0x264E80
 bool __fastcall UFG::NavModuleLocal::HasInput(UFG::NavModuleLocal *this)
 {
-  UFG::NavComponent *v1; // rdx
-  UFG::NavModulePathing *v2; // r8
-  UFG::NavPath *v3; // rax
+  UFG::NavComponent *m_navComponent; // rdx
+  UFG::NavModulePathing *m_pNavModulePathing; // r8
+  UFG::NavPath *m_pNavPath; // rax
   bool v4; // cl
-  float v5; // xmm0_4
+  float m_fDesiredSpeed; // xmm0_4
 
-  v1 = this->m_navComponent;
-  v2 = v1->m_pNavModulePathing;
-  v3 = v2->m_pPath.m_pNavPath;
-  v4 = v3 && v3->m_aWaypoints.size;
-  if ( !v2->m_aGoalPoints.size || (v5 = v2->m_aGoalPoints.p->m_speed, v5 <= 0.0) )
-    v5 = v1->m_fDesiredSpeed;
-  return v4 && v5 > 0.0 && v2->m_aGoalPoints.size;
+  m_navComponent = this->m_navComponent;
+  m_pNavModulePathing = m_navComponent->m_pNavModulePathing;
+  m_pNavPath = m_pNavModulePathing->m_pPath.m_pNavPath;
+  v4 = m_pNavPath && m_pNavPath->m_aWaypoints.size;
+  if ( !m_pNavModulePathing->m_aGoalPoints.size
+    || (m_fDesiredSpeed = m_pNavModulePathing->m_aGoalPoints.p->m_speed, m_fDesiredSpeed <= 0.0) )
+  {
+    m_fDesiredSpeed = m_navComponent->m_fDesiredSpeed;
+  }
+  return v4 && m_fDesiredSpeed > 0.0 && m_pNavModulePathing->m_aGoalPoints.size;
 }
 
 // File Line: 270
@@ -702,30 +694,34 @@ _BOOL8 __fastcall UFG::NavModuleLocal::IsAvoidanceEnabled(UFG::NavModuleLocal *t
   bool v2; // al
   bool v3; // cl
 
-  v1 = this->m_avoidanceType != 8;
-  v2 = this->m_navComponent->m_navPosition.vfptr->IsMeshPositionValid((UFG::NavPositionBase *)&this->m_navComponent->m_navPosition);
+  v1 = this->m_avoidanceType != eCOLLISION_AVOIDANCE_NO_ONE;
+  v2 = this->m_navComponent->m_navPosition.vfptr->IsMeshPositionValid(&this->m_navComponent->m_navPosition);
   v3 = v1;
   if ( !v2 )
-    v3 = 0;
+    return 0;
   return v3;
 }
 
 // File Line: 294
 // RVA: 0x264340
-void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(UFG::qVector2 *vPointA, UFG::qVector2 *vPointADirection, UFG::qVector2 *vPointB, float fMaxRadius, UFG::qVector2 *vOutRadiusCenter, UFG::qVector2 *vOutRadiusTangent, float *fOutRadius, float fSideBuffer)
+void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(
+        UFG::qVector2 *vPointA,
+        UFG::qVector2 *vPointADirection,
+        UFG::qVector2 *vPointB,
+        float fMaxRadius,
+        UFG::qVector2 *vOutRadiusCenter,
+        UFG::qVector2 *vOutRadiusTangent,
+        float *fOutRadius,
+        float fSideBuffer)
 {
-  UFG::qVector2 *v8; // rdi
-  UFG::qVector2 *v9; // rbx
-  UFG::qVector2 *v10; // rsi
-  float v11; // xmm9_4
   float v12; // xmm11_4
-  __m128 v13; // xmm12
+  __m128 x_low; // xmm12
   __m128 v14; // xmm2
   float v15; // xmm1_4
   float v16; // xmm11_4
   float v17; // xmm12_4
   float v18; // xmm3_4
-  __m128 v19; // xmm5
+  __m128 y_low; // xmm5
   float v20; // xmm2_4
   float v21; // xmm14_4
   float v22; // xmm2_4
@@ -738,40 +734,35 @@ void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(UFG::qVector2 *vPoi
   float v29; // xmm6_4
   float *v30; // rcx
   UFG::qVector2 *v31; // rax
-  float v32; // xmm6_4
-  float v33; // xmm7_4
-  float v34; // xmm6_4
+  float v32; // xmm7_4
+  float v33; // xmm6_4
+  float v34; // xmm7_4
   float v35; // xmm7_4
-  float v36; // xmm7_4
-  float v37; // xmm0_4
-  float v38; // xmm6_4
-  float v39; // xmm11_4
-  float v40; // xmm9_4
-  float v41; // xmm2_4
-  float v42; // xmm8_4
-  float v43; // xmm7_4
-  float v44; // xmm6_4
-  float v45; // xmm4_4
-  __m128 v46; // xmm5
-  __m128 v47; // xmm1
-  float v48; // xmm8_4
-  UFG::qVector2 *v49; // rax
-  float v50; // xmm0_4
-  float v51; // eax
-  UFG::qVector2 *v52; // rax
-  float v53; // xmm12_4
-  UFG::qVector2 *v54; // rcx
-  UFG::qVector2 source; // [rsp+D0h] [rbp+8h]
+  float v36; // xmm0_4
+  float v37; // xmm6_4
+  float v38; // xmm11_4
+  float v39; // xmm9_4
+  float v40; // xmm2_4
+  float v41; // xmm8_4
+  float v42; // xmm7_4
+  float v43; // xmm6_4
+  float v44; // xmm4_4
+  __m128 v45; // xmm5
+  __m128 v46; // xmm1
+  float v47; // xmm8_4
+  UFG::qVector2 *v48; // rax
+  float y; // xmm0_4
+  float x; // eax
+  UFG::qVector2 *v51; // rax
+  float v52; // xmm12_4
+  UFG::qVector2 *v53; // rcx
+  UFG::qVector2 source; // [rsp+D0h] [rbp+8h] BYREF
 
-  v8 = vPointB;
-  v9 = vPointADirection;
-  v10 = vPointA;
-  v13 = (__m128)LODWORD(vPointADirection->x);
-  v11 = fMaxRadius;
+  x_low = (__m128)LODWORD(vPointADirection->x);
   v12 = (float)(UFG::qVector3::msDirUp.y * 0.0) - (float)(vPointADirection->y * UFG::qVector3::msDirUp.z);
-  v13.m128_f32[0] = (float)(v13.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(UFG::qVector3::msDirUp.x * 0.0);
-  v14 = v13;
-  v14.m128_f32[0] = (float)((float)(v13.m128_f32[0] * v13.m128_f32[0]) + (float)(v12 * v12))
+  x_low.m128_f32[0] = (float)(x_low.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(UFG::qVector3::msDirUp.x * 0.0);
+  v14 = x_low;
+  v14.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v12 * v12))
                   + (float)((float)((float)(vPointADirection->y * UFG::qVector3::msDirUp.x)
                                   - (float)(vPointADirection->x * UFG::qVector3::msDirUp.y))
                           * (float)((float)(vPointADirection->y * UFG::qVector3::msDirUp.x)
@@ -779,13 +770,13 @@ void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(UFG::qVector2 *vPoi
   if ( v14.m128_f32[0] == 0.0 )
     v15 = 0.0;
   else
-    v15 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v14));
-  v19 = (__m128)LODWORD(vPointB->y);
+    v15 = 1.0 / _mm_sqrt_ps(v14).m128_f32[0];
+  y_low = (__m128)LODWORD(vPointB->y);
   v16 = v12 * v15;
-  v17 = v13.m128_f32[0] * v15;
+  v17 = x_low.m128_f32[0] * v15;
   v18 = vPointB->x - vPointA->x;
-  v19.m128_f32[0] = v19.m128_f32[0] - vPointA->y;
-  v20 = (float)(v19.m128_f32[0] * v17) + (float)(v18 * v16);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - vPointA->y;
+  v20 = (float)(y_low.m128_f32[0] * v17) + (float)(v18 * v16);
   if ( v20 <= 0.0 )
     v21 = FLOAT_N1_0;
   else
@@ -793,25 +784,25 @@ void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(UFG::qVector2 *vPoi
   v22 = COERCE_FLOAT(LODWORD(v20) & _xmm) - fSideBuffer;
   if ( v22 < 0.0 )
     v22 = 0.0;
-  v23 = v19;
+  v23 = y_low;
   v24 = v22 * v21;
-  v23.m128_f32[0] = (float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v18 * v18);
-  LODWORD(v25) = (unsigned __int128)_mm_sqrt_ps(v23);
+  v23.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v18 * v18);
+  LODWORD(v25) = _mm_sqrt_ps(v23).m128_u32[0];
   if ( v24 < 0.0 )
     LODWORD(v24) ^= _xmm[0];
   if ( v24 < 0.001 || v25 == 0.0 )
   {
-    *fOutRadius = v11;
-    v52 = vOutRadiusCenter;
-    v53 = (float)(v17 * v11) + vPointA->y;
-    vOutRadiusCenter->x = (float)(v16 * v11) + vPointA->x;
-    v52->y = v53;
-    v50 = vPointADirection->y;
-    v51 = vPointADirection->x;
+    *fOutRadius = fMaxRadius;
+    v51 = vOutRadiusCenter;
+    v52 = (float)(v17 * fMaxRadius) + vPointA->y;
+    vOutRadiusCenter->x = (float)(v16 * fMaxRadius) + vPointA->x;
+    v51->y = v52;
+    y = vPointADirection->y;
+    x = vPointADirection->x;
     goto LABEL_37;
   }
-  v26 = COERCE_FLOAT(COERCE_UNSIGNED_INT((float)(vPointADirection->y * v19.m128_f32[0]) + (float)(vPointADirection->x
-                                                                                                * v18)) & _xmm)
+  v26 = COERCE_FLOAT(COERCE_UNSIGNED_INT((float)(vPointADirection->y * y_low.m128_f32[0]) + (float)(vPointADirection->x
+                                                                                                  * v18)) & _xmm)
       / v25;
   if ( v26 <= -1.0 )
   {
@@ -826,67 +817,66 @@ void __fastcall UFG::NavModuleLocal::GetPointDirectionRadius(UFG::qVector2 *vPoi
   if ( v28 <= 0.0 )
     v28 = 0.0;
   v29 = (float)(v25 * 0.5) / v28;
-  if ( v11 < v29 )
-    v29 = v11;
+  if ( fMaxRadius < v29 )
+    v29 = fMaxRadius;
   v30 = fOutRadius;
   v31 = vOutRadiusCenter;
   *fOutRadius = v29;
   v32 = v29 * v21;
-  v33 = v32;
-  v34 = (float)(v32 * v17) + v10->y;
-  v35 = (float)(v33 * v16) + v10->x;
-  v31->y = v34;
-  v31->x = v35;
-  v36 = v35 - v8->x;
-  v37 = v36 * v36;
-  v38 = v34 - v8->y;
-  if ( v11 != *v30 )
+  v33 = (float)((float)(v29 * v21) * v17) + vPointA->y;
+  v34 = (float)(v32 * v16) + vPointA->x;
+  v31->y = v33;
+  v31->x = v34;
+  v35 = v34 - vPointB->x;
+  v36 = v35 * v35;
+  v37 = v33 - vPointB->y;
+  if ( fMaxRadius != *v30 )
   {
-    if ( (float)((float)(v38 * v38) + v37) > 0.001 )
+    if ( (float)((float)(v37 * v37) + v36) > 0.001 )
     {
-      v43 = v36 * v21;
-      v44 = v38 * v21;
-      v46 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-      v45 = (float)(v44 * UFG::qVector3::msDirUp.z) - (float)(UFG::qVector3::msDirUp.y * 0.0);
-      v46.m128_f32[0] = (float)(UFG::qVector3::msDirUp.x * 0.0) - (float)(v43 * UFG::qVector3::msDirUp.z);
-      v47 = v46;
-      v47.m128_f32[0] = (float)((float)(v46.m128_f32[0] * v46.m128_f32[0]) + (float)(v45 * v45))
-                      + (float)((float)((float)(v43 * UFG::qVector3::msDirUp.y) - (float)(v44 * UFG::qVector3::msDirUp.x))
-                              * (float)((float)(v43 * UFG::qVector3::msDirUp.y) - (float)(v44 * UFG::qVector3::msDirUp.x)));
-      if ( v47.m128_f32[0] == 0.0 )
-        v48 = 0.0;
+      v42 = v35 * v21;
+      v43 = v37 * v21;
+      v45 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+      v44 = (float)(v43 * UFG::qVector3::msDirUp.z) - (float)(UFG::qVector3::msDirUp.y * 0.0);
+      v45.m128_f32[0] = (float)(UFG::qVector3::msDirUp.x * 0.0) - (float)(v42 * UFG::qVector3::msDirUp.z);
+      v46 = v45;
+      v46.m128_f32[0] = (float)((float)(v45.m128_f32[0] * v45.m128_f32[0]) + (float)(v44 * v44))
+                      + (float)((float)((float)(v42 * UFG::qVector3::msDirUp.y) - (float)(v43 * UFG::qVector3::msDirUp.x))
+                              * (float)((float)(v42 * UFG::qVector3::msDirUp.y) - (float)(v43 * UFG::qVector3::msDirUp.x)));
+      if ( v46.m128_f32[0] == 0.0 )
+        v47 = 0.0;
       else
-        v48 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v47));
-      v49 = vOutRadiusTangent;
-      vOutRadiusTangent->x = v45 * v48;
-      v49->y = v46.m128_f32[0] * v48;
+        v47 = 1.0 / _mm_sqrt_ps(v46).m128_f32[0];
+      v48 = vOutRadiusTangent;
+      vOutRadiusTangent->x = v44 * v47;
+      v48->y = v45.m128_f32[0] * v47;
       return;
     }
-    v50 = v9->y;
-    v51 = v9->x;
+    y = vPointADirection->y;
+    x = vPointADirection->x;
 LABEL_37:
-    v54 = vOutRadiusTangent;
-    vOutRadiusTangent->y = v50;
-    v54->x = v51;
+    v53 = vOutRadiusTangent;
+    vOutRadiusTangent->y = y;
+    v53->x = x;
     return;
   }
-  v39 = (float)(v38 * v38) + v37;
-  v40 = v11 / fsqrt(v39);
-  if ( v40 <= -1.0 )
+  v38 = (float)(v37 * v37) + v36;
+  v39 = fMaxRadius / fsqrt(v38);
+  if ( v39 <= -1.0 )
   {
-    v40 = FLOAT_N1_0;
+    v39 = FLOAT_N1_0;
   }
-  else if ( v40 >= 1.0 )
+  else if ( v39 >= 1.0 )
   {
-    v40 = *(float *)&FLOAT_1_0;
+    v39 = *(float *)&FLOAT_1_0;
   }
-  v41 = asinf(v40) * v21;
-  if ( v39 == 0.0 )
-    v42 = 0.0;
+  v40 = asinf(v39) * v21;
+  if ( v38 == 0.0 )
+    v41 = 0.0;
   else
-    v42 = 1.0 / fsqrt(v39);
-  source.x = v36 * v42;
-  source.y = v38 * v42;
-  UFG::qRotateVectorZ(vOutRadiusTangent, &source, v41);
+    v41 = 1.0 / fsqrt(v38);
+  source.x = v35 * v41;
+  source.y = v37 * v41;
+  UFG::qRotateVectorZ(vOutRadiusTangent, &source, v40);
 }
 

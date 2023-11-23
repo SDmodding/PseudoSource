@@ -1,32 +1,31 @@
 // File Line: 45
 // RVA: 0x27B910
-signed __int64 __fastcall UFG::CoverCornerHandle::Get(UFG::CoverCornerHandle *this)
+UFG::CoverCorner *__fastcall UFG::CoverCornerHandle::Get(UFG::CoverCornerHandle *this)
 {
-  UFG::CoverCornerHandle *v1; // rbx
-  UFG::DynamicCoverCorner *v2; // rcx
+  UFG::DynamicCoverCorner *m_pPointer; // rcx
   UFG::DynamicCoverCorner *v3; // rax
-  signed __int64 result; // rax
-  UFG::qResourceData *v5; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v6; // rcx
-  signed __int64 v7; // rax
+  UFG::qBaseNodeRB **mChild; // rax
 
-  v1 = this;
-  if ( !this->m_ResourceHandle.mData || this->m_uCoverCornerIndex == -1 )
+  if ( !this->m_ResourceHandle.mData || this->m_uCoverCornerIndex == 0xFFFF )
   {
-    v2 = this->m_pDynamicCoverCorner.m_pPointer;
-    if ( !v2 || !UFG::DynamicCoverComponent::IsEnabled((UFG::DynamicCoverComponent *)v2->m_pParentInstance.m_pPointer) )
+    m_pPointer = this->m_pDynamicCoverCorner.m_pPointer;
+    if ( !m_pPointer
+      || !UFG::DynamicCoverComponent::IsEnabled((UFG::DynamicCoverComponent *)m_pPointer->m_pParentInstance.m_pPointer) )
+    {
       return 0i64;
+    }
   }
-  v3 = v1->m_pDynamicCoverCorner.m_pPointer;
+  v3 = this->m_pDynamicCoverCorner.m_pPointer;
   if ( v3 )
-    return (signed __int64)&v3->mPrev;
-  v5 = v1->m_ResourceHandle.mData;
-  v6 = v5[1].mNode.mChild[0];
-  v7 = (signed __int64)v5[1].mNode.mChild;
+    return &v3->UFG::CoverCorner;
+  mData = this->m_ResourceHandle.mData;
+  v6 = mData[1].mNode.mChild[0];
+  mChild = mData[1].mNode.mChild;
   if ( v6 )
-    result = (signed __int64)v6 + 48 * v1->m_uCoverCornerIndex + v7;
+    return (UFG::CoverCorner *)((char *)v6 + 48 * this->m_uCoverCornerIndex + (_QWORD)mChild);
   else
-    result = 48i64 * v1->m_uCoverCornerIndex;
-  return result;
+    return (UFG::CoverCorner *)(48i64 * this->m_uCoverCornerIndex);
 }
 

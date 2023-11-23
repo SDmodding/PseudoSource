@@ -1,6 +1,7 @@
 // File Line: 25
 // RVA: 0xB2EF60
-void __fastcall hkaPredictiveCompressedAnimation::TrackCompressionParams::TrackCompressionParams(hkaPredictiveCompressedAnimation::TrackCompressionParams *this)
+void __fastcall hkaPredictiveCompressedAnimation::TrackCompressionParams::TrackCompressionParams(
+        hkaPredictiveCompressedAnimation::TrackCompressionParams *this)
 {
   this->m_staticTranslationTolerance = 0.000099999997;
   this->m_staticRotationTolerance = 0.000099999997;
@@ -13,84 +14,90 @@ void __fastcall hkaPredictiveCompressedAnimation::TrackCompressionParams::TrackC
 
 // File Line: 29
 // RVA: 0xB2EFA0
-void __fastcall hkaPredictiveCompressedAnimation::CompressionParams::CompressionParams(hkaPredictiveCompressedAnimation::CompressionParams *this)
+void __fastcall hkaPredictiveCompressedAnimation::CompressionParams::CompressionParams(
+        hkaPredictiveCompressedAnimation::CompressionParams *this)
 {
-  hkaPredictiveCompressedAnimation::CompressionParams *v1; // rbx
-  _DWORD *v2; // rax
-  _DWORD *v3; // rdi
-  _DWORD *v4; // rcx
-  hkaPredictiveCompressedAnimation::TrackCompressionParams v5; // [rsp+20h] [rbp-28h]
+  float *v2; // rax
+  float *v3; // rdi
+  hkaPredictiveCompressedAnimation::TrackCompressionParams *v4; // rcx
+  hkaPredictiveCompressedAnimation::TrackCompressionParams v5; // [rsp+20h] [rbp-28h] BYREF
 
-  this->m_parameterPalette.m_capacityAndFlags = 2147483648;
-  v1 = this;
+  this->m_parameterPalette.m_capacityAndFlags = 0x80000000;
   this->m_parameterPalette.m_data = 0i64;
   this->m_parameterPalette.m_size = 0;
   this->m_trackIndexToPaletteIndex.m_data = 0i64;
   this->m_trackIndexToPaletteIndex.m_size = 0;
-  this->m_trackIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
+  this->m_trackIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
   this->m_floatTrackIndexToPaletteIndex.m_data = 0i64;
   this->m_floatTrackIndexToPaletteIndex.m_size = 0;
-  this->m_floatTrackIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
+  this->m_floatTrackIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
   hkaPredictiveCompressedAnimation::TrackCompressionParams::TrackCompressionParams(&v5);
   v3 = v2;
-  if ( v1->m_parameterPalette.m_size == (v1->m_parameterPalette.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v1, 32);
-  v4 = (_DWORD *)&v1->m_parameterPalette.m_data[v1->m_parameterPalette.m_size].m_staticTranslationTolerance;
+  if ( this->m_parameterPalette.m_size == (this->m_parameterPalette.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, this, 32);
+  v4 = &this->m_parameterPalette.m_data[this->m_parameterPalette.m_size];
   if ( v4 )
   {
-    *v4 = *v3;
-    v4[1] = v3[1];
-    v4[2] = v3[2];
-    v4[3] = v3[3];
-    v4[4] = v3[4];
-    v4[5] = v3[5];
-    v4[6] = v3[6];
-    v4[7] = v3[7];
+    v4->m_staticTranslationTolerance = *v3;
+    v4->m_staticRotationTolerance = v3[1];
+    v4->m_staticScaleTolerance = v3[2];
+    v4->m_staticFloatTolerance = v3[3];
+    v4->m_dynamicTranslationTolerance = v3[4];
+    v4->m_dynamicRotationTolerance = v3[5];
+    v4->m_dynamicScaleTolerance = v3[6];
+    v4->m_dynamicFloatTolerance = v3[7];
   }
-  ++v1->m_parameterPalette.m_size;
+  ++this->m_parameterPalette.m_size;
 }
 
 // File Line: 36
 // RVA: 0xB2F060
-void __fastcall hkaPredictiveCompressedAnimation::CompressionParams::CompressionParams(hkaPredictiveCompressedAnimation::CompressionParams *this, float staticTranslationTolerance, float staticRotationTolerance, float staticScaleTolerance, float staticFloatTolerance, float dynamicTranslationTolerance, float dynamicRotationTolerance, float dynamicScaleTolerance, float dynamicFloatTolerance)
+void __fastcall hkaPredictiveCompressedAnimation::CompressionParams::CompressionParams(
+        hkaPredictiveCompressedAnimation::CompressionParams *this,
+        float staticTranslationTolerance,
+        float staticRotationTolerance,
+        float staticScaleTolerance,
+        float staticFloatTolerance,
+        float dynamicTranslationTolerance,
+        float dynamicRotationTolerance,
+        float dynamicScaleTolerance,
+        float dynamicFloatTolerance)
 {
-  hkaPredictiveCompressedAnimation::CompressionParams *v9; // rbx
-  float *v10; // rax
-  hkaPredictiveCompressedAnimation::TrackCompressionParams v11; // [rsp+20h] [rbp-A8h]
+  hkaPredictiveCompressedAnimation::TrackCompressionParams *v10; // rax
+  hkaPredictiveCompressedAnimation::TrackCompressionParams v11; // [rsp+20h] [rbp-A8h] BYREF
 
-  this->m_parameterPalette.m_capacityAndFlags = 2147483648;
-  v9 = this;
+  this->m_parameterPalette.m_capacityAndFlags = 0x80000000;
   this->m_parameterPalette.m_data = 0i64;
   this->m_parameterPalette.m_size = 0;
   this->m_trackIndexToPaletteIndex.m_data = 0i64;
   this->m_trackIndexToPaletteIndex.m_size = 0;
-  this->m_trackIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
+  this->m_trackIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
   this->m_floatTrackIndexToPaletteIndex.m_data = 0i64;
   this->m_floatTrackIndexToPaletteIndex.m_size = 0;
-  this->m_floatTrackIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
+  this->m_floatTrackIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
   hkaPredictiveCompressedAnimation::TrackCompressionParams::TrackCompressionParams(&v11);
-  if ( v9->m_parameterPalette.m_size == (v9->m_parameterPalette.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v9, 32);
-  v10 = &v9->m_parameterPalette.m_data[v9->m_parameterPalette.m_size].m_staticTranslationTolerance;
+  if ( this->m_parameterPalette.m_size == (this->m_parameterPalette.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, this, 32);
+  v10 = &this->m_parameterPalette.m_data[this->m_parameterPalette.m_size];
   if ( v10 )
   {
-    *v10 = staticTranslationTolerance;
-    v10[1] = staticRotationTolerance;
-    v10[2] = staticScaleTolerance;
-    v10[3] = staticFloatTolerance;
-    v10[4] = dynamicTranslationTolerance;
-    v10[5] = dynamicRotationTolerance;
-    v10[6] = dynamicScaleTolerance;
-    v10[7] = dynamicFloatTolerance;
+    v10->m_staticTranslationTolerance = staticTranslationTolerance;
+    v10->m_staticRotationTolerance = staticRotationTolerance;
+    v10->m_staticScaleTolerance = staticScaleTolerance;
+    v10->m_staticFloatTolerance = staticFloatTolerance;
+    v10->m_dynamicTranslationTolerance = dynamicTranslationTolerance;
+    v10->m_dynamicRotationTolerance = dynamicRotationTolerance;
+    v10->m_dynamicScaleTolerance = dynamicScaleTolerance;
+    v10->m_dynamicFloatTolerance = dynamicFloatTolerance;
   }
-  ++v9->m_parameterPalette.m_size;
+  ++this->m_parameterPalette.m_size;
 }
 
 // File Line: 51
 // RVA: 0xB326F0
-__int64 __fastcall weightFromBit(int b)
+__int64 __fastcall weightFromBit(char b)
 {
-  return (unsigned __int8)-(char)b;
+  return (unsigned __int8)-b;
 }
 
 // File Line: 56
@@ -108,7 +115,7 @@ void __fastcall normalize4IfManhattan(hkVector4f *q)
   v4 = _mm_rsqrt_ps(v3);
   q->m_quad = _mm_mul_ps(
                 _mm_andnot_ps(
-                  _mm_cmpleps(v3, (__m128)0i64),
+                  _mm_cmple_ps(v3, (__m128)0i64),
                   _mm_mul_ps(
                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v4, v3), v4)),
                     _mm_mul_ps(*(__m128 *)_xmm, v4))),
@@ -119,13 +126,11 @@ void __fastcall normalize4IfManhattan(hkVector4f *q)
 // RVA: 0xB32760
 void __fastcall applyWeights(const unsigned __int16 **bitmap, char *weights, int n)
 {
-  int v3; // er10
+  int v3; // r10d
   __int64 v4; // r9
-  char *v5; // rbx
-  const unsigned __int16 **v6; // rdi
-  __int64 v7; // r11
+  __int64 i; // r11
   int v8; // edx
-  signed int v9; // eax
+  int v9; // eax
   __int64 v10; // r8
   char *v11; // rax
   char v12; // cl
@@ -134,55 +139,52 @@ void __fastcall applyWeights(const unsigned __int16 **bitmap, char *weights, int
   {
     v3 = n;
     v4 = 0i64;
-    v5 = weights;
-    v6 = bitmap;
-    v7 = n;
-    if ( n > 0 )
+    for ( i = n; v4 < i; v3 -= 16 )
     {
-      do
+      v8 = *(*bitmap)++;
+      v9 = 16;
+      if ( v3 < 16 )
+        v9 = v3;
+      v10 = v9;
+      if ( v9 > 0 )
       {
-        v8 = **v6;
-        ++*v6;
-        v9 = 16;
-        if ( v3 < 16 )
-          v9 = v3;
-        v10 = v9;
-        if ( v9 > 0 )
+        v11 = &weights[v4];
+        do
         {
-          v11 = &v5[v4];
-          do
-          {
-            v12 = v8;
-            v8 >>= 1;
-            ++v11;
-            *(v11 - 1) &= -(v12 & 1);
-            --v10;
-          }
-          while ( v10 );
+          v12 = v8;
+          v8 >>= 1;
+          *v11++ &= -(v12 & 1);
+          --v10;
         }
-        v4 += 16i64;
-        v3 -= 16;
+        while ( v10 );
       }
-      while ( v4 < v7 );
+      v4 += 16i64;
     }
   }
 }
 
 // File Line: 90
 // RVA: 0xB32810
-void __fastcall dequantize8(const __int16 *quant, hkVector4f *f_leftscale, hkVector4f *f_rightscale, hkVector4f *f_leftoff, hkVector4f *f_rightoff, hkVector4f *out_left, hkVector4f *out_right)
+void __fastcall dequantize8(
+        const __m128i *quant,
+        hkVector4f *f_leftscale,
+        hkVector4f *f_rightscale,
+        hkVector4f *f_leftoff,
+        hkVector4f *f_rightoff,
+        hkVector4f *out_left,
+        hkVector4f *out_right)
 {
-  __m128i v7; // xmm0
+  __m128i si128; // xmm0
 
-  v7 = _mm_load_si128((const __m128i *)quant);
+  si128 = _mm_load_si128(quant);
   out_left->m_quad = _mm_add_ps(
                        _mm_mul_ps(
-                         _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v7, (__m128i)0i64), 0x10u), 0x10u)),
+                         _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(si128, (__m128i)0i64), 0x10u), 0x10u)),
                          f_leftscale->m_quad),
                        f_leftoff->m_quad);
   out_right->m_quad = _mm_add_ps(
                         _mm_mul_ps(
-                          _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v7, (__m128i)0i64), 0x10u), 0x10u)),
+                          _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(si128, (__m128i)0i64), 0x10u), 0x10u)),
                           f_rightscale->m_quad),
                         f_rightoff->m_quad);
 }
@@ -191,39 +193,44 @@ void __fastcall dequantize8(const __int16 *quant, hkVector4f *f_leftscale, hkVec
 // RVA: 0xB32870
 void __fastcall lerp(hkVector4f *a, hkSimdFloat32 *aw, hkVector4f *b, hkSimdFloat32 *bw, hkVector4f *out)
 {
-  hkVector4f v5; // xmm1
+  __m128 v5; // xmm1
 
-  v5.m_quad = _mm_mul_ps(a->m_quad, aw->m_real);
-  *out = (hkVector4f)v5.m_quad;
-  out->m_quad = _mm_add_ps(_mm_mul_ps(b->m_quad, bw->m_real), v5.m_quad);
+  v5 = _mm_mul_ps(a->m_quad, aw->m_real);
+  *out = (hkVector4f)v5;
+  out->m_quad = _mm_add_ps(_mm_mul_ps(b->m_quad, bw->m_real), v5);
 }
 
 // File Line: 168
 // RVA: 0xB328A0
-void __fastcall expandParams(unsigned __int16 *fixed, hkVector4f *scale, hkVector4f *offset, const float **scalePtr, const float **offsetPtr, hkSimdFloat32 *fixedScale, hkSimdFloat32 *fixedOffset)
+void __fastcall expandParams(
+        unsigned __int16 *fixed,
+        hkVector4f *scale,
+        hkVector4f *offset,
+        float **scalePtr,
+        float **offsetPtr,
+        hkSimdFloat32 *fixedScale,
+        hkSimdFloat32 *fixedOffset)
 {
   __int64 v7; // r10
-  unsigned __int16 *v8; // r11
-  signed __int64 v9; // rdi
+  __int64 v9; // rdi
   __int64 v10; // rbx
-  __m128 v11; // xmm1
-  const float *v12; // rcx
-  const float *v13; // rcx
+  __m128 m_real; // xmm1
+  float *v12; // rcx
+  float *v13; // rcx
   hkVector4f v14; // xmm1
   hkVector4f v15; // [rsp+0h] [rbp-28h]
   __m128 v16; // [rsp+10h] [rbp-18h]
 
   v7 = 0i64;
-  v8 = fixed;
   v9 = 4i64;
   v10 = 0i64;
   do
   {
-    if ( *(_BYTE *)v8 & 1 )
+    if ( (*(_BYTE *)fixed & 1) != 0 )
     {
-      v11 = fixedOffset->m_real;
+      m_real = fixedOffset->m_real;
       v15.m_quad.m128_i32[v7] = (int)*fixedScale;
-      v16.m128_i32[v7] = v11.m128_i32[0];
+      v16.m128_i32[v7] = m_real.m128_i32[0];
     }
     else
     {
@@ -234,7 +241,7 @@ void __fastcall expandParams(unsigned __int16 *fixed, hkVector4f *scale, hkVecto
       v16.m128_f32[v10] = **offsetPtr;
       *offsetPtr = v13 + 1;
     }
-    *v8 >>= 1;
+    *fixed >>= 1;
     ++v7;
     ++v10;
     --v9;
@@ -247,13 +254,16 @@ void __fastcall expandParams(unsigned __int16 *fixed, hkVector4f *scale, hkVecto
 
 // File Line: 212
 // RVA: 0xB32960
-void __fastcall loadDynamicData(const char **compressedData, const int frame, const bool singleFrame, const float **scalePtr, const float **offsetPtr, const unsigned __int16 **isFixedRange, __int16 *scratchSpace)
+void __fastcall loadDynamicData(
+        const char **compressedData,
+        int frame,
+        const bool singleFrame,
+        const float **scalePtr,
+        const float **offsetPtr,
+        const unsigned __int16 **isFixedRange,
+        __m128 *scratchSpace)
 {
-  const char **v7; // rdi
-  const float **v8; // rbx
-  bool v9; // r15
-  int v10; // esi
-  _QWORD *v11; // rcx
+  _QWORD *Value; // rcx
   unsigned __int64 v12; // r9
   unsigned __int64 v13; // rax
   const char *v14; // rcx
@@ -261,37 +271,37 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
   _QWORD *v16; // r8
   _QWORD *v17; // rcx
   unsigned __int64 v18; // rax
-  signed __int64 v19; // rcx
+  _QWORD *v19; // rcx
   __int64 v20; // r9
-  signed __int64 v21; // rdi
+  __int64 v21; // rdi
   unsigned __int16 v22; // dx
   __int64 v23; // r10
   __int64 v24; // r11
-  signed __int64 v25; // rsi
-  const float *v26; // rcx
+  __int64 v25; // rsi
+  int *v26; // rcx
   int *v27; // rcx
   __m128 v28; // xmm8
   __int64 v29; // r10
   __int64 v30; // r11
-  signed __int64 v31; // rsi
-  const float *v32; // rcx
+  __int64 v31; // rsi
+  int *v32; // rcx
   int *v33; // rcx
   __m128 v34; // xmm6
   __m128 v35; // xmm7
   __int64 v36; // r10
   __int64 v37; // r11
-  signed __int64 v38; // rsi
-  const float *v39; // rcx
+  __int64 v38; // rsi
+  int *v39; // rcx
   int *v40; // rcx
   __m128 v41; // xmm4
   __m128 v42; // xmm5
   __int64 v43; // r10
-  const float *v44; // rcx
+  int *v44; // rcx
   int *v45; // rcx
-  __m128i v46; // xmm1
+  __m128i si128; // xmm0
   __m128 v47; // xmm10
-  __m128i v48; // xmm0
-  __m128i v49; // xmm1
+  __m128 v48; // xmm9
+  __m128i v49; // xmm0
   __m128 v50; // xmm10
   __m128 v51; // xmm9
   __m128 v52; // xmm11
@@ -311,67 +321,62 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
   _QWORD *v66; // r8
   _QWORD *v67; // rcx
   unsigned __int64 v68; // rax
-  signed __int64 v69; // rcx
-  __m128 v70; // [rsp+18h] [rbp-79h]
-  __m128 v71; // [rsp+28h] [rbp-69h]
-  float retaddr; // [rsp+D8h] [rbp+47h]
-  int **v73; // [rsp+E8h] [rbp+57h]
-  unsigned __int16 **v74; // [rsp+F0h] [rbp+5Fh]
+  _QWORD *v69; // rcx
+  __m256i v70; // [rsp+18h] [rbp-79h]
+  void *retaddr; // [rsp+D8h] [rbp+47h]
+  int **v72; // [rsp+E8h] [rbp+57h]
+  unsigned __int16 **v73; // [rsp+F0h] [rbp+5Fh]
   __m128i *frameData; // [rsp+F8h] [rbp+67h]
 
-  v7 = compressedData;
-  v8 = scalePtr;
-  v9 = singleFrame;
-  v10 = frame;
-  v11 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v12 = v11[1];
-  if ( v12 < v11[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v12 = Value[1];
+  if ( v12 < Value[3] )
   {
     *(_QWORD *)v12 = "LtloadDynamic";
     *(_QWORD *)(v12 + 16) = "StDecompress";
     v13 = __rdtsc();
     *(_DWORD *)(v12 + 8) = v13;
-    v11[1] = v12 + 24;
+    Value[1] = v12 + 24;
   }
-  v14 = *v7;
-  if ( v9 )
-    v15 = hkaPredictiveBlockCompression::decodeSingleFrame(v14, v10, (__int16 *)frameData->m128i_i64);
+  v14 = *compressedData;
+  if ( singleFrame )
+    v15 = hkaPredictiveBlockCompression::decodeSingleFrame(v14, frame, frameData->m128i_i16);
   else
-    v15 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v14, v10, (__int16 *)frameData->m128i_i64);
-  *v7 = v15;
+    v15 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v14, frame, frameData->m128i_i16);
+  *compressedData = v15;
   v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v17 = (_QWORD *)v16[1];
   if ( (unsigned __int64)v17 < v16[3] )
   {
     *v17 = "StDequantize";
     v18 = __rdtsc();
-    v19 = (signed __int64)(v17 + 2);
-    *(_DWORD *)(v19 - 8) = v18;
+    v19 = v17 + 2;
+    *((_DWORD *)v19 - 2) = v18;
     v16[1] = v19;
   }
-  retaddr = FLOAT_0_00012208521;
+  *(float *)&retaddr = FLOAT_0_00012208521;
   v20 = 0i64;
   v21 = 4i64;
-  v22 = **v74;
+  v22 = **v73;
   v23 = 0i64;
   v24 = 0i64;
-  ++*v74;
+  ++*v73;
   v25 = 4i64;
   do
   {
-    if ( v22 & 1 )
+    if ( (v22 & 1) != 0 )
     {
-      v71.m128_f32[v23] = FLOAT_0_00012208521;
-      v70.m128_i32[v23 + 2] = 0;
+      *(float *)&v70.m256i_i32[v23 + 4] = FLOAT_0_00012208521;
+      v70.m256i_i32[v23 + 2] = 0;
     }
     else
     {
-      v26 = *v8;
-      v71.m128_f32[v24] = **v8;
-      *v8 = v26 + 1;
-      v27 = *v73;
-      v70.m128_i32[v24 + 2] = **v73;
-      *v73 = v27 + 1;
+      v26 = (int *)*scalePtr;
+      *(float *)&v70.m256i_i32[v24 + 4] = **scalePtr;
+      *scalePtr = (const float *)(v26 + 1);
+      v27 = *v72;
+      v70.m256i_i32[v24 + 2] = **v72;
+      *v72 = v27 + 1;
     }
     v22 >>= 1;
     ++v23;
@@ -379,25 +384,25 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
     --v25;
   }
   while ( v25 );
-  v28 = v71;
+  v28 = *(__m128 *)&v70.m256i_u64[2];
   v29 = 0i64;
   v30 = 0i64;
   v31 = 4i64;
   do
   {
-    if ( v22 & 1 )
+    if ( (v22 & 1) != 0 )
     {
-      v71.m128_f32[v29] = FLOAT_0_00012208521;
-      v70.m128_i32[v29] = 0;
+      *(float *)&v70.m256i_i32[v29 + 4] = FLOAT_0_00012208521;
+      v70.m256i_i32[v29] = 0;
     }
     else
     {
-      v32 = *v8;
-      v71.m128_f32[v30] = **v8;
-      *v8 = v32 + 1;
-      v33 = *v73;
-      v70.m128_i32[v30] = **v73;
-      *v73 = v33 + 1;
+      v32 = (int *)*scalePtr;
+      *(float *)&v70.m256i_i32[v30 + 4] = **scalePtr;
+      *scalePtr = (const float *)(v32 + 1);
+      v33 = *v72;
+      v70.m256i_i32[v30] = **v72;
+      *v72 = v33 + 1;
     }
     v22 >>= 1;
     ++v29;
@@ -405,26 +410,26 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
     --v31;
   }
   while ( v31 );
-  v34 = v71;
-  v35 = v70;
+  v34 = *(__m128 *)&v70.m256i_u64[2];
+  v35 = *(__m128 *)v70.m256i_i8;
   v36 = 0i64;
   v37 = 0i64;
   v38 = 4i64;
   do
   {
-    if ( v22 & 1 )
+    if ( (v22 & 1) != 0 )
     {
-      v71.m128_f32[v36] = FLOAT_0_00012208521;
-      v70.m128_i32[v36] = 0;
+      *(float *)&v70.m256i_i32[v36 + 4] = FLOAT_0_00012208521;
+      v70.m256i_i32[v36] = 0;
     }
     else
     {
-      v39 = *v8;
-      v71.m128_f32[v37] = **v8;
-      *v8 = v39 + 1;
-      v40 = *v73;
-      v70.m128_i32[v37] = **v73;
-      *v73 = v40 + 1;
+      v39 = (int *)*scalePtr;
+      *(float *)&v70.m256i_i32[v37 + 4] = **scalePtr;
+      *scalePtr = (const float *)(v39 + 1);
+      v40 = *v72;
+      v70.m256i_i32[v37] = **v72;
+      *v72 = v40 + 1;
     }
     v22 >>= 1;
     ++v36;
@@ -432,24 +437,24 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
     --v38;
   }
   while ( v38 );
-  v41 = v71;
-  v42 = v70;
+  v41 = *(__m128 *)&v70.m256i_u64[2];
+  v42 = *(__m128 *)v70.m256i_i8;
   v43 = 0i64;
   do
   {
-    if ( v22 & 1 )
+    if ( (v22 & 1) != 0 )
     {
-      v70.m128_f32[v20] = FLOAT_0_00012208521;
-      v71.m128_i32[v20] = 0;
+      *(float *)&v70.m256i_i32[v20] = FLOAT_0_00012208521;
+      v70.m256i_i32[v20 + 4] = 0;
     }
     else
     {
-      v44 = *v8;
-      v70.m128_f32[v43] = **v8;
-      *v8 = v44 + 1;
-      v45 = *v73;
-      v71.m128_i32[v43] = **v73;
-      *v73 = v45 + 1;
+      v44 = (int *)*scalePtr;
+      *(float *)&v70.m256i_i32[v43] = **scalePtr;
+      *scalePtr = (const float *)(v44 + 1);
+      v45 = *v72;
+      v70.m256i_i32[v43 + 4] = **v72;
+      *v72 = v45 + 1;
     }
     v22 >>= 1;
     ++v20;
@@ -457,12 +462,12 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
     --v21;
   }
   while ( v21 );
-  v46 = _mm_load_si128(frameData);
-  v47 = _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v46, (__m128i)0i64), 0x10u), 0x10u));
-  v48 = _mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v46, (__m128i)0i64), 0x10u), 0x10u);
+  si128 = _mm_load_si128(frameData);
+  v47 = _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(si128, (__m128i)0i64), 0x10u), 0x10u));
+  v48 = _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(si128, (__m128i)0i64), 0x10u), 0x10u));
   v49 = _mm_load_si128(frameData + 1);
   v50 = _mm_add_ps(_mm_mul_ps(v47, v34), v35);
-  v51 = _mm_add_ps(_mm_mul_ps(_mm_cvtepi32_ps(v48), v28), *(__m128 *)((char *)&v70 + 8));
+  v51 = _mm_add_ps(_mm_mul_ps(v48, v28), *(__m128 *)&v70.m256i_u64[1]);
   v52 = _mm_add_ps(
           _mm_mul_ps(
             _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v49, (__m128i)0i64), 0x10u), 0x10u)),
@@ -471,9 +476,9 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
   v53 = _mm_add_ps(
           _mm_mul_ps(
             _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v49, (__m128i)0i64), 0x10u), 0x10u)),
-            v70),
-          v71);
-  if ( v9 )
+            *(__m128 *)v70.m256i_i8),
+          *(__m128 *)&v70.m256i_u64[2]);
+  if ( singleFrame )
   {
     *((__m128 *)offsetPtr + 8) = v51;
     *((__m128 *)offsetPtr + 9) = v50;
@@ -492,7 +497,7 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
             _mm_mul_ps(
               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v54, (__m128i)0i64), 0x10u), 0x10u)),
               v28),
-            *(__m128 *)((char *)&v70 + 8));
+            *(__m128 *)&v70.m256i_u64[1]);
     *((__m128 *)offsetPtr + 4) = v56;
     v57 = _mm_add_ps(
             _mm_mul_ps(
@@ -508,16 +513,16 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
     v59 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v55, (__m128i)0i64), 0x10u), 0x10u)),
-              v70),
-            v71);
+              *(__m128 *)v70.m256i_i8),
+            *(__m128 *)&v70.m256i_u64[2]);
     *((__m128 *)offsetPtr + 6) = v58;
     *((__m128 *)offsetPtr + 7) = v59;
     v60 = *(__m128 *)isFixedRange;
-    v61 = _mm_mul_ps(*(__m128 *)scratchSpace, v58);
-    v62 = _mm_add_ps(_mm_mul_ps(*(__m128 *)scratchSpace, v56), _mm_mul_ps(*(__m128 *)isFixedRange, v51));
+    v61 = _mm_mul_ps(*scratchSpace, v58);
+    v62 = _mm_add_ps(_mm_mul_ps(*scratchSpace, v56), _mm_mul_ps(*(__m128 *)isFixedRange, v51));
     v63 = _mm_mul_ps(*(__m128 *)isFixedRange, v50);
-    v64 = _mm_mul_ps(*(__m128 *)scratchSpace, v57);
-    v65 = _mm_mul_ps(*(__m128 *)scratchSpace, v59);
+    v64 = _mm_mul_ps(*scratchSpace, v57);
+    v65 = _mm_mul_ps(*scratchSpace, v59);
     *((__m128 *)offsetPtr + 8) = v62;
     *((__m128 *)offsetPtr + 9) = _mm_add_ps(v64, v63);
     *((__m128 *)offsetPtr + 10) = _mm_add_ps(v61, _mm_mul_ps(v60, v52));
@@ -529,669 +534,661 @@ void __fastcall loadDynamicData(const char **compressedData, const int frame, co
   {
     *v67 = "lt";
     v68 = __rdtsc();
-    v69 = (signed __int64)(v67 + 2);
-    *(_DWORD *)(v69 - 8) = v68;
+    v69 = v67 + 2;
+    *((_DWORD *)v69 - 2) = v68;
     v66[1] = v69;
   }
+}    *v67 = "lt";
+    v68 = __rdtsc();
+    v69 = v67 + 2;
+    *((_DWORD *)v69 - 2) = v68;
+    v66[1] = v69;
+  }
 }
 
 // File Line: 291
 // RVA: 0xB32660
-void __fastcall hkaPredictiveCompressedAnimation::getCompressedDataOffset(hkaPredictiveCompressedAnimation *this, unsigned int frame, unsigned int *start, unsigned int *end)
+void __fastcall hkaPredictiveCompressedAnimation::getCompressedDataOffset(
+        hkaPredictiveCompressedAnimation *this,
+        unsigned int frame,
+        unsigned int *start,
+        unsigned int *end)
 {
   __int64 v4; // r11
 
   *start = 0;
   v4 = frame / 0xF;
   if ( (_DWORD)v4 )
-    *start = *(_DWORD *)&this->m_intData.m_data[2 * ((signed int)v4 - 1) + this->m_intArrayOffsets[0]];
+    *start = *(_DWORD *)&this->m_intData.m_data[2 * (int)v4 - 2 + this->m_intArrayOffsets[0]];
   *end = *(_DWORD *)&this->m_intData.m_data[2 * v4 + this->m_intArrayOffsets[0]];
 }
 
 // File Line: 313
 // RVA: 0xB2F9E0
-void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(hkaPredictiveCompressedAnimation *this, unsigned int frameIndex, float frameDelta, const char *compressedData, hkQsTransformf *refBones, const float *refFloats, int numBones, int numFloats, hkQsTransformf *bonesOut, float *floatsOut, char *boneWeightsInOut, char *floatWeightsInOut)
+void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(
+        hkaPredictiveCompressedAnimation *this,
+        unsigned int frameIndex,
+        float frameDelta,
+        const char *compressedData,
+        hkQsTransformf *refBones,
+        const float *refFloats,
+        int numBones,
+        __int64 numFloats,
+        hkQsTransformf *bonesOut,
+        float *floatsOut,
+        char *boneWeightsInOut,
+        char *floatWeightsInOut)
 {
   hkaPredictiveCompressedAnimation *v12; // r15
   const char *v13; // r12
-  unsigned int v14; // ebx
-  _QWORD *v15; // r8
+  _QWORD *Value; // r8
   unsigned __int64 v16; // rcx
   unsigned __int64 v17; // rax
   __int64 v18; // rcx
   __int64 v19; // rdx
-  signed __int64 v20; // r8
-  int v21; // er9
+  __int64 v20; // r8
+  int v21; // r9d
   __int64 v22; // rax
   unsigned int v23; // ebx
   char v24; // al
   __m128 v25; // xmm8
-  __m128 *v26; // rax
+  __m128 *p_m_quad; // rax
   __m128 v27; // xmm9
-  float *v28; // rcx
-  float *v29; // rdi
+  float *m_data; // rcx
+  int *v29; // rdi
   __int64 v30; // rax
-  signed __int64 v31; // rsi
+  __int64 v31; // rsi
   __int64 v32; // rax
-  signed __int64 v33; // rdx
+  __int64 v33; // rdx
   unsigned __int16 *v34; // rcx
   __int64 v35; // rax
-  signed __int64 v36; // rdx
+  __int64 v36; // rdx
   __int64 v37; // rax
   hkLifoAllocator *v38; // rax
-  unsigned __int64 v39; // rbx
+  __m128i *v39; // rbx
   hkLifoAllocator *v40; // rax
-  bool v41; // sf
-  unsigned __int8 v42; // of
-  _OWORD *v43; // r14
-  unsigned __int64 v44; // rcx
-  float *v45; // r13
-  __int64 v46; // rbx
-  unsigned __int16 *v47; // r9
-  unsigned __int64 v48; // r10
-  signed int v49; // er11
-  int v50; // edx
-  signed int v51; // eax
-  __int64 v52; // r8
-  float *v53; // rcx
-  char v54; // al
-  __int64 v55; // r13
-  __int64 v56; // r10
-  char *v57; // r14
-  int v58; // er11
-  int v59; // edx
-  signed int v60; // eax
-  __int64 v61; // r8
-  char *v62; // rcx
-  char v63; // al
-  int v64; // er13
-  unsigned int v65; // ebx
-  hkLifoAllocator *v66; // rax
-  char *v67; // r15
-  int v68; // er12
-  char *v69; // rcx
-  hkLifoAllocator *v70; // rax
-  __m128 *v71; // rbx
-  char *v72; // rcx
-  __int64 v73; // rdx
-  signed __int64 v74; // rax
-  _QWORD *v75; // rax
-  _QWORD *v76; // rcx
-  _QWORD *v77; // r8
-  unsigned __int64 v78; // rax
-  signed __int64 v79; // rcx
-  __int64 v80; // r10
-  __int64 v81; // r12
-  __int64 v82; // rdx
-  __int64 v83; // r8
-  __int128 *v84; // rcx
-  __int64 v85; // r9
-  __int128 v86; // xmm0
-  __int128 v87; // xmm1
-  __int128 v88; // xmm2
-  _QWORD *v89; // r8
-  _QWORD *v90; // rcx
-  unsigned __int64 v91; // rax
-  signed __int64 v92; // rcx
-  int v93; // er10
-  char *v94; // r11
-  int *v95; // rcx
-  int v96; // er8
-  signed __int64 v97; // rdx
+  bool v41; // cc
+  __m128 *m_cur; // r14
+  __m128 *v43; // rcx
+  float *v44; // r13
+  __int64 v45; // rbx
+  unsigned __int16 *v46; // r9
+  unsigned __int64 v47; // r10
+  int v48; // r11d
+  int v49; // edx
+  int v50; // eax
+  __int64 v51; // r8
+  float *v52; // rcx
+  char v53; // al
+  __int64 v54; // r13
+  __int64 v55; // r10
+  char *v56; // r14
+  int v57; // r11d
+  int v58; // edx
+  int v59; // eax
+  __int64 v60; // r8
+  char *v61; // rcx
+  char v62; // al
+  int v63; // r13d
+  unsigned int v64; // ebx
+  hkLifoAllocator *v65; // rax
+  char *v66; // r15
+  int v67; // r12d
+  char *v68; // rcx
+  hkLifoAllocator *v69; // rax
+  __m128 *v70; // rbx
+  char *v71; // rcx
+  __int64 v72; // rdx
+  __int64 v73; // rax
+  _QWORD *v74; // rax
+  _QWORD *v75; // rcx
+  _QWORD *v76; // r8
+  unsigned __int64 v77; // rax
+  _QWORD *v78; // rcx
+  __int64 v79; // r10
+  __int64 v80; // r12
+  __int64 v81; // rdx
+  signed __int64 v82; // r8
+  __int128 *v83; // rcx
+  signed __int64 v84; // r9
+  __int128 v85; // xmm0
+  __int128 v86; // xmm1
+  __int128 v87; // xmm2
+  _QWORD *v88; // r8
+  _QWORD *v89; // rcx
+  unsigned __int64 v90; // rax
+  _QWORD *v91; // rcx
+  int v92; // r10d
+  char *v93; // r11
+  int *v94; // rcx
+  int v95; // r8d
+  __int64 v96; // rdx
+  int v97; // xmm0_4
   int v98; // xmm0_4
-  __int64 v99; // rax
-  int v100; // xmm0_4
-  __int64 v101; // rax
-  _QWORD *v102; // r8
-  _QWORD *v103; // rcx
-  unsigned __int64 v104; // rax
-  signed __int64 v105; // rcx
-  signed __int64 v106; // rbx
-  int v107; // er15
-  _QWORD *v108; // rax
-  unsigned __int64 v109; // rcx
+  _QWORD *v99; // r8
+  _QWORD *v100; // rcx
+  unsigned __int64 v101; // rax
+  _QWORD *v102; // rcx
+  __int64 v103; // rbx
+  int v104; // r15d
+  _QWORD *v105; // rax
+  unsigned __int64 v106; // rcx
+  _QWORD *v107; // r8
+  unsigned __int64 v108; // rax
+  const char *v109; // rax
   _QWORD *v110; // r8
-  unsigned __int64 v111; // rax
-  const char *v112; // rax
-  _QWORD *v113; // r8
-  _QWORD *v114; // rcx
-  unsigned __int64 v115; // rax
-  signed __int64 v116; // rcx
-  __int64 v117; // r8
-  unsigned __int16 v118; // cx
-  __int64 v119; // rdx
-  signed __int64 v120; // r9
-  int v121; // eax
-  __m128 v122; // xmm12
-  __m128 v123; // xmm13
-  __int64 v124; // r8
-  __int64 v125; // rdx
-  signed __int64 v126; // r9
-  int v127; // eax
-  __m128 v128; // xmm10
-  __m128 v129; // xmm11
-  __int64 v130; // r8
-  __int64 v131; // rdx
-  signed __int64 v132; // r9
-  int v133; // eax
-  __m128 v134; // xmm6
-  __m128 v135; // xmm7
-  __int64 v136; // r8
-  __int64 v137; // rdx
-  signed __int64 v138; // r9
-  int v139; // eax
-  __m128 v140; // xmm2
-  __m128 v141; // xmm3
-  __m128i v142; // xmm0
-  __m128 v143; // xmm5
-  __m128i v144; // xmm0
-  __m128i v145; // xmm1
-  __m128 v146; // xmm2
-  __m128i v147; // xmm1
-  __m128 v148; // xmm1
-  _QWORD *v149; // r8
-  _QWORD *v150; // rcx
-  unsigned __int64 v151; // rax
-  signed __int64 v152; // rcx
-  int v153; // ecx
-  int v154; // er9
-  __int64 v155; // r8
-  signed __int64 v156; // r10
-  _DWORD *v157; // rdi
-  __int64 v158; // rsi
-  _DWORD *v159; // rdx
-  int v160; // xmm0_4
-  int v161; // xmm1_4
-  __int64 v162; // rcx
-  int v163; // xmm0_4
-  int v164; // xmm1_4
-  __int64 v165; // rcx
-  _QWORD *v166; // r8
-  _QWORD *v167; // rcx
-  unsigned __int64 v168; // rax
-  signed __int64 v169; // rcx
-  int v170; // er11
-  int v171; // ecx
-  signed int v172; // eax
-  signed __int64 v173; // rbx
-  int v174; // er9
-  unsigned __int16 *v175; // r10
-  signed __int64 v176; // r8
-  signed __int64 v177; // rdx
-  signed __int64 v178; // rcx
-  signed __int64 v179; // r9
-  __m128 v180; // xmm0
-  __m128 v181; // xmm5
-  __m128i v182; // xmm15
-  __m128i v183; // xmm5
-  __m128i v184; // xmm6
-  __m128 v185; // xmm3
-  __m128 v186; // xmm13
+  _QWORD *v111; // rcx
+  unsigned __int64 v112; // rax
+  _QWORD *v113; // rcx
+  __int64 v114; // r8
+  unsigned __int16 v115; // cx
+  __int64 v116; // rdx
+  __int64 v117; // r9
+  int v118; // eax
+  __m128 v119; // xmm12
+  __m128 v120; // xmm13
+  __int64 v121; // r8
+  __int64 v122; // rdx
+  __int64 v123; // r9
+  int v124; // eax
+  __m128 v125; // xmm10
+  __m128 v126; // xmm11
+  __int64 v127; // r8
+  __int64 v128; // rdx
+  __int64 v129; // r9
+  int v130; // eax
+  __m128 v131; // xmm6
+  __m128 v132; // xmm7
+  __int64 v133; // r8
+  __int64 v134; // rdx
+  __int64 v135; // r9
+  int v136; // eax
+  __m128 v137; // xmm5
+  __m128 v138; // xmm1
+  _QWORD *v139; // r8
+  _QWORD *v140; // rcx
+  unsigned __int64 v141; // rax
+  _QWORD *v142; // rcx
+  int v143; // ecx
+  int v144; // r9d
+  __int64 v145; // r8
+  __int64 v146; // r10
+  _DWORD *v147; // rdi
+  __int64 v148; // rsi
+  __m128 *v149; // rdx
+  int v150; // xmm0_4
+  int v151; // xmm1_4
+  int v152; // xmm0_4
+  int v153; // xmm1_4
+  _QWORD *v154; // r8
+  _QWORD *v155; // rcx
+  unsigned __int64 v156; // rax
+  _QWORD *v157; // rcx
+  int v158; // r11d
+  int v159; // ecx
+  signed int v160; // eax
+  __int64 v161; // rbx
+  int v162; // r9d
+  unsigned __int16 *v163; // r10
+  __int64 v164; // r8
+  __int64 v165; // rdx
+  __int64 v166; // rcx
+  __int64 v167; // r9
+  __m128 v168; // xmm5
+  __m128 v169; // xmm6
+  __m128 v170; // xmm0
+  __m128 v171; // xmm5
+  __m128i v172; // xmm15
+  __m128i v173; // xmm5
+  __m128i v174; // xmm6
+  __m128 v175; // xmm3
+  __m128 v176; // xmm13
+  __m128 v177; // xmm15
+  __m128 v178; // xmm2
+  __m128 v179; // xmm0
+  __m128 v180; // xmm3
+  __m128 v181; // xmm0
+  __m128 v182; // xmm6
+  __m128 v183; // xmm11
+  __m128 v184; // xmm13
+  __m128 v185; // xmm12
+  __m128 v186; // xmm0
   __m128 v187; // xmm15
-  __m128 v188; // xmm2
-  __m128 v189; // xmm0
-  __m128 v190; // xmm3
+  __m128 v188; // xmm1
+  __m128 v189; // xmm9
+  __m128 v190; // xmm1
   __m128 v191; // xmm0
-  __m128 v192; // xmm6
-  __m128 v193; // xmm11
-  __m128 v194; // xmm13
-  __m128 v195; // xmm12
+  __m128 v192; // xmm7
+  __m128 v193; // xmm1
+  __m128 v194; // xmm1
+  __m128 v195; // xmm5
   __m128 v196; // xmm0
-  __m128 v197; // xmm15
-  __m128 v198; // xmm1
-  __m128 v199; // xmm9
-  __m128 v200; // xmm1
+  __m128 v197; // xmm1
+  __m128 v198; // xmm6
+  __m128 v199; // xmm1
+  __m128 v200; // xmm3
   __m128 v201; // xmm0
-  __m128 v202; // xmm7
-  __m128 v203; // xmm1
-  __m128 v204; // xmm1
-  __m128 v205; // xmm5
-  __m128 v206; // xmm0
-  __m128 v207; // xmm1
-  __m128 v208; // xmm6
-  __m128 v209; // xmm1
-  __m128 v210; // xmm3
-  __m128 v211; // xmm0
-  __m128 v212; // xmm1
-  __m128 v213; // xmm4
-  __m128 v214; // xmm2
+  __m128 v202; // xmm1
+  __m128 v203; // xmm4
+  __m128 v204; // xmm2
+  __m128 v205; // xmm0
+  __int64 v206; // r9
+  __int64 v207; // rdx
+  int v208; // ecx
+  __int64 v209; // r8
+  __int64 v210; // rcx
+  __m128 v211; // xmm2
+  __m128 v212; // xmm3
+  __m128 v213; // xmm0
+  __m128 v214; // xmm6
   __m128 v215; // xmm0
-  __int64 v216; // r9
-  __int64 v217; // rdx
-  int v218; // ecx
-  __int64 v219; // r8
-  signed __int64 v220; // rcx
-  __m128 v221; // xmm2
-  __m128 v222; // xmm3
-  __m128 v223; // xmm0
-  __m128 v224; // xmm6
-  __m128 v225; // xmm0
-  __m128 v226; // xmm1
-  __m128 v227; // xmm2
-  __m128 v228; // xmm3
-  signed __int64 v229; // rcx
-  __m128 v230; // xmm1
-  __m128 v231; // xmm3
-  __m128 v232; // xmm0
-  __m128 v233; // xmm6
-  __m128 v234; // xmm0
-  __m128 v235; // xmm1
-  __m128 v236; // xmm2
-  __m128 v237; // xmm3
-  __m128 *v238; // r13
-  hkLifoAllocator *v239; // rax
-  int v240; // er12
-  int v241; // ebx
-  __int64 v242; // rbx
-  int v243; // er9
-  __m128 *v244; // r10
-  unsigned __int16 *v245; // r14
-  signed __int64 v246; // r8
-  signed __int64 v247; // rcx
-  signed __int64 v248; // rdx
-  signed __int64 v249; // r9
-  __m128 v250; // xmm4
-  __m128 v251; // xmm8
-  __m128 v252; // xmm12
-  __m128 v253; // xmm0
-  __m128i v254; // xmm4
-  __m128i v255; // xmm12
-  __m128i v256; // xmm7
-  __m128i v257; // xmm3
-  __m128 v258; // xmm13
-  __m128 v259; // xmm12
-  __m128 v260; // xmm0
-  __m128 v261; // xmm13
-  __m128 v262; // xmm4
-  __m128 v263; // xmm11
-  __m128 v264; // xmm10
+  __m128 v216; // xmm1
+  __m128 v217; // xmm2
+  __m128 v218; // xmm3
+  __int64 v219; // rcx
+  __m128 v220; // xmm1
+  __m128 v221; // xmm3
+  __m128 v222; // xmm0
+  __m128 v223; // xmm6
+  __m128 v224; // xmm0
+  __m128 v225; // xmm1
+  __m128 v226; // xmm2
+  __m128 v227; // xmm3
+  __m128 *v228; // r13
+  hkLifoAllocator *v229; // rax
+  int v230; // r12d
+  int v231; // ebx
+  __int64 v232; // rbx
+  int v233; // r9d
+  __m128 *v234; // r10
+  unsigned __int16 *v235; // r14
+  __int64 v236; // r8
+  __int64 v237; // rcx
+  __int64 v238; // rdx
+  __int64 v239; // r9
+  __m128 v240; // xmm8
+  __m128 v241; // xmm12
+  __m128 v242; // xmm0
+  __m128i v243; // xmm4
+  __m128i v244; // xmm12
+  __m128i v245; // xmm7
+  __m128i v246; // xmm3
+  __m128 v247; // xmm13
+  __m128 v248; // xmm12
+  __m128 v249; // xmm0
+  __m128 v250; // xmm13
+  __m128 v251; // xmm4
+  __m128 v252; // xmm11
+  __m128 v253; // xmm2
+  __m128 v254; // xmm0
+  __m128 v255; // xmm2
+  __m128 v256; // xmm0
+  __m128 v257; // xmm7
+  __m128 v258; // xmm10
+  __m128 v259; // xmm0
+  __m128 v260; // xmm8
+  __m128i v261; // xmm15
+  __m128i v262; // xmm4
+  __m128i v263; // xmm11
+  __m128 v264; // xmm7
   __m128 v265; // xmm2
-  __m128 v266; // xmm1
-  __m128 v267; // xmm2
-  __m128 v268; // xmm0
-  __m128 v269; // xmm7
-  __m128 v270; // xmm13
-  __m128 v271; // xmm10
-  __m128 v272; // xmm0
-  __m128 v273; // xmm0
-  __m128 v274; // xmm8
-  __m128i v275; // xmm15
-  __m128i v276; // xmm4
-  __m128i v277; // xmm11
-  __m128 v278; // xmm3
-  __m128 v279; // xmm7
-  __m128 v280; // xmm15
-  __m128 v281; // xmm7
-  __m128 v282; // xmm2
-  __m128 v283; // xmm1
-  __m128 v284; // xmm2
-  __m128 v285; // xmm0
-  __m128 v286; // xmm11
-  __m128 v287; // xmm6
-  __m128 v288; // xmm7
-  __m128 v289; // xmm1
-  __m128 v290; // xmm5
-  __m128 v291; // xmm12
-  __m128 v292; // xmm4
-  __m128 v293; // xmm0
-  __m128 v294; // xmm3
-  __m128 v295; // xmm2
-  __m128 v296; // xmm5
-  __m128 v297; // xmm4
-  __m128 v298; // xmm3
+  __m128 v266; // xmm0
+  __m128 v267; // xmm12
+  __m128 v268; // xmm2
+  __m128 v269; // xmm0
+  __m128 v270; // xmm11
+  __m128 v271; // xmm6
+  __m128 v272; // xmm7
+  __m128 v273; // xmm1
+  __m128 v274; // xmm12
+  __m128 v275; // xmm4
+  __m128 v276; // xmm0
+  __m128 v277; // xmm2
+  __m128 v278; // xmm5
+  __m128 v279; // xmm4
+  __m128 v280; // xmm3
+  __m128 v281; // xmm2
+  __m128 v282; // xmm3
+  __m128 v283; // xmm15
+  __m128 v284; // xmm0
+  __m128 v285; // xmm1
+  __m128 v286; // xmm13
+  __m128 v287; // xmm1
+  __m128 v288; // xmm9
+  __m128 v289; // xmm10
+  __m128 v290; // xmm0
+  __m128 v291; // xmm1
+  __m128 v292; // xmm2
+  __m128 v293; // xmm1
+  __m128 v294; // xmm8
+  __m128 v295; // xmm6
+  __m128 v296; // xmm7
+  __m128 v297; // xmm0
+  __m128 v298; // xmm1
   __m128 v299; // xmm2
-  __m128 v300; // xmm3
-  __m128 v301; // xmm15
-  __m128 v302; // xmm0
-  __m128 v303; // xmm1
-  __m128 v304; // xmm13
-  __m128 v305; // xmm1
-  __m128 v306; // xmm9
-  __m128 v307; // xmm10
-  __m128 v308; // xmm0
-  __m128 v309; // xmm1
-  __m128 v310; // xmm2
-  __m128 v311; // xmm1
-  __m128 v312; // xmm8
-  __m128 v313; // xmm6
-  __m128 v314; // xmm7
+  __m128 v300; // xmm1
+  __m128 v301; // xmm5
+  __m128 v302; // xmm4
+  __m128 v303; // xmm0
+  __m128 v304; // xmm1
+  __m128 v305; // xmm2
+  __m128 v306; // xmm1
+  char *v307; // rdx
+  __int64 v308; // r8
+  int v309; // ecx
+  __int64 v310; // r9
+  __int64 v311; // rcx
+  __m128 v312; // xmm2
+  __m128 v313; // xmm2
+  __m128 v314; // xmm0
   __m128 v315; // xmm0
-  __m128 v316; // xmm1
-  __m128 v317; // xmm2
-  __m128 v318; // xmm1
-  __m128 v319; // xmm5
+  __m128 v316; // xmm2
+  __m128 v317; // xmm7
+  __m128 v318; // xmm2
+  __m128 v319; // xmm0
   __m128 v320; // xmm4
   __m128 v321; // xmm0
   __m128 v322; // xmm1
-  __m128 v323; // xmm2
-  __m128 v324; // xmm1
-  char *v325; // rdx
-  __int64 v326; // r8
-  int v327; // ecx
-  __int64 v328; // r9
-  signed __int64 v329; // rcx
+  __m128 v323; // xmm5
+  __m128 v324; // xmm0
+  __m128 v325; // xmm1
+  __m128 v326; // xmm2
+  __m128 v327; // xmm3
+  __int64 v328; // rcx
+  __m128 v329; // xmm2
   __m128 v330; // xmm2
-  __m128 v331; // xmm2
-  __m128 v332; // xmm0
-  __m128 v333; // xmm0
-  __m128 v334; // xmm2
-  __m128 v335; // xmm7
-  __m128 v336; // xmm2
-  __m128 v337; // xmm0
-  __m128 v338; // xmm4
-  __m128 v339; // xmm0
-  __m128 v340; // xmm1
-  __m128 v341; // xmm5
-  __m128 v342; // xmm0
-  __m128 v343; // xmm1
-  __m128 v344; // xmm2
-  __m128 v345; // xmm3
-  signed __int64 v346; // rcx
-  __m128 v347; // xmm2
-  __m128 v348; // xmm2
-  __m128 v349; // xmm0
-  __m128 v350; // xmm1
-  __m128 v351; // xmm2
-  __m128 v352; // xmm7
-  __m128 v353; // xmm2
-  __m128 v354; // xmm0
-  __m128 v355; // xmm4
-  __m128 v356; // xmm0
-  __m128 v357; // xmm1
-  __m128 v358; // xmm5
-  __m128 v359; // xmm0
-  __m128 v360; // xmm1
-  __m128 v361; // xmm3
-  hkLifoAllocator *v362; // r9
-  _QWORD *v363; // r8
-  _QWORD *v364; // rcx
-  unsigned __int64 v365; // rax
-  signed __int64 v366; // rcx
-  hkQsTransformf *v367; // rcx
-  hkQsTransformf *v368; // rbx
-  __int64 v369; // rdx
-  signed __int64 v370; // r8
-  int v371; // eax
-  _QWORD *v372; // r8
-  _QWORD *v373; // rcx
-  unsigned __int64 v374; // rax
-  signed __int64 v375; // rcx
-  unsigned __int16 *v376; // rdx
-  __int64 v377; // rcx
-  unsigned __int16 *v378; // r10
-  int v379; // eax
-  signed int v380; // ecx
-  int *v381; // rdx
-  __int64 v382; // r8
-  int v383; // eax
-  __int64 v384; // r9
-  int v385; // eax
-  _QWORD *v386; // r8
-  _QWORD *v387; // rcx
-  unsigned __int64 v388; // rax
-  signed __int64 v389; // rcx
-  __int64 v390; // rcx
-  float *v391; // rdx
-  int v392; // ecx
-  int v393; // er10
-  signed int v394; // ecx
-  int v395; // er13
-  _QWORD *v396; // r8
-  unsigned __int64 v397; // rcx
-  unsigned __int64 v398; // rax
-  const char *v399; // rax
-  _QWORD *v400; // r8
-  _QWORD *v401; // rcx
-  unsigned __int64 v402; // rax
-  signed __int64 v403; // rcx
-  __int64 v404; // r8
-  unsigned __int16 v405; // cx
+  __m128 v331; // xmm0
+  __m128 v332; // xmm1
+  __m128 v333; // xmm2
+  __m128 v334; // xmm7
+  __m128 v335; // xmm2
+  __m128 v336; // xmm0
+  __m128 v337; // xmm4
+  __m128 v338; // xmm0
+  __m128 v339; // xmm1
+  __m128 v340; // xmm5
+  __m128 v341; // xmm0
+  __m128 v342; // xmm1
+  __m128 v343; // xmm3
+  hkLifoAllocator *v344; // r9
+  _QWORD *v345; // r8
+  _QWORD *v346; // rcx
+  unsigned __int64 v347; // rax
+  _QWORD *v348; // rcx
+  hkQsTransformf *v349; // rcx
+  hkQsTransformf *v350; // rbx
+  __int64 v351; // rdx
+  signed __int64 v352; // r8
+  int v353; // eax
+  _QWORD *v354; // r8
+  _QWORD *v355; // rcx
+  unsigned __int64 v356; // rax
+  _QWORD *v357; // rcx
+  unsigned __int16 *v358; // rdx
+  __int64 v359; // rcx
+  unsigned __int16 *v360; // r10
+  int v361; // eax
+  int v362; // ecx
+  int *v363; // rdx
+  __int64 v364; // r8
+  int v365; // eax
+  __int64 v366; // r9
+  int v367; // eax
+  _QWORD *v368; // r8
+  _QWORD *v369; // rcx
+  unsigned __int64 v370; // rax
+  _QWORD *v371; // rcx
+  __int64 m_firstFloatBlockScaleAndOffsetIndex; // rcx
+  float *v373; // rdx
+  int v374; // ecx
+  int v375; // r10d
+  signed int v376; // ecx
+  int v377; // r13d
+  _QWORD *v378; // r8
+  unsigned __int64 v379; // rcx
+  unsigned __int64 v380; // rax
+  const char *v381; // rax
+  _QWORD *v382; // r8
+  _QWORD *v383; // rcx
+  unsigned __int64 v384; // rax
+  _QWORD *v385; // rcx
+  __int64 v386; // r8
+  unsigned __int16 v387; // cx
+  __int64 v388; // rdx
+  __int64 v389; // r9
+  int v390; // eax
+  __m128 v391; // xmm12
+  __m128 v392; // xmm13
+  __int64 v393; // r8
+  __int64 v394; // rdx
+  __int64 v395; // r9
+  int v396; // eax
+  __m128 v397; // xmm10
+  __m128 v398; // xmm11
+  __int64 v399; // r8
+  __int64 v400; // rdx
+  __int64 v401; // r9
+  int v402; // eax
+  __m128 v403; // xmm6
+  __m128 v404; // xmm7
+  __int64 v405; // r8
   __int64 v406; // rdx
-  signed __int64 v407; // r9
+  __int64 v407; // r9
   int v408; // eax
-  __m128 v409; // xmm12
-  __m128 v410; // xmm13
-  __int64 v411; // r8
-  __int64 v412; // rdx
-  signed __int64 v413; // r9
-  int v414; // eax
-  __m128 v415; // xmm10
-  __m128 v416; // xmm11
-  __int64 v417; // r8
-  __int64 v418; // rdx
-  signed __int64 v419; // r9
-  int v420; // eax
-  __m128 v421; // xmm6
-  __m128 v422; // xmm7
-  __int64 v423; // r8
-  __int64 v424; // rdx
-  signed __int64 v425; // r9
-  int v426; // eax
-  __m128 v427; // xmm2
-  __m128 v428; // xmm3
-  __m128i v429; // xmm0
-  __m128 v430; // xmm5
-  __m128i v431; // xmm0
-  __m128i v432; // xmm1
-  __m128 v433; // xmm2
-  __m128i v434; // xmm1
-  __m128 v435; // xmm1
-  _QWORD *v436; // rax
-  _QWORD *v437; // rcx
-  _QWORD *v438; // r8
-  unsigned __int64 v439; // rax
-  signed __int64 v440; // rcx
-  signed __int64 v441; // r8
-  __int64 v442; // r15
-  int v443; // ecx
-  int v444; // er9
-  signed __int64 v445; // rdx
-  int v446; // eax
-  signed __int64 v447; // rax
-  __int64 v448; // rbx
-  int v449; // er15
-  _QWORD *v450; // r8
-  unsigned __int64 v451; // rcx
-  unsigned __int64 v452; // rax
-  const char *v453; // rax
-  _QWORD *v454; // r8
-  _QWORD *v455; // rcx
-  unsigned __int64 v456; // rax
-  signed __int64 v457; // rcx
-  __int64 v458; // r8
-  unsigned __int16 v459; // cx
-  __int64 v460; // rdx
-  signed __int64 v461; // r9
-  int v462; // eax
-  __m128 v463; // xmm12
-  __m128 v464; // xmm13
-  __int64 v465; // r8
-  __int64 v466; // rdx
-  signed __int64 v467; // r9
-  int v468; // eax
-  __m128 v469; // xmm10
-  __m128 v470; // xmm11
-  __int64 v471; // r8
-  __int64 v472; // rdx
-  signed __int64 v473; // r9
-  int v474; // eax
-  __m128 v475; // xmm6
-  __m128 v476; // xmm7
-  __int64 v477; // r8
-  __int64 v478; // rdx
-  signed __int64 v479; // r9
-  int v480; // eax
-  __m128 v481; // xmm2
-  __m128 v482; // xmm3
-  __m128i v483; // xmm0
-  __m128 v484; // xmm5
-  __m128i v485; // xmm0
-  __m128i v486; // xmm1
-  __m128 v487; // xmm2
-  __m128i v488; // xmm1
-  __m128 v489; // xmm1
-  _QWORD *v490; // r8
-  _QWORD *v491; // rcx
-  unsigned __int64 v492; // rax
-  signed __int64 v493; // rcx
-  int v494; // ecx
-  hkQsTransformf *v495; // r9
-  __int64 v496; // r8
-  __int64 v497; // r10
-  int *v498; // rdx
-  int v499; // eax
-  hkLifoAllocator *v500; // rax
-  hkLifoAllocator *v501; // r9
-  _QWORD *v502; // r8
-  _QWORD *v503; // rcx
-  unsigned __int64 v504; // rax
-  signed __int64 v505; // rcx
-  char v506; // [rsp+20h] [rbp-D8h]
+  __m128 v409; // xmm5
+  __m128 v410; // xmm1
+  _QWORD *v411; // rax
+  _QWORD *v412; // rcx
+  _QWORD *v413; // r8
+  unsigned __int64 v414; // rax
+  _QWORD *v415; // rcx
+  __int64 v416; // r8
+  __int64 v417; // r15
+  int v418; // ecx
+  int v419; // r9d
+  __int64 v420; // rdx
+  int v421; // eax
+  __int64 v422; // rax
+  __int64 v423; // rbx
+  int v424; // r15d
+  _QWORD *v425; // r8
+  unsigned __int64 v426; // rcx
+  unsigned __int64 v427; // rax
+  const char *v428; // rax
+  _QWORD *v429; // r8
+  _QWORD *v430; // rcx
+  unsigned __int64 v431; // rax
+  _QWORD *v432; // rcx
+  __int64 v433; // r8
+  unsigned __int16 v434; // cx
+  __int64 v435; // rdx
+  __int64 v436; // r9
+  int v437; // eax
+  __m128 v438; // xmm12
+  __m128 v439; // xmm13
+  __int64 v440; // r8
+  __int64 v441; // rdx
+  __int64 v442; // r9
+  int v443; // eax
+  __m128 v444; // xmm10
+  __m128 v445; // xmm11
+  __int64 v446; // r8
+  __int64 v447; // rdx
+  __int64 v448; // r9
+  int v449; // eax
+  __m128 v450; // xmm6
+  __m128 v451; // xmm7
+  __int64 v452; // r8
+  __int64 v453; // rdx
+  __int64 v454; // r9
+  int v455; // eax
+  __m128 v456; // xmm5
+  __m128 v457; // xmm1
+  _QWORD *v458; // r8
+  _QWORD *v459; // rcx
+  unsigned __int64 v460; // rax
+  _QWORD *v461; // rcx
+  int v462; // ecx
+  hkQsTransformf *v463; // r9
+  __int64 v464; // r8
+  __int64 v465; // r10
+  __m128 *v466; // rdx
+  int v467; // eax
+  hkLifoAllocator *v468; // rax
+  hkLifoAllocator *v469; // r9
+  _QWORD *v470; // r8
+  _QWORD *v471; // rcx
+  unsigned __int64 v472; // rax
+  _QWORD *v473; // rcx
+  char v474; // [rsp+20h] [rbp-D8h]
   __m128 *p; // [rsp+28h] [rbp-D0h]
   __m128i *frameData; // [rsp+30h] [rbp-C8h]
-  __m128 v509; // [rsp+40h] [rbp-B8h]
-  __m128 v510; // [rsp+50h] [rbp-A8h]
-  void *v511; // [rsp+60h] [rbp-98h]
-  unsigned __int16 *v512; // [rsp+68h] [rbp-90h]
-  unsigned __int16 *v513; // [rsp+70h] [rbp-88h]
-  float *v514; // [rsp+78h] [rbp-80h]
-  int *v515; // [rsp+80h] [rbp-78h]
-  _OWORD *v516; // [rsp+88h] [rbp-70h]
-  __m128 v517; // [rsp+98h] [rbp-60h]
-  __m128 v518; // [rsp+A8h] [rbp-50h]
-  __int64 v519; // [rsp+B8h] [rbp-40h]
-  __m128 v520; // [rsp+C8h] [rbp-30h]
-  __m128 v521; // [rsp+D8h] [rbp-20h]
-  __m128 v522; // [rsp+E8h] [rbp-10h]
-  __m128 v523; // [rsp+F8h] [rbp+0h]
-  const char *v524; // [rsp+108h] [rbp+10h]
-  __m128 v525; // [rsp+118h] [rbp+20h]
-  __m128 v526; // [rsp+128h] [rbp+30h]
-  __m128 v527; // [rsp+138h] [rbp+40h]
-  __m128 v528; // [rsp+148h] [rbp+50h]
-  __m128 v529; // [rsp+158h] [rbp+60h]
-  __m128 v530; // [rsp+168h] [rbp+70h]
-  __m128 v531; // [rsp+178h] [rbp+80h]
-  __m128 v532; // [rsp+188h] [rbp+90h]
-  const char *v533; // [rsp+198h] [rbp+A0h]
-  __m128 v534; // [rsp+1A8h] [rbp+B0h]
-  __m128 v535; // [rsp+1B8h] [rbp+C0h]
-  __m128 v536; // [rsp+1C8h] [rbp+D0h]
-  __m128 v537; // [rsp+1D8h] [rbp+E0h]
-  __m128 v538; // [rsp+1E8h] [rbp+F0h]
-  __m128 v539; // [rsp+1F8h] [rbp+100h]
-  __m128 v540; // [rsp+208h] [rbp+110h]
-  __m128 v541; // [rsp+218h] [rbp+120h]
-  __m128 v542; // [rsp+228h] [rbp+130h]
-  __m128 v543; // [rsp+238h] [rbp+140h]
-  __m128 v544; // [rsp+248h] [rbp+150h]
-  __m128 v545; // [rsp+258h] [rbp+160h]
-  __m128 v546; // [rsp+268h] [rbp+170h]
-  __m128 v547; // [rsp+278h] [rbp+180h]
-  __m128 v548; // [rsp+288h] [rbp+190h]
-  __m128 v549; // [rsp+298h] [rbp+1A0h]
-  __m128 v550; // [rsp+2A8h] [rbp+1B0h]
-  __m128 v551; // [rsp+2B8h] [rbp+1C0h]
-  __m128 v552; // [rsp+2C8h] [rbp+1D0h]
-  __m128 v553; // [rsp+2D8h] [rbp+1E0h]
-  __m128 v554; // [rsp+2E8h] [rbp+1F0h]
-  __m128 v555; // [rsp+2F8h] [rbp+200h]
-  __m128 v556; // [rsp+308h] [rbp+210h]
-  __m128 v557; // [rsp+318h] [rbp+220h]
-  __m128 v558; // [rsp+328h] [rbp+230h]
-  __m128 v559; // [rsp+338h] [rbp+240h]
-  __m128 v560; // [rsp+348h] [rbp+250h]
-  __m128 v561; // [rsp+358h] [rbp+260h]
-  __m128 v562; // [rsp+368h] [rbp+270h]
-  __m128 v563; // [rsp+378h] [rbp+280h]
-  __m128 v564; // [rsp+388h] [rbp+290h]
-  __m128 v565; // [rsp+398h] [rbp+2A0h]
-  __m128 v566; // [rsp+3A8h] [rbp+2B0h]
-  __m128 v567; // [rsp+3B8h] [rbp+2C0h]
-  __m128 v568; // [rsp+3C8h] [rbp+2D0h]
-  __m128 v569; // [rsp+3D8h] [rbp+2E0h]
-  __m128 v570; // [rsp+3E8h] [rbp+2F0h]
-  __m128 v571; // [rsp+3F8h] [rbp+300h]
-  __m128 v572; // [rsp+408h] [rbp+310h]
-  __m128 v573; // [rsp+418h] [rbp+320h]
-  __m128 v574; // [rsp+428h] [rbp+330h]
-  __m128 v575; // [rsp+438h] [rbp+340h]
-  __m128 v576; // [rsp+448h] [rbp+350h]
-  __m128 v577; // [rsp+458h] [rbp+360h]
-  __m128 v578; // [rsp+468h] [rbp+370h]
-  __m128 v579; // [rsp+478h] [rbp+380h]
-  __m128 v580; // [rsp+488h] [rbp+390h]
-  __m128 v581; // [rsp+498h] [rbp+3A0h]
-  __m128 v582; // [rsp+4A8h] [rbp+3B0h]
-  __m128 v583; // [rsp+4B8h] [rbp+3C0h]
-  __m128 v584; // [rsp+4C8h] [rbp+3D0h]
-  __m128 v585; // [rsp+4D8h] [rbp+3E0h]
-  __m128 v586; // [rsp+4E8h] [rbp+3F0h]
-  __m128 v587; // [rsp+4F8h] [rbp+400h]
-  __int128 v588; // [rsp+508h] [rbp+410h]
-  __m128 v589; // [rsp+518h] [rbp+420h]
-  __m128 v590; // [rsp+528h] [rbp+430h]
-  __int128 v591; // [rsp+538h] [rbp+440h]
-  __m128 v592; // [rsp+548h] [rbp+450h]
-  __m128 v593; // [rsp+558h] [rbp+460h]
-  __m128 v594; // [rsp+568h] [rbp+470h]
-  __m128 v595; // [rsp+578h] [rbp+480h]
-  __int128 v596; // [rsp+588h] [rbp+490h]
-  __m128 v597; // [rsp+598h] [rbp+4A0h]
-  __int128 v598; // [rsp+5A8h] [rbp+4B0h]
-  __m128 v599; // [rsp+5B8h] [rbp+4C0h]
-  __int128 v600; // [rsp+5C8h] [rbp+4D0h]
-  __m128 v601; // [rsp+5D8h] [rbp+4E0h]
-  __int128 v602; // [rsp+5E8h] [rbp+4F0h]
-  __int128 v603; // [rsp+5F8h] [rbp+500h]
-  __m128 v604; // [rsp+608h] [rbp+510h]
-  __m128 v605; // [rsp+618h] [rbp+520h]
-  __int128 v606; // [rsp+628h] [rbp+530h]
-  __m128 v607; // [rsp+638h] [rbp+540h]
-  __int128 v608; // [rsp+648h] [rbp+550h]
-  __m128 v609; // [rsp+658h] [rbp+560h]
-  __int128 v610; // [rsp+668h] [rbp+570h]
-  __int128 v611; // [rsp+678h] [rbp+580h]
-  __int128 v612; // [rsp+688h] [rbp+590h]
-  __m128 v613; // [rsp+698h] [rbp+5A0h]
-  __m128 v614; // [rsp+6A8h] [rbp+5B0h]
-  signed __int64 retaddr; // [rsp+7A8h] [rbp+6B0h]
-  hkaPredictiveCompressedAnimation *start; // [rsp+7B0h] [rbp+6B8h]
-  unsigned int v617; // [rsp+7B8h] [rbp+6C0h]
-  const char *end; // [rsp+7C0h] [rbp+6C8h]
-  const char *v619; // [rsp+7C8h] [rbp+6D0h]
+  __m128 v477; // [rsp+40h] [rbp-B8h]
+  __m128 v478; // [rsp+50h] [rbp-A8h]
+  void *v479; // [rsp+60h] [rbp-98h]
+  unsigned __int16 *v480; // [rsp+68h] [rbp-90h]
+  unsigned __int16 *v481; // [rsp+70h] [rbp-88h]
+  int *v482; // [rsp+78h] [rbp-80h]
+  int *v483; // [rsp+80h] [rbp-78h]
+  __m128 *v484; // [rsp+88h] [rbp-70h]
+  __m128 v485; // [rsp+98h] [rbp-60h]
+  __m128 v486; // [rsp+A8h] [rbp-50h]
+  __int64 v487; // [rsp+B8h] [rbp-40h]
+  __m128 v488; // [rsp+C8h] [rbp-30h]
+  __m128 v489; // [rsp+D8h] [rbp-20h]
+  __m128 v490; // [rsp+E8h] [rbp-10h]
+  __m128 v491; // [rsp+F8h] [rbp+0h]
+  const char *v492; // [rsp+108h] [rbp+10h]
+  __m128 v493; // [rsp+118h] [rbp+20h]
+  __m128 v494; // [rsp+128h] [rbp+30h]
+  __m128 v495; // [rsp+138h] [rbp+40h]
+  __m128 v496; // [rsp+148h] [rbp+50h]
+  __m128 v497; // [rsp+158h] [rbp+60h]
+  __m128 v498; // [rsp+168h] [rbp+70h]
+  __m128 v499; // [rsp+178h] [rbp+80h]
+  __m128 v500; // [rsp+188h] [rbp+90h]
+  const char *v501; // [rsp+198h] [rbp+A0h]
+  __m128 v502; // [rsp+1A8h] [rbp+B0h]
+  __m128 v503; // [rsp+1B8h] [rbp+C0h]
+  __m128 v504; // [rsp+1C8h] [rbp+D0h]
+  __m128 v505; // [rsp+1D8h] [rbp+E0h]
+  __m128 v506; // [rsp+1E8h] [rbp+F0h]
+  __m128 v507; // [rsp+1F8h] [rbp+100h]
+  __m128 v508; // [rsp+208h] [rbp+110h]
+  __m128 v509; // [rsp+218h] [rbp+120h]
+  __m128 v510; // [rsp+228h] [rbp+130h]
+  __m128 v511; // [rsp+238h] [rbp+140h]
+  __m128 v512; // [rsp+248h] [rbp+150h]
+  __m128 v513; // [rsp+258h] [rbp+160h]
+  __m128 v514; // [rsp+268h] [rbp+170h]
+  __m128 v515; // [rsp+278h] [rbp+180h]
+  __m128 v516; // [rsp+288h] [rbp+190h]
+  __m128 v517; // [rsp+298h] [rbp+1A0h] BYREF
+  __m128 v518; // [rsp+2A8h] [rbp+1B0h]
+  __m128 v519; // [rsp+2B8h] [rbp+1C0h]
+  __m128 v520; // [rsp+2C8h] [rbp+1D0h]
+  __m128 v521; // [rsp+2D8h] [rbp+1E0h]
+  __m128 v522; // [rsp+2E8h] [rbp+1F0h]
+  __m128 v523; // [rsp+2F8h] [rbp+200h]
+  __m128 v524; // [rsp+308h] [rbp+210h]
+  __m128 v525; // [rsp+318h] [rbp+220h]
+  __m128 v526; // [rsp+328h] [rbp+230h]
+  __m128 v527; // [rsp+338h] [rbp+240h]
+  __m128 v528; // [rsp+348h] [rbp+250h]
+  __m128 v529; // [rsp+358h] [rbp+260h]
+  __m128 v530; // [rsp+368h] [rbp+270h]
+  __m128 v531; // [rsp+378h] [rbp+280h]
+  __m128 v532; // [rsp+388h] [rbp+290h]
+  __m128 v533; // [rsp+398h] [rbp+2A0h]
+  __m128 v534; // [rsp+3A8h] [rbp+2B0h]
+  __m128 v535; // [rsp+3B8h] [rbp+2C0h]
+  __m128 v536; // [rsp+3C8h] [rbp+2D0h]
+  __m128 v537; // [rsp+3D8h] [rbp+2E0h]
+  __m128 v538; // [rsp+3E8h] [rbp+2F0h]
+  __m128 v539; // [rsp+3F8h] [rbp+300h]
+  __m128 v540; // [rsp+408h] [rbp+310h]
+  __m128 v541; // [rsp+418h] [rbp+320h]
+  __m128 v542; // [rsp+428h] [rbp+330h]
+  __m128 v543; // [rsp+438h] [rbp+340h]
+  __m128 v544; // [rsp+448h] [rbp+350h]
+  __m128 v545; // [rsp+458h] [rbp+360h]
+  __m128 v546; // [rsp+468h] [rbp+370h]
+  __m128 v547; // [rsp+478h] [rbp+380h]
+  __m128 v548; // [rsp+488h] [rbp+390h]
+  __m128 v549; // [rsp+498h] [rbp+3A0h]
+  __m128 v550; // [rsp+4A8h] [rbp+3B0h]
+  __m128 v551; // [rsp+4B8h] [rbp+3C0h]
+  __m128 v552; // [rsp+4C8h] [rbp+3D0h]
+  __m128 m_quad; // [rsp+4D8h] [rbp+3E0h] BYREF
+  __m128 v554; // [rsp+4E8h] [rbp+3F0h]
+  __m128 v555; // [rsp+4F8h] [rbp+400h]
+  __m128i si128; // [rsp+508h] [rbp+410h]
+  __m128 v557; // [rsp+518h] [rbp+420h]
+  __m128 v558; // [rsp+528h] [rbp+430h]
+  __m128i v559; // [rsp+538h] [rbp+440h]
+  __m128 v560; // [rsp+548h] [rbp+450h]
+  __m128 v561; // [rsp+558h] [rbp+460h]
+  __m128 v562; // [rsp+568h] [rbp+470h]
+  __m128 v563; // [rsp+578h] [rbp+480h]
+  __m128i v564; // [rsp+588h] [rbp+490h]
+  __m128 v565; // [rsp+598h] [rbp+4A0h]
+  __m128i v566; // [rsp+5A8h] [rbp+4B0h]
+  __m128 v567; // [rsp+5B8h] [rbp+4C0h]
+  __m128i v568; // [rsp+5C8h] [rbp+4D0h]
+  __m128 v569; // [rsp+5D8h] [rbp+4E0h]
+  __m128i v570; // [rsp+5E8h] [rbp+4F0h]
+  __m128i v571; // [rsp+5F8h] [rbp+500h]
+  __m128 v572; // [rsp+608h] [rbp+510h]
+  __m128 v573; // [rsp+618h] [rbp+520h]
+  __m128i v574; // [rsp+628h] [rbp+530h]
+  __m128 v575; // [rsp+638h] [rbp+540h]
+  __m128i v576; // [rsp+648h] [rbp+550h]
+  __m128 v577; // [rsp+658h] [rbp+560h]
+  __m128i v578; // [rsp+668h] [rbp+570h]
+  __m128i v579; // [rsp+678h] [rbp+580h]
+  __m128i v580; // [rsp+688h] [rbp+590h]
+  __m128 v581; // [rsp+698h] [rbp+5A0h]
+  __m128 v582; // [rsp+6A8h] [rbp+5B0h]
+  __int64 retaddr; // [rsp+7A8h] [rbp+6B0h]
+  hkaPredictiveCompressedAnimation *start; // [rsp+7B0h] [rbp+6B8h] BYREF
+  unsigned int v585; // [rsp+7B8h] [rbp+6C0h]
+  __int64 end; // [rsp+7C0h] [rbp+6C8h] BYREF
+  const char *v587; // [rsp+7C8h] [rbp+6D0h]
 
-  v619 = compressedData;
+  v587 = compressedData;
   *(float *)&end = frameDelta;
   start = this;
   v12 = this;
   v13 = compressedData;
-  v14 = frameIndex;
-  v15 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v16 = v15[1];
-  if ( v16 < v15[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v16 = Value[1];
+  if ( v16 < Value[3] )
   {
     *(_QWORD *)v16 = "LtPredictiveSample";
     *(_QWORD *)(v16 + 16) = "StSetup";
     v17 = __rdtsc();
     *(_DWORD *)(v16 + 8) = v17;
-    v15[1] = v16 + 24;
+    Value[1] = v16 + 24;
   }
   if ( !v13 )
   {
-    hkaPredictiveCompressedAnimation::getCompressedDataOffset(v12, v14, (unsigned int *)&start, (unsigned int *)&end);
+    hkaPredictiveCompressedAnimation::getCompressedDataOffset(
+      v12,
+      frameIndex,
+      (unsigned int *)&start,
+      (unsigned int *)&end);
     v13 = &v12->m_compressedData.m_data[(unsigned int)start];
-    end = &v12->m_compressedData.m_data[(unsigned int)start];
+    end = (__int64)v13;
   }
   v18 = v12->m_intArrayOffsets[1];
-  v524 = v13;
-  v19 = v14 / 0xF;
-  v20 = (signed __int64)&v12->m_intData.m_data[v18];
+  v492 = v13;
+  v19 = frameIndex / 0xF;
+  v20 = (__int64)&v12->m_intData.m_data[v18];
   v21 = *(unsigned __int16 *)(v20 + 4 * v19 + 2);
   v22 = *(unsigned __int16 *)(v20 + 4 * v19);
-  v23 = v14 % 0xF;
+  v23 = frameIndex % 0xF;
   LODWORD(start) = v23;
-  v533 = &v13[v22 | (unsigned int)(v21 << 16)];
+  v501 = &v13[v22 | (unsigned int)(v21 << 16)];
   if ( frameDelta >= 0.001 )
   {
     if ( frameDelta <= 0.99900001 )
@@ -1208,1833 +1205,1774 @@ void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(hkaPredictiveCo
   {
     v24 = 1;
   }
-  v506 = v24;
-  v25 = _mm_shuffle_ps((__m128)v617, (__m128)v617, 0);
-  v530 = v25;
+  v474 = v24;
+  v25 = _mm_shuffle_ps((__m128)v585, (__m128)v585, 0);
+  v498 = v25;
   if ( v24 )
   {
-    v585 = query.m_quad;
-    v26 = &v585;
+    m_quad = query.m_quad;
+    p_m_quad = &m_quad;
   }
   else
   {
-    v26 = &v549;
-    v549 = _mm_sub_ps(query.m_quad, v25);
+    p_m_quad = &v517;
+    v517 = _mm_sub_ps(query.m_quad, v25);
   }
-  v27 = *v26;
-  v28 = v12->m_floatData.m_data;
-  v29 = &v28[v12->m_floatArrayOffsets[1]];
+  v27 = *p_m_quad;
+  m_data = v12->m_floatData.m_data;
+  v29 = (int *)&m_data[v12->m_floatArrayOffsets[1]];
   v30 = v12->m_floatArrayOffsets[2];
-  v526 = v27;
-  v31 = (signed __int64)&v28[v30];
+  v494 = v27;
+  v31 = (__int64)&m_data[v30];
   v32 = v12->m_floatArrayOffsets[0];
-  v514 = v29;
-  v33 = (signed __int64)&v28[v32];
+  v482 = v29;
+  v33 = (__int64)&m_data[v32];
   v34 = v12->m_intData.m_data;
   v35 = v12->m_intArrayOffsets[2];
-  v515 = (int *)v33;
-  v36 = (signed __int64)&v34[v35];
+  v483 = (int *)v33;
+  v36 = (__int64)&v34[v35];
   v37 = v12->m_intArrayOffsets[3];
-  v512 = (unsigned __int16 *)v36;
-  v514 = (float *)v31;
-  v513 = &v34[v37];
+  v480 = (unsigned __int16 *)v36;
+  v482 = (int *)v31;
+  v481 = &v34[v37];
   v38 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   frameData = (__m128i *)v38->m_cur;
-  v39 = (unsigned __int64)&frameData[8];
-  if ( v38->m_slabSize < 128 || (void *)v39 > v38->m_end )
+  v39 = frameData + 8;
+  if ( v38->m_slabSize < 128 || v39 > v38->m_end )
     frameData = (__m128i *)hkLifoAllocator::allocateFromNewSlab(v38, 128);
   else
-    v38->m_cur = (void *)v39;
+    v38->m_cur = v39;
   v40 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v42 = __OFSUB__(v40->m_slabSize, 256);
-  v41 = v40->m_slabSize - 256 < 0;
-  v43 = v40->m_cur;
-  v44 = (unsigned __int64)(v43 + 16);
-  v516 = v40->m_cur;
-  if ( v41 ^ v42 || (void *)v44 > v40->m_end )
+  v41 = v40->m_slabSize < 256;
+  m_cur = (__m128 *)v40->m_cur;
+  v43 = m_cur + 16;
+  v484 = m_cur;
+  if ( v41 || v43 > v40->m_end )
   {
-    v43 = hkLifoAllocator::allocateFromNewSlab(v40, 256);
-    v516 = v43;
+    m_cur = (__m128 *)hkLifoAllocator::allocateFromNewSlab(v40, 256);
+    v484 = m_cur;
   }
   else
   {
-    v40->m_cur = (void *)v44;
+    v40->m_cur = v43;
   }
-  v45 = floatsOut;
-  v46 = (signed int)refFloats;
-  v47 = v512;
+  v44 = floatsOut;
+  v45 = (int)refFloats;
+  v46 = v480;
   if ( floatsOut )
   {
-    v48 = 0i64;
-    if ( (signed int)refFloats > 0i64 )
+    v47 = 0i64;
+    if ( (int)refFloats > 0i64 )
     {
-      v49 = (signed int)refFloats;
+      v48 = (int)refFloats;
       do
       {
-        v50 = *v47;
-        v51 = 16;
-        ++v47;
-        if ( v49 < 16 )
-          v51 = v49;
-        v52 = v51;
-        if ( v51 > 0 )
+        v49 = *v46;
+        v50 = 16;
+        ++v46;
+        if ( v48 < 16 )
+          v50 = v48;
+        v51 = v50;
+        if ( v50 > 0 )
         {
-          v53 = &v45[v48];
+          v52 = &v44[v47 / 4];
           do
           {
-            v54 = v50;
-            v50 >>= 1;
-            v53 = (float *)((char *)v53 + 1);
-            *((_BYTE *)v53 - 1) &= -(v54 & 1);
-            --v52;
+            v53 = v49;
+            v49 >>= 1;
+            v52 = (float *)((char *)v52 + 1);
+            *((_BYTE *)v52 - 1) &= -(v53 & 1);
+            --v51;
           }
-          while ( v52 );
+          while ( v51 );
         }
-        v48 += 4i64;
-        v49 -= 16;
+        v47 += 16i64;
+        v48 -= 16;
       }
-      while ( (signed __int64)(v48 * 4) < v46 );
-      v29 = v514;
+      while ( (__int64)v47 < v45 );
+      v29 = v482;
     }
   }
-  v55 = numBones;
+  v54 = numBones;
   if ( boneWeightsInOut )
   {
-    v56 = 0i64;
+    v55 = 0i64;
     if ( numBones > 0 )
     {
-      v57 = boneWeightsInOut;
-      v58 = numBones;
+      v56 = boneWeightsInOut;
+      v57 = numBones;
       do
       {
-        v59 = *v47;
-        v60 = 16;
-        ++v47;
-        if ( v58 < 16 )
-          v60 = v58;
-        v61 = v60;
-        if ( v60 > 0 )
+        v58 = *v46;
+        v59 = 16;
+        ++v46;
+        if ( v57 < 16 )
+          v59 = v57;
+        v60 = v59;
+        if ( v59 > 0 )
         {
-          v62 = &v57[v56];
+          v61 = &v56[v55];
           do
           {
-            v63 = v59;
-            v59 >>= 1;
-            ++v62;
-            *(v62 - 1) &= -(v63 & 1);
-            --v61;
+            v62 = v58;
+            v58 >>= 1;
+            *v61++ &= -(v62 & 1);
+            --v60;
           }
-          while ( v61 );
+          while ( v60 );
         }
-        v56 += 16i64;
-        v58 -= 16;
+        v55 += 16i64;
+        v57 -= 16;
       }
-      while ( v56 < v55 );
-      v31 = (signed __int64)v514;
-      v43 = v516;
+      while ( v55 < v54 );
+      v31 = (__int64)v482;
+      m_cur = v484;
     }
   }
-  if ( (signed int)refFloats > 0 )
+  if ( (int)refFloats > 0 )
   {
-    v64 = 12 * (_DWORD)refFloats;
-    v65 = ((_DWORD)refFloats + 3) & 0xFFFFFFFC;
-    v66 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v67 = (char *)v66->m_cur;
-    v511 = v67;
-    v68 = (48 * v65 + 127) & 0xFFFFFF80;
-    LODWORD(floatsOut) = (48 * v65 + 127) & 0xFFFFFF80;
-    v69 = &v67[v68];
-    if ( v68 > v66->m_slabSize || v69 > v66->m_end )
+    v63 = 12 * (_DWORD)refFloats;
+    v64 = ((_DWORD)refFloats + 3) & 0xFFFFFFFC;
+    v65 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v66 = (char *)v65->m_cur;
+    v479 = v66;
+    v67 = (48 * v64 + 127) & 0xFFFFFF80;
+    LODWORD(floatsOut) = v67;
+    v68 = &v66[v67];
+    if ( v67 > v65->m_slabSize || v68 > v65->m_end )
     {
-      v67 = (char *)hkLifoAllocator::allocateFromNewSlab(v66, v68);
-      v511 = v67;
+      v66 = (char *)hkLifoAllocator::allocateFromNewSlab(v65, v67);
+      v479 = v66;
     }
     else
     {
-      v66->m_cur = v69;
+      v65->m_cur = v68;
     }
-    v70 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v71 = (__m128 *)v70->m_cur;
-    v72 = (char *)v71 + v68;
-    p = (__m128 *)v70->m_cur;
-    if ( v68 > v70->m_slabSize || v72 > v70->m_end )
+    v69 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v70 = (__m128 *)v69->m_cur;
+    v71 = (char *)v70 + v67;
+    p = v70;
+    if ( v67 > v69->m_slabSize || v71 > v69->m_end )
     {
-      v71 = (__m128 *)hkLifoAllocator::allocateFromNewSlab(v70, v68);
-      p = v71;
+      v70 = (__m128 *)hkLifoAllocator::allocateFromNewSlab(v69, v67);
+      p = v70;
     }
     else
     {
-      v70->m_cur = v72;
+      v69->m_cur = v71;
     }
-    v73 = *(_QWORD *)(retaddr + 72);
-    v519 = v73 + 2i64 * *(signed int *)(retaddr + 104);
-    v74 = v73 + 2i64 * *(signed int *)(retaddr + 120);
-    boneWeightsInOut = (char *)(v73 + 2i64 * *(signed int *)(retaddr + 112));
-    v512 = (unsigned __int16 *)v74;
-    v75 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v76 = (_QWORD *)v75[1];
-    v77 = v75;
-    if ( (unsigned __int64)v76 < v75[3] )
+    v72 = *(_QWORD *)(retaddr + 72);
+    v487 = v72 + 2i64 * *(int *)(retaddr + 104);
+    v73 = v72 + 2i64 * *(int *)(retaddr + 120);
+    boneWeightsInOut = (char *)(v72 + 2i64 * *(int *)(retaddr + 112));
+    v480 = (unsigned __int16 *)v73;
+    v74 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v75 = (_QWORD *)v74[1];
+    v76 = v74;
+    if ( (unsigned __int64)v75 < v74[3] )
     {
-      *v76 = "StCopyReferencePose";
-      v78 = __rdtsc();
-      v79 = (signed __int64)(v76 + 2);
-      *(_DWORD *)(v79 - 8) = v78;
-      v77[1] = v79;
+      *v75 = "StCopyReferencePose";
+      v77 = __rdtsc();
+      v78 = v75 + 2;
+      *((_DWORD *)v78 - 2) = v77;
+      v76[1] = v78;
     }
-    v80 = (signed int)refFloats;
-    v81 = *(_QWORD *)&numFloats;
-    if ( (signed int)refFloats > 0i64 )
+    v79 = (int)refFloats;
+    v80 = numFloats;
+    if ( (int)refFloats > 0 )
     {
-      v82 = *(_QWORD *)&numFloats - (_QWORD)v619;
-      v83 = v67 - v619;
-      v84 = (__int128 *)(v619 + 32);
-      v85 = (char *)v71 - v619;
+      v81 = numFloats - (_QWORD)v587;
+      v82 = v66 - v587;
+      v83 = (__int128 *)(v587 + 32);
+      v84 = (char *)v70 - v587;
       do
       {
-        v86 = *(v84 - 2);
-        v87 = *(v84 - 1);
-        v88 = *v84;
-        v84 += 3;
-        *(__int128 *)((char *)v84 + v82 - 80) = v86;
-        *(__int128 *)((char *)v84 + v82 - 64) = v87;
-        *(__int128 *)((char *)v84 + v82 - 48) = v88;
-        *(__int128 *)((char *)v84 + v83 - 80) = v86;
-        *(__int128 *)((char *)v84 + v83 - 64) = v87;
-        *(__int128 *)((char *)v84 + v83 - 48) = v88;
-        *(__int128 *)((char *)v84 + v85 - 80) = v86;
-        *(__int128 *)((char *)v84 + v85 - 64) = v87;
-        *(__int128 *)((char *)v84 + v85 - 48) = v88;
-        --v80;
+        v85 = *(v83 - 2);
+        v86 = *(v83 - 1);
+        v87 = *v83;
+        v83 += 3;
+        *(__int128 *)((char *)v83 + v81 - 80) = v85;
+        *(__int128 *)((char *)v83 + v81 - 64) = v86;
+        *(__int128 *)((char *)v83 + v81 - 48) = v87;
+        *(__int128 *)((char *)v83 + v82 - 80) = v85;
+        *(__int128 *)((char *)v83 + v82 - 64) = v86;
+        *(__int128 *)((char *)v83 + v82 - 48) = v87;
+        *(__int128 *)((char *)v83 + v84 - 80) = v85;
+        *(__int128 *)((char *)v83 + v84 - 64) = v86;
+        *(__int128 *)((char *)v83 + v84 - 48) = v87;
+        --v79;
       }
-      while ( v80 );
+      while ( v79 );
     }
-    v89 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v90 = (_QWORD *)v89[1];
-    if ( (unsigned __int64)v90 < v89[3] )
+    v88 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v89 = (_QWORD *)v88[1];
+    if ( (unsigned __int64)v89 < v88[3] )
     {
-      *v90 = "StCopyStaticTracks";
-      v91 = __rdtsc();
-      v92 = (signed __int64)(v90 + 2);
-      *(_DWORD *)(v92 - 8) = v91;
-      v89[1] = v92;
+      *v89 = "StCopyStaticTracks";
+      v90 = __rdtsc();
+      v91 = v89 + 2;
+      *((_DWORD *)v91 - 2) = v90;
+      v88[1] = v91;
     }
-    v93 = *(_DWORD *)(retaddr + 116) - *(_DWORD *)(retaddr + 112);
-    if ( v93 > 0 )
+    v92 = *(_DWORD *)(retaddr + 116) - *(_DWORD *)(retaddr + 112);
+    if ( v92 > 0 )
     {
-      v94 = boneWeightsInOut;
-      v95 = v515;
-      v96 = *(unsigned __int16 *)boneWeightsInOut;
-      v97 = 0i64;
-      if ( v93 - 1 <= 0 )
+      v93 = boneWeightsInOut;
+      v94 = v483;
+      v95 = *(unsigned __int16 *)boneWeightsInOut;
+      v96 = 0i64;
+      if ( v92 - 1 <= 0 )
       {
 LABEL_61:
-        if ( v96 < v64 )
+        if ( v95 < v63 )
         {
-          v100 = *v95;
-          v101 = v96;
-          *(_DWORD *)(v81 + 4 * v101) = *v95;
-          *(_DWORD *)&v67[4 * v101] = v100;
-          *((_DWORD *)v71->m128_u64 + v101) = v100;
+          v98 = *v94;
+          *(_DWORD *)(v80 + 4i64 * v95) = *v94;
+          *(_DWORD *)&v66[4 * v95] = v98;
+          v70->m128_i32[v95] = v98;
         }
       }
       else
       {
-        while ( v96 < v64 )
+        while ( v95 < v63 )
         {
-          v98 = *v95;
-          v99 = v96;
-          ++v97;
-          *(_DWORD *)(v81 + 4 * v99) = *v95;
-          *(_DWORD *)&v67[4 * v99] = v98;
-          ++v95;
-          *((_DWORD *)v71->m128_u64 + v99) = v98;
-          v96 = *(unsigned __int16 *)&v94[2 * v97];
-          if ( v97 >= v93 - 1 )
+          v97 = *v94;
+          ++v96;
+          *(_DWORD *)(v80 + 4i64 * v95) = *v94;
+          *(_DWORD *)&v66[4 * v95] = v97;
+          ++v94;
+          v70->m128_i32[v95] = v97;
+          v95 = *(unsigned __int16 *)&v93[2 * v96];
+          if ( v96 >= v92 - 1 )
             goto LABEL_61;
         }
       }
-      v515 += v93;
+      v483 += v92;
     }
-    v102 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v103 = (_QWORD *)v102[1];
-    if ( (unsigned __int64)v103 < v102[3] )
+    v99 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v100 = (_QWORD *)v99[1];
+    if ( (unsigned __int64)v100 < v99[3] )
     {
-      *v103 = "StCopyDynamicTracks";
-      v104 = __rdtsc();
-      v105 = (signed __int64)(v103 + 2);
-      *(_DWORD *)(v105 - 8) = v104;
-      v102[1] = v105;
+      *v100 = "StCopyDynamicTracks";
+      v101 = __rdtsc();
+      v102 = v100 + 2;
+      *((_DWORD *)v102 - 2) = v101;
+      v99[1] = v102;
     }
     v12 = (hkaPredictiveCompressedAnimation *)retaddr;
-    v106 = 0i64;
+    v103 = 0i64;
     LODWORD(refFloats) = 0;
     LODWORD(boneWeightsInOut) = *(_DWORD *)(retaddr + 108) - *(_DWORD *)(retaddr + 104);
-    v522.m128_u64[0] = (signed int)boneWeightsInOut;
-    if ( (signed int)boneWeightsInOut > 0 )
+    v490.m128_u64[0] = (int)boneWeightsInOut;
+    if ( (int)boneWeightsInOut > 0 )
     {
       do
       {
-        v107 = *(unsigned __int16 *)(v519 + 2 * v106);
-        if ( v107 >= v64 )
+        v104 = *(unsigned __int16 *)(v487 + 2 * v103);
+        if ( v104 >= v63 )
           break;
-        v524 = end;
-        v108 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v109 = v108[1];
-        v110 = v108;
-        if ( v109 < v108[3] )
+        v492 = (const char *)end;
+        v105 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v106 = v105[1];
+        v107 = v105;
+        if ( v106 < v105[3] )
         {
-          *(_QWORD *)v109 = "LtloadDynamic";
-          *(_QWORD *)(v109 + 16) = "StDecompress";
-          v111 = __rdtsc();
-          *(_DWORD *)(v109 + 8) = v111;
-          v110[1] = v109 + 24;
+          *(_QWORD *)v106 = "LtloadDynamic";
+          *(_QWORD *)(v106 + 16) = "StDecompress";
+          v108 = __rdtsc();
+          *(_DWORD *)(v106 + 8) = v108;
+          v107[1] = v106 + 24;
         }
-        if ( v506 )
-          v112 = hkaPredictiveBlockCompression::decodeSingleFrame(end, (int)start, (__int16 *)frameData->m128i_i64);
+        if ( v474 )
+          v109 = hkaPredictiveBlockCompression::decodeSingleFrame((const char *)end, (int)start, frameData->m128i_i16);
         else
-          v112 = hkaPredictiveBlockCompression::decodeAdjacentFrames(end, (int)start, (__int16 *)frameData->m128i_i64);
-        end = v112;
-        v113 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v114 = (_QWORD *)v113[1];
-        if ( (unsigned __int64)v114 < v113[3] )
+          v109 = hkaPredictiveBlockCompression::decodeAdjacentFrames(
+                   (const char *)end,
+                   (int)start,
+                   frameData->m128i_i16);
+        end = (__int64)v109;
+        v110 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v111 = (_QWORD *)v110[1];
+        if ( (unsigned __int64)v111 < v110[3] )
         {
-          *v114 = "StDequantize";
-          v115 = __rdtsc();
-          v116 = (signed __int64)(v114 + 2);
-          *(_DWORD *)(v116 - 8) = v115;
-          v113[1] = v116;
+          *v111 = "StDequantize";
+          v112 = __rdtsc();
+          v113 = v111 + 2;
+          *((_DWORD *)v113 - 2) = v112;
+          v110[1] = v113;
         }
-        v117 = 0i64;
-        v617 = 956302336;
-        v118 = *v513;
-        v119 = 0i64;
-        ++v513;
-        v120 = 4i64;
+        v114 = 0i64;
+        v585 = 956302336;
+        v115 = *v481;
+        v116 = 0i64;
+        ++v481;
+        v117 = 4i64;
         do
         {
-          if ( v118 & 1 )
+          if ( (v115 & 1) != 0 )
           {
-            v521.m128_i32[v117] = 956302336;
-            v525.m128_i32[v117] = 0;
+            v489.m128_i32[v114] = 956302336;
+            v493.m128_i32[v114] = 0;
           }
           else
           {
-            v121 = *(_DWORD *)v29;
-            ++v29;
+            v118 = *v29++;
             v31 += 4i64;
-            v521.m128_i32[v119] = v121;
-            v525.m128_i32[v119] = *(_DWORD *)(v31 - 4);
+            v489.m128_i32[v116] = v118;
+            v493.m128_i32[v116] = *(_DWORD *)(v31 - 4);
           }
-          v118 >>= 1;
-          ++v117;
-          ++v119;
-          --v120;
+          v115 >>= 1;
+          ++v114;
+          ++v116;
+          --v117;
         }
-        while ( v120 );
-        v122 = v521;
-        v123 = v525;
-        v124 = 0i64;
-        v125 = 0i64;
-        v126 = 4i64;
-        v575 = v521;
-        v551 = v525;
+        while ( v117 );
+        v119 = v489;
+        v120 = v493;
+        v121 = 0i64;
+        v122 = 0i64;
+        v123 = 4i64;
+        v543 = v489;
+        v519 = v493;
         do
         {
-          if ( v118 & 1 )
+          if ( (v115 & 1) != 0 )
           {
-            v523.m128_i32[v124] = 956302336;
-            v520.m128_i32[v124] = 0;
+            v491.m128_i32[v121] = 956302336;
+            v488.m128_i32[v121] = 0;
           }
           else
           {
-            v127 = *(_DWORD *)v29;
-            ++v29;
+            v124 = *v29++;
             v31 += 4i64;
-            v523.m128_i32[v125] = v127;
-            v520.m128_i32[v125] = *(_DWORD *)(v31 - 4);
+            v491.m128_i32[v122] = v124;
+            v488.m128_i32[v122] = *(_DWORD *)(v31 - 4);
           }
-          v118 >>= 1;
-          ++v124;
-          ++v125;
-          --v126;
+          v115 >>= 1;
+          ++v121;
+          ++v122;
+          --v123;
         }
-        while ( v126 );
-        v128 = v523;
-        v129 = v520;
-        v130 = 0i64;
-        v131 = 0i64;
-        v132 = 4i64;
-        v577 = v523;
-        v553 = v520;
+        while ( v123 );
+        v125 = v491;
+        v126 = v488;
+        v127 = 0i64;
+        v128 = 0i64;
+        v129 = 4i64;
+        v545 = v491;
+        v521 = v488;
         do
         {
-          if ( v118 & 1 )
+          if ( (v115 & 1) != 0 )
           {
-            v517.m128_i32[v130] = 956302336;
-            v518.m128_i32[v130] = 0;
+            v485.m128_i32[v127] = 956302336;
+            v486.m128_i32[v127] = 0;
           }
           else
           {
-            v133 = *(_DWORD *)v29;
-            ++v29;
+            v130 = *v29++;
             v31 += 4i64;
-            v517.m128_i32[v131] = v133;
-            v518.m128_i32[v131] = *(_DWORD *)(v31 - 4);
+            v485.m128_i32[v128] = v130;
+            v486.m128_i32[v128] = *(_DWORD *)(v31 - 4);
           }
-          v118 >>= 1;
-          ++v130;
-          ++v131;
-          --v132;
+          v115 >>= 1;
+          ++v127;
+          ++v128;
+          --v129;
         }
-        while ( v132 );
-        v134 = v517;
-        v135 = v518;
-        v136 = 0i64;
-        v137 = 0i64;
-        v138 = 4i64;
-        v579 = v517;
-        v555 = v518;
+        while ( v129 );
+        v131 = v485;
+        v132 = v486;
+        v133 = 0i64;
+        v134 = 0i64;
+        v135 = 4i64;
+        v547 = v485;
+        v523 = v486;
         do
         {
-          if ( v118 & 1 )
+          if ( (v115 & 1) != 0 )
           {
-            v510.m128_i32[v136] = 956302336;
-            v509.m128_i32[v136] = 0;
+            v478.m128_i32[v133] = 956302336;
+            v477.m128_i32[v133] = 0;
           }
           else
           {
-            v139 = *(_DWORD *)v29;
-            ++v29;
+            v136 = *v29++;
             v31 += 4i64;
-            v510.m128_i32[v137] = v139;
-            v509.m128_i32[v137] = *(_DWORD *)(v31 - 4);
+            v478.m128_i32[v134] = v136;
+            v477.m128_i32[v134] = *(_DWORD *)(v31 - 4);
           }
-          v118 >>= 1;
-          ++v136;
-          ++v137;
-          --v138;
+          v115 >>= 1;
+          ++v133;
+          ++v134;
+          --v135;
         }
-        while ( v138 );
-        v140 = v510;
-        v141 = v509;
-        v514 = v29;
-        v581 = v510;
-        v557 = v509;
-        v142 = _mm_load_si128(frameData);
-        _mm_store_si128((__m128i *)&v588, v142);
-        v143 = _mm_add_ps(
+        while ( v135 );
+        v482 = v29;
+        v549 = v478;
+        v525 = v477;
+        si128 = _mm_load_si128(frameData);
+        v137 = _mm_add_ps(
                  _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v142, (__m128i)0i64), 0x10u), 0x10u)),
-                   v122),
-                 v123);
-        v534 = _mm_add_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(si128, (__m128i)0i64), 0x10u), 0x10u)),
+                   v119),
+                 v120);
+        v502 = _mm_add_ps(
                  _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v142, (__m128i)0i64), 0x10u), 0x10u)),
-                   v128),
-                 v129);
-        v583 = v143;
-        v144 = _mm_load_si128(frameData + 1);
-        _mm_store_si128((__m128i *)&v611, v144);
-        v532 = _mm_add_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(si128, (__m128i)0i64), 0x10u), 0x10u)),
+                   v125),
+                 v126);
+        v551 = v137;
+        v579 = _mm_load_si128(frameData + 1);
+        v500 = _mm_add_ps(
                  _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v144, (__m128i)0i64), 0x10u), 0x10u)),
-                   v134),
-                 v135);
-        v536 = _mm_add_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v579, (__m128i)0i64), 0x10u), 0x10u)),
+                   v131),
+                 v132);
+        v504 = _mm_add_ps(
                  _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v144, (__m128i)0i64), 0x10u), 0x10u)),
-                   v140),
-                 v141);
-        if ( v506 )
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v579, (__m128i)0i64), 0x10u), 0x10u)),
+                   v478),
+                 v477);
+        if ( v474 )
         {
-          v43[8] = v143;
-          v43[9] = v534;
-          v43[10] = v532;
-          v148 = v536;
+          m_cur[8] = v137;
+          m_cur[9] = v502;
+          m_cur[10] = v500;
+          v138 = v504;
         }
         else
         {
-          *v43 = v143;
-          v43[1] = v534;
-          v43[2] = v532;
-          v43[3] = v536;
-          v145 = _mm_load_si128(frameData + 2);
-          _mm_store_si128((__m128i *)&v591, v145);
-          v146 = _mm_add_ps(
+          *m_cur = v137;
+          m_cur[1] = v502;
+          m_cur[2] = v500;
+          m_cur[3] = v504;
+          v559 = _mm_load_si128(frameData + 2);
+          v506 = _mm_add_ps(
                    _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v145, (__m128i)0i64), 0x10u), 0x10u)),
-                     v575),
-                   v551);
-          v538 = _mm_add_ps(
+                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v559, (__m128i)0i64), 0x10u), 0x10u)),
+                     v545),
+                   v521);
+          v527 = _mm_add_ps(
                    _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v145, (__m128i)0i64), 0x10u), 0x10u)),
-                     v577),
-                   v553);
-          v559 = v146;
-          v147 = _mm_load_si128(frameData + 3);
-          _mm_store_si128((__m128i *)&v603, v147);
-          v543 = _mm_add_ps(
+                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v559, (__m128i)0i64), 0x10u), 0x10u)),
+                     v543),
+                   v519);
+          v571 = _mm_load_si128(frameData + 3);
+          v511 = _mm_add_ps(
                    _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v147, (__m128i)0i64), 0x10u), 0x10u)),
-                     v579),
-                   v555);
-          v541 = _mm_add_ps(
+                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v571, (__m128i)0i64), 0x10u), 0x10u)),
+                     v547),
+                   v523);
+          v509 = _mm_add_ps(
                    _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v147, (__m128i)0i64), 0x10u), 0x10u)),
-                     v581),
-                   v557);
-          v43[4] = v146;
-          v43[5] = v538;
-          v43[6] = v543;
-          v43[7] = v541;
-          v593 = _mm_add_ps(_mm_mul_ps(v27, v583), _mm_mul_ps(v559, v25));
-          v547 = _mm_add_ps(_mm_mul_ps(v27, v534), _mm_mul_ps(v538, v25));
-          v561 = _mm_add_ps(_mm_mul_ps(v27, v532), _mm_mul_ps(v543, v25));
-          v587 = _mm_add_ps(_mm_mul_ps(v27, v536), _mm_mul_ps(v541, v25));
-          v43[8] = v593;
-          v43[9] = v547;
-          v43[10] = v561;
-          v148 = v587;
+                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v571, (__m128i)0i64), 0x10u), 0x10u)),
+                     v549),
+                   v525);
+          m_cur[4] = v527;
+          m_cur[5] = v506;
+          m_cur[6] = v511;
+          m_cur[7] = v509;
+          v561 = _mm_add_ps(_mm_mul_ps(v27, v551), _mm_mul_ps(v527, v25));
+          v515 = _mm_add_ps(_mm_mul_ps(v27, v502), _mm_mul_ps(v506, v25));
+          v529 = _mm_add_ps(_mm_mul_ps(v27, v500), _mm_mul_ps(v511, v25));
+          v555 = _mm_add_ps(_mm_mul_ps(v27, v504), _mm_mul_ps(v509, v25));
+          m_cur[8] = v561;
+          m_cur[9] = v515;
+          m_cur[10] = v529;
+          v138 = v555;
         }
-        v43[11] = v148;
-        v149 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v150 = (_QWORD *)v149[1];
-        if ( (unsigned __int64)v150 < v149[3] )
+        m_cur[11] = v138;
+        v139 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v140 = (_QWORD *)v139[1];
+        if ( (unsigned __int64)v140 < v139[3] )
         {
-          *v150 = "lt";
-          v151 = __rdtsc();
-          v152 = (signed __int64)(v150 + 2);
-          *(_DWORD *)(v152 - 8) = v151;
-          v149[1] = v152;
+          *v140 = "lt";
+          v141 = __rdtsc();
+          v142 = v140 + 2;
+          *((_DWORD *)v142 - 2) = v141;
+          v139[1] = v142;
         }
-        v153 = (signed int)boneWeightsInOut;
-        v154 = (signed int)refFloats;
-        v155 = 0i64;
-        if ( (signed int)refFloats + 16 < (signed int)boneWeightsInOut )
-          v153 = (_DWORD)refFloats + 16;
-        v156 = v153 - 1;
-        if ( v106 < v156 )
+        v143 = (int)boneWeightsInOut;
+        v144 = (int)refFloats;
+        v145 = 0i64;
+        if ( (int)refFloats + 16 < (int)boneWeightsInOut )
+          v143 = (_DWORD)refFloats + 16;
+        v146 = v143 - 1;
+        if ( v103 < v146 )
         {
-          v157 = v511;
-          v158 = v519;
-          v159 = v43 + 8;
+          v147 = v479;
+          v148 = v487;
+          v149 = m_cur + 8;
           do
           {
-            if ( (unsigned __int16)v107 >= v64 )
+            if ( (unsigned __int16)v104 >= v63 )
               break;
-            v160 = *(v159 - 32);
-            v161 = *(v159 - 16);
-            v162 = (unsigned __int16)v107;
-            ++v106;
-            ++v154;
-            *(_DWORD *)(v81 + 4 * v162) = *v159;
-            ++v155;
-            ++v159;
-            v157[v162] = v160;
-            *((_DWORD *)p->m128_u64 + v162) = v161;
-            LOWORD(v107) = *(_WORD *)(v158 + 2 * v106);
+            v150 = v149[-8].m128_i32[0];
+            v151 = v149[-4].m128_i32[0];
+            ++v103;
+            ++v144;
+            *(_DWORD *)(v80 + 4i64 * (unsigned __int16)v104) = v149->m128_i32[0];
+            ++v145;
+            v149 = (__m128 *)((char *)v149 + 4);
+            v147[(unsigned __int16)v104] = v150;
+            p->m128_i32[(unsigned __int16)v104] = v151;
+            LOWORD(v104) = *(_WORD *)(v148 + 2 * v103);
           }
-          while ( v106 < v156 );
-          v29 = v514;
-          v31 = (signed __int64)v514;
-          v43 = v516;
-          LODWORD(refFloats) = v154;
+          while ( v103 < v146 );
+          v29 = v482;
+          v31 = (__int64)v482;
+          m_cur = v484;
+          LODWORD(refFloats) = v144;
         }
-        if ( (unsigned __int16)v107 < v64 )
+        if ( (unsigned __int16)v104 < v63 )
         {
-          v163 = *((_DWORD *)v43 + v155);
-          v164 = *((_DWORD *)v43 + v155 + 16);
-          v165 = (unsigned __int16)v107;
-          ++v106;
-          *(_DWORD *)(v81 + 4 * v165) = *((_DWORD *)v43 + v155 + 32);
-          LODWORD(refFloats) = v154 + 1;
-          *((_DWORD *)v511 + v165) = v163;
-          *((_DWORD *)p->m128_u64 + v165) = v164;
+          v152 = m_cur->m128_i32[v145];
+          v153 = m_cur[4].m128_i32[v145];
+          ++v103;
+          *(_DWORD *)(v80 + 4i64 * (unsigned __int16)v104) = m_cur[8].m128_i32[v145];
+          LODWORD(refFloats) = v144 + 1;
+          *((_DWORD *)v479 + (unsigned __int16)v104) = v152;
+          p->m128_i32[(unsigned __int16)v104] = v153;
         }
       }
-      while ( v106 < (signed __int64)v522.m128_u64[0] );
+      while ( v103 < v490.m128_i64[0] );
       v12 = (hkaPredictiveCompressedAnimation *)retaddr;
     }
-    v166 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v167 = (_QWORD *)v166[1];
-    if ( (unsigned __int64)v167 < v166[3] )
+    v154 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v155 = (_QWORD *)v154[1];
+    if ( (unsigned __int64)v155 < v154[3] )
     {
-      *v167 = "StInterpolateQuaternions";
-      v168 = __rdtsc();
-      v169 = (signed __int64)(v167 + 2);
-      *(_DWORD *)(v169 - 8) = v168;
-      v166[1] = v169;
+      *v155 = "StInterpolateQuaternions";
+      v156 = __rdtsc();
+      v157 = v155 + 2;
+      *((_DWORD *)v157 - 2) = v156;
+      v154[1] = v157;
     }
-    v170 = v12->m_intData.m_size - v12->m_intArrayOffsets[8] - 8;
-    if ( v170 <= 0 )
+    v158 = v12->m_intData.m_size - v12->m_intArrayOffsets[8] - 8;
+    if ( v158 <= 0 )
     {
-      v238 = p;
+      v228 = p;
     }
     else
     {
-      v171 = 0;
+      v159 = 0;
       LODWORD(refFloats) = 0;
-      v172 = (v170 & 0xFFFFFFFC) - 4;
-      if ( v506 )
+      v160 = (v158 & 0xFFFFFFFC) - 4;
+      if ( v474 )
       {
-        if ( v172 > 0 )
+        if ( v160 > 0 )
         {
-          v173 = 0i64;
-          v174 = v512[3];
-          retaddr = v172;
-          if ( v172 > 0i64 )
+          v161 = 0i64;
+          v162 = v480[3];
+          retaddr = v160;
+          v163 = v480 + 2;
+          do
           {
-            v175 = v512 + 2;
-            do
-            {
-              if ( v174 >= v64 )
-                break;
-              v176 = 6i64 * *(v175 - 2);
-              v177 = 6i64 * *v175;
-              v178 = 6i64 * *(v175 - 1);
-              v179 = 6i64 * v174;
-              v180 = _mm_shuffle_ps(*(__m128 *)(v81 + 48i64 * *v175 + 16), *(__m128 *)(v81 + 8 * v179 + 16), 68);
-              v181 = _mm_shuffle_ps(
-                       *(__m128 *)(v81 + 48i64 * *(v175 - 2) + 16),
-                       *(__m128 *)(v81 + 48i64 * *(v175 - 1) + 16),
-                       68);
-              v182 = (__m128i)_mm_shuffle_ps(v181, v180, 136);
-              v183 = (__m128i)_mm_shuffle_ps(v181, v180, 221);
-              v184 = (__m128i)_mm_shuffle_ps(
-                                _mm_shuffle_ps(
-                                  *(__m128 *)(v81 + 48i64 * *(v175 - 2) + 16),
-                                  *(__m128 *)(v81 + 48i64 * *(v175 - 1) + 16),
-                                  238),
-                                _mm_shuffle_ps(
-                                  *(__m128 *)(v81 + 48i64 * *v175 + 16),
-                                  *(__m128 *)(v81 + 8 * v179 + 16),
-                                  238),
-                                136);
-              v185 = (__m128)_mm_srli_epi32(_mm_slli_epi32(v182, 1u), 1u);
-              v186 = _mm_shuffle_ps((__m128)v182, (__m128)v183, 68);
-              v187 = _mm_shuffle_ps((__m128)v182, (__m128)v183, 238);
-              v188 = _mm_sub_ps(
-                       query.m_quad,
-                       _mm_add_ps(
-                         _mm_add_ps(v185, (__m128)_mm_srli_epi32(_mm_slli_epi32(v183, 1u), 1u)),
-                         (__m128)_mm_srli_epi32(_mm_slli_epi32(v184, 1u), 1u)));
-              v189 = _mm_cmpltps(v188, query.m_quad);
-              v190 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v189, query.m_quad), _mm_and_ps(v188, v189)));
-              v191 = _mm_shuffle_ps((__m128)v184, v190, 68);
-              v192 = _mm_shuffle_ps((__m128)v184, v190, 238);
-              v193 = _mm_shuffle_ps(v186, v191, 136);
-              v194 = _mm_shuffle_ps(v186, v191, 221);
-              v195 = _mm_shuffle_ps(v187, v192, 136);
-              v196 = _mm_mul_ps(v193, v193);
-              v197 = _mm_shuffle_ps(v187, v192, 221);
-              v198 = _mm_add_ps(_mm_shuffle_ps(v196, v196, 78), v196);
-              v199 = _mm_add_ps(_mm_shuffle_ps(v198, v198, 177), v198);
-              v200 = _mm_rsqrt_ps(v199);
-              v609 = v199;
-              v201 = _mm_mul_ps(v194, v194);
-              v202 = _mm_mul_ps(
-                       _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v200, v199), v200)),
-                       _mm_mul_ps(v200, *(__m128 *)_xmm));
-              v175 += 4;
-              v203 = _mm_add_ps(_mm_shuffle_ps(v201, v201, 78), v201);
-              v173 += 4i64;
-              v595 = _mm_add_ps(_mm_shuffle_ps(v203, v203, 177), v203);
-              v204 = _mm_rsqrt_ps(v595);
-              v205 = _mm_mul_ps(
-                       _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v204, v595), v204)),
-                       _mm_mul_ps(v204, *(__m128 *)_xmm));
-              v206 = _mm_mul_ps(v195, v195);
-              v207 = _mm_add_ps(_mm_shuffle_ps(v206, v206, 78), v206);
-              v208 = _mm_mul_ps(_mm_andnot_ps(_mm_cmpleps(v595, (__m128)0i64), v205), v194);
-              v605 = _mm_add_ps(_mm_shuffle_ps(v207, v207, 177), v207);
-              v209 = _mm_rsqrt_ps(v605);
-              v210 = _mm_mul_ps(
-                       _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v209, v605), v209)),
-                       _mm_mul_ps(v209, *(__m128 *)_xmm));
-              v211 = _mm_mul_ps(v197, v197);
-              v212 = _mm_add_ps(_mm_shuffle_ps(v211, v211, 78), v211);
-              v213 = _mm_mul_ps(_mm_andnot_ps(_mm_cmpleps(v605, (__m128)0i64), v210), v195);
-              v214 = _mm_add_ps(_mm_shuffle_ps(v212, v212, 177), v212);
-              v597 = v214;
-              v215 = _mm_rsqrt_ps(v214);
-              *(__m128 *)(v81 + 8 * v176 + 16) = _mm_mul_ps(_mm_andnot_ps(_mm_cmpleps(v199, (__m128)0i64), v202), v193);
-              *(__m128 *)(v81 + 8 * v178 + 16) = v208;
-              *(__m128 *)(v81 + 8 * v177 + 16) = v213;
-              v171 = (_DWORD)refFloats + 4;
-              LODWORD(refFloats) = (_DWORD)refFloats + 4;
-              *(__m128 *)(v81 + 8 * v179 + 16) = _mm_mul_ps(
-                                                   _mm_andnot_ps(
-                                                     _mm_cmpleps(v214, (__m128)0i64),
-                                                     _mm_mul_ps(
-                                                       _mm_sub_ps(
-                                                         (__m128)_xmm,
-                                                         _mm_mul_ps(_mm_mul_ps(v214, v215), v215)),
-                                                       _mm_mul_ps(*(__m128 *)_xmm, v215))),
-                                                   v197);
-              v174 = v175[1];
-            }
-            while ( v173 < retaddr );
-            v25 = v530;
-            v27 = v526;
-          }
-        }
-        v216 = (__int64)v512;
-        v217 = v171;
-        v218 = v512[v171];
-        v219 = v170 - 1;
-        if ( v217 >= v219 )
-        {
-LABEL_124:
-          if ( v218 < v64 )
-          {
-            v229 = 6i64 * v218;
-            v230 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)(v81 + 8 * v229 + 16), 1u), 1u);
-            v231 = _mm_sub_ps(
+            if ( v162 >= v63 )
+              break;
+            v164 = 6i64 * *(v163 - 2);
+            v165 = 6i64 * *v163;
+            v166 = 6i64 * *(v163 - 1);
+            v167 = 6i64 * v162;
+            v168 = *(__m128 *)(v80 + 48i64 * *(v163 - 2) + 16);
+            v169 = _mm_shuffle_ps(v168, *(__m128 *)(v80 + 48i64 * *(v163 - 1) + 16), 238);
+            v170 = _mm_shuffle_ps(*(__m128 *)(v80 + 48i64 * *v163 + 16), *(__m128 *)(v80 + 8 * v167 + 16), 68);
+            v171 = _mm_shuffle_ps(v168, *(__m128 *)(v80 + 48i64 * *(v163 - 1) + 16), 68);
+            v172 = (__m128i)_mm_shuffle_ps(v171, v170, 136);
+            v173 = (__m128i)_mm_shuffle_ps(v171, v170, 221);
+            v174 = (__m128i)_mm_shuffle_ps(
+                              v169,
+                              _mm_shuffle_ps(
+                                *(__m128 *)(v80 + 48i64 * *v163 + 16),
+                                *(__m128 *)(v80 + 8 * v167 + 16),
+                                238),
+                              136);
+            v175 = (__m128)_mm_srli_epi32(_mm_slli_epi32(v172, 1u), 1u);
+            v176 = _mm_shuffle_ps((__m128)v172, (__m128)v173, 68);
+            v177 = _mm_shuffle_ps((__m128)v172, (__m128)v173, 238);
+            v178 = _mm_sub_ps(
                      query.m_quad,
                      _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v230, v230, 85), _mm_shuffle_ps(v230, v230, 0)),
-                       _mm_shuffle_ps(v230, v230, 170)));
-            v232 = _mm_cmpltps(v231, query.m_quad);
-            v233 = _mm_shuffle_ps(
-                     *(__m128 *)(v81 + 8 * v229 + 16),
-                     _mm_unpackhi_ps(
-                       *(__m128 *)(v81 + 8 * v229 + 16),
-                       _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v231, v232), _mm_andnot_ps(v232, query.m_quad)))),
-                     196);
-            v234 = _mm_mul_ps(v233, v233);
-            v235 = _mm_add_ps(_mm_shuffle_ps(v234, v234, 78), v234);
-            v236 = _mm_add_ps(_mm_shuffle_ps(v235, v235, 177), v235);
-            v237 = _mm_rsqrt_ps(v236);
-            v599 = v236;
-            *(__m128 *)(v81 + 8 * v229 + 16) = _mm_mul_ps(
+                       _mm_add_ps(v175, (__m128)_mm_srli_epi32(_mm_slli_epi32(v173, 1u), 1u)),
+                       (__m128)_mm_srli_epi32(_mm_slli_epi32(v174, 1u), 1u)));
+            v179 = _mm_cmplt_ps(v178, query.m_quad);
+            v180 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v179, query.m_quad), _mm_and_ps(v178, v179)));
+            v181 = _mm_shuffle_ps((__m128)v174, v180, 68);
+            v182 = _mm_shuffle_ps((__m128)v174, v180, 238);
+            v183 = _mm_shuffle_ps(v176, v181, 136);
+            v184 = _mm_shuffle_ps(v176, v181, 221);
+            v185 = _mm_shuffle_ps(v177, v182, 136);
+            v186 = _mm_mul_ps(v183, v183);
+            v187 = _mm_shuffle_ps(v177, v182, 221);
+            v188 = _mm_add_ps(_mm_shuffle_ps(v186, v186, 78), v186);
+            v189 = _mm_add_ps(_mm_shuffle_ps(v188, v188, 177), v188);
+            v190 = _mm_rsqrt_ps(v189);
+            v577 = v189;
+            v191 = _mm_mul_ps(v184, v184);
+            v192 = _mm_mul_ps(
+                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v190, v189), v190)),
+                     _mm_mul_ps(v190, *(__m128 *)_xmm));
+            v163 += 4;
+            v193 = _mm_add_ps(_mm_shuffle_ps(v191, v191, 78), v191);
+            v161 += 4i64;
+            v563 = _mm_add_ps(_mm_shuffle_ps(v193, v193, 177), v193);
+            v194 = _mm_rsqrt_ps(v563);
+            v195 = _mm_mul_ps(
+                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v194, v563), v194)),
+                     _mm_mul_ps(v194, *(__m128 *)_xmm));
+            v196 = _mm_mul_ps(v185, v185);
+            v197 = _mm_add_ps(_mm_shuffle_ps(v196, v196, 78), v196);
+            v198 = _mm_mul_ps(_mm_andnot_ps(_mm_cmple_ps(v563, (__m128)0i64), v195), v184);
+            v573 = _mm_add_ps(_mm_shuffle_ps(v197, v197, 177), v197);
+            v199 = _mm_rsqrt_ps(v573);
+            v200 = _mm_mul_ps(
+                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v199, v573), v199)),
+                     _mm_mul_ps(v199, *(__m128 *)_xmm));
+            v201 = _mm_mul_ps(v187, v187);
+            v202 = _mm_add_ps(_mm_shuffle_ps(v201, v201, 78), v201);
+            v203 = _mm_mul_ps(_mm_andnot_ps(_mm_cmple_ps(v573, (__m128)0i64), v200), v185);
+            v204 = _mm_add_ps(_mm_shuffle_ps(v202, v202, 177), v202);
+            v565 = v204;
+            v205 = _mm_rsqrt_ps(v204);
+            *(__m128 *)(v80 + 8 * v164 + 16) = _mm_mul_ps(_mm_andnot_ps(_mm_cmple_ps(v189, (__m128)0i64), v192), v183);
+            *(__m128 *)(v80 + 8 * v166 + 16) = v198;
+            *(__m128 *)(v80 + 8 * v165 + 16) = v203;
+            v159 = (_DWORD)refFloats + 4;
+            LODWORD(refFloats) = (_DWORD)refFloats + 4;
+            *(__m128 *)(v80 + 8 * v167 + 16) = _mm_mul_ps(
                                                  _mm_andnot_ps(
-                                                   _mm_cmpleps(v236, (__m128)0i64),
+                                                   _mm_cmple_ps(v204, (__m128)0i64),
                                                    _mm_mul_ps(
-                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v237, v236), v237)),
-                                                     _mm_mul_ps(*(__m128 *)_xmm, v237))),
-                                                 v233);
+                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v204, v205), v205)),
+                                                     _mm_mul_ps(*(__m128 *)_xmm, v205))),
+                                                 v187);
+            v162 = v163[1];
+          }
+          while ( v161 < retaddr );
+          v25 = v498;
+          v27 = v494;
+        }
+        v206 = (__int64)v480;
+        v207 = v159;
+        v208 = v480[v159];
+        v209 = v158 - 1;
+        if ( v207 >= v209 )
+        {
+LABEL_124:
+          if ( v208 < v63 )
+          {
+            v219 = 6i64 * v208;
+            v220 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)(v80 + 8 * v219 + 16), 1u), 1u);
+            v221 = _mm_sub_ps(
+                     query.m_quad,
+                     _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v220, v220, 85), _mm_shuffle_ps(v220, v220, 0)),
+                       _mm_shuffle_ps(v220, v220, 170)));
+            v222 = _mm_cmplt_ps(v221, query.m_quad);
+            v223 = _mm_shuffle_ps(
+                     *(__m128 *)(v80 + 8 * v219 + 16),
+                     _mm_unpackhi_ps(
+                       *(__m128 *)(v80 + 8 * v219 + 16),
+                       _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v221, v222), _mm_andnot_ps(v222, query.m_quad)))),
+                     196);
+            v224 = _mm_mul_ps(v223, v223);
+            v225 = _mm_add_ps(_mm_shuffle_ps(v224, v224, 78), v224);
+            v226 = _mm_add_ps(_mm_shuffle_ps(v225, v225, 177), v225);
+            v227 = _mm_rsqrt_ps(v226);
+            v567 = v226;
+            *(__m128 *)(v80 + 8 * v219 + 16) = _mm_mul_ps(
+                                                 _mm_andnot_ps(
+                                                   _mm_cmple_ps(v226, (__m128)0i64),
+                                                   _mm_mul_ps(
+                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v227, v226), v227)),
+                                                     _mm_mul_ps(*(__m128 *)_xmm, v227))),
+                                                 v223);
           }
         }
         else
         {
-          while ( v218 < v64 )
+          while ( v208 < v63 )
           {
-            ++v217;
-            v220 = 6i64 * v218;
-            v221 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)(v81 + 8 * v220 + 16), 1u), 1u);
-            v222 = _mm_sub_ps(
+            ++v207;
+            v210 = 6i64 * v208;
+            v211 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)(v80 + 8 * v210 + 16), 1u), 1u);
+            v212 = _mm_sub_ps(
                      query.m_quad,
                      _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v221, v221, 0), _mm_shuffle_ps(v221, v221, 85)),
-                       _mm_shuffle_ps(v221, v221, 170)));
-            v223 = _mm_cmpltps(v222, query.m_quad);
-            v224 = _mm_shuffle_ps(
-                     *(__m128 *)(v81 + 8 * v220 + 16),
+                       _mm_add_ps(_mm_shuffle_ps(v211, v211, 0), _mm_shuffle_ps(v211, v211, 85)),
+                       _mm_shuffle_ps(v211, v211, 170)));
+            v213 = _mm_cmplt_ps(v212, query.m_quad);
+            v214 = _mm_shuffle_ps(
+                     *(__m128 *)(v80 + 8 * v210 + 16),
                      _mm_unpackhi_ps(
-                       *(__m128 *)(v81 + 8 * v220 + 16),
-                       _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v223, query.m_quad), _mm_and_ps(v222, v223)))),
+                       *(__m128 *)(v80 + 8 * v210 + 16),
+                       _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v213, query.m_quad), _mm_and_ps(v212, v213)))),
                      196);
-            v225 = _mm_mul_ps(v224, v224);
-            v226 = _mm_add_ps(_mm_shuffle_ps(v225, v225, 78), v225);
-            v227 = _mm_add_ps(_mm_shuffle_ps(v226, v226, 177), v226);
-            v228 = _mm_rsqrt_ps(v227);
-            v613 = v227;
-            *(__m128 *)(v81 + 8 * v220 + 16) = _mm_mul_ps(
+            v215 = _mm_mul_ps(v214, v214);
+            v216 = _mm_add_ps(_mm_shuffle_ps(v215, v215, 78), v215);
+            v217 = _mm_add_ps(_mm_shuffle_ps(v216, v216, 177), v216);
+            v218 = _mm_rsqrt_ps(v217);
+            v581 = v217;
+            *(__m128 *)(v80 + 8 * v210 + 16) = _mm_mul_ps(
                                                  _mm_andnot_ps(
-                                                   _mm_cmpleps(v227, (__m128)0i64),
+                                                   _mm_cmple_ps(v217, (__m128)0i64),
                                                    _mm_mul_ps(
-                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v228, v227), v228)),
-                                                     _mm_mul_ps(*(__m128 *)_xmm, v228))),
-                                                 v224);
-            v218 = *(unsigned __int16 *)(v216 + 2 * v217);
-            if ( v217 >= v219 )
+                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v218, v217), v218)),
+                                                     _mm_mul_ps(*(__m128 *)_xmm, v218))),
+                                                 v214);
+            v208 = *(unsigned __int16 *)(v206 + 2 * v207);
+            if ( v207 >= v209 )
               goto LABEL_124;
           }
         }
         goto LABEL_126;
       }
-      v242 = (__int64)v512;
-      if ( v172 > 0 )
+      v232 = (__int64)v480;
+      if ( v160 > 0 )
       {
-        v243 = v512[3];
+        v233 = v480[3];
         retaddr = 0i64;
-        boneWeightsInOut = (char *)v172;
-        if ( v172 > 0i64 )
+        boneWeightsInOut = (char *)v160;
+        v234 = (__m128 *)v479;
+        v235 = v480 + 2;
+        do
         {
-          v244 = (__m128 *)v511;
-          v245 = v512 + 2;
-          do
-          {
-            if ( v243 >= v64 )
-              break;
-            v246 = 6i64 * *(v245 - 2);
-            v247 = 6i64 * *(v245 - 1);
-            v248 = 6i64 * *v245;
-            v249 = 3i64 * v243;
-            v250 = _mm_shuffle_ps(v244[3 * *(v245 - 2) + 1], v244[3 * *(v245 - 1) + 1], 68);
-            v251 = p[3 * *v245 + 1];
-            v252 = v250;
-            v253 = _mm_shuffle_ps(v244[3 * *v245 + 1], v244[v249 + 1], 68);
-            v254 = (__m128i)_mm_shuffle_ps(v250, v253, 221);
-            v255 = (__m128i)_mm_shuffle_ps(v252, v253, 136);
-            v256 = (__m128i)_mm_shuffle_ps(
-                              _mm_shuffle_ps(v244[3 * *(v245 - 2) + 1], v244[3 * *(v245 - 1) + 1], 238),
-                              _mm_shuffle_ps(v244[3 * *v245 + 1], v244[v249 + 1], 238),
-                              136);
-            v257 = _mm_slli_epi32(v255, 1u);
-            v258 = (__m128)v255;
-            v259 = _mm_shuffle_ps((__m128)v255, (__m128)v254, 238);
-            v260 = (__m128)_mm_srli_epi32(_mm_slli_epi32(v254, 1u), 1u);
-            v261 = _mm_shuffle_ps(v258, (__m128)v254, 68);
-            v262 = _mm_shuffle_ps(p[3 * *(v245 - 2) + 1], p[3 * *(v245 - 1) + 1], 68);
-            v263 = _mm_shuffle_ps(p[3 * *(v245 - 2) + 1], p[3 * *(v245 - 1) + 1], 238);
-            v264 = v261;
-            v265 = _mm_sub_ps(
-                     query.m_quad,
+          if ( v233 >= v63 )
+            break;
+          v236 = 6i64 * *(v235 - 2);
+          v237 = 6i64 * *(v235 - 1);
+          v238 = 6i64 * *v235;
+          v239 = 3i64 * v233;
+          v240 = p[3 * *v235 + 1];
+          v241 = _mm_shuffle_ps(v234[3 * *(v235 - 2) + 1], v234[3 * *(v235 - 1) + 1], 68);
+          v242 = _mm_shuffle_ps(v234[3 * *v235 + 1], v234[v239 + 1], 68);
+          v243 = (__m128i)_mm_shuffle_ps(v241, v242, 221);
+          v244 = (__m128i)_mm_shuffle_ps(v241, v242, 136);
+          v245 = (__m128i)_mm_shuffle_ps(
+                            _mm_shuffle_ps(v234[3 * *(v235 - 2) + 1], v234[3 * *(v235 - 1) + 1], 238),
+                            _mm_shuffle_ps(v234[3 * *v235 + 1], v234[v239 + 1], 238),
+                            136);
+          v246 = _mm_slli_epi32(v244, 1u);
+          v247 = (__m128)v244;
+          v248 = _mm_shuffle_ps((__m128)v244, (__m128)v243, 238);
+          v249 = (__m128)_mm_srli_epi32(_mm_slli_epi32(v243, 1u), 1u);
+          v250 = _mm_shuffle_ps(v247, (__m128)v243, 68);
+          v251 = _mm_shuffle_ps(p[3 * *(v235 - 2) + 1], p[3 * *(v235 - 1) + 1], 68);
+          v252 = _mm_shuffle_ps(p[3 * *(v235 - 2) + 1], p[3 * *(v235 - 1) + 1], 238);
+          v253 = _mm_sub_ps(
+                   query.m_quad,
+                   _mm_add_ps(
+                     _mm_add_ps((__m128)_mm_srli_epi32(v246, 1u), v249),
+                     (__m128)_mm_srli_epi32(_mm_slli_epi32(v245, 1u), 1u)));
+          v254 = _mm_cmplt_ps(v253, query.m_quad);
+          v255 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v254, query.m_quad), _mm_and_ps(v254, v253)));
+          v256 = _mm_shuffle_ps((__m128)v245, v255, 68);
+          v257 = _mm_shuffle_ps((__m128)v245, v255, 238);
+          v258 = _mm_shuffle_ps(v250, v256, 136);
+          v478 = _mm_shuffle_ps(v250, v256, 221);
+          v486 = _mm_shuffle_ps(v248, v257, 136);
+          v259 = _mm_shuffle_ps(v240, p[v239 + 1], 68);
+          v260 = _mm_shuffle_ps(v240, p[v239 + 1], 238);
+          v477 = _mm_shuffle_ps(v248, v257, 221);
+          v261 = (__m128i)_mm_shuffle_ps(v251, v259, 136);
+          v262 = (__m128i)_mm_shuffle_ps(v251, v259, 221);
+          v263 = (__m128i)_mm_shuffle_ps(v252, v260, 136);
+          v264 = _mm_shuffle_ps((__m128)v261, (__m128)v262, 68);
+          v265 = _mm_sub_ps(
+                   query.m_quad,
+                   _mm_add_ps(
                      _mm_add_ps(
-                       _mm_add_ps((__m128)_mm_srli_epi32(v257, 1u), v260),
-                       (__m128)_mm_srli_epi32(_mm_slli_epi32(v256, 1u), 1u)));
-            v266 = _mm_cmpltps(v265, query.m_quad);
-            v267 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v266, query.m_quad), _mm_and_ps(v266, v265)));
-            v268 = _mm_shuffle_ps((__m128)v256, v267, 68);
-            v269 = _mm_shuffle_ps((__m128)v256, v267, 238);
-            v270 = _mm_shuffle_ps(v261, v268, 221);
-            v271 = _mm_shuffle_ps(v264, v268, 136);
-            v272 = p[3 * *v245 + 1];
-            v510 = v270;
-            v518 = _mm_shuffle_ps(v259, v269, 136);
-            v273 = _mm_shuffle_ps(v272, p[v249 + 1], 68);
-            v274 = _mm_shuffle_ps(v251, p[v249 + 1], 238);
-            v509 = _mm_shuffle_ps(v259, v269, 221);
-            v275 = (__m128i)_mm_shuffle_ps(v262, v273, 136);
-            v276 = (__m128i)_mm_shuffle_ps(v262, v273, 221);
-            v277 = (__m128i)_mm_shuffle_ps(v263, v274, 136);
-            v278 = _mm_add_ps(
-                     (__m128)_mm_srli_epi32(_mm_slli_epi32(v275, 1u), 1u),
-                     (__m128)_mm_srli_epi32(_mm_slli_epi32(v276, 1u), 1u));
-            v279 = (__m128)v275;
-            v280 = _mm_shuffle_ps((__m128)v275, (__m128)v276, 238);
-            v281 = _mm_shuffle_ps(v279, (__m128)v276, 68);
-            v282 = _mm_sub_ps(query.m_quad, _mm_add_ps(v278, (__m128)_mm_srli_epi32(_mm_slli_epi32(v277, 1u), 1u)));
-            v283 = _mm_cmpltps(v282, query.m_quad);
-            v284 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v283, query.m_quad), _mm_and_ps(v283, v282)));
-            v285 = _mm_shuffle_ps((__m128)v277, v284, 68);
-            v286 = _mm_shuffle_ps((__m128)v277, v284, 238);
-            v287 = _mm_shuffle_ps(v281, v285, 136);
-            v288 = _mm_shuffle_ps(v281, v285, 221);
-            v517 = _mm_shuffle_ps(v280, v286, 221);
-            v289 = _mm_mul_ps(v517, v509);
-            v290 = _mm_mul_ps(v287, v271);
-            v291 = _mm_shuffle_ps(v280, v286, 136);
-            v292 = v290;
-            v293 = _mm_mul_ps(v288, v270);
-            v294 = _mm_mul_ps(v291, v518);
-            v295 = v294;
-            v296 = _mm_shuffle_ps(v290, v293, 238);
-            v297 = _mm_shuffle_ps(v292, v293, 68);
-            v298 = _mm_shuffle_ps(v294, v289, 238);
-            v299 = _mm_shuffle_ps(v295, v289, 68);
-            v300 = _mm_xor_ps(
-                     (__m128)_mm_slli_epi32(
-                               _mm_srli_epi32(
-                                 (__m128i)_mm_cmpltps(
-                                            _mm_add_ps(
-                                              _mm_add_ps(
-                                                _mm_shuffle_ps(v296, v298, 221),
-                                                _mm_shuffle_ps(v296, v298, 136)),
-                                              _mm_add_ps(
-                                                _mm_shuffle_ps(v297, v299, 221),
-                                                _mm_shuffle_ps(v297, v299, 136))),
-                                            (__m128)0i64),
-                                 0x1Fu),
+                       (__m128)_mm_srli_epi32(_mm_slli_epi32(v261, 1u), 1u),
+                       (__m128)_mm_srli_epi32(_mm_slli_epi32(v262, 1u), 1u)),
+                     (__m128)_mm_srli_epi32(_mm_slli_epi32(v263, 1u), 1u)));
+          v266 = _mm_cmplt_ps(v265, query.m_quad);
+          v267 = _mm_shuffle_ps((__m128)v261, (__m128)v262, 238);
+          v268 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_andnot_ps(v266, query.m_quad), _mm_and_ps(v266, v265)));
+          v269 = _mm_shuffle_ps((__m128)v263, v268, 68);
+          v270 = _mm_shuffle_ps((__m128)v263, v268, 238);
+          v271 = _mm_shuffle_ps(v264, v269, 136);
+          v272 = _mm_shuffle_ps(v264, v269, 221);
+          v485 = _mm_shuffle_ps(v267, v270, 221);
+          v273 = _mm_mul_ps(v485, v477);
+          v274 = _mm_shuffle_ps(v267, v270, 136);
+          v275 = _mm_mul_ps(v271, v258);
+          v276 = _mm_mul_ps(v272, v478);
+          v277 = _mm_mul_ps(v274, v486);
+          v278 = _mm_shuffle_ps(v275, v276, 238);
+          v279 = _mm_shuffle_ps(v275, v276, 68);
+          v280 = _mm_shuffle_ps(v277, v273, 238);
+          v281 = _mm_shuffle_ps(v277, v273, 68);
+          v282 = _mm_xor_ps(
+                   (__m128)_mm_slli_epi32(
+                             _mm_srli_epi32(
+                               (__m128i)_mm_cmplt_ps(
+                                          _mm_add_ps(
+                                            _mm_add_ps(_mm_shuffle_ps(v278, v280, 221), _mm_shuffle_ps(v278, v280, 136)),
+                                            _mm_add_ps(_mm_shuffle_ps(v279, v281, 221), _mm_shuffle_ps(v279, v281, 136))),
+                                          (__m128)0i64),
                                0x1Fu),
-                     v530);
-            v301 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v300, v300, 0), v287), _mm_mul_ps(v526, v271));
-            v302 = _mm_mul_ps(v301, v301);
-            v303 = _mm_add_ps(_mm_shuffle_ps(v302, v302, 78), v302);
-            v304 = _mm_add_ps(_mm_shuffle_ps(v303, v303, 177), v303);
-            v305 = _mm_rsqrt_ps(v304);
-            v607 = v304;
-            v306 = _mm_mul_ps(
-                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v305, v304), v305)),
-                     _mm_mul_ps(*(__m128 *)_xmm, v305));
-            v307 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v300, v300, 85), v288), _mm_mul_ps(v526, v510));
-            v308 = _mm_mul_ps(v307, v307);
-            v309 = _mm_add_ps(_mm_shuffle_ps(v308, v308, 78), v308);
-            v310 = _mm_add_ps(_mm_shuffle_ps(v309, v309, 177), v309);
-            v311 = _mm_rsqrt_ps(v310);
-            v601 = v310;
-            v312 = _mm_cmpleps(v310, (__m128)0i64);
-            v313 = _mm_mul_ps(
-                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v311, v310), v311)),
-                     _mm_mul_ps(*(__m128 *)_xmm, v311));
-            v314 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v300, v300, 170), v291), _mm_mul_ps(v526, v518));
-            v315 = _mm_mul_ps(v314, v314);
-            v316 = _mm_add_ps(_mm_shuffle_ps(v315, v315, 78), v315);
-            v317 = _mm_add_ps(_mm_shuffle_ps(v316, v316, 177), v316);
-            v318 = _mm_rsqrt_ps(v317);
-            v589 = v317;
-            v319 = _mm_cmpleps(v317, (__m128)0i64);
-            v320 = _mm_mul_ps(
-                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v318, v317), v318)),
-                     _mm_mul_ps(*(__m128 *)_xmm, v318));
-            v522 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v300, v300, 255), v517), _mm_mul_ps(v526, v509));
-            v321 = _mm_mul_ps(v522, v522);
-            v322 = _mm_add_ps(_mm_shuffle_ps(v321, v321, 78), v321);
-            v323 = _mm_add_ps(_mm_shuffle_ps(v322, v322, 177), v322);
-            v324 = _mm_rsqrt_ps(v323);
-            v590 = v323;
-            v245 += 4;
-            *(__m128 *)(v81 + 8 * v246 + 16) = _mm_mul_ps(_mm_andnot_ps(_mm_cmpleps(v304, (__m128)0i64), v306), v301);
-            *(__m128 *)(v81 + 8 * v247 + 16) = _mm_mul_ps(_mm_andnot_ps(v312, v313), v307);
-            v171 = (_DWORD)refFloats + 4;
-            LODWORD(refFloats) = (_DWORD)refFloats + 4;
-            *(__m128 *)(v81 + 8 * v248 + 16) = _mm_mul_ps(_mm_andnot_ps(v319, v320), v314);
-            retaddr += 4i64;
-            *(__m128 *)(v81 + 4 * v249 + 16) = _mm_mul_ps(
-                                                 _mm_andnot_ps(
-                                                   _mm_cmpleps(v323, (__m128)0i64),
-                                                   _mm_mul_ps(
-                                                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v324, v323), v324)),
-                                                     _mm_mul_ps(*(__m128 *)_xmm, v324))),
-                                                 v522);
-            v243 = v245[1];
-          }
-          while ( retaddr < (signed __int64)boneWeightsInOut );
-          v25 = v530;
-          v27 = v526;
-          v43 = v516;
+                             0x1Fu),
+                   v498);
+          v283 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v282, v282, 0), v271), _mm_mul_ps(v494, v258));
+          v284 = _mm_mul_ps(v283, v283);
+          v285 = _mm_add_ps(_mm_shuffle_ps(v284, v284, 78), v284);
+          v286 = _mm_add_ps(_mm_shuffle_ps(v285, v285, 177), v285);
+          v287 = _mm_rsqrt_ps(v286);
+          v575 = v286;
+          v288 = _mm_mul_ps(
+                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v287, v286), v287)),
+                   _mm_mul_ps(*(__m128 *)_xmm, v287));
+          v289 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v282, v282, 85), v272), _mm_mul_ps(v494, v478));
+          v290 = _mm_mul_ps(v289, v289);
+          v291 = _mm_add_ps(_mm_shuffle_ps(v290, v290, 78), v290);
+          v292 = _mm_add_ps(_mm_shuffle_ps(v291, v291, 177), v291);
+          v293 = _mm_rsqrt_ps(v292);
+          v569 = v292;
+          v294 = _mm_cmple_ps(v292, (__m128)0i64);
+          v295 = _mm_mul_ps(
+                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v293, v292), v293)),
+                   _mm_mul_ps(*(__m128 *)_xmm, v293));
+          v296 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v282, v282, 170), v274), _mm_mul_ps(v494, v486));
+          v297 = _mm_mul_ps(v296, v296);
+          v298 = _mm_add_ps(_mm_shuffle_ps(v297, v297, 78), v297);
+          v299 = _mm_add_ps(_mm_shuffle_ps(v298, v298, 177), v298);
+          v300 = _mm_rsqrt_ps(v299);
+          v557 = v299;
+          v301 = _mm_cmple_ps(v299, (__m128)0i64);
+          v302 = _mm_mul_ps(
+                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v300, v299), v300)),
+                   _mm_mul_ps(*(__m128 *)_xmm, v300));
+          v490 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v282, v282, 255), v485), _mm_mul_ps(v494, v477));
+          v303 = _mm_mul_ps(v490, v490);
+          v304 = _mm_add_ps(_mm_shuffle_ps(v303, v303, 78), v303);
+          v305 = _mm_add_ps(_mm_shuffle_ps(v304, v304, 177), v304);
+          v306 = _mm_rsqrt_ps(v305);
+          v558 = v305;
+          v235 += 4;
+          *(__m128 *)(v80 + 8 * v236 + 16) = _mm_mul_ps(_mm_andnot_ps(_mm_cmple_ps(v286, (__m128)0i64), v288), v283);
+          *(__m128 *)(v80 + 8 * v237 + 16) = _mm_mul_ps(_mm_andnot_ps(v294, v295), v289);
+          v159 = (_DWORD)refFloats + 4;
+          LODWORD(refFloats) = (_DWORD)refFloats + 4;
+          *(__m128 *)(v80 + 8 * v238 + 16) = _mm_mul_ps(_mm_andnot_ps(v301, v302), v296);
+          retaddr += 4i64;
+          *(__m128 *)(v80 + 4 * v239 + 16) = _mm_mul_ps(
+                                               _mm_andnot_ps(
+                                                 _mm_cmple_ps(v305, (__m128)0i64),
+                                                 _mm_mul_ps(
+                                                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v306, v305), v306)),
+                                                   _mm_mul_ps(*(__m128 *)_xmm, v306))),
+                                               v490);
+          v233 = v235[1];
         }
+        while ( retaddr < (__int64)boneWeightsInOut );
+        v25 = v498;
+        v27 = v494;
+        m_cur = v484;
       }
-      v325 = (char *)v511;
-      v326 = v171;
-      v327 = *(unsigned __int16 *)(v242 + 2i64 * v171);
-      v328 = v170 - 1;
-      if ( v326 < v328 )
+      v307 = (char *)v479;
+      v308 = v159;
+      v309 = *(unsigned __int16 *)(v232 + 2i64 * v159);
+      v310 = v158 - 1;
+      if ( v308 < v310 )
       {
-        while ( v327 < v64 )
+        while ( v309 < v63 )
         {
-          v329 = 6i64 * v327;
-          v330 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)&v325[8 * v329 + 16], 1u), 1u);
-          v331 = _mm_sub_ps(
+          v311 = 6i64 * v309;
+          v312 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)&v307[8 * v311 + 16], 1u), 1u);
+          v313 = _mm_sub_ps(
                    query.m_quad,
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v330, v330, 85), _mm_shuffle_ps(v330, v330, 0)),
-                     _mm_shuffle_ps(v330, v330, 170)));
-          v332 = _mm_cmpltps(v331, query.m_quad);
-          v333 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v331, v332), _mm_andnot_ps(v332, query.m_quad)));
-          v334 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)p[(unsigned __int64)v329 / 2 + 1], 1u), 1u);
-          v335 = _mm_shuffle_ps(
-                   *(__m128 *)&v325[8 * v329 + 16],
-                   _mm_unpackhi_ps(*(__m128 *)&v325[8 * v329 + 16], v333),
+                     _mm_add_ps(_mm_shuffle_ps(v312, v312, 85), _mm_shuffle_ps(v312, v312, 0)),
+                     _mm_shuffle_ps(v312, v312, 170)));
+          v314 = _mm_cmplt_ps(v313, query.m_quad);
+          v315 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v313, v314), _mm_andnot_ps(v314, query.m_quad)));
+          v316 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)p[(unsigned __int64)v311 / 2 + 1], 1u), 1u);
+          v317 = _mm_shuffle_ps(
+                   *(__m128 *)&v307[8 * v311 + 16],
+                   _mm_unpackhi_ps(*(__m128 *)&v307[8 * v311 + 16], v315),
                    196);
-          v336 = _mm_sub_ps(
+          v318 = _mm_sub_ps(
                    query.m_quad,
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v334, v334, 85), _mm_shuffle_ps(v334, v334, 0)),
-                     _mm_shuffle_ps(v334, v334, 170)));
-          v337 = _mm_cmpltps(v336, query.m_quad);
-          v338 = _mm_shuffle_ps(
-                   p[(unsigned __int64)v329 / 2 + 1],
+                     _mm_add_ps(_mm_shuffle_ps(v316, v316, 85), _mm_shuffle_ps(v316, v316, 0)),
+                     _mm_shuffle_ps(v316, v316, 170)));
+          v319 = _mm_cmplt_ps(v318, query.m_quad);
+          v320 = _mm_shuffle_ps(
+                   p[(unsigned __int64)v311 / 2 + 1],
                    _mm_unpackhi_ps(
-                     p[(unsigned __int64)v329 / 2 + 1],
-                     _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v336, v337), _mm_andnot_ps(v337, query.m_quad)))),
+                     p[(unsigned __int64)v311 / 2 + 1],
+                     _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v318, v319), _mm_andnot_ps(v319, query.m_quad)))),
                    196);
-          v339 = _mm_mul_ps(v338, v335);
-          v340 = _mm_add_ps(_mm_shuffle_ps(v339, v339, 78), v339);
-          v341 = _mm_add_ps(
+          v321 = _mm_mul_ps(v320, v317);
+          v322 = _mm_add_ps(_mm_shuffle_ps(v321, v321, 78), v321);
+          v323 = _mm_add_ps(
                    _mm_mul_ps(
                      _mm_xor_ps(
                        (__m128)_mm_slli_epi32(
                                  _mm_srli_epi32(
-                                   (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v340, v340, 177), v340), (__m128)0i64),
+                                   (__m128i)_mm_cmplt_ps(
+                                              _mm_add_ps(_mm_shuffle_ps(v322, v322, 177), v322),
+                                              (__m128)0i64),
                                    0x1Fu),
                                  0x1Fu),
                        v25),
-                     v338),
-                   _mm_mul_ps(v27, v335));
-          v342 = _mm_mul_ps(v341, v341);
-          v343 = _mm_add_ps(_mm_shuffle_ps(v342, v342, 78), v342);
-          v344 = _mm_add_ps(_mm_shuffle_ps(v343, v343, 177), v343);
-          v345 = _mm_rsqrt_ps(v344);
-          v592 = v344;
-          ++v326;
-          *(__m128 *)(v81 + 8 * v329 + 16) = _mm_mul_ps(
+                     v320),
+                   _mm_mul_ps(v27, v317));
+          v324 = _mm_mul_ps(v323, v323);
+          v325 = _mm_add_ps(_mm_shuffle_ps(v324, v324, 78), v324);
+          v326 = _mm_add_ps(_mm_shuffle_ps(v325, v325, 177), v325);
+          v327 = _mm_rsqrt_ps(v326);
+          v560 = v326;
+          ++v308;
+          *(__m128 *)(v80 + 8 * v311 + 16) = _mm_mul_ps(
                                                _mm_andnot_ps(
-                                                 _mm_cmpleps(v344, (__m128)0i64),
+                                                 _mm_cmple_ps(v326, (__m128)0i64),
                                                  _mm_mul_ps(
-                                                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v345, v344), v345)),
-                                                   _mm_mul_ps(*(__m128 *)_xmm, v345))),
-                                               v341);
-          v327 = *(unsigned __int16 *)(v242 + 2 * v326);
-          if ( v326 >= v328 )
+                                                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v327, v326), v327)),
+                                                   _mm_mul_ps(*(__m128 *)_xmm, v327))),
+                                               v323);
+          v309 = *(unsigned __int16 *)(v232 + 2 * v308);
+          if ( v308 >= v310 )
             goto LABEL_140;
         }
         goto LABEL_126;
       }
 LABEL_140:
-      if ( v327 >= v64 )
+      if ( v309 >= v63 )
       {
 LABEL_126:
-        v238 = p;
+        v228 = p;
         goto LABEL_127;
       }
-      v238 = p;
-      v346 = 6i64 * v327;
-      v347 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)&v325[8 * v346 + 16], 1u), 1u);
-      v348 = _mm_sub_ps(
+      v228 = p;
+      v328 = 6i64 * v309;
+      v329 = (__m128)_mm_srli_epi32(_mm_slli_epi32(*(__m128i *)&v307[8 * v328 + 16], 1u), 1u);
+      v330 = _mm_sub_ps(
                query.m_quad,
                _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v347, v347, 85), _mm_shuffle_ps(v347, v347, 0)),
-                 _mm_shuffle_ps(v347, v347, 170)));
-      v349 = _mm_cmpltps(v348, query.m_quad);
-      v350 = _mm_or_ps(_mm_andnot_ps(v349, query.m_quad), _mm_and_ps(v348, v349));
-      v351 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)p[(unsigned __int64)v346 / 2 + 1], 1u), 1u);
-      v352 = _mm_shuffle_ps(
-               *(__m128 *)&v325[8 * v346 + 16],
-               _mm_unpackhi_ps(*(__m128 *)&v325[8 * v346 + 16], _mm_max_ps((__m128)0i64, v350)),
+                 _mm_add_ps(_mm_shuffle_ps(v329, v329, 85), _mm_shuffle_ps(v329, v329, 0)),
+                 _mm_shuffle_ps(v329, v329, 170)));
+      v331 = _mm_cmplt_ps(v330, query.m_quad);
+      v332 = _mm_or_ps(_mm_andnot_ps(v331, query.m_quad), _mm_and_ps(v330, v331));
+      v333 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)p[(unsigned __int64)v328 / 2 + 1], 1u), 1u);
+      v334 = _mm_shuffle_ps(
+               *(__m128 *)&v307[8 * v328 + 16],
+               _mm_unpackhi_ps(*(__m128 *)&v307[8 * v328 + 16], _mm_max_ps((__m128)0i64, v332)),
                196);
-      v353 = _mm_sub_ps(
+      v335 = _mm_sub_ps(
                query.m_quad,
                _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v351, v351, 85), _mm_shuffle_ps(v351, v351, 0)),
-                 _mm_shuffle_ps(v351, v351, 170)));
-      v354 = _mm_cmpltps(v353, query.m_quad);
-      v355 = _mm_shuffle_ps(
-               p[(unsigned __int64)v346 / 2 + 1],
+                 _mm_add_ps(_mm_shuffle_ps(v333, v333, 85), _mm_shuffle_ps(v333, v333, 0)),
+                 _mm_shuffle_ps(v333, v333, 170)));
+      v336 = _mm_cmplt_ps(v335, query.m_quad);
+      v337 = _mm_shuffle_ps(
+               p[(unsigned __int64)v328 / 2 + 1],
                _mm_unpackhi_ps(
-                 p[(unsigned __int64)v346 / 2 + 1],
-                 _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v353, v354), _mm_andnot_ps(v354, query.m_quad)))),
+                 p[(unsigned __int64)v328 / 2 + 1],
+                 _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v335, v336), _mm_andnot_ps(v336, query.m_quad)))),
                196);
-      v356 = _mm_mul_ps(v355, v352);
-      v357 = _mm_add_ps(_mm_shuffle_ps(v356, v356, 78), v356);
-      v358 = _mm_add_ps(
+      v338 = _mm_mul_ps(v337, v334);
+      v339 = _mm_add_ps(_mm_shuffle_ps(v338, v338, 78), v338);
+      v340 = _mm_add_ps(
                _mm_mul_ps(
                  _mm_xor_ps(
                    (__m128)_mm_slli_epi32(
                              _mm_srli_epi32(
-                               (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v357, v357, 177), v357), (__m128)0i64),
+                               (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v339, v339, 177), v339), (__m128)0i64),
                                0x1Fu),
                              0x1Fu),
                    v25),
-                 v355),
-               _mm_mul_ps(v27, v352));
-      v359 = _mm_mul_ps(v358, v358);
-      v360 = _mm_add_ps(_mm_shuffle_ps(v359, v359, 78), v359);
-      v594 = _mm_add_ps(_mm_shuffle_ps(v360, v360, 177), v360);
-      v361 = _mm_rsqrt_ps(v594);
-      *(__m128 *)(v81 + 8 * v346 + 16) = _mm_mul_ps(
+                 v337),
+               _mm_mul_ps(v27, v334));
+      v341 = _mm_mul_ps(v340, v340);
+      v342 = _mm_add_ps(_mm_shuffle_ps(v341, v341, 78), v341);
+      v562 = _mm_add_ps(_mm_shuffle_ps(v342, v342, 177), v342);
+      v343 = _mm_rsqrt_ps(v562);
+      *(__m128 *)(v80 + 8 * v328 + 16) = _mm_mul_ps(
                                            _mm_andnot_ps(
-                                             _mm_cmpleps(v594, (__m128)0i64),
+                                             _mm_cmple_ps(v562, (__m128)0i64),
                                              _mm_mul_ps(
-                                               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v361, v594), v361)),
-                                               _mm_mul_ps(*(__m128 *)_xmm, v361))),
-                                           v358);
+                                               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v343, v562), v343)),
+                                               _mm_mul_ps(*(__m128 *)_xmm, v343))),
+                                           v340);
     }
 LABEL_127:
-    v239 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v240 = (signed int)floatsOut;
-    v241 = ((_DWORD)floatsOut + 15) & 0xFFFFFFF0;
-    if ( (signed int)floatsOut > v239->m_slabSize
-      || (char *)v238 + v241 != v239->m_cur
-      || v239->m_firstNonLifoEnd == v238 )
-    {
-      hkLifoAllocator::slowBlockFree(v239, v238, v241);
-    }
+    v229 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v230 = (int)floatsOut;
+    v231 = ((_DWORD)floatsOut + 15) & 0xFFFFFFF0;
+    if ( (int)floatsOut > v229->m_slabSize || (char *)v228 + v231 != v229->m_cur || v229->m_firstNonLifoEnd == v228 )
+      hkLifoAllocator::slowBlockFree(v229, v228, v231);
     else
-    {
-      v239->m_cur = v238;
-    }
-    v362 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    if ( v240 > v362->m_slabSize || (char *)v511 + v241 != v362->m_cur || v362->m_firstNonLifoEnd == v511 )
-      hkLifoAllocator::slowBlockFree(v362, v511, v241);
+      v229->m_cur = v228;
+    v344 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    if ( v230 > v344->m_slabSize || (char *)v479 + v231 != v344->m_cur || v344->m_firstNonLifoEnd == v479 )
+      hkLifoAllocator::slowBlockFree(v344, v479, v231);
     else
-      v362->m_cur = v511;
-    LODWORD(v55) = numBones;
-    v13 = end;
+      v344->m_cur = v479;
+    LODWORD(v54) = numBones;
+    v13 = (const char *)end;
   }
-  v363 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v364 = (_QWORD *)v363[1];
-  if ( (unsigned __int64)v364 < v363[3] )
+  v345 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v346 = (_QWORD *)v345[1];
+  if ( (unsigned __int64)v346 < v345[3] )
   {
-    *v364 = "StCopyReferencePoseF";
-    v365 = __rdtsc();
-    v366 = (signed __int64)(v364 + 2);
-    *(_DWORD *)(v366 - 8) = v365;
-    v363[1] = v366;
+    *v346 = "StCopyReferencePoseF";
+    v347 = __rdtsc();
+    v348 = v346 + 2;
+    *((_DWORD *)v348 - 2) = v347;
+    v345[1] = v348;
   }
-  v367 = refBones;
-  v368 = bonesOut;
-  if ( (signed int)v55 > 0 )
+  v349 = refBones;
+  v350 = bonesOut;
+  if ( (int)v54 > 0 )
   {
-    v369 = (unsigned int)v55;
-    v370 = (char *)bonesOut - (char *)refBones;
+    v351 = (unsigned int)v54;
+    v352 = (char *)bonesOut - (char *)refBones;
     do
     {
-      v371 = v367->m_translation.m_quad.m128_i32[0];
-      v367 = (hkQsTransformf *)((char *)v367 + 4);
-      *(int *)((char *)&v367->m_translation.m_quad.m128_i32[-1] + v370) = v371;
-      --v369;
+      v353 = v349->m_translation.m_quad.m128_i32[0];
+      v349 = (hkQsTransformf *)((char *)v349 + 4);
+      *(int *)((char *)&v349->m_translation.m_quad.m128_i32[-1] + v352) = v353;
+      --v351;
     }
-    while ( v369 );
+    while ( v351 );
   }
-  v372 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v373 = (_QWORD *)v372[1];
-  if ( (unsigned __int64)v373 < v372[3] )
+  v354 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v355 = (_QWORD *)v354[1];
+  if ( (unsigned __int64)v355 < v354[3] )
   {
-    *v373 = "StCopyStaticTracksF";
-    v374 = __rdtsc();
-    v375 = (signed __int64)(v373 + 2);
-    *(_DWORD *)(v375 - 8) = v374;
-    v372[1] = v375;
+    *v355 = "StCopyStaticTracksF";
+    v356 = __rdtsc();
+    v357 = v355 + 2;
+    *((_DWORD *)v357 - 2) = v356;
+    v354[1] = v357;
   }
-  v376 = v12->m_intData.m_data;
-  v377 = v12->m_intArrayOffsets[7];
-  v378 = &v376[v377];
-  v379 = v12->m_intArrayOffsets[8] - v377;
-  retaddr = (signed __int64)&v376[v12->m_intArrayOffsets[5]];
-  if ( v379 > 0 )
+  v358 = v12->m_intData.m_data;
+  v359 = v12->m_intArrayOffsets[7];
+  v360 = &v358[v359];
+  v361 = v12->m_intArrayOffsets[8] - v359;
+  retaddr = (__int64)&v358[v12->m_intArrayOffsets[5]];
+  if ( v361 > 0 )
   {
-    v380 = *v378;
-    v381 = v515;
-    v382 = 0i64;
-    v383 = v379 - 1;
-    v384 = v383;
-    if ( v383 <= 0 )
+    v362 = *v360;
+    v363 = v483;
+    v364 = 0i64;
+    v365 = v361 - 1;
+    v366 = v365;
+    if ( v365 <= 0 )
     {
 LABEL_161:
-      if ( v380 < (signed int)v55 )
-        v368->m_translation.m_quad.m128_i32[v380] = *v381;
+      if ( v362 < (int)v54 )
+        v350->m_translation.m_quad.m128_i32[v362] = *v363;
     }
     else
     {
-      while ( v380 < (signed int)v55 )
+      while ( v362 < (int)v54 )
       {
-        v385 = *v381;
-        ++v382;
-        ++v381;
-        v368->m_translation.m_quad.m128_i32[v380] = v385;
-        v380 = v378[v382];
-        if ( v382 >= v384 )
+        v367 = *v363;
+        ++v364;
+        ++v363;
+        v350->m_translation.m_quad.m128_i32[v362] = v367;
+        v362 = v360[v364];
+        if ( v364 >= v366 )
           goto LABEL_161;
       }
     }
   }
-  v386 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v387 = (_QWORD *)v386[1];
-  if ( (unsigned __int64)v387 < v386[3] )
+  v368 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v369 = (_QWORD *)v368[1];
+  if ( (unsigned __int64)v369 < v368[3] )
   {
-    *v387 = "StCopyDynamicTracksF";
-    v388 = __rdtsc();
-    v389 = (signed __int64)(v387 + 2);
-    *(_DWORD *)(v389 - 8) = v388;
-    v386[1] = v389;
+    *v369 = "StCopyDynamicTracksF";
+    v370 = __rdtsc();
+    v371 = v369 + 2;
+    *((_DWORD *)v371 - 2) = v370;
+    v368[1] = v371;
   }
-  if ( v524 != v533 )
+  if ( v492 != v501 )
   {
-    v390 = v12->m_firstFloatBlockScaleAndOffsetIndex;
-    v391 = v12->m_floatData.m_data;
-    v13 = v533;
-    v29 = &v391[v390 + v12->m_floatArrayOffsets[1]];
-    v31 = (signed __int64)&v391[v390 + v12->m_floatArrayOffsets[2]];
-    v513 = &v12->m_intData.m_data[v12->m_intArrayOffsets[3]
-                                + ((signed __int64)(v12->m_intArrayOffsets[5] - v12->m_intArrayOffsets[4]) >> 4)];
+    m_firstFloatBlockScaleAndOffsetIndex = v12->m_firstFloatBlockScaleAndOffsetIndex;
+    v373 = v12->m_floatData.m_data;
+    v13 = v501;
+    v29 = (int *)&v373[m_firstFloatBlockScaleAndOffsetIndex + v12->m_floatArrayOffsets[1]];
+    v31 = (__int64)&v373[m_firstFloatBlockScaleAndOffsetIndex + v12->m_floatArrayOffsets[2]];
+    v481 = &v12->m_intData.m_data[v12->m_intArrayOffsets[3]
+                                + ((__int64)(v12->m_intArrayOffsets[5] - v12->m_intArrayOffsets[4]) >> 4)];
   }
-  v392 = v12->m_intArrayOffsets[5];
-  v393 = v12->m_intArrayOffsets[6] - v392;
-  v394 = (v392 - v12->m_intArrayOffsets[4]) & 0x8000000F;
-  LODWORD(refFloats) = v393;
-  v617 = v394;
-  if ( v394 < 0 )
+  v374 = v12->m_intArrayOffsets[5];
+  v375 = v12->m_intArrayOffsets[6] - v374;
+  v376 = (v374 - v12->m_intArrayOffsets[4]) & 0x8000000F;
+  LODWORD(refFloats) = v375;
+  v585 = v376;
+  if ( v376 < 0 )
   {
-    v394 = (((_BYTE)v394 - 1) | 0xFFFFFFF0) + 1;
-    v617 = v394;
+    v376 = (((_BYTE)v376 - 1) | 0xFFFFFFF0) + 1;
+    v585 = v376;
   }
-  v395 = v393;
-  if ( 16 - v394 < v393 )
-    v395 = 16 - v394;
-  if ( v395 <= 0 )
+  v377 = v375;
+  if ( 16 - v376 < v375 )
+    v377 = 16 - v376;
+  if ( v377 <= 0 )
   {
-    v441 = retaddr;
+    v416 = retaddr;
     goto LABEL_211;
   }
-  if ( v524 != v533 )
+  if ( v492 != v501 )
   {
-    v396 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v397 = v396[1];
-    if ( v397 < v396[3] )
+    v378 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v379 = v378[1];
+    if ( v379 < v378[3] )
     {
-      *(_QWORD *)v397 = "LtloadDynamic";
-      *(_QWORD *)(v397 + 16) = "StDecompress";
-      v398 = __rdtsc();
-      *(_DWORD *)(v397 + 8) = v398;
-      v396[1] = v397 + 24;
+      *(_QWORD *)v379 = "LtloadDynamic";
+      *(_QWORD *)(v379 + 16) = "StDecompress";
+      v380 = __rdtsc();
+      *(_DWORD *)(v379 + 8) = v380;
+      v378[1] = v379 + 24;
     }
-    if ( v506 )
-      v399 = hkaPredictiveBlockCompression::decodeSingleFrame(v13, (int)start, (__int16 *)frameData->m128i_i64);
+    if ( v474 )
+      v381 = hkaPredictiveBlockCompression::decodeSingleFrame(v13, (int)start, frameData->m128i_i16);
     else
-      v399 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v13, (int)start, (__int16 *)frameData->m128i_i64);
-    v13 = v399;
-    v400 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v401 = (_QWORD *)v400[1];
-    if ( (unsigned __int64)v401 < v400[3] )
+      v381 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v13, (int)start, frameData->m128i_i16);
+    v13 = v381;
+    v382 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v383 = (_QWORD *)v382[1];
+    if ( (unsigned __int64)v383 < v382[3] )
     {
-      *v401 = "StDequantize";
-      v402 = __rdtsc();
-      v403 = (signed __int64)(v401 + 2);
-      *(_DWORD *)(v403 - 8) = v402;
-      v400[1] = v403;
+      *v383 = "StDequantize";
+      v384 = __rdtsc();
+      v385 = v383 + 2;
+      *((_DWORD *)v385 - 2) = v384;
+      v382[1] = v385;
     }
-    v404 = 0i64;
+    v386 = 0i64;
     LODWORD(end) = 956302336;
-    v405 = *v513;
-    v406 = 0i64;
-    ++v513;
-    v407 = 4i64;
+    v387 = *v481;
+    v388 = 0i64;
+    ++v481;
+    v389 = 4i64;
     do
     {
-      if ( v405 & 1 )
+      if ( (v387 & 1) != 0 )
       {
-        v509.m128_i32[v404] = 956302336;
-        v510.m128_i32[v404] = 0;
+        v477.m128_i32[v386] = 956302336;
+        v478.m128_i32[v386] = 0;
       }
       else
       {
-        v408 = *(_DWORD *)v29;
-        ++v29;
+        v390 = *v29++;
         v31 += 4i64;
-        v509.m128_i32[v406] = v408;
-        v510.m128_i32[v406] = *(_DWORD *)(v31 - 4);
+        v477.m128_i32[v388] = v390;
+        v478.m128_i32[v388] = *(_DWORD *)(v31 - 4);
       }
-      v405 >>= 1;
-      ++v404;
+      v387 >>= 1;
+      ++v386;
+      ++v388;
+      --v389;
+    }
+    while ( v389 );
+    v391 = v477;
+    v392 = v478;
+    v393 = 0i64;
+    v394 = 0i64;
+    v395 = 4i64;
+    v552 = v477;
+    v532 = v478;
+    do
+    {
+      if ( (v387 & 1) != 0 )
+      {
+        v477.m128_i32[v393] = 956302336;
+        v478.m128_i32[v393] = 0;
+      }
+      else
+      {
+        v396 = *v29++;
+        v31 += 4i64;
+        v477.m128_i32[v394] = v396;
+        v478.m128_i32[v394] = *(_DWORD *)(v31 - 4);
+      }
+      v387 >>= 1;
+      ++v393;
+      ++v394;
+      --v395;
+    }
+    while ( v395 );
+    v397 = v477;
+    v398 = v478;
+    v399 = 0i64;
+    v400 = 0i64;
+    v401 = 4i64;
+    v544 = v477;
+    v534 = v478;
+    do
+    {
+      if ( (v387 & 1) != 0 )
+      {
+        v477.m128_i32[v399] = 956302336;
+        v478.m128_i32[v399] = 0;
+      }
+      else
+      {
+        v402 = *v29++;
+        v31 += 4i64;
+        v477.m128_i32[v400] = v402;
+        v478.m128_i32[v400] = *(_DWORD *)(v31 - 4);
+      }
+      v387 >>= 1;
+      ++v399;
+      ++v400;
+      --v401;
+    }
+    while ( v401 );
+    v403 = v477;
+    v404 = v478;
+    v405 = 0i64;
+    v406 = 0i64;
+    v407 = 4i64;
+    v550 = v477;
+    v536 = v478;
+    do
+    {
+      if ( (v387 & 1) != 0 )
+      {
+        v477.m128_i32[v405] = 956302336;
+        v478.m128_i32[v405] = 0;
+      }
+      else
+      {
+        v408 = *v29++;
+        v31 += 4i64;
+        v477.m128_i32[v406] = v408;
+        v478.m128_i32[v406] = *(_DWORD *)(v31 - 4);
+      }
+      v387 >>= 1;
+      ++v405;
       ++v406;
       --v407;
     }
     while ( v407 );
-    v409 = v509;
-    v410 = v510;
-    v411 = 0i64;
-    v412 = 0i64;
-    v413 = 4i64;
-    v584 = v509;
-    v564 = v510;
-    do
-    {
-      if ( v405 & 1 )
-      {
-        v509.m128_i32[v411] = 956302336;
-        v510.m128_i32[v411] = 0;
-      }
-      else
-      {
-        v414 = *(_DWORD *)v29;
-        ++v29;
-        v31 += 4i64;
-        v509.m128_i32[v412] = v414;
-        v510.m128_i32[v412] = *(_DWORD *)(v31 - 4);
-      }
-      v405 >>= 1;
-      ++v411;
-      ++v412;
-      --v413;
-    }
-    while ( v413 );
-    v415 = v509;
-    v416 = v510;
-    v417 = 0i64;
-    v418 = 0i64;
-    v419 = 4i64;
-    v576 = v509;
-    v566 = v510;
-    do
-    {
-      if ( v405 & 1 )
-      {
-        v509.m128_i32[v417] = 956302336;
-        v510.m128_i32[v417] = 0;
-      }
-      else
-      {
-        v420 = *(_DWORD *)v29;
-        ++v29;
-        v31 += 4i64;
-        v509.m128_i32[v418] = v420;
-        v510.m128_i32[v418] = *(_DWORD *)(v31 - 4);
-      }
-      v405 >>= 1;
-      ++v417;
-      ++v418;
-      --v419;
-    }
-    while ( v419 );
-    v421 = v509;
-    v422 = v510;
-    v423 = 0i64;
-    v424 = 0i64;
-    v425 = 4i64;
-    v582 = v509;
-    v568 = v510;
-    do
-    {
-      if ( v405 & 1 )
-      {
-        v509.m128_i32[v423] = 956302336;
-        v510.m128_i32[v423] = 0;
-      }
-      else
-      {
-        v426 = *(_DWORD *)v29;
-        ++v29;
-        v31 += 4i64;
-        v509.m128_i32[v424] = v426;
-        v510.m128_i32[v424] = *(_DWORD *)(v31 - 4);
-      }
-      v405 >>= 1;
-      ++v423;
-      ++v424;
-      --v425;
-    }
-    while ( v425 );
-    v427 = v509;
-    v428 = v510;
-    v578 = v509;
-    v570 = v510;
-    v429 = _mm_load_si128(frameData);
-    _mm_store_si128((__m128i *)&v596, v429);
-    v430 = _mm_add_ps(
+    v546 = v477;
+    v538 = v478;
+    v564 = _mm_load_si128(frameData);
+    v409 = _mm_add_ps(
              _mm_mul_ps(
-               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v429, (__m128i)0i64), 0x10u), 0x10u)),
-               v409),
-             v410);
-    v531 = _mm_add_ps(
+               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v564, (__m128i)0i64), 0x10u), 0x10u)),
+               v391),
+             v392);
+    v499 = _mm_add_ps(
              _mm_mul_ps(
-               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v429, (__m128i)0i64), 0x10u), 0x10u)),
-               v415),
-             v416);
-    v572 = v430;
-    v431 = _mm_load_si128(frameData + 1);
-    _mm_store_si128((__m128i *)&v598, v431);
-    v527 = _mm_add_ps(
+               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v564, (__m128i)0i64), 0x10u), 0x10u)),
+               v397),
+             v398);
+    v540 = v409;
+    v566 = _mm_load_si128(frameData + 1);
+    v495 = _mm_add_ps(
              _mm_mul_ps(
-               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v431, (__m128i)0i64), 0x10u), 0x10u)),
-               v421),
-             v422);
-    v535 = _mm_add_ps(
+               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v566, (__m128i)0i64), 0x10u), 0x10u)),
+               v403),
+             v404);
+    v503 = _mm_add_ps(
              _mm_mul_ps(
-               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v431, (__m128i)0i64), 0x10u), 0x10u)),
-               v427),
-             v428);
-    if ( v506 )
+               _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v566, (__m128i)0i64), 0x10u), 0x10u)),
+               v477),
+             v478);
+    if ( v474 )
     {
-      v43[8] = v430;
-      v43[9] = v531;
-      v43[10] = v527;
-      v435 = v535;
+      m_cur[8] = v409;
+      m_cur[9] = v499;
+      m_cur[10] = v495;
+      v410 = v503;
     }
     else
     {
-      *v43 = v430;
-      v43[1] = v531;
-      v43[2] = v527;
-      v43[3] = v535;
-      v432 = _mm_load_si128(frameData + 2);
-      _mm_store_si128((__m128i *)&v600, v432);
-      v433 = _mm_add_ps(
+      *m_cur = v409;
+      m_cur[1] = v499;
+      m_cur[2] = v495;
+      m_cur[3] = v503;
+      v568 = _mm_load_si128(frameData + 2);
+      v513 = _mm_add_ps(
                _mm_mul_ps(
-                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v432, (__m128i)0i64), 0x10u), 0x10u)),
-                 v584),
-               v564);
-      v545 = _mm_add_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v568, (__m128i)0i64), 0x10u), 0x10u)),
+                 v544),
+               v534);
+      v554 = _mm_add_ps(
                _mm_mul_ps(
-                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v432, (__m128i)0i64), 0x10u), 0x10u)),
-                 v576),
-               v566);
-      v586 = v433;
-      v434 = _mm_load_si128(frameData + 3);
-      _mm_store_si128((__m128i *)&v602, v434);
-      v539 = _mm_add_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v568, (__m128i)0i64), 0x10u), 0x10u)),
+                 v552),
+               v532);
+      v570 = _mm_load_si128(frameData + 3);
+      v507 = _mm_add_ps(
                _mm_mul_ps(
-                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v434, (__m128i)0i64), 0x10u), 0x10u)),
-                 v582),
-               v568);
-      v540 = _mm_add_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v570, (__m128i)0i64), 0x10u), 0x10u)),
+                 v550),
+               v536);
+      v508 = _mm_add_ps(
                _mm_mul_ps(
-                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v434, (__m128i)0i64), 0x10u), 0x10u)),
-                 v578),
-               v570);
-      v43[4] = v433;
-      v43[5] = v545;
-      v43[6] = v539;
-      v43[7] = v540;
-      v604 = _mm_add_ps(_mm_mul_ps(v25, v586), _mm_mul_ps(v27, v572));
-      v580 = _mm_add_ps(_mm_mul_ps(v25, v545), _mm_mul_ps(v27, v531));
-      v574 = _mm_add_ps(_mm_mul_ps(v25, v539), _mm_mul_ps(v27, v527));
-      v562 = _mm_add_ps(_mm_mul_ps(v25, v540), _mm_mul_ps(v27, v535));
-      v43[8] = v604;
-      v43[9] = v580;
-      v43[10] = v574;
-      v435 = v562;
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v570, (__m128i)0i64), 0x10u), 0x10u)),
+                 v546),
+               v538);
+      m_cur[4] = v554;
+      m_cur[5] = v513;
+      m_cur[6] = v507;
+      m_cur[7] = v508;
+      v572 = _mm_add_ps(_mm_mul_ps(v25, v554), _mm_mul_ps(v27, v540));
+      v548 = _mm_add_ps(_mm_mul_ps(v25, v513), _mm_mul_ps(v27, v499));
+      v542 = _mm_add_ps(_mm_mul_ps(v25, v507), _mm_mul_ps(v27, v495));
+      v530 = _mm_add_ps(_mm_mul_ps(v25, v508), _mm_mul_ps(v27, v503));
+      m_cur[8] = v572;
+      m_cur[9] = v548;
+      m_cur[10] = v542;
+      v410 = v530;
     }
-    v43[11] = v435;
-    v436 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v393 = (signed int)refFloats;
-    v437 = (_QWORD *)v436[1];
-    v438 = v436;
-    if ( (unsigned __int64)v437 < v436[3] )
+    m_cur[11] = v410;
+    v411 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v375 = (int)refFloats;
+    v412 = (_QWORD *)v411[1];
+    v413 = v411;
+    if ( (unsigned __int64)v412 < v411[3] )
     {
-      *v437 = "lt";
-      v439 = __rdtsc();
-      v440 = (signed __int64)(v437 + 2);
-      *(_DWORD *)(v440 - 8) = v439;
-      v438[1] = v440;
+      *v412 = "lt";
+      v414 = __rdtsc();
+      v415 = v412 + 2;
+      *((_DWORD *)v415 - 2) = v414;
+      v413[1] = v415;
     }
   }
-  v441 = retaddr;
-  v442 = (signed int)v617;
-  v443 = *(unsigned __int16 *)retaddr;
-  v444 = 0;
-  v445 = 0i64;
-  if ( v395 - 1 <= 0 )
+  v416 = retaddr;
+  v417 = (int)v585;
+  v418 = *(unsigned __int16 *)retaddr;
+  v419 = 0;
+  v420 = 0i64;
+  if ( v377 - 1 <= 0 )
   {
 LABEL_208:
-    v446 = numBones;
-    if ( v443 >= numBones )
+    v421 = numBones;
+    if ( v418 >= numBones )
       goto LABEL_212;
-    v368->m_translation.m_quad.m128_i32[v443] = *((_DWORD *)v43 + v442 + v444 + 32);
+    v350->m_translation.m_quad.m128_i32[v418] = m_cur[8].m128_i32[v417 + v419];
 LABEL_211:
-    v446 = numBones;
+    v421 = numBones;
     goto LABEL_212;
   }
   while ( 1 )
   {
-    v446 = numBones;
-    if ( v443 >= numBones )
+    v421 = numBones;
+    if ( v418 >= numBones )
       break;
-    v447 = v442 + v445++;
-    ++v444;
-    v368->m_translation.m_quad.m128_i32[v443] = *((_DWORD *)v43 + v447 + 32);
-    v443 = *(unsigned __int16 *)(retaddr + 2 * v445);
-    if ( v445 >= v395 - 1 )
+    v422 = v417 + v420++;
+    ++v419;
+    v350->m_translation.m_quad.m128_i32[v418] = m_cur[8].m128_i32[v422];
+    v418 = *(unsigned __int16 *)(retaddr + 2 * v420);
+    if ( v420 >= v377 - 1 )
       goto LABEL_208;
   }
 LABEL_212:
-  if ( v395 < v393 )
+  if ( v377 < v375 )
   {
-    v448 = v395;
-    end = (const char *)v393;
-    if ( v395 < (signed __int64)v393 )
+    v423 = v377;
+    for ( end = v375; v423 < end; v416 = retaddr )
     {
+      v424 = *(unsigned __int16 *)(v416 + 2 * v423);
+      if ( v424 >= v421 )
+        break;
+      v425 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v426 = v425[1];
+      if ( v426 < v425[3] )
+      {
+        *(_QWORD *)v426 = "LtloadDynamic";
+        *(_QWORD *)(v426 + 16) = "StDecompress";
+        v427 = __rdtsc();
+        *(_DWORD *)(v426 + 8) = v427;
+        v425[1] = v426 + 24;
+      }
+      if ( v474 )
+        v428 = hkaPredictiveBlockCompression::decodeSingleFrame(v13, (int)start, frameData->m128i_i16);
+      else
+        v428 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v13, (int)start, frameData->m128i_i16);
+      v13 = v428;
+      v429 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v430 = (_QWORD *)v429[1];
+      if ( (unsigned __int64)v430 < v429[3] )
+      {
+        *v430 = "StDequantize";
+        v431 = __rdtsc();
+        v432 = v430 + 2;
+        *((_DWORD *)v432 - 2) = v431;
+        v429[1] = v432;
+      }
+      v433 = 0i64;
+      v585 = 956302336;
+      v434 = *v481;
+      v435 = 0i64;
+      ++v481;
+      v436 = 4i64;
       do
       {
-        v449 = *(unsigned __int16 *)(v441 + 2 * v448);
-        if ( v449 >= v446 )
-          break;
-        v450 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v451 = v450[1];
-        if ( v451 < v450[3] )
+        if ( (v434 & 1) != 0 )
         {
-          *(_QWORD *)v451 = "LtloadDynamic";
-          *(_QWORD *)(v451 + 16) = "StDecompress";
-          v452 = __rdtsc();
-          *(_DWORD *)(v451 + 8) = v452;
-          v450[1] = v451 + 24;
-        }
-        if ( v506 )
-          v453 = hkaPredictiveBlockCompression::decodeSingleFrame(v13, (int)start, (__int16 *)frameData->m128i_i64);
-        else
-          v453 = hkaPredictiveBlockCompression::decodeAdjacentFrames(v13, (int)start, (__int16 *)frameData->m128i_i64);
-        v13 = v453;
-        v454 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v455 = (_QWORD *)v454[1];
-        if ( (unsigned __int64)v455 < v454[3] )
-        {
-          *v455 = "StDequantize";
-          v456 = __rdtsc();
-          v457 = (signed __int64)(v455 + 2);
-          *(_DWORD *)(v457 - 8) = v456;
-          v454[1] = v457;
-        }
-        v458 = 0i64;
-        v617 = 956302336;
-        v459 = *v513;
-        v460 = 0i64;
-        ++v513;
-        v461 = 4i64;
-        do
-        {
-          if ( v459 & 1 )
-          {
-            v509.m128_i32[v458] = 956302336;
-            v510.m128_i32[v458] = 0;
-          }
-          else
-          {
-            v462 = *(_DWORD *)v29;
-            ++v29;
-            v31 += 4i64;
-            v509.m128_i32[v460] = v462;
-            v510.m128_i32[v460] = *(_DWORD *)(v31 - 4);
-          }
-          v459 >>= 1;
-          ++v458;
-          ++v460;
-          --v461;
-        }
-        while ( v461 );
-        v463 = v509;
-        v464 = v510;
-        v465 = 0i64;
-        v466 = 0i64;
-        v467 = 4i64;
-        v563 = v509;
-        v565 = v510;
-        do
-        {
-          if ( v459 & 1 )
-          {
-            v518.m128_i32[v465] = 956302336;
-            v517.m128_i32[v465] = 0;
-          }
-          else
-          {
-            v468 = *(_DWORD *)v29;
-            ++v29;
-            v31 += 4i64;
-            v518.m128_i32[v466] = v468;
-            v517.m128_i32[v466] = *(_DWORD *)(v31 - 4);
-          }
-          v459 >>= 1;
-          ++v465;
-          ++v466;
-          --v467;
-        }
-        while ( v467 );
-        v469 = v518;
-        v470 = v517;
-        v471 = 0i64;
-        v472 = 0i64;
-        v473 = 4i64;
-        v567 = v518;
-        v569 = v517;
-        do
-        {
-          if ( v459 & 1 )
-          {
-            v520.m128_i32[v471] = 956302336;
-            v523.m128_i32[v471] = 0;
-          }
-          else
-          {
-            v474 = *(_DWORD *)v29;
-            ++v29;
-            v31 += 4i64;
-            v520.m128_i32[v472] = v474;
-            v523.m128_i32[v472] = *(_DWORD *)(v31 - 4);
-          }
-          v459 >>= 1;
-          ++v471;
-          ++v472;
-          --v473;
-        }
-        while ( v473 );
-        v475 = v520;
-        v476 = v523;
-        v477 = 0i64;
-        v478 = 0i64;
-        v479 = 4i64;
-        v571 = v520;
-        v573 = v523;
-        do
-        {
-          if ( v459 & 1 )
-          {
-            v525.m128_i32[v477] = 956302336;
-            v521.m128_i32[v477] = 0;
-          }
-          else
-          {
-            v480 = *(_DWORD *)v29;
-            ++v29;
-            v31 += 4i64;
-            v525.m128_i32[v478] = v480;
-            v521.m128_i32[v478] = *(_DWORD *)(v31 - 4);
-          }
-          v459 >>= 1;
-          ++v477;
-          ++v478;
-          --v479;
-        }
-        while ( v479 );
-        v481 = v525;
-        v482 = v521;
-        v548 = v525;
-        v550 = v521;
-        v483 = _mm_load_si128(frameData);
-        _mm_store_si128((__m128i *)&v606, v483);
-        v484 = _mm_add_ps(
-                 _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v483, (__m128i)0i64), 0x10u), 0x10u)),
-                   v463),
-                 v464);
-        v528 = _mm_add_ps(
-                 _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v483, (__m128i)0i64), 0x10u), 0x10u)),
-                   v469),
-                 v470);
-        v554 = v484;
-        v485 = _mm_load_si128(frameData + 1);
-        _mm_store_si128((__m128i *)&v608, v485);
-        v529 = _mm_add_ps(
-                 _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v485, (__m128i)0i64), 0x10u), 0x10u)),
-                   v475),
-                 v476);
-        v537 = _mm_add_ps(
-                 _mm_mul_ps(
-                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v485, (__m128i)0i64), 0x10u), 0x10u)),
-                   v481),
-                 v482);
-        if ( v506 )
-        {
-          v43[8] = v484;
-          v43[9] = v528;
-          v43[10] = v529;
-          v489 = v537;
+          v477.m128_i32[v433] = 956302336;
+          v478.m128_i32[v433] = 0;
         }
         else
         {
-          *v43 = v484;
-          v43[1] = v528;
-          v43[2] = v529;
-          v43[3] = v537;
-          v486 = _mm_load_si128(frameData + 2);
-          _mm_store_si128((__m128i *)&v610, v486);
-          v487 = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v486, (__m128i)0i64), 0x10u), 0x10u)),
-                     v563),
-                   v565);
-          v542 = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v486, (__m128i)0i64), 0x10u), 0x10u)),
-                     v567),
-                   v569);
-          v552 = v487;
-          v488 = _mm_load_si128(frameData + 3);
-          _mm_store_si128((__m128i *)&v612, v488);
-          v544 = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v488, (__m128i)0i64), 0x10u), 0x10u)),
-                     v571),
-                   v573);
-          v546 = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v488, (__m128i)0i64), 0x10u), 0x10u)),
-                     v548),
-                   v550);
-          v43[4] = v487;
-          v43[5] = v542;
-          v43[6] = v544;
-          v43[7] = v546;
-          v614 = _mm_add_ps(_mm_mul_ps(v25, v552), _mm_mul_ps(v27, v554));
-          v556 = _mm_add_ps(_mm_mul_ps(v25, v542), _mm_mul_ps(v27, v528));
-          v558 = _mm_add_ps(_mm_mul_ps(v25, v544), _mm_mul_ps(v27, v529));
-          v560 = _mm_add_ps(_mm_mul_ps(v25, v546), _mm_mul_ps(v27, v537));
-          v43[8] = v614;
-          v43[9] = v556;
-          v43[10] = v558;
-          v489 = v560;
+          v437 = *v29++;
+          v31 += 4i64;
+          v477.m128_i32[v435] = v437;
+          v478.m128_i32[v435] = *(_DWORD *)(v31 - 4);
         }
-        v43[11] = v489;
-        v490 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v491 = (_QWORD *)v490[1];
-        if ( (unsigned __int64)v491 < v490[3] )
-        {
-          *v491 = "lt";
-          v492 = __rdtsc();
-          v493 = (signed __int64)(v491 + 2);
-          *(_DWORD *)(v493 - 8) = v492;
-          v490[1] = v493;
-        }
-        v494 = (signed int)refFloats;
-        v495 = bonesOut;
-        v496 = 0i64;
-        if ( v395 + 16 < (signed int)refFloats )
-          v494 = v395 + 16;
-        v497 = v494 - 1;
-        if ( v448 >= v497 )
-        {
-LABEL_253:
-          v446 = numBones;
-          if ( v449 < numBones )
-          {
-            ++v395;
-            v495->m_translation.m_quad.m128_i32[v449] = *((_DWORD *)v43 + v496 + 32);
-            v446 = numBones;
-            ++v448;
-          }
-        }
-        else
-        {
-          v498 = (int *)(v43 + 8);
-          while ( 1 )
-          {
-            v446 = numBones;
-            if ( v449 >= numBones )
-              break;
-            v499 = *v498;
-            ++v448;
-            ++v395;
-            ++v496;
-            ++v498;
-            v495->m_translation.m_quad.m128_i32[v449] = v499;
-            v449 = *(unsigned __int16 *)(retaddr + 2 * v448);
-            if ( v448 >= v497 )
-              goto LABEL_253;
-          }
-        }
-        v441 = retaddr;
+        v434 >>= 1;
+        ++v433;
+        ++v435;
+        --v436;
       }
-      while ( v448 < (signed __int64)end );
+      while ( v436 );
+      v438 = v477;
+      v439 = v478;
+      v440 = 0i64;
+      v441 = 0i64;
+      v442 = 4i64;
+      v531 = v477;
+      v533 = v478;
+      do
+      {
+        if ( (v434 & 1) != 0 )
+        {
+          v486.m128_i32[v440] = 956302336;
+          v485.m128_i32[v440] = 0;
+        }
+        else
+        {
+          v443 = *v29++;
+          v31 += 4i64;
+          v486.m128_i32[v441] = v443;
+          v485.m128_i32[v441] = *(_DWORD *)(v31 - 4);
+        }
+        v434 >>= 1;
+        ++v440;
+        ++v441;
+        --v442;
+      }
+      while ( v442 );
+      v444 = v486;
+      v445 = v485;
+      v446 = 0i64;
+      v447 = 0i64;
+      v448 = 4i64;
+      v535 = v486;
+      v537 = v485;
+      do
+      {
+        if ( (v434 & 1) != 0 )
+        {
+          v488.m128_i32[v446] = 956302336;
+          v491.m128_i32[v446] = 0;
+        }
+        else
+        {
+          v449 = *v29++;
+          v31 += 4i64;
+          v488.m128_i32[v447] = v449;
+          v491.m128_i32[v447] = *(_DWORD *)(v31 - 4);
+        }
+        v434 >>= 1;
+        ++v446;
+        ++v447;
+        --v448;
+      }
+      while ( v448 );
+      v450 = v488;
+      v451 = v491;
+      v452 = 0i64;
+      v453 = 0i64;
+      v454 = 4i64;
+      v539 = v488;
+      v541 = v491;
+      do
+      {
+        if ( (v434 & 1) != 0 )
+        {
+          v493.m128_i32[v452] = 956302336;
+          v489.m128_i32[v452] = 0;
+        }
+        else
+        {
+          v455 = *v29++;
+          v31 += 4i64;
+          v493.m128_i32[v453] = v455;
+          v489.m128_i32[v453] = *(_DWORD *)(v31 - 4);
+        }
+        v434 >>= 1;
+        ++v452;
+        ++v453;
+        --v454;
+      }
+      while ( v454 );
+      v516 = v493;
+      v518 = v489;
+      v574 = _mm_load_si128(frameData);
+      v456 = _mm_add_ps(
+               _mm_mul_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v574, (__m128i)0i64), 0x10u), 0x10u)),
+                 v438),
+               v439);
+      v496 = _mm_add_ps(
+               _mm_mul_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v574, (__m128i)0i64), 0x10u), 0x10u)),
+                 v444),
+               v445);
+      v522 = v456;
+      v576 = _mm_load_si128(frameData + 1);
+      v497 = _mm_add_ps(
+               _mm_mul_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v576, (__m128i)0i64), 0x10u), 0x10u)),
+                 v450),
+               v451);
+      v505 = _mm_add_ps(
+               _mm_mul_ps(
+                 _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v576, (__m128i)0i64), 0x10u), 0x10u)),
+                 v493),
+               v489);
+      if ( v474 )
+      {
+        m_cur[8] = v456;
+        m_cur[9] = v496;
+        m_cur[10] = v497;
+        v457 = v505;
+      }
+      else
+      {
+        *m_cur = v456;
+        m_cur[1] = v496;
+        m_cur[2] = v497;
+        m_cur[3] = v505;
+        v578 = _mm_load_si128(frameData + 2);
+        v510 = _mm_add_ps(
+                 _mm_mul_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v578, (__m128i)0i64), 0x10u), 0x10u)),
+                   v535),
+                 v537);
+        v520 = _mm_add_ps(
+                 _mm_mul_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v578, (__m128i)0i64), 0x10u), 0x10u)),
+                   v531),
+                 v533);
+        v580 = _mm_load_si128(frameData + 3);
+        v512 = _mm_add_ps(
+                 _mm_mul_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpacklo_epi16(v580, (__m128i)0i64), 0x10u), 0x10u)),
+                   v539),
+                 v541);
+        v514 = _mm_add_ps(
+                 _mm_mul_ps(
+                   _mm_cvtepi32_ps(_mm_srai_epi32(_mm_slli_epi32(_mm_unpackhi_epi16(v580, (__m128i)0i64), 0x10u), 0x10u)),
+                   v516),
+                 v518);
+        m_cur[4] = v520;
+        m_cur[5] = v510;
+        m_cur[6] = v512;
+        m_cur[7] = v514;
+        v582 = _mm_add_ps(_mm_mul_ps(v25, v520), _mm_mul_ps(v27, v522));
+        v524 = _mm_add_ps(_mm_mul_ps(v25, v510), _mm_mul_ps(v27, v496));
+        v526 = _mm_add_ps(_mm_mul_ps(v25, v512), _mm_mul_ps(v27, v497));
+        v528 = _mm_add_ps(_mm_mul_ps(v25, v514), _mm_mul_ps(v27, v505));
+        m_cur[8] = v582;
+        m_cur[9] = v524;
+        m_cur[10] = v526;
+        v457 = v528;
+      }
+      m_cur[11] = v457;
+      v458 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v459 = (_QWORD *)v458[1];
+      if ( (unsigned __int64)v459 < v458[3] )
+      {
+        *v459 = "lt";
+        v460 = __rdtsc();
+        v461 = v459 + 2;
+        *((_DWORD *)v461 - 2) = v460;
+        v458[1] = v461;
+      }
+      v462 = (int)refFloats;
+      v463 = bonesOut;
+      v464 = 0i64;
+      if ( v377 + 16 < (int)refFloats )
+        v462 = v377 + 16;
+      v465 = v462 - 1;
+      if ( v423 >= v465 )
+      {
+LABEL_253:
+        v421 = numBones;
+        if ( v424 < numBones )
+        {
+          ++v377;
+          v463->m_translation.m_quad.m128_i32[v424] = m_cur[8].m128_i32[v464];
+          v421 = numBones;
+          ++v423;
+        }
+      }
+      else
+      {
+        v466 = m_cur + 8;
+        while ( 1 )
+        {
+          v421 = numBones;
+          if ( v424 >= numBones )
+            break;
+          v467 = v466->m128_i32[0];
+          ++v423;
+          ++v377;
+          ++v464;
+          v466 = (__m128 *)((char *)v466 + 4);
+          v463->m_translation.m_quad.m128_i32[v424] = v467;
+          v424 = *(unsigned __int16 *)(retaddr + 2 * v423);
+          if ( v423 >= v465 )
+            goto LABEL_253;
+        }
+      }
     }
   }
-  v500 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v500->m_slabSize < 256 || v43 + 16 != v500->m_cur || v500->m_firstNonLifoEnd == v43 )
-    hkLifoAllocator::slowBlockFree(v500, v43, 256);
+  v468 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  if ( v468->m_slabSize < 256 || &m_cur[16] != v468->m_cur || v468->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v468, m_cur, 256);
   else
-    v500->m_cur = v43;
-  v501 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v501->m_slabSize < 128 || &frameData[8] != v501->m_cur || v501->m_firstNonLifoEnd == frameData )
-    hkLifoAllocator::slowBlockFree(v501, frameData, 128);
+    v468->m_cur = m_cur;
+  v469 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  if ( v469->m_slabSize < 128 || &frameData[8] != v469->m_cur || v469->m_firstNonLifoEnd == frameData )
+    hkLifoAllocator::slowBlockFree(v469, frameData, 128);
   else
-    v501->m_cur = frameData;
-  v502 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v503 = (_QWORD *)v502[1];
-  if ( (unsigned __int64)v503 < v502[3] )
+    v469->m_cur = frameData;
+  v470 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v471 = (_QWORD *)v470[1];
+  if ( (unsigned __int64)v471 < v470[3] )
   {
-    *v503 = "lt";
-    v504 = __rdtsc();
-    v505 = (signed __int64)(v503 + 2);
-    *(_DWORD *)(v505 - 8) = v504;
-    v502[1] = v505;
+    *v471 = "lt";
+    v472 = __rdtsc();
+    v473 = v471 + 2;
+    *((_DWORD *)v473 - 2) = v472;
+    v470[1] = v473;
   }
-}= v556;
-          v43[10] = v558;
-          v489 = v560;
-        }
-        v43[11] = v489;
-        v490 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v491 = (_QWORD *)v490[1];
-        if ( (unsigned __int64)v491 < v490[3] )
-        {
-          *v491 = "lt";
-          v492 = __rdtsc();
-          v493 = (signed __int64)(v491 + 2);
-          *(_DWORD *)(v493 - 8) = v492;
-          v490[1] = v493;
-        }
-        v494 = (signed int)refFloats;
-        v495 = bonesOut;
-        v496 = 0i64;
-        if ( v395 + 16 < (signed int)refFloats )
-          v494 = v395 + 16;
-        v497 = v494 - 1;
-        if ( v448 >= v497 )
-        {
+}= _mm_add_ps(_mm_mul_ps(v25, v514), _mm_mul_ps(v27, v505));
+        m_cur[8] = v582;
+        m_cur[9] = v524;
+        m_cur[10] = v526;
+        v457 = v528;
+      }
+      m_cur[11] = v457;
+      v458 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v459 = (_QWORD *)v458[1];
+      if ( (unsigned __int64)v459 < v458[3] )
+      {
+        *v459 = "lt";
+        v460 = __rdtsc();
+        v461 = v459 + 2;
+        *((_DWORD *)v461 - 2) = v460;
+        v458[1] = v461;
+      }
+      v462 = (int)refFloats;
+      v463 = bonesOut;
+      v464 = 0i64;
+      if ( v377 + 16 < (int)refFloats )
+        v462 = v377 + 16;
+      v465 = v462 - 1;
+      if ( v423 >= v465 )
+      {
 LABEL_253:
-          v446 = numBones;
-          if ( v449 < numBones )
-          {
-            ++v395;
-            v495->m_translation.m_quad.m128_i32[v449] = *((_DWORD *)v43 + v496 + 32);
-            v446 = numBones;
-            ++v448;
-          }
-        }
-        else
+        v421 = numBones;
+        if ( v424 < numBones )
         {
-          v498 = (int *)(v43 + 8);
-          while ( 1 )
-          {
-            v446 = numBones;
-            if ( v449 >= numBones )
-              break;
-    
+          ++v377;
+          v463->m_translation.m_quad.m128_i32[v424] = m_cur[8].m128_i32[v464];
+          v421 = numBones;
+          ++v423;
+        }
+      }
+      else
+      {
+        v466 = m_cur + 8;
+        while ( 1 )
+        {
+          v421 = numBones;
+          if ( v424 >= numBones )
+            break;
+      
 
 // File Line: 849
 // RVA: 0xB2F690
-signed __int64 __fastcall hkaPredictiveCompressedAnimation::getNumDataChunks(hkaPredictiveCompressedAnimation *this, unsigned int frame, float delta)
+__int64 __fastcall hkaPredictiveCompressedAnimation::getNumDataChunks(
+        hkaPredictiveCompressedAnimation *this,
+        unsigned int frame,
+        float delta)
 {
   return 4i64;
 }
 
 // File Line: 854
 // RVA: 0xB2F810
-void __fastcall hkaPredictiveCompressedAnimation::recoverChunkData(hkaPredictiveCompressedAnimation *this, hkaAnimation::DataChunk *ch, int numChunks)
+void __fastcall hkaPredictiveCompressedAnimation::recoverChunkData(
+        hkaPredictiveCompressedAnimation *this,
+        hkaAnimation::DataChunk *ch,
+        int numChunks)
 {
-  int v3; // er8
-  char *v4; // rax
-  hkaPredictiveCompressedAnimation *v5; // r9
-  unsigned int v6; // ecx
-  unsigned int v7; // ecx
+  int m_size; // r8d
+  char *m_data; // rax
+  int v6; // ecx
+  int v7; // ecx
 
-  v3 = ch[1].m_size;
-  v4 = (char *)ch[1].m_data;
-  v5 = this;
-  this->m_compressedData.m_size = v3;
-  this->m_compressedData.m_data = v4;
-  this->m_compressedData.m_capacityAndFlags = v3 | 0x80000000;
+  m_size = ch[1].m_size;
+  m_data = (char *)ch[1].m_data;
+  this->m_compressedData.m_size = m_size;
+  this->m_compressedData.m_data = m_data;
+  this->m_compressedData.m_capacityAndFlags = m_size | 0x80000000;
   v6 = ch[2].m_size >> 1;
-  v5->m_intData.m_data = (unsigned __int16 *)ch[2].m_data;
-  v5->m_intData.m_size = v6;
-  v5->m_intData.m_capacityAndFlags = v6 | 0x80000000;
+  this->m_intData.m_data = (unsigned __int16 *)ch[2].m_data;
+  this->m_intData.m_size = v6;
+  this->m_intData.m_capacityAndFlags = v6 | 0x80000000;
   v7 = ch[3].m_size >> 2;
-  v5->m_floatData.m_data = (float *)ch[3].m_data;
-  v5->m_floatData.m_size = v7;
-  v5->m_floatData.m_capacityAndFlags = v7 | 0x80000000;
+  this->m_floatData.m_data = (float *)ch[3].m_data;
+  this->m_floatData.m_size = v7;
+  this->m_floatData.m_capacityAndFlags = v7 | 0x80000000;
 }
 
 // File Line: 863
 // RVA: 0xB2F6A0
-void __fastcall hkaPredictiveCompressedAnimation::getDataChunks(hkaPredictiveCompressedAnimation *this, unsigned int frame, float delta, hkaAnimation::DataChunk *ch)
+void __fastcall hkaPredictiveCompressedAnimation::getDataChunks(
+        hkaPredictiveCompressedAnimation *this,
+        unsigned int frame,
+        float delta,
+        hkaAnimation::DataChunk *ch)
 {
-  hkaAnimation::DataChunk *v4; // rbx
-  hkaPredictiveCompressedAnimation *v5; // rdi
   unsigned int v6; // edx
   float *v7; // rcx
-  int v8; // edx
-  unsigned __int16 *v9; // rax
+  int m_size; // edx
+  unsigned __int16 *m_data; // rax
   int v10; // eax
-  unsigned int start; // [rsp+30h] [rbp+8h]
-  unsigned int end; // [rsp+48h] [rbp+20h]
+  unsigned int start; // [rsp+30h] [rbp+8h] BYREF
+  unsigned int end; // [rsp+48h] [rbp+20h] BYREF
 
-  v4 = ch;
   ch->m_data = (const char *)this;
   ch->m_size = 192;
-  v5 = this;
   hkaPredictiveCompressedAnimation::getCompressedDataOffset(this, frame, &start, &end);
   v6 = start;
   v7 = 0i64;
-  v4[1].m_data = &v5->m_compressedData.m_data[start];
-  v4[1].m_size = end - v6;
-  v8 = v5->m_intData.m_size;
-  v9 = 0i64;
-  if ( v8 )
-    v9 = v5->m_intData.m_data;
-  v4[2].m_data = (const char *)v9;
-  v4[2].m_size = 2 * v8;
-  v10 = v5->m_floatData.m_size;
+  ch[1].m_data = &this->m_compressedData.m_data[start];
+  ch[1].m_size = end - v6;
+  m_size = this->m_intData.m_size;
+  m_data = 0i64;
+  if ( m_size )
+    m_data = this->m_intData.m_data;
+  ch[2].m_data = (const char *)m_data;
+  ch[2].m_size = 2 * m_size;
+  v10 = this->m_floatData.m_size;
   if ( v10 )
-    v7 = v5->m_floatData.m_data;
-  v4[3].m_data = (const char *)v7;
-  v4[3].m_size = 4 * v10;
+    v7 = this->m_floatData.m_data;
+  ch[3].m_data = (const char *)v7;
+  ch[3].m_size = 4 * v10;
 }
 
 // File Line: 874
 // RVA: 0xB2F730
-unsigned __int64 __fastcall hkaPredictiveCompressedAnimation::getMaxSizeOfCombinedDataChunks(hkaPredictiveCompressedAnimation *this)
+unsigned __int64 __fastcall hkaPredictiveCompressedAnimation::getMaxSizeOfCombinedDataChunks(
+        hkaPredictiveCompressedAnimation *this)
 {
   return ((4i64 * (unsigned int)this->m_floatData.m_size + 15) & 0xFFFFFFFFFFFFFFF0ui64)
        + ((this->m_maxCompressedBytesPerFrame + 31) & 0xFFFFFFF0)
@@ -3044,29 +2982,38 @@ unsigned __int64 __fastcall hkaPredictiveCompressedAnimation::getMaxSizeOfCombin
 
 // File Line: 884
 // RVA: 0xB2F780
-signed __int64 __fastcall hkaPredictiveCompressedAnimation::getMaxDecompressionTempBytes(hkaPredictiveCompressedAnimation *this)
+__int64 __fastcall hkaPredictiveCompressedAnimation::getMaxDecompressionTempBytes(
+        hkaPredictiveCompressedAnimation *this)
 {
-  hkaSkeleton *v1; // rax
-  unsigned int v2; // er9
+  hkaSkeleton *m_skeleton; // rax
+  unsigned int v2; // r9d
 
-  v1 = this->m_skeleton;
-  v2 = (v1->m_bones.m_size + 3) & 0xFFFFFFFC;
+  m_skeleton = this->m_skeleton;
+  v2 = (m_skeleton->m_bones.m_size + 3) & 0xFFFFFFFC;
   return ((v2 + 15) & 0xFFFFFFF0)
-       + ((((v1->m_floatSlots.m_size + 3) & 0xFFFFFFFC) + 15) & 0xFFFFFFF0)
-       + 4 * (((v1->m_floatSlots.m_size + 3) & 0xFFFFFFFC) + 4 * (v2 + 2 * (v2 + 8)))
+       + ((((m_skeleton->m_floatSlots.m_size + 3) & 0xFFFFFFFC) + 15) & 0xFFFFFFF0)
+       + 4 * (((m_skeleton->m_floatSlots.m_size + 3) & 0xFFFFFFFC) + 4 * (v2 + 2 * (v2 + 8)))
        + 96i64 * v2;
 }
 
 // File Line: 910
 // RVA: 0xB32220
-void __fastcall hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(int frameIndex, float frameDelta, int numTransformTracks, int numFloatTracks, hkQsTransformf *referenceBones, const float *referenceFloats, hkaAnimation::DataChunk *chunks, int numChunks, hkQsTransformf *transformTracksOut, float *floatTracksOut)
+void __fastcall hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(
+        unsigned int frameIndex,
+        float frameDelta,
+        int numTransformTracks,
+        int numFloatTracks,
+        hkQsTransformf *referenceBones,
+        const float *referenceFloats,
+        hkaAnimation::DataChunk *chunks,
+        int numChunks,
+        hkQsTransformf *transformTracksOut,
+        float *floatTracksOut)
 {
-  hkaPredictiveCompressedAnimation *v10; // r13
-  int v11; // ebx
-  int v12; // er14
+  hkaPredictiveCompressedAnimation *m_data; // r13
   __int64 numBones; // r15
-  signed __int64 numFloats; // r12
-  hkLifoAllocator *v15; // rax
+  __int64 v14; // r12
+  hkLifoAllocator *Value; // rax
   int v16; // edx
   char *v17; // rcx
   hkLifoAllocator *v18; // rax
@@ -3082,46 +3029,41 @@ void __fastcall hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(in
   int v28; // edx
   char *v29; // rcx
   int v30; // edx
-  int v31; // er9
+  int v31; // r9d
   __int64 v32; // r8
-  hkQsTransformf *v33; // r10
-  hkVector4f *v34; // rcx
+  hkVector4f *p_m_scale; // rcx
   hkQsTransformf *v35; // rax
-  float *v36; // rcx
-  signed __int64 v37; // r8
+  __int64 v37; // r8
   float *v38; // r9
   int v39; // ebx
   hkLifoAllocator *v40; // rax
-  int v41; // er8
+  int v41; // r8d
   int v42; // ebx
   hkLifoAllocator *v43; // rax
-  int v44; // er8
+  int v44; // r8d
   int v45; // ebx
   hkLifoAllocator *v46; // rax
-  int v47; // er8
+  int v47; // r8d
   int v48; // ebx
   hkLifoAllocator *v49; // rax
-  int v50; // er8
+  int v50; // r8d
+  __int64 numFloats; // [rsp+38h] [rbp-80h]
   hkQsTransformf *bonesOut; // [rsp+70h] [rbp-48h]
-  int frameIndexa; // [rsp+C0h] [rbp+8h]
 
-  frameIndexa = frameIndex;
-  v10 = (hkaPredictiveCompressedAnimation *)chunks->m_data;
-  v11 = numFloatTracks;
-  v12 = numTransformTracks;
-  numBones = *((signed int *)chunks->m_data + 39);
-  numFloats = *((signed int *)chunks->m_data + 40);
-  v15 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  bonesOut = (hkQsTransformf *)v15->m_cur;
+  m_data = (hkaPredictiveCompressedAnimation *)chunks->m_data;
+  numBones = *((int *)chunks->m_data + 39);
+  v14 = *((int *)chunks->m_data + 40);
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  bonesOut = (hkQsTransformf *)Value->m_cur;
   v16 = (48 * ((numBones + 3) & 0xFFFFFFFC) + 127) & 0xFFFFFF80;
   v17 = (char *)bonesOut + v16;
-  if ( v16 > v15->m_slabSize || v17 > v15->m_end )
-    bonesOut = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(v15, v16);
+  if ( v16 > Value->m_slabSize || v17 > Value->m_end )
+    bonesOut = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(Value, v16);
   else
-    v15->m_cur = v17;
+    Value->m_cur = v17;
   v18 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   floatsOut = (float *)v18->m_cur;
-  v20 = (4 * ((numFloats + 3) & 0xFFFFFFFC) + 127) & 0xFFFFFF80;
+  v20 = (4 * ((v14 + 3) & 0xFFFFFFFC) + 127) & 0xFFFFFF80;
   v21 = (char *)floatsOut + v20;
   if ( v20 > v18->m_slabSize || v21 > v18->m_end )
     floatsOut = (float *)hkLifoAllocator::allocateFromNewSlab(v18, v20);
@@ -3137,17 +3079,18 @@ void __fastcall hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(in
     v22->m_cur = v25;
   v26 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   floatWeightsInOut = (char *)v26->m_cur;
-  v28 = (((numFloats + 15) & 0xFFFFFFF0) + 127) & 0xFFFFFF80;
+  v28 = (((v14 + 15) & 0xFFFFFFF0) + 127) & 0xFFFFFF80;
   v29 = &floatWeightsInOut[v28];
   if ( v28 > v26->m_slabSize || v29 > v26->m_end )
     floatWeightsInOut = (char *)hkLifoAllocator::allocateFromNewSlab(v26, v28);
   else
     v26->m_cur = v29;
   hkString::memSet(boneWeightsInOut, 255, numBones);
-  hkString::memSet(floatWeightsInOut, 255, numFloats);
+  hkString::memSet(floatWeightsInOut, 255, v14);
+  LODWORD(numFloats) = v14;
   hkaPredictiveCompressedAnimation::sampleFullPose(
-    v10,
-    frameIndexa,
+    m_data,
+    frameIndex,
     frameDelta,
     chunks[1].m_data,
     referenceBones,
@@ -3161,42 +3104,39 @@ void __fastcall hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(in
   v30 = 0;
   v31 = 0;
   v32 = 0i64;
-  if ( (signed int)numBones > 0 )
+  if ( (int)numBones > 0 )
   {
-    v33 = transformTracksOut;
-    v34 = &bonesOut->m_scale;
+    p_m_scale = &bonesOut->m_scale;
     do
     {
-      if ( v31 >= v12 )
+      if ( v31 >= numTransformTracks )
         break;
-      if ( (unsigned __int8)boneWeightsInOut[v32] > 0u )
+      if ( boneWeightsInOut[v32] )
       {
-        v35 = v33;
-        ++v33;
-        v35->m_translation = (hkVector4f)v34[-2].m_quad;
+        v35 = transformTracksOut++;
+        v35->m_translation = (hkVector4f)p_m_scale[-2].m_quad;
         ++v31;
-        v35->m_rotation.m_vec = (hkVector4f)v34[-1].m_quad;
-        v35->m_scale = (hkVector4f)v34->m_quad;
+        v35->m_rotation.m_vec = (hkVector4f)p_m_scale[-1].m_quad;
+        v35->m_scale = (hkVector4f)p_m_scale->m_quad;
       }
       ++v32;
-      v34 += 3;
+      p_m_scale += 3;
     }
     while ( v32 < numBones );
   }
-  v36 = floatTracksOut;
   v37 = 0i64;
-  if ( numFloats < 4 )
+  if ( v14 < 4 )
   {
 LABEL_38:
-    while ( v37 < numFloats )
+    while ( v37 < v14 )
     {
-      if ( v30 >= v11 )
+      if ( v30 >= numFloatTracks )
         break;
       if ( floatWeightsInOut[v37] )
       {
-        ++v36;
+        ++floatTracksOut;
         ++v30;
-        *(v36 - 1) = floatsOut[v37];
+        *(floatTracksOut - 1) = floatsOut[v37];
       }
       ++v37;
     }
@@ -3204,45 +3144,45 @@ LABEL_38:
   else
   {
     v38 = floatsOut + 2;
-    while ( v30 < v11 )
+    while ( v30 < numFloatTracks )
     {
       if ( floatWeightsInOut[v37] )
       {
-        ++v36;
+        ++floatTracksOut;
         ++v30;
-        *(v36 - 1) = *(v38 - 2);
+        *(floatTracksOut - 1) = *(v38 - 2);
       }
-      if ( v30 >= v11 )
+      if ( v30 >= numFloatTracks )
         break;
       if ( floatWeightsInOut[v37 + 1] )
       {
-        ++v36;
+        ++floatTracksOut;
         ++v30;
-        *(v36 - 1) = *(v38 - 1);
+        *(floatTracksOut - 1) = *(v38 - 1);
       }
-      if ( v30 >= v11 )
+      if ( v30 >= numFloatTracks )
         break;
       if ( floatWeightsInOut[v37 + 2] )
       {
-        ++v36;
+        ++floatTracksOut;
         ++v30;
-        *(v36 - 1) = *v38;
+        *(floatTracksOut - 1) = *v38;
       }
-      if ( v30 >= v11 )
+      if ( v30 >= numFloatTracks )
         break;
       if ( floatWeightsInOut[v37 + 3] )
       {
-        ++v36;
+        ++floatTracksOut;
         ++v30;
-        *(v36 - 1) = v38[1];
+        *(floatTracksOut - 1) = v38[1];
       }
       v37 += 4i64;
       v38 += 4;
-      if ( v37 >= numFloats - 3 )
+      if ( v37 >= v14 - 3 )
         goto LABEL_38;
     }
   }
-  v39 = (((numFloats + 15) & 0xFFFFFFF0) + 127) & 0xFFFFFF80;
+  v39 = (((v14 + 15) & 0xFFFFFFF0) + 127) & 0xFFFFFF80;
   v40 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v41 = (v39 + 15) & 0xFFFFFFF0;
   if ( v39 > v40->m_slabSize || &floatWeightsInOut[v41] != v40->m_cur || v40->m_firstNonLifoEnd == floatWeightsInOut )
@@ -3256,7 +3196,7 @@ LABEL_38:
     hkLifoAllocator::slowBlockFree(v43, boneWeightsInOut, v44);
   else
     v43->m_cur = boneWeightsInOut;
-  v45 = (4 * ((numFloats + 3) & 0xFFFFFFFC) + 127) & 0xFFFFFF80;
+  v45 = (4 * ((v14 + 3) & 0xFFFFFFFC) + 127) & 0xFFFFFF80;
   v46 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v47 = (v45 + 15) & 0xFFFFFFF0;
   if ( v45 > v46->m_slabSize || (char *)floatsOut + v47 != v46->m_cur || v46->m_firstNonLifoEnd == floatsOut )
@@ -3274,16 +3214,18 @@ LABEL_38:
 
 // File Line: 964
 // RVA: 0xB2F1B0
-void __fastcall hkaPredictiveCompressedAnimation::sampleTracks(hkaPredictiveCompressedAnimation *this, float time, hkQsTransformf *transformTracksOut, float *floatTracksOut)
+void __fastcall hkaPredictiveCompressedAnimation::sampleTracks(
+        hkaPredictiveCompressedAnimation *this,
+        float time,
+        hkQsTransformf *transformTracksOut,
+        float *floatTracksOut)
 {
-  hkaSkeleton *v4; // rdx
-  int numBones; // er12
-  int v6; // edi
-  float *v7; // rbx
-  hkQsTransformf *v8; // rsi
-  hkLifoAllocator *v9; // rax
+  hkaSkeleton *m_skeleton; // rdx
+  int numBones; // r12d
+  int m_size; // edi
+  hkLifoAllocator *Value; // rax
   hkQsTransformf *bonesOut; // r13
-  int v11; // er15
+  int v11; // r15d
   char *v12; // rcx
   hkLifoAllocator *v13; // rax
   float *floatsOut; // r14
@@ -3298,62 +3240,57 @@ void __fastcall hkaPredictiveCompressedAnimation::sampleTracks(hkaPredictiveComp
   char *floatWeightsInOut; // rdi
   int v24; // eax
   char *v25; // rdx
-  float v26; // ST60_4
-  signed int v27; // eax
-  __m128 v28; // xmm5
-  __m128 v29; // xmm4
-  __m128 v30; // xmm1
-  unsigned int v31; // eax
-  __m128i v32; // xmm5
-  __m128 v33; // xmm2
-  __m128 v34; // xmm3
-  __m128 v35; // xmm4
-  unsigned int v36; // edx
-  float v37; // xmm6_4
-  __m128 v38; // xmm5
-  __m128 v39; // xmm1
-  signed __int64 v40; // rcx
-  signed __int64 v41; // r8
-  hkVector4f *v42; // rdx
-  hkQsTransformf *v43; // rax
-  float *v44; // rdx
-  hkLifoAllocator *v45; // rax
-  int v46; // er8
-  hkLifoAllocator *v47; // rax
-  int v48; // er8
-  hkLifoAllocator *v49; // rax
-  int v50; // er8
-  hkLifoAllocator *v51; // rax
-  int v52; // er8
+  int v26; // eax
+  __m128 v27; // xmm5
+  __m128 v28; // xmm4
+  __m128 v29; // xmm1
+  unsigned int v30; // eax
+  __m128i v31; // xmm5
+  __m128 v32; // xmm2
+  __m128 v33; // xmm3
+  __m128 v34; // xmm4
+  unsigned int v35; // edx
+  float v36; // xmm6_4
+  __m128 v37; // xmm5
+  __m128 v38; // xmm1
+  __int64 v39; // rcx
+  __int64 v40; // r8
+  hkVector4f *p_m_scale; // rdx
+  hkQsTransformf *v42; // rax
+  float *v43; // rdx
+  hkLifoAllocator *v44; // rax
+  int v45; // r8d
+  hkLifoAllocator *v46; // rax
+  int v47; // r8d
+  hkLifoAllocator *v48; // rax
+  int v49; // r8d
+  hkLifoAllocator *v50; // rax
+  int v51; // r8d
   int v53; // [rsp+68h] [rbp-60h]
-  signed int v54; // [rsp+6Ch] [rbp-5Ch]
-  signed int v55; // [rsp+70h] [rbp-58h]
-  hkaPredictiveCompressedAnimation *v56; // [rsp+D0h] [rbp+8h]
+  int v54; // [rsp+6Ch] [rbp-5Ch]
+  int v55; // [rsp+70h] [rbp-58h]
   int n; // [rsp+D8h] [rbp+10h]
 
-  v56 = this;
-  v4 = this->m_skeleton;
-  numBones = v4->m_referencePose.m_size;
-  v6 = v4->m_referenceFloats.m_size;
-  v7 = floatTracksOut;
-  v8 = transformTracksOut;
+  m_skeleton = this->m_skeleton;
+  numBones = m_skeleton->m_referencePose.m_size;
+  m_size = m_skeleton->m_referenceFloats.m_size;
   if ( this->m_numBones < numBones )
     numBones = this->m_numBones;
-  if ( this->m_numFloatSlots < v6 )
-    v6 = this->m_numFloatSlots;
-  n = v6;
-  v9 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  bonesOut = (hkQsTransformf *)v9->m_cur;
+  if ( this->m_numFloatSlots < m_size )
+    m_size = this->m_numFloatSlots;
+  n = m_size;
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  bonesOut = (hkQsTransformf *)Value->m_cur;
   v11 = (48 * numBones + 127) & 0xFFFFFF80;
   v12 = (char *)bonesOut + v11;
-  if ( v11 > v9->m_slabSize || v12 > v9->m_end )
-    bonesOut = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(v9, v11);
+  if ( v11 > Value->m_slabSize || v12 > Value->m_end )
+    bonesOut = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(Value, v11);
   else
-    v9->m_cur = v12;
+    Value->m_cur = v12;
   v13 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   floatsOut = (float *)v13->m_cur;
-  v15 = (4 * v6 + 127) & 0xFFFFFF80;
-  v55 = (4 * v6 + 127) & 0xFFFFFF80;
+  v15 = (4 * m_size + 127) & 0xFFFFFF80;
+  v55 = v15;
   v16 = (char *)floatsOut + v15;
   if ( v15 > v13->m_slabSize || v16 > v13->m_end )
     floatsOut = (float *)hkLifoAllocator::allocateFromNewSlab(v13, v15);
@@ -3362,14 +3299,14 @@ void __fastcall hkaPredictiveCompressedAnimation::sampleTracks(hkaPredictiveComp
   v17 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   boneWeightsInOut = (char *)v17->m_cur;
   v19 = (numBones + 127) & 0xFFFFFF80;
-  v54 = (numBones + 127) & 0xFFFFFF80;
+  v54 = v19;
   v20 = &boneWeightsInOut[v19];
   if ( v19 > v17->m_slabSize || v20 > v17->m_end )
     boneWeightsInOut = (char *)hkLifoAllocator::allocateFromNewSlab(v17, v19);
   else
     v17->m_cur = v20;
   v21 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v22 = v6 + 127;
+  v22 = m_size + 127;
   floatWeightsInOut = (char *)v21->m_cur;
   v24 = v22 & 0xFFFFFF80;
   v53 = v24;
@@ -3380,148 +3317,137 @@ void __fastcall hkaPredictiveCompressedAnimation::sampleTracks(hkaPredictiveComp
     v21->m_cur = v25;
   hkString::memSet(boneWeightsInOut, 255, numBones);
   hkString::memSet(floatWeightsInOut, 255, n);
-  v26 = time;
-  v27 = (unsigned __int64)((__int64 (*)(void))v56->vfptr[4].__vecDelDtor)() - 1;
-  v28 = 0i64;
-  v29 = _mm_shuffle_ps((__m128)LODWORD(v56->m_duration), (__m128)LODWORD(v56->m_duration), 0);
-  v30 = _mm_rcp_ps(v29);
-  v28.m128_f32[0] = (float)v27;
-  v31 = v27 - 1;
-  v32 = (__m128i)_mm_and_ps(
+  v26 = ((__int64 (__fastcall *)(hkaPredictiveCompressedAnimation *))this->vfptr[4].__vecDelDtor)(this) - 1;
+  v27 = 0i64;
+  v28 = _mm_shuffle_ps((__m128)LODWORD(this->m_duration), (__m128)LODWORD(this->m_duration), 0);
+  v29 = _mm_rcp_ps(v28);
+  v27.m128_f32[0] = (float)v26;
+  v30 = v26 - 1;
+  v31 = (__m128i)_mm_and_ps(
                    _mm_mul_ps(
-                     _mm_shuffle_ps(v28, v28, 0),
+                     _mm_shuffle_ps(v27, v27, 0),
                      _mm_mul_ps(
-                       _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v29, v30)), v30),
-                       _mm_shuffle_ps((__m128)LODWORD(v26), (__m128)LODWORD(v26), 0))),
-                   _mm_cmpltps((__m128)0i64, v29));
-  v33 = _mm_sub_ps(
-          _mm_add_ps(_mm_add_ps(_mm_sub_ps((__m128)v32, *(__m128 *)two23), *(__m128 *)two23), *(__m128 *)two23),
+                       _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v28, v29)), v29),
+                       _mm_shuffle_ps((__m128)LODWORD(time), (__m128)LODWORD(time), 0))),
+                   _mm_cmplt_ps((__m128)0i64, v28));
+  v32 = _mm_sub_ps(
+          _mm_add_ps(_mm_add_ps(_mm_sub_ps((__m128)v31, *(__m128 *)two23), *(__m128 *)two23), *(__m128 *)two23),
           *(__m128 *)two23);
-  v34 = _mm_cmpltps(*(__m128 *)two23, (__m128)_mm_srli_epi32(_mm_slli_epi32(v32, 1u), 1u));
-  v35 = _mm_or_ps(
-          _mm_andnot_ps(v34, _mm_add_ps(_mm_cvtepi32_ps((__m128i)_mm_cmpltps((__m128)v32, v33)), v33)),
-          _mm_and_ps((__m128)v32, v34));
-  v36 = _mm_cvtsi128_si32(_mm_cvttps_epi32(v35));
-  if ( v36 <= v31 )
+  v33 = _mm_cmplt_ps(*(__m128 *)two23, (__m128)_mm_srli_epi32(_mm_slli_epi32(v31, 1u), 1u));
+  v34 = _mm_or_ps(
+          _mm_andnot_ps(v33, _mm_add_ps(_mm_cvtepi32_ps((__m128i)_mm_cmplt_ps((__m128)v31, v32)), v32)),
+          _mm_and_ps((__m128)v31, v33));
+  v35 = _mm_cvtsi128_si32(_mm_cvttps_epi32(v34));
+  if ( v35 <= v30 )
   {
-    v38 = _mm_sub_ps((__m128)v32, v35);
-    v39 = _mm_cmpltps(v38, query.m_quad);
-    v37 = fmax(
-            0.0,
-            COERCE_FLOAT(*(unsigned __int128 *)&_mm_andnot_ps(v39, query.m_quad) | v38.m128_i32[0] & v39.m128_i32[0]));
+    v37 = _mm_sub_ps((__m128)v31, v34);
+    v38 = _mm_cmplt_ps(v37, query.m_quad);
+    v36 = fmax(0.0, COERCE_FLOAT(_mm_andnot_ps(v38, query.m_quad).m128_u32[0] | v37.m128_i32[0] & v38.m128_i32[0]));
   }
   else
   {
-    v37 = *(float *)&FLOAT_1_0;
-    v36 = v31;
+    v36 = *(float *)&FLOAT_1_0;
+    v35 = v30;
   }
   hkaPredictiveCompressedAnimation::sampleFullPose(
-    v56,
+    this,
+    v35,
     v36,
-    v37,
     0i64,
-    v56->m_skeleton->m_referencePose.m_data,
-    v56->m_skeleton->m_referenceFloats.m_data,
+    this->m_skeleton->m_referencePose.m_data,
+    this->m_skeleton->m_referenceFloats.m_data,
     numBones,
     n,
     bonesOut,
     floatsOut,
     boneWeightsInOut,
     floatWeightsInOut);
+  v39 = 0i64;
   v40 = 0i64;
-  v41 = 0i64;
   if ( numBones > 0 )
   {
-    v42 = &bonesOut->m_scale;
+    p_m_scale = &bonesOut->m_scale;
     do
     {
-      if ( boneWeightsInOut[v41] )
+      if ( boneWeightsInOut[v40] )
       {
-        v43 = v8;
-        ++v8;
-        v43->m_translation = (hkVector4f)v42[-2].m_quad;
-        v43->m_rotation.m_vec = (hkVector4f)v42[-1].m_quad;
-        v43->m_scale = (hkVector4f)v42->m_quad;
+        v42 = transformTracksOut++;
+        v42->m_translation = (hkVector4f)p_m_scale[-2].m_quad;
+        v42->m_rotation.m_vec = (hkVector4f)p_m_scale[-1].m_quad;
+        v42->m_scale = (hkVector4f)p_m_scale->m_quad;
       }
-      ++v41;
-      v42 += 3;
+      ++v40;
+      p_m_scale += 3;
     }
-    while ( v41 < numBones );
+    while ( v40 < numBones );
   }
   if ( n >= 4i64 )
   {
-    v44 = floatsOut + 2;
+    v43 = floatsOut + 2;
     do
     {
-      if ( floatWeightsInOut[v40] )
-      {
-        ++v7;
-        *(v7 - 1) = *(v44 - 2);
-      }
-      if ( floatWeightsInOut[v40 + 1] )
-      {
-        ++v7;
-        *(v7 - 1) = *(v44 - 1);
-      }
-      if ( floatWeightsInOut[v40 + 2] )
-      {
-        ++v7;
-        *(v7 - 1) = *v44;
-      }
-      if ( floatWeightsInOut[v40 + 3] )
-      {
-        ++v7;
-        *(v7 - 1) = v44[1];
-      }
-      v40 += 4i64;
-      v44 += 4;
+      if ( floatWeightsInOut[v39] )
+        *floatTracksOut++ = *(v43 - 2);
+      if ( floatWeightsInOut[v39 + 1] )
+        *floatTracksOut++ = *(v43 - 1);
+      if ( floatWeightsInOut[v39 + 2] )
+        *floatTracksOut++ = *v43;
+      if ( floatWeightsInOut[v39 + 3] )
+        *floatTracksOut++ = v43[1];
+      v39 += 4i64;
+      v43 += 4;
     }
-    while ( v40 < n - 3i64 );
+    while ( v39 < n - 3i64 );
   }
-  for ( ; v40 < n; ++v40 )
+  for ( ; v39 < n; ++v39 )
   {
-    if ( floatWeightsInOut[v40] )
-    {
-      ++v7;
-      *(v7 - 1) = floatsOut[v40];
-    }
+    if ( floatWeightsInOut[v39] )
+      *floatTracksOut++ = floatsOut[v39];
   }
-  v45 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v46 = (v53 + 15) & 0xFFFFFFF0;
-  if ( v53 > v45->m_slabSize || &floatWeightsInOut[v46] != v45->m_cur || v45->m_firstNonLifoEnd == floatWeightsInOut )
-    hkLifoAllocator::slowBlockFree(v45, floatWeightsInOut, v46);
+  v44 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v45 = (v53 + 15) & 0xFFFFFFF0;
+  if ( v53 > v44->m_slabSize || &floatWeightsInOut[v45] != v44->m_cur || v44->m_firstNonLifoEnd == floatWeightsInOut )
+    hkLifoAllocator::slowBlockFree(v44, floatWeightsInOut, v45);
   else
-    v45->m_cur = floatWeightsInOut;
-  v47 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v48 = (v54 + 15) & 0xFFFFFFF0;
-  if ( v54 > v47->m_slabSize || &boneWeightsInOut[v48] != v47->m_cur || v47->m_firstNonLifoEnd == boneWeightsInOut )
-    hkLifoAllocator::slowBlockFree(v47, boneWeightsInOut, v48);
+    v44->m_cur = floatWeightsInOut;
+  v46 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v47 = (v54 + 15) & 0xFFFFFFF0;
+  if ( v54 > v46->m_slabSize || &boneWeightsInOut[v47] != v46->m_cur || v46->m_firstNonLifoEnd == boneWeightsInOut )
+    hkLifoAllocator::slowBlockFree(v46, boneWeightsInOut, v47);
   else
-    v47->m_cur = boneWeightsInOut;
-  v49 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v50 = (v55 + 15) & 0xFFFFFFF0;
-  if ( v55 > v49->m_slabSize || (char *)floatsOut + v50 != v49->m_cur || v49->m_firstNonLifoEnd == floatsOut )
-    hkLifoAllocator::slowBlockFree(v49, floatsOut, v50);
+    v46->m_cur = boneWeightsInOut;
+  v48 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v49 = (v55 + 15) & 0xFFFFFFF0;
+  if ( v55 > v48->m_slabSize || (char *)floatsOut + v49 != v48->m_cur || v48->m_firstNonLifoEnd == floatsOut )
+    hkLifoAllocator::slowBlockFree(v48, floatsOut, v49);
   else
-    v49->m_cur = floatsOut;
-  v51 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v52 = (v11 + 15) & 0xFFFFFFF0;
-  if ( v11 > v51->m_slabSize || (char *)bonesOut + v52 != v51->m_cur || v51->m_firstNonLifoEnd == bonesOut )
-    hkLifoAllocator::slowBlockFree(v51, bonesOut, v52);
+    v48->m_cur = floatsOut;
+  v50 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v51 = (v11 + 15) & 0xFFFFFFF0;
+  if ( v11 > v50->m_slabSize || (char *)bonesOut + v51 != v50->m_cur || v50->m_firstNonLifoEnd == bonesOut )
+    hkLifoAllocator::slowBlockFree(v50, bonesOut, v51);
   else
-    v51->m_cur = bonesOut;
+    v50->m_cur = bonesOut;
 }
 
 // File Line: 1019
 // RVA: 0xB2F670
-void __fastcall hkaPredictiveCompressedAnimation::sampleIndividualFloatTracks(hkaPredictiveCompressedAnimation *this, float time, const __int16 *tracks, unsigned int numTracks)
+void __fastcall hkaPredictiveCompressedAnimation::sampleIndividualFloatTracks(
+        hkaPredictiveCompressedAnimation *this,
+        float time,
+        const __int16 *tracks,
+        unsigned int numTracks)
 {
   ;
 }
 
 // File Line: 1023
 // RVA: 0xB2F660
-void __fastcall hkaPredictiveCompressedAnimation::sampleIndividualTransformTracks(hkaPredictiveCompressedAnimation *this, float time, const __int16 *tracks, unsigned int numTracks)
+void __fastcall hkaPredictiveCompressedAnimation::sampleIndividualTransformTracks(
+        hkaPredictiveCompressedAnimation *this,
+        float time,
+        const __int16 *tracks,
+        unsigned int numTracks)
 {
   ;
 }
@@ -3535,58 +3461,52 @@ __int64 __fastcall hkaPredictiveCompressedAnimation::getNumOriginalFrames(hkaPre
 
 // File Line: 1032
 // RVA: 0xB2F880
-void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(hkaPredictiveCompressedAnimation *this, hkQsTransformf *bonesOut, float *floatsOut, float time)
+void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(
+        hkaPredictiveCompressedAnimation *this,
+        hkQsTransformf *bonesOut,
+        float *floatsOut,
+        float time)
 {
-  float *v4; // rdi
-  hkQsTransformf *v5; // rsi
-  hkaPredictiveCompressedAnimation *v6; // rbx
-  signed int v7; // eax
+  int v7; // eax
   __m128 v8; // xmm3
   __m128 v9; // xmm4
   unsigned int v10; // eax
   __m128 v11; // xmm1
   __m128i v12; // xmm5
   __m128 v13; // xmm2
-  __m128 v14; // xmm3
+  __m128 v14; // xmm4
   __m128 v15; // xmm4
   unsigned int v16; // edx
   float v17; // xmm6_4
   __m128 v18; // xmm5
   __m128 v19; // xmm1
-  float v20; // [rsp+98h] [rbp+20h]
 
-  v20 = time;
-  v4 = floatsOut;
-  v5 = bonesOut;
-  v6 = this;
-  v7 = (unsigned __int64)((__int64 (*)(void))this->vfptr[4].__vecDelDtor)() - 1;
+  v7 = ((__int64 (__fastcall *)(hkaPredictiveCompressedAnimation *))this->vfptr[4].__vecDelDtor)(this) - 1;
   v8 = 0i64;
-  v9 = _mm_shuffle_ps((__m128)LODWORD(v6->m_duration), (__m128)LODWORD(v6->m_duration), 0);
+  v9 = _mm_shuffle_ps((__m128)LODWORD(this->m_duration), (__m128)LODWORD(this->m_duration), 0);
   v8.m128_f32[0] = (float)v7;
   v10 = v7 - 1;
   v11 = _mm_rcp_ps(v9);
   v12 = (__m128i)_mm_and_ps(
-                   _mm_cmpltps((__m128)0i64, v9),
+                   _mm_cmplt_ps((__m128)0i64, v9),
                    _mm_mul_ps(
                      _mm_mul_ps(
                        _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v9, v11)), v11),
-                       _mm_shuffle_ps((__m128)LODWORD(v20), (__m128)LODWORD(v20), 0)),
+                       _mm_shuffle_ps((__m128)LODWORD(time), (__m128)LODWORD(time), 0)),
                      _mm_shuffle_ps(v8, v8, 0)));
   v13 = _mm_sub_ps(
           _mm_add_ps(_mm_add_ps(_mm_sub_ps((__m128)v12, *(__m128 *)two23), *(__m128 *)two23), *(__m128 *)two23),
           *(__m128 *)two23);
-  v14 = _mm_cmpltps(*(__m128 *)two23, (__m128)_mm_srli_epi32(_mm_slli_epi32(v12, 1u), 1u));
+  v14 = _mm_cmplt_ps(*(__m128 *)two23, (__m128)_mm_srli_epi32(_mm_slli_epi32(v12, 1u), 1u));
   v15 = _mm_or_ps(
-          _mm_andnot_ps(v14, _mm_add_ps(_mm_cvtepi32_ps((__m128i)_mm_cmpltps((__m128)v12, v13)), v13)),
+          _mm_andnot_ps(v14, _mm_add_ps(_mm_cvtepi32_ps((__m128i)_mm_cmplt_ps((__m128)v12, v13)), v13)),
           _mm_and_ps(v14, (__m128)v12));
   v16 = _mm_cvtsi128_si32(_mm_cvttps_epi32(v15));
   if ( v16 <= v10 )
   {
     v18 = _mm_sub_ps((__m128)v12, v15);
-    v19 = _mm_cmpltps(v18, query.m_quad);
-    v17 = fmax(
-            0.0,
-            COERCE_FLOAT(v18.m128_i32[0] & v19.m128_i32[0] | *(unsigned __int128 *)&_mm_andnot_ps(v19, query.m_quad)));
+    v19 = _mm_cmplt_ps(v18, query.m_quad);
+    v17 = fmax(0.0, COERCE_FLOAT(v18.m128_i32[0] & v19.m128_i32[0] | _mm_andnot_ps(v19, query.m_quad).m128_u32[0]));
   }
   else
   {
@@ -3594,23 +3514,23 @@ void __fastcall hkaPredictiveCompressedAnimation::sampleFullPose(hkaPredictiveCo
     v16 = v10;
   }
   hkaPredictiveCompressedAnimation::sampleFullPose(
-    v6,
+    this,
     v16,
     v17,
     0i64,
-    v6->m_skeleton->m_referencePose.m_data,
-    v6->m_skeleton->m_referenceFloats.m_data,
-    v6->m_numBones,
-    v6->m_numFloatSlots,
-    v5,
-    v4,
+    this->m_skeleton->m_referencePose.m_data,
+    this->m_skeleton->m_referenceFloats.m_data,
+    this->m_numBones,
+    this->m_numFloatSlots,
+    bonesOut,
+    floatsOut,
     0i64,
     0i64);
 }
 
 // File Line: 1046
 // RVA: 0xB32200
-signed __int64 __fastcall hkaPredictiveCompressedAnimation::getSizeInBytes(hkaPredictiveCompressedAnimation *this)
+__int64 __fastcall hkaPredictiveCompressedAnimation::getSizeInBytes(hkaPredictiveCompressedAnimation *this)
 {
   return (unsigned int)this->m_compressedData.m_size
        + 2 * ((unsigned int)this->m_intData.m_size + 2 * ((unsigned int)this->m_floatData.m_size + 48i64));
@@ -3632,7 +3552,9 @@ hkaSkeleton *__fastcall hkaPredictiveCompressedAnimation::getSkeleton(hkaPredict
 
 // File Line: 1061
 // RVA: 0xB2F800
-void __fastcall hkaPredictiveCompressedAnimation::setSkeleton(hkaPredictiveCompressedAnimation *this, hkaSkeleton *skeleton)
+void __fastcall hkaPredictiveCompressedAnimation::setSkeleton(
+        hkaPredictiveCompressedAnimation *this,
+        hkaSkeleton *skeleton)
 {
   this->m_skeleton = skeleton;
 }

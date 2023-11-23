@@ -1,6 +1,6 @@
 // File Line: 7
 // RVA: 0x12B88DC
-double __fastcall modf(long double x, long double *iptr)
+double __fastcall modf(double x, long double *iptr)
 {
   double v2; // xmm1_8
   unsigned __int64 v3; // rax
@@ -30,7 +30,7 @@ double __fastcall modf(long double x, long double *iptr)
       *(_QWORD *)&result = *(_QWORD *)&x & 0x8000000000000000ui64;
       return result;
     }
-    v2 = x + x;
+    return x + x;
   }
   return v2;
 }

@@ -6,8 +6,8 @@ unsigned __int64 __fastcall Scaleform::Timer::GetProfileTicks()
   unsigned __int64 v1; // rax
   LARGE_INTEGER v2; // rbx
   LARGE_INTEGER v3; // r8
-  LARGE_INTEGER PerformanceCount; // [rsp+30h] [rbp+8h]
-  LARGE_INTEGER Frequency; // [rsp+38h] [rbp+10h]
+  LARGE_INTEGER PerformanceCount; // [rsp+30h] [rbp+8h] BYREF
+  LARGE_INTEGER Frequency; // [rsp+38h] [rbp+10h] BYREF
 
   QueryPerformanceCounter(&PerformanceCount);
   v0 = TimerOverrideInstance;
@@ -44,23 +44,23 @@ unsigned int __fastcall Scaleform::Timer::GetTicksMs()
 
   result = timeGetTime();
   if ( TimerOverrideInstance )
-    result = TimerOverrideInstance->vfptr->GetTicksMs(TimerOverrideInstance, result);
+    return TimerOverrideInstance->vfptr->GetTicksMs(TimerOverrideInstance, result);
   return result;
 }
 
 // File Line: 108
 // RVA: 0x98DC10
-signed __int64 __fastcall Scaleform::Timer::GetTicks()
+__int64 __fastcall Scaleform::Timer::GetTicks()
 {
-  unsigned int v0; // eax
+  unsigned int Time; // eax
   unsigned int v1; // ecx
   unsigned __int64 v2; // rbx
 
   EnterCriticalSection(&Scaleform::WinAPI_GetTimeCS);
-  v0 = timeGetTime();
-  v1 = v0;
+  Time = timeGetTime();
+  v1 = Time;
   if ( TimerOverrideInstance )
-    v1 = TimerOverrideInstance->vfptr->GetTicksMs(TimerOverrideInstance, v0);
+    v1 = TimerOverrideInstance->vfptr->GetTicksMs(TimerOverrideInstance, Time);
   if ( Scaleform::WinAPI_OldTime > v1 )
     ++Scaleform::WinAPI_WrapCounter;
   Scaleform::WinAPI_OldTime = v1;

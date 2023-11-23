@@ -28,17 +28,17 @@ hkClass *__fastcall hkpBreakableBody::Controller::staticClass()
 
 // File Line: 86
 // RVA: 0xD4FF40
-void __fastcall finishLoadedObjecthkpBreakableBodyController(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBreakableBodyController(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpBreakableBody::Controller::`vftable;
+    *p = &hkpBreakableBody::Controller::`vftable;
 }
 
 // File Line: 92
 // RVA: 0xD4FF60
-void __fastcall cleanupLoadedObjecthkpBreakableBodyController(void *p)
+void __fastcall cleanupLoadedObjecthkpBreakableBodyController(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 96
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpBreakableBodyControllerTypeInfo__()
   hkpBreakableBodyControllerTypeInfo.m_typeName = "hkpBreakableBodyController";
   hkpBreakableBodyControllerTypeInfo.m_vtable = result;
   hkpBreakableBodyControllerTypeInfo.m_scopedName = "!hkpBreakableBody::Controller";
-  hkpBreakableBodyControllerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBreakableBodyController;
-  hkpBreakableBodyControllerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBreakableBodyController;
+  hkpBreakableBodyControllerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBreakableBodyController;
+  hkpBreakableBodyControllerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBreakableBodyController;
   return result;
 }
 
@@ -82,7 +82,7 @@ void dynamic_initializer_for__hkpBreakableBodyClass__()
     &hkpBreakableBody_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 170

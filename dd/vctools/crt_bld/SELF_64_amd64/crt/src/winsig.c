@@ -10,25 +10,23 @@ void __fastcall initp_misc_winsig(void *enull)
 
 // File Line: 450
 // RVA: 0x12CD560
-signed __int64 __fastcall raise(int signum)
+__int64 __fastcall raise(unsigned int signum)
 {
-  unsigned int v1; // ebx
-  signed int v2; // edi
+  int v2; // edi
   _tiddata *v3; // rsi
   void (__fastcall **v4)(int); // r14
   void (__fastcall *v5)(int); // rcx
   _tiddata *v6; // rax
-  void *v8; // rdx
+  void *pxcptacttab; // rdx
   unsigned __int64 v9; // rcx
   __int64 v10; // r8
-  void (__fastcall *v11)(signed __int64, __int64, __int64); // r15
-  signed int v12; // er12
+  void (__fastcall *v11)(__int64, __int64, __int64); // r15
+  int v12; // r12d
   int v13; // ecx
   __int64 v14; // rdx
-  void *v15; // [rsp+28h] [rbp-30h]
-  int v16; // [rsp+68h] [rbp+10h]
+  void *tpxcptinfoptrs; // [rsp+28h] [rbp-30h]
+  int tfpecode; // [rsp+68h] [rbp+10h]
 
-  v1 = signum;
   v2 = 0;
   v3 = 0i64;
   if ( signum == 2 )
@@ -50,15 +48,15 @@ LABEL_12:
     {
       switch ( signum )
       {
-        case 15:
+        case 0xFu:
           v4 = &term_action;
           v5 = term_action;
           break;
-        case 21:
+        case 0x15u:
           v4 = &ctrlbreak_action;
           v5 = ctrlbreak_action;
           break;
-        case 22:
+        case 0x16u:
           goto LABEL_12;
         default:
           *errno() = 22;
@@ -67,7 +65,7 @@ LABEL_12:
       }
 LABEL_23:
       v2 = 1;
-      v11 = (void (__fastcall *)(signed __int64, __int64, __int64))DecodePointer(v5);
+      v11 = (void (__fastcall *)(__int64, __int64, __int64))DecodePointer(v5);
       goto $decode_done;
     }
   }
@@ -75,44 +73,44 @@ LABEL_23:
   v3 = v6;
   if ( !v6 )
     return 0xFFFFFFFFi64;
-  v8 = v6->_pxcptacttab;
-  v9 = (unsigned __int64)v6->_pxcptacttab;
+  pxcptacttab = v6->_pxcptacttab;
+  v9 = (unsigned __int64)pxcptacttab;
   v10 = XcptActTabCount;
   do
   {
-    if ( *(_DWORD *)(v9 + 4) == v1 )
+    if ( *(_DWORD *)(v9 + 4) == signum )
       break;
     v9 += 16i64;
   }
-  while ( v9 < (unsigned __int64)v8 + 16 * XcptActTabCount );
-  if ( v9 >= (unsigned __int64)v8 + 16 * XcptActTabCount || *(_DWORD *)(v9 + 4) != v1 )
+  while ( v9 < (unsigned __int64)pxcptacttab + 16 * XcptActTabCount );
+  if ( v9 >= (unsigned __int64)pxcptacttab + 16 * XcptActTabCount || *(_DWORD *)(v9 + 4) != signum )
     v9 = 0i64;
   v4 = (void (__fastcall **)(int))(v9 + 8);
-  v11 = *(void (__fastcall **)(signed __int64, __int64, __int64))(v9 + 8);
+  v11 = *(void (__fastcall **)(__int64, __int64, __int64))(v9 + 8);
 $decode_done:
-  if ( v11 != (void (__fastcall *)(signed __int64, __int64, __int64))1 )
+  if ( v11 != (void (__fastcall *)(__int64, __int64, __int64))1 )
   {
     if ( !v11 )
       exit(3);
     if ( v2 )
       lock(0);
     v12 = 2320;
-    if ( v1 <= 0xB && _bittest(&v12, v1) )
+    if ( signum <= 0xB && _bittest(&v12, signum) )
     {
-      v15 = v3->_tpxcptinfoptrs;
+      tpxcptinfoptrs = v3->_tpxcptinfoptrs;
       v3->_tpxcptinfoptrs = 0i64;
-      if ( v1 != 8 )
+      if ( signum != 8 )
         goto LABEL_38;
-      v16 = v3->_tfpecode;
+      tfpecode = v3->_tfpecode;
       v3->_tfpecode = 140;
     }
-    if ( v1 == 8 )
+    if ( signum == 8 )
     {
       v13 = First_FPE_Indx;
       v14 = (unsigned int)First_FPE_Indx;
-      while ( (signed int)v14 < Num_FPE + v13 )
+      while ( (int)v14 < Num_FPE + v13 )
       {
-        *((_QWORD *)v3->_pxcptacttab + 2 * (signed int)v14 + 1) = 0i64;
+        *((_QWORD *)v3->_pxcptacttab + 2 * (int)v14 + 1) = 0i64;
         v14 = (unsigned int)(v14 + 1);
         v13 = First_FPE_Indx;
       }
@@ -123,15 +121,15 @@ LABEL_38:
 $LN38_31:
     if ( v2 )
       unlock(0);
-    if ( v1 == 8 )
+    if ( signum == 8 )
       v11(8i64, (unsigned int)v3->_tfpecode, v10);
     else
-      v11(v1, v14, v10);
-    if ( v1 <= 0xB && _bittest(&v12, v1) )
+      v11(signum, v14, v10);
+    if ( signum <= 0xB && _bittest(&v12, signum) )
     {
-      v3->_tpxcptinfoptrs = v15;
-      if ( v1 == 8 )
-        v3->_tfpecode = v16;
+      v3->_tpxcptinfoptrs = tpxcptinfoptrs;
+      if ( signum == 8 )
+        v3->_tfpecode = tfpecode;
     }
   }
   return 0i64;

@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultTransmission::staticClass()
 
 // File Line: 68
 // RVA: 0xE25800
-void __fastcall finishLoadedObjecthkpVehicleDefaultTransmission(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultTransmission(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultTransmission::`vftable;
+    *p = &hkpVehicleDefaultTransmission::`vftable;
 }
 
 // File Line: 74
 // RVA: 0xE25820
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultTransmission(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultTransmission(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultTransmissionTypeInfo__()
   hkpVehicleDefaultTransmissionTypeInfo.m_typeName = "hkpVehicleDefaultTransmission";
   hkpVehicleDefaultTransmissionTypeInfo.m_vtable = result;
   hkpVehicleDefaultTransmissionTypeInfo.m_scopedName = "!hkpVehicleDefaultTransmission";
-  hkpVehicleDefaultTransmissionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultTransmission;
-  hkpVehicleDefaultTransmissionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultTransmission;
+  hkpVehicleDefaultTransmissionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultTransmission;
+  hkpVehicleDefaultTransmissionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultTransmission;
   return result;
 }
 

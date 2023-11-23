@@ -1,26 +1,25 @@
 // File Line: 533
 // RVA: 0xE51B0
-void __fastcall hkArray<unsigned int,hkContainerTempAllocator>::~hkArray<unsigned int,hkContainerTempAllocator>(hkArray<unsigned int,hkContainerTempAllocator> *this)
+void __fastcall hkArray<unsigned int,hkContainerTempAllocator>::~hkArray<unsigned int,hkContainerTempAllocator>(
+        hkArray<unsigned int,hkContainerTempAllocator> *this)
 {
-  int v1; // er8
-  hkArray<unsigned int,hkContainerTempAllocator> *v2; // rbx
+  int m_capacityAndFlags; // r8d
 
-  v1 = this->m_capacityAndFlags;
-  v2 = this;
+  m_capacityAndFlags = this->m_capacityAndFlags;
   this->m_size = 0;
-  if ( v1 < 0 )
+  if ( m_capacityAndFlags < 0 )
   {
     this->m_data = 0i64;
-    this->m_capacityAndFlags = 2147483648;
+    this->m_capacityAndFlags = 0x80000000;
   }
   else
   {
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       this->m_data,
-      4 * v1);
-    v2->m_data = 0i64;
-    v2->m_capacityAndFlags = 2147483648;
+      4 * m_capacityAndFlags);
+    this->m_data = 0i64;
+    this->m_capacityAndFlags = 0x80000000;
   }
 }
 

@@ -8,7 +8,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C630 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,0,Scaleform::GFx::ASString>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_display::Stage::alignGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,0,Scaleform::GFx::ASString>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::alignGet;
   return result;
 }
 
@@ -92,7 +92,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C690 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,6,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject>>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::focusGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,6,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject> *))Scaleform::GFx::AS3::Instances::fl_display::Stage::focusGet;
   return result;
 }
 
@@ -120,7 +120,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C6B0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,8,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::Stage *, long double *))Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Stage,8,double>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateGet;
   return result;
 }
 
@@ -540,7 +540,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C890 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Stage,38,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::addChild;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Stage,38,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *))Scaleform::GFx::AS3::Instances::fl_display::Stage::addChild;
   return result;
 }
 
@@ -554,7 +554,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C8A0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Instances::fl_display::Stage,39,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *,long>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::addChildAt;
+  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Instances::fl_display::Stage,39,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *,long>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *, int))Scaleform::GFx::AS3::Instances::fl_display::Stage::addChildAt;
   return result;
 }
 
@@ -568,7 +568,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc5_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C8B0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc5<Scaleform::GFx::AS3::Instances::fl_display::Stage,40,Scaleform::GFx::AS3::Value const,Scaleform::GFx::ASString const &,Scaleform::GFx::AS3::Value const &,bool,long,bool>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::addEventListener;
+  Scaleform::GFx::AS3::ThunkFunc5<Scaleform::GFx::AS3::Instances::fl_display::Stage,40,Scaleform::GFx::AS3::Value const,Scaleform::GFx::ASString const &,Scaleform::GFx::AS3::Value const &,bool,long,bool>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::ASString *, Scaleform::GFx::AS3::Value *, bool, int, bool))Scaleform::GFx::AS3::Instances::fl_display::Stage::addEventListener;
   return result;
 }
 
@@ -652,7 +652,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C910 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Stage,46,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,long>::Method = Scaleform::GFx::AS3::Instances::fl_display::Stage::removeChildAt;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Stage,46,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,long>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Stage *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *, int))Scaleform::GFx::AS3::Instances::fl_display::Stage::removeChildAt;
   return result;
 }
 
@@ -728,23 +728,21 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 157
 // RVA: 0x82BC10
-void __usercall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this@<rcx>, Scaleform::GFx::ASString *result@<rdx>, __int64 a3@<rbx>)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v3; // rdi
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v4; // rbx
-  void *(__fastcall *v5)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
+  __int64 v2; // rbx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
   const char *v6; // r8
   Scaleform::GFx::ASString *v7; // rax
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h] BYREF
   __int64 v11; // [rsp+48h] [rbp+10h]
 
-  v11 = a3;
-  v3 = result;
-  v4 = this;
-  v5 = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  switch ( (*(unsigned int (__cdecl **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))(*(_QWORD *)v5 + 136i64))(v5) )
+  v11 = v2;
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  switch ( (*(unsigned int (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))(*(_QWORD *)vecDelDtor + 136i64))(vecDelDtor) )
   {
     case 1u:
       v6 = "T";
@@ -771,50 +769,48 @@ void __usercall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignGet(Scal
       v6 = "RB";
       break;
     default:
-      v6 = &customWorldMapCaption;
+      v6 = &customCaption;
       break;
   }
-  v7 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->pTraits.pObject->pVM->StringManagerRef->Builtins,
+  v7 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         this->pTraits.pObject->pVM->StringManagerRef,
          &resulta,
          v6);
-  Scaleform::GFx::ASString::Append(v3, v7);
-  v8 = resulta.pNode;
-  v9 = resulta.pNode->RefCount == 1;
-  --v8->RefCount;
-  if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+  Scaleform::GFx::ASString::Append(result, v7);
+  pNode = resulta.pNode;
+  if ( resulta.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 178
 // RVA: 0x82BD20
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v3; // r14
   unsigned int v4; // edi
-  signed int v5; // ebp
-  unsigned int v6; // esi
+  int Length; // ebp
+  unsigned int CharAt; // esi
   unsigned int v7; // ebx
-  void *(__fastcall *v8)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
-  Scaleform::GFx::ASString resulta; // [rsp+50h] [rbp+8h]
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString resulta; // [rsp+50h] [rbp+8h] BYREF
 
-  v3 = this;
   Scaleform::GFx::ASString::ToUpper(value, &resulta);
   v4 = 0;
-  v5 = Scaleform::GFx::ASConstString::GetLength((Scaleform::GFx::ASConstString *)&resulta.pNode);
-  if ( v5 < 1 )
+  Length = Scaleform::GFx::ASConstString::GetLength(&resulta);
+  if ( Length < 1 )
     goto LABEL_24;
-  v6 = Scaleform::GFx::ASConstString::GetCharAt((Scaleform::GFx::ASConstString *)&resulta.pNode, 0);
+  CharAt = Scaleform::GFx::ASConstString::GetCharAt(&resulta, 0);
   v7 = 1;
-  if ( v5 >= 2 )
-    v4 = Scaleform::GFx::ASConstString::GetCharAt((Scaleform::GFx::ASConstString *)&resulta.pNode, 1u);
-  if ( v6 != 84 )
+  if ( Length >= 2 )
+    v4 = Scaleform::GFx::ASConstString::GetCharAt(&resulta, 1u);
+  if ( CharAt != 84 )
   {
-    switch ( v6 )
+    switch ( CharAt )
     {
-      case 0x4Cu:
+      case L:
         if ( v4 == 84 )
           goto LABEL_10;
         if ( v4 != 66 )
@@ -825,7 +821,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::alignSet(Scal
 LABEL_23:
         v7 = 7;
         goto LABEL_25;
-      case 0x52u:
+      case R:
         if ( v4 == 84 )
           goto LABEL_15;
         if ( v4 != 66 )
@@ -834,7 +830,7 @@ LABEL_23:
           goto LABEL_25;
         }
         goto LABEL_22;
-      case 0x42u:
+      case B:
         if ( v4 == 76 )
           goto LABEL_23;
         if ( v4 != 82 )
@@ -860,43 +856,45 @@ LABEL_10:
 LABEL_15:
     v7 = 6;
 LABEL_25:
-  v8 = v3->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  (*(void (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int), _QWORD))(*(_QWORD *)v8 + 128i64))(
-    v8,
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  (*(void (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int), _QWORD))(*(_QWORD *)vecDelDtor
+                                                                                                + 128i64))(
+    vecDelDtor,
     v7);
-  v9 = resulta.pNode;
-  v10 = resulta.pNode->RefCount == 1;
-  --v9->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+  pNode = resulta.pNode;
+  if ( resulta.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 214
 // RVA: 0x82D8F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::autoOrientsGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::autoOrientsGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result)
 {
-  *result = (*((_DWORD *)this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor + 5300) >> 14) & 1;
+  *result = (*((_DWORD *)this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor + 5300) & 0x4000) != 0;
 }
 
 // File Line: 222
 // RVA: 0x834840
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::deviceOrientationGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::deviceOrientationGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rdi
-  Scaleform::GFx::AS3::VM *v3; // r9
-  int v4; // er8
-  int v5; // er8
-  int v6; // er8
+  Scaleform::GFx::AS3::VM *pVM; // r9
+  int v4; // r8d
+  int v5; // r8d
+  int v6; // r8d
   const char *v7; // r8
-  Scaleform::GFx::ASStringNode *v8; // rbx
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::ASString *v8; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rbx
+  Scaleform::GFx::ASStringNode *v10; // rcx
+  bool v11; // zf
+  Scaleform::GFx::ASStringNode *v12; // rcx
+  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = result;
-  v3 = this->pTraits.pObject->pVM;
-  v4 = *((_DWORD *)v3[1].vfptr[2].__vecDelDtor + 5404);
+  pVM = this->pTraits.pObject->pVM;
+  v4 = *((_DWORD *)pVM[1].vfptr[2].__vecDelDtor + 5404);
   if ( v4 )
   {
     v5 = v4 - 1;
@@ -924,303 +922,329 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::deviceOrienta
   {
     v7 = "default";
   }
-  v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->StringManagerRef->Builtins,
+  v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         pVM->StringManagerRef,
          &resulta,
-         v7)->pNode;
-  ++v8->RefCount;
-  v9 = v2->pNode;
-  v10 = v2->pNode->RefCount == 1;
-  --v9->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v9);
-  v2->pNode = v8;
-  v11 = resulta.pNode;
-  v10 = resulta.pNode->RefCount == 1;
-  --v11->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v11);
+         v7);
+  pNode = v8->pNode;
+  ++v8->pNode->RefCount;
+  v10 = result->pNode;
+  v11 = result->pNode->RefCount-- == 1;
+  if ( v11 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v10);
+  result->pNode = pNode;
+  v12 = resulta.pNode;
+  v11 = resulta.pNode->RefCount-- == 1;
+  if ( v11 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v12);
 }
 
 // File Line: 239
 // RVA: 0x8352B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::displayStateGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::displayStateGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::displayStateGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::displayStateGet() is not implemented\n");
 }
 
 // File Line: 246
 // RVA: 0x8352E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::displayStateSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::displayStateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::displayStateSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::displayStateSet() is not implemented\n");
 }
 
 // File Line: 253
 // RVA: 0x848890
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::focusGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::focusGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *v2; // rbx
   char *v3; // rcx
   __int64 v4; // rax
   Scaleform::GFx::AS3::Instances::fl::XMLList *v5; // rdx
-  signed int v6; // ecx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> v7; // rcx
-  unsigned int v8; // eax
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> resulta; // [rsp+40h] [rbp+8h]
+  int TraitsType; // ecx
+  Scaleform::GFx::AS3::Instances::fl::XMLList *pObject; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> resulta; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)result;
   Scaleform::GFx::MovieImpl::GetFocusedCharacter(
     (Scaleform::GFx::MovieImpl *)this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor,
     &resulta,
     0);
   if ( !resulta.pObject )
-    goto LABEL_22;
+    goto LABEL_12;
   v3 = (char *)resulta.pObject + 4 * (unsigned __int8)resulta.pObject->AvmObjOffset;
-  v4 = (*(__int64 (__cdecl **)(char *))(*(_QWORD *)v3 + 8i64))(v3);
+  v4 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v3 + 8i64))(v3);
   if ( v4 )
     v4 -= 56i64;
   v5 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v4 + 16);
   if ( !v5 )
     v5 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v4 + 8);
-  if ( (unsigned __int8)v5 & 1 )
+  if ( ((unsigned __int8)v5 & 1) != 0 )
     v5 = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)v5 - 1);
-  if ( v5 && ((v6 = v5->pTraits.pObject->TraitsType, v6 == 23) || v6 >= 29) )
+  if ( v5 && ((TraitsType = v5->pTraits.pObject->TraitsType, TraitsType == 23) || TraitsType >= 29) )
   {
-    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(v2, v5);
+    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(result, v5);
   }
   else
   {
-LABEL_22:
-    v7.pObject = v2->pObject;
-    if ( v2->pObject )
+LABEL_12:
+    pObject = result->pObject;
+    if ( result->pObject )
     {
-      if ( (_QWORD)v7.pObject & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        v2->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)v7.pObject - 1);
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)pObject - 1);
       }
       else
       {
-        v8 = v7.pObject->RefCount;
-        if ( v8 & 0x3FFFFF )
+        RefCount = pObject->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v7.pObject->RefCount = v8 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v7.pObject->vfptr);
+          pObject->RefCount = RefCount - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
         }
       }
-      v2->pObject = 0i64;
+      result->pObject = 0i64;
     }
   }
   if ( resulta.pObject )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&resulta.pObject->vfptr);
+    Scaleform::RefCountNTSImpl::Release(resulta.pObject);
 }
 
 // File Line: 272
 // RVA: 0x848A10
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::focusSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::focusSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *value)
 {
-  Scaleform::GFx::AS3::VM *v3; // rdi
-  Scaleform::GFx::InteractiveObject *v4; // rbx
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> resulta; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::AS3::VM *pVM; // rdi
+  Scaleform::GFx::InteractiveObject *pObject; // rbx
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> resulta; // [rsp+40h] [rbp+8h] BYREF
   Scaleform::GFx::InteractiveObject *v6; // [rsp+50h] [rbp+18h]
 
-  v3 = this->pTraits.pObject->pVM;
-  v4 = 0i64;
+  pVM = this->pTraits.pObject->pVM;
+  pObject = 0i64;
   v6 = 0i64;
   if ( value )
   {
-    v4 = (Scaleform::GFx::InteractiveObject *)value->pDispObj.pObject;
-    if ( v4 )
-      ++v4->RefCount;
-    v6 = v4;
+    pObject = (Scaleform::GFx::InteractiveObject *)value->pDispObj.pObject;
+    if ( pObject )
+      ++pObject->RefCount;
+    v6 = pObject;
   }
-  Scaleform::GFx::MovieImpl::GetFocusedCharacter((Scaleform::GFx::MovieImpl *)v3[1].vfptr[2].__vecDelDtor, &resulta, 0);
-  if ( resulta.pObject != v4 )
+  Scaleform::GFx::MovieImpl::GetFocusedCharacter((Scaleform::GFx::MovieImpl *)pVM[1].vfptr[2].__vecDelDtor, &resulta, 0);
+  if ( resulta.pObject != pObject )
     Scaleform::GFx::MovieImpl::SetKeyboardFocusTo(
-      (Scaleform::GFx::MovieImpl *)v3[1].vfptr[2].__vecDelDtor,
-      v4,
+      (Scaleform::GFx::MovieImpl *)pVM[1].vfptr[2].__vecDelDtor,
+      pObject,
       0,
       GFx_FocusMovedByAS);
   if ( resulta.pObject )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&resulta.pObject->vfptr);
-  if ( v4 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v4->vfptr);
+    Scaleform::RefCountNTSImpl::Release(resulta.pObject);
+  if ( pObject )
+    Scaleform::RefCountNTSImpl::Release(pObject);
 }
 
 // File Line: 286
 // RVA: 0x849A60
-void __usercall Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this@<rcx>, long double *result@<rdx>, float a3@<xmm0>)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        long double *result)
 {
-  long double *v3; // rbx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
   __int64 v4; // rax
 
-  v3 = result;
-  v4 = (*(__int64 (**)(void))(*(_QWORD *)this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor + 8i64))();
-  (*(void (__fastcall **)(__int64))(*(_QWORD *)v4 + 72i64))(v4);
-  *v3 = a3;
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  v4 = (*(__int64 (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))(*(_QWORD *)vecDelDtor
+                                                                                                + 8i64))(vecDelDtor);
+  *result = (*(float (__fastcall **)(__int64))(*(_QWORD *)v4 + 72i64))(v4);
 }
 
 // File Line: 295
 // RVA: 0x849AA0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::frameRateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::frameRateSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::frameRateSet() is not implemented\n");
 }
 
 // File Line: 303
 // RVA: 0x849C50
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenHeightGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, unsigned int *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenHeightGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        unsigned int *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::fullScreenHeightGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::fullScreenHeightGet() is not implemented\n");
 }
 
 // File Line: 310
 // RVA: 0x849C80
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenSourceRectGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Rectangle> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenSourceRectGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Rectangle> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::fullScreenSourceRectGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::fullScreenSourceRectGet() is not implemented\n");
 }
 
 // File Line: 317
 // RVA: 0x849CB0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenSourceRectSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenSourceRectSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::fullScreenSourceRectSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::fullScreenSourceRectSet() is not implemented\n");
 }
 
 // File Line: 324
 // RVA: 0x849CE0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenWidthGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, unsigned int *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::fullScreenWidthGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        unsigned int *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::fullScreenWidthGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::fullScreenWidthGet() is not implemented\n");
 }
 
 // File Line: 331
 // RVA: 0x84DFF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::heightGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::heightGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        long double *result)
 {
-  Scaleform::GFx::DisplayObject *v2; // rbx
-  long double *v3; // rsi
-  Scaleform::RefCountNTSImplCoreVtbl *v4; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rbx
+  Scaleform::RefCountNTSImplCoreVtbl *vfptr; // rdi
   __int64 v5; // rax
-  char v6; // [rsp+20h] [rbp-18h]
+  char v6[4]; // [rsp+20h] [rbp-18h] BYREF
   float v7; // [rsp+24h] [rbp-14h]
   float v8; // [rsp+2Ch] [rbp-Ch]
 
-  v2 = this->pDispObj.pObject;
-  v3 = result;
-  v4 = v2->vfptr;
-  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))v2->vfptr[2].__vecDelDtor)(this->pDispObj.pObject);
-  ((void (__fastcall *)(Scaleform::GFx::DisplayObject *, char *, __int64))v4[61].__vecDelDtor)(v2, &v6, v5);
-  *v3 = (float)(v8 - v7) * 0.05;
+  pObject = this->pDispObj.pObject;
+  vfptr = pObject->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
+  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))pObject->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pObject);
+  ((void (__fastcall *)(Scaleform::GFx::DisplayObject *, char *, __int64))vfptr[61].__vecDelDtor)(pObject, v6, v5);
+  *result = (float)(v8 - v7) * 0.05;
 }
 
 // File Line: 339
 // RVA: 0x84E070
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::heightSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::heightSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::heightSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::heightSet() is not implemented\n");
 }
 
 // File Line: 358
 // RVA: 0x855070
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::nativeWindowGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::NativeWindow> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::nativeWindowGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::NativeWindow> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method instance::Stage::nativeWindowGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method instance::Stage::nativeWindowGet() is not implemented\n");
 }
 
 // File Line: 371
 // RVA: 0x855AE0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::orientationGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::orientationGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rdi
-  Scaleform::GFx::ASStringNode *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rcx
-  bool v5; // zf
+  Scaleform::GFx::ASStringNode *vfptr; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = result;
-  v3 = (Scaleform::GFx::ASStringNode *)this->pDispObj.pObject[2].vfptr;
-  ++v3->RefCount;
-  v4 = result->pNode;
-  v5 = result->pNode->RefCount == 1;
-  --v4->RefCount;
-  if ( v5 )
+  vfptr = (Scaleform::GFx::ASStringNode *)this->pDispObj.pObject[2].Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
+  ++vfptr->RefCount;
+  pNode = result->pNode;
+  if ( result->pNode->RefCount-- == 1 )
   {
-    Scaleform::GFx::ASStringNode::ReleaseNode(v4);
-    v2->pNode = v3;
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    result->pNode = vfptr;
   }
   else
   {
-    result->pNode = v3;
+    result->pNode = vfptr;
   }
 }
 
 // File Line: 379
 // RVA: 0x858B30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::qualityGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::qualityGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::qualityGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::qualityGet() is not implemented\n");
 }
 
 // File Line: 386
 // RVA: 0x858BB0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::qualitySet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::qualitySet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::qualitySet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::qualitySet() is not implemented\n");
 }
 
 // File Line: 393
 // RVA: 0x85A450
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rdi
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v3; // rbx
-  void *(__fastcall *v4)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
   int v5; // eax
   int v6; // eax
   const char *v7; // r8
   Scaleform::GFx::ASString *v8; // rax
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
-  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString resulta; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = result;
-  v3 = this;
-  v4 = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  v5 = (*(__int64 (__cdecl **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))(*(_QWORD *)v4 + 120i64))(v4);
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  v5 = (*(__int64 (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))(*(_QWORD *)vecDelDtor
+                                                                                                + 120i64))(vecDelDtor);
   if ( v5 )
   {
     v6 = v5 - 2;
@@ -1240,36 +1264,36 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeGet(
   {
     v7 = "noScale";
   }
-  v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->pTraits.pObject->pVM->StringManagerRef->Builtins,
+  v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         this->pTraits.pObject->pVM->StringManagerRef,
          &resulta,
          v7);
-  Scaleform::GFx::ASString::Append(v2, v8);
-  v9 = resulta.pNode;
-  v10 = resulta.pNode->RefCount == 1;
-  --v9->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+  Scaleform::GFx::ASString::Append(result, v8);
+  pNode = resulta.pNode;
+  if ( resulta.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 409
 // RVA: 0x85A500
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::GFx::ASStringNode *v3; // rbx
-  void *(__fastcall *v4)(Scaleform::GFx::AS3::VM *, unsigned int); // rdi
-  signed __int64 v5; // rdx
+  Scaleform::GFx::ASStringNode *pNode; // rbx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rdi
+  __int64 v5; // rdx
   int v6; // eax
-  bool v7; // zf
 
-  v3 = value->pNode;
-  ++v3->RefCount;
-  v4 = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  if ( Scaleform::String::CompareNoCase(v3->pData, "noScale") )
+  pNode = value->pNode;
+  ++pNode->RefCount;
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  if ( Scaleform::String::CompareNoCase(pNode->pData, "noScale") )
   {
-    if ( Scaleform::String::CompareNoCase(v3->pData, "exactFit") )
+    if ( Scaleform::String::CompareNoCase(pNode->pData, "exactFit") )
     {
-      v6 = Scaleform::String::CompareNoCase(v3->pData, "noBorder");
+      v6 = Scaleform::String::CompareNoCase(pNode->pData, "noBorder");
       v5 = 1i64;
       if ( !v6 )
         v5 = 3i64;
@@ -1283,220 +1307,252 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::scaleModeSet(
   {
     v5 = 0i64;
   }
-  if ( v4 )
-    (*(void (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int), signed __int64))(*(_QWORD *)v4 + 112i64))(
-      v4,
+  if ( vecDelDtor )
+    (*(void (__fastcall **)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int), __int64))(*(_QWORD *)vecDelDtor + 112i64))(
+      vecDelDtor,
       v5);
-  v7 = v3->RefCount-- == 1;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v3);
+  if ( pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 432
 // RVA: 0x85F3F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::showDefaultContextMenuGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::showDefaultContextMenuGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::showDefaultContextMenuGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::showDefaultContextMenuGet() is not implemented\n");
 }
 
 // File Line: 439
 // RVA: 0x85F420
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::showDefaultContextMenuSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::showDefaultContextMenuSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::showDefaultContextMenuSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::showDefaultContextMenuSet() is not implemented\n");
 }
 
 // File Line: 446
 // RVA: 0x85F8D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageFocusRectGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageFocusRectGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result)
 {
-  *result = ((__int64 (*)(void))this->pDispObj.pObject->vfptr[88].__vecDelDtor)();
+  *result = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))this->pDispObj.pObject->Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::vfptr[88].__vecDelDtor)(this->pDispObj.pObject);
 }
 
 // File Line: 454
 // RVA: 0x85F8F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageFocusRectSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageFocusRectSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rax
+  Scaleform::GFx::DisplayObject *pObject; // rax
 
-  v3 = this->pDispObj.pObject;
+  pObject = this->pDispObj.pObject;
   if ( value )
   {
-    v3[1].Id.Id |= 0x180u;
+    pObject[1].Id.Id |= 0x180u;
   }
   else
   {
-    v3[1].Id.Id &= 0xFFFFFF7F;
-    v3[1].Id.Id |= 0x100u;
+    pObject[1].Id.Id &= ~0x80u;
+    pObject[1].Id.Id |= 0x100u;
   }
 }
 
 // File Line: 462
 // RVA: 0x85FA20
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageHeightGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, int *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageHeightGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        int *result)
 {
-  int *v2; // rbx
-  void *(__fastcall *v3)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
   __int64 v4; // rax
-  char v5; // [rsp+20h] [rbp-18h]
+  char v5[24]; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = result;
-  v3 = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  v4 = (*(__int64 (__fastcall **)(_QWORD, char *))(*(_QWORD *)v3 + 144i64))(v3, &v5);
-  *v2 = (signed int)(float)(*(float *)(v4 + 12) - *(float *)(v4 + 4));
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  v4 = (*(__int64 (__fastcall **)(_QWORD, char *))(*(_QWORD *)vecDelDtor + 144i64))(vecDelDtor, v5);
+  *result = (int)(float)(*(float *)(v4 + 12) - *(float *)(v4 + 4));
 }
 
 // File Line: 469
 // RVA: 0x85FA70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageHeightSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, int value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageHeightSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        int value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::stageHeightSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::stageHeightSet() is not implemented\n");
 }
 
 // File Line: 476
 // RVA: 0x85FAA0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageWidthGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, int *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageWidthGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        int *result)
 {
-  int *v2; // rbx
-  void *(__fastcall *v3)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
+  void *(__fastcall *vecDelDtor)(Scaleform::GFx::AS3::VM *, unsigned int); // rcx
   float *v4; // rax
-  char v5; // [rsp+20h] [rbp-18h]
+  char v5[24]; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = result;
-  v3 = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
-  v4 = (float *)(*(__int64 (__fastcall **)(_QWORD, char *))(*(_QWORD *)v3 + 144i64))(v3, &v5);
-  *v2 = (signed int)(float)(v4[2] - *v4);
+  vecDelDtor = this->pTraits.pObject->pVM[1].vfptr[2].__vecDelDtor;
+  v4 = (float *)(*(__int64 (__fastcall **)(_QWORD, char *))(*(_QWORD *)vecDelDtor + 144i64))(vecDelDtor, v5);
+  *result = (int)(float)(v4[2] - *v4);
 }
 
 // File Line: 483
 // RVA: 0x85FAF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageWidthSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, int value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::stageWidthSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        int value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::stageWidthSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::stageWidthSet() is not implemented\n");
 }
 
 // File Line: 490
 // RVA: 0x8606C0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::tabChildrenGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::tabChildrenGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::tabChildrenGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::tabChildrenGet() is not implemented\n");
 }
 
 // File Line: 497
 // RVA: 0x8607E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::tabChildrenSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::tabChildrenSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::tabChildrenSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::tabChildrenSet() is not implemented\n");
 }
 
 // File Line: 504
 // RVA: 0x860BB0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::textSnapshotGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_text::TextSnapshot> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::textSnapshotGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_text::TextSnapshot> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::textSnapshotGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::textSnapshotGet() is not implemented\n");
 }
 
 // File Line: 511
 // RVA: 0x86C000
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::widthGet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::widthGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        long double *result)
 {
-  Scaleform::GFx::DisplayObject *v2; // rbx
-  long double *v3; // rsi
-  Scaleform::RefCountNTSImplCoreVtbl *v4; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rbx
+  Scaleform::RefCountNTSImplCoreVtbl *vfptr; // rdi
   __int64 v5; // rax
-  float v6; // [rsp+20h] [rbp-18h]
-  float v7; // [rsp+28h] [rbp-10h]
+  int v6[6]; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this->pDispObj.pObject;
-  v3 = result;
-  v4 = v2->vfptr;
-  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))v2->vfptr[2].__vecDelDtor)(this->pDispObj.pObject);
-  ((void (__fastcall *)(Scaleform::GFx::DisplayObject *, float *, __int64))v4[61].__vecDelDtor)(v2, &v6, v5);
-  *v3 = (float)(v7 - v6) * 0.05;
+  pObject = this->pDispObj.pObject;
+  vfptr = pObject->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
+  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))pObject->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pObject);
+  ((void (__fastcall *)(Scaleform::GFx::DisplayObject *, int *, __int64))vfptr[61].__vecDelDtor)(pObject, v6, v5);
+  *result = (float)(*(float *)&v6[2] - *(float *)v6) * 0.05;
 }
 
 // File Line: 519
 // RVA: 0x86C080
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::widthSet(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::widthSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Stage::widthSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::widthSet() is not implemented\n");
 }
 
 // File Line: 526
 // RVA: 0x82AF90
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addChild(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *child)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addChild(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *child)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::addChild(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer *)&this->vfptr,
-    result,
-    child);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::addChild(this, result, child);
 }
 
 // File Line: 532
 // RVA: 0x82B140
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addChildAt(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *child, int index)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addChildAt(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *child,
+        int index)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::addChildAt(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer *)&this->vfptr,
-    result,
-    child,
-    index);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::addChildAt(this, result, child, index);
 }
 
 // File Line: 538
 // RVA: 0x82B7B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addEventListener(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *type, Scaleform::GFx::AS3::Value *listener, bool useCapture, int priority, bool useWeakReference)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::addEventListener(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::WeakProxy *type,
+        Scaleform::GFx::AS3::Value *listener,
+        bool useCapture,
+        int priority,
+        bool useWeakReference)
 {
-  Scaleform::GFx::ASString *v7; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v8; // rdi
-
-  v7 = type;
-  v8 = this;
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::addEventListener(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
+    this,
     result,
     type,
     listener,
     useCapture,
     priority,
     useWeakReference);
-  if ( v7->pNode == (Scaleform::GFx::ASStringNode *)v8->pTraits.pObject->pVM[1].vfptr[91].__vecDelDtor )
-    ++v8->pDispObj.pObject[2].RefCount;
+  if ( *(void *(__fastcall **)(Scaleform::GFx::AS3::VM *, unsigned int))&type->RefCount == this->pTraits.pObject->pVM[1].vfptr[91].__vecDelDtor )
+    ++this->pDispObj.pObject[2].RefCount;
 }
 
 // File Line: 549
 // RVA: 0x82D740
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::assignFocus(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *objectToFocus, Scaleform::GFx::ASString *direction)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::assignFocus(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *objectToFocus,
+        Scaleform::GFx::ASString *direction)
 {
-  Scaleform::GFx::AS3::FlashUI *v4; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v4 = this->pTraits.pObject->pVM->UI;
-  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, signed __int64, const char *, Scaleform::GFx::ASString *))v4->vfptr->Output)(
-    v4,
+  UI = this->pTraits.pObject->pVM->UI;
+  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, __int64, const char *, Scaleform::GFx::ASString *))UI->vfptr->Output)(
+    UI,
     2i64,
     "The method Stage::assignFocus() is not implemented\n",
     direction);
@@ -1504,166 +1560,175 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::assignFocus(S
 
 // File Line: 556
 // RVA: 0x8352A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::dispatchEvent(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result, Scaleform::GFx::AS3::Instances::fl_events::Event *event)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::dispatchEvent(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result,
+        Scaleform::GFx::AS3::Instances::fl_events::Event *event)
 {
-  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::dispatchEvent(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
-    result,
-    event);
+  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::dispatchEvent(this, result, event);
 }
 
 // File Line: 562
 // RVA: 0x84DE50
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::hasEventListener(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result, Scaleform::GFx::ASString *type)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::hasEventListener(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result,
+        Scaleform::GFx::ASString *type)
 {
-  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::hasEventListener(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
-    result,
-    type);
+  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::hasEventListener(this, result, type);
 }
 
 // File Line: 568
 // RVA: 0x850710
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::invalidate(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::invalidate(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   LOBYTE(this->pTraits.pObject->pVM[1].vfptr[280].__vecDelDtor) = 1;
 }
 
 // File Line: 576
 // RVA: 0x850A50
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::isFocusInaccessible(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::isFocusInaccessible(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Stage::isFocusInaccessible() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Stage::isFocusInaccessible() is not implemented\n");
 }
 
 // File Line: 583
 // RVA: 0x8598F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::removeChildAt(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result, int index)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::removeChildAt(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result,
+        unsigned int index)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::removeChildAt(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer *)&this->vfptr,
-    result,
-    index);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::removeChildAt(this, result, index);
 }
 
 // File Line: 589
 // RVA: 0x859B10
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::removeEventListener(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *type, Scaleform::GFx::AS3::Value *listener, bool useCapture)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::removeEventListener(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *type,
+        Scaleform::GFx::AS3::Value *listener,
+        bool useCapture)
 {
-  Scaleform::GFx::ASString *v5; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v6; // rdi
-
-  v5 = type;
-  v6 = this;
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::removeEventListener(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
+    this,
     result,
     type,
     listener,
     useCapture);
-  if ( v5->pNode == (Scaleform::GFx::ASStringNode *)v6->pTraits.pObject->pVM[1].vfptr[91].__vecDelDtor )
-    --v6->pDispObj.pObject[2].RefCount;
+  if ( type->pNode == (Scaleform::GFx::ASStringNode *)this->pTraits.pObject->pVM[1].vfptr[91].__vecDelDtor )
+    --this->pDispObj.pObject[2].RefCount;
 }
 
 // File Line: 601
 // RVA: 0x85B060
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::setChildIndex(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *child, int index)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::setChildIndex(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *child,
+        int index)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::setChildIndex(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer *)&this->vfptr,
-    result,
-    child,
-    index);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::setChildIndex(this, result, child, index);
 }
 
 // File Line: 607
 // RVA: 0x85BA30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::setOrientation(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *newOrientation)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::setOrientation(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *newOrientation)
 {
-  Scaleform::GFx::DisplayObject *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::DisplayObject *pObject; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rdi
+  Scaleform::GFx::ASStringNode *vfptr; // rcx
 
-  v3 = this->pDispObj.pObject;
-  v4 = newOrientation->pNode;
-  ++v4->RefCount;
-  v5 = (Scaleform::GFx::ASStringNode *)v3[2].vfptr;
-  v6 = v5->RefCount-- == 1;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-  v3[2].vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)v4;
+  pObject = this->pDispObj.pObject;
+  pNode = newOrientation->pNode;
+  ++newOrientation->pNode->RefCount;
+  vfptr = (Scaleform::GFx::ASStringNode *)pObject[2].Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
+  if ( vfptr->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(vfptr);
+  pObject[2].Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)pNode;
 }
 
 // File Line: 615
 // RVA: 0x860650
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::swapChildrenAt(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, int index1, int index2)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::swapChildrenAt(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        int index1,
+        int index2)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::swapChildrenAt(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer *)&this->vfptr,
-    result,
-    index1,
-    index2);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::swapChildrenAt(this, result, index1, index2);
 }
 
 // File Line: 621
 // RVA: 0x86C360
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::willTrigger(Scaleform::GFx::AS3::Instances::fl_display::Stage *this, bool *result, Scaleform::GFx::ASString *type)
+// attributes: thunk
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::willTrigger(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this,
+        bool *result,
+        Scaleform::GFx::ASString *type)
 {
-  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::willTrigger(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
-    result,
-    type);
+  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::willTrigger(this, result, type);
 }
 
 // File Line: 665
 // RVA: 0x78E210
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::~Stage(Scaleform::GFx::AS3::Instances::fl_display::Stage *this)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Stage::~Stage(
+        Scaleform::GFx::AS3::Instances::fl_display::Stage *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Stage *v1; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Object *v2; // rcx
-  unsigned int v3; // eax
+  Scaleform::GFx::AS3::Instances::fl::Object *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v1 = this;
   this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Stage::`vftable;
   this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::`vftable;
   this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::`vftable;
-  v2 = this->pContextMenu.pObject;
-  if ( v2 )
+  pObject = this->pContextMenu.pObject;
+  if ( pObject )
   {
-    if ( (unsigned __int8)v2 & 1 )
+    if ( ((unsigned __int8)pObject & 1) != 0 )
     {
-      v1->pContextMenu.pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)v2 - 1);
+      this->pContextMenu.pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)pObject - 1);
     }
     else
     {
-      v3 = v2->RefCount;
-      if ( v3 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v2->RefCount = v3 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v2->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
   }
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~DisplayObject((Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~DisplayObject(this);
 }
 
 // File Line: 795
 // RVA: 0x800120
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Stage> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Stage> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Stage> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 831
@@ -1682,11 +1747,11 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 855
 // RVA: 0x75E4E0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Stage::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Stage::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
@@ -1694,60 +1759,58 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   Scaleform::GFx::AS3::Class *v9; // rax
   Scaleform::GFx::AS3::Class *v10; // rbx
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::StageCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_display::StageCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
-    v6->TraitsType = 22;
+    v6->TraitsType = Traits_DisplayObject_Begin;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::InteractiveObject::`vftable;
-    v6->TraitsType = 23;
+    v6->TraitsType = Traits_InteractiveObject;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObjectContainer::`vftable;
-    v6->TraitsType = 29;
+    v6->TraitsType = Traits_DisplayObjectContainer;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::Stage::`vftable;
-    v6->TraitsType = 32;
+    v6->TraitsType = Traits_Stage;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::StageCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_display::StageCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
-    v8.pV->TraitsType = 22;
+    v8.pV->TraitsType = Traits_DisplayObject_Begin;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::InteractiveObject::`vftable;
-    v8.pV->TraitsType = 23;
+    v8.pV->TraitsType = Traits_InteractiveObject;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObjectContainer::`vftable;
-    v8.pV->TraitsType = 29;
+    v8.pV->TraitsType = Traits_DisplayObjectContainer;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::Stage::`vftable;
-    v8.pV->TraitsType = 32;
+    v8.pV->TraitsType = Traits_Stage;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   v10 = v9;
   if ( v9 )
   {
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
     v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_display::Stage::`vftable;
   }
-  return v3;
+  return result;
 }
 

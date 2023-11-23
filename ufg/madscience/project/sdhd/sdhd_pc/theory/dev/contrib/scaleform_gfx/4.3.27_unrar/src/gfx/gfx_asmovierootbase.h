@@ -1,12 +1,9 @@
 // File Line: 51
 // RVA: 0x6C6B40
-void __fastcall Scaleform::GFx::ASMovieRootBase::ASMovieRootBase(Scaleform::GFx::ASMovieRootBase *this, Scaleform::GFx::ASSupport *asSupport)
+void __fastcall Scaleform::GFx::ASMovieRootBase::ASMovieRootBase(
+        Scaleform::GFx::ASMovieRootBase *this,
+        Scaleform::GFx::Resource *asSupport)
 {
-  Scaleform::GFx::ASSupport *v2; // rdi
-  Scaleform::GFx::ASMovieRootBase *v3; // rbx
-
-  v2 = asSupport;
-  v3 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -15,23 +12,21 @@ void __fastcall Scaleform::GFx::ASMovieRootBase::ASMovieRootBase(Scaleform::GFx:
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable;
   this->pMovieImpl = 0i64;
   if ( asSupport )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)asSupport);
-  v3->pASSupport.pObject = v2;
-  v3->AVMVersion = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *))v2->vfptr[6].__vecDelDtor)(v2);
+    Scaleform::Render::RenderBuffer::AddRef(asSupport);
+  this->pASSupport.pObject = (Scaleform::GFx::ASSupport *)asSupport;
+  this->AVMVersion = asSupport->vfptr[1].GetResourceTypeCode(asSupport);
 }
 
 // File Line: 53
 // RVA: 0x6D0AA0
 void __fastcall Scaleform::GFx::ASMovieRootBase::~ASMovieRootBase(Scaleform::GFx::ASMovieRootBase *this)
 {
-  Scaleform::GFx::ASMovieRootBase *v1; // rbx
-  Scaleform::Render::RenderBuffer *v2; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable;
-  v2 = (Scaleform::Render::RenderBuffer *)this->pASSupport.pObject;
-  if ( v2 )
-    Scaleform::RefCountImpl::Release(v2);
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  pObject = (Scaleform::Render::RenderBuffer *)this->pASSupport.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 

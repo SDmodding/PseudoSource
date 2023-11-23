@@ -28,36 +28,34 @@ hkClass *__fastcall hkpMouseSpringAction::staticClass()
 
 // File Line: 69
 // RVA: 0xE0B1C0
-void __fastcall finishLoadedObjecthkpMouseSpringAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMouseSpringAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _DWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v2 = &hkpMouseSpringAction::`vftable;
-    v2[33] = 2147483648;
-    *((_QWORD *)v2 + 15) = 0i64;
-    v2[32] = 0;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpMouseSpringAction::`vftable;
+    HIDWORD(p[16].m_stringAndFlag) = 0x80000000;
+    p[15].m_stringAndFlag = 0i64;
+    LODWORD(p[16].m_stringAndFlag) = 0;
   }
 }
 
 // File Line: 75
 // RVA: 0xE0B210
-void __fastcall cleanupLoadedObjecthkpMouseSpringAction(void *p)
+void __fastcall cleanupLoadedObjecthkpMouseSpringAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
 // RVA: 0xE0B220
 void **__fastcall getVtablehkpMouseSpringAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-70h]
+  hkStringPtr v1; // [rsp+48h] [rbp-70h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpMouseSpringAction::`vftable;
@@ -74,8 +72,8 @@ void **dynamic_initializer_for__hkpMouseSpringActionTypeInfo__()
   hkpMouseSpringActionTypeInfo.m_typeName = "hkpMouseSpringAction";
   hkpMouseSpringActionTypeInfo.m_vtable = result;
   hkpMouseSpringActionTypeInfo.m_scopedName = "!hkpMouseSpringAction";
-  hkpMouseSpringActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMouseSpringAction;
-  hkpMouseSpringActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMouseSpringAction;
+  hkpMouseSpringActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMouseSpringAction;
+  hkpMouseSpringActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMouseSpringAction;
   return result;
 }
 

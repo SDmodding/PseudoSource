@@ -2,39 +2,31 @@
 // RVA: 0xA340E0
 void __fastcall UFG::HDDmanager::HDDmanager(UFG::HDDmanager *this)
 {
-  UFG::HDDmanager *v1; // rdi
-  UFG::qList<UFG::qString,UFG::qString,1,0> *v2; // rbx
-  UFG::qList<UFG::qString,UFG::qString,1,0> *v3; // rax
-  UFG::qNode<UFG::qString,UFG::qString> *v4; // r8
-  UFG::qNode<UFG::qString,UFG::qString> *v5; // rdx
+  UFG::HDDmanager *i; // rax
+  __int64 v3; // r8
+  UFG::HddFileContainer *mFileContainer; // rdx
 
-  v1 = this;
-  UFG::qMutex::qMutex(&this->mSaveDataFileMutex, &customWorldMapCaption);
-  v2 = &v1->mSaveDataFiles;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v1->mStatus = 0;
-  v1->mReCreateData = 0;
-  UFG::qMemSet(v1->mSaveDataExists, 0, 0x23u);
-  v1->mReCreateData = 0;
-  v1->m_eSaveLoadPermission = -1;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v1->mSaveDataFileMutex);
-  v3 = (UFG::qList<UFG::qString,UFG::qString,1,0> *)v1->mSaveDataFiles.mNode.mNext;
-  if ( v3 != &v1->mSaveDataFiles )
+  UFG::qMutex::qMutex(&this->mSaveDataFileMutex, &customCaption);
+  this->mSaveDataFiles.mNode.mPrev = &this->mSaveDataFiles.mNode;
+  this->mSaveDataFiles.mNode.mNext = &this->mSaveDataFiles.mNode;
+  this->mStatus = eHDD_STATUS_IDLE;
+  this->mReCreateData = 0;
+  UFG::qMemSet(this->mSaveDataExists, 0, 0x23u);
+  this->mReCreateData = 0;
+  this->m_eSaveLoadPermission = -1;
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
+  for ( i = (UFG::HDDmanager *)this->mSaveDataFiles.mNode.mNext;
+        i != (UFG::HDDmanager *)&this->mSaveDataFiles;
+        i = (UFG::HDDmanager *)this->mSaveDataFiles.mNode.mNext )
   {
-    do
-    {
-      v4 = v3->mNode.mPrev;
-      v5 = v3->mNode.mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mNode.mPrev = &v3->mNode;
-      v3->mNode.mNext = &v3->mNode;
-      v3 = (UFG::qList<UFG::qString,UFG::qString,1,0> *)v1->mSaveDataFiles.mNode.mNext;
-    }
-    while ( v3 != v2 );
+    v3 = *(_QWORD *)&i->mStatus;
+    mFileContainer = i->mFileContainer;
+    *(_QWORD *)(v3 + 8) = mFileContainer;
+    *(_QWORD *)&mFileContainer->TotalFileSize = v3;
+    *(_QWORD *)&i->mStatus = i;
+    i->mFileContainer = (UFG::HddFileContainer *)i;
   }
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v1->mSaveDataFileMutex);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
 }
 
 // File Line: 40
@@ -57,20 +49,20 @@ void UFG::HDDmanager::Instantiate(void)
 void UFG::HDDmanager::ShutDown(void)
 {
   UFG::HDDmanager *v0; // rdi
-  UFG::qList<UFG::qString,UFG::qString,1,0> *v1; // rbx
-  UFG::qNode<UFG::qString,UFG::qString> *v2; // rdx
-  UFG::qNode<UFG::qString,UFG::qString> *v3; // rax
+  UFG::qList<UFG::qString,UFG::qString,1,0> *p_mSaveDataFiles; // rbx
+  UFG::qNode<UFG::qString,UFG::qString> *mPrev; // rdx
+  UFG::qNode<UFG::qString,UFG::qString> *mNext; // rax
 
   v0 = UFG::HDDmanager::mInstance;
   if ( UFG::HDDmanager::mInstance )
   {
-    v1 = &UFG::HDDmanager::mInstance->mSaveDataFiles;
+    p_mSaveDataFiles = &UFG::HDDmanager::mInstance->mSaveDataFiles;
     UFG::qList<UFG::qString,UFG::qString,1,0>::DeleteNodes(&UFG::HDDmanager::mInstance->mSaveDataFiles);
-    v2 = v1->mNode.mPrev;
-    v3 = v0->mSaveDataFiles.mNode.mNext;
-    v2->mNext = v3;
-    v3->mPrev = v2;
-    v1->mNode.mPrev = &v1->mNode;
+    mPrev = p_mSaveDataFiles->mNode.mPrev;
+    mNext = v0->mSaveDataFiles.mNode.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mSaveDataFiles->mNode.mPrev = &p_mSaveDataFiles->mNode;
     v0->mSaveDataFiles.mNode.mNext = &v0->mSaveDataFiles.mNode;
     Scaleform::Lock::~Lock((LPCRITICAL_SECTION)&v0->mSaveDataFileMutex);
     operator delete[](v0);
@@ -79,137 +71,135 @@ void UFG::HDDmanager::ShutDown(void)
 
 // File Line: 81
 // RVA: 0xA34330
-void __fastcall UFG::HDDmanager::HDDFileList(UFG::HDDmanager *this, void (__fastcall *callBack)(UFG::errCode *__struct_ptr))
+void __fastcall UFG::HDDmanager::HDDFileList(UFG::HDDmanager *this, void (__fastcall *callBack)(UFG::errCode))
 {
-  UFG::HDDmanager *v2; // rdi
-  UFG::GameSaveLoad::eGameSlotNum v3; // ebx
+  unsigned int i; // ebx
   UFG::GameSaveLoad *v4; // rax
-  UFG::eHDD_RETURN_CODE v5; // [rsp+30h] [rbp-48h]
-  unsigned int v6; // [rsp+34h] [rbp-44h]
-  UFG::eHDD_STATUS v7; // [rsp+38h] [rbp-40h]
-  UFG::qString result; // [rsp+40h] [rbp-38h]
+  int v5[4]; // [rsp+30h] [rbp-48h] BYREF
+  UFG::qString result; // [rsp+40h] [rbp-38h] BYREF
 
-  v2 = this;
-  if ( this->m_eSaveLoadPermission & 1 )
+  if ( (this->m_eSaveLoadPermission & 1) != 0 )
   {
-    this->mCallBack = (void (__fastcall *)(UFG::errCode))callBack;
+    this->mCallBack = callBack;
     UFG::HDDmanager::ResetSaveDataFileNameList(this);
-    v3 = 0;
-    do
+    for ( i = 0; i < 8; ++i )
     {
       v4 = UFG::GameSaveLoad::Instance();
-      UFG::GameSaveLoad::GetSlotFullFilename(v4, &result, v3);
-      if ( (unsigned __int8)UFG::qFileExists(result.mData) )
-        UFG::HDDmanager::AddSaveDataFileName(v2, result.mData);
+      UFG::GameSaveLoad::GetSlotFullFilename(v4, &result, i);
+      if ( UFG::qFileExists(result.mData) )
+        UFG::HDDmanager::AddSaveDataFileName(this, result.mData);
       UFG::qString::~qString(&result);
-      ++v3;
     }
-    while ( (unsigned int)v3 < 8 );
-    *(_QWORD *)&v2->mError.eCode = 0i64;
-    v2->mError.eType = 5;
-    v2->mStatus = 0;
-    v5 = v2->mError.eCode;
-    v6 = v2->mError.errArg;
-    v7 = v2->mError.eType;
-    ((void (__fastcall *)(UFG::eHDD_RETURN_CODE *))v2->mCallBack)(&v5);
+    *(_QWORD *)&this->mError.eCode = 0i64;
+    this->mError.eType = eHDD_STATUS_FILELIST;
+    this->mStatus = eHDD_STATUS_IDLE;
+    v5[0] = this->mError.eCode;
+    v5[1] = this->mError.errArg;
+    v5[2] = this->mError.eType;
+    ((void (__fastcall *)(int *))this->mCallBack)(v5);
   }
 }
 
 // File Line: 120
 // RVA: 0xA344A0
-void __fastcall UFG::HDDmanager::HDDSave(UFG::HDDmanager *this, UFG::HddFileContainer *files, void (__fastcall *callBack)(UFG::errCode *__struct_ptr), UFG::qString *folderName_PS3, bool reCreate)
+void __fastcall UFG::HDDmanager::HDDSave(
+        UFG::HDDmanager *this,
+        UFG::HddFileContainer *files,
+        void (__fastcall *callBack)(UFG::errCode),
+        UFG::qString *folderName_PS3,
+        bool reCreate)
 {
-  UFG::qString *v5; // rbx
-
-  v5 = folderName_PS3;
-  if ( (this->m_eSaveLoadPermission >> 1) & 1 && files && files->ContainerCount >= 1 )
+  if ( (this->m_eSaveLoadPermission & 2) != 0 && files && files->ContainerCount )
   {
     this->mFileContainer = files;
-    this->mCallBack = (void (__fastcall *)(UFG::errCode))callBack;
+    this->mCallBack = callBack;
     this->mReCreateData = reCreate;
     UFG::HDDmanager::HDDSaveNext(this);
   }
-  UFG::qString::~qString(v5);
+  UFG::qString::~qString(folderName_PS3);
 }
 
 // File Line: 141
 // RVA: 0xA34500
 void __fastcall UFG::HDDmanager::HDDSaveNext(UFG::HDDmanager *this)
 {
-  UFG::HDDmanager *callback_param; // rbx
-  hkResourceContainer *v2; // rdi
+  hkResourceContainer *UsedSpace; // rdi
 
-  callback_param = this;
-  v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
-  UFG::qPrintf("Writing %s, File Size %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
-  callback_param->mStatus = 2;
+  UsedSpace = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
+  UFG::qPrintf(
+    "Writing %s, File Size %d\n",
+    (const char *)UsedSpace[3].vfptr,
+    *(unsigned int *)&UsedSpace[6].m_memSizeAndFlags);
+  this->mStatus = eHDD_STATUS_SAVE;
   UFG::qWriteAsync(
-    (const char *)v2[3].vfptr,
-    v2[7].vfptr,
-    *(unsigned int *)&v2[6].m_memSizeAndFlags,
+    (const char *)UsedSpace[3].vfptr,
+    UsedSpace[7].vfptr,
+    *(unsigned int *)&UsedSpace[6].m_memSizeAndFlags,
     0i64,
     QSEEK_CUR,
     UFG::HDDmanager::onWriteAsyncCallback,
-    callback_param,
+    this,
     QPRIORITY_NORMAL);
 }
 
 // File Line: 152
 // RVA: 0xA34870
-void __fastcall UFG::HDDmanager::onWriteAsyncCallback(UFG::qFileOp *file_op, void *callback_param)
+void __fastcall UFG::HDDmanager::onWriteAsyncCallback(UFG::qFileOp *file_op, UFG::HDDmanager *callback_param)
 {
-  UFG::HddFileContainer *v2; // rsi
-  UFG::HDDmanager *v3; // rdi
-  __int64 v4; // rax
+  UFG::HddFileContainer *mFileContainer; // rsi
+  __int64 m_iSlotNum; // rax
   UFG::HDDmanager *v5; // rax
   UFG::HDDmanager *v6; // rdx
-  UFG::eHDD_RETURN_CODE v7; // eax
-  UFG::eHDD_RETURN_CODE v8; // [rsp+20h] [rbp-18h]
-  unsigned int v9; // [rsp+24h] [rbp-14h]
-  UFG::eHDD_STATUS v10; // [rsp+28h] [rbp-10h]
+  UFG::eHDD_RETURN_CODE eCode; // eax
+  int v8[6]; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = (UFG::HddFileContainer *)*((_QWORD *)callback_param + 1);
-  v3 = (UFG::HDDmanager *)callback_param;
-  v4 = UFG::HDDmanager::mInstance->m_iSlotNum;
+  mFileContainer = callback_param->mFileContainer;
+  m_iSlotNum = UFG::HDDmanager::mInstance->m_iSlotNum;
   if ( file_op )
   {
-    UFG::HDDmanager::mInstance->mSaveDataExists[v4] = 1;
+    UFG::HDDmanager::mInstance->mSaveDataExists[m_iSlotNum] = 1;
     v5 = UFG::HDDmanager::mInstance;
     *(_QWORD *)&UFG::HDDmanager::mInstance->mError.eCode = 0i64;
   }
   else
   {
-    UFG::HDDmanager::mInstance->mSaveDataExists[v4] = 0;
+    UFG::HDDmanager::mInstance->mSaveDataExists[m_iSlotNum] = 0;
     v5 = UFG::HDDmanager::mInstance;
     *(_QWORD *)&UFG::HDDmanager::mInstance->mError.eCode = 2i64;
   }
-  v5->mError.eType = 2;
-  UFG::HddFileContainer::SetCurrentFileToNext(v2);
-  if ( UFG::HddFileContainer::IsEndOfList(v2) )
+  v5->mError.eType = eHDD_STATUS_SAVE;
+  UFG::HddFileContainer::SetCurrentFileToNext(mFileContainer);
+  if ( UFG::HddFileContainer::IsEndOfList(mFileContainer) )
   {
     v6 = UFG::HDDmanager::mInstance;
-    v7 = UFG::HDDmanager::mInstance->mError.eCode;
-    UFG::HDDmanager::mInstance->mStatus = 0;
-    v8 = v7;
-    v9 = v6->mError.errArg;
-    v10 = v6->mError.eType;
-    ((void (__fastcall *)(UFG::eHDD_RETURN_CODE *))v6->mCallBack)(&v8);
+    eCode = UFG::HDDmanager::mInstance->mError.eCode;
+    UFG::HDDmanager::mInstance->mStatus = eHDD_STATUS_IDLE;
+    v8[0] = eCode;
+    v8[1] = v6->mError.errArg;
+    v8[2] = v6->mError.eType;
+    ((void (__fastcall *)(int *))v6->mCallBack)(v8);
   }
   else
   {
-    UFG::HDDmanager::HDDSaveNext(v3);
+    UFG::HDDmanager::HDDSaveNext(callback_param);
   }
 }
 
 // File Line: 188
 // RVA: 0xA34400
-void __fastcall UFG::HDDmanager::HDDLoad(UFG::HDDmanager *this, UFG::HddFileContainer *files, void (__fastcall *callBack)(UFG::errCode *__struct_ptr))
+void __fastcall UFG::HDDmanager::HDDLoad(
+        UFG::HDDmanager *this,
+        UFG::HddFileContainer *files,
+        void (__fastcall *callBack)(UFG::errCode))
 {
-  if ( this->m_eSaveLoadPermission & 1 && files && files->ContainerCount >= 1 )
+  if ( (this->m_eSaveLoadPermission & 1) != 0 && files )
   {
-    this->mFileContainer = files;
-    this->mCallBack = (void (__fastcall *)(UFG::errCode))callBack;
-    UFG::HDDmanager::HDDLoadNext(this);
+    if ( files->ContainerCount )
+    {
+      this->mFileContainer = files;
+      this->mCallBack = callBack;
+      UFG::HDDmanager::HDDLoadNext(this);
+    }
   }
 }
 
@@ -217,17 +207,18 @@ void __fastcall UFG::HDDmanager::HDDLoad(UFG::HDDmanager *this, UFG::HddFileCont
 // RVA: 0xA34430
 void __fastcall UFG::HDDmanager::HDDLoadNext(UFG::HDDmanager *this)
 {
-  UFG::HDDmanager *v1; // rdi
-  hkResourceContainer *v2; // rbx
+  hkResourceContainer *UsedSpace; // rbx
 
-  v1 = this;
-  v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
-  UFG::qPrintf("Loading %s File Size = %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
-  v1->mStatus = 3;
+  UsedSpace = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
+  UFG::qPrintf(
+    "Loading %s File Size = %d\n",
+    (const char *)UsedSpace[3].vfptr,
+    *(unsigned int *)&UsedSpace[6].m_memSizeAndFlags);
+  this->mStatus = eHDD_STATUS_LOAD;
   UFG::qReadEntireFileAsync(
-    (const char *)v2[3].vfptr,
+    (const char *)UsedSpace[3].vfptr,
     UFG::HDDmanager::onReadAsyncCallback,
-    v1,
+    this,
     0i64,
     0i64,
     0i64,
@@ -236,108 +227,108 @@ void __fastcall UFG::HDDmanager::HDDLoadNext(UFG::HDDmanager *this)
 
 // File Line: 217
 // RVA: 0xA346A0
-void __fastcall UFG::HDDmanager::onReadAsyncCallback(UFG::qFileOp *file_op, void *callback_param)
+void __fastcall UFG::HDDmanager::onReadAsyncCallback(UFG::qFileOp *file_op, UFG::HDDmanager *callback_param)
 {
-  __int64 v2; // r12
-  UFG::HddFileContainer *v3; // r14
-  UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *v4; // rdi
-  UFG::HDDmanager *v5; // r15
-  UFG::qFileOp *v6; // rsi
-  const char *v7; // rbx
-  char *v8; // rax
-  unsigned int v9; // eax
+  __int64 m_iSlotNum; // r12
+  UFG::HddFileContainer *mFileContainer; // r14
+  UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *mNext; // rdi
+  const char *mPrev; // rbx
+  char *Filename; // rax
+  unsigned int EntireFileSize; // eax
   unsigned int v10; // ebx
   UFG::allocator::free_link *v11; // rax
-  char *v12; // rax
+  char *EntireFileBuffer; // rax
   char *v13; // rax
   UFG::HDDmanager *v14; // rax
   UFG::HDDmanager *v15; // rax
   UFG::HDDmanager *v16; // rdx
-  UFG::eHDD_RETURN_CODE v17; // eax
-  UFG::eHDD_RETURN_CODE v18; // [rsp+20h] [rbp-38h]
-  unsigned int v19; // [rsp+24h] [rbp-34h]
-  UFG::eHDD_STATUS v20; // [rsp+28h] [rbp-30h]
+  UFG::eHDD_RETURN_CODE eCode; // eax
+  int v18[4]; // [rsp+20h] [rbp-38h] BYREF
 
-  v2 = UFG::HDDmanager::mInstance->m_iSlotNum;
-  v3 = (UFG::HddFileContainer *)*((_QWORD *)callback_param + 1);
-  v4 = v3->FileList.mNode.mNext;
-  v5 = (UFG::HDDmanager *)callback_param;
-  v6 = file_op;
-  if ( v4 != (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)&v3->FileList )
+  m_iSlotNum = UFG::HDDmanager::mInstance->m_iSlotNum;
+  mFileContainer = callback_param->mFileContainer;
+  mNext = mFileContainer->FileList.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)&mFileContainer->FileList )
   {
     while ( 1 )
     {
-      v7 = (const char *)v4[3].mPrev;
-      v8 = UFG::qFileOp::GetFilename(v6);
-      if ( !(unsigned int)UFG::qStringCompare(v8, v7, -1) )
+      mPrev = (const char *)mNext[3].mPrev;
+      Filename = UFG::qFileOp::GetFilename(file_op);
+      if ( !(unsigned int)UFG::qStringCompare(Filename, mPrev, -1) )
         break;
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)&v3->FileList )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)&mFileContainer->FileList )
         goto LABEL_11;
     }
-    if ( v6 && UFG::qFileOp::GetReadEntireFileBuffer(v6) )
+    if ( file_op && UFG::qFileOp::GetReadEntireFileBuffer(file_op) )
     {
-      v9 = UFG::qFileOp::GetReadEntireFileSize(v6);
-      v10 = v9;
-      if ( LOBYTE(v4[1].mPrev) )
+      EntireFileSize = UFG::qFileOp::GetReadEntireFileSize(file_op);
+      v10 = EntireFileSize;
+      if ( LOBYTE(mNext[1].mPrev) )
       {
-        v11 = UFG::qRealloc(v4[7].mPrev, v9, "Hdd File Data", 0i64);
-        LODWORD(v4[6].mNext) = v10;
-        v4[7].mPrev = (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)v11;
+        v11 = UFG::qRealloc(mNext[7].mPrev, EntireFileSize, "Hdd File Data", 0i64);
+        LODWORD(mNext[6].mNext) = v10;
+        mNext[7].mPrev = (UFG::qNode<UFG::HddSaveFile,UFG::HddSaveFile> *)v11;
       }
-      v12 = UFG::qFileOp::GetReadEntireFileBuffer(v6);
-      UFG::qMemCopy(v4[7].mPrev, v12, (unsigned int)v4[6].mNext);
+      EntireFileBuffer = UFG::qFileOp::GetReadEntireFileBuffer(file_op);
+      UFG::qMemCopy(mNext[7].mPrev, EntireFileBuffer, (unsigned int)mNext[6].mNext);
     }
     else
     {
-      operator delete[](v4[7].mPrev);
-      v4[7].mPrev = 0i64;
+      operator delete[](mNext[7].mPrev);
+      mNext[7].mPrev = 0i64;
     }
   }
 LABEL_11:
-  if ( v6 && UFG::qFileOp::GetReadEntireFileBuffer(v6) )
+  if ( file_op && UFG::qFileOp::GetReadEntireFileBuffer(file_op) )
   {
-    v13 = UFG::qFileOp::GetReadEntireFileBuffer(v6);
+    v13 = UFG::qFileOp::GetReadEntireFileBuffer(file_op);
     UFG::qFreeEntireFile(v13, 0i64);
     v14 = UFG::HDDmanager::mInstance;
     *(_QWORD *)&UFG::HDDmanager::mInstance->mError.eCode = 0i64;
-    v14->mError.eType = 3;
-    UFG::HDDmanager::mInstance->mSaveDataExists[v2] = 1;
+    v14->mError.eType = eHDD_STATUS_LOAD;
+    UFG::HDDmanager::mInstance->mSaveDataExists[m_iSlotNum] = 1;
   }
   else
   {
     v15 = UFG::HDDmanager::mInstance;
     *(_QWORD *)&UFG::HDDmanager::mInstance->mError.eCode = 3i64;
-    v15->mError.eType = 3;
-    UFG::HDDmanager::mInstance->mSaveDataExists[v2] = 0;
+    v15->mError.eType = eHDD_STATUS_LOAD;
+    UFG::HDDmanager::mInstance->mSaveDataExists[m_iSlotNum] = 0;
   }
-  UFG::HddFileContainer::SetCurrentFileToNext(v3);
-  if ( UFG::HddFileContainer::IsEndOfList(v3) )
+  UFG::HddFileContainer::SetCurrentFileToNext(mFileContainer);
+  if ( UFG::HddFileContainer::IsEndOfList(mFileContainer) )
   {
     v16 = UFG::HDDmanager::mInstance;
-    v17 = UFG::HDDmanager::mInstance->mError.eCode;
-    UFG::HDDmanager::mInstance->mStatus = 0;
-    v18 = v17;
-    v19 = v16->mError.errArg;
-    v20 = v16->mError.eType;
-    ((void (__fastcall *)(UFG::eHDD_RETURN_CODE *))v16->mCallBack)(&v18);
+    eCode = UFG::HDDmanager::mInstance->mError.eCode;
+    UFG::HDDmanager::mInstance->mStatus = eHDD_STATUS_IDLE;
+    v18[0] = eCode;
+    v18[1] = v16->mError.errArg;
+    v18[2] = v16->mError.eType;
+    ((void (__fastcall *)(int *))v16->mCallBack)(v18);
   }
   else
   {
-    UFG::HDDmanager::HDDLoadNext(v5);
+    UFG::HDDmanager::HDDLoadNext(callback_param);
   }
 }
 
 // File Line: 277
 // RVA: 0xA34240
-void __fastcall UFG::HDDmanager::HDDDelete(UFG::HDDmanager *this, UFG::HddFileContainer *files, void (__fastcall *callBack)(UFG::errCode *__struct_ptr))
+void __fastcall UFG::HDDmanager::HDDDelete(
+        UFG::HDDmanager *this,
+        UFG::HddFileContainer *files,
+        void (__fastcall *callBack)(UFG::errCode))
 {
-  if ( (this->m_eSaveLoadPermission >> 1) & 1 && files && files->ContainerCount >= 1 )
+  if ( (this->m_eSaveLoadPermission & 2) != 0 && files )
   {
-    this->mFileContainer = files;
-    this->mCallBack = (void (__fastcall *)(UFG::errCode))callBack;
-    this->mReCreateData = 0;
-    UFG::HDDmanager::HDDDeleteNext(this);
+    if ( files->ContainerCount )
+    {
+      this->mFileContainer = files;
+      this->mCallBack = callBack;
+      this->mReCreateData = 0;
+      UFG::HDDmanager::HDDDeleteNext(this);
+    }
   }
 }
 
@@ -345,41 +336,37 @@ void __fastcall UFG::HDDmanager::HDDDelete(UFG::HDDmanager *this, UFG::HddFileCo
 // RVA: 0xA34270
 void __fastcall UFG::HDDmanager::HDDDeleteNext(UFG::HDDmanager *this)
 {
-  UFG::HDDmanager *v1; // rbx
-  hkResourceContainer *v2; // rdi
-  UFG::HddFileContainer *v3; // rcx
+  hkResourceContainer *UsedSpace; // rdi
+  UFG::HddFileContainer *mFileContainer; // rcx
   UFG::HDDmanager *v4; // rdx
-  UFG::eHDD_RETURN_CODE v5; // eax
-  UFG::eHDD_RETURN_CODE v6; // [rsp+20h] [rbp-18h]
-  unsigned int v7; // [rsp+24h] [rbp-14h]
-  UFG::eHDD_STATUS v8; // [rsp+28h] [rbp-10h]
+  UFG::eHDD_RETURN_CODE eCode; // eax
+  int v6[6]; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this;
   do
   {
-    v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)v1->mFileContainer);
-    UFG::qPrintf("Deleting %s\n", v2[3].vfptr);
-    v1->mStatus = 4;
-    if ( (unsigned __int8)UFG::qDeleteFile((const char *)v2[3].vfptr) )
+    UsedSpace = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
+    UFG::qPrintf("Deleting %s\n", (const char *)UsedSpace[3].vfptr);
+    this->mStatus = eHDD_STATUS_DELETE;
+    if ( UFG::qDeleteFile((const char *)UsedSpace[3].vfptr) )
     {
-      *(_QWORD *)&v1->mError.eCode = 3i64;
+      *(_QWORD *)&this->mError.eCode = 3i64;
     }
     else
     {
-      v1->mSaveDataExists[v1->m_iSlotNum] = 0;
-      *(_QWORD *)&v1->mError.eCode = 0i64;
+      this->mSaveDataExists[this->m_iSlotNum] = 0;
+      *(_QWORD *)&this->mError.eCode = 0i64;
     }
-    v3 = v1->mFileContainer;
-    v1->mError.eType = 4;
-    UFG::HddFileContainer::SetCurrentFileToNext(v3);
+    mFileContainer = this->mFileContainer;
+    this->mError.eType = eHDD_STATUS_DELETE;
+    UFG::HddFileContainer::SetCurrentFileToNext(mFileContainer);
   }
-  while ( !UFG::HddFileContainer::IsEndOfList(v1->mFileContainer) );
+  while ( !UFG::HddFileContainer::IsEndOfList(this->mFileContainer) );
   v4 = UFG::HDDmanager::mInstance;
-  v5 = UFG::HDDmanager::mInstance->mError.eCode;
-  UFG::HDDmanager::mInstance->mStatus = 0;
-  v6 = v5;
-  v7 = v4->mError.errArg;
-  v8 = v4->mError.eType;
-  ((void (__fastcall *)(UFG::eHDD_RETURN_CODE *))v4->mCallBack)(&v6);
+  eCode = UFG::HDDmanager::mInstance->mError.eCode;
+  UFG::HDDmanager::mInstance->mStatus = eHDD_STATUS_IDLE;
+  v6[0] = eCode;
+  v6[1] = v4->mError.errArg;
+  v6[2] = v4->mError.eType;
+  ((void (__fastcall *)(int *))v4->mCallBack)(v6);
 }
 

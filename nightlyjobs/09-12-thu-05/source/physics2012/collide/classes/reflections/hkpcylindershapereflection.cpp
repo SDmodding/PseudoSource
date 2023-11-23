@@ -28,23 +28,24 @@ hkClass *__fastcall hkpCylinderShape::staticClass()
 
 // File Line: 104
 // RVA: 0xCEB950
-void __fastcall finishLoadedObjecthkpCylinderShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCylinderShape(hkpCylinderShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpCylinderShape::hkpCylinderShape);
+  if ( p )
+    hkpCylinderShape::hkpCylinderShape(p, finishing);
 }
 
 // File Line: 110
 // RVA: 0xCEB970
-void __fastcall cleanupLoadedObjecthkpCylinderShape(void *p)
+void __fastcall cleanupLoadedObjecthkpCylinderShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 114
 // RVA: 0xCEB980
 hkBaseObjectVtbl *__fastcall getVtablehkpCylinderShape()
 {
-  hkpCylinderShape v1; // [rsp+20h] [rbp-78h]
+  hkpCylinderShape v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpCylinderShape::hkpCylinderShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpCylinderShapeTypeInfo__()
   hkpCylinderShapeTypeInfo.m_typeName = "hkpCylinderShape";
   hkpCylinderShapeTypeInfo.m_vtable = result;
   hkpCylinderShapeTypeInfo.m_scopedName = "!hkpCylinderShape";
-  hkpCylinderShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCylinderShape;
-  hkpCylinderShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCylinderShape;
+  hkpCylinderShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCylinderShape;
+  hkpCylinderShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCylinderShape;
   return result;
 }
 

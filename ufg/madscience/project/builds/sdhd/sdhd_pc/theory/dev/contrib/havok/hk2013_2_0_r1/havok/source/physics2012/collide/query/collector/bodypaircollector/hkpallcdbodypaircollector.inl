@@ -10,22 +10,20 @@ void __fastcall hkpAllCdBodyPairCollector::reset(hkpAllCdBodyPairCollector *this
 // RVA: 0x9DB30
 void __fastcall hkpAllCdBodyPairCollector::~hkpAllCdBodyPairCollector(hkpAllCdBodyPairCollector *this)
 {
-  hkpAllCdBodyPairCollector *v1; // rdi
-  hkInplaceArray<hkpRootCdBodyPair,16,hkContainerHeapAllocator> *v2; // rbx
-  int v3; // er8
+  hkInplaceArray<hkpRootCdBodyPair,16,hkContainerHeapAllocator> *p_m_hits; // rbx
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable;
-  v2 = &this->m_hits;
+  p_m_hits = &this->m_hits;
   this->m_hits.m_size = 0;
-  v3 = this->m_hits.m_capacityAndFlags;
-  if ( v3 >= 0 )
+  m_capacityAndFlags = this->m_hits.m_capacityAndFlags;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_data,
-      32 * v3);
-  v2->m_data = 0i64;
-  v2->m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable;
+      &hkContainerHeapAllocator::s_alloc,
+      p_m_hits->m_data,
+      32 * m_capacityAndFlags);
+  p_m_hits->m_data = 0i64;
+  p_m_hits->m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable;
 }
 

@@ -2,13 +2,10 @@
 // RVA: 0x1334518
 __int64 __fastcall putenv(const char *option)
 {
-  const char *v1; // rbx
-
-  v1 = option;
   lock(7);
-  LODWORD(v1) = putenv_helper(v1, 0i64);
+  LODWORD(option) = putenv_helper(option, 0i64);
   unlock(7);
-  return (unsigned int)v1;
+  return (unsigned int)option;
 }
 
 // File Line: 78
@@ -17,53 +14,48 @@ _putenv$fin$0
 
 // File Line: 112
 // RVA: 0x133454C
-signed __int64 __fastcall putenv_helper(const char *name, const char *value)
+__int64 __fastcall putenv_helper(char *name, char *value)
 {
-  const char *v2; // rsi
-  const char *v3; // rdi
   const char *v5; // rax
-  size_t v6; // rax
-  size_t v7; // rbx
-  char *v8; // rax
-  const char *v9; // r8
-  unsigned __int64 v10; // rdx
-  char *v11; // rcx
-  unsigned __int64 v12; // r14
-  unsigned __int64 v13; // rax
-  unsigned __int64 v14; // rbx
-  char *v15; // rax
-  signed __int64 v16; // r14
-  int cchWideChar; // er14
-  int v18; // eax
+  size_t v6; // rbx
+  char *v7; // rax
+  char *v8; // r8
+  unsigned __int64 v9; // rdx
+  char *v10; // rcx
+  unsigned __int64 v11; // r14
+  unsigned __int64 v12; // rax
+  unsigned __int64 v13; // rbx
+  char *v14; // rax
+  unsigned __int64 v15; // r14
+  int cchWideChar; // r14d
+  int v17; // eax
   void *lpWideCharStr; // rax
-  signed __int64 v20; // rax
-  void *pBlock; // [rsp+70h] [rbp+40h]
-  char *poption; // [rsp+78h] [rbp+48h]
+  __int64 v19; // rax
+  void *pBlock; // [rsp+70h] [rbp+40h] BYREF
+  char *poption; // [rsp+78h] [rbp+48h] BYREF
 
   poption = 0i64;
-  v2 = value;
-  v3 = name;
   if ( !_env_initialized )
     return 0xFFFFFFFFi64;
   if ( !name )
     goto LABEL_4;
   if ( value )
   {
-    v12 = strnlen(name, 0x7FFFui64);
-    v13 = strnlen(v2, 0x7FFFui64);
-    if ( v12 < 0x7FFF && v13 < 0x7FFF )
+    v11 = strnlen(name, 0x7FFFui64);
+    v12 = strnlen(value, 0x7FFFui64);
+    if ( v11 < 0x7FFF && v12 < 0x7FFF )
     {
-      v14 = v12 + v13 + 2;
-      v15 = (char *)calloc_crt(v12 + v13 + 2, 1ui64);
-      poption = v15;
-      if ( !v15 )
+      v13 = v11 + v12 + 2;
+      v14 = (char *)calloc_crt(v13, 1ui64);
+      poption = v14;
+      if ( !v14 )
         return 0xFFFFFFFFi64;
-      strcpy_s(v15, v14, v3);
-      poption[v12] = 61;
-      v16 = v12 + 1;
-      v9 = v2;
-      v11 = &poption[v16];
-      v10 = v14 - v16;
+      strcpy_s(v14, v13, name);
+      poption[v11] = 61;
+      v15 = v11 + 1;
+      v8 = value;
+      v10 = &poption[v15];
+      v9 = v13 - v15;
       goto LABEL_15;
     }
 LABEL_4:
@@ -72,20 +64,19 @@ LABEL_4:
     return 0xFFFFFFFFi64;
   }
   v5 = mbschr(name, 0x3Du);
-  if ( v5 && (v5 - v3 >= 0x7FFF || strnlen(v5 + 1, 0x7FFFui64) >= 0x7FFF) )
+  if ( v5 && (v5 - name >= 0x7FFF || strnlen(v5 + 1, 0x7FFFui64) >= 0x7FFF) )
     goto LABEL_4;
-  v6 = strlen(v3);
-  v7 = v6;
-  v8 = (char *)calloc_crt(v6 + 1, 1ui64);
-  poption = v8;
-  if ( !v8 )
+  v6 = strlen(name);
+  v7 = (char *)calloc_crt(v6 + 1, 1ui64);
+  poption = v7;
+  if ( !v7 )
     return 0xFFFFFFFFi64;
-  v9 = v3;
-  v10 = v7 + 1;
-  v11 = v8;
+  v8 = name;
+  v9 = v6 + 1;
+  v10 = v7;
 LABEL_15:
-  strcpy_s(v11, v10, v9);
-  if ( (unsigned int)_crtsetenv(&poption, 1) )
+  strcpy_s(v10, v9, v8);
+  if ( (unsigned int)_crtsetenv((const char **)&poption, 1) )
   {
     if ( poption )
       free(poption);
@@ -94,29 +85,29 @@ LABEL_15:
   if ( wenviron )
   {
     pBlock = 0i64;
-    cchWideChar = MultiByteToWideChar(0, 0, v3, -1, 0i64, 0);
+    cchWideChar = MultiByteToWideChar(0, 0, name, -1, 0i64, 0);
     if ( !cchWideChar )
     {
 LABEL_20:
       *errno() = 42;
       return 0xFFFFFFFFi64;
     }
-    if ( v2 )
+    if ( value )
     {
-      v18 = MultiByteToWideChar(0, 0, v2, -1, 0i64, 0);
-      if ( !v18 )
+      v17 = MultiByteToWideChar(0, 0, value, -1, 0i64, 0);
+      if ( !v17 )
         goto LABEL_20;
-      cchWideChar += v18 + 1;
+      cchWideChar += v17 + 1;
     }
     lpWideCharStr = calloc_crt(cchWideChar, 2ui64);
     pBlock = lpWideCharStr;
     if ( !lpWideCharStr )
       return 0xFFFFFFFFi64;
-    if ( !MultiByteToWideChar(0, 0, v3, -1, (LPWSTR)lpWideCharStr, cchWideChar)
-      || v2
-      && (v20 = wcslen((const wchar_t *)pBlock),
-          *((_WORD *)pBlock + v20) = 61,
-          !MultiByteToWideChar(0, 0, v2, -1, (LPWSTR)pBlock + v20 + 1, cchWideChar - (v20 + 1))) )
+    if ( !MultiByteToWideChar(0, 0, name, -1, (LPWSTR)lpWideCharStr, cchWideChar)
+      || value
+      && (v19 = wcslen((const wchar_t *)pBlock),
+          *((_WORD *)pBlock + v19) = 61,
+          !MultiByteToWideChar(0, 0, value, -1, (LPWSTR)pBlock + v19 + 1, cchWideChar - (v19 + 1))) )
     {
       free(pBlock);
       goto LABEL_20;

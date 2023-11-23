@@ -13,60 +13,49 @@ __int64 dynamic_initializer_for__StimulusBank::sClassNameUID__()
 // RVA: 0x332050
 void __fastcall StimulusBank::StimulusBank(StimulusBank *this)
 {
-  StimulusBank *v1; // rbx
-  UFG::qNode<ActionNodeBank,ActionNodeBank> *v2; // rax
-
-  v1 = this;
-  ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)&this->vfptr);
-  v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable;
-  v1->m_Level = 0;
-  v1->mSignalMask = -1i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable;
-  *(_QWORD *)&v1->m_NumChildren = 0i64;
-  v1->m_pStimulusType = 0i64;
-  v1->m_pNumRecords = 0i64;
-  v1->m_pStimulusRecordBlock = 0i64;
-  v1->m_ppFirstStimulusRecord = 0i64;
-  v1->m_pNeedToCallMatchOnChild = 0i64;
-  v1->m_pNeedToCallMatchOnChildInitialValues = 0i64;
-  v1->m_MaxSecondsSincePerceivedForAnyStimulus = -999999.0;
+  ActionNodeImplementation::ActionNodeImplementation(this);
+  this->mPrev = &this->UFG::qNode<ActionNodeBank,ActionNodeBank>;
+  this->mNext = &this->UFG::qNode<ActionNodeBank,ActionNodeBank>;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable;
+  this->m_Level = 0;
+  this->mSignalMask = -1i64;
+  this->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable;
+  *(_QWORD *)&this->m_NumChildren = 0i64;
+  this->m_pStimulusType = 0i64;
+  this->m_pNumRecords = 0i64;
+  this->m_pStimulusRecordBlock = 0i64;
+  this->m_ppFirstStimulusRecord = 0i64;
+  this->m_pNeedToCallMatchOnChild = 0i64;
+  this->m_pNeedToCallMatchOnChildInitialValues = 0i64;
+  this->m_MaxSecondsSincePerceivedForAnyStimulus = -999999.0;
 }
 
 // File Line: 61
 // RVA: 0x33B2C0
 void __fastcall StimulusBank::~StimulusBank(StimulusBank *this)
 {
-  StimulusBank *v1; // rbx
-  UFG::qNode<ActionNodeBank,ActionNodeBank> *v2; // rdx
-  UFG::qNode<ActionNodeBank,ActionNodeBank> *v3; // rcx
-  UFG::qNode<ActionNodeBank,ActionNodeBank> *v4; // rax
+  UFG::qNode<ActionNodeBank,ActionNodeBank> *mPrev; // rcx
+  UFG::qNode<ActionNodeBank,ActionNodeBank> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable;
   StimulusBank::CleanUp(this);
-  v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
-  v3 = v1->mPrev;
-  v4 = v1->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  ActionNodeImplementation::~ActionNodeImplementation((ActionNodeImplementation *)&v1->vfptr);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<ActionNodeBank,ActionNodeBank>;
+  this->mNext = &this->UFG::qNode<ActionNodeBank,ActionNodeBank>;
+  ActionNodeImplementation::~ActionNodeImplementation(this);
 }
 
 // File Line: 84
 // RVA: 0x350DB0
 StimulusBank *__fastcall StimulusBank::CreateClone(StimulusBank *this)
 {
-  StimulusBank *v1; // rdi
   char *v2; // rax
   StimulusBank *v3; // rax
   StimulusBank *v4; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB8ui64, "StimulusBank::CreateClone", 0i64, 1u);
   if ( v2 )
   {
@@ -78,7 +67,7 @@ StimulusBank *__fastcall StimulusBank::CreateClone(StimulusBank *this)
     v4 = 0i64;
   }
   StimulusBank::CleanUp(v4);
-  ActionNodeBank::CopyFrom((ActionNodeBank *)&v4->vfptr, (ActionNodeBank *)&v1->vfptr);
+  ActionNodeBank::CopyFrom(v4, this);
   return v4;
 }
 
@@ -86,145 +75,133 @@ StimulusBank *__fastcall StimulusBank::CreateClone(StimulusBank *this)
 // RVA: 0x34E770
 void __fastcall StimulusBank::CleanUp(StimulusBank *this)
 {
-  StimulusBank *v1; // rbx
-
-  v1 = this;
   operator delete[](this->m_pStimulusType);
-  operator delete[](v1->m_pNumRecords);
-  operator delete[](v1->m_pStimulusRecordBlock);
-  operator delete[](v1->m_ppFirstStimulusRecord);
-  operator delete[](v1->m_pNeedToCallMatchOnChild);
-  operator delete[](v1->m_pNeedToCallMatchOnChildInitialValues);
-  v1->m_MaxSecondsSincePerceivedForAnyStimulus = -999999.0;
-  *(_QWORD *)&v1->m_NumChildren = 0i64;
-  v1->m_pStimulusType = 0i64;
-  v1->m_pNumRecords = 0i64;
-  v1->m_pStimulusRecordBlock = 0i64;
-  v1->m_ppFirstStimulusRecord = 0i64;
-  v1->m_pNeedToCallMatchOnChild = 0i64;
-  v1->m_pNeedToCallMatchOnChildInitialValues = 0i64;
+  operator delete[](this->m_pNumRecords);
+  operator delete[](this->m_pStimulusRecordBlock);
+  operator delete[](this->m_ppFirstStimulusRecord);
+  operator delete[](this->m_pNeedToCallMatchOnChild);
+  operator delete[](this->m_pNeedToCallMatchOnChildInitialValues);
+  this->m_MaxSecondsSincePerceivedForAnyStimulus = -999999.0;
+  *(_QWORD *)&this->m_NumChildren = 0i64;
+  this->m_pStimulusType = 0i64;
+  this->m_pNumRecords = 0i64;
+  this->m_pStimulusRecordBlock = 0i64;
+  this->m_ppFirstStimulusRecord = 0i64;
+  this->m_pNeedToCallMatchOnChild = 0i64;
+  this->m_pNeedToCallMatchOnChildInitialValues = 0i64;
 }
 
 // File Line: 158
 // RVA: 0x350900
-__int64 __fastcall StimulusBank::CountNumStimulusTypesInConditionGroup(StimulusBank *this, ConditionGroup *condition_group, int *num_entries)
+__int64 __fastcall StimulusBank::CountNumStimulusTypesInConditionGroup(
+        StimulusBank *this,
+        ConditionGroup *condition_group,
+        int *num_entries)
 {
-  __int64 v3; // rax
-  unsigned __int8 v4; // si
-  char *v5; // rcx
-  __int64 v6; // rdi
-  int *v7; // rbp
-  unsigned __int8 *v8; // rbx
-  StimulusBank *v10; // [rsp+40h] [rbp+8h]
-  ConditionGroup *v11; // [rsp+48h] [rbp+10h]
-  char *v12; // [rsp+58h] [rbp+20h]
+  unsigned __int8 v3; // si
+  char *v4; // rcx
+  __int64 v5; // rdi
+  unsigned __int8 *v7; // rbx
+  char *v11; // [rsp+58h] [rbp+20h]
 
-  v11 = condition_group;
-  v10 = this;
-  v3 = condition_group->mConditions.mData.mOffset;
-  v4 = 0;
-  v5 = (char *)&condition_group->mConditions.mData + v3;
-  v6 = 0i64;
-  v12 = (char *)&condition_group->mConditions.mData + v3;
-  v7 = num_entries;
-  if ( condition_group->mConditions.mCount & 0x7FFFFFFF )
+  v3 = 0;
+  v4 = (char *)&condition_group->mConditions.mData + condition_group->mConditions.mData.mOffset;
+  v5 = 0i64;
+  v11 = v4;
+  if ( (condition_group->mConditions.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v8 = (unsigned __int8 *)&v5[8 * v6 + *(_QWORD *)&v5[8 * v6]];
-      if ( (*(unsigned int (__fastcall **)(unsigned __int8 *))(*(_QWORD *)v8 + 40i64))(v8) == ReceivedStimulusCondition::sClassNameUID )
+      v7 = (unsigned __int8 *)&v4[8 * v5 + *(_QWORD *)&v4[8 * v5]];
+      if ( (*(unsigned int (__fastcall **)(unsigned __int8 *))(*(_QWORD *)v7 + 40i64))(v7) == ReceivedStimulusCondition::sClassNameUID )
       {
-        v4 = 1;
-        ++v7[v8[48]];
+        v3 = 1;
+        ++num_entries[v7[48]];
       }
-      else if ( (*(unsigned int (__fastcall **)(unsigned __int8 *))(*(_QWORD *)v8 + 40i64))(v8) == ConditionGroup::sClassNameUID
-             && StimulusBank::CountNumStimulusTypesInConditionGroup(v10, (ConditionGroup *)v8, v7) )
+      else if ( (*(unsigned int (__fastcall **)(unsigned __int8 *))(*(_QWORD *)v7 + 40i64))(v7) == ConditionGroup::sClassNameUID
+             && StimulusBank::CountNumStimulusTypesInConditionGroup(this, (ConditionGroup *)v7, num_entries) )
       {
-        v4 = 1;
+        v3 = 1;
       }
-      v6 = (unsigned int)(v6 + 1);
-      v5 = v12;
+      v5 = (unsigned int)(v5 + 1);
+      v4 = v11;
     }
-    while ( (unsigned int)v6 < (v11->mConditions.mCount & 0x7FFFFFFFu) );
+    while ( (unsigned int)v5 < (condition_group->mConditions.mCount & 0x7FFFFFFFu) );
   }
-  return v4;
+  return v3;
 }
 
 // File Line: 194
 // RVA: 0x340C50
-void __fastcall StimulusBank::AddRecordsForAllReceivedStimulusConditions(StimulusBank *this, ConditionGroup *condition_group, int child_index, int *record_index)
+void __fastcall StimulusBank::AddRecordsForAllReceivedStimulusConditions(
+        StimulusBank *this,
+        ConditionGroup *condition_group,
+        int child_index,
+        int *record_index)
 {
-  StimulusBank *v4; // rdi
   __int64 v5; // rsi
-  int *v6; // rbp
   char *v7; // rcx
-  signed __int64 v8; // rbx
-  int v9; // edx
+  __int64 v8; // rbx
+  int m_NumStimulusTypes; // edx
   __int64 v10; // r9
   int v11; // ecx
   __int64 v12; // r8
-  UFG::eStimulusType *v13; // rax
+  UFG::eStimulusType *m_pStimulusType; // rax
   __int64 v14; // rdx
   StimulusRecord *v15; // rcx
   float v16; // xmm1_4
-  float v17; // xmm0_4
+  float m_MaxSecondsSincePerceivedForAnyStimulus; // xmm0_4
   char *v18; // [rsp+20h] [rbp-28h]
-  ConditionGroup *v19; // [rsp+58h] [rbp+10h]
-  int child_indexa; // [rsp+60h] [rbp+18h]
 
-  child_indexa = child_index;
-  v19 = condition_group;
-  v4 = this;
   v5 = 0i64;
-  v6 = record_index;
   v7 = (char *)&condition_group->mConditions.mData + condition_group->mConditions.mData.mOffset;
-  v18 = (char *)&condition_group->mConditions.mData + condition_group->mConditions.mData.mOffset;
-  if ( condition_group->mConditions.mCount & 0x7FFFFFFF )
+  v18 = v7;
+  if ( (condition_group->mConditions.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v8 = (signed __int64)&v7[8 * v5 + *(_QWORD *)&v7[8 * v5]];
-      if ( (*(unsigned int (__fastcall **)(signed __int64))(*(_QWORD *)v8 + 40i64))(v8) == ReceivedStimulusCondition::sClassNameUID )
+      v8 = (__int64)&v7[8 * v5 + *(_QWORD *)&v7[8 * v5]];
+      if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v8 + 40i64))(v8) == ReceivedStimulusCondition::sClassNameUID )
       {
-        v9 = v4->m_NumStimulusTypes;
+        m_NumStimulusTypes = this->m_NumStimulusTypes;
         v10 = *(unsigned __int8 *)(v8 + 48);
         v11 = 0;
         v12 = 0i64;
-        if ( v9 > 0 )
+        if ( m_NumStimulusTypes > 0 )
         {
-          v13 = v4->m_pStimulusType;
-          while ( (_DWORD)v10 != *v13 )
+          m_pStimulusType = this->m_pStimulusType;
+          while ( (_DWORD)v10 != *m_pStimulusType )
           {
             ++v11;
             ++v12;
-            ++v13;
-            if ( v11 >= v9 )
+            ++m_pStimulusType;
+            if ( v11 >= m_NumStimulusTypes )
               goto LABEL_14;
           }
           if ( v12 >= 0 )
           {
-            v14 = v6[v10];
-            v15 = v4->m_ppFirstStimulusRecord[v12];
-            v15[v14].m_ChildIndex = child_indexa;
+            v14 = record_index[v10];
+            v15 = this->m_ppFirstStimulusRecord[v12];
+            v15[v14].m_ChildIndex = child_index;
             v16 = *(float *)(v8 + 60);
             v15[v14].m_MaxSecondsSincePerceived = v16;
-            v17 = v4->m_MaxSecondsSincePerceivedForAnyStimulus;
-            if ( v17 <= v16 )
-              v17 = v16;
-            v4->m_MaxSecondsSincePerceivedForAnyStimulus = v17;
-            ++v6[v10];
+            m_MaxSecondsSincePerceivedForAnyStimulus = this->m_MaxSecondsSincePerceivedForAnyStimulus;
+            if ( m_MaxSecondsSincePerceivedForAnyStimulus <= v16 )
+              m_MaxSecondsSincePerceivedForAnyStimulus = v16;
+            this->m_MaxSecondsSincePerceivedForAnyStimulus = m_MaxSecondsSincePerceivedForAnyStimulus;
+            ++record_index[v10];
           }
         }
       }
-      else if ( (*(unsigned int (__fastcall **)(signed __int64))(*(_QWORD *)v8 + 40i64))(v8) == ConditionGroup::sClassNameUID )
+      else if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v8 + 40i64))(v8) == ConditionGroup::sClassNameUID )
       {
-        StimulusBank::AddRecordsForAllReceivedStimulusConditions(v4, (ConditionGroup *)v8, child_indexa, v6);
+        StimulusBank::AddRecordsForAllReceivedStimulusConditions(this, (ConditionGroup *)v8, child_index, record_index);
       }
 LABEL_14:
       v7 = v18;
       v5 = (unsigned int)(v5 + 1);
     }
-    while ( (unsigned int)v5 < (v19->mConditions.mCount & 0x7FFFFFFFu) );
+    while ( (unsigned int)v5 < (condition_group->mConditions.mCount & 0x7FFFFFFFu) );
   }
 }
 
@@ -232,278 +209,266 @@ LABEL_14:
 // RVA: 0x383930
 void __fastcall StimulusBank::ResolveReferences(StimulusBank *this)
 {
-  StimulusBank *v1; // rbx
   __int64 v2; // r15
   int v3; // ecx
-  UFG::allocator::free_link *v4; // rax
-  unsigned __int64 v5; // rcx
-  UFG::allocator::free_link *v6; // rax
-  unsigned int v7; // er8
+  char *v4; // rax
+  unsigned __int64 m_NumChildren; // rcx
+  char *v6; // rax
+  int v7; // r8d
   unsigned int v8; // esi
   unsigned int v9; // edi
   __int64 v10; // r14
-  signed __int64 v11; // r12
-  ConditionGroup *v12; // rax
-  int v13; // er8
-  int v14; // ebp
-  char *v15; // rax
-  signed __int64 v16; // rdx
-  unsigned __int64 v17; // rdi
-  unsigned __int64 v18; // rax
+  __int64 v11; // r12
+  __int64 v12; // rcx
+  ConditionGroup *v13; // rax
+  int v14; // r8d
+  int v15; // ebp
+  int *v16; // rax
+  __int64 v17; // rdx
+  unsigned __int64 v18; // rdi
   unsigned __int64 v19; // rax
   unsigned __int64 v20; // rax
   unsigned __int64 v21; // rax
-  UFG::allocator::free_link *v22; // rax
-  StimulusRecord *v23; // r11
-  signed int v24; // er9
-  __int64 v25; // rdi
-  __int64 v26; // r10
-  char *v27; // rdx
-  __int64 v28; // rdi
-  signed __int64 v29; // r14
-  ConditionGroup *v30; // rax
-  char dest; // [rsp+20h] [rbp-3B8h]
-  int record_index; // [rsp+1F0h] [rbp-1E8h]
+  unsigned __int64 v22; // rax
+  StimulusRecord **v23; // rax
+  StimulusRecord *m_pStimulusRecordBlock; // r11
+  int v25; // r9d
+  __int64 v26; // rdi
+  __int64 v27; // r10
+  int *v28; // rdx
+  __int64 v29; // rdi
+  __int64 v30; // r14
+  __int64 v31; // rcx
+  ConditionGroup *v32; // rax
+  int dest[116]; // [rsp+20h] [rbp-3B8h] BYREF
+  int record_index[116]; // [rsp+1F0h] [rbp-1E8h] BYREF
 
-  v1 = this;
   StimulusBank::CleanUp(this);
-  UFG::qMemSet(&dest, 0, 0x1D0u);
-  v2 = ((__int64 (__fastcall *)(StimulusBank *))v1->vfptr[1].GetResourcePath)(v1);
+  UFG::qMemSet(dest, 0, 0x1D0u);
+  v2 = ((__int64 (__fastcall *)(StimulusBank *))this->vfptr[1].GetResourcePath)(this);
   v3 = *(_DWORD *)v2 & 0x7FFFFFFF;
-  v1->m_NumChildren = v3;
-  v4 = UFG::qMalloc(v3, "StimulusBank", 0i64);
-  v5 = v1->m_NumChildren;
-  v1->m_pNeedToCallMatchOnChild = (char *)v4;
-  v6 = UFG::qMalloc(v5, "StimulusBank", 0i64);
-  v7 = v1->m_NumChildren;
-  v1->m_pNeedToCallMatchOnChildInitialValues = (char *)v6;
+  this->m_NumChildren = v3;
+  v4 = (char *)UFG::qMalloc(v3, "StimulusBank", 0i64);
+  m_NumChildren = this->m_NumChildren;
+  this->m_pNeedToCallMatchOnChild = v4;
+  v6 = (char *)UFG::qMalloc(m_NumChildren, "StimulusBank", 0i64);
+  v7 = this->m_NumChildren;
+  this->m_pNeedToCallMatchOnChildInitialValues = v6;
   UFG::qMemSet(v6, 0, v7);
   v8 = 0;
   v9 = 0;
   v10 = 0i64;
   v11 = v2 + *(_QWORD *)(v2 + 8) + 8i64;
-  if ( *(_DWORD *)v2 & 0x7FFFFFFF )
+  if ( (*(_DWORD *)v2 & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v12 = (ConditionGroup *)(*(__int64 (**)(void))(*(_QWORD *)(*(_QWORD *)(v11 + 8i64 * v9) + v11 + 8i64 * v9) + 272i64))();
-      if ( !v12 || !(unsigned __int8)StimulusBank::CountNumStimulusTypesInConditionGroup(v1, v12, (int *)&dest) )
-        v1->m_pNeedToCallMatchOnChildInitialValues[v10] = 1;
+      v12 = *(_QWORD *)(v11 + 8i64 * v9) + v11 + 8i64 * v9;
+      v13 = (ConditionGroup *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v12 + 272i64))(v12);
+      if ( !v13 || !(unsigned __int8)StimulusBank::CountNumStimulusTypesInConditionGroup(this, v13, dest) )
+        this->m_pNeedToCallMatchOnChildInitialValues[v10] = 1;
       ++v9;
       ++v10;
     }
     while ( v9 < (*(_DWORD *)v2 & 0x7FFFFFFFu) );
   }
-  v13 = 0;
   v14 = 0;
-  v15 = &dest;
-  v16 = 116i64;
+  v15 = 0;
+  v16 = dest;
+  v17 = 116i64;
   do
   {
-    if ( *(_DWORD *)v15 > 0 )
+    if ( *v16 > 0 )
     {
-      v14 += *(_DWORD *)v15;
-      ++v13;
+      v15 += *v16;
+      ++v14;
     }
-    v15 += 4;
-    --v16;
+    ++v16;
+    --v17;
   }
-  while ( v16 );
-  v17 = v13;
-  v1->m_NumStimulusTypes = v13;
-  v18 = 4i64 * v13;
-  if ( !is_mul_ok(v13, 4ui64) )
-    v18 = -1i64;
-  v1->m_pStimulusType = (UFG::eStimulusType *)UFG::qMalloc(v18, "StimulusBank", 0i64);
-  v19 = 4 * v17;
-  if ( !is_mul_ok(v17, 4ui64) )
+  while ( v17 );
+  v18 = v14;
+  this->m_NumStimulusTypes = v14;
+  v19 = 4i64 * v14;
+  if ( !is_mul_ok(v14, 4ui64) )
     v19 = -1i64;
-  v1->m_pNumRecords = (int *)UFG::qMalloc(v19, "StimulusBank", 0i64);
-  v20 = 8i64 * v14;
-  if ( !is_mul_ok(v14, 8ui64) )
+  this->m_pStimulusType = (UFG::eStimulusType *)UFG::qMalloc(v19, "StimulusBank", 0i64);
+  v20 = 4 * v18;
+  if ( !is_mul_ok(v18, 4ui64) )
     v20 = -1i64;
-  v1->m_pStimulusRecordBlock = (StimulusRecord *)UFG::qMalloc(v20, "StimulusBank", 0i64);
-  v21 = 8 * v17;
-  if ( !is_mul_ok(v17, 8ui64) )
+  this->m_pNumRecords = (int *)UFG::qMalloc(v20, "StimulusBank", 0i64);
+  v21 = 8i64 * v15;
+  if ( !is_mul_ok(v15, 8ui64) )
     v21 = -1i64;
-  v22 = UFG::qMalloc(v21, "StimulusBank", 0i64);
-  v23 = v1->m_pStimulusRecordBlock;
-  v24 = 0;
-  v25 = 0i64;
+  this->m_pStimulusRecordBlock = (StimulusRecord *)UFG::qMalloc(v21, "StimulusBank", 0i64);
+  v22 = 8 * v18;
+  if ( !is_mul_ok(v18, 8ui64) )
+    v22 = -1i64;
+  v23 = (StimulusRecord **)UFG::qMalloc(v22, "StimulusBank", 0i64);
+  m_pStimulusRecordBlock = this->m_pStimulusRecordBlock;
+  v25 = 0;
   v26 = 0i64;
-  v27 = &dest;
-  v1->m_ppFirstStimulusRecord = (StimulusRecord **)v22;
+  v27 = 0i64;
+  v28 = dest;
+  this->m_ppFirstStimulusRecord = v23;
   do
   {
-    if ( *(_DWORD *)v27 > 0 )
+    if ( *v28 > 0 )
     {
+      ++v27;
       ++v26;
-      ++v25;
-      v1->m_pStimulusType[v26 - 1] = v24;
-      v1->m_pNumRecords[v26 - 1] = *(_DWORD *)v27;
-      v1->m_ppFirstStimulusRecord[v25 - 1] = v23;
-      v23 += *(signed int *)v27;
+      this->m_pStimulusType[v27 - 1] = v25;
+      this->m_pNumRecords[v27 - 1] = *v28;
+      this->m_ppFirstStimulusRecord[v26 - 1] = m_pStimulusRecordBlock;
+      m_pStimulusRecordBlock += *v28;
     }
-    ++v24;
-    v27 += 4;
+    ++v25;
+    ++v28;
   }
-  while ( v24 < 116 );
-  UFG::qMemSet(&record_index, 0, 0x1D0u);
-  v28 = ((__int64 (__fastcall *)(StimulusBank *))v1->vfptr[1].GetResourcePath)(v1);
-  v29 = v28 + *(_QWORD *)(v28 + 8) + 8i64;
-  if ( *(_DWORD *)v28 & 0x7FFFFFFF )
+  while ( v25 < 116 );
+  UFG::qMemSet(record_index, 0, 0x1D0u);
+  v29 = ((__int64 (__fastcall *)(StimulusBank *))this->vfptr[1].GetResourcePath)(this);
+  v30 = v29 + *(_QWORD *)(v29 + 8) + 8i64;
+  if ( (*(_DWORD *)v29 & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v30 = (ConditionGroup *)(*(__int64 (**)(void))(*(_QWORD *)(v29 + 8i64 * v8 + *(_QWORD *)(v29 + 8i64 * v8)) + 272i64))();
-      if ( v30 )
-        StimulusBank::AddRecordsForAllReceivedStimulusConditions(v1, v30, v8, &record_index);
+      v31 = v30 + 8i64 * v8 + *(_QWORD *)(v30 + 8i64 * v8);
+      v32 = (ConditionGroup *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v31 + 272i64))(v31);
+      if ( v32 )
+        StimulusBank::AddRecordsForAllReceivedStimulusConditions(this, v32, v8, record_index);
       ++v8;
     }
-    while ( v8 < (*(_DWORD *)v28 & 0x7FFFFFFFu) );
+    while ( v8 < (*(_DWORD *)v29 & 0x7FFFFFFFu) );
   }
-  ActionNodeBank::ResolveReferences((ActionNodeBank *)&v1->vfptr);
+  ActionNodeBank::ResolveReferences(this);
 }
 
 // File Line: 379
 // RVA: 0x372780
 ActionNodePlayable *__fastcall StimulusBank::Match(StimulusBank *this, ActionContext *context)
 {
-  StimulusBank *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // rsi
-  unsigned __int16 v5; // r8
-  UFG::SimComponent *v6; // rdi
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rdi
   UFG::SimComponent *v7; // rax
   __int64 v8; // r8
   __int64 v9; // r9
-  float v10; // xmm2_4
+  float mSimTime_Temp; // xmm2_4
   __int64 v11; // r13
-  int v12; // er10
+  int v12; // r10d
   __int64 v13; // r11
   __int64 v14; // rax
   float *v15; // rax
   float v16; // xmm1_4
-  float *v17; // rdx
-  __int64 v18; // rbp
+  StimulusRecord *i; // rdx
+  int v18; // ebp
   ActionNode *v19; // r15
-  StimulusBank *v20; // rcx
+  StimulusBank *m_currentNode; // rcx
   ActionNode *v21; // rdx
-  __int64 v22; // rax
-  signed __int64 v23; // rcx
+  __int64 mOffset; // rax
+  UFG::qOffset64<ActionNode *> *p_mParent; // rcx
   unsigned int v24; // esi
   __int64 v25; // rdi
   __int64 v26; // r14
-  signed __int64 v27; // r12
-  signed __int64 v28; // rcx
-  ActionContext *v30; // [rsp+58h] [rbp+10h]
+  __int64 v27; // r12
+  __int64 v28; // rcx
 
-  v30 = context;
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v4 = context;
-  if ( !v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( !m_pPointer )
     return 0i64;
-  v5 = v3->m_Flags;
-  if ( (v5 >> 14) & 1 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v6 = v3->m_Components.p[11].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[11].m_pComponent;
   }
-  else if ( (v5 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v5 >> 13) & 1 )
-      v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::StimulusReceiverComponent::_TypeUID);
-    else
-      v7 = (v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::StimulusReceiverComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::StimulusReceiverComponent::_TypeUID);
-    v6 = v7;
+    v7 = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+       ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::StimulusReceiverComponent::_TypeUID)
+       : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::StimulusReceiverComponent::_TypeUID);
+    m_pComponent = v7;
   }
   else
   {
-    v6 = v3->m_Components.p[11].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[11].m_pComponent;
   }
-  if ( !v6 )
+  if ( !m_pComponent )
     return 0i64;
-  UFG::qMemCopy(v2->m_pNeedToCallMatchOnChild, v2->m_pNeedToCallMatchOnChildInitialValues, v2->m_NumChildren);
-  v10 = UFG::Metrics::msInstance.mSimTime_Temp;
+  UFG::qMemCopy(this->m_pNeedToCallMatchOnChild, this->m_pNeedToCallMatchOnChildInitialValues, this->m_NumChildren);
+  mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
   v11 = 0i64;
-  if ( UFG::Metrics::msInstance.mSimTime_Temp <= (float)(*(float *)(&v6[16].m_SimObjIndex + 1)
-                                                       + v2->m_MaxSecondsSincePerceivedForAnyStimulus) )
+  if ( UFG::Metrics::msInstance.mSimTime_Temp <= (float)(*(float *)(&m_pComponent[16].m_SimObjIndex + 1)
+                                                       + this->m_MaxSecondsSincePerceivedForAnyStimulus) )
   {
     v12 = 0;
-    if ( v2->m_NumStimulusTypes > 0 )
+    if ( this->m_NumStimulusTypes > 0 )
     {
       v9 = 0i64;
       v13 = 0i64;
       do
       {
-        v14 = *((_QWORD *)&v6[1].m_BoundComponentHandles.mNode.mPrev + (signed int)v2->m_pStimulusType[v9]);
+        v14 = *((_QWORD *)&m_pComponent[1].m_BoundComponentHandles.mNode.mPrev + (int)this->m_pStimulusType[v9]);
         if ( v14 && (v15 = (float *)(v14 + 32)) != 0i64 )
           v16 = *v15;
         else
           v16 = FLOAT_N99999_0;
         v8 = 0i64;
-        v17 = (float *)v2->m_ppFirstStimulusRecord[v13];
-        if ( v2->m_pNumRecords[v9] > 0 )
+        for ( i = this->m_ppFirstStimulusRecord[v13]; (int)v8 < this->m_pNumRecords[v9]; ++i )
         {
-          do
-          {
-            if ( v10 <= (float)(v16 + v17[1]) )
-              v2->m_pNeedToCallMatchOnChild[*(signed int *)v17] = 1;
-            v8 = (unsigned int)(v8 + 1);
-            v17 += 2;
-          }
-          while ( (signed int)v8 < v2->m_pNumRecords[v9] );
+          if ( mSimTime_Temp <= (float)(v16 + i->m_MaxSecondsSincePerceived) )
+            this->m_pNeedToCallMatchOnChild[i->m_ChildIndex] = 1;
+          v8 = (unsigned int)(v8 + 1);
         }
         ++v12;
         ++v13;
         ++v9;
       }
-      while ( v12 < v2->m_NumStimulusTypes );
+      while ( v12 < this->m_NumStimulusTypes );
     }
   }
-  LODWORD(v18) = -1;
+  v18 = -1;
   v19 = 0i64;
-  v20 = (StimulusBank *)v4->mActionController->m_currentNode;
-  if ( v20 )
+  m_currentNode = (StimulusBank *)context->mActionController->m_currentNode;
+  if ( m_currentNode )
   {
     v21 = 0i64;
-    while ( v20 != v2 )
+    while ( m_currentNode != this )
     {
-      v22 = v20->mParent.mOffset;
-      v21 = (ActionNode *)&v20->vfptr;
-      v23 = (signed __int64)&v20->mParent;
-      if ( v22 )
+      mOffset = m_currentNode->mParent.mOffset;
+      v21 = m_currentNode;
+      p_mParent = &m_currentNode->mParent;
+      if ( mOffset )
       {
-        v20 = (StimulusBank *)(v22 + v23);
-        if ( v20 )
+        m_currentNode = (StimulusBank *)((char *)p_mParent + mOffset);
+        if ( m_currentNode )
           continue;
       }
-      goto LABEL_33;
+      goto LABEL_32;
     }
     if ( v21 )
     {
       v19 = v21;
-      LODWORD(v18) = BinPtrArray<ActionNode,0,0>::Find(&v2->mChildren, v21);
+      v18 = BinPtrArray<ActionNode,0,0>::Find(&this->mChildren, v21);
     }
   }
-LABEL_33:
+LABEL_32:
   v24 = 0;
   v25 = 0i64;
-  v26 = ((__int64 (__fastcall *)(StimulusBank *, Expression::IMemberMapVtbl *, __int64, __int64))v2->vfptr[1].GetResourcePath)(
-          v2,
-          v2->vfptr,
+  v26 = ((__int64 (__fastcall *)(StimulusBank *, Expression::IMemberMapVtbl *, __int64, __int64))this->vfptr[1].GetResourcePath)(
+          this,
+          this->vfptr,
           v8,
           v9 * 4);
-  v18 = (signed int)v18;
   v27 = v26 + *(_QWORD *)(v26 + 8) + 8i64;
-  if ( *(_DWORD *)v26 & 0x7FFFFFFF )
+  if ( (*(_DWORD *)v26 & 0x7FFFFFFF) != 0 )
   {
     do
     {
       v28 = v27 + 8i64 * v24 + *(_QWORD *)(v27 + 8i64 * v24);
-      if ( (v18 == -1 || v25 < v18) && v2->m_pNeedToCallMatchOnChild[v25] || (ActionNode *)v28 == v19 )
+      if ( (v18 == -1i64 || v25 < v18) && this->m_pNeedToCallMatchOnChild[v25] || (ActionNode *)v28 == v19 )
       {
-        v11 = (*(__int64 (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v28 + 200i64))(v28, v30);
+        v11 = (*(__int64 (__fastcall **)(__int64, ActionContext *))(*(_QWORD *)v28 + 200i64))(v28, context);
         if ( v11 )
           break;
       }
@@ -514,4 +479,8 @@ LABEL_33:
   }
   return (ActionNodePlayable *)v11;
 }
+      ++v24;
+      ++v25;
+    }
+    while ( v24 < (
 

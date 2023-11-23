@@ -2,11 +2,8 @@
 // RVA: 0x24BAB0
 void __fastcall UELLexerFree(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-
-  v1 = ctx;
   ctx->pLexer->free(ctx->pLexer);
-  antlrFree(v1);
+  antlrFree(ctx);
 }
 
 // File Line: 424
@@ -32,19 +29,17 @@ UELLexer_Ctx_struct *__fastcall UELLexerNew(ANTLR3_INPUT_STREAM_struct *instream
 
 // File Line: 466
 // RVA: 0x24DC80
-ANTLR3_LEXER_struct **__fastcall UELLexerNewSSD(ANTLR3_INPUT_STREAM_struct *instream, ANTLR3_RECOGNIZER_SHARED_STATE_struct *state)
+UELLexer_Ctx_struct *__fastcall UELLexerNewSSD(
+        ANTLR3_INPUT_STREAM_struct *instream,
+        ANTLR3_RECOGNIZER_SHARED_STATE_struct *state)
 {
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rdi
-  ANTLR3_INPUT_STREAM_struct *v3; // rsi
   ANTLR3_LEXER_struct **v4; // rbx
   ANTLR3_LEXER_struct *v5; // rax
 
-  v2 = state;
-  v3 = instream;
   v4 = (ANTLR3_LEXER_struct **)antlrCalloc(1u, 0x188u);
   if ( !v4 )
     return 0i64;
-  v5 = antlr3LexerNewStream(0x401u, v3, v2);
+  v5 = antlr3LexerNewStream(0x401u, instream, state);
   *v4 = v5;
   if ( !v5 )
   {
@@ -101,147 +96,129 @@ ANTLR3_LEXER_struct **__fastcall UELLexerNewSSD(ANTLR3_INPUT_STREAM_struct *inst
   v4[46] = (ANTLR3_LEXER_struct *)getGrammarFileName_0;
   v4[48] = (ANTLR3_LEXER_struct *)UELLexerFree;
   v4[47] = (ANTLR3_LEXER_struct *)UELLexerReset;
-  return v4;
+  return (UELLexer_Ctx_struct *)v4;
 }
 
 // File Line: 977
 // RVA: 0x24D5E0
 void __fastcall mT__44(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 40u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 44;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 44;
 }
 
 // File Line: 1018
 // RVA: 0x24D620
 void __fastcall mT__45(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 41u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 45;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 45;
 }
 
 // File Line: 1059
 // RVA: 0x24D660
 void __fastcall mT__46(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 44u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 46;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 46;
 }
 
 // File Line: 1100
 // RVA: 0x24D6A0
 void __fastcall mT__47(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 91u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 47;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 47;
 }
 
 // File Line: 1141
 // RVA: 0x24D6E0
 void __fastcall mT__48(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 93u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 48;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 48;
 }
 
 // File Line: 1182
 // RVA: 0x24D720
 void __fastcall mT__49(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 123u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 49;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 49;
 }
 
 // File Line: 1223
 // RVA: 0x24D760
 void __fastcall mT__50(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_1);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 50;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 50;
 }
 
 // File Line: 1266
 // RVA: 0x24D7A0
 void __fastcall mT__51(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 125u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 51;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 51;
 }
 
 // File Line: 1307
 // RVA: 0x24C160
 void __fastcall mENUMERATION(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 101u);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
-    if ( v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) < 0x41
-      || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x5A )
+    if ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x41
+      || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x5A )
     {
-      v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-      v1->pLexer->rec->state->exception->type = 4;
-      v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-      v1->pLexer->recover(v1->pLexer);
+      ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+      ctx->pLexer->rec->state->exception->type = 4;
+      ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+      ctx->pLexer->recover(ctx->pLexer);
     }
     else
     {
-      v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
-      mLABEL(v1);
-      v2 = v1->pLexer->rec->state;
-      if ( v2->error != 1 )
-        v2->type = 13;
+      ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
+      mLABEL(ctx);
+      state = ctx->pLexer->rec->state;
+      if ( state->error != 1 )
+        state->type = 13;
     }
   }
 }
@@ -250,42 +227,38 @@ void __fastcall mENUMERATION(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24D160
 void __fastcall mSCOPE(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 58u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 37;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 37;
 }
 
 // File Line: 1413
 // RVA: 0x24D360
 void __fastcall mTYPE(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  signed int v2; // edi
+  int v2; // edi
   unsigned int v3; // eax
   unsigned int *v4; // rdx
 
-  v1 = ctx;
   v2 = 1;
   switch ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) )
   {
-    case 0x42u:
+    case B:
       v2 = 5;
       goto $LN39_3;
-    case 0x45u:
+    case E:
       v2 = 7;
       goto $LN39_3;
-    case 0x49u:
+    case I:
       goto $LN39_3;
-    case 0x52u:
+    case R:
       v2 = 4;
       goto $LN39_3;
-    case 0x53u:
-      v3 = v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 2);
+    case S:
+      v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 2);
       if ( v3 == 116 )
       {
         v2 = 2;
@@ -294,11 +267,11 @@ void __fastcall mTYPE(UELLexer_Ctx_struct *ctx)
       {
         if ( v3 != 121 )
         {
-          v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-          v1->pLexer->rec->state->exception->type = 3;
-          v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-          v1->pLexer->rec->state->exception->decisionNum = 1;
-          v1->pLexer->rec->state->exception->state = 2;
+          ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+          ctx->pLexer->rec->state->exception->type = 3;
+          ctx->pLexer->rec->state->exception->message = &customCaption;
+          ctx->pLexer->rec->state->exception->decisionNum = 1;
+          ctx->pLexer->rec->state->exception->state = 2;
           return;
         }
         v2 = 3;
@@ -327,25 +300,25 @@ $LN39_3:
         case 7:
           v4 = lit_8;
 LABEL_19:
-          v1->pLexer->matchs(v1->pLexer, v4);
-          if ( v1->pLexer->rec->state->error != 1 )
+          ctx->pLexer->matchs(ctx->pLexer, v4);
+          if ( ctx->pLexer->rec->state->error != 1 )
             goto LABEL_20;
-          break;
+          return;
         default:
 LABEL_20:
-          v1->pLexer->rec->state->type = 41;
+          ctx->pLexer->rec->state->type = 41;
           break;
       }
       return;
-    case 0x56u:
+    case V:
       v2 = 6;
       goto $LN39_3;
     default:
-      v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-      v1->pLexer->rec->state->exception->type = 3;
-      v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-      v1->pLexer->rec->state->exception->decisionNum = 1;
-      v1->pLexer->rec->state->exception->state = 0;
+      ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+      ctx->pLexer->rec->state->exception->type = 3;
+      ctx->pLexer->rec->state->exception->message = &customCaption;
+      ctx->pLexer->rec->state->exception->decisionNum = 1;
+      ctx->pLexer->rec->state->exception->state = 0;
       return;
   }
 }
@@ -354,31 +327,29 @@ LABEL_20:
 // RVA: 0x24CD30
 void __fastcall mOR(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
   bool v2; // zf
-  ANTLR3_LEXER_struct *v3; // rax
+  ANTLR3_LEXER_struct *pLexer; // rax
   unsigned int v4; // eax
 
-  v1 = ctx;
   v2 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) == 124;
-  v3 = v1->pLexer;
+  pLexer = ctx->pLexer;
   if ( v2 )
   {
-    v4 = v3->input->istream->_LA(v3->input->istream, 2);
+    v4 = pLexer->input->istream->_LA(pLexer->input->istream, 2);
     if ( v4 == 124 )
-      v1->pLexer->matchs(v1->pLexer, lit_9);
+      ctx->pLexer->matchs(ctx->pLexer, lit_9);
     else
-      v1->pLexer->matchc(v1->pLexer, 124u);
-    if ( v1->pLexer->rec->state->error != 1 )
-      v1->pLexer->rec->state->type = 31;
+      ctx->pLexer->matchc(ctx->pLexer, 124u);
+    if ( ctx->pLexer->rec->state->error != 1 )
+      ctx->pLexer->rec->state->type = 31;
   }
   else
   {
-    v3->rec->exConstruct(v3->rec);
-    v1->pLexer->rec->state->exception->type = 3;
-    v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-    v1->pLexer->rec->state->exception->decisionNum = 2;
-    v1->pLexer->rec->state->exception->state = 0;
+    pLexer->rec->exConstruct(pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 3;
+    ctx->pLexer->rec->state->exception->message = &customCaption;
+    ctx->pLexer->rec->state->exception->decisionNum = 2;
+    ctx->pLexer->rec->state->exception->state = 0;
   }
 }
 
@@ -386,31 +357,29 @@ void __fastcall mOR(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24BE30
 void __fastcall mAND(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
   bool v2; // zf
-  ANTLR3_LEXER_struct *v3; // rax
+  ANTLR3_LEXER_struct *pLexer; // rax
   unsigned int v4; // eax
 
-  v1 = ctx;
   v2 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) == 38;
-  v3 = v1->pLexer;
+  pLexer = ctx->pLexer;
   if ( v2 )
   {
-    v4 = v3->input->istream->_LA(v3->input->istream, 2);
+    v4 = pLexer->input->istream->_LA(pLexer->input->istream, 2);
     if ( v4 == 38 )
-      v1->pLexer->matchs(v1->pLexer, lit_10);
+      ctx->pLexer->matchs(ctx->pLexer, lit_10);
     else
-      v1->pLexer->matchc(v1->pLexer, 38u);
-    if ( v1->pLexer->rec->state->error != 1 )
-      v1->pLexer->rec->state->type = 6;
+      ctx->pLexer->matchc(ctx->pLexer, 38u);
+    if ( ctx->pLexer->rec->state->error != 1 )
+      ctx->pLexer->rec->state->type = 6;
   }
   else
   {
-    v3->rec->exConstruct(v3->rec);
-    v1->pLexer->rec->state->exception->type = 3;
-    v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-    v1->pLexer->rec->state->exception->decisionNum = 3;
-    v1->pLexer->rec->state->exception->state = 0;
+    pLexer->rec->exConstruct(pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 3;
+    ctx->pLexer->rec->state->exception->message = &customCaption;
+    ctx->pLexer->rec->state->exception->decisionNum = 3;
+    ctx->pLexer->rec->state->exception->state = 0;
   }
 }
 
@@ -418,193 +387,167 @@ void __fastcall mAND(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C250
 void __fastcall mEQUALS(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_11);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 14;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 14;
 }
 
 // File Line: 1860
 // RVA: 0x24CCF0
 void __fastcall mNOTEQUALS(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_12);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 30;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 30;
 }
 
 // File Line: 1903
 // RVA: 0x24CAF0
 void __fastcall mLTH(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 60u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 24;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 24;
 }
 
 // File Line: 1944
 // RVA: 0x24CAB0
 void __fastcall mLTEQ(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_13);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 23;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 23;
 }
 
 // File Line: 1987
 // RVA: 0x24C620
 void __fastcall mGTH(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 62u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 19;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 19;
 }
 
 // File Line: 2028
 // RVA: 0x24C5E0
 void __fastcall mGTEQ(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_14);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 18;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 18;
 }
 
 // File Line: 2071
 // RVA: 0x24CF00
 void __fastcall mPLUS(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 43u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 34;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 34;
 }
 
 // File Line: 2112
 // RVA: 0x24CB30
 void __fastcall mMINUS(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 45u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 25;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 25;
 }
 
 // File Line: 2153
 // RVA: 0x24CC70
 void __fastcall mMULT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 42u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 27;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 27;
 }
 
 // File Line: 2194
 // RVA: 0x24C120
 void __fastcall mDIV(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 47u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 12;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 12;
 }
 
 // File Line: 2235
 // RVA: 0x24CCB0
 void __fastcall mNOT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 33u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 29;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 29;
 }
 
 // File Line: 2276
 // RVA: 0x24D120
 void __fastcall mREFERENCE(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 46u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 36;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 36;
 }
 
 // File Line: 2317
 // RVA: 0x24CE30
 void __fastcall mPARAMETER(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   if ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x41
-    || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x5A )
+    || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x5A )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 4;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-    v1->pLexer->recover(v1->pLexer);
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 4;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+    ctx->pLexer->recover(ctx->pLexer);
   }
   else
   {
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
-    mLABEL(v1);
-    v2 = v1->pLexer->rec->state;
-    if ( v2->error != 1 )
-      v2->type = 32;
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
+    mLABEL(ctx);
+    state = ctx->pLexer->rec->state;
+    if ( state->error != 1 )
+      state->type = 32;
   }
 }
 
@@ -612,34 +555,29 @@ void __fastcall mPARAMETER(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24BF30
 void __fastcall mARGUMENT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 35u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 7;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 7;
 }
 
 // File Line: 2416
 // RVA: 0x24C070
 void __fastcall mDIGIT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-
-  v1 = ctx;
   if ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x30
-    || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x39 )
+    || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39 )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 4;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-    v1->pLexer->recover(v1->pLexer);
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 4;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+    ctx->pLexer->recover(ctx->pLexer);
   }
   else
   {
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
 }
 
@@ -647,47 +585,42 @@ void __fastcall mDIGIT(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C770
 void __fastcall mINTEGER(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  signed int i; // edi
+  int i; // edi
   unsigned int v3; // eax
-  signed int v4; // ecx
-  bool v5; // cf
-  bool v6; // zf
-  ANTLR3_LEXER_struct *v7; // rax
+  int v4; // ecx
+  bool v5; // cc
+  ANTLR3_LEXER_struct *pLexer; // rax
 
-  v1 = ctx;
   for ( i = 0; ; ++i )
   {
-    v3 = v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1);
+    v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
     v4 = 2;
-    v3 -= 48;
-    v5 = v3 < 9;
-    v6 = v3 == 9;
-    v7 = v1->pLexer;
-    if ( v5 || v6 )
+    v5 = v3 - 48 <= 9;
+    pLexer = ctx->pLexer;
+    if ( v5 )
       v4 = 1;
     if ( v4 != 1 )
       break;
-    if ( v7->input->istream->_LA(v7->input->istream, 1) < 0x30
-      || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x39 )
+    if ( pLexer->input->istream->_LA(pLexer->input->istream, 1) < 0x30
+      || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39 )
     {
-      v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-      v1->pLexer->rec->state->exception->type = 4;
-      v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-      v1->pLexer->recover(v1->pLexer);
+      ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+      ctx->pLexer->rec->state->exception->type = 4;
+      ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+      ctx->pLexer->recover(ctx->pLexer);
       return;
     }
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
   if ( i < 1 )
   {
-    v7->rec->exConstruct(v7->rec);
-    v1->pLexer->rec->state->exception->type = 5;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.EarlyExitException";
+    pLexer->rec->exConstruct(pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 5;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.EarlyExitException";
   }
   else
   {
-    v7->rec->state->type = 21;
+    pLexer->rec->state->type = 21;
   }
 }
 
@@ -695,78 +628,71 @@ void __fastcall mINTEGER(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24CF40
 void __fastcall mREAL(UELLexer_Ctx_struct *ctx)
 {
-  signed int v1; // esi
-  UELLexer_Ctx_struct *v2; // rbx
-  signed int i; // edi
+  int v1; // esi
+  int i; // edi
   unsigned int v4; // eax
-  signed int v5; // ecx
-  bool v6; // cf
-  bool v7; // zf
-  ANTLR3_LEXER_struct *v8; // rax
-  unsigned int v9; // eax
-  signed int v10; // ecx
+  int v5; // ecx
+  bool v6; // cc
+  ANTLR3_LEXER_struct *pLexer; // rax
+  unsigned int v8; // eax
+  int v9; // ecx
 
   v1 = 0;
-  v2 = ctx;
   for ( i = 0; ; ++i )
   {
-    v4 = v2->pLexer->input->istream->_LA(v2->pLexer->input->istream, 1);
+    v4 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
     v5 = 2;
-    v4 -= 48;
-    v6 = v4 < 9;
-    v7 = v4 == 9;
-    v8 = v2->pLexer;
-    if ( v6 || v7 )
+    v6 = v4 - 48 <= 9;
+    pLexer = ctx->pLexer;
+    if ( v6 )
       v5 = 1;
     if ( v5 != 1 )
       break;
-    if ( v8->input->istream->_LA(v8->input->istream, 1) < 0x30
-      || v2->pLexer->input->istream->_LA(v2->pLexer->input->istream, 1) > 0x39 )
+    if ( pLexer->input->istream->_LA(pLexer->input->istream, 1) < 0x30
+      || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39 )
     {
 LABEL_16:
-      v2->pLexer->rec->exConstruct(v2->pLexer->rec);
-      v2->pLexer->rec->state->exception->type = 4;
-      v2->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-      v2->pLexer->recover(v2->pLexer);
+      ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+      ctx->pLexer->rec->state->exception->type = 4;
+      ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+      ctx->pLexer->recover(ctx->pLexer);
       return;
     }
-    v2->pLexer->input->istream->consume(v2->pLexer->input->istream);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
   if ( i < 1 )
-    goto LABEL_22;
-  v8->matchc(v2->pLexer, 46u);
-  if ( v2->pLexer->rec->state->error == 1 )
+    goto LABEL_19;
+  pLexer->matchc(ctx->pLexer, 46u);
+  if ( ctx->pLexer->rec->state->error == 1 )
     return;
   while ( 1 )
   {
-    v9 = v2->pLexer->input->istream->_LA(v2->pLexer->input->istream, 1);
-    v10 = 2;
-    v9 -= 48;
-    v6 = v9 < 9;
-    v7 = v9 == 9;
-    v8 = v2->pLexer;
-    if ( v6 || v7 )
-      v10 = 1;
-    if ( v10 != 1 )
+    v8 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
+    v9 = 2;
+    v6 = v8 - 48 <= 9;
+    pLexer = ctx->pLexer;
+    if ( v6 )
+      v9 = 1;
+    if ( v9 != 1 )
       break;
-    if ( v8->input->istream->_LA(v8->input->istream, 1) < 0x30
-      || v2->pLexer->input->istream->_LA(v2->pLexer->input->istream, 1) > 0x39 )
+    if ( pLexer->input->istream->_LA(pLexer->input->istream, 1) < 0x30
+      || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39 )
     {
       goto LABEL_16;
     }
-    v2->pLexer->input->istream->consume(v2->pLexer->input->istream);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
     ++v1;
   }
   if ( v1 < 1 )
   {
-LABEL_22:
-    v8->rec->exConstruct(v8->rec);
-    v2->pLexer->rec->state->exception->type = 5;
-    v2->pLexer->rec->state->exception->name = "org.antlr.runtime.EarlyExitException";
+LABEL_19:
+    pLexer->rec->exConstruct(pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 5;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.EarlyExitException";
   }
   else
   {
-    v8->rec->state->type = 35;
+    pLexer->rec->state->type = 35;
   }
 }
 
@@ -774,13 +700,11 @@ LABEL_22:
 // RVA: 0x24BF70
 void __fastcall mBOOLEAN(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rdi
-  signed int v2; // ebx
+  int v2; // ebx
   unsigned int v3; // eax
   int v4; // ebx
   unsigned int *v5; // rdx
 
-  v1 = ctx;
   v2 = 1;
   v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
   if ( v3 == 102 )
@@ -789,11 +713,11 @@ void __fastcall mBOOLEAN(UELLexer_Ctx_struct *ctx)
   }
   else if ( v3 != 116 )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 3;
-    v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-    v1->pLexer->rec->state->exception->decisionNum = 7;
-    v1->pLexer->rec->state->exception->state = 0;
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 3;
+    ctx->pLexer->rec->state->exception->message = &customCaption;
+    ctx->pLexer->rec->state->exception->decisionNum = 7;
+    ctx->pLexer->rec->state->exception->state = 0;
     return;
   }
   v4 = v2 - 1;
@@ -801,8 +725,8 @@ void __fastcall mBOOLEAN(UELLexer_Ctx_struct *ctx)
   {
     v5 = lit_15;
 LABEL_9:
-    v1->pLexer->matchs(v1->pLexer, v5);
-    if ( v1->pLexer->rec->state->error == 1 )
+    ctx->pLexer->matchs(ctx->pLexer, v5);
+    if ( ctx->pLexer->rec->state->error == 1 )
       return;
     goto LABEL_10;
   }
@@ -812,32 +736,30 @@ LABEL_9:
     goto LABEL_9;
   }
 LABEL_10:
-  v1->pLexer->rec->state->type = 8;
+  ctx->pLexer->rec->state->type = 8;
 }
 
 // File Line: 2839
 // RVA: 0x24C510
 void __fastcall mFUNCTION(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   if ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x61
-    || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x7A )
+    || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x7A )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 4;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-    v1->pLexer->recover(v1->pLexer);
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 4;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+    ctx->pLexer->recover(ctx->pLexer);
   }
   else
   {
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
-    mLABEL(v1);
-    v2 = v1->pLexer->rec->state;
-    if ( v2->error != 1 )
-      v2->type = 17;
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
+    mLABEL(ctx);
+    state = ctx->pLexer->rec->state;
+    if ( state->error != 1 )
+      state->type = 17;
   }
 }
 
@@ -845,31 +767,28 @@ void __fastcall mFUNCTION(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C4D0
 void __fastcall mFRAGMENT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 94u);
-  v2 = v1->pLexer->rec->state;
-  if ( v2->error != 1 )
-    v2->type = 16;
+  state = ctx->pLexer->rec->state;
+  if ( state->error != 1 )
+    state->type = 16;
 }
 
 // File Line: 2938
 // RVA: 0x24BB10
 void __fastcall mALL_TEXT_STRING(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *i; // rdi
-  signed int v2; // ebx
-  signed int v3; // eax
+  int v2; // ebx
+  int v3; // eax
   int v4; // ebx
 
-  for ( i = ctx; ; i->pLexer->input->istream->consume(i->pLexer->input->istream) )
+  while ( 1 )
   {
     while ( 1 )
     {
       v2 = 3;
-      v3 = i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1);
+      v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
       if ( v3 == 92 )
       {
         v2 = 1;
@@ -881,46 +800,45 @@ void __fastcall mALL_TEXT_STRING(UELLexer_Ctx_struct *ctx)
       v4 = v2 - 1;
       if ( v4 )
         break;
-      mEscapeSequence(i);
-      if ( i->pLexer->rec->state->error == 1 )
+      mEscapeSequence(ctx);
+      if ( ctx->pLexer->rec->state->error == 1 )
         return;
     }
     if ( v4 != 1 )
       return;
-    if ( (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x20
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x21)
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x23
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x5B)
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x5D
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0xFFFF) )
+    if ( (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x20
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x21)
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x23
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x5B)
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x5D
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0xFFFF) )
     {
       break;
     }
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
-  i->pLexer->rec->exConstruct(i->pLexer->rec);
-  i->pLexer->rec->state->exception->type = 4;
-  i->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-  i->pLexer->recover(i->pLexer);
+  ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+  ctx->pLexer->rec->state->exception->type = 4;
+  ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+  ctx->pLexer->recover(ctx->pLexer);
 }
 
 // File Line: 3040
 // RVA: 0x24D280
 void __fastcall mSTRING(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 34u);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
-    mALL_TEXT_STRING(v1);
-    if ( v1->pLexer->rec->state->error != 1 )
+    mALL_TEXT_STRING(ctx);
+    if ( ctx->pLexer->rec->state->error != 1 )
     {
-      v1->pLexer->matchc(v1->pLexer, 34u);
-      v2 = v1->pLexer->rec->state;
-      if ( v2->error != 1 )
-        v2->type = 39;
+      ctx->pLexer->matchc(ctx->pLexer, 34u);
+      state = ctx->pLexer->rec->state;
+      if ( state->error != 1 )
+        state->type = 39;
     }
   }
 }
@@ -929,17 +847,16 @@ void __fastcall mSTRING(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24BCA0
 void __fastcall mALL_TEXT_SYMBOL(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *i; // rdi
-  signed int v2; // ebx
-  signed int v3; // eax
+  int v2; // ebx
+  int v3; // eax
   int v4; // ebx
 
-  for ( i = ctx; ; i->pLexer->input->istream->consume(i->pLexer->input->istream) )
+  while ( 1 )
   {
     while ( 1 )
     {
       v2 = 3;
-      v3 = i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1);
+      v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
       if ( v3 == 92 )
       {
         v2 = 1;
@@ -951,46 +868,45 @@ void __fastcall mALL_TEXT_SYMBOL(UELLexer_Ctx_struct *ctx)
       v4 = v2 - 1;
       if ( v4 )
         break;
-      mEscapeSequence(i);
-      if ( i->pLexer->rec->state->error == 1 )
+      mEscapeSequence(ctx);
+      if ( ctx->pLexer->rec->state->error == 1 )
         return;
     }
     if ( v4 != 1 )
       return;
-    if ( (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x20
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x26)
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x28
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x5B)
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x5D
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0xFFFF) )
+    if ( (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x20
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x26)
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x28
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x5B)
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x5D
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0xFFFF) )
     {
       break;
     }
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
-  i->pLexer->rec->exConstruct(i->pLexer->rec);
-  i->pLexer->rec->state->exception->type = 4;
-  i->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-  i->pLexer->recover(i->pLexer);
+  ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+  ctx->pLexer->rec->state->exception->type = 4;
+  ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+  ctx->pLexer->recover(ctx->pLexer);
 }
 
 // File Line: 3199
 // RVA: 0x24D2F0
 void __fastcall mSYMBOL(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v2; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 39u);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
-    mALL_TEXT_SYMBOL(v1);
-    if ( v1->pLexer->rec->state->error != 1 )
+    mALL_TEXT_SYMBOL(ctx);
+    if ( ctx->pLexer->rec->state->error != 1 )
     {
-      v1->pLexer->matchc(v1->pLexer, 39u);
-      v2 = v1->pLexer->rec->state;
-      if ( v2->error != 1 )
-        v2->type = 40;
+      ctx->pLexer->matchc(ctx->pLexer, 39u);
+      state = ctx->pLexer->rec->state;
+      if ( state->error != 1 )
+        state->type = 40;
     }
   }
 }
@@ -999,77 +915,76 @@ void __fastcall mSYMBOL(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C8D0
 void __fastcall mLABEL(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *i; // rbx
-  signed int v2; // edi
+  int v2; // edi
 
-  for ( i = ctx; ; i->pLexer->input->istream->consume(i->pLexer->input->istream) )
+  while ( 1 )
   {
     v2 = 2;
-    switch ( i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) )
+    switch ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) )
     {
-      case 0x30u:
-      case 0x31u:
-      case 0x32u:
-      case 0x33u:
-      case 0x34u:
-      case 0x35u:
-      case 0x36u:
-      case 0x37u:
-      case 0x38u:
-      case 0x39u:
-      case 0x41u:
-      case 0x42u:
-      case 0x43u:
-      case 0x44u:
-      case 0x45u:
-      case 0x46u:
-      case 0x47u:
-      case 0x48u:
-      case 0x49u:
-      case 0x4Au:
-      case 0x4Bu:
-      case 0x4Cu:
-      case 0x4Du:
-      case 0x4Eu:
-      case 0x4Fu:
-      case 0x50u:
-      case 0x51u:
-      case 0x52u:
-      case 0x53u:
-      case 0x54u:
-      case 0x55u:
-      case 0x56u:
-      case 0x57u:
-      case 0x58u:
-      case 0x59u:
-      case 0x5Au:
-      case 0x5Fu:
-      case 0x61u:
-      case 0x62u:
-      case 0x63u:
-      case 0x64u:
-      case 0x65u:
-      case 0x66u:
-      case 0x67u:
-      case 0x68u:
-      case 0x69u:
-      case 0x6Au:
-      case 0x6Bu:
-      case 0x6Cu:
-      case 0x6Du:
-      case 0x6Eu:
-      case 0x6Fu:
-      case 0x70u:
-      case 0x71u:
-      case 0x72u:
-      case 0x73u:
-      case 0x74u:
-      case 0x75u:
-      case 0x76u:
-      case 0x77u:
-      case 0x78u:
-      case 0x79u:
-      case 0x7Au:
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+      case A:
+      case B:
+      case C:
+      case D:
+      case E:
+      case F:
+      case G:
+      case H:
+      case I:
+      case J:
+      case K:
+      case L:
+      case M:
+      case N:
+      case O:
+      case P:
+      case Q:
+      case R:
+      case S:
+      case T:
+      case U:
+      case V:
+      case W:
+      case X:
+      case Y:
+      case Z:
+      case _:
+      case a:
+      case b:
+      case c:
+      case d:
+      case e:
+      case f:
+      case g:
+      case h:
+      case i:
+      case j:
+      case k:
+      case l:
+      case m:
+      case n:
+      case o:
+      case p:
+      case q:
+      case r:
+      case s:
+      case t:
+      case u:
+      case v:
+      case w:
+      case x:
+      case y:
+      case z:
         v2 = 1;
         break;
       default:
@@ -1077,20 +992,21 @@ void __fastcall mLABEL(UELLexer_Ctx_struct *ctx)
     }
     if ( v2 != 1 )
       break;
-    if ( (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x30
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x39)
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x41
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x5A)
-      && i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) != 95
-      && (i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) < 0x61
-       || i->pLexer->input->istream->_LA(i->pLexer->input->istream, 1) > 0x7A) )
+    if ( (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x30
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39)
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x41
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x5A)
+      && ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) != 95
+      && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x61
+       || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x7A) )
     {
-      i->pLexer->rec->exConstruct(i->pLexer->rec);
-      i->pLexer->rec->state->exception->type = 4;
-      i->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-      i->pLexer->recover(i->pLexer);
+      ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+      ctx->pLexer->rec->state->exception->type = 4;
+      ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+      ctx->pLexer->recover(ctx->pLexer);
       return;
     }
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
 }
 
@@ -1098,63 +1014,61 @@ void __fastcall mLABEL(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C290
 void __fastcall mEscapeSequence(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-  signed int v2; // edi
+  int v2; // edi
 
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 92u);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
     v2 = 1;
-    switch ( v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) )
+    switch ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) )
     {
-      case 0x27u:
+      case \:
         v2 = 4;
         goto $LN30_6;
-      case 0x5Cu:
+      case \\:
         v2 = 5;
         goto $LN30_6;
-      case 0x6Eu:
+      case n:
         goto $LN30_6;
-      case 0x72u:
+      case r:
         v2 = 2;
         goto $LN30_6;
-      case 0x74u:
+      case t:
         v2 = 3;
         goto $LN30_6;
-      case 0x75u:
+      case u:
         v2 = 6;
 $LN30_6:
         switch ( v2 )
         {
           case 1:
-            v1->pLexer->matchc(v1->pLexer, 110u);
+            ctx->pLexer->matchc(ctx->pLexer, 110u);
             break;
           case 2:
-            v1->pLexer->matchc(v1->pLexer, 114u);
+            ctx->pLexer->matchc(ctx->pLexer, 114u);
             break;
           case 3:
-            v1->pLexer->matchc(v1->pLexer, 116u);
+            ctx->pLexer->matchc(ctx->pLexer, 116u);
             break;
           case 4:
-            v1->pLexer->matchc(v1->pLexer, 39u);
+            ctx->pLexer->matchc(ctx->pLexer, 39u);
             break;
           case 5:
-            v1->pLexer->matchc(v1->pLexer, 92u);
+            ctx->pLexer->matchc(ctx->pLexer, 92u);
             break;
           case 6:
-            mUnicodeEscape(v1);
+            mUnicodeEscape(ctx);
             break;
           default:
             return;
         }
         break;
       default:
-        v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-        v1->pLexer->rec->state->exception->type = 3;
-        v1->pLexer->rec->state->exception->message = &customWorldMapCaption;
-        v1->pLexer->rec->state->exception->decisionNum = 11;
-        v1->pLexer->rec->state->exception->state = 0;
+        ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+        ctx->pLexer->rec->state->exception->type = 3;
+        ctx->pLexer->rec->state->exception->message = &customCaption;
+        ctx->pLexer->rec->state->exception->decisionNum = 11;
+        ctx->pLexer->rec->state->exception->state = 0;
         break;
     }
   }
@@ -1164,21 +1078,18 @@ $LN30_6:
 // RVA: 0x24DAC0
 void __fastcall mUnicodeEscape(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-
-  v1 = ctx;
   ctx->pLexer->matchc(ctx->pLexer, 117u);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
-    mHexDigit(v1);
-    if ( v1->pLexer->rec->state->error != 1 )
+    mHexDigit(ctx);
+    if ( ctx->pLexer->rec->state->error != 1 )
     {
-      mHexDigit(v1);
-      if ( v1->pLexer->rec->state->error != 1 )
+      mHexDigit(ctx);
+      if ( ctx->pLexer->rec->state->error != 1 )
       {
-        mHexDigit(v1);
-        if ( v1->pLexer->rec->state->error != 1 )
-          mHexDigit(v1);
+        mHexDigit(ctx);
+        if ( ctx->pLexer->rec->state->error != 1 )
+          mHexDigit(ctx);
       }
     }
   }
@@ -1188,24 +1099,21 @@ void __fastcall mUnicodeEscape(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24C660
 void __fastcall mHexDigit(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-
-  v1 = ctx;
   if ( (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x30
-     || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x39)
-    && (v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) < 0x41
-     || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x46)
-    && (v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) < 0x61
-     || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0x66) )
+     || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x39)
+    && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x41
+     || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x46)
+    && (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 0x61
+     || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) > 0x66) )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 4;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-    v1->pLexer->recover(v1->pLexer);
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 4;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+    ctx->pLexer->recover(ctx->pLexer);
   }
   else
   {
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
   }
 }
 
@@ -1213,37 +1121,35 @@ void __fastcall mHexDigit(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24D1A0
 void __fastcall mSL_COMMENT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rdi
-  signed int v2; // ebx
+  int v2; // ebx
   unsigned int v3; // eax
-  ANTLR3_LEXER_struct *v4; // rax
+  ANTLR3_LEXER_struct *pLexer; // rax
   ANTLR3_LEXER_struct *v5; // rcx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v6; // rax
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_17);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
     while ( 1 )
     {
       v2 = 2;
-      v3 = v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1);
+      v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
       if ( v3 != 10 && (v3 <= 9 || v3 - 11 <= 0xFFF4) )
         v2 = 1;
-      v4 = v1->pLexer;
-      v5 = v1->pLexer;
+      pLexer = ctx->pLexer;
+      v5 = ctx->pLexer;
       if ( v2 != 1 )
         break;
-      v4->matchAny(v5);
-      if ( v1->pLexer->rec->state->error == 1 )
+      pLexer->matchAny(v5);
+      if ( ctx->pLexer->rec->state->error == 1 )
         return;
     }
-    v4->matchc(v5, 10u);
-    v6 = v1->pLexer->rec->state;
-    if ( v6->error != 1 )
+    pLexer->matchc(v5, 10u);
+    state = ctx->pLexer->rec->state;
+    if ( state->error != 1 )
     {
-      v6->channel = 99;
-      v1->pLexer->rec->state->type = 38;
+      state->channel = 99;
+      ctx->pLexer->rec->state->type = 38;
     }
   }
 }
@@ -1252,64 +1158,53 @@ void __fastcall mSL_COMMENT(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24CB70
 void __fastcall mML_COMMENT(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rdi
-  signed int v2; // ebx
+  int v2; // ebx
   unsigned int v3; // eax
   unsigned int v4; // eax
-  unsigned int v5; // eax
-  bool v6; // cf
-  bool v7; // zf
-  unsigned int v8; // eax
-  ANTLR3_LEXER_struct *v9; // rax
-  ANTLR3_LEXER_struct *v10; // rcx
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v11; // rax
+  bool v5; // cc
+  ANTLR3_LEXER_struct *pLexer; // rax
+  ANTLR3_LEXER_struct *v7; // rcx
+  ANTLR3_RECOGNIZER_SHARED_STATE_struct *state; // rax
 
-  v1 = ctx;
   ctx->pLexer->matchs(ctx->pLexer, lit_18);
-  while ( v1->pLexer->rec->state->error != 1 )
+  while ( ctx->pLexer->rec->state->error != 1 )
   {
     v2 = 2;
-    v3 = v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1);
+    v3 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1);
     if ( v3 == 42 )
     {
-      v4 = v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 2);
+      v4 = ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 2);
       if ( v4 == 47 )
         goto LABEL_10;
       if ( v4 > 0x2E )
       {
-        v5 = v4 - 48;
-        v6 = v5 < 0xFFCF;
-        v7 = v5 == 65487;
+        v5 = v4 - 48 <= 0xFFCF;
         goto LABEL_8;
       }
     }
     else if ( v3 > 0x29 )
     {
-      v8 = v3 - 43;
-      v6 = v8 < 0xFFD4;
-      v7 = v8 == 65492;
+      v5 = v3 - 43 <= 0xFFD4;
 LABEL_8:
-      if ( !v6 && !v7 )
+      if ( !v5 )
         goto LABEL_10;
-      goto LABEL_9;
     }
-LABEL_9:
     v2 = 1;
 LABEL_10:
-    v9 = v1->pLexer;
-    v10 = v1->pLexer;
+    pLexer = ctx->pLexer;
+    v7 = ctx->pLexer;
     if ( v2 != 1 )
     {
-      v9->matchs(v10, lit_19);
-      v11 = v1->pLexer->rec->state;
-      if ( v11->error != 1 )
+      pLexer->matchs(v7, lit_19);
+      state = ctx->pLexer->rec->state;
+      if ( state->error != 1 )
       {
-        v11->channel = 99;
-        v1->pLexer->rec->state->type = 26;
+        state->channel = 99;
+        ctx->pLexer->rec->state->type = 26;
       }
       return;
     }
-    v9->matchAny(v10);
+    pLexer->matchAny(v7);
   }
 }
 
@@ -1317,25 +1212,22 @@ LABEL_10:
 // RVA: 0x24DB50
 void __fastcall mWS(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
-
-  v1 = ctx;
-  if ( (ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) < 9
-     || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0xA)
-    && (v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) < 0xC
-     || v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) > 0xD)
-    && v1->pLexer->input->istream->_LA(v1->pLexer->input->istream, 1) != 32 )
+  if ( ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) >= 9
+    && ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) <= 0xA
+    || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) >= 0xC
+    && ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) <= 0xD
+    || ctx->pLexer->input->istream->_LA(ctx->pLexer->input->istream, 1) == 32 )
   {
-    v1->pLexer->rec->exConstruct(v1->pLexer->rec);
-    v1->pLexer->rec->state->exception->type = 4;
-    v1->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
-    v1->pLexer->recover(v1->pLexer);
+    ctx->pLexer->input->istream->consume(ctx->pLexer->input->istream);
+    ctx->pLexer->rec->state->channel = 99;
+    ctx->pLexer->rec->state->type = 43;
   }
   else
   {
-    v1->pLexer->input->istream->consume(v1->pLexer->input->istream);
-    v1->pLexer->rec->state->channel = 99;
-    v1->pLexer->rec->state->type = 43;
+    ctx->pLexer->rec->exConstruct(ctx->pLexer->rec);
+    ctx->pLexer->rec->state->exception->type = 4;
+    ctx->pLexer->rec->state->exception->name = "org.antlr.runtime.MismatchedSetException";
+    ctx->pLexer->recover(ctx->pLexer);
   }
 }
 
@@ -1343,125 +1235,123 @@ void __fastcall mWS(UELLexer_Ctx_struct *ctx)
 // RVA: 0x24D7E0
 void __fastcall mTokens(UELLexer_Ctx_struct *ctx)
 {
-  UELLexer_Ctx_struct *v1; // rbx
   int v2; // eax
 
-  v1 = ctx;
   v2 = cdfa14.predict(ctx, ctx->pLexer->rec, ctx->pLexer->input->istream, &cdfa14);
-  if ( v1->pLexer->rec->state->error != 1 )
+  if ( ctx->pLexer->rec->state->error != 1 )
   {
     switch ( v2 )
     {
       case 1:
-        mT__44(v1);
+        mT__44(ctx);
         break;
       case 2:
-        mT__45(v1);
+        mT__45(ctx);
         break;
       case 3:
-        mT__46(v1);
+        mT__46(ctx);
         break;
       case 4:
-        mT__47(v1);
+        mT__47(ctx);
         break;
       case 5:
-        mT__48(v1);
+        mT__48(ctx);
         break;
       case 6:
-        mT__49(v1);
+        mT__49(ctx);
         break;
       case 7:
-        mT__50(v1);
+        mT__50(ctx);
         break;
       case 8:
-        mT__51(v1);
+        mT__51(ctx);
         break;
       case 9:
-        mENUMERATION(v1);
+        mENUMERATION(ctx);
         break;
       case 10:
-        mSCOPE(v1);
+        mSCOPE(ctx);
         break;
       case 11:
-        mTYPE(v1);
+        mTYPE(ctx);
         break;
       case 12:
-        mOR(v1);
+        mOR(ctx);
         break;
       case 13:
-        mAND(v1);
+        mAND(ctx);
         break;
       case 14:
-        mEQUALS(v1);
+        mEQUALS(ctx);
         break;
       case 15:
-        mNOTEQUALS(v1);
+        mNOTEQUALS(ctx);
         break;
       case 16:
-        mLTH(v1);
+        mLTH(ctx);
         break;
       case 17:
-        mLTEQ(v1);
+        mLTEQ(ctx);
         break;
       case 18:
-        mGTH(v1);
+        mGTH(ctx);
         break;
       case 19:
-        mGTEQ(v1);
+        mGTEQ(ctx);
         break;
       case 20:
-        mPLUS(v1);
+        mPLUS(ctx);
         break;
       case 21:
-        mMINUS(v1);
+        mMINUS(ctx);
         break;
       case 22:
-        mMULT(v1);
+        mMULT(ctx);
         break;
       case 23:
-        mDIV(v1);
+        mDIV(ctx);
         break;
       case 24:
-        mNOT(v1);
+        mNOT(ctx);
         break;
       case 25:
-        mREFERENCE(v1);
+        mREFERENCE(ctx);
         break;
       case 26:
-        mPARAMETER(v1);
+        mPARAMETER(ctx);
         break;
       case 27:
-        mARGUMENT(v1);
+        mARGUMENT(ctx);
         break;
       case 28:
-        mINTEGER(v1);
+        mINTEGER(ctx);
         break;
       case 29:
-        mREAL(v1);
+        mREAL(ctx);
         break;
       case 30:
-        mBOOLEAN(v1);
+        mBOOLEAN(ctx);
         break;
       case 31:
-        mFUNCTION(v1);
+        mFUNCTION(ctx);
         break;
       case 32:
-        mFRAGMENT(v1);
+        mFRAGMENT(ctx);
         break;
       case 33:
-        mSTRING(v1);
+        mSTRING(ctx);
         break;
       case 34:
-        mSYMBOL(v1);
+        mSYMBOL(ctx);
         break;
       case 35:
-        mSL_COMMENT(v1);
+        mSL_COMMENT(ctx);
         break;
       case 36:
-        mML_COMMENT(v1);
+        mML_COMMENT(ctx);
         break;
       case 37:
-        mWS(v1);
+        mWS(ctx);
         break;
       default:
         return;

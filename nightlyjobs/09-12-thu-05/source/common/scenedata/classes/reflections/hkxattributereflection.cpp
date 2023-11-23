@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxAttributeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 74
@@ -28,23 +28,22 @@ hkClass *__fastcall hkxAttribute::staticClass()
 
 // File Line: 81
 // RVA: 0xE33C10
-void __fastcall finishLoadedObjecthkxAttribute(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAttribute(hkxAttribute *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxAttribute::hkxAttribute);
+  if ( p )
+    hkxAttribute::hkxAttribute(p, finishing);
 }
 
 // File Line: 87
 // RVA: 0xE33C30
-void __fastcall cleanupLoadedObjecthkxAttribute(void *p)
+void __fastcall cleanupLoadedObjecthkxAttribute(hkStringPtr *p)
 {
-  hkStringPtr *v1; // rbx
-  hkReferencedObject *v2; // rcx
+  hkReferencedObject *m_stringAndFlag; // rcx
 
-  v1 = (hkStringPtr *)p;
-  v2 = (hkReferencedObject *)*((_QWORD *)p + 1);
-  if ( v2 )
-    hkReferencedObject::removeReference(v2);
-  v1[1].m_stringAndFlag = 0i64;
-  hkStringPtr::~hkStringPtr(v1);
+  m_stringAndFlag = (hkReferencedObject *)p[1].m_stringAndFlag;
+  if ( m_stringAndFlag )
+    hkReferencedObject::removeReference(m_stringAndFlag);
+  p[1].m_stringAndFlag = 0i64;
+  hkStringPtr::~hkStringPtr(p);
 }
 

@@ -8,7 +8,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DD90 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,0,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::alphasGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,0,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::alphasGet;
   return result;
 }
 
@@ -22,7 +22,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDA0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::alphasSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::alphasSet;
   return result;
 }
 
@@ -36,7 +36,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDB0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,2,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::angleGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,2,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::angleGet;
   return result;
 }
 
@@ -50,7 +50,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDC0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,3,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::GlowFilter::alphaSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,3,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::GlowFilter::alphaSet;
   return result;
 }
 
@@ -64,7 +64,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDD0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,4,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::blurXGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,4,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::blurXGet;
   return result;
 }
 
@@ -78,7 +78,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDE0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,5,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::blurXSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,5,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::blurXSet;
   return result;
 }
 
@@ -92,7 +92,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DDF0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,6,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::blurYGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,6,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::blurYGet;
   return result;
 }
 
@@ -106,7 +106,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE00 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,7,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::blurYSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,7,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::blurYSet;
   return result;
 }
 
@@ -120,7 +120,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE10 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,8,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::colorsGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,8,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::colorsGet;
   return result;
 }
 
@@ -134,7 +134,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE20 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,9,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::colorsSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,9,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::colorsSet;
   return result;
 }
 
@@ -148,7 +148,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE30 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,10,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::distanceGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,10,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::distanceGet;
   return result;
 }
 
@@ -162,7 +162,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE40 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,11,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::distanceSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,11,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::distanceSet;
   return result;
 }
 
@@ -176,7 +176,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE50 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,12,bool>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, bool *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::knockoutGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,12,bool>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, bool *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::knockoutGet;
   return result;
 }
 
@@ -190,7 +190,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE60 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,13,Scaleform::GFx::AS3::Value const,bool>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, bool))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::knockoutSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,13,Scaleform::GFx::AS3::Value const,bool>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, bool))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::knockoutSet;
   return result;
 }
 
@@ -204,7 +204,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE70 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,14,long>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, int *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::qualityGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,14,long>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, int *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::qualityGet;
   return result;
 }
 
@@ -218,7 +218,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE80 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,15,Scaleform::GFx::AS3::Value const,long>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, int))Scaleform::GFx::AS3::Instances::fl_filters::GlowFilter::qualitySet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,15,Scaleform::GFx::AS3::Value const,long>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, int))Scaleform::GFx::AS3::Instances::fl_filters::GlowFilter::qualitySet;
   return result;
 }
 
@@ -232,7 +232,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DE90 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,16,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::ratiosGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,16,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::ratiosGet;
   return result;
 }
 
@@ -246,7 +246,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DEA0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,17,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::ratiosSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,17,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::ratiosSet;
   return result;
 }
 
@@ -260,7 +260,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DEB0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,18,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::strengthGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,18,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, long double *))Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::strengthGet;
   return result;
 }
 
@@ -274,7 +274,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DEC0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,19,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::strengthSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,19,Scaleform::GFx::AS3::Value const,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, long double))Scaleform::GFx::AS3::Instances::fl_filters::DropShadowFilter::strengthSet;
   return result;
 }
 
@@ -288,7 +288,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DED0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,20,Scaleform::GFx::ASString>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_events::TextEvent::textGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,20,Scaleform::GFx::ASString>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_events::TextEvent::textGet;
   return result;
 }
 
@@ -302,7 +302,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243DEE0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,21,Scaleform::GFx::AS3::Value const,Scaleform::GFx::ASString const &>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::typeSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter,21,Scaleform::GFx::AS3::Value const,Scaleform::GFx::ASString const &>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::typeSet;
   return result;
 }
 
@@ -322,478 +322,474 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 87
 // RVA: 0x77E6F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::GradientBevelFilter(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *this, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::GradientBevelFilter(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *this,
+        Scaleform::GFx::AS3::InstanceTraits::Traits *t)
 {
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *v2; // rbx
   Scaleform::Render::Filter *v3; // rdi
   Scaleform::Render::GradientFilter *v4; // rax
   Scaleform::Render::Filter *v5; // rax
-  Scaleform::Render::RenderBuffer *v6; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
 
-  v2 = this;
-  Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter::`vftable;
+  Scaleform::GFx::AS3::Instance::Instance(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter::`vftable;
   v3 = 0i64;
-  v2->FilterData.pObject = 0i64;
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::`vftable;
-  v2->Alphas.pObject = 0i64;
-  v2->Ratios.pObject = 0i64;
-  v2->Colors.pObject = 0i64;
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-    (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v2->pTraits.pObject->pVM->StringManagerRef->Builtins,
-    &v2->Type);
-  v2->pGradientData.pObject = 0i64;
+  this->FilterData.pObject = 0i64;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::`vftable;
+  this->Alphas.pObject = 0i64;
+  this->Ratios.pObject = 0i64;
+  this->Colors.pObject = 0i64;
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+    this->pTraits.pObject->pVM->StringManagerRef,
+    &this->Type);
+  this->pGradientData.pObject = 0i64;
   v4 = (Scaleform::Render::GradientFilter *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                               Scaleform::Memory::pGlobalHeap,
-                                              88ui64,
+                                              88i64,
                                               0i64);
   if ( v4 )
   {
     Scaleform::Render::GradientFilter::GradientFilter(v4, Filter_GradientBevel, 0i64, 4.0, 0.78539819, 4.0, 4.0, 1u);
     v3 = v5;
   }
-  v6 = (Scaleform::Render::RenderBuffer *)v2->FilterData.pObject;
-  if ( v6 )
-    Scaleform::RefCountImpl::Release(v6);
-  v2->FilterData.pObject = v3;
+  pObject = (Scaleform::Render::RenderBuffer *)this->FilterData.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->FilterData.pObject = v3;
 }
 
 // File Line: 94
 // RVA: 0x82BF90
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::alphasGet(Scaleform::GFx::AS3::Instances::fl_filters::DisplacementMapFilter *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::alphasGet(
+        Scaleform::GFx::AS3::Instances::fl_filters::DisplacementMapFilter *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::BitmapData **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::BitmapData *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *p_MapBitmap; // rdi
+  Scaleform::GFx::AS3::Instances::fl_display::BitmapData *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->MapBitmap.pObject;
-  v3 = result;
+  p_MapBitmap = &this->MapBitmap;
   if ( &this->MapBitmap != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_MapBitmap->pObject )
+      p_MapBitmap->pObject->RefCount = (p_MapBitmap->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::BitmapData *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::BitmapData *)((char *)pObject - 1);
+        result->pObject = p_MapBitmap->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_MapBitmap->pObject;
   }
 }
 
 // File Line: 100
 // RVA: 0x82C010
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::alphasSet(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl::Array *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::alphasSet(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *v3; // rbx
-
-  v3 = this;
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
     (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Alphas,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)value);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(v3);
+    value);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(this);
 }
 
 // File Line: 149
 // RVA: 0x831310
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::colorsGet(Scaleform::GFx::AS3::Instances::fl_net::SharedObject *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::colorsGet(
+        Scaleform::GFx::AS3::Instances::fl_net::SharedObject *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl::Object **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Object *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *p_DataObj; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Object *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->DataObj.pObject;
-  v3 = result;
+  p_DataObj = &this->DataObj;
   if ( &this->DataObj != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_DataObj->pObject )
+      p_DataObj->pObject->RefCount = (p_DataObj->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)pObject - 1);
+        result->pObject = p_DataObj->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_DataObj->pObject;
   }
 }
 
 // File Line: 155
 // RVA: 0x831390
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::colorsSet(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl::Array *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::colorsSet(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *v3; // rbx
-
-  v3 = this;
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
     (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Colors,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)value);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(v3);
+    value);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(this);
 }
 
 // File Line: 204
 // RVA: 0x858C10
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::ratiosGet(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::ratiosGet(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl::Array **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Array *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *p_Ratios; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->Ratios.pObject;
-  v3 = result;
+  p_Ratios = &this->Ratios;
   if ( &this->Ratios != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_Ratios->pObject )
+      p_Ratios->pObject->RefCount = (p_Ratios->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)pObject - 1);
+        result->pObject = p_Ratios->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_Ratios->pObject;
   }
 }
 
 // File Line: 210
 // RVA: 0x858C90
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::ratiosSet(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl::Array *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::ratiosSet(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *v3; // rbx
-
-  v3 = this;
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
     (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Ratios,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)value);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(v3);
+    value);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(this);
 }
 
 // File Line: 237
 // RVA: 0x86AEA0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::typeSet(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::typeSet(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::Render::Filter *v3; // r10
-  int v4; // er9
-  const char *v5; // r8
+  Scaleform::Render::Filter *pObject; // r10
+  int vfptr; // r9d
+  const char *pData; // r8
   __int64 v6; // rax
   __int64 v7; // rdx
   char v8; // cl
   char v9; // cl
 
-  v3 = this->FilterData.pObject;
-  LODWORD(v3[1].vfptr) &= 0xFFFFFF5F;
-  v4 = (int)v3[1].vfptr;
-  v5 = value->pNode->pData;
+  pObject = this->FilterData.pObject;
+  LODWORD(pObject[1].vfptr) &= 0xFFFFFF5F;
+  vfptr = (int)pObject[1].vfptr;
+  pData = value->pNode->pData;
   v6 = 0i64;
   v7 = 0i64;
   while ( 1 )
   {
-    v8 = v5[v7++];
+    v8 = pData[v7++];
     if ( v8 != aInner[v7 - 1] )
       break;
     if ( v7 == 6 )
     {
-      LODWORD(v3[1].vfptr) = v4 | 0x20;
+      LODWORD(pObject[1].vfptr) = vfptr | 0x20;
       return;
     }
   }
   while ( 1 )
   {
-    v9 = v5[v6++];
+    v9 = pData[v6++];
     if ( v9 != aOuter[v6 - 1] )
       break;
     if ( v6 == 6 )
       return;
   }
-  LODWORD(v3[1].vfptr) = v4 | 0x80;
+  LODWORD(pObject[1].vfptr) = vfptr | 0x80;
 }
 
 // File Line: 257
 // RVA: 0x82FEE0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::clone(Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter::clone(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter> *result)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter> *v2; // r12
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *v3; // rbp
   __int64 v4; // r15
-  Scaleform::GFx::AS3::Instances::fl::XMLList *v5; // rbx
-  Scaleform::GFx::AS3::Instances::fl::XMLList *v6; // rdi
-  Scaleform::GFx::AS3::Instances::fl::XMLList *v7; // rsi
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rbx
+  Scaleform::GFx::AS3::Instances::fl::Array *v6; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Array *v7; // rsi
   double v8; // xmm6_8
   double v9; // xmm12_8
-  signed __int64 v10; // rdx
-  signed __int64 v11; // rcx
-  signed __int64 v12; // rcx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *p_Colors; // rdx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *p_Alphas; // rcx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *p_Ratios; // rcx
   Scaleform::Render::Filter *v13; // rax
   double v14; // xmm10_8
   double v15; // xmm9_8
   double v16; // xmm13_8
-  unsigned int v17; // er13
-  Scaleform::GFx::ASStringNode *v18; // r14
+  unsigned int vfptr_high; // r13d
+  Scaleform::GFx::ASStringNode *pNode; // r14
   Scaleform::GFx::ASStringNode *v19; // rcx
   bool v20; // zf
-  int v21; // eax
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *v22; // rbp
-  Scaleform::Render::Filter *v23; // r14
-  float v24; // xmm7_4
-  float v25; // xmm8_4
-  float v26; // xmm6_4
-  float v27; // xmm0_4
-  signed int v28; // ecx
-  Scaleform::Render::Filter *v29; // r9
-  int v30; // er8
-  const char *v31; // rdx
-  __int64 v32; // rcx
-  char v33; // al
-  int v34; // er8
-  char v35; // al
-  Scaleform::Render::Filter *v36; // rcx
-  Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter *v37; // rcx
-  unsigned int v38; // eax
-  Scaleform::GFx::ASStringNode *v39; // rcx
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *pV; // rbp
+  Scaleform::Render::Filter *v22; // r14
+  float v23; // xmm7_4
+  float v24; // xmm8_4
+  float v25; // xmm6_4
+  float v26; // xmm0_4
+  int v27; // ecx
+  Scaleform::Render::Filter *v28; // r9
+  int vfptr; // r8d
+  const char *pData; // rdx
+  __int64 v31; // rcx
+  char v32; // al
+  int v33; // r8d
+  char v34; // al
+  Scaleform::Render::Filter *v35; // rcx
+  Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter *v36; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *v38; // rcx
+  unsigned int v39; // eax
   unsigned int v40; // eax
   unsigned int v41; // eax
-  unsigned int v42; // eax
-  unsigned __int64 *v43; // [rsp+20h] [rbp-F8h]
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter> resulta; // [rsp+28h] [rbp-F0h]
-  __int64 v45; // [rsp+30h] [rbp-E8h]
-  int v46; // [rsp+38h] [rbp-E0h]
-  __int64 v47; // [rsp+40h] [rbp-D8h]
-  int v48; // [rsp+120h] [rbp+8h]
-  Scaleform::GFx::ASString v49; // [rsp+128h] [rbp+10h]
-  unsigned __int64 *v50; // [rsp+130h] [rbp+18h]
-  unsigned __int64 *v51; // [rsp+138h] [rbp+20h]
+  Scaleform::GFx::AS3::Instances::fl::Array *v42; // [rsp+20h] [rbp-F8h] BYREF
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter> resulta; // [rsp+28h] [rbp-F0h] BYREF
+  __int64 v44; // [rsp+30h] [rbp-E8h]
+  int v45; // [rsp+38h] [rbp-E0h]
+  __int64 v46; // [rsp+40h] [rbp-D8h]
+  bool v47; // [rsp+120h] [rbp+8h]
+  Scaleform::GFx::ASString v48; // [rsp+128h] [rbp+10h] BYREF
+  Scaleform::GFx::AS3::Instances::fl::Array *v49; // [rsp+130h] [rbp+18h] BYREF
+  Scaleform::GFx::AS3::Instances::fl::Array *v50; // [rsp+138h] [rbp+20h] BYREF
 
-  v45 = -2i64;
-  v2 = result;
-  v3 = this;
+  v44 = -2i64;
   Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter::MakeInstance(
     &resulta,
     (Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter *)this->pTraits.pObject);
   v4 = 0i64;
-  v5 = 0i64;
-  v43 = 0i64;
+  pObject = 0i64;
+  v42 = 0i64;
   v6 = 0i64;
-  v51 = 0i64;
-  v7 = 0i64;
   v50 = 0i64;
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-    (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->pTraits.pObject->pVM->StringManagerRef->Builtins,
-    &v49);
-  v8 = (float)(*(float *)&v3->FilterData.pObject[3].vfptr * 0.050000001);
-  v9 = (double)HIBYTE(v3->FilterData.pObject[2].vfptr) * 0.00392156862745098;
-  v10 = (signed __int64)&v3->Colors;
-  if ( &v3->Colors != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v43 )
+  v7 = 0i64;
+  v49 = 0i64;
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+    this->pTraits.pObject->pVM->StringManagerRef,
+    &v48);
+  v8 = (float)(*(float *)&this->FilterData.pObject[3].vfptr * 0.050000001);
+  v9 = (double)HIBYTE(this->FilterData.pObject[2].vfptr) * 0.00392156862745098;
+  p_Colors = &this->Colors;
+  if ( &this->Colors != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v42 )
   {
-    if ( *(_QWORD *)v10 )
-      *(_DWORD *)(*(_QWORD *)v10 + 32i64) = (*(_DWORD *)(*(_QWORD *)v10 + 32i64) + 1) & 0x8FBFFFFF;
-    v5 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)v10;
-    v43 = *(unsigned __int64 **)v10;
+    if ( p_Colors->pObject )
+      p_Colors->pObject->RefCount = (p_Colors->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = p_Colors->pObject;
+    v42 = p_Colors->pObject;
   }
-  v11 = (signed __int64)&v3->Alphas;
-  if ( &v3->Alphas != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v51 )
+  p_Alphas = &this->Alphas;
+  if ( &this->Alphas != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v50 )
   {
-    if ( *(_QWORD *)v11 )
-      *(_DWORD *)(*(_QWORD *)v11 + 32i64) = (*(_DWORD *)(*(_QWORD *)v11 + 32i64) + 1) & 0x8FBFFFFF;
-    v6 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)v11;
-    v51 = *(unsigned __int64 **)v11;
+    if ( p_Alphas->pObject )
+      p_Alphas->pObject->RefCount = (p_Alphas->pObject->RefCount + 1) & 0x8FBFFFFF;
+    v6 = p_Alphas->pObject;
+    v50 = p_Alphas->pObject;
   }
-  v12 = (signed __int64)&v3->Ratios;
-  if ( &v3->Ratios != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v50 )
+  p_Ratios = &this->Ratios;
+  if ( &this->Ratios != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *)&v49 )
   {
-    if ( *(_QWORD *)v12 )
-      *(_DWORD *)(*(_QWORD *)v12 + 32i64) = (*(_DWORD *)(*(_QWORD *)v12 + 32i64) + 1) & 0x8FBFFFFF;
-    v7 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)v12;
-    v50 = *(unsigned __int64 **)v12;
+    if ( p_Ratios->pObject )
+      p_Ratios->pObject->RefCount = (p_Ratios->pObject->RefCount + 1) & 0x8FBFFFFF;
+    v7 = p_Ratios->pObject;
+    v49 = p_Ratios->pObject;
   }
-  v13 = v3->FilterData.pObject;
+  v13 = this->FilterData.pObject;
   v14 = (float)(*(float *)&v13[1].RefCount * 0.050000001);
   v15 = (float)(*((float *)&v13[1].RefCount + 1) * 0.050000001);
   v16 = *(float *)&v13[2].vfptr;
-  v17 = HIDWORD(v13[1].vfptr);
-  v18 = v3->Type.pNode;
-  ++v18->RefCount;
-  v19 = v49.pNode;
-  v20 = v49.pNode->RefCount == 1;
-  --v19->RefCount;
+  vfptr_high = HIDWORD(v13[1].vfptr);
+  pNode = this->Type.pNode;
+  ++pNode->RefCount;
+  v19 = v48.pNode;
+  v20 = v48.pNode->RefCount-- == 1;
   if ( v20 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v19);
-  v49.pNode = v18;
-  v21 = LODWORD(v3->FilterData.pObject[1].vfptr) >> 4;
-  LOBYTE(v21) = v21 & 1;
-  v48 = v21;
-  v46 = 0;
-  v47 = 0i64;
-  v22 = resulta.pV;
-  v23 = resulta.pV->FilterData.pObject;
-  v24 = *((float *)&v23[3].vfptr + 1);
-  v25 = (float)v8 * 20.0;
-  *((float *)&v23[3].vfptr + 1) = v24;
-  *(float *)&v23[3].vfptr = v25;
-  v26 = sinf(v24) * v25;
-  *(float *)&v23[1].Type = cosf(v24) * v25;
-  *(float *)&v23[1].Frozen = v26;
-  HIBYTE(v23[2].vfptr) = (signed int)(v9 * 255.0);
+  v48.pNode = pNode;
+  v47 = ((__int64)this->FilterData.pObject[1].vfptr & 0x10) != 0;
+  v45 = 0;
+  v46 = 0i64;
+  pV = resulta.pV;
+  v22 = resulta.pV->FilterData.pObject;
+  v23 = *((float *)&v22[3].vfptr + 1);
+  v24 = (float)v8 * 20.0;
+  *((float *)&v22[3].vfptr + 1) = v23;
+  *(float *)&v22[3].vfptr = v24;
+  v25 = sinf(v23) * v24;
+  *(float *)&v22[1].Type = cosf(v23) * v24;
+  *(float *)&v22[1].Frozen = v25;
+  HIBYTE(v22[2].vfptr) = (int)(v9 * 255.0);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v22->Colors,
-    v5);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)v22);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&pV->Colors,
+    (Scaleform::GFx::AS3::Instances::fl::XMLList *)pObject);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)pV);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v22->Alphas,
-    v6);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)v22);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&pV->Alphas,
+    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v6);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)pV);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v22->Ratios,
-    v7);
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)v22);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&pV->Ratios,
+    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v7);
+  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient((Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *)pV);
   if ( v14 < 0.0 )
     v14 = 0.0;
-  *(float *)&v22->FilterData.pObject[1].RefCount = (float)v14 * 20.0;
+  *(float *)&pV->FilterData.pObject[1].RefCount = (float)v14 * 20.0;
   if ( v15 < 0.0 )
     v15 = 0.0;
-  v27 = v15;
-  *((float *)&v22->FilterData.pObject[1].RefCount + 1) = v27 * 20.0;
-  *(float *)&v22->FilterData.pObject[2].vfptr = v16;
-  v28 = 15;
-  if ( v17 < 0xF )
-    v28 = v17;
-  HIDWORD(v22->FilterData.pObject[1].vfptr) = v28;
-  v29 = v22->FilterData.pObject;
-  LODWORD(v29[1].vfptr) &= 0xFFFFFF5F;
-  v30 = (int)v29[1].vfptr;
-  v31 = v49.pNode->pData;
-  v32 = 0i64;
+  v26 = v15;
+  *((float *)&pV->FilterData.pObject[1].RefCount + 1) = v26 * 20.0;
+  *(float *)&pV->FilterData.pObject[2].vfptr = v16;
+  v27 = 15;
+  if ( vfptr_high < 0xF )
+    v27 = vfptr_high;
+  HIDWORD(pV->FilterData.pObject[1].vfptr) = v27;
+  v28 = pV->FilterData.pObject;
+  LODWORD(v28[1].vfptr) &= 0xFFFFFF5F;
+  vfptr = (int)v28[1].vfptr;
+  pData = v48.pNode->pData;
+  v31 = 0i64;
   while ( 1 )
   {
-    v33 = v31[v32++];
-    if ( v33 != aInner[v32 - 1] )
+    v32 = pData[v31++];
+    if ( v32 != aInner[v31 - 1] )
       break;
-    if ( v32 == 6 )
+    if ( v31 == 6 )
     {
-      v34 = v30 | 0x20;
+      v33 = vfptr | 0x20;
       goto LABEL_29;
     }
   }
   while ( 1 )
   {
-    v35 = v31[v4++];
-    if ( v35 != aOuter[v4 - 1] )
+    v34 = pData[v4++];
+    if ( v34 != aOuter[v4 - 1] )
       break;
     if ( v4 == 6 )
       goto LABEL_30;
   }
-  v34 = v30 | 0x80;
+  v33 = vfptr | 0x80;
 LABEL_29:
-  LODWORD(v29[1].vfptr) = v34;
+  LODWORD(v28[1].vfptr) = v33;
 LABEL_30:
-  v36 = v22->FilterData.pObject;
-  LODWORD(v36[1].vfptr) &= 0xFFFFFFEF;
-  LODWORD(v36[1].vfptr) |= (_BYTE)v48 != 0 ? 0x10 : 0;
-  v37 = v2->pObject;
-  if ( v22 != (Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter *)v2->pObject )
+  v35 = pV->FilterData.pObject;
+  LODWORD(v35[1].vfptr) &= ~0x10u;
+  LODWORD(v35[1].vfptr) |= v47 ? 0x10 : 0;
+  v36 = result->pObject;
+  if ( pV != result->pObject )
   {
-    if ( v37 )
+    if ( v36 )
     {
-      if ( (unsigned __int8)v37 & 1 )
+      if ( ((unsigned __int8)v36 & 1) != 0 )
       {
-        v2->pObject = (Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter *)((char *)v37 - 1);
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter *)((char *)v36 - 1);
       }
       else
       {
-        v38 = v37->RefCount;
-        if ( v38 & 0x3FFFFF )
+        RefCount = v36->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v37->RefCount = v38 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v37->vfptr);
+          v36->RefCount = RefCount - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v36);
         }
       }
     }
-    v2->pObject = (Scaleform::GFx::AS3::Instances::fl_filters::BitmapFilter *)&v22->vfptr;
+    result->pObject = pV;
   }
-  v39 = v49.pNode;
-  v20 = v49.pNode->RefCount == 1;
-  --v39->RefCount;
+  v38 = v48.pNode;
+  v20 = v48.pNode->RefCount-- == 1;
   if ( v20 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v39);
+    Scaleform::GFx::ASStringNode::ReleaseNode(v38);
   if ( v7 )
   {
-    if ( (unsigned __int8)v7 & 1 )
+    if ( ((unsigned __int8)v7 & 1) != 0 )
     {
-      v50 = (unsigned __int64 *)((char *)&v7[-1].List.Data.Policy.Capacity + 7);
+      v49 = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v7 - 1);
     }
     else
     {
-      v40 = v7->RefCount;
-      if ( v40 & 0x3FFFFF )
+      v39 = v7->RefCount;
+      if ( (v39 & 0x3FFFFF) != 0 )
       {
-        v7->RefCount = v40 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v7->vfptr);
+        v7->RefCount = v39 - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v7);
       }
     }
   }
   if ( v6 )
   {
-    if ( (unsigned __int8)v6 & 1 )
+    if ( ((unsigned __int8)v6 & 1) != 0 )
     {
-      v51 = (unsigned __int64 *)((char *)&v6[-1].List.Data.Policy.Capacity + 7);
+      v50 = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v6 - 1);
     }
     else
     {
-      v41 = v6->RefCount;
-      if ( v41 & 0x3FFFFF )
+      v40 = v6->RefCount;
+      if ( (v40 & 0x3FFFFF) != 0 )
       {
-        v6->RefCount = v41 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v6->vfptr);
+        v6->RefCount = v40 - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v6);
       }
     }
   }
-  if ( v5 )
+  if ( pObject )
   {
-    if ( (unsigned __int8)v5 & 1 )
+    if ( ((unsigned __int8)pObject & 1) != 0 )
     {
-      v43 = (unsigned __int64 *)((char *)&v5[-1].List.Data.Policy.Capacity + 7);
+      v42 = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)pObject - 1);
     }
     else
     {
-      v42 = v5->RefCount;
-      if ( v42 & 0x3FFFFF )
+      v41 = pObject->RefCount;
+      if ( (v41 & 0x3FFFFF) != 0 )
       {
-        v5->RefCount = v42 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v5->vfptr);
+        pObject->RefCount = v41 - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
   }
@@ -801,273 +797,235 @@ LABEL_30:
 
 // File Line: 323
 // RVA: 0x796F40
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+// bad sp value at call has been detected, the output may be wrong!
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rsi
-  unsigned int v4; // er14
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *v5; // r15
   __int64 v6; // rdi
-  Scaleform::GFx::AS3::Traits *v7; // rax
+  Scaleform::GFx::AS3::Traits *pObject; // rax
   Scaleform::GFx::AS3::VM::Error *v8; // rax
-  Scaleform::GFx::ASStringNode *v9; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v10; // r12
-  bool v11; // al
-  char v12; // al
-  int v13; // ecx
-  Scaleform::GFx::AS3::VM::Error *v14; // rax
-  int v15; // ecx
+  unsigned int v13; // ecx
+  unsigned int v14; // ecx
+  unsigned int v15; // ecx
   Scaleform::GFx::AS3::VM::Error *v16; // rax
-  int v17; // ecx
-  Scaleform::GFx::AS3::VM::Error *v18; // rax
-  Scaleform::GFx::ASStringNode *v19; // rcx
-  bool v20; // zf
-  bool v21; // al
-  char v22; // al
-  char v23; // al
-  char v24; // al
-  char v25; // al
-  Scaleform::Render::Filter *v26; // rbx
-  float v27; // xmm7_4
-  float v28; // xmm8_4
-  float v29; // xmm6_4
-  double v30; // xmm2_8
-  double v31; // xmm2_8
-  float v32; // xmm0_4
-  int v33; // ecx
-  Scaleform::Render::Filter *v34; // r9
-  int v35; // er8
-  const char *v36; // rdx
-  __int64 v37; // rcx
+  Scaleform::GFx::ASStringNode *v17; // rcx
+  bool v18; // zf
+  Scaleform::Render::Filter *v24; // rbx
+  float v25; // xmm7_4
+  float v26; // xmm8_4
+  float v27; // xmm6_4
+  double v28; // xmm2_8
+  double v29; // xmm2_8
+  float v30; // xmm0_4
+  int v31; // ecx
+  Scaleform::Render::Filter *v32; // r9
+  int vfptr; // r8d
+  const char *pData; // rdx
+  __int64 v35; // rcx
+  char v36; // al
+  int v37; // r8d
   char v38; // al
-  int v39; // er8
-  char v40; // al
-  Scaleform::Render::Filter *v41; // rcx
-  Scaleform::GFx::ASString result; // [rsp+8h] [rbp-61h]
-  long double v43; // [rsp+10h] [rbp-59h]
-  long double v44; // [rsp+18h] [rbp-51h]
-  long double v45; // [rsp+20h] [rbp-49h]
-  long double v46; // [rsp+28h] [rbp-41h]
-  long double v47; // [rsp+30h] [rbp-39h]
-  Scaleform::GFx::AS3::VM::Error v48; // [rsp+38h] [rbp-31h]
-  __int64 v49; // [rsp+58h] [rbp-11h]
-  Scaleform::GFx::AS3::CheckResult v50; // [rsp+D8h] [rbp+6Fh]
-  int v51; // [rsp+E8h] [rbp+7Fh]
+  Scaleform::Render::Filter *v39; // rcx
+  Scaleform::GFx::ASString result; // [rsp+8h] [rbp-61h] BYREF
+  long double v41; // [rsp+10h] [rbp-59h] BYREF
+  long double v42; // [rsp+18h] [rbp-51h] BYREF
+  long double v43; // [rsp+20h] [rbp-49h] BYREF
+  long double v44; // [rsp+28h] [rbp-41h] BYREF
+  long double v45; // [rsp+30h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::VM::Error v46; // [rsp+38h] [rbp-31h] BYREF
+  __int64 v47; // [rsp+58h] [rbp-11h]
+  Scaleform::GFx::AS3::CheckResult v48; // [rsp+D8h] [rbp+6Fh] BYREF
+  int v49[4]; // [rsp+E8h] [rbp+7Fh] BYREF
 
-  v49 = -2i64;
-  v3 = argv;
-  v4 = argc;
-  v5 = this;
+  v47 = -2i64;
   v6 = 0i64;
-  v7 = this->pTraits.pObject;
+  pObject = this->pTraits.pObject;
   if ( argc > 0xB )
   {
-    Scaleform::GFx::AS3::VM::Error::Error(&v48, eWrongArgumentCountError, v7->pVM);
-    Scaleform::GFx::AS3::VM::ThrowErrorInternal(v5->pTraits.pObject->pVM, v8, &Scaleform::GFx::AS3::fl::ArgumentErrorTI);
-    v9 = v48.Message.pNode;
-    goto LABEL_80;
+    Scaleform::GFx::AS3::VM::Error::Error(&v46, 1063, pObject->pVM);
+    Scaleform::GFx::AS3::VM::ThrowErrorInternal(
+      this->pTraits.pObject->pVM,
+      v8,
+      &Scaleform::GFx::AS3::fl::ArgumentErrorTI);
+    pNode = v46.Message.pNode;
+    goto LABEL_78;
   }
-  v46 = DOUBLE_4_0;
-  v47 = DOUBLE_45_0;
-  v43 = DOUBLE_4_0;
   v44 = DOUBLE_4_0;
-  v45 = DOUBLE_1_0;
-  v51 = 1;
+  v45 = DOUBLE_45_0;
+  v41 = DOUBLE_4_0;
+  v42 = DOUBLE_4_0;
+  v43 = DOUBLE_1_0;
+  v49[0] = 1;
   v10 = 0;
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-    (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v7->pVM->StringManagerRef->Builtins,
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+    pObject->pVM->StringManagerRef,
     &result,
     "inner");
-  v11 = v4 >= 1 && !Scaleform::GFx::AS3::Value::Convert2Number(v3, &v50, &v46)->Result;
-  if ( !v11 )
+  if ( (!argc || Scaleform::GFx::AS3::Value::Convert2Number(argv, &v48, &v44)->Result)
+    && (argc < 2 || Scaleform::GFx::AS3::Value::Convert2Number(argv + 1, &v48, &v45)->Result) )
   {
-    v12 = v4 < 2 || Scaleform::GFx::AS3::Value::Convert2Number(v3 + 1, &v50, &v47)->Result ? 0 : 1;
-    if ( !v12 )
+    if ( argc >= 3 )
     {
-      if ( v4 >= 3 )
+      v13 = argv[2].Flags & 0x1F;
+      if ( (v13 - 12 > 3 && v13 != 10 || argv[2].value.VS._1.VStr)
+        && !Scaleform::GFx::AS3::VM::IsOfType(
+              this->pTraits.pObject->pVM,
+              argv + 2,
+              "Array",
+              this->pTraits.pObject->pVM->CurrentDomain.pObject) )
       {
-        v13 = v3[2].Flags & 0x1F;
-        if ( ((unsigned int)(v13 - 12) > 3 && v13 != 10 || *(_QWORD *)&v3[2].value.VNumber)
-          && !Scaleform::GFx::AS3::VM::IsOfType(
-                v5->pTraits.pObject->pVM,
-                v3 + 2,
-                "Array",
-                v5->pTraits.pObject->pVM->CurrentDomain.pObject) )
-        {
-          Scaleform::GFx::AS3::VM::Error::Error(&v48, eCheckTypeFailedError, v5->pTraits.pObject->pVM);
-          Scaleform::GFx::AS3::VM::ThrowErrorInternal(
-            v5->pTraits.pObject->pVM,
-            v14,
-            &Scaleform::GFx::AS3::fl::TypeErrorTI);
-          goto LABEL_33;
-        }
-        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->Colors,
-          (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3[2].value.VS._1.VStr);
+        goto LABEL_31;
       }
-      if ( v4 >= 4 )
+      Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Colors,
+        (Scaleform::GFx::AS3::Instances::fl::XMLList *)argv[2].value.VS._1.VStr);
+    }
+    if ( argc >= 4 )
+    {
+      v14 = argv[3].Flags & 0x1F;
+      if ( (v14 - 12 > 3 && v14 != 10 || argv[3].value.VS._1.VStr)
+        && !Scaleform::GFx::AS3::VM::IsOfType(
+              this->pTraits.pObject->pVM,
+              argv + 3,
+              "Array",
+              this->pTraits.pObject->pVM->CurrentDomain.pObject) )
       {
-        v15 = v3[3].Flags & 0x1F;
-        if ( ((unsigned int)(v15 - 12) > 3 && v15 != 10 || *(_QWORD *)&v3[3].value.VNumber)
-          && !Scaleform::GFx::AS3::VM::IsOfType(
-                v5->pTraits.pObject->pVM,
-                v3 + 3,
-                "Array",
-                v5->pTraits.pObject->pVM->CurrentDomain.pObject) )
-        {
-          Scaleform::GFx::AS3::VM::Error::Error(&v48, eCheckTypeFailedError, v5->pTraits.pObject->pVM);
-          Scaleform::GFx::AS3::VM::ThrowErrorInternal(
-            v5->pTraits.pObject->pVM,
-            v16,
-            &Scaleform::GFx::AS3::fl::TypeErrorTI);
-          goto LABEL_33;
-        }
-        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->Alphas,
-          (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3[3].value.VS._1.VStr);
+        goto LABEL_31;
       }
-      if ( v4 >= 5 )
+      Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Alphas,
+        (Scaleform::GFx::AS3::Instances::fl::XMLList *)argv[3].value.VS._1.VStr);
+    }
+    if ( argc >= 5 )
+    {
+      v15 = argv[4].Flags & 0x1F;
+      if ( (v15 - 12 > 3 && v15 != 10 || argv[4].value.VS._1.VStr)
+        && !Scaleform::GFx::AS3::VM::IsOfType(
+              this->pTraits.pObject->pVM,
+              argv + 4,
+              "Array",
+              this->pTraits.pObject->pVM->CurrentDomain.pObject) )
       {
-        v17 = v3[4].Flags & 0x1F;
-        if ( ((unsigned int)(v17 - 12) > 3 && v17 != 10 || *(_QWORD *)&v3[4].value.VNumber)
-          && !Scaleform::GFx::AS3::VM::IsOfType(
-                v5->pTraits.pObject->pVM,
-                v3 + 4,
-                "Array",
-                v5->pTraits.pObject->pVM->CurrentDomain.pObject) )
-        {
-          Scaleform::GFx::AS3::VM::Error::Error(&v48, eCheckTypeFailedError, v5->pTraits.pObject->pVM);
-          Scaleform::GFx::AS3::VM::ThrowErrorInternal(
-            v5->pTraits.pObject->pVM,
-            v18,
-            &Scaleform::GFx::AS3::fl::TypeErrorTI);
-LABEL_33:
-          v19 = v48.Message.pNode;
-          v20 = v48.Message.pNode->RefCount == 1;
-          --v19->RefCount;
-          if ( v20 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v19);
-          goto LABEL_79;
-        }
-        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->Ratios,
-          (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3[4].value.VS._1.VStr);
+LABEL_31:
+        Scaleform::GFx::AS3::VM::Error::Error(&v46, 1034, this->pTraits.pObject->pVM);
+        Scaleform::GFx::AS3::VM::ThrowErrorInternal(
+          this->pTraits.pObject->pVM,
+          v16,
+          &Scaleform::GFx::AS3::fl::TypeErrorTI);
+        v17 = v46.Message.pNode;
+        v18 = v46.Message.pNode->RefCount-- == 1;
+        if ( v18 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(v17);
+        goto LABEL_77;
       }
-      v21 = v4 >= 6 && !Scaleform::GFx::AS3::Value::Convert2Number(v3 + 5, &v50, &v43)->Result;
-      if ( !v21 )
+      Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Ratios,
+        (Scaleform::GFx::AS3::Instances::fl::XMLList *)argv[4].value.VS._1.VStr);
+    }
+    if ( (argc < 6 || Scaleform::GFx::AS3::Value::Convert2Number(argv + 5, &v48, &v41)->Result)
+      && (argc < 7 || Scaleform::GFx::AS3::Value::Convert2Number(argv + 6, &v48, &v42)->Result)
+      && (argc < 8 || Scaleform::GFx::AS3::Value::Convert2Number(argv + 7, &v48, &v43)->Result)
+      && (argc < 9 || Scaleform::GFx::AS3::Value::Convert2Int32(argv + 8, &v48, v49)->Result)
+      && (argc < 0xA || Scaleform::GFx::AS3::Value::Convert2String(argv + 9, &v48, &result)->Result) )
+    {
+      if ( argc >= 0xB )
+        v10 = Scaleform::GFx::AS3::Value::Convert2Boolean(argv + 10);
+      v46.ID = 0;
+      v46.Message.pNode = 0i64;
+      v24 = this->FilterData.pObject;
+      v25 = *((float *)&v24[3].vfptr + 1);
+      v26 = (float)v44 * 20.0;
+      *((float *)&v24[3].vfptr + 1) = v25;
+      *(float *)&v24[3].vfptr = v26;
+      v27 = sinf(v25) * v26;
+      *(float *)&v24[1].Type = cosf(v25) * v26;
+      *(float *)&v24[1].Frozen = v27;
+      HIBYTE(v24[2].vfptr) = (int)(v45 * 255.0);
+      v28 = v41;
+      if ( v41 < 0.0 )
+        v28 = 0.0;
+      *(float *)&this->FilterData.pObject[1].RefCount = (float)v28 * 20.0;
+      v29 = v42;
+      if ( v42 < 0.0 )
+        v29 = 0.0;
+      v30 = v29;
+      *((float *)&this->FilterData.pObject[1].RefCount + 1) = v30 * 20.0;
+      *(float *)&this->FilterData.pObject[2].vfptr = v43;
+      v31 = 15;
+      if ( v49[0] < 0xFu )
+        v31 = v49[0];
+      HIDWORD(this->FilterData.pObject[1].vfptr) = v31;
+      v32 = this->FilterData.pObject;
+      LODWORD(v32[1].vfptr) &= 0xFFFFFF5F;
+      vfptr = (int)v32[1].vfptr;
+      pData = result.pNode->pData;
+      v35 = 0i64;
+      while ( 1 )
       {
-        v22 = v4 < 7 || Scaleform::GFx::AS3::Value::Convert2Number(v3 + 6, &v50, &v44)->Result ? 0 : 1;
-        if ( !v22 )
+        v36 = pData[v35++];
+        if ( v36 != aInner[v35 - 1] )
+          break;
+        if ( v35 == 6 )
         {
-          v23 = v4 < 8 || Scaleform::GFx::AS3::Value::Convert2Number(v3 + 7, &v50, &v45)->Result ? 0 : 1;
-          if ( !v23 )
-          {
-            v24 = v4 < 9 || Scaleform::GFx::AS3::Value::Convert2Int32(v3 + 8, &v50, &v51)->Result ? 0 : 1;
-            if ( !v24 )
-            {
-              v25 = v4 < 0xA || Scaleform::GFx::AS3::Value::Convert2String(v3 + 9, &v50, &result)->Result ? 0 : 1;
-              if ( !v25 )
-              {
-                if ( v4 >= 0xB )
-                  v10 = Scaleform::GFx::AS3::Value::Convert2Boolean(v3 + 10);
-                v48.ID = 0;
-                v48.Message.pNode = 0i64;
-                v26 = v5->FilterData.pObject;
-                v27 = *((float *)&v26[3].vfptr + 1);
-                v28 = (float)v46 * 20.0;
-                *((float *)&v26[3].vfptr + 1) = v27;
-                *(float *)&v26[3].vfptr = v28;
-                v29 = sinf(v27) * v28;
-                *(float *)&v26[1].Type = cosf(v27) * v28;
-                *(float *)&v26[1].Frozen = v29;
-                HIBYTE(v26[2].vfptr) = (signed int)(v47 * 255.0);
-                v30 = v43;
-                if ( v43 < 0.0 )
-                  v30 = 0.0;
-                *(float *)&v5->FilterData.pObject[1].RefCount = (float)v30 * 20.0;
-                v31 = v44;
-                if ( v44 < 0.0 )
-                  v31 = 0.0;
-                v32 = v31;
-                *((float *)&v5->FilterData.pObject[1].RefCount + 1) = v32 * 20.0;
-                *(float *)&v5->FilterData.pObject[2].vfptr = v45;
-                v33 = 15;
-                if ( (unsigned int)v51 < 0xF )
-                  v33 = v51;
-                HIDWORD(v5->FilterData.pObject[1].vfptr) = v33;
-                v34 = v5->FilterData.pObject;
-                LODWORD(v34[1].vfptr) &= 0xFFFFFF5F;
-                v35 = (int)v34[1].vfptr;
-                v36 = result.pNode->pData;
-                v37 = 0i64;
-                while ( 1 )
-                {
-                  v38 = v36[v37++];
-                  if ( v38 != aInner[v37 - 1] )
-                    break;
-                  if ( v37 == 6 )
-                  {
-                    v39 = v35 | 0x20;
-                    goto LABEL_77;
-                  }
-                }
-                while ( 1 )
-                {
-                  v40 = v36[v6++];
-                  if ( v40 != aOuter[v6 - 1] )
-                    break;
-                  if ( v6 == 6 )
-                    goto LABEL_78;
-                }
-                v39 = v35 | 0x80;
-LABEL_77:
-                LODWORD(v34[1].vfptr) = v39;
-LABEL_78:
-                v41 = v5->FilterData.pObject;
-                LODWORD(v41[1].vfptr) &= 0xFFFFFFEF;
-                LODWORD(v41[1].vfptr) |= v10 != 0 ? 0x10 : 0;
-                Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(v5);
-              }
-            }
-          }
+          v37 = vfptr | 0x20;
+          goto LABEL_75;
         }
       }
-      goto LABEL_79;
+      while ( 1 )
+      {
+        v38 = pData[v6++];
+        if ( v38 != aOuter[v6 - 1] )
+          break;
+        if ( v6 == 6 )
+          goto LABEL_76;
+      }
+      v37 = vfptr | 0x80;
+LABEL_75:
+      LODWORD(v32[1].vfptr) = v37;
+LABEL_76:
+      v39 = this->FilterData.pObject;
+      LODWORD(v39[1].vfptr) &= ~0x10u;
+      LODWORD(v39[1].vfptr) |= v10 ? 0x10 : 0;
+      Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(this);
     }
   }
-LABEL_79:
-  v9 = result.pNode;
-LABEL_80:
-  v20 = v9->RefCount-- == 1;
-  if ( v20 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+LABEL_77:
+  pNode = result.pNode;
+LABEL_78:
+  v18 = pNode->RefCount-- == 1;
+  if ( v18 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 397
 // RVA: 0x8593E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::recomputeGradient(
+        Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter *v1; // rbx
   Scaleform::Render::GradientData *v2; // rdi
-  const char *v3; // rdx
+  const char *pData; // rdx
   __int64 v4; // rax
   char v5; // cl
   bool v6; // zf
   Scaleform::Render::GradientType v7; // esi
-  Scaleform::Render::RenderBuffer *v8; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   Scaleform::Render::GradientData *v9; // rax
   Scaleform::Render::GradientData *v10; // rax
   Scaleform::Render::RenderBuffer *v11; // rcx
   Scaleform::Render::Filter *v12; // rdi
-  Scaleform::GFx::Resource *v13; // rcx
+  Scaleform::Render::GradientData *v13; // rcx
   Scaleform::Render::RenderBuffer *v14; // rcx
 
-  v1 = this;
   v2 = 0i64;
-  v3 = this->Type.pNode->pData;
+  pData = this->Type.pNode->pData;
   v4 = 0i64;
   while ( 1 )
   {
-    v5 = v3[v4++];
+    v5 = pData[v4++];
     v6 = v5 == aRadial[v4 - 1];
     if ( v5 != aRadial[v4 - 1] )
       break;
@@ -1077,79 +1035,74 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_filters::GradientGlowFilter::
       break;
     }
   }
-  v7 = 0;
-  if ( v6 )
-    v7 = 1;
-  v8 = (Scaleform::Render::RenderBuffer *)v1->pGradientData.pObject;
-  if ( v8 )
-    Scaleform::RefCountImpl::Release(v8);
-  v1->pGradientData.pObject = 0i64;
-  if ( v1->Colors.pObject && v1->Alphas.pObject )
+  v7 = v6;
+  pObject = (Scaleform::Render::RenderBuffer *)this->pGradientData.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->pGradientData.pObject = 0i64;
+  if ( this->Colors.pObject && this->Alphas.pObject )
   {
-    v9 = (Scaleform::Render::GradientData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    v9 = (Scaleform::Render::GradientData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                               Scaleform::Memory::pGlobalHeap,
                                               48i64);
     if ( v9 )
     {
-      Scaleform::Render::GradientData::GradientData(v9, v7, v1->Colors.pObject->SA.Length, 0);
+      Scaleform::Render::GradientData::GradientData(v9, v7, this->Colors.pObject->SA.Length, 0);
       v2 = v10;
     }
-    v11 = (Scaleform::Render::RenderBuffer *)v1->pGradientData.pObject;
+    v11 = (Scaleform::Render::RenderBuffer *)this->pGradientData.pObject;
     if ( v11 )
       Scaleform::RefCountImpl::Release(v11);
-    v1->pGradientData.pObject = v2;
+    this->pGradientData.pObject = v2;
     Scaleform::GFx::AS3::Instances::fl_display::Graphics::FillGradientData(
-      v1->Colors.pObject,
-      v1->Alphas.pObject,
-      v1->Ratios.pObject,
+      this->Colors.pObject,
+      this->Alphas.pObject,
+      this->Ratios.pObject,
       v2);
   }
-  v12 = v1->FilterData.pObject;
-  v13 = (Scaleform::GFx::Resource *)v1->pGradientData.pObject;
+  v12 = this->FilterData.pObject;
+  v13 = this->pGradientData.pObject;
   if ( v13 )
-    Scaleform::Render::RenderBuffer::AddRef(v13);
+    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v13);
   v14 = *(Scaleform::Render::RenderBuffer **)&v12[2].Type;
   if ( v14 )
     Scaleform::RefCountImpl::Release(v14);
-  *(_QWORD *)&v12[2].Type = v1->pGradientData.pObject;
+  *(_QWORD *)&v12[2].Type = this->pGradientData.pObject;
 }
 
 // File Line: 483
 // RVA: 0x7FF730
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_filters::GradientBevelFilter> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_filters::GradientBevelFilter::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 505
 // RVA: 0x7536E0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_filters::GradientBevelFilter::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_filters::GradientBevelFilter::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_filters::GradientBevelFilterCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_filters::GradientBevelFilterCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_filters::BitmapFilter::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_filters::GradientBevelFilter::`vftable;
@@ -1158,14 +1111,14 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(
       v7,
-      v2,
+      vm,
       &Scaleform::GFx::AS3::fl_filters::GradientBevelFilterCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_filters::BitmapFilter::`vftable;
@@ -1176,13 +1129,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

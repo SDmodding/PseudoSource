@@ -2,93 +2,112 @@
 // RVA: 0x4D2900
 void UFG::TSCollectible::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+
   UFG::TSCollectible::mspCollectibleClass = SSBrain::get_class("Collectible");
-  SSClass::register_method_func(UFG::TSCollectible::mspCollectibleClass, "collect", UFG::TSCollectible::Mthd_collect, 0);
+  SSClass::register_method_func(
+    UFG::TSCollectible::mspCollectibleClass,
+    "collect",
+    UFG::TSCollectible::Mthd_collect,
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_collected",
     UFG::TSCollectible::Mthd_is_collected,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_usable",
     UFG::TSCollectible::Mthd_is_usable,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_locked",
     UFG::TSCollectible::Mthd_is_locked,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "collect",
     UFG::TSCollectible::MthdC_collect,
     1,
-    0);
+    rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_collected",
     UFG::TSCollectible::MthdC_is_collected,
     1,
-    0);
+    rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_usable",
     UFG::TSCollectible::MthdC_is_usable,
     1,
-    0);
+    rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "collect_by_type",
     UFG::TSCollectible::MthdC_collect_by_type,
     1,
-    0);
+    rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "is_collected_by_type",
     UFG::TSCollectible::MthdC_is_collected_by_type,
     1,
-    0);
+    rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "get_collected_count_by_type",
     UFG::TSCollectible::MthdC_get_collected_count_by_type,
     1,
-    0);
+    rebinde);
+  LOBYTE(rebindf.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "unlock_weapon_spawner",
     UFG::TSCollectible::MthdC_unlock_weapon_spawner,
     1,
-    0);
+    rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCollectible::mspCollectibleClass,
     "list_collect_of_type",
     UFG::TSCollectible::MthdC_list_collect_of_type,
     1,
-    0);
+    rebindg);
 }
 
 // File Line: 83
 // RVA: 0x501190
 void __fastcall UFG::TSCollectible::Mthd_is_collected(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  UFG::CollectibleComponent *v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   char v5; // al
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v4 = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)v2[2].vfptr->set_data_by_name);
-    if ( v4 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)i_obj_p[2].vfptr->set_data_by_name);
+    if ( CollectibleComponent )
     {
-      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))v4->vfptr[19].__vecDelDtor)(v4);
-      *v3 = (SSInstance *)SSBoolean::pool_new(v5);
+      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))CollectibleComponent->vfptr[19].__vecDelDtor)(CollectibleComponent);
+      *ppResult = SSBoolean::pool_new(v5);
     }
   }
 }
@@ -97,21 +116,19 @@ void __fastcall UFG::TSCollectible::Mthd_is_collected(SSInvokedMethod *pScope, S
 // RVA: 0x4F68C0
 void __fastcall UFG::TSCollectible::Mthd_collect(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSInvokedMethod *v3; // rbx
-  UFG::CollectibleComponent *v4; // rax
+  SSObjectBase *i_obj_p; // rdx
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   SSData *v5; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  v3 = pScope;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v4 = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)v2[2].vfptr->set_data_by_name);
-  if ( v4 )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)i_obj_p[2].vfptr->set_data_by_name);
+  if ( CollectibleComponent )
   {
-    v5 = *v3->i_data.i_array_p;
+    v5 = *pScope->i_data.i_array_p;
     LOBYTE(v5) = v5->i_data_p->i_user_data != 0;
-    v4->vfptr[24].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v4->vfptr, (unsigned int)v5);
+    CollectibleComponent->vfptr[24].__vecDelDtor(CollectibleComponent, (unsigned int)v5);
   }
 }
 
@@ -119,22 +136,20 @@ void __fastcall UFG::TSCollectible::Mthd_collect(SSInvokedMethod *pScope, SSInst
 // RVA: 0x503B20
 void __fastcall UFG::TSCollectible::Mthd_is_usable(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  UFG::CollectibleComponent *v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   char v5; // al
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v4 = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)v2[2].vfptr->set_data_by_name);
-    if ( v4 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)i_obj_p[2].vfptr->set_data_by_name);
+    if ( CollectibleComponent )
     {
-      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))v4->vfptr[20].__vecDelDtor)(v4);
-      *v3 = (SSInstance *)SSBoolean::pool_new(v5);
+      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))CollectibleComponent->vfptr[20].__vecDelDtor)(CollectibleComponent);
+      *ppResult = SSBoolean::pool_new(v5);
     }
   }
 }
@@ -143,22 +158,20 @@ void __fastcall UFG::TSCollectible::Mthd_is_usable(SSInvokedMethod *pScope, SSIn
 // RVA: 0x502610
 void __fastcall UFG::TSCollectible::Mthd_is_locked(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  UFG::CollectibleComponent *v4; // rax
+  SSObjectBase *i_obj_p; // r8
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   char v5; // al
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v4 = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)v2[2].vfptr->set_data_by_name);
-    if ( v4 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent((UFG::SimObject *)i_obj_p[2].vfptr->set_data_by_name);
+    if ( CollectibleComponent )
     {
-      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))v4->vfptr[21].__vecDelDtor)(v4);
-      *v3 = (SSInstance *)SSBoolean::pool_new(v5);
+      v5 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))CollectibleComponent->vfptr[21].__vecDelDtor)(CollectibleComponent);
+      *ppResult = SSBoolean::pool_new(v5);
     }
   }
 }
@@ -167,20 +180,18 @@ void __fastcall UFG::TSCollectible::Mthd_is_locked(SSInvokedMethod *pScope, SSIn
 // RVA: 0x4E93F0
 void __fastcall UFG::TSCollectible::MthdC_is_collected(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  UFG::CollectibleComponent *v3; // rax
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   char v4; // cl
-  UFG::qSymbol name; // [rsp+38h] [rbp+10h]
+  UFG::qSymbol name; // [rsp+38h] [rbp+10h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
     name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    v3 = UFG::CollectibleComponent::GetCollectibleComponent(&name);
+    CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent(&name);
     v4 = 0;
-    if ( v3 )
-      v4 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))v3->vfptr[19].__vecDelDtor)(v3);
-    *v2 = (SSInstance *)SSBoolean::pool_new(v4);
+    if ( CollectibleComponent )
+      v4 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))CollectibleComponent->vfptr[19].__vecDelDtor)(CollectibleComponent);
+    *ppResult = SSBoolean::pool_new(v4);
   }
 }
 
@@ -188,19 +199,17 @@ void __fastcall UFG::TSCollectible::MthdC_is_collected(SSInvokedMethod *pScope, 
 // RVA: 0x4E46B0
 void __fastcall UFG::TSCollectible::MthdC_collect(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  UFG::CollectibleComponent *v3; // rax
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   __int64 v4; // rdx
-  UFG::qSymbol name; // [rsp+30h] [rbp+8h]
+  UFG::qSymbol name; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = pScope;
   name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v3 = UFG::CollectibleComponent::GetCollectibleComponent(&name);
-  if ( v3 )
+  CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent(&name);
+  if ( CollectibleComponent )
   {
-    v4 = *((_QWORD *)v2->i_data.i_array_p + 1);
+    v4 = *((_QWORD *)pScope->i_data.i_array_p + 1);
     LOBYTE(v4) = *(_QWORD *)(*(_QWORD *)(v4 + 8) + 32i64) != 0i64;
-    v3->vfptr[24].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v3->vfptr, v4);
+    CollectibleComponent->vfptr[24].__vecDelDtor(CollectibleComponent, v4);
   }
 }
 
@@ -208,36 +217,34 @@ void __fastcall UFG::TSCollectible::MthdC_collect(SSInvokedMethod *pScope, SSIns
 // RVA: 0x4E9440
 void __fastcall UFG::TSCollectible::MthdC_is_collected_by_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  SSInstance **v3; // rdi
-  UFG::GameStat::MapBoolStat v4; // ebx
-  UFG::GameStat::MapInt32Stat v5; // ebx
+  SSData **i_array_p; // r8
+  UFG::GameStat::MapBoolStat MapBoolStatEnum; // ebx
+  UFG::GameStat::MapInt32Stat MapInt32StatEnum; // ebx
   UFG::GameStatTracker *v6; // rax
-  unsigned int v7; // eax
+  unsigned int Stat; // eax
   UFG::GameStatTracker *v8; // rax
   bool v9; // al
-  UFG::qSymbol name; // [rsp+38h] [rbp+10h]
-  UFG::qSymbol v11; // [rsp+40h] [rbp+18h]
+  UFG::qSymbol name; // [rsp+38h] [rbp+10h] BYREF
+  UFG::qSymbol v11; // [rsp+40h] [rbp+18h] BYREF
 
   if ( ppResult )
   {
-    v2 = pScope->i_data.i_array_p;
-    v3 = ppResult;
-    name.mUID = (*v2)->i_data_p->i_user_data;
-    v11.mUID = v2[1]->i_data_p->i_user_data;
-    v4 = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
-    if ( v4 == 93 )
+    i_array_p = pScope->i_data.i_array_p;
+    name.mUID = (*i_array_p)->i_data_p->i_user_data;
+    v11.mUID = i_array_p[1]->i_data_p->i_user_data;
+    MapBoolStatEnum = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
+    if ( MapBoolStatEnum == Num_MapBool_Stats )
     {
-      v5 = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
+      MapInt32StatEnum = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
       v6 = UFG::GameStatTracker::Instance();
-      v7 = UFG::GameStatTracker::GetStat(v6, v5, &v11);
-      *v3 = SSInstance::pool_new(SSBrain::c_integer_class_p, v7);
+      Stat = UFG::GameStatTracker::GetStat(v6, MapInt32StatEnum, &v11);
+      *ppResult = SSInstance::pool_new(SSBrain::c_integer_class_p, Stat);
     }
     else
     {
       v8 = UFG::GameStatTracker::Instance();
-      v9 = UFG::GameStatTracker::GetStat(v8, v4, &v11);
-      *v3 = (SSInstance *)SSBoolean::pool_new(v9);
+      v9 = UFG::GameStatTracker::GetStat(v8, MapBoolStatEnum, &v11);
+      *ppResult = SSBoolean::pool_new(v9);
     }
   }
 }
@@ -246,35 +253,33 @@ void __fastcall UFG::TSCollectible::MthdC_is_collected_by_type(SSInvokedMethod *
 // RVA: 0x4E7510
 void __fastcall UFG::TSCollectible::MthdC_get_collected_count_by_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rdi
-  UFG::GameStat::MapBoolStat v3; // ebx
-  UFG::GameStat::MapInt32Stat v4; // ebx
+  UFG::GameStat::MapBoolStat MapBoolStatEnum; // ebx
+  UFG::GameStat::MapInt32Stat MapInt32StatEnum; // ebx
   UFG::GameStatTracker *v5; // rax
-  UFG::qArray<unsigned long,0> *v6; // rax
-  unsigned int v7; // eax
+  UFG::qArray<unsigned long,0> *MapInt; // rax
+  unsigned int Count; // eax
   UFG::GameStatTracker *v8; // rax
-  UFG::PersistentData::MapBool *v9; // rax
-  UFG::qSymbol name; // [rsp+38h] [rbp+10h]
+  UFG::PersistentData::MapBool *MapBool; // rax
+  UFG::qSymbol name; // [rsp+38h] [rbp+10h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
     name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    v3 = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
-    if ( v3 == 93 )
+    MapBoolStatEnum = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
+    if ( MapBoolStatEnum == Num_MapBool_Stats )
     {
-      v4 = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
+      MapInt32StatEnum = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
       v5 = UFG::GameStatTracker::Instance();
-      v6 = (UFG::qArray<unsigned long,0> *)UFG::GameStatTracker::GetMapInt(v5, v4);
-      v7 = UFG::qSymbolUC::as_uint32(v6);
+      MapInt = (UFG::qArray<unsigned long,0> *)UFG::GameStatTracker::GetMapInt(v5, MapInt32StatEnum);
+      Count = UFG::qSymbolUC::as_uint32(MapInt);
     }
     else
     {
       v8 = UFG::GameStatTracker::Instance();
-      v9 = UFG::GameStatTracker::GetMapBool(v8, v3);
-      v7 = UFG::PersistentData::MapBool::GetCount(v9);
+      MapBool = UFG::GameStatTracker::GetMapBool(v8, MapBoolStatEnum);
+      Count = UFG::PersistentData::MapBool::GetCount(MapBool);
     }
-    *v2 = SSInstance::pool_new(SSBrain::c_integer_class_p, v7);
+    *ppResult = SSInstance::pool_new(SSBrain::c_integer_class_p, Count);
   }
 }
 
@@ -282,34 +287,32 @@ void __fastcall UFG::TSCollectible::MthdC_get_collected_count_by_type(SSInvokedM
 // RVA: 0x4E4710
 void __fastcall UFG::TSCollectible::MthdC_collect_by_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  SSInvokedMethod *v3; // rbx
-  UFG::GameStat::MapBoolStat v4; // edi
-  UFG::GameStat::MapInt32Stat v5; // edi
+  SSData **i_array_p; // r8
+  UFG::GameStat::MapBoolStat MapBoolStatEnum; // edi
+  UFG::GameStat::MapInt32Stat MapInt32StatEnum; // edi
   __int64 v6; // rbx
   UFG::GameStatTracker *v7; // rax
   bool v8; // bl
   UFG::GameStatTracker *v9; // rax
-  UFG::qSymbol name; // [rsp+30h] [rbp+8h]
-  UFG::qSymbol v11; // [rsp+40h] [rbp+18h]
+  UFG::qSymbol name; // [rsp+30h] [rbp+8h] BYREF
+  UFG::qSymbol v11; // [rsp+40h] [rbp+18h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = pScope;
-  name.mUID = (*v2)->i_data_p->i_user_data;
-  v11.mUID = v2[1]->i_data_p->i_user_data;
-  v4 = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
-  if ( v4 == 93 )
+  i_array_p = pScope->i_data.i_array_p;
+  name.mUID = (*i_array_p)->i_data_p->i_user_data;
+  v11.mUID = i_array_p[1]->i_data_p->i_user_data;
+  MapBoolStatEnum = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
+  if ( MapBoolStatEnum == Num_MapBool_Stats )
   {
-    v5 = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
-    v6 = *(_QWORD *)(*((_QWORD *)v3->i_data.i_array_p + 2) + 8i64);
+    MapInt32StatEnum = (unsigned int)UFG::GameStat::GetMapInt32StatEnum(&name, 0);
+    v6 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 2) + 8i64);
     v7 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::SetStat(v7, v5, &v11, *(_DWORD *)(v6 + 32));
+    UFG::GameStatTracker::SetStat(v7, MapInt32StatEnum, &v11, *(_DWORD *)(v6 + 32));
   }
   else
   {
-    v8 = *(_QWORD *)(*(_QWORD *)(*((_QWORD *)v3->i_data.i_array_p + 2) + 8i64) + 32i64) != 0i64;
+    v8 = *(_QWORD *)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 2) + 8i64) + 32i64) != 0i64;
     v9 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::SetStat(v9, v4, &v11, v8);
+    UFG::GameStatTracker::SetStat(v9, MapBoolStatEnum, &v11, v8);
   }
 }
 
@@ -317,20 +320,18 @@ void __fastcall UFG::TSCollectible::MthdC_collect_by_type(SSInvokedMethod *pScop
 // RVA: 0x4E9D10
 void __fastcall UFG::TSCollectible::MthdC_is_usable(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  UFG::CollectibleComponent *v3; // rax
+  UFG::CollectibleComponent *CollectibleComponent; // rax
   char v4; // cl
-  UFG::qSymbol name; // [rsp+38h] [rbp+10h]
+  UFG::qSymbol name; // [rsp+38h] [rbp+10h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
     name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    v3 = UFG::CollectibleComponent::GetCollectibleComponent(&name);
+    CollectibleComponent = UFG::CollectibleComponent::GetCollectibleComponent(&name);
     v4 = 0;
-    if ( v3 )
-      v4 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))v3->vfptr[20].__vecDelDtor)(v3);
-    *v2 = (SSInstance *)SSBoolean::pool_new(v4);
+    if ( CollectibleComponent )
+      v4 = ((__int64 (__fastcall *)(UFG::CollectibleComponent *))CollectibleComponent->vfptr[20].__vecDelDtor)(CollectibleComponent);
+    *ppResult = SSBoolean::pool_new(v4);
   }
 }
 
@@ -338,50 +339,45 @@ void __fastcall UFG::TSCollectible::MthdC_is_usable(SSInvokedMethod *pScope, SSI
 // RVA: 0x4F2B90
 void __fastcall UFG::TSCollectible::MthdC_unlock_weapon_spawner(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
   UFG::GameStatTracker *v3; // rax
-  UFG::PersistentData::MapBool *v4; // rax
-  UFG::qSymbol name; // [rsp+30h] [rbp+8h]
+  UFG::PersistentData::MapBool *MapBool; // rax
+  UFG::qSymbol name; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = pScope;
   name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v3 = UFG::GameStatTracker::Instance();
-  v4 = UFG::GameStatTracker::GetMapBool(v3, Collectible_WeaponSpawner);
+  MapBool = UFG::GameStatTracker::GetMapBool(v3, Collectible_WeaponSpawner);
   UFG::PersistentData::MapBool::SetStatus(
-    v4,
+    MapBool,
     &name,
-    *(_QWORD *)(*(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64) + 32i64) != 0i64);
+    *(_QWORD *)(*(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64) + 32i64) != 0i64);
 }
 
 // File Line: 251
 // RVA: 0x4EA760
 void __fastcall UFG::TSCollectible::MthdC_list_collect_of_type(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // r14
   SSList *v3; // rdi
-  UFG::GameStat::MapBoolStat v4; // ebx
+  UFG::GameStat::MapBoolStat MapBoolStatEnum; // ebx
   UFG::GameStatTracker *v5; // rax
-  UFG::PersistentData::MapFloat *v6; // rax
+  UFG::PersistentData::MapFloat *MapBool; // rax
   UFG::PersistentData::KeyValue *v7; // rax
-  UFG::qBaseNodeRB *v8; // rax
-  UFG::SimComponent *v9; // rax
-  unsigned __int64 v10; // rbx
-  int v11; // eax
-  SSClass *v12; // rcx
-  SSInstance *v13; // rax
-  __int64 v14; // rax
-  ARefCountMix<SSInstance> **v15; // rbx
-  unsigned __int64 i; // rsi
-  UFG::PersistentData::MapFloat::Iterator result; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol name; // [rsp+68h] [rbp+10h]
-  SSList *v19; // [rsp+70h] [rbp+18h]
+  UFG::qBaseNodeRB *SimObject; // rax
+  UFG::SimComponent *ComponentOfType; // rbx
+  int v10; // eax
+  SSClass *v11; // rcx
+  SSInstance *v12; // rax
+  __int64 i_count; // rax
+  ARefCountMix<SSInstance> **i_array_p; // rbx
+  ARefCountMix<SSInstance> **i; // rsi
+  UFG::PersistentData::MapFloat::Iterator result; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol name; // [rsp+68h] [rbp+10h] BYREF
+  SSList *v18; // [rsp+70h] [rbp+18h]
 
   if ( ppResult )
   {
-    v2 = ppResult;
     name.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
     v3 = (SSList *)AMemory::c_malloc_func(0x18ui64, "SSList");
-    v19 = v3;
+    v18 = v3;
     if ( v3 )
     {
       v3->i_items.i_count = 0;
@@ -393,49 +389,48 @@ void __fastcall UFG::TSCollectible::MthdC_list_collect_of_type(SSInvokedMethod *
     {
       v3 = 0i64;
     }
-    v4 = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
-    if ( v4 )
+    MapBoolStatEnum = (unsigned int)UFG::GameStat::GetMapBoolStatEnum(&name, 0);
+    if ( MapBoolStatEnum )
     {
       v5 = UFG::GameStatTracker::Instance();
-      v6 = (UFG::PersistentData::MapFloat *)UFG::GameStatTracker::GetMapBool(v5, v4);
-      UFG::PersistentData::MapInt::GetIterator(v6, &result);
+      MapBool = (UFG::PersistentData::MapFloat *)UFG::GameStatTracker::GetMapBool(v5, MapBoolStatEnum);
+      UFG::PersistentData::MapInt::GetIterator(MapBool, &result);
       while ( UFG::PersistentData::MapBool::Iterator::IsValid((UFG::PersistentData::MapBool::Iterator *)&result) )
       {
         v7 = UFG::PersistentData::MapBool::Iterator::GetName((UFG::PersistentData::MapBool::Iterator *)&result);
-        v8 = UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)v7);
-        if ( v8 )
+        SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)v7);
+        if ( SimObject )
         {
-          v9 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)v8, UFG::MarkerBase::_TypeUID);
-          v10 = (unsigned __int64)v9;
-          v11 = ((__int64 (__fastcall *)(UFG::SimComponent *))v9->vfptr[16].__vecDelDtor)(v9);
-          if ( v11 == 4 )
+          ComponentOfType = UFG::SimObject::GetComponentOfType((UFG::SimObject *)SimObject, UFG::MarkerBase::_TypeUID);
+          v10 = ((__int64 (__fastcall *)(UFG::SimComponent *))ComponentOfType->vfptr[16].__vecDelDtor)(ComponentOfType);
+          if ( v10 == 4 )
           {
-            v12 = UFG::TSTriggerRegion::mspTriggerRegionClass;
+            v11 = UFG::TSTriggerRegion::mspTriggerRegionClass;
           }
-          else if ( v11 == 8 )
+          else if ( v10 == 8 )
           {
-            v12 = UFG::TSSpawnPoint::mspSpawnPointClass;
+            v11 = UFG::TSSpawnPoint::mspSpawnPointClass;
           }
           else
           {
-            v12 = UFG::TSInterestPoint::mspInterestPointClass;
-            if ( v11 != 512 )
-              v12 = UFG::TSMarker::mspMarkerClass;
+            v11 = UFG::TSInterestPoint::mspInterestPointClass;
+            if ( v10 != 512 )
+              v11 = UFG::TSMarker::mspMarkerClass;
           }
-          v13 = SSInstance::pool_new(v12, v10);
-          APArray<SSInstance,SSInstance,ACompareAddress<SSInstance>>::append(&v3->i_items, v13);
+          v12 = SSInstance::pool_new(v11, (unsigned __int64)ComponentOfType);
+          APArray<SSInstance,SSInstance,ACompareAddress<SSInstance>>::append(&v3->i_items, v12);
         }
         UFG::PersistentData::MapFloat::Iterator::Next((ARefCountMix<SSInstance> *)&result);
       }
     }
-    v14 = v3->i_items.i_count;
-    if ( (_DWORD)v14 )
+    i_count = v3->i_items.i_count;
+    if ( (_DWORD)i_count )
     {
-      v15 = (ARefCountMix<SSInstance> **)v3->i_items.i_array_p;
-      for ( i = (unsigned __int64)&v15[v14]; (unsigned __int64)v15 < i; ++v15 )
-        UFG::PersistentData::MapFloat::Iterator::Next(*v15 + 4);
+      i_array_p = (ARefCountMix<SSInstance> **)v3->i_items.i_array_p;
+      for ( i = &i_array_p[i_count]; i_array_p < i; ++i_array_p )
+        UFG::PersistentData::MapFloat::Iterator::Next(*i_array_p + 4);
     }
-    *v2 = SSList::as_instance(v3);
+    *ppResult = SSList::as_instance(v3);
   }
 }
 

@@ -2,22 +2,17 @@
 // RVA: 0xC7D990
 void __fastcall hkStatsAllocator::hkStatsAllocator(hkStatsAllocator *this, hkMemoryAllocator *a)
 {
-  hkMemoryAllocator *v2; // rbx
-  hkStatsAllocator *v3; // rdi
-
-  v2 = a;
-  v3 = this;
   this->vfptr = (hkMemoryAllocatorVtbl *)&hkStatsAllocator::`vftable;
-  hkCriticalSection::hkCriticalSection(&this->m_criticalSection, 1000);
-  v3->m_alloc = v2;
-  v3->m_stats.m_inUse = -1i64;
-  v3->m_stats.m_peakInUse = -1i64;
-  v3->m_stats.m_allocated = 0i64;
-  v3->m_stats.m_available = -1i64;
-  v3->m_stats.m_totalAvailable = -1i64;
-  v3->m_stats.m_largestBlock = -1i64;
-  v3->m_stats.m_inUse = 0i64;
-  v3->m_stats.m_peakInUse = 0i64;
+  hkCriticalSection::hkCriticalSection(&this->m_criticalSection, 0x3E8u);
+  this->m_alloc = a;
+  this->m_stats.m_inUse = -1i64;
+  this->m_stats.m_peakInUse = -1i64;
+  this->m_stats.m_allocated = 0i64;
+  this->m_stats.m_available = -1i64;
+  this->m_stats.m_totalAvailable = -1i64;
+  this->m_stats.m_largestBlock = -1i64;
+  this->m_stats.m_inUse = 0i64;
+  this->m_stats.m_peakInUse = 0i64;
 }
 
 // File Line: 24
@@ -31,71 +26,53 @@ void __fastcall hkStatsAllocator::init(hkStatsAllocator *this, hkMemoryAllocator
 // RVA: 0xC7DA20
 __int64 __fastcall hkStatsAllocator::blockAlloc(hkStatsAllocator *this, int numBytes)
 {
-  _RTL_CRITICAL_SECTION *v2; // rsi
-  hkStatsAllocator *v3; // rbx
+  hkCriticalSection *p_m_criticalSection; // rsi
   __int64 v4; // rdi
-  __int64 v5; // r8
-  bool v6; // zf
-  bool v7; // sf
-  unsigned __int8 v8; // of
-  hkMemoryAllocator *v9; // rcx
-  __int64 v10; // rbx
+  __int64 m_allocated; // r8
+  bool v6; // cc
+  hkMemoryAllocator *m_alloc; // rcx
+  __int64 v8; // rbx
 
-  v2 = &this->m_criticalSection.m_section;
-  v3 = this;
+  p_m_criticalSection = &this->m_criticalSection;
   v4 = numBytes;
   EnterCriticalSection(&this->m_criticalSection.m_section);
-  v3->m_stats.m_allocated += v4;
-  v5 = v3->m_stats.m_allocated;
-  v8 = __OFSUB__(v3->m_stats.m_peakInUse, v5);
-  v6 = v3->m_stats.m_peakInUse == v5;
-  v7 = v3->m_stats.m_peakInUse - v5 < 0;
-  v9 = v3->m_alloc;
-  v3->m_stats.m_inUse = v5;
-  if ( !((unsigned __int8)(v7 ^ v8) | v6) )
-    v5 = v3->m_stats.m_peakInUse;
-  v3->m_stats.m_peakInUse = v5;
-  v10 = (*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&v9->vfptr->__vecDelDtor + 1))(v9, (unsigned int)v4);
-  LeaveCriticalSection(v2);
-  return v10;
+  this->m_stats.m_allocated += v4;
+  m_allocated = this->m_stats.m_allocated;
+  v6 = this->m_stats.m_peakInUse <= m_allocated;
+  m_alloc = this->m_alloc;
+  this->m_stats.m_inUse = m_allocated;
+  if ( !v6 )
+    m_allocated = this->m_stats.m_peakInUse;
+  this->m_stats.m_peakInUse = m_allocated;
+  v8 = (*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&m_alloc->vfptr->__vecDelDtor + 1))(
+         m_alloc,
+         (unsigned int)v4);
+  LeaveCriticalSection(&p_m_criticalSection->m_section);
+  return v8;
 }
 
 // File Line: 40
 // RVA: 0xC7DA90
 void __fastcall hkStatsAllocator::blockFree(hkStatsAllocator *this, void *p, int numBytes)
 {
-  hkStatsAllocator *v3; // rbx
   __int64 v4; // rdi
-  void *v5; // rsi
-  hkMemoryAllocator *v6; // rcx
+  hkMemoryAllocator *m_alloc; // rcx
 
-  v3 = this;
   v4 = numBytes;
-  v5 = p;
   EnterCriticalSection(&this->m_criticalSection.m_section);
-  v6 = v3->m_alloc;
-  v3->m_stats.m_allocated -= v4;
-  v6->vfptr->blockFree(v6, v5, v4);
-  LeaveCriticalSection(&v3->m_criticalSection.m_section);
+  m_alloc = this->m_alloc;
+  this->m_stats.m_allocated -= v4;
+  m_alloc->vfptr->blockFree(m_alloc, p, v4);
+  LeaveCriticalSection(&this->m_criticalSection.m_section);
 }
 
 // File Line: 47
 // RVA: 0xC7DAF0
 void __fastcall hkStatsAllocator::getMemoryStatistics(hkStatsAllocator *this, hkMemoryAllocator::MemoryStatistics *u)
 {
-  hkStatsAllocator *v2; // rbx
-  hkMemoryAllocator::MemoryStatistics *v3; // rsi
-
-  v2 = this;
-  v3 = u;
   EnterCriticalSection(&this->m_criticalSection.m_section);
-  v3->m_allocated = v2->m_stats.m_allocated;
-  v3->m_inUse = v2->m_stats.m_inUse;
-  v3->m_peakInUse = v2->m_stats.m_peakInUse;
-  v3->m_available = v2->m_stats.m_available;
-  v3->m_totalAvailable = v2->m_stats.m_totalAvailable;
-  v3->m_largestBlock = v2->m_stats.m_largestBlock;
-  LeaveCriticalSection(&v2->m_criticalSection.m_section);
+  *u = this->m_stats;
+  LeaveCriticalSection(&this->m_criticalSection.m_section);
 }
 
 // File Line: 53
@@ -107,8 +84,8 @@ void __fastcall hkStatsAllocator::resetPeakMemoryStatistics(hkStatsAllocator *th
 
 // File Line: 58
 // RVA: 0xC7DB60
-__int64 __fastcall hkStatsAllocator::getAllocatedSize(hkStatsAllocator *this, const void *obj, int numBytes)
+__int64 __fastcall hkStatsAllocator::getAllocatedSize(hkStatsAllocator *this, const void *obj, unsigned int numBytes)
 {
-  return (unsigned int)numBytes;
+  return numBytes;
 }
 

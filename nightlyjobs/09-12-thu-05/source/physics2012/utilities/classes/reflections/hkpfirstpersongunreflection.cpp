@@ -39,39 +39,35 @@ hkClass *__fastcall hkpFirstPersonGun::staticClass()
 
 // File Line: 152
 // RVA: 0xE0AE20
-void __fastcall finishLoadedObjecthkpFirstPersonGun(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpFirstPersonGun(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _DWORD *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 24);
+    v3 = p + 3;
     v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    v2[13] = 2147483648;
-    *((_QWORD *)v2 + 5) = 0i64;
-    v2[12] = 0;
-    if ( v4 )
-      *((_BYTE *)v2 + 16) = 0;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    HIDWORD(p[6].m_stringAndFlag) = 0x80000000;
+    p[5].m_stringAndFlag = 0i64;
+    LODWORD(p[6].m_stringAndFlag) = 0;
+    if ( finishing.m_finishing )
+      LOBYTE(p[2].m_stringAndFlag) = 0;
   }
 }
 
 // File Line: 158
 // RVA: 0xE0AE80
-void __fastcall cleanupLoadedObjecthkpFirstPersonGun(void *p)
+void __fastcall cleanupLoadedObjecthkpFirstPersonGun(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 162
 // RVA: 0xE0AE90
 void **__fastcall getVtablehkpFirstPersonGun()
 {
-  hkStringPtr v1; // [rsp+38h] [rbp-30h]
+  hkStringPtr v1; // [rsp+38h] [rbp-30h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpFirstPersonGun::`vftable;
@@ -88,8 +84,8 @@ void **dynamic_initializer_for__hkpFirstPersonGunTypeInfo__()
   hkpFirstPersonGunTypeInfo.m_typeName = "hkpFirstPersonGun";
   hkpFirstPersonGunTypeInfo.m_vtable = result;
   hkpFirstPersonGunTypeInfo.m_scopedName = "!hkpFirstPersonGun";
-  hkpFirstPersonGunTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpFirstPersonGun;
-  hkpFirstPersonGunTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpFirstPersonGun;
+  hkpFirstPersonGunTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpFirstPersonGun;
+  hkpFirstPersonGunTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpFirstPersonGun;
   return result;
 }
 

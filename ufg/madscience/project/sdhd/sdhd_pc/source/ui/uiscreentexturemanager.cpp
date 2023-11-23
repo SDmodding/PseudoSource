@@ -6,114 +6,105 @@ __int64 UFG::_dynamic_initializer_for__symGhostFlow__()
 
   v0 = UFG::qStringHash32("DLC_Ghost", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symGhostFlow, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symGhostFlow__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symGhostFlow__);
 }
 
 // File Line: 126
 // RVA: 0x5BD7C0
-void __fastcall UFG::UIScreenTextureManager::ScreenInfo::ScreenInfo(UFG::UIScreenTextureManager::ScreenInfo *this, const char *screenName, const char *texturePackName)
+void __fastcall UFG::UIScreenTextureManager::ScreenInfo::ScreenInfo(
+        UFG::UIScreenTextureManager::ScreenInfo *this,
+        const char *screenName,
+        const char *texturePackName)
 {
-  const char *v3; // rdi
-  const char *v4; // rbx
-  UFG::UIScreenTextureManager::ScreenInfo *v5; // rsi
   unsigned int v6; // eax
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v7; // rax
 
-  v3 = texturePackName;
-  v4 = screenName;
-  v5 = this;
-  v6 = UFG::qStringHashUpper32(screenName, 0xFFFFFFFF);
-  v5->mNode.mParent = 0i64;
-  v5->mNode.mChild[0] = 0i64;
-  v5->mNode.mChild[1] = 0i64;
-  v5->mNode.mUID = v6;
-  v7 = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v5->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  UFG::qString::qString(&v5->mScreenName, v4);
-  UFG::qString::qString(&v5->mTexturePackName, v3);
-  *(_QWORD *)&v5->mValidStates = 0i64;
-  v5->mTexturePackSize = 0;
-  v5->mLoadCb = 0i64;
-  v5->mIsLoadedCb = 0i64;
-  v5->mReleaseCb = 0i64;
-  UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(v5, v3);
+  v6 = UFG::qStringHashUpper32(screenName, -1);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->mNode.mUID = v6;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+  UFG::qString::qString(&this->mScreenName, screenName);
+  UFG::qString::qString(&this->mTexturePackName, texturePackName);
+  *(_QWORD *)&this->mValidStates = 0i64;
+  this->mTexturePackSize = 0;
+  this->mLoadCb = 0i64;
+  this->mIsLoadedCb = 0i64;
+  this->mReleaseCb = 0i64;
+  UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(this, texturePackName);
 }
 
 // File Line: 131
 // RVA: 0x5C2040
-void __fastcall UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(UFG::UIScreenTextureManager::ScreenInfo *this, const char *texturePackName)
+void __fastcall UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(
+        UFG::UIScreenTextureManager::ScreenInfo *this,
+        const char *texturePackName)
 {
-  UFG::UIScreenTextureManager::ScreenInfo *v2; // rbx
-  UFG::qString v3; // [rsp+28h] [rbp-30h]
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this;
   UFG::qString::Set(&this->mTexturePackName, texturePackName);
-  if ( UFG::qString::operator!=(&v2->mTexturePackName, 0i64) )
+  if ( UFG::qString::operator!=(&this->mTexturePackName, 0i64) )
   {
-    UFG::qString::qString(&v3, &v2->mTexturePackName);
+    UFG::qString::qString(&v3, &this->mTexturePackName);
     UFG::qString::ReplaceString(&v3, ".perm.bin", ".temp.bin", 1);
-    v2->mTexturePackSize = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v3.mData) + 4095) & 0xFFFFF000;
+    this->mTexturePackSize = (UFG::StreamFileWrapper::GetAllocationSize(v3.mData) + 4095) & 0xFFFFF000;
     UFG::qString::~qString(&v3);
   }
   else
   {
-    v2->mTexturePackSize = 0;
+    this->mTexturePackSize = 0;
   }
 }
 
 // File Line: 151
 // RVA: 0x5BD880
-void __fastcall UFG::UIScreenTextureManager::TexturePackReference::TexturePackReference(UFG::UIScreenTextureManager::TexturePackReference *this, const char *fileName)
+void __fastcall UFG::UIScreenTextureManager::TexturePackReference::TexturePackReference(
+        UFG::UIScreenTextureManager::TexturePackReference *this,
+        const char *fileName)
 {
-  const char *v2; // rbx
-  UFG::UIScreenTextureManager::TexturePackReference *v3; // rdi
   unsigned int v4; // eax
-  UFG::DataStreamer::Handle *v5; // [rsp+50h] [rbp+18h]
 
-  v2 = fileName;
-  v3 = this;
-  v4 = UFG::qStringHashUpper32(fileName, 0xFFFFFFFF);
-  v3->mNode.mParent = 0i64;
-  v3->mNode.mChild[0] = 0i64;
-  v3->mNode.mChild[1] = 0i64;
-  v3->mNode.mUID = v4;
-  UFG::qString::qString(&v3->mFileName, v2);
-  *(_QWORD *)&v3->mReferenceCount = 0i64;
-  v5 = &v3->mTextures;
-  v5->mPrev = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&v5->mPrev;
-  v3->mTextures.mCallback = 0i64;
-  v3->mTextures.mCallbackParam = 0i64;
-  v3->mTextures.mImpl = 0i64;
-  *(_DWORD *)&v3->mTextures.mFlags = 536870915;
-  v3->mTextures._mTargetState.mValue = 1;
-  v3->mDeferredCallbacks.p = 0i64;
-  *(_QWORD *)&v3->mDeferredCallbacks.size = 0i64;
-  v3->mDeferredCallbackParams.p = 0i64;
-  *(_QWORD *)&v3->mDeferredCallbackParams.size = 0i64;
-  UFG::UIScreenTextureManager::TexturePackReference::SetTexturePack(v3, v2);
+  v4 = UFG::qStringHashUpper32(fileName, -1);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->mNode.mUID = v4;
+  UFG::qString::qString(&this->mFileName, fileName);
+  *(_QWORD *)&this->mReferenceCount = 0i64;
+  this->mTextures.mPrev = &this->mTextures;
+  this->mTextures.mNext = &this->mTextures;
+  this->mTextures.mCallback = 0i64;
+  this->mTextures.mCallbackParam = 0i64;
+  this->mTextures.mImpl = 0i64;
+  *(_DWORD *)&this->mTextures.mFlags = 536870915;
+  this->mTextures._mTargetState.mValue = 1;
+  this->mDeferredCallbacks.p = 0i64;
+  *(_QWORD *)&this->mDeferredCallbacks.size = 0i64;
+  this->mDeferredCallbackParams.p = 0i64;
+  *(_QWORD *)&this->mDeferredCallbackParams.size = 0i64;
+  UFG::UIScreenTextureManager::TexturePackReference::SetTexturePack(this, fileName);
 }
 
 // File Line: 156
 // RVA: 0x5C20E0
-void __fastcall UFG::UIScreenTextureManager::TexturePackReference::SetTexturePack(UFG::UIScreenTextureManager::TexturePackReference *this, const char *texturePackName)
+void __fastcall UFG::UIScreenTextureManager::TexturePackReference::SetTexturePack(
+        UFG::UIScreenTextureManager::TexturePackReference *this,
+        const char *texturePackName)
 {
-  UFG::UIScreenTextureManager::TexturePackReference *v2; // rbx
-  UFG::qString v3; // [rsp+28h] [rbp-30h]
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this;
   UFG::qString::Set(&this->mFileName, texturePackName);
-  if ( UFG::qString::operator!=(&v2->mFileName, 0i64) )
+  if ( UFG::qString::operator!=(&this->mFileName, 0i64) )
   {
-    UFG::qString::qString(&v3, &v2->mFileName);
+    UFG::qString::qString(&v3, &this->mFileName);
     UFG::qString::ReplaceString(&v3, ".perm.bin", ".temp.bin", 1);
-    v2->mTextureSize = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v3.mData) + 4095) & 0xFFFFF000;
+    this->mTextureSize = (UFG::StreamFileWrapper::GetAllocationSize(v3.mData) + 4095) & 0xFFFFF000;
     UFG::qString::~qString(&v3);
   }
   else
   {
-    v2->mTextureSize = 0;
+    this->mTextureSize = 0;
   }
 }
 
@@ -121,11 +112,10 @@ void __fastcall UFG::UIScreenTextureManager::TexturePackReference::SetTexturePac
 // RVA: 0x5BE120
 void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
 {
-  unsigned int v1; // ebx
   UFG::allocator::free_link *v2; // rax
   UFG::UIScreenTextureManager *v3; // rax
   UFG::UIScreenFactoryBase *v4; // rax
-  char *v5; // rdi
+  char *mData; // rdi
   UFG::UIScreenTextureManager *v6; // rsi
   UFG::allocator::free_link *v7; // rax
   __int64 v8; // rax
@@ -435,9 +425,9 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   UFG::allocator::free_link *v312; // rax
   __int64 v313; // rax
   Illusion::Texture *v314; // rdx
-  __int64 v315; // rax
+  __int64 mOffset; // rax
   Illusion::TextureUser *v316; // rcx
-  UFG::qString v317; // [rsp+30h] [rbp-B8h]
+  UFG::qString v317; // [rsp+30h] [rbp-B8h] BYREF
   __int64 v318; // [rsp+58h] [rbp-90h]
   int v319; // [rsp+60h] [rbp-88h]
   int v320; // [rsp+64h] [rbp-84h]
@@ -451,33 +441,15 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   __int64 v328; // [rsp+B0h] [rbp-38h]
   int v329; // [rsp+B8h] [rbp-30h]
   char v330; // [rsp+BCh] [rbp-2Ch]
-  UFG::qString v331; // [rsp+C8h] [rbp-20h]
-  __int64 v332; // [rsp+F0h] [rbp+8h]
-  int v333; // [rsp+F8h] [rbp+10h]
-  int v334; // [rsp+FCh] [rbp+14h]
-  int v335; // [rsp+100h] [rbp+18h]
-  __int64 v336; // [rsp+104h] [rbp+1Ch]
-  int v337; // [rsp+10Ch] [rbp+24h]
-  int v338; // [rsp+110h] [rbp+28h]
-  __int128 v339; // [rsp+118h] [rbp+30h]
-  __int128 v340; // [rsp+128h] [rbp+40h]
-  __int64 v341; // [rsp+138h] [rbp+50h]
-  __int64 v342; // [rsp+140h] [rbp+58h]
-  __int64 v343; // [rsp+148h] [rbp+60h]
-  __int64 v344; // [rsp+150h] [rbp+68h]
-  __int64 v345; // [rsp+158h] [rbp+70h]
-  __int64 v346; // [rsp+160h] [rbp+78h]
-  int v347; // [rsp+168h] [rbp+80h]
-  char v348; // [rsp+16Ch] [rbp+84h]
-  __int64 v349; // [rsp+178h] [rbp+90h]
+  Illusion::CreateTargetParams v331; // [rsp+C8h] [rbp-20h] BYREF
+  __int64 v332; // [rsp+178h] [rbp+90h]
   void *vars0; // [rsp+1B0h] [rbp+C8h]
 
-  v349 = -2i64;
-  v1 = texturePoolSize;
+  v332 = -2i64;
   v2 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x1B0ui64, "UIScreenTextureManager", 0i64, 1u);
   vars0 = v2;
   if ( v2 )
-    UFG::UIScreenTextureManager::UIScreenTextureManager((UFG::UIScreenTextureManager *)v2, v1);
+    UFG::UIScreenTextureManager::UIScreenTextureManager((UFG::UIScreenTextureManager *)v2, texturePoolSize);
   else
     v3 = 0i64;
   UFG::UIScreenTextureManager::sInstance = v3;
@@ -498,17 +470,14 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v4 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Loading",
-    v4);
-  v5 = UFG::UIHKScreenLoading::gTexturePackFilename.mData;
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Loading", v4);
+  mData = UFG::UIHKScreenLoading::gTexturePackFilename.mData;
   v6 = UFG::UIScreenTextureManager::sInstance;
   v7 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v7;
   if ( v7 )
   {
-    UFG::UIScreenTextureManager::ScreenInfo::ScreenInfo((UFG::UIScreenTextureManager::ScreenInfo *)v7, "Loading", v5);
+    UFG::UIScreenTextureManager::ScreenInfo::ScreenInfo((UFG::UIScreenTextureManager::ScreenInfo *)v7, "Loading", mData);
     v9 = v8;
   }
   else
@@ -520,8 +489,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v9 + 144) = 0i64;
   *(_QWORD *)(v9 + 152) = 0i64;
   *(_QWORD *)(v9 + 160) = 0i64;
-  if ( v5 )
-    *(_DWORD *)(v9 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v5) + 4095) & 0xFFFFF000;
+  if ( mData )
+    *(_DWORD *)(v9 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(mData) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v6->mAllScreens.mTree, (UFG::qBaseNodeRB *)v9);
   v10 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -539,10 +508,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v10 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "GlobalOverlay",
-    v10);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "GlobalOverlay", v10);
   v11 = UFG::UIScreenTextureManager::sInstance;
   v12 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v12;
@@ -575,10 +541,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v14 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DialogBox",
-    v14);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DialogBox", v14);
   v15 = UFG::UIScreenTextureManager::sInstance;
   v16 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v16;
@@ -611,10 +574,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v18 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DialogPopup",
-    v18);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DialogPopup", v18);
   v19 = UFG::UIScreenTextureManager::sInstance;
   v20 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v20;
@@ -647,10 +607,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v22 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Splash",
-    v22);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Splash", v22);
   v23 = UFG::UIHKScreenSplash::gTexturePackFilename;
   v24 = UFG::UIScreenTextureManager::sInstance;
   v25 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -670,7 +627,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v27 + 152) = 0i64;
   *(_QWORD *)(v27 + 160) = 0i64;
   if ( v23 )
-    *(_DWORD *)(v27 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v23) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v27 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v23) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v24->mAllScreens.mTree, (UFG::qBaseNodeRB *)v27);
   v28 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -688,10 +645,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v28 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Hints",
-    v28);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Hints", v28);
   v29 = UFG::UIHKScreenHints::gTexturePackFilename;
   v30 = UFG::UIScreenTextureManager::sInstance;
   v31 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -711,7 +665,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v33 + 152) = 0i64;
   *(_QWORD *)(v33 + 160) = 0i64;
   if ( v29 )
-    *(_DWORD *)(v33 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v29) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v33 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v29) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v30->mAllScreens.mTree, (UFG::qBaseNodeRB *)v33);
   v34 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -729,10 +683,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v34 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "MainMenu",
-    v34);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "MainMenu", v34);
   v35 = UFG::UIHKScreenMainMenu::gTexturePackFilename;
   v36 = UFG::UIScreenTextureManager::sInstance;
   v37 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -752,7 +703,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v39 + 152) = 0i64;
   *(_QWORD *)(v39 + 160) = 0i64;
   if ( v35 )
-    *(_DWORD *)(v39 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v35) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v39 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v35) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v36->mAllScreens.mTree, (UFG::qBaseNodeRB *)v39);
   v40 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -770,10 +721,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v40 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "StartFlowScreen",
-    v40);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "StartFlowScreen", v40);
   v41 = UFG::UIScreenTextureManager::sInstance;
   v42 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v42;
@@ -806,10 +754,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v44 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PauseMenu",
-    v44);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PauseMenu", v44);
   v45 = UFG::UIHKScreenPauseMenu::gTexturePackFilename;
   v46 = UFG::UIScreenTextureManager::sInstance;
   v47 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -832,7 +777,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v49 + 152) = 0i64;
   *(_QWORD *)(v49 + 160) = 0i64;
   if ( v45 )
-    *(_DWORD *)(v49 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v45) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v49 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v45) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v46->mAllScreens.mTree, (UFG::qBaseNodeRB *)v49);
   v50 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 8ui64, "UIHKScreenHud", 0i64, 1u);
   vars0 = v50;
@@ -845,10 +790,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v50 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Hud",
-    v50);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Hud", v50);
   v51 = UFG::UIHKScreenHud::gTexturePackFilename;
   v52 = UFG::UIScreenTextureManager::sInstance;
   v53 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -868,7 +810,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   v55->mIsLoadedCb = 0i64;
   v55->mReleaseCb = 0i64;
   if ( v51 )
-    v55->mTexturePackSize = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v51) + 0xFFF) & 0xFFFFF000;
+    v55->mTexturePackSize = (UFG::StreamFileWrapper::GetAllocationSize(v51) + 0xFFF) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v52->mAllScreens.mTree, &v55->mNode);
   v56 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -886,10 +828,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v56 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "SaveLoad",
-    v56);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "SaveLoad", v56);
   v57 = UFG::UIScreenTextureManager::sInstance;
   v58 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v58;
@@ -922,10 +861,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v60 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Wardrobe",
-    v60);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Wardrobe", v60);
   v61 = UFG::UIHKScreenWardrobe::gTexturePackFilename;
   v62 = UFG::UIScreenTextureManager::sInstance;
   v63 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -945,7 +881,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v65 + 152) = 0i64;
   *(_QWORD *)(v65 + 160) = 0i64;
   if ( v61 )
-    *(_DWORD *)(v65 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v61) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v65 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v61) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v62->mAllScreens.mTree, (UFG::qBaseNodeRB *)v65);
   v66 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -963,10 +899,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v66 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "CaseComplete",
-    v66);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "CaseComplete", v66);
   v67 = UFG::UIScreenTextureManager::sInstance;
   v68 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v68;
@@ -999,10 +932,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v70 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "WorldMap",
-    v70);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "WorldMap", v70);
   v71 = UFG::UIHKScreenWorldMap::gTexturePackFilename;
   v72 = UFG::UIScreenTextureManager::sInstance;
   v73 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1022,7 +952,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v75 + 152) = 0i64;
   *(_QWORD *)(v75 + 160) = 0i64;
   if ( v71 )
-    *(_DWORD *)(v75 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v71) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v75 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v71) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v72->mAllScreens.mTree, (UFG::qBaseNodeRB *)v75);
   v76 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -1040,10 +970,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v76 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "ScriptableList",
-    v76);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "ScriptableList", v76);
   v77 = UFG::UIScreenTextureManager::sInstance;
   v78 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v78;
@@ -1076,10 +1003,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v80 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "GarageBrowser",
-    v80);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "GarageBrowser", v80);
   v81 = UFG::UIHKScreenGarageBrowser::gTexturePackFilename;
   v82 = UFG::UIScreenTextureManager::sInstance;
   v83 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1102,7 +1026,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v85 + 152) = 0i64;
   *(_QWORD *)(v85 + 160) = 0i64;
   if ( v81 )
-    *(_DWORD *)(v85 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v81) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v85 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v81) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v82->mAllScreens.mTree, (UFG::qBaseNodeRB *)v85);
   v86 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -1120,10 +1044,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v86 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "GameTracker",
-    v86);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "GameTracker", v86);
   v87 = UFG::UIScreenTextureManager::sInstance;
   v88 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v88;
@@ -1156,10 +1077,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v90 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Camera",
-    v90);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Camera", v90);
   v91 = UFG::UIHKScreenCamera::gTexturePackFilename;
   v92 = UFG::UIScreenTextureManager::sInstance;
   v93 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1179,7 +1097,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v95 + 152) = 0i64;
   *(_QWORD *)(v95 + 160) = 0i64;
   if ( v91 )
-    *(_DWORD *)(v95 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v91) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v95 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v91) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v92->mAllScreens.mTree, (UFG::qBaseNodeRB *)v95);
   v96 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                       &gScaleformMemoryPool,
@@ -1197,10 +1115,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v96 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Camera_CCTV",
-    v96);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Camera_CCTV", v96);
   v97 = UFG::UIHKScreenCameraCCTV::gTexturePackFilename;
   v98 = UFG::UIScreenTextureManager::sInstance;
   v99 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1223,7 +1138,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v101 + 152) = 0i64;
   *(_QWORD *)(v101 + 160) = 0i64;
   if ( v97 )
-    *(_DWORD *)(v101 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v97) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v101 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v97) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v98->mAllScreens.mTree, (UFG::qBaseNodeRB *)v101);
   v102 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1241,10 +1156,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v102 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_Audio",
-    v102);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_Audio", v102);
   v103 = UFG::UIScreenTextureManager::sInstance;
   v104 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v104;
@@ -1277,10 +1189,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v106 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_Display",
-    v106);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_Display", v106);
   v107 = UFG::UIScreenTextureManager::sInstance;
   v108 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v108;
@@ -1313,10 +1222,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v110 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_DisplayAdvanced",
-    v110);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_DisplayAdvanced", v110);
   v111 = UFG::UIScreenTextureManager::sInstance;
   v112 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v112;
@@ -1349,10 +1255,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v114 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_Game",
-    v114);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_Game", v114);
   v115 = UFG::UIScreenTextureManager::sInstance;
   v116 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v116;
@@ -1385,10 +1288,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v118 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_Controllers",
-    v118);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_Controllers", v118);
   v119 = UFG::UIHKScreenOptionsController::gTexturePackFilename;
   v120 = UFG::UIScreenTextureManager::sInstance;
   v121 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1411,7 +1311,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v123 + 152) = 0i64;
   *(_QWORD *)(v123 + 160) = 0i64;
   if ( v119 )
-    *(_DWORD *)(v123 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v119) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v123 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v119) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v120->mAllScreens.mTree, (UFG::qBaseNodeRB *)v123);
   v124 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1429,10 +1329,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v124 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_ButtonMapping",
-    v124);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_ButtonMapping", v124);
   v125 = UFG::UIHKScreenOptionsButtonMapping::gTexturePackFilename;
   v126 = UFG::UIScreenTextureManager::sInstance;
   v127 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1455,7 +1352,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v129 + 152) = 0i64;
   *(_QWORD *)(v129 + 160) = 0i64;
   if ( v125 )
-    *(_DWORD *)(v129 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v125) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v129 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v125) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v126->mAllScreens.mTree, (UFG::qBaseNodeRB *)v129);
   v130 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1473,10 +1370,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v130 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Options_Calibration",
-    v130);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Options_Calibration", v130);
   v131 = UFG::UIHKScreenOptionsCalibration::gTexturePackFilename;
   v132 = UFG::UIScreenTextureManager::sInstance;
   v133 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1499,7 +1393,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v135 + 152) = 0i64;
   *(_QWORD *)(v135 + 160) = 0i64;
   if ( v131 )
-    *(_DWORD *)(v135 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v131) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v135 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v131) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v132->mAllScreens.mTree, (UFG::qBaseNodeRB *)v135);
   v136 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1517,10 +1411,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v136 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "SocialHub",
-    v136);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "SocialHub", v136);
   v137 = UFG::UIScreenTextureManager::sInstance;
   v138 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v138;
@@ -1553,10 +1444,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v140 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Stats",
-    v140);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Stats", v140);
   v141 = UFG::UIHKScreenStats::gTexturePackFilename;
   v142 = UFG::UIScreenTextureManager::sInstance;
   v143 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1576,7 +1464,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v145 + 152) = 0i64;
   *(_QWORD *)(v145 + 160) = 0i64;
   if ( v141 )
-    *(_DWORD *)(v145 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v141) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v145 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v141) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v142->mAllScreens.mTree, (UFG::qBaseNodeRB *)v145);
   v146 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1594,10 +1482,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v146 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PhotoBrowser",
-    v146);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PhotoBrowser", v146);
   v147 = UFG::UIHKScreenPhotoBrowser::gTexturePackFilename;
   v148 = UFG::UIScreenTextureManager::sInstance;
   v149 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1620,7 +1505,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v151 + 152) = 0i64;
   *(_QWORD *)(v151 + 160) = 0i64;
   if ( v147 )
-    *(_DWORD *)(v151 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v147) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v151 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v147) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v148->mAllScreens.mTree, (UFG::qBaseNodeRB *)v151);
   v152 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1638,10 +1523,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v152 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Credits",
-    v152);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Credits", v152);
   v153 = UFG::UIScreenTextureManager::sInstance;
   v154 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v154;
@@ -1674,10 +1556,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v156 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "NISPause",
-    v156);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "NISPause", v156);
   v157 = UFG::UIScreenTextureManager::sInstance;
   v158 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v158;
@@ -1710,10 +1589,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v160 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Dialog_MissionFailed",
-    v160);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Dialog_MissionFailed", v160);
   v161 = UFG::UIHKScreenMissionFailed::gTexturePackFilename;
   v162 = UFG::UIScreenTextureManager::sInstance;
   v163 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1736,7 +1612,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v165 + 152) = 0i64;
   *(_QWORD *)(v165 + 160) = 0i64;
   if ( v161 )
-    *(_DWORD *)(v165 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v161) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v165 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v161) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v162->mAllScreens.mTree, (UFG::qBaseNodeRB *)v165);
   v166 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1754,10 +1630,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v166 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "FightClub",
-    v166);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "FightClub", v166);
   v167 = UFG::UIHKScreenFightClub::gTexturePackFilename;
   v168 = UFG::UIScreenTextureManager::sInstance;
   v169 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1780,7 +1653,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v171 + 152) = 0i64;
   *(_QWORD *)(v171 + 160) = 0i64;
   if ( v167 )
-    *(_DWORD *)(v171 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v167) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v171 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v167) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v168->mAllScreens.mTree, (UFG::qBaseNodeRB *)v171);
   v172 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1798,10 +1671,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v172 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "MartialArts",
-    v172);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "MartialArts", v172);
   v173 = UFG::UIHKScreenMartialArts::gTexturePackFilename;
   v174 = UFG::UIScreenTextureManager::sInstance;
   v175 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1824,7 +1694,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v177 + 152) = 0i64;
   *(_QWORD *)(v177 + 160) = 0i64;
   if ( v173 )
-    *(_DWORD *)(v177 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v173) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v177 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v173) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v174->mAllScreens.mTree, (UFG::qBaseNodeRB *)v177);
   v178 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1842,10 +1712,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v178 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "FightingTutorial",
-    v178);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "FightingTutorial", v178);
   v179 = UFG::UIScreenTextureManager::sInstance;
   v180 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v180;
@@ -1878,10 +1745,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v182 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "CockFight",
-    v182);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "CockFight", v182);
   v183 = UFG::UIHKScreenCockFight::gTexturePackFilename;
   v184 = UFG::UIScreenTextureManager::sInstance;
   v185 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1904,7 +1768,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v187 + 152) = 0i64;
   *(_QWORD *)(v187 + 160) = 0i64;
   if ( v183 )
-    *(_DWORD *)(v187 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v183) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v187 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v183) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v184->mAllScreens.mTree, (UFG::qBaseNodeRB *)v187);
   v188 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1922,10 +1786,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v188 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "GameLog",
-    v188);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "GameLog", v188);
   v189 = UFG::UIHKScreenGameLog::gTexturePackFilename;
   v190 = UFG::UIScreenTextureManager::sInstance;
   v191 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1948,7 +1809,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v193 + 152) = 0i64;
   *(_QWORD *)(v193 + 160) = 0i64;
   if ( v189 )
-    *(_DWORD *)(v193 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v189) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v193 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v189) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v190->mAllScreens.mTree, (UFG::qBaseNodeRB *)v193);
   v194 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -1966,10 +1827,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v194 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "FaceTracker",
-    v194);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "FaceTracker", v194);
   v195 = UFG::UIHKScreenFaceTracker::gTexturePackFilename;
   v196 = UFG::UIScreenTextureManager::sInstance;
   v197 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -1992,7 +1850,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v199 + 152) = 0i64;
   *(_QWORD *)(v199 + 160) = 0i64;
   if ( v195 )
-    *(_DWORD *)(v199 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v195) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v199 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v195) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v196->mAllScreens.mTree, (UFG::qBaseNodeRB *)v199);
   v200 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2010,10 +1868,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v200 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "MissionComplete",
-    v200);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "MissionComplete", v200);
   v201 = UFG::UIScreenTextureManager::sInstance;
   v202 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v202;
@@ -2046,10 +1901,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v204 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Upgrades",
-    v204);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Upgrades", v204);
   v205 = UFG::UIHKScreenUpgrades::gTexturePackFilename;
   v206 = UFG::UIScreenTextureManager::sInstance;
   v207 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2072,7 +1924,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v209 + 152) = 0i64;
   *(_QWORD *)(v209 + 160) = 0i64;
   if ( v205 )
-    *(_DWORD *)(v209 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v205) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v209 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v205) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v206->mAllScreens.mTree, (UFG::qBaseNodeRB *)v209);
   v210 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2090,10 +1942,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v210 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Unlockables",
-    v210);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Unlockables", v210);
   v211 = UFG::UIHKScreenUnlockables::gTexturePackFilename;
   v212 = UFG::UIScreenTextureManager::sInstance;
   v213 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2116,7 +1965,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v215 + 152) = 0i64;
   *(_QWORD *)(v215 + 160) = 0i64;
   if ( v211 )
-    *(_DWORD *)(v215 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v211) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v215 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v211) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v212->mAllScreens.mTree, (UFG::qBaseNodeRB *)v215);
   v216 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2134,10 +1983,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v216 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "OpeningCredits",
-    v216);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "OpeningCredits", v216);
   v217 = UFG::UIScreenTextureManager::sInstance;
   v218 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v218;
@@ -2170,10 +2016,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v220 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PCBenchmark",
-    v220);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PCBenchmark", v220);
   v221 = UFG::UIScreenTextureManager::sInstance;
   v222 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v222;
@@ -2206,10 +2049,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v224 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PickLockMinigame",
-    v224);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PickLockMinigame", v224);
   v225 = UFG::UIHKScreenPickLockMinigame::gTexturePackFilename;
   v226 = UFG::UIScreenTextureManager::sInstance;
   v227 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2232,7 +2072,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v229 + 152) = 0i64;
   *(_QWORD *)(v229 + 160) = 0i64;
   if ( v225 )
-    *(_DWORD *)(v229 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v225) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v229 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v225) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v226->mAllScreens.mTree, (UFG::qBaseNodeRB *)v229);
   v230 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2250,10 +2090,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v230 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "BugPlantingMinigame",
-    v230);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "BugPlantingMinigame", v230);
   v231 = UFG::UIHKScreenBugPlantingMinigame::gTexturePackFilename;
   v232 = UFG::UIScreenTextureManager::sInstance;
   v233 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2276,7 +2113,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v235 + 152) = 0i64;
   *(_QWORD *)(v235 + 160) = 0i64;
   if ( v231 )
-    *(_DWORD *)(v235 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v231) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v235 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v231) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v232->mAllScreens.mTree, (UFG::qBaseNodeRB *)v235);
   v236 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2294,10 +2131,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v236 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PhoneTraceMinigame",
-    v236);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PhoneTraceMinigame", v236);
   v237 = UFG::UIHKScreenPhoneTraceMinigame::gTexturePackFilename;
   v238 = UFG::UIScreenTextureManager::sInstance;
   v239 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2320,7 +2154,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v241 + 152) = 0i64;
   *(_QWORD *)(v241 + 160) = 0i64;
   if ( v237 )
-    *(_DWORD *)(v241 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v237) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v241 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v237) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v238->mAllScreens.mTree, (UFG::qBaseNodeRB *)v241);
   v242 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2338,10 +2172,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v242 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PhoneSignalMinigame",
-    v242);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PhoneSignalMinigame", v242);
   v243 = UFG::UIHKScreenPhoneSignalMinigame::gTexturePackFilename;
   v244 = UFG::UIScreenTextureManager::sInstance;
   v245 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2364,7 +2195,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v247 + 152) = 0i64;
   *(_QWORD *)(v247 + 160) = 0i64;
   if ( v243 )
-    *(_DWORD *)(v247 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v243) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v247 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v243) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v244->mAllScreens.mTree, (UFG::qBaseNodeRB *)v247);
   v248 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2382,10 +2213,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v248 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "SpyPC",
-    v248);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "SpyPC", v248);
   v249 = UFG::UIHKScreenSpyPC::gTexturePackFilename;
   v250 = UFG::UIScreenTextureManager::sInstance;
   v251 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2405,7 +2233,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v253 + 152) = 0i64;
   *(_QWORD *)(v253 + 160) = 0i64;
   if ( v249 )
-    *(_DWORD *)(v253 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v249) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v253 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v249) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v250->mAllScreens.mTree, (UFG::qBaseNodeRB *)v253);
   v254 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2423,10 +2251,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v254 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "SpyCam",
-    v254);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "SpyCam", v254);
   v255 = UFG::UIHKScreenSpyCam::gTexturePackFilename;
   v256 = UFG::UIScreenTextureManager::sInstance;
   v257 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2446,7 +2271,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v259 + 152) = 0i64;
   *(_QWORD *)(v259 + 160) = 0i64;
   if ( v255 )
-    *(_DWORD *)(v259 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v255) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v259 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v255) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v256->mAllScreens.mTree, (UFG::qBaseNodeRB *)v259);
   v260 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2464,10 +2289,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v260 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "KaraokeMinigame",
-    v260);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "KaraokeMinigame", v260);
   v261 = UFG::UIHKScreenKaraokeMinigame::gTexturePackFilename;
   v262 = UFG::UIScreenTextureManager::sInstance;
   v263 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2490,7 +2312,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v265 + 152) = 0i64;
   *(_QWORD *)(v265 + 160) = 0i64;
   if ( v261 )
-    *(_DWORD *)(v265 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v261) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v265 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v261) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v262->mAllScreens.mTree, (UFG::qBaseNodeRB *)v265);
   v266 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2508,10 +2330,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v266 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "HackingMinigame",
-    v266);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "HackingMinigame", v266);
   v267 = UFG::UIHKScreenHackingMinigame::gTexturePackFilename;
   v268 = UFG::UIScreenTextureManager::sInstance;
   v269 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2534,7 +2353,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v271 + 152) = 0i64;
   *(_QWORD *)(v271 + 160) = 0i64;
   if ( v267 )
-    *(_DWORD *)(v271 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v267) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v271 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v267) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v268->mAllScreens.mTree, (UFG::qBaseNodeRB *)v271);
   v272 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2552,10 +2371,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v272 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "PokerDiceMinigame",
-    v272);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "PokerDiceMinigame", v272);
   v273 = UFG::UIHKScreenPokerDiceMinigame::gTexturePackFilename;
   v274 = UFG::UIScreenTextureManager::sInstance;
   v275 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2578,7 +2394,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v277 + 152) = 0i64;
   *(_QWORD *)(v277 + 160) = 0i64;
   if ( v273 )
-    *(_DWORD *)(v277 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v273) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v277 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v273) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v274->mAllScreens.mTree, (UFG::qBaseNodeRB *)v277);
   v278 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2596,10 +2412,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v278 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "SafeCrackingMinigame",
-    v278);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "SafeCrackingMinigame", v278);
   v279 = UFG::UIHKScreenSafeCrackingMinigame::gTexturePackFilename;
   v280 = UFG::UIScreenTextureManager::sInstance;
   v281 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2622,7 +2435,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v283 + 152) = 0i64;
   *(_QWORD *)(v283 + 160) = 0i64;
   if ( v279 )
-    *(_DWORD *)(v283 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v279) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v283 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v279) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v280->mAllScreens.mTree, (UFG::qBaseNodeRB *)v283);
   v284 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2640,10 +2453,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v284 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DebugScreenList",
-    v284);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DebugScreenList", v284);
   v285 = UFG::UIScreenTextureManager::sInstance;
   v286 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v286;
@@ -2676,10 +2486,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v288 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DebugNISList",
-    v288);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DebugNISList", v288);
   v289 = UFG::UIScreenTextureManager::sInstance;
   v290 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v290;
@@ -2712,10 +2519,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v292 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DebugLanguageList",
-    v292);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DebugLanguageList", v292);
   v293 = UFG::UIScreenTextureManager::sInstance;
   v294 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v294;
@@ -2748,10 +2552,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v296 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Sandbox",
-    v296);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Sandbox", v296);
   v297 = UFG::UIScreenTextureManager::sInstance;
   v298 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v298;
@@ -2784,10 +2585,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v300 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "Sandbox2",
-    v300);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "Sandbox2", v300);
   v301 = UFG::UIScreenTextureManager::sInstance;
   v302 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v302;
@@ -2820,10 +2618,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v304 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DemoClosing",
-    v304);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DemoClosing", v304);
   v305 = UFG::UIHKScreenDemoClosing::gTexturePackFilename;
   v306 = UFG::UIScreenTextureManager::sInstance;
   v307 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
@@ -2846,7 +2641,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v309 + 152) = 0i64;
   *(_QWORD *)(v309 + 160) = 0i64;
   if ( v305 )
-    *(_DWORD *)(v309 + 136) = ((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(v305) + 4095) & 0xFFFFF000;
+    *(_DWORD *)(v309 + 136) = (UFG::StreamFileWrapper::GetAllocationSize(v305) + 4095) & 0xFFFFF000;
   UFG::qBaseTreeRB::Add(&v306->mAllScreens.mTree, (UFG::qBaseNodeRB *)v309);
   v310 = (UFG::UIScreenFactoryBase *)UFG::qMemoryPool::Allocate(
                                        &gScaleformMemoryPool,
@@ -2864,10 +2659,7 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   {
     v310 = 0i64;
   }
-  UFG::UIScreenFactory::addScreenMapping(
-    (UFG::UIScreenFactory *)&UFG::UIScreenTextureManager::sInstance->vfptr,
-    "DemoHack_SkipGameslice",
-    v310);
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DemoHack_SkipGameslice", v310);
   v311 = UFG::UIScreenTextureManager::sInstance;
   v312 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v312;
@@ -2884,37 +2676,21 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v313 + 152) = 0i64;
   *(_QWORD *)(v313 + 160) = 0i64;
   UFG::qBaseTreeRB::Add(&v311->mAllScreens.mTree, (UFG::qBaseNodeRB *)v313);
-  UFG::qString::qString(&v331, "UI_Shared_512_256");
-  v336 = 1i64;
-  v332 = 0i64;
-  v333 = 1;
-  v334 = 1;
-  v335 = -1;
-  v337 = 0;
-  v338 = 1;
-  _mm_store_si128((__m128i *)&v339, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v340, (__m128i)0i64);
-  v341 = 0i64;
-  v342 = 0i64;
-  v343 = 0i64;
-  v344 = 0i64;
-  v345 = 0i64;
-  v346 = 0i64;
-  v347 = 0;
-  v348 = 0;
-  v332 = 1099511628288i64;
-  LOBYTE(v335) = 0;
-  UFG::UIScreenTextureManager::sInstance->mSharedTargets[0] = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v331);
+  UFG::qString::qString(&v331.name, "UI_Shared_512_256");
+  *(_QWORD *)&v331.num_mrt = 1i64;
+  v331.depth = 1;
+  v331.array_size = 1;
+  *(_DWORD *)v331.mrt_formats = -256;
+  v331.target_flags = 0;
+  v331.num_mips = 1;
+  memset(v331.textures, 0, 85);
+  *(_QWORD *)&v331.width = 0x10000000200i64;
+  UFG::UIScreenTextureManager::sInstance->mSharedTargets[0] = Illusion::CreateTarget(&v331);
   UFG::qString::qString(&v317, "UI_Shared_128_128");
-  *(_QWORD *)((char *)&v321 + 4) = 1i64;
-  v318 = 0i64;
   v319 = 1;
   v320 = 1;
-  LODWORD(v321) = -1;
-  HIDWORD(v321) = 0;
-  LODWORD(v322) = 1;
-  _mm_store_si128((__m128i *)&v321, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v322, (__m128i)0i64);
+  v321 = 0i64;
+  v322 = 0i64;
   v323 = 0i64;
   v324 = 0i64;
   v325 = 0i64;
@@ -2923,14 +2699,14 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   v328 = 0i64;
   v329 = 0;
   v330 = 0;
-  v318 = 549755814016i64;
+  v318 = 0x8000000080i64;
   LOBYTE(v321) = 0;
   UFG::UIScreenTextureManager::sInstance->mSharedTargets[1] = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v317);
   v314 = UFG::UIScreenTextureManager::sInstance->mSharedTargets[0]->mTargetTexture[0];
   v314->mAlphaStateUID = -89056095;
-  v315 = v314->mTextureUser.mOffset;
-  if ( v315 )
-    v316 = (Illusion::TextureUser *)((char *)&v314->mTextureUser + v315);
+  mOffset = v314->mTextureUser.mOffset;
+  if ( mOffset )
+    v316 = (Illusion::TextureUser *)((char *)&v314->mTextureUser + mOffset);
   else
     v316 = 0i64;
   Illusion::TextureUser::OnLoad(v316, v314);
@@ -2944,12 +2720,14 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   UFG::UIScreenTextureManager::m_ActionRequests.mBits[7] = 0i64;
   UFG::UIScreenTextureManager::m_ActionRequests.mBits[8] = 0i64;
   UFG::qString::~qString(&v317);
-  UFG::qString::~qString(&v331);
-}17);
-  UFG::qString::~qString(&v331);
-}>vfptr,
-    "DemoHack_SkipGameslice",
-    v310);
+  UFG::qString::~qString(&v331.name);
+}toryWrapper<UFG::UIHKScreenDemoHack_SkipGameslice>::`vftable;
+  }
+  else
+  {
+    v310 = 0i64;
+  }
+  UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenTextureManager::sInstance, "DemoHack_SkipGameslice", v310);
   v311 = UFG::UIScreenTextureManager::sInstance;
   v312 = UFG::qMalloc(0xA8ui64, "UIScreenTextureManager", 0i64);
   vars0 = v312;
@@ -2966,50 +2744,42 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   *(_QWORD *)(v313 + 152) = 0i64;
   *(_QWORD *)(v313 + 160) = 0i64;
   UFG::qBaseTreeRB::Add(&v311->mAllScreens.mTree, (UFG::qBaseNodeRB *)v313);
-  UFG::qString::qString(&v331, "UI_Shared_512_256");
-  v336 = 1i64;
-  v332 = 0i64;
-  v333 = 1;
-  v334 = 1;
-  v335 = -1;
-  v337 = 0;
-  v338 = 1;
-  _mm_store_si128((__m128i *)&v339, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v340, (__m128i)0i64);
-  v341 = 0i64;
-  v342 = 0i64;
-  v343 = 0i64;
-  v344 = 0i64;
-  v345 = 0i64;
-  v346 = 0i64;
-  v347 = 0;
-  v348 = 0;
-  v332 = 1099511628288i64;
-  LOBYTE(v335) = 0;
-  UFG::UIScreen
+  UFG::qString::qString(&v331.name, "UI_Shared_512_256");
+  *(_QWORD *)&v331.num_mrt = 1i64;
+  v331.depth = 1;
+  v331.array_size = 1;
+  *(_DWORD *)v331.mrt_formats = -256;
+  v331.target_flags = 0;
+  v331.num_mips = 1;
+  memset(v331.textures, 0, 85);
+  *(_QWORD *)&v331.width = 0x10000000200i64;
+  UFG::UIScreenTextureManager::sInstance->mSharedTargets[0] = Illusion::CreateTarget(&v331);
+  UFG::qString::qString(&v317, "UI_Shared_128_128");
+  v319 = 1;
+  v320 = 1;
+  v321 = 0i64;
+  v322 = 0i64;
+  v323 = 
 
 // File Line: 272
 // RVA: 0x5C1E80
 void UFG::UIScreenTextureManager::Quit(void)
 {
-  signed __int64 v0; // rbx
-  signed __int64 v1; // rdi
+  __int64 v0; // rbx
+  __int64 v1; // rdi
 
   v0 = 52i64;
   v1 = 2i64;
   UFG::UIScreen::mInitCallback = 0i64;
   do
   {
-    Illusion::DeleteTarget((Illusion::Target *)(&UFG::UIScreenTextureManager::sInstance->vfptr)[v0], 1);
-    ++v0;
+    Illusion::DeleteTarget((AMD_HD3D *)(&UFG::UIScreenTextureManager::sInstance->vfptr)[v0++], 1);
     *(_QWORD *)((char *)UFG::UIScreenTextureManager::sInstance + v0 * 8 - 8) = 0i64;
     --v1;
   }
   while ( v1 );
   if ( UFG::UIScreenTextureManager::sInstance )
-    UFG::UIScreenTextureManager::sInstance->vfptr->__vecDelDtor(
-      (UFG::UIScreenFactory *)UFG::UIScreenTextureManager::sInstance,
-      1u);
+    UFG::UIScreenTextureManager::sInstance->vfptr->__vecDelDtor(UFG::UIScreenTextureManager::sInstance, 1i64);
   UFG::UIScreenTextureManager::sInstance = 0i64;
 }
 
@@ -3022,108 +2792,93 @@ UFG::UIScreenTextureManager *__fastcall UFG::UIScreenTextureManager::Instance()
 
 // File Line: 304
 // RVA: 0x5BD940
-void __fastcall UFG::UIScreenTextureManager::UIScreenTextureManager(UFG::UIScreenTextureManager *this, unsigned int texturePoolSize)
+void __fastcall UFG::UIScreenTextureManager::UIScreenTextureManager(
+        UFG::UIScreenTextureManager *this,
+        unsigned int texturePoolSize)
 {
-  unsigned int v2; // ebx
-  UFG::UIScreenTextureManager *v3; // rdi
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v4; // [rsp+50h] [rbp+18h]
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v5; // [rsp+50h] [rbp+18h]
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v6; // [rsp+50h] [rbp+18h]
-
-  v2 = texturePoolSize;
-  v3 = this;
-  UFG::UIScreenFactory::UIScreenFactory((UFG::UIScreenFactory *)&this->vfptr);
-  v3->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable;
-  v3->mGameState = 1;
-  v3->mTexturePoolSize = v2;
-  v3->mCurrentTexturePoolUsage = 0;
-  v3->mForceFlush = 0;
-  UFG::qBaseTreeRB::qBaseTreeRB(&v3->mAllScreens.mTree);
-  UFG::qBaseTreeRB::qBaseTreeRB(&v3->mTextures.mTree);
-  v4 = &v3->mQueued;
-  v4->mNode.mPrev = &v4->mNode;
-  v4->mNode.mNext = &v4->mNode;
-  v5 = &v3->mLoading;
-  v5->mNode.mPrev = &v5->mNode;
-  v5->mNode.mNext = &v5->mNode;
-  v6 = &v3->mActive;
-  v6->mNode.mPrev = &v6->mNode;
-  v6->mNode.mNext = &v6->mNode;
-  UFG::qStringCopy(v3->m_rootDir, 128, "Data/UI/Screens/", -1);
+  UFG::UIScreenFactory::UIScreenFactory(this);
+  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable;
+  this->mGameState = GameState_FE;
+  this->mTexturePoolSize = texturePoolSize;
+  this->mCurrentTexturePoolUsage = 0;
+  this->mForceFlush = 0;
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mAllScreens.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mTextures.mTree);
+  this->mQueued.mNode.mPrev = &this->mQueued.mNode;
+  this->mQueued.mNode.mNext = &this->mQueued.mNode;
+  this->mLoading.mNode.mPrev = &this->mLoading.mNode;
+  this->mLoading.mNode.mNext = &this->mLoading.mNode;
+  this->mActive.mNode.mPrev = &this->mActive.mNode;
+  this->mActive.mNode.mNext = &this->mActive.mNode;
+  UFG::qStringCopy(this->m_rootDir, 128, "Data/UI/Screens/", -1);
 }
 
 // File Line: 313
 // RVA: 0x5BDB10
 void __fastcall UFG::UIScreenTextureManager::~UIScreenTextureManager(UFG::UIScreenTextureManager *this)
 {
-  UFG::UIScreenTextureManager *v1; // r14
   UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v2; // rax
-  UFG::qBaseNodeRB **v3; // r8
+  UFG::qBaseNodeRB **i; // r8
   UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v4; // rdx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v5; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v6; // rax
-  signed __int64 i; // rax
-  _QWORD *v8; // rdx
-  __int64 v9; // rcx
-  _QWORD *v10; // rax
-  signed __int64 j; // rax
-  _QWORD *v12; // rdx
-  __int64 v13; // rcx
-  _QWORD *v14; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mNext; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *j; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v8; // rdx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v9; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v10; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *k; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v12; // rdx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v13; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v14; // rax
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable;
   v2 = this->mQueued.mNode.mNext - 2;
-  v3 = this->mTextures.mTree.mNULL.mChild;
-  if ( v2 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)this->mTextures.mTree.mNULL.mChild )
+  for ( i = this->mTextures.mTree.mNULL.mChild;
+        v2 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)i;
+        v2 = this->mQueued.mNode.mNext - 2 )
   {
-    do
-    {
-      v4 = v2 + 2;
-      v5 = v2[2].mPrev;
-      v6 = v2[2].mNext;
-      v5->mNext = v6;
-      v6->mPrev = v5;
-      v4->mPrev = v4;
-      v4->mNext = v4;
-      v2 = v1->mQueued.mNode.mNext - 2;
-    }
-    while ( v2 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)v3 );
+    v4 = v2 + 2;
+    mPrev = v2[2].mPrev;
+    mNext = v2[2].mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    v4->mPrev = v4;
+    v4->mNext = v4;
   }
-  for ( i = (signed __int64)&v1->mActive.mNode.mNext[-2];
-        (UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *)i != &v1->mQueued;
-        i = (signed __int64)&v1->mActive.mNode.mNext[-2] )
+  for ( j = this->mActive.mNode.mNext - 2;
+        j != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&this->mQueued;
+        j = this->mActive.mNode.mNext - 2 )
   {
-    v8 = (_QWORD *)(i + 32);
-    v9 = *(_QWORD *)(i + 32);
-    v10 = *(_QWORD **)(i + 40);
-    *(_QWORD *)(v9 + 8) = v10;
-    *v10 = v9;
-    *v8 = v8;
-    v8[1] = v8;
+    v8 = j + 2;
+    v9 = j[2].mPrev;
+    v10 = j[2].mNext;
+    v9->mNext = v10;
+    v10->mPrev = v9;
+    v8->mPrev = v8;
+    v8->mNext = v8;
   }
-  for ( j = (signed __int64)&v1->mLoading.mNode.mNext[-2];
-        (unsigned int *)j != &v1->mTextures.mTree.mNULL.mUID;
-        j = (signed __int64)&v1->mLoading.mNode.mNext[-2] )
+  for ( k = this->mLoading.mNode.mNext - 2;
+        k != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&this->mTextures.mTree.mNULL.mUID;
+        k = this->mLoading.mNode.mNext - 2 )
   {
-    v12 = (_QWORD *)(j + 32);
-    v13 = *(_QWORD *)(j + 32);
-    v14 = *(_QWORD **)(j + 40);
-    *(_QWORD *)(v13 + 8) = v14;
-    *v14 = v13;
-    *v12 = v12;
-    v12[1] = v12;
+    v12 = k + 2;
+    v13 = k[2].mPrev;
+    v14 = k[2].mNext;
+    v13->mNext = v14;
+    v14->mPrev = v13;
+    v12->mPrev = v12;
+    v12->mNext = v12;
   }
-  UFG::qTreeRB<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,1>::DeleteAll(&v1->mAllScreens);
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&v1->mActive);
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&v1->mLoading);
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&v1->mQueued);
-  UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1>::DeleteAll(&v1->mTextures);
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mTextures);
-  UFG::qTreeRB<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,1>::DeleteAll(&v1->mAllScreens);
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mAllScreens);
-  UFG::UIScreenFactory::~UIScreenFactory((UFG::UIScreenFactory *)&v1->vfptr);
-}
+  UFG::qTreeRB<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,1>::DeleteAll(&this->mAllScreens);
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&this->mActive);
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&this->mLoading);
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>::~qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0>((UFG::qList<MemberMapMemberVariable,MemberMapMemberVariable,0,0> *)&this->mQueued);
+  UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1>::DeleteAll(&this->mTextures);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->mTextures);
+  UFG::qTreeRB<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,1>::DeleteAll(&this->mAllScreens);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->mAllScreens);
+  UFG::UIScreenFactory::~UIScreenFactory(this);
+}llScre
 
 // File Line: 321
 // RVA: 0x5C2030
@@ -3136,217 +2891,208 @@ void __fastcall UFG::UIScreenTextureManager::SetGameState(ANTLR3_INPUT_STREAM_st
 // RVA: 0x5BDFA0
 __int64 __fastcall UFG::UIScreenTextureManager::GetGameState(UFG::UIScreenTextureManager *this)
 {
-  return this->mGameState;
+  return (unsigned int)this->mGameState;
 }
 
 // File Line: 331
 // RVA: 0x5C1A70
-void __fastcall UFG::UIScreenTextureManager::QueueLoadAndPush(UFG::UIScreenTextureManager *this, const char *screenName, const char *texturePack)
+void __fastcall UFG::UIScreenTextureManager::QueueLoadAndPush(
+        UFG::UIScreenTextureManager *this,
+        const char *screenName,
+        const char *texturePack)
 {
-  UFG::UIScreenTextureManager *v3; // rdi
-  const char *v4; // r12
-  const char *v5; // rbp
   unsigned int v6; // eax
   UFG::qBaseTreeRB *callbackParam; // rbx
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v8; // rsi
-  signed int v9; // eax
-  signed __int64 v10; // rcx
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v11; // r14
-  signed int v12; // ecx
-  signed __int64 v13; // rax
-  UFG::qBaseNodeRB *v14; // rax
-  UFG::qBaseNodeRB *v15; // rcx
-  unsigned int v16; // ecx
-  UFG::ProgressionTracker *v17; // rax
-  UFG::qSymbol *v18; // rax
-  UFG::DataStreamer::PRIORITY v19; // er8
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mQueued; // rsi
+  int v9; // eax
+  UFG::UIScreenTextureManager *v10; // rcx
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mLoading; // r14
+  int v12; // ecx
+  UFG::UIScreenTextureManager *v13; // rax
+  UFG::qBaseNodeRB *mPrev; // rax
+  unsigned int v15; // ecx
+  UFG::ProgressionTracker *v16; // rax
+  UFG::qSymbol *ActiveFlow; // rax
+  UFG::DataStreamer::PRIORITY v18; // r8d
+  UFG::qBaseNodeRB *mParent; // rax
   UFG::qBaseNodeRB *v20; // rax
-  UFG::qBaseNodeRB *v21; // rax
-  UFG::qBaseNodeRB *v22; // rcx
-  UFG::qBaseNodeRB *v23; // rdx
-  UFG::qBaseNodeRB *v24; // rax
-  const char *v25; // rcx
+  UFG::qBaseNodeRB *v21; // rcx
+  UFG::qBaseNodeRB *v22; // rax
 
-  v3 = this;
-  v4 = texturePack;
-  v5 = screenName;
-  UFG::qPrintf("QueueLoadAndPush:%s\n");
-  v6 = UFG::qStringHashUpper32(v5, 0xFFFFFFFF);
+  UFG::qPrintf("QueueLoadAndPush:%s\n", screenName);
+  v6 = UFG::qStringHashUpper32(screenName, -1);
   if ( v6 )
-    callbackParam = UFG::qBaseTreeRB::Get(&v3->mAllScreens.mTree, v6);
+    callbackParam = UFG::qBaseTreeRB::Get(&this->mAllScreens.mTree, v6);
   else
     callbackParam = 0i64;
-  v8 = &v3->mQueued;
+  p_mQueued = &this->mQueued;
   v9 = -1;
-  v10 = (signed __int64)&v3->mQueued.mNode.mNext[-2];
-  if ( (UFG::qBaseNodeRB **)v10 != v3->mTextures.mTree.mNULL.mChild )
+  v10 = (UFG::UIScreenTextureManager *)&this->mQueued.mNode.mNext[-2];
+  if ( v10 == (UFG::UIScreenTextureManager *)this->mTextures.mTree.mNULL.mChild )
+    goto LABEL_9;
+  while ( 1 )
   {
-    while ( 1 )
-    {
-      ++v9;
-      if ( (UFG::qBaseTreeRB *)v10 == callbackParam )
-        break;
-      v10 = *(_QWORD *)(v10 + 40) - 32i64;
-      if ( (UFG::qBaseNodeRB **)v10 == v3->mTextures.mTree.mNULL.mChild )
-        goto LABEL_9;
-    }
-    if ( v9 != -1 )
-      return;
+    ++v9;
+    if ( v10 == (UFG::UIScreenTextureManager *)callbackParam )
+      break;
+    v10 = (UFG::UIScreenTextureManager *)&v10->m_factoryList.mTree.mNULL.mParent[-1];
+    if ( v10 == (UFG::UIScreenTextureManager *)this->mTextures.mTree.mNULL.mChild )
+      goto LABEL_9;
   }
-LABEL_9:
-  v11 = &v3->mLoading;
-  v12 = -1;
-  v13 = (signed __int64)&v3->mLoading.mNode.mNext[-2];
-  if ( (unsigned int *)v13 != &v3->mTextures.mTree.mNULL.mUID )
+  if ( v9 == -1 )
   {
+LABEL_9:
+    p_mLoading = &this->mLoading;
+    v12 = -1;
+    v13 = (UFG::UIScreenTextureManager *)&this->mLoading.mNode.mNext[-2];
+    if ( v13 == (UFG::UIScreenTextureManager *)&this->mTextures.mTree.mNULL.mUID )
+      goto LABEL_14;
     while ( 1 )
     {
       ++v12;
-      if ( (UFG::qBaseTreeRB *)v13 == callbackParam )
+      if ( v13 == (UFG::UIScreenTextureManager *)callbackParam )
         break;
-      v13 = *(_QWORD *)(v13 + 40) - 32i64;
-      if ( (unsigned int *)v13 == &v3->mTextures.mTree.mNULL.mUID )
+      v13 = (UFG::UIScreenTextureManager *)&v13->m_factoryList.mTree.mNULL.mParent[-1];
+      if ( v13 == (UFG::UIScreenTextureManager *)&this->mTextures.mTree.mNULL.mUID )
         goto LABEL_14;
     }
-    if ( v12 != -1 )
-      return;
-  }
+    if ( v12 == -1 )
+    {
 LABEL_14:
-  if ( !callbackParam )
-  {
-    v25 = "Error: UIScreenTextureManager::QueueLoadAndPush could not find screen %s\n";
-    goto LABEL_37;
-  }
-  if ( !(v3->mGameState & callbackParam[1].mNULL.mUID) )
-  {
-    v25 = "Error: UIScreenTextureManager::QueueLoadAndPush could screen %s is not valid for current game state\n";
-LABEL_37:
-    UFG::qPrintf(v25, v5);
-    return;
-  }
-  if ( *(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 2 && UFG::UIScreenTextureManager::ModalScreenInQueue(v3) )
-  {
-    v14 = (UFG::qBaseNodeRB *)v8->mNode.mPrev;
-    v15 = &callbackParam->mNULL;
-    v14->mChild[0] = &callbackParam->mNULL;
-    v15->mParent = v14;
-    v15->mChild[0] = (UFG::qBaseNodeRB *)v8;
-    v8->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&callbackParam->mNULL;
-    return;
-  }
-  if ( *(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 0x10 )
-  {
-    if ( (unsigned int)UFG::qStringCompare(v5, "Dialog_MissionFailed", -1) )
-    {
-      v17 = UFG::ProgressionTracker::Instance();
-      v18 = UFG::ProgressionTracker::GetActiveFlow(v17);
-      v16 = -1497411807;
-      if ( v18->mUID == UFG::symGhostFlow.mUID )
-        v16 = 0x4AA0BCE2;
-    }
-    else
-    {
-      v16 = 1753162818;
-    }
-    UFG::UI::StartPauseVFX(v16);
-  }
-  if ( v4 )
-    UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(
-      (UFG::UIScreenTextureManager::ScreenInfo *)callbackParam,
-      v4);
-  if ( HIDWORD(callbackParam[1].mNULL.mParent) )
-  {
-    v19 = 12288;
-    if ( *(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 8 )
-      v19 = 16385;
-    UFG::UIScreenTextureManager::QueueTexturePackLoad(
-      v3,
-      (const char *)callbackParam[1].mNULL.mChild[0],
-      v19,
-      (void (__fastcall *)(UFG::DataStreamer::Handle *, void *))UFG::UIScreenTextureManager::HandleScreenTextureLoaded,
-      callbackParam);
-    goto LABEL_33;
-  }
-  v20 = callbackParam[2].mRoot.mParent;
-  if ( v20 )
-  {
-    ((void (__fastcall *)(_QWORD, UFG::qBaseTreeRB *))v20)(
-      UFG::UIScreenTextureManager::HandleScreenTextureLoaded,
-      callbackParam);
+      if ( callbackParam )
+      {
+        if ( (this->mGameState & callbackParam[1].mNULL.mUID) != 0 )
+        {
+          if ( (*(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 2) != 0
+            && UFG::UIScreenTextureManager::ModalScreenInQueue(this) )
+          {
+            mPrev = (UFG::qBaseNodeRB *)p_mQueued->mNode.mPrev;
+            mPrev->mChild[0] = &callbackParam->mNULL;
+            callbackParam->mNULL.mParent = mPrev;
+            callbackParam->mNULL.mChild[0] = (UFG::qBaseNodeRB *)p_mQueued;
+            p_mQueued->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&callbackParam->mNULL;
+            return;
+          }
+          if ( (*(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 0x10) != 0 )
+          {
+            if ( (unsigned int)UFG::qStringCompare(screenName, "Dialog_MissionFailed", -1) )
+            {
+              v16 = UFG::ProgressionTracker::Instance();
+              ActiveFlow = UFG::ProgressionTracker::GetActiveFlow(v16);
+              v15 = -1497411807;
+              if ( ActiveFlow->mUID == UFG::symGhostFlow.mUID )
+                v15 = 0x4AA0BCE2;
+            }
+            else
+            {
+              v15 = 1753162818;
+            }
+            UFG::UI::StartPauseVFX(v15);
+          }
+          if ( texturePack )
+            UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(
+              (UFG::UIScreenTextureManager::ScreenInfo *)callbackParam,
+              texturePack);
+          if ( HIDWORD(callbackParam[1].mNULL.mParent) )
+          {
+            v18 = HIGH_PRIORITY;
+            if ( (*(_BYTE *)(&callbackParam[1].mNULL.mUID + 1) & 8) != 0 )
+              v18 = 16385;
+            UFG::UIScreenTextureManager::QueueTexturePackLoad(
+              this,
+              (const char *)callbackParam[1].mNULL.mChild[0],
+              v18,
+              (void (__fastcall *)(UFG::DataStreamer::Handle *, void *))UFG::UIScreenTextureManager::HandleScreenTextureLoaded,
+              callbackParam);
+            goto LABEL_33;
+          }
+          mParent = callbackParam[2].mRoot.mParent;
+          if ( mParent )
+          {
+            ((void (__fastcall *)(_QWORD, UFG::qBaseTreeRB *))mParent)(
+              UFG::UIScreenTextureManager::HandleScreenTextureLoaded,
+              callbackParam);
 LABEL_33:
-    v21 = callbackParam->mNULL.mChild[0];
-    v22 = callbackParam->mNULL.mParent;
-    v23 = &callbackParam->mNULL;
-    v22->mChild[0] = v21;
-    v21->mParent = v22;
-    v23->mParent = v23;
-    v23->mChild[0] = v23;
-    v24 = (UFG::qBaseNodeRB *)v11->mNode.mPrev;
-    v24->mChild[0] = &callbackParam->mNULL;
-    v23->mParent = v24;
-    v23->mChild[0] = (UFG::qBaseNodeRB *)v11;
-    v11->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&callbackParam->mNULL;
-    return;
+            v20 = callbackParam->mNULL.mChild[0];
+            v21 = callbackParam->mNULL.mParent;
+            v21->mChild[0] = v20;
+            v20->mParent = v21;
+            callbackParam->mNULL.mParent = &callbackParam->mNULL;
+            callbackParam->mNULL.mChild[0] = &callbackParam->mNULL;
+            v22 = (UFG::qBaseNodeRB *)p_mLoading->mNode.mPrev;
+            v22->mChild[0] = &callbackParam->mNULL;
+            callbackParam->mNULL.mParent = v22;
+            callbackParam->mNULL.mChild[0] = (UFG::qBaseNodeRB *)p_mLoading;
+            p_mLoading->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&callbackParam->mNULL;
+            return;
+          }
+          UFG::UIScreenTextureManager::PushScreen(this, (UFG::UIScreenTextureManager::ScreenInfo *)callbackParam);
+        }
+        else
+        {
+          UFG::qPrintf(
+            "Error: UIScreenTextureManager::QueueLoadAndPush could screen %s is not valid for current game state\n",
+            screenName);
+        }
+      }
+      else
+      {
+        UFG::qPrintf("Error: UIScreenTextureManager::QueueLoadAndPush could not find screen %s\n", screenName);
+      }
+    }
   }
-  UFG::UIScreenTextureManager::PushScreen(v3, (UFG::UIScreenTextureManager::ScreenInfo *)callbackParam);
 }
 
 // File Line: 404
 // RVA: 0x5C1920
-bool __fastcall UFG::UIScreenTextureManager::IsTexturePackLoaded(UFG::UIScreenTextureManager *this, const char *textureName)
+bool __fastcall UFG::UIScreenTextureManager::IsTexturePackLoaded(
+        UFG::UIScreenTextureManager *this,
+        const char *textureName)
 {
-  UFG::UIScreenTextureManager *v2; // rbx
   unsigned int v3; // eax
   UFG::qBaseTreeRB *v4; // rax
-  bool result; // al
 
-  v2 = this;
-  v3 = UFG::qStringHashUpper32(textureName, 0xFFFFFFFF);
-  if ( v3 && (v4 = UFG::qBaseTreeRB::Get(&v2->mTextures.mTree, v3)) != 0i64 )
-    result = (unsigned int)UFG::DataStreamer::GetStreamState((UFG::DataStreamer::Handle *)v4[1].mRoot.mChild) == 6;
-  else
-    result = 0;
-  return result;
+  v3 = UFG::qStringHashUpper32(textureName, -1);
+  return v3
+      && (v4 = UFG::qBaseTreeRB::Get(&this->mTextures.mTree, v3)) != 0i64
+      && (unsigned int)UFG::DataStreamer::GetStreamState((UFG::DataStreamer::Handle *)v4[1].mRoot.mChild) == 6;
 }
 
 // File Line: 415
 // RVA: 0x5C1CA0
-void __fastcall UFG::UIScreenTextureManager::QueueTexturePackLoad(UFG::UIScreenTextureManager *this, const char *textureName, UFG::DataStreamer::PRIORITY priority, void (__fastcall *callback)(UFG::DataStreamer::Handle *, void *), void *callbackParam)
+void __fastcall UFG::UIScreenTextureManager::QueueTexturePackLoad(
+        UFG::UIScreenTextureManager *this,
+        const char *textureName,
+        UFG::DataStreamer::PRIORITY priority,
+        UFG::qReflectInventoryBase *callback,
+        UFG::qReflectInventoryBase *callbackParam)
 {
-  void (__fastcall *v5)(UFG::DataStreamer::Handle *, void *); // r13
-  UFG::DataStreamer::PRIORITY v6; // er15
-  const char *v7; // rbp
-  UFG::UIScreenTextureManager *v8; // r14
   unsigned int v9; // eax
   UFG::qBaseTreeRB *v10; // rax
   UFG::qArray<UFG::qReflectInventoryBase *,0> *v11; // rsi
-  __int64 v12; // rbp
+  __int64 mUID; // rbp
   unsigned int v13; // edi
   unsigned int v14; // edx
   unsigned int v15; // ebx
   unsigned int v16; // edx
-  __int64 v17; // rbp
+  __int64 size; // rbp
   unsigned int v18; // edi
-  unsigned int v19; // eax
+  unsigned int capacity; // eax
   UFG::allocator::free_link *v20; // rax
   __int64 v21; // rax
   __int64 v22; // rdi
 
-  v5 = callback;
-  v6 = priority;
-  v7 = textureName;
-  v8 = this;
-  v9 = UFG::qStringHashUpper32(textureName, 0xFFFFFFFF);
+  v9 = UFG::qStringHashUpper32(textureName, -1);
   if ( v9
-    && (v10 = UFG::qBaseTreeRB::Get(&v8->mTextures.mTree, v9),
+    && (v10 = UFG::qBaseTreeRB::Get(&this->mTextures.mTree, v9),
         (v11 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)v10) != 0i64) )
   {
     ++LODWORD(v10[1].mRoot.mParent);
-    v12 = v10[1].mNULL.mUID;
-    v13 = v12 + 1;
+    mUID = v10[1].mNULL.mUID;
+    v13 = mUID + 1;
     v14 = *(&v10[1].mNULL.mUID + 1);
     v15 = 1;
-    if ( (signed int)v12 + 1 > v14 )
+    if ( (int)mUID + 1 > v14 )
     {
       if ( v14 )
         v16 = 2 * v14;
@@ -3357,31 +3103,31 @@ void __fastcall UFG::UIScreenTextureManager::QueueTexturePackLoad(UFG::UIScreenT
       if ( v16 <= 2 )
         v16 = 2;
       if ( v16 - v13 > 0x10000 )
-        v16 = v12 + 65537;
+        v16 = mUID + 65537;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
         (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v10[1].mNULL.mUID,
         v16,
         "qArray.Add");
     }
     v11[8].size = v13;
-    v11[8].p[v12] = (UFG::qReflectInventoryBase *)v5;
-    v17 = v11[9].size;
-    v18 = v17 + 1;
-    v19 = v11[9].capacity;
-    if ( (signed int)v17 + 1 > v19 )
+    v11[8].p[mUID] = callback;
+    size = v11[9].size;
+    v18 = size + 1;
+    capacity = v11[9].capacity;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v19 )
-        v15 = 2 * v19;
+      if ( capacity )
+        v15 = 2 * capacity;
       for ( ; v15 < v18; v15 *= 2 )
         ;
       if ( v15 <= 2 )
         v15 = 2;
       if ( v15 - v18 > 0x10000 )
-        v15 = v17 + 65537;
+        v15 = size + 65537;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v11 + 9, v15, "qArray.Add");
     }
     v11[9].size = v18;
-    v11[9].p[v17] = (UFG::qReflectInventoryBase *)callbackParam;
+    v11[9].p[size] = callbackParam;
   }
   else
   {
@@ -3390,7 +3136,7 @@ void __fastcall UFG::UIScreenTextureManager::QueueTexturePackLoad(UFG::UIScreenT
     {
       UFG::UIScreenTextureManager::TexturePackReference::TexturePackReference(
         (UFG::UIScreenTextureManager::TexturePackReference *)v20,
-        v7);
+        textureName);
       v22 = v21;
     }
     else
@@ -3398,30 +3144,37 @@ void __fastcall UFG::UIScreenTextureManager::QueueTexturePackLoad(UFG::UIScreenT
       v22 = 0i64;
     }
     *(_DWORD *)(v22 + 72) = 1;
-    UFG::DataStreamer::QueueStream((UFG::DataStreamer::Handle *)(v22 + 80), v7, DATA_UI, v6, 2u, v5, callbackParam);
-    UFG::qBaseTreeRB::Add(&v8->mTextures.mTree, (UFG::qBaseNodeRB *)v22);
+    UFG::DataStreamer::QueueStream(
+      (UFG::DataStreamer::Handle *)(v22 + 80),
+      textureName,
+      DATA_UI,
+      priority,
+      2u,
+      (void (__fastcall *)(UFG::DataStreamer::Handle *, void *))callback,
+      callbackParam);
+    UFG::qBaseTreeRB::Add(&this->mTextures.mTree, (UFG::qBaseNodeRB *)v22);
   }
 }
 
 // File Line: 461
 // RVA: 0x5C1FF0
-void __fastcall UFG::UIScreenTextureManager::ReleaseTexturePack(UFG::UIScreenTextureManager *this, const char *textureName)
+void __fastcall UFG::UIScreenTextureManager::ReleaseTexturePack(
+        UFG::UIScreenTextureManager *this,
+        const char *textureName)
 {
-  UFG::UIScreenTextureManager *v2; // rbx
   unsigned int v3; // eax
   UFG::qBaseTreeRB *v4; // rax
-  int v5; // ecx
+  int mParent; // ecx
 
-  v2 = this;
-  v3 = UFG::qStringHashUpper32(textureName, 0xFFFFFFFF);
+  v3 = UFG::qStringHashUpper32(textureName, -1);
   if ( v3 )
   {
-    v4 = UFG::qBaseTreeRB::Get(&v2->mTextures.mTree, v3);
+    v4 = UFG::qBaseTreeRB::Get(&this->mTextures.mTree, v3);
     if ( v4 )
     {
-      v5 = (int)v4[1].mRoot.mParent;
-      if ( v5 )
-        LODWORD(v4[1].mRoot.mParent) = v5 - 1;
+      mParent = (int)v4[1].mRoot.mParent;
+      if ( mParent )
+        LODWORD(v4[1].mRoot.mParent) = mParent - 1;
     }
   }
 }
@@ -3430,57 +3183,51 @@ void __fastcall UFG::UIScreenTextureManager::ReleaseTexturePack(UFG::UIScreenTex
 // RVA: 0x5C1F00
 void __fastcall UFG::UIScreenTextureManager::ReleaseScreen(UFG::UIScreenTextureManager *this, const char *screenName)
 {
-  const char *v2; // rdi
-  UFG::UIScreenTextureManager *v3; // rsi
   unsigned int v4; // eax
   UFG::qBaseTreeRB *v5; // rax
   UFG::qBaseTreeRB *v6; // rbx
-  UFG::qBaseNodeRB *v7; // rcx
+  UFG::qBaseNodeRB *mParent; // rcx
   UFG::qBaseNodeRB *v8; // rax
-  UFG::qBaseNodeRB *v9; // r8
-  unsigned int v10; // eax
-  UFG::qBaseTreeRB *v11; // rax
-  int v12; // ecx
-  void (*v13)(void); // rax
+  unsigned int v9; // eax
+  UFG::qBaseTreeRB *v10; // rax
+  int v11; // ecx
+  void (*v12)(void); // rax
 
-  v2 = screenName;
-  v3 = this;
-  v4 = UFG::qStringHashUpper32(screenName, 0xFFFFFFFF);
-  if ( v4 && (v5 = UFG::qBaseTreeRB::Get(&v3->mAllScreens.mTree, v4), (v6 = v5) != 0i64) )
+  v4 = UFG::qStringHashUpper32(screenName, -1);
+  if ( v4 && (v5 = UFG::qBaseTreeRB::Get(&this->mAllScreens.mTree, v4), (v6 = v5) != 0i64) )
   {
-    if ( *(_BYTE *)(&v5[1].mNULL.mUID + 1) & 0x10 )
+    if ( (*(_BYTE *)(&v5[1].mNULL.mUID + 1) & 0x10) != 0 )
       UFG::UI::StopPauseVFX(1);
-    v7 = v6->mNULL.mParent;
+    mParent = v6->mNULL.mParent;
     v8 = v6->mNULL.mChild[0];
-    v9 = &v6->mNULL;
-    v7->mChild[0] = v8;
-    v8->mParent = v7;
-    v9->mParent = v9;
-    v9->mChild[0] = v9;
+    mParent->mChild[0] = v8;
+    v8->mParent = mParent;
+    v6->mNULL.mParent = &v6->mNULL;
+    v6->mNULL.mChild[0] = &v6->mNULL;
     if ( HIDWORD(v6[1].mNULL.mParent) )
     {
-      v10 = UFG::qStringHashUpper32((const char *)v6[1].mNULL.mChild[0], 0xFFFFFFFF);
-      if ( v10 )
+      v9 = UFG::qStringHashUpper32((const char *)v6[1].mNULL.mChild[0], -1);
+      if ( v9 )
       {
-        v11 = UFG::qBaseTreeRB::Get(&v3->mTextures.mTree, v10);
-        if ( v11 )
+        v10 = UFG::qBaseTreeRB::Get(&this->mTextures.mTree, v9);
+        if ( v10 )
         {
-          v12 = (int)v11[1].mRoot.mParent;
-          if ( v12 )
-            LODWORD(v11[1].mRoot.mParent) = v12 - 1;
+          v11 = (int)v10[1].mRoot.mParent;
+          if ( v11 )
+            LODWORD(v10[1].mRoot.mParent) = v11 - 1;
         }
       }
     }
     else
     {
-      v13 = (void (*)(void))v6[2].mRoot.mChild[1];
-      if ( v13 )
-        v13();
+      v12 = (void (*)(void))v6[2].mRoot.mChild[1];
+      if ( v12 )
+        v12();
     }
   }
   else
   {
-    UFG::qPrintf("Error: UIScreenTextureManager::ReleaseScreen() could not find screen %s\n", v2);
+    UFG::qPrintf("Error: UIScreenTextureManager::ReleaseScreen() could not find screen %s\n", screenName);
   }
 }
 
@@ -3495,336 +3242,302 @@ void __fastcall UFG::UIScreenTextureManager::ForceFlush(UFG::UIScreenTextureMana
 // RVA: 0x5C2170
 void __fastcall UFG::UIScreenTextureManager::Update(UFG::UIScreenTextureManager *this, float deltaTime)
 {
-  UFG::qBaseNodeRB **v2; // r14
+  UFG::qBaseNodeRB **mChild; // r14
   UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v3; // rdx
-  UFG::UIScreenTextureManager *v4; // rsi
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v5; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v6; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mNext; // rax
   UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v7; // rdx
-  signed __int64 v8; // rbp
-  signed __int64 v9; // rbx
+  unsigned int *p_mUID; // rbp
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v9; // rbx
   unsigned __int8 (*v10)(void); // rax
-  int v11; // eax
+  int mPrev_high; // eax
   const char *v12; // rdx
-  int v13; // er8
-  __int64 v14; // rcx
-  _QWORD *v15; // rax
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> **v16; // rdx
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v17; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v18; // rax
-  signed __int64 v19; // rdi
-  signed __int64 v20; // rbx
-  char v21; // cl
-  signed __int64 v22; // rdx
-  signed __int64 v23; // rax
-  signed __int64 v24; // rax
-  signed __int64 j; // rbx
-  int v26; // eax
-  signed __int64 v27; // rdx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v28; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v29; // rax
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v30; // r8
+  int v13; // r8d
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v14; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v15; // rax
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mActive; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v17; // rax
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mQueued; // rdi
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v19; // rbx
+  char v20; // cl
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v21; // rdx
+  __int64 v22; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v23; // rax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *j; // rbx
+  int v25; // eax
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v26; // rdx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v27; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v28; // rax
   UFG::qBaseTreeRB *i; // rbx
   UFG::qBaseTreeRB *k; // rbx
-  __int64 v33; // rdi
-  signed int v34; // eax
-  float v35; // xmm1_4
-  UFG::UIScreenTextureManager::TexturePackReference *v36; // rbx
-  UFG::qBaseTreeRB *v37; // rcx
-  UFG::StreamingMemory::DATA_TYPE dataTypes; // [rsp+40h] [rbp+8h]
+  __int64 m; // rdi
+  signed int mCurrentTexturePoolUsage; // eax
+  float v33; // xmm1_4
+  UFG::UIScreenTextureManager::TexturePackReference *Head; // rbx
+  UFG::qTreeRB<UFG::UIScreenTextureManager::TexturePackReference,UFG::UIScreenTextureManager::TexturePackReference,1> *p_mTextures; // rcx
+  UFG::StreamingMemory::DATA_TYPE dataTypes; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this->mTextures.mTree.mNULL.mChild;
+  mChild = this->mTextures.mTree.mNULL.mChild;
   v3 = this->mQueued.mNode.mNext - 2;
-  v4 = this;
   if ( v3 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)this->mTextures.mTree.mNULL.mChild )
   {
-    while ( this->mGameState & (_QWORD)v3[8].mPrev )
+    while ( (this->mGameState & (__int64)v3[8].mPrev) != 0 )
     {
       v3 = v3[2].mNext - 2;
-      if ( v3 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)v2 )
+      if ( v3 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)mChild )
         goto LABEL_6;
     }
-    v5 = v3[2].mPrev;
-    v6 = v3[2].mNext;
+    mPrev = v3[2].mPrev;
+    mNext = v3[2].mNext;
     v7 = v3 + 2;
-    v5->mNext = v6;
-    v6->mPrev = v5;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     v7->mPrev = v7;
     v7->mNext = v7;
   }
 LABEL_6:
-  v8 = (signed __int64)&v4->mTextures.mTree.mNULL.mUID;
-  v9 = (signed __int64)&v4->mLoading.mNode.mNext[-2];
-  if ( (unsigned int *)v9 != &v4->mTextures.mTree.mNULL.mUID )
+  p_mUID = &this->mTextures.mTree.mNULL.mUID;
+  v9 = this->mLoading.mNode.mNext - 2;
+  if ( v9 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&this->mTextures.mTree.mNULL.mUID )
   {
     while ( 1 )
     {
-      if ( !(*(_DWORD *)(v9 + 128) & v4->mGameState) )
+      if ( ((__int64)v9[8].mPrev & this->mGameState) == 0 )
       {
-        UFG::UIScreenTextureManager::ReleaseScreen(v4, *(const char **)(v9 + 72));
+        UFG::UIScreenTextureManager::ReleaseScreen(this, (const char *)v9[4].mNext);
         goto LABEL_21;
       }
-      v10 = *(unsigned __int8 (**)(void))(v9 + 152);
+      v10 = (unsigned __int8 (*)(void))v9[9].mNext;
       if ( v10 )
       {
         if ( v10() )
           break;
       }
-      v9 = *(_QWORD *)(v9 + 40) - 32i64;
-      if ( v9 == v8 )
+      v9 = v9[2].mNext - 2;
+      if ( v9 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mUID )
         goto LABEL_21;
     }
-    v11 = *(_DWORD *)(v9 + 132);
-    v12 = *(const char **)(v9 + 72);
-    if ( v11 & 4 )
+    mPrev_high = HIDWORD(v9[8].mPrev);
+    v12 = (const char *)v9[4].mNext;
+    if ( (mPrev_high & 4) != 0 )
     {
       v13 = 0;
-      if ( v11 & 0x20 )
+      if ( (mPrev_high & 0x20) != 0 )
         v13 = -2;
-      if ( v11 & 0x40 )
+      if ( (mPrev_high & 0x40) != 0 )
         v13 = -1;
-      UFG::UIScreenManagerBase::queuePushOverlay(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v12,
-        v13,
-        -1);
+      UFG::UIScreenManagerBase::queuePushOverlay(UFG::UIScreenManager::s_instance, v12, v13, -1);
     }
     else
     {
-      UFG::UIScreenManagerBase::queuePushScreen(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v12,
-        -1);
+      UFG::UIScreenManagerBase::queuePushScreen(UFG::UIScreenManager::s_instance, v12, -1);
     }
-    v14 = *(_QWORD *)(v9 + 32);
-    v15 = *(_QWORD **)(v9 + 40);
-    v16 = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> **)(v9 + 32);
-    *(_QWORD *)(v14 + 8) = v15;
-    *v15 = v14;
-    *v16 = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)v16;
-    v16[1] = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)v16;
-    v17 = &UFG::UIScreenTextureManager::sInstance->mActive;
-    v18 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
-    v18->mNext = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)(v9 + 32);
-    *v16 = v18;
-    v16[1] = &v17->mNode;
-    v17->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)(v9 + 32);
+    v14 = v9[2].mPrev;
+    v15 = v9[2].mNext;
+    v14->mNext = v15;
+    v15->mPrev = v14;
+    v9[2].mPrev = v9 + 2;
+    v9[2].mNext = v9 + 2;
+    p_mActive = &UFG::UIScreenTextureManager::sInstance->mActive;
+    v17 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
+    v17->mNext = v9 + 2;
+    v9[2].mPrev = v17;
+    v9[2].mNext = &p_mActive->mNode;
+    p_mActive->mNode.mPrev = v9 + 2;
   }
 LABEL_21:
-  v19 = (signed __int64)&v4->mQueued;
-  v20 = (signed __int64)&v4->mActive.mNode.mNext[-2];
-  if ( (UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *)v20 != &v4->mQueued )
+  p_mQueued = &this->mQueued;
+  v19 = this->mActive.mNode.mNext - 2;
+  if ( v19 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&this->mQueued )
   {
     do
     {
-      if ( !(*(_DWORD *)(v20 + 128) & v4->mGameState) )
+      if ( ((__int64)v19[8].mPrev & this->mGameState) == 0 )
       {
-        if ( *(_BYTE *)(v20 + 132) & 4 )
-          UFG::UIScreenManagerBase::queuePopOverlay(
-            (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-            *(const char **)(v20 + 72));
+        if ( (BYTE4(v19[8].mPrev) & 4) != 0 )
+          UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManager::s_instance, (const char *)v19[4].mNext);
         else
-          UFG::UIScreenManagerBase::queuePopScreen(
-            (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-            *(_DWORD *)(v20 + 24));
+          UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, (unsigned int)v19[1].mNext);
       }
-      v20 = *(_QWORD *)(v20 + 40) - 32i64;
+      v19 = v19[2].mNext - 2;
     }
-    while ( v20 != v19 );
+    while ( v19 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mQueued );
   }
-  v21 = 0;
-  v22 = (signed __int64)&v4->mLoading.mNode.mNext[-2];
-  v23 = v22;
-  if ( v22 != v8 )
+  v20 = 0;
+  v21 = this->mLoading.mNode.mNext - 2;
+  v22 = (__int64)v21;
+  if ( v21 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mUID )
   {
-    while ( !(*(_BYTE *)(v23 + 132) & 2) )
+    while ( (*(_BYTE *)(v22 + 132) & 2) == 0 )
     {
-      v23 = *(_QWORD *)(v23 + 40) - 32i64;
-      if ( v23 == v8 )
+      v22 = *(_QWORD *)(v22 + 40) - 32i64;
+      if ( (unsigned int *)v22 == p_mUID )
         goto LABEL_32;
     }
-    v21 = 1;
+    v20 = 1;
   }
 LABEL_32:
-  v24 = (signed __int64)&v4->mActive.mNode.mNext[-2];
-  if ( v24 == v19 )
+  v23 = this->mActive.mNode.mNext - 2;
+  if ( v23 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mQueued )
   {
 LABEL_35:
-    if ( !v21 )
+    if ( !v20 )
     {
-      v27 = (signed __int64)&v4->mQueued.mNode.mNext[-2];
-      if ( (UFG::qBaseNodeRB **)v27 == v2 )
+      v26 = this->mQueued.mNode.mNext - 2;
+      if ( v26 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)mChild )
       {
-        for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v4->mAllScreens);
+        for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mAllScreens);
               i;
-              i = UFG::qBaseTreeRB::GetNext(&v4->mAllScreens.mTree, &i->mRoot) )
+              i = UFG::qBaseTreeRB::GetNext(&this->mAllScreens.mTree, &i->mRoot) )
         {
-          if ( i[1].mNULL.mUID & v4->mGameState
-            && *(_BYTE *)(&i[1].mNULL.mUID + 1) & 1
+          if ( (i[1].mNULL.mUID & this->mGameState) != 0
+            && (*(_BYTE *)(&i[1].mNULL.mUID + 1) & 1) != 0
             && i->mNULL.mParent == &i->mNULL
             && i->mNULL.mChild[0] == &i->mNULL )
           {
-            UFG::UIScreenTextureManager::QueueLoadAndPush(v4, (const char *)i[1].mRoot.mParent, 0i64);
+            UFG::UIScreenTextureManager::QueueLoadAndPush(this, (const char *)i[1].mRoot.mParent, 0i64);
           }
         }
       }
       else
       {
-        v28 = v4->mQueued.mNode.mNext->mPrev;
-        v29 = *(UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> **)(v27 + 40);
-        v30 = v4->mQueued.mNode.mNext;
-        v28->mNext = v29;
-        v29->mPrev = v28;
-        v30->mPrev = v30;
-        v30->mNext = v30;
-        UFG::UIScreenTextureManager::QueueLoadAndPush(v4, *(const char **)(v27 + 72), 0i64);
+        v27 = this->mQueued.mNode.mNext->mPrev;
+        v28 = v26[2].mNext;
+        v27->mNext = v28;
+        v28->mPrev = v27;
+        v26[2].mPrev = v26 + 2;
+        v26[2].mNext = v26 + 2;
+        UFG::UIScreenTextureManager::QueueLoadAndPush(this, (const char *)v26[4].mNext, 0i64);
       }
       goto LABEL_57;
     }
   }
   else
   {
-    while ( !(*(_BYTE *)(v24 + 132) & 2) )
+    while ( (BYTE4(v23[8].mPrev) & 2) == 0 )
     {
-      v24 = *(_QWORD *)(v24 + 40) - 32i64;
-      if ( v24 == v19 )
+      v23 = v23[2].mNext - 2;
+      if ( v23 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mQueued )
         goto LABEL_35;
     }
   }
-  if ( v22 != v8 )
+  if ( v21 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mUID )
   {
-    while ( !(*(_BYTE *)(v22 + 132) & 1) )
+    while ( (BYTE4(v21[8].mPrev) & 1) == 0 )
     {
-      v22 = *(_QWORD *)(v22 + 40) - 32i64;
-      if ( v22 == v8 )
+      v21 = v21[2].mNext - 2;
+      if ( v21 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mUID )
         goto LABEL_41;
     }
-    UFG::UIScreenTextureManager::ReleaseScreen(v4, *(const char **)(v22 + 72));
+    UFG::UIScreenTextureManager::ReleaseScreen(this, (const char *)v21[4].mNext);
   }
 LABEL_41:
-  for ( j = (signed __int64)&v4->mActive.mNode.mNext[-2]; j != v19; j = *(_QWORD *)(j + 40) - 32i64 )
+  for ( j = this->mActive.mNode.mNext - 2;
+        j != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)p_mQueued;
+        j = j[2].mNext - 2 )
   {
-    v26 = *(_DWORD *)(j + 132);
-    if ( v26 & 1 )
+    v25 = HIDWORD(j[8].mPrev);
+    if ( (v25 & 1) != 0 )
     {
-      if ( v26 & 4 )
-        UFG::UIScreenManagerBase::queuePopOverlay(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          *(const char **)(j + 72));
+      if ( (v25 & 4) != 0 )
+        UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManager::s_instance, (const char *)j[4].mNext);
       else
-        UFG::UIScreenManagerBase::queuePopScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          *(_DWORD *)(j + 24));
+        UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, (unsigned int)j[1].mNext);
     }
   }
 LABEL_57:
-  v4->mCurrentTexturePoolUsage = 0;
-  for ( k = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v4->mTextures);
+  this->mCurrentTexturePoolUsage = 0;
+  for ( k = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mTextures);
         k;
-        k = UFG::qBaseTreeRB::GetNext(&v4->mTextures.mTree, &k->mRoot) )
+        k = UFG::qBaseTreeRB::GetNext(&this->mTextures.mTree, &k->mRoot) )
   {
-    v4->mCurrentTexturePoolUsage += HIDWORD(k[1].mRoot.mParent);
+    this->mCurrentTexturePoolUsage += HIDWORD(k[1].mRoot.mParent);
     if ( k[1].mNULL.mUID
       && (unsigned int)UFG::DataStreamer::GetStreamState((UFG::DataStreamer::Handle *)k[1].mRoot.mChild) == 6 )
     {
-      v33 = 0i64;
-      if ( k[1].mNULL.mUID )
-      {
-        do
-        {
-          (*(void (__fastcall **)(UFG::qBaseNodeRB **, _QWORD))(*(_QWORD *)&k[1].mCount + 8 * v33))(
-            k[1].mRoot.mChild,
-            *((_QWORD *)&k[2].mRoot.mChild[0]->mParent + v33));
-          v33 = (unsigned int)(v33 + 1);
-        }
-        while ( (unsigned int)v33 < k[1].mNULL.mUID );
-      }
+      for ( m = 0i64; (unsigned int)m < k[1].mNULL.mUID; m = (unsigned int)(m + 1) )
+        (*(void (__fastcall **)(UFG::qBaseNodeRB **, _QWORD))(*(_QWORD *)&k[1].mCount + 8 * m))(
+          k[1].mRoot.mChild,
+          *((_QWORD *)&k[2].mRoot.mChild[0]->mParent + m));
       UFG::qArray<UFG::PartRequest *,0>::~qArray<UFG::PartRequest *,0>((UFG::qArray<ActiveMultiMorphTarget,0> *)&k[1].mNULL.mUID);
       UFG::qArray<UFG::PartRequest *,0>::~qArray<UFG::PartRequest *,0>((UFG::qArray<ActiveMultiMorphTarget,0> *)&k[2]);
     }
   }
-  v34 = v4->mCurrentTexturePoolUsage;
-  dataTypes = 8;
-  v35 = (float)v34 / (float)(signed int)v4->mTexturePoolSize;
+  mCurrentTexturePoolUsage = this->mCurrentTexturePoolUsage;
+  dataTypes = DATA_UI;
+  v33 = (float)mCurrentTexturePoolUsage / (float)(int)this->mTexturePoolSize;
   if ( UFG::DataStreamer::IsStalled(&dataTypes, 1u) )
-    v4->mForceFlush = 1;
-  if ( v35 > 0.80000001 || v4->mForceFlush )
+    this->mForceFlush = 1;
+  if ( v33 > 0.80000001 || this->mForceFlush )
   {
     while ( 1 )
     {
-      v36 = (UFG::UIScreenTextureManager::TexturePackReference *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v4->mTextures);
-      if ( !v36 )
+      Head = (UFG::UIScreenTextureManager::TexturePackReference *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mTextures);
+      if ( !Head )
         break;
       while ( 1 )
       {
-        v37 = &v4->mTextures.mTree;
-        if ( !v36->mReferenceCount )
+        p_mTextures = &this->mTextures;
+        if ( !Head->mReferenceCount )
           break;
-        v36 = (UFG::UIScreenTextureManager::TexturePackReference *)UFG::qBaseTreeRB::GetNext(v37, &v36->mNode);
-        if ( !v36 )
+        Head = (UFG::UIScreenTextureManager::TexturePackReference *)UFG::qBaseTreeRB::GetNext(
+                                                                      &p_mTextures->mTree,
+                                                                      &Head->mNode);
+        if ( !Head )
           goto LABEL_71;
       }
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)v37,
-        (UFG::qBaseNodeVariableRB<unsigned __int64> *)v36);
-      UFG::UIScreenTextureManager::TexturePackReference::~TexturePackReference(v36);
-      operator delete[](v36);
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)p_mTextures,
+        (UFG::qBaseNodeVariableRB<unsigned __int64> *)Head);
+      UFG::UIScreenTextureManager::TexturePackReference::~TexturePackReference(Head);
+      operator delete[](Head);
     }
 LABEL_71:
-    v4->mForceFlush = 0;
+    this->mForceFlush = 0;
   }
 }
 
 // File Line: 650
 // RVA: 0x5C19E0
-void __fastcall UFG::UIScreenTextureManager::PushScreen(UFG::UIScreenTextureManager *this, UFG::UIScreenTextureManager::ScreenInfo *screenInfo)
+void __fastcall UFG::UIScreenTextureManager::PushScreen(
+        UFG::UIScreenTextureManager *this,
+        UFG::UIScreenTextureManager::ScreenInfo *screenInfo)
 {
-  unsigned int v2; // eax
-  UFG::UIScreenTextureManager::ScreenInfo *v3; // rbx
-  char *v4; // rdx
-  int v5; // er8
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v6; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v7; // rax
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v8; // rdx
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v9; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v10; // rax
+  unsigned int mFlags; // eax
+  char *mData; // rdx
+  int v5; // r8d
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mNext; // rax
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mActive; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v9; // rax
 
-  v2 = screenInfo->mFlags;
-  v3 = screenInfo;
-  v4 = screenInfo->mScreenName.mData;
-  if ( v2 & 4 )
+  mFlags = screenInfo->mFlags;
+  mData = screenInfo->mScreenName.mData;
+  if ( (mFlags & 4) != 0 )
   {
     v5 = 0;
-    if ( v2 & 0x20 )
+    if ( (mFlags & 0x20) != 0 )
       v5 = -2;
-    if ( v2 & 0x40 )
+    if ( (mFlags & 0x40) != 0 )
       v5 = -1;
-    UFG::UIScreenManagerBase::queuePushOverlay(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v4,
-      v5,
-      -1);
+    UFG::UIScreenManagerBase::queuePushOverlay(UFG::UIScreenManager::s_instance, mData, v5, -1);
   }
   else
   {
-    UFG::UIScreenManagerBase::queuePushScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v4,
-      -1);
+    UFG::UIScreenManagerBase::queuePushScreen(UFG::UIScreenManager::s_instance, mData, -1);
   }
-  v6 = v3->mPrev;
-  v7 = v3->mNext;
-  v8 = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v3->mPrev;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v8->mPrev = v8;
-  v8->mNext = v8;
-  v9 = &UFG::UIScreenTextureManager::sInstance->mActive;
-  v10 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
-  v10->mNext = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v3->mPrev;
-  v8->mPrev = v10;
-  v8->mNext = &v9->mNode;
-  v9->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v3->mPrev;
+  mPrev = screenInfo->mPrev;
+  mNext = screenInfo->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  screenInfo->mPrev = &screenInfo->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+  screenInfo->mNext = &screenInfo->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+  p_mActive = &UFG::UIScreenTextureManager::sInstance->mActive;
+  v9 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
+  v9->mNext = &screenInfo->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+  screenInfo->mPrev = v9;
+  screenInfo->mNext = &p_mActive->mNode;
+  p_mActive->mNode.mPrev = &screenInfo->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
 }
 
 // File Line: 690
@@ -3833,16 +3546,14 @@ char __fastcall UFG::UIScreenTextureManager::ModalScreenInQueue(UFG::UIScreenTex
 {
   char v1; // r8
   UFG::UIScreenTextureManager *v2; // rax
-  UFG::UIScreenTextureManager *v3; // r9
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v4; // rdx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v5; // rcx
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mQueued; // rdx
+  UFG::UIScreenTextureManager *v5; // rcx
 
   v1 = 0;
   v2 = (UFG::UIScreenTextureManager *)&this->mLoading.mNode.mNext[-2];
-  v3 = this;
   if ( v2 != (UFG::UIScreenTextureManager *)&this->mTextures.mTree.mNULL.mUID )
   {
-    while ( !(v2->m_rootDir[52] & 2) )
+    while ( (v2->m_rootDir[52] & 2) == 0 )
     {
       v2 = (UFG::UIScreenTextureManager *)&v2->m_factoryList.mTree.mNULL.mParent[-1];
       if ( v2 == (UFG::UIScreenTextureManager *)&this->mTextures.mTree.mNULL.mUID )
@@ -3851,14 +3562,14 @@ char __fastcall UFG::UIScreenTextureManager::ModalScreenInQueue(UFG::UIScreenTex
     v1 = 1;
   }
 LABEL_6:
-  v4 = &this->mQueued;
-  v5 = this->mActive.mNode.mNext - 2;
-  if ( v5 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v3->mQueued )
+  p_mQueued = &this->mQueued;
+  v5 = (UFG::UIScreenTextureManager *)&this->mActive.mNode.mNext[-2];
+  if ( v5 == (UFG::UIScreenTextureManager *)&this->mQueued )
     return v1;
-  while ( !(BYTE4(v5[8].mPrev) & 2) )
+  while ( (v5->m_rootDir[52] & 2) == 0 )
   {
-    v5 = v5[2].mNext - 2;
-    if ( v5 == (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)v4 )
+    v5 = (UFG::UIScreenTextureManager *)&v5->m_factoryList.mTree.mNULL.mParent[-1];
+    if ( v5 == (UFG::UIScreenTextureManager *)p_mQueued )
       return v1;
   }
   return 1;
@@ -3866,80 +3577,71 @@ LABEL_6:
 
 // File Line: 823
 // RVA: 0x5BE000
-void __fastcall UFG::UIScreenTextureManager::HandleScreenTextureLoaded(UFG::DataStreamer::Handle *handle, UFG::UIScreenTextureManager::ScreenInfo *param)
+void __fastcall UFG::UIScreenTextureManager::HandleScreenTextureLoaded(
+        UFG::DataStreamer::Handle *handle,
+        UFG::UIScreenTextureManager::ScreenInfo *param)
 {
-  UFG::UIScreenTextureManager::ScreenInfo *v2; // rbx
-  void (*v3)(void); // rax
-  unsigned int v4; // eax
-  const char *v5; // rdx
-  int v6; // er8
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v7; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v8; // rax
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v9; // rdx
-  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *v10; // rcx
-  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v11; // rax
-  UFG::UIScreenTextureManager *v12; // rdi
-  unsigned int v13; // eax
-  UFG::qBaseTreeRB *v14; // rax
-  int v15; // ecx
+  void (*mIsLoadedCb)(void); // rax
+  unsigned int mFlags; // eax
+  char *mData; // rdx
+  int v6; // r8d
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mPrev; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *mNext; // rax
+  UFG::qList<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo,0,0> *p_mActive; // rcx
+  UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *v10; // rax
+  UFG::UIScreenTextureManager *v11; // rdi
+  unsigned int v12; // eax
+  UFG::qBaseTreeRB *v13; // rax
+  int mParent; // ecx
 
-  v2 = param;
-  if ( UFG::UIScreenTextureManager::sInstance->mGameState & param->mValidStates )
+  if ( (UFG::UIScreenTextureManager::sInstance->mGameState & param->mValidStates) != 0 )
   {
-    v3 = (void (*)(void))param->mIsLoadedCb;
-    if ( v3 )
-      v3();
-    if ( !v2->mIsLoadedCb )
+    mIsLoadedCb = (void (*)(void))param->mIsLoadedCb;
+    if ( mIsLoadedCb )
+      mIsLoadedCb();
+    if ( !param->mIsLoadedCb )
     {
-      v4 = v2->mFlags;
-      v5 = v2->mScreenName.mData;
-      if ( v4 & 4 )
+      mFlags = param->mFlags;
+      mData = param->mScreenName.mData;
+      if ( (mFlags & 4) != 0 )
       {
         v6 = 0;
-        if ( v4 & 0x20 )
+        if ( (mFlags & 0x20) != 0 )
           v6 = -2;
-        if ( v4 & 0x40 )
+        if ( (mFlags & 0x40) != 0 )
           v6 = -1;
-        UFG::UIScreenManagerBase::queuePushOverlay(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v5,
-          v6,
-          -1);
+        UFG::UIScreenManagerBase::queuePushOverlay(UFG::UIScreenManager::s_instance, mData, v6, -1);
       }
       else
       {
-        UFG::UIScreenManagerBase::queuePushScreen(
-          (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-          v5,
-          -1);
+        UFG::UIScreenManagerBase::queuePushScreen(UFG::UIScreenManager::s_instance, mData, -1);
       }
-      v7 = v2->mPrev;
-      v8 = v2->mNext;
-      v9 = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v2->mPrev;
-      v7->mNext = v8;
-      v8->mPrev = v7;
-      v9->mPrev = v9;
-      v9->mNext = v9;
-      v10 = &UFG::UIScreenTextureManager::sInstance->mActive;
-      v11 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
-      v11->mNext = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v2->mPrev;
-      v9->mPrev = v11;
-      v9->mNext = &v10->mNode;
-      v10->mNode.mPrev = (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)&v2->mPrev;
+      mPrev = param->mPrev;
+      mNext = param->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      param->mPrev = &param->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+      param->mNext = &param->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+      p_mActive = &UFG::UIScreenTextureManager::sInstance->mActive;
+      v10 = UFG::UIScreenTextureManager::sInstance->mActive.mNode.mPrev;
+      v10->mNext = &param->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
+      param->mPrev = v10;
+      param->mNext = &p_mActive->mNode;
+      p_mActive->mNode.mPrev = &param->UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo>;
     }
   }
   else if ( UFG::qString::operator!=(&param->mTexturePackName, 0i64) )
   {
-    v12 = UFG::UIScreenTextureManager::sInstance;
-    v13 = UFG::qStringHashUpper32(v2->mTexturePackName.mData, 0xFFFFFFFF);
-    if ( v13 )
+    v11 = UFG::UIScreenTextureManager::sInstance;
+    v12 = UFG::qStringHashUpper32(param->mTexturePackName.mData, -1);
+    if ( v12 )
     {
-      v14 = UFG::qBaseTreeRB::Get(&v12->mTextures.mTree, v13);
-      if ( v14 )
+      v13 = UFG::qBaseTreeRB::Get(&v11->mTextures.mTree, v12);
+      if ( v13 )
       {
-        v15 = (int)v14[1].mRoot.mParent;
-        if ( v15 )
-          LODWORD(v14[1].mRoot.mParent) = v15 - 1;
+        mParent = (int)v13[1].mRoot.mParent;
+        if ( mParent )
+          LODWORD(v13[1].mRoot.mParent) = mParent - 1;
       }
     }
   }
@@ -3947,25 +3649,25 @@ void __fastcall UFG::UIScreenTextureManager::HandleScreenTextureLoaded(UFG::Data
 
 // File Line: 847
 // RVA: 0x5BDFF0
-Illusion::Target *__fastcall UFG::UIScreenTextureManager::GetSharedTarget(UFG::UIScreenTextureManager *this, UFG::UIScreenTextureManager::SharedTargetType type)
+Illusion::Target *__fastcall UFG::UIScreenTextureManager::GetSharedTarget(
+        UFG::UIScreenTextureManager *this,
+        UFG::UIScreenTextureManager::SharedTargetType type)
 {
   return this->mSharedTargets[type];
 }
 
 // File Line: 853
 // RVA: 0x5BDFB0
-UFG::qBaseTreeRB *__fastcall UFG::UIScreenTextureManager::GetScreenInfo(UFG::UIScreenTextureManager *this, const char *screenName)
+UFG::qBaseTreeRB *__fastcall UFG::UIScreenTextureManager::GetScreenInfo(
+        UFG::UIScreenTextureManager *this,
+        const char *screenName)
 {
-  UFG::UIScreenTextureManager *v2; // rbx
   unsigned int v3; // eax
-  UFG::qBaseTreeRB *result; // rax
 
-  v2 = this;
-  v3 = UFG::qStringHashUpper32(screenName, 0xFFFFFFFF);
+  v3 = UFG::qStringHashUpper32(screenName, -1);
   if ( v3 )
-    result = UFG::qBaseTreeRB::Get(&v2->mAllScreens.mTree, v3);
+    return UFG::qBaseTreeRB::Get(&this->mAllScreens.mTree, v3);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 

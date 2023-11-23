@@ -1,9 +1,9 @@
 // File Line: 83
 // RVA: 0xA0DAD0
-bool __fastcall Scaleform::Render::D3D1x::ShaderDesc::IsShaderVersionSupported(Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
+bool __fastcall Scaleform::Render::D3D1x::ShaderDesc::IsShaderVersionSupported(
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
 {
-  __int32 v1; // ecx
-  int v2; // ecx
+  int v1; // ecx
   bool result; // al
 
   result = 1;
@@ -12,12 +12,8 @@ bool __fastcall Scaleform::Render::D3D1x::ShaderDesc::IsShaderVersionSupported(S
     v1 = ver - 1;
     if ( v1 )
     {
-      v2 = v1 - 1;
-      if ( v2 )
-      {
-        if ( v2 != 1 )
-          result = 0;
-      }
+      if ( (unsigned int)(v1 - 1) >= 2 )
+        return 0;
     }
   }
   return result;
@@ -25,93 +21,93 @@ bool __fastcall Scaleform::Render::D3D1x::ShaderDesc::IsShaderVersionSupported(S
 
 // File Line: 127
 // RVA: 0xA0A8F0
-signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(Scaleform::Render::D3D1x::ShaderDesc::ShaderType type)
+__int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(int type)
 {
-  signed __int64 result; // rax
-  __int32 v2; // ecx
+  __int64 result; // rax
+  int v2; // ecx
   int v3; // ecx
   int v4; // ecx
-  __int32 v5; // ecx
+  int v5; // ecx
   int v6; // ecx
   int v7; // ecx
-  __int32 v8; // ecx
+  int v8; // ecx
   int v9; // ecx
   int v10; // ecx
-  __int32 v11; // ecx
+  int v11; // ecx
   int v12; // ecx
-  __int32 v13; // ecx
+  int v13; // ecx
   int v14; // ecx
   int v15; // ecx
-  __int32 v16; // ecx
+  int v16; // ecx
   int v17; // ecx
-  __int32 v18; // ecx
+  int v18; // ecx
   int v19; // ecx
   int v20; // ecx
-  __int32 v21; // ecx
+  int v21; // ecx
   int v22; // ecx
-  __int32 v23; // ecx
+  int v23; // ecx
   int v24; // ecx
   int v25; // ecx
-  __int32 v26; // ecx
+  int v26; // ecx
   int v27; // ecx
   int v28; // ecx
-  __int32 v29; // ecx
+  int v29; // ecx
   int v30; // ecx
   int v31; // ecx
-  __int32 v32; // ecx
+  int v32; // ecx
   int v33; // ecx
-  __int32 v34; // ecx
+  int v34; // ecx
   int v35; // ecx
   int v36; // ecx
-  __int32 v37; // ecx
+  int v37; // ecx
   int v38; // ecx
-  __int32 v39; // ecx
+  int v39; // ecx
   int v40; // ecx
   int v41; // ecx
-  __int32 v42; // ecx
+  int v42; // ecx
   int v43; // ecx
 
-  if ( (signed int)type > 257 )
+  if ( type > 257 )
   {
-    if ( (signed int)type > 513 )
+    if ( type > 513 )
     {
-      if ( (signed int)type > 769 )
+      if ( type > 769 )
       {
-        if ( (signed int)type > 1025 )
+        if ( type > 1025 )
         {
-          if ( (signed int)type > 1281 )
+          if ( type > 1281 )
           {
-            if ( (signed int)type > 65537 )
+            if ( type > 65537 )
             {
-              if ( (signed int)type > 65793 )
+              if ( type > 65793 )
               {
-                if ( (signed int)type > 0x20000 )
+                if ( type > 0x20000 )
                 {
-                  if ( (signed int)type > 133120 )
+                  if ( type > 133120 )
                   {
-                    if ( (signed int)type > 135168 )
+                    if ( type > 135168 )
                     {
-                      if ( (signed int)type > 0x40000 )
+                      if ( type > 0x40000 )
                       {
-                        if ( (signed int)type > 262400 )
+                        if ( type > 262400 )
                         {
-                          if ( (signed int)type > 270336 )
+                          if ( type > 270336 )
                           {
-                            if ( (signed int)type > 270592 )
+                            if ( type > 270592 )
                             {
-                              if ( (signed int)type > 278528 )
+                              if ( type > 278528 )
                               {
-                                if ( (signed int)type > 278784 )
+                                if ( type > 278784 )
                                 {
-                                  if ( (signed int)type > 393216 )
+                                  if ( type > 393216 )
                                   {
-                                    if ( (signed int)type > 731137 )
+                                    if ( type > 731137 )
                                     {
-                                      if ( (signed int)type > 786432 )
+                                      if ( type > 786432 )
                                       {
-                                        if ( (signed int)type > 0x100000 )
+                                        if ( type > 0x100000 )
                                         {
-                                          if ( (signed int)type > 1441794 )
+                                          if ( type > 1441794 )
                                           {
                                             v42 = type - 1441796;
                                             if ( !v42 )
@@ -143,7 +139,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                         {
                                           if ( type == 0x100000 )
                                             return 906i64;
-                                          if ( (signed int)type > 917568 )
+                                          if ( type > 917568 )
                                           {
                                             v37 = type - 917632;
                                             if ( !v37 )
@@ -176,9 +172,9 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                       {
                                         if ( type == 786432 )
                                           return 897i64;
-                                        if ( (signed int)type > 754177 )
+                                        if ( type > 754177 )
                                         {
-                                          if ( (signed int)type > 758272 )
+                                          if ( type > 758272 )
                                           {
                                             v32 = type - 758273;
                                             if ( !v32 )
@@ -210,7 +206,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                         {
                                           if ( type == 754177 )
                                             return 888i64;
-                                          if ( (signed int)type > 735232 )
+                                          if ( type > 735232 )
                                           {
                                             v26 = type - 735233;
                                             if ( !v26 )
@@ -247,11 +243,11 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                     {
                                       if ( type == 731137 )
                                         return 878i64;
-                                      if ( (signed int)type > 660481 )
+                                      if ( type > 660481 )
                                       {
-                                        if ( (signed int)type > 676352 )
+                                        if ( type > 676352 )
                                         {
-                                          if ( (signed int)type > 729089 )
+                                          if ( type > 729089 )
                                           {
                                             v21 = type - 729600;
                                             if ( !v21 )
@@ -283,7 +279,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                         {
                                           if ( type == 676352 )
                                             return 869i64;
-                                          if ( (signed int)type > 673792 )
+                                          if ( type > 673792 )
                                           {
                                             v16 = type - 673793;
                                             if ( !v16 )
@@ -316,9 +312,9 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                       {
                                         if ( type == 660481 )
                                           return 860i64;
-                                        if ( (signed int)type > 655872 )
+                                        if ( type > 655872 )
                                         {
-                                          if ( (signed int)type > 659457 )
+                                          if ( type > 659457 )
                                           {
                                             v11 = type - 659968;
                                             if ( !v11 )
@@ -350,7 +346,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                         {
                                           if ( type == 655872 )
                                             return 851i64;
-                                          if ( (signed int)type > 524289 )
+                                          if ( type > 524289 )
                                           {
                                             v5 = type - 557056;
                                             if ( !v5 )
@@ -387,7 +383,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                   }
                                   if ( type == 393216 )
                                   {
-                                    result = 841i64;
+                                    return 841i64;
                                   }
                                   else
                                   {
@@ -469,7 +465,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                                 }
                                 else if ( type == 278784 )
                                 {
-                                  result = 817i64;
+                                  return 817i64;
                                 }
                                 else
                                 {
@@ -659,7 +655,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                               }
                               else if ( type == 278528 )
                               {
-                                result = 757i64;
+                                return 757i64;
                               }
                               else
                               {
@@ -777,7 +773,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                             }
                             else if ( type == 270592 )
                             {
-                              result = 721i64;
+                              return 721i64;
                             }
                             else
                             {
@@ -1039,7 +1035,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                           }
                           else if ( type == 270336 )
                           {
-                            result = 637i64;
+                            return 637i64;
                           }
                           else
                           {
@@ -1121,7 +1117,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                         }
                         else if ( type == 262400 )
                         {
-                          result = 613i64;
+                          return 613i64;
                         }
                         else
                         {
@@ -1311,7 +1307,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                       }
                       else if ( type == 0x40000 )
                       {
-                        result = 553i64;
+                        return 553i64;
                       }
                       else
                       {
@@ -1447,7 +1443,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                     }
                     else if ( type == 135168 )
                     {
-                      result = 511i64;
+                      return 511i64;
                     }
                     else
                     {
@@ -1529,7 +1525,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                   }
                   else if ( type == 133120 )
                   {
-                    result = 487i64;
+                    return 487i64;
                   }
                   else
                   {
@@ -1593,7 +1589,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
                 }
                 else if ( type == 0x20000 )
                 {
-                  result = 469i64;
+                  return 469i64;
                 }
                 else
                 {
@@ -1711,7 +1707,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
               }
               else if ( type == 65793 )
               {
-                result = 433i64;
+                return 433i64;
               }
               else
               {
@@ -1937,7 +1933,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
             }
             else if ( type == 65537 )
             {
-              result = 361i64;
+              return 361i64;
             }
             else
             {
@@ -2055,7 +2051,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
           }
           else if ( type == 1281 )
           {
-            result = 325i64;
+            return 325i64;
           }
           else
           {
@@ -2317,7 +2313,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
         }
         else if ( type == 1025 )
         {
-          result = 241i64;
+          return 241i64;
         }
         else
         {
@@ -2435,7 +2431,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
       }
       else if ( type == 769 )
       {
-        result = 205i64;
+        return 205i64;
       }
       else
       {
@@ -2697,7 +2693,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
     }
     else if ( type == 513 )
     {
-      result = 121i64;
+      return 121i64;
     }
     else
     {
@@ -2815,7 +2811,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
   }
   else if ( type == 257 )
   {
-    result = 85i64;
+    return 85i64;
   }
   else
   {
@@ -3078,8 +3074,7 @@ signed __int64 __fastcall Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(S
     }
   }
   return result;
-}     break;
-      case 171:
+}
         result = 83i64;
         break;
       case 173:
@@ -11260,20 +11255,20 @@ __int64 Scaleform::Render::D3D1x::_dynamic_initializer_for__ShaderDesc_VS_D3D1xF
 
 // File Line: 43497
 // RVA: 0xA0A880
-Scaleform::Render::D3D1x::VertexShaderDesc *__fastcall Scaleform::Render::D3D1x::VertexShaderDesc::GetDesc(Scaleform::Render::D3D1x::ShaderDesc::ShaderType shader, Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
+Scaleform::Render::D3D1x::VertexShaderDesc *__fastcall Scaleform::Render::D3D1x::VertexShaderDesc::GetDesc(
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderType shader,
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
 {
-  return Scaleform::Render::D3D1x::VertexShaderDesc::Descs[ShaderIndexingData[0][(signed int)ver
-                                                                               + 4i64
-                                                                               * (signed int)Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader)].VertexIndex];
+  return Scaleform::Render::D3D1x::VertexShaderDesc::Descs[ShaderIndexingData[Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader)][ver].VertexIndex];
 }
 
 // File Line: 43502
 // RVA: 0xA0DAA0
-__int64 __fastcall Scaleform::Render::D3D1x::VertexShaderDesc::GetShaderIndex(Scaleform::Render::D3D1x::ShaderDesc::ShaderType shader, Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
+__int64 __fastcall Scaleform::Render::D3D1x::VertexShaderDesc::GetShaderIndex(
+        int shader,
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
 {
-  return (unsigned int)ShaderIndexingData[0][(signed int)ver
-                                           + 4i64
-                                           * (signed int)Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader)].VertexIndex;
+  return (unsigned int)ShaderIndexingData[(int)Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader)][ver].VertexIndex;
 }
 
 // File Line: 44492
@@ -27448,10 +27443,10 @@ __int64 Scaleform::Render::D3D1x::_dynamic_initializer_for__ShaderDesc_FS_D3D1xF
 
 // File Line: 66265
 // RVA: 0xA0A8C0
-__int64 __fastcall Scaleform::Render::D3D1x::FragShaderDesc::GetShaderIndex(Scaleform::Render::D3D1x::ShaderDesc::ShaderType shader, Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
+__int64 __fastcall Scaleform::Render::D3D1x::FragShaderDesc::GetShaderIndex(
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderType shader,
+        Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion ver)
 {
-  return dword_1419FFF64[6
-                       * ((signed int)ver
-                        + 4i64 * (signed int)Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader))];
+  return dword_1419FFF64[24 * Scaleform::Render::D3D1x::ShaderDesc::GetShaderIndex(shader) + 6 * ver];
 }
 

@@ -1,23 +1,20 @@
 // File Line: 84
 // RVA: 0x12B49E8
-unsigned __int64 __fastcall fread_s(void *buffer, unsigned __int64 bufferSize, unsigned __int64 elementSize, unsigned __int64 count, _iobuf *stream)
+unsigned __int64 __fastcall fread_s(
+        _BYTE *buffer,
+        size_t bufferSize,
+        unsigned __int64 elementSize,
+        unsigned __int64 count,
+        _iobuf *stream)
 {
-  unsigned __int64 v5; // rsi
-  unsigned __int64 v6; // r15
-  unsigned __int64 v7; // rdi
-  void *v8; // r14
   unsigned __int64 v9; // rdi
 
-  v5 = count;
-  v6 = elementSize;
-  v7 = bufferSize;
-  v8 = buffer;
   if ( elementSize && count )
   {
     if ( stream )
     {
       lock_file(stream);
-      v9 = fread_nolock_s(v8, v7, v6, v5, stream);
+      v9 = fread_nolock_s(buffer, bufferSize, elementSize, count, stream);
       unlock_file(stream);
       return v9;
     }
@@ -35,40 +32,39 @@ fread_s$fin$0
 
 // File Line: 127
 // RVA: 0x12B47A8
-unsigned __int64 __fastcall fread_nolock_s(void *buffer, unsigned __int64 bufferSize, unsigned __int64 elementSize, unsigned __int64 num, _iobuf *stream)
+unsigned __int64 __fastcall fread_nolock_s(
+        _BYTE *buffer,
+        size_t bufferSize,
+        unsigned __int64 elementSize,
+        unsigned __int64 num,
+        _iobuf *stream)
 {
-  unsigned __int64 v5; // r14
-  unsigned __int64 v6; // rbp
-  void *v7; // r12
   _BYTE *v8; // r15
-  unsigned __int64 v9; // r13
+  size_t v9; // r13
   unsigned __int64 v11; // rbx
   unsigned __int64 v12; // rsi
-  unsigned int v13; // ecx
-  unsigned __int64 v14; // r15
+  unsigned int bufsiz; // ecx
+  unsigned __int64 cnt; // r15
   __int64 v15; // rax
   _BYTE *v16; // r15
-  signed int v17; // er15
+  int v17; // r15d
   unsigned __int64 v18; // rdx
-  unsigned int v19; // er15
+  unsigned int v19; // r15d
   int v20; // eax
-  unsigned int v21; // er8
+  unsigned int v21; // r8d
   int v22; // eax
-  int v23; // [rsp+60h] [rbp+8h]
+  unsigned int v23; // [rsp+60h] [rbp+8h]
   _BYTE *dst; // [rsp+68h] [rbp+10h]
   unsigned __int64 v25; // [rsp+78h] [rbp+20h]
 
   v25 = num;
-  v5 = elementSize;
-  v6 = bufferSize;
-  v7 = buffer;
   v8 = buffer;
   dst = buffer;
   v9 = bufferSize;
   if ( !elementSize || !num )
     return 0i64;
   if ( !buffer )
-    goto LABEL_53;
+    goto LABEL_4;
   if ( !stream || num > 0xFFFFFFFFFFFFFFFFui64 / elementSize )
   {
     if ( bufferSize != -1i64 )
@@ -76,64 +72,64 @@ unsigned __int64 __fastcall fread_nolock_s(void *buffer, unsigned __int64 buffer
       memset(buffer, 0, bufferSize);
       num = v25;
     }
-    if ( !stream || num > 0xFFFFFFFFFFFFFFFFui64 / v5 )
+    if ( !stream || num > 0xFFFFFFFFFFFFFFFFui64 / elementSize )
     {
-LABEL_53:
+LABEL_4:
       *errno() = 22;
       goto LABEL_5;
     }
   }
-  v11 = num * v5;
-  v12 = num * v5;
-  if ( stream->_flag & 0x10C )
-    v13 = stream->_bufsiz;
+  v11 = num * elementSize;
+  v12 = num * elementSize;
+  if ( (stream->_flag & 0x10C) != 0 )
+    bufsiz = stream->_bufsiz;
   else
-    v13 = 4096;
-  v23 = v13;
+    bufsiz = 4096;
+  v23 = bufsiz;
   if ( !v11 )
     return num;
-  while ( stream->_flag & 0x10C )
+  while ( (stream->_flag & 0x10C) != 0 )
   {
-    v14 = stream->_cnt;
-    if ( !(_DWORD)v14 )
+    cnt = stream->_cnt;
+    if ( !(_DWORD)cnt )
     {
       v8 = dst;
       break;
     }
-    if ( (v14 & 0x80000000) != 0i64 )
-      goto LABEL_48;
-    if ( v12 < v14 )
-      LODWORD(v14) = v12;
-    if ( (unsigned int)v14 > v9 )
-      goto LABEL_45;
-    memcpy_s(dst, v9, stream->_ptr, (unsigned int)v14);
-    stream->_cnt -= v14;
-    v15 = (unsigned int)v14;
+    if ( (cnt & 0x80000000) != 0i64 )
+      goto LABEL_47;
+    if ( v12 < cnt )
+      LODWORD(cnt) = v12;
+    if ( (unsigned int)cnt > v9 )
+      goto LABEL_44;
+    memcpy_s(dst, v9, stream->_ptr, (unsigned int)cnt);
+    stream->_cnt -= cnt;
+    v15 = (unsigned int)cnt;
     v16 = dst;
     v12 -= v15;
     stream->_ptr += v15;
-LABEL_25:
-    v13 = v23;
+LABEL_24:
+    bufsiz = v23;
     v8 = &v16[v15];
     v9 -= v15;
-LABEL_42:
+LABEL_41:
     dst = v8;
     if ( !v12 )
       return v25;
   }
-  if ( v12 >= v13 )
+  if ( v12 >= bufsiz )
   {
-    if ( v13 )
+    if ( bufsiz )
     {
       if ( v12 <= 0x7FFFFFFF )
       {
         v17 = v12;
-        v18 = v12 % v13;
+        v18 = v12 % bufsiz;
       }
       else
       {
         v17 = 0x7FFFFFFF;
-        LODWORD(v18) = 0x7FFFFFFF % v13;
+        LODWORD(v18) = 0x7FFFFFFF % bufsiz;
       }
       v19 = v17 - v18;
     }
@@ -144,7 +140,7 @@ LABEL_42:
         v19 = 0x7FFFFFFF;
     }
     if ( v19 > v9 )
-      goto LABEL_45;
+      goto LABEL_44;
     v20 = fileno(stream);
     v21 = v19;
     v16 = dst;
@@ -152,34 +148,34 @@ LABEL_42:
     if ( !(_DWORD)v15 )
     {
       stream->_flag |= 0x10u;
-      return (v11 - v12) / v5;
+      return (v11 - v12) / elementSize;
     }
     if ( (_DWORD)v15 == -1 )
     {
-LABEL_48:
+LABEL_47:
       stream->_flag |= 0x20u;
-      return (v11 - v12) / v5;
+      return (v11 - v12) / elementSize;
     }
     v15 = (unsigned int)v15;
     v12 -= (unsigned int)v15;
-    goto LABEL_25;
+    goto LABEL_24;
   }
   v22 = filbuf(stream);
   if ( v22 == -1 )
-    return (v11 - v12) / v5;
+    return (v11 - v12) / elementSize;
   if ( v9 )
   {
     *v8 = v22;
-    v13 = stream->_bufsiz;
+    bufsiz = stream->_bufsiz;
     --v12;
     ++v8;
     --v9;
-    v23 = stream->_bufsiz;
-    goto LABEL_42;
+    v23 = bufsiz;
+    goto LABEL_41;
   }
-LABEL_45:
-  if ( v6 != -1i64 )
-    memset(v7, 0, v6);
+LABEL_44:
+  if ( bufferSize != -1i64 )
+    memset(buffer, 0, bufferSize);
   *errno() = 34;
 LABEL_5:
   invalid_parameter_noinfo();

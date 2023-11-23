@@ -7,7 +7,8 @@ _BOOL8 __fastcall UFG::DoorComponent::IsOpen(UFG::DoorComponent *this)
 
 // File Line: 54
 // RVA: 0x6F44B0
-hkpMoppSplittingPlaneDirection *__fastcall Scaleform::GFx::AS3::IntervalTimer::GetNextInvokeTime(hkpMoppDefaultAssembler *this)
+hkpMoppSplittingPlaneDirection *__fastcall Scaleform::GFx::AS3::IntervalTimer::GetNextInvokeTime(
+        hkpMoppDefaultAssembler *this)
 {
   return this->m_directions.m_data;
 }

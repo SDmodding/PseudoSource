@@ -3,15 +3,15 @@
 void __fastcall UFG::UIItem::~UIItem(UFG::UIItem *this)
 {
   UFG::qNode<UFG::UIItem,UFG::UIItem> *v1; // rdx
-  UFG::qNode<UFG::UIItem,UFG::UIItem> *v2; // rcx
-  UFG::qNode<UFG::UIItem,UFG::UIItem> *v3; // rax
+  UFG::qNode<UFG::UIItem,UFG::UIItem> *mPrev; // rcx
+  UFG::qNode<UFG::UIItem,UFG::UIItem> *mNext; // rax
 
   this->vfptr = (UFG::UIItemVtbl *)&UFG::UIItem::`vftable;
-  v1 = (UFG::qNode<UFG::UIItem,UFG::UIItem> *)&this->mPrev;
-  v2 = this->mPrev;
-  v3 = v1->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  v1 = &this->UFG::qNode<UFG::UIItem,UFG::UIItem>;
+  mPrev = this->mPrev;
+  mNext = v1->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
 }

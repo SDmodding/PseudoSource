@@ -1,5 +1,6 @@
 // File Line: 22
 // RVA: 0x132F360
+// attributes: thunk
 OSuitePrivate::ConsumablesManager *__fastcall OSuite::IConsumablesManager::GetConsumableManager()
 {
   return OSuite::TSingleton<OSuitePrivate::ConsumablesManager>::Object();
@@ -9,143 +10,132 @@ OSuitePrivate::ConsumablesManager *__fastcall OSuite::IConsumablesManager::GetCo
 // RVA: 0x15DF9C0
 __int64 dynamic_initializer_for__OSuitePrivate::ConsumablesManager::m_instance__()
 {
-  return atexit(dynamic_atexit_destructor_for__OSuitePrivate::ConsumablesManager::m_instance__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__OSuitePrivate::ConsumablesManager::m_instance__);
 }
 
 // File Line: 46
 // RVA: 0x132EAAC
-void __fastcall OSuitePrivate::ConsumablesManager::ConsumablesManager(OSuitePrivate::ConsumablesManager *this, OSuite::ZObject *a2)
+void __fastcall OSuitePrivate::ConsumablesManager::ConsumablesManager(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::ZObject *a2)
 {
-  OSuite::ZObject *v2; // rbx
-  OSuitePrivate::ConsumablesManager *v3; // rdi
+  OSuite::TList<OSuite::IPlayerAccount *> *p_m_TransactionRequested; // rbx
   __int64 v4; // rax
 
   this->m_platformConsumables = 0i64;
   this->m_pEidosConsumables = 0i64;
   this->m_pPlatformOnlyTransaction = 0i64;
-  v2 = (OSuite::ZObject *)&this->m_TransactionRequested.vfptr;
-  v3 = this;
-  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
-  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&this->m_TransactionRequested.vfptr, a2);
-  v2[4].vfptr = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-  v4 = OSuite::ZObject::malloc(v2, 0x80ui64, 0i64);
-  v2[2].vfptr = 0i64;
-  v2[4].vfptr = (OSuite::ZObjectVtbl *)v4;
-  v2[1].vfptr = (OSuite::ZObjectVtbl *)16;
-  OSuite::ZMutex::ZMutex(&v3->m_mutex);
-  v3->m_httpRequest = 0i64;
-  *(_WORD *)&v3->m_bRequestInProgress = 0;
-  OSuite::ZString::ZString(&v3->m_finalizeData);
+  p_m_TransactionRequested = &this->m_TransactionRequested;
+  this->OSuite::IConsumablesManager::vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
+  this->OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
+  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&this->m_TransactionRequested, a2);
+  p_m_TransactionRequested->m_pList = 0i64;
+  p_m_TransactionRequested->OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  p_m_TransactionRequested->OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+  v4 = OSuite::ZObject::malloc(p_m_TransactionRequested, 0x80ui64, 0i64);
+  p_m_TransactionRequested->m_nTop = 0i64;
+  p_m_TransactionRequested->m_pList = (OSuite::IPlayerAccount **)v4;
+  p_m_TransactionRequested->m_nSize = 16i64;
+  OSuite::ZMutex::ZMutex(&this->m_mutex);
+  this->m_httpRequest = 0i64;
+  *(_WORD *)&this->m_bRequestInProgress = 0;
+  OSuite::ZString::ZString(&this->m_finalizeData);
 }
 
 // File Line: 54
 // RVA: 0x132EB50
 void __fastcall OSuitePrivate::ConsumablesManager::~ConsumablesManager(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rbx
-  OSuitePrivate::ZConsumableTransactionBase *v2; // rcx
-  OSuite::TList<OSuite::IPlayerAccount *> *v3; // rcx
-  OSuite::IPlayerAccount **v4; // rdx
+  OSuitePrivate::ZConsumableTransactionBase *m_pPlatformOnlyTransaction; // rcx
+  OSuite::IPlayerAccount **m_pList; // rdx
 
-  v1 = this;
-  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
-  v2 = this->m_pPlatformOnlyTransaction;
-  if ( v2 )
+  this->OSuite::IConsumablesManager::vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
+  this->OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
+  m_pPlatformOnlyTransaction = this->m_pPlatformOnlyTransaction;
+  if ( m_pPlatformOnlyTransaction )
   {
-    ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, signed __int64))v2->vfptr->~IConsumableTransaction)(
-      v2,
+    ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, __int64))m_pPlatformOnlyTransaction->OSuite::IConsumableTransaction::vfptr->~IConsumableTransaction)(
+      m_pPlatformOnlyTransaction,
       1i64);
-    v1->m_pPlatformOnlyTransaction = 0i64;
+    this->m_pPlatformOnlyTransaction = 0i64;
   }
-  OSuite::ZString::~ZString(&v1->m_finalizeData);
-  OSuite::ZMutex::~ZMutex(&v1->m_mutex);
-  v3 = &v1->m_TransactionRequested;
-  v4 = v1->m_TransactionRequested.m_pList;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-  OSuite::ZObject::free((OSuite::ZObject *)&v1->m_TransactionRequested.vfptr, v4);
+  OSuite::ZString::~ZString(&this->m_finalizeData);
+  OSuite::ZMutex::~ZMutex(&this->m_mutex);
+  m_pList = this->m_TransactionRequested.m_pList;
+  this->m_TransactionRequested.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  this->m_TransactionRequested.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+  OSuite::ZObject::free(&this->m_TransactionRequested, m_pList);
 }
 
 // File Line: 66
 // RVA: 0x1330A0C
 void __fastcall OSuitePrivate::ConsumablesManager::Update(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rbx
-  OSuitePrivate::ZPlatformConsumables *v2; // rcx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
   int v3; // esi
-  OSuitePrivate::ZEidosConsumables *v4; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
 
-  v1 = this;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v2 = v1->m_platformConsumables;
+  m_platformConsumables = this->m_platformConsumables;
   v3 = 0;
-  if ( v2 )
+  if ( m_platformConsumables )
   {
-    ((void (*)(void))v2->vfptr[4].__vecDelDtor)();
-    v3 = ((__int64 (*)(void))v1->m_platformConsumables->vfptr[2].__vecDelDtor)();
+    ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[4].__vecDelDtor)(m_platformConsumables);
+    v3 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))this->m_platformConsumables->vfptr[2].__vecDelDtor)(this->m_platformConsumables);
   }
-  v4 = v1->m_pEidosConsumables;
-  if ( v4 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
   {
-    ((void (*)(void))v4->vfptr[4].__vecDelDtor)();
+    ((void (__fastcall *)(OSuitePrivate::ZEidosConsumables *))m_pEidosConsumables->vfptr[4].__vecDelDtor)(m_pEidosConsumables);
     if ( !v3 )
     {
-      OSuitePrivate::ConsumablesManager::CloseLostTransactions(v1);
-      OSuitePrivate::ConsumablesManager::CompleteTransactions(v1);
-      OSuitePrivate::ConsumablesManager::TransferLostConsumables(v1);
+      OSuitePrivate::ConsumablesManager::CloseLostTransactions(this);
+      OSuitePrivate::ConsumablesManager::CompleteTransactions(this);
+      OSuitePrivate::ConsumablesManager::TransferLostConsumables(this);
     }
   }
-  OSuite::ZMutex::Unlock(&v1->m_mutex);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
 }
 
 // File Line: 96
 // RVA: 0x132F714
 __int64 __fastcall OSuitePrivate::ConsumablesManager::GetStatus(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rdi
-  OSuitePrivate::ZEidosConsumables *v2; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
   unsigned int v3; // ebx
-  OSuitePrivate::ZPlatformConsumables *v4; // rcx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
 
-  v1 = this;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v2 = v1->m_pEidosConsumables;
+  m_pEidosConsumables = this->m_pEidosConsumables;
   v3 = 0;
-  if ( v2 )
-    v3 = ((__int64 (*)(void))v2->vfptr[1].__vecDelDtor)();
-  v4 = v1->m_platformConsumables;
-  if ( v4 && !v3 )
-    v3 = ((__int64 (*)(void))v4->vfptr[2].__vecDelDtor)();
-  OSuite::ZMutex::Unlock(&v1->m_mutex);
+  if ( m_pEidosConsumables )
+    v3 = ((__int64 (__fastcall *)(OSuitePrivate::ZEidosConsumables *))m_pEidosConsumables->vfptr[1].__vecDelDtor)(m_pEidosConsumables);
+  m_platformConsumables = this->m_platformConsumables;
+  if ( m_platformConsumables && !v3 )
+    v3 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[2].__vecDelDtor)(m_platformConsumables);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v3;
 }
 
 // File Line: 116
 // RVA: 0x132FBF4
-signed __int64 __fastcall OSuitePrivate::ConsumablesManager::Initialize(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerProfile, OSuite::ZString *servlet)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::Initialize(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerProfile,
+        OSuite::ZString *servlet)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rbx
-  OSuite::ZString *v4; // rbp
-  OSuite::IPlayerAccount *v5; // r14
   unsigned int v6; // edi
   OSuite::ZString *v7; // rax
   hkEntitySelectorAll *v8; // rax
   hkpEntity *v9; // rdx
   OSuite::ZOnlineSuite *v10; // rax
-  OSuite::IGameConfig *v11; // rax
+  OSuite::IGameConfig *GameConfig; // rax
   OSuitePrivate::ZEidosConsumables *v13; // rax
 
-  v3 = this;
-  v4 = servlet;
-  v5 = pPlayerProfile;
   OSuite::ZMutex::Lock(&this->m_mutex);
   v6 = 0;
-  v7 = v5->vfptr->GetUserId(v5, 0);
-  if ( (unsigned __int8)OSuite::ZString::IsNull(v7) )
+  v7 = pPlayerProfile->vfptr->GetUserId(pPlayerProfile, 0i64);
+  if ( OSuite::ZString::IsNull(v7) )
   {
     v6 = -2147483646;
   }
@@ -155,204 +145,186 @@ signed __int64 __fastcall OSuitePrivate::ConsumablesManager::Initialize(OSuitePr
     if ( (unsigned int)hkaReferencePoseAnimation::getNumOriginalFrames(v8, v9) == 1 )
     {
       v10 = OSuite::ZOnlineSuite::Instance();
-      v11 = OSuite::ZOnlineSuite::GetGameConfig(v10);
-      if ( !(__int64)v11->vfptr->GetSteamWebAPIKey(v11) )
+      GameConfig = OSuite::ZOnlineSuite::GetGameConfig(v10);
+      if ( !GameConfig->vfptr->GetSteamWebAPIKey(GameConfig) )
         return 2147483654i64;
     }
-    if ( !v3->m_pEidosConsumables && !OSuite::ZString::operator==(v4, &customWorldMapCaption) )
+    if ( !this->m_pEidosConsumables && !OSuite::ZString::operator==(servlet, &customCaption) )
     {
       v13 = OSuite::TSingleton<OSuitePrivate::ZEidosConsumables>::Object();
-      v3->m_pEidosConsumables = v13;
-      OSuitePrivate::ZEidosConsumables::SetServlet(v13, v4);
-      OSuitePrivate::ZEidosConsumables::AddUser(v3->m_pEidosConsumables, v5);
-      v6 = ((__int64 (*)(void))v3->m_pEidosConsumables->vfptr[2].__vecDelDtor)();
+      this->m_pEidosConsumables = v13;
+      OSuitePrivate::ZEidosConsumables::SetServlet(v13, servlet);
+      OSuitePrivate::ZEidosConsumables::AddUser(this->m_pEidosConsumables, pPlayerProfile);
+      v6 = ((__int64 (__fastcall *)(OSuitePrivate::ZEidosConsumables *))this->m_pEidosConsumables->vfptr[2].__vecDelDtor)(this->m_pEidosConsumables);
     }
-    if ( !v3->m_platformConsumables )
-      v3->m_platformConsumables = 0i64;
+    if ( !this->m_platformConsumables )
+      this->m_platformConsumables = 0i64;
   }
-  OSuite::ZMutex::Unlock(&v3->m_mutex);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v6;
 }
 
 // File Line: 164
 // RVA: 0x1330038
-__int64 __fastcall OSuitePrivate::ConsumablesManager::RegisterUser(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::RegisterUser(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rbx
-  OSuite::IPlayerAccount *v3; // rbp
   OSuite::ConsumableError v4; // edi
-  OSuitePrivate::ZEidosConsumables *v5; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
 
-  v2 = this;
-  v3 = pPlayerAccount;
-  v4 = 0;
+  v4 = OS_CONSUMABLES_OK;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v5 = v2->m_pEidosConsumables;
-  if ( v5 )
-    v4 = OSuitePrivate::ZEidosConsumables::AddUser(v5, v3);
-  OSuite::ZMutex::Unlock(&v2->m_mutex);
-  return v4;
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
+    v4 = OSuitePrivate::ZEidosConsumables::AddUser(m_pEidosConsumables, pPlayerAccount);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
+  return (unsigned int)v4;
 }
 
 // File Line: 179
 // RVA: 0x1330744
 void __fastcall OSuitePrivate::ConsumablesManager::Terminate(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rbx
-  OSuitePrivate::ZConsumableTransactionBase *v2; // rcx
-  OSuitePrivate::ZPlatformConsumables *v3; // rcx
-  OSuitePrivate::ZEidosConsumables *v4; // rcx
+  OSuitePrivate::ZConsumableTransactionBase *m_pPlatformOnlyTransaction; // rcx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
 
-  v1 = this;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v2 = v1->m_pPlatformOnlyTransaction;
-  if ( v2 )
+  m_pPlatformOnlyTransaction = this->m_pPlatformOnlyTransaction;
+  if ( m_pPlatformOnlyTransaction )
   {
-    ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, signed __int64))v2->vfptr->~IConsumableTransaction)(
-      v2,
+    ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, __int64))m_pPlatformOnlyTransaction->OSuite::IConsumableTransaction::vfptr->~IConsumableTransaction)(
+      m_pPlatformOnlyTransaction,
       1i64);
-    v1->m_pPlatformOnlyTransaction = 0i64;
+    this->m_pPlatformOnlyTransaction = 0i64;
   }
-  v3 = v1->m_platformConsumables;
-  if ( v3 )
+  m_platformConsumables = this->m_platformConsumables;
+  if ( m_platformConsumables )
   {
-    ((void (*)(void))v3->vfptr[3].__vecDelDtor)();
-    v1->m_platformConsumables = 0i64;
+    ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[3].__vecDelDtor)(m_platformConsumables);
+    this->m_platformConsumables = 0i64;
   }
-  v4 = v1->m_pEidosConsumables;
-  if ( v4 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
   {
-    ((void (*)(void))v4->vfptr[3].__vecDelDtor)();
-    v1->m_pEidosConsumables = 0i64;
+    ((void (__fastcall *)(OSuitePrivate::ZEidosConsumables *))m_pEidosConsumables->vfptr[3].__vecDelDtor)(m_pEidosConsumables);
+    this->m_pEidosConsumables = 0i64;
   }
-  OSuite::ZMutex::Unlock(&v1->m_mutex);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
 }
 
 // File Line: 206
 // RVA: 0x132F368
-__int64 __fastcall OSuitePrivate::ConsumablesManager::GetCount(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::GetCount(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rdi
-  OSuite::IPlayerAccount *v3; // rbp
   unsigned int v4; // ebx
-  void *v5; // rcx
+  void *m_pEidosConsumables; // rcx
 
-  v2 = this;
-  v3 = pPlayerAccount;
   v4 = 0;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v5 = v2->m_pEidosConsumables;
-  if ( v5 || (v5 = v2->m_platformConsumables) != 0i64 )
-    v4 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *))(*(_QWORD *)v5 + 40i64))(v5, v3);
-  OSuite::ZMutex::Unlock(&v2->m_mutex);
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables || (m_pEidosConsumables = this->m_platformConsumables) != 0i64 )
+    v4 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *))(*(_QWORD *)m_pEidosConsumables + 40i64))(
+           m_pEidosConsumables,
+           pPlayerAccount);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v4;
 }
 
 // File Line: 224
 // RVA: 0x132F3D4
-__int64 __fastcall OSuitePrivate::ConsumablesManager::GetInfo(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, const char *consumableId, OSuite::IConsumableInfo **ppInfo)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::GetInfo(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        const char *consumableId,
+        OSuite::IConsumableInfo **ppInfo)
 {
-  OSuitePrivate::ConsumablesManager *v4; // rdi
-  OSuite::IConsumableInfo **v5; // rbp
-  const char *v6; // r14
-  OSuite::IPlayerAccount *v7; // r15
   unsigned int v8; // ebx
-  void *v9; // rcx
+  void *m_pEidosConsumables; // rcx
 
-  v4 = this;
-  v5 = ppInfo;
-  v6 = consumableId;
-  v7 = pPlayerAccount;
   v8 = -2147483643;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v9 = v4->m_pEidosConsumables;
-  if ( v9 || (v9 = v4->m_platformConsumables) != 0i64 )
-    v8 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, const char *, OSuite::IConsumableInfo **))(*(_QWORD *)v9 + 48i64))(
-           v9,
-           v7,
-           v6,
-           v5);
-  OSuite::ZMutex::Unlock(&v4->m_mutex);
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables || (m_pEidosConsumables = this->m_platformConsumables) != 0i64 )
+    v8 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, const char *, OSuite::IConsumableInfo **))(*(_QWORD *)m_pEidosConsumables + 48i64))(
+           m_pEidosConsumables,
+           pPlayerAccount,
+           consumableId,
+           ppInfo);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v8;
 }
 
 // File Line: 242
 // RVA: 0x132F450
-__int64 __fastcall OSuitePrivate::ConsumablesManager::GetNextInfo(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, unsigned int index, OSuite::IConsumableInfo **ppInfo)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::GetNextInfo(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        unsigned int index,
+        OSuite::IConsumableInfo **ppInfo)
 {
-  OSuitePrivate::ConsumablesManager *v4; // rdi
-  OSuite::IConsumableInfo **v5; // rbp
-  unsigned int v6; // er14
-  OSuite::IPlayerAccount *v7; // r15
   unsigned int v8; // ebx
-  void *v9; // rcx
+  void *m_pEidosConsumables; // rcx
 
-  v4 = this;
-  v5 = ppInfo;
-  v6 = index;
-  v7 = pPlayerAccount;
   v8 = -2147483643;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v9 = v4->m_pEidosConsumables;
-  if ( v9 || (v9 = v4->m_platformConsumables) != 0i64 )
-    v8 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, _QWORD, OSuite::IConsumableInfo **))(*(_QWORD *)v9 + 56i64))(
-           v9,
-           v7,
-           v6,
-           v5);
-  OSuite::ZMutex::Unlock(&v4->m_mutex);
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables || (m_pEidosConsumables = this->m_platformConsumables) != 0i64 )
+    v8 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, _QWORD, OSuite::IConsumableInfo **))(*(_QWORD *)m_pEidosConsumables + 56i64))(
+           m_pEidosConsumables,
+           pPlayerAccount,
+           index,
+           ppInfo);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v8;
 }
 
 // File Line: 260
 // RVA: 0x132EED0
-__int64 __fastcall OSuitePrivate::ConsumablesManager::Consume(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuite::IConsumableInfo *pInfo)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::Consume(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuite::IConsumableInfo *pInfo)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rdi
-  OSuite::IConsumableInfo *v4; // rbp
-  OSuite::IPlayerAccount *v5; // r14
   unsigned int v6; // ebx
-  void *v7; // rcx
+  void *m_pEidosConsumables; // rcx
 
-  v3 = this;
-  v4 = pInfo;
-  v5 = pPlayerAccount;
   v6 = -2147483643;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v7 = v3->m_pEidosConsumables;
-  if ( v7 || (v7 = v3->m_platformConsumables) != 0i64 )
-    v6 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, OSuite::IConsumableInfo *))(*(_QWORD *)v7 + 64i64))(
-           v7,
-           v5,
-           v4);
-  OSuite::ZMutex::Unlock(&v3->m_mutex);
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables || (m_pEidosConsumables = this->m_platformConsumables) != 0i64 )
+    v6 = (*(__int64 (__fastcall **)(void *, OSuite::IPlayerAccount *, OSuite::IConsumableInfo *))(*(_QWORD *)m_pEidosConsumables
+                                                                                                + 64i64))(
+           m_pEidosConsumables,
+           pPlayerAccount,
+           pInfo);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v6;
 }
 
 // File Line: 279
 // RVA: 0x132FCF0
-__int64 __fastcall OSuitePrivate::ConsumablesManager::NewTransaction(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuite::TList<OSuite::IConsumableInfo *> *infos, const char *tag)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::NewTransaction(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuite::TList<OSuite::IConsumableInfo *> *infos,
+        const char *tag)
 {
-  OSuitePrivate::ConsumablesManager *v4; // rdi
-  const char *v5; // rbp
-  OSuite::TList<OSuite::IConsumableInfo *> *v6; // r14
-  OSuite::IPlayerAccount *v7; // r15
   unsigned int v8; // ebx
-  OSuitePrivate::ZEidosConsumables *v9; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
   __int64 v10; // rax
 
-  v4 = this;
-  v5 = tag;
-  v6 = infos;
-  v7 = pPlayerAccount;
   v8 = -2147483135;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v9 = v4->m_pEidosConsumables;
-  if ( v9 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
   {
-    v8 = OSuitePrivate::ZEidosConsumables::NewTransaction(v9, v7, v6, v5);
+    v8 = OSuitePrivate::ZEidosConsumables::NewTransaction(m_pEidosConsumables, pPlayerAccount, infos, tag);
   }
-  else if ( !v4->m_pPlatformOnlyTransaction )
+  else if ( !this->m_pPlatformOnlyTransaction )
   {
     v10 = OSuite::ZObject::operator new(0x18ui64);
     if ( v10 )
@@ -361,218 +333,212 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::NewTransaction(OSuitePriva
       *(_QWORD *)v10 = &OSuitePrivate::ZConsumableTransactionBase::`vftable{for `OSuite::IConsumableTransaction};
       *(_QWORD *)(v10 + 8) = &OSuitePrivate::ZConsumableTransactionBase::`vftable{for `OSuite::ZObject};
     }
-    v4->m_pPlatformOnlyTransaction = (OSuitePrivate::ZConsumableTransactionBase *)v10;
+    this->m_pPlatformOnlyTransaction = (OSuitePrivate::ZConsumableTransactionBase *)v10;
     v8 = v10 == 0 ? 0x80000004 : 0;
   }
-  OSuite::ZMutex::Unlock(&v4->m_mutex);
+  OSuite::ZMutex::Unlock(&this->m_mutex);
   return v8;
 }
 
 // File Line: 303
 // RVA: 0x132F2DC
-__int64 __fastcall OSuitePrivate::ConsumablesManager::GetActiveTransaction(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuite::IConsumableTransaction **ppTransaction)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::GetActiveTransaction(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuite::IConsumableTransaction **ppTransaction)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rsi
-  OSuite::IConsumableTransaction **v4; // rdi
-  OSuite::IPlayerAccount *v5; // r14
-  OSuite::ConsumableError v6; // ebx
-  OSuitePrivate::ZEidosConsumables *v7; // rcx
-  OSuitePrivate::ZConsumableTransactionBase *v8; // rax
+  OSuite::ConsumableError ActiveTransaction; // ebx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
+  OSuitePrivate::ZConsumableTransactionBase *m_pPlatformOnlyTransaction; // rax
 
-  v3 = this;
-  v4 = ppTransaction;
-  v5 = pPlayerAccount;
-  v6 = -2147483132;
+  ActiveTransaction = OS_CONSUMABLES_NO_TRANSACTION;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v7 = v3->m_pEidosConsumables;
-  if ( v7 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
   {
-    v6 = OSuitePrivate::ZEidosConsumables::GetActiveTransaction(v7, v5, v4);
+    ActiveTransaction = OSuitePrivate::ZEidosConsumables::GetActiveTransaction(
+                          m_pEidosConsumables,
+                          pPlayerAccount,
+                          ppTransaction);
   }
   else
   {
-    v8 = v3->m_pPlatformOnlyTransaction;
-    if ( v8 )
+    m_pPlatformOnlyTransaction = this->m_pPlatformOnlyTransaction;
+    if ( m_pPlatformOnlyTransaction )
     {
-      if ( v4 )
-        *v4 = (OSuite::IConsumableTransaction *)&v8->vfptr;
-      v6 = 0;
+      if ( ppTransaction )
+        *ppTransaction = m_pPlatformOnlyTransaction;
+      ActiveTransaction = OS_CONSUMABLES_OK;
     }
   }
-  OSuite::ZMutex::Unlock(&v3->m_mutex);
-  return v6;
+  OSuite::ZMutex::Unlock(&this->m_mutex);
+  return (unsigned int)ActiveTransaction;
 }
 
 // File Line: 328
 // RVA: 0x132EC3C
-__int64 __fastcall OSuitePrivate::ConsumablesManager::CloseActiveTransaction(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::CloseActiveTransaction(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rbx
-  OSuite::IPlayerAccount *v3; // rsi
-  OSuitePrivate::ZEidosConsumables *v4; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
   OSuite::ConsumableError v5; // edi
-  OSuitePrivate::ZConsumableTransactionBase *v6; // rcx
+  OSuitePrivate::ZConsumableTransactionBase *m_pPlatformOnlyTransaction; // rcx
   OSuitePrivate::ZConsumableTransactionBase *v7; // rcx
-  OSuite::IConsumableTransaction *ppTransaction; // [rsp+20h] [rbp-28h]
+  OSuite::IConsumableTransaction *ppTransaction; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = this;
-  v3 = pPlayerAccount;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v4 = v2->m_pEidosConsumables;
-  v5 = -2147483133;
-  if ( v4 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  v5 = OS_CONSUMABLES_INVALID_TRANSACTION;
+  if ( m_pEidosConsumables )
   {
     ppTransaction = 0i64;
-    if ( OSuitePrivate::ZEidosConsumables::GetActiveTransaction(v4, v3, &ppTransaction) == OS_CONSUMABLES_OK )
+    if ( OSuitePrivate::ZEidosConsumables::GetActiveTransaction(m_pEidosConsumables, pPlayerAccount, &ppTransaction) == OS_CONSUMABLES_OK )
     {
-      ((void (*)(void))ppTransaction->vfptr->GetState)();
+      ppTransaction->vfptr->GetState(ppTransaction);
       ppTransaction = 0i64;
     }
-    v5 = OSuitePrivate::ZEidosConsumables::CloseActiveTransaction(v2->m_pEidosConsumables, v3);
+    v5 = OSuitePrivate::ZEidosConsumables::CloseActiveTransaction(this->m_pEidosConsumables, pPlayerAccount);
   }
   else
   {
-    v6 = v2->m_pPlatformOnlyTransaction;
-    if ( v6 )
+    m_pPlatformOnlyTransaction = this->m_pPlatformOnlyTransaction;
+    if ( m_pPlatformOnlyTransaction )
     {
-      ((void (*)(void))v6->vfptr->GetState)();
-      v7 = v2->m_pPlatformOnlyTransaction;
+      m_pPlatformOnlyTransaction->OSuite::IConsumableTransaction::vfptr->GetState(m_pPlatformOnlyTransaction);
+      v7 = this->m_pPlatformOnlyTransaction;
       if ( v7 )
-        ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, signed __int64))v7->vfptr->~IConsumableTransaction)(
+        ((void (__fastcall *)(OSuitePrivate::ZConsumableTransactionBase *, __int64))v7->OSuite::IConsumableTransaction::vfptr->~IConsumableTransaction)(
           v7,
           1i64);
-      v2->m_pPlatformOnlyTransaction = 0i64;
-      v5 = 0;
+      this->m_pPlatformOnlyTransaction = 0i64;
+      v5 = OS_CONSUMABLES_OK;
     }
   }
-  OSuite::ZMutex::Unlock(&v2->m_mutex);
-  return v5;
+  OSuite::ZMutex::Unlock(&this->m_mutex);
+  return (unsigned int)v5;
 }
 
 // File Line: 371
 // RVA: 0x132EDFC
 void __fastcall OSuitePrivate::ConsumablesManager::CompleteTransactions(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rdi
-  OSuitePrivate::ZEidosConsumables *v2; // rcx
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
   unsigned __int64 v3; // rsi
-  OSuitePrivate::ZEidosTransaction *v4; // rax
+  OSuitePrivate::ZEidosTransaction *Transaction; // rax
   OSuitePrivate::ZEidosTransaction *v5; // rbx
   OSuite::IPlayerAccount *v6; // rax
-  OSuite::IPlayerAccount *v7; // rax
+  OSuite::IPlayerAccount *User; // rax
 
-  v1 = this;
-  v2 = this->m_pEidosConsumables;
-  if ( v2 )
+  m_pEidosConsumables = this->m_pEidosConsumables;
+  if ( m_pEidosConsumables )
   {
     v3 = 0i64;
-    if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v2->m_playerData) )
+    if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&m_pEidosConsumables->m_playerData) )
     {
       do
       {
-        v4 = OSuitePrivate::ZEidosConsumables::GetTransaction(v1->m_pEidosConsumables, v3);
-        v5 = v4;
-        if ( v4 && v4->m_bClose )
+        Transaction = OSuitePrivate::ZEidosConsumables::GetTransaction(this->m_pEidosConsumables, v3);
+        v5 = Transaction;
+        if ( Transaction && Transaction->m_bClose )
         {
-          if ( OSuitePrivate::ZEidosTransaction::GetCompletionState(v4) )
+          if ( OSuitePrivate::ZEidosTransaction::GetCompletionState(Transaction) )
           {
-            if ( OSuitePrivate::ZEidosTransaction::GetCompletionState(v5) == 2
-              || OSuitePrivate::ZEidosTransaction::GetCompletionState(v5) == 3 )
+            if ( OSuitePrivate::ZEidosTransaction::GetCompletionState(v5) == TXN_PURCHASED
+              || OSuitePrivate::ZEidosTransaction::GetCompletionState(v5) == TXN_CONSUMING )
             {
-              v7 = OSuitePrivate::ZEidosConsumables::GetUser(v1->m_pEidosConsumables, v3);
-              OSuitePrivate::ConsumablesManager::HandlePurchasedTxn(v1, v7, v5);
+              User = OSuitePrivate::ZEidosConsumables::GetUser(this->m_pEidosConsumables, v3);
+              OSuitePrivate::ConsumablesManager::HandlePurchasedTxn(this, User, v5);
             }
           }
           else
           {
-            v6 = OSuitePrivate::ZEidosConsumables::GetUser(v1->m_pEidosConsumables, v3);
-            OSuitePrivate::ConsumablesManager::HandleNewTxn(v1, v6, v5);
+            v6 = OSuitePrivate::ZEidosConsumables::GetUser(this->m_pEidosConsumables, v3);
+            OSuitePrivate::ConsumablesManager::HandleNewTxn(this, v6, v5);
           }
         }
         ++v3;
       }
-      while ( v3 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v1->m_pEidosConsumables->m_playerData) );
+      while ( v3 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_pEidosConsumables->m_playerData) );
     }
   }
 }
 
 // File Line: 401
 // RVA: 0x132F87C
-void __fastcall OSuitePrivate::ConsumablesManager::HandleNewTxn(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+void __fastcall OSuitePrivate::ConsumablesManager::HandleNewTxn(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rbx
-  OSuitePrivate::ZEidosTransaction *v4; // rdi
-  OSuite::IPlayerAccount *v5; // rsi
   OSuite::ITransactionState v6; // eax
-  OSuitePrivate::ZPlatformConsumables *v7; // rcx
-  OSuitePrivate::EidosTransactionState v8; // er9
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
+  OSuitePrivate::EidosTransactionState v8; // r9d
   hkEntitySelectorAll *v9; // rax
   hkpEntity *v10; // rdx
   OSuitePrivate::ZPlatformConsumables *v11; // rcx
   OSuitePrivate::EidosTransactionState v12; // edx
 
-  v3 = this;
-  v4 = pTxn;
-  v5 = pPlayerAccount;
-  v6 = (unsigned int)pTxn->vfptr->GetState((OSuite::IConsumableTransaction *)pTxn);
+  v6 = pTxn->vfptr->GetState(pTxn);
   if ( v6 == TRANSACTION_STATE_NEW )
   {
-    v7 = v3->m_platformConsumables;
-    if ( v7 )
+    m_platformConsumables = this->m_platformConsumables;
+    if ( m_platformConsumables )
     {
-      if ( !((unsigned __int8 (*)(void))v7->vfptr[9].__vecDelDtor)() )
+      if ( !((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[9].__vecDelDtor)(m_platformConsumables) )
         return;
-      v8 = 6;
+      v8 = TXN_CANCELLED;
       goto LABEL_5;
     }
-    if ( v3->m_pEidosConsumables )
+    if ( this->m_pEidosConsumables )
     {
       v9 = (hkEntitySelectorAll *)OSuite::GameInterface();
       if ( (unsigned int)hkaReferencePoseAnimation::getNumOriginalFrames(v9, v10) == 1 )
-        OSuitePrivate::ConsumablesManager::QuerySteamTxn(v3, v5, v4);
+        OSuitePrivate::ConsumablesManager::QuerySteamTxn(this, pPlayerAccount, pTxn);
       else
-        v4->m_bClose = 0;
+        pTxn->m_bClose = 0;
     }
     return;
   }
-  if ( v6 != 1 )
+  if ( v6 != TRANSACTION_STATE_PURCHASED )
   {
-    if ( v6 != 2 )
+    if ( v6 != TRANSACTION_STATE_CANCELLED )
       return;
-    v12 = 6;
+    v12 = TXN_CANCELLED;
     goto LABEL_18;
   }
-  v11 = v3->m_platformConsumables;
+  v11 = this->m_platformConsumables;
   if ( !v11 )
   {
-    if ( !v3->m_pEidosConsumables )
+    if ( !this->m_pEidosConsumables )
       return;
-    v12 = 4;
+    v12 = TXN_CONSUMED;
 LABEL_18:
-    OSuitePrivate::ZEidosTransaction::SetCompletionState(v4, v12);
+    OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, v12);
     return;
   }
-  if ( ((unsigned __int8 (*)(void))v11->vfptr[9].__vecDelDtor)() )
+  if ( ((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))v11->vfptr[9].__vecDelDtor)(v11) )
   {
-    v8 = 7;
+    v8 = TXN_ERROR;
 LABEL_5:
-    OSuitePrivate::ConsumablesManager::SendPurchasedData(v3, v5, v4, v8);
+    OSuitePrivate::ConsumablesManager::SendPurchasedData(this, pPlayerAccount, pTxn, v8);
   }
 }
 
 // File Line: 459
 // RVA: 0x1330344
-void __fastcall OSuitePrivate::ConsumablesManager::SendPurchasedData(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn, OSuitePrivate::EidosTransactionState errState)
+void __fastcall OSuitePrivate::ConsumablesManager::SendPurchasedData(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::ZObject *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn,
+        OSuitePrivate::EidosTransactionState errState)
 {
-  OSuitePrivate::ConsumablesManager *v4; // r12
-  OSuitePrivate::EidosTransactionState v5; // er15
-  OSuitePrivate::ZEidosTransaction *v6; // r14
   OSuitePrivate::EidosTransactionState v7; // ebx
-  void *v8; // rax
+  int *v8; // rax
   __int64 v9; // rsi
   OSuite::ZConsumableInfoBase *v10; // rdi
-  OSuitePrivate::ZPlatformConsumables *v11; // rax
-  OSuite::ZObjectVtbl *v12; // rbx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rax
+  OSuite::ZObjectVtbl *vfptr; // rbx
   OSuite::ZString *v13; // rax
   char *v14; // rax
   unsigned int v15; // ebx
@@ -581,115 +547,103 @@ void __fastcall OSuitePrivate::ConsumablesManager::SendPurchasedData(OSuitePriva
   char *v18; // rax
   int v19; // eax
   int v20; // ebx
-  OSuite::IPlayerAccount *v21; // [rsp+20h] [rbp-48h]
-  __int64 v22; // [rsp+28h] [rbp-40h]
-  OSuite::ZObject v23; // [rsp+30h] [rbp-38h]
-  __int64 v24; // [rsp+38h] [rbp-30h]
-  __int64 v25; // [rsp+40h] [rbp-28h]
-  void **v26; // [rsp+48h] [rbp-20h]
-  void *ptr; // [rsp+50h] [rbp-18h]
+  __int64 v22; // [rsp+28h] [rbp-40h] BYREF
+  OSuite::TList<int> v23; // [rsp+30h] [rbp-38h] BYREF
 
-  v4 = this;
-  v5 = errState;
-  v6 = pTxn;
-  v21 = pPlayerAccount;
   v7 = errState;
-  ptr = 0i64;
-  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v23, (OSuite::ZObject *)pPlayerAccount);
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
-  v26 = &OSuite::TList<int>::`vftable{for `OSuite::IHashable};
-  ptr = 0i64;
-  v8 = (void *)OSuite::ZObject::malloc(&v23, 0x40ui64, 0i64);
-  v24 = 16i64;
-  v25 = 0i64;
-  ptr = v8;
+  v23.m_pList = 0i64;
+  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v23, pPlayerAccount);
+  v23.OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v23.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::IHashable};
+  v23.m_pList = 0i64;
+  v8 = (int *)OSuite::ZObject::malloc(&v23, 0x40ui64, 0i64);
+  v23.m_nSize = 16i64;
+  v23.m_nTop = 0i64;
+  v23.m_pList = v8;
   v9 = 0i64;
-  if ( !OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v6->m_Infos) )
+  if ( !OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos) )
     goto LABEL_13;
   while ( 1 )
   {
-    v10 = v6->m_Infos.m_pList[v9];
+    v10 = pTxn->m_Infos.m_pList[v9];
     if ( !v10 )
       goto LABEL_9;
-    v11 = v4->m_platformConsumables;
+    m_platformConsumables = this->m_platformConsumables;
     v22 = 0i64;
-    v12 = v11->vfptr;
-    v13 = (OSuite::ZString *)v10->vfptr->GetId((OSuite::IConsumableInfo *)&v10->vfptr);
+    vfptr = m_platformConsumables->vfptr;
+    v13 = (OSuite::ZString *)v10->OSuite::IConsumableInfo::vfptr->GetId(v10);
     v14 = OSuite::ZString::c_str(v13);
-    if ( ((unsigned int (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *, __int64 *))v12[6].__vecDelDtor)(
-           v4->m_platformConsumables,
-           v21,
+    if ( ((unsigned int (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::ZObject *, char *, __int64 *))vfptr[6].__vecDelDtor)(
+           this->m_platformConsumables,
+           pPlayerAccount,
            v14,
            &v22) )
     {
       break;
     }
-    v15 = (*(__int64 (**)(void))(*(_QWORD *)v22 + 8i64))();
-    if ( v15 < v10->vfptr->GetQuantity((OSuite::IConsumableInfo *)&v10->vfptr) )
+    v15 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v22 + 8i64))(v22);
+    if ( v15 < v10->OSuite::IConsumableInfo::vfptr->GetQuantity(v10) )
     {
-      v7 = v5;
-      (*(void (**)(void))(*(_QWORD *)v22 + 16i64))();
+      v7 = errState;
+      (*(void (__fastcall **)(__int64))(*(_QWORD *)v22 + 16i64))(v22);
       goto LABEL_13;
     }
-    if ( ((unsigned __int8 (*)(void))v4->m_platformConsumables->vfptr[10].__vecDelDtor)() )
+    if ( ((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))this->m_platformConsumables->vfptr[10].__vecDelDtor)(this->m_platformConsumables) )
     {
-      v16 = v4->m_platformConsumables->vfptr;
-      v17 = (OSuite::ZString *)v10->vfptr->GetId((OSuite::IConsumableInfo *)&v10->vfptr);
+      v16 = this->m_platformConsumables->vfptr;
+      v17 = (OSuite::ZString *)v10->OSuite::IConsumableInfo::vfptr->GetId(v10);
       v18 = OSuite::ZString::c_str(v17);
-      v19 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *))v16[11].__vecDelDtor)(
-              v4->m_platformConsumables,
-              v21,
+      v19 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::ZObject *, char *))v16[11].__vecDelDtor)(
+              this->m_platformConsumables,
+              pPlayerAccount,
               v18);
     }
     else
     {
-      v19 = (*(__int64 (**)(void))(*(_QWORD *)v22 + 8i64))();
+      v19 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v22 + 8i64))(v22);
     }
     v20 = v19;
-    OSuite::TList<int>::Grow((OSuite::TList<int> *)&v23, v25 + 1);
-    *((_DWORD *)ptr + v25++) = v20;
-    v7 = 2;
-    (*(void (**)(void))(*(_QWORD *)v22 + 16i64))();
+    OSuite::TList<int>::Grow(&v23, v23.m_nTop + 1);
+    v23.m_pList[v23.m_nTop++] = v20;
+    v7 = TXN_PURCHASED;
+    (*(void (__fastcall **)(__int64))(*(_QWORD *)v22 + 16i64))(v22);
 LABEL_9:
-    if ( ++v9 >= OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v6->m_Infos) )
+    if ( ++v9 >= OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos) )
       goto LABEL_13;
   }
-  v7 = v5;
+  v7 = errState;
 LABEL_13:
-  if ( v7 == 2 )
-    OSuitePrivate::ZEidosTransaction::UpdateToPurchased(v6, (OSuite::TList<int> *)&v23);
+  if ( v7 == TXN_PURCHASED )
+    OSuitePrivate::ZEidosTransaction::UpdateToPurchased(pTxn, &v23);
   else
-    OSuitePrivate::ZEidosTransaction::SetCompletionState(v6, v7);
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
-  v26 = &OSuite::TList<int>::`vftable{for `OSuite::IHashable};
-  OSuite::ZObject::free(&v23, ptr);
+    OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, v7);
+  v23.OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v23.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::IHashable};
+  OSuite::ZObject::free(&v23, v23.m_pList);
 }
 
 // File Line: 509
 // RVA: 0x132F94C
-void __fastcall OSuitePrivate::ConsumablesManager::HandlePurchasedTxn(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+void __fastcall OSuitePrivate::ConsumablesManager::HandlePurchasedTxn(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rbx
-  OSuitePrivate::ZPlatformConsumables *v4; // rcx
-  OSuitePrivate::ZEidosTransaction *v5; // rdi
-  OSuite::IPlayerAccount *v6; // rsi
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
 
-  v3 = this;
-  v4 = this->m_platformConsumables;
-  v5 = pTxn;
-  v6 = pPlayerAccount;
-  if ( v4 )
+  m_platformConsumables = this->m_platformConsumables;
+  if ( m_platformConsumables )
   {
-    ((void (*)(void))v4->vfptr[5].__vecDelDtor)();
-    if ( ((unsigned __int8 (*)(void))v3->m_platformConsumables->vfptr[9].__vecDelDtor)() )
+    ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[5].__vecDelDtor)(m_platformConsumables);
+    if ( ((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))this->m_platformConsumables->vfptr[9].__vecDelDtor)(this->m_platformConsumables) )
     {
-      if ( ((unsigned __int8 (*)(void))v3->m_platformConsumables->vfptr[10].__vecDelDtor)() )
-        OSuitePrivate::ConsumablesManager::ConsumeDataFromConsumedCount(v3, v6, v5);
+      if ( ((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))this->m_platformConsumables->vfptr[10].__vecDelDtor)(this->m_platformConsumables) )
+        OSuitePrivate::ConsumablesManager::ConsumeDataFromConsumedCount(this, pPlayerAccount, pTxn);
       else
-        OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(v3, v6, v5);
+        OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(this, pPlayerAccount, pTxn);
     }
   }
-  else if ( v3->m_pEidosConsumables )
+  else if ( this->m_pEidosConsumables )
   {
     OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, TXN_CONSUMED);
   }
@@ -697,19 +651,21 @@ void __fastcall OSuitePrivate::ConsumablesManager::HandlePurchasedTxn(OSuitePriv
 
 // File Line: 533
 // RVA: 0x132F0E0
-void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuite::ZRedBlackTreeBase *v3; // r13
+  OSuite::ZRedBlackTreeBase *p_m_Infos; // r13
   OSuitePrivate::ConsumablesManager *v4; // rbx
-  OSuitePrivate::ZEidosTransaction *v5; // rbp
   char v6; // r15
   unsigned __int64 v7; // r14
   __int64 v8; // rdi
-  signed __int64 v9; // r12
+  __int64 v9; // r12
   unsigned __int64 v10; // rsi
   __int64 v11; // r12
-  OSuitePrivate::ZPlatformConsumables *v12; // rax
-  OSuite::ZObjectVtbl *v13; // rbx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rax
+  OSuite::ZObjectVtbl *vfptr; // rbx
   OSuite::ZString *v14; // rax
   char *v15; // rax
   int v16; // eax
@@ -719,17 +675,12 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(OSuitePri
   bool v20; // zf
   OSuitePrivate::EidosTransactionState v21; // edx
   unsigned __int64 v22; // rax
-  OSuitePrivate::ConsumablesManager *v23; // [rsp+20h] [rbp-68h]
   __int64 v24; // [rsp+28h] [rbp-60h]
-  OSuite::IPlayerAccount *v25; // [rsp+30h] [rbp-58h]
   __int64 v26; // [rsp+38h] [rbp-50h]
-  __int64 v27; // [rsp+40h] [rbp-48h]
+  __int64 v27; // [rsp+40h] [rbp-48h] BYREF
 
-  v3 = (OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos;
+  p_m_Infos = (OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos;
   v4 = this;
-  v23 = this;
-  v5 = pTxn;
-  v25 = pPlayerAccount;
   v6 = 0;
   v7 = 0i64;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos) )
@@ -741,22 +692,22 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(OSuitePri
     v24 = 0i64;
     while ( !v6 )
     {
-      v11 = *(__int64 *)((char *)&v3[1].m_pTop->vfptr + v9);
+      v11 = *(__int64 *)((char *)&p_m_Infos[1].m_pTop->vfptr + v9);
       if ( v11 )
       {
-        v12 = v4->m_platformConsumables;
+        m_platformConsumables = v4->m_platformConsumables;
         v27 = 0i64;
-        v13 = v12->vfptr;
+        vfptr = m_platformConsumables->vfptr;
         v14 = (OSuite::ZString *)(**(__int64 (__fastcall ***)(__int64))v11)(v11);
         v15 = OSuite::ZString::c_str(v14);
-        v16 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *, __int64 *))v13[6].__vecDelDtor)(
-                v23->m_platformConsumables,
-                v25,
+        v16 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *, __int64 *))vfptr[6].__vecDelDtor)(
+                this->m_platformConsumables,
+                pPlayerAccount,
                 v15,
                 &v27);
         if ( v16 )
         {
-          v4 = v23;
+          v4 = this;
           if ( v16 == -2147483388 )
             ++v7;
           else
@@ -764,33 +715,33 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(OSuitePri
         }
         else
         {
-          OSuite::TList<int>::Grow(&v5->m_tempCount, v10);
-          if ( v10 - 1 >= v5->m_tempCount.m_nTop )
-            v5->m_tempCount.m_nTop = v10;
-          v17 = *(int *)((char *)v5->m_tempCount.m_pList + v24);
-          if ( (*(unsigned int (**)(void))(*(_QWORD *)v27 + 8i64))() == v17 )
+          OSuite::TList<int>::Grow(&pTxn->m_tempCount, v10);
+          if ( v10 - 1 >= pTxn->m_tempCount.m_nTop )
+            pTxn->m_tempCount.m_nTop = v10;
+          v17 = *(int *)((char *)pTxn->m_tempCount.m_pList + v24);
+          if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v27 + 8i64))(v27) == v17 )
           {
-            v4 = v23;
-            ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, __int64))v23->m_platformConsumables->vfptr[8].__vecDelDtor)(
-              v23->m_platformConsumables,
-              v25,
+            v4 = this;
+            ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, __int64))this->m_platformConsumables->vfptr[8].__vecDelDtor)(
+              this->m_platformConsumables,
+              pPlayerAccount,
               v11);
           }
           else
           {
-            OSuite::TList<int>::Grow(&v5->m_tempCount, v10);
-            if ( v10 - 1 >= v5->m_tempCount.m_nTop )
-              v5->m_tempCount.m_nTop = v10;
-            v18 = *(int *)((char *)v5->m_tempCount.m_pList + v24);
-            v19 = (*(__int64 (**)(void))(*(_QWORD *)v27 + 8i64))();
+            OSuite::TList<int>::Grow(&pTxn->m_tempCount, v10);
+            if ( v10 - 1 >= pTxn->m_tempCount.m_nTop )
+              pTxn->m_tempCount.m_nTop = v10;
+            v18 = *(int *)((char *)pTxn->m_tempCount.m_pList + v24);
+            v19 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v27 + 8i64))(v27);
             v20 = (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v11 + 8i64))(v11) + v19 == v18;
-            v4 = v23;
+            v4 = this;
             if ( v20 )
               ++v7;
             else
               v6 = 1;
           }
-          (*(void (**)(void))(*(_QWORD *)v27 + 16i64))();
+          (*(void (__fastcall **)(__int64))(*(_QWORD *)v27 + 16i64))(v27);
           v8 = v24;
         }
       }
@@ -799,55 +750,52 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromInfo(OSuitePri
       ++v10;
       v24 = v8;
       v26 += 8i64;
-      if ( v10 - 1 >= OSuite::ZHttpStreamReader::Tell(v3) )
+      if ( v10 - 1 >= OSuite::ZHttpStreamReader::Tell(p_m_Infos) )
       {
         if ( !v6 )
           goto LABEL_22;
         break;
       }
     }
-    v21 = 7;
+    v21 = TXN_ERROR;
   }
   else
   {
 LABEL_22:
-    v22 = OSuite::ZHttpStreamReader::Tell(v3);
-    v21 = 3;
+    v22 = OSuite::ZHttpStreamReader::Tell(p_m_Infos);
+    v21 = TXN_CONSUMING;
     if ( v7 >= v22 )
-      v21 = 4;
+      v21 = TXN_CONSUMED;
   }
-  OSuitePrivate::ZEidosTransaction::SetCompletionState(v5, v21);
+  OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, v21);
 }
 
 // File Line: 578
 // RVA: 0x132EF48
-void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromConsumedCount(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromConsumedCount(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuite::ZRedBlackTreeBase *v3; // r15
+  OSuite::ZRedBlackTreeBase *p_m_Infos; // r15
   OSuitePrivate::ConsumablesManager *v4; // rbx
-  OSuitePrivate::ZEidosTransaction *v5; // rsi
   char v6; // r12
   unsigned __int64 v7; // rbp
   __int64 v8; // r13
-  signed __int64 v9; // r14
+  __int64 v9; // r14
   unsigned __int64 v10; // rdi
   __int64 v11; // r14
-  OSuite::ZObjectVtbl *v12; // rbx
+  OSuite::ZObjectVtbl *vfptr; // rbx
   OSuite::ZString *v13; // rax
   char *v14; // rax
   int v15; // ebx
   OSuitePrivate::EidosTransactionState v16; // edx
   unsigned __int64 v17; // rax
-  OSuitePrivate::ConsumablesManager *v18; // [rsp+70h] [rbp+8h]
-  OSuite::IPlayerAccount *v19; // [rsp+78h] [rbp+10h]
   int v20; // [rsp+80h] [rbp+18h]
   __int64 v21; // [rsp+88h] [rbp+20h]
 
-  v19 = pPlayerAccount;
-  v18 = this;
-  v3 = (OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos;
+  p_m_Infos = (OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos;
   v4 = this;
-  v5 = pTxn;
   v6 = 0;
   v7 = 0i64;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&pTxn->m_Infos) )
@@ -861,42 +809,42 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumeDataFromConsumedCount(
       if ( v6 )
       {
 LABEL_18:
-        v16 = 7;
+        v16 = TXN_ERROR;
         goto LABEL_21;
       }
-      v11 = *(__int64 *)((char *)&v3[1].m_pTop->vfptr + v9);
+      v11 = *(__int64 *)((char *)&p_m_Infos[1].m_pTop->vfptr + v9);
       if ( v11 )
       {
-        v12 = v4->m_platformConsumables->vfptr;
+        vfptr = v4->m_platformConsumables->vfptr;
         v13 = (OSuite::ZString *)(**(__int64 (__fastcall ***)(__int64))v11)(v11);
         v14 = OSuite::ZString::c_str(v13);
-        v20 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *))v12[11].__vecDelDtor)(
-                v18->m_platformConsumables,
-                v19,
+        v20 = ((__int64 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, char *))vfptr[11].__vecDelDtor)(
+                this->m_platformConsumables,
+                pPlayerAccount,
                 v14);
         if ( v20 == -2 )
           goto LABEL_6;
-        OSuite::TList<int>::Grow(&v5->m_tempCount, v10);
-        if ( v10 - 1 >= v5->m_tempCount.m_nTop )
-          v5->m_tempCount.m_nTop = v10;
-        if ( v20 != v5->m_tempCount.m_pList[v8] )
+        OSuite::TList<int>::Grow(&pTxn->m_tempCount, v10);
+        if ( v10 - 1 >= pTxn->m_tempCount.m_nTop )
+          pTxn->m_tempCount.m_nTop = v10;
+        if ( v20 != pTxn->m_tempCount.m_pList[v8] )
         {
-          OSuite::TList<int>::Grow(&v5->m_tempCount, v10);
-          if ( v10 - 1 >= v5->m_tempCount.m_nTop )
-            v5->m_tempCount.m_nTop = v10;
-          v15 = v5->m_tempCount.m_pList[v8];
+          OSuite::TList<int>::Grow(&pTxn->m_tempCount, v10);
+          if ( v10 - 1 >= pTxn->m_tempCount.m_nTop )
+            pTxn->m_tempCount.m_nTop = v10;
+          v15 = pTxn->m_tempCount.m_pList[v8];
           if ( v15 + (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v11 + 8i64))(v11) == v20 )
 LABEL_6:
             ++v7;
           else
             v6 = 1;
-          v4 = v18;
+          v4 = this;
           goto LABEL_16;
         }
-        v4 = v18;
-        ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, __int64))v18->m_platformConsumables->vfptr[8].__vecDelDtor)(
-          v18->m_platformConsumables,
-          v19,
+        v4 = this;
+        ((void (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, __int64))this->m_platformConsumables->vfptr[8].__vecDelDtor)(
+          this->m_platformConsumables,
+          pPlayerAccount,
           v11);
       }
 LABEL_16:
@@ -904,7 +852,7 @@ LABEL_16:
       v9 = v21 + 8;
       ++v8;
       v21 += 8i64;
-      if ( v10 - 1 >= OSuite::ZHttpStreamReader::Tell(v3) )
+      if ( v10 - 1 >= OSuite::ZHttpStreamReader::Tell(p_m_Infos) )
       {
         if ( !v6 )
           break;
@@ -912,139 +860,121 @@ LABEL_16:
       }
     }
   }
-  v17 = OSuite::ZHttpStreamReader::Tell(v3);
-  v16 = 3;
+  v17 = OSuite::ZHttpStreamReader::Tell(p_m_Infos);
+  v16 = TXN_CONSUMING;
   if ( v7 >= v17 )
-    v16 = 4;
+    v16 = TXN_CONSUMED;
 LABEL_21:
-  OSuitePrivate::ZEidosTransaction::SetCompletionState(v5, v16);
+  OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, v16);
 }
 
 // File Line: 615
 // RVA: 0x13307B0
 void __fastcall OSuitePrivate::ConsumablesManager::TransferLostConsumables(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuitePrivate::ConsumablesManager *v1; // rdi
-  OSuitePrivate::ZPlatformConsumables *v2; // rcx
-  unsigned __int64 v3; // r14
-  OSuite::IPlayerAccount *v4; // rsi
-  int v5; // er15
-  OSuitePrivate::ZEidosConsumables *v6; // rcx
+  OSuitePrivate::ZPlatformConsumables *m_platformConsumables; // rcx
+  unsigned __int64 i; // r14
+  OSuite::IPlayerAccount *User; // rsi
+  int v5; // r15d
+  OSuitePrivate::ZEidosConsumables *m_pEidosConsumables; // rcx
   OSuite::ZObject *v7; // rdx
-  void *v8; // rax
-  unsigned int v9; // ebx
+  OSuite::ZRedBlackTreeBase::ZElementBase **v8; // rax
+  int v9; // ebx
   OSuitePrivate::ZPlatformConsumables *v10; // rcx
   unsigned __int64 v11; // rsi
   unsigned __int64 v12; // rbx
-  signed __int64 v13; // rax
-  __int64 v14; // [rsp+20h] [rbp-40h]
-  OSuite::IConsumableTransaction *ppTransaction; // [rsp+28h] [rbp-38h]
-  OSuite::ZObject v16; // [rsp+30h] [rbp-30h]
-  __int64 v17; // [rsp+38h] [rbp-28h]
-  unsigned __int64 v18; // [rsp+40h] [rbp-20h]
-  void **v19; // [rsp+48h] [rbp-18h]
-  void *ptr; // [rsp+50h] [rbp-10h]
+  unsigned __int64 m_nTop; // rax
+  OSuite::ZRedBlackTreeBase::ZElementBase *v14; // [rsp+20h] [rbp-40h] BYREF
+  OSuite::IConsumableTransaction *ppTransaction; // [rsp+28h] [rbp-38h] BYREF
+  OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> v16; // [rsp+30h] [rbp-30h] BYREF
 
-  v1 = this;
-  v2 = this->m_platformConsumables;
-  if ( v2 )
+  m_platformConsumables = this->m_platformConsumables;
+  if ( m_platformConsumables )
   {
-    if ( v1->m_pEidosConsumables )
+    if ( this->m_pEidosConsumables )
     {
-      if ( ((unsigned __int8 (*)(void))v2->vfptr[9].__vecDelDtor)() )
+      if ( ((unsigned __int8 (__fastcall *)(OSuitePrivate::ZPlatformConsumables *))m_platformConsumables->vfptr[9].__vecDelDtor)(m_platformConsumables) )
       {
-        v3 = 0i64;
-        if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v1->m_pEidosConsumables->m_playerData) )
+        for ( i = 0i64;
+              i < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_pEidosConsumables->m_playerData);
+              ++i )
         {
-          do
+          User = OSuitePrivate::ZEidosConsumables::GetUser(this->m_pEidosConsumables, i);
+          v5 = (int)this->m_platformConsumables->vfptr[5].__vecDelDtor(this->m_platformConsumables, User);
+          if ( v5 > 0 )
           {
-            v4 = OSuitePrivate::ZEidosConsumables::GetUser(v1->m_pEidosConsumables, v3);
-            v5 = (__int64)v1->m_platformConsumables->vfptr[5].__vecDelDtor(
-                            (OSuite::ZObject *)&v1->m_platformConsumables->vfptr,
-                            (unsigned int)v4);
-            if ( v5 > 0 )
+            m_pEidosConsumables = this->m_pEidosConsumables;
+            ppTransaction = 0i64;
+            if ( OSuitePrivate::ZEidosConsumables::GetActiveTransaction(m_pEidosConsumables, User, &ppTransaction) == OS_CONSUMABLES_NO_TRANSACTION )
             {
-              v6 = v1->m_pEidosConsumables;
-              ppTransaction = 0i64;
-              if ( OSuitePrivate::ZEidosConsumables::GetActiveTransaction(v6, v4, &ppTransaction) == -2147483132 )
+              v16.m_pList = 0i64;
+              OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v16, v7);
+              v16.m_pList = 0i64;
+              v16.OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+              v16.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+              v8 = (OSuite::ZRedBlackTreeBase::ZElementBase **)OSuite::ZObject::malloc(&v16, 0x80ui64, 0i64);
+              v16.m_nTop = 0i64;
+              v9 = 0;
+              v16.m_pList = v8;
+              v16.m_nSize = 16i64;
+              do
               {
-                ptr = 0i64;
-                OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v16, v7);
-                ptr = 0i64;
-                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-                v8 = (void *)OSuite::ZObject::malloc(&v16, 0x80ui64, 0i64);
-                v18 = 0i64;
-                v9 = 0;
-                ptr = v8;
-                v17 = 16i64;
-                if ( v5 > 0 )
+                v10 = this->m_platformConsumables;
+                v14 = 0i64;
+                if ( !((unsigned int (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, _QWORD, OSuite::ZRedBlackTreeBase::ZElementBase **))v10->vfptr[7].__vecDelDtor)(
+                        v10,
+                        User,
+                        (unsigned int)v9,
+                        &v14) )
+                {
+                  if ( ((unsigned int (__fastcall *)(OSuite::ZRedBlackTreeBase::ZElementBase *))v14->vfptr[1].__vecDelDtor)(v14) )
+                  {
+                    OSuite::TList<OSuite::ZONavigationProperty *>::Grow(&v16, v16.m_nTop + 1);
+                    v16.m_pList[v16.m_nTop++] = v14;
+                  }
+                  else
+                  {
+                    ((void (__fastcall *)(OSuite::ZRedBlackTreeBase::ZElementBase *))v14->vfptr[2].__vecDelDtor)(v14);
+                  }
+                }
+                ++v9;
+              }
+              while ( v9 < v5 );
+              if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) )
+              {
+                if ( OSuitePrivate::ZEidosConsumables::NewTransaction(
+                       this->m_pEidosConsumables,
+                       User,
+                       (OSuite::TList<OSuite::IConsumableInfo *> *)&v16,
+                       "ConsumableManager") == OS_CONSUMABLES_OK )
+                {
+                  OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
+                    (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&this->m_TransactionRequested,
+                    this->m_TransactionRequested.m_nTop + 1);
+                  this->m_TransactionRequested.m_pList[this->m_TransactionRequested.m_nTop++] = User;
+                }
+                v11 = 0i64;
+                if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) )
                 {
                   do
                   {
-                    v10 = v1->m_platformConsumables;
-                    v14 = 0i64;
-                    if ( !((unsigned int (__fastcall *)(OSuitePrivate::ZPlatformConsumables *, OSuite::IPlayerAccount *, _QWORD, __int64 *))v10->vfptr[7].__vecDelDtor)(
-                            v10,
-                            v4,
-                            v9,
-                            &v14) )
-                    {
-                      if ( (*(unsigned int (**)(void))(*(_QWORD *)v14 + 8i64))() )
-                      {
-                        OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
-                          (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&v16,
-                          v18 + 1);
-                        *((_QWORD *)ptr + v18++) = v14;
-                      }
-                      else
-                      {
-                        (*(void (**)(void))(*(_QWORD *)v14 + 16i64))();
-                      }
-                    }
-                    ++v9;
+                    v12 = v11 + 1;
+                    OSuite::TList<OSuite::ZONavigationProperty *>::Grow(&v16, v11 + 1);
+                    m_nTop = v16.m_nTop;
+                    if ( v11 >= v16.m_nTop )
+                      m_nTop = v11 + 1;
+                    v16.m_nTop = m_nTop;
+                    ((void (__fastcall *)(OSuite::ZRedBlackTreeBase::ZElementBase *))v16.m_pList[v11]->vfptr[2].__vecDelDtor)(v16.m_pList[v11]);
+                    ++v11;
                   }
-                  while ( (signed int)v9 < v5 );
+                  while ( v12 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) );
                 }
-                if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) )
-                {
-                  if ( OSuitePrivate::ZEidosConsumables::NewTransaction(
-                         v1->m_pEidosConsumables,
-                         v4,
-                         (OSuite::TList<OSuite::IConsumableInfo *> *)&v16,
-                         "ConsumableManager") == OS_CONSUMABLES_OK )
-                  {
-                    OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
-                      (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&v1->m_TransactionRequested,
-                      v1->m_TransactionRequested.m_nTop + 1);
-                    v1->m_TransactionRequested.m_pList[v1->m_TransactionRequested.m_nTop++] = v4;
-                  }
-                  v11 = 0i64;
-                  if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) )
-                  {
-                    do
-                    {
-                      v12 = v11 + 1;
-                      OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
-                        (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&v16,
-                        v11 + 1);
-                      v13 = v18;
-                      if ( v11 >= v18 )
-                        v13 = v11 + 1;
-                      v18 = v13;
-                      (*(void (**)(void))(**((_QWORD **)ptr + v11++) + 16i64))();
-                    }
-                    while ( v12 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) );
-                  }
-                }
-                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-                OSuite::ZObject::free(&v16, ptr);
               }
+              v16.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+              v16.OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+              OSuite::ZObject::free(&v16, v16.m_pList);
             }
-            ++v3;
           }
-          while ( v3 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v1->m_pEidosConsumables->m_playerData) );
         }
       }
     }
@@ -1055,61 +985,57 @@ void __fastcall OSuitePrivate::ConsumablesManager::TransferLostConsumables(OSuit
 // RVA: 0x132ECFC
 void __fastcall OSuitePrivate::ConsumablesManager::CloseLostTransactions(OSuitePrivate::ConsumablesManager *this)
 {
-  OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *v1; // rbx
-  OSuitePrivate::ConsumablesManager *v2; // rbp
+  OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *p_m_TransactionRequested; // rbx
   unsigned __int64 v3; // rdi
-  unsigned __int64 v4; // rsi
-  OSuite::ConsumableError v5; // eax
-  OSuite::IConsumableTransaction *ppTransaction; // [rsp+20h] [rbp-18h]
+  unsigned __int64 i; // rsi
+  OSuite::ConsumableError ActiveTransaction; // eax
+  OSuite::IConsumableTransaction *ppTransaction; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&this->m_TransactionRequested;
-  v2 = this;
+  p_m_TransactionRequested = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&this->m_TransactionRequested;
   v3 = 0i64;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_TransactionRequested) )
   {
-    v4 = 1i64;
-    while ( 1 )
+    for ( i = 1i64; ; ++i )
     {
       ppTransaction = 0i64;
-      OSuite::TList<OSuite::ZONavigationProperty *>::Grow(v1, v4);
-      if ( v3 >= v1->m_nTop )
-        v1->m_nTop = v4;
-      v5 = OSuitePrivate::ZEidosConsumables::GetActiveTransaction(
-             v2->m_pEidosConsumables,
-             (OSuite::IPlayerAccount *)v1->m_pList[v3],
-             &ppTransaction);
+      OSuite::TList<OSuite::ZONavigationProperty *>::Grow(p_m_TransactionRequested, i);
+      if ( v3 >= p_m_TransactionRequested->m_nTop )
+        p_m_TransactionRequested->m_nTop = i;
+      ActiveTransaction = OSuitePrivate::ZEidosConsumables::GetActiveTransaction(
+                            this->m_pEidosConsumables,
+                            (OSuite::IPlayerAccount *)p_m_TransactionRequested->m_pList[v3],
+                            &ppTransaction);
       if ( ppTransaction )
         break;
-      if ( v5 == -2147483132 )
+      if ( ActiveTransaction == OS_CONSUMABLES_NO_TRANSACTION )
         goto LABEL_10;
 LABEL_11:
-      ++v3;
-      ++v4;
-      if ( v3 >= OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v1) )
+      if ( ++v3 >= OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)p_m_TransactionRequested) )
         return;
     }
     ppTransaction->vfptr->SetState(ppTransaction, TRANSACTION_STATE_PURCHASED);
-    OSuite::TList<OSuite::ZONavigationProperty *>::Grow(v1, v4);
-    if ( v3 >= v1->m_nTop )
-      v1->m_nTop = v4;
+    OSuite::TList<OSuite::ZONavigationProperty *>::Grow(p_m_TransactionRequested, i);
+    if ( v3 >= p_m_TransactionRequested->m_nTop )
+      p_m_TransactionRequested->m_nTop = i;
     OSuitePrivate::ZEidosConsumables::CloseActiveTransaction(
-      v2->m_pEidosConsumables,
-      (OSuite::IPlayerAccount *)v1->m_pList[v3]);
+      this->m_pEidosConsumables,
+      (OSuite::IPlayerAccount *)p_m_TransactionRequested->m_pList[v3]);
 LABEL_10:
-    v1->vfptr[1].__vecDelDtor((OSuite::ZObject *)&v1->vfptr, v3--);
-    --v4;
+    p_m_TransactionRequested->OSuite::ZListBase::OSuite::ZObject::vfptr[1].__vecDelDtor(p_m_TransactionRequested, v3--);
+    --i;
     goto LABEL_11;
   }
 }
 
 // File Line: 687
 // RVA: 0x132F4CC
-OSuite::ZJsonObject *__fastcall OSuitePrivate::ConsumablesManager::GetResponseParams(OSuitePrivate::ConsumablesManager *this, OSuite::ZJsonDocument *doc)
+OSuite::ZJsonObject *__fastcall OSuitePrivate::ConsumablesManager::GetResponseParams(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::ZJsonDocument *doc)
 {
   void *(__fastcall *v2)(OSuite::ZObject *, unsigned int); // rdi
-  OSuite::ZJsonDocument *v3; // rbx
   OSuite::ZObjectVtbl *v4; // rsi
-  OSuite::ZJsonObject *v5; // rsi
+  OSuite::ZJsonObject *vecDelDtor; // rsi
   OSuite::ZObjectVtbl *v6; // rbx
   OSuite::ZObjectVtbl *v7; // rbx
   OSuite::ZJsonObject *v8; // rbx
@@ -1120,32 +1046,31 @@ OSuite::ZJsonObject *__fastcall OSuitePrivate::ConsumablesManager::GetResponsePa
   OSuite::ZString *v13; // rax
   OSuite::ZString *v14; // rax
   OSuite::ZObjectVtbl *v15; // rbx
-  OSuite::ZString sName; // [rsp+20h] [rbp-39h]
-  OSuite::ZString v18; // [rsp+38h] [rbp-21h]
-  OSuite::ZString v19; // [rsp+50h] [rbp-9h]
-  OSuite::ZString result; // [rsp+68h] [rbp+Fh]
-  OSuite::ZString v21; // [rsp+80h] [rbp+27h]
+  OSuite::ZString sName; // [rsp+20h] [rbp-39h] BYREF
+  OSuite::ZString v18; // [rsp+38h] [rbp-21h] BYREF
+  OSuite::ZString v19; // [rsp+50h] [rbp-9h] BYREF
+  OSuite::ZString result; // [rsp+68h] [rbp+Fh] BYREF
+  OSuite::ZString v21; // [rsp+80h] [rbp+27h] BYREF
 
   v2 = 0i64;
-  v3 = doc;
   v21.m_pString = 0i64;
   OSuite::ZString::ZString(&v21);
   OSuite::ZString::ZString(&sName, "response");
-  v4 = OSuite::ZJsonObject::Value((OSuite::ZJsonObject *)&v3->vfptr, &sName);
+  v4 = OSuite::ZJsonObject::Value(doc, &sName);
   OSuite::ZString::~ZString(&sName);
   if ( v4 )
   {
-    v5 = (OSuite::ZJsonObject *)v4[10].__vecDelDtor;
-    if ( v5 )
+    vecDelDtor = (OSuite::ZJsonObject *)v4[10].__vecDelDtor;
+    if ( vecDelDtor )
     {
       OSuite::ZString::ZString(&sName, "result");
-      v6 = OSuite::ZJsonObject::Value(v5, &sName);
+      v6 = OSuite::ZJsonObject::Value(vecDelDtor, &sName);
       OSuite::ZString::~ZString(&sName);
       OSuite::ZString::operator=(&v21, (OSuite::ZString *)&v6[2]);
       if ( OSuite::ZString::operator==(&v21, "Failure") )
       {
         OSuite::ZString::ZString(&sName, "error");
-        v7 = OSuite::ZJsonObject::Value(v5, &sName);
+        v7 = OSuite::ZJsonObject::Value(vecDelDtor, &sName);
         OSuite::ZString::~ZString(&sName);
         if ( v7 )
         {
@@ -1180,7 +1105,7 @@ OSuite::ZJsonObject *__fastcall OSuitePrivate::ConsumablesManager::GetResponsePa
       else
       {
         OSuite::ZString::ZString(&v18, "params");
-        v15 = OSuite::ZJsonObject::Value(v5, &v18);
+        v15 = OSuite::ZJsonObject::Value(vecDelDtor, &v18);
         OSuite::ZString::~ZString(&v18);
         if ( v15 )
           v2 = v15[10].__vecDelDtor;
@@ -1193,19 +1118,18 @@ OSuite::ZJsonObject *__fastcall OSuitePrivate::ConsumablesManager::GetResponsePa
 
 // File Line: 750
 // RVA: 0x132FF98
-void __fastcall OSuitePrivate::ConsumablesManager::QuerySteamTxn(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+void __fastcall OSuitePrivate::ConsumablesManager::QuerySteamTxn(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuitePrivate::ZEidosTransaction *v3; // rdi
-  OSuitePrivate::ConsumablesManager *v4; // rbx
   __int64 v5; // rax
   __int64 v6; // rax
-  OSuitePrivate::EidosTransactionState v7; // eax
+  OSuitePrivate::EidosTransactionState Response; // eax
   OSuitePrivate::EidosTransactionState v8; // esi
   OSuite::ZHttpManager *v9; // rax
   __int64 v10; // rax
 
-  v3 = pTxn;
-  v4 = this;
   if ( !this->m_bRequestInProgress )
   {
     if ( this->m_httpRequest )
@@ -1215,24 +1139,24 @@ void __fastcall OSuitePrivate::ConsumablesManager::QuerySteamTxn(OSuitePrivate::
         v6 = ((__int64 (__fastcall *)(OSuitePrivate::ZEidosTransaction *, OSuite::IPlayerAccount *))pTxn->vfptr->GetId)(
                pTxn,
                pPlayerAccount);
-        v7 = (unsigned int)OSuitePrivate::ConsumablesManager::HandleFinalizeResponse(v4, v6);
+        Response = (unsigned int)OSuitePrivate::ConsumablesManager::HandleFinalizeResponse(this, v6);
       }
       else
       {
-        v7 = (unsigned int)OSuitePrivate::ConsumablesManager::HandleQueryResponse(this, pPlayerAccount, pTxn);
+        Response = (unsigned int)OSuitePrivate::ConsumablesManager::HandleQueryResponse(this, pPlayerAccount, pTxn);
       }
-      v8 = v7;
+      v8 = Response;
       v9 = OSuite::TSingleton<OSuite::ZHttpManager>::Object();
-      OSuite::ZHttpRequestManager::ReleaseHttpRequest(v9->m_httpRequestManager, v4->m_httpRequest);
-      v4->m_httpRequest = 0i64;
+      OSuite::ZHttpRequestManager::ReleaseHttpRequest(v9->m_httpRequestManager, this->m_httpRequest);
+      this->m_httpRequest = 0i64;
       if ( v8 )
       {
-        OSuitePrivate::ZEidosTransaction::SetCompletionState(v3, v8);
+        OSuitePrivate::ZEidosTransaction::SetCompletionState(pTxn, v8);
       }
       else
       {
-        v10 = v3->vfptr->GetId((OSuite::IConsumableTransaction *)&v3->vfptr);
-        OSuitePrivate::ConsumablesManager::SendFinalize(v4, v10);
+        v10 = pTxn->vfptr->GetId(pTxn);
+        OSuitePrivate::ConsumablesManager::SendFinalize(this, v10);
       }
     }
     else
@@ -1240,7 +1164,7 @@ void __fastcall OSuitePrivate::ConsumablesManager::QuerySteamTxn(OSuitePrivate::
       v5 = ((__int64 (__fastcall *)(OSuitePrivate::ZEidosTransaction *, OSuite::IPlayerAccount *))pTxn->vfptr->GetId)(
              pTxn,
              pPlayerAccount);
-      OSuitePrivate::ConsumablesManager::SendQuery(v4, v5);
+      OSuitePrivate::ConsumablesManager::SendQuery(this, v5);
     }
   }
 }
@@ -1249,100 +1173,84 @@ void __fastcall OSuitePrivate::ConsumablesManager::QuerySteamTxn(OSuitePrivate::
 // RVA: 0x133052C
 void __fastcall OSuitePrivate::ConsumablesManager::SendQuery(OSuitePrivate::ConsumablesManager *this, __int64 orderId)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rdi
-  __int64 v3; // rbx
   OSuite::ZGameInterface *v4; // rax
-  const char *v5; // rax
+  const char *SteamShopURL; // rax
   OSuite::ZOnlineSuite *v6; // rax
-  OSuite::IGameConfig *v7; // rax
+  OSuite::IGameConfig *GameConfig; // rax
   const char *v8; // rax
   OSuite::ZGameInterface *v9; // rax
-  unsigned int v10; // eax
-  OSuite::ZHttpRequestManager *v11; // rbx
+  int AppID; // eax
+  OSuite::ZHttpRequestManager *m_httpRequestManager; // rbx
   OSuite::ZUrl *v12; // rax
   OSuite::IHttpRequest *v13; // rax
-  OSuite::ZObjectVtbl *v14; // rbx
+  OSuite::ZObjectVtbl *vfptr; // rbx
   __int64 v15; // rax
   OSuite::ZObjectVtbl *v16; // rbx
   __int64 v17; // rax
-  hkSeekableStreamReader *v18; // rax
-  OSuite::IHttpRequest *v19; // rcx
-  __int64 v20; // [rsp+30h] [rbp-D0h]
-  __int64 v21; // [rsp+38h] [rbp-C8h]
-  __int64 v22; // [rsp+40h] [rbp-C0h]
-  __int64 v23; // [rsp+48h] [rbp-B8h]
-  __int64 v24; // [rsp+50h] [rbp-B0h]
-  __int64 v25; // [rsp+58h] [rbp-A8h]
-  hkSeekableStreamReader *v26; // [rsp+60h] [rbp-A0h]
-  bool (__fastcall *v27)(OSuitePrivate::ConsumablesManager *, OSuite::IHttpRequest *, OSuite::ZHttp::EError); // [rsp+68h] [rbp-98h]
-  char v28; // [rsp+70h] [rbp-90h]
-  OSuite::ZString v29; // [rsp+78h] [rbp-88h]
-  OSuite::ZUrl v30; // [rsp+90h] [rbp-70h]
-  OSuite::ZStringBuilder v31; // [rsp+168h] [rbp+68h]
-  OSuite::ZString result; // [rsp+198h] [rbp+98h]
+  hkSeekableStreamReader *RCX; // rax
+  OSuite::IHttpRequest *m_httpRequest; // rcx
+  __int64 v20[8]; // [rsp+30h] [rbp-D0h] BYREF
+  char v21; // [rsp+70h] [rbp-90h]
+  OSuite::ZString v22; // [rsp+78h] [rbp-88h] BYREF
+  OSuite::ZUrl v23; // [rsp+90h] [rbp-70h] BYREF
+  OSuite::ZStringBuilder v24; // [rsp+168h] [rbp+68h] BYREF
+  OSuite::ZString result; // [rsp+198h] [rbp+98h] BYREF
 
-  v2 = this;
   *(_WORD *)&this->m_bRequestInProgress = 1;
-  v3 = orderId;
-  v31.m_Chars.m_pList = 0i64;
-  OSuite::ZStringBuilder::ZStringBuilder(&v31, 0x100ui64);
+  v24.m_Chars.m_pList = 0i64;
+  OSuite::ZStringBuilder::ZStringBuilder(&v24, (OSuite::ZObject *)0x100);
   v4 = OSuite::GameInterface();
-  v5 = OSuite::ZGameInterface::GetSteamShopURL(v4);
-  OSuite::ZStringBuilder::Append(&v31, v5);
-  OSuite::ZStringBuilder::Append(&v31, "QueryTxn/V0001/?key=");
+  SteamShopURL = OSuite::ZGameInterface::GetSteamShopURL(v4);
+  OSuite::ZStringBuilder::Append(&v24, SteamShopURL);
+  OSuite::ZStringBuilder::Append(&v24, "QueryTxn/V0001/?key=");
   v6 = OSuite::ZOnlineSuite::Instance();
-  v7 = OSuite::ZOnlineSuite::GetGameConfig(v6);
-  v8 = v7->vfptr->GetSteamWebAPIKey(v7);
-  OSuite::ZStringBuilder::Append(&v31, v8);
-  OSuite::ZStringBuilder::Append(&v31, "&orderid=");
-  OSuite::ZStringBuilder::AppendInt(&v31, v3);
-  OSuite::ZStringBuilder::Append(&v31, "&appid=");
+  GameConfig = OSuite::ZOnlineSuite::GetGameConfig(v6);
+  v8 = GameConfig->vfptr->GetSteamWebAPIKey(GameConfig);
+  OSuite::ZStringBuilder::Append(&v24, v8);
+  OSuite::ZStringBuilder::Append(&v24, "&orderid=");
+  OSuite::ZStringBuilder::AppendInt(&v24, orderId);
+  OSuite::ZStringBuilder::Append(&v24, "&appid=");
   v9 = OSuite::GameInterface();
-  v10 = OSuite::ZGameInterface::GetAppID(v9);
-  OSuite::ZStringBuilder::AppendInt(&v31, v10);
+  AppID = OSuite::ZGameInterface::GetAppID(v9);
+  OSuite::ZStringBuilder::AppendInt(&v24, AppID);
   result.m_pString = 0i64;
-  OSuite::ZStringBuilder::ToString(&v31, &result);
-  v11 = OSuite::TSingleton<OSuite::ZHttpManager>::Object()->m_httpRequestManager;
-  OSuite::ZUrl::ZUrl(&v30, &result);
-  OSuite::ZHttpRequestManager::CreateHttpRequest(v11, v12, 0i64, 0, 30);
-  v2->m_httpRequest = v13;
-  OSuite::ZUrl::~ZUrl(&v30);
-  v14 = v2->m_httpRequest->vfptr;
-  OSuite::ZString::ZString(&v29, "GET");
-  v14[44].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v15);
-  v2->m_httpRequest->vfptr[42].__vecDelDtor((OSuite::ZObject *)v2->m_httpRequest, 0);
-  v16 = v2->m_httpRequest->vfptr;
-  OSuite::ZString::ZString(&v29, "application/json");
-  v16[36].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v17);
-  v18 = Assembly::GetRCX(v2);
-  v21 = 0i64;
-  v27 = OSuitePrivate::ConsumablesManager::OnRequestFinished;
-  v19 = v2->m_httpRequest;
-  v20 = 0i64;
-  v23 = 0i64;
-  v22 = 0i64;
-  v25 = 0i64;
-  v24 = 0i64;
-  v26 = v18;
-  v28 = 1;
-  v19->vfptr[6].__vecDelDtor((OSuite::ZObject *)&v19->vfptr, (unsigned int)&v20);
+  OSuite::ZStringBuilder::ToString(&v24, &result);
+  m_httpRequestManager = OSuite::TSingleton<OSuite::ZHttpManager>::Object()->m_httpRequestManager;
+  OSuite::ZUrl::ZUrl(&v23, &result);
+  OSuite::ZHttpRequestManager::CreateHttpRequest(m_httpRequestManager, v12, 0i64, 0, 30);
+  this->m_httpRequest = v13;
+  OSuite::ZUrl::~ZUrl(&v23);
+  vfptr = this->m_httpRequest->vfptr;
+  OSuite::ZString::ZString(&v22, "GET");
+  vfptr[44].__vecDelDtor(this->m_httpRequest, v15);
+  this->m_httpRequest->vfptr[42].__vecDelDtor(this->m_httpRequest, 0);
+  v16 = this->m_httpRequest->vfptr;
+  OSuite::ZString::ZString(&v22, "application/json");
+  v16[36].__vecDelDtor(this->m_httpRequest, v17);
+  RCX = Assembly::GetRCX(this);
+  v20[7] = (__int64)OSuitePrivate::ConsumablesManager::OnRequestFinished;
+  m_httpRequest = this->m_httpRequest;
+  memset(v20, 0, 48);
+  v20[6] = (__int64)RCX;
+  v21 = 1;
+  m_httpRequest->vfptr[6].__vecDelDtor(m_httpRequest, (unsigned int)v20);
   OSuite::ZString::~ZString(&result);
-  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v31);
+  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v24);
 }
 
 // File Line: 806
 // RVA: 0x132F9CC
-__int64 __fastcall OSuitePrivate::ConsumablesManager::HandleQueryResponse(OSuitePrivate::ConsumablesManager *this, OSuite::IPlayerAccount *pPlayerAccount, OSuitePrivate::ZEidosTransaction *pTxn)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::HandleQueryResponse(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IPlayerAccount *pPlayerAccount,
+        OSuitePrivate::ZEidosTransaction *pTxn)
 {
-  OSuitePrivate::ConsumablesManager *v3; // rbx
-  OSuitePrivate::ZEidosTransaction *v4; // r12
-  OSuite::IPlayerAccount *v5; // r15
   unsigned int v6; // esi
   __int64 v7; // rax
   __int64 v8; // r14
   __int64 v9; // rax
   OSuite::IReader *v10; // rax
-  OSuite::ZJsonObject *v11; // rbx
+  OSuite::ZJsonObject *ResponseParams; // rbx
   OSuite::ZObjectVtbl *v12; // rdi
   OSuite::ZObjectVtbl *v13; // rdi
   OSuite::ZObjectVtbl *v14; // rbx
@@ -1350,42 +1258,39 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::HandleQueryResponse(OSuite
   OSuite::ZString *v16; // rax
   OSuite::ZString *v17; // rdi
   bool v18; // bl
-  OSuite::ZString sName; // [rsp+20h] [rbp-59h]
-  OSuite::ZString v21; // [rsp+38h] [rbp-41h]
-  OSuite::ZString v22; // [rsp+50h] [rbp-29h]
-  OSuite::ZJsonDocument doc; // [rsp+68h] [rbp-11h]
+  OSuite::ZString sName; // [rsp+20h] [rbp-59h] BYREF
+  OSuite::ZString v21; // [rsp+38h] [rbp-41h] BYREF
+  OSuite::ZString v22; // [rsp+50h] [rbp-29h] BYREF
+  OSuite::ZJsonDocument doc; // [rsp+68h] [rbp-11h] BYREF
 
-  v3 = this;
-  v4 = pTxn;
-  v5 = pPlayerAccount;
   v6 = 6;
-  v7 = ((__int64 (*)(void))this->m_httpRequest->vfptr[33].__vecDelDtor)();
+  v7 = ((__int64 (__fastcall *)(OSuite::IHttpRequest *))this->m_httpRequest->vfptr[33].__vecDelDtor)(this->m_httpRequest);
   if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v7 + 32i64))(v7) == 200 )
   {
     v21.m_pString = 0i64;
-    OSuite::ZString::ZString(&v21, &customWorldMapCaption);
+    OSuite::ZString::ZString(&v21, &customCaption);
     v22.m_pString = 0i64;
-    OSuite::ZString::ZString(&v22, &customWorldMapCaption);
+    OSuite::ZString::ZString(&v22, &customCaption);
     v8 = -1i64;
-    v9 = ((__int64 (*)(void))v3->m_httpRequest->vfptr[33].__vecDelDtor)();
+    v9 = ((__int64 (__fastcall *)(OSuite::IHttpRequest *))this->m_httpRequest->vfptr[33].__vecDelDtor)(this->m_httpRequest);
     v10 = (OSuite::IReader *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 64i64))(v9);
     doc.m_Pairs.m_pLists = 0i64;
     OSuite::ZJsonDocument::ZJsonDocument(&doc, v10);
-    v11 = OSuitePrivate::ConsumablesManager::GetResponseParams(v3, &doc);
-    if ( v11 )
+    ResponseParams = OSuitePrivate::ConsumablesManager::GetResponseParams(this, &doc);
+    if ( ResponseParams )
     {
       OSuite::ZString::ZString(&sName, "status");
-      v12 = OSuite::ZJsonObject::Value(v11, &sName);
+      v12 = OSuite::ZJsonObject::Value(ResponseParams, &sName);
       OSuite::ZString::~ZString(&sName);
       if ( v12 )
         OSuite::ZString::operator=(&v21, (OSuite::ZString *)&v12[2]);
       OSuite::ZString::ZString(&sName, "orderid");
-      v13 = OSuite::ZJsonObject::Value(v11, &sName);
+      v13 = OSuite::ZJsonObject::Value(ResponseParams, &sName);
       OSuite::ZString::~ZString(&sName);
       if ( v13 )
         v8 = OSuite::ZString::ToInt((OSuite::ZString *)&v13[2]);
       OSuite::ZString::ZString(&sName, "steamid");
-      v14 = OSuite::ZJsonObject::Value(v11, &sName);
+      v14 = OSuite::ZJsonObject::Value(ResponseParams, &sName);
       OSuite::ZString::~ZString(&sName);
       if ( v14 )
         OSuite::ZString::operator=(&v22, (OSuite::ZString *)&v14[2]);
@@ -1398,14 +1303,14 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::HandleQueryResponse(OSuite
     {
       v6 = 4;
     }
-    v15 = v5->vfptr->GetUserId(v5, 0);
+    v15 = pPlayerAccount->vfptr->GetUserId(pPlayerAccount, 0i64);
     OSuite::ZString::ZString(&sName, v15);
     v17 = v16;
     v18 = OSuite::ZString::operator==(&v22, v16) == 0;
     OSuite::ZString::~ZString(v17);
     if ( v18 )
       v6 = 7;
-    if ( v8 != v4->vfptr->GetId((OSuite::IConsumableTransaction *)&v4->vfptr) )
+    if ( v8 != pTxn->vfptr->GetId(pTxn) )
       v6 = 7;
     OSuite::ZJsonDocument::~ZJsonDocument(&doc);
     OSuite::ZString::~ZString(&v22);
@@ -1416,22 +1321,22 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::HandleQueryResponse(OSuite
 
 // File Line: 878
 // RVA: 0x1330090
-void __fastcall OSuitePrivate::ConsumablesManager::SendFinalize(OSuitePrivate::ConsumablesManager *this, __int64 orderId)
+void __fastcall OSuitePrivate::ConsumablesManager::SendFinalize(
+        OSuitePrivate::ConsumablesManager *this,
+        __int64 orderId)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rsi
-  __int64 v3; // rbx
   OSuite::ZGameInterface *v4; // rax
-  const char *v5; // rax
+  const char *SteamShopURL; // rax
   OSuite::ZOnlineSuite *v6; // rax
-  OSuite::IGameConfig *v7; // rax
+  OSuite::IGameConfig *GameConfig; // rax
   const char *v8; // rax
   OSuite::ZGameInterface *v9; // rax
-  unsigned int v10; // eax
+  int AppID; // eax
   OSuite::ZString *v11; // rax
-  OSuite::ZHttpRequestManager *v12; // rbx
+  OSuite::ZHttpRequestManager *m_httpRequestManager; // rbx
   OSuite::ZUrl *v13; // rax
   OSuite::IHttpRequest *v14; // rax
-  OSuite::ZObjectVtbl *v15; // rbx
+  OSuite::ZObjectVtbl *vfptr; // rbx
   __int64 v16; // rax
   OSuite::ZObjectVtbl *v17; // rbx
   unsigned __int64 v18; // rax
@@ -1439,122 +1344,108 @@ void __fastcall OSuitePrivate::ConsumablesManager::SendFinalize(OSuitePrivate::C
   __int64 v20; // rax
   OSuite::ZObjectVtbl *v21; // rbx
   __int64 v22; // rax
-  hkSeekableStreamReader *v23; // rbx
+  hkSeekableStreamReader *RCX; // rbx
   hkSeekableStreamReader *v24; // rax
-  OSuite::IHttpRequest *v25; // rcx
-  OSuite::ZString result; // [rsp+30h] [rbp-D0h]
-  __int64 v27; // [rsp+48h] [rbp-B8h]
-  __int64 v28; // [rsp+50h] [rbp-B0h]
-  __int64 v29; // [rsp+58h] [rbp-A8h]
-  __int64 v30; // [rsp+60h] [rbp-A0h]
-  hkSeekableStreamReader *v31; // [rsp+68h] [rbp-98h]
-  bool (__fastcall *v32)(OSuitePrivate::ConsumablesManager *, OSuite::IHttpRequest *, unsigned __int64); // [rsp+70h] [rbp-90h]
-  hkSeekableStreamReader *v33; // [rsp+78h] [rbp-88h]
-  bool (__fastcall *v34)(OSuitePrivate::ConsumablesManager *, OSuite::IHttpRequest *, OSuite::ZHttp::EError); // [rsp+80h] [rbp-80h]
-  char v35; // [rsp+88h] [rbp-78h]
-  OSuite::ZUrl v36; // [rsp+90h] [rbp-70h]
-  OSuite::ZStringBuilder v37; // [rsp+168h] [rbp+68h]
-  OSuite::ZString sPath; // [rsp+198h] [rbp+98h]
-  OSuite::ZStringBuilder v39; // [rsp+1B0h] [rbp+B0h]
+  OSuite::IHttpRequest *m_httpRequest; // rcx
+  OSuite::ZString result; // [rsp+30h] [rbp-D0h] BYREF
+  __int64 v27[8]; // [rsp+48h] [rbp-B8h] BYREF
+  char v28; // [rsp+88h] [rbp-78h]
+  OSuite::ZUrl v29; // [rsp+90h] [rbp-70h] BYREF
+  OSuite::ZStringBuilder v30; // [rsp+168h] [rbp+68h] BYREF
+  OSuite::ZString sPath; // [rsp+198h] [rbp+98h] BYREF
+  OSuite::ZStringBuilder v32; // [rsp+1B0h] [rbp+B0h] BYREF
 
-  v2 = this;
   *(_WORD *)&this->m_bRequestInProgress = 257;
-  v3 = orderId;
-  v39.m_Chars.m_pList = 0i64;
-  OSuite::ZStringBuilder::ZStringBuilder(&v39, 0x100ui64);
+  v32.m_Chars.m_pList = 0i64;
+  OSuite::ZStringBuilder::ZStringBuilder(&v32, (OSuite::ZObject *)0x100);
   v4 = OSuite::GameInterface();
-  v5 = OSuite::ZGameInterface::GetSteamShopURL(v4);
-  OSuite::ZStringBuilder::Append(&v39, v5);
-  OSuite::ZStringBuilder::Append(&v39, "FinalizeTxn/V0001/?key=");
+  SteamShopURL = OSuite::ZGameInterface::GetSteamShopURL(v4);
+  OSuite::ZStringBuilder::Append(&v32, SteamShopURL);
+  OSuite::ZStringBuilder::Append(&v32, "FinalizeTxn/V0001/?key=");
   v6 = OSuite::ZOnlineSuite::Instance();
-  v7 = OSuite::ZOnlineSuite::GetGameConfig(v6);
-  v8 = v7->vfptr->GetSteamWebAPIKey(v7);
-  OSuite::ZStringBuilder::Append(&v39, v8);
-  v37.m_Chars.m_pList = 0i64;
-  OSuite::ZStringBuilder::ZStringBuilder(&v37, 0x100ui64);
-  OSuite::ZStringBuilder::Append(&v37, "orderid=");
-  OSuite::ZStringBuilder::AppendInt(&v37, v3);
-  OSuite::ZStringBuilder::Append(&v37, "&appid=");
+  GameConfig = OSuite::ZOnlineSuite::GetGameConfig(v6);
+  v8 = GameConfig->vfptr->GetSteamWebAPIKey(GameConfig);
+  OSuite::ZStringBuilder::Append(&v32, v8);
+  v30.m_Chars.m_pList = 0i64;
+  OSuite::ZStringBuilder::ZStringBuilder(&v30, (OSuite::ZObject *)0x100);
+  OSuite::ZStringBuilder::Append(&v30, "orderid=");
+  OSuite::ZStringBuilder::AppendInt(&v30, orderId);
+  OSuite::ZStringBuilder::Append(&v30, "&appid=");
   v9 = OSuite::GameInterface();
-  v10 = OSuite::ZGameInterface::GetAppID(v9);
-  OSuite::ZStringBuilder::AppendInt(&v37, v10);
-  v11 = OSuite::ZStringBuilder::ToString(&v37, &result);
-  OSuite::ZString::operator=(&v2->m_finalizeData, v11);
+  AppID = OSuite::ZGameInterface::GetAppID(v9);
+  OSuite::ZStringBuilder::AppendInt(&v30, AppID);
+  v11 = OSuite::ZStringBuilder::ToString(&v30, &result);
+  OSuite::ZString::operator=(&this->m_finalizeData, v11);
   OSuite::ZString::~ZString(&result);
   sPath.m_pString = 0i64;
-  OSuite::ZStringBuilder::ToString(&v39, &sPath);
-  v12 = OSuite::TSingleton<OSuite::ZHttpManager>::Object()->m_httpRequestManager;
-  OSuite::ZUrl::ZUrl(&v36, &sPath);
-  OSuite::ZHttpRequestManager::CreateHttpRequest(v12, v13, 0i64, 0, 30);
-  v2->m_httpRequest = v14;
-  OSuite::ZUrl::~ZUrl(&v36);
-  v15 = v2->m_httpRequest->vfptr;
+  OSuite::ZStringBuilder::ToString(&v32, &sPath);
+  m_httpRequestManager = OSuite::TSingleton<OSuite::ZHttpManager>::Object()->m_httpRequestManager;
+  OSuite::ZUrl::ZUrl(&v29, &sPath);
+  OSuite::ZHttpRequestManager::CreateHttpRequest(m_httpRequestManager, v13, 0i64, 0, 30);
+  this->m_httpRequest = v14;
+  OSuite::ZUrl::~ZUrl(&v29);
+  vfptr = this->m_httpRequest->vfptr;
   OSuite::ZString::ZString(&result, "POST");
-  v15[44].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v16);
-  v17 = v2->m_httpRequest->vfptr;
-  v18 = OSuite::ZString::Count(&v2->m_finalizeData);
-  v17[42].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v18);
-  v19 = v2->m_httpRequest->vfptr;
+  vfptr[44].__vecDelDtor(this->m_httpRequest, v16);
+  v17 = this->m_httpRequest->vfptr;
+  v18 = OSuite::ZString::Count(&this->m_finalizeData);
+  v17[42].__vecDelDtor(this->m_httpRequest, v18);
+  v19 = this->m_httpRequest->vfptr;
   OSuite::ZString::ZString(&result, "application/json");
-  v19[36].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v20);
-  v21 = v2->m_httpRequest->vfptr;
+  v19[36].__vecDelDtor(this->m_httpRequest, v20);
+  v21 = this->m_httpRequest->vfptr;
   OSuite::ZString::ZString(&result, "application/x-www-form-urlencoded");
-  v21[41].__vecDelDtor((OSuite::ZObject *)&v2->m_httpRequest->vfptr, v22);
-  v23 = Assembly::GetRCX(v2);
-  v24 = Assembly::GetRCX(v2);
-  v28 = 0i64;
-  v32 = OSuitePrivate::ConsumablesManager::OnFinalizeTxnDataNeeded;
-  v25 = v2->m_httpRequest;
-  v31 = v24;
-  v27 = 0i64;
-  v30 = 0i64;
-  v29 = 0i64;
-  v33 = v23;
-  v35 = 1;
-  v34 = OSuitePrivate::ConsumablesManager::OnRequestFinished;
-  v25->vfptr[6].__vecDelDtor((OSuite::ZObject *)&v25->vfptr, (unsigned int)&v27);
+  v21[41].__vecDelDtor(this->m_httpRequest, v22);
+  RCX = Assembly::GetRCX(this);
+  v24 = Assembly::GetRCX(this);
+  v27[5] = (__int64)OSuitePrivate::ConsumablesManager::OnFinalizeTxnDataNeeded;
+  m_httpRequest = this->m_httpRequest;
+  v27[4] = (__int64)v24;
+  memset(v27, 0, 32);
+  v27[6] = (__int64)RCX;
+  v28 = 1;
+  v27[7] = (__int64)OSuitePrivate::ConsumablesManager::OnRequestFinished;
+  m_httpRequest->vfptr[6].__vecDelDtor(m_httpRequest, (unsigned int)v27);
   OSuite::ZString::~ZString(&sPath);
-  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v37);
-  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v39);
+  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v30);
+  OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v32);
 }
 
 // File Line: 914
 // RVA: 0x132F774
-__int64 __fastcall OSuitePrivate::ConsumablesManager::HandleFinalizeResponse(OSuitePrivate::ConsumablesManager *this, __int64 orderId)
+__int64 __fastcall OSuitePrivate::ConsumablesManager::HandleFinalizeResponse(
+        OSuitePrivate::ConsumablesManager *this,
+        __int64 orderId)
 {
-  OSuitePrivate::ConsumablesManager *v2; // rdi
-  __int64 v3; // rbp
   unsigned int v4; // ebx
   __int64 v5; // rax
   __int64 v6; // rsi
   __int64 v7; // rax
   OSuite::IReader *v8; // rax
-  OSuite::ZJsonObject *v9; // rdi
+  OSuite::ZJsonObject *ResponseParams; // rdi
   OSuite::ZObjectVtbl *v10; // rdi
-  OSuite::ZString sName; // [rsp+20h] [rbp-58h]
-  OSuite::ZJsonDocument doc; // [rsp+38h] [rbp-40h]
+  OSuite::ZString sName; // [rsp+20h] [rbp-58h] BYREF
+  OSuite::ZJsonDocument doc; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = this;
-  v3 = orderId;
   v4 = 7;
-  v5 = ((__int64 (*)(void))this->m_httpRequest->vfptr[33].__vecDelDtor)();
+  v5 = ((__int64 (__fastcall *)(OSuite::IHttpRequest *))this->m_httpRequest->vfptr[33].__vecDelDtor)(this->m_httpRequest);
   if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v5 + 32i64))(v5) == 200 )
   {
     v6 = -1i64;
-    v7 = ((__int64 (*)(void))v2->m_httpRequest->vfptr[33].__vecDelDtor)();
+    v7 = ((__int64 (__fastcall *)(OSuite::IHttpRequest *))this->m_httpRequest->vfptr[33].__vecDelDtor)(this->m_httpRequest);
     v8 = (OSuite::IReader *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v7 + 64i64))(v7);
     doc.m_Pairs.m_pLists = 0i64;
     OSuite::ZJsonDocument::ZJsonDocument(&doc, v8);
-    v9 = OSuitePrivate::ConsumablesManager::GetResponseParams(v2, &doc);
-    if ( v9 )
+    ResponseParams = OSuitePrivate::ConsumablesManager::GetResponseParams(this, &doc);
+    if ( ResponseParams )
     {
       OSuite::ZString::ZString(&sName, "orderid");
-      v10 = OSuite::ZJsonObject::Value(v9, &sName);
+      v10 = OSuite::ZJsonObject::Value(ResponseParams, &sName);
       OSuite::ZString::~ZString(&sName);
       if ( v10 )
         v6 = OSuite::ZString::ToInt((OSuite::ZString *)&v10[2]);
     }
-    if ( v6 == v3 )
+    if ( v6 == orderId )
       v4 = 4;
     OSuite::ZJsonDocument::~ZJsonDocument(&doc);
   }
@@ -1563,29 +1454,33 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::HandleFinalizeResponse(OSu
 
 // File Line: 955
 // RVA: 0x132FF8C
-bool __fastcall OSuitePrivate::ConsumablesManager::OnRequestFinished(OSuitePrivate::ConsumablesManager *this, OSuite::IHttpRequest *__formal, OSuite::ZHttp::EError error)
+bool __fastcall OSuitePrivate::ConsumablesManager::OnRequestFinished(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IHttpRequest *__formal,
+        OSuite::ZHttp::EError error)
 {
   this->m_bRequestInProgress = 0;
-  return error == 0;
+  return error == HTTPERROR_OK;
 }
 
 // File Line: 962
 // RVA: 0x132FF30
-bool __fastcall OSuitePrivate::ConsumablesManager::OnFinalizeTxnDataNeeded(OSuitePrivate::ConsumablesManager *this, OSuite::IHttpRequest *request, unsigned __int64 __formal)
+bool __fastcall OSuitePrivate::ConsumablesManager::OnFinalizeTxnDataNeeded(
+        OSuitePrivate::ConsumablesManager *this,
+        OSuite::IHttpRequest *request,
+        unsigned __int64 __formal)
 {
-  OSuite::ZObjectVtbl *v3; // rsi
-  OSuite::ZString *v4; // rbx
-  OSuite::IHttpRequest *v5; // r14
+  OSuite::ZObjectVtbl *vfptr; // rsi
+  OSuite::ZString *p_m_finalizeData; // rbx
   unsigned __int64 v6; // rdi
   char *v7; // rax
 
-  v3 = request->vfptr;
-  v4 = &this->m_finalizeData;
-  v5 = request;
+  vfptr = request->vfptr;
+  p_m_finalizeData = &this->m_finalizeData;
   v6 = OSuite::ZString::Count(&this->m_finalizeData);
-  v7 = OSuite::ZString::c_str(v4);
-  return ((unsigned __int8 (__fastcall *)(OSuite::IHttpRequest *, char *, unsigned __int64))v3[14].__vecDelDtor)(
-           v5,
+  v7 = OSuite::ZString::c_str(p_m_finalizeData);
+  return ((unsigned __int8 (__fastcall *)(OSuite::IHttpRequest *, char *, unsigned __int64))vfptr[14].__vecDelDtor)(
+           request,
            v7,
            v6) != 0;
 }

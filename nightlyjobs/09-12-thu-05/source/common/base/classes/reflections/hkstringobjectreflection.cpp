@@ -28,30 +28,30 @@ hkClass *__fastcall hkStringObject::staticClass()
 
 // File Line: 62
 // RVA: 0xC54ED0
-void __fastcall finishLoadedObjecthkStringObject(void *p, int finishing)
+void __fastcall finishLoadedObjecthkStringObject(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 16);
+    v2 = p + 2;
     v2[-2].m_stringAndFlag = (const char *)&hkStringObject::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 68
 // RVA: 0xC54F00
-void __fastcall cleanupLoadedObjecthkStringObject(void *p)
+void __fastcall cleanupLoadedObjecthkStringObject(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
 // RVA: 0xC54F10
 void **__fastcall getVtablehkStringObject()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-18h]
+  hkStringPtr v1; // [rsp+30h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkStringObject::`vftable;
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkStringObjectTypeInfo__()
   hkStringObjectTypeInfo.m_typeName = "hkStringObject";
   hkStringObjectTypeInfo.m_vtable = result;
   hkStringObjectTypeInfo.m_scopedName = "!hkStringObject";
-  hkStringObjectTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkStringObject;
-  hkStringObjectTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkStringObject;
+  hkStringObjectTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkStringObject;
+  hkStringObjectTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkStringObject;
   return result;
 }
 

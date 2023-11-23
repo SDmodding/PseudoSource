@@ -51,29 +51,29 @@ UFG::SimObject *__fastcall UFG::EncounterBase::GetFocusTarget(UFG::EncounterBase
 // RVA: 0x3F0500
 void __fastcall UFG::EncounterBase::SetFocusTarget(UFG::EncounterBase *this, UFG::SimObject *pTarget)
 {
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v2; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpFocusTarget; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
 
-  v2 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mpFocusTarget.mPrev;
+  p_mpFocusTarget = &this->mpFocusTarget;
   if ( this->mpFocusTarget.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = v2;
-    v2->mNext = v2;
+    mPrev = p_mpFocusTarget->mPrev;
+    mNext = p_mpFocusTarget->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpFocusTarget->mPrev = p_mpFocusTarget;
+    p_mpFocusTarget->mNext = p_mpFocusTarget;
   }
-  v2[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)pTarget;
+  p_mpFocusTarget->m_pPointer = pTarget;
   if ( pTarget )
   {
-    v5 = pTarget->m_SafePointerList.mNode.mPrev;
-    v5->mNext = v2;
-    v2->mPrev = v5;
-    v2->mNext = &pTarget->m_SafePointerList.mNode;
-    pTarget->m_SafePointerList.mNode.mPrev = v2;
+    v5 = pTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v5->mNext = p_mpFocusTarget;
+    p_mpFocusTarget->mPrev = v5;
+    p_mpFocusTarget->mNext = &pTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mpFocusTarget;
   }
 }
 
@@ -93,9 +93,9 @@ UFG::SimObject *__fastcall UFG::EncounterBase::GetSecondaryTarget(UFG::Encounter
 
 // File Line: 89
 // RVA: 0x3ED6C0
-ASymbol *__fastcall ActionNodeImplementation::GetChildList(SSActor *this)
+ANamed *__fastcall ActionNodeImplementation::GetChildList(SSActor *this)
 {
-  return &this->i_name;
+  return &this->ANamed;
 }
 
 // File Line: 96
@@ -116,14 +116,12 @@ __int64 __fastcall UFG::EncounterBase::GetKillCount(UFG::EncounterBase *this)
 // RVA: 0x3ED900
 UFG::qPropertySet *__fastcall UFG::EncounterBase::GetHeatLevelProperties(UFG::EncounterBase *this)
 {
-  __int64 v1; // rax
-  UFG::qPropertySet *result; // rax
+  __int64 mHeatLevel; // rax
 
-  v1 = this->mHeatLevel;
+  mHeatLevel = this->mHeatLevel;
   if ( this->mFocusTargetContext.mIsInWater )
-    result = this->mWaterHeatLevelProperties[v1];
+    return this->mWaterHeatLevelProperties[mHeatLevel];
   else
-    result = this->mHeatLevelProperties[v1];
-  return result;
+    return this->mHeatLevelProperties[mHeatLevel];
 }
 

@@ -1,17 +1,21 @@
 // File Line: 34
 // RVA: 0x9AD30
-void __fastcall hkSmallArray<hkpEntityActivationListener *>::~hkSmallArray<hkpEntityActivationListener *>(hkSmallArray<hkpEntityListener *> *this)
+void __fastcall hkSmallArray<hkpEntityActivationListener *>::~hkSmallArray<hkpEntityActivationListener *>(
+        hkSmallArray<hkpEntityListener *> *this)
 {
-  unsigned __int16 v1; // di
-  hkpEntityListener **v2; // rbx
-  _QWORD **v3; // rax
+  signed __int16 m_capacityAndFlags; // di
+  hkpEntityListener **m_data; // rbx
+  _QWORD **Value; // rax
 
-  v1 = this->m_capacityAndFlags;
-  if ( (v1 & 0x8000u) == 0 )
+  m_capacityAndFlags = this->m_capacityAndFlags;
+  if ( m_capacityAndFlags >= 0 )
   {
-    v2 = this->m_data;
-    v3 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpEntityListener **, _QWORD))(*v3[11] + 16i64))(v3[11], v2, 8 * (v1 & 0x3FFFu));
+    m_data = this->m_data;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkpEntityListener **, _QWORD))(*Value[11] + 16i64))(
+      Value[11],
+      m_data,
+      8 * (m_capacityAndFlags & 0x3FFFu));
   }
 }
 

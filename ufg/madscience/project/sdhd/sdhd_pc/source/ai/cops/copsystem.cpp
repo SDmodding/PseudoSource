@@ -2,7 +2,7 @@
 // RVA: 0x3EF340
 UFG::CopSystem *__fastcall UFG::CopSystem::Instance()
 {
-  if ( !(_S10_5 & 1) )
+  if ( (_S10_5 & 1) == 0 )
   {
     _S10_5 |= 1u;
     UFG::CopSystem::CopSystem(&sCopSystem);
@@ -16,227 +16,218 @@ UFG::CopSystem *__fastcall UFG::CopSystem::Instance()
 // RVA: 0x3EC240
 void __fastcall UFG::CopSystem::CopSystem(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rsi
-  float v2; // xmm1_4
-  float v3; // xmm2_4
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v4; // rdi
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpAmbientSuspect; // rdi
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpArrestRightHumanCop; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
 
-  v1 = this;
-  UFG::EncounterBase::EncounterBase((UFG::EncounterBase *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable;
-  v1->mNumArrestAttempts = 0;
-  v1->mAreRoadBlocksActive = 0;
-  v1->mRoadBlockCooldownTimestamp = 0.0;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mRoadBlockTriggerOrigin.x = UFG::qVector3::msZero.x;
-  v1->mRoadBlockTriggerOrigin.y = v2;
-  v1->mRoadBlockTriggerOrigin.z = v3;
-  *(_QWORD *)&v1->mAudioTimer = 0i64;
-  v1->mAudioPursuitDelay = 0.0;
-  v1->mDistantSirens.m_pOneShot = 0i64;
-  *(_QWORD *)&v1->mAudioHeatLevel.m_currentValue = 0i64;
-  v1->mAudioHeatLevel.m_riseRate = 10000000.0;
-  v1->mAudioHeatLevel.m_fallRate = 10000000.0;
+  UFG::EncounterBase::EncounterBase(this);
+  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable;
+  this->mNumArrestAttempts = 0;
+  this->mAreRoadBlocksActive = 0;
+  this->mRoadBlockCooldownTimestamp = 0.0;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mRoadBlockTriggerOrigin.x = UFG::qVector3::msZero.x;
+  this->mRoadBlockTriggerOrigin.y = y;
+  this->mRoadBlockTriggerOrigin.z = z;
+  *(_QWORD *)&this->mAudioTimer = 0i64;
+  this->mAudioPursuitDelay = 0.0;
+  this->mDistantSirens.m_pOneShot = 0i64;
+  *(_QWORD *)&this->mAudioHeatLevel.m_currentValue = 0i64;
+  this->mAudioHeatLevel.m_riseRate = 10000000.0;
+  this->mAudioHeatLevel.m_fallRate = 10000000.0;
   `eh vector constructor iterator(
-    v1->mHeatEvents,
+    this->mHeatEvents,
     0xCui64,
     26,
     (void (__fastcall *)(void *))UFG::CopHeatEvent::CopHeatEvent);
-  v4 = &v1->mpAmbientSuspect;
-  v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v1->mpAmbientSuspect.m_pPointer = 0i64;
-  v5 = &v1->mpArrestRightHumanCop;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->mpArrestRightHumanCop.m_pPointer = 0i64;
-  UFG::qString::qString(&v1->mLastHeatEventCaption);
-  v1->mLastHeatEventIndex = 0;
-  *(_WORD *)&v1->mIsExcludingPlayerForRestOfChase = 256;
-  v1->mReloadTuningFiles = 0;
-  v1->mDebugDrawLevel = 1;
-  *(_WORD *)&v1->mShowCops = 0;
-  v1->mShowResources = 0;
-  if ( v1->mpAmbientSuspect.m_pPointer )
+  p_mpAmbientSuspect = &this->mpAmbientSuspect;
+  this->mpAmbientSuspect.mPrev = &this->mpAmbientSuspect;
+  this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
+  this->mpAmbientSuspect.m_pPointer = 0i64;
+  p_mpArrestRightHumanCop = &this->mpArrestRightHumanCop;
+  this->mpArrestRightHumanCop.mPrev = &this->mpArrestRightHumanCop;
+  this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
+  this->mpArrestRightHumanCop.m_pPointer = 0i64;
+  UFG::qString::qString(&this->mLastHeatEventCaption);
+  this->mLastHeatEventIndex = eHEATEVENT_NONE;
+  *(_WORD *)&this->mIsExcludingPlayerForRestOfChase = 256;
+  this->mReloadTuningFiles = 0;
+  this->mDebugDrawLevel = 1;
+  *(_WORD *)&this->mShowCops = 0;
+  this->mShowResources = 0;
+  if ( this->mpAmbientSuspect.m_pPointer )
   {
-    v6 = v4->mPrev;
-    v7 = v1->mpAmbientSuspect.mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-    v1->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpAmbientSuspect.mPrev;
+    mPrev = p_mpAmbientSuspect->mPrev;
+    mNext = this->mpAmbientSuspect.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpAmbientSuspect->mPrev = p_mpAmbientSuspect;
+    this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
   }
-  v1->mpAmbientSuspect.m_pPointer = 0i64;
-  if ( v1->mpArrestRightHumanCop.m_pPointer )
+  this->mpAmbientSuspect.m_pPointer = 0i64;
+  if ( this->mpArrestRightHumanCop.m_pPointer )
   {
-    v8 = v5->mPrev;
-    v9 = v1->mpArrestRightHumanCop.mNext;
+    v8 = p_mpArrestRightHumanCop->mPrev;
+    v9 = this->mpArrestRightHumanCop.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v1->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpArrestRightHumanCop.mPrev;
+    p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+    this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
   }
-  v1->mpArrestRightHumanCop.m_pPointer = 0i64;
-  v1->mArrestRightTimestamp = 0.0;
+  this->mpArrestRightHumanCop.m_pPointer = 0i64;
+  this->mArrestRightTimestamp = 0.0;
 }
 
 // File Line: 202
 // RVA: 0x3EC3D0
 void __fastcall UFG::CopSystem::~CopSystem(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpArrestRightHumanCop; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpAmbientSuspect; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v11; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable;
   UFG::qString::~qString(&this->mLastHeatEventCaption);
-  v2 = &v1->mpArrestRightHumanCop;
-  if ( v1->mpArrestRightHumanCop.m_pPointer )
+  p_mpArrestRightHumanCop = &this->mpArrestRightHumanCop;
+  if ( this->mpArrestRightHumanCop.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v1->mpArrestRightHumanCop.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v1->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpArrestRightHumanCop.mPrev;
+    mPrev = p_mpArrestRightHumanCop->mPrev;
+    mNext = this->mpArrestRightHumanCop.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+    this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
   }
-  v1->mpArrestRightHumanCop.m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v1->mpArrestRightHumanCop.mNext;
+  this->mpArrestRightHumanCop.m_pPointer = 0i64;
+  v5 = p_mpArrestRightHumanCop->mPrev;
+  v6 = this->mpArrestRightHumanCop.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpArrestRightHumanCop.mPrev;
-  v7 = &v1->mpAmbientSuspect;
-  if ( v1->mpAmbientSuspect.m_pPointer )
+  p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+  this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
+  p_mpAmbientSuspect = &this->mpAmbientSuspect;
+  if ( this->mpAmbientSuspect.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v1->mpAmbientSuspect.mNext;
+    v8 = p_mpAmbientSuspect->mPrev;
+    v9 = this->mpAmbientSuspect.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v1->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpAmbientSuspect.mPrev;
+    p_mpAmbientSuspect->mPrev = p_mpAmbientSuspect;
+    this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
   }
-  v1->mpAmbientSuspect.m_pPointer = 0i64;
-  v10 = v7->mPrev;
-  v11 = v1->mpAmbientSuspect.mNext;
+  this->mpAmbientSuspect.m_pPointer = 0i64;
+  v10 = p_mpAmbientSuspect->mPrev;
+  v11 = this->mpAmbientSuspect.mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
-  v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-  v1->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpAmbientSuspect.mPrev;
-  `eh vector destructor iterator(v1->mHeatEvents, 0xCui64, 26, (void (__fastcall *)(void *))_);
-  UFG::OneShotHandle::Release(&v1->mDistantSirens);
-  UFG::EncounterBase::~EncounterBase((UFG::EncounterBase *)&v1->vfptr);
+  p_mpAmbientSuspect->mPrev = p_mpAmbientSuspect;
+  this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
+  `eh vector destructor iterator(this->mHeatEvents, 0xCui64, 26, (void (__fastcall *)(void *))_);
+  UFG::OneShotHandle::Release(&this->mDistantSirens);
+  UFG::EncounterBase::~EncounterBase(this);
 }
 
 // File Line: 206
 // RVA: 0x3EF0D0
 void __fastcall UFG::CopSystem::Initialize(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-  hkSeekableStreamReader *v2; // rax
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v3; // rdi
-  UFG::SimObjectCharacter *v4; // rax
+  fastdelegate::detail::GenericClass *RCX; // rax
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *vfptr; // rdi
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   unsigned int v5; // eax
-  UFG::qPropertySet *v6; // rax
+  UFG::qPropertySet *PropertySet; // rax
   float *v7; // rdi
   UFG::qPropertySet *v8; // rax
   float *v9; // rax
-  hkSeekableStreamReader *v10; // [rsp+38h] [rbp-20h]
-  __int64 (__fastcall *v11)(__int64); // [rsp+40h] [rbp-18h]
+  fastdelegate::FastDelegate1<UFG::Event *,void> v10[2]; // [rsp+38h] [rbp-20h] BYREF
 
-  v1 = this;
-  v11 =  UFG::CopSystem::`vcall{744,{flat}};
-  v10 = Assembly::GetRCX(this);
+  v10[0].m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *)) UFG::CopSystem::`vcall{744,{flat}};
+  v10[0].m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
   UFG::EventDispatcher::Register(
     &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v10,
+    v10,
     UFG::gGameStatEventChannel.mUID,
     UFG::gGameStatEventChannel.mName,
     0);
-  v2 = Assembly::GetRCX(v1);
-  v11 =  UFG::CopSystem::`vcall{736,{flat}};
-  v10 = v2;
+  RCX = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
+  v10[0].m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *)) UFG::CopSystem::`vcall{736,{flat}};
+  v10[0].m_Closure.m_pthis = RCX;
   UFG::EventDispatcher::Register(
     &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v10,
+    v10,
     UFG::gDestructionEventChannel.mUID,
     UFG::gDestructionEventChannel.mName,
     0);
-  v1->vfptr[5].__vecDelDtor(
-    (UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr,
-    (unsigned int)sCopsTuningPropertySetName);
-  v3 = v1->vfptr;
-  v4 = UFG::GetLocalPlayer();
-  v3[19].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, (unsigned int)v4);
-  UFG::EncounterBase::Initialize((UFG::EncounterBase *)&v1->vfptr);
-  if ( !(_S11_4 & 1) )
+  this->vfptr[5].__vecDelDtor(this, (unsigned int)sCopsTuningPropertySetName);
+  vfptr = this->vfptr;
+  LocalPlayer = UFG::GetLocalPlayer();
+  vfptr[19].__vecDelDtor(this, (unsigned int)LocalPlayer);
+  UFG::EncounterBase::Initialize(this);
+  if ( (_S11_4 & 1) == 0 )
   {
     _S11_4 |= 1u;
     v5 = UFG::qStringHash32("audio-copaudiocomponent", 0xFFFFFFFF);
     UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&audioPropertySet, v5);
     atexit(UFG::CopSystem::Initialize_::_2_::_dynamic_atexit_destructor_for__audioPropertySet__);
   }
-  v6 = UFG::PropertySetManager::CreateOrFindPropertySet((UFG::qSymbol *)&audioPropertySet.mUID);
-  v1->mCopAudioConfig = v6;
-  v7 = UFG::qPropertySet::Get<float>(v6, (UFG::qSymbol *)&vehicle_pursuit_max_time.mUID, DEPTH_RECURSE);
-  v1->mAudioPursuitDelay = UFG::qRandom(*v7, &UFG::qDefaultSeed) + 2.0;
-  v1->mAudioScannerDelay = UFG::qRandom(*v7, &UFG::qDefaultSeed) + 2.0;
-  v1->mAudioTimer = 0.0;
-  memset(v1->mStimulusWatchList, 0, sizeof(v1->mStimulusWatchList));
-  v1->mStimulusWatchList[5] = 1;
-  *(_WORD *)&v1->mStimulusWatchList[9] = 257;
-  *(_DWORD *)&v1->mStimulusWatchList[13] = 16843009;
-  v1->mStimulusWatchList[17] = 1;
-  v1->mStimulusWatchList[19] = 1;
-  v1->mStimulusWatchList[21] = 1;
-  *(_WORD *)&v1->mStimulusWatchList[23] = 257;
-  v1->mStimulusWatchList[25] = 1;
-  *(_WORD *)&v1->mStimulusWatchList[28] = 257;
+  PropertySet = UFG::PropertySetManager::CreateOrFindPropertySet(&audioPropertySet);
+  this->mCopAudioConfig = PropertySet;
+  v7 = UFG::qPropertySet::Get<float>(
+         PropertySet,
+         (UFG::qArray<unsigned long,0> *)&vehicle_pursuit_max_time,
+         DEPTH_RECURSE);
+  this->mAudioPursuitDelay = UFG::qRandom(*v7, (unsigned int *)&UFG::qDefaultSeed) + 2.0;
+  this->mAudioScannerDelay = UFG::qRandom(*v7, (unsigned int *)&UFG::qDefaultSeed) + 2.0;
+  this->mAudioTimer = 0.0;
+  memset(this->mStimulusWatchList, 0, sizeof(this->mStimulusWatchList));
+  this->mStimulusWatchList[5] = 1;
+  *(_WORD *)&this->mStimulusWatchList[9] = 257;
+  *(_DWORD *)&this->mStimulusWatchList[13] = 16843009;
+  this->mStimulusWatchList[17] = 1;
+  this->mStimulusWatchList[19] = 1;
+  this->mStimulusWatchList[21] = 1;
+  *(_WORD *)&this->mStimulusWatchList[23] = 257;
+  this->mStimulusWatchList[25] = 1;
+  *(_WORD *)&this->mStimulusWatchList[28] = 257;
   UFG::GameStatAction::Player::SetHeat(0.0);
-  v1->mIsAmbientUnitsAllowed = 1;
-  if ( v1->mHeatLevel == HEATLEVEL_NONE )
+  this->mIsAmbientUnitsAllowed = 1;
+  if ( this->mHeatLevel == HEATLEVEL_NONE )
   {
-    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v1->vfptr[33].__vecDelDtor)(v1);
-    v9 = UFG::qPropertySet::Get<float>(v8, (UFG::qSymbol *)&EncounterSym_heatwave_timer.mUID, DEPTH_RECURSE);
-    v1->mWaveTimer = UFG::qRandom(*v9, &UFG::qDefaultSeed);
+    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
+    v9 = UFG::qPropertySet::Get<float>(v8, (UFG::qArray<unsigned long,0> *)&EncounterSym_heatwave_timer, DEPTH_RECURSE);
+    this->mWaveTimer = UFG::qRandom(*v9, (unsigned int *)&UFG::qDefaultSeed);
   }
-  *(_QWORD *)&v1->mStats.mFinishReason = 0i64;
-  v1->mStats.mLastLevelKillCount = 0;
-  ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[120].__vecDelDtor)(v1);
-  v1->mHeatLevelTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
-  v1->mOnFootNoSprintTimer = 0.0;
+  *(_QWORD *)&this->mStats.mFinishReason = 0i64;
+  this->mStats.mLastLevelKillCount = 0;
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[120].__vecDelDtor)(this);
+  this->mHeatLevelTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+  this->mOnFootNoSprintTimer = 0.0;
 }
 
 // File Line: 273
 // RVA: 0x3F0630
 void __fastcall UFG::CopSystem::Shutdown(UFG::CopSystem *this, __int64 a2)
 {
-  UFG::CopSystem *v2; // rsi
   UFG::CopRoadBlock *v3; // rcx
   UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *v4; // rbx
-  hkSeekableStreamReader *v5; // rax
-  hkSeekableStreamReader *v6; // [rsp+20h] [rbp-18h]
-  __int64 (__fastcall *v7)(__int64); // [rsp+28h] [rbp-10h]
+  fastdelegate::detail::GenericClass *RCX; // rax
+  fastdelegate::FastDelegate1<UFG::Event *,void> v6; // [rsp+20h] [rbp-18h] BYREF
 
   LOBYTE(a2) = 1;
-  v2 = this;
-  this->vfptr[3].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)this, a2);
+  this->vfptr[3].__vecDelDtor(this, a2);
   v3 = (UFG::CopRoadBlock *)&UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mNext[-7];
   if ( (UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *)&UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mNext[-7] != &UFG::CopRoadBlock::s_CopRoadBlockList - 7 )
   {
@@ -248,63 +239,64 @@ void __fastcall UFG::CopSystem::Shutdown(UFG::CopSystem *this, __int64 a2)
     }
     while ( v4 != &UFG::CopRoadBlock::s_CopRoadBlockList - 7 );
   }
-  v2->mAreRoadBlocksActive = 0;
-  UFG::EncounterBase::Shutdown((UFG::EncounterBase *)&v2->vfptr);
-  v7 =  UFG::CopSystem::`vcall{736,{flat}};
-  v6 = Assembly::GetRCX(v2);
-  UFG::EventDispatcher::UnRegister(
-    &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v6,
-    UFG::gDestructionEventChannel.mUID);
-  v5 = Assembly::GetRCX(v2);
-  v7 =  UFG::CopSystem::`vcall{744,{flat}};
-  v6 = v5;
-  UFG::EventDispatcher::UnRegister(
-    &UFG::EventDispatcher::mInstance,
-    (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v6,
-    UFG::gGameStatEventChannel.mUID);
-  ((void (__fastcall *)(UFG::CopSystem *))v2->vfptr[117].__vecDelDtor)(v2);
+  this->mAreRoadBlocksActive = 0;
+  UFG::EncounterBase::Shutdown(this);
+  v6.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *)) UFG::CopSystem::`vcall{736,{flat}};
+  v6.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
+  UFG::EventDispatcher::UnRegister(&UFG::EventDispatcher::mInstance, &v6, UFG::gDestructionEventChannel.mUID);
+  RCX = (fastdelegate::detail::GenericClass *)Assembly::GetRCX(this);
+  v6.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *)) UFG::CopSystem::`vcall{744,{flat}};
+  v6.m_Closure.m_pthis = RCX;
+  UFG::EventDispatcher::UnRegister(&UFG::EventDispatcher::mInstance, &v6, UFG::gGameStatEventChannel.mUID);
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[117].__vecDelDtor)(this);
 }
 
 // File Line: 293
 // RVA: 0x3F0170
 void __fastcall UFG::CopSystem::RemoveAllUnitsOnScene(UFG::CopSystem *this, bool includeNonManaged)
 {
-  bool v2; // r14
-  UFG::SimObjectCharacter *v3; // rax
-  unsigned __int16 v4; // r9
-  UFG::VehicleOwnershipComponent *v5; // rax
-  UFG::SimObject *v6; // rbp
-  UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *v7; // rax
-  char v8; // cl
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  __int16 m_Flags; // r9
+  UFG::VehicleOwnershipComponent *ComponentOfTypeHK; // rax
+  UFG::SimObject *OwnedVehicle; // rbp
+  UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *p_mNext; // rax
+  char mPrev; // cl
   UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *v9; // rbx
-  UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *v10; // rdi
+  UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *mNext; // rdi
 
-  v2 = includeNonManaged;
-  UFG::EncounterBase::RemoveAllUnitsOnScene((UFG::EncounterBase *)&this->vfptr, includeNonManaged);
-  v3 = UFG::GetLocalPlayer();
-  if ( v3
-    && ((v4 = v3->m_Flags, !((v4 >> 14) & 1)) ? ((v4 & 0x8000u) == 0 ? (!((v4 >> 13) & 1) ? (!((v4 >> 12) & 1) ? (v5 = (UFG::VehicleOwnershipComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::VehicleOwnershipComponent::_TypeUID)) : (v5 = (UFG::VehicleOwnershipComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v3->vfptr, UFG::VehicleOwnershipComponent::_TypeUID))) : (v5 = (UFG::VehicleOwnershipComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v3->vfptr, UFG::VehicleOwnershipComponent::_TypeUID))) : (v5 = (UFG::VehicleOwnershipComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v3->vfptr, UFG::VehicleOwnershipComponent::_TypeUID))) : (v5 = (UFG::VehicleOwnershipComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v3->vfptr, UFG::VehicleOwnershipComponent::_TypeUID)),
-        v5) )
+  UFG::EncounterBase::RemoveAllUnitsOnScene(this, includeNonManaged);
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer
+    && ((m_Flags = LocalPlayer->m_Flags, (m_Flags & 0x4000) != 0)
+     || m_Flags < 0
+     || (m_Flags & 0x2000) != 0
+     || (m_Flags & 0x1000) != 0
+      ? (ComponentOfTypeHK = (UFG::VehicleOwnershipComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                 LocalPlayer,
+                                                                 UFG::VehicleOwnershipComponent::_TypeUID))
+      : (ComponentOfTypeHK = (UFG::VehicleOwnershipComponent *)UFG::SimObject::GetComponentOfType(
+                                                                 LocalPlayer,
+                                                                 UFG::VehicleOwnershipComponent::_TypeUID)),
+        ComponentOfTypeHK) )
   {
-    v6 = UFG::VehicleOwnershipComponent::GetOwnedVehicle(v5);
+    OwnedVehicle = UFG::VehicleOwnershipComponent::GetOwnedVehicle(ComponentOfTypeHK);
   }
   else
   {
-    v6 = 0i64;
+    OwnedVehicle = 0i64;
   }
-  v7 = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
+  p_mNext = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
   if ( &UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext != (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> **)((char *)&UFG::CopUnitComponent::s_CopUnitComponentList - 72) )
   {
     do
     {
-      v8 = (char)v7[30].mNode.mPrev;
-      v9 = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&v7[5].mNode.mPrev[-5].mNext;
-      if ( v8 & 2 && (v2 || v8 & 1) )
+      mPrev = (char)p_mNext[30].mNode.mPrev;
+      v9 = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&p_mNext[5].mNode.mPrev[-5].mNext;
+      if ( (mPrev & 2) != 0 && (includeNonManaged || (mPrev & 1) != 0) )
       {
-        v10 = v7[2].mNode.mNext;
-        UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v10[4].mNext);
-        if ( v10 == (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *)v6 )
+        mNext = p_mNext[2].mNode.mNext;
+        UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&mNext[4].mNext);
+        if ( mNext == (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *)OwnedVehicle )
         {
           UFG::qPrintChannel::Print(
             &UFG::gPrintChannel_HK_Cops,
@@ -314,10 +306,10 @@ void __fastcall UFG::CopSystem::RemoveAllUnitsOnScene(UFG::CopSystem *this, bool
         else
         {
           UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_Cops, OUTPUT_LEVEL_DEBUG, "[CopSystem]:   Deleting (%s)\n");
-          UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, (UFG::SimObject *)v10);
+          UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, (UFG::SimObject *)mNext);
         }
       }
-      v7 = v9;
+      p_mNext = v9;
     }
     while ( v9 != (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)((char *)&UFG::CopUnitComponent::s_CopUnitComponentList
                                                                                 - 72) );
@@ -328,9 +320,6 @@ void __fastcall UFG::CopSystem::RemoveAllUnitsOnScene(UFG::CopSystem *this, bool
 // RVA: 0x3ECF90
 void __fastcall UFG::CopSystem::EnableAmbientUnits(UFG::CopSystem *this, __int64 enable)
 {
-  UFG::CopSystem *v2; // rbx
-
-  v2 = this;
   if ( (_BYTE)enable != this->mIsAmbientUnitsAllowed )
   {
     this->mIsAmbientUnitsAllowed = enable;
@@ -339,10 +328,10 @@ void __fastcall UFG::CopSystem::EnableAmbientUnits(UFG::CopSystem *this, __int64
       OUTPUT_LEVEL_DEBUG,
       "[CopSystem]: Enable ambient state changed to (%s)\n");
   }
-  if ( !v2->mIsAmbientUnitsAllowed && v2->mHeatLevel == HEATLEVEL_NONE )
+  if ( !this->mIsAmbientUnitsAllowed && this->mHeatLevel == HEATLEVEL_NONE )
   {
     LOBYTE(enable) = 1;
-    v2->vfptr[3].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v2->vfptr, enable);
+    this->vfptr[3].__vecDelDtor(this, enable);
   }
 }
 
@@ -350,30 +339,25 @@ void __fastcall UFG::CopSystem::EnableAmbientUnits(UFG::CopSystem *this, __int64
 // RVA: 0x3EF8C0
 void __fastcall UFG::CopSystem::OnRestore(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
   __int64 v2; // rdx
   UFG::qPropertySet *v3; // rax
   float *v4; // rax
 
-  v1 = this;
-  ((void (*)(void))this->vfptr[117].__vecDelDtor)();
-  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v1->vfptr[88].__vecDelDtor)(v1, 0i64, 0i64);
-  ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[112].__vecDelDtor)(v1);
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[117].__vecDelDtor)(this);
+  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))this->vfptr[88].__vecDelDtor)(this, 0i64, 0i64);
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[112].__vecDelDtor)(this);
   LOBYTE(v2) = 1;
-  v1->vfptr[3].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, v2);
-  ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[120].__vecDelDtor)(v1);
-  v3 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v1->vfptr[33].__vecDelDtor)(v1);
-  v4 = UFG::qPropertySet::Get<float>(v3, (UFG::qSymbol *)&EncounterSym_heatwave_timer.mUID, DEPTH_RECURSE);
-  v1->mWaveTimer = UFG::qRandom(*v4, &UFG::qDefaultSeed);
+  this->vfptr[3].__vecDelDtor(this, v2);
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[120].__vecDelDtor)(this);
+  v3 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
+  v4 = UFG::qPropertySet::Get<float>(v3, (UFG::qArray<unsigned long,0> *)&EncounterSym_heatwave_timer, DEPTH_RECURSE);
+  this->mWaveTimer = UFG::qRandom(*v4, (unsigned int *)&UFG::qDefaultSeed);
 }
 
 // File Line: 352
 // RVA: 0x3ECEE0
 void __fastcall UFG::CopSystem::Enable(UFG::CopSystem *this, bool enable)
 {
-  UFG::CopSystem *v2; // rbx
-
-  v2 = this;
   if ( enable != this->mEnable )
   {
     this->mEnable = enable;
@@ -381,46 +365,41 @@ void __fastcall UFG::CopSystem::Enable(UFG::CopSystem *this, bool enable)
       &UFG::gPrintChannel_HK_Cops,
       OUTPUT_LEVEL_DEBUG,
       "[CopSystem]: Enable state changed to (%s)\n");
-    ((void (__fastcall *)(UFG::CopSystem *))v2->vfptr[50].__vecDelDtor)(v2);
+    ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[50].__vecDelDtor)(this);
   }
-  if ( !v2->mEnable )
+  if ( !this->mEnable )
   {
-    if ( !(_S10_5 & 1) )
+    if ( (_S10_5 & 1) == 0 )
     {
       _S10_5 |= 1u;
       UFG::CopSystem::CopSystem(&sCopSystem);
       atexit(UFG::CopSystem::Instance_::_2_::_dynamic_atexit_destructor_for__sCopSystem__);
     }
     UFG::CopSystem::mspInstance = &sCopSystem;
-    sCopSystem.vfptr[3].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&sCopSystem, 0);
+    sCopSystem.vfptr[3].__vecDelDtor(&sCopSystem, 0);
   }
 }
 
 // File Line: 369
 // RVA: 0x3EF870
-signed __int64 __fastcall UFG::CopSystem::IsStimulusUpdateRequired(UFG::CopSystem *this)
+_BOOL8 __fastcall UFG::CopSystem::IsStimulusUpdateRequired(UFG::CopSystem *this)
 {
-  bool *v1; // rax
-  signed __int64 v2; // rdx
-  signed __int64 result; // rax
+  bool *p_mTracked; // rax
+  __int64 v2; // rdx
+  _BOOL8 result; // rax
 
-  v1 = &this->mHeatEvents[0].mTracked;
+  p_mTracked = &this->mHeatEvents[0].mTracked;
   v2 = 0i64;
-  while ( *v1 )
+  while ( *p_mTracked )
   {
     ++v2;
-    v1 += 12;
+    p_mTracked += 12;
     if ( v2 >= 26 )
-    {
-      result = 0i64;
-      if ( this->mShowStimulus )
-        result = 1i64;
-      return result;
-    }
+      return this->mShowStimulus;
   }
   result = 1i64;
   if ( this->mShowStimulus )
-    result = 1i64;
+    return 1i64;
   return result;
 }
 
@@ -436,51 +415,47 @@ bool __fastcall UFG::CopSystem::IsAmbientUnitsAllowed(UFG::CopSystem *this)
   {
     v1 = UFG::ProgressionTracker::Instance();
     if ( !UFG::ProgressionTracker::IsRunningCriticalActiveMaster(v1) )
-      result = 1;
+      return 1;
   }
   return result;
 }
 
 // File Line: 397
 // RVA: 0x3ED720
-int __fastcall UFG::CopSystem::GetDesiredVehiclePopulation(UFG::CopSystem *this, UFG::qPropertySet *heatPropSet)
+unsigned int __fastcall UFG::CopSystem::GetDesiredVehiclePopulation(
+        UFG::CopSystem *this,
+        UFG::qPropertySet *heatPropSet)
 {
-  UFG::qPropertySet *v2; // rdi
-  UFG::CopSystem *v3; // rbx
-  int result; // eax
-  int v5; // edi
+  unsigned int DesiredVehiclePopulation; // edi
   unsigned int v6; // eax
-  signed int v7; // ecx
+  int v7; // ecx
 
-  v2 = heatPropSet;
-  v3 = this;
   if ( this->mHeatLevel )
   {
-    v5 = UFG::EncounterBase::GetDesiredVehiclePopulation((UFG::EncounterBase *)&this->vfptr, heatPropSet);
-    if ( v3->mFocusTargetContext.mIsOnFootHeuristic )
+    DesiredVehiclePopulation = UFG::EncounterBase::GetDesiredVehiclePopulation(this, heatPropSet);
+    if ( this->mFocusTargetContext.mIsOnFootHeuristic )
     {
-      v6 = (__int64)v3->vfptr[44].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, 2u);
-      if ( v6 + v5 > 8 )
+      v6 = (unsigned int)this->vfptr[44].__vecDelDtor(this, 2i64);
+      if ( v6 + DesiredVehiclePopulation > 8 )
       {
         v7 = 8;
         if ( v6 < 8 )
           v7 = v6;
-        v5 = 8 - v7;
+        DesiredVehiclePopulation = 8 - v7;
       }
     }
-    if ( v3->mFocusTargetContext.mIsInsideInterior )
-      v5 = 0;
-    result = v5;
+    if ( this->mFocusTargetContext.mIsInsideInterior )
+      return 0;
+    return DesiredVehiclePopulation;
   }
-  else if ( ((unsigned __int8 (*)(void))this->vfptr[113].__vecDelDtor)() )
+  else if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[113].__vecDelDtor)(this) )
   {
-    result = UFG::EncounterBase::GetDesiredVehiclePopulation((UFG::EncounterBase *)&v3->vfptr, v2);
+    return UFG::EncounterBase::GetDesiredVehiclePopulation(this, heatPropSet);
   }
   else
   {
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 425
@@ -493,12 +468,12 @@ __int64 __fastcall UFG::CopSystem::GetDesiredOnFootPopulation(UFG::CopSystem *th
   v2 = heatPropSet;
   v3 = this;
   if ( this->mHeatLevel )
-    return UFG::EncounterBase::GetDesiredOnFootPopulation((UFG::EncounterBase *)&this->vfptr, heatPropSet);
-  if ( ((unsigned __int8 (*)(void))this->vfptr[113].__vecDelDtor)() )
+    return UFG::EncounterBase::GetDesiredOnFootPopulation(this, heatPropSet);
+  if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[113].__vecDelDtor)(this) )
   {
     heatPropSet = v2;
     this = v3;
-    return UFG::EncounterBase::GetDesiredOnFootPopulation((UFG::EncounterBase *)&this->vfptr, heatPropSet);
+    return UFG::EncounterBase::GetDesiredOnFootPopulation(this, heatPropSet);
   }
   return 0i64;
 }
@@ -507,138 +482,131 @@ __int64 __fastcall UFG::CopSystem::GetDesiredOnFootPopulation(UFG::CopSystem *th
 // RVA: 0x3F17B0
 void __fastcall UFG::CopSystem::UpdateHeatTimer(UFG::CopSystem *this, float deltaTime, float currentTime)
 {
-  UFG::CopSystem *v3; // rbx
-  Render::DebugDrawManager *v4; // rax
-  _BOOL8 v5; // rdx
-  double v6; // xmm0_8
+  Render::DebugDrawManager *Context; // rax
+  _BOOL8 mCoolingDown; // rdx
+  float v6; // xmm0_4
   Render::DebugDrawContext *v7; // rdi
-  __int64 v8; // rax
+  __int64 mHeatLevel; // rax
   bool v9; // al
-  bool v10; // zf
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v11; // rax
-  UFG::qPropertySet *v12; // rax
-  UFG::HeatLevelEnum v13; // eax
-  char v14; // di
-  float v15; // xmm7_4
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v16; // rax
-  UFG::qPropertySet *v17; // rax
-  float v18; // xmm0_4
-  __int64 v19; // [rsp+28h] [rbp-40h]
+  float mReplenishTimeout; // xmm0_4
+  float v11; // xmm0_4
+  bool v12; // zf
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *vfptr; // rax
+  UFG::qPropertySet *v14; // rax
+  UFG::HeatLevelEnum v15; // eax
+  char v16; // di
+  float v17; // xmm7_4
+  double v18; // xmm0_8
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v19; // rax
+  UFG::qPropertySet *v20; // rax
+  float v21; // xmm0_4
 
-  v3 = this;
-  v4 = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
-  v5 = v3->mCoolingDown;
-  *(float *)&v6 = v3->mReducedRadiusTimer - deltaTime;
-  v3->mCoolingDown = 0;
-  v7 = (Render::DebugDrawContext *)v4;
-  if ( *(float *)&v6 <= 0.0 )
-    LODWORD(v6) = 0;
-  v8 = v3->mHeatLevel;
-  v3->mReducedRadiusTimer = *(float *)&v6;
-  if ( (_DWORD)v8 )
+  Context = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
+  mCoolingDown = this->mCoolingDown;
+  v6 = this->mReducedRadiusTimer - deltaTime;
+  this->mCoolingDown = 0;
+  v7 = (Render::DebugDrawContext *)Context;
+  if ( v6 <= 0.0 )
+    v6 = 0.0;
+  mHeatLevel = this->mHeatLevel;
+  this->mReducedRadiusTimer = v6;
+  if ( (_DWORD)mHeatLevel )
   {
-    v9 = UFG::Metrics::msInstance.mSimTimeMSec - v3->mStartTimestamp < CopSystem_MinimumEngagedTime[v8];
-    if ( v3->mIsSafehouseInstantCooldownActive || !v9 )
+    v9 = UFG::Metrics::msInstance.mSimTimeMSec - this->mStartTimestamp < CopSystem_MinimumEngagedTime[mHeatLevel];
+    if ( this->mIsSafehouseInstantCooldownActive || !v9 )
     {
-      if ( (_BYTE)v5 || !v3->mIsReplenishing || (*(float *)&v6 = v3->mReplenishTimeout, *(float *)&v6 <= 0.0) )
+      if ( mCoolingDown
+        || !this->mIsReplenishing
+        || (mReplenishTimeout = this->mReplenishTimeout, mReplenishTimeout <= 0.0) )
       {
-        if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v3->vfptr[32].__vecDelDtor)(v3) )
-          v3->mCooldownAllowed = 0;
-        if ( v3->mEnable && v3->mDebugDrawLevel > 1 )
+        if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))this->vfptr[32].__vecDelDtor)(this) )
+          this->mCooldownAllowed = 0;
+        if ( this->mEnable && this->mDebugDrawLevel > 1 )
         {
-          if ( v3->mCooldownAllowed )
-          {
+          if ( this->mCooldownAllowed )
             Render::DebugDrawContext::DrawTextA(v7, 700, 20, &UFG::qColour::Green, "(ESCAPED!)");
-          }
           else
-          {
-            LODWORD(v19) = v3->mInsideDynamicRadiusCount;
             Render::DebugDrawContext::DrawTextA(
               v7,
               700,
               20,
               &UFG::qColour::Red,
               "(INSIDE) Inside (dynamic: %d) heat regions",
-              v19);
-          }
+              this->mInsideDynamicRadiusCount);
         }
       }
       else
       {
-        *(float *)&v6 = *(float *)&v6 - deltaTime;
-        if ( *(float *)&v6 <= 0.0 )
-          LODWORD(v6) = 0;
-        v10 = v3->mEnable == 0;
-        v3->mReplenishTimeout = *(float *)&v6;
-        v3->mCooldownAllowed = 0;
-        if ( !v10 && v3->mDebugDrawLevel > 1 )
-        {
-          v6 = *(float *)&v6;
+        v11 = mReplenishTimeout - deltaTime;
+        if ( v11 <= 0.0 )
+          v11 = 0.0;
+        v12 = !this->mEnable;
+        this->mReplenishTimeout = v11;
+        this->mCooldownAllowed = 0;
+        if ( !v12 && this->mDebugDrawLevel > 1 )
           Render::DebugDrawContext::DrawTextA(
             v7,
             700,
             20,
             &UFG::qColour::Green,
             "(REPLENSHING) (%.2f seconds remaining)",
-            v6);
-        }
+            v11);
       }
     }
     else
     {
-      v3->mWaveCount = 0;
-      v3->mCooldownAllowed = 0;
-      v3->mIsReplenishing = 1;
+      this->mWaveCount = 0;
+      this->mCooldownAllowed = 0;
+      this->mIsReplenishing = 1;
     }
   }
-  if ( v3->mCooldownAllowed )
+  if ( this->mCooldownAllowed )
   {
-    v3->mCoolingDown = 1;
+    this->mCoolingDown = 1;
   }
   else
   {
-    v11 = v3->vfptr;
-    v3->mCooldownAllowed = 1;
-    v12 = (UFG::qPropertySet *)v11[33].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, v5);
-    *(float *)&v6 = UFG::Metrics::msInstance.mSimTime_Temp
-                  + *UFG::qPropertySet::Get<float>(
-                       v12,
-                       (UFG::qSymbol *)&EncounterSym_cooldown_timer.mUID,
-                       DEPTH_RECURSE);
-    v3->mNonEventfulCooldownTimestamp = *(float *)&v6;
+    vfptr = this->vfptr;
+    this->mCooldownAllowed = 1;
+    v14 = (UFG::qPropertySet *)vfptr[33].__vecDelDtor(this, mCoolingDown);
+    this->mNonEventfulCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp
+                                        + *UFG::qPropertySet::Get<float>(
+                                             v14,
+                                             (UFG::qArray<unsigned long,0> *)&EncounterSym_cooldown_timer,
+                                             DEPTH_RECURSE);
   }
-  if ( v3->mInstantCooldownActive || v3->mIsSafehouseInstantCooldownActive )
-    v3->mCoolingDown = 1;
-  if ( currentTime <= v3->mNonEventfulCooldownTimestamp || !v3->mCoolingDown )
+  if ( this->mInstantCooldownActive || this->mIsSafehouseInstantCooldownActive )
+    this->mCoolingDown = 1;
+  if ( currentTime <= this->mNonEventfulCooldownTimestamp || !this->mCoolingDown )
     goto LABEL_40;
-  v13 = v3->mHeatLevel;
-  v14 = 0;
-  v15 = 0.0;
-  if ( v13 == HEATLEVEL_NONE )
-    v14 = 1;
-  if ( (signed int)v13 > 0 )
+  v15 = this->mHeatLevel;
+  v16 = 0;
+  v17 = 0.0;
+  if ( v15 == HEATLEVEL_NONE )
+    v16 = 1;
+  if ( v15 > HEATLEVEL_NONE )
   {
-    v3->vfptr[87].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, 0);
-    v16 = v3->vfptr;
-    v3->mStats.mFinishReason = 3;
-    v15 = *(float *)&v6;
-    v17 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v16[33].__vecDelDtor)(v3);
-    v3->mNonEventfulCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp
-                                      + *UFG::qPropertySet::Get<float>(
-                                           v17,
-                                           (UFG::qSymbol *)&EncounterSym_cooldown_timer.mUID,
-                                           DEPTH_RECURSE);
+    v18 = ((double (__fastcall *)(UFG::CopSystem *, _QWORD))this->vfptr[87].__vecDelDtor)(this, 0i64);
+    v19 = this->vfptr;
+    this->mStats.mFinishReason = eFinishReason_Escaped;
+    v17 = *(float *)&v18;
+    v20 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v19[33].__vecDelDtor)(this);
+    this->mNonEventfulCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp
+                                        + *UFG::qPropertySet::Get<float>(
+                                             v20,
+                                             (UFG::qArray<unsigned long,0> *)&EncounterSym_cooldown_timer,
+                                             DEPTH_RECURSE);
   }
-  UFG::GameStatAction::Player::SetHeat(v15);
-  if ( v14 )
+  UFG::GameStatAction::Player::SetHeat(v17);
+  if ( v16 )
   {
 LABEL_40:
-    if ( !v3->mIsReplenishing )
+    if ( !this->mIsReplenishing )
     {
-      v18 = v3->mWaveTimer - deltaTime;
-      v3->mWaveTimer = v18;
-      if ( v18 <= 0.0 )
-        ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[23].__vecDelDtor)(v3);
+      v21 = this->mWaveTimer - deltaTime;
+      this->mWaveTimer = v21;
+      if ( v21 <= 0.0 )
+        ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[23].__vecDelDtor)(this);
     }
   }
 }
@@ -647,7 +615,6 @@ LABEL_40:
 // RVA: 0x3EEB70
 void __fastcall UFG::CopSystem::HandleHeatLevelChange(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
   UFG::qPropertySet *v2; // rax
   UFG::qPropertySet *v3; // rdi
   signed int v4; // ebp
@@ -655,86 +622,79 @@ void __fastcall UFG::CopSystem::HandleHeatLevelChange(UFG::CopSystem *this)
   bool v6; // zf
   bool v7; // cl
   UFG::qStaticSymbol *v8; // rax
-  __int128 v9; // xmm6
+  float v9; // xmm6_4
   signed int v10; // esi
-  UFG::eAIObjective v11; // er15
-  unsigned int v12; // er14
-  UFG::SimObjectCVBase *v13; // rcx
-  unsigned __int16 v14; // dx
+  UFG::eAIObjective v11; // r15d
+  unsigned int v12; // r14d
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
   UFG::ActiveAIEntityComponent *v15; // rax
   UFG::ActiveAIEntityComponent *v16; // rdi
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v17; // rax
-  signed int v18; // edi
-  UFG::HeatLevelEnum v19; // eax
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *vfptr; // rax
+  signed int i; // edi
+  UFG::HeatLevelEnum mHeatLevel; // eax
   UFG::HeatLevelEnum v20; // eax
-  UFG::qSymbol name; // [rsp+50h] [rbp+8h]
+  UFG::qArray<unsigned long,0> name; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = (UFG::qPropertySet *)((__int64 (*)(void))this->vfptr[33].__vecDelDtor)();
+  v2 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
   v3 = v2;
   if ( v2 )
   {
     v4 = 1;
-    v1->mIsAvoidPeds = *UFG::qPropertySet::Get<bool>(
-                          v2,
-                          (UFG::qSymbol *)&EncounterSym_vehicle_avoid_peds.mUID,
-                          DEPTH_RECURSE);
-    v1->mIsAllowedToPass = *UFG::qPropertySet::Get<bool>(
-                              v3,
-                              (UFG::qSymbol *)&EncounterSym_vehicle_allowed_to_pass.mUID,
-                              DEPTH_RECURSE);
-    v1->mIsStaysOffSidewalk = *UFG::qPropertySet::Get<bool>(
-                                 v3,
-                                 (UFG::qSymbol *)&EncounterSym_vehicle_stays_off_sidewalk.mUID,
-                                 DEPTH_RECURSE);
-    v1->mIsRespectSpeedLimit = *UFG::qPropertySet::Get<bool>(
-                                  v3,
-                                  (UFG::qSymbol *)&EncounterSym_vehicle_respect_speed_limit.mUID,
-                                  DEPTH_RECURSE);
-    v5 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&EncounterSym_vehicle_can_turn_around.mUID, DEPTH_RECURSE);
-    v6 = v1->mFocusTargetContext.mIsOnFootHeuristic == 0;
+    this->mIsAvoidPeds = *UFG::qPropertySet::Get<bool>(
+                            v2,
+                            (UFG::qArray<unsigned long,0> *)&EncounterSym_vehicle_avoid_peds,
+                            DEPTH_RECURSE);
+    this->mIsAllowedToPass = *UFG::qPropertySet::Get<bool>(
+                                v3,
+                                (UFG::qArray<unsigned long,0> *)&EncounterSym_vehicle_allowed_to_pass,
+                                DEPTH_RECURSE);
+    this->mIsStaysOffSidewalk = *UFG::qPropertySet::Get<bool>(
+                                   v3,
+                                   (UFG::qArray<unsigned long,0> *)&EncounterSym_vehicle_stays_off_sidewalk,
+                                   DEPTH_RECURSE);
+    this->mIsRespectSpeedLimit = *UFG::qPropertySet::Get<bool>(
+                                    v3,
+                                    (UFG::qArray<unsigned long,0> *)&EncounterSym_vehicle_respect_speed_limit,
+                                    DEPTH_RECURSE);
+    v5 = UFG::qPropertySet::Get<bool>(
+           v3,
+           (UFG::qArray<unsigned long,0> *)&EncounterSym_vehicle_can_turn_around,
+           DEPTH_RECURSE);
+    v6 = !this->mFocusTargetContext.mIsOnFootHeuristic;
     v7 = *v5;
     v8 = &EncounterSym_ambient_density_invehicle;
-    v1->mIsCanTurnAround = v7;
+    this->mIsCanTurnAround = v7;
     if ( !v6 )
       v8 = &EncounterSym_ambient_density_onfoot;
-    name.mUID = v8->mUID;
-    v9 = *(unsigned int *)UFG::qPropertySet::Get<float>(v3, &name, DEPTH_RECURSE);
+    name.size = v8->mUID;
+    v9 = *UFG::qPropertySet::Get<float>(v3, &name, DEPTH_RECURSE);
     UFG::PedSpawnManager::GetInstance();
-    UFG::PedSpawnManager::AdjustCopSystemDensityModifier(*(float *)&v9);
+    UFG::PedSpawnManager::AdjustCopSystemDensityModifier(v9);
     v10 = 0;
-    v11 = 0;
+    v11 = eAI_OBJECTIVE_NONE;
     v12 = 0;
-    LODWORD(UFG::WheeledVehicleManager::mMaxRoadDensityScale) = v9;
-    if ( v1->mHeatLevel > 0 )
+    UFG::WheeledVehicleManager::mMaxRoadDensityScale = v9;
+    if ( this->mHeatLevel > HEATLEVEL_NONE )
       v11 = eAI_OBJECTIVE_PURSUIT_TARGET;
-    if ( v1->mHumans.size > 0 )
+    if ( this->mHumans.size )
     {
       do
       {
-        v13 = (UFG::SimObjectCVBase *)v1->mHumans.p[v12]->m_pSimObject;
-        if ( v13 )
+        m_pSimObject = (UFG::SimObjectCVBase *)this->mHumans.p[v12]->m_pSimObject;
+        if ( m_pSimObject )
         {
-          v14 = v13->m_Flags;
-          if ( (v14 >> 14) & 1 )
-          {
-            v15 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v13);
-          }
-          else if ( (v14 & 0x8000u) == 0 )
-          {
-            if ( (v14 >> 13) & 1 )
-              v15 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v13->vfptr,
-                                                      UFG::ActiveAIEntityComponent::_TypeUID);
-            else
-              v15 = (UFG::ActiveAIEntityComponent *)((v14 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         (UFG::SimObjectGame *)&v13->vfptr,
-                                                                         UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v13->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-          }
+          m_Flags = m_pSimObject->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+            v15 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(m_pSimObject);
           else
-          {
-            v15 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v13);
-          }
+            v15 = (UFG::ActiveAIEntityComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                                 ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     m_pSimObject,
+                                                     UFG::ActiveAIEntityComponent::_TypeUID)
+                                                 : UFG::SimObject::GetComponentOfType(
+                                                     m_pSimObject,
+                                                     UFG::ActiveAIEntityComponent::_TypeUID));
           v16 = v15;
           if ( v15 )
           {
@@ -744,40 +704,37 @@ void __fastcall UFG::CopSystem::HandleHeatLevelChange(UFG::CopSystem *this)
         }
         ++v12;
       }
-      while ( v12 < v1->mHumans.size );
+      while ( v12 < this->mHumans.size );
     }
-    ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[49].__vecDelDtor)(v1);
-    if ( v1->mHeatLevel )
+    ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[49].__vecDelDtor)(this);
+    if ( this->mHeatLevel )
     {
-      v18 = 0;
-      do
+      for ( i = 0; i < 6; ++i )
       {
-        if ( v1->mEnable )
+        if ( this->mEnable )
         {
-          v19 = v1->mHeatLevel;
-          if ( v18 == v19 || v18 == v19 + 1 )
-            v1->vfptr[45].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, v18);
+          mHeatLevel = this->mHeatLevel;
+          if ( i == mHeatLevel || i == mHeatLevel + 1 )
+            this->vfptr[45].__vecDelDtor(this, i);
         }
-        ++v18;
       }
-      while ( v18 < 6 );
       do
       {
-        if ( !v1->mEnable || (v20 = v1->mHeatLevel, v10 != v20) && v10 != v20 + 1 )
-          v1->vfptr[46].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, v10);
+        if ( !this->mEnable || (v20 = this->mHeatLevel, v10 != v20) && v10 != v20 + 1 )
+          this->vfptr[46].__vecDelDtor(this, v10);
         ++v10;
       }
       while ( v10 < 6 );
     }
     else
     {
-      v17 = v1->vfptr;
-      if ( v1->mEnable )
-        v17[45].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, 0);
+      vfptr = this->vfptr;
+      if ( this->mEnable )
+        vfptr[45].__vecDelDtor(this, 0);
       else
-        v17[46].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, 0);
+        vfptr[46].__vecDelDtor(this, 0);
       do
-        v1->vfptr[46].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, v4++);
+        this->vfptr[46].__vecDelDtor(this, v4++);
       while ( v4 < 6 );
     }
   }
@@ -785,102 +742,71 @@ void __fastcall UFG::CopSystem::HandleHeatLevelChange(UFG::CopSystem *this)
 
 // File Line: 638
 // RVA: 0x3F1FA0
-void __fastcall UFG::CopSystem::UpdateVehicleFlags(UFG::CopSystem *this, UFG::SimObject *pSimObject)
+void __fastcall UFG::CopSystem::UpdateVehicleFlags(UFG::CopSystem *this, UFG::SimObjectCVBase *pSimObject)
 {
-  UFG::SimObjectCVBase *v2; // rbx
-  unsigned __int16 v3; // dx
-  UFG::CopSystem *v4; // rsi
-  UFG::AiDriverComponent *v5; // rax
+  signed __int16 m_Flags; // dx
+  UFG::AiDriverComponent *ComponentOfTypeHK; // rax
   UFG::AiDriverComponent *v6; // rdi
-  unsigned __int16 v7; // cx
-  UFG::SimComponent *v8; // rbx
-  UFG::SimComponent *v9; // rax
+  signed __int16 v7; // cx
+  UFG::SimComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
   unsigned int v10; // edx
-  char v11; // cl
+  bool v11; // cl
 
   if ( pSimObject )
   {
-    v2 = (UFG::SimObjectCVBase *)pSimObject;
-    v3 = pSimObject->m_Flags;
-    v4 = this;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(pSimObject);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v5 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v2->vfptr,
-                                         UFG::AiDriverComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v5 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v2->vfptr,
-                                         UFG::AiDriverComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
-                                         (UFG::SimObject *)&v2->vfptr,
-                                         UFG::AiDriverComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                      pSimObject,
+                                                      UFG::AiDriverComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v2);
+      ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
+                                                      pSimObject,
+                                                      UFG::AiDriverComponent::_TypeUID);
     }
-    v6 = v5;
-    if ( v5 )
+    v6 = ComponentOfTypeHK;
+    if ( ComponentOfTypeHK )
     {
-      UFG::AiDriverComponent::SetAvoidPeds(v5, v4->mIsAvoidPeds);
-      UFG::AiDriverComponent::SetAllowedToPass(v6, v4->mIsAllowedToPass);
-      UFG::AiDriverComponent::SetStayOffSidewalk(v6, v4->mIsStaysOffSidewalk);
-      UFG::AiDriverComponent::SetRespectSpeedLimit(v6, v4->mIsRespectSpeedLimit);
-      UFG::AiDriverComponent::SetCanTurnAround(v6, v4->mIsCanTurnAround);
+      UFG::AiDriverComponent::SetAvoidPeds(ComponentOfTypeHK, this->mIsAvoidPeds);
+      UFG::AiDriverComponent::SetAllowedToPass(v6, this->mIsAllowedToPass);
+      UFG::AiDriverComponent::SetStayOffSidewalk(v6, this->mIsStaysOffSidewalk);
+      UFG::AiDriverComponent::SetRespectSpeedLimit(v6, this->mIsRespectSpeedLimit);
+      UFG::AiDriverComponent::SetCanTurnAround(v6, this->mIsCanTurnAround);
     }
-    v7 = v2->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    v7 = pSimObject->m_Flags;
+    if ( (v7 & 0x4000) != 0 )
     {
-      v8 = v2->m_Components.p[24].m_pComponent;
+      m_pComponent = pSimObject->m_Components.p[24].m_pComponent;
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( v7 >= 0 )
     {
-      if ( (v7 >> 13) & 1 )
-      {
-        v9 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&v2->vfptr,
-               UFG::RoadSpaceComponent::_TypeUID);
-      }
-      else if ( (v7 >> 12) & 1 )
-      {
-        v9 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&v2->vfptr,
-               UFG::RoadSpaceComponent::_TypeUID);
-      }
+      if ( (v7 & 0x2000) != 0 || (v7 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(pSimObject, UFG::RoadSpaceComponent::_TypeUID);
       else
-      {
-        v9 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::RoadSpaceComponent::_TypeUID);
-      }
-      v8 = v9;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(pSimObject, UFG::RoadSpaceComponent::_TypeUID);
+      m_pComponent = ComponentOfType;
     }
     else
     {
-      v8 = v2->m_Components.p[24].m_pComponent;
+      m_pComponent = pSimObject->m_Components.p[24].m_pComponent;
     }
-    if ( v8 )
+    if ( m_pComponent )
     {
       v10 = 4;
-      if ( v4->mHeatLevel )
+      if ( this->mHeatLevel )
         v10 = 1;
-      UFG::RoadSpaceComponent::SetLaneFlags((UFG::RoadSpaceComponent *)v8, v10);
-      v11 = 0;
-      if ( v4->mHeatLevel )
-        v11 = 1;
-      v8[30].m_TypeUID &= 0xFFFFFFFD;
-      v8[30].m_TypeUID |= 2 * (v11 != 0);
+      UFG::RoadSpaceComponent::SetLaneFlags((UFG::RoadSpaceComponent *)m_pComponent, v10);
+      v11 = this->mHeatLevel != HEATLEVEL_NONE;
+      m_pComponent[30].m_TypeUID &= ~2u;
+      m_pComponent[30].m_TypeUID |= 2 * v11;
     }
   }
 }
@@ -889,103 +815,91 @@ void __fastcall UFG::CopSystem::UpdateVehicleFlags(UFG::CopSystem *this, UFG::Si
 // RVA: 0x3ED000
 void __fastcall UFG::CopSystem::ExcludePlayerForRestOfChase(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // r14
   UFG::GameStatTracker *v2; // rax
-  __int64 v3; // rbp
-  UFG::SimObjectGame *v4; // rbx
-  unsigned __int16 v5; // cx
-  UFG::SimComponent *v6; // rsi
-  UFG::SimComponent *v7; // rax
+  __int64 i; // rbp
+  UFG::SimObjectGame *m_pSimObject; // rbx
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rsi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   bool v8; // zf
   UFG::SimObjectGame *v9; // rcx
   unsigned __int8 v10; // cl
-  signed __int64 v11; // rdi
-  unsigned __int16 v12; // cx
-  UFG::SimComponent *v13; // rax
+  __int64 v11; // rdi
+  __int16 v12; // cx
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v1 = this;
-  if ( !this->mIsExcludingPlayerForRestOfChase && this->mHeatLevel > 0 )
+  if ( !this->mIsExcludingPlayerForRestOfChase && this->mHeatLevel > HEATLEVEL_NONE )
   {
     this->mIsExcludingPlayerForRestOfChase = 1;
     v2 = UFG::FactionInterface::Get();
     UFG::FactionInterface::SetStanding(&v2->mFactionInterface, FACTION_PLAYER, FACTION_LAW, FACTIONSTANDING_INDIFFERENT);
-    v3 = 0i64;
-    if ( v1->mHumans.size )
+    for ( i = 0i64; (unsigned int)i < this->mHumans.size; i = (unsigned int)(i + 1) )
     {
-      do
+      m_pSimObject = (UFG::SimObjectGame *)this->mHumans.p[i]->m_pSimObject;
+      if ( m_pSimObject )
       {
-        v4 = (UFG::SimObjectGame *)v1->mHumans.p[v3]->m_pSimObject;
-        if ( v4 )
+        m_Flags = m_pSimObject->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v5 = v4->m_Flags;
-          if ( (v5 >> 14) & 1 )
-          {
-            v6 = v4->m_Components.p[20].m_pComponent;
-          }
-          else if ( (v5 & 0x8000u) == 0 )
-          {
-            if ( (v5 >> 13) & 1 )
-            {
-              v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                     (UFG::SimObjectGame *)v1->mHumans.p[v3]->m_pSimObject,
-                     UFG::TargetingSystemBaseComponent::_TypeUID);
-            }
-            else
-            {
-              v8 = ((v5 >> 12) & 1) == 0;
-              v9 = (UFG::SimObjectGame *)v1->mHumans.p[v3]->m_pSimObject;
-              if ( v8 )
-                v7 = UFG::SimObject::GetComponentOfType(
-                       (UFG::SimObject *)&v9->vfptr,
-                       UFG::TargetingSystemBaseComponent::_TypeUID);
-              else
-                v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::TargetingSystemBaseComponent::_TypeUID);
-            }
-            v6 = v7;
-          }
-          else
-          {
-            v6 = v4->m_Components.p[20].m_pComponent;
-          }
-          if ( v6 )
-          {
-            v10 = *(_BYTE *)(*(_QWORD *)&v6[1].m_Flags + 37i64);
-            if ( v10 )
-            {
-              v11 = 56i64 * v10;
-              UFG::TargetingSimObject::SetTarget((UFG::TargetingSimObject *)(v11 + *(_QWORD *)&v6[1].m_TypeUID), 0i64);
-              UFG::TargetingSimObject::SetLock((UFG::TargetingSimObject *)(v11 + *(_QWORD *)&v6[1].m_TypeUID), 0);
-            }
-          }
-          v12 = v4->m_Flags;
-          if ( (v12 >> 14) & 1 )
-          {
-            v13 = v4->m_Components.p[6].m_pComponent;
-          }
-          else if ( (v12 & 0x8000u) == 0 )
-          {
-            if ( (v12 >> 13) & 1 )
-            {
-              v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-            }
-            else if ( (v12 >> 12) & 1 )
-            {
-              v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-            }
-            else
-            {
-              v13 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::HealthComponent::_TypeUID);
-            }
-          }
-          else
-          {
-            v13 = v4->m_Components.p[6].m_pComponent;
-          }
-          BYTE6(v13[1].m_BoundComponentHandles.mNode.mPrev) = 0;
+          m_pComponent = m_pSimObject->m_Components.p[20].m_pComponent;
         }
-        v3 = (unsigned int)(v3 + 1);
+        else if ( m_Flags >= 0 )
+        {
+          if ( (m_Flags & 0x2000) != 0 )
+          {
+            ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                  (UFG::SimObjectGame *)this->mHumans.p[i]->m_pSimObject,
+                                  UFG::TargetingSystemBaseComponent::_TypeUID);
+          }
+          else
+          {
+            v8 = (m_Flags & 0x1000) == 0;
+            v9 = (UFG::SimObjectGame *)this->mHumans.p[i]->m_pSimObject;
+            if ( v8 )
+              ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v9, UFG::TargetingSystemBaseComponent::_TypeUID);
+            else
+              ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                    v9,
+                                    UFG::TargetingSystemBaseComponent::_TypeUID);
+          }
+          m_pComponent = ComponentOfTypeHK;
+        }
+        else
+        {
+          m_pComponent = m_pSimObject->m_Components.p[20].m_pComponent;
+        }
+        if ( m_pComponent )
+        {
+          v10 = *(_BYTE *)(*(_QWORD *)&m_pComponent[1].m_Flags + 37i64);
+          if ( v10 )
+          {
+            v11 = 56i64 * v10;
+            UFG::TargetingSimObject::SetTarget(
+              (UFG::TargetingSimObject *)(v11 + *(_QWORD *)&m_pComponent[1].m_TypeUID),
+              0i64);
+            UFG::TargetingSimObject::SetLock(
+              (UFG::TargetingSimObject *)(v11 + *(_QWORD *)&m_pComponent[1].m_TypeUID),
+              0);
+          }
+        }
+        v12 = m_pSimObject->m_Flags;
+        if ( (v12 & 0x4000) != 0 )
+        {
+          ComponentOfType = m_pSimObject->m_Components.p[6].m_pComponent;
+        }
+        else if ( v12 >= 0 )
+        {
+          if ( (v12 & 0x2000) != 0 || (v12 & 0x1000) != 0 )
+            ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::HealthComponent::_TypeUID);
+          else
+            ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::HealthComponent::_TypeUID);
+        }
+        else
+        {
+          ComponentOfType = m_pSimObject->m_Components.p[6].m_pComponent;
+        }
+        BYTE6(ComponentOfType[1].m_BoundComponentHandles.mNode.mPrev) = 0;
       }
-      while ( (unsigned int)v3 < v1->mHumans.size );
     }
   }
 }
@@ -994,56 +908,40 @@ void __fastcall UFG::CopSystem::ExcludePlayerForRestOfChase(UFG::CopSystem *this
 // RVA: 0x3EF990
 void __fastcall UFG::CopSystem::ReIncludePlayerForRestOfChase(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rdi
   UFG::GameStatTracker *v2; // rax
-  __int64 v3; // rbx
-  UFG::SimObjectGame *v4; // rcx
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rax
+  __int64 i; // rbx
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
-  v1 = this;
-  if ( this->mHeatLevel > 0 )
+  if ( this->mHeatLevel > HEATLEVEL_NONE )
   {
     this->mIsExcludingPlayerForRestOfChase = 0;
     v2 = UFG::FactionInterface::Get();
     UFG::FactionInterface::SetStanding(&v2->mFactionInterface, FACTION_PLAYER, FACTION_LAW, FACTIONSTANDING_HOSTILE);
-    v3 = 0i64;
-    if ( v1->mHumans.size )
+    for ( i = 0i64; (unsigned int)i < this->mHumans.size; i = (unsigned int)(i + 1) )
     {
-      do
+      m_pSimObject = (UFG::SimObjectGame *)this->mHumans.p[i]->m_pSimObject;
+      if ( m_pSimObject )
       {
-        v4 = (UFG::SimObjectGame *)v1->mHumans.p[v3]->m_pSimObject;
-        if ( v4 )
+        m_Flags = m_pSimObject->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v5 = v4->m_Flags;
-          if ( (v5 >> 14) & 1 )
-          {
-            v6 = v4->m_Components.p[6].m_pComponent;
-          }
-          else if ( (v5 & 0x8000u) == 0 )
-          {
-            if ( (v5 >> 13) & 1 )
-            {
-              v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-            }
-            else if ( (v5 >> 12) & 1 )
-            {
-              v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-            }
-            else
-            {
-              v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::HealthComponent::_TypeUID);
-            }
-          }
-          else
-          {
-            v6 = v4->m_Components.p[6].m_pComponent;
-          }
-          BYTE6(v6[1].m_BoundComponentHandles.mNode.mPrev) = 1;
+          m_pComponent = m_pSimObject->m_Components.p[6].m_pComponent;
         }
-        v3 = (unsigned int)(v3 + 1);
+        else if ( m_Flags >= 0 )
+        {
+          if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+            m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::HealthComponent::_TypeUID);
+          else
+            m_pComponent = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::HealthComponent::_TypeUID);
+        }
+        else
+        {
+          m_pComponent = m_pSimObject->m_Components.p[6].m_pComponent;
+        }
+        BYTE6(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev) = 1;
       }
-      while ( (unsigned int)v3 < v1->mHumans.size );
     }
   }
 }
@@ -1052,136 +950,131 @@ void __fastcall UFG::CopSystem::ReIncludePlayerForRestOfChase(UFG::CopSystem *th
 // RVA: 0x3F03C0
 void __fastcall UFG::CopSystem::ResetChaseStats(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-  signed int v2; // ecx
-  signed __int64 v3; // rax
-  float v4; // xmm1_4
-  float v5; // xmm2_4
-  float v6; // xmm0_4
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v10; // rdx
+  int v2; // ecx
+  bool *p_mTracked; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float mSimTime_Temp; // xmm0_4
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpAmbientSuspect; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpArrestRightHumanCop; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v11; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v12; // rax
 
-  v1 = this;
   this->mIsExcludingPlayerForRestOfChase = 0;
   this->mInstantCooldownActive = 0;
   this->mIsSafehouseInstantCooldownActive = 0;
   *(_QWORD *)&this->mWaveCount = 0i64;
   *(_WORD *)&this->mHasSpawnedInFrontForCurrentWave = 0;
   this->mNumArrestAttempts = 0;
-  UFG::qString::Set(&this->mLastHeatEventCaption, &customWorldMapCaption);
-  v1->mLastHeatEventIndex = 0;
-  UFG::EncounterUnitContext::Reset(&v1->mFocusTargetContext);
-  v1->mEnableWaveTimerChangesByDisabledUnits = 1;
-  v1->mAreRoadBlocksActive = 0;
-  v1->mRoadBlockCooldownTimestamp = 0.0;
+  UFG::qString::Set(&this->mLastHeatEventCaption, &customCaption);
+  this->mLastHeatEventIndex = eHEATEVENT_NONE;
+  UFG::EncounterUnitContext::Reset(&this->mFocusTargetContext);
+  this->mEnableWaveTimerChangesByDisabledUnits = 1;
+  this->mAreRoadBlocksActive = 0;
+  this->mRoadBlockCooldownTimestamp = 0.0;
   v2 = 0;
-  v3 = (signed __int64)&v1->mHeatEvents[0].mTracked;
-  v4 = UFG::qVector3::msZero.y;
-  v5 = UFG::qVector3::msZero.z;
-  v1->mRoadBlockTriggerOrigin.x = UFG::qVector3::msZero.x;
-  v1->mRoadBlockTriggerOrigin.y = v4;
-  v1->mRoadBlockTriggerOrigin.z = v5;
+  p_mTracked = &this->mHeatEvents[0].mTracked;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mRoadBlockTriggerOrigin.x = UFG::qVector3::msZero.x;
+  this->mRoadBlockTriggerOrigin.y = y;
+  this->mRoadBlockTriggerOrigin.z = z;
   do
   {
-    *(_DWORD *)(v3 + 4) = v2;
-    v6 = UFG::Metrics::msInstance.mSimTime_Temp;
+    *((_DWORD *)p_mTracked + 1) = v2;
+    mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
     ++v2;
-    *(_BYTE *)v3 = 1;
-    *(float *)(v3 - 4) = v6;
-    v3 += 12i64;
+    *p_mTracked = 1;
+    *((float *)p_mTracked - 1) = mSimTime_Temp;
+    p_mTracked += 12;
   }
   while ( v2 < 26 );
-  v7 = &v1->mpAmbientSuspect;
-  if ( v1->mpAmbientSuspect.m_pPointer )
+  p_mpAmbientSuspect = &this->mpAmbientSuspect;
+  if ( this->mpAmbientSuspect.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v1->mpAmbientSuspect.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v1->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpAmbientSuspect.mPrev;
+    mPrev = p_mpAmbientSuspect->mPrev;
+    mNext = this->mpAmbientSuspect.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpAmbientSuspect->mPrev = p_mpAmbientSuspect;
+    this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
   }
-  v1->mpAmbientSuspect.m_pPointer = 0i64;
-  v10 = &v1->mpArrestRightHumanCop;
-  if ( v1->mpArrestRightHumanCop.m_pPointer )
+  this->mpAmbientSuspect.m_pPointer = 0i64;
+  p_mpArrestRightHumanCop = &this->mpArrestRightHumanCop;
+  if ( this->mpArrestRightHumanCop.m_pPointer )
   {
-    v11 = v10->mPrev;
-    v12 = v1->mpArrestRightHumanCop.mNext;
+    v11 = p_mpArrestRightHumanCop->mPrev;
+    v12 = this->mpArrestRightHumanCop.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
-    v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-    v1->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpArrestRightHumanCop.mPrev;
+    p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+    this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
   }
-  v1->mpArrestRightHumanCop.m_pPointer = 0i64;
-  v1->mArrestRightTimestamp = 0.0;
-  v1->mOnFootNoSprintTimer = 0.0;
+  this->mpArrestRightHumanCop.m_pPointer = 0i64;
+  this->mArrestRightTimestamp = 0.0;
+  this->mOnFootNoSprintTimer = 0.0;
 }
 
 // File Line: 760
 // RVA: 0x3F13F0
 void __fastcall UFG::CopSystem::UpdateHeatLevel(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rsi
-  UFG::HeatLevelEnum v2; // er14
+  UFG::HeatLevelEnum mHeatLevel; // r14d
   UFG::GameStatTracker *v3; // rax
-  float v4; // xmm0_4
+  float Stat; // xmm0_4
   int v5; // ebp
   UFG::GameStatTracker *v6; // rax
   __int64 v7; // rdx
   UFG::qPropertySet *v8; // rax
-  __int128 v9; // xmm0
+  float v9; // xmm0_4
   float v10; // xmm0_4
   float v11; // xmm1_4
   UFG::GameStatTracker *v12; // rax
-  UFG::eFactionClassEnum v13; // ebx
+  UFG::eFactionClassEnum j; // ebx
   UFG::GameStatTracker *v14; // rax
   const char *v15; // rdx
   UFG::GameStatTracker *v16; // rax
-  UFG::eFactionClassEnum v17; // edi
+  UFG::eFactionClassEnum i; // edi
   UFG::GameStatTracker *v18; // rax
-  UFG::eFactionStandingEnum v19; // ebx
+  UFG::eFactionStandingEnum Standing; // ebx
   UFG::GameStatTracker *v20; // rax
   UFG::qString *v21; // rax
-  char *v22; // r9
-  UFG::qString result; // [rsp+38h] [rbp-40h]
+  UFG::qString result; // [rsp+38h] [rbp-40h] BYREF
 
-  v1 = this;
-  v2 = this->mHeatLevel;
+  mHeatLevel = this->mHeatLevel;
   v3 = UFG::GameStatTracker::Instance();
-  v4 = UFG::GameStatTracker::GetStat(v3, Heat);
-  UFG::PropertySetHandle::Bind(&v1->mProperties);
-  if ( v4 >= *UFG::qPropertySet::Get<float>(
-                v1->mProperties.mpPropSet,
-                (UFG::qSymbol *)&EncounterSym_threshold_level1.mUID,
-                DEPTH_RECURSE) )
-  {
-    UFG::PropertySetHandle::Bind(&v1->mProperties);
-    if ( v4 >= *UFG::qPropertySet::Get<float>(
-                  v1->mProperties.mpPropSet,
-                  (UFG::qSymbol *)&EncounterSym_threshold_level2.mUID,
+  Stat = UFG::GameStatTracker::GetStat(v3, Heat);
+  UFG::PropertySetHandle::Bind(&this->mProperties);
+  if ( Stat >= *UFG::qPropertySet::Get<float>(
+                  this->mProperties.mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level1,
                   DEPTH_RECURSE) )
-    {
-      UFG::PropertySetHandle::Bind(&v1->mProperties);
-      if ( v4 >= *UFG::qPropertySet::Get<float>(
-                    v1->mProperties.mpPropSet,
-                    (UFG::qSymbol *)&EncounterSym_threshold_level3.mUID,
+  {
+    UFG::PropertySetHandle::Bind(&this->mProperties);
+    if ( Stat >= *UFG::qPropertySet::Get<float>(
+                    this->mProperties.mpPropSet,
+                    (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level2,
                     DEPTH_RECURSE) )
-      {
-        UFG::PropertySetHandle::Bind(&v1->mProperties);
-        if ( v4 >= *UFG::qPropertySet::Get<float>(
-                      v1->mProperties.mpPropSet,
-                      (UFG::qSymbol *)&EncounterSym_threshold_level4.mUID,
+    {
+      UFG::PropertySetHandle::Bind(&this->mProperties);
+      if ( Stat >= *UFG::qPropertySet::Get<float>(
+                      this->mProperties.mpPropSet,
+                      (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level3,
                       DEPTH_RECURSE) )
+      {
+        UFG::PropertySetHandle::Bind(&this->mProperties);
+        if ( Stat >= *UFG::qPropertySet::Get<float>(
+                        this->mProperties.mpPropSet,
+                        (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level4,
+                        DEPTH_RECURSE) )
         {
-          UFG::PropertySetHandle::Bind(&v1->mProperties);
-          v5 = (v4 >= *UFG::qPropertySet::Get<float>(
-                         v1->mProperties.mpPropSet,
-                         (UFG::qSymbol *)&EncounterSym_threshold_level5.mUID,
-                         DEPTH_RECURSE))
+          UFG::PropertySetHandle::Bind(&this->mProperties);
+          v5 = (Stat >= *UFG::qPropertySet::Get<float>(
+                           this->mProperties.mpPropSet,
+                           (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level5,
+                           DEPTH_RECURSE))
              + 4;
         }
         else
@@ -1203,191 +1096,171 @@ void __fastcall UFG::CopSystem::UpdateHeatLevel(UFG::CopSystem *this)
   {
     v5 = 0;
   }
-  if ( v5 == v2 )
+  if ( v5 == mHeatLevel )
     return;
-  UFG::CopSystem::UpdateTelemetryStatsNewLevel(v1, v2, (UFG::HeatLevelEnum)v5);
-  v1->mCurrentWaveType.mUID = v1->mHeatLevelPropertiesName[v5].mUID;
-  v1->mHeatLevel = v5;
-  v1->mHeatLevelTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+  UFG::CopSystem::UpdateTelemetryStatsNewLevel(this, mHeatLevel, (UFG::HeatLevelEnum)v5);
+  this->mCurrentWaveType.mUID = this->mHeatLevelPropertiesName[v5].mUID;
+  this->mHeatLevel = v5;
+  this->mHeatLevelTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
   v6 = UFG::GameStatTracker::Instance();
   UFG::GameStatTracker::SetStatHigh(v6, HighestHeatLevel, v5);
   if ( v5 )
   {
-    if ( v5 > v2 )
+    if ( v5 > mHeatLevel )
     {
-      v1->mWaveCount = 0;
-      v1->mHasSpawnedInFrontForCurrentWave = 0;
-      ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[23].__vecDelDtor)(v1);
+      this->mWaveCount = 0;
+      this->mHasSpawnedInFrontForCurrentWave = 0;
+      ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[23].__vecDelDtor)(this);
     }
-    if ( v2 )
+    if ( mHeatLevel )
       goto LABEL_33;
-    v1->mStartTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+    this->mStartTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
     v16 = UFG::FactionInterface::Get();
     UFG::FactionInterface::SetStanding(&v16->mFactionInterface, FACTION_PLAYER, FACTION_LAW, FACTIONSTANDING_HOSTILE);
-    v17 = 0;
-    do
+    for ( i = FACTION_INVALID; (unsigned int)i < NUM_FACTIONS; ++i )
     {
-      if ( (unsigned int)(v17 - 2) > 1 && v17 != 36 )
+      if ( (unsigned int)(i - 2) > 1 && i != FACTION_LAW_HOSTILE )
       {
         v18 = UFG::FactionInterface::Get();
-        v19 = (unsigned int)UFG::FactionInterface::GetStanding(&v18->mFactionInterface, FACTION_PLAYER, v17);
+        Standing = (unsigned int)UFG::FactionInterface::GetStanding(&v18->mFactionInterface, FACTION_PLAYER, i);
         v20 = UFG::FactionInterface::Get();
-        UFG::FactionInterface::SetStanding(&v20->mFactionInterface, FACTION_LAW, v17, v19);
+        UFG::FactionInterface::SetStanding(&v20->mFactionInterface, FACTION_LAW, i, Standing);
       }
-      ++v17;
     }
-    while ( (unsigned int)v17 < 0x27 );
-    if ( v1->mLastHeatEventIndex == eHEATEVENT_NONE )
+    if ( this->mLastHeatEventIndex == eHEATEVENT_NONE )
       goto LABEL_33;
     v15 = "Begin_Pursuit";
   }
   else
   {
-    ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[120].__vecDelDtor)(v1);
-    if ( (unsigned __int8)UFG::CopSystem::IsPlayerInsideUnlockedSafehouse(v1, 0i64) )
+    ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[120].__vecDelDtor)(this);
+    if ( (unsigned __int8)UFG::CopSystem::IsPlayerInsideUnlockedSafehouse(this, 0i64) )
     {
       LOBYTE(v7) = 1;
-      v1->vfptr[3].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v1->vfptr, v7);
+      this->vfptr[3].__vecDelDtor(this, v7);
     }
-    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v1->vfptr[33].__vecDelDtor)(v1);
-    v9 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                            v8,
-                            (UFG::qSymbol *)&EncounterSym_heatwave_timer.mUID,
-                            DEPTH_RECURSE);
-    v10 = UFG::qRandom(*(float *)&v9, &UFG::qDefaultSeed);
+    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
+    v9 = *UFG::qPropertySet::Get<float>(v8, (UFG::qArray<unsigned long,0> *)&EncounterSym_heatwave_timer, DEPTH_RECURSE);
+    v10 = UFG::qRandom(v9, (unsigned int *)&UFG::qDefaultSeed);
     v11 = FLOAT_60_0;
     if ( v10 >= 60.0 )
       v11 = v10;
-    v1->mWaveTimer = v11;
+    this->mWaveTimer = v11;
     v12 = UFG::FactionInterface::Get();
     UFG::FactionInterface::SetStanding(
       &v12->mFactionInterface,
       FACTION_PLAYER,
       FACTION_LAW,
       FACTIONSTANDING_INDIFFERENT);
-    v13 = 0;
-    do
+    for ( j = FACTION_INVALID; (unsigned int)j < NUM_FACTIONS; ++j )
     {
-      if ( v13 != 3 && v13 != 36 )
+      if ( j != FACTION_LAW && j != FACTION_LAW_HOSTILE )
       {
         v14 = UFG::FactionInterface::Get();
-        UFG::FactionInterface::SetStanding(&v14->mFactionInterface, FACTION_LAW, v13, FACTIONSTANDING_INDIFFERENT);
+        UFG::FactionInterface::SetStanding(&v14->mFactionInterface, FACTION_LAW, j, FACTIONSTANDING_INDIFFERENT);
       }
-      ++v13;
     }
-    while ( (unsigned int)v13 < 0x27 );
-    v1->mStartTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+    this->mStartTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
     v15 = "End_Pursuit";
   }
   UFG::PoliceScannerAudio::PlayScenario(&UFG::PoliceScannerAudio::sm_Instance, v15);
 LABEL_33:
-  ((void (__fastcall *)(UFG::CopSystem *))v1->vfptr[50].__vecDelDtor)(v1);
-  UFG::GameStatAction::Player::NotifyHeatLevelChange(v2, (UFG::HeatLevelEnum)v5);
-  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))v1->vfptr[115].__vecDelDtor)(
-    v1,
-    (unsigned int)v2,
+  ((void (__fastcall *)(UFG::CopSystem *))this->vfptr[50].__vecDelDtor)(this);
+  UFG::GameStatAction::Player::NotifyHeatLevelChange(mHeatLevel, (UFG::HeatLevelEnum)v5);
+  ((void (__fastcall *)(UFG::CopSystem *, _QWORD, _QWORD))this->vfptr[115].__vecDelDtor)(
+    this,
+    (unsigned int)mHeatLevel,
     (unsigned int)v5);
-  if ( v1->mEnable )
+  if ( this->mEnable && this->mDebugDrawLevel > 0 )
   {
-    if ( v1->mDebugDrawLevel > 0 )
-    {
-      v21 = UFG::qString::FormatEx(&result, "DEBUG: Heat level changed to (%d)!", (unsigned int)v5);
-      UFG::qString::Set(&v1->mLastHeatEventCaption, v21->mData, v21->mLength, 0i64, 0);
-      UFG::qString::~qString(&result);
-      v22 = v1->mLastHeatEventCaption.mData;
-      UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_Cops, OUTPUT_LEVEL_DEBUG, "[CopSystem]: %s\n");
-    }
+    v21 = UFG::qString::FormatEx(&result, "DEBUG: Heat level changed to (%d)!", (unsigned int)v5);
+    UFG::qString::Set(&this->mLastHeatEventCaption, v21->mData, v21->mLength, 0i64, 0);
+    UFG::qString::~qString(&result);
+    UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_Cops, OUTPUT_LEVEL_DEBUG, "[CopSystem]: %s\n");
   }
 }
 
 // File Line: 888
 // RVA: 0x3EEF50
-void __fastcall UFG::CopSystem::HandleOnFootSpawnPost(UFG::CopSystem *this, UFG::SimObject *pOnFootSpawn)
+void __fastcall UFG::CopSystem::HandleOnFootSpawnPost(UFG::CopSystem *this, UFG::SimObjectGame *pOnFootSpawn)
 {
-  UFG::SimObjectGame *v2; // rbx
-  UFG::CopSystem *v3; // rdi
-  unsigned __int16 v4; // dx
-  UFG::StimulusReceiverComponent *v5; // rsi
-  UFG::SimComponent *v6; // rax
-  UFG::eStimulusType v7; // ebx
-  bool *v8; // rdi
+  signed __int16 m_Flags; // dx
+  UFG::StimulusReceiverComponent *m_pComponent; // rsi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  int v7; // ebx
+  bool *mStimulusWatchList; // rdi
 
-  v2 = (UFG::SimObjectGame *)pOnFootSpawn;
-  v3 = this;
-  UFG::EncounterBase::HandleOnFootSpawnPost((UFG::EncounterBase *)&this->vfptr, pOnFootSpawn);
-  if ( v2 )
+  UFG::EncounterBase::HandleOnFootSpawnPost(this, pOnFootSpawn);
+  if ( pOnFootSpawn )
   {
-    v4 = v2->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = pOnFootSpawn->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::StimulusReceiverComponent *)v2->m_Components.p[11].m_pComponent;
+      m_pComponent = (UFG::StimulusReceiverComponent *)pOnFootSpawn->m_Components.p[11].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::StimulusReceiverComponent::_TypeUID);
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              pOnFootSpawn,
+                              UFG::StimulusReceiverComponent::_TypeUID);
       else
-        v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::StimulusReceiverComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::StimulusReceiverComponent::_TypeUID);
-      v5 = (UFG::StimulusReceiverComponent *)v6;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(pOnFootSpawn, UFG::StimulusReceiverComponent::_TypeUID);
+      m_pComponent = (UFG::StimulusReceiverComponent *)ComponentOfTypeHK;
     }
     else
     {
-      v5 = (UFG::StimulusReceiverComponent *)v2->m_Components.p[11].m_pComponent;
+      m_pComponent = (UFG::StimulusReceiverComponent *)pOnFootSpawn->m_Components.p[11].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
       v7 = 0;
-      v8 = v3->mStimulusWatchList;
+      mStimulusWatchList = this->mStimulusWatchList;
       do
       {
-        if ( *v8 )
-          UFG::StimulusReceiverComponent::RequestToReceiveStimulus(v5, v7);
+        if ( *mStimulusWatchList )
+          UFG::StimulusReceiverComponent::RequestToReceiveStimulus(m_pComponent, v7);
         ++v7;
-        ++v8;
+        ++mStimulusWatchList;
       }
-      while ( (signed int)v7 < 116 );
+      while ( v7 < 116 );
     }
   }
 }
 
 // File Line: 916
 // RVA: 0x3EF3D0
-bool __fastcall UFG::CopSystem::IsCharacterInUseHeuristic(UFG::CopSystem *this, UFG::EncounterUnitComponent *pEncounterUnitComponent)
+bool __fastcall UFG::CopSystem::IsCharacterInUseHeuristic(
+        UFG::CopSystem *this,
+        UFG::EncounterUnitComponent *pEncounterUnitComponent)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::EncounterUnitComponent *v3; // rdi
-  UFG::CopSystem *v4; // rsi
-  unsigned __int16 v5; // r8
-  UFG::SimComponent *v6; // rax
+  UFG::SimObject *m_pSimObject; // rbx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rax
 
-  v2 = pEncounterUnitComponent->m_pSimObject;
-  v3 = pEncounterUnitComponent;
-  v4 = this;
-  if ( !v2 )
-    return UFG::EncounterBase::IsCharacterInUseHeuristic((UFG::EncounterBase *)&v4->vfptr, v3);
-  v5 = v2->m_Flags;
-  if ( (v5 >> 14) & 1 )
+  m_pSimObject = pEncounterUnitComponent->m_pSimObject;
+  if ( !m_pSimObject )
+    return UFG::EncounterBase::IsCharacterInUseHeuristic(this, pEncounterUnitComponent);
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v6 = v2->m_Components.p[17].m_pComponent;
+    m_pComponent = m_pSimObject->m_Components.p[17].m_pComponent;
   }
-  else if ( (v5 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v5 >> 13) & 1 )
-      v6 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v2, UFG::CopUnitComponent::_TypeUID);
-    else
-      v6 = (v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                              (UFG::SimObjectGame *)v2,
-                              UFG::CopUnitComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                   v2,
-                                                                   UFG::CopUnitComponent::_TypeUID);
+    m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                 ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                     (UFG::SimObjectGame *)m_pSimObject,
+                     UFG::CopUnitComponent::_TypeUID)
+                 : UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CopUnitComponent::_TypeUID);
   }
   else
   {
-    v6 = v2->m_Components.p[17].m_pComponent;
+    m_pComponent = m_pSimObject->m_Components.p[17].m_pComponent;
   }
-  if ( !v6 || v6[7].m_Flags & 2 )
-    return UFG::EncounterBase::IsCharacterInUseHeuristic((UFG::EncounterBase *)&v4->vfptr, v3);
-  UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->m_Name);
+  if ( !m_pComponent || (m_pComponent[7].m_Flags & 2) != 0 )
+    return UFG::EncounterBase::IsCharacterInUseHeuristic(this, pEncounterUnitComponent);
+  UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&m_pSimObject->m_Name);
   UFG::qPrintChannel::Print(
     &UFG::gPrintChannel_HK_Cops,
     OUTPUT_LEVEL_DEBUG,
@@ -1397,407 +1270,317 @@ bool __fastcall UFG::CopSystem::IsCharacterInUseHeuristic(UFG::CopSystem *this, 
 
 // File Line: 933
 // RVA: 0x3EFA70
-char __fastcall UFG::CopSystem::Reacquire(UFG::CopSystem *this, UFG::EncounterUnit::UnitType unitType, UFG::SimObject *pPlayer, UFG::TransformNodeComponent *pPlayerTransform, UFG::SimObject **pExisting)
+char __fastcall UFG::CopSystem::Reacquire(
+        UFG::CopSystem *this,
+        UFG::EncounterUnit::UnitType unitType,
+        UFG::SimObject *pPlayer,
+        UFG::TransformNodeComponent *pPlayerTransform,
+        UFG::SimObject **pExisting)
 {
-  UFG::EncounterUnit::UnitType v5; // er12
-  UFG::CopSystem *v6; // r14
   bool v7; // cf
-  char *v8; // rbp
+  char *p_mNext; // rbp
   bool i; // zf
-  signed __int64 v10; // r15
+  __int64 v10; // r15
   char v11; // al
   UFG::SimObjectGame *v12; // rbx
-  UFG::TransformNodeComponent *v13; // rdi
-  unsigned __int16 v14; // cx
-  UFG::EncounterUnitComponent *v15; // rsi
-  UFG::SimComponent *v16; // rax
-  UFG::qMemoryPool *v17; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  __int16 m_Flags; // cx
+  UFG::EncounterUnitComponent *m_pComponent; // rsi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v18; // rax
   UFG::EncounterUnitComponent *v19; // rax
-  unsigned __int16 v20; // cx
+  __int16 v20; // cx
   unsigned int v21; // edi
-  unsigned __int16 v22; // cx
-  __int16 v23; // ax
-  UFG::CharacterOccupantComponent *v24; // rax
-  UFG::VehicleOccupantComponent *v25; // rax
-  UFG::qSafePointerNode<UFG::SimObject>Vtbl *v26; // rcx
-  UFG::SimComponent *v27; // rax
-  UFG::SimObjectGame *v28; // rax
-  unsigned __int16 v29; // dx
-  UFG::SimComponent *v30; // rax
-  UFG::PedSpawnManager *v31; // rax
-  unsigned __int16 v32; // cx
-  UFG::TargetingSystemBaseComponent *v33; // rax
-  unsigned __int16 v34; // cx
-  UFG::SimComponent *v35; // rax
-  unsigned __int16 v36; // cx
-  UFG::StreamedResourceComponent *v37; // rdi
-  UFG::SimComponent *v38; // rax
-  unsigned __int16 v39; // cx
-  UFG::CharacterOccupantComponent *v40; // rax
-  UFG::TransformNodeComponent *v41; // rax
-  UFG::SimObjectModifier v43; // [rsp+40h] [rbp-48h]
-  UFG::qSymbol symbol; // [rsp+98h] [rbp+10h]
+  __int16 v22; // cx
+  UFG::CharacterOccupantComponent *v23; // rax
+  UFG::VehicleOccupantComponent *v24; // rax
+  UFG::qSafePointerNode<UFG::SimObject>Vtbl *vfptr; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::SimObjectGame *Texture; // rax
+  __int16 v28; // dx
+  UFG::SimComponent *v29; // rax
+  UFG::PedSpawnManager *Instance; // rax
+  __int16 v31; // cx
+  UFG::TargetingSystemBaseComponent *v32; // rax
+  __int16 v33; // cx
+  UFG::SimComponent *v34; // rax
+  __int16 v35; // cx
+  UFG::StreamedResourceComponent *v36; // rdi
+  UFG::SimComponent *v37; // rax
+  __int16 v38; // cx
+  UFG::CharacterOccupantComponent *v39; // rax
+  UFG::TransformNodeComponent *CurrentVehicle; // rax
+  UFG::SimObjectModifier v42; // [rsp+40h] [rbp-48h] BYREF
+  UFG::qSymbol symbol; // [rsp+98h] [rbp+10h] BYREF
 
-  v5 = unitType;
-  v6 = this;
-  if ( unitType == 1 )
+  if ( unitType == F5_1Pt2_512 )
     v7 = this->mHumans.size < 0x20;
   else
     v7 = this->mVehicles.size < 8;
   if ( v7 )
   {
-    v8 = (char *)&UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
+    p_mNext = (char *)&UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
     for ( i = &UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext == (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> **)((char *)&UFG::CopUnitComponent::s_CopUnitComponentList - 72);
-          !i;
+          ;
           i = v10 == (_QWORD)&UFG::CopUnitComponent::s_CopUnitComponentList - 72 )
     {
-      v10 = *((_QWORD *)v8 + 10) - 72i64;
-      if ( *((_DWORD *)v8 + 119) == v5 )
+      if ( i )
+        return 0;
+      v10 = *((_QWORD *)p_mNext + 10) - 72i64;
+      if ( *((_DWORD *)p_mNext + 119) == unitType )
       {
-        v11 = v8[480];
-        if ( v11 & 2 )
+        v11 = p_mNext[480];
+        if ( (v11 & 2) != 0 && (v11 & 8) != 0 && (v11 & 1) == 0 )
         {
-          if ( v11 & 8 )
+          v12 = (UFG::SimObjectGame *)*((_QWORD *)p_mNext + 5);
+          if ( v12 )
           {
-            if ( !(v11 & 1) )
+            m_pTransformNodeComponent = v12->m_pTransformNodeComponent;
+            if ( m_pTransformNodeComponent )
             {
-              v12 = (UFG::SimObjectGame *)*((_QWORD *)v8 + 5);
-              if ( v12 )
+              UFG::TransformNodeComponent::UpdateWorldTransform(v12->m_pTransformNodeComponent);
+              if ( !this->vfptr[58].__vecDelDtor(this, &m_pTransformNodeComponent->mWorldTransform.v3)
+                && (this->vfptr[47].__vecDelDtor(this, v12) || (p_mNext[480] & 0x10) != 0) )
               {
-                v13 = v12->m_pTransformNodeComponent;
-                if ( v13 )
+                m_Flags = v12->m_Flags;
+                if ( (m_Flags & 0x4000) != 0 )
                 {
-                  UFG::TransformNodeComponent::UpdateWorldTransform(v12->m_pTransformNodeComponent);
-                  if ( !(unsigned __int8)v6->vfptr[58].__vecDelDtor(
-                                           (UFG::qSafePointerNode<UFG::EncounterBase> *)&v6->vfptr,
-                                           (unsigned int)&v13->mWorldTransform.v3)
-                    && ((unsigned __int8)v6->vfptr[47].__vecDelDtor(
-                                           (UFG::qSafePointerNode<UFG::EncounterBase> *)&v6->vfptr,
-                                           (unsigned int)v12)
-                     || ((unsigned __int8)v8[480] >> 4) & 1) )
+                  m_pComponent = (UFG::EncounterUnitComponent *)v12->m_Components.p[16].m_pComponent;
+                }
+                else if ( m_Flags >= 0 )
+                {
+                  if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+                    ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                          v12,
+                                          UFG::EncounterUnitComponent::_TypeUID);
+                  else
+                    ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v12, UFG::EncounterUnitComponent::_TypeUID);
+                  m_pComponent = (UFG::EncounterUnitComponent *)ComponentOfTypeHK;
+                }
+                else
+                {
+                  m_pComponent = (UFG::EncounterUnitComponent *)v12->m_Components.p[16].m_pComponent;
+                }
+                if ( !m_pComponent )
+                {
+                  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+                  v18 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0xE0ui64, "EncounterUnitComponent", 0i64, 1u);
+                  if ( v18 )
                   {
-                    v14 = v12->m_Flags;
-                    if ( (v14 >> 14) & 1 )
+                    UFG::EncounterUnitComponent::EncounterUnitComponent(
+                      (UFG::EncounterUnitComponent *)v18,
+                      v12->mNode.mUID);
+                    m_pComponent = v19;
+                  }
+                  else
+                  {
+                    m_pComponent = 0i64;
+                  }
+                  v20 = v12->m_Flags;
+                  if ( (v20 & 0x4000) != 0 )
+                  {
+                    v21 = 16;
+                  }
+                  else if ( v20 >= 0 )
+                  {
+                    v21 = -1;
+                  }
+                  else
+                  {
+                    v21 = 16;
+                  }
+                  UFG::SimObjectModifier::SimObjectModifier(&v42, v12, 1);
+                  UFG::SimObjectModifier::AttachComponent(&v42, m_pComponent, v21);
+                  UFG::SimObjectModifier::Close(&v42);
+                  UFG::SimObjectModifier::~SimObjectModifier(&v42);
+                }
+                if ( this->vfptr[78].__vecDelDtor(this, m_pComponent) )
+                {
+                  v22 = v12->m_Flags;
+                  if ( unitType != F5_1Pt2_512 )
+                  {
+                    if ( (v22 & 0x4000) != 0 )
+                      goto LABEL_56;
+                    if ( v22 >= 0 )
                     {
-                      v15 = (UFG::EncounterUnitComponent *)v12->m_Components.p[16].m_pComponent;
-                    }
-                    else if ( (v14 & 0x8000u) == 0 )
-                    {
-                      if ( (v14 >> 13) & 1 )
-                      {
-                        v16 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::EncounterUnitComponent::_TypeUID);
-                      }
-                      else if ( (v14 >> 12) & 1 )
-                      {
-                        v16 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::EncounterUnitComponent::_TypeUID);
-                      }
+                      if ( (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0 )
+LABEL_56:
+                        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                            v12,
+                                            UFG::VehicleOccupantComponent::_TypeUID);
                       else
-                      {
-                        v16 = UFG::SimObject::GetComponentOfType(
-                                (UFG::SimObject *)&v12->vfptr,
-                                UFG::EncounterUnitComponent::_TypeUID);
-                      }
-                      v15 = (UFG::EncounterUnitComponent *)v16;
+                        ComponentOfType = UFG::SimObject::GetComponentOfType(
+                                            v12,
+                                            UFG::VehicleOccupantComponent::_TypeUID);
                     }
                     else
                     {
-                      v15 = (UFG::EncounterUnitComponent *)v12->m_Components.p[16].m_pComponent;
+                      ComponentOfType = v12->m_Components.p[30].m_pComponent;
                     }
-                    if ( !v15 )
+                    if ( !ComponentOfType )
+                      goto LABEL_91;
+                    Texture = (UFG::SimObjectGame *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)ComponentOfType);
+                    if ( Texture )
                     {
-                      v17 = UFG::GetSimulationMemoryPool();
-                      v18 = UFG::qMemoryPool::Allocate(v17, 0xE0ui64, "EncounterUnitComponent", 0i64, 1u);
-                      if ( v18 )
+                      v28 = Texture->m_Flags;
+                      if ( (v28 & 0x4000) != 0 )
                       {
-                        UFG::EncounterUnitComponent::EncounterUnitComponent(
-                          (UFG::EncounterUnitComponent *)v18,
-                          v12->mNode.mUID);
-                        v15 = v19;
+                        v29 = Texture->m_Components.p[17].m_pComponent;
+                      }
+                      else if ( v28 >= 0 )
+                      {
+                        v29 = (v28 & 0x2000) != 0 || (v28 & 0x1000) != 0
+                            ? UFG::SimObjectGame::GetComponentOfTypeHK(Texture, UFG::CopUnitComponent::_TypeUID)
+                            : UFG::SimObject::GetComponentOfType(Texture, UFG::CopUnitComponent::_TypeUID);
                       }
                       else
                       {
-                        v15 = 0i64;
+                        v29 = Texture->m_Components.p[17].m_pComponent;
                       }
-                      v20 = v12->m_Flags;
-                      if ( (v20 >> 14) & 1 )
-                      {
-                        v21 = 16;
-                      }
-                      else if ( (v20 & 0x8000u) == 0 )
-                      {
-                        v21 = -1;
-                      }
-                      else
-                      {
-                        v21 = 16;
-                      }
-                      UFG::SimObjectModifier::SimObjectModifier(&v43, (UFG::SimObject *)&v12->vfptr, 1);
-                      UFG::SimObjectModifier::AttachComponent(&v43, (UFG::SimComponent *)&v15->vfptr, v21);
-                      UFG::SimObjectModifier::Close(&v43);
-                      UFG::SimObjectModifier::~SimObjectModifier(&v43);
+                      if ( v29 && (v29[7].m_Flags & 1) != 0 )
+                        goto LABEL_91;
                     }
-                    if ( v6->vfptr[78].__vecDelDtor(
-                           (UFG::qSafePointerNode<UFG::EncounterBase> *)&v6->vfptr,
-                           (unsigned int)v15) )
+                    goto LABEL_70;
+                  }
+                  if ( (v22 & 0x4000) != 0 )
+                  {
+                    v23 = (UFG::CharacterOccupantComponent *)v12->m_Components.p[44].m_pComponent;
+                  }
+                  else if ( v22 < 0 || (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0 )
+                  {
+                    v23 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               v12,
+                                                               UFG::CharacterOccupantComponent::_TypeUID);
+                  }
+                  else
+                  {
+                    v23 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
+                                                               v12,
+                                                               UFG::CharacterOccupantComponent::_TypeUID);
+                  }
+                  if ( !v23
+                    || (v24 = UFG::CharacterOccupantComponent::GetCurrentVehicle(v23)) == 0i64
+                    || (vfptr = v24->mpDriver.m_pPointer[2].vfptr) == 0i64
+                    || !HIBYTE(vfptr[17].__vecDelDtor) )
+                  {
+                    UFG::PedSpawnManager::AquireOwnership(v12, 0, 1, -1);
+                    Instance = UFG::PedSpawnManager::GetInstance();
+                    UFG::PedSpawnManager::SetSuspendOption(Instance, v12, NoSuspend);
+                    if ( this->mIsExcludingPlayerForRestOfChase )
                     {
-                      v22 = v12->m_Flags;
-                      v23 = v22 >> 14;
-                      if ( v5 == 1 )
+                      v31 = v12->m_Flags;
+                      if ( (v31 & 0x4000) != 0 )
                       {
-                        if ( v23 & 1 )
-                        {
-                          v24 = (UFG::CharacterOccupantComponent *)v12->m_Components.p[44].m_pComponent;
-                        }
-                        else if ( (v22 & 0x8000u) == 0 )
-                        {
-                          if ( (v22 >> 13) & 1 )
-                          {
-                            v24 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                        v32 = (UFG::TargetingSystemBaseComponent *)v12->m_Components.p[20].m_pComponent;
+                      }
+                      else if ( v31 >= 0 )
+                      {
+                        if ( (v31 & 0x2000) != 0 || (v31 & 0x1000) != 0 )
+                          v32 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
                                                                        v12,
-                                                                       UFG::CharacterOccupantComponent::_TypeUID);
-                          }
-                          else if ( (v22 >> 12) & 1 )
-                          {
-                            v24 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       v12,
-                                                                       UFG::CharacterOccupantComponent::_TypeUID);
-                          }
-                          else
-                          {
-                            v24 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
-                                                                       (UFG::SimObject *)&v12->vfptr,
-                                                                       UFG::CharacterOccupantComponent::_TypeUID);
-                          }
-                        }
+                                                                       UFG::TargetingSystemBaseComponent::_TypeUID);
                         else
-                        {
-                          v24 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     v12,
-                                                                     UFG::CharacterOccupantComponent::_TypeUID);
-                        }
-                        if ( !v24
-                          || (v25 = UFG::CharacterOccupantComponent::GetCurrentVehicle(v24)) == 0i64
-                          || (v26 = v25->mpDriver.m_pPointer[2].vfptr) == 0i64
-                          || !HIBYTE(v26[17].__vecDelDtor) )
-                        {
-                          UFG::PedSpawnManager::AquireOwnership((UFG::SimObject *)&v12->vfptr, 0, 1, -1);
-                          v31 = UFG::PedSpawnManager::GetInstance();
-                          UFG::PedSpawnManager::SetSuspendOption(v31, (UFG::SimObject *)&v12->vfptr, NoSuspend);
-                          if ( v6->mIsExcludingPlayerForRestOfChase )
-                          {
-                            v32 = v12->m_Flags;
-                            if ( (v32 >> 14) & 1 )
-                            {
-                              v33 = (UFG::TargetingSystemBaseComponent *)v12->m_Components.p[20].m_pComponent;
-                            }
-                            else if ( (v32 & 0x8000u) == 0 )
-                            {
-                              if ( (v32 >> 13) & 1 )
-                              {
-                                v33 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                             v12,
-                                                                             UFG::TargetingSystemBaseComponent::_TypeUID);
-                              }
-                              else if ( (v32 >> 12) & 1 )
-                              {
-                                v33 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                             v12,
-                                                                             UFG::TargetingSystemBaseComponent::_TypeUID);
-                              }
-                              else
-                              {
-                                v33 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                                             (UFG::SimObject *)&v12->vfptr,
-                                                                             UFG::TargetingSystemBaseComponent::_TypeUID);
-                              }
-                            }
-                            else
-                            {
-                              v33 = (UFG::TargetingSystemBaseComponent *)v12->m_Components.p[20].m_pComponent;
-                            }
-                            if ( v33 )
-                              UFG::TargetingSystemBaseComponent::ClearTarget(v33, eTARGET_TYPE_AI_OBJECTIVE);
-                            v34 = v12->m_Flags;
-                            if ( (v34 >> 14) & 1 )
-                            {
-                              v35 = v12->m_Components.p[6].m_pComponent;
-                            }
-                            else if ( (v34 & 0x8000u) == 0 )
-                            {
-                              if ( (v34 >> 13) & 1 )
-                              {
-                                v35 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::HealthComponent::_TypeUID);
-                              }
-                              else if ( (v34 >> 12) & 1 )
-                              {
-                                v35 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::HealthComponent::_TypeUID);
-                              }
-                              else
-                              {
-                                v35 = UFG::SimObject::GetComponentOfType(
-                                        (UFG::SimObject *)&v12->vfptr,
-                                        UFG::HealthComponent::_TypeUID);
-                              }
-                            }
-                            else
-                            {
-                              v35 = v12->m_Components.p[6].m_pComponent;
-                            }
-                            BYTE6(v35[1].m_BoundComponentHandles.mNode.mPrev) = 0;
-                          }
-LABEL_97:
-                          v36 = v12->m_Flags;
-                          if ( (v36 >> 14) & 1 )
-                          {
-                            v37 = (UFG::StreamedResourceComponent *)v12->m_Components.p[10].m_pComponent;
-                          }
-                          else if ( (v36 & 0x8000u) == 0 )
-                          {
-                            if ( (v36 >> 13) & 1 )
-                            {
-                              v37 = (UFG::StreamedResourceComponent *)v12->m_Components.p[7].m_pComponent;
-                            }
-                            else
-                            {
-                              if ( (v36 >> 12) & 1 )
-                                v38 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                                        v12,
-                                        UFG::StreamedResourceComponent::_TypeUID);
-                              else
-                                v38 = UFG::SimObject::GetComponentOfType(
-                                        (UFG::SimObject *)&v12->vfptr,
-                                        UFG::StreamedResourceComponent::_TypeUID);
-                              v37 = (UFG::StreamedResourceComponent *)v38;
-                            }
-                          }
-                          else
-                          {
-                            v37 = (UFG::StreamedResourceComponent *)v12->m_Components.p[10].m_pComponent;
-                          }
-                          if ( v37 )
-                          {
-                            symbol.mUID = v37->mActivePriority.mUID;
-                            UFG::StreamedResourceComponent::IncrementPriorityReferenceCount(
-                              v37,
-                              (UFG::qSymbol *)&qSymbol_Critical.mUID);
-                            UFG::StreamedResourceComponent::DecrementPriorityReferenceCount(v37, &symbol);
-                          }
-                          v8[480] = v8[480] & 0xFB | 1;
-                          if ( *((_QWORD *)v8 + 20) )
-                          {
-                            v6->mVehicles.p[v6->mVehicles.size++] = v15;
-                          }
-                          else
-                          {
-                            v39 = v12->m_Flags;
-                            if ( (v39 >> 14) & 1 )
-                            {
-                              v40 = (UFG::CharacterOccupantComponent *)v12->m_Components.p[44].m_pComponent;
-                            }
-                            else if ( (v39 & 0x8000u) == 0 )
-                            {
-                              if ( (v39 >> 13) & 1 )
-                              {
-                                v40 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           v12,
-                                                                           UFG::CharacterOccupantComponent::_TypeUID);
-                              }
-                              else if ( (v39 >> 12) & 1 )
-                              {
-                                v40 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           v12,
-                                                                           UFG::CharacterOccupantComponent::_TypeUID);
-                              }
-                              else
-                              {
-                                v40 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
-                                                                           (UFG::SimObject *)&v12->vfptr,
-                                                                           UFG::CharacterOccupantComponent::_TypeUID);
-                              }
-                            }
-                            else
-                            {
-                              v40 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         v12,
-                                                                         UFG::CharacterOccupantComponent::_TypeUID);
-                            }
-                            if ( v40 )
-                            {
-                              v41 = (UFG::TransformNodeComponent *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v40);
-                              if ( v41 )
-                              {
-                                UFG::EncounterUnitComponent::SetGroupVehicle((SkeletalPose *)v15, v41);
-                                UFG::EncounterUnitComponent::IncrementGroupVehicleUsageCount(v15);
-                              }
-                            }
-                            v6->mHumans.p[v6->mHumans.size++] = v15;
-                          }
-                          ((void (__fastcall *)(UFG::CopSystem *, UFG::EncounterUnitComponent *, _QWORD))v6->vfptr[69].__vecDelDtor)(
-                            v6,
-                            v15,
-                            0i64);
-                          *pExisting = (UFG::SimObject *)*((_QWORD *)v8 + 5);
-                          return 1;
-                        }
+                          v32 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                       v12,
+                                                                       UFG::TargetingSystemBaseComponent::_TypeUID);
                       }
                       else
                       {
-                        if ( v23 & 1 )
-                        {
-                          v27 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::VehicleOccupantComponent::_TypeUID);
-                        }
-                        else if ( (v22 & 0x8000u) == 0 )
-                        {
-                          if ( (v22 >> 13) & 1 )
-                          {
-                            v27 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::VehicleOccupantComponent::_TypeUID);
-                          }
-                          else if ( (v22 >> 12) & 1 )
-                          {
-                            v27 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::VehicleOccupantComponent::_TypeUID);
-                          }
-                          else
-                          {
-                            v27 = UFG::SimObject::GetComponentOfType(
-                                    (UFG::SimObject *)&v12->vfptr,
-                                    UFG::VehicleOccupantComponent::_TypeUID);
-                          }
-                        }
+                        v32 = (UFG::TargetingSystemBaseComponent *)v12->m_Components.p[20].m_pComponent;
+                      }
+                      if ( v32 )
+                        UFG::TargetingSystemBaseComponent::ClearTarget(v32, eTARGET_TYPE_AI_OBJECTIVE);
+                      v33 = v12->m_Flags;
+                      if ( (v33 & 0x4000) != 0 )
+                      {
+                        v34 = v12->m_Components.p[6].m_pComponent;
+                      }
+                      else if ( v33 >= 0 )
+                      {
+                        if ( (v33 & 0x2000) != 0 || (v33 & 0x1000) != 0 )
+                          v34 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::HealthComponent::_TypeUID);
                         else
-                        {
-                          v27 = v12->m_Components.p[30].m_pComponent;
-                        }
-                        if ( !v27 )
-                          goto LABEL_97;
-                        v28 = (UFG::SimObjectGame *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)v27);
-                        if ( v28 )
-                        {
-                          v29 = v28->m_Flags;
-                          if ( (v29 >> 14) & 1 )
-                          {
-                            v30 = v28->m_Components.p[17].m_pComponent;
-                          }
-                          else if ( (v29 & 0x8000u) == 0 )
-                          {
-                            if ( (v29 >> 13) & 1 )
-                              v30 = UFG::SimObjectGame::GetComponentOfTypeHK(v28, UFG::CopUnitComponent::_TypeUID);
-                            else
-                              v30 = (v29 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        v28,
-                                                        UFG::CopUnitComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                             (UFG::SimObject *)&v28->vfptr,
-                                                                                             UFG::CopUnitComponent::_TypeUID);
-                          }
-                          else
-                          {
-                            v30 = v28->m_Components.p[17].m_pComponent;
-                          }
-                          if ( v30 && v30[7].m_Flags & 1 )
-                            goto LABEL_97;
-                        }
+                          v34 = UFG::SimObject::GetComponentOfType(v12, UFG::HealthComponent::_TypeUID);
+                      }
+                      else
+                      {
+                        v34 = v12->m_Components.p[6].m_pComponent;
+                      }
+                      BYTE6(v34[1].m_BoundComponentHandles.mNode.mPrev) = 0;
+                    }
+LABEL_91:
+                    v35 = v12->m_Flags;
+                    if ( (v35 & 0x4000) != 0 )
+                    {
+                      v36 = (UFG::StreamedResourceComponent *)v12->m_Components.p[10].m_pComponent;
+                    }
+                    else if ( v35 >= 0 )
+                    {
+                      if ( (v35 & 0x2000) != 0 )
+                      {
+                        v36 = (UFG::StreamedResourceComponent *)v12->m_Components.p[7].m_pComponent;
+                      }
+                      else
+                      {
+                        if ( (v35 & 0x1000) != 0 )
+                          v37 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::StreamedResourceComponent::_TypeUID);
+                        else
+                          v37 = UFG::SimObject::GetComponentOfType(v12, UFG::StreamedResourceComponent::_TypeUID);
+                        v36 = (UFG::StreamedResourceComponent *)v37;
                       }
                     }
+                    else
+                    {
+                      v36 = (UFG::StreamedResourceComponent *)v12->m_Components.p[10].m_pComponent;
+                    }
+                    if ( v36 )
+                    {
+                      symbol.mUID = v36->mActivePriority.mUID;
+                      UFG::StreamedResourceComponent::IncrementPriorityReferenceCount(v36, &qSymbol_Critical);
+                      UFG::StreamedResourceComponent::DecrementPriorityReferenceCount(v36, &symbol);
+                    }
+                    p_mNext[480] = p_mNext[480] & 0xFA | 1;
+                    if ( *((_QWORD *)p_mNext + 20) )
+                    {
+                      this->mVehicles.p[this->mVehicles.size++] = m_pComponent;
+                    }
+                    else
+                    {
+                      v38 = v12->m_Flags;
+                      if ( (v38 & 0x4000) != 0 )
+                      {
+                        v39 = (UFG::CharacterOccupantComponent *)v12->m_Components.p[44].m_pComponent;
+                      }
+                      else if ( v38 < 0 || (v38 & 0x2000) != 0 || (v38 & 0x1000) != 0 )
+                      {
+                        v39 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                   v12,
+                                                                   UFG::CharacterOccupantComponent::_TypeUID);
+                      }
+                      else
+                      {
+                        v39 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
+                                                                   v12,
+                                                                   UFG::CharacterOccupantComponent::_TypeUID);
+                      }
+                      if ( v39 )
+                      {
+                        CurrentVehicle = (UFG::TransformNodeComponent *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v39);
+                        if ( CurrentVehicle )
+                        {
+                          UFG::EncounterUnitComponent::SetGroupVehicle((SkeletalPose *)m_pComponent, CurrentVehicle);
+                          UFG::EncounterUnitComponent::IncrementGroupVehicleUsageCount(m_pComponent);
+                        }
+                      }
+                      this->mHumans.p[this->mHumans.size++] = m_pComponent;
+                    }
+                    ((void (__fastcall *)(UFG::CopSystem *, UFG::EncounterUnitComponent *, _QWORD))this->vfptr[69].__vecDelDtor)(
+                      this,
+                      m_pComponent,
+                      0i64);
+                    *pExisting = (UFG::SimObject *)*((_QWORD *)p_mNext + 5);
+                    return 1;
                   }
                 }
               }
@@ -1805,7 +1588,8 @@ LABEL_97:
           }
         }
       }
-      v8 = (char *)v10;
+LABEL_70:
+      p_mNext = (char *)v10;
     }
   }
   return 0;
@@ -1815,60 +1599,58 @@ LABEL_97:
 // RVA: 0x3F1AA0
 void __fastcall UFG::CopSystem::UpdateRoadBlocks(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rdi
   __int64 v2; // rax
   UFG::TransformNodeComponent *v3; // r14
-  bool v4; // si
-  signed __int64 v5; // r14
+  char mAreRoadBlocksActive; // si
+  UFG::qVector3 *v5; // r14
   float v6; // xmm6_4
   float v7; // xmm7_4
   float *v8; // rax
   UFG::qPropertySet *v9; // rax
   float v10; // xmm1_4
   bool v11; // al
-  float v12; // xmm0_4
-  float v13; // xmm1_4
-  bool v14; // al
+  float y; // xmm0_4
+  float z; // xmm1_4
+  char v14; // al
   char v15; // bp
   float *v16; // rax
   float v17; // xmm6_4
   float *v18; // rax
-  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v19; // rcx
+  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *p_mNode; // rcx
   float v20; // xmm7_4
   UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *v21; // rbx
   UFG::CopRoadBlock *v22; // rcx
   UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *v23; // rbx
-  int pBitfields; // [rsp+70h] [rbp+8h]
+  int pBitfields; // [rsp+70h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = ((__int64 (*)(void))this->vfptr[18].__vecDelDtor)();
+  v2 = ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[18].__vecDelDtor)(this);
   if ( !v2 )
     return;
   v3 = *(UFG::TransformNodeComponent **)(v2 + 88);
   if ( !v3 )
     return;
   UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v4 = v1->mAreRoadBlocksActive;
-  v5 = (signed __int64)&v3->mWorldTransform.v3;
-  if ( v4 )
+  mAreRoadBlocksActive = this->mAreRoadBlocksActive;
+  v5 = (UFG::qVector3 *)&v3->mWorldTransform.v3;
+  if ( mAreRoadBlocksActive )
   {
-    v6 = v1->mRoadBlockTriggerOrigin.x - *(float *)v5;
-    v7 = v1->mRoadBlockTriggerOrigin.y - *(float *)(v5 + 4);
-    UFG::PropertySetHandle::Bind(&v1->mProperties);
+    v6 = this->mRoadBlockTriggerOrigin.x - v5->x;
+    v7 = this->mRoadBlockTriggerOrigin.y - v5->y;
+    UFG::PropertySetHandle::Bind(&this->mProperties);
     v8 = UFG::qPropertySet::Get<float>(
-           v1->mProperties.mpPropSet,
-           (UFG::qSymbol *)&CopSym_roadblock_escape_radius.mUID,
+           this->mProperties.mpPropSet,
+           (UFG::qArray<unsigned long,0> *)&CopSym_roadblock_escape_radius,
            DEPTH_RECURSE);
     if ( (float)((float)(v7 * v7) + (float)(v6 * v6)) > (float)(*v8 * *v8) )
     {
-      v1->mAreRoadBlocksActive = 0;
-      v1->mRoadBlockCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
+      this->mAreRoadBlocksActive = 0;
+      this->mRoadBlockCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
     }
   }
-  v9 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v1->vfptr[33].__vecDelDtor)(v1);
-  v10 = *UFG::qPropertySet::Get<float>(v9, (UFG::qSymbol *)&CopSym_roadblock_frequency.mUID, DEPTH_RECURSE);
+  v9 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
+  v10 = *UFG::qPropertySet::Get<float>(v9, (UFG::qArray<unsigned long,0> *)&CopSym_roadblock_frequency, DEPTH_RECURSE);
   v11 = v10 >= 0.0;
-  if ( v1->mFocusTargetContext.mIsInWater || v1->mFocusTargetContext.mIsInsideInterior )
+  if ( this->mFocusTargetContext.mIsInWater || this->mFocusTargetContext.mIsInsideInterior )
   {
     v11 = 0;
   }
@@ -1876,56 +1658,53 @@ void __fastcall UFG::CopSystem::UpdateRoadBlocks(UFG::CopSystem *this)
   {
     goto LABEL_12;
   }
-  v1->mAreRoadBlocksActive = 0;
-  v1->mRoadBlockCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
+  this->mAreRoadBlocksActive = 0;
+  this->mRoadBlockCooldownTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
 LABEL_12:
-  if ( !v4 && v11 && (float)(UFG::Metrics::msInstance.mSimTime_Temp - v1->mRoadBlockCooldownTimestamp) > v10 )
+  if ( !mAreRoadBlocksActive
+    && v11
+    && (float)(UFG::Metrics::msInstance.mSimTime_Temp - this->mRoadBlockCooldownTimestamp) > v10 )
   {
-    v1->mAreRoadBlocksActive = 1;
-    v12 = *(float *)(v5 + 4);
-    v13 = *(float *)(v5 + 8);
-    v1->mRoadBlockTriggerOrigin.x = *(float *)v5;
-    v1->mRoadBlockTriggerOrigin.y = v12;
-    v1->mRoadBlockTriggerOrigin.z = v13;
+    this->mAreRoadBlocksActive = 1;
+    y = v5->y;
+    z = v5->z;
+    this->mRoadBlockTriggerOrigin.x = v5->x;
+    this->mRoadBlockTriggerOrigin.y = y;
+    this->mRoadBlockTriggerOrigin.z = z;
   }
-  v14 = v1->mAreRoadBlocksActive;
-  if ( v4 != v14 )
+  v14 = this->mAreRoadBlocksActive;
+  if ( mAreRoadBlocksActive != v14 )
   {
     if ( v14 )
     {
       v15 = 0;
       pBitfields = 0;
-      UFG::PropertySetHandle::Bind(&v1->mProperties);
+      UFG::PropertySetHandle::Bind(&this->mProperties);
       v16 = UFG::qPropertySet::Get<float>(
-              v1->mProperties.mpPropSet,
-              (UFG::qSymbol *)&CopSym_roadblock_spawn_min_radius.mUID,
+              this->mProperties.mpPropSet,
+              (UFG::qArray<unsigned long,0> *)&CopSym_roadblock_spawn_min_radius,
               DEPTH_RECURSE);
       v17 = *v16 * *v16;
-      UFG::PropertySetHandle::Bind(&v1->mProperties);
+      UFG::PropertySetHandle::Bind(&this->mProperties);
       v18 = UFG::qPropertySet::Get<float>(
-              v1->mProperties.mpPropSet,
-              (UFG::qSymbol *)&CopSym_roadblock_spawn_max_radius.mUID,
+              this->mProperties.mpPropSet,
+              (UFG::qArray<unsigned long,0> *)&CopSym_roadblock_spawn_max_radius,
               DEPTH_RECURSE);
-      v19 = UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mNext - 7;
+      p_mNode = UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mNext - 7;
       v20 = *v18 * *v18;
       if ( (UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *)&UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mNext[-7] == &UFG::CopRoadBlock::s_CopRoadBlockList - 7 )
-        goto LABEL_28;
+        goto LABEL_23;
       do
       {
-        v21 = (UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *)&v19[7].mNext[-7];
-        if ( ((_QWORD)v19[2].mPrev & 3) == 1 )
-          v15 |= UFG::CopRoadBlock::ActivateByDistance(
-                   (UFG::CopRoadBlock *)v19,
-                   (UFG::qVector3 *)v5,
-                   v17,
-                   v20,
-                   &pBitfields);
-        v19 = &v21->mNode;
+        v21 = (UFG::qList<UFG::CopRoadBlock,UFG::CopRoadBlock,1,0> *)&p_mNode[7].mNext[-7];
+        if ( ((__int64)p_mNode[2].mPrev & 3) == 1 )
+          v15 |= UFG::CopRoadBlock::ActivateByDistance((UFG::CopRoadBlock *)p_mNode, v5, v17, v20, &pBitfields);
+        p_mNode = &v21->mNode;
       }
       while ( v21 != &UFG::CopRoadBlock::s_CopRoadBlockList - 7 );
       if ( !v15 )
-LABEL_28:
-        v1->mAreRoadBlocksActive = 0;
+LABEL_23:
+        this->mAreRoadBlocksActive = 0;
     }
     else
     {
@@ -1946,39 +1725,36 @@ LABEL_28:
 
 // File Line: 1172
 // RVA: 0x3ED930
-float __fastcall UFG::CopSystem::GetHeatRadius(UFG::CopSystem *this, bool isOnfoot, UFG::EncounterUnitComponent *pEncounterUnitComponent)
+float __fastcall UFG::CopSystem::GetHeatRadius(
+        UFG::CopSystem *this,
+        bool isOnfoot,
+        UFG::EncounterUnitComponent *pEncounterUnitComponent)
 {
-  UFG::EncounterUnitComponent *v3; // rsi
-  bool v4; // bp
-  UFG::CopSystem *v5; // rdi
   UFG::qStaticSymbol *v7; // rbx
   UFG::qPropertySet *v8; // rax
-  __int128 v9; // xmm6
-  float v10; // xmm0_4
+  float v9; // xmm6_4
+  float mInsideRadiusTimer; // xmm0_4
   float v11; // xmm1_4
   float v12; // xmm0_4
 
-  v3 = pEncounterUnitComponent;
-  v4 = isOnfoot;
-  v5 = this;
-  if ( !((unsigned int (*)(void))this->vfptr[89].__vecDelDtor)() )
+  if ( !((unsigned int (__fastcall *)(UFG::CopSystem *))this->vfptr[89].__vecDelDtor)(this) )
     return sCopSystem_WitnessRadius;
-  if ( v5->mInstantCooldownActive || v5->mIsSafehouseInstantCooldownActive )
+  if ( this->mInstantCooldownActive || this->mIsSafehouseInstantCooldownActive )
   {
-    LODWORD(v9) = 0;
+    v9 = 0.0;
   }
   else
   {
     v7 = &EncounterSym_heat_radius_vehicle;
-    if ( v4 )
+    if ( isOnfoot )
       v7 = &EncounterSym_heat_radius_onfoot;
-    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v5->vfptr[33].__vecDelDtor)(v5);
-    v9 = *(unsigned int *)UFG::qPropertySet::Get<float>(v8, (UFG::qSymbol *)&v7->mUID, DEPTH_RECURSE);
+    v8 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[33].__vecDelDtor)(this);
+    v9 = *UFG::qPropertySet::Get<float>(v8, (UFG::qArray<unsigned long,0> *)v7, DEPTH_RECURSE);
   }
-  if ( v3 )
+  if ( pEncounterUnitComponent )
   {
-    v10 = v3->mInsideRadiusTimer;
-    if ( v10 < 0.0 || (v11 = v3->mAcquiredTimer - v10, v11 <= 0.0) )
+    mInsideRadiusTimer = pEncounterUnitComponent->mInsideRadiusTimer;
+    if ( mInsideRadiusTimer < 0.0 || (v11 = pEncounterUnitComponent->mAcquiredTimer - mInsideRadiusTimer, v11 <= 0.0) )
     {
       v11 = 0.0;
     }
@@ -1990,11 +1766,11 @@ float __fastcall UFG::CopSystem::GetHeatRadius(UFG::CopSystem *this, bool isOnfo
     }
     v12 = v11;
 LABEL_16:
-    *(float *)&v9 = *(float *)&v9 * (float)((float)(v12 * 0.60000002) + 0.40000001);
+    v9 = v9 * (float)((float)(v12 * 0.60000002) + 0.40000001);
   }
-  if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))v5->vfptr[16].__vecDelDtor)(v5) )
-    *(float *)&v9 = *(float *)&v9 * v5->mReducedRadiusPercentage;
-  return *(float *)&v9;
+  if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[16].__vecDelDtor)(this) )
+    return v9 * this->mReducedRadiusPercentage;
+  return v9;
 }
 
 // File Line: 1200
@@ -2004,7 +1780,7 @@ float __fastcall UFG::CopSystem::GetCurrentHeatLevelElapsedTime(UFG::CopSystem *
   float v1; // xmm0_4
 
   v1 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(this->mHeatLevelTimestamp));
-  if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mHeatLevelTimestamp) < 0 )
+  if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mHeatLevelTimestamp) < 0 )
     v1 = v1 + 1.8446744e19;
   return v1 * 0.001;
 }
@@ -2013,16 +1789,13 @@ float __fastcall UFG::CopSystem::GetCurrentHeatLevelElapsedTime(UFG::CopSystem *
 // RVA: 0x3F0780
 void __fastcall UFG::CopSystem::TriggerOnFootNoSprint(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rdi
-
-  v1 = this;
-  if ( ((signed int (*)(void))this->vfptr[89].__vecDelDtor)() > 0 )
+  if ( ((int (__fastcall *)(UFG::CopSystem *))this->vfptr[89].__vecDelDtor)(this) > 0 )
   {
-    UFG::PropertySetHandle::Bind(&v1->mProperties);
-    v1->mOnFootNoSprintTimer = *UFG::qPropertySet::Get<float>(
-                                  v1->mProperties.mpPropSet,
-                                  (UFG::qSymbol *)&EncounterSym_success_vault_no_sprint_timer.mUID,
-                                  DEPTH_RECURSE);
+    UFG::PropertySetHandle::Bind(&this->mProperties);
+    this->mOnFootNoSprintTimer = *UFG::qPropertySet::Get<float>(
+                                    this->mProperties.mpPropSet,
+                                    (UFG::qArray<unsigned long,0> *)&EncounterSym_success_vault_no_sprint_timer,
+                                    DEPTH_RECURSE);
   }
 }
 
@@ -2032,8 +1805,11 @@ char __fastcall UFG::CopSystem::IsOnFootNoSprintActive(UFG::CopSystem *this)
 {
   char result; // al
 
-  if ( this->mOnFootNoSprintTimer > 0.0 || (result = ((__int64 (*)(void))this->vfptr[16].__vecDelDtor)()) != 0 )
-    result = 1;
+  if ( this->mOnFootNoSprintTimer > 0.0 )
+    return 1;
+  result = ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[16].__vecDelDtor)(this);
+  if ( result )
+    return 1;
   return result;
 }
 
@@ -2041,87 +1817,84 @@ char __fastcall UFG::CopSystem::IsOnFootNoSprintActive(UFG::CopSystem *this)
 // RVA: 0x3EDA60
 float __fastcall UFG::CopSystem::GetHeatThresholdByLevel(UFG::CopSystem *this, int heatLevel)
 {
-  UFG::qPropertySet **v2; // rbx
-  __int128 v3; // xmm0
-  UFG::qPropertySet **v4; // rbx
-  UFG::qPropertySet **v5; // rbx
-  UFG::qPropertySet **v6; // rbx
-  UFG::qPropertySet **v7; // rbx
+  UFG::PropertySetHandle *v2; // rbx
+  float result; // xmm0_4
+  UFG::PropertySetHandle *v4; // rbx
+  UFG::PropertySetHandle *v5; // rbx
+  UFG::PropertySetHandle *v6; // rbx
+  UFG::PropertySetHandle *p_mProperties; // rbx
 
-  switch ( heatLevel + 1 )
+  switch ( heatLevel )
   {
-    case 0:
-    case 6:
-      v7 = (UFG::qPropertySet **)&this->mProperties;
+    case -1:
+    case 5:
+      p_mProperties = &this->mProperties;
       UFG::PropertySetHandle::Bind(&this->mProperties);
-      v3 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                              v7[1],
-                              (UFG::qSymbol *)&EncounterSym_threshold_level5.mUID,
-                              DEPTH_RECURSE);
+      result = *UFG::qPropertySet::Get<float>(
+                  p_mProperties->mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level5,
+                  DEPTH_RECURSE);
+      break;
+    case 1:
+      v2 = &this->mProperties;
+      UFG::PropertySetHandle::Bind(&this->mProperties);
+      result = *UFG::qPropertySet::Get<float>(
+                  v2->mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level1,
+                  DEPTH_RECURSE);
       break;
     case 2:
-      v2 = (UFG::qPropertySet **)&this->mProperties;
+      v4 = &this->mProperties;
       UFG::PropertySetHandle::Bind(&this->mProperties);
-      v3 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                              v2[1],
-                              (UFG::qSymbol *)&EncounterSym_threshold_level1.mUID,
-                              DEPTH_RECURSE);
+      result = *UFG::qPropertySet::Get<float>(
+                  v4->mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level2,
+                  DEPTH_RECURSE);
       break;
     case 3:
-      v4 = (UFG::qPropertySet **)&this->mProperties;
+      v5 = &this->mProperties;
       UFG::PropertySetHandle::Bind(&this->mProperties);
-      v3 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                              v4[1],
-                              (UFG::qSymbol *)&EncounterSym_threshold_level2.mUID,
-                              DEPTH_RECURSE);
+      result = *UFG::qPropertySet::Get<float>(
+                  v5->mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level3,
+                  DEPTH_RECURSE);
       break;
     case 4:
-      v5 = (UFG::qPropertySet **)&this->mProperties;
+      v6 = &this->mProperties;
       UFG::PropertySetHandle::Bind(&this->mProperties);
-      v3 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                              v5[1],
-                              (UFG::qSymbol *)&EncounterSym_threshold_level3.mUID,
-                              DEPTH_RECURSE);
-      break;
-    case 5:
-      v6 = (UFG::qPropertySet **)&this->mProperties;
-      UFG::PropertySetHandle::Bind(&this->mProperties);
-      v3 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                              v6[1],
-                              (UFG::qSymbol *)&EncounterSym_threshold_level4.mUID,
-                              DEPTH_RECURSE);
+      result = *UFG::qPropertySet::Get<float>(
+                  v6->mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_threshold_level4,
+                  DEPTH_RECURSE);
       break;
     default:
-      LODWORD(v3) = 0;
+      result = 0.0;
       break;
   }
-  return *(float *)&v3;
+  return result;
 }
 
 // File Line: 1237
 // RVA: 0x3F0550
-void __usercall UFG::CopSystem::SetHeatLevel(UFG::CopSystem *this@<rcx>, __int64 heatLevel@<rdx>, UFG::eHeatEventEnum heatEvent@<r8d>, float a4@<xmm0>)
+void __fastcall UFG::CopSystem::SetHeatLevel(UFG::CopSystem *this, __int64 heatLevel, UFG::eHeatEventEnum heatEvent)
 {
-  int v4; // eax
-  UFG::eHeatEventEnum v5; // ebx
-  UFG::CopSystem *v6; // rdi
+  int mMaxHeatLevel; // eax
+  double v6; // xmm0_8
   UFG::GameStatTracker *v7; // rax
 
-  v4 = this->mMaxHeatLevel;
-  v5 = heatEvent;
-  v6 = this;
-  if ( v4 != -1 && v4 < (signed int)heatLevel )
-    heatLevel = (unsigned int)v4;
-  this->vfptr[87].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)this, heatLevel);
-  v6->mLastHeatEventIndex = v5;
-  UFG::PropertySetHandle::Bind(&v6->mProperties);
-  v6->mLastHeatEventTimer = *UFG::qPropertySet::Get<float>(
-                               v6->mProperties.mpPropSet,
-                               (UFG::qSymbol *)&EncounterSym_last_heat_event_timer.mUID,
-                               DEPTH_RECURSE);
+  mMaxHeatLevel = this->mMaxHeatLevel;
+  if ( mMaxHeatLevel != -1 && mMaxHeatLevel < (int)heatLevel )
+    heatLevel = (unsigned int)mMaxHeatLevel;
+  v6 = ((double (__fastcall *)(UFG::CopSystem *, __int64))this->vfptr[87].__vecDelDtor)(this, heatLevel);
+  this->mLastHeatEventIndex = heatEvent;
+  UFG::PropertySetHandle::Bind(&this->mProperties);
+  this->mLastHeatEventTimer = *UFG::qPropertySet::Get<float>(
+                                 this->mProperties.mpPropSet,
+                                 (UFG::qArray<unsigned long,0> *)&EncounterSym_last_heat_event_timer,
+                                 DEPTH_RECURSE);
   v7 = UFG::GameStatTracker::Instance();
-  UFG::GameStatTracker::SetStat(v7, Heat, a4);
-  v6->mCooldownAllowed = 0;
+  UFG::GameStatTracker::SetStat(v7, Heat, *(float *)&v6);
+  this->mCooldownAllowed = 0;
 }
 
 // File Line: 1259
@@ -2142,33 +1915,29 @@ void __fastcall UFG::EncounterBase::TriggerInstantCooldown(UFG::CopSystem *this)
 // RVA: 0x3ED860
 float __fastcall UFG::CopSystem::GetHeatLevelPercentage(UFG::CopSystem *this)
 {
-  unsigned int *v1; // rbx
   UFG::GameStatTracker *v2; // rax
-  float v3; // xmm0_4
-  float v4; // xmm6_4
-  signed __int64 v5; // rdx
-  int v6; // eax
+  float Stat; // xmm6_4
+  double v4; // xmm0_8
+  __int64 v5; // rdx
+  __int32 v6; // eax
   float v7; // xmm7_4
   float v8; // xmm0_4
-  float result; // xmm0_4
 
-  v1 = (unsigned int *)this;
   v2 = UFG::GameStatTracker::Instance();
-  v3 = UFG::GameStatTracker::GetStat(v2, Heat);
-  v4 = v3;
-  (*(void (__fastcall **)(unsigned int *, _QWORD))(*(_QWORD *)v1 + 696i64))(v1, v1[59]);
+  Stat = UFG::GameStatTracker::GetStat(v2, Heat);
+  v4 = ((double (__fastcall *)(UFG::CopSystem *, _QWORD))this->vfptr[87].__vecDelDtor)(
+         this,
+         (unsigned int)this->mHeatLevel);
   v5 = 5i64;
-  v6 = v1[59] + 1;
-  v7 = v3;
+  v6 = this->mHeatLevel + 1;
+  v7 = *(float *)&v4;
   if ( v6 < 5 )
     v5 = (unsigned int)v6;
-  (*(void (__fastcall **)(unsigned int *, signed __int64))(*(_QWORD *)v1 + 696i64))(v1, v5);
-  v8 = v3 - v3;
+  v8 = ((float (__fastcall *)(UFG::CopSystem *, __int64))this->vfptr[87].__vecDelDtor)(this, v5) - *(float *)&v4;
   if ( v8 > 0.0 )
-    result = (float)(v4 - v7) / v8;
+    return (float)(Stat - v7) / v8;
   else
-    result = *(float *)&FLOAT_1_0;
-  return result;
+    return *(float *)&FLOAT_1_0;
 }
 
 // File Line: 1284
@@ -2179,7 +1948,7 @@ __int64 UFG::_dynamic_initializer_for__gSafeHouseSymbol_SFAB__()
 
   v0 = UFG::qStringHash32("SFAB-AB", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gSafeHouseSymbol_SFAB, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFAB__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFAB__);
 }
 
 // File Line: 1285
@@ -2190,7 +1959,7 @@ __int64 UFG::_dynamic_initializer_for__gSafeHouseSymbol_SFCT__()
 
   v0 = UFG::qStringHash32("SFCT-CT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gSafeHouseSymbol_SFCT, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFCT__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFCT__);
 }
 
 // File Line: 1286
@@ -2201,7 +1970,7 @@ __int64 UFG::_dynamic_initializer_for__gSafeHouseSymbol_SFKT__()
 
   v0 = UFG::qStringHash32("SFKT-KT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gSafeHouseSymbol_SFKT, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFKT__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFKT__);
 }
 
 // File Line: 1287
@@ -2212,174 +1981,152 @@ __int64 UFG::_dynamic_initializer_for__gSafeHouseSymbol_SFNP__()
 
   v0 = UFG::qStringHash32("SFNP-NP", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gSafeHouseSymbol_SFNP, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFNP__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSafeHouseSymbol_SFNP__);
 }
 
 // File Line: 1290
 // RVA: 0x3EF540
-UFG::UIHKScreenHud *__fastcall UFG::CopSystem::IsPlayerInsideUnlockedSafehouse(UFG::CopSystem *this, bool *pIsFullyInside)
+UFG::UIHKScreenHud *__fastcall UFG::CopSystem::IsPlayerInsideUnlockedSafehouse(
+        UFG::CopSystem *this,
+        bool *pIsFullyInside)
 {
-  bool *v2; // rdi
   UFG::UIHKScreenHud *result; // rax
-  UFG::eInteriors v4; // ebx
-  bool v5; // si
+  UFG::eInteriors mActiveInterior; // ebx
+  bool Stat; // si
   UFG::GameStatTracker *v6; // rax
   UFG::GameStatTracker *v7; // rax
   UFG::GameStatTracker *v8; // rax
   UFG::GameStatTracker *v9; // rax
-  UFG::SimObjectCharacter *v10; // rax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   UFG::SimObjectCharacterPropertiesComponent *v11; // rax
   bool v12; // al
   unsigned int v13; // eax
   UFG::qStaticSymbol *v14; // rdx
   unsigned int v15; // eax
   unsigned int v16; // eax
-  UFG::SimObjectGame *v17; // rax
-  unsigned __int16 v18; // dx
-  UFG::DoorComponent *v19; // rax
+  UFG::SimObjectGame *SimObject; // rax
+  __int16 m_Flags; // dx
+  UFG::DoorComponent *ComponentOfTypeHK; // rax
 
-  v2 = pIsFullyInside;
   result = UFG::UIHKScreenHud::getInstance();
   if ( result )
   {
     UFG::UIHKScreenHud::getInstance();
-    v4 = UFG::UIHKScreenHud::mInteriorManager->mActiveInterior;
-    v5 = 0;
-    switch ( v4 )
+    mActiveInterior = UFG::UIHKScreenHud::mInteriorManager->mActiveInterior;
+    Stat = 0;
+    switch ( mActiveInterior )
     {
-      case 2:
-      case 6:
-      case 7:
-      case 22:
-      case 23:
-        v5 = 1;
+      case INTERIOR_BAMBAM:
+      case INTERIOR_PENDREWHQ:
+      case INTERIOR_KARAOKE:
+      case INTERIOR_GAMBLINGDENCT:
+      case INTERIOR_GAMBLINGDENNP:
+        Stat = 1;
         break;
-      case 15:
+      case INTERIOR_SAFEHOUSEAB:
         v6 = UFG::GameStatTracker::Instance();
-        v5 = UFG::GameStatTracker::GetStat(v6, Collectible_Safehouse, (UFG::qSymbol *)&UFG::gSafeHouseSymbol_SFAB.mUID);
+        Stat = UFG::GameStatTracker::GetStat(v6, Collectible_Safehouse, &UFG::gSafeHouseSymbol_SFAB);
         break;
-      case 16:
+      case INTERIOR_SAFEHOUSECT:
         v7 = UFG::GameStatTracker::Instance();
-        v5 = UFG::GameStatTracker::GetStat(v7, Collectible_Safehouse, (UFG::qSymbol *)&UFG::gSafeHouseSymbol_SFCT.mUID);
+        Stat = UFG::GameStatTracker::GetStat(v7, Collectible_Safehouse, &UFG::gSafeHouseSymbol_SFCT);
         break;
-      case 17:
+      case INTERIOR_SAFEHOUSEKT:
         v8 = UFG::GameStatTracker::Instance();
-        v5 = UFG::GameStatTracker::GetStat(v8, Collectible_Safehouse, (UFG::qSymbol *)&UFG::gSafeHouseSymbol_SFKT.mUID);
+        Stat = UFG::GameStatTracker::GetStat(v8, Collectible_Safehouse, &UFG::gSafeHouseSymbol_SFKT);
         break;
-      case 18:
+      case INTERIOR_SAFEHOUSENP:
         v9 = UFG::GameStatTracker::Instance();
-        v5 = UFG::GameStatTracker::GetStat(v9, Collectible_Safehouse, (UFG::qSymbol *)&UFG::gSafeHouseSymbol_SFNP.mUID);
+        Stat = UFG::GameStatTracker::GetStat(v9, Collectible_Safehouse, &UFG::gSafeHouseSymbol_SFNP);
         break;
       default:
         break;
     }
-    if ( !v2 )
-      return (UFG::UIHKScreenHud *)v5;
-    if ( v4 != 6 )
+    if ( !pIsFullyInside )
+      return (UFG::UIHKScreenHud *)Stat;
+    if ( mActiveInterior != INTERIOR_PENDREWHQ )
     {
-      if ( v4 == 15 )
-        goto LABEL_20;
-      if ( v4 != 17 )
+      if ( mActiveInterior == INTERIOR_SAFEHOUSEAB )
       {
-        if ( (unsigned int)(v4 - 22) > 1 )
+        if ( (_S12_3 & 1) == 0 )
+        {
+          _S12_3 |= 1u;
+          v13 = UFG::qStringHash32("LOI_AB_SHDoor001_101", 0xFFFFFFFF);
+          UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sABSafeHouse, v13);
+          atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_22_::_dynamic_atexit_destructor_for__sABSafeHouse__);
+        }
+        v14 = &sABSafeHouse;
+LABEL_30:
+        SimObject = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, v14);
+        if ( SimObject )
+        {
+          m_Flags = SimObject->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+            ComponentOfTypeHK = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        SimObject,
+                                                        UFG::DoorComponent::_TypeUID);
+          else
+            ComponentOfTypeHK = (UFG::DoorComponent *)UFG::SimObject::GetComponentOfType(
+                                                        SimObject,
+                                                        UFG::DoorComponent::_TypeUID);
+        }
+        else
+        {
+          ComponentOfTypeHK = 0i64;
+        }
+        if ( ComponentOfTypeHK )
+        {
+          *pIsFullyInside = !UFG::DoorComponent::IsOpen(ComponentOfTypeHK);
+          return (UFG::UIHKScreenHud *)Stat;
+        }
+LABEL_41:
+        *pIsFullyInside = 1;
+        return (UFG::UIHKScreenHud *)Stat;
+      }
+      if ( mActiveInterior != INTERIOR_SAFEHOUSEKT )
+      {
+        if ( (unsigned int)(mActiveInterior - 22) > 1 )
         {
           v12 = 0;
           if ( UFG::GetLocalPlayer() )
           {
-            v10 = UFG::GetLocalPlayer();
-            v11 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>((UFG::SimObjectCVBase *)&v10->vfptr);
+            LocalPlayer = UFG::GetLocalPlayer();
+            v11 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(LocalPlayer);
             if ( v11 )
             {
-              if ( !((LOBYTE(v11->mBooleans.mBits[0]) >> 1) & 1) )
+              if ( (v11->mBooleans.mBits[0] & 2) == 0 )
                 v12 = 1;
             }
           }
-          *v2 = v12;
-          return (UFG::UIHKScreenHud *)v5;
+          *pIsFullyInside = v12;
+          return (UFG::UIHKScreenHud *)Stat;
         }
-        goto LABEL_44;
+        goto LABEL_41;
       }
     }
-    if ( v4 != 15 )
+    if ( mActiveInterior == INTERIOR_SAFEHOUSEKT )
     {
-      if ( v4 == 17 )
+      if ( (_S12_3 & 2) == 0 )
       {
-        if ( !(_S12_3 & 2) )
-        {
-          _S12_3 |= 2u;
-          v15 = UFG::qStringHash32("LOI_KT_SHDoor001_101", 0xFFFFFFFF);
-          UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sKTSafeHouse, v15);
-          atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_26_::_dynamic_atexit_destructor_for__sKTSafeHouse__);
-        }
-        v14 = &sKTSafeHouse;
+        _S12_3 |= 2u;
+        v15 = UFG::qStringHash32("LOI_KT_SHDoor001_101", 0xFFFFFFFF);
+        UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sKTSafeHouse, v15);
+        atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_26_::_dynamic_atexit_destructor_for__sKTSafeHouse__);
       }
-      else
-      {
-        if ( v4 != 6 )
-          goto LABEL_41;
-        if ( !(_S12_3 & 4) )
-        {
-          _S12_3 |= 4u;
-          v16 = UFG::qStringHash32("LOI_PHQDoor004_01", 0xFFFFFFFF);
-          UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sPendrewsHqDoor, v16);
-          atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_30_::_dynamic_atexit_destructor_for__sPendrewsHqDoor__);
-        }
-        v14 = &sPendrewsHqDoor;
-      }
-LABEL_31:
-      v17 = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)&v14->mUID);
-      if ( v17 )
-      {
-        v18 = v17->m_Flags;
-        if ( (v18 >> 14) & 1 )
-        {
-          v19 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::DoorComponent::_TypeUID);
-        }
-        else if ( (v18 & 0x8000u) == 0 )
-        {
-          if ( (v18 >> 13) & 1 )
-          {
-            v19 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::DoorComponent::_TypeUID);
-          }
-          else if ( (v18 >> 12) & 1 )
-          {
-            v19 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::DoorComponent::_TypeUID);
-          }
-          else
-          {
-            v19 = (UFG::DoorComponent *)UFG::SimObject::GetComponentOfType(
-                                          (UFG::SimObject *)&v17->vfptr,
-                                          UFG::DoorComponent::_TypeUID);
-          }
-        }
-        else
-        {
-          v19 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::DoorComponent::_TypeUID);
-        }
-LABEL_42:
-        if ( v19 )
-        {
-          *v2 = (unsigned __int8)UFG::DoorComponent::IsOpen(v19) == 0;
-          return (UFG::UIHKScreenHud *)v5;
-        }
-LABEL_44:
-        *v2 = 1;
-        return (UFG::UIHKScreenHud *)v5;
-      }
-LABEL_41:
-      v19 = 0i64;
-      goto LABEL_42;
+      v14 = &sKTSafeHouse;
     }
-LABEL_20:
-    if ( !(_S12_3 & 1) )
+    else
     {
-      _S12_3 |= 1u;
-      v13 = UFG::qStringHash32("LOI_AB_SHDoor001_101", 0xFFFFFFFF);
-      UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sABSafeHouse, v13);
-      atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_22_::_dynamic_atexit_destructor_for__sABSafeHouse__);
+      if ( (_S12_3 & 4) == 0 )
+      {
+        _S12_3 |= 4u;
+        v16 = UFG::qStringHash32("LOI_PHQDoor004_01", 0xFFFFFFFF);
+        UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sPendrewsHqDoor, v16);
+        atexit(UFG::CopSystem::IsPlayerInsideUnlockedSafehouse_::_30_::_dynamic_atexit_destructor_for__sPendrewsHqDoor__);
+      }
+      v14 = &sPendrewsHqDoor;
     }
-    v14 = &sABSafeHouse;
-    goto LABEL_31;
+    goto LABEL_30;
   }
   return result;
 }
@@ -2388,125 +2135,116 @@ LABEL_20:
 // RVA: 0x3EC860
 bool __fastcall UFG::CopSystem::AllowSpawnRegionSpawning(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-  bool result; // al
   UFG::CopSystem *v3; // rax
 
-  v1 = this;
-  if ( !((unsigned __int8 (*)(void))this->vfptr[7].__vecDelDtor)()
-    || !((unsigned __int8 (__fastcall *)(UFG::CopSystem *))v1->vfptr[113].__vecDelDtor)(v1) )
+  if ( !((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[7].__vecDelDtor)(this)
+    || !((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[113].__vecDelDtor)(this) )
   {
     return 0;
   }
   v3 = UFG::CopSystem::Instance();
-  if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) )
-    result = v1->mFocusTargetContext.mIsOnFootHeuristic != 0;
-  else
-    result = 1;
-  return result;
+  return !((unsigned int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3)
+      || this->mFocusTargetContext.mIsOnFootHeuristic;
 }
 
 // File Line: 1404
 // RVA: 0x3F07D0
 void __fastcall UFG::CopSystem::Update(UFG::CopSystem *this, float deltaTime)
 {
-  float v2; // xmm9_4
   UFG::CopSystem *v3; // rdi
-  Render::DebugDrawContext *v4; // r15
+  Render::DebugDrawContext *Context; // r15
   UFG::OSuiteLeaderboardManager *v5; // rax
-  UFG::OSuiteLeaderboardData *v6; // rax
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v7; // rbx
-  UFG::SimObjectCharacter *v8; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *vfptr; // rbx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   UFG::SimObject *v9; // rax
-  UFG::TransformNodeComponent *v10; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector3 *v11; // rax
-  float v12; // xmm1_4
-  float v13; // xmm2_4
-  float v14; // xmm7_4
-  __int128 v15; // xmm1
-  char *v16; // rbp
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float mSimTime_Temp; // xmm7_4
+  float v15; // xmm1_4
+  char *mStimulusCount; // rbp
   char *v17; // rdx
-  signed __int64 v18; // r9
-  signed __int64 v19; // r14
-  signed __int64 v20; // r10
-  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *v21; // rax
+  __int64 v18; // r9
+  __int64 v19; // r14
+  __int64 v20; // r10
+  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *p_mNode; // rax
   UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *v22; // rcx
   __int64 v23; // rax
   float *v24; // rax
   int v25; // esi
   const char **v26; // rbx
   UFG::qColour *v27; // r9
-  signed __int64 v28; // rbx
-  signed __int64 v29; // rsi
-  float v30; // xmm0_4
-  bool v31; // bl
-  UFG::SimObject *v32; // rax
-  signed int v33; // eax
-  bool v34; // zf
-  bool v35; // sf
-  unsigned __int8 v36; // of
-  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v37; // rax
-  UFG::qPropertySet *v38; // rax
-  UFG::qStaticSymbol *v39; // rcx
-  float *v40; // rax
-  float v41; // xmm6_4
-  float v42; // xmm0_4
-  float v43; // xmm7_4
-  float v44; // xmm6_4
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v45; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v46; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v47; // rax
-  __int64 v48; // [rsp+30h] [rbp-98h]
-  UFG::CopSystem *v49; // [rsp+D0h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+E0h] [rbp+18h]
+  bool *p_mTracked; // rbx
+  __int64 v29; // rsi
+  float mLastHeatEventTimer; // xmm0_4
+  float v31; // xmm0_4
+  bool mIsOnFootHeuristic; // bl
+  UFG::SimObject *v33; // rax
+  int mHeatLevel; // eax
+  bool v35; // cc
+  UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *v36; // rax
+  UFG::qPropertySet *v37; // rax
+  UFG::qStaticSymbol *v38; // rcx
+  float *v39; // rax
+  float v40; // xmm6_4
+  float v41; // xmm0_4
+  float v42; // xmm7_4
+  float v43; // xmm6_4
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpArrestRightHumanCop; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  __int64 v47; // [rsp+30h] [rbp-98h]
+  UFG::qArray<unsigned long,0> result; // [rsp+E0h] [rbp+18h] BYREF
 
-  v49 = this;
-  v2 = deltaTime;
   v3 = this;
-  v4 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+  Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
   Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
   UFG::OnlineManager::Instance();
-  if ( ((signed int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) > 1 )
+  if ( ((int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) > 1 )
   {
     v5 = UFG::OSuiteLeaderboardManager::Instance();
-    v6 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v5, "StatAwardsSurvivor");
-    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v6, deltaTime);
+    LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                            v5,
+                                            "StatAwardsSurvivor");
+    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(LeaderboardDataUsingLeaderboardName, deltaTime);
   }
-  v7 = v3->vfptr;
-  v8 = UFG::GetLocalPlayer();
-  v7[19].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, (unsigned int)v8);
+  vfptr = v3->vfptr;
+  LocalPlayer = UFG::GetLocalPlayer();
+  vfptr[19].__vecDelDtor(v3, (unsigned int)LocalPlayer);
   if ( v3->mReloadTuningFiles )
   {
-    UFG::qSymbol::create_from_string(&result, sCopsTuningPropertySetName);
-    UFG::PropertySetManager::ReloadPropertySet(&result);
+    UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, sCopsTuningPropertySetName);
+    UFG::PropertySetManager::ReloadPropertySet((UFG::qSymbol *)&result);
     v3->mReloadTuningFiles = 0;
   }
   if ( !v3->mEnable )
     UFG::GameStatAction::Player::SetHeat(0.0);
   v9 = (UFG::SimObject *)((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[18].__vecDelDtor)(v3);
-  if ( v9 && (v10 = v9->m_pTransformNodeComponent) != 0i64 )
+  if ( v9 && (m_pTransformNodeComponent = v9->m_pTransformNodeComponent) != 0i64 )
   {
     UFG::TransformNodeComponent::UpdateWorldTransform(v9->m_pTransformNodeComponent);
-    v11 = (UFG::qVector3 *)&v10->mWorldTransform.v3;
+    v11 = (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3;
   }
   else
   {
     v11 = &UFG::qVector3::msZero;
   }
-  v12 = v11->y;
-  v13 = v11->z;
+  y = v11->y;
+  z = v11->z;
   v3->mFocusTargetPosition.x = v11->x;
-  v3->mFocusTargetPosition.y = v12;
-  v3->mFocusTargetPosition.z = v13;
-  v14 = UFG::Metrics::msInstance.mSimTime_Temp;
+  v3->mFocusTargetPosition.y = y;
+  v3->mFocusTargetPosition.z = z;
+  mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
   if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))v3->vfptr[118].__vecDelDtor)(v3) )
   {
     UFG::PropertySetHandle::Bind(&v3->mProperties);
-    v15 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                             v3->mProperties.mpPropSet,
-                             (UFG::qSymbol *)&CopSym_tunable_stimulus_alive_time.mUID,
-                             DEPTH_RECURSE);
-    v16 = v3->mStimulusCount;
+    v15 = *UFG::qPropertySet::Get<float>(
+             v3->mProperties.mpPropSet,
+             (UFG::qArray<unsigned long,0> *)&CopSym_tunable_stimulus_alive_time,
+             DEPTH_RECURSE);
+    mStimulusCount = v3->mStimulusCount;
     v17 = v3->mStimulusCount;
     v18 = 112i64;
     v19 = 116i64;
@@ -2516,23 +2254,23 @@ void __fastcall UFG::CopSystem::Update(UFG::CopSystem *this, float deltaTime)
       *v17 = 0;
       if ( *(v17 - 116) )
       {
-        v21 = UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext - 4;
+        p_mNode = UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext - 4;
         if ( (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext[-4] != &UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList - 4 )
         {
           do
           {
-            v22 = (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&v21[4].mNext[-4];
-            v23 = *(__int64 *)((char *)&v21->mPrev + v18);
+            v22 = (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&p_mNode[4].mNext[-4];
+            v23 = *(__int64 *)((char *)&p_mNode->mPrev + v18);
             if ( v23 )
             {
               v24 = (float *)(v23 + 32);
               if ( v24 )
               {
-                if ( *(float *)&v15 >= (float)(v14 - *v24) )
+                if ( v15 >= (float)(mSimTime_Temp - *v24) )
                   ++*v17;
               }
             }
-            v21 = &v22->mNode;
+            p_mNode = &v22->mNode;
           }
           while ( v22 != &UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList - 4 );
         }
@@ -2544,117 +2282,117 @@ void __fastcall UFG::CopSystem::Update(UFG::CopSystem *this, float deltaTime)
     while ( v20 );
     if ( v3->mShowStimulus )
     {
-      Render::DebugDrawContext::DrawTextA(v4, 40, 80, &UFG::qColour::White, "Tracking stimulus for heat generation:");
+      Render::DebugDrawContext::DrawTextA(
+        Context,
+        40,
+        80,
+        &UFG::qColour::White,
+        "Tracking stimulus for heat generation:");
       v25 = 90;
       v26 = UFG::g_StimulusName;
       do
       {
-        if ( *(v16 - 116) )
+        if ( *(mStimulusCount - 116) )
         {
           v27 = &UFG::qColour::White;
-          if ( *v16 )
+          if ( *mStimulusCount )
             v27 = &UFG::qColour::Yellow;
-          LODWORD(v48) = (unsigned __int8)*v16;
-          Render::DebugDrawContext::DrawTextA(v4, 60, v25, v27, "%s: %d", *v26, v48);
+          LODWORD(v47) = (unsigned __int8)*mStimulusCount;
+          Render::DebugDrawContext::DrawTextA(Context, 60, v25, v27, "%s: %d", *v26, v47);
           v25 += 10;
         }
-        ++v16;
+        ++mStimulusCount;
         ++v26;
         --v19;
       }
       while ( v19 );
-      v3 = v49;
+      v3 = this;
     }
   }
-  v28 = (signed __int64)&v3->mHeatEvents[0].mTracked;
+  p_mTracked = &v3->mHeatEvents[0].mTracked;
   v29 = 26i64;
   do
   {
-    if ( !*(_BYTE *)v28 && (float)(UFG::Metrics::msInstance.mSimTime_Temp - *(float *)(v28 - 4)) > 0.5 )
+    if ( !*p_mTracked && (float)(UFG::Metrics::msInstance.mSimTime_Temp - *((float *)p_mTracked - 1)) > 0.5 )
     {
-      if ( !(_S10_5 & 1) )
+      if ( (_S10_5 & 1) == 0 )
       {
         _S10_5 |= 1u;
         UFG::CopSystem::CopSystem(&sCopSystem);
         atexit(UFG::CopSystem::Instance_::_2_::_dynamic_atexit_destructor_for__sCopSystem__);
       }
       UFG::CopSystem::mspInstance = &sCopSystem;
-      sCopSystem.vfptr[99].__vecDelDtor(
-        (UFG::qSafePointerNode<UFG::EncounterBase> *)&sCopSystem,
-        *(unsigned int *)(v28 + 4));
-      *(float *)(v28 - 4) = UFG::Metrics::msInstance.mSimTime_Temp;
-      *(_BYTE *)v28 = 1;
+      sCopSystem.vfptr[99].__vecDelDtor(&sCopSystem, *((unsigned int *)p_mTracked + 1));
+      *((_DWORD *)p_mTracked - 1) = LODWORD(UFG::Metrics::msInstance.mSimTime_Temp);
+      *p_mTracked = 1;
     }
-    v28 += 12i64;
+    p_mTracked += 12;
     --v29;
   }
   while ( v29 );
-  v30 = v3->mLastHeatEventTimer;
-  if ( v30 > 0.0 )
+  mLastHeatEventTimer = v3->mLastHeatEventTimer;
+  if ( mLastHeatEventTimer > 0.0 )
   {
-    v30 = v30 - v2;
-    if ( v30 <= 0.0 )
-      v30 = 0.0;
-    v3->mLastHeatEventTimer = v30;
-    if ( v30 == 0.0 )
+    v31 = mLastHeatEventTimer - deltaTime;
+    if ( v31 <= 0.0 )
+      v31 = 0.0;
+    v3->mLastHeatEventTimer = v31;
+    if ( v31 == 0.0 )
     {
-      v3->mLastHeatEventIndex = 0;
+      v3->mLastHeatEventIndex = eHEATEVENT_NONE;
     }
     else if ( v3->mLastHeatEventIndex == eHEATEVENT_NONE )
     {
       v3->mLastHeatEventTimer = 0.0;
     }
   }
-  v31 = v3->mFocusTargetContext.mIsOnFootHeuristic;
-  v32 = (UFG::SimObject *)((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[18].__vecDelDtor)(v3);
-  UFG::EncounterUnitContext::Update(&v3->mFocusTargetContext, v32, v2);
-  if ( v31 && !v3->mFocusTargetContext.mIsOnFootHeuristic )
+  mIsOnFootHeuristic = v3->mFocusTargetContext.mIsOnFootHeuristic;
+  v33 = (UFG::SimObject *)((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[18].__vecDelDtor)(v3);
+  UFG::EncounterUnitContext::Update(&v3->mFocusTargetContext, v33, deltaTime);
+  if ( mIsOnFootHeuristic && !v3->mFocusTargetContext.mIsOnFootHeuristic )
   {
-    v33 = v3->mHeatLevel;
-    if ( v33 >= 1 )
+    mHeatLevel = v3->mHeatLevel;
+    if ( mHeatLevel >= 1 )
     {
-      v36 = __OFSUB__(v33, 2);
-      v34 = v33 == 2;
-      v35 = v33 - 2 < 0;
-      v37 = v3->vfptr;
-      if ( (unsigned __int8)(v35 ^ v36) | v34 )
+      v35 = mHeatLevel <= 2;
+      v36 = v3->vfptr;
+      if ( v35 )
       {
         v3->mFocusTargetContext.mOpenFired = 1;
-        ((void (__fastcall *)(UFG::CopSystem *, signed __int64, signed __int64))v37[88].__vecDelDtor)(v3, 2i64, 25i64);
+        ((void (__fastcall *)(UFG::CopSystem *, __int64, __int64))v36[88].__vecDelDtor)(v3, 2i64, 25i64);
       }
       else
       {
-        v37[111].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v3->vfptr, 25u);
+        v36[111].__vecDelDtor(v3, 25u);
       }
       ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[23].__vecDelDtor)(v3);
     }
   }
-  if ( v3->mHeatLevel >= 1 )
+  if ( v3->mHeatLevel >= HEATLEVEL_ONE )
   {
-    v38 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[33].__vecDelDtor)(v3);
-    if ( v38 )
+    v37 = (UFG::qPropertySet *)((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[33].__vecDelDtor)(v3);
+    if ( v37 )
     {
-      v39 = &EncounterSym_ambient_density_invehicle;
+      v38 = &EncounterSym_ambient_density_invehicle;
       if ( v3->mFocusTargetContext.mIsOnFootHeuristic )
-        v39 = &EncounterSym_ambient_density_onfoot;
-      result.mUID = v39->mUID;
-      v40 = UFG::qPropertySet::Get<float>(v38, &result, DEPTH_RECURSE);
-      if ( v40 )
+        v38 = &EncounterSym_ambient_density_onfoot;
+      result.size = v38->mUID;
+      v39 = UFG::qPropertySet::Get<float>(v37, &result, DEPTH_RECURSE);
+      if ( v39 )
       {
-        v41 = *v40;
-        if ( *v40 >= 0.0 )
+        v40 = *v39;
+        if ( *v39 >= 0.0 )
         {
           UFG::PedSpawnManager::GetInstance();
-          v30 = v41;
-          UFG::PedSpawnManager::AdjustCopSystemDensityModifier(v41);
-          UFG::WheeledVehicleManager::mMaxRoadDensityScale = v41;
+          UFG::PedSpawnManager::AdjustCopSystemDensityModifier(v40);
+          UFG::WheeledVehicleManager::mMaxRoadDensityScale = v40;
         }
       }
     }
   }
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[38].__vecDelDtor)(v3);
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[40].__vecDelDtor)(v3);
-  UFG::CopSystem::ApplySpeedCap(v3, v30);
+  UFG::CopSystem::ApplySpeedCap(v3);
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[39].__vecDelDtor)(v3);
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[112].__vecDelDtor)(v3);
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[76].__vecDelDtor)(v3);
@@ -2663,40 +2401,40 @@ void __fastcall UFG::CopSystem::Update(UFG::CopSystem *this, float deltaTime)
   ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[116].__vecDelDtor)(v3);
   if ( !v3->mpArrestRightHumanCop.m_pPointer )
     ((void (__fastcall *)(UFG::CopSystem *))v3->vfptr[83].__vecDelDtor)(v3);
-  v42 = v3->mOnFootNoSprintTimer - v2;
-  if ( v42 <= 0.0 )
-    v42 = 0.0;
-  v3->mOnFootNoSprintTimer = v42;
+  v41 = v3->mOnFootNoSprintTimer - deltaTime;
+  if ( v41 <= 0.0 )
+    v41 = 0.0;
+  v3->mOnFootNoSprintTimer = v41;
   if ( v3->mpArrestRightHumanCop.m_pPointer )
   {
-    v43 = UFG::Metrics::msInstance.mSimTime_Temp;
+    v42 = UFG::Metrics::msInstance.mSimTime_Temp;
     UFG::PropertySetHandle::Bind(&v3->mProperties);
-    v44 = v43 - v3->mArrestRightTimestamp;
-    if ( v44 > *UFG::qPropertySet::Get<float>(
+    v43 = v42 - v3->mArrestRightTimestamp;
+    if ( v43 > *UFG::qPropertySet::Get<float>(
                   v3->mProperties.mpPropSet,
-                  (UFG::qSymbol *)&EncounterSym_arrest_right_timeout_timer.mUID,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_arrest_right_timeout_timer,
                   DEPTH_RECURSE) )
     {
-      v45 = &v3->mpArrestRightHumanCop;
+      p_mpArrestRightHumanCop = &v3->mpArrestRightHumanCop;
       if ( v3->mpArrestRightHumanCop.m_pPointer )
       {
-        v46 = v45->mPrev;
-        v47 = v3->mpArrestRightHumanCop.mNext;
-        v46->mNext = v47;
-        v47->mPrev = v46;
-        v45->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v45->mPrev;
-        v3->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mpArrestRightHumanCop.mPrev;
+        mPrev = p_mpArrestRightHumanCop->mPrev;
+        mNext = v3->mpArrestRightHumanCop.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+        v3->mpArrestRightHumanCop.mNext = &v3->mpArrestRightHumanCop;
       }
       v3->mpArrestRightHumanCop.m_pPointer = 0i64;
-      v3->mArrestRightTimestamp = v43;
+      v3->mArrestRightTimestamp = v42;
     }
   }
-  if ( ((signed int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) > 0 )
+  if ( ((int (__fastcall *)(UFG::CopSystem *))v3->vfptr[89].__vecDelDtor)(v3) > 0 )
   {
-    LOBYTE(result.mUID) = 0;
+    LOBYTE(result.size) = 0;
     if ( (unsigned __int8)UFG::CopSystem::IsPlayerInsideUnlockedSafehouse(v3, (bool *)&result) )
     {
-      v3->mIsSafehouseInstantCooldownActive = result.mUID;
+      v3->mIsSafehouseInstantCooldownActive = result.size;
       v3->mFocusTargetContext.mOpenFired = 1;
     }
     else
@@ -2708,184 +2446,154 @@ void __fastcall UFG::CopSystem::Update(UFG::CopSystem *this, float deltaTime)
 
 // File Line: 1812
 // RVA: 0x3EC990
-void __usercall UFG::CopSystem::ApplySpeedCap(UFG::CopSystem *this@<rcx>, float a2@<xmm0>)
+void __fastcall UFG::CopSystem::ApplySpeedCap(UFG::CopSystem *this)
 {
-  __int64 v2; // rbp
-  UFG::CopSystem *v3; // rsi
-  UFG::EncounterUnitComponent *v4; // rdi
-  char v5; // r14
-  UFG::SimObject *v6; // rax
-  UFG::TransformNodeComponent *v7; // rbx
+  __int64 i; // rbp
+  UFG::EncounterUnitComponent *v3; // rdi
+  char v4; // r14
+  double v5; // xmm0_8
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   float v8; // xmm6_4
   float v9; // xmm7_4
   float *v10; // rax
   UFG::SimObjectCVBase *v11; // rcx
-  unsigned __int16 v12; // dx
-  UFG::AiDriverComponent *v13; // rax
+  __int16 m_Flags; // dx
+  UFG::AiDriverComponent *ComponentOfTypeHK; // rax
   UFG::AiDriverComponent *v14; // rdi
 
-  v2 = 0i64;
-  v3 = this;
-  if ( this->mVehicles.size )
+  for ( i = 0i64; (unsigned int)i < this->mVehicles.size; i = (unsigned int)(i + 1) )
   {
-    do
+    v3 = this->mVehicles.p[i];
+    if ( v3->mEngaged )
     {
-      v4 = v3->mVehicles.p[v2];
-      if ( v4->mEngaged )
+      v4 = ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[16].__vecDelDtor)(this);
+      if ( !v4 )
       {
-        v5 = ((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[16].__vecDelDtor)(v3);
-        if ( !v5 )
+        if ( v3->m_pSimObject )
         {
-          if ( v4->m_pSimObject )
+          v5 = ((double (__fastcall *)(UFG::CopSystem *, _QWORD, UFG::EncounterUnitComponent *))this->vfptr[17].__vecDelDtor)(
+                 this,
+                 0i64,
+                 v3);
+          m_pSimObject = v3->m_pSimObject;
+          if ( m_pSimObject )
           {
-            ((void (__fastcall *)(UFG::CopSystem *, _QWORD, UFG::EncounterUnitComponent *))v3->vfptr[17].__vecDelDtor)(
-              v3,
-              0i64,
-              v4);
-            v6 = v4->m_pSimObject;
-            if ( v6 )
+            m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+            if ( m_pTransformNodeComponent )
             {
-              v7 = v6->m_pTransformNodeComponent;
-              if ( v7 )
-              {
-                UFG::TransformNodeComponent::UpdateWorldTransform(v6->m_pTransformNodeComponent);
-                v8 = v3->mFocusTargetPosition.x - v7->mWorldTransform.v3.x;
-                v9 = v3->mFocusTargetPosition.y - v7->mWorldTransform.v3.y;
-                UFG::PropertySetHandle::Bind(&v3->mProperties);
-                v10 = UFG::qPropertySet::Get<float>(
-                        v3->mProperties.mpPropSet,
-                        (UFG::qSymbol *)&EncounterSym_disengage_vehicle_radius_ratio.mUID,
-                        DEPTH_RECURSE);
-                if ( (float)((float)(v9 * v9) + (float)(v8 * v8)) > (float)((float)(a2 * *v10) * (float)(a2 * *v10)) )
-                  v5 = 1;
-              }
-            }
-          }
-        }
-        v11 = (UFG::SimObjectCVBase *)v4->m_pSimObject;
-        if ( v11 )
-        {
-          v12 = v11->m_Flags;
-          if ( (v12 >> 14) & 1 )
-          {
-            v13 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v11);
-          }
-          else if ( (v12 & 0x8000u) == 0 )
-          {
-            if ( (v12 >> 13) & 1 )
-            {
-              v13 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v11->vfptr,
-                                                UFG::AiDriverComponent::_TypeUID);
-            }
-            else if ( (v12 >> 12) & 1 )
-            {
-              v13 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v11->vfptr,
-                                                UFG::AiDriverComponent::_TypeUID);
-            }
-            else
-            {
-              v13 = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v11->vfptr,
-                                                UFG::AiDriverComponent::_TypeUID);
-            }
-          }
-          else
-          {
-            v13 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v11);
-          }
-          v14 = v13;
-          if ( v13 )
-          {
-            if ( v5 )
-            {
-              UFG::PropertySetHandle::Bind(&v3->mProperties);
-              a2 = *UFG::qPropertySet::Get<float>(
-                      v3->mProperties.mpPropSet,
-                      (UFG::qSymbol *)&EncounterSym_disengage_vehicle_topspeed.mUID,
-                      DEPTH_RECURSE)
-                 * 0.27777779;
-              v14->m_DesiredSpeedLimit = a2;
-            }
-            else
-            {
-              v13->m_DesiredSpeedLimit = -1.0;
+              UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimObject->m_pTransformNodeComponent);
+              v8 = this->mFocusTargetPosition.x - m_pTransformNodeComponent->mWorldTransform.v3.x;
+              v9 = this->mFocusTargetPosition.y - m_pTransformNodeComponent->mWorldTransform.v3.y;
+              UFG::PropertySetHandle::Bind(&this->mProperties);
+              v10 = UFG::qPropertySet::Get<float>(
+                      this->mProperties.mpPropSet,
+                      (UFG::qArray<unsigned long,0> *)&EncounterSym_disengage_vehicle_radius_ratio,
+                      DEPTH_RECURSE);
+              if ( (float)((float)(v9 * v9) + (float)(v8 * v8)) > (float)((float)(*(float *)&v5 * *v10)
+                                                                        * (float)(*(float *)&v5 * *v10)) )
+                v4 = 1;
             }
           }
         }
       }
-      v2 = (unsigned int)(v2 + 1);
+      v11 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
+      if ( v11 )
+      {
+        m_Flags = v11->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+        {
+          ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v11);
+        }
+        else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        {
+          ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                          v11,
+                                                          UFG::AiDriverComponent::_TypeUID);
+        }
+        else
+        {
+          ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
+                                                          v11,
+                                                          UFG::AiDriverComponent::_TypeUID);
+        }
+        v14 = ComponentOfTypeHK;
+        if ( ComponentOfTypeHK )
+        {
+          if ( v4 )
+          {
+            UFG::PropertySetHandle::Bind(&this->mProperties);
+            v14->m_DesiredSpeedLimit = *UFG::qPropertySet::Get<float>(
+                                          this->mProperties.mpPropSet,
+                                          (UFG::qArray<unsigned long,0> *)&EncounterSym_disengage_vehicle_topspeed,
+                                          DEPTH_RECURSE)
+                                     * 0.27777779;
+          }
+          else
+          {
+            ComponentOfTypeHK->m_DesiredSpeedLimit = -1.0;
+          }
+        }
+      }
     }
-    while ( (unsigned int)v2 < v3->mVehicles.size );
   }
 }
 
 // File Line: 1863
 // RVA: 0x3EDC00
-void __fastcall UFG::CopSystem::HandleArrest(UFG::CopSystem *this, UFG::SimObject *pSource, UFG::SimObject *pTarget)
+void __fastcall UFG::CopSystem::HandleArrest(
+        UFG::CopSystem *this,
+        UFG::SimObject *pSource,
+        UFG::SimObjectCharacter *pTarget)
 {
-  UFG::SimObjectCharacter *v3; // rbx
-  UFG::CopSystem *v4; // rdi
-  UFG::SceneObjectProperties *v5; // rax
-  unsigned __int16 v6; // cx
-  UFG::SimComponent *v7; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rax
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
   UFG::ProgressionTracker *v8; // rax
   UFG::GameStatTracker *v9; // rax
   unsigned int v10; // edx
 
-  v3 = (UFG::SimObjectCharacter *)pTarget;
-  v4 = this;
   if ( pTarget )
   {
-    v5 = pTarget->m_pSceneObj;
-    if ( v5 )
+    m_pSceneObj = pTarget->m_pSceneObj;
+    if ( m_pSceneObj )
     {
-      if ( v5->mpWritableProperties || v5->mpConstProperties )
+      if ( m_pSceneObj->mpWritableProperties || m_pSceneObj->mpConstProperties )
       {
-        v6 = pTarget->m_Flags;
-        if ( (v6 >> 14) & 1 )
+        m_Flags = pTarget->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v7 = pTarget->m_Components.p[8].m_pComponent;
+          m_pComponent = pTarget->m_Components.p[8].m_pComponent;
         }
-        else if ( (v6 & 0x8000u) == 0 )
+        else if ( m_Flags >= 0 )
         {
-          if ( (v6 >> 13) & 1 )
-            v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                   (UFG::SimObjectGame *)pTarget,
-                   UFG::MissionFailConditionComponent::_TypeUID);
+          if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+            m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(
+                             pTarget,
+                             UFG::MissionFailConditionComponent::_TypeUID);
           else
-            v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                    (UFG::SimObjectGame *)pTarget,
-                                    UFG::MissionFailConditionComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                      pTarget,
-                                                                                      UFG::MissionFailConditionComponent::_TypeUID);
+            m_pComponent = UFG::SimObject::GetComponentOfType(pTarget, UFG::MissionFailConditionComponent::_TypeUID);
         }
         else
         {
-          v7 = pTarget->m_Components.p[8].m_pComponent;
+          m_pComponent = pTarget->m_Components.p[8].m_pComponent;
         }
-        if ( v7 && BYTE4(v7[1].m_BoundComponentHandles.mNode.mPrev) )
+        if ( m_pComponent && BYTE4(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev) )
         {
           v8 = UFG::ProgressionTracker::Instance();
           UFG::ProgressionTracker::SetRestoreType(v8, RestoreType_PoliceStation, 1);
-          UFG::MissionFailConditionComponent::FailObject(
-            (UFG::SimObject *)&v3->vfptr,
-            (UFG::qSymbol *)&qSymbol_ArrestFailCaption.mUID);
+          UFG::MissionFailConditionComponent::FailObject(pTarget, &qSymbol_ArrestFailCaption);
         }
       }
     }
   }
-  if ( v3 == UFG::GetLocalPlayer() )
+  if ( pTarget == UFG::GetLocalPlayer() )
   {
     v9 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::ApplyDelta(v9, TimesArrested, 1);
     v10 = UI_HASH_CLEANUPMINIGAME_6;
-    v4->mStats.mFinishReason = 1;
-    UFG::UIScreenManagerBase::queueMessage(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v10,
-      0xFFFFFFFF);
+    this->mStats.mFinishReason = eFinishReason_Arrested;
+    UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, v10, 0xFFFFFFFF);
   }
 }
 
@@ -2893,49 +2601,48 @@ void __fastcall UFG::CopSystem::HandleArrest(UFG::CopSystem *this, UFG::SimObjec
 // RVA: 0x3F02D0
 void __fastcall UFG::CopSystem::Replenish(UFG::CopSystem *this)
 {
-  JUMPOUT(this->mIsExcludingPlayerForRestOfChase, 0, UFG::EncounterBase::Replenish);
+  if ( !this->mIsExcludingPlayerForRestOfChase )
+    UFG::EncounterBase::Replenish(this);
 }
 
 // File Line: 1898
 // RVA: 0x3EC8C0
 void __fastcall UFG::CopSystem::ApplyReducedRadius(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rdi
   UFG::GameStatTracker *v2; // rax
-  signed int v3; // eax
-  UFG::PropertySetHandle *v4; // rcx
+  int Stat; // eax
+  UFG::PropertySetHandle *p_mProperties; // rcx
   UFG::qStaticSymbol *v5; // rdx
 
-  v1 = this;
-  if ( !((unsigned __int8 (*)(void))this->vfptr[16].__vecDelDtor)() )
+  if ( !((unsigned __int8 (__fastcall *)(UFG::CopSystem *))this->vfptr[16].__vecDelDtor)(this) )
   {
     v2 = UFG::GameStatTracker::Instance();
-    v3 = UFG::GameStatTracker::GetStat(v2, CopDrivingStage);
-    v4 = &v1->mProperties;
-    if ( v3 < 5 )
+    Stat = UFG::GameStatTracker::GetStat(v2, CopDrivingStage);
+    p_mProperties = &this->mProperties;
+    if ( Stat < 5 )
     {
-      UFG::PropertySetHandle::Bind(v4);
-      v1->mReducedRadiusTimer = *UFG::qPropertySet::Get<float>(
-                                   v1->mProperties.mpPropSet,
-                                   (UFG::qSymbol *)&CopSym_reduced_radius_timer.mUID,
-                                   DEPTH_RECURSE);
-      UFG::PropertySetHandle::Bind(&v1->mProperties);
+      UFG::PropertySetHandle::Bind(p_mProperties);
+      this->mReducedRadiusTimer = *UFG::qPropertySet::Get<float>(
+                                     this->mProperties.mpPropSet,
+                                     (UFG::qArray<unsigned long,0> *)&CopSym_reduced_radius_timer,
+                                     DEPTH_RECURSE);
+      UFG::PropertySetHandle::Bind(&this->mProperties);
       v5 = &CopSym_reduced_radius_percentage;
     }
     else
     {
-      UFG::PropertySetHandle::Bind(v4);
-      v1->mReducedRadiusTimer = *UFG::qPropertySet::Get<float>(
-                                   v1->mProperties.mpPropSet,
-                                   (UFG::qSymbol *)&CopSym_reduced_radius_timer_perk.mUID,
-                                   DEPTH_RECURSE);
-      UFG::PropertySetHandle::Bind(&v1->mProperties);
+      UFG::PropertySetHandle::Bind(p_mProperties);
+      this->mReducedRadiusTimer = *UFG::qPropertySet::Get<float>(
+                                     this->mProperties.mpPropSet,
+                                     (UFG::qArray<unsigned long,0> *)&CopSym_reduced_radius_timer_perk,
+                                     DEPTH_RECURSE);
+      UFG::PropertySetHandle::Bind(&this->mProperties);
       v5 = &CopSym_reduced_radius_percentage_perk;
     }
-    v1->mReducedRadiusPercentage = *UFG::qPropertySet::Get<float>(
-                                      v1->mProperties.mpPropSet,
-                                      (UFG::qSymbol *)&v5->mUID,
-                                      DEPTH_RECURSE);
+    this->mReducedRadiusPercentage = *UFG::qPropertySet::Get<float>(
+                                        this->mProperties.mpPropSet,
+                                        (UFG::qArray<unsigned long,0> *)v5,
+                                        DEPTH_RECURSE);
   }
 }
 
@@ -2943,26 +2650,24 @@ void __fastcall UFG::CopSystem::ApplyReducedRadius(UFG::CopSystem *this)
 // RVA: 0x3ED420
 void __fastcall UFG::CopSystem::GenerateHeatEvent(UFG::CopSystem *this, UFG::eHeatEventEnum heatEvent)
 {
-  UFG::CopSystem *v2; // r15
   __int64 v3; // rdx
-  float v4; // xmm6_4
-  signed __int64 v5; // r14
-  bool *v6; // r12
-  signed __int64 v7; // r13
+  float mSimTime_Temp; // xmm6_4
+  __int64 v5; // r14
+  bool *mStimulusWatchList; // r12
+  __int64 v7; // r13
   float v8; // xmm7_4
-  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *v9; // rbx
+  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *p_mNode; // rbx
   __int64 v10; // rax
   UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *v11; // rdi
   float *v12; // rax
-  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *v13; // rax
+  UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *mNext; // rax
   UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *v14; // rsi
-  __m128 v15; // xmm1
+  __m128 mPrev_high; // xmm1
   float v16; // xmm0_4
   UFG::SimObjectGame *v17; // rcx
-  UFG::SimComponent *v18; // rax
-  unsigned __int16 v19; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  __int16 m_Flags; // dx
 
-  v2 = this;
   if ( this->mEnable && !this->mIsExcludingPlayerForRestOfChase )
   {
     v3 = heatEvent;
@@ -2973,95 +2678,87 @@ void __fastcall UFG::CopSystem::GenerateHeatEvent(UFG::CopSystem *this, UFG::eHe
       this->mHeatEvents[v3].mTracked = 0;
     }
     UFG::UIHKScreenHud::PingMinimap();
-    v4 = UFG::Metrics::msInstance.mSimTime_Temp;
-    UFG::PropertySetHandle::Bind(&v2->mProperties);
+    mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
+    UFG::PropertySetHandle::Bind(&this->mProperties);
     v5 = 112i64;
-    v6 = v2->mStimulusWatchList;
+    mStimulusWatchList = this->mStimulusWatchList;
     v7 = 116i64;
     v8 = *UFG::qPropertySet::Get<float>(
-            v2->mProperties.mpPropSet,
-            (UFG::qSymbol *)&CopSym_tunable_stimulus_alive_time.mUID,
+            this->mProperties.mpPropSet,
+            (UFG::qArray<unsigned long,0> *)&CopSym_tunable_stimulus_alive_time,
             DEPTH_RECURSE);
     do
     {
-      if ( *v6 )
+      if ( *mStimulusWatchList )
       {
-        v9 = UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext - 4;
+        p_mNode = UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext - 4;
         if ( (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList.mNode.mNext[-4] != &UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList - 4 )
         {
           do
           {
-            v10 = *(__int64 *)((char *)&v9->mPrev + v5);
-            v11 = (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&v9[4].mNext[-4];
+            v10 = *(__int64 *)((char *)&p_mNode->mPrev + v5);
+            v11 = (UFG::qList<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent,1,0> *)&p_mNode[4].mNext[-4];
             if ( v10 )
             {
               v12 = (float *)(v10 + 32);
               if ( v12 )
               {
-                if ( (float)(v4 - *v12) <= v8 )
+                if ( (float)(mSimTime_Temp - *v12) <= v8 )
                 {
-                  v13 = v9[2].mNext;
-                  if ( v13 )
+                  mNext = p_mNode[2].mNext;
+                  if ( mNext )
                   {
-                    v14 = v13[5].mNext;
+                    v14 = mNext[5].mNext;
                     if ( v14 )
                     {
-                      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v13[5].mNext);
-                      v15 = (__m128)HIDWORD(v14[11].mPrev);
-                      v16 = *(float *)&v14[11].mPrev - v2->mFocusTargetPosition.x;
-                      v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] - v2->mFocusTargetPosition.y)
-                                              * (float)(v15.m128_f32[0] - v2->mFocusTargetPosition.y))
-                                      + (float)(v16 * v16);
-                      if ( COERCE_FLOAT(_mm_sqrt_ps(v15)) < sCopSystem_WitnessRadius )
+                      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)mNext[5].mNext);
+                      mPrev_high = (__m128)HIDWORD(v14[11].mPrev);
+                      v16 = *(float *)&v14[11].mPrev - this->mFocusTargetPosition.x;
+                      mPrev_high.m128_f32[0] = (float)((float)(mPrev_high.m128_f32[0] - this->mFocusTargetPosition.y)
+                                                     * (float)(mPrev_high.m128_f32[0] - this->mFocusTargetPosition.y))
+                                             + (float)(v16 * v16);
+                      if ( _mm_sqrt_ps(mPrev_high).m128_f32[0] < sCopSystem_WitnessRadius )
                       {
-                        v17 = (UFG::SimObjectGame *)v9[2].mNext;
+                        v17 = (UFG::SimObjectGame *)p_mNode[2].mNext;
                         if ( v17 )
                         {
-                          v19 = v17->m_Flags;
-                          if ( (v19 >> 14) & 1 )
+                          m_Flags = v17->m_Flags;
+                          if ( (m_Flags & 0x4000) != 0 )
                           {
-                            v18 = v17->m_Components.p[17].m_pComponent;
+                            m_pComponent = v17->m_Components.p[17].m_pComponent;
                           }
-                          else if ( (v19 & 0x8000u) == 0 )
+                          else if ( m_Flags >= 0 )
                           {
-                            if ( (v19 >> 13) & 1 )
-                            {
-                              v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::CopUnitComponent::_TypeUID);
-                            }
-                            else if ( (v19 >> 12) & 1 )
-                            {
-                              v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::CopUnitComponent::_TypeUID);
-                            }
+                            if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+                              m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                               v17,
+                                               UFG::CopUnitComponent::_TypeUID);
                             else
-                            {
-                              v18 = UFG::SimObject::GetComponentOfType(
-                                      (UFG::SimObject *)&v17->vfptr,
-                                      UFG::CopUnitComponent::_TypeUID);
-                            }
+                              m_pComponent = UFG::SimObject::GetComponentOfType(v17, UFG::CopUnitComponent::_TypeUID);
                           }
                           else
                           {
-                            v18 = v17->m_Components.p[17].m_pComponent;
+                            m_pComponent = v17->m_Components.p[17].m_pComponent;
                           }
                         }
                         else
                         {
-                          v18 = 0i64;
+                          m_pComponent = 0i64;
                         }
-                        UFG::UIHKScreenHud::AddWitness((UFG::qVector3 *)&v14[11], v18 != 0i64);
+                        UFG::UIHKScreenHud::AddWitness((UFG::qVector3 *)&v14[11], m_pComponent != 0i64);
                       }
                     }
                   }
                 }
               }
             }
-            v9 = &v11->mNode;
+            p_mNode = &v11->mNode;
           }
           while ( v11 != &UFG::StimulusReceiverComponent::s_StimulusReceiverComponentList - 4 );
         }
       }
       v5 += 8i64;
-      ++v6;
+      ++mStimulusWatchList;
       --v7;
     }
     while ( v7 );
@@ -3072,17 +2769,15 @@ void __fastcall UFG::CopSystem::GenerateHeatEvent(UFG::CopSystem *this, UFG::eHe
 // RVA: 0x3ECBA0
 float __fastcall UFG::CopSystem::CalculateMultiplier(UFG::CopSystem *this, UFG::eHeatEventEnum heatEvent)
 {
-  UFG::CopSystem *v2; // rbx
   __int64 v3; // rax
   unsigned __int8 v4; // r8
   __int64 v5; // rax
   unsigned __int8 v6; // cl
   unsigned __int8 v7; // al
   float v8; // xmm7_4
-  UFG::PropertySetHandle *v9; // rcx
+  UFG::PropertySetHandle *p_mProperties; // rcx
   UFG::qStaticSymbol *v10; // rdx
 
-  v2 = this;
   v3 = stimulusMultiplierType[heatEvent][0];
   v4 = 0;
   if ( (_DWORD)v3 != 116 )
@@ -3099,116 +2794,114 @@ float __fastcall UFG::CopSystem::CalculateMultiplier(UFG::CopSystem *this, UFG::
   v8 = *(float *)&FLOAT_1_0;
   if ( v4 )
   {
-    v9 = &v2->mProperties;
+    p_mProperties = &this->mProperties;
     if ( v4 > 5u )
     {
       if ( v4 > 0xCu )
       {
-        UFG::PropertySetHandle::Bind(v9);
+        UFG::PropertySetHandle::Bind(p_mProperties);
         v10 = &CopSym_multiplier_density_thirdteen_up;
       }
       else
       {
-        UFG::PropertySetHandle::Bind(v9);
+        UFG::PropertySetHandle::Bind(p_mProperties);
         v10 = &CopSym_multiplier_density_six_to_twelve;
       }
     }
     else
     {
-      UFG::PropertySetHandle::Bind(v9);
+      UFG::PropertySetHandle::Bind(p_mProperties);
       v10 = &CopSym_multiplier_density_one_to_five;
     }
-    v8 = *UFG::qPropertySet::Get<float>(v2->mProperties.mpPropSet, (UFG::qSymbol *)&v10->mUID, DEPTH_RECURSE);
+    v8 = *UFG::qPropertySet::Get<float>(this->mProperties.mpPropSet, (UFG::qArray<unsigned long,0> *)v10, DEPTH_RECURSE);
   }
   return (float)(1.0 - UFG::PlayerBuffTracker::GetHeatLevelReductionPercent()) * v8;
 }
 
 // File Line: 2031
 // RVA: 0x3ECC80
-void __usercall UFG::CopSystem::CommitHeatEvent(UFG::CopSystem *this@<rcx>, UFG::eHeatEventEnum heatEvent@<edx>, float a3@<xmm0>)
+void __fastcall UFG::CopSystem::CommitHeatEvent(UFG::CopSystem *this, UFG::eHeatEventEnum heatEvent)
 {
-  __int64 v3; // rdi
-  UFG::CopSystem *v4; // rbx
-  __int128 v5; // xmm9
+  __int64 v2; // rdi
+  float v4; // xmm9_4
+  double v5; // xmm0_8
   float v6; // xmm10_4
   float v7; // xmm7_4
   UFG::ProgressionTracker *v8; // rax
   float v9; // xmm6_4
-  float v10; // xmm8_4
-  UFG::GameStatTracker *v11; // rax
-  float v12; // xmm0_4
-  char *v13; // rax
-  UFG::qString *v14; // rax
-  char *v15; // r9
-  UFG::qString result; // [rsp+48h] [rbp-80h]
+  double v10; // xmm0_8
+  float v11; // xmm8_4
+  UFG::GameStatTracker *v12; // rax
+  float v13; // xmm0_4
+  char *v14; // rax
+  UFG::qString *v15; // rax
+  UFG::qString result; // [rsp+48h] [rbp-80h] BYREF
 
-  v3 = heatEvent;
-  v4 = this;
+  v2 = heatEvent;
   if ( this->mEnable && !this->mIsExcludingPlayerForRestOfChase )
   {
     UFG::PropertySetHandle::Bind(&this->mProperties);
-    v5 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                            v4->mProperties.mpPropSet,
-                            CopSystemProperty_stimulus[v3],
-                            DEPTH_RECURSE);
-    v4->vfptr[119].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v4->vfptr, v3);
-    v6 = a3;
+    v4 = *UFG::qPropertySet::Get<float>(
+            this->mProperties.mpPropSet,
+            (UFG::qArray<unsigned long,0> *)CopSystemProperty_stimulus[v2],
+            DEPTH_RECURSE);
+    v5 = ((double (__fastcall *)(UFG::CopSystem *, _QWORD))this->vfptr[119].__vecDelDtor)(this, (unsigned int)v2);
+    v6 = *(float *)&v5;
     v7 = *(float *)&FLOAT_1_0;
     v8 = UFG::ProgressionTracker::Instance();
     if ( UFG::ProgressionTracker::IsRunningCriticalActiveMaster(v8) )
       v7 = sCopSystem_ActiveMissionMultiplier;
-    v9 = (float)(a3 * *(float *)&v5) * v7;
-    v4->vfptr[87].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v4->vfptr, v4->mMaxHeatLevel);
-    v10 = a3;
-    v11 = UFG::GameStatTracker::Instance();
-    v12 = UFG::GameStatTracker::GetStat(v11, Heat) + v9;
-    if ( v12 >= v10 )
-      v12 = v10;
-    UFG::GameStatAction::Player::SetHeat(v12);
-    v13 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)CopSystemProperty_stimulus[v3]);
-    v14 = UFG::qString::FormatEx(
+    v9 = (float)(*(float *)&v5 * v4) * v7;
+    v10 = ((double (__fastcall *)(UFG::CopSystem *, _QWORD))this->vfptr[87].__vecDelDtor)(
+            this,
+            (unsigned int)this->mMaxHeatLevel);
+    v11 = *(float *)&v10;
+    v12 = UFG::GameStatTracker::Instance();
+    v13 = UFG::GameStatTracker::GetStat(v12, Heat) + v9;
+    if ( v13 >= v11 )
+      v13 = v11;
+    UFG::GameStatAction::Player::SetHeat(v13);
+    v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)CopSystemProperty_stimulus[v2]);
+    v15 = UFG::qString::FormatEx(
             &result,
             "DEBUG: Last committed HeatEvent(%d - %s) - Base(%.2f) X (%.2f) X (%.2f) = (%.2f)",
-            (unsigned int)v3,
-            v13,
-            *(float *)&v5,
+            (unsigned int)v2,
+            v14,
+            v4,
             v6,
             v7,
-            v9,
-            -2i64);
-    UFG::qString::Set(&v4->mLastHeatEventCaption, v14->mData, v14->mLength, 0i64, 0);
+            v9);
+    UFG::qString::Set(&this->mLastHeatEventCaption, v15->mData, v15->mLength, 0i64, 0);
     UFG::qString::~qString(&result);
-    v15 = v4->mLastHeatEventCaption.mData;
     UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_Cops, OUTPUT_LEVEL_DEBUG, "[CopSystem]: %s\n");
-    v4->mLastHeatEventIndex = v3;
-    UFG::PropertySetHandle::Bind(&v4->mProperties);
-    v4->mLastHeatEventTimer = *UFG::qPropertySet::Get<float>(
-                                 v4->mProperties.mpPropSet,
-                                 (UFG::qSymbol *)&EncounterSym_last_heat_event_timer.mUID,
-                                 DEPTH_RECURSE);
-    v4->mCooldownAllowed = 0;
-    UFG::CopSystem::HandleHeatEvent(v4);
+    this->mLastHeatEventIndex = v2;
+    UFG::PropertySetHandle::Bind(&this->mProperties);
+    this->mLastHeatEventTimer = *UFG::qPropertySet::Get<float>(
+                                   this->mProperties.mpPropSet,
+                                   (UFG::qArray<unsigned long,0> *)&EncounterSym_last_heat_event_timer,
+                                   DEPTH_RECURSE);
+    this->mCooldownAllowed = 0;
+    UFG::CopSystem::HandleHeatEvent(this);
   }
 }
 
 // File Line: 2065
 // RVA: 0x3F05E0
-void __usercall UFG::CopSystem::SetMaxHeatLevel(UFG::CopSystem *this@<rcx>, int maxHeatLevel@<edx>, float a3@<xmm0>)
+void __fastcall UFG::CopSystem::SetMaxHeatLevel(UFG::CopSystem *this, int maxHeatLevel)
 {
-  int v3; // eax
-  __int64 v4; // rdx
+  __int64 mHeatLevel; // rdx
+  double v4; // xmm0_8
   UFG::GameStatTracker *v5; // rax
 
-  v3 = maxHeatLevel;
   this->mMaxHeatLevel = maxHeatLevel;
   if ( maxHeatLevel != -1 )
   {
-    v4 = (unsigned int)this->mHeatLevel;
-    if ( v3 < (signed int)v4 )
-      v4 = (unsigned int)v3;
-    this->vfptr[87].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)this, v4);
+    mHeatLevel = (unsigned int)this->mHeatLevel;
+    if ( maxHeatLevel < (int)mHeatLevel )
+      mHeatLevel = (unsigned int)maxHeatLevel;
+    v4 = ((double (__fastcall *)(UFG::CopSystem *, __int64))this->vfptr[87].__vecDelDtor)(this, mHeatLevel);
     v5 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::SetStat(v5, Heat, a3);
+    UFG::GameStatTracker::SetStat(v5, Heat, *(float *)&v4);
   }
 }
 
@@ -3221,146 +2914,135 @@ void __fastcall UFG::CopSystem::ClearMaxHeatLevel(UFG::CopSystem *this)
 
 // File Line: 2081
 // RVA: 0x3EC500
-bool __fastcall UFG::CopSystem::AcquireArrestRight(UFG::CopSystem *this, UFG::SimObject *pCop)
+bool __fastcall UFG::CopSystem::AcquireArrestRight(UFG::CopSystem *this, UFG::SimObjectGame *pCop)
 {
-  UFG::SimObject *v2; // rbp
-  UFG::SimObject *v3; // rdi
-  UFG::CopSystem *v4; // rsi
+  UFG::SimObject *m_pPointer; // rbp
   bool result; // al
   UFG::TransformNodeComponent *v6; // rbx
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // cx
+  UFG::SimComponent *m_pComponent; // rax
+  signed __int16 m_Flags; // cx
   UFG::CopSystem *v9; // rcx
   UFG::CopSystem *v10; // rax
   float *v11; // r14
-  float v12; // xmm6_4
+  float mSimTime_Temp; // xmm6_4
   float v13; // xmm6_4
   UFG::TransformNodeComponent *v14; // rbx
   __m128 v15; // xmm8
   float v16; // xmm7_4
   float v17; // xmm6_4
-  UFG::TransformNodeComponent *v18; // rbp
-  __m128 v19; // xmm2
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbp
+  __m128 y_low; // xmm2
   float v20; // xmm7_4
   __m128 v21; // xmm2
   float v22; // xmm6_4
-  __int128 v23; // xmm0
+  float v23; // xmm0_4
 
-  v2 = this->mpArrestRightHumanCop.m_pPointer;
-  v3 = pCop;
-  v4 = this;
-  if ( v2 == pCop )
+  m_pPointer = this->mpArrestRightHumanCop.m_pPointer;
+  if ( m_pPointer == pCop )
     return 1;
   v6 = 0i64;
   if ( pCop )
   {
-    v8 = pCop->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = pCop->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = pCop->m_Components.p[16].m_pComponent;
+      m_pComponent = pCop->m_Components.p[16].m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)pCop, UFG::EncounterUnitComponent::_TypeUID);
-      }
-      else if ( (v8 >> 12) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)pCop, UFG::EncounterUnitComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(pCop, UFG::EncounterUnitComponent::_TypeUID);
       else
-      {
-        v7 = UFG::SimObject::GetComponentOfType(pCop, UFG::EncounterUnitComponent::_TypeUID);
-      }
+        m_pComponent = UFG::SimObject::GetComponentOfType(pCop, UFG::EncounterUnitComponent::_TypeUID);
     }
     else
     {
-      v7 = pCop->m_Components.p[16].m_pComponent;
+      m_pComponent = pCop->m_Components.p[16].m_pComponent;
     }
   }
   else
   {
-    v7 = 0i64;
+    m_pComponent = 0i64;
   }
-  v9 = v4;
-  if ( v7 )
+  v9 = this;
+  if ( m_pComponent )
   {
-    v10 = *(UFG::CopSystem **)&v7[1].m_TypeUID;
+    v10 = *(UFG::CopSystem **)&m_pComponent[1].m_TypeUID;
     if ( v10 )
       v9 = v10;
   }
-  v11 = (float *)((__int64 (*)(void))v9->vfptr[20].__vecDelDtor)();
-  if ( v2 )
+  v11 = (float *)((__int64 (__fastcall *)(UFG::CopSystem *))v9->vfptr[20].__vecDelDtor)(v9);
+  if ( m_pPointer )
   {
-    v18 = v2->m_pTransformNodeComponent;
-    if ( v3 )
-      v6 = v3->m_pTransformNodeComponent;
-    if ( v18 && v6 )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
+    if ( pCop )
+      v6 = pCop->m_pTransformNodeComponent;
+    if ( m_pTransformNodeComponent && v6 )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform(v18);
-      v19 = (__m128)LODWORD(v18->mWorldTransform.v3.y);
-      v19.m128_f32[0] = (float)((float)((float)(v19.m128_f32[0] - v11[1]) * (float)(v19.m128_f32[0] - v11[1]))
-                              + (float)((float)(v18->mWorldTransform.v3.x - *v11)
-                                      * (float)(v18->mWorldTransform.v3.x - *v11)))
-                      + (float)((float)(v18->mWorldTransform.v3.z - v11[2]) * (float)(v18->mWorldTransform.v3.z - v11[2]));
-      LODWORD(v20) = (unsigned __int128)_mm_sqrt_ps(v19);
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      y_low = (__m128)LODWORD(m_pTransformNodeComponent->mWorldTransform.v3.y);
+      y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - v11[1]) * (float)(y_low.m128_f32[0] - v11[1]))
+                                + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.x - *v11)
+                                        * (float)(m_pTransformNodeComponent->mWorldTransform.v3.x - *v11)))
+                        + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.z - v11[2])
+                                * (float)(m_pTransformNodeComponent->mWorldTransform.v3.z - v11[2]));
+      LODWORD(v20) = _mm_sqrt_ps(y_low).m128_u32[0];
       UFG::TransformNodeComponent::UpdateWorldTransform(v6);
       v21 = (__m128)LODWORD(v6->mWorldTransform.v3.y);
       v21.m128_f32[0] = (float)((float)((float)(v21.m128_f32[0] - v11[1]) * (float)(v21.m128_f32[0] - v11[1]))
                               + (float)((float)(v6->mWorldTransform.v3.x - *v11)
                                       * (float)(v6->mWorldTransform.v3.x - *v11)))
                       + (float)((float)(v6->mWorldTransform.v3.z - v11[2]) * (float)(v6->mWorldTransform.v3.z - v11[2]));
-      LODWORD(v22) = (unsigned __int128)_mm_sqrt_ps(v21);
-      UFG::PropertySetHandle::Bind(&v4->mProperties);
-      v23 = *(unsigned int *)UFG::qPropertySet::Get<float>(
-                               v4->mProperties.mpPropSet,
-                               (UFG::qSymbol *)&EncounterSym_arrest_right_closer_distance_threshold.mUID,
-                               DEPTH_RECURSE);
-      if ( v22 < *(float *)&v23 )
-        *(float *)&v23 = v22;
-      if ( (float)(*(float *)&v23 + v22) < v20 )
+      v22 = _mm_sqrt_ps(v21).m128_f32[0];
+      UFG::PropertySetHandle::Bind(&this->mProperties);
+      v23 = *UFG::qPropertySet::Get<float>(
+               this->mProperties.mpPropSet,
+               (UFG::qArray<unsigned long,0> *)&EncounterSym_arrest_right_closer_distance_threshold,
+               DEPTH_RECURSE);
+      if ( v22 < v23 )
+        v23 = v22;
+      if ( (float)(v23 + v22) < v20 )
       {
         UFG::qSafePointer<Creature,Creature>::operator=(
-          (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v4->mpArrestRightHumanCop,
-          (UFG::SimComponent *)v3);
-        v4->mArrestRightTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
+          (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&this->mpArrestRightHumanCop,
+          (UFG::SimComponent *)pCop);
+        this->mArrestRightTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
       }
     }
   }
   else
   {
-    v12 = UFG::Metrics::msInstance.mSimTime_Temp;
-    UFG::PropertySetHandle::Bind(&v4->mProperties);
-    v13 = v12 - v4->mArrestRightTimestamp;
+    mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
+    UFG::PropertySetHandle::Bind(&this->mProperties);
+    v13 = mSimTime_Temp - this->mArrestRightTimestamp;
     if ( v13 > *UFG::qPropertySet::Get<float>(
-                  v4->mProperties.mpPropSet,
-                  (UFG::qSymbol *)&EncounterSym_arrest_right_cooldown_timer.mUID,
+                  this->mProperties.mpPropSet,
+                  (UFG::qArray<unsigned long,0> *)&EncounterSym_arrest_right_cooldown_timer,
                   DEPTH_RECURSE) )
     {
-      if ( v3 )
+      if ( pCop )
       {
-        v14 = v3->m_pTransformNodeComponent;
+        v14 = pCop->m_pTransformNodeComponent;
         if ( v14 )
         {
-          UFG::TransformNodeComponent::UpdateWorldTransform(v3->m_pTransformNodeComponent);
+          UFG::TransformNodeComponent::UpdateWorldTransform(pCop->m_pTransformNodeComponent);
           v15 = (__m128)LODWORD(v14->mWorldTransform.v3.y);
           v16 = v14->mWorldTransform.v3.x - *v11;
           v15.m128_f32[0] = v15.m128_f32[0] - v11[1];
           v17 = v14->mWorldTransform.v3.z - v11[2];
-          UFG::PropertySetHandle::Bind(&v4->mProperties);
+          UFG::PropertySetHandle::Bind(&this->mProperties);
           v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] * v15.m128_f32[0]) + (float)(v16 * v16))
                           + (float)(v17 * v17);
-          if ( COERCE_FLOAT(_mm_sqrt_ps(v15)) < *UFG::qPropertySet::Get<float>(
-                                                   v4->mProperties.mpPropSet,
-                                                   (UFG::qSymbol *)&EncounterSym_arrest_right_distance_threshold.mUID,
-                                                   DEPTH_RECURSE) )
+          if ( _mm_sqrt_ps(v15).m128_f32[0] < *UFG::qPropertySet::Get<float>(
+                                                 this->mProperties.mpPropSet,
+                                                 (UFG::qArray<unsigned long,0> *)&EncounterSym_arrest_right_distance_threshold,
+                                                 DEPTH_RECURSE) )
           {
             UFG::qSafePointer<Creature,Creature>::operator=(
-              (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v4->mpArrestRightHumanCop,
-              (UFG::SimComponent *)v3);
+              (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&this->mpArrestRightHumanCop,
+              (UFG::SimComponent *)pCop);
             result = 1;
-            v4->mArrestRightTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
+            this->mArrestRightTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
             return result;
           }
         }
@@ -3374,21 +3056,21 @@ bool __fastcall UFG::CopSystem::AcquireArrestRight(UFG::CopSystem *this, UFG::Si
 // RVA: 0x3F0120
 void __fastcall UFG::CopSystem::ReleaseArrestRight(UFG::CopSystem *this, UFG::SimObject *pCop)
 {
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpArrestRightHumanCop; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
 
   if ( this->mpArrestRightHumanCop.m_pPointer == pCop )
   {
-    v2 = &this->mpArrestRightHumanCop;
+    p_mpArrestRightHumanCop = &this->mpArrestRightHumanCop;
     if ( this->mpArrestRightHumanCop.m_pPointer )
     {
-      v3 = v2->mPrev;
-      v4 = this->mpArrestRightHumanCop.mNext;
-      v3->mNext = v4;
-      v4->mPrev = v3;
-      v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-      this->mpArrestRightHumanCop.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mpArrestRightHumanCop.mPrev;
+      mPrev = p_mpArrestRightHumanCop->mPrev;
+      mNext = this->mpArrestRightHumanCop.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mpArrestRightHumanCop->mPrev = p_mpArrestRightHumanCop;
+      this->mpArrestRightHumanCop.mNext = &this->mpArrestRightHumanCop;
     }
     this->mpArrestRightHumanCop.m_pPointer = 0i64;
     this->mArrestRightTimestamp = UFG::Metrics::msInstance.mSimTime_Temp;
@@ -3420,18 +3102,16 @@ const char *__fastcall UFG::CopSystem::GetHeatEventName(UFG::CopSystem *this, UF
 // RVA: 0x3ED7E0
 __int64 __fastcall UFG::CopSystem::GetHeatEventEnum(UFG::CopSystem *this, UFG::qString *heatEventName)
 {
-  UFG::qString *v2; // rsi
   unsigned int v3; // edi
   const char **v4; // rbx
 
-  v2 = heatEventName;
   v3 = 0;
   v4 = UFG::HeatEventEnumNames;
-  while ( !UFG::qString::operator==(v2, *v4) )
+  while ( !UFG::qString::operator==(heatEventName, *v4) )
   {
     ++v4;
     ++v3;
-    if ( (signed __int64)v4 >= (signed __int64)UFG::VehicleOrientationEnumNames )
+    if ( (__int64)v4 >= (__int64)UFG::VehicleOrientationEnumNames )
       return 0i64;
   }
   return v3;
@@ -3439,64 +3119,53 @@ __int64 __fastcall UFG::CopSystem::GetHeatEventEnum(UFG::CopSystem *this, UFG::q
 
 // File Line: 2182
 // RVA: 0x3F02E0
-void __fastcall UFG::CopSystem::ReportInfractionTarget(UFG::CopSystem *this, UFG::SimObject *pWitness, UFG::SimObject *pSuspect)
+void __fastcall UFG::CopSystem::ReportInfractionTarget(
+        UFG::CopSystem *this,
+        UFG::SimObjectGame *pWitness,
+        UFG::SimObject *pSuspect)
 {
-  UFG::SimObject *v3; // rbx
-  UFG::SimObjectGame *v4; // r9
-  UFG::CopSystem *v5; // rsi
-  UFG::TransformNodeComponent *v6; // rdi
-  unsigned __int16 v7; // dx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v8; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  signed __int16 m_Flags; // dx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpAmbientSuspect; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v11; // rax
 
-  v3 = pSuspect;
-  v4 = (UFG::SimObjectGame *)pWitness;
-  v5 = this;
   if ( pWitness )
   {
-    v6 = pWitness->m_pTransformNodeComponent;
-    if ( v6 )
+    m_pTransformNodeComponent = pWitness->m_pTransformNodeComponent;
+    if ( m_pTransformNodeComponent )
     {
-      v7 = pWitness->m_Flags;
-      if ( !((v7 >> 14) & 1) && (v7 & 0x8000u) == 0 )
+      m_Flags = pWitness->m_Flags;
+      if ( (m_Flags & 0x4000) == 0 && m_Flags >= 0 )
       {
-        if ( (v7 >> 13) & 1 )
-        {
-          UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::CopUnitComponent::_TypeUID);
-        }
-        else if ( (v7 >> 12) & 1 )
-        {
-          UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::CopUnitComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          UFG::SimObjectGame::GetComponentOfTypeHK(pWitness, UFG::CopUnitComponent::_TypeUID);
         else
-        {
-          UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::CopUnitComponent::_TypeUID);
-        }
+          UFG::SimObject::GetComponentOfType(pWitness, UFG::CopUnitComponent::_TypeUID);
       }
-      UFG::TransformNodeComponent::UpdateWorldTransform(v6);
-      UFG::UIHKScreenHud::AddWitness((UFG::qVector3 *)&v6->mWorldTransform.v3, 0);
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      UFG::UIHKScreenHud::AddWitness((UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3, 0);
     }
   }
-  v8 = &v5->mpAmbientSuspect;
-  if ( v5->mpAmbientSuspect.m_pPointer )
+  p_mpAmbientSuspect = &this->mpAmbientSuspect;
+  if ( this->mpAmbientSuspect.m_pPointer )
   {
-    v9 = v8->mPrev;
-    v10 = v5->mpAmbientSuspect.mNext;
-    v9->mNext = v10;
-    v10->mPrev = v9;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v5->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mpAmbientSuspect.mPrev;
+    mPrev = p_mpAmbientSuspect->mPrev;
+    mNext = this->mpAmbientSuspect.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpAmbientSuspect->mPrev = p_mpAmbientSuspect;
+    this->mpAmbientSuspect.mNext = &this->mpAmbientSuspect;
   }
-  v5->mpAmbientSuspect.m_pPointer = v3;
-  if ( v3 )
+  this->mpAmbientSuspect.m_pPointer = pSuspect;
+  if ( pSuspect )
   {
-    v11 = v3->m_SafePointerList.mNode.mPrev;
-    v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v8->mPrev = v11;
-    v5->mpAmbientSuspect.mNext = &v3->m_SafePointerList.mNode;
-    v3->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v8->mPrev;
+    v11 = pSuspect->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v11->mNext = p_mpAmbientSuspect;
+    p_mpAmbientSuspect->mPrev = v11;
+    this->mpAmbientSuspect.mNext = &pSuspect->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pSuspect->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mpAmbientSuspect;
   }
 }
 
@@ -3504,20 +3173,20 @@ void __fastcall UFG::CopSystem::ReportInfractionTarget(UFG::CopSystem *this, UFG
 // RVA: 0x3ECE90
 __int64 __fastcall UFG::CopSystem::CountActualUnits(UFG::CopSystem *this, UFG::EncounterUnit::UnitType unitType)
 {
-  unsigned int v2; // er8
-  UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> **v3; // rax
+  unsigned int v2; // r8d
+  UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> **p_mNext; // rax
   UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *v4; // rcx
 
   v2 = 0;
-  v3 = &UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
+  p_mNext = &UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext;
   if ( &UFG::CopUnitComponent::s_CopUnitComponentList.mNode.mNext[-5].mNext != (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> **)((char *)&UFG::CopUnitComponent::s_CopUnitComponentList - 72) )
   {
     do
     {
-      v4 = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&v3[10][-5].mNext;
-      if ( *((_DWORD *)v3 + 119) == unitType && (_BYTE)v3[60] & 2 )
+      v4 = (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)&p_mNext[10][-5].mNext;
+      if ( *((_DWORD *)p_mNext + 119) == unitType && ((_BYTE)p_mNext[60] & 2) != 0 )
         ++v2;
-      v3 = &v3[10][-5].mNext;
+      p_mNext = &p_mNext[10][-5].mNext;
     }
     while ( v4 != (UFG::qList<UFG::CopUnitComponent,UFG::CopUnitComponent,1,0> *)((char *)&UFG::CopUnitComponent::s_CopUnitComponentList
                                                                                 - 72) );
@@ -3533,7 +3202,7 @@ const char *__fastcall UFG::CopSystem::GetSpawningPrefix(UFG::CopSystem *this, b
 
   result = "cops_vehicle_";
   if ( isCharacter )
-    result = "cops_character_";
+    return "cops_character_";
   return result;
 }
 
@@ -3541,26 +3210,24 @@ const char *__fastcall UFG::CopSystem::GetSpawningPrefix(UFG::CopSystem *this, b
 // RVA: 0x3EEB00
 void __fastcall UFG::CopSystem::HandleHeatEvent(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-  UFG::eHeatEventEnum v2; // ecx
-  UFG::SimObjectCharacter *v3; // rax
-  UFG::SimComponent *v4; // rdx
+  UFG::eHeatEventEnum mLastHeatEventIndex; // ecx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  UFG::SimComponent *m_pComponent; // rdx
 
-  v1 = this;
-  v2 = this->mLastHeatEventIndex;
-  if ( (unsigned int)(v2 - 4) <= 1 || v2 == 10 )
+  mLastHeatEventIndex = this->mLastHeatEventIndex;
+  if ( (unsigned int)(mLastHeatEventIndex - 4) <= 1 || mLastHeatEventIndex == eHEATEVENT_FIRE_WEAPON )
   {
-    v1->mFocusTargetContext.mOpenFired = 1;
-    v3 = UFG::GetLocalPlayer();
-    if ( v3 )
+    this->mFocusTargetContext.mOpenFired = 1;
+    LocalPlayer = UFG::GetLocalPlayer();
+    if ( LocalPlayer )
     {
-      v4 = v3->m_Components.p[20].m_pComponent;
-      if ( v4 )
+      m_pComponent = LocalPlayer->m_Components.p[20].m_pComponent;
+      if ( m_pComponent )
       {
-        if ( *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v4[1].m_Flags + 31i64)
-                       + *(_QWORD *)&v4[1].m_TypeUID
+        if ( *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 31i64)
+                       + *(_QWORD *)&m_pComponent[1].m_TypeUID
                        + 40) )
-          v1->mFocusTargetContext.mOpenFiredWithHostage = 1;
+          this->mFocusTargetContext.mOpenFiredWithHostage = 1;
       }
     }
   }

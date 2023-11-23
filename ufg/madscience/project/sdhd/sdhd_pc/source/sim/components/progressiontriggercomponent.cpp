@@ -2,14 +2,14 @@
 // RVA: 0x154CA60
 __int64 UFG::_dynamic_initializer_for__smProgressionTriggerComponent_UpdateList__()
 {
-  return atexit(UFG::_dynamic_atexit_destructor_for__smProgressionTriggerComponent_UpdateList__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__smProgressionTriggerComponent_UpdateList__);
 }
 
 // File Line: 51
 // RVA: 0x1543FC0
 __int64 dynamic_initializer_for__UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList__);
 }
 
 // File Line: 52
@@ -21,44 +21,40 @@ UFG::ComponentIDDesc *__fastcall UFG::ProgressionTriggerComponent::GetDesc(UFG::
 
 // File Line: 66
 // RVA: 0x5186C0
-void __fastcall UFG::ProgressionTriggerComponent::ProgressionTriggerComponent(UFG::ProgressionTriggerComponent *this, unsigned int name_uid)
+void __fastcall UFG::ProgressionTriggerComponent::ProgressionTriggerComponent(
+        UFG::ProgressionTriggerComponent *this,
+        unsigned int name_uid)
 {
-  UFG::ProgressionTriggerComponent *v2; // rbx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v3; // rdx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v4; // rax
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v5; // rax
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *mPrev; // rax
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v3 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v4 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v2->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable;
-  v2->mpGameSlice = 0i64;
-  v2->mCallTimeout = 0i64;
-  v2->mCallFailTimeout = 0i64;
-  *(_DWORD *)&v2->mInsideActiveRegion = 0;
-  *(_WORD *)&v2->mRequiresTODWait = 0;
-  v2->mpRegionSceneObjects[0] = 0i64;
-  v2->mpTriggerRegions[0] = 0i64;
-  v2->mpRegionSceneObjects[1] = 0i64;
-  v2->mpTriggerRegions[1] = 0i64;
-  v2->mpRegionSceneObjects[2] = 0i64;
-  v2->mpTriggerRegions[2] = 0i64;
-  v2->mpRegionSceneObjects[3] = 0i64;
-  v2->mpTriggerRegions[3] = 0i64;
-  v2->mpRegionSceneObjects[4] = 0i64;
-  v2->mpTriggerRegions[4] = 0i64;
-  v5 = UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev;
-  UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&v2->mPrev;
-  v3->mPrev = v5;
-  v2->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList;
-  UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&v2->mPrev;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mPrev = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable;
+  this->mpGameSlice = 0i64;
+  this->mCallTimeout = 0i64;
+  this->mCallFailTimeout = 0i64;
+  *(_DWORD *)&this->mInsideActiveRegion = 0;
+  *(_WORD *)&this->mRequiresTODWait = 0;
+  this->mpRegionSceneObjects[0] = 0i64;
+  this->mpTriggerRegions[0] = 0i64;
+  this->mpRegionSceneObjects[1] = 0i64;
+  this->mpTriggerRegions[1] = 0i64;
+  this->mpRegionSceneObjects[2] = 0i64;
+  this->mpTriggerRegions[2] = 0i64;
+  this->mpRegionSceneObjects[3] = 0i64;
+  this->mpTriggerRegions[3] = 0i64;
+  this->mpRegionSceneObjects[4] = 0i64;
+  this->mpTriggerRegions[4] = 0i64;
+  mPrev = UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev;
+  UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mPrev = mPrev;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList;
+  UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentList.mNode.mPrev = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
+    this,
     UFG::ProgressionTriggerComponent::_ProgressionTriggerComponentTypeUID,
     "ProgressionTriggerComponent");
 }
@@ -67,120 +63,113 @@ void __fastcall UFG::ProgressionTriggerComponent::ProgressionTriggerComponent(UF
 // RVA: 0x51C250
 void __fastcall UFG::ProgressionTriggerComponent::~ProgressionTriggerComponent(UFG::ProgressionTriggerComponent *this)
 {
-  UFG::ProgressionTriggerComponent *v1; // rdi
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v2; // rsi
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v3; // rcx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v4; // rax
-  UFG::SceneObjectProperties **v5; // rbx
-  signed __int64 v6; // rbp
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v7; // rdx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v8; // rcx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v9; // rax
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v10; // rcx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v11; // rax
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *mPrev; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *mNext; // rax
+  UFG::SceneObjectProperties **mpRegionSceneObjects; // rbx
+  __int64 v6; // rbp
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v7; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v8; // rax
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v9; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v10; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable;
   if ( this == UFG::gpCurrentProgressionTriggerComponent )
-    UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->mPrev[-5];
+    UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev[-5];
   if ( this == UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentpCurrentIterator )
-    UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentpCurrentIterator = (UFG::ProgressionTriggerComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+    UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentpCurrentIterator = (UFG::ProgressionTriggerComponent *)&this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mPrev[-4];
+  v2 = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>;
+  mPrev = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent>::mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  if ( v1->mRegionsCreated )
+  if ( this->mRegionsCreated )
   {
-    v5 = v1->mpRegionSceneObjects;
+    mpRegionSceneObjects = this->mpRegionSceneObjects;
     v6 = 5i64;
     do
     {
-      UFG::SceneObjectProperties::Deactivate(*v5);
-      *v5 = 0i64;
-      ++v5;
+      UFG::SceneObjectProperties::Deactivate(*mpRegionSceneObjects);
+      *mpRegionSceneObjects++ = 0i64;
       --v6;
     }
     while ( v6 );
-    v1->mRegionsCreated = 0;
+    this->mRegionsCreated = 0;
   }
-  v7 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v10 = v2->mPrev;
-  v11 = v2->mNext;
-  v10->mNext = v11;
-  v11->mPrev = v10;
+  v7 = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev;
+  v8 = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+  this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+  v9 = v2->mPrev;
+  v10 = v2->mNext;
+  v9->mNext = v10;
+  v10->mPrev = v9;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 101
 // RVA: 0x55C1E0
 void __fastcall UFG::ProgressionTriggerComponent::Update(UFG::ProgressionTriggerComponent *this, float deltaTime)
 {
-  UFG::ProgressionTriggerComponent *v2; // rdi
-  UFG::PDATriggerParameters *v3; // rbp
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rbp
   char v4; // si
-  UFG::SimObjectCharacter *v5; // rax
-  unsigned __int16 v6; // dx
-  UFG::CharacterOccupantComponent *v7; // rbx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  __int16 m_Flags; // dx
+  UFG::CharacterOccupantComponent *ComponentOfType; // rbx
   unsigned int v8; // edx
-  unsigned int v9; // er9
-  signed __int64 v10; // rbx
-  unsigned int v11; // edx
-  unsigned int v12; // er9
+  unsigned int v9; // r9d
+  __int64 v10; // rbx
+  unsigned int mComponentTableEntryCount; // edx
+  unsigned int size; // r9d
   unsigned int v13; // edx
-  unsigned int v14; // er9
-  UFG::SimComponent *v15; // rax
-  UFG::SimObject *v16; // rcx
-  unsigned __int64 v17; // rax
-  unsigned __int64 v18; // rbx
+  unsigned int v14; // r9d
+  UFG::SimComponent *m_pSimComponent; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  unsigned __int64 mCallTimeout; // rax
+  unsigned __int64 mSimTimeMSec; // rbx
   UFG::UIHK_PDAWidget *v19; // rax
   UFG::UIHK_PDAWidget *v20; // rax
-  unsigned __int64 v21; // rcx
+  unsigned __int64 mCallFailTimeout; // rcx
   unsigned __int64 v22; // rax
   UFG::GameSliceStreamer *v23; // rax
 
-  v2 = this;
   if ( !this->mEnabled )
     return;
-  v3 = this->mpGameSlice->mPDATriggerParameters;
-  if ( !v3 || !v3->mIncoming )
+  mPDATriggerParameters = this->mpGameSlice->mPDATriggerParameters;
+  if ( !mPDATriggerParameters || !mPDATriggerParameters->mIncoming )
     return;
   v4 = 0;
-  if ( v3->mVehicleFilter.mUID == -1 )
+  if ( mPDATriggerParameters->mVehicleFilter.mUID == -1 )
     goto LABEL_36;
-  v5 = UFG::GetLocalPlayer();
-  if ( !v5 )
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( !LocalPlayer )
     goto LABEL_37;
-  v6 = v5->m_Flags;
-  if ( !((v6 >> 14) & 1) )
+  m_Flags = LocalPlayer->m_Flags;
+  if ( (m_Flags & 0x4000) == 0 )
   {
-    if ( (v6 & 0x8000u) == 0 )
+    if ( m_Flags >= 0 )
     {
-      if ( (v6 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v11 = v5->mComponentTableEntryCount;
-        v12 = v5->m_Components.size;
-        if ( v11 < v12 )
+        mComponentTableEntryCount = LocalPlayer->mComponentTableEntryCount;
+        size = LocalPlayer->m_Components.size;
+        if ( mComponentTableEntryCount < size )
         {
-          v10 = (signed __int64)&v5->m_Components.p[v11];
+          v10 = (__int64)&LocalPlayer->m_Components.p[mComponentTableEntryCount];
           while ( (*(_DWORD *)(v10 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF )
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v11;
+            ++mComponentTableEntryCount;
             v10 += 16i64;
-            if ( v11 >= v12 )
+            if ( mComponentTableEntryCount >= size )
             {
-              v7 = 0i64;
+              ComponentOfType = 0i64;
               goto LABEL_31;
             }
           }
@@ -189,26 +178,26 @@ void __fastcall UFG::ProgressionTriggerComponent::Update(UFG::ProgressionTrigger
       }
       else
       {
-        if ( !((v6 >> 12) & 1) )
+        if ( (m_Flags & 0x1000) == 0 )
         {
-          v7 = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v5->vfptr,
-                                                    UFG::CharacterOccupantComponent::_TypeUID);
+          ComponentOfType = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
+                                                                 LocalPlayer,
+                                                                 UFG::CharacterOccupantComponent::_TypeUID);
           goto LABEL_31;
         }
-        v13 = v5->mComponentTableEntryCount;
-        v14 = v5->m_Components.size;
+        v13 = LocalPlayer->mComponentTableEntryCount;
+        v14 = LocalPlayer->m_Components.size;
         if ( v13 < v14 )
         {
-          v10 = (signed __int64)&v5->m_Components.p[v13];
+          v10 = (__int64)&LocalPlayer->m_Components.p[v13];
           while ( (*(_DWORD *)(v10 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF )
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF) != 0 )
           {
             ++v13;
             v10 += 16i64;
             if ( v13 >= v14 )
             {
-              v7 = 0i64;
+              ComponentOfType = 0i64;
               goto LABEL_31;
             }
           }
@@ -218,13 +207,13 @@ void __fastcall UFG::ProgressionTriggerComponent::Update(UFG::ProgressionTrigger
     }
     else
     {
-      v8 = v5->mComponentTableEntryCount;
-      v9 = v5->m_Components.size;
+      v8 = LocalPlayer->mComponentTableEntryCount;
+      v9 = LocalPlayer->m_Components.size;
       if ( v8 < v9 )
       {
-        v10 = (signed __int64)&v5->m_Components.p[v8];
+        v10 = (__int64)&LocalPlayer->m_Components.p[v8];
         while ( (*(_DWORD *)(v10 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-             || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF )
+             || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v10 + 8) & 0x1FFFFFF) != 0 )
         {
           ++v8;
           v10 += 16i64;
@@ -232,72 +221,70 @@ void __fastcall UFG::ProgressionTriggerComponent::Update(UFG::ProgressionTrigger
             goto LABEL_14;
         }
 LABEL_15:
-        v7 = *(UFG::CharacterOccupantComponent **)v10;
+        ComponentOfType = *(UFG::CharacterOccupantComponent **)v10;
         goto LABEL_31;
       }
     }
 LABEL_14:
-    v7 = 0i64;
+    ComponentOfType = 0i64;
     goto LABEL_31;
   }
-  v7 = (UFG::CharacterOccupantComponent *)v5->m_Components.p[44].m_pComponent;
+  ComponentOfType = (UFG::CharacterOccupantComponent *)LocalPlayer->m_Components.p[44].m_pComponent;
 LABEL_31:
-  if ( v7 )
+  if ( ComponentOfType )
   {
-    if ( !UFG::CharacterOccupantComponent::IsEnteringOrExiting(v7) )
+    if ( !UFG::CharacterOccupantComponent::IsEnteringOrExiting(ComponentOfType) )
     {
-      v15 = v7->mCurrentVOC.m_pSimComponent;
-      if ( v15 )
+      m_pSimComponent = ComponentOfType->mCurrentVOC.m_pSimComponent;
+      if ( m_pSimComponent )
       {
-        v16 = v15->m_pSimObject;
-        if ( v16 )
+        m_pSimObject = m_pSimComponent->m_pSimObject;
+        if ( m_pSimObject )
         {
-          if ( UFG::SimObjectUtility::IsClassType(v16, &v3->mVehicleFilter) )
-          {
+          if ( UFG::SimObjectUtility::IsClassType(m_pSimObject, &mPDATriggerParameters->mVehicleFilter) )
 LABEL_36:
             v4 = 1;
-            goto LABEL_37;
-          }
         }
       }
     }
   }
 LABEL_37:
-  v17 = v2->mCallTimeout;
-  v18 = UFG::Metrics::msInstance.mSimTimeMSec;
-  if ( v17 )
+  mCallTimeout = this->mCallTimeout;
+  mSimTimeMSec = UFG::Metrics::msInstance.mSimTimeMSec;
+  if ( mCallTimeout )
   {
-    if ( UFG::Metrics::msInstance.mSimTimeMSec > v17 || !v4 )
+    if ( UFG::Metrics::msInstance.mSimTimeMSec > mCallTimeout || !v4 )
     {
-      UFG::ProgressionTriggerComponent::DisablePDATrigger(v2->mpGameSlice);
-      UFG::ProgressionTriggerComponent::UnloadScripts(v2);
-      v2->mCallFailTimeout = v18 + 10000;
+      UFG::ProgressionTriggerComponent::DisablePDATrigger(this->mpGameSlice);
+      UFG::ProgressionTriggerComponent::UnloadScripts(this);
+      this->mCallFailTimeout = mSimTimeMSec + 10000;
       return;
     }
     v19 = UFG::UIHK_PDAWidget::Get();
     if ( v19 && UFG::UIHK_PDAWidget::HasAnswered(v19) )
     {
-      UFG::ProgressionTriggerComponent::OnActivate(v2);
+      UFG::ProgressionTriggerComponent::OnActivate(this);
 LABEL_50:
       v23 = UFG::GameSliceStreamer::Instance();
-      UFG::GameSliceStreamer::RequestStream(v23, v2->mpGameSlice);
-      return;
+      UFG::GameSliceStreamer::RequestStream(
+        v23,
+        (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this->mpGameSlice);
     }
   }
-  else if ( v2->mInsideActiveRegion )
+  else if ( this->mInsideActiveRegion )
   {
     v20 = UFG::UIHK_PDAWidget::Get();
     if ( v20 )
     {
       if ( v4 )
       {
-        v21 = v2->mCallFailTimeout;
-        if ( !v21 || v18 > v21 )
+        mCallFailTimeout = this->mCallFailTimeout;
+        if ( !mCallFailTimeout || mSimTimeMSec > mCallFailTimeout )
         {
-          UFG::UIHK_PDAWidget::QueueIncomingPhoneCall(v20, v3->mContactName.mData, 0, 0, 0);
+          UFG::UIHK_PDAWidget::QueueIncomingPhoneCall(v20, mPDATriggerParameters->mContactName.mData, 0, 0, 0);
           v22 = UFG::Metrics::msInstance.mSimTimeMSec;
-          v2->mCallFailTimeout = 0i64;
-          v2->mCallTimeout = v22 + 15000;
+          this->mCallFailTimeout = 0i64;
+          this->mCallTimeout = v22 + 15000;
           goto LABEL_50;
         }
       }
@@ -317,162 +304,166 @@ void __fastcall UFG::ProgressionTriggerComponent::UpdateAll(float deltaTime)
                                                                              - 5);
         UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)v1 )
   {
-    ((void (*)(void))v1->mPrev[7].mPrev)();
-    v1 = UFG::gpCurrentProgressionTriggerComponent->mNext - 5;
+    ((void (__fastcall *)(UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *))v1->mPrev[7].mPrev)(v1);
+    v1 = UFG::gpCurrentProgressionTriggerComponent->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext
+       - 5;
   }
   UFG::gpCurrentProgressionTriggerComponent = 0i64;
 }
 
 // File Line: 202
 // RVA: 0x5249F0
-void __fastcall UFG::ProgressionTriggerComponent::CreateRegions(UFG::ProgressionTriggerComponent *this, UFG::TransformNodeComponent *pTransformNode)
+void __fastcall UFG::ProgressionTriggerComponent::CreateRegions(
+        UFG::ProgressionTriggerComponent *this,
+        UFG::TransformNodeComponent *pTransformNode)
 {
-  UFG::TransformNodeComponent *v2; // r15
-  UFG::ProgressionTriggerComponent *v3; // rbp
-  UFG::SimObjectCharacter *v4; // rdi
-  UFG::SceneObjectProperties *v5; // rbx
-  UFG::qPropertySet *v6; // rcx
-  UFG::qPropertySet *v7; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rdi
+  UFG::SceneObjectProperties *m_pSceneObj; // rbx
+  UFG::qPropertySet *mpWritableProperties; // rcx
+  UFG::qPropertySet *mpConstProperties; // rcx
   UFG::qPropertySet *v8; // rcx
-  UFG::qPropertySet *v9; // r13
+  UFG::qPropertySet *PropertySet; // r13
   float *v10; // rsi
-  signed __int64 v11; // rdi
-  signed __int64 v12; // r14
+  UFG::SceneObjectProperties **mpRegionSceneObjects; // rdi
+  __int64 v12; // r14
   UFG::SceneObjectProperties *v13; // rax
-  UFG::qPropertySet *v14; // rax
-  UFG::qPropertySet *v15; // rbx
-  __int64 v16; // rbx
-  UFG::TransformNodeComponent *v17; // rcx
-  unsigned __int16 v18; // cx
-  unsigned int v19; // er8
-  unsigned int v20; // er10
-  __int64 v21; // rbx
-  signed __int64 v22; // rdx
-  UFG::SimComponent *v23; // rbx
-  unsigned int v24; // er8
-  unsigned int v25; // er10
-  unsigned int v26; // er8
-  unsigned int v27; // er10
-  unsigned int v28; // er8
-  unsigned int v29; // er10
-  hkSeekableStreamReader *v30; // rax
+  UFG::qPropertySet *WritableProperties; // rax
+  UFG::qPropertySet *appended; // rbx
+  UFG::SimObject *m_pSimObject; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rcx
+  __int16 m_Flags; // cx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r10d
+  UFG::SimComponentHolder *p; // rbx
+  __int64 v22; // rdx
+  UFG::SimComponent *ComponentOfType; // rbx
+  unsigned int v24; // r8d
+  unsigned int v25; // r10d
+  unsigned int v26; // r8d
+  unsigned int v27; // r10d
+  unsigned int v28; // r8d
+  unsigned int v29; // r10d
+  hkSeekableStreamReader *RCX; // rax
   hkSeekableStreamReader *v31; // rax
-  signed __int64 v32; // rsi
+  __int64 i; // rsi
   UFG::TriggerRegion *v33; // rbx
   UFG::SimObject *v34; // rcx
-  unsigned __int16 v35; // dx
-  unsigned int v36; // er8
-  unsigned int v37; // er10
+  __int16 v35; // dx
+  unsigned int v36; // r8d
+  unsigned int v37; // r10d
   UFG::SimComponentHolder *v38; // rbx
-  signed __int64 v39; // rdx
-  UFG::RegionComponent *v40; // rbx
-  unsigned int v41; // er8
-  unsigned int v42; // er10
-  unsigned int v43; // er8
-  unsigned int v44; // er10
-  unsigned int v45; // er8
-  unsigned int v46; // er10
+  __int64 v39; // rdx
+  UFG::RegionComponent *m_pComponent; // rbx
+  unsigned int v41; // r8d
+  unsigned int v42; // r10d
+  unsigned int v43; // r8d
+  unsigned int v44; // r10d
+  unsigned int v45; // r8d
+  unsigned int v46; // r10d
   UFG::TransformNodeComponent *v47; // rdi
   UFG::SimObjectCharacter *v48; // [rsp+20h] [rbp-68h]
-  int v49; // [rsp+30h] [rbp-58h]
-  int v50; // [rsp+34h] [rbp-54h]
-  int v51; // [rsp+38h] [rbp-50h]
-  float v52; // [rsp+3Ch] [rbp-4Ch]
-  float v53; // [rsp+40h] [rbp-48h]
-  UFG::qSymbol result; // [rsp+90h] [rbp+8h]
-  UFG::qSymbol name_a; // [rsp+A0h] [rbp+18h]
-  UFG::qSymbol objName; // [rsp+A8h] [rbp+20h]
+  int v49[22]; // [rsp+30h] [rbp-58h] BYREF
+  UFG::qSymbol result; // [rsp+90h] [rbp+8h] BYREF
+  UFG::qSymbol name_a; // [rsp+A0h] [rbp+18h] BYREF
+  UFG::qSymbol objName; // [rsp+A8h] [rbp+20h] BYREF
 
-  v2 = pTransformNode;
-  v3 = this;
-  v4 = UFG::GetLocalPlayer();
-  v48 = v4;
-  v5 = v3->m_pSimObject->m_pSceneObj;
-  v6 = v5->mpWritableProperties;
-  if ( !v6 )
-    v6 = v5->mpConstProperties;
-  v49 = *(_DWORD *)UFG::qPropertySet::Get<float>(v6, (UFG::qSymbol *)&qSymbol_ActivateRadius.mUID, DEPTH_RECURSE);
-  v7 = v5->mpWritableProperties;
-  if ( !v7 )
-    v7 = v5->mpConstProperties;
-  v51 = *(_DWORD *)UFG::qPropertySet::Get<float>(v7, (UFG::qSymbol *)&qSymbol_DeactivateRadius.mUID, DEPTH_RECURSE);
-  v8 = v5->mpWritableProperties;
+  LocalPlayer = UFG::GetLocalPlayer();
+  v48 = LocalPlayer;
+  m_pSceneObj = this->m_pSimObject->m_pSceneObj;
+  mpWritableProperties = m_pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = m_pSceneObj->mpConstProperties;
+  v49[0] = *(int *)UFG::qPropertySet::Get<float>(
+                     mpWritableProperties,
+                     (UFG::qArray<unsigned long,0> *)&qSymbol_ActivateRadius,
+                     DEPTH_RECURSE);
+  mpConstProperties = m_pSceneObj->mpWritableProperties;
+  if ( !mpConstProperties )
+    mpConstProperties = m_pSceneObj->mpConstProperties;
+  v49[2] = *(int *)UFG::qPropertySet::Get<float>(
+                     mpConstProperties,
+                     (UFG::qArray<unsigned long,0> *)&qSymbol_DeactivateRadius,
+                     DEPTH_RECURSE);
+  v8 = m_pSceneObj->mpWritableProperties;
   if ( !v8 )
-    v8 = v5->mpConstProperties;
-  v50 = *(_DWORD *)UFG::qPropertySet::Get<float>(v8, (UFG::qSymbol *)&qSymbol_TriggerRadius.mUID, DEPTH_RECURSE);
-  v52 = FLOAT_180_0;
-  v53 = FLOAT_200_0;
-  if ( !v3->mRegionsCreated )
+    v8 = m_pSceneObj->mpConstProperties;
+  v49[1] = *(int *)UFG::qPropertySet::Get<float>(
+                     v8,
+                     (UFG::qArray<unsigned long,0> *)&qSymbol_TriggerRadius,
+                     DEPTH_RECURSE);
+  *(float *)&v49[3] = FLOAT_180_0;
+  *(float *)&v49[4] = FLOAT_200_0;
+  if ( !this->mRegionsCreated )
   {
-    if ( !(_S67 & 1) )
+    if ( (_S67 & 1) == 0 )
     {
       _S67 |= 1u;
       UFG::qSymbol::create_from_string(&triggerPropertySetSymbol_0, "object-logical-TriggerRegion");
       atexit(UFG::ProgressionTriggerComponent::CreateRegions_::_8_::_dynamic_atexit_destructor_for__triggerPropertySetSymbol__);
     }
-    v9 = UFG::PropertySetManager::GetPropertySet(&triggerPropertySetSymbol_0);
-    v10 = (float *)&v49;
-    v11 = (signed __int64)v3->mpRegionSceneObjects;
+    PropertySet = UFG::PropertySetManager::GetPropertySet(&triggerPropertySetSymbol_0);
+    v10 = (float *)v49;
+    mpRegionSceneObjects = this->mpRegionSceneObjects;
     v12 = 5i64;
     while ( 1 )
     {
-      UFG::qSymbol::create_suffix(&result, &v3->m_pSimObject->m_Name, "_");
+      UFG::qSymbol::create_suffix((UFG::qWiseSymbol *)&result, &this->m_pSimObject->m_Name, "_");
       UFG::qSymbol::create_suffix(
-        &name_a,
+        (UFG::qWiseSymbol *)&name_a,
         &result,
-        *(const char **)((char *)UFG::ProgressionTriggerRegionTypes - (char *)v3 + v11 - 96));
-      UFG::qSymbol::create_suffix(&objName, &name_a, "_PTR");
-      v13 = UFG::SceneObjectProperties::Create(&objName, 0i64, v9);
-      *(_QWORD *)v11 = v13;
-      v14 = UFG::SceneObjectProperties::GetWritableProperties(v13);
-      v15 = UFG::RegionComponent::PropertiesAppendDefaultProperty(v14);
-      UFG::qPropertySet::Set<unsigned long>(v15, (UFG::qSymbol *)&SimSym_Type.mUID, 2u);
-      UFG::qPropertySet::Set<float>(v15, (UFG::qSymbol *)&SimSym_Radius.mUID, *v10);
-      UFG::SceneObjectProperties::Activate(*(UFG::SceneObjectProperties **)v11, 1u, 0i64, 0i64);
-      v16 = *(_QWORD *)(*(_QWORD *)v11 + 40i64);
-      if ( !v16 )
+        *(char **)((char *)mpRegionSceneObjects + (char *)UFG::ProgressionTriggerRegionTypes - (char *)this - 96));
+      UFG::qSymbol::create_suffix((UFG::qWiseSymbol *)&objName, &name_a, "_PTR");
+      v13 = UFG::SceneObjectProperties::Create(&objName, 0i64, PropertySet);
+      *mpRegionSceneObjects = v13;
+      WritableProperties = UFG::SceneObjectProperties::GetWritableProperties(v13);
+      appended = UFG::RegionComponent::PropertiesAppendDefaultProperty(WritableProperties);
+      UFG::qPropertySet::Set<unsigned long>(appended, (UFG::qArray<unsigned long,0> *)&SimSym_Type, 2u);
+      UFG::qPropertySet::Set<float>(appended, (UFG::qArray<unsigned long,0> *)&SimSym_Radius, *v10);
+      UFG::SceneObjectProperties::Activate(*mpRegionSceneObjects, 1u, 0i64, 0i64);
+      m_pSimObject = (*mpRegionSceneObjects)->m_pSimObject;
+      if ( !m_pSimObject )
       {
 LABEL_44:
-        v23 = 0i64;
+        ComponentOfType = 0i64;
         goto LABEL_45;
       }
-      v17 = *(UFG::TransformNodeComponent **)(v16 + 88);
-      if ( v17 )
-        UFG::TransformNodeComponent::SetParent(v17, v2, 0);
-      v18 = *(_WORD *)(v16 + 76);
-      if ( (v18 >> 14) & 1 )
+      m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+      if ( m_pTransformNodeComponent )
+        UFG::TransformNodeComponent::SetParent(m_pTransformNodeComponent, pTransformNode, eInheritXform_Full);
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v19 = *(_DWORD *)(v16 + 128);
-        v20 = *(_DWORD *)(v16 + 96);
-        if ( v19 >= v20 )
+        vfptr = (unsigned int)m_pSimObject[1].vfptr;
+        size = m_pSimObject->m_Components.size;
+        if ( vfptr >= size )
           goto LABEL_44;
-        v21 = *(_QWORD *)(v16 + 104);
+        p = m_pSimObject->m_Components.p;
         while ( 1 )
         {
-          v22 = 2i64 * v19;
-          if ( (*(_DWORD *)(v21 + 16i64 * v19 + 8) & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
-            && !(UFG::TriggerRegion::_TypeUID & ~*(_DWORD *)(v21 + 16i64 * v19 + 8) & 0x1FFFFFF) )
+          v22 = vfptr;
+          if ( (p[vfptr].m_TypeUID & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
+            && (UFG::TriggerRegion::_TypeUID & ~p[vfptr].m_TypeUID & 0x1FFFFFF) == 0 )
           {
             break;
           }
-          if ( ++v19 >= v20 )
+          if ( ++vfptr >= size )
             goto LABEL_44;
         }
       }
-      else if ( (v18 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v18 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v26 = *(_DWORD *)(v16 + 128);
-          v27 = *(_DWORD *)(v16 + 96);
+          v26 = (unsigned int)m_pSimObject[1].vfptr;
+          v27 = m_pSimObject->m_Components.size;
           if ( v26 >= v27 )
             goto LABEL_44;
-          v21 = *(_QWORD *)(v16 + 104);
+          p = m_pSimObject->m_Components.p;
           while ( 1 )
           {
-            v22 = 2i64 * v26;
-            if ( (*(_DWORD *)(v21 + 16i64 * v26 + 8) & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
-              && !(UFG::TriggerRegion::_TypeUID & ~*(_DWORD *)(v21 + 16i64 * v26 + 8) & 0x1FFFFFF) )
+            v22 = v26;
+            if ( (p[v26].m_TypeUID & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
+              && (UFG::TriggerRegion::_TypeUID & ~p[v26].m_TypeUID & 0x1FFFFFF) == 0 )
             {
               break;
             }
@@ -482,21 +473,21 @@ LABEL_44:
         }
         else
         {
-          if ( !((v18 >> 12) & 1) )
+          if ( (m_Flags & 0x1000) == 0 )
           {
-            v23 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)v16, UFG::TriggerRegion::_TypeUID);
+            ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::TriggerRegion::_TypeUID);
             goto LABEL_45;
           }
-          v28 = *(_DWORD *)(v16 + 128);
-          v29 = *(_DWORD *)(v16 + 96);
+          v28 = (unsigned int)m_pSimObject[1].vfptr;
+          v29 = m_pSimObject->m_Components.size;
           if ( v28 >= v29 )
             goto LABEL_44;
-          v21 = *(_QWORD *)(v16 + 104);
+          p = m_pSimObject->m_Components.p;
           while ( 1 )
           {
-            v22 = 2i64 * v28;
-            if ( (*(_DWORD *)(v21 + 16i64 * v28 + 8) & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
-              && !(UFG::TriggerRegion::_TypeUID & ~*(_DWORD *)(v21 + 16i64 * v28 + 8) & 0x1FFFFFF) )
+            v22 = v28;
+            if ( (p[v28].m_TypeUID & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
+              && (UFG::TriggerRegion::_TypeUID & ~p[v28].m_TypeUID & 0x1FFFFFF) == 0 )
             {
               break;
             }
@@ -507,16 +498,16 @@ LABEL_44:
       }
       else
       {
-        v24 = *(_DWORD *)(v16 + 128);
-        v25 = *(_DWORD *)(v16 + 96);
+        v24 = (unsigned int)m_pSimObject[1].vfptr;
+        v25 = m_pSimObject->m_Components.size;
         if ( v24 >= v25 )
           goto LABEL_44;
-        v21 = *(_QWORD *)(v16 + 104);
+        p = m_pSimObject->m_Components.p;
         while ( 1 )
         {
-          v22 = 2i64 * v24;
-          if ( (*(_DWORD *)(v21 + 16i64 * v24 + 8) & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
-            && !(UFG::TriggerRegion::_TypeUID & ~*(_DWORD *)(v21 + 16i64 * v24 + 8) & 0x1FFFFFF) )
+          v22 = v24;
+          if ( (p[v24].m_TypeUID & 0xFE000000) == (UFG::TriggerRegion::_TypeUID & 0xFE000000)
+            && (UFG::TriggerRegion::_TypeUID & ~p[v24].m_TypeUID & 0x1FFFFFF) == 0 )
           {
             break;
           }
@@ -524,42 +515,41 @@ LABEL_44:
             goto LABEL_44;
         }
       }
-      v23 = *(UFG::SimComponent **)(v21 + 8 * v22);
+      ComponentOfType = p[v22].m_pComponent;
 LABEL_45:
-      *(_QWORD *)(v11 + 40) = v23;
-      v30 = Assembly::GetRCX(v3);
-      v23[3].m_BoundComponentHandles.mNode.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)UFG::ProgressionTriggerComponent::OnEnterTrigger;
-      v23[3].m_BoundComponentHandles.mNode.mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)v30;
-      v31 = Assembly::GetRCX(v3);
-      v23[4].m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)UFG::ProgressionTriggerComponent::OnExitTrigger;
-      v23[4].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v31;
-      v11 += 8i64;
+      mpRegionSceneObjects[5] = (UFG::SceneObjectProperties *)ComponentOfType;
+      RCX = Assembly::GetRCX(this);
+      ComponentOfType[3].m_BoundComponentHandles.mNode.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)UFG::ProgressionTriggerComponent::OnEnterTrigger;
+      ComponentOfType[3].m_BoundComponentHandles.mNode.mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)RCX;
+      v31 = Assembly::GetRCX(this);
+      ComponentOfType[4].m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)UFG::ProgressionTriggerComponent::OnExitTrigger;
+      ComponentOfType[4].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v31;
+      ++mpRegionSceneObjects;
       ++v10;
       if ( !--v12 )
       {
-        v3->mRegionsCreated = 1;
-        v4 = v48;
+        this->mRegionsCreated = 1;
+        LocalPlayer = v48;
         break;
       }
     }
   }
-  v32 = 0i64;
-  do
+  for ( i = 0i64; i < 5; ++i )
   {
-    v33 = v3->mpTriggerRegions[v32];
+    v33 = this->mpTriggerRegions[i];
     if ( !v33 )
       goto LABEL_87;
-    if ( !v4 )
+    if ( !LocalPlayer )
       goto LABEL_87;
     LOBYTE(result.mUID) = 0;
-    UFG::TriggerRegion::TrackTarget(v33, (UFG::SimObject *)&v4->vfptr, (bool *)&result);
-    if ( v32 )
+    UFG::TriggerRegion::TrackTarget(v33, LocalPlayer, (bool *)&result);
+    if ( i )
       goto LABEL_87;
     v34 = v33->m_pSimObject;
     if ( !v34 )
       goto LABEL_87;
     v35 = v34->m_Flags;
-    if ( (v35 >> 14) & 1 )
+    if ( (v35 & 0x4000) != 0 )
     {
       v36 = (unsigned int)v34[1].vfptr;
       v37 = v34->m_Components.size;
@@ -570,7 +560,7 @@ LABEL_45:
       {
         v39 = v36;
         if ( (v38[v36].m_TypeUID & 0xFE000000) == (UFG::RegionComponent::_TypeUID & 0xFE000000)
-          && !(UFG::RegionComponent::_TypeUID & ~v38[v36].m_TypeUID & 0x1FFFFFF) )
+          && (UFG::RegionComponent::_TypeUID & ~v38[v36].m_TypeUID & 0x1FFFFFF) == 0 )
         {
           break;
         }
@@ -578,9 +568,9 @@ LABEL_45:
           goto LABEL_60;
       }
     }
-    else if ( (v35 & 0x8000u) == 0 )
+    else if ( v35 >= 0 )
     {
-      if ( (v35 >> 13) & 1 )
+      if ( (v35 & 0x2000) != 0 )
       {
         v43 = (unsigned int)v34[1].vfptr;
         v44 = v34->m_Components.size;
@@ -591,7 +581,7 @@ LABEL_45:
         {
           v39 = v43;
           if ( (v38[v43].m_TypeUID & 0xFE000000) == (UFG::RegionComponent::_TypeUID & 0xFE000000)
-            && !(UFG::RegionComponent::_TypeUID & ~v38[v43].m_TypeUID & 0x1FFFFFF) )
+            && (UFG::RegionComponent::_TypeUID & ~v38[v43].m_TypeUID & 0x1FFFFFF) == 0 )
           {
             break;
           }
@@ -601,9 +591,9 @@ LABEL_45:
       }
       else
       {
-        if ( !((v35 >> 12) & 1) )
+        if ( (v35 & 0x1000) == 0 )
         {
-          v40 = (UFG::RegionComponent *)UFG::SimObject::GetComponentOfType(v34, UFG::RegionComponent::_TypeUID);
+          m_pComponent = (UFG::RegionComponent *)UFG::SimObject::GetComponentOfType(v34, UFG::RegionComponent::_TypeUID);
           goto LABEL_83;
         }
         v45 = (unsigned int)v34[1].vfptr;
@@ -611,7 +601,7 @@ LABEL_45:
         if ( v45 >= v46 )
         {
 LABEL_60:
-          v40 = 0i64;
+          m_pComponent = 0i64;
           goto LABEL_83;
         }
         v38 = v34->m_Components.p;
@@ -619,7 +609,7 @@ LABEL_60:
         {
           v39 = v45;
           if ( (v38[v45].m_TypeUID & 0xFE000000) == (UFG::RegionComponent::_TypeUID & 0xFE000000)
-            && !(UFG::RegionComponent::_TypeUID & ~v38[v45].m_TypeUID & 0x1FFFFFF) )
+            && (UFG::RegionComponent::_TypeUID & ~v38[v45].m_TypeUID & 0x1FFFFFF) == 0 )
           {
             break;
           }
@@ -639,7 +629,7 @@ LABEL_60:
       {
         v39 = v41;
         if ( (v38[v41].m_TypeUID & 0xFE000000) == (UFG::RegionComponent::_TypeUID & 0xFE000000)
-          && !(UFG::RegionComponent::_TypeUID & ~v38[v41].m_TypeUID & 0x1FFFFFF) )
+          && (UFG::RegionComponent::_TypeUID & ~v38[v41].m_TypeUID & 0x1FFFFFF) == 0 )
         {
           break;
         }
@@ -647,132 +637,136 @@ LABEL_60:
           goto LABEL_60;
       }
     }
-    v40 = (UFG::RegionComponent *)v38[v39].m_pComponent;
+    m_pComponent = (UFG::RegionComponent *)v38[v39].m_pComponent;
 LABEL_83:
-    if ( v40 )
+    if ( m_pComponent )
     {
-      v47 = v4->m_pTransformNodeComponent;
+      v47 = LocalPlayer->m_pTransformNodeComponent;
       if ( v47 )
       {
         UFG::TransformNodeComponent::UpdateWorldTransform(v47);
-        if ( !UFG::RegionComponent::IsHitPoint(v40, (UFG::qVector3 *)&v47->mWorldTransform.v3) )
-          v3->mRequiresExitToActivate = 0;
+        if ( !UFG::RegionComponent::IsHitPoint(m_pComponent, (UFG::qVector3 *)&v47->mWorldTransform.v3) )
+          this->mRequiresExitToActivate = 0;
       }
     }
 LABEL_87:
-    UFG::TriggerRegion::EnableHot(v3->mpTriggerRegions[v32++], 1);
-    v4 = v48;
+    UFG::TriggerRegion::EnableHot(this->mpTriggerRegions[i], 1);
+    LocalPlayer = v48;
   }
-  while ( v32 < 5 );
-}
+}       UFG::TransformNodeComponent::UpdateWorldTransform(v47);
+        if ( !UFG::RegionComponent::IsHitPoint(m_pComponent, (UFG::qVector3 *)&v47->mWorldTransform.v3) )
+          this->mRequiresExitToActivate = 0;
+      }
+    }
+LABEL_87:
+    UFG::TriggerRegion::EnableHot(this->mpTriggerRegions[i], 1);
+    LocalPlayer 
 
 // File Line: 331
 // RVA: 0x534B30
-void __fastcall UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(UFG::ProgressionTriggerComponent *this, bool enable)
+void __fastcall UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(
+        UFG::ProgressionTriggerComponent *this,
+        bool enable)
 {
-  UFG::ProgressionTriggerComponent *v2; // r14
-  UFG::SimObject *v3; // rcx
-  bool v4; // bl
-  unsigned __int16 v5; // r8
+  UFG::SimObject *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
   UFG::SimComponent *v6; // rdi
-  unsigned int v7; // er8
-  unsigned int v8; // er9
-  signed __int64 v9; // rdx
-  UFG::SpawnPoint *v10; // rax
-  unsigned int v11; // er8
-  unsigned int v12; // er9
-  unsigned int v13; // er8
-  unsigned int v14; // er9
-  unsigned int v15; // er8
-  unsigned int v16; // er9
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 v9; // rdx
+  UFG::SpawnPoint *ComponentOfType; // rax
+  unsigned int v11; // r8d
+  unsigned int v12; // r9d
+  unsigned int v13; // r8d
+  unsigned int v14; // r9d
+  unsigned int v15; // r8d
+  unsigned int v16; // r9d
   UFG::SimObjectGame *v17; // rax
   UFG::SimObjectProp *v18; // rbx
-  unsigned __int16 v19; // dx
-  UFG::CharacterAnimationComponent *v20; // rcx
+  __int16 v19; // dx
+  UFG::CharacterAnimationComponent *m_pComponent; // rcx
   UFG::CharacterAnimationComponent *v21; // rax
-  unsigned int v22; // er8
-  unsigned int v23; // er9
-  signed __int64 v24; // rdx
-  UFG::SceneObjectProperties *v25; // rbp
-  UFG::qPropertySet *v26; // rsi
-  UFG::qPropertySet *v27; // rax
-  unsigned __int16 v28; // cx
-  unsigned int v29; // er8
-  unsigned int v30; // er9
-  signed __int64 v31; // rdx
-  unsigned int v32; // er8
-  unsigned int v33; // er9
-  unsigned int v34; // er8
-  unsigned int v35; // er9
-  UFG::SimObject *v36; // rax
+  unsigned int mComponentTableEntryCount; // r8d
+  unsigned int v23; // r9d
+  __int64 v24; // rdx
+  UFG::SceneObjectProperties *m_pSceneObj; // rbp
+  UFG::qPropertySet *WritableProperties; // rsi
+  UFG::qPropertySet *PropertySet; // rax
+  __int16 v28; // cx
+  unsigned int v29; // r8d
+  unsigned int v30; // r9d
+  __int64 v31; // rdx
+  unsigned int v32; // r8d
+  unsigned int v33; // r9d
+  unsigned int v34; // r8d
+  unsigned int v35; // r9d
+  UFG::SimObject *ResourceMovieDef; // rax
 
-  v2 = this;
-  v3 = this->m_pSimObject;
-  v4 = enable;
-  if ( !v3 )
+  m_pSimObject = this->m_pSimObject;
+  if ( !m_pSimObject )
     return;
-  v5 = v3->m_Flags;
+  m_Flags = m_pSimObject->m_Flags;
   v6 = 0i64;
-  if ( (v5 >> 14) & 1 )
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v7 = (unsigned int)v3[1].vfptr;
-    v8 = v3->m_Components.size;
-    if ( v7 < v8 )
+    vfptr = (unsigned int)m_pSimObject[1].vfptr;
+    size = m_pSimObject->m_Components.size;
+    if ( vfptr < size )
     {
-      v9 = (signed __int64)&v3->m_Components.p[v7];
+      v9 = (__int64)&m_pSimObject->m_Components.p[vfptr];
       while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::SpawnPoint::_TypeUID & 0xFE000000)
-           || UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF )
+           || (UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
       {
-        ++v7;
+        ++vfptr;
         v9 += 16i64;
-        if ( v7 >= v8 )
+        if ( vfptr >= size )
           goto LABEL_8;
       }
 LABEL_9:
-      v10 = *(UFG::SpawnPoint **)v9;
+      ComponentOfType = *(UFG::SpawnPoint **)v9;
       goto LABEL_32;
     }
     goto LABEL_8;
   }
-  if ( (v5 & 0x8000u) != 0 )
+  if ( m_Flags < 0 )
   {
-    v11 = (unsigned int)v3[1].vfptr;
-    v12 = v3->m_Components.size;
+    v11 = (unsigned int)m_pSimObject[1].vfptr;
+    v12 = m_pSimObject->m_Components.size;
     if ( v11 < v12 )
     {
-      v9 = (signed __int64)&v3->m_Components.p[v11];
+      v9 = (__int64)&m_pSimObject->m_Components.p[v11];
       while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::SpawnPoint::_TypeUID & 0xFE000000)
-           || UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF )
+           || (UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
       {
         ++v11;
         v9 += 16i64;
         if ( v11 >= v12 )
         {
-          v10 = 0i64;
+          ComponentOfType = 0i64;
           goto LABEL_32;
         }
       }
       goto LABEL_9;
     }
 LABEL_8:
-    v10 = 0i64;
+    ComponentOfType = 0i64;
     goto LABEL_32;
   }
-  if ( (v5 >> 13) & 1 )
+  if ( (m_Flags & 0x2000) != 0 )
   {
-    v13 = (unsigned int)v3[1].vfptr;
-    v14 = v3->m_Components.size;
+    v13 = (unsigned int)m_pSimObject[1].vfptr;
+    v14 = m_pSimObject->m_Components.size;
     if ( v13 < v14 )
     {
-      v9 = (signed __int64)&v3->m_Components.p[v13];
+      v9 = (__int64)&m_pSimObject->m_Components.p[v13];
       while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::SpawnPoint::_TypeUID & 0xFE000000)
-           || UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF )
+           || (UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
       {
         ++v13;
         v9 += 16i64;
         if ( v13 >= v14 )
         {
-          v10 = 0i64;
+          ComponentOfType = 0i64;
           goto LABEL_32;
         }
       }
@@ -780,21 +774,21 @@ LABEL_8:
     }
     goto LABEL_8;
   }
-  if ( (v5 >> 12) & 1 )
+  if ( (m_Flags & 0x1000) != 0 )
   {
-    v15 = (unsigned int)v3[1].vfptr;
-    v16 = v3->m_Components.size;
+    v15 = (unsigned int)m_pSimObject[1].vfptr;
+    v16 = m_pSimObject->m_Components.size;
     if ( v15 < v16 )
     {
-      v9 = (signed __int64)&v3->m_Components.p[v15];
+      v9 = (__int64)&m_pSimObject->m_Components.p[v15];
       while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::SpawnPoint::_TypeUID & 0xFE000000)
-           || UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF )
+           || (UFG::SpawnPoint::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
       {
         ++v15;
         v9 += 16i64;
         if ( v15 >= v16 )
         {
-          v10 = 0i64;
+          ComponentOfType = 0i64;
           goto LABEL_32;
         }
       }
@@ -802,113 +796,116 @@ LABEL_8:
     }
     goto LABEL_8;
   }
-  v10 = (UFG::SpawnPoint *)UFG::SimObject::GetComponentOfType(v3, UFG::SpawnPoint::_TypeUID);
+  ComponentOfType = (UFG::SpawnPoint *)UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::SpawnPoint::_TypeUID);
 LABEL_32:
-  if ( !v10 )
+  if ( !ComponentOfType )
     return;
-  if ( !v4 )
+  if ( !enable )
   {
-    v36 = Scaleform::GFx::InteractiveObject::GetResourceMovieDef(v10);
-    if ( v36 )
-      UFG::SimObject::Destroy(v36);
+    ResourceMovieDef = Scaleform::GFx::InteractiveObject::GetResourceMovieDef(ComponentOfType);
+    if ( ResourceMovieDef )
+      UFG::SimObject::Destroy(ResourceMovieDef);
     return;
   }
-  v17 = UFG::SpawnPoint::Spawn(v10, 0, 0);
+  v17 = UFG::SpawnPoint::Spawn(ComponentOfType, 0, 0);
   v18 = (UFG::SimObjectProp *)v17;
   if ( !v17 )
     return;
-  UFG::SimObjectUtility::ReinitializeSimObject((UFG::SimObject *)&v17->vfptr, 1, 0);
+  UFG::SimObjectUtility::ReinitializeSimObject(v17, 1, 0);
   v19 = v18->m_Flags;
-  if ( (v19 >> 14) & 1 )
+  if ( (v19 & 0x4000) != 0 )
   {
-    v20 = (UFG::CharacterAnimationComponent *)v18->m_Components.p[9].m_pComponent;
-    if ( !v20
-      || (UFG::CharacterAnimationComponent::_TypeUID ^ v20->m_TypeUID) & 0xFE000000
-      || UFG::CharacterAnimationComponent::_TypeUID & ~v20->m_TypeUID & 0x1FFFFFF )
+    m_pComponent = (UFG::CharacterAnimationComponent *)v18->m_Components.p[9].m_pComponent;
+    if ( !m_pComponent
+      || ((UFG::CharacterAnimationComponent::_TypeUID ^ m_pComponent->m_TypeUID) & 0xFE000000) != 0
+      || (UFG::CharacterAnimationComponent::_TypeUID & ~m_pComponent->m_TypeUID & 0x1FFFFFF) != 0 )
     {
       goto LABEL_39;
     }
     goto LABEL_57;
   }
-  if ( (v19 & 0x8000u) != 0 )
+  if ( v19 < 0 )
   {
-    v20 = (UFG::CharacterAnimationComponent *)v18->m_Components.p[9].m_pComponent;
-    if ( !v20 || (UFG::CharacterAnimationComponent::_TypeUID ^ v20->m_TypeUID) & 0xFE000000 )
+    m_pComponent = (UFG::CharacterAnimationComponent *)v18->m_Components.p[9].m_pComponent;
+    if ( !m_pComponent || ((UFG::CharacterAnimationComponent::_TypeUID ^ m_pComponent->m_TypeUID) & 0xFE000000) != 0 )
       goto LABEL_39;
-    if ( UFG::CharacterAnimationComponent::_TypeUID & ~v20->m_TypeUID & 0x1FFFFFF )
-      v20 = 0i64;
+    if ( (UFG::CharacterAnimationComponent::_TypeUID & ~m_pComponent->m_TypeUID & 0x1FFFFFF) != 0 )
+      m_pComponent = 0i64;
     goto LABEL_57;
   }
-  if ( (v19 >> 13) & 1 )
+  if ( (v19 & 0x2000) != 0 )
   {
     v21 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v18);
 LABEL_56:
-    v20 = v21;
+    m_pComponent = v21;
     goto LABEL_57;
   }
-  if ( !((v19 >> 12) & 1) )
+  if ( (v19 & 0x1000) == 0 )
   {
     v21 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v18->vfptr,
+                                                v18,
                                                 UFG::CharacterAnimationComponent::_TypeUID);
     goto LABEL_56;
   }
-  v22 = v18->mComponentTableEntryCount;
+  mComponentTableEntryCount = v18->mComponentTableEntryCount;
   v23 = v18->m_Components.size;
-  if ( v22 >= v23 )
+  if ( mComponentTableEntryCount >= v23 )
   {
 LABEL_39:
-    v20 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_57;
   }
-  v24 = (signed __int64)&v18->m_Components.p[v22];
+  v24 = (__int64)&v18->m_Components.p[mComponentTableEntryCount];
   while ( (*(_DWORD *)(v24 + 8) & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
-       || UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v24 + 8) & 0x1FFFFFF )
+       || (UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v24 + 8) & 0x1FFFFFF) != 0 )
   {
-    ++v22;
+    ++mComponentTableEntryCount;
     v24 += 16i64;
-    if ( v22 >= v23 )
+    if ( mComponentTableEntryCount >= v23 )
     {
-      v20 = 0i64;
+      m_pComponent = 0i64;
       goto LABEL_57;
     }
   }
-  v20 = *(UFG::CharacterAnimationComponent **)v24;
+  m_pComponent = *(UFG::CharacterAnimationComponent **)v24;
 LABEL_57:
-  if ( v20 && v2->mpGameSlice->mFaceActionType != 18 )
+  if ( m_pComponent && this->mpGameSlice->mFaceActionType != 18 )
   {
-    v25 = v18->m_pSceneObj;
-    v26 = UFG::SceneObjectProperties::GetWritableProperties(v25);
+    m_pSceneObj = v18->m_pSceneObj;
+    WritableProperties = UFG::SceneObjectProperties::GetWritableProperties(m_pSceneObj);
     if ( !UFG::qPropertySet::GetParentFromName(
-            v26,
-            (UFG::qSymbol *)&SimSymX_propset_componentFaceAction.mUID,
+            WritableProperties,
+            (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentFaceAction,
             DEPTH_RECURSE) )
     {
-      v27 = UFG::PropertySetManager::CreateOrFindPropertySet((UFG::qSymbol *)&SimSymX_propset_componentFaceAction.mUID);
-      UFG::PSWrapper::AppendParentLocal(v26, v27);
+      PropertySet = UFG::PropertySetManager::CreateOrFindPropertySet(&SimSymX_propset_componentFaceAction);
+      UFG::PSWrapper::AppendParentLocal(WritableProperties, PropertySet);
     }
     UFG::qPropertySet::Set<UFG::qSymbol>(
-      v26,
-      (UFG::qSymbol *)&SimSym_FaceAction.mUID,
-      (UFG::qSymbol *)&UFG::FaceActionEnumSymbols[v2->mpGameSlice->mFaceActionType].mUID);
-    UFG::qPropertySet::Set<unsigned long>(v26, (UFG::qSymbol *)&SimSym_PipsRequired.mUID, v2->mpGameSlice->mMinPipLevel);
-    UFG::qPropertySet::Set<bool>(v26, (UFG::qSymbol *)&SimSym_Hidden.mUID, 0);
-    UFG::qPropertySet::Set<bool>(v26, (UFG::qSymbol *)&SimSym_RemoveOnCompletion.mUID, 1);
+      WritableProperties,
+      (UFG::qArray<unsigned long,0> *)&SimSym_FaceAction,
+      &UFG::FaceActionEnumSymbols[this->mpGameSlice->mFaceActionType]);
+    UFG::qPropertySet::Set<unsigned long>(
+      WritableProperties,
+      (UFG::qArray<unsigned long,0> *)&SimSym_PipsRequired,
+      this->mpGameSlice->mMinPipLevel);
+    UFG::qPropertySet::Set<bool>(WritableProperties, (UFG::qArray<unsigned long,0> *)&SimSym_Hidden, 0);
+    UFG::qPropertySet::Set<bool>(WritableProperties, (UFG::qArray<unsigned long,0> *)&SimSym_RemoveOnCompletion, 1);
     v28 = v18->m_Flags;
-    if ( (v28 >> 14) & 1 )
+    if ( (v28 & 0x4000) != 0 )
     {
       v6 = v18->m_Components.p[45].m_pComponent;
       goto LABEL_86;
     }
-    if ( (v28 & 0x8000u) != 0 )
+    if ( v28 < 0 )
     {
       v29 = v18->mComponentTableEntryCount;
       v30 = v18->m_Components.size;
       if ( v29 >= v30 )
         goto LABEL_86;
-      v31 = (signed __int64)&v18->m_Components.p[v29];
+      v31 = (__int64)&v18->m_Components.p[v29];
       while ( (*(_DWORD *)(v31 + 8) & 0xFE000000) != (UFG::FaceActionComponent::_TypeUID & 0xFE000000)
-           || UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF )
+           || (UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF) != 0 )
       {
         ++v29;
         v31 += 16i64;
@@ -917,15 +914,15 @@ LABEL_57:
       }
       goto LABEL_70;
     }
-    if ( (v28 >> 13) & 1 )
+    if ( (v28 & 0x2000) != 0 )
     {
       v32 = v18->mComponentTableEntryCount;
       v33 = v18->m_Components.size;
       if ( v32 < v33 )
       {
-        v31 = (signed __int64)&v18->m_Components.p[v32];
+        v31 = (__int64)&v18->m_Components.p[v32];
         while ( (*(_DWORD *)(v31 + 8) & 0xFE000000) != (UFG::FaceActionComponent::_TypeUID & 0xFE000000)
-             || UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF )
+             || (UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF) != 0 )
         {
           ++v32;
           v31 += 16i64;
@@ -934,18 +931,17 @@ LABEL_57:
         }
 LABEL_70:
         v6 = *(UFG::SimComponent **)v31;
-        goto LABEL_86;
       }
     }
-    else if ( (v28 >> 12) & 1 )
+    else if ( (v28 & 0x1000) != 0 )
     {
       v34 = v18->mComponentTableEntryCount;
       v35 = v18->m_Components.size;
       if ( v34 < v35 )
       {
-        v31 = (signed __int64)&v18->m_Components.p[v34];
+        v31 = (__int64)&v18->m_Components.p[v34];
         while ( (*(_DWORD *)(v31 + 8) & 0xFE000000) != (UFG::FaceActionComponent::_TypeUID & 0xFE000000)
-             || UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF )
+             || (UFG::FaceActionComponent::_TypeUID & ~*(_DWORD *)(v31 + 8) & 0x1FFFFFF) != 0 )
         {
           ++v34;
           v31 += 16i64;
@@ -957,62 +953,66 @@ LABEL_70:
     }
     else
     {
-      v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v18->vfptr, UFG::FaceActionComponent::_TypeUID);
+      v6 = UFG::SimObject::GetComponentOfType(v18, UFG::FaceActionComponent::_TypeUID);
     }
 LABEL_86:
     if ( v6 )
-      v6->vfptr[12].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v6->vfptr, (unsigned int)v25);
+      v6->vfptr[12].__vecDelDtor(v6, (unsigned int)m_pSceneObj);
     else
-      UFG::FaceActionComponent::CreateFaceActionComponent(v25);
+      UFG::FaceActionComponent::CreateFaceActionComponent(m_pSceneObj);
   }
 }
 
 // File Line: 390
 // RVA: 0x526790
-void __fastcall UFG::ProgressionTriggerComponent::Enable(UFG::ProgressionTriggerComponent *this, UFG::GameSlice *pGameSlice)
+void __fastcall UFG::ProgressionTriggerComponent::Enable(
+        UFG::ProgressionTriggerComponent *this,
+        UFG::GameSlice *pGameSlice)
 {
-  UFG::ProgressionTriggerComponent *v2; // rbx
-  UFG::SimObject *v3; // rax
-  UFG::SceneObjectProperties *v4; // rdx
-  UFG::qPropertySet *v5; // rcx
-  UFG::TransformNodeComponent *v6; // rdx
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rdx
+  UFG::qPropertySet *mpWritableProperties; // rcx
+  UFG::TransformNodeComponent *mNext; // rdx
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v7; // rdx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v8; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *mPrev; // rcx
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v9; // rax
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v10; // rax
 
-  v2 = this;
   if ( !this->mEnabled )
   {
-    v3 = this->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     this->mpGameSlice = pGameSlice;
-    v4 = v3->m_pSceneObj;
-    v5 = v4->mpWritableProperties;
-    if ( !v5 )
-      v5 = v4->mpConstProperties;
-    UFG::qPropertySet::Get<char const *>(v5, (UFG::qSymbol *)&qSymbol_IndicatorType.mUID, DEPTH_RECURSE);
-    v6 = (UFG::TransformNodeComponent *)v2->m_pSimObject;
-    if ( v6 )
-      v6 = (UFG::TransformNodeComponent *)v6->mChildren.mNode.mNext;
-    UFG::ProgressionTriggerComponent::CreateRegions(v2, v6);
-    if ( !v2->mRequiresExitToActivate )
-      UFG::ProgressionTriggerComponent::EnableObjective(v2);
-    v7 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v2->mPrev;
-    if ( v7->mPrev != v7 || (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> **)v2->mNext != &v2->mPrev )
+    m_pSceneObj = m_pSimObject->m_pSceneObj;
+    mpWritableProperties = m_pSceneObj->mpWritableProperties;
+    if ( !mpWritableProperties )
+      mpWritableProperties = m_pSceneObj->mpConstProperties;
+    UFG::qPropertySet::Get<char const *>(
+      mpWritableProperties,
+      (UFG::qArray<unsigned long,0> *)&qSymbol_IndicatorType,
+      DEPTH_RECURSE);
+    mNext = (UFG::TransformNodeComponent *)this->m_pSimObject;
+    if ( mNext )
+      mNext = (UFG::TransformNodeComponent *)mNext->mChildren.mNode.mNext;
+    UFG::ProgressionTriggerComponent::CreateRegions(this, mNext);
+    if ( !this->mRequiresExitToActivate )
+      UFG::ProgressionTriggerComponent::EnableObjective(this);
+    v7 = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+    if ( v7->mPrev != v7
+      || this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext != &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> )
     {
-      v8 = v7->mPrev;
-      v9 = v2->mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
+      mPrev = v7->mPrev;
+      v9 = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext;
+      mPrev->mNext = v9;
+      v9->mPrev = mPrev;
       v7->mPrev = v7;
-      v2->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v2->mPrev;
+      this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
     }
     v10 = smProgressionTriggerComponent_UpdateList.mNode.mPrev;
     smProgressionTriggerComponent_UpdateList.mNode.mPrev->mNext = v7;
     v7->mPrev = v10;
-    v2->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&smProgressionTriggerComponent_UpdateList;
-    smProgressionTriggerComponent_UpdateList.mNode.mPrev = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v2->mPrev;
-    v2->mEnabled = 1;
+    this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&smProgressionTriggerComponent_UpdateList;
+    smProgressionTriggerComponent_UpdateList.mNode.mPrev = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+    this->mEnabled = 1;
   }
 }
 
@@ -1020,26 +1020,27 @@ void __fastcall UFG::ProgressionTriggerComponent::Enable(UFG::ProgressionTrigger
 // RVA: 0x526D50
 void __fastcall UFG::ProgressionTriggerComponent::EnableObjective(UFG::ProgressionTriggerComponent *this)
 {
-  UFG::ProgressionTriggerComponent *v1; // rbx
-  UFG::SceneObjectProperties *v2; // rdx
-  UFG::qPropertySet *v3; // rcx
+  UFG::SceneObjectProperties *m_pSceneObj; // rdx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   char *v4; // rax
   UFG::ProgressionTracker *v5; // rax
-  UFG::qString identifier; // [rsp+28h] [rbp-30h]
+  UFG::qString identifier; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
-  v2 = this->m_pSimObject->m_pSceneObj;
-  v3 = v2->mpWritableProperties;
-  if ( !v3 )
-    v3 = v2->mpConstProperties;
-  v4 = UFG::qPropertySet::Get<char const *>(v3, (UFG::qSymbol *)&qSymbol_Objective.mUID, DEPTH_RECURSE);
+  m_pSceneObj = this->m_pSimObject->m_pSceneObj;
+  mpWritableProperties = m_pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = m_pSceneObj->mpConstProperties;
+  v4 = UFG::qPropertySet::Get<char const *>(
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_Objective,
+         DEPTH_RECURSE);
   if ( v4 )
   {
     if ( *v4 )
     {
       UFG::qString::qString(&identifier, v4);
       v5 = UFG::ProgressionTracker::Instance();
-      UFG::ObjectiveTracker::UpdateStatus(&v5->mObjectiveTracker, &identifier, STATUS_ACTIVE, v1->mpGameSlice);
+      UFG::ObjectiveTracker::UpdateStatus(&v5->mObjectiveTracker, &identifier, STATUS_ACTIVE, this->mpGameSlice);
       UFG::qString::~qString(&identifier);
     }
   }
@@ -1049,66 +1050,65 @@ void __fastcall UFG::ProgressionTriggerComponent::EnableObjective(UFG::Progressi
 // RVA: 0x526030
 void __fastcall UFG::ProgressionTriggerComponent::Disable(UFG::ProgressionTriggerComponent *this, bool turnLayerOn)
 {
-  bool v2; // bp
-  UFG::ProgressionTriggerComponent *v3; // rdi
-  UFG::TriggerRegion **v4; // rbx
-  signed __int64 v5; // rsi
-  UFG::SceneObjectProperties *v6; // rdx
-  UFG::qPropertySet *v7; // rcx
+  UFG::TriggerRegion **mpTriggerRegions; // rbx
+  __int64 v5; // rsi
+  UFG::SceneObjectProperties *m_pSceneObj; // rdx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   char *v8; // rax
   UFG::qString *v9; // rax
   UFG::qString *v10; // rbx
   UFG::ProgressionTracker *v11; // rax
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v12; // rdx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v13; // rcx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v14; // rax
-  UFG::qString v15; // [rsp+28h] [rbp-30h]
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *mPrev; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *mNext; // rax
+  UFG::qString v15; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = turnLayerOn;
-  v3 = this;
   if ( this->mEnabled )
   {
-    v4 = this->mpTriggerRegions;
+    mpTriggerRegions = this->mpTriggerRegions;
     v5 = 5i64;
     do
     {
-      UFG::TriggerRegion::EnableHot(*v4, 0);
-      ++v4;
+      UFG::TriggerRegion::EnableHot(*mpTriggerRegions++, 0);
       --v5;
     }
     while ( v5 );
-    if ( !v3->mpGameSlice->mKeepTriggerObjectiveEnabled || !v2 )
+    if ( !this->mpGameSlice->mKeepTriggerObjectiveEnabled || !turnLayerOn )
     {
-      v6 = v3->m_pSimObject->m_pSceneObj;
-      v7 = v6->mpWritableProperties;
-      if ( !v7 )
-        v7 = v6->mpConstProperties;
-      v8 = UFG::qPropertySet::Get<char const *>(v7, (UFG::qSymbol *)&qSymbol_Objective.mUID, DEPTH_RECURSE);
+      m_pSceneObj = this->m_pSimObject->m_pSceneObj;
+      mpWritableProperties = m_pSceneObj->mpWritableProperties;
+      if ( !mpWritableProperties )
+        mpWritableProperties = m_pSceneObj->mpConstProperties;
+      v8 = UFG::qPropertySet::Get<char const *>(
+             mpWritableProperties,
+             (UFG::qArray<unsigned long,0> *)&qSymbol_Objective,
+             DEPTH_RECURSE);
       if ( v8 && *v8 )
       {
         UFG::qString::qString(&v15, v8);
         v10 = v9;
         v11 = UFG::ProgressionTracker::Instance();
-        UFG::ObjectiveTracker::UpdateStatus(&v11->mObjectiveTracker, v10, 0, v3->mpGameSlice);
+        UFG::ObjectiveTracker::UpdateStatus(&v11->mObjectiveTracker, v10, STATUS_INACTIVE, this->mpGameSlice);
         UFG::qString::~qString(&v15);
       }
     }
-    UFG::GameSlice::SetWaitingForTrigger(v3->mpGameSlice, 0, v2);
-    if ( !v2 )
-      UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(v3, 0);
-    v12 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v3->mPrev;
-    if ( v12->mPrev != v12 || (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> **)v3->mNext != &v3->mPrev )
+    UFG::GameSlice::SetWaitingForTrigger(this->mpGameSlice, 0, turnLayerOn);
+    if ( !turnLayerOn )
+      UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(this, 0);
+    v12 = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+    if ( v12->mPrev != v12
+      || this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext != &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> )
     {
-      if ( v3 == UFG::gpCurrentProgressionTriggerComponent )
-        UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->mPrev[-5];
-      v13 = v12->mPrev;
-      v14 = v3->mNext;
-      v13->mNext = v14;
-      v14->mPrev = v13;
+      if ( this == UFG::gpCurrentProgressionTriggerComponent )
+        UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev[-5];
+      mPrev = v12->mPrev;
+      mNext = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
       v12->mPrev = v12;
-      v3->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v3->mPrev;
+      this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
     }
-    v3->mEnabled = 0;
+    this->mEnabled = 0;
   }
 }
 
@@ -1116,36 +1116,36 @@ void __fastcall UFG::ProgressionTriggerComponent::Disable(UFG::ProgressionTrigge
 // RVA: 0x526530
 void __fastcall UFG::ProgressionTriggerComponent::DisablePDATrigger(UFG::GameSlice *pGameSlice)
 {
-  UFG::PDATriggerParameters *v1; // rax
-  UFG::ProgressionTriggerComponent *v2; // rbx
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rax
+  UFG::ProgressionTriggerComponent *Component; // rbx
   UFG::UIHK_PDAWidget *v3; // rax
-  UFG::PDATriggerTracker *v4; // rcx
-  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v6; // [rsp+48h] [rbp+10h]
+  UFG::PDATriggerTracker *p_mPDATriggerTracker; // rcx
+  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_identifier; // [rsp+48h] [rbp+10h]
 
-  v1 = pGameSlice->mPDATriggerParameters;
+  mPDATriggerParameters = pGameSlice->mPDATriggerParameters;
   if ( pGameSlice->mTriggerObjectName.mUID == -1 )
   {
-    if ( v1 )
+    if ( mPDATriggerParameters )
     {
-      v6 = &identifier;
-      identifier.mUID = v1->mContactSymbol.mUID;
-      v4 = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
-      UFG::PDATriggerTracker::Remove(v4, (__int64)&identifier);
+      p_identifier = &identifier;
+      identifier.mUID = mPDATriggerParameters->mContactSymbol.mUID;
+      p_mPDATriggerTracker = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
+      UFG::PDATriggerTracker::Remove(p_mPDATriggerTracker, &identifier.mUID);
     }
   }
-  else if ( v1 )
+  else if ( mPDATriggerParameters )
   {
-    if ( v1->mIncoming )
+    if ( mPDATriggerParameters->mIncoming )
     {
-      v2 = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
-      if ( v2 )
+      Component = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
+      if ( Component )
       {
         v3 = UFG::UIHK_PDAWidget::Get();
         if ( v3 )
         {
           UFG::UIHK_PDAWidget::EndPhoneCall(v3, 1);
-          v2->mCallTimeout = 0i64;
+          Component->mCallTimeout = 0i64;
         }
       }
     }
@@ -1154,123 +1154,119 @@ void __fastcall UFG::ProgressionTriggerComponent::DisablePDATrigger(UFG::GameSli
 
 // File Line: 505
 // RVA: 0x52B990
-UFG::SimComponent *__fastcall UFG::ProgressionTriggerComponent::GetComponent(UFG::GameSlice *pGameSlice)
+UFG::ProgressionTriggerComponent *__fastcall UFG::ProgressionTriggerComponent::GetComponent(UFG::GameSlice *pGameSlice)
 {
-  UFG::qBaseNodeRB *v1; // rax
-  unsigned __int16 v2; // dx
-  unsigned int v3; // er9
-  unsigned int v4; // er10
-  _DWORD *v5; // rdx
-  unsigned int v7; // er9
-  unsigned int v8; // er10
-  unsigned int v9; // er9
-  unsigned int v10; // er10
-  unsigned int v11; // er9
-  unsigned int v12; // er10
+  UFG::qBaseNodeRB *SimObject; // rax
+  __int16 v2; // dx
+  unsigned int mParent; // r9d
+  unsigned int v4; // r10d
+  _DWORD *i; // rdx
+  unsigned int v7; // r9d
+  unsigned int v8; // r10d
+  unsigned int v9; // r9d
+  unsigned int v10; // r10d
+  unsigned int v11; // r9d
+  unsigned int v12; // r10d
 
   if ( pGameSlice->mTriggerObjectName.mUID == -1 )
     return 0i64;
-  v1 = UFG::Simulation::GetSimObject(&UFG::gSim, &pGameSlice->mTriggerObjectName);
-  if ( !v1 )
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &pGameSlice->mTriggerObjectName);
+  if ( !SimObject )
     return 0i64;
-  v2 = WORD2(v1[2].mChild[0]);
-  if ( (v2 >> 14) & 1 )
+  v2 = WORD2(SimObject[2].mChild[0]);
+  if ( (v2 & 0x4000) != 0 )
   {
-    v3 = (unsigned int)v1[4].mParent;
-    v4 = (unsigned int)v1[3].mParent;
-    if ( v3 < v4 )
+    mParent = (unsigned int)SimObject[4].mParent;
+    v4 = (unsigned int)SimObject[3].mParent;
+    if ( mParent < v4 )
     {
-      v5 = (_DWORD *)((char *)v1[3].mChild[0] + 16 * v3);
-      while ( (v5[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
-           || UFG::ProgressionTriggerComponent::_TypeUID & ~v5[2] & 0x1FFFFFF )
+      for ( i = (_DWORD *)SimObject[3].mChild[0] + 4 * mParent;
+            (i[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
+         || (UFG::ProgressionTriggerComponent::_TypeUID & ~i[2] & 0x1FFFFFF) != 0;
+            i += 4 )
       {
-        ++v3;
-        v5 += 4;
-        if ( v3 >= v4 )
+        if ( ++mParent >= v4 )
           return 0i64;
       }
-      return *(UFG::SimComponent **)v5;
+      return *(UFG::ProgressionTriggerComponent **)i;
     }
     return 0i64;
   }
-  if ( (v2 & 0x8000u) != 0 )
+  if ( v2 < 0 )
   {
-    v7 = (unsigned int)v1[4].mParent;
-    v8 = (unsigned int)v1[3].mParent;
+    v7 = (unsigned int)SimObject[4].mParent;
+    v8 = (unsigned int)SimObject[3].mParent;
     if ( v7 < v8 )
     {
-      v5 = (_DWORD *)((char *)v1[3].mChild[0] + 16 * v7);
-      while ( (v5[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
-           || UFG::ProgressionTriggerComponent::_TypeUID & ~v5[2] & 0x1FFFFFF )
+      for ( i = (_DWORD *)SimObject[3].mChild[0] + 4 * v7;
+            (i[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
+         || (UFG::ProgressionTriggerComponent::_TypeUID & ~i[2] & 0x1FFFFFF) != 0;
+            i += 4 )
       {
-        ++v7;
-        v5 += 4;
-        if ( v7 >= v8 )
+        if ( ++v7 >= v8 )
           return 0i64;
       }
-      return *(UFG::SimComponent **)v5;
+      return *(UFG::ProgressionTriggerComponent **)i;
     }
     return 0i64;
   }
-  if ( (v2 >> 13) & 1 )
+  if ( (v2 & 0x2000) != 0 )
   {
-    v9 = (unsigned int)v1[4].mParent;
-    v10 = (unsigned int)v1[3].mParent;
+    v9 = (unsigned int)SimObject[4].mParent;
+    v10 = (unsigned int)SimObject[3].mParent;
     if ( v9 < v10 )
     {
-      v5 = (_DWORD *)((char *)v1[3].mChild[0] + 16 * v9);
-      while ( (v5[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
-           || UFG::ProgressionTriggerComponent::_TypeUID & ~v5[2] & 0x1FFFFFF )
+      for ( i = (_DWORD *)SimObject[3].mChild[0] + 4 * v9;
+            (i[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
+         || (UFG::ProgressionTriggerComponent::_TypeUID & ~i[2] & 0x1FFFFFF) != 0;
+            i += 4 )
       {
-        ++v9;
-        v5 += 4;
-        if ( v9 >= v10 )
+        if ( ++v9 >= v10 )
           return 0i64;
       }
-      return *(UFG::SimComponent **)v5;
+      return *(UFG::ProgressionTriggerComponent **)i;
     }
     return 0i64;
   }
-  if ( (v2 >> 12) & 1 )
+  if ( (v2 & 0x1000) != 0 )
   {
-    v11 = (unsigned int)v1[4].mParent;
-    v12 = (unsigned int)v1[3].mParent;
+    v11 = (unsigned int)SimObject[4].mParent;
+    v12 = (unsigned int)SimObject[3].mParent;
     if ( v11 < v12 )
     {
-      v5 = (_DWORD *)((char *)v1[3].mChild[0] + 16 * v11);
-      while ( (v5[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
-           || UFG::ProgressionTriggerComponent::_TypeUID & ~v5[2] & 0x1FFFFFF )
+      for ( i = (_DWORD *)SimObject[3].mChild[0] + 4 * v11;
+            (i[2] & 0xFE000000) != (UFG::ProgressionTriggerComponent::_TypeUID & 0xFE000000)
+         || (UFG::ProgressionTriggerComponent::_TypeUID & ~i[2] & 0x1FFFFFF) != 0;
+            i += 4 )
       {
-        ++v11;
-        v5 += 4;
-        if ( v11 >= v12 )
+        if ( ++v11 >= v12 )
           return 0i64;
       }
-      return *(UFG::SimComponent **)v5;
+      return *(UFG::ProgressionTriggerComponent **)i;
     }
     return 0i64;
   }
-  return UFG::SimObject::GetComponentOfType((UFG::SimObject *)v1, UFG::ProgressionTriggerComponent::_TypeUID);
+  return (UFG::ProgressionTriggerComponent *)UFG::SimObject::GetComponentOfType(
+                                               (UFG::SimObject *)SimObject,
+                                               UFG::ProgressionTriggerComponent::_TypeUID);
 }
 
 // File Line: 524
 // RVA: 0x53C060
 char __fastcall UFG::ProgressionTriggerComponent::IsRestoring(UFG::GameSlice *pGameSlice)
 {
-  UFG::GameSlice *v1; // rsi
   int v2; // ebx
-  int v3; // edi
+  int NumChildren; // edi
 
-  v1 = pGameSlice;
-  if ( pGameSlice->mState == 2 )
+  if ( pGameSlice->mState == STATE_RESTORING )
     return 0;
   v2 = 0;
-  v3 = UFG::GameSlice::GetNumChildren(pGameSlice);
-  if ( v3 <= 0 )
+  NumChildren = UFG::GameSlice::GetNumChildren(pGameSlice);
+  if ( NumChildren <= 0 )
     return 0;
-  while ( UFG::GameSlice::GetChild(v1, v2)->mState < 2 )
+  while ( UFG::GameSlice::GetChild(pGameSlice, v2)->mState < STATE_RESTORING )
   {
-    if ( ++v2 >= v3 )
+    if ( ++v2 >= NumChildren )
       return 0;
   }
   return 1;
@@ -1280,142 +1276,141 @@ char __fastcall UFG::ProgressionTriggerComponent::IsRestoring(UFG::GameSlice *pG
 // RVA: 0x526E60
 void __fastcall UFG::ProgressionTriggerComponent::EnableTrigger(UFG::GameSlice *pGameSlice)
 {
-  UFG::GameSlice *v1; // rbx
-  bool v2; // di
-  UFG::PDATriggerParameters *v3; // rsi
-  UFG::ProgressionTriggerComponent *v4; // rax
-  UFG::PDATriggerTracker *v5; // rcx
+  bool IsWaitingForTrigger; // di
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rsi
+  UFG::ProgressionTriggerComponent *Component; // rax
+  UFG::PDATriggerTracker *p_mPDATriggerTracker; // rcx
   UFG::ProgressionTracker *v6; // rax
-  UFG::GameSlice *v7; // rax
+  UFG::GameSlice *Parent; // rax
   UFG::GameSliceStreamer *v8; // rax
-  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v10; // [rsp+48h] [rbp+10h]
+  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_identifier; // [rsp+48h] [rbp+10h]
 
-  v1 = pGameSlice;
-  v2 = 0;
-  v3 = pGameSlice->mPDATriggerParameters;
+  IsWaitingForTrigger = 0;
+  mPDATriggerParameters = pGameSlice->mPDATriggerParameters;
   if ( UFG::GameSlice::GetParent(pGameSlice) )
   {
-    v7 = UFG::GameSlice::GetParent(v1);
-    v2 = UFG::GameSlice::IsWaitingForTrigger(v7);
-    if ( v2 )
+    Parent = UFG::GameSlice::GetParent(pGameSlice);
+    IsWaitingForTrigger = UFG::GameSlice::IsWaitingForTrigger(Parent);
+    if ( IsWaitingForTrigger )
       goto LABEL_13;
     goto LABEL_12;
   }
-  if ( v1->mTriggerObjectName.mUID != -1 )
+  if ( pGameSlice->mTriggerObjectName.mUID != -1 )
   {
-    if ( !UFG::ProgressionTriggerComponent::IsRestoring(v1) )
+    if ( !UFG::ProgressionTriggerComponent::IsRestoring(pGameSlice) )
     {
-      v4 = UFG::ProgressionTriggerComponent::GetComponent(v1);
-      if ( v4 )
+      Component = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
+      if ( Component )
       {
-        UFG::ProgressionTriggerComponent::Enable(v4, v1);
-        v2 = 1;
+        UFG::ProgressionTriggerComponent::Enable(Component, pGameSlice);
+        IsWaitingForTrigger = 1;
         goto LABEL_13;
       }
     }
 LABEL_12:
     v8 = UFG::GameSliceStreamer::Instance();
-    UFG::GameSliceStreamer::RequestStream(v8, v1);
+    UFG::GameSliceStreamer::RequestStream(
+      v8,
+      (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)pGameSlice);
     goto LABEL_13;
   }
-  if ( !v3 || UFG::ProgressionTriggerComponent::IsRestoring(v1) )
+  if ( !mPDATriggerParameters || UFG::ProgressionTriggerComponent::IsRestoring(pGameSlice) )
     goto LABEL_12;
-  v10 = &identifier;
-  identifier.mUID = v3->mContactSymbol.mUID;
-  v5 = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
-  UFG::PDATriggerTracker::Add(v5, (__int64)&identifier, v1);
-  if ( v3->mObjectiveName.mLength )
+  p_identifier = &identifier;
+  identifier.mUID = mPDATriggerParameters->mContactSymbol.mUID;
+  p_mPDATriggerTracker = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
+  UFG::PDATriggerTracker::Add(p_mPDATriggerTracker, &identifier.mUID, pGameSlice);
+  if ( mPDATriggerParameters->mObjectiveName.mLength )
   {
     v6 = UFG::ProgressionTracker::Instance();
-    UFG::ObjectiveTracker::UpdateStatus(&v6->mObjectiveTracker, &v3->mObjectiveName, STATUS_ACTIVE, v1);
+    UFG::ObjectiveTracker::UpdateStatus(
+      &v6->mObjectiveTracker,
+      &mPDATriggerParameters->mObjectiveName,
+      STATUS_ACTIVE,
+      pGameSlice);
   }
-  v2 = 1;
+  IsWaitingForTrigger = 1;
 LABEL_13:
-  UFG::GameSlice::SetWaitingForTrigger(v1, v2, 1);
+  UFG::GameSlice::SetWaitingForTrigger(pGameSlice, IsWaitingForTrigger, 1);
 }
 
 // File Line: 594
 // RVA: 0x5207E0
 void __fastcall UFG::ProgressionTriggerComponent::ActiveateOnlyAfterExitFromRegion(UFG::GameSlice *pGameSlice)
 {
-  UFG::ProgressionTriggerComponent *v1; // rax
+  UFG::ProgressionTriggerComponent *Component; // rax
 
-  v1 = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
-  if ( v1 )
-    v1->mRequiresExitToActivate = 1;
+  Component = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
+  if ( Component )
+    Component->mRequiresExitToActivate = 1;
 }
 
 // File Line: 603
 // RVA: 0x5265C0
 void __fastcall UFG::ProgressionTriggerComponent::DisableTrigger(UFG::GameSlice *pGameSlice, bool turnLayerOn)
 {
-  bool v2; // di
-  UFG::GameSlice *v3; // rbx
-  UFG::PDATriggerParameters *v4; // rax
-  UFG::ProgressionTriggerComponent *v5; // rax
-  UFG::PDATriggerTracker *v6; // rcx
-  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v8; // [rsp+50h] [rbp+18h]
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rax
+  UFG::ProgressionTriggerComponent *Component; // rax
+  UFG::PDATriggerTracker *p_mPDATriggerTracker; // rcx
+  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_identifier; // [rsp+50h] [rbp+18h]
 
-  v2 = turnLayerOn;
-  v3 = pGameSlice;
   do
   {
-    v4 = v3->mPDATriggerParameters;
-    if ( v3->mTriggerObjectName.mUID == -1 )
+    mPDATriggerParameters = pGameSlice->mPDATriggerParameters;
+    if ( pGameSlice->mTriggerObjectName.mUID == -1 )
     {
-      if ( v4 )
+      if ( mPDATriggerParameters )
       {
-        v8 = &identifier;
-        identifier.mUID = v4->mContactSymbol.mUID;
-        v6 = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
-        UFG::PDATriggerTracker::Remove(v6, (__int64)&identifier);
+        p_identifier = &identifier;
+        identifier.mUID = mPDATriggerParameters->mContactSymbol.mUID;
+        p_mPDATriggerTracker = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
+        UFG::PDATriggerTracker::Remove(p_mPDATriggerTracker, &identifier.mUID);
       }
     }
     else
     {
-      v5 = UFG::ProgressionTriggerComponent::GetComponent(v3);
-      if ( v5 )
-        UFG::ProgressionTriggerComponent::Disable(v5, v2);
+      Component = UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
+      if ( Component )
+        UFG::ProgressionTriggerComponent::Disable(Component, turnLayerOn);
     }
-    v3 = UFG::GameSlice::GetParent(v3);
+    pGameSlice = UFG::GameSlice::GetParent(pGameSlice);
   }
-  while ( v3 );
+  while ( pGameSlice );
 }
 
 // File Line: 630
 // RVA: 0x53CD20
-void __fastcall UFG::ProgressionTriggerComponent::OnActivate(UFG::GameSlice *pGameSlice)
+void __fastcall UFG::ProgressionTriggerComponent::OnActivate(
+        UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *pGameSlice)
 {
-  UFG::GameSlice *v1; // rbx
-  UFG::PDATriggerParameters *v2; // rdi
-  UFG::ProgressionTriggerComponent *v3; // rax
+  UFG::PDATriggerParameters *mNext; // rdi
+  UFG::ProgressionTriggerComponent *Component; // rax
   UFG::GameSliceStreamer *v4; // rax
-  UFG::PDATriggerTracker *v5; // rcx
-  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v7; // [rsp+48h] [rbp+10h]
+  UFG::PDATriggerTracker *p_mPDATriggerTracker; // rcx
+  UFG::qSymbol identifier; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_identifier; // [rsp+48h] [rbp+10h]
 
-  v1 = pGameSlice;
-  v2 = pGameSlice->mPDATriggerParameters;
-  if ( pGameSlice->mTriggerObjectName.mUID == -1 )
+  mNext = (UFG::PDATriggerParameters *)pGameSlice[3].mNext;
+  if ( HIDWORD(pGameSlice[10].mNext) == -1 )
   {
-    if ( v2 )
+    if ( mNext )
     {
       v4 = UFG::GameSliceStreamer::Instance();
-      UFG::GameSliceStreamer::RequestStream(v4, v1);
-      v7 = &identifier;
-      identifier.mUID = v2->mContactSymbol.mUID;
-      v5 = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
-      UFG::PDATriggerTracker::Remove(v5, (__int64)&identifier);
-      UFG::GameSlice::SetWaitingForTrigger(v1, 0, 1);
+      UFG::GameSliceStreamer::RequestStream(v4, pGameSlice);
+      p_identifier = &identifier;
+      identifier.mUID = mNext->mContactSymbol.mUID;
+      p_mPDATriggerTracker = &UFG::ProgressionTracker::Instance()->mPDATriggerTracker;
+      UFG::PDATriggerTracker::Remove(p_mPDATriggerTracker, &identifier.mUID);
+      UFG::GameSlice::SetWaitingForTrigger((UFG::GameSlice *)pGameSlice, 0, 1);
     }
   }
   else
   {
-    v3 = (UFG::ProgressionTriggerComponent *)UFG::ProgressionTriggerComponent::GetComponent(pGameSlice);
-    if ( v3 )
-      UFG::ProgressionTriggerComponent::OnActivate(v3);
+    Component = UFG::ProgressionTriggerComponent::GetComponent((UFG::GameSlice *)pGameSlice);
+    if ( Component )
+      UFG::ProgressionTriggerComponent::OnActivate(Component);
   }
 }
 
@@ -1423,133 +1418,132 @@ void __fastcall UFG::ProgressionTriggerComponent::OnActivate(UFG::GameSlice *pGa
 // RVA: 0x535720
 bool __fastcall UFG::ProgressionTriggerComponent::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rax
-  UFG::qPropertySet *v2; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
 
-  v1 = pSceneObj;
-  v2 = pSceneObj->mpWritableProperties;
-  if ( !v2 )
-    v2 = v1->mpConstProperties;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   return UFG::qPropertySet::GetParentFromName(
-           v2,
-           (UFG::qSymbol *)&SimSymX_propset_componentProgressionTrigger.mUID,
+           mpWritableProperties,
+           (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentProgressionTrigger,
            DEPTH_RECURSE) != 0i64;
 }
 
 // File Line: 659
 // RVA: 0x5453B0
-UFG::SimComponent *__fastcall UFG::ProgressionTriggerComponent::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
+UFG::ProgressionTriggerComponent *__fastcall UFG::ProgressionTriggerComponent::PropertiesOnActivate(
+        UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rdi
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v3; // rax
   UFG::SimComponent *v4; // rax
   UFG::SimComponent *v5; // rbx
-  UFG::SimObjectModifier v7; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v7; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = pSceneObj;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = UFG::qMemoryPool::Allocate(v2, 0xD0ui64, "ProgressionTriggerComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0xD0ui64, "ProgressionTriggerComponent", 0i64, 1u);
   if ( v3 )
   {
-    UFG::ProgressionTriggerComponent::ProgressionTriggerComponent((UFG::ProgressionTriggerComponent *)v3, v1->m_NameUID);
+    UFG::ProgressionTriggerComponent::ProgressionTriggerComponent(
+      (UFG::ProgressionTriggerComponent *)v3,
+      pSceneObj->m_NameUID);
     v5 = v4;
   }
   else
   {
     v5 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v7, v1->m_pSimObject, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v7, pSceneObj->m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v7, v5, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v7);
   UFG::SimObjectModifier::~SimObjectModifier(&v7);
-  return v5;
+  return (UFG::ProgressionTriggerComponent *)v5;
 }
 
 // File Line: 699
 // RVA: 0x52A2F0
 void __fastcall UFG::ProgressionTriggerComponent::ForceOnEnter(UFG::ProgressionTriggerComponent *this)
 {
-  UFG::ProgressionTriggerComponent *v1; // rbx
   UFG::GameSliceStreamer *v2; // rax
-  UFG::GameSlice *v3; // rcx
-  UFG::PDATriggerParameters *v4; // rax
+  UFG::GameSlice *mpGameSlice; // rcx
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rax
 
-  v1 = this;
   v2 = UFG::GameSliceStreamer::Instance();
-  UFG::GameSliceStreamer::RequestStream(v2, v1->mpGameSlice);
-  v3 = v1->mpGameSlice;
-  v4 = v3->mPDATriggerParameters;
-  v1->mInsideActiveRegion = 1;
-  if ( !v4 )
+  UFG::GameSliceStreamer::RequestStream(
+    v2,
+    (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this->mpGameSlice);
+  mpGameSlice = this->mpGameSlice;
+  mPDATriggerParameters = mpGameSlice->mPDATriggerParameters;
+  this->mInsideActiveRegion = 1;
+  if ( !mPDATriggerParameters )
   {
-    UFG::GameSlice::_EnableLayer(v3);
-    UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(v1, 1);
+    UFG::GameSlice::_EnableLayer(mpGameSlice);
+    UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(this, 1);
   }
-  if ( !v1->mpGameSlice->mPDATriggerParameters )
-    UFG::ProgressionTriggerComponent::OnActivate(v1);
-  *(_WORD *)&v1->mWaitMenuActive = 0;
-  v1->mRequiresExitToActivate = 0;
+  if ( !this->mpGameSlice->mPDATriggerParameters )
+    UFG::ProgressionTriggerComponent::OnActivate(this);
+  *(_WORD *)&this->mWaitMenuActive = 0;
+  this->mRequiresExitToActivate = 0;
 }
 
 // File Line: 709
 // RVA: 0x5413D0
-void __fastcall UFG::ProgressionTriggerComponent::OnEnterTrigger(UFG::ProgressionTriggerComponent *this, UFG::TriggerRegion *pTriggerRegion)
+void __fastcall UFG::ProgressionTriggerComponent::OnEnterTrigger(
+        UFG::ProgressionTriggerComponent *this,
+        UFG::TriggerRegion *pTriggerRegion)
 {
-  UFG::TriggerRegion *v2; // rdi
-  UFG::ProgressionTriggerComponent *v3; // rbx
-  UFG::GameSlice *v4; // rsi
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mpGameSlice; // rsi
   UFG::GameSliceStreamer *v5; // rax
   UFG::GameSlice *v6; // rsi
   UFG::ProgressionTracker *v7; // rax
   UFG::GameSlice *v8; // rcx
-  UFG::PDATriggerParameters *v9; // rax
+  UFG::PDATriggerParameters *mPDATriggerParameters; // rax
   UFG::GameSliceStreamer *v10; // rax
 
-  v2 = pTriggerRegion;
-  v3 = this;
   if ( pTriggerRegion == this->mpTriggerRegions[3] )
   {
-    v4 = this->mpGameSlice;
-    if ( !v4->mPDATriggerParameters )
+    mpGameSlice = (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this->mpGameSlice;
+    if ( !mpGameSlice[3].mNext )
     {
       v5 = UFG::GameSliceStreamer::Instance();
-      UFG::GameSliceStreamer::RequestStream(v5, v4);
+      UFG::GameSliceStreamer::RequestStream(v5, mpGameSlice);
     }
   }
-  if ( !UFG::GameSlice::IsAllowedAtThisTimeOfDay(v3->mpGameSlice) || v3->mRequiresTODWait )
+  if ( !UFG::GameSlice::IsAllowedAtThisTimeOfDay(this->mpGameSlice) || this->mRequiresTODWait )
   {
-    v6 = v3->mpGameSlice;
-    if ( v6->mPerformTimeShift && v2 == v3->mpTriggerRegions[1] )
+    v6 = this->mpGameSlice;
+    if ( v6->mPerformTimeShift && pTriggerRegion == this->mpTriggerRegions[1] )
     {
-      *(_WORD *)&v3->mWaitMenuActive = 257;
+      *(_WORD *)&this->mWaitMenuActive = 257;
       v7 = UFG::ProgressionTracker::Instance();
-      UFG::ProgressionTracker::EnableGameSliceTODWait(v7, v6, v3);
+      UFG::ProgressionTracker::EnableGameSliceTODWait(v7, v6, this);
     }
-    v3->mRequiresExitToActivate = 1;
+    this->mRequiresExitToActivate = 1;
   }
-  if ( !v3->mRequiresExitToActivate )
+  if ( !this->mRequiresExitToActivate )
   {
-    if ( v2 == v3->mpTriggerRegions[1] )
+    if ( pTriggerRegion == this->mpTriggerRegions[1] )
     {
-      if ( !v3->mpGameSlice->mPDATriggerParameters )
-        UFG::ProgressionTriggerComponent::OnActivate(v3);
+      if ( !this->mpGameSlice->mPDATriggerParameters )
+        UFG::ProgressionTriggerComponent::OnActivate(this);
     }
     else
     {
-      if ( v2 != v3->mpTriggerRegions[0] )
+      if ( pTriggerRegion != this->mpTriggerRegions[0] )
         return;
-      v8 = v3->mpGameSlice;
-      v9 = v8->mPDATriggerParameters;
-      v3->mInsideActiveRegion = 1;
-      if ( !v9 )
+      v8 = this->mpGameSlice;
+      mPDATriggerParameters = v8->mPDATriggerParameters;
+      this->mInsideActiveRegion = 1;
+      if ( !mPDATriggerParameters )
       {
         UFG::GameSlice::_EnableLayer(v8);
-        UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(v3, 1);
+        UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(this, 1);
       }
     }
     v10 = UFG::GameSliceStreamer::Instance();
-    UFG::GameSliceStreamer::RequestStream(v10, v3->mpGameSlice);
+    UFG::GameSliceStreamer::RequestStream(
+      v10,
+      (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this->mpGameSlice);
   }
 }
 
@@ -1559,44 +1553,42 @@ UFG::ProgressionTriggerComponent::UnloadScripts
 
 // File Line: 773
 // RVA: 0x541D00
-void __fastcall UFG::ProgressionTriggerComponent::OnExitTrigger(UFG::ProgressionTriggerComponent *this, UFG::TriggerRegion *pTriggerRegion)
+void __fastcall UFG::ProgressionTriggerComponent::OnExitTrigger(
+        UFG::ProgressionTriggerComponent *this,
+        UFG::TriggerRegion *pTriggerRegion)
 {
-  UFG::TriggerRegion *v2; // rdi
-  UFG::ProgressionTriggerComponent *v3; // rbx
   UFG::ProgressionTracker *v4; // rax
-  UFG::GameSlice *v5; // rcx
+  UFG::GameSlice *mpGameSlice; // rcx
 
-  v2 = pTriggerRegion;
-  v3 = this;
   if ( pTriggerRegion == this->mpTriggerRegions[4] && !this->mpGameSlice->mPDATriggerParameters )
     UFG::ProgressionTriggerComponent::UnloadScripts(this);
-  if ( v2 == v3->mpTriggerRegions[1] && v3->mWaitMenuActive )
+  if ( pTriggerRegion == this->mpTriggerRegions[1] && this->mWaitMenuActive )
   {
-    v3->mWaitMenuActive = 0;
+    this->mWaitMenuActive = 0;
     v4 = UFG::ProgressionTracker::Instance();
     UFG::ProgressionTracker::EnableGameSliceTODWait(v4, 0i64, 0i64);
   }
-  if ( v2 == v3->mpTriggerRegions[0] )
+  if ( pTriggerRegion == this->mpTriggerRegions[0] )
   {
-    if ( v3->mRequiresExitToActivate )
-      UFG::ProgressionTriggerComponent::EnableObjective(v3);
-    v3->mRequiresExitToActivate = 0;
-    v3->mRequiresTODWait = 0;
+    if ( this->mRequiresExitToActivate )
+      UFG::ProgressionTriggerComponent::EnableObjective(this);
+    this->mRequiresExitToActivate = 0;
+    this->mRequiresTODWait = 0;
   }
-  else if ( v2 == v3->mpTriggerRegions[2] )
+  else if ( pTriggerRegion == this->mpTriggerRegions[2] )
   {
-    v5 = v3->mpGameSlice;
-    if ( v5->mPDATriggerParameters )
+    mpGameSlice = this->mpGameSlice;
+    if ( mpGameSlice->mPDATriggerParameters )
     {
-      UFG::ProgressionTriggerComponent::DisablePDATrigger(v5);
-      UFG::ProgressionTriggerComponent::UnloadScripts(v3);
+      UFG::ProgressionTriggerComponent::DisablePDATrigger(mpGameSlice);
+      UFG::ProgressionTriggerComponent::UnloadScripts(this);
     }
     else
     {
-      UFG::GameSlice::_DisableLayer(v5);
-      UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(v3, 0);
+      UFG::GameSlice::_DisableLayer(mpGameSlice);
+      UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(this, 0);
     }
-    v3->mInsideActiveRegion = 0;
+    this->mInsideActiveRegion = 0;
   }
 }
 
@@ -1604,66 +1596,67 @@ void __fastcall UFG::ProgressionTriggerComponent::OnExitTrigger(UFG::Progression
 // RVA: 0x53CBC0
 void __fastcall UFG::ProgressionTriggerComponent::OnActivate(UFG::ProgressionTriggerComponent *this)
 {
-  UFG::ProgressionTriggerComponent *v1; // rdi
-  UFG::TriggerRegion **v2; // rbx
-  signed __int64 v3; // rsi
-  UFG::SceneObjectProperties *v4; // rdx
-  UFG::qPropertySet *v5; // rcx
+  UFG::TriggerRegion **mpTriggerRegions; // rbx
+  __int64 v3; // rsi
+  UFG::SceneObjectProperties *m_pSceneObj; // rdx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   char *v6; // rax
   UFG::qString *v7; // rax
   UFG::qString *v8; // rbx
   UFG::ProgressionTracker *v9; // rax
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v10; // rdx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v11; // rcx
-  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *v12; // rax
-  UFG::qString v13; // [rsp+28h] [rbp-30h]
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *mPrev; // rcx
+  UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *mNext; // rax
+  UFG::qString v13; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( this->mEnabled )
   {
-    v2 = this->mpTriggerRegions;
+    mpTriggerRegions = this->mpTriggerRegions;
     v3 = 5i64;
     do
     {
-      UFG::TriggerRegion::EnableHot(*v2, 0);
-      ++v2;
+      UFG::TriggerRegion::EnableHot(*mpTriggerRegions++, 0);
       --v3;
     }
     while ( v3 );
-    if ( !v1->mpGameSlice->mKeepTriggerObjectiveEnabled )
+    if ( !this->mpGameSlice->mKeepTriggerObjectiveEnabled )
     {
-      v4 = v1->m_pSimObject->m_pSceneObj;
-      v5 = v4->mpWritableProperties;
-      if ( !v5 )
-        v5 = v4->mpConstProperties;
-      v6 = UFG::qPropertySet::Get<char const *>(v5, (UFG::qSymbol *)&qSymbol_Objective.mUID, DEPTH_RECURSE);
+      m_pSceneObj = this->m_pSimObject->m_pSceneObj;
+      mpWritableProperties = m_pSceneObj->mpWritableProperties;
+      if ( !mpWritableProperties )
+        mpWritableProperties = m_pSceneObj->mpConstProperties;
+      v6 = UFG::qPropertySet::Get<char const *>(
+             mpWritableProperties,
+             (UFG::qArray<unsigned long,0> *)&qSymbol_Objective,
+             DEPTH_RECURSE);
       if ( v6 && *v6 )
       {
         UFG::qString::qString(&v13, v6);
         v8 = v7;
         v9 = UFG::ProgressionTracker::Instance();
-        UFG::ObjectiveTracker::UpdateStatus(&v9->mObjectiveTracker, v8, 0, v1->mpGameSlice);
+        UFG::ObjectiveTracker::UpdateStatus(&v9->mObjectiveTracker, v8, STATUS_INACTIVE, this->mpGameSlice);
         UFG::qString::~qString(&v13);
       }
     }
-    UFG::GameSlice::SetWaitingForTrigger(v1->mpGameSlice, 0, 1);
-    v10 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v1->mPrev;
-    if ( v10->mPrev != v10 || (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> **)v1->mNext != &v1->mPrev )
+    UFG::GameSlice::SetWaitingForTrigger(this->mpGameSlice, 0, 1);
+    v10 = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
+    if ( v10->mPrev != v10
+      || this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext != &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> )
     {
-      if ( v1 == UFG::gpCurrentProgressionTriggerComponent )
-        UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->mPrev[-5];
-      v11 = v10->mPrev;
-      v12 = v1->mNext;
-      v11->mNext = v12;
-      v12->mPrev = v11;
+      if ( this == UFG::gpCurrentProgressionTriggerComponent )
+        UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mPrev[-5];
+      mPrev = v10->mPrev;
+      mNext = this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
       v10->mPrev = v10;
-      v1->mNext = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v1->mPrev;
+      this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>::mNext = &this->UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList>;
     }
-    v1->mEnabled = 0;
+    this->mEnabled = 0;
   }
-  UFG::ProgressionTriggerComponent::DisablePDATrigger(v1->mpGameSlice);
-  UFG::GameSlice::_EnableLayer(v1->mpGameSlice);
-  UFG::GameSlice::StopDrivenVehicle(v1->mpGameSlice);
-  UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(v1, 1);
+  UFG::ProgressionTriggerComponent::DisablePDATrigger(this->mpGameSlice);
+  UFG::GameSlice::_EnableLayer(this->mpGameSlice);
+  UFG::GameSlice::StopDrivenVehicle(this->mpGameSlice);
+  UFG::ProgressionTriggerComponent::HandleSpawnPointSpawn(this, 1);
 }
 

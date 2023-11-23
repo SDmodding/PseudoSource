@@ -1,48 +1,50 @@
 // File Line: 42
 // RVA: 0xAE7380
-signed __int64 __fastcall DSP::ERUnitDual::Init(DSP::ERUnitDual *this, AK::IAkPluginMemAlloc *in_pAllocator, float in_fRoomSizeScale, AkRoomVerb::TapInfo *in_pTapInfoLeft, AkRoomVerb::TapInfo *in_pTapInfoRight, unsigned int in_uNumTapsL, unsigned int in_uNumTapsR, unsigned int in_uSampleRate)
+__int64 __fastcall DSP::ERUnitDual::Init(
+        DSP::ERUnitDual *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        float in_fRoomSizeScale,
+        AkRoomVerb::TapInfo *in_pTapInfoLeft,
+        AkRoomVerb::TapInfo *in_pTapInfoRight,
+        unsigned int in_uNumTapsL,
+        unsigned int in_uNumTapsR,
+        signed int in_uSampleRate)
 {
-  AkRoomVerb::TapInfo *v8; // rsi
-  AK::IAkPluginMemAlloc *v9; // rdi
-  DSP::ERUnitDual *v10; // rbx
   float v11; // xmm0_4
-  float v12; // xmm6_4
+  float fTapTime; // xmm6_4
   float v13; // xmm7_4
   float v14; // xmm6_4
   float v15; // xmm0_4
   float v16; // xmm8_4
   unsigned int v17; // eax
   __int64 v18; // rdx
-  __int64 v19; // rax
-  signed int v21; // edi
+  float *v19; // rax
+  int v21; // edi
   unsigned __int16 v22; // r8
   unsigned __int16 v23; // r11
   unsigned __int16 v24; // r9
-  signed int v25; // edx
-  unsigned int v26; // eax
+  int i; // edx
+  unsigned int uDelayLineLength; // eax
   unsigned int v27; // ecx
   unsigned __int16 v28; // r11
   unsigned __int16 v29; // r8
-  unsigned __int16 v30; // r9
+  unsigned __int16 j; // r9
   unsigned int v31; // eax
   unsigned int v32; // ecx
 
-  v8 = in_pTapInfoLeft;
-  v9 = in_pAllocator;
-  v10 = this;
   if ( in_uNumTapsL - 1 > 0x3F || in_uNumTapsR - 1 > 0x3F )
     return 2i64;
   v11 = powf(2.0, in_fRoomSizeScale * 0.0099999998);
-  v12 = v8->fTapTime;
+  fTapTime = in_pTapInfoLeft->fTapTime;
   v13 = v11;
-  if ( v8->fTapTime >= in_pTapInfoRight->fTapTime )
-    v12 = in_pTapInfoRight->fTapTime;
-  v14 = v12 * v11;
-  v15 = v8[in_uNumTapsL - 1].fTapTime;
+  if ( in_pTapInfoLeft->fTapTime >= in_pTapInfoRight->fTapTime )
+    fTapTime = in_pTapInfoRight->fTapTime;
+  v14 = fTapTime * v11;
+  v15 = in_pTapInfoLeft[in_uNumTapsL - 1].fTapTime;
   if ( v15 <= in_pTapInfoRight[in_uNumTapsR - 1].fTapTime )
     v15 = in_pTapInfoRight[in_uNumTapsR - 1].fTapTime;
-  v16 = (float)(signed int)in_uSampleRate;
-  v17 = (signed int)(float)((float)((float)((float)(v15 * v13) - v14) * 0.001) * (float)(signed int)in_uSampleRate);
+  v16 = (float)in_uSampleRate;
+  v17 = (int)(float)((float)((float)((float)(v15 * v13) - v14) * 0.001) * (float)in_uSampleRate);
   if ( v17 >= 4 )
   {
     if ( v17 > 0xFFFF )
@@ -53,76 +55,64 @@ signed __int64 __fastcall DSP::ERUnitDual::Init(DSP::ERUnitDual *this, AK::IAkPl
     LOWORD(v17) = 4;
   }
   v18 = (unsigned __int16)v17 & 0xFFFC;
-  v10->uDelayLineLength = v18;
-  v19 = (__int64)v9->vfptr->Malloc(v9, 4 * v18);
-  v10->pfDelay = (float *)v19;
+  this->uDelayLineLength = v18;
+  v19 = (float *)in_pAllocator->vfptr->Malloc(in_pAllocator, 4 * v18);
+  this->pfDelay = v19;
   if ( !v19 )
     return 52i64;
   v21 = -1;
   v22 = 0;
   v23 = 0;
-  v10->uIndexToNextWrappingTapL = 0;
+  this->uIndexToNextWrappingTapL = 0;
   v24 = 0;
-  v25 = -1;
-  if ( in_uNumTapsL )
+  for ( i = -1; v24 < in_uNumTapsL; i = v27 )
   {
-    do
+    uDelayLineLength = this->uDelayLineLength;
+    v27 = (int)(float)((float)((float)((float)(v13 * in_pTapInfoLeft[v24].fTapTime) - v14) * 0.001) * v16) & 0xFFFFFFFC;
+    if ( v27 >= this->uDelayLineLength )
+      v27 = uDelayLineLength - 4;
+    if ( v27 != i )
     {
-      v26 = v10->uDelayLineLength;
-      v27 = (signed int)(float)((float)((float)((float)(v13 * v8[v24].fTapTime) - v14) * 0.001) * v16) & 0xFFFFFFFC;
-      if ( v27 >= v10->uDelayLineLength )
-        v27 = v26 - 4;
-      if ( v27 != v25 )
+      this->uTapOffsetsL[v22] = uDelayLineLength - v27;
+      if ( !v27 )
+        this->uTapOffsetsL[v22] = 0;
+      this->fTapGainsL[v22] = in_pTapInfoLeft[v24].fTapGain;
+      if ( this->uTapOffsetsL[v22] > v23 )
       {
-        v10->uTapOffsetsL[v22] = v26 - v27;
-        if ( !v27 )
-          v10->uTapOffsetsL[v22] = 0;
-        v10->fTapGainsL[v22] = v8[v24].fTapGain;
-        if ( v10->uTapOffsetsL[v22] > v23 )
-        {
-          v23 = v10->uTapOffsetsL[v22];
-          v10->uIndexToNextWrappingTapL = v22;
-        }
-        ++v22;
+        v23 = this->uTapOffsetsL[v22];
+        this->uIndexToNextWrappingTapL = v22;
       }
-      ++v24;
-      v25 = v27;
+      ++v22;
     }
-    while ( v24 < in_uNumTapsL );
+    ++v24;
   }
-  v10->uNumTapsL = v22;
+  this->uNumTapsL = v22;
   v28 = 0;
-  v10->uIndexToNextWrappingTapR = 0;
+  this->uIndexToNextWrappingTapR = 0;
   v29 = 0;
-  v30 = 0;
-  if ( in_uNumTapsR )
+  for ( j = 0; j < in_uNumTapsR; v21 = v32 )
   {
-    do
+    v31 = this->uDelayLineLength;
+    v32 = (int)(float)((float)((float)((float)(v13 * in_pTapInfoRight[j].fTapTime) - v14) * 0.001) * v16) & 0xFFFFFFFC;
+    if ( v32 >= this->uDelayLineLength )
+      v32 = v31 - 4;
+    if ( v32 != v21 )
     {
-      v31 = v10->uDelayLineLength;
-      v32 = (signed int)(float)((float)((float)((float)(v13 * in_pTapInfoRight[v30].fTapTime) - v14) * 0.001) * v16) & 0xFFFFFFFC;
-      if ( v32 >= v10->uDelayLineLength )
-        v32 = v31 - 4;
-      if ( v32 != v21 )
+      this->uTapOffsetsR[v29] = v31 - v32;
+      if ( !v32 )
+        this->uTapOffsetsR[v29] = 0;
+      this->fTapGainsR[v29] = in_pTapInfoRight[j].fTapGain;
+      if ( this->uTapOffsetsR[v29] > v28 )
       {
-        v10->uTapOffsetsR[v29] = v31 - v32;
-        if ( !v32 )
-          v10->uTapOffsetsR[v29] = 0;
-        v10->fTapGainsR[v29] = in_pTapInfoRight[v30].fTapGain;
-        if ( v10->uTapOffsetsR[v29] > v28 )
-        {
-          v28 = v10->uTapOffsetsR[v29];
-          v10->uIndexToNextWrappingTapR = v29;
-        }
-        ++v29;
+        v28 = this->uTapOffsetsR[v29];
+        this->uIndexToNextWrappingTapR = v29;
       }
-      ++v30;
-      v21 = v32;
+      ++v29;
     }
-    while ( v30 < in_uNumTapsR );
+    ++j;
   }
-  v10->uWriteOffset = 0;
-  v10->uNumTapsR = v29;
+  this->uWriteOffset = 0;
+  this->uNumTapsR = v29;
   return 1i64;
 }
 
@@ -130,14 +120,11 @@ signed __int64 __fastcall DSP::ERUnitDual::Init(DSP::ERUnitDual *this, AK::IAkPl
 // RVA: 0xAE7670
 void __fastcall DSP::ERUnitDual::Term(DSP::ERUnitDual *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  DSP::ERUnitDual *v2; // rbx
-
-  v2 = this;
   if ( this->pfDelay )
   {
     ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
-    v2->pfDelay = 0i64;
-    v2->uDelayLineLength = 0;
+    this->pfDelay = 0i64;
+    this->uDelayLineLength = 0;
   }
   else
   {
@@ -155,18 +142,22 @@ void __fastcall DSP::ERUnitDual::Reset(DSP::ERUnitDual *this)
 
 // File Line: 331
 // RVA: 0xAE76E0
-void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_pfInput, float *out_pfEROutputL, float *out_pfEROutputR, unsigned int in_uNumFrames)
+void __fastcall DSP::ERUnitDual::ProcessBuffer(
+        DSP::ERUnitDual *this,
+        float *in_pfInput,
+        float *out_pfEROutputL,
+        float *out_pfEROutputR,
+        unsigned int in_uNumFrames)
 {
-  unsigned __int16 v5; // r10
+  unsigned __int16 uNumTapsR; // r10
   unsigned int v6; // ebp
-  float *v7; // r14
+  float *pfDelay; // r14
   float *v8; // r11
   float *v9; // rbx
-  float *v10; // rdi
   int v11; // esi
-  unsigned int v12; // er10
+  unsigned int v12; // r10d
   unsigned __int64 v13; // r9
-  __int64 v14; // rax
+  __int64 uWriteOffset; // rax
   __int128 v15; // xmm0
   __m128 v16; // xmm3
   __m128 v17; // xmm2
@@ -191,7 +182,7 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
   __m128 v36; // xmm0
   __m128 v37; // xmm2
   __m128 v38; // xmm1
-  unsigned int i; // er8
+  unsigned int i; // r8d
   __int64 v40; // rax
   __int64 v41; // rdx
   __m128 v42; // xmm0
@@ -211,16 +202,15 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
 
   v55 = out_pfEROutputR;
   v54 = out_pfEROutputL;
-  v5 = this->uNumTapsR;
+  uNumTapsR = this->uNumTapsR;
   v6 = in_uNumFrames;
-  v7 = this->pfDelay;
+  pfDelay = this->pfDelay;
   v8 = out_pfEROutputR;
-  if ( this->uNumTapsL < v5 )
-    v5 = this->uNumTapsL;
+  if ( this->uNumTapsL < uNumTapsR )
+    uNumTapsR = this->uNumTapsL;
   v9 = out_pfEROutputL;
-  v10 = in_pfInput;
-  v11 = v5 & 0xFFFC;
-  v52 = v5 & 0xFFFC;
+  v11 = uNumTapsR & 0xFFFC;
+  v52 = v11;
   if ( in_uNumFrames )
   {
     do
@@ -236,18 +226,18 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
       if ( v12 >= 4 )
       {
         v13 = (unsigned __int64)v12 >> 2;
-        v51 = (unsigned __int64)v12 >> 2;
+        v51 = v13;
         do
         {
-          v14 = this->uWriteOffset;
-          v15 = *(_OWORD *)v10;
-          v10 += 4;
+          uWriteOffset = this->uWriteOffset;
+          v15 = *(_OWORD *)in_pfInput;
+          in_pfInput += 4;
           v16 = 0i64;
           v17 = 0i64;
           v18 = 0;
-          v53 = v10;
-          *(_OWORD *)&v7[v14] = v15;
-          this->uWriteOffset = v14 + 4;
+          v53 = in_pfInput;
+          *(_OWORD *)&pfDelay[uWriteOffset] = v15;
+          this->uWriteOffset = uWriteOffset + 4;
           if ( v11 )
           {
             v19 = &this->uTapOffsetsL[2];
@@ -268,19 +258,19 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
               v31 = _mm_add_ps(
                       _mm_add_ps(
                         v16,
-                        _mm_mul_ps(*(__m128 *)&v7[v23], _mm_shuffle_ps((__m128)*(v20 - 2), (__m128)*(v20 - 2), 0))),
-                      _mm_mul_ps(*(__m128 *)&v7[v24], _mm_shuffle_ps((__m128)*(v20 - 1), (__m128)*(v20 - 1), 0)));
-              v32 = _mm_mul_ps(*(__m128 *)&v7[v25], _mm_shuffle_ps((__m128)*v20, (__m128)*v20, 0));
+                        _mm_mul_ps(*(__m128 *)&pfDelay[v23], _mm_shuffle_ps((__m128)*(v20 - 2), (__m128)*(v20 - 2), 0))),
+                      _mm_mul_ps(*(__m128 *)&pfDelay[v24], _mm_shuffle_ps((__m128)*(v20 - 1), (__m128)*(v20 - 1), 0)));
+              v32 = _mm_mul_ps(*(__m128 *)&pfDelay[v25], _mm_shuffle_ps((__m128)*v20, (__m128)*v20, 0));
               v33 = _mm_shuffle_ps((__m128)v20[1], (__m128)v20[1], 0);
               v20 += 4;
               v19 += 4;
-              v16 = _mm_add_ps(_mm_add_ps(v31, v32), _mm_mul_ps(*(__m128 *)&v7[v26], v33));
+              v16 = _mm_add_ps(_mm_add_ps(v31, v32), _mm_mul_ps(*(__m128 *)&pfDelay[v26], v33));
               v34 = _mm_add_ps(
                       _mm_add_ps(
                         v17,
-                        _mm_mul_ps(*(__m128 *)&v7[v27], _mm_shuffle_ps((__m128)v20[58], (__m128)v20[58], 0))),
-                      _mm_mul_ps(*(__m128 *)&v7[v28], _mm_shuffle_ps((__m128)v20[59], (__m128)v20[59], 0)));
-              v35 = _mm_mul_ps(*(__m128 *)&v7[v29], _mm_shuffle_ps((__m128)v20[60], (__m128)v20[60], 0));
+                        _mm_mul_ps(*(__m128 *)&pfDelay[v27], _mm_shuffle_ps((__m128)v20[58], (__m128)v20[58], 0))),
+                      _mm_mul_ps(*(__m128 *)&pfDelay[v28], _mm_shuffle_ps((__m128)v20[59], (__m128)v20[59], 0)));
+              v35 = _mm_mul_ps(*(__m128 *)&pfDelay[v29], _mm_shuffle_ps((__m128)v20[60], (__m128)v20[60], 0));
               v36 = (__m128)v20[61];
               *(v19 - 6) = v23 + 4;
               *(v19 - 5) = v24 + 4;
@@ -289,7 +279,7 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
               v19[58] = v27 + 4;
               v19[59] = v28 + 4;
               v37 = _mm_add_ps(v34, v35);
-              v38 = _mm_mul_ps(*(__m128 *)&v7[v30], _mm_shuffle_ps(v36, v36, 0));
+              v38 = _mm_mul_ps(*(__m128 *)&pfDelay[v30], _mm_shuffle_ps(v36, v36, 0));
               v19[60] = v29 + 4;
               v17 = _mm_add_ps(v37, v38);
               v19[61] = v30 + 4;
@@ -298,7 +288,7 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
             while ( v22 );
             v8 = v55;
             v9 = v54;
-            v10 = v53;
+            in_pfInput = v53;
             v13 = v51;
             v11 = v52;
           }
@@ -307,7 +297,7 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
             v40 = i++;
             v41 = this->uTapOffsetsL[v40];
             v42 = (__m128)LODWORD(this->fTapGainsL[v40]);
-            v43 = *(__m128 *)&v7[v41];
+            v43 = *(__m128 *)&pfDelay[v41];
             this->uTapOffsetsL[v40] = v41 + 4;
           }
           for ( ; v18 < this->uNumTapsR; v17 = _mm_add_ps(v17, _mm_mul_ps(v47, _mm_shuffle_ps(v46, v46, 0))) )
@@ -315,7 +305,7 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
             v44 = v18++;
             v45 = this->uTapOffsetsR[v44];
             v46 = (__m128)LODWORD(this->fTapGainsR[v44]);
-            v47 = *(__m128 *)&v7[v45];
+            v47 = *(__m128 *)&pfDelay[v45];
             this->uTapOffsetsR[v44] = v45 + 4;
           }
           *(__m128 *)v9 = v16;
@@ -335,15 +325,13 @@ void __fastcall DSP::ERUnitDual::ProcessBuffer(DSP::ERUnitDual *this, float *in_
       if ( *((unsigned __int16 *)v48 + 266) == this->uDelayLineLength )
       {
         *((_WORD *)v48 + 266) = 0;
-        this->uIndexToNextWrappingTapL = (unsigned __int16)(this->uIndexToNextWrappingTapL + 1)
-                                       % (signed int)this->uNumTapsL;
+        this->uIndexToNextWrappingTapL = (unsigned __int16)(this->uIndexToNextWrappingTapL + 1) % (int)this->uNumTapsL;
       }
       v49 = (char *)this + 2 * this->uIndexToNextWrappingTapR;
       if ( *((unsigned __int16 *)v49 + 330) == this->uDelayLineLength )
       {
         *((_WORD *)v49 + 330) = 0;
-        this->uIndexToNextWrappingTapR = (unsigned __int16)(this->uIndexToNextWrappingTapR + 1)
-                                       % (signed int)this->uNumTapsR;
+        this->uIndexToNextWrappingTapR = (unsigned __int16)(this->uIndexToNextWrappingTapR + 1) % (int)this->uNumTapsR;
       }
       if ( this->uWriteOffset == this->uDelayLineLength )
         this->uWriteOffset = 0;

@@ -16,25 +16,25 @@ bool __fastcall OSuite::ZHttpRequest::IsConnecting(OSuite::ZHttpRequest *this)
 // RVA: 0xEDC334
 __int64 __fastcall OSuite::ZHttpRequest::ReadyToWrite(OSuite::ZHttpRequest *this)
 {
-  return ((__int64 (*)(void))this->m_streamWriter.vfptr[4].__vecDelDtor)();
+  return ((__int64 (__fastcall *)(OSuite::ZHttpStreamWriter *))this->m_streamWriter.vfptr[4].__vecDelDtor)(&this->m_streamWriter);
 }
 
 // File Line: 38
 // RVA: 0xEDCB9C
 __int64 __fastcall OSuite::ZHttpRequest::WriterEof(OSuite::ZHttpRequest *this)
 {
-  return ((__int64 (*)(void))this->m_streamWriter.vfptr[5].__vecDelDtor)();
+  return ((__int64 (__fastcall *)(OSuite::ZHttpStreamWriter *))this->m_streamWriter.vfptr[5].__vecDelDtor)(&this->m_streamWriter);
 }
 
 // File Line: 44
 // RVA: 0xEDC1B8
 OSuite::IHttpResponse *__fastcall OSuite::ZHttpRequest::GetResponse(OSuite::ZHttpRequest *this)
 {
-  OSuite::IHttpResponse *v1; // rdx
+  __int64 v1; // rdx
 
   v1 = 0i64;
   if ( this != (OSuite::ZHttpRequest *)-568i64 )
-    v1 = (OSuite::IHttpResponse *)&this->m_httpResponse.vfptr;
-  return v1;
+    return &this->m_httpResponse.OSuite::IHttpResponse;
+  return (OSuite::IHttpResponse *)v1;
 }
 

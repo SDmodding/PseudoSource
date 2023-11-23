@@ -1,431 +1,408 @@
 // File Line: 44
 // RVA: 0x9413D0
-void __fastcall Scaleform::Render::Renderer2DImpl::Renderer2DImpl(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::HAL *hal)
+void __fastcall Scaleform::Render::Renderer2DImpl::Renderer2DImpl(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::HAL *hal)
 {
-  Scaleform::Render::HAL *v2; // rsi
-  Scaleform::Render::Renderer2DImpl *v3; // rdi
-  Scaleform::Render::ThreadCommandQueue *v4; // r8
-  Scaleform::List<Scaleform::Render::ContextImpl::RenderNotify::ContextNode,Scaleform::Render::ContextImpl::RenderNotify::ContextNode> *v5; // rax
-  Scaleform::Render::ContextImpl::RenderNotify::ServiceCommand *v6; // rax
-  Scaleform::Render::HALNotify *v7; // rbx
-  Scaleform::Render::GlyphCache *v8; // rbp
+  Scaleform::Render::ThreadCommandQueue *pRTCommandQueue; // r8
+  Scaleform::Render::HALNotify *v5; // rbx
+  Scaleform::Render::GlyphCache *v6; // rbp
+  Scaleform::MemoryHeap *v7; // rax
+  Scaleform::MemoryHeap *v8; // rax
   Scaleform::MemoryHeap *v9; // rax
-  Scaleform::MemoryHeap *v10; // rax
-  signed __int64 v11; // r12
-  Scaleform::MemoryHeap *v12; // rax
-  Scaleform::List<Scaleform::Render::MatrixPoolImpl::HandlePage,Scaleform::Render::MatrixPoolImpl::HandlePageBase> *v13; // rax
-  Scaleform::List<Scaleform::Render::MatrixPoolImpl::HandlePage,Scaleform::Render::MatrixPoolImpl::HandlePageBase> *v14; // rax
-  Scaleform::List<Scaleform::Render::MatrixPoolImpl::DataPage,Scaleform::Render::MatrixPoolImpl::DataPage> *v15; // rax
-  Scaleform::List<Scaleform::Render::ComplexMesh::UpdateNode,Scaleform::Render::ComplexMesh::UpdateNode> *v16; // rax
-  signed __int64 v17; // rax
-  Scaleform::MemoryHeap *v18; // r14
-  Scaleform::Render::MeshKeyManager *v19; // rax
-  Scaleform::Render::MeshKeyManager *v20; // rax
-  Scaleform::Render::MeshKeyManager *v21; // r15
-  Scaleform::Render::MeshKeyManager *v22; // rcx
-  Scaleform::Render::GlyphCache *v23; // rax
-  Scaleform::Render::GlyphCache *v24; // rax
-  Scaleform::Render::GlyphCache *v25; // rcx
-  signed __int64 v26; // [rsp+78h] [rbp+10h]
+  unsigned int *p_Flags; // rax
+  Scaleform::MemoryHeap *v11; // r14
+  Scaleform::Render::MeshKeyManager *v12; // rax
+  Scaleform::Render::MeshKeyManager *v13; // rax
+  Scaleform::Render::MeshKeyManager *v14; // r15
+  Scaleform::Render::MeshKeyManager *pObject; // rcx
+  Scaleform::Render::GlyphCache *v16; // rax
+  Scaleform::Render::GlyphCache *v17; // rax
+  Scaleform::Render::GlyphCache *v18; // rcx
 
-  v2 = hal;
-  v3 = this;
-  v4 = hal->pRTCommandQueue;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
-  v5 = &this->ActiveContextSet;
-  v5->Root.pPrev = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)v5;
-  v5->Root.pNext = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)v5;
-  this->pRTCommandQueue = v4;
-  v6 = &this->ServiceCommandInstance;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
-  v6->RefCount = 1;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::ServiceCommand::`vftable;
-  v6->pNotify = (Scaleform::Render::ContextImpl::RenderNotify *)&this->vfptr;
-  v7 = (Scaleform::Render::HALNotify *)&this->vfptr;
-  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
-  v8 = 0i64;
-  v7->pNext = 0i64;
-  v7->pPrev = 0i64;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
-  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
+  pRTCommandQueue = hal->pRTCommandQueue;
+  this->Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
+  this->ActiveContextSet.Root.Scaleform::Render::ContextImpl::RenderNotify::pPrev = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)&this->ActiveContextSet;
+  this->ActiveContextSet.Root.pNext = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)&this->ActiveContextSet;
+  this->pRTCommandQueue = pRTCommandQueue;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->ServiceCommandInstance.RefCount = 1;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable;
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::ServiceCommand::`vftable;
+  this->ServiceCommandInstance.pNotify = this;
+  v5 = &this->Scaleform::Render::HALNotify;
+  this->Scaleform::Render::HALNotify::vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
+  v6 = 0i64;
+  this->pNext = 0i64;
+  this->pPrev = 0i64;
+  this->Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
+  this->Scaleform::Render::HALNotify::vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
   _InterlockedExchangeAdd(&hal->RefCount, 1u);
   this->pHal.pObject = hal;
+  v7 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
+  Scaleform::Render::MeshGenerator::MeshGenerator(&this->MeshGen, v7);
+  v8 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
+  Scaleform::Render::StrokeGenerator::StrokeGenerator(&this->StrokeGen, v8);
+  this->Tolerances.Epsilon = 0.0000099999997;
+  this->Tolerances.CurveTolerance = 1.0;
+  this->Tolerances.CollinearityTolerance = 1.0;
+  this->Tolerances.IntersectionEpsilon = 0.001;
+  this->Tolerances.FillLowerScale = 0.70709997;
+  this->Tolerances.FillUpperScale = 1.4141999;
+  this->Tolerances.FillAliasedLowerScale = 0.5;
+  this->Tolerances.FillAliasedUpperScale = 2.0;
+  this->Tolerances.StrokeLowerScale = 0.99000001;
+  this->Tolerances.StrokeUpperScale = 1.01;
+  this->Tolerances.HintedStrokeLowerScale = 0.99900001;
+  this->Tolerances.HintedStrokeUpperScale = 1.001;
+  this->Tolerances.Scale9LowerScale = 0.995;
+  this->Tolerances.Scale9UpperScale = 1.005;
+  this->Tolerances.EdgeAAScale = 0.94999999;
+  this->Tolerances.MorphTolerance = 0.000099999997;
+  this->Tolerances.MinDet3D = 0.001;
+  this->Tolerances.MinScale3D = 0.050000001;
+  this->Tolerances.CurveRecursionLimit = 12;
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->FillManager.RefCount = 1;
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::PrimitiveFillManager,71>::`vftable;
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable;
+  this->FillManager.pHAL = hal;
+  this->FillManager.FillSet.pTable = 0i64;
+  this->FillManager.Gradients.pTable = 0i64;
   v9 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
-  Scaleform::Render::MeshGenerator::MeshGenerator(&v3->MeshGen, v9);
-  v10 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v3);
-  Scaleform::Render::StrokeGenerator::StrokeGenerator(&v3->StrokeGen, v10);
-  v3->Tolerances.Epsilon = 0.0000099999997;
-  v3->Tolerances.CurveTolerance = 1.0;
-  v3->Tolerances.CollinearityTolerance = 1.0;
-  v3->Tolerances.IntersectionEpsilon = 0.001;
-  v3->Tolerances.FillLowerScale = 0.70709997;
-  v3->Tolerances.FillUpperScale = 1.4141999;
-  v3->Tolerances.FillAliasedLowerScale = 0.5;
-  v3->Tolerances.FillAliasedUpperScale = 2.0;
-  v3->Tolerances.StrokeLowerScale = 0.99000001;
-  v3->Tolerances.StrokeUpperScale = 1.01;
-  v3->Tolerances.HintedStrokeLowerScale = 0.99900001;
-  v3->Tolerances.HintedStrokeUpperScale = 1.001;
-  v3->Tolerances.Scale9LowerScale = 0.995;
-  v3->Tolerances.Scale9UpperScale = 1.005;
-  v3->Tolerances.EdgeAAScale = 0.94999999;
-  v3->Tolerances.MorphTolerance = 0.000099999997;
-  v3->Tolerances.MinDet3D = 0.001;
-  v3->Tolerances.MinScale3D = 0.050000001;
-  v3->Tolerances.CurveRecursionLimit = 12;
-  v11 = (signed __int64)&v3->FillManager;
-  *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
-  *(_DWORD *)(v11 + 8) = 1;
-  *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable;
-  *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
-  *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::PrimitiveFillManager,71>::`vftable;
-  *(_QWORD *)v11 = &Scaleform::Render::PrimitiveFillManager::`vftable;
-  v3->FillManager.pHAL = v2;
-  v3->FillManager.FillSet.pTable = 0i64;
-  v3->FillManager.Gradients.pTable = 0i64;
-  v12 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v3);
-  v26 = (signed __int64)&v3->MPool;
-  *(_QWORD *)v26 = &Scaleform::RefCountImplCore::`vftable;
-  *(_DWORD *)(v26 + 8) = 1;
-  *(_QWORD *)v26 = &Scaleform::RefCountImpl::`vftable;
-  *(_QWORD *)v26 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,73>::`vftable;
-  *(_QWORD *)v26 = &Scaleform::RefCountBase<Scaleform::Render::MatrixPoolImpl::MatrixPool,73>::`vftable;
-  *(_QWORD *)v26 = &Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable;
-  v3->MPool.pHeap = v12;
-  v3->MPool.AllocatedSpace = 0i64;
-  v3->MPool.DataPageCount = 0i64;
-  v3->MPool.FreedSpace = 0i64;
-  v3->MPool.HandleTable.pHeap = v12;
-  v3->MPool.HandleTable.pPool = &v3->MPool;
-  v13 = &v3->MPool.HandleTable.FullPages;
-  v13->Root.pPrev = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)v13;
-  v13->Root.pNext = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)v13;
-  v14 = &v3->MPool.HandleTable.PartiallyFreePages;
-  v14->Root.pPrev = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)v14;
-  v14->Root.pNext = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)v14;
-  v15 = &v3->MPool.DataPages;
-  v15->Root.pPrev = (Scaleform::Render::MatrixPoolImpl::DataPage *)v15;
-  v15->Root.pNext = (Scaleform::Render::MatrixPoolImpl::DataPage *)v15;
-  v3->MPool.pAllocPage = 0i64;
-  v3->MPool.pSqueezePage = 0i64;
-  v3->MPool.pLastFreedPage = 0i64;
-  v3->pMeshKeyManager.pObject = 0i64;
-  v3->pGlyphCache.pObject = 0i64;
-  v3->mGlyphCacheParam.TextureWidth = 1024;
-  v3->mGlyphCacheParam.TextureHeight = 1024;
-  v3->mGlyphCacheParam.NumTextures = 1;
-  v3->mGlyphCacheParam.MaxSlotHeight = 48;
-  v3->mGlyphCacheParam.SlotPadding = 2;
-  v3->mGlyphCacheParam.TexUpdWidth = 256;
-  v3->mGlyphCacheParam.TexUpdHeight = 512;
-  v3->mGlyphCacheParam.MaxRasterScale = 1.0;
-  v3->mGlyphCacheParam.MaxVectorCacheSize = 500;
-  v3->mGlyphCacheParam.FauxItalicAngle = 0.25;
-  v3->mGlyphCacheParam.FauxBoldRatio = 0.045000002;
-  v3->mGlyphCacheParam.OutlineRatio = 0.0099999998;
-  v3->mGlyphCacheParam.ShadowQuality = 1.0;
-  *(_WORD *)&v3->mGlyphCacheParam.UseAutoFit = 257;
-  v3->mGlyphCacheParam.FenceWaitOnFullCache = 1;
-  v16 = &v3->mComplexMeshUpdateList;
-  v16->Root.pPrev = (Scaleform::Render::ComplexMesh::UpdateNode *)v16;
-  v16->Root.pNext = (Scaleform::Render::ComplexMesh::UpdateNode *)v16;
-  *(_QWORD *)&v3->VP.BufferWidth = 0i64;
-  *(_QWORD *)&v3->VP.Left = 0i64;
-  v3->VP.Height = 1;
-  v3->VP.Width = 1;
-  *(_QWORD *)&v3->VP.ScissorWidth = 0i64;
-  *(_QWORD *)&v3->VP.ScissorLeft = 0i64;
-  v3->VP.Flags = 0;
-  v17 = (signed __int64)&v3->VP.Flags;
-  if ( v3 == (Scaleform::Render::Renderer2DImpl *)-3680i64 )
-    v17 = 0i64;
-  v3->RenderRoots.Root.pPrev = (Scaleform::Render::TreeCacheNode *)v17;
-  v3->RenderRoots.Root.pNext = (Scaleform::Render::TreeCacheNode *)v17;
-  v3->pPrev = v2->NotifyList.Root.pPrev;
-  v3->pNext = (Scaleform::Render::HALNotify *)&v2->HALState;
-  v2->NotifyList.Root.pPrev->pNext = v7;
-  v2->NotifyList.Root.pPrev = v7;
-  v18 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v3);
-  v19 = (Scaleform::Render::MeshKeyManager *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  this->MPool.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->MPool.RefCount = 1;
+  this->MPool.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->MPool.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,73>::`vftable;
+  this->MPool.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MatrixPoolImpl::MatrixPool,73>::`vftable;
+  this->MPool.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable;
+  this->MPool.pHeap = v9;
+  this->MPool.AllocatedSpace = 0i64;
+  this->MPool.DataPageCount = 0i64;
+  this->MPool.FreedSpace = 0i64;
+  this->MPool.HandleTable.pHeap = v9;
+  this->MPool.HandleTable.pPool = &this->MPool;
+  this->MPool.HandleTable.FullPages.Root.pPrev = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)&this->MPool.HandleTable.FullPages;
+  this->MPool.HandleTable.FullPages.Root.pNext = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)&this->MPool.HandleTable.FullPages;
+  this->MPool.HandleTable.PartiallyFreePages.Root.pPrev = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)&this->MPool.HandleTable.PartiallyFreePages;
+  this->MPool.HandleTable.PartiallyFreePages.Root.pNext = (Scaleform::Render::MatrixPoolImpl::HandlePageBase *)&this->MPool.HandleTable.PartiallyFreePages;
+  this->MPool.DataPages.Root.pPrev = (Scaleform::Render::MatrixPoolImpl::DataPage *)&this->MPool.DataPages;
+  this->MPool.DataPages.Root.pNext = (Scaleform::Render::MatrixPoolImpl::DataPage *)&this->MPool.DataPages;
+  this->MPool.pAllocPage = 0i64;
+  this->MPool.pSqueezePage = 0i64;
+  this->MPool.pLastFreedPage = 0i64;
+  this->pMeshKeyManager.pObject = 0i64;
+  this->pGlyphCache.pObject = 0i64;
+  this->mGlyphCacheParam.TextureWidth = 1024;
+  this->mGlyphCacheParam.TextureHeight = 1024;
+  this->mGlyphCacheParam.NumTextures = 1;
+  this->mGlyphCacheParam.MaxSlotHeight = 48;
+  this->mGlyphCacheParam.SlotPadding = 2;
+  this->mGlyphCacheParam.TexUpdWidth = 256;
+  this->mGlyphCacheParam.TexUpdHeight = 512;
+  this->mGlyphCacheParam.MaxRasterScale = 1.0;
+  this->mGlyphCacheParam.MaxVectorCacheSize = 500;
+  this->mGlyphCacheParam.FauxItalicAngle = 0.25;
+  this->mGlyphCacheParam.FauxBoldRatio = 0.045000002;
+  this->mGlyphCacheParam.OutlineRatio = 0.0099999998;
+  this->mGlyphCacheParam.ShadowQuality = 1.0;
+  *(_WORD *)&this->mGlyphCacheParam.UseAutoFit = 257;
+  this->mGlyphCacheParam.FenceWaitOnFullCache = 1;
+  this->mComplexMeshUpdateList.Root.pPrev = (Scaleform::Render::ComplexMesh::UpdateNode *)&this->mComplexMeshUpdateList;
+  this->mComplexMeshUpdateList.Root.pNext = (Scaleform::Render::ComplexMesh::UpdateNode *)&this->mComplexMeshUpdateList;
+  *(_QWORD *)&this->VP.BufferWidth = 0i64;
+  *(_QWORD *)&this->VP.Left = 0i64;
+  this->VP.Height = 1;
+  this->VP.Width = 1;
+  *(_QWORD *)&this->VP.ScissorWidth = 0i64;
+  *(_QWORD *)&this->VP.ScissorLeft = 0i64;
+  this->VP.Flags = 0;
+  p_Flags = &this->VP.Flags;
+  if ( this == (Scaleform::Render::Renderer2DImpl *)-3680i64 )
+    p_Flags = 0i64;
+  this->RenderRoots.Root.pPrev = (Scaleform::Render::TreeCacheNode *)p_Flags;
+  this->RenderRoots.Root.pNext = (Scaleform::Render::TreeCacheNode *)p_Flags;
+  this->pPrev = hal->NotifyList.Root.pPrev;
+  this->pNext = (Scaleform::Render::HALNotify *)&hal->HALState;
+  hal->NotifyList.Root.pPrev->pNext = v5;
+  hal->NotifyList.Root.pPrev = v5;
+  v11 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
+  v12 = (Scaleform::Render::MeshKeyManager *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                Scaleform::Memory::pGlobalHeap,
                                                96i64);
-  if ( v19 )
+  if ( v12 )
   {
-    Scaleform::Render::MeshKeyManager::MeshKeyManager(v19, v18);
-    v21 = v20;
+    Scaleform::Render::MeshKeyManager::MeshKeyManager(v12, v11);
+    v14 = v13;
   }
   else
   {
-    v21 = 0i64;
+    v14 = 0i64;
   }
-  v22 = v3->pMeshKeyManager.pObject;
-  if ( v22 && !_InterlockedDecrement(&v22->RefCount) && v22 )
-    v22->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v22->vfptr, 1u);
-  v3->pMeshKeyManager.pObject = v21;
-  v23 = (Scaleform::Render::GlyphCache *)v18->vfptr->Alloc(v18, 7320ui64, 0i64);
-  if ( v23 )
+  pObject = this->pMeshKeyManager.pObject;
+  if ( pObject && !_InterlockedDecrement(&pObject->RefCount) )
+    pObject->vfptr->__vecDelDtor(pObject, 1u);
+  this->pMeshKeyManager.pObject = v14;
+  v16 = (Scaleform::Render::GlyphCache *)v11->vfptr->Alloc(v11, 7320ui64, 0i64);
+  if ( v16 )
   {
-    Scaleform::Render::GlyphCache::GlyphCache(v23, v18);
-    v8 = v24;
+    Scaleform::Render::GlyphCache::GlyphCache(v16, v11);
+    v6 = v17;
   }
-  v25 = v3->pGlyphCache.pObject;
-  if ( v25 && !_InterlockedDecrement(&v25->RefCount) && v25 )
-    v25->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v25->vfptr, 1u);
-  v3->pGlyphCache.pObject = v8;
-  v8->pRenderer = v2;
-  v8->pFillMan = (Scaleform::Render::PrimitiveFillManager *)v11;
-  if ( ((unsigned __int8 (__fastcall *)(Scaleform::Render::HAL *))v2->vfptr[4].__vecDelDtor)(v2) )
-    Scaleform::Render::GlyphCache::initialize(v8);
+  v18 = this->pGlyphCache.pObject;
+  if ( v18 && !_InterlockedDecrement(&v18->RefCount) )
+    v18->Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr->__vecDelDtor(
+      v18,
+      1u);
+  this->pGlyphCache.pObject = v6;
+  v6->pRenderer = hal;
+  v6->pFillMan = &this->FillManager;
+  if ( ((unsigned __int8 (__fastcall *)(Scaleform::Render::HAL *))hal->vfptr[4].__vecDelDtor)(hal) )
+    Scaleform::Render::GlyphCache::initialize(v6);
 }
 
 // File Line: 58
 // RVA: 0x94C6B0
 void __fastcall Scaleform::Render::Renderer2DImpl::~Renderer2DImpl(Scaleform::Render::Renderer2DImpl *this)
 {
-  Scaleform::Render::Renderer2DImpl *v1; // rdi
-  Scaleform::Render::GlyphCache *v2; // rcx
+  Scaleform::Render::GlyphCache *pObject; // rcx
   Scaleform::Render::MeshKeyManager *v3; // rcx
-  Scaleform::Render::PrimitiveFillManager *v4; // rbx
-  Scaleform::Render::HAL *v5; // rcx
+  Scaleform::Render::HAL *v4; // rcx
 
-  v1 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
-  this->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
-  Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::ContextImpl::RenderNotify *)&this->vfptr);
-  Scaleform::Render::MeshKeyManager::DestroyAllKeys(v1->pMeshKeyManager.pObject);
-  v1->pPrev->pNext = v1->pNext;
-  v1->pNext->pPrev = v1->pPrev;
-  v1->pPrev = (Scaleform::Render::HALNotify *)-1i64;
-  v1->pNext = (Scaleform::Render::HALNotify *)-1i64;
-  v2 = v1->pGlyphCache.pObject;
-  if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
-    v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
-  v3 = v1->pMeshKeyManager.pObject;
-  if ( v3 && !_InterlockedDecrement(&v3->RefCount) && v3 )
-    v3->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 1u);
-  Scaleform::Render::MatrixPoolImpl::MatrixPool::~MatrixPool(&v1->MPool);
-  v4 = &v1->FillManager;
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable;
-  Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v1->FillManager.Gradients);
-  Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v1->FillManager.FillSet);
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
-  v1->StrokeGen.mPath.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
-  v1->StrokeGen.mStrokeSorter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
-  v1->StrokeGen.mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
-  Scaleform::Render::LinearHeap::ClearAndRelease(&v1->StrokeGen.Heap2);
-  Scaleform::Render::LinearHeap::ClearAndRelease(&v1->StrokeGen.Heap1);
-  Scaleform::Render::MeshGenerator::~MeshGenerator(&v1->MeshGen);
-  v5 = v1->pHal.pObject;
-  if ( v5 && _InterlockedExchangeAdd(&v5->RefCount, 0xFFFFFFFF) == 1 && v5 )
-    v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
-  v1->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
-  Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::ContextImpl::RenderNotify *)&v1->vfptr);
-  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
+  this->Scaleform::Render::HALNotify::vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
+  Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData(this);
+  Scaleform::Render::MeshKeyManager::DestroyAllKeys(this->pMeshKeyManager.pObject);
+  this->pPrev->pNext = this->pNext;
+  this->pNext->pPrev = this->pPrev;
+  this->pPrev = (Scaleform::Render::HALNotify *)-1i64;
+  this->pNext = (Scaleform::Render::HALNotify *)-1i64;
+  pObject = this->pGlyphCache.pObject;
+  if ( pObject && !_InterlockedDecrement(&pObject->RefCount) )
+    pObject->Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr->__vecDelDtor(
+      pObject,
+      1u);
+  v3 = this->pMeshKeyManager.pObject;
+  if ( v3 && !_InterlockedDecrement(&v3->RefCount) )
+    v3->vfptr->__vecDelDtor(v3, 1u);
+  Scaleform::Render::MatrixPoolImpl::MatrixPool::~MatrixPool(&this->MPool);
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable;
+  Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&this->FillManager.Gradients);
+  Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&this->FillManager.FillSet);
+  this->FillManager.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->StrokeGen.mPath.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->StrokeGen.mStrokeSorter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->StrokeGen.mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  Scaleform::Render::LinearHeap::ClearAndRelease(&this->StrokeGen.Heap2);
+  Scaleform::Render::LinearHeap::ClearAndRelease(&this->StrokeGen.Heap1);
+  Scaleform::Render::MeshGenerator::~MeshGenerator(&this->MeshGen);
+  v4 = this->pHal.pObject;
+  if ( v4 && _InterlockedExchangeAdd(&v4->RefCount, 0xFFFFFFFF) == 1 )
+    v4->vfptr->__vecDelDtor(v4, 1u);
+  this->Scaleform::Render::HALNotify::vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
+  this->Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
+  Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData(this);
+  this->ServiceCommandInstance.Scaleform::Render::ContextImpl::RenderNotify::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 71
 // RVA: 0x95A780
 __int64 __fastcall Scaleform::Render::Renderer2DImpl::BeginFrame(Scaleform::Render::Renderer2DImpl *this)
 {
-  Scaleform::Render::Renderer2DImpl *v1; // rdi
-  Scaleform::Render::GlyphCache *v2; // rbx
-  Scaleform::Render::HAL *v3; // rcx
+  Scaleform::Render::GlyphCache *pObject; // rbx
+  Scaleform::Render::HAL *pRenderer; // rcx
   Scaleform::Render::FontCacheHandleManager *v4; // rcx
 
-  v1 = this;
   Scaleform::Render::MeshKeyManager::ProcessKillList(this->pMeshKeyManager.pObject);
-  v2 = v1->pGlyphCache.pObject;
-  if ( v2 )
+  pObject = this->pGlyphCache.pObject;
+  if ( pObject )
   {
-    if ( !v2->pFontHandleManager.pObject )
+    if ( !pObject->pFontHandleManager.pObject )
     {
-      v3 = v2->pRenderer;
-      if ( !v3 || !((unsigned __int8 (*)(void))v3->vfptr[4].__vecDelDtor)() )
-        return ((__int64 (*)(void))v1->pHal.pObject->vfptr[5].__vecDelDtor)();
-      Scaleform::Render::GlyphCache::initialize(v2);
+      pRenderer = pObject->pRenderer;
+      if ( !pRenderer
+        || !((unsigned __int8 (__fastcall *)(Scaleform::Render::HAL *))pRenderer->vfptr[4].__vecDelDtor)(pRenderer) )
+      {
+        return ((__int64 (__fastcall *)(Scaleform::Render::HAL *))this->pHal.pObject->vfptr[5].__vecDelDtor)(this->pHal.pObject);
+      }
+      Scaleform::Render::GlyphCache::initialize(pObject);
     }
-    v4 = v2->pFontHandleManager.pObject;
+    v4 = pObject->pFontHandleManager.pObject;
     if ( v4 )
       Scaleform::Render::FontCacheHandleManager::ProcessKillList(v4);
   }
-  return ((__int64 (*)(void))v1->pHal.pObject->vfptr[5].__vecDelDtor)();
+  return ((__int64 (__fastcall *)(Scaleform::Render::HAL *))this->pHal.pObject->vfptr[5].__vecDelDtor)(this->pHal.pObject);
 }
 
 // File Line: 125
 // RVA: 0x96EC70
-void __fastcall Scaleform::Render::Renderer2DImpl::Draw(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::TreeRoot *pnode)
+void __fastcall Scaleform::Render::Renderer2DImpl::Draw(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::TreeRoot *pnode)
 {
-  Scaleform::Render::TreeRoot *v2; // r15
-  Scaleform::Render::Renderer2DImpl *v3; // rsi
-  Scaleform::Render::TreeCacheRoot *v4; // rbx
+  Scaleform::Render::TreeCacheRoot *pRenderer; // rbx
   unsigned __int64 v5; // r12
-  unsigned __int64 v6; // rdx
-  unsigned __int64 v7; // r14
-  unsigned __int64 v8; // r13
-  Scaleform::Render::Viewport *v9; // rdi
-  int v10; // er10
-  int v11; // er8
-  Scaleform::Render::HAL *v12; // rcx
-  Scaleform::Render::MatrixState *v13; // rax
-  int v14; // er9
-  int v15; // edx
-  char v16; // bp
-  float v17; // xmm6_4
-  float v18; // xmm7_4
-  float v19; // xmm8_4
-  float v20; // xmm9_4
-  int v21; // eax
-  int v22; // ebx
+  __int64 v6; // r14
+  unsigned __int64 v7; // r13
+  Scaleform::Render::Viewport *p_VP; // rdi
+  int v9; // r10d
+  int v10; // r8d
+  Scaleform::Render::HAL *pObject; // rcx
+  Scaleform::Render::MatrixState *v12; // rax
+  int v13; // r9d
+  int v14; // edx
+  char v15; // bp
+  float v16; // xmm6_4
+  float v17; // xmm7_4
+  float v18; // xmm8_4
+  float v19; // xmm9_4
+  __int16 v20; // ax
+  unsigned __int16 v21; // bx
+  Scaleform::Render::TreeCacheRoot *v22; // rax
   Scaleform::Render::TreeCacheRoot *v23; // rax
-  Scaleform::Render::TreeCacheRoot *v24; // rax
-  signed int v25; // eax
-  signed int v26; // ecx
-  signed int v27; // eax
-  signed int v28; // ecx
-  Scaleform::Render::Rect<int> prect; // [rsp+38h] [rbp-A0h]
-  __int128 v30; // [rsp+50h] [rbp-88h]
-  int v31; // [rsp+E8h] [rbp+10h]
-  Scaleform::Render::TreeCacheRoot *v32; // [rsp+F0h] [rbp+18h]
+  int v24; // eax
+  int v25; // ecx
+  int v26; // eax
+  int UpdateFlags; // ecx
+  Scaleform::Render::Rect<int> prect; // [rsp+38h] [rbp-A0h] BYREF
+  __int128 v29; // [rsp+50h] [rbp-88h]
+  int v30; // [rsp+E8h] [rbp+10h] BYREF
+  Scaleform::Render::TreeCacheRoot *v31; // [rsp+F0h] [rbp+18h]
 
-  v2 = pnode;
-  v3 = this;
-  v4 = (Scaleform::Render::TreeCacheRoot *)pnode->pRenderer;
+  pRenderer = (Scaleform::Render::TreeCacheRoot *)pnode->pRenderer;
   v5 = (unsigned __int64)pnode & 0xFFFFFFFFFFFFF000ui64;
-  v6 = (unsigned __int128)((signed __int64)((signed __int64)&pnode[-1]
-                                          - ((unsigned __int64)pnode & 0xFFFFFFFFFFFFF000ui64))
-                         * (signed __int128)5270498306774157605i64) >> 64;
-  v7 = (v6 >> 63) + ((signed __int64)v6 >> 4);
-  v8 = *(_QWORD *)(*(_QWORD *)(v5 + 40) + 8 * ((v6 >> 63) + (unsigned int)((signed __int64)v6 >> 4)) + 40) & 0xFFFFFFFFFFFFFFFEui64;
-  v9 = (Scaleform::Render::Viewport *)(v8 + 160);
-  if ( *(_DWORD *)(v8 + 160) && *(_DWORD *)(v8 + 164) )
+  v6 = (__int64)((__int64)&pnode[-1] - ((unsigned __int64)pnode & 0xFFFFFFFFFFFFF000ui64)) / 56;
+  v7 = *(_QWORD *)(*(_QWORD *)(((unsigned __int64)pnode & 0xFFFFFFFFFFFFF000ui64) + 0x28) + 8i64 * (unsigned int)v6 + 40) & 0xFFFFFFFFFFFFFFFEui64;
+  p_VP = (Scaleform::Render::Viewport *)(v7 + 160);
+  if ( *(_DWORD *)(v7 + 160) && *(_DWORD *)(v7 + 164) )
   {
-    v10 = *(_DWORD *)(v8 + 172);
-    v11 = *(_DWORD *)(v8 + 168);
-    v12 = this->pHal.pObject;
-    v13 = v12->Matrices.pObject;
-    if ( ((*(_DWORD *)(v8 + 200) & 0x30) - 16) & 0xFFFFFFDF )
+    v9 = *(_DWORD *)(v7 + 172);
+    v10 = *(_DWORD *)(v7 + 168);
+    pObject = this->pHal.pObject;
+    v12 = pObject->Matrices.pObject;
+    if ( (((*(_DWORD *)(v7 + 200) & 0x30) - 16) & 0xFFFFFFDF) != 0 )
     {
-      v14 = *(_DWORD *)(v8 + 180);
-      v15 = *(_DWORD *)(v8 + 176);
+      v13 = *(_DWORD *)(v7 + 180);
+      v14 = *(_DWORD *)(v7 + 176);
     }
     else
     {
-      v14 = *(_DWORD *)(v8 + 176);
-      v15 = *(_DWORD *)(v8 + 180);
+      v13 = *(_DWORD *)(v7 + 176);
+      v14 = *(_DWORD *)(v7 + 180);
     }
-    v13->ViewRectOriginal.x1 = v11;
-    v13->ViewRectOriginal.y1 = v10;
-    v13->ViewRectOriginal.x2 = v11 + v15;
-    v13->ViewRectOriginal.y2 = v10 + v14;
-    v12->Matrices.pObject->UVPOChanged = 1;
+    v12->ViewRectOriginal.x1 = v10;
+    v12->ViewRectOriginal.y1 = v9;
+    v12->ViewRectOriginal.x2 = v10 + v14;
+    v12->ViewRectOriginal.y2 = v9 + v13;
+    pObject->Matrices.pObject->UVPOChanged = 1;
   }
   else
   {
-    v9 = &this->VP;
+    p_VP = &this->VP;
   }
-  v30 = 0i64;
+  v29 = 0i64;
   *(_QWORD *)&prect.x1 = 0i64;
   *(_QWORD *)&prect.x2 = 0i64;
-  if ( Scaleform::Render::Viewport::GetClippedRect<int>(v9, &prect, 1) )
+  if ( Scaleform::Render::Viewport::GetClippedRect<int>(p_VP, &prect, 1) )
   {
-    v17 = (float)(prect.y2 - v9->Top);
-    v18 = (float)(prect.x2 - v9->Left);
-    v19 = (float)(prect.y1 - v9->Top);
-    v20 = (float)(prect.x1 - v9->Left);
-    v16 = 1;
+    v16 = (float)(prect.y2 - p_VP->Top);
+    v17 = (float)(prect.x2 - p_VP->Left);
+    v18 = (float)(prect.y1 - p_VP->Top);
+    v19 = (float)(prect.x1 - p_VP->Left);
+    v15 = 1;
   }
   else
   {
-    v16 = 0;
-    v17 = *((float *)&v30 + 3);
-    v18 = *((float *)&v30 + 2);
-    v19 = *((float *)&v30 + 1);
-    v20 = *(float *)&v30;
+    v15 = 0;
+    v16 = *((float *)&v29 + 3);
+    v17 = *((float *)&v29 + 2);
+    v18 = *((float *)&v29 + 1);
+    v19 = *(float *)&v29;
   }
-  if ( v9->BufferWidth && v9->BufferHeight )
+  if ( p_VP->BufferWidth && p_VP->BufferHeight )
   {
-    if ( v4 )
+    if ( pRenderer )
     {
-      if ( v16 == v4->ViewValid
-        && v20 == v4->ViewCullRect.x1
-        && v18 == v4->ViewCullRect.x2
-        && v19 == v4->ViewCullRect.y1
-        && v17 == v4->ViewCullRect.y2 )
+      if ( v15 == pRenderer->ViewValid
+        && v19 == pRenderer->ViewCullRect.x1
+        && v17 == pRenderer->ViewCullRect.x2
+        && v18 == pRenderer->ViewCullRect.y1
+        && v16 == pRenderer->ViewCullRect.y2 )
       {
         goto LABEL_32;
       }
-      v4->ViewValid = v16;
-      v4->ViewCullRect.x1 = v20;
-      v4->ViewCullRect.y1 = v19;
-      v4->ViewCullRect.x2 = v18;
-      v4->ViewCullRect.y2 = v17;
-      v27 = 1;
-      v28 = v4->UpdateFlags;
-      if ( v28 >= 0 )
+      pRenderer->ViewValid = v15;
+      pRenderer->ViewCullRect.x1 = v19;
+      pRenderer->ViewCullRect.y1 = v18;
+      pRenderer->ViewCullRect.x2 = v17;
+      pRenderer->ViewCullRect.y2 = v16;
+      v26 = 1;
+      UpdateFlags = pRenderer->UpdateFlags;
+      if ( UpdateFlags >= 0 )
       {
-        v4->pNextUpdate = v4->pUpdateList;
-        v4->pUpdateList = (Scaleform::Render::TreeCacheNode *)&v4->vfptr;
-        v27 = -2147483647;
+        pRenderer->pNextUpdate = pRenderer->pUpdateList;
+        pRenderer->pUpdateList = pRenderer;
+        v26 = -2147483647;
       }
-      v4->UpdateFlags = v28 | v27;
+      pRenderer->UpdateFlags = UpdateFlags | v26;
 LABEL_31:
-      Scaleform::Render::TreeCacheRoot::UpdateTreeData(v4);
+      Scaleform::Render::TreeCacheRoot::UpdateTreeData(pRenderer);
 LABEL_32:
-      if ( v16 )
-        Scaleform::Render::TreeCacheRoot::Draw(v4);
+      if ( v15 )
+        Scaleform::Render::TreeCacheRoot::Draw(pRenderer);
       return;
     }
-    v21 = *(_WORD *)(v8 + 10) & 0xC;
-    if ( !v21 )
-      v21 = 4;
-    v22 = v21 | *(_BYTE *)(v8 + 10) & 1;
-    v31 = 71;
-    v23 = (Scaleform::Render::TreeCacheRoot *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
+    v20 = *(_WORD *)(v7 + 10) & 0xC;
+    if ( (*(_WORD *)(v7 + 10) & 0xC) == 0 )
+      v20 = 4;
+    v21 = v20 | *(_BYTE *)(v7 + 10) & 1;
+    v30 = 71;
+    v22 = (Scaleform::Render::TreeCacheRoot *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                                 Scaleform::Memory::pGlobalHeap,
-                                                v3,
-                                                496ui64,
-                                                (Scaleform::AllocInfo *)&v31);
-    v32 = v23;
-    if ( v23 )
+                                                this,
+                                                496i64,
+                                                &v30);
+    v31 = v22;
+    if ( v22 )
     {
-      Scaleform::Render::TreeCacheRoot::TreeCacheRoot(v23, v3, v3->pHal.pObject, v22, v2);
-      v4 = v24;
+      Scaleform::Render::TreeCacheRoot::TreeCacheRoot(v22, this, this->pHal.pObject, v21, pnode);
+      pRenderer = v23;
     }
     else
     {
-      v4 = 0i64;
+      pRenderer = 0i64;
     }
-    if ( v4 )
+    if ( pRenderer )
     {
-      v2->pRenderer = (Scaleform::Render::TreeCacheNode *)&v4->vfptr;
-      v4->pPrev = v3->RenderRoots.Root.pPrev;
-      v4->pNext = (Scaleform::Render::TreeCacheNode *)&v3->VP.Flags;
-      v3->RenderRoots.Root.pPrev->pNext = (Scaleform::Render::TreeCacheNode *)&v4->vfptr;
-      v3->RenderRoots.Root.pPrev = (Scaleform::Render::TreeCacheNode *)&v4->vfptr;
-      v4->ViewValid = v16;
-      v4->ViewCullRect.x1 = v20;
-      v4->ViewCullRect.y1 = v19;
-      v4->ViewCullRect.x2 = v18;
-      v4->ViewCullRect.y2 = v17;
-      v4->vfptr->UpdateChildSubtree(
-        (Scaleform::Render::TreeCacheNode *)&v4->vfptr,
-        (Scaleform::Render::TreeNode::NodeData *)(*(_QWORD *)(*(_QWORD *)(v5 + 40) + 8i64 * (unsigned int)v7 + 40) & 0xFFFFFFFFFFFFFFFEui64),
+      pnode->pRenderer = pRenderer;
+      pRenderer->pPrev = this->RenderRoots.Root.pPrev;
+      pRenderer->pNext = (Scaleform::Render::TreeCacheNode *)&this->VP.Flags;
+      this->RenderRoots.Root.pPrev->pNext = pRenderer;
+      this->RenderRoots.Root.pPrev = pRenderer;
+      pRenderer->ViewValid = v15;
+      pRenderer->ViewCullRect.x1 = v19;
+      pRenderer->ViewCullRect.y1 = v18;
+      pRenderer->ViewCullRect.x2 = v17;
+      pRenderer->ViewCullRect.y2 = v16;
+      pRenderer->vfptr->UpdateChildSubtree(
+        pRenderer,
+        (Scaleform::Render::TreeNode::NodeData *)(*(_QWORD *)(*(_QWORD *)(v5 + 40) + 8i64 * (unsigned int)v6 + 40) & 0xFFFFFFFFFFFFFFFEui64),
         1u);
-      v25 = 16777219;
-      v26 = v4->UpdateFlags;
-      if ( v26 >= 0 )
+      v24 = 16777219;
+      v25 = pRenderer->UpdateFlags;
+      if ( v25 >= 0 )
       {
-        v4->pNextUpdate = v4->pUpdateList;
-        v4->pUpdateList = (Scaleform::Render::TreeCacheNode *)&v4->vfptr;
-        v25 = -2130706429;
+        pRenderer->pNextUpdate = pRenderer->pUpdateList;
+        pRenderer->pUpdateList = pRenderer;
+        v24 = -2130706429;
       }
-      v4->UpdateFlags = v25 | v26;
-      Scaleform::Render::TreeCacheRoot::ChainUpdatesByDepth(v4);
+      pRenderer->UpdateFlags = v24 | v25;
+      Scaleform::Render::TreeCacheRoot::ChainUpdatesByDepth(pRenderer);
       goto LABEL_31;
     }
   }
@@ -433,216 +410,206 @@ LABEL_32:
 
 // File Line: 219
 // RVA: 0x971100
-void __fastcall Scaleform::Render::Renderer2DImpl::EntryDestroy(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::ContextImpl::Entry *p)
+void __fastcall Scaleform::Render::Renderer2DImpl::EntryDestroy(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::ContextImpl::Entry *p)
 {
-  Scaleform::Render::TreeCacheNode *v2; // rcx
-  Scaleform::Render::ContextImpl::Entry *v3; // rbx
+  Scaleform::Render::TreeCacheNode *pRenderer; // rcx
 
-  v2 = p->pRenderer;
-  v3 = p;
-  if ( v2 )
+  pRenderer = p->pRenderer;
+  if ( pRenderer )
   {
-    v2->vfptr->__vecDelDtor(v2, 1u);
-    v3->pRenderer = 0i64;
+    pRenderer->vfptr->__vecDelDtor(pRenderer, 1u);
+    p->pRenderer = 0i64;
   }
 }
 
 // File Line: 231
 // RVA: 0x971130
-void __fastcall Scaleform::Render::Renderer2DImpl::EntryFlush(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::ContextImpl::Entry *p)
+void __fastcall Scaleform::Render::Renderer2DImpl::EntryFlush(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::ContextImpl::Entry *p)
 {
-  this->vfptr->EntryDestroy((Scaleform::Render::ContextImpl::RenderNotify *)this, p);
+  this->Scaleform::Render::ContextImpl::RenderNotify::vfptr->EntryDestroy(this, p);
 }
 
 // File Line: 239
 // RVA: 0x970E30
-void __fastcall Scaleform::Render::Renderer2DImpl::EntryChanges(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::ContextImpl::Context *context, Scaleform::Render::PagedItemBuffer<Scaleform::Render::ContextImpl::EntryChange,63> *cb, bool forceUpdateImages)
+void __fastcall Scaleform::Render::Renderer2DImpl::EntryChanges(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::ContextImpl::Context *context,
+        Scaleform::Render::PagedItemBuffer<Scaleform::Render::ContextImpl::EntryChange,63> *cb,
+        bool forceUpdateImages)
 {
-  Scaleform::Render::PagedItemBuffer<Scaleform::Render::ContextImpl::EntryChange,63>::Page *v4; // r15
-  bool v5; // r12
+  Scaleform::Render::PagedItemBuffer<Scaleform::Render::ContextImpl::EntryChange,63>::Page *pPages; // r15
   Scaleform::Render::ContextImpl::Context *v6; // r13
   Scaleform::Render::Renderer2DImpl *v7; // rdi
-  unsigned int v8; // er14
-  _DWORD *v9; // rdi
-  __int64 v10; // rbx
-  int v11; // eax
-  __int64 v12; // rbp
-  signed int v13; // esi
-  unsigned __int64 v14; // rdx
+  unsigned int i; // r14d
+  Scaleform::Render::ContextImpl::EntryChange *v9; // rdi
+  Scaleform::Render::TreeCacheNode *pRenderer; // rbx
+  unsigned int ChangeBits; // eax
+  Scaleform::Render::TreeCacheRoot *pRoot; // rbp
+  int v13; // esi
+  unsigned int v14; // eax
   int v15; // eax
-  int v16; // eax
-  __int64 v17; // rcx
-  int v18; // ecx
-  __int64 v19; // rcx
-  signed int v20; // eax
-  Scaleform::Render::TreeCacheRoot *v21; // rbx
-  signed __int64 v22; // rdi
-  signed __int64 v23; // rax
-  Scaleform::Render::Renderer2DImpl *v24; // [rsp+60h] [rbp+8h]
-  Scaleform::Render::ContextImpl::Context *v25; // [rsp+68h] [rbp+10h]
+  Scaleform::Render::TreeCacheNode *pParent; // rcx
+  int v17; // ecx
+  Scaleform::Render::TreeCacheNode *v18; // rcx
+  int v19; // eax
+  Scaleform::Render::TreeCacheRoot *pNext; // rbx
+  Scaleform::List<Scaleform::Render::TreeCacheNode,Scaleform::Render::TreeCacheNode> *p_RenderRoots; // rdi
+  __int64 v22; // rax
 
-  v25 = context;
-  v24 = this;
-  v4 = cb->pPages;
-  v5 = forceUpdateImages;
+  pPages = cb->pPages;
   v6 = context;
   v7 = this;
   if ( cb->pPages )
   {
     do
     {
-      v8 = 0;
-      if ( v4->Count )
+      for ( i = 0; i < pPages->Count; ++i )
       {
-        do
+        v9 = &pPages->Items[i];
+        if ( v9->pNode )
         {
-          v9 = (_DWORD *)((char *)v4 + 16 * (v8 + 1i64));
-          if ( *(_QWORD *)v9 )
+          pRenderer = v9->pNode->pRenderer;
+          if ( pRenderer )
           {
-            v10 = *(_QWORD *)(*(_QWORD *)v9 + 24i64);
-            if ( v10 )
+            if ( (v9->ChangeBits & 0x3730) != 0 )
+              (*(void (__fastcall **)(Scaleform::Render::TreeCacheNode *))pRenderer->vfptr->gap8)(pRenderer);
+            ChangeBits = v9->ChangeBits;
+            pRoot = pRenderer->pRoot;
+            if ( (ChangeBits & 0x7E208C) != 0 )
             {
-              if ( v9[2] & 0x3730 )
-                (*(void (__fastcall **)(__int64))(*(_QWORD *)v10 + 8i64))(v10);
-              v11 = v9[2];
-              v12 = *(_QWORD *)(v10 + 24);
-              if ( v11 & 0x7E208C )
+              v13 = 0;
+              if ( (ChangeBits & 4) != 0 )
               {
-                v13 = 0;
-                if ( v11 & 4 )
+                v13 = 0x1000000;
+                pRenderer->Flags ^= (pRenderer->Flags ^ *(_WORD *)((*(_QWORD *)(*(_QWORD *)(((unsigned __int64)pRenderer->pNode & 0xFFFFFFFFFFFFF000ui64)
+                                                                                          + 0x28)
+                                                                              + 8i64
+                                                                              * (unsigned int)((int)(LODWORD(pRenderer->pNode) - ((__int64)pRenderer->pNode & 0xFFFFF000) - 56)
+                                                                                             / 56)
+                                                                              + 40) & 0xFFFFFFFFFFFFFFFEui64)
+                                                                 + 10)) & 1;
+              }
+              if ( (v9->ChangeBits & 0x40000) != 0 )
+                Scaleform::Render::TreeCacheNode::updateMaskCache(
+                  pRenderer,
+                  (Scaleform::Render::TreeNode::NodeData *)(*(_QWORD *)(*(_QWORD *)(((unsigned __int64)pRenderer->pNode & 0xFFFFFFFFFFFFF000ui64)
+                                                                                  + 0x28)
+                                                                      + 8i64
+                                                                      * (unsigned int)((int)(LODWORD(pRenderer->pNode)
+                                                                                           - ((__int64)pRenderer->pNode & 0xFFFFF000)
+                                                                                           - 56)
+                                                                                     / 56)
+                                                                      + 40) & 0xFFFFFFFFFFFFFFFEui64),
+                  pRenderer->Depth + 1,
+                  0);
+              v14 = v9->ChangeBits;
+              if ( (v14 & 8) != 0 )
+                v13 |= 0x2000000u;
+              v15 = v14 & 0x7E0000;
+              if ( v15 )
+              {
+                pRenderer->UpdateFlags |= v15;
+                v13 |= 0x1000000u;
+              }
+              if ( (v9->ChangeBits & 0x2000) != 0 )
+                v13 |= 0x1000000u;
+              if ( !pRoot )
+                continue;
+              if ( v13 )
+              {
+                pParent = pRenderer->pParent;
+                if ( pParent )
                 {
-                  v13 = 0x1000000;
-                  *(_WORD *)(v10 + 74) ^= (*(_WORD *)(v10 + 74) ^ *(_WORD *)((*(_QWORD *)(*(_QWORD *)((*(_QWORD *)(v10 + 32) & 0xFFFFFFFFFFFFF000ui64) + 0x28)
-                                                                                        + 8
-                                                                                        * ((unsigned int)((signed __int64)((unsigned __int128)((signed __int64)(*(_QWORD *)(v10 + 32) - (*(_QWORD *)(v10 + 32) & 0xFFFFFFFFFFFFF000ui64) - 56) * (signed __int128)5270498306774157605i64) >> 64) >> 4)
-                                                                                         + ((unsigned __int64)((unsigned __int128)((signed __int64)(*(_QWORD *)(v10 + 32) - (*(_QWORD *)(v10 + 32) & 0xFFFFFFFFFFFFF000ui64) - 56) * (signed __int128)5270498306774157605i64) >> 64) >> 63))
-                                                                                        + 40) & 0xFFFFFFFFFFFFFFFEui64)
-                                                                           + 10)) & 1;
-                }
-                if ( v9[2] & 0x40000 )
-                {
-                  v14 = (unsigned __int128)((signed __int64)(*(_QWORD *)(v10 + 32)
-                                                           - (*(_QWORD *)(v10 + 32) & 0xFFFFFFFFFFFFF000ui64)
-                                                           - 56)
-                                          * (signed __int128)5270498306774157605i64) >> 64;
-                  Scaleform::Render::TreeCacheNode::updateMaskCache(
-                    (Scaleform::Render::TreeCacheNode *)v10,
-                    (Scaleform::Render::TreeNode::NodeData *)(*(_QWORD *)(*(_QWORD *)((*(_QWORD *)(v10 + 32) & 0xFFFFFFFFFFFFF000ui64)
-                                                                                    + 0x28)
-                                                                        + 8
-                                                                        * ((unsigned int)((signed __int64)v14 >> 4)
-                                                                         + (v14 >> 63))
-                                                                        + 40) & 0xFFFFFFFFFFFFFFFEui64),
-                    *(_WORD *)(v10 + 72) + 1,
-                    0);
-                }
-                v15 = v9[2];
-                if ( v15 & 8 )
-                  v13 |= 0x2000000u;
-                v16 = v15 & 0x7E0000;
-                if ( v16 )
-                {
-                  *(_DWORD *)(v10 + 76) |= v16;
-                  v13 |= 0x1000000u;
-                }
-                if ( v9[2] & 0x2000 )
-                  v13 |= 0x1000000u;
-                if ( !v12 )
-                  goto LABEL_33;
-                if ( v13 )
-                {
-                  v17 = *(_QWORD *)(v10 + 48);
-                  if ( v17 )
+                  if ( (pParent->UpdateFlags & 0x80000000) == 0 )
                   {
-                    if ( *(_DWORD *)(v17 + 76) >= 0 )
-                    {
-                      v13 |= 0x80000000;
-                      *(_QWORD *)(v17 + 80) = *(_QWORD *)(v12 + 192);
-                      *(_QWORD *)(v12 + 192) = v17;
-                    }
-                    *(_DWORD *)(v17 + 76) |= v13;
+                    v13 |= 0x80000000;
+                    pParent->pNextUpdate = pRoot->pUpdateList;
+                    pRoot->pUpdateList = pParent;
                   }
+                  pParent->UpdateFlags |= v13;
                 }
               }
-              if ( v12 )
+            }
+            if ( pRoot )
+            {
+              v17 = v9->ChangeBits & 0x12003;
+              if ( v17 )
               {
-                v18 = v9[2] & 0x12003;
-                if ( v18 )
+                if ( (pRenderer->UpdateFlags & 0x80000000) == 0 )
                 {
-                  if ( *(_DWORD *)(v10 + 76) >= 0 )
+                  v17 |= 0x80000000;
+                  pRenderer->pNextUpdate = pRoot->pUpdateList;
+                  pRoot->pUpdateList = pRenderer;
+                }
+                pRenderer->UpdateFlags |= v17;
+                if ( (v9->ChangeBits & 1) != 0 && (pRenderer->Flags & 0x20) != 0 )
+                {
+                  v18 = pRenderer->pParent;
+                  v19 = 33554433;
+                  if ( (v18->UpdateFlags & 0x80000000) == 0 )
                   {
-                    v18 |= 0x80000000;
-                    *(_QWORD *)(v10 + 80) = *(_QWORD *)(v12 + 192);
-                    *(_QWORD *)(v12 + 192) = v10;
+                    v18->pNextUpdate = pRoot->pUpdateList;
+                    pRoot->pUpdateList = v18;
+                    v19 = -2113929215;
                   }
-                  *(_DWORD *)(v10 + 76) |= v18;
-                  if ( v9[2] & 1 && (*(_BYTE *)(v10 + 74) >> 5) & 1 )
-                  {
-                    v19 = *(_QWORD *)(v10 + 48);
-                    v20 = 33554433;
-                    if ( *(_DWORD *)(v19 + 76) >= 0 )
-                    {
-                      *(_QWORD *)(v19 + 80) = *(_QWORD *)(v12 + 192);
-                      *(_QWORD *)(v12 + 192) = v19;
-                      v20 = -2113929215;
-                    }
-                    *(_DWORD *)(v19 + 76) |= v20;
-                  }
+                  v18->UpdateFlags |= v19;
                 }
               }
             }
           }
-LABEL_33:
-          ++v8;
         }
-        while ( v8 < v4->Count );
       }
-      v4 = v4->pNext;
+      pPages = pPages->pNext;
     }
-    while ( v4 );
-    v6 = v25;
-    v7 = v24;
+    while ( pPages );
+    v6 = context;
+    v7 = this;
   }
-  if ( v5 )
+  if ( forceUpdateImages )
     Scaleform::Render::Renderer2DImpl::UpdateComplexMeshes(v7);
-  v21 = (Scaleform::Render::TreeCacheRoot *)v7->RenderRoots.Root.pNext;
-  v22 = (signed __int64)&v7->RenderRoots;
+  pNext = (Scaleform::Render::TreeCacheRoot *)v7->RenderRoots.Root.pNext;
+  p_RenderRoots = &v7->RenderRoots;
   while ( 1 )
   {
-    v23 = v22 ? v22 - 8 : 0i64;
-    if ( v21 == (Scaleform::Render::TreeCacheRoot *)v23 )
+    v22 = p_RenderRoots ? (__int64)&p_RenderRoots[-1].Root.8 : 0i64;
+    if ( pNext == (Scaleform::Render::TreeCacheRoot *)v22 )
       break;
-    if ( v5
-      && *(Scaleform::Render::ContextImpl::Context **)(*(_QWORD *)(((_QWORD)v21->pNode & 0xFFFFFFFFFFFFF000ui64) + 0x18)
+    if ( forceUpdateImages
+      && *(Scaleform::Render::ContextImpl::Context **)(*(_QWORD *)(((unsigned __int64)pNext->pNode & 0xFFFFFFFFFFFFF000ui64)
+                                                                 + 0x18)
                                                      + 16i64) == v6 )
     {
-      v21->vfptr->forceUpdateImages((Scaleform::Render::TreeCacheNode *)&v21->vfptr);
+      pNext->vfptr->forceUpdateImages(pNext);
     }
-    Scaleform::Render::TreeCacheRoot::ChainUpdatesByDepth(v21);
-    Scaleform::Render::TreeCacheRoot::UpdateTreeData(v21);
-    v21 = (Scaleform::Render::TreeCacheRoot *)v21->pNext;
+    Scaleform::Render::TreeCacheRoot::ChainUpdatesByDepth(pNext);
+    Scaleform::Render::TreeCacheRoot::UpdateTreeData(pNext);
+    pNext = (Scaleform::Render::TreeCacheRoot *)pNext->pNext;
   }
 }
 
 // File Line: 401
 // RVA: 0x99CAE0
-void __fastcall Scaleform::Render::Renderer2DImpl::OnHALEvent(Scaleform::Render::Renderer2DImpl *this, Scaleform::Render::HALNotifyType type)
+void __fastcall Scaleform::Render::Renderer2DImpl::OnHALEvent(
+        Scaleform::Render::Renderer2DImpl *this,
+        Scaleform::Render::HALNotifyType type)
 {
-  Scaleform::Render::Renderer2DImpl *v2; // rbx
-  __int32 v3; // edx
+  int v3; // edx
   int v4; // edx
-  Scaleform::Render::GlyphCache *v5; // rdi
-  Scaleform::Render::ThreadCommandQueue *v6; // rcx
+  Scaleform::Render::GlyphCache *pNext; // rdi
+  Scaleform::Render::ThreadCommandQueue *pRTCommandQueue; // rcx
 
-  v2 = this;
   if ( type == HAL_Initialize )
-    goto LABEL_12;
+    goto LABEL_5;
   v3 = type - 1;
   if ( !v3 )
   {
-    Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::ContextImpl::RenderNotify *)&this[-1].VP.Left);
-    Scaleform::Render::MeshKeyManager::DestroyAllKeys((Scaleform::Render::MeshKeyManager *)v2->MPool.HandleTable.PartiallyFreePages.Root.pPrev);
-    Scaleform::Render::GlyphCache::Destroy((Scaleform::Render::GlyphCache *)v2->MPool.HandleTable.PartiallyFreePages.Root.pNext);
+    Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::Renderer2DImpl *)((char *)this - 56));
+    Scaleform::Render::MeshKeyManager::DestroyAllKeys((Scaleform::Render::MeshKeyManager *)this->MPool.HandleTable.PartiallyFreePages.Root.pPrev);
+    Scaleform::Render::GlyphCache::Destroy((Scaleform::Render::GlyphCache *)this->MPool.HandleTable.PartiallyFreePages.Root.pNext);
     return;
   }
   v4 = v3 - 1;
@@ -653,13 +620,13 @@ void __fastcall Scaleform::Render::Renderer2DImpl::OnHALEvent(Scaleform::Render:
   }
   if ( v4 == 1 )
   {
-LABEL_12:
-    v5 = (Scaleform::Render::GlyphCache *)this->MPool.HandleTable.PartiallyFreePages.Root.pNext;
-    v6 = this->pRTCommandQueue;
-    v5->pFillMan = (Scaleform::Render::PrimitiveFillManager *)&v2->Tolerances.FillAliasedLowerScale;
-    v5->pRenderer = (Scaleform::Render::HAL *)v6;
-    if ( ((unsigned __int8 (*)(void))v6->vfptr[1].PushThreadCommand)() )
-      Scaleform::Render::GlyphCache::initialize(v5);
+LABEL_5:
+    pNext = (Scaleform::Render::GlyphCache *)this->MPool.HandleTable.PartiallyFreePages.Root.pNext;
+    pRTCommandQueue = this->pRTCommandQueue;
+    pNext->pFillMan = (Scaleform::Render::PrimitiveFillManager *)&this->Tolerances.FillAliasedLowerScale;
+    pNext->pRenderer = (Scaleform::Render::HAL *)pRTCommandQueue;
+    if ( ((unsigned __int8 (__fastcall *)(Scaleform::Render::ThreadCommandQueue *))pRTCommandQueue->vfptr[1].PushThreadCommand)(pRTCommandQueue) )
+      Scaleform::Render::GlyphCache::initialize(pNext);
   }
 }
 
@@ -667,129 +634,117 @@ LABEL_12:
 // RVA: 0x9BDB90
 void __fastcall Scaleform::Render::Renderer2DImpl::UpdateComplexMeshes(Scaleform::Render::Renderer2DImpl *this)
 {
-  Scaleform::Render::Renderer2DImpl *v1; // rdi
-  _RTL_CRITICAL_SECTION *v2; // rbx
-  Scaleform::Render::Renderer2DImpl *v3; // r15
-  signed __int64 v4; // r13
-  signed __int64 v5; // rbp
+  Scaleform::Lock *p_KeySetLock; // rbx
+  Scaleform::Render::ComplexMesh::UpdateNode *pNext; // r15
+  Scaleform::List<Scaleform::Render::ComplexMesh::UpdateNode,Scaleform::Render::ComplexMesh::UpdateNode> *p_mComplexMeshUpdateList; // r13
+  Scaleform::Render::ComplexMesh::UpdateNode *v5; // rbp
   Scaleform::Render::TextureManager *textureManager; // r12
-  unsigned int v7; // er14
+  unsigned int v7; // r14d
   __int64 v8; // rdi
   unsigned int *v9; // rdi
-  int pDtor; // ST20_4
-  int v11; // ST20_4
-  Scaleform::Render::PrimitiveFill *v12; // rax
-  Scaleform::Render::PrimitiveFill *v13; // rsi
-  __int64 v14; // rcx
-  bool v15; // zf
-  char ptr; // [rsp+58h] [rbp-90h]
-  Scaleform::Ptr<Scaleform::Render::Image> gradientImg1; // [rsp+60h] [rbp-88h]
-  Scaleform::Render::FillData fd0; // [rsp+70h] [rbp-78h]
-  Scaleform::Render::FillData fd1; // [rsp+90h] [rbp-58h]
-  signed __int64 v20; // [rsp+F0h] [rbp+8h]
-  Scaleform::Lock *v21; // [rsp+F8h] [rbp+10h]
+  Scaleform::Render::PrimitiveFill *v10; // rax
+  Scaleform::Render::PrimitiveFill *v11; // rsi
+  __int64 v12; // rcx
+  bool v13; // zf
+  void (__fastcall *pDtor)(void *); // [rsp+20h] [rbp-C8h]
+  Scaleform::Ptr<Scaleform::Render::Image> ptr; // [rsp+58h] [rbp-90h] BYREF
+  Scaleform::Ptr<Scaleform::Render::Image> gradientImg1; // [rsp+60h] [rbp-88h] BYREF
+  Scaleform::Render::FillData fd0; // [rsp+70h] [rbp-78h] BYREF
+  Scaleform::Render::FillData fd1; // [rsp+90h] [rbp-58h] BYREF
+  Scaleform::List<Scaleform::Render::ComplexMesh::UpdateNode,Scaleform::Render::ComplexMesh::UpdateNode> *i; // [rsp+F0h] [rbp+8h]
 
-  v1 = this;
-  v2 = &this->pMeshKeyManager.pObject->KeySetLock.cs;
-  v21 = &this->pMeshKeyManager.pObject->KeySetLock;
-  EnterCriticalSection(v2);
-  v3 = (Scaleform::Render::Renderer2DImpl *)v1->mComplexMeshUpdateList.Root.pNext;
-  v4 = (signed __int64)&v1->mComplexMeshUpdateList;
-  v20 = (signed __int64)&v1->mComplexMeshUpdateList;
-  if ( v3 != (Scaleform::Render::Renderer2DImpl *)&v1->mComplexMeshUpdateList )
+  p_KeySetLock = &this->pMeshKeyManager.pObject->KeySetLock;
+  EnterCriticalSection(&p_KeySetLock->cs);
+  pNext = this->mComplexMeshUpdateList.Root.pNext;
+  p_mComplexMeshUpdateList = &this->mComplexMeshUpdateList;
+  for ( i = &this->mComplexMeshUpdateList;
+        pNext != (Scaleform::Render::ComplexMesh::UpdateNode *)p_mComplexMeshUpdateList;
+        pNext = pNext->pNext )
   {
-    do
+    v5 = pNext - 10;
+    if ( ((__int64 (__fastcall *)(Scaleform::Render::ComplexMesh::UpdateNode *))pNext[-5].pNext->Scaleform::ListNode<Scaleform::Render::ComplexMesh::UpdateNode>::$33BF73C4AE1B64C528F7D9912F00A9F4::pPrev[6].pNext)(pNext[-5].pNext) )
     {
-      v5 = (signed __int64)&v3[-1].MPool.pLastFreedPage;
-      if ( ((unsigned __int8 (*)(void))v3[-1].mComplexMeshUpdateList.Root.pNext->pPrev[6].pNext)() )
+      textureManager = (Scaleform::Render::TextureManager *)((__int64 (__fastcall *)(Scaleform::Render::ComplexMesh::UpdateNode *))v5[5].pPrev[5].pPrev->pPrev[30].pNext)(v5[5].pPrev[5].pPrev);
+      v7 = 0;
+      if ( v5[15].pNext )
       {
-        textureManager = (Scaleform::Render::TextureManager *)(*(__int64 (**)(void))(**(_QWORD **)(*(_QWORD *)(v5 + 80)
-                                                                                                 + 80i64)
-                                                                                   + 488i64))();
-        v7 = 0;
-        if ( *(_QWORD *)(v5 + 248) )
+        v8 = 0i64;
+        do
         {
-          v8 = 0i64;
-          do
+          v9 = (unsigned int *)v5[15].pPrev + 14 * v8;
+          if ( *(_QWORD *)v9 )
           {
-            v9 = (unsigned int *)(*(_QWORD *)(v5 + 240) + 56 * v8);
-            if ( *(_QWORD *)v9 )
+            fd0.Type = Fill_VColor;
+            fd0.Color = 0;
+            fd0.PrimFill = PrimFill_VColor_EAlpha;
+            fd0.FillMode.Fill = 0;
+            fd0.pVFormat = &Scaleform::Render::VertexXY16iCF32::Format;
+            fd1.Type = Fill_VColor;
+            fd1.Color = 0;
+            fd1.PrimFill = PrimFill_VColor_EAlpha;
+            fd1.FillMode.Fill = 0;
+            fd1.pVFormat = &Scaleform::Render::VertexXY16iCF32::Format;
+            pDtor = (void (__fastcall *)(void *))ARefPtr<SSClassDescBase>::~ARefPtr<SSClassDescBase>;
+            `eh vector constructor iterator(
+              &ptr,
+              8ui64,
+              2,
+              (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
+            LODWORD(pDtor) = v5[9].pNext;
+            ((void (__fastcall *)(Scaleform::Render::ComplexMesh::UpdateNode *, Scaleform::Render::FillData *, _QWORD, _QWORD, void (__fastcall *)(void *)))v5[5].pNext->Scaleform::ListNode<Scaleform::Render::ComplexMesh::UpdateNode>::$33BF73C4AE1B64C528F7D9912F00A9F4::pPrev[5].pNext)(
+              v5[5].pNext,
+              &fd0,
+              HIDWORD(v5[9].pVoidPrev),
+              v9[11],
+              pDtor);
+            ((void (__fastcall *)(Scaleform::Render::ComplexMesh::UpdateNode *, Scaleform::Render::FillData *, _QWORD, _QWORD, _DWORD))v5[5].pNext->Scaleform::ListNode<Scaleform::Render::ComplexMesh::UpdateNode>::$33BF73C4AE1B64C528F7D9912F00A9F4::pPrev[5].pNext)(
+              v5[5].pNext,
+              &fd1,
+              HIDWORD(v5[9].pVoidPrev),
+              v9[12],
+              v5[9].pNext);
+            v10 = Scaleform::Render::PrimitiveFillManager::CreateMergedFill(
+                    (Scaleform::Render::PrimitiveFillManager *)v5[11].pPrev,
+                    v9[13],
+                    *(Scaleform::Render::VertexFormat **)(*(_QWORD *)v9 + 48i64),
+                    &fd0,
+                    &fd1,
+                    &ptr,
+                    &gradientImg1,
+                    textureManager,
+                    *(float *)&v5[9].pPrev);
+            v11 = v10;
+            if ( v10 )
             {
-              fd0.Type = 3;
-              fd0.Color = 0;
-              fd0.PrimFill = 4;
-              fd0.FillMode.Fill = 0;
-              fd0.pVFormat = &Scaleform::Render::VertexXY16iCF32::Format;
-              fd1.Type = 3;
-              fd1.Color = 0;
-              fd1.PrimFill = 4;
-              fd1.FillMode.Fill = 0;
-              fd1.pVFormat = &Scaleform::Render::VertexXY16iCF32::Format;
-              `eh vector constructor iterator(
-                &ptr,
-                8ui64,
-                2,
-                (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
-              pDtor = *(_DWORD *)(v5 + 152);
-              (*(void (__fastcall **)(_QWORD, Scaleform::Render::FillData *, _QWORD, _QWORD))(**(_QWORD **)(v5 + 88)
-                                                                                            + 88i64))(
-                *(_QWORD *)(v5 + 88),
-                &fd0,
-                *(unsigned int *)(v5 + 148),
-                v9[11]);
-              v11 = *(_DWORD *)(v5 + 152);
-              (*(void (__fastcall **)(_QWORD, Scaleform::Render::FillData *, _QWORD, _QWORD))(**(_QWORD **)(v5 + 88)
-                                                                                            + 88i64))(
-                *(_QWORD *)(v5 + 88),
-                &fd1,
-                *(unsigned int *)(v5 + 148),
-                v9[12]);
-              v12 = Scaleform::Render::PrimitiveFillManager::CreateMergedFill(
-                      *(Scaleform::Render::PrimitiveFillManager **)(v5 + 176),
-                      v9[13],
-                      *(Scaleform::Render::VertexFormat **)(*(_QWORD *)v9 + 48i64),
-                      &fd0,
-                      &fd1,
-                      (Scaleform::Ptr<Scaleform::Render::Image> *)&ptr,
-                      &gradientImg1,
-                      textureManager,
-                      *(float *)(v5 + 144));
-              v13 = v12;
-              if ( v12 )
+              ++v10->RefCount;
+              v12 = *(_QWORD *)v9;
+              if ( *(_QWORD *)v9 )
               {
-                ++v12->RefCount;
-                v14 = *(_QWORD *)v9;
-                if ( *(_QWORD *)v9 )
-                {
-                  v15 = (*(_DWORD *)(v14 + 8))-- == 1;
-                  if ( v15 )
-                    (**(void (__fastcall ***)(__int64, signed __int64))v14)(v14, 1i64);
-                }
-                *(_QWORD *)v9 = v13;
-                v15 = v13->RefCount-- == 1;
-                if ( v15 )
-                  v13->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v13->vfptr, 1u);
+                v13 = (*(_DWORD *)(v12 + 8))-- == 1;
+                if ( v13 )
+                  (**(void (__fastcall ***)(__int64, __int64))v12)(v12, 1i64);
               }
-              `eh vector destructor iterator(
-                &ptr,
-                8ui64,
-                2,
-                (void (__fastcall *)(void *))ARefPtr<SSClassDescBase>::~ARefPtr<SSClassDescBase>);
+              *(_QWORD *)v9 = v11;
+              v13 = v11->RefCount-- == 1;
+              if ( v13 )
+                v11->vfptr->__vecDelDtor(v11, 1u);
             }
-            v8 = ++v7;
+            `eh vector destructor iterator(
+              &ptr,
+              8ui64,
+              2,
+              (void (__fastcall *)(void *))ARefPtr<SSClassDescBase>::~ARefPtr<SSClassDescBase>);
           }
-          while ( (unsigned __int64)v7 < *(_QWORD *)(v5 + 248) );
-          v4 = v20;
+          v8 = ++v7;
         }
-        Scaleform::Render::ComplexMesh::updateFillMatrixCache(
-          (Scaleform::Render::ComplexMesh *)&v3[-1].MPool.pLastFreedPage,
-          (Scaleform::Render::Matrix2x4<float> *)(v5 + 208));
+        while ( (Scaleform::Render::ComplexMesh::UpdateNode *)v7 < v5[15].pNext );
+        p_mComplexMeshUpdateList = i;
       }
-      v3 = (Scaleform::Render::Renderer2DImpl *)v3->ActiveContextSet.Root.pPrev;
+      Scaleform::Render::ComplexMesh::updateFillMatrixCache(
+        (Scaleform::Render::ComplexMesh *)&pNext[-10],
+        (Scaleform::Render::Matrix2x4<float> *)&v5[13]);
     }
-    while ( v3 != (Scaleform::Render::Renderer2DImpl *)v4 );
-    v2 = &v21->cs;
   }
-  LeaveCriticalSection(v2);
+  LeaveCriticalSection(&p_KeySetLock->cs);
 }
 

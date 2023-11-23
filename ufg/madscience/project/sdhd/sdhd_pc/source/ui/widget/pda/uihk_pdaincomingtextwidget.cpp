@@ -2,50 +2,52 @@
 // RVA: 0x5CDBF0
 void __fastcall UFG::UIHK_PDAIncomingTextWidget::~UIHK_PDAIncomingTextWidget(UFG::UIHK_PDAIncomingTextWidget *this)
 {
-  UFG::UIHK_PDAIncomingTextWidget *v1; // rbx
-  signed __int64 v2; // rbx
+  UFG::UIHK_PDAInputLocker *p_mInputLocker; // rbx
   int v3; // eax
 
-  v1 = this;
   if ( this->mState )
     UFG::UIHK_PDAIncomingTextWidget::DismissMessage(this, DISMISS_CAUSE_DEACTIVATE);
-  v2 = (signed __int64)&v1->mInputLocker;
-  if ( *(_BYTE *)(v2 + 40) )
+  p_mInputLocker = &this->mInputLocker;
+  if ( p_mInputLocker->mAcquired )
   {
     if ( UFG::UIHK_PDAWidget::mInputLocked )
     {
       UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
       v3 = UFG::UIHKGameplayHelpWidget::mLocked;
       if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-        v3 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+        v3 = --UFG::UIHKGameplayHelpWidget::mLocked;
       if ( v3 < 1 )
         UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
       --UFG::UIHK_PDAWidget::mInputLocked;
     }
-    *(_BYTE *)(v2 + 40) = 0;
+    p_mInputLocker->mAcquired = 0;
   }
-  UFG::qString::~qString((UFG::qString *)v2);
+  UFG::qString::~qString(&p_mInputLocker->mOwner);
 }
 
 // File Line: 67
 // RVA: 0x5EB340
-void __fastcall UFG::UIHK_PDAIncomingTextWidget::HandleMessage(UFG::UIHK_PDAIncomingTextWidget *this, UFG::UIScreen *screen, unsigned int msgId)
+void __fastcall UFG::UIHK_PDAIncomingTextWidget::HandleMessage(
+        UFG::UIHK_PDAIncomingTextWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId)
 {
   bool v3; // zf
 
-  if ( this->mState == 2 )
+  if ( this->mState == STATE_PHONE_CONTACTS )
   {
-    JUMPOUT(msgId, UI_HASH_DPAD_UP_PRESSED_30, UFG::UIHK_PDAIncomingTextWidget::DisplayMessage);
+    if ( msgId == UI_HASH_DPAD_UP_PRESSED_30 )
+      UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(this);
   }
   else
   {
-    if ( this->mState == 4 )
+    if ( this->mState == STATE_INCOMING_CALL )
     {
       v3 = msgId == UI_HASH_BUTTON_BACK_RELEASED_30;
     }
     else
     {
-      if ( this->mState != 5 )
+      if ( this->mState != STATE_OUTGOING_CALL )
         return;
       v3 = msgId == UI_HASH_BUTTON_ACCEPT_RELEASED_30;
     }
@@ -56,22 +58,25 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::HandleMessage(UFG::UIHK_PDAInco
 
 // File Line: 101
 // RVA: 0x5D14E0
-void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingTextWidget *this, const char *textMessage, const char *contactName, bool outgoing, const char *contactImage)
+void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(
+        UFG::UIHK_PDAIncomingTextWidget *this,
+        const char *textMessage,
+        const char *contactName,
+        bool outgoing,
+        const char *contactImage)
 {
-  bool v5; // r13
   const char *v6; // rbp
   const char *v7; // rsi
-  UFG::UIHK_PDAIncomingTextWidget *v8; // r12
   const char *v9; // r14
   UFG::allocator::free_link *v10; // rax
   int v11; // ebx
   __int64 v12; // rax
   __int64 v13; // rdi
   UFG::allocator::free_link *v14; // rax
-  signed __int64 v15; // r15
+  UFG::allocator::free_link *v15; // r15
   const char *v16; // rax
   unsigned int v17; // eax
-  UFG::UIGfxTranslator *v18; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
   const char *v19; // rax
   unsigned int v20; // eax
   UFG::UIGfxTranslator *v21; // rcx
@@ -79,18 +84,16 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   unsigned int v23; // eax
   UFG::UIGfxTranslator *v24; // rcx
   UFG::allocator::free_link *v25; // rax
-  signed __int64 v26; // rsi
-  __int64 v27; // rbp
+  UFG::allocator::free_link *v26; // rsi
+  UFG::allocator::free_link *v27; // rbp
   __int64 v28; // rbp
   __int64 v29; // rsi
   __int64 v30; // rsi
   __int64 v31; // rbp
-  signed __int64 v32; // rsi
+  __int64 v32; // rsi
 
-  v5 = outgoing;
   v6 = contactName;
   v7 = textMessage;
-  v8 = this;
   v9 = contactImage;
   UFG::UIHK_PDATextInboxWidget::SaveMessage(textMessage, contactName, outgoing, contactImage);
   v10 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x58ui64, "UIHK_PDAIncomingTextWidget", 0i64, 1u);
@@ -108,7 +111,7 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   if ( v14 )
   {
     LODWORD(v14->mNext) = 3;
-    v15 = (signed __int64)&v14[1];
+    v15 = v14 + 1;
     `eh vector constructor iterator(&v14[1], 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
   }
   else
@@ -120,13 +123,10 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   {
     if ( *v7 == 36 )
       ++v7;
-    v17 = UFG::qStringHashUpper32(v7, 0xFFFFFFFF);
-    v18 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( !v18
-      || (v16 = (const char *)v18->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v18->vfptr, v17)) == 0i64 )
-    {
+    v17 = UFG::qStringHashUpper32(v7, -1);
+    m_translator = UFG::UIScreenManager::s_instance->m_translator;
+    if ( !m_translator || (v16 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v17)) == 0i64 )
       v16 = v7;
-    }
   }
   else
   {
@@ -137,13 +137,10 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   {
     if ( *v6 == 36 )
       ++v6;
-    v20 = UFG::qStringHashUpper32(v6, 0xFFFFFFFF);
+    v20 = UFG::qStringHashUpper32(v6, -1);
     v21 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( !v21
-      || (v19 = (const char *)v21->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v21->vfptr, v20)) == 0i64 )
-    {
+    if ( !v21 || (v19 = (const char *)v21->vfptr[5].__vecDelDtor(v21, v20)) == 0i64 )
       v19 = v6;
-    }
   }
   else
   {
@@ -154,13 +151,10 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   {
     if ( *contactImage == 36 )
       v9 = contactImage + 1;
-    v23 = UFG::qStringHashUpper32(v9, 0xFFFFFFFF);
+    v23 = UFG::qStringHashUpper32(v9, -1);
     v24 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( !v24
-      || (v22 = (const char *)v24->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v24->vfptr, v23)) == 0i64 )
-    {
+    if ( !v24 || (v22 = (const char *)v24->vfptr[5].__vecDelDtor(v24, v23)) == 0i64 )
       v22 = v9;
-    }
   }
   else
   {
@@ -173,7 +167,7 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   if ( v25 )
   {
     LODWORD(v25->mNext) = 4;
-    v26 = (signed __int64)&v25[1];
+    v26 = v25 + 1;
     `eh vector constructor iterator(&v25[1], 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   }
   else
@@ -181,20 +175,20 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
     v26 = 0i64;
   }
   *(_QWORD *)(v13 + 64) = v26;
-  v27 = *(_QWORD *)(*(_QWORD *)(v13 + 80) + 24i64);
-  if ( (*(_DWORD *)(v26 + 24) >> 6) & 1 )
+  v27 = *(UFG::allocator::free_link **)(*(_QWORD *)(v13 + 80) + 24i64);
+  if ( ((__int64)v26[3].mNext & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(_QWORD, signed __int64, _QWORD))(**(_QWORD **)(v26 + 16) + 16i64))(
-      *(_QWORD *)(v26 + 16),
+    ((void (__fastcall *)(UFG::allocator::free_link *, UFG::allocator::free_link *, UFG::allocator::free_link *))v26[2].mNext->mNext[2].mNext)(
+      v26[2].mNext,
       v26,
-      *(_QWORD *)(v26 + 32));
-    *(_QWORD *)(v26 + 16) = 0i64;
+      v26[4].mNext);
+    v26[2].mNext = 0i64;
   }
-  *(_DWORD *)(v26 + 24) = 6;
-  *(_QWORD *)(v26 + 32) = v27;
+  LODWORD(v26[3].mNext) = 6;
+  v26[4].mNext = v27;
   v28 = *(_QWORD *)(*(_QWORD *)(v13 + 80) + 64i64);
   v29 = *(_QWORD *)(v13 + 64);
-  if ( (*(_DWORD *)(v29 + 72) >> 6) & 1 )
+  if ( (*(_DWORD *)(v29 + 72) & 0x40) != 0 )
   {
     (*(void (__fastcall **)(_QWORD, __int64, _QWORD))(**(_QWORD **)(v29 + 64) + 16i64))(
       *(_QWORD *)(v29 + 64),
@@ -205,7 +199,7 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   *(_DWORD *)(v29 + 72) = 6;
   *(_QWORD *)(v29 + 80) = v28;
   v30 = *(_QWORD *)(v13 + 64);
-  if ( (*(_DWORD *)(v30 + 120) >> 6) & 1 )
+  if ( (*(_DWORD *)(v30 + 120) & 0x40) != 0 )
   {
     (*(void (__fastcall **)(_QWORD, __int64, _QWORD))(**(_QWORD **)(v30 + 112) + 16i64))(
       *(_QWORD *)(v30 + 112),
@@ -214,12 +208,12 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
     *(_QWORD *)(v30 + 112) = 0i64;
   }
   *(_DWORD *)(v30 + 120) = 2;
-  *(_BYTE *)(v30 + 128) = v5;
+  *(_BYTE *)(v30 + 128) = outgoing;
   v31 = *(_QWORD *)(*(_QWORD *)(v13 + 80) + 104i64);
   v32 = *(_QWORD *)(v13 + 64) + 144i64;
-  if ( (*(_DWORD *)(*(_QWORD *)(v13 + 64) + 168i64) >> 6) & 1 )
+  if ( (*(_DWORD *)(*(_QWORD *)(v13 + 64) + 168i64) & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(_QWORD, signed __int64, _QWORD))(**(_QWORD **)(*(_QWORD *)(v13 + 64) + 160i64) + 16i64))(
+    (*(void (__fastcall **)(_QWORD, __int64, _QWORD))(**(_QWORD **)(*(_QWORD *)(v13 + 64) + 160i64) + 16i64))(
       *(_QWORD *)(*(_QWORD *)(v13 + 64) + 160i64),
       *(_QWORD *)(v13 + 64) + 144i64,
       *(_QWORD *)(*(_QWORD *)(v13 + 64) + 176i64));
@@ -229,17 +223,16 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   *(_QWORD *)(v32 + 32) = v31;
   if ( *(_DWORD *)(v13 + 44) )
     UFG::UIScreenInvokeQueue::Add(&UFG::UIHK_PDAWidget::mScreenInvokeQueue, (UFG::UIScreenInvoke *)v13);
-  LOBYTE(v11) = v5 != 0;
-  v8->mState = v11 + 2;
-  UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(v8);
+  LOBYTE(v11) = outgoing;
+  this->mState = v11 + 2;
+  UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(this);
 }
 
 // File Line: 151
 // RVA: 0x5D6730
 void __fastcall UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(UFG::UIHK_PDAIncomingTextWidget *this)
 {
-  UFG::UIHK_PDAIncomingTextWidget *v1; // rbx
-  UFG::UIHK_PDAIncomingTextWidget::eState v2; // ecx
+  UFG::UIHK_PDAIncomingTextWidget::eState mState; // ecx
   UFG::InputActionData *v3; // rax
   UFG::InputActionData *v4; // rax
   bool v5; // al
@@ -247,12 +240,11 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(UFG::UIHK_PDAInc
   UFG::UIScreenInvoke *v7; // rax
   UFG::UIScreenInvoke *v8; // rbx
 
-  v1 = this;
-  v2 = this->mState;
-  if ( (unsigned int)(v2 - 4) > 1 )
+  mState = this->mState;
+  if ( (unsigned int)(mState - 4) > 1 )
   {
-    v1->mState = (v2 != 2) + 4;
-    *(_WORD *)&v1->mMessageRead = 0;
+    this->mState = (mState != STATE_PHONE_CONTACTS) + 4;
+    *(_WORD *)&this->mMessageRead = 0;
     v3 = UFG::ActionDef_UIAcceptRepeat.mDataPerController[UFG::gActiveControllerNum];
     v5 = 1;
     if ( !v3 || !v3->mActionTrue )
@@ -261,14 +253,14 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(UFG::UIHK_PDAInc
       if ( !v4 || !v4->mActionTrue )
         v5 = 0;
     }
-    v1->mIgnoreButtonOnce = v5;
-    *(_QWORD *)&v1->mDismissCause = 0i64;
-    if ( !v1->mInputLocker.mAcquired )
+    this->mIgnoreButtonOnce = v5;
+    *(_QWORD *)&this->mDismissCause = 0i64;
+    if ( !this->mInputLocker.mAcquired )
     {
       UFG::SetInputMode_PDA_On(UFG::gActiveControllerNum);
       ++UFG::UIHKGameplayHelpWidget::mLocked;
       ++UFG::UIHK_PDAWidget::mInputLocked;
-      v1->mInputLocker.mAcquired = 1;
+      this->mInputLocker.mAcquired = 1;
     }
     v6 = UFG::qMemoryPool::Allocate(
            &gScaleformMemoryPool,
@@ -289,28 +281,23 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::DisplayMessage(UFG::UIHK_PDAInc
     if ( v8 && v8->command.mLength )
       UFG::UIScreenInvokeQueue::Add(&UFG::UIHK_PDAWidget::mScreenInvokeQueue, v8);
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0x9E75334E,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x9E75334E, 0i64, 0, 0i64);
   }
 }
 
 // File Line: 171
 // RVA: 0x5D6500
-void __fastcall UFG::UIHK_PDAIncomingTextWidget::DismissMessage(UFG::UIHK_PDAIncomingTextWidget *this, UFG::UIHK_PDAIncomingTextWidget::eDismissCause dismissCause)
+void __fastcall UFG::UIHK_PDAIncomingTextWidget::DismissMessage(
+        UFG::UIHK_PDAIncomingTextWidget *this,
+        UFG::UIHK_PDAIncomingTextWidget::eDismissCause dismissCause)
 {
-  UFG::UIHK_PDAIncomingTextWidget *v2; // rbx
   int v3; // eax
   UFG::allocator::free_link *v4; // rax
   UFG::UIScreenInvoke *v5; // rbx
   UFG::allocator::free_link *v6; // rax
 
-  v2 = this;
-  if ( dismissCause != 3 )
-    goto LABEL_23;
+  if ( dismissCause != DISMISS_CAUSE_INPUT )
+    goto LABEL_5;
   if ( this->mIgnoreButtonOnce )
   {
     this->mIgnoreButtonOnce = 0;
@@ -318,8 +305,8 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::DismissMessage(UFG::UIHK_PDAInc
   }
   if ( this->mDisplayTime >= 1.0 )
   {
-LABEL_23:
-    this->mState = 0;
+LABEL_5:
+    this->mState = STATE_IDLE;
     this->mMessageRead = 1;
     this->mDismissCause = dismissCause;
     if ( this->mInputLocker.mAcquired )
@@ -329,12 +316,12 @@ LABEL_23:
         UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
         v3 = UFG::UIHKGameplayHelpWidget::mLocked;
         if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-          v3 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+          v3 = --UFG::UIHKGameplayHelpWidget::mLocked;
         if ( v3 < 1 )
           UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
         --UFG::UIHK_PDAWidget::mInputLocked;
       }
-      v2->mInputLocker.mAcquired = 0;
+      this->mInputLocker.mAcquired = 0;
     }
     v4 = UFG::qMemoryPool::Allocate(
            &gScaleformMemoryPool,
@@ -349,7 +336,7 @@ LABEL_23:
       v6->mNext = v6;
       v6[1].mNext = v6;
       v5->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
-      UFG::qString::qString(&v5->command, &customWorldMapCaption);
+      UFG::qString::qString(&v5->command, &customCaption);
     }
     else
     {
@@ -359,12 +346,7 @@ LABEL_23:
     if ( v5 && v5->command.mLength )
       UFG::UIScreenInvokeQueue::Add(&UFG::UIHK_PDAWidget::mScreenInvokeQueue, v5);
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0x4AAC5E6Bu,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x4AAC5E6Bu, 0i64, 0, 0i64);
   }
 }
 

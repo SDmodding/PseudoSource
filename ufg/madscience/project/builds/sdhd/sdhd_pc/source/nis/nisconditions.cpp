@@ -13,18 +13,15 @@ __int64 dynamic_initializer_for__IsNISPlayingCondition::sClassNameUID__()
 // RVA: 0x3DFCD0
 void __fastcall IsNISPlayingCondition::IsNISPlayingCondition(IsNISPlayingCondition *this)
 {
-  IsNISPlayingCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingCondition::`vftable;
 }
 
 // File Line: 29
 // RVA: 0x3E36F0
 _BOOL8 __fastcall IsNISPlayingCondition::Match(IsNISPlayingCondition *this, ActionContext *pContext)
 {
-  return NISManager::sInstance->mState != 0;
+  return NISManager::sInstance->mState != STATE_INVALID;
 }
 
 // File Line: 48
@@ -42,18 +39,15 @@ __int64 dynamic_initializer_for__IsNISPlayingActionCondition::sClassNameUID__()
 // RVA: 0x3DFCA0
 void __fastcall IsNISPlayingActionCondition::IsNISPlayingActionCondition(IsNISPlayingActionCondition *this)
 {
-  IsNISPlayingActionCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingActionCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingActionCondition::`vftable;
 }
 
 // File Line: 55
 // RVA: 0x3E36E0
 bool __fastcall IsNISPlayingActionCondition::Match(IsNISPlayingActionCondition *this, ActionContext *pContext)
 {
-  return NISManager::sInstance->mState == 4;
+  return NISManager::sInstance->mState == STATE_INCOMPLETE;
 }
 
 // File Line: 74
@@ -71,45 +65,49 @@ __int64 dynamic_initializer_for__IsNISControlledCondition::sClassNameUID__()
 // RVA: 0x3DFC40
 void __fastcall IsNISControlledCondition::IsNISControlledCondition(IsNISControlledCondition *this)
 {
-  IsNISControlledCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISControlledCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISControlledCondition::`vftable;
 }
 
 // File Line: 81
 // RVA: 0x3E35E0
 char __fastcall IsNISControlledCondition::Match(IsNISControlledCondition *this, ActionContext *pContext)
 {
-  NISInstance *v2; // rax
-  char v3; // cl
-  char v4; // al
-  char result; // al
+  NISInstance *m_pPointer; // rax
+  bool v3; // cl
+  bool v4; // al
   UFG::SimObjectGame *v6; // rcx
-  unsigned __int16 v7; // dx
-  UFG::SimComponent *v8; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfType; // rax
 
-  if ( NISManager::sInstance->mState != 4 )
-    goto LABEL_30;
-  v2 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v2 )
-    v2 = (NISInstance *)v2->mpNISNode;
-  v3 = v2 && BYTE2(v2->mAnimationGroupHandle.mNext) ? 1 : 0;
-  v4 = v2 && BYTE3(v2->mAnimationGroupHandle.mNext) ? 1 : 0;
-  if ( v3 && v4
-    || (v6 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer) != 0i64
-    && ((v7 = v6->m_Flags, !((v7 >> 14) & 1)) ? ((v7 & 0x8000u) == 0 ? (!((v7 >> 13) & 1) ? (!((v7 >> 12) & 1) ? (v8 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::ActionTreeComponent::_TypeUID)) : (v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::ActionTreeComponent::_TypeUID))) : (v8 = v6->m_Components.p[6].m_pComponent)) : (v8 = v6->m_Components.p[7].m_pComponent)) : (v8 = v6->m_Components.p[7].m_pComponent),
-        v8 && LOBYTE(v8[2].m_pSimObject)) )
+  if ( NISManager::sInstance->mState != STATE_INCOMPLETE )
+    return 0;
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (NISInstance *)m_pPointer->mpNISNode;
+  v3 = m_pPointer && BYTE2(m_pPointer->mAnimationGroupHandle.mNext);
+  v4 = m_pPointer && BYTE3(m_pPointer->mAnimationGroupHandle.mNext);
+  if ( v3 && v4 )
+    return 1;
+  v6 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( v6
+    && ((m_Flags = v6->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0
+       ? ((m_Flags & 0x2000) == 0
+        ? ((m_Flags & 0x1000) == 0
+         ? (ComponentOfType = UFG::SimObject::GetComponentOfType(v6, UFG::ActionTreeComponent::_TypeUID))
+         : (ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::ActionTreeComponent::_TypeUID)))
+        : (ComponentOfType = v6->m_Components.p[6].m_pComponent))
+       : (ComponentOfType = v6->m_Components.p[7].m_pComponent))
+      : (ComponentOfType = v6->m_Components.p[7].m_pComponent),
+        ComponentOfType && LOBYTE(ComponentOfType[2].m_pSimObject)) )
   {
-    result = 1;
+    return 1;
   }
   else
   {
-LABEL_30:
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 117
@@ -127,31 +125,22 @@ __int64 dynamic_initializer_for__IsNISSeamlessInCondition::sClassNameUID__()
 // RVA: 0x3DFD00
 void __fastcall IsNISSeamlessInCondition::IsNISSeamlessInCondition(IsNISSeamlessInCondition *this)
 {
-  IsNISSeamlessInCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessInCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessInCondition::`vftable;
 }
 
 // File Line: 124
 // RVA: 0x3E3700
-char __fastcall IsNISSeamlessInCondition::Match(IsNISSeamlessInCondition *this, ActionContext *pContext)
+bool __fastcall IsNISSeamlessInCondition::Match(IsNISSeamlessInCondition *this, ActionContext *pContext)
 {
-  NISInstance *v2; // rax
-  char result; // al
+  NISInstance *m_pPointer; // rax
 
-  if ( NISManager::sInstance->mState != 4 )
-    goto LABEL_10;
-  v2 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v2 )
-    v2 = (NISInstance *)v2->mpNISNode;
-  if ( v2 && BYTE6(v2->mAnimationGroupHandle.mNext) )
-    result = 1;
-  else
-LABEL_10:
-    result = 0;
-  return result;
+  if ( NISManager::sInstance->mState != STATE_INCOMPLETE )
+    return 0;
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (NISInstance *)m_pPointer->mpNISNode;
+  return m_pPointer && BYTE6(m_pPointer->mAnimationGroupHandle.mNext);
 }
 
 // File Line: 152
@@ -169,31 +158,22 @@ __int64 dynamic_initializer_for__IsNISSeamlessOutCondition::sClassNameUID__()
 // RVA: 0x3DFD30
 void __fastcall IsNISSeamlessOutCondition::IsNISSeamlessOutCondition(IsNISSeamlessOutCondition *this)
 {
-  IsNISSeamlessOutCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessOutCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessOutCondition::`vftable;
 }
 
 // File Line: 159
 // RVA: 0x3E3730
-char __fastcall IsNISSeamlessOutCondition::Match(IsNISSeamlessOutCondition *this, ActionContext *pContext)
+bool __fastcall IsNISSeamlessOutCondition::Match(IsNISSeamlessOutCondition *this, ActionContext *pContext)
 {
-  NISInstance *v2; // rax
-  char result; // al
+  NISInstance *m_pPointer; // rax
 
-  if ( NISManager::sInstance->mState != 4 )
-    goto LABEL_10;
-  v2 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v2 )
-    v2 = (NISInstance *)v2->mpNISNode;
-  if ( v2 && HIBYTE(v2->mAnimationGroupHandle.mNext) )
-    result = 1;
-  else
-LABEL_10:
-    result = 0;
-  return result;
+  if ( NISManager::sInstance->mState != STATE_INCOMPLETE )
+    return 0;
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (NISInstance *)m_pPointer->mpNISNode;
+  return m_pPointer && HIBYTE(m_pPointer->mAnimationGroupHandle.mNext);
 }
 
 // File Line: 187
@@ -209,30 +189,30 @@ __int64 dynamic_initializer_for__IsNISPlayerControllableCondition::sClassNameUID
 
 // File Line: 190
 // RVA: 0x3DFC70
-void __fastcall IsNISPlayerControllableCondition::IsNISPlayerControllableCondition(IsNISPlayerControllableCondition *this)
+void __fastcall IsNISPlayerControllableCondition::IsNISPlayerControllableCondition(
+        IsNISPlayerControllableCondition *this)
 {
-  IsNISPlayerControllableCondition *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayerControllableCondition::`vftable;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayerControllableCondition::`vftable;
 }
 
 // File Line: 194
 // RVA: 0x3E36B0
-bool __fastcall IsNISPlayerControllableCondition::Match(IsNISPlayerControllableCondition *this, ActionContext *pContext)
+bool __fastcall IsNISPlayerControllableCondition::Match(
+        IsNISPlayerControllableCondition *this,
+        ActionContext *pContext)
 {
-  NISInstance *v2; // rax
+  NISInstance *m_pPointer; // rax
   bool result; // al
 
   result = 0;
-  if ( NISManager::sInstance->mState == 4 )
+  if ( NISManager::sInstance->mState == STATE_INCOMPLETE )
   {
-    v2 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-    if ( v2 )
+    m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+    if ( m_pPointer )
     {
-      if ( v2->mpNISAllowPlayerControlTask )
-        result = 1;
+      if ( m_pPointer->mpNISAllowPlayerControlTask )
+        return 1;
     }
   }
   return result;

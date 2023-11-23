@@ -2,75 +2,72 @@
 // RVA: 0x107360
 void __fastcall SSLiteral::~SSLiteral(SSLiteral *this)
 {
-  SSLiteral *v1; // rdi
-  AStringRef *v2; // rbx
-  bool v3; // zf
-  AObjReusePool<AStringRef> *v4; // rax
-  AObjBlock<AStringRef> *v5; // rcx
-  unsigned __int64 v6; // rdx
+  AStringRef *i_data; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v7; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v8; // rcx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
 
-  v1 = this;
   this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-  if ( this->i_kind == 4 )
+  if ( this->i_kind == Type_int16 )
   {
-    v2 = (AStringRef *)this->i_data;
-    v3 = v2->i_ref_count-- == 1;
-    if ( v3 )
+    i_data = (AStringRef *)this->i_data;
+    if ( i_data->i_ref_count-- == 1 )
     {
-      if ( v2->i_deallocate )
-        AMemory::c_free_func(v2->i_cstr_p);
-      v4 = AStringRef::get_pool();
-      v5 = v4->i_block_p;
-      v6 = (unsigned __int64)v5->i_objects_a;
-      if ( (unsigned __int64)v2 < v6 || (v7 = (unsigned __int64)v2 < v6 + 24i64 * v5->i_size, v8 = &v4->i_pool, !v7) )
-        v8 = &v4->i_exp_pool;
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v8, v2);
+      if ( i_data->i_deallocate )
+        AMemory::c_free_func(i_data->i_cstr_p);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)i_data < i_objects_a
+        || (v7 = (unsigned __int64)i_data < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v7) )
+      {
+        p_i_exp_pool = &pool->i_exp_pool;
+      }
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_data);
     }
   }
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 253
 // RVA: 0x105AD0
 void __fastcall SSLiteral::SSLiteral(SSLiteral *this, const void **binary_pp)
 {
-  SSLiteral *v2; // rbx
-  SSLiteral::eType v3; // eax
+  SSLiteral::eType i_kind; // eax
   ASymbol *v4; // rax
   SSClass *v5; // rax
-  ASymbol *v6; // rcx
-  AString *v7; // rcx
-  ASymbol result; // [rsp+48h] [rbp+10h]
+  unsigned __int64 *v6; // rcx
+  unsigned __int64 *p_i_data; // rcx
+  unsigned __int64 *result; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = this;
   this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
   this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
   this->i_kind = *(unsigned __int8 *)*binary_pp;
   *binary_pp = (char *)*binary_pp + 1;
-  v3 = this->i_kind;
-  switch ( v3 )
+  i_kind = this->i_kind;
+  switch ( i_kind )
   {
-    case 4:
-      v7 = (AString *)&this->i_data;
-      *(_QWORD *)&result.i_uid = (char *)v2 + 8;
-      if ( v2 != (SSLiteral *)-8i64 )
-        AString::AString(v7, binary_pp);
+    case Type_int16:
+      p_i_data = &this->i_data;
+      result = &this->i_data;
+      if ( this != (SSLiteral *)-8i64 )
+        AString::AString((AString *)p_i_data, binary_pp);
       break;
-    case 5:
-      v6 = (ASymbol *)&this->i_data;
-      *(_QWORD *)&result.i_uid = (char *)v2 + 8;
-      if ( v2 != (SSLiteral *)-8i64 )
-        ASymbol::create_from_binary(v6, binary_pp);
+    case Type_int32:
+      v6 = &this->i_data;
+      result = &this->i_data;
+      if ( this != (SSLiteral *)-8i64 )
+        ASymbol::create_from_binary((ASymbol *)v6, binary_pp);
       break;
-    case 6:
-      v4 = ASymbol::create_from_binary(&result, binary_pp);
+    case Type_float:
+      v4 = ASymbol::create_from_binary((ASymbol *)&result, binary_pp);
       v5 = SSBrain::get_class(v4);
-      v2->i_data = (__int64)v5->vfptr->get_metaclass((SSClassDescBase *)&v5->vfptr);
+      this->i_data = (unsigned __int64)v5->vfptr->get_metaclass(v5);
       break;
     default:
-      if ( (unsigned int)(v3 - 7) > 3 )
+      if ( (unsigned int)(i_kind - 7) > 3 )
       {
         this->i_data = *(unsigned int *)*binary_pp;
         *binary_pp = (char *)*binary_pp + 4;
@@ -81,84 +78,77 @@ void __fastcall SSLiteral::SSLiteral(SSLiteral *this, const void **binary_pp)
 
 // File Line: 495
 // RVA: 0x11D910
-SSInvokedBase *__fastcall SSLiteral::invoke(SSLiteral *this, SSObjectBase *scope_p, SSInvokedBase *caller_p, SSInstance **result_pp)
+SSInvokedBase *__fastcall SSLiteral::invoke(
+        SSLiteral *this,
+        SSObjectBase *scope_p,
+        SSInvokedBase *caller_p,
+        SSInstance **result_pp)
 {
-  SSInstance **v4; // rbx
   SSInvokedBase *result; // rax
-  unsigned __int64 v6; // rax
-  __int64 v7; // rax
-  __int64 v8; // rax
-  __int64 v9; // rax
+  unsigned __int64 i_data; // rax
+  SSInstance *v7; // rax
+  SSInstance *v8; // rax
+  SSInvokedContextBase *v9; // rax
 
-  v4 = result_pp;
   if ( result_pp )
   {
     switch ( this->i_kind )
     {
-      case 0:
-        *result_pp = (SSInstance *)SSBoolean::pool_new(this->i_data);
+      case Type_uint8:
+        *result_pp = SSBoolean::pool_new(this->i_data);
         return 0i64;
-      case 1:
+      case Type_uint16:
         *result_pp = SSInstance::pool_new(SSBrain::c_char_class_p, this->i_data);
         return 0i64;
-      case 2:
+      case Type_uint32:
         *result_pp = SSInstance::pool_new(SSBrain::c_integer_class_p, this->i_data);
         return 0i64;
-      case 3:
+      case Type_int8:
         *result_pp = SSInstance::pool_new(SSBrain::c_real_class_p, this->i_data);
         return 0i64;
-      case 4:
+      case Type_int16:
         *result_pp = SSString::as_instance((AString *)&this->i_data);
         return 0i64;
-      case 5:
+      case Type_int32:
         *result_pp = SSSymbol::as_instance((ASymbol *)&this->i_data);
         return 0i64;
-      case 6:
-        v6 = this->i_data;
-        if ( v6 )
+      case Type_float:
+        i_data = this->i_data;
+        if ( i_data )
           goto LABEL_10;
         goto LABEL_13;
-      case 7:
+      case Type_string:
         goto $LN21_1;
-      case 8:
-        v7 = ((__int64 (__fastcall *)(SSObjectBase *, SSObjectBase *, SSInvokedBase *))scope_p->vfptr->get_topmost_scope)(
-               scope_p,
-               scope_p,
-               caller_p);
-        ++*(_DWORD *)(v7 + 16);
-        *v4 = (SSInstance *)v7;
+      case Type_qVector2:
+        v7 = scope_p->vfptr->get_topmost_scope(scope_p);
+        ++v7->i_ref_count;
+        *result_pp = v7;
         return 0i64;
-      case 9:
-        v8 = ((__int64 (__fastcall *)(SSObjectBase *, SSObjectBase *, SSInvokedBase *))scope_p->vfptr->get_topmost_scope)(
-               scope_p,
-               scope_p,
-               caller_p);
-        v6 = (*(__int64 (**)(void))(**(_QWORD **)(v8 + 24) + 136i64))();
-        if ( v6 )
+      case Type_qVector3:
+        v8 = scope_p->vfptr->get_topmost_scope(scope_p);
+        i_data = (unsigned __int64)v8->i_class_p->vfptr->get_metaclass(v8->i_class_p);
+        if ( i_data )
         {
 LABEL_10:
-          *v4 = (SSInstance *)(v6 + 8);
-          result = 0i64;
+          *result_pp = (SSInstance *)(i_data + 8);
+          return 0i64;
         }
         else
         {
 LABEL_13:
           result = 0i64;
-          *v4 = 0i64;
+          *result_pp = 0i64;
         }
         return result;
-      case 0xA:
-        v9 = ((__int64 (__fastcall *)(SSObjectBase *, SSObjectBase *, SSInvokedBase *))scope_p->vfptr->get_scope_context)(
-               scope_p,
-               scope_p,
-               caller_p);
+      case Type_qVector4:
+        v9 = scope_p->vfptr->get_scope_context(scope_p);
         if ( v9 )
         {
-          *v4 = (SSInstance *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 24i64))(v9);
+          *result_pp = v9->vfptr->as_instance(v9);
           return 0i64;
         }
 $LN21_1:
-        *v4 = SSBrain::c_nil_p;
+        *result_pp = SSBrain::c_nil_p;
         break;
       default:
         return 0i64;
@@ -172,103 +162,95 @@ $LN21_1:
 void __fastcall SSLiteral::track_memory(SSLiteral *this, AMemoryStats *mem_stats_p)
 {
   const char *v2; // rbx
-  AMemoryStats *v3; // rsi
-  SSLiteral *v4; // rdi
-  unsigned int size_dynamic_needed; // er8
+  unsigned int size_dynamic_needed; // r8d
   unsigned int size_dynamic; // edx
-  unsigned __int64 v7; // rax
+  unsigned __int64 i_data; // rax
 
   v2 = 0i64;
-  v3 = mem_stats_p;
-  v4 = this;
   AMemoryStats::track_memory(mem_stats_p, "SSLiteral", 0x18u, 8u, 0, 0, 1u);
   size_dynamic_needed = 0;
   size_dynamic = 0;
-  switch ( v4->i_kind )
+  switch ( this->i_kind )
   {
-    case 0:
+    case Type_uint8:
       v2 = "SSLiteral.Boolean";
       break;
-    case 1:
+    case Type_uint16:
       v2 = "SSLiteral.Char";
       break;
-    case 2:
+    case Type_uint32:
       v2 = "SSLiteral.Integer";
       break;
-    case 3:
+    case Type_int8:
       v2 = "SSLiteral.Real";
       break;
-    case 4:
-      v7 = v4->i_data;
+    case Type_int16:
+      i_data = this->i_data;
       v2 = "SSLiteral.String";
-      size_dynamic = *(_DWORD *)(v7 + 12);
-      size_dynamic_needed = *(_DWORD *)(v7 + 8) + 1;
+      size_dynamic = *(_DWORD *)(i_data + 12);
+      size_dynamic_needed = *(_DWORD *)(i_data + 8) + 1;
       break;
-    case 5:
+    case Type_int32:
       v2 = "SSLiteral.Symbol";
       break;
-    case 6:
+    case Type_float:
       v2 = "SSLiteral.Class";
       break;
-    case 7:
+    case Type_string:
       v2 = "SSLiteral.nil";
       break;
-    case 8:
+    case Type_qVector2:
       v2 = "SSLiteral.this";
       break;
-    case 9:
+    case Type_qVector3:
       v2 = "SSLiteral.this_class";
       break;
-    case 0xA:
+    case Type_qVector4:
       v2 = "SSLiteral.this_code";
       break;
     default:
       break;
   }
-  AMemoryStats::track_memory(v3, v2, 0, 0, size_dynamic_needed, size_dynamic, 1u);
+  AMemoryStats::track_memory(mem_stats_p, v2, 0, 0, size_dynamic_needed, size_dynamic, 1u);
 }
 
 // File Line: 674
 // RVA: 0x105DE0
 void __fastcall SSLiteralList::SSLiteralList(SSLiteralList *this, const void **binary_pp)
 {
-  const void **v2; // rdi
-  SSLiteralList *v3; // rsi
   __int64 v4; // rbp
-  SSExpressionBase **v5; // rcx
+  SSExpressionBase **i_array_p; // rcx
   SSExpressionBase **v6; // rbx
-  unsigned __int64 i; // rbp
+  SSExpressionBase **i; // rbp
   eSSExprType v8; // ecx
-  signed __int64 v9; // rax
+  char *v9; // rax
   SSExpressionBase *v10; // rax
 
-  v2 = binary_pp;
-  v3 = this;
   this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
   this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralList::`vftable;
   this->i_item_exprs.i_count = 0;
   this->i_item_exprs.i_array_p = 0i64;
   this->i_ctor_p = (SSMethodCall *)SSInvokeBase::from_binary_typed_new(binary_pp);
-  v4 = *(unsigned __int16 *)*v2;
-  *v2 = (char *)*v2 + 2;
-  if ( v3->i_item_exprs.i_count != (_DWORD)v4 )
+  v4 = *(unsigned __int16 *)*binary_pp;
+  *binary_pp = (char *)*binary_pp + 2;
+  if ( this->i_item_exprs.i_count != (_DWORD)v4 )
   {
-    v3->i_item_exprs.i_count = v4;
-    v5 = v3->i_item_exprs.i_array_p;
-    if ( v5 )
-      AMemory::c_free_func(v5);
-    v3->i_item_exprs.i_array_p = APArrayBase<SSExpressionBase>::alloc_array(v4);
+    this->i_item_exprs.i_count = v4;
+    i_array_p = this->i_item_exprs.i_array_p;
+    if ( i_array_p )
+      AMemory::c_free_func(i_array_p);
+    this->i_item_exprs.i_array_p = APArrayBase<SSExpressionBase>::alloc_array(v4);
   }
-  v6 = v3->i_item_exprs.i_array_p;
-  for ( i = (unsigned __int64)&v6[v4]; (unsigned __int64)v6 < i; ++v6 )
+  v6 = this->i_item_exprs.i_array_p;
+  for ( i = &v6[v4]; v6 < i; ++v6 )
   {
-    v8 = *(unsigned __int8 *)*v2;
-    v9 = (signed __int64)*v2 + 1;
-    *v2 = (const void *)v9;
+    v8 = *(unsigned __int8 *)*binary_pp;
+    v9 = (char *)*binary_pp + 1;
+    *binary_pp = v9;
     if ( v8 )
     {
-      *v2 = (const void *)(v9 + 2);
-      v10 = SSExpressionBase::from_binary_new(v8, v2);
+      *binary_pp = v9 + 2;
+      v10 = SSExpressionBase::from_binary_new(v8, binary_pp);
     }
     else
     {
@@ -280,23 +262,22 @@ void __fastcall SSLiteralList::SSLiteralList(SSLiteralList *this, const void **b
 
 // File Line: 819
 // RVA: 0x119F60
-signed __int64 __fastcall SSLiteralList::get_side_effect(SSLiteralList *this)
+__int64 __fastcall SSLiteralList::get_side_effect(SSLiteralList *this)
 {
-  __int64 v1; // rax
-  SSExpressionBase **v2; // rbx
-  unsigned __int64 v3; // rdi
+  __int64 i_count; // rax
+  SSExpressionBase **i_array_p; // rbx
+  SSExpressionBase **v3; // rdi
 
-  v1 = this->i_item_exprs.i_count;
-  if ( !(_DWORD)v1 )
+  i_count = this->i_item_exprs.i_count;
+  if ( !(_DWORD)i_count )
     return 0i64;
-  v2 = this->i_item_exprs.i_array_p;
-  v3 = (unsigned __int64)&v2[v1];
-  if ( (unsigned __int64)v2 >= v3 )
+  i_array_p = this->i_item_exprs.i_array_p;
+  v3 = &i_array_p[i_count];
+  if ( i_array_p >= v3 )
     return 0i64;
-  while ( !((unsigned int (*)(void))(*v2)->vfptr->get_side_effect)() )
+  while ( (*i_array_p)->vfptr->get_side_effect(*i_array_p) == SSSideEffect_none )
   {
-    ++v2;
-    if ( (unsigned __int64)v2 >= v3 )
+    if ( ++i_array_p >= v3 )
       return 0i64;
   }
   return 1i64;
@@ -304,62 +285,56 @@ signed __int64 __fastcall SSLiteralList::get_side_effect(SSLiteralList *this)
 
 // File Line: 1039
 // RVA: 0x11DB70
-SSInvokedBase *__fastcall SSLiteralList::invoke(SSLiteralList *this, SSObjectBase *scope_p, SSInvokedBase *caller_p, SSInstance **result_pp)
+SSInvokedBase *__fastcall SSLiteralList::invoke(
+        SSLiteralList *this,
+        SSObjectBase *scope_p,
+        SSInvokedBase *caller_p,
+        SSInstance **result_pp)
 {
   SSInstance **v4; // r12
   SSLiteralList *v5; // r13
-  __int64 v6; // rbp
-  SSExpressionBase **v7; // rsi
-  unsigned __int64 v8; // r15
+  __int64 i_count; // rbp
+  SSExpressionBase **i_array_p; // rsi
+  SSExpressionBase **v8; // r15
   unsigned int *v9; // rax
   unsigned int *v10; // rdi
   SSInstance *v11; // rbx
   SSInstance **v12; // rax
-  unsigned int **v13; // r14
+  _QWORD *v13; // r14
   SSClass *v14; // rbp
-  AObjReusePool<SSInstance> *v15; // rax
-  AObjReusePool<SSInstance> *v16; // rsi
+  AObjReusePool<SSInstance> *pool; // rsi
+  unsigned int v16; // eax
   unsigned int v17; // eax
-  unsigned int v18; // eax
-  unsigned int v19; // eax
-  __int64 v20; // rcx
-  SSInstance **v21; // rax
-  unsigned int v22; // eax
-  SSMethodCall *v23; // rcx
-  bool v24; // zf
-  __int64 v25; // rax
-  ARefCountMix<SSInstance> **v26; // rbx
-  unsigned __int64 i; // rsi
-  unsigned int *v29; // [rsp+30h] [rbp-58h]
-  __int64 v30; // [rsp+38h] [rbp-50h]
-  SSLiteralList *v31; // [rsp+90h] [rbp+8h]
-  SSObjectBase *v32; // [rsp+98h] [rbp+10h]
-  SSInvokedBase *v33; // [rsp+A0h] [rbp+18h]
-  SSInstance **v34; // [rsp+A8h] [rbp+20h]
+  __int64 v18; // rcx
+  SSInstance **v19; // rax
+  unsigned int v20; // eax
+  SSMethodCall *i_ctor_p; // rcx
+  __int64 v23; // rax
+  ARefCountMix<SSInstance> **v24; // rbx
+  ARefCountMix<SSInstance> **i; // rsi
+  __int64 v27[11]; // [rsp+30h] [rbp-58h] BYREF
+  SSInstance **v31; // [rsp+A8h] [rbp+20h] BYREF
 
-  v34 = result_pp;
-  v33 = caller_p;
-  v32 = scope_p;
-  v31 = this;
-  v30 = -2i64;
+  v31 = result_pp;
+  v27[1] = -2i64;
   v4 = result_pp;
   v5 = this;
-  v6 = this->i_item_exprs.i_count;
-  v7 = this->i_item_exprs.i_array_p;
-  v8 = (unsigned __int64)&v7[v6];
+  i_count = this->i_item_exprs.i_count;
+  i_array_p = this->i_item_exprs.i_array_p;
+  v8 = &i_array_p[i_count];
   v9 = (unsigned int *)AMemory::c_malloc_func(0x18ui64, "SSList");
   v10 = v9;
-  v29 = v9;
+  v27[0] = (__int64)v9;
   v11 = 0i64;
   if ( v9 )
   {
     *v9 = 0;
     *((_QWORD *)v9 + 1) = 0i64;
     v9[4] = 0;
-    if ( (_DWORD)v6 )
+    if ( (_DWORD)i_count )
     {
-      v9[4] = v6;
-      v12 = APArrayBase<SSInstance>::alloc_array(v6);
+      v9[4] = i_count;
+      v12 = APArrayBase<SSInstance>::alloc_array(i_count);
     }
     else
     {
@@ -372,78 +347,75 @@ SSInvokedBase *__fastcall SSLiteralList::invoke(SSLiteralList *this, SSObjectBas
   {
     v10 = 0i64;
   }
-  v13 = (unsigned int **)*((_QWORD *)v10 + 1);
-  if ( (unsigned __int64)v7 < v8 )
+  v13 = (_QWORD *)*((_QWORD *)v10 + 1);
+  if ( i_array_p < v8 )
   {
     do
     {
-      (*v7)->vfptr->invoke(*v7, v32, v33, (SSInstance **)&v29);
-      *v13 = v29;
-      ++v7;
+      (*i_array_p)->vfptr->invoke(*i_array_p, scope_p, caller_p, (SSInstance **)v27);
+      *v13 = v27[0];
+      ++i_array_p;
       ++v13;
     }
-    while ( (unsigned __int64)v7 < v8 );
-    v4 = v34;
-    v5 = v31;
+    while ( i_array_p < v8 );
+    v4 = v31;
+    v5 = this;
   }
-  *v10 = v6;
+  *v10 = i_count;
   if ( v5->i_ctor_p || v4 )
   {
     v14 = SSBrain::c_list_class_p;
-    v15 = SSInstance::get_pool();
-    v16 = v15;
-    v17 = v15->i_pool.i_count;
-    if ( v17 )
+    pool = SSInstance::get_pool();
+    if ( pool->i_pool.i_count )
     {
-      v22 = v17 - 1;
-      v16->i_pool.i_count = v22;
-      v20 = v22;
-      v21 = v16->i_pool.i_array_p;
+      v20 = pool->i_pool.i_count - 1;
+      pool->i_pool.i_count = v20;
+      v18 = v20;
+      v19 = pool->i_pool.i_array_p;
     }
     else
     {
-      if ( !v16->i_exp_pool.i_count )
-        AObjReusePool<SSInstance>::append_block(v16, v16->i_expand_size);
-      v18 = v16->i_exp_pool.i_count;
-      if ( !v18 )
+      if ( !pool->i_exp_pool.i_count )
+        AObjReusePool<SSInstance>::append_block(pool, pool->i_expand_size);
+      v16 = pool->i_exp_pool.i_count;
+      if ( !v16 )
         goto LABEL_19;
-      v19 = v18 - 1;
-      v16->i_exp_pool.i_count = v19;
-      v20 = v19;
-      v21 = v16->i_exp_pool.i_array_p;
+      v17 = v16 - 1;
+      pool->i_exp_pool.i_count = v17;
+      v18 = v17;
+      v19 = pool->i_exp_pool.i_array_p;
     }
-    v11 = v21[v20];
+    v11 = v19[v18];
 LABEL_19:
     v11->i_class_p = v14;
     v11->i_user_data = (unsigned __int64)v10;
     v11->i_ref_count = 1;
     v11->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
   }
-  v23 = v5->i_ctor_p;
-  if ( v23 )
-    v23->vfptr->invoke_call((SSInvokeBase *)&v23->vfptr, v11, v32, v33, (SSInstance **)&v34);
+  i_ctor_p = v5->i_ctor_p;
+  if ( i_ctor_p )
+    i_ctor_p->vfptr->invoke_call(i_ctor_p, v11, scope_p, caller_p, (SSInstance **)&v31);
   if ( v4 )
   {
     *v4 = v11;
   }
   else if ( v11 )
   {
-    v24 = v11->i_ref_count-- == 1;
-    if ( v24 )
+    if ( v11->i_ref_count-- == 1 )
     {
-      v11->i_ref_count = 2147483648;
-      v11->vfptr[1].get_scope_context((SSObjectBase *)&v11->vfptr);
+      v11->i_ref_count = 0x80000000;
+      v11->vfptr[1].get_scope_context(v11);
     }
   }
   else
   {
-    v34 = (SSInstance **)v10;
-    v25 = *v10;
-    if ( (_DWORD)v25 )
+    v31 = (SSInstance **)v10;
+    v23 = *v10;
+    if ( (_DWORD)v23 )
     {
-      v26 = (ARefCountMix<SSInstance> **)*((_QWORD *)v10 + 1);
-      for ( i = (unsigned __int64)&v26[v25]; (unsigned __int64)v26 < i; ++v26 )
-        ARefCountMix<SSInstance>::dereference(*v26 + 4);
+      v24 = (ARefCountMix<SSInstance> **)*((_QWORD *)v10 + 1);
+      for ( i = &v24[v23]; v24 < i; ++v24 )
+        ARefCountMix<SSInstance>::dereference(*v24 + 4);
     }
     AMemory::c_free_func(*((void **)v10 + 1));
     AMemory::c_free_func(v10);
@@ -455,30 +427,26 @@ LABEL_19:
 // RVA: 0x13E370
 void __fastcall SSLiteralList::track_memory(SSLiteralList *this, AMemoryStats *mem_stats_p)
 {
-  SSExpressionBase **v2; // rbx
-  AMemoryStats *v3; // rsi
-  unsigned __int64 v4; // rdi
-  SSLiteralList *i; // rbp
-  SSMethodCall *v6; // rcx
+  SSExpressionBase **i_array_p; // rbx
+  SSExpressionBase **i; // rdi
+  SSMethodCall *i_ctor_p; // rcx
 
-  v2 = this->i_item_exprs.i_array_p;
-  v3 = mem_stats_p;
-  v4 = (unsigned __int64)&v2[this->i_item_exprs.i_count];
-  for ( i = this; (unsigned __int64)v2 < v4; ++v2 )
+  i_array_p = this->i_item_exprs.i_array_p;
+  for ( i = &i_array_p[this->i_item_exprs.i_count]; i_array_p < i; ++i_array_p )
   {
-    if ( *v2 )
-      (*v2)->vfptr->track_memory(*v2, v3);
+    if ( *i_array_p )
+      (*i_array_p)->vfptr->track_memory(*i_array_p, mem_stats_p);
   }
   AMemoryStats::track_memory(
-    v3,
+    mem_stats_p,
     "SSLiteralList",
     0x20u,
     8u,
-    8 * i->i_item_exprs.i_count,
-    8 * i->i_item_exprs.i_count,
+    8 * this->i_item_exprs.i_count,
+    8 * this->i_item_exprs.i_count,
     1u);
-  v6 = i->i_ctor_p;
-  if ( v6 )
-    v6->vfptr->track_memory((SSInvokeBase *)&v6->vfptr, v3);
+  i_ctor_p = this->i_ctor_p;
+  if ( i_ctor_p )
+    i_ctor_p->vfptr->track_memory(i_ctor_p, mem_stats_p);
 }
 

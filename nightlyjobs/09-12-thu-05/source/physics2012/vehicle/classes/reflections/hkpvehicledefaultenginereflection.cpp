@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultEngine::staticClass()
 
 // File Line: 71
 // RVA: 0xE25580
-void __fastcall finishLoadedObjecthkpVehicleDefaultEngine(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultEngine(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultEngine::`vftable;
+    *p = &hkpVehicleDefaultEngine::`vftable;
 }
 
 // File Line: 77
 // RVA: 0xE255A0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultEngine(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultEngine(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 81
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultEngineTypeInfo__()
   hkpVehicleDefaultEngineTypeInfo.m_typeName = "hkpVehicleDefaultEngine";
   hkpVehicleDefaultEngineTypeInfo.m_vtable = result;
   hkpVehicleDefaultEngineTypeInfo.m_scopedName = "!hkpVehicleDefaultEngine";
-  hkpVehicleDefaultEngineTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultEngine;
-  hkpVehicleDefaultEngineTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultEngine;
+  hkpVehicleDefaultEngineTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultEngine;
+  hkpVehicleDefaultEngineTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultEngine;
   return result;
 }
 

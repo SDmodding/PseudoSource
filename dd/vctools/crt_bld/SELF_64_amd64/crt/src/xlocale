@@ -1,45 +1,43 @@
 // File Line: 545
 // RVA: 0x12DE2E8
-std::locale::facet *__fastcall std::use_facet<std::codecvt<char,char,int>>(std::locale *_Loc)
+std::codecvt<char,char,int> *__fastcall std::use_facet<std::codecvt<char,char,int>>(std::locale *_Loc)
 {
-  std::locale *v1; // r14
   std::locale::facet *v2; // rsi
-  unsigned __int64 v3; // rdi
-  std::locale::_Locimp *v4; // rcx
+  unsigned __int64 Id; // rdi
+  std::locale::_Locimp *Ptr; // rcx
   std::locale::facet *v5; // rbx
   std::locale::_Locimp *v6; // rax
-  std::bad_cast pExceptionObject; // [rsp+28h] [rbp-30h]
-  std::_Lockit v9; // [rsp+60h] [rbp+8h]
-  std::_Lockit v10; // [rsp+68h] [rbp+10h]
-  std::locale::facet *_Ppf; // [rsp+70h] [rbp+18h]
+  std::bad_cast pExceptionObject; // [rsp+28h] [rbp-30h] BYREF
+  std::_Lockit v9; // [rsp+60h] [rbp+8h] BYREF
+  std::_Lockit v10; // [rsp+68h] [rbp+10h] BYREF
+  std::locale::facet *_Ppf; // [rsp+70h] [rbp+18h] BYREF
 
-  v1 = _Loc;
   std::_Lockit::_Lockit(&v10, 0);
   v2 = std::_Facetptr<std::codecvt<char,char,int>>::_Psave;
   _Ppf = std::_Facetptr<std::codecvt<char,char,int>>::_Psave;
-  v3 = std::codecvt<char,char,int>::id._Id;
+  Id = std::codecvt<char,char,int>::id._Id;
   if ( !std::codecvt<char,char,int>::id._Id )
   {
     std::_Lockit::_Lockit(&v9, 0);
-    if ( std::codecvt<char,char,int>::id._Id == v3 )
+    if ( std::codecvt<char,char,int>::id._Id == Id )
       std::codecvt<char,char,int>::id._Id = ++std::locale::id::_Id_cnt;
     std::_Lockit::~_Lockit(&v9);
-    v3 = std::codecvt<char,char,int>::id._Id;
+    Id = std::codecvt<char,char,int>::id._Id;
   }
-  v4 = v1->_Ptr;
-  if ( v3 >= v1->_Ptr->_Facetcount )
+  Ptr = _Loc->_Ptr;
+  if ( Id >= _Loc->_Ptr->_Facetcount )
     v5 = 0i64;
   else
-    v5 = v4->_Facetvec[v3];
+    v5 = Ptr->_Facetvec[Id];
   if ( !v5 )
   {
-    if ( v4->_Xparent )
+    if ( Ptr->_Xparent )
     {
       v6 = std::locale::_Getgloballocale();
-      if ( v3 >= v6->_Facetcount )
+      if ( Id >= v6->_Facetcount )
         v5 = 0i64;
       else
-        v5 = v6->_Facetvec[v3];
+        v5 = v6->_Facetvec[Id];
     }
     if ( !v5 )
     {
@@ -49,25 +47,25 @@ std::locale::facet *__fastcall std::use_facet<std::codecvt<char,char,int>>(std::
       }
       else
       {
-        if ( std::codecvt<char,char,int>::_Getcat(&_Ppf, v1) == -1i64 )
+        if ( std::codecvt<char,char,int>::_Getcat(&_Ppf, _Loc) == -1i64 )
         {
           std::bad_cast::bad_cast(&pExceptionObject, "bad cast");
-          CxxThrowException(&pExceptionObject, &TI2_AVbad_cast_std__);
+          CxxThrowException(&pExceptionObject, (_s_ThrowInfo *)&TI2_AVbad_cast_std__);
         }
         v5 = _Ppf;
         std::_Facetptr<std::codecvt<char,char,int>>::_Psave = _Ppf;
-        _Ppf->vfptr->_Incref((std::_Facet_base *)_Ppf);
-        std::_Facet_Register((std::_Facet_base *)&v5->vfptr);
+        _Ppf->vfptr->_Incref(_Ppf);
+        std::_Facet_Register(v5);
       }
     }
   }
   std::_Lockit::~_Lockit(&v10);
-  return v5;
+  return (std::codecvt<char,char,int> *)v5;
 }
 
 // File Line: 839
 // RVA: 0x12DE91C
-signed __int64 __fastcall std::codecvt_base::do_encoding(std::codecvt_base *this)
+__int64 __fastcall std::codecvt_base::do_encoding(std::codecvt_base *this)
 {
   return 1i64;
 }
@@ -76,44 +74,40 @@ signed __int64 __fastcall std::codecvt_base::do_encoding(std::codecvt_base *this
 // RVA: 0x12DE6B8
 unsigned __int64 __fastcall std::codecvt<char,char,int>::_Getcat(std::locale::facet **_Ppf, std::locale *_Ploc)
 {
-  std::locale *v2; // r14
-  std::locale::facet **v3; // rdi
   char v4; // si
-  char *v5; // rbx
-  std::locale::_Locimp *v6; // rax
-  const char *v7; // rdx
-  std::_Locinfo v9; // [rsp+28h] [rbp-70h]
+  std::locale::facet *v5; // rbx
+  std::locale::_Locimp *Ptr; // rax
+  const char *Myptr; // rdx
+  std::_Locinfo v9; // [rsp+28h] [rbp-70h] BYREF
 
-  v2 = _Ploc;
-  v3 = _Ppf;
   v4 = 0;
   if ( _Ppf && !*_Ppf )
   {
-    v5 = AMemory::malloc_default(0x10ui64);
+    v5 = (std::locale::facet *)AMemory::malloc_default(0x10ui64);
     if ( v5 )
     {
-      v6 = v2->_Ptr;
-      if ( v2->_Ptr )
+      Ptr = _Ploc->_Ptr;
+      if ( _Ploc->_Ptr )
       {
-        v7 = v6->_Name._Myptr;
-        if ( !v7 )
-          v7 = &v6->_Name._Nul;
+        Myptr = Ptr->_Name._Myptr;
+        if ( !Myptr )
+          Myptr = &Ptr->_Name._Nul;
       }
       else
       {
-        v7 = &customWorldMapCaption;
+        Myptr = &customCaption;
       }
-      std::_Locinfo::_Locinfo(&v9, v7);
+      std::_Locinfo::_Locinfo(&v9, Myptr);
       v4 = 1;
-      *((_DWORD *)v5 + 2) = 0;
-      *(_QWORD *)v5 = &std::codecvt<char,char,int>::`vftable;
+      v5->_Refs = 0;
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::codecvt<char,char,int>::`vftable;
     }
     else
     {
       v5 = 0i64;
     }
-    *v3 = (std::locale::facet *)v5;
-    if ( v4 & 1 )
+    *_Ppf = v5;
+    if ( (v4 & 1) != 0 )
       std::_Locinfo::~_Locinfo(&v9);
   }
   return 2i64;
@@ -128,7 +122,15 @@ char __fastcall OSuite::ZMetric::TStoredData<__int64>::CanSerialize(std::codecvt
 
 // File Line: 926
 // RVA: 0x12DE8EC
-signed __int64 __fastcall std::codecvt<char,char,int>::do_out(std::codecvt<char,char,int> *this, int *__formal, const char *_First1, const char *_Last1, const char **_Mid1, char *_First2, char *_Last2, char **_Mid2)
+__int64 __fastcall std::codecvt<char,char,int>::do_out(
+        std::codecvt<char,char,int> *this,
+        int *__formal,
+        const char *_First1,
+        const char *_Last1,
+        const char **_Mid1,
+        char *_First2,
+        char *_Last2,
+        char **_Mid2)
 {
   *_Mid1 = _First1;
   *_Mid2 = _First2;
@@ -137,7 +139,12 @@ signed __int64 __fastcall std::codecvt<char,char,int>::do_out(std::codecvt<char,
 
 // File Line: 955
 // RVA: 0x12DE924
-__int64 __fastcall std::codecvt<char,char,int>::do_unshift(std::codecvt<char,char,int> *this, int *__formal, char *_First2, char *a4, char **_Mid2)
+__int64 __fastcall std::codecvt<char,char,int>::do_unshift(
+        std::codecvt<char,char,int> *this,
+        int *__formal,
+        char *_First2,
+        char *a4,
+        char **_Mid2)
 {
   *_Mid2 = _First2;
   return 0i64;
@@ -145,7 +152,12 @@ __int64 __fastcall std::codecvt<char,char,int>::do_unshift(std::codecvt<char,cha
 
 // File Line: 962
 // RVA: 0x12DE908
-__int64 __fastcall std::codecvt<char,char,int>::do_length(std::codecvt<char,char,int> *this, int *__formal, const char *_First1, const char *_Last1, unsigned __int64 _Count)
+__int64 __fastcall std::codecvt<char,char,int>::do_length(
+        std::codecvt<char,char,int> *this,
+        int *__formal,
+        const char *_First1,
+        const char *_Last1,
+        unsigned __int64 _Count)
 {
   unsigned __int64 v5; // r9
 

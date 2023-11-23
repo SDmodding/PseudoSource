@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaiLineOfSightUtilInputBaseClass__()
     &hkaiLineOfSightUtilInputBase_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 133
@@ -39,9 +39,12 @@ hkClass *__fastcall hkaiLineOfSightUtil::InputBase::staticClass()
 
 // File Line: 140
 // RVA: 0xBB7CF0
-void __fastcall finishLoadedObjecthkaiLineOfSightUtilInputBase(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiLineOfSightUtilInputBase(
+        hkaiLineOfSightUtil::InputBase *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiLineOfSightUtil::InputBase::InputBase);
+  if ( p )
+    hkaiLineOfSightUtil::InputBase::InputBase(p, finishing);
 }
 
 // File Line: 146
@@ -81,9 +84,12 @@ hkClass *__fastcall hkaiLineOfSightUtil::LineOfSightInput::staticClass()
 
 // File Line: 194
 // RVA: 0xBB7D20
-void __fastcall finishLoadedObjecthkaiLineOfSightUtilLineOfSightInput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiLineOfSightUtilLineOfSightInput(
+        hkaiLineOfSightUtil::LineOfSightInput *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiLineOfSightUtil::LineOfSightInput::LineOfSightInput);
+  if ( p )
+    hkaiLineOfSightUtil::LineOfSightInput::LineOfSightInput(p, finishing);
 }
 
 // File Line: 200
@@ -123,9 +129,12 @@ hkClass *__fastcall hkaiLineOfSightUtil::DirectPathInput::staticClass()
 
 // File Line: 247
 // RVA: 0xBB7D50
-void __fastcall finishLoadedObjecthkaiLineOfSightUtilDirectPathInput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiLineOfSightUtilDirectPathInput(
+        hkaiLineOfSightUtil::DirectPathInput *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiLineOfSightUtil::DirectPathInput::DirectPathInput);
+  if ( p )
+    hkaiLineOfSightUtil::DirectPathInput::DirectPathInput(p, finishing);
 }
 
 // File Line: 253
@@ -165,16 +174,20 @@ hkClass *__fastcall hkaiLineOfSightUtil::LineOfSightOutput::staticClass()
 
 // File Line: 326
 // RVA: 0xBB7D80
-void __fastcall finishLoadedObjecthkaiLineOfSightUtilLineOfSightOutput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiLineOfSightUtilLineOfSightOutput(
+        hkaiLineOfSightUtil::LineOfSightOutput *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiLineOfSightUtil::LineOfSightOutput::LineOfSightOutput);
+  if ( p )
+    hkaiLineOfSightUtil::LineOfSightOutput::LineOfSightOutput(p, finishing);
 }
 
 // File Line: 332
 // RVA: 0xBB7DA0
-void __fastcall cleanupLoadedObjecthkaiLineOfSightUtilLineOfSightOutput(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiLineOfSightUtilLineOfSightOutput(hkaiLineOfSightUtil::LineOfSightOutput *p)
 {
-  hkaiLineOfSightUtil::LineOfSightOutput::~LineOfSightOutput((hkaiLineOfSightUtil::LineOfSightOutput *)p);
+  hkaiLineOfSightUtil::LineOfSightOutput::~LineOfSightOutput(p);
 }
 
 // File Line: 364

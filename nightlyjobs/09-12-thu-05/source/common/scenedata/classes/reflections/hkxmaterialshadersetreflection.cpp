@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxMaterialShaderSetClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,23 +28,24 @@ hkClass *__fastcall hkxMaterialShaderSet::staticClass()
 
 // File Line: 65
 // RVA: 0xE32570
-void __fastcall finishLoadedObjecthkxMaterialShaderSet(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMaterialShaderSet(hkxMaterialShaderSet *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxMaterialShaderSet::hkxMaterialShaderSet);
+  if ( p )
+    hkxMaterialShaderSet::hkxMaterialShaderSet(p, finishing);
 }
 
 // File Line: 71
 // RVA: 0xE32590
-void __fastcall cleanupLoadedObjecthkxMaterialShaderSet(void *p)
+void __fastcall cleanupLoadedObjecthkxMaterialShaderSet(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xE325A0
 hkBaseObjectVtbl *__fastcall getVtablehkxMaterialShaderSet()
 {
-  hkxMaterialShaderSet v1; // [rsp+20h] [rbp-28h]
+  hkxMaterialShaderSet v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkxMaterialShaderSet::hkxMaterialShaderSet(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkxMaterialShaderSetTypeInfo__()
   hkxMaterialShaderSetTypeInfo.m_typeName = "hkxMaterialShaderSet";
   hkxMaterialShaderSetTypeInfo.m_vtable = result;
   hkxMaterialShaderSetTypeInfo.m_scopedName = "!hkxMaterialShaderSet";
-  hkxMaterialShaderSetTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMaterialShaderSet;
-  hkxMaterialShaderSetTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMaterialShaderSet;
+  hkxMaterialShaderSetTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMaterialShaderSet;
+  hkxMaterialShaderSetTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMaterialShaderSet;
   return result;
 }
 

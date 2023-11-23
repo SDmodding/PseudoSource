@@ -28,23 +28,24 @@ hkClass *__fastcall hkpSphereShape::staticClass()
 
 // File Line: 62
 // RVA: 0xCEBF90
-void __fastcall finishLoadedObjecthkpSphereShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSphereShape(hkpSphereShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSphereShape::hkpSphereShape);
+  if ( p )
+    hkpSphereShape::hkpSphereShape(p, finishing);
 }
 
 // File Line: 68
 // RVA: 0xCEBFB0
-void __fastcall cleanupLoadedObjecthkpSphereShape(void *p)
+void __fastcall cleanupLoadedObjecthkpSphereShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
 // RVA: 0xCEBFC0
 hkBaseObjectVtbl *__fastcall getVtablehkpSphereShape()
 {
-  hkpSphereShape v1; // [rsp+20h] [rbp-48h]
+  hkpSphereShape v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpSphereShape::hkpSphereShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpSphereShapeTypeInfo__()
   hkpSphereShapeTypeInfo.m_typeName = "hkpSphereShape";
   hkpSphereShapeTypeInfo.m_vtable = result;
   hkpSphereShapeTypeInfo.m_scopedName = "!hkpSphereShape";
-  hkpSphereShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSphereShape;
-  hkpSphereShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSphereShape;
+  hkpSphereShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSphereShape;
+  hkpSphereShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSphereShape;
   return result;
 }
 

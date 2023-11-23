@@ -2,7 +2,7 @@
 // RVA: 0x1543EE0
 __int64 dynamic_initializer_for__UFG::HudComponent::s_HudComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::HudComponent::s_HudComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::HudComponent::s_HudComponentList__);
 }
 
 // File Line: 22
@@ -14,249 +14,245 @@ UFG::ComponentIDDesc *__fastcall UFG::HudComponent::GetDesc(UFG::HudComponent *t
 
 // File Line: 36
 // RVA: 0x517DD0
-void __fastcall UFG::HudComponent::HudComponent(UFG::HudComponent *this, unsigned int name_uid, UFG::qPropertySet *properties, bool startSuspended)
+void __fastcall UFG::HudComponent::HudComponent(
+        UFG::HudComponent *this,
+        unsigned int name_uid,
+        UFG::qPropertySet *properties,
+        bool startSuspended)
 {
-  bool v4; // si
-  UFG::qPropertySet *v5; // rbp
-  UFG::HudComponent *v6; // rdi
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v7; // rbx
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v8; // rax
-  char *v9; // rax
+  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *mPrev; // rax
+  char *v8; // rax
 
-  v4 = startSuspended;
-  v5 = properties;
-  v6 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v7 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v6->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
-  v6->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v6->mRootTransformComponent);
-  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&v6->mHealthComponent);
-  UFG::qString::qString(&v6->mSymbolName);
-  *(_WORD *)&v6->mIsKnockedOut = 0;
-  v6->mUseCustomFilterDistance = 0;
-  v6->mCustomFilterDistance = 0.0;
-  UFG::qString::qString(&v6->mCustomWorldMapCaption);
-  v6->mBlipGuid = 0;
-  v8 = UFG::HudComponent::s_HudComponentList.mNode.mPrev;
-  UFG::HudComponent::s_HudComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v6->mPrev;
-  v7->mPrev = v8;
-  v6->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&UFG::HudComponent::s_HudComponentList;
-  UFG::HudComponent::s_HudComponentList.mNode.mPrev = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v6->mPrev;
-  UFG::SimComponent::AddType((UFG::SimComponent *)&v6->vfptr, UFG::HudComponent::_HudComponentTypeUID, "HudComponent");
-  if ( v5 )
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->mNext = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::UpdateInterface::vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&this->mRootTransformComponent);
+  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&this->mHealthComponent);
+  UFG::qString::qString(&this->mSymbolName);
+  *(_WORD *)&this->mIsKnockedOut = 0;
+  this->mUseCustomFilterDistance = 0;
+  this->mCustomFilterDistance = 0.0;
+  UFG::qString::qString(&this->mCustomWorldMapCaption);
+  this->mBlipGuid = 0;
+  mPrev = UFG::HudComponent::s_HudComponentList.mNode.mPrev;
+  UFG::HudComponent::s_HudComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&UFG::HudComponent::s_HudComponentList;
+  UFG::HudComponent::s_HudComponentList.mNode.mPrev = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  UFG::SimComponent::AddType(this, UFG::HudComponent::_HudComponentTypeUID, "HudComponent");
+  if ( properties )
   {
-    v9 = UFG::qPropertySet::Get<char const *>(v5, (UFG::qSymbol *)&SimSym_HudSymbolName.mUID, DEPTH_RECURSE);
-    UFG::qString::Set(&v6->mSymbolName, v9);
+    v8 = UFG::qPropertySet::Get<char const *>(
+           properties,
+           (UFG::qArray<unsigned long,0> *)&SimSym_HudSymbolName,
+           DEPTH_RECURSE);
+    UFG::qString::Set(&this->mSymbolName, v8);
   }
-  if ( v4 )
-    v6->m_Flags |= 2u;
+  if ( startSuspended )
+    this->m_Flags |= 2u;
 }
 
 // File Line: 55
 // RVA: 0x517CB0
-void __fastcall UFG::HudComponent::HudComponent(UFG::HudComponent *this, unsigned int name_uid, const char *symbolName, bool useCustomFilterDistance, float customFilterDistance, const char *customWorldMapCaption)
+void __fastcall UFG::HudComponent::HudComponent(
+        UFG::HudComponent *this,
+        unsigned int name_uid,
+        const char *symbolName,
+        bool useCustomFilterDistance,
+        float customFilterDistance,
+        const char *customWorldMapCaption)
 {
-  bool v6; // r14
-  const char *v7; // rbp
-  UFG::HudComponent *v8; // r15
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v9; // rsi
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v10; // rax
+  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *mPrev; // rax
 
-  v6 = useCustomFilterDistance;
-  v7 = symbolName;
-  v8 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v9 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v8->mPrev;
-  v9->mPrev = v9;
-  v9->mNext = v9;
-  v8->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
-  v8->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v8->mRootTransformComponent);
-  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&v8->mHealthComponent);
-  UFG::qString::qString(&v8->mSymbolName);
-  UFG::qString::qString(&v8->mCustomWorldMapCaption);
-  v10 = UFG::HudComponent::s_HudComponentList.mNode.mPrev;
-  UFG::HudComponent::s_HudComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v8->mPrev;
-  v9->mPrev = v10;
-  v8->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&UFG::HudComponent::s_HudComponentList;
-  UFG::HudComponent::s_HudComponentList.mNode.mPrev = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v8->mPrev;
-  UFG::SimComponent::AddType((UFG::SimComponent *)&v8->vfptr, UFG::HudComponent::_HudComponentTypeUID, "HudComponent");
-  UFG::qString::Set(&v8->mSymbolName, v7);
-  v8->mUseCustomFilterDistance = v6;
-  v8->mCustomFilterDistance = customFilterDistance;
-  UFG::qString::Set(&v8->mCustomWorldMapCaption, customWorldMapCaption);
-  *(_WORD *)&v8->mIsKnockedOut = 0;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->mNext = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::UpdateInterface::vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&this->mRootTransformComponent);
+  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&this->mHealthComponent);
+  UFG::qString::qString(&this->mSymbolName);
+  UFG::qString::qString(&this->mCustomWorldMapCaption);
+  mPrev = UFG::HudComponent::s_HudComponentList.mNode.mPrev;
+  UFG::HudComponent::s_HudComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&UFG::HudComponent::s_HudComponentList;
+  UFG::HudComponent::s_HudComponentList.mNode.mPrev = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  UFG::SimComponent::AddType(this, UFG::HudComponent::_HudComponentTypeUID, "HudComponent");
+  UFG::qString::Set(&this->mSymbolName, symbolName);
+  this->mUseCustomFilterDistance = useCustomFilterDistance;
+  this->mCustomFilterDistance = customFilterDistance;
+  UFG::qString::Set(&this->mCustomWorldMapCaption, customWorldMapCaption);
+  *(_WORD *)&this->mIsKnockedOut = 0;
 }
 
 // File Line: 73
 // RVA: 0x51BB90
 void __fastcall UFG::HudComponent::~HudComponent(UFG::HudComponent *this)
 {
-  UFG::HudComponent *v1; // rdi
   UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v2; // rbx
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v3; // rcx
-  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v4; // rax
+  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *mPrev; // rcx
+  UFG::qNode<UFG::HudComponent,UFG::HudComponent> *mNext; // rax
   UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v5; // rcx
   UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v6; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
+  this->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::UpdateInterface::vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::HudComponent::s_HudComponentpCurrentIterator )
     UFG::HudComponent::s_HudComponentpCurrentIterator = (UFG::HudComponent *)&this->mPrev[-5].mNext;
-  v2 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::HudComponent,UFG::HudComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::qString::~qString(&v1->mCustomWorldMapCaption);
-  UFG::qString::~qString(&v1->mSymbolName);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mHealthComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&v1->mRootTransformComponent);
+  UFG::qString::~qString(&this->mCustomWorldMapCaption);
+  UFG::qString::~qString(&this->mSymbolName);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mHealthComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&this->mRootTransformComponent);
   v5 = v2->mPrev;
   v6 = v2->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 86
 // RVA: 0x5356E0
 bool __fastcall UFG::HudComponent::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rax
-  UFG::qPropertySet *v2; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
 
-  v1 = pSceneObj;
-  v2 = pSceneObj->mpWritableProperties;
-  if ( !v2 )
-    v2 = v1->mpConstProperties;
-  return UFG::qPropertySet::GetParentFromName(v2, (UFG::qSymbol *)&SimSymX_propset_componentHud.mUID, DEPTH_RECURSE) != 0i64;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
+  return UFG::qPropertySet::GetParentFromName(
+           mpWritableProperties,
+           (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentHud,
+           DEPTH_RECURSE) != 0i64;
 }
 
 // File Line: 92
 // RVA: 0x5450A0
-UFG::SimComponent *__fastcall UFG::HudComponent::PropertiesOnActivate(UFG::SceneObjectProperties *sceneObject)
+UFG::HudComponent *__fastcall UFG::HudComponent::PropertiesOnActivate(UFG::SceneObjectProperties *sceneObject)
 {
-  UFG::SceneObjectProperties *v1; // rbx
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v3; // rax
-  UFG::qPropertySet *v4; // r8
+  UFG::qPropertySet *mpWritableProperties; // r8
   UFG::SimComponent *v5; // rax
   UFG::SimComponent *v6; // rdi
-  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = sceneObject;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = UFG::qMemoryPool::Allocate(v2, 0x118ui64, "HudComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x118ui64, "HudComponent", 0i64, 1u);
   if ( v3 )
   {
-    v4 = v1->mpWritableProperties;
-    if ( !v4 )
-      v4 = v1->mpConstProperties;
-    UFG::HudComponent::HudComponent((UFG::HudComponent *)v3, v1->m_NameUID, v4, 0);
+    mpWritableProperties = sceneObject->mpWritableProperties;
+    if ( !mpWritableProperties )
+      mpWritableProperties = sceneObject->mpConstProperties;
+    UFG::HudComponent::HudComponent((UFG::HudComponent *)v3, sceneObject->m_NameUID, mpWritableProperties, 0);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v8, v1->m_pSimObject, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v8, sceneObject->m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v8, v6, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v8);
   UFG::SimObjectModifier::~SimObjectModifier(&v8);
-  return v6;
+  return (UFG::HudComponent *)v6;
 }
 
 // File Line: 102
 // RVA: 0x53E1E0
-void __usercall UFG::HudComponent::OnAttach(UFG::HudComponent *this@<rcx>, UFG::SimObject *object@<rdx>, float a3@<xmm0>)
+void __fastcall UFG::HudComponent::OnAttach(UFG::HudComponent *this, UFG::SimObject *object)
 {
-  UFG::SimObject *v3; // rdi
-  UFG::HudComponent *v4; // rbx
-  unsigned int v5; // eax
-  UFG::BasePhysicsSystem *v6; // rbp
-  UFG::RebindingComponentHandle<UFG::HealthComponent,0> *v7; // r8
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
-  UFG::SimObject *v12; // rax
-  unsigned int v13; // esi
-  UFG::qBaseTreeRB *v14; // rdi
-  UFG::UIMapBlip *v15; // rax
-  UFG::SimComponent *v16; // rbx
+  unsigned int mStringHash32; // eax
+  UFG::BasePhysicsSystem *v5; // rbp
+  UFG::RebindingComponentHandle<UFG::HealthComponent,0> *p_mHealthComponent; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rax
+  UFG::SimObject *m_pSimObject; // rax
+  unsigned int mBlipGuid; // esi
+  UFG::qBaseTreeRB *CollisionModel; // rdi
+  UFG::UIMapBlip *Icon; // rax
+  UFG::SimComponent *m_pSimComponent; // rbx
 
-  v3 = object;
-  v4 = this;
   this->mBlipGuid = 0;
   if ( this->mSymbolName.mStringHash32 == -1 )
     this->mSymbolName.mStringHash32 = UFG::qStringHash32(this->mSymbolName.mData, 0xFFFFFFFF);
-  v5 = v4->mSymbolName.mStringHash32;
-  v4->mIsHostile = v5 == -2083396313 || v5 == -1617994565 || v5 == -1188642363 || v5 == -590296049;
-  v6 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::Bind<UFG::SimObject>(&v4->mRootTransformComponent, v3);
-  v7 = &v4->mHealthComponent;
-  if ( v4->mHealthComponent.m_pSimComponent )
+  mStringHash32 = this->mSymbolName.mStringHash32;
+  this->mIsHostile = mStringHash32 == -2083396313
+                  || mStringHash32 == -1617994565
+                  || mStringHash32 == -1188642363
+                  || mStringHash32 == -590296049;
+  v5 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::Bind<UFG::SimObject>(
+    &this->mRootTransformComponent,
+    object);
+  p_mHealthComponent = &this->mHealthComponent;
+  if ( this->mHealthComponent.m_pSimComponent )
   {
-    v8 = v7->mPrev;
-    v9 = v4->mHealthComponent.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v4->mHealthComponent.m_pSimComponent = 0i64;
+    mPrev = p_mHealthComponent->mPrev;
+    mNext = this->mHealthComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mHealthComponent.m_pSimComponent = 0i64;
 LABEL_15:
-    v4->mHealthComponent.m_pSimObject = 0i64;
-    v4->mHealthComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mHealthComponent.mPrev;
-    v7->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v7->mPrev;
+    this->mHealthComponent.m_pSimObject = 0i64;
+    this->mHealthComponent.mNext = &this->mHealthComponent;
+    p_mHealthComponent->mPrev = p_mHealthComponent;
     goto LABEL_16;
   }
-  if ( v4->mHealthComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::HealthComponent,0> *)v7->mPrev != v7
-     || (UFG::RebindingComponentHandle<UFG::HealthComponent,0> *)v4->mHealthComponent.mNext != &v4->mHealthComponent) )
+  if ( this->mHealthComponent.m_pSimObject
+    && (p_mHealthComponent->mPrev != p_mHealthComponent || this->mHealthComponent.mNext != &this->mHealthComponent) )
   {
-    v10 = v7->mPrev;
-    v11 = v4->mHealthComponent.mNext;
-    v10->mNext = v11;
-    v11->mPrev = v10;
+    v9 = p_mHealthComponent->mPrev;
+    v10 = this->mHealthComponent.mNext;
+    v9->mNext = v10;
+    v10->mPrev = v9;
     goto LABEL_15;
   }
 LABEL_16:
-  v4->mHealthComponent.m_Changed = 1;
-  v4->mHealthComponent.m_pSimObject = v3;
-  v4->mHealthComponent.m_TypeUID = UFG::HealthComponent::_TypeUID;
-  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::BindInternal<UFG::SimObject>(&v4->mHealthComponent, v3);
-  if ( !v6 )
+  this->mHealthComponent.m_Changed = 1;
+  this->mHealthComponent.m_pSimObject = object;
+  this->mHealthComponent.m_TypeUID = UFG::HealthComponent::_TypeUID;
+  UFG::RebindingComponentHandle<UFG::HealthComponent,0>::BindInternal<UFG::SimObject>(&this->mHealthComponent, object);
+  if ( !v5 )
     return;
-  if ( !v4->mBlipGuid )
+  if ( !this->mBlipGuid )
   {
-    v12 = v4->m_pSimObject;
-    if ( v12 )
-      v4->mBlipGuid = v12->m_Name.mUID;
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
+      this->mBlipGuid = m_pSimObject->m_Name.mUID;
   }
-  v13 = v4->mBlipGuid;
-  v14 = UFG::BasePhysicsSystem::GetCollisionModel(v6, v4->mBlipGuid);
-  if ( !v14 )
+  mBlipGuid = this->mBlipGuid;
+  CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v5, mBlipGuid);
+  if ( !CollisionModel )
   {
-    v15 = UFG::UIMapBlipManager::CreateIcon((UFG::UIMapBlipManager *)v6, v13, v4->mSymbolName.mData, 0.0, a3, 0.0);
-    v14 = (UFG::qBaseTreeRB *)v15;
-    if ( !v15 )
+    Icon = UFG::UIMapBlipManager::CreateIcon((UFG::UIMapBlipManager *)v5, mBlipGuid, this->mSymbolName.mData, 0.0, 0.0);
+    CollisionModel = (UFG::qBaseTreeRB *)Icon;
+    if ( !Icon )
       return;
-    v15->mUseCustomFilterDistance = v4->mUseCustomFilterDistance;
-    v15->mCustomFilterDistance = v4->mCustomFilterDistance;
-    UFG::UIMapBlip::SetWorldMapCaption(v15, v4->mCustomWorldMapCaption.mData);
+    Icon->mUseCustomFilterDistance = this->mUseCustomFilterDistance;
+    Icon->mCustomFilterDistance = this->mCustomFilterDistance;
+    UFG::UIMapBlip::SetWorldMapCaption(Icon, this->mCustomWorldMapCaption.mData);
   }
-  v16 = v4->mRootTransformComponent.m_pSimComponent;
-  if ( v16 )
+  m_pSimComponent = this->mRootTransformComponent.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v16);
-    UFG::UIMapBlip::SetPosition((UFG::UIMapBlip *)v14, (UFG::qVector3 *)&v16[2].m_BoundComponentHandles);
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimComponent);
+    UFG::UIMapBlip::SetPosition(
+      (UFG::UIMapBlip *)CollisionModel,
+      (UFG::qVector3 *)&m_pSimComponent[2].m_BoundComponentHandles);
   }
 }
 
@@ -264,132 +260,127 @@ LABEL_16:
 // RVA: 0x5407C0
 void __fastcall UFG::HudComponent::OnDetach(UFG::HudComponent *this)
 {
-  UFG::HudComponent *v1; // rbx
   UFG::UIMapBlipManager *v2; // rcx
-  UFG::SimObject *v3; // rax
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *v4; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *p_mRootTransformComponent; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rax
-  UFG::RebindingComponentHandle<UFG::HealthComponent,0> *v9; // rdx
+  UFG::RebindingComponentHandle<UFG::HealthComponent,0> *p_mHealthComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rax
 
-  v1 = this;
   v2 = UFG::UIHKScreenHud::mIconManager;
   if ( UFG::UIHKScreenHud::mIconManager )
   {
-    if ( !v1->mBlipGuid )
+    if ( !this->mBlipGuid )
     {
-      v3 = v1->m_pSimObject;
-      if ( v3 )
-        v1->mBlipGuid = v3->m_Name.mUID;
+      m_pSimObject = this->m_pSimObject;
+      if ( m_pSimObject )
+        this->mBlipGuid = m_pSimObject->m_Name.mUID;
     }
-    UFG::UIMapBlipManager::RemoveIcon(v2, v1->mBlipGuid);
+    UFG::UIMapBlipManager::RemoveIcon(v2, this->mBlipGuid);
   }
-  v4 = &v1->mRootTransformComponent;
-  if ( v1->mRootTransformComponent.m_pSimComponent )
+  p_mRootTransformComponent = &this->mRootTransformComponent;
+  if ( this->mRootTransformComponent.m_pSimComponent )
   {
-    v5 = v4->mPrev;
-    v6 = v1->mRootTransformComponent.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v1->mRootTransformComponent.m_pSimComponent = 0i64;
+    mPrev = p_mRootTransformComponent->mPrev;
+    mNext = this->mRootTransformComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mRootTransformComponent.m_pSimComponent = 0i64;
 LABEL_12:
-    v1->mRootTransformComponent.m_pSimObject = 0i64;
-    v1->mRootTransformComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mRootTransformComponent.mPrev;
-    v4->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
+    this->mRootTransformComponent.m_pSimObject = 0i64;
+    this->mRootTransformComponent.mNext = &this->mRootTransformComponent;
+    p_mRootTransformComponent->mPrev = p_mRootTransformComponent;
     goto LABEL_13;
   }
-  if ( v1->mRootTransformComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)v4->mPrev != v4
-     || (UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)v1->mRootTransformComponent.mNext != &v1->mRootTransformComponent) )
+  if ( this->mRootTransformComponent.m_pSimObject
+    && (p_mRootTransformComponent->mPrev != p_mRootTransformComponent
+     || this->mRootTransformComponent.mNext != &this->mRootTransformComponent) )
   {
-    v7 = v4->mPrev;
-    v8 = v1->mRootTransformComponent.mNext;
+    v7 = p_mRootTransformComponent->mPrev;
+    v8 = this->mRootTransformComponent.mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
     goto LABEL_12;
   }
 LABEL_13:
-  v1->mRootTransformComponent.m_Changed = 1;
-  v9 = &v1->mHealthComponent;
-  if ( v1->mHealthComponent.m_pSimComponent )
+  this->mRootTransformComponent.m_Changed = 1;
+  p_mHealthComponent = &this->mHealthComponent;
+  if ( this->mHealthComponent.m_pSimComponent )
   {
-    v10 = v9->mPrev;
-    v11 = v1->mHealthComponent.mNext;
+    v10 = p_mHealthComponent->mPrev;
+    v11 = this->mHealthComponent.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
-    v1->mHealthComponent.m_pSimComponent = 0i64;
+    this->mHealthComponent.m_pSimComponent = 0i64;
 LABEL_19:
-    v1->mHealthComponent.m_pSimObject = 0i64;
-    v1->mHealthComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mHealthComponent.mPrev;
-    v9->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v9->mPrev;
+    this->mHealthComponent.m_pSimObject = 0i64;
+    this->mHealthComponent.mNext = &this->mHealthComponent;
+    p_mHealthComponent->mPrev = p_mHealthComponent;
     goto LABEL_20;
   }
-  if ( v1->mHealthComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::HealthComponent,0> *)v9->mPrev != v9
-     || (UFG::RebindingComponentHandle<UFG::HealthComponent,0> *)v1->mHealthComponent.mNext != &v1->mHealthComponent) )
+  if ( this->mHealthComponent.m_pSimObject
+    && (p_mHealthComponent->mPrev != p_mHealthComponent || this->mHealthComponent.mNext != &this->mHealthComponent) )
   {
-    v12 = v9->mPrev;
-    v13 = v1->mHealthComponent.mNext;
+    v12 = p_mHealthComponent->mPrev;
+    v13 = this->mHealthComponent.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
     goto LABEL_19;
   }
 LABEL_20:
-  v1->mHealthComponent.m_Changed = 1;
+  this->mHealthComponent.m_Changed = 1;
 }
 
 // File Line: 166
 // RVA: 0x55BB20
 void __fastcall UFG::HudComponent::Update(UFG::HudComponent *this, float delta_sec)
 {
-  UFG::HudComponent *v2; // rbx
   UFG::BasePhysicsSystem *v3; // rcx
-  char *v4; // rax
-  UFG::qBaseTreeRB *v5; // rbp
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rsi
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
-  UFG::ObjectiveTracker *v8; // rax
+  char *mData; // rax
+  UFG::qBaseTreeRB *CollisionModel; // rbp
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rsi
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // rax
 
-  v2 = this;
   v3 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
   if ( UFG::UIHKScreenHud::mIconManager )
   {
-    if ( !LODWORD(v2->mSymbolName.mData) )
+    if ( !LODWORD(this->mSymbolName.mData) )
     {
-      v4 = v2[-1].mCustomWorldMapCaption.mData;
-      if ( v4 )
-        LODWORD(v2->mSymbolName.mData) = *((_DWORD *)v4 + 18);
+      mData = this[-1].mCustomWorldMapCaption.mData;
+      if ( mData )
+        LODWORD(this->mSymbolName.mData) = *((_DWORD *)mData + 18);
     }
-    v5 = UFG::BasePhysicsSystem::GetCollisionModel(v3, (unsigned int)v2->mSymbolName.mData);
-    if ( v5 && v2[-1].mCustomWorldMapCaption.mData )
+    CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v3, (unsigned int)this->mSymbolName.mData);
+    if ( CollisionModel && this[-1].mCustomWorldMapCaption.mData )
     {
-      v6 = v2->m_BoundComponentHandles.mNode.mPrev;
-      if ( v6 )
+      mPrev = this->m_BoundComponentHandles.mNode.UFG::SimComponent::mPrev;
+      if ( mPrev )
       {
-        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2->m_BoundComponentHandles.mNode.mPrev);
-        UFG::UIMapBlip::SetPosition((UFG::UIMapBlip *)v5, (UFG::qVector3 *)&v6[11]);
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)this->m_BoundComponentHandles.mNode.UFG::SimComponent::mPrev);
+        UFG::UIMapBlip::SetPosition((UFG::UIMapBlip *)CollisionModel, (UFG::qVector3 *)&mPrev[11]);
       }
-      if ( !LOBYTE(v2->mHealthComponent.m_pSimComponent) )
+      if ( !LOBYTE(this->mHealthComponent.m_pSimComponent) )
       {
-        v7 = v2->mRootTransformComponent.mNext;
-        if ( v7 )
+        mNext = this->mRootTransformComponent.mNext;
+        if ( mNext )
         {
-          if ( BYTE4(v7[7].mPrev) )
+          if ( BYTE4(mNext[7].mPrev) )
           {
-            UFG::HudComponent::HideSymbol((UFG::HudComponent *)((char *)v2 - 64));
-            v8 = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
-            if ( v8 )
+            UFG::HudComponent::HideSymbol((UFG::HudComponent *)((char *)this - 64));
+            p_mObjectiveTracker = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
+            if ( p_mObjectiveTracker )
               UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(
-                v8,
-                (UFG::qSymbol *)v2[-1].mCustomWorldMapCaption.mData + 18,
+                p_mObjectiveTracker,
+                (UFG::qSymbol *)this[-1].mCustomWorldMapCaption.mData + 18,
                 0);
-            LOBYTE(v2->mHealthComponent.m_pSimComponent) = 1;
+            LOBYTE(this->mHealthComponent.m_pSimComponent) = 1;
           }
         }
       }
@@ -402,45 +393,43 @@ void __fastcall UFG::HudComponent::Update(UFG::HudComponent *this, float delta_s
 void __fastcall UFG::HudComponent::HideSymbol(UFG::HudComponent *this)
 {
   UFG::BasePhysicsSystem *v1; // r8
-  UFG::SimObject *v2; // rax
-  UFG::qBaseTreeRB *v3; // rax
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::qBaseTreeRB *CollisionModel; // rax
 
   v1 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
   if ( UFG::UIHKScreenHud::mIconManager )
   {
     if ( !this->mBlipGuid )
     {
-      v2 = this->m_pSimObject;
-      if ( v2 )
-        this->mBlipGuid = v2->m_Name.mUID;
+      m_pSimObject = this->m_pSimObject;
+      if ( m_pSimObject )
+        this->mBlipGuid = m_pSimObject->m_Name.mUID;
     }
-    v3 = UFG::BasePhysicsSystem::GetCollisionModel(v1, this->mBlipGuid);
-    if ( v3 )
-      UFG::UIMapBlip::SetVisible((UFG::UIMapBlip *)v3, 0);
+    CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v1, this->mBlipGuid);
+    if ( CollisionModel )
+      UFG::UIMapBlip::SetVisible((UFG::UIMapBlip *)CollisionModel, 0);
   }
 }
 
 // File Line: 236
 // RVA: 0x533930
-char __fastcall UFG::HudComponent::GetWorldPosition(UFG::HudComponent *this, UFG::qVector3 *pos)
+bool __fastcall UFG::HudComponent::GetWorldPosition(UFG::HudComponent *this, UFG::qVector3 *pos)
 {
-  UFG::SimComponent *v2; // rbx
-  UFG::qVector3 *v3; // rdi
+  UFG::SimComponent *m_pSimComponent; // rbx
   float v4; // xmm0_4
   float v5; // xmm1_4
-  char result; // al
+  bool result; // al
 
-  v2 = this->mRootTransformComponent.m_pSimComponent;
-  v3 = pos;
-  if ( !v2 )
+  m_pSimComponent = this->mRootTransformComponent.m_pSimComponent;
+  if ( !m_pSimComponent )
     return 0;
   UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)this->mRootTransformComponent.m_pSimComponent);
-  v4 = *((float *)&v2[2].m_BoundComponentHandles.mNode.mPrev + 1);
-  v5 = *(float *)&v2[2].m_BoundComponentHandles.mNode.mNext;
-  v3->x = *(float *)&v2[2].m_BoundComponentHandles.mNode.mPrev;
+  v4 = *((float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev + 1);
+  v5 = *(float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext;
+  pos->x = *(float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev;
   result = 1;
-  v3->y = v4;
-  v3->z = v5;
+  pos->y = v4;
+  pos->z = v5;
   return result;
 }
 
@@ -448,13 +437,13 @@ char __fastcall UFG::HudComponent::GetWorldPosition(UFG::HudComponent *this, UFG
 // RVA: 0x52AB90
 __int64 __fastcall UFG::HudComponent::GetBlipGuid(UFG::HudComponent *this)
 {
-  UFG::SimObject *v1; // rax
+  UFG::SimObject *m_pSimObject; // rax
 
   if ( !this->mBlipGuid )
   {
-    v1 = this->m_pSimObject;
-    if ( v1 )
-      this->mBlipGuid = v1->m_Name.mUID;
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
+      this->mBlipGuid = m_pSimObject->m_Name.mUID;
   }
   return this->mBlipGuid;
 }
@@ -464,16 +453,16 @@ __int64 __fastcall UFG::HudComponent::GetBlipGuid(UFG::HudComponent *this)
 UFG::qBaseTreeRB *__fastcall UFG::HudComponent::GetIcon(UFG::HudComponent *this)
 {
   UFG::BasePhysicsSystem *v1; // r8
-  UFG::SimObject *v3; // rax
+  UFG::SimObject *m_pSimObject; // rax
 
   v1 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
   if ( !UFG::UIHKScreenHud::mIconManager )
     return 0i64;
   if ( !this->mBlipGuid )
   {
-    v3 = this->m_pSimObject;
-    if ( v3 )
-      this->mBlipGuid = v3->m_Name.mUID;
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
+      this->mBlipGuid = m_pSimObject->m_Name.mUID;
   }
   return UFG::BasePhysicsSystem::GetCollisionModel(v1, this->mBlipGuid);
 }

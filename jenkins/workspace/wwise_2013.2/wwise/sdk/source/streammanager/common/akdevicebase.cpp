@@ -1,117 +1,107 @@
 // File Line: 50
 // RVA: 0xAA27C0
-void __fastcall AK::StreamMgr::CAkDeviceBase::CAkDeviceBase(AK::StreamMgr::CAkDeviceBase *this, AK::StreamMgr::IAkLowLevelIOHook *in_pLowLevelHook)
+void __fastcall AK::StreamMgr::CAkDeviceBase::CAkDeviceBase(
+        AK::StreamMgr::CAkDeviceBase *this,
+        AK::StreamMgr::IAkLowLevelIOHook *in_pLowLevelHook)
 {
-  AK::StreamMgr::IAkLowLevelIOHook *v2; // rbx
-  AK::StreamMgr::CAkDeviceBase *v3; // rdi
-
-  v2 = in_pLowLevelHook;
-  v3 = this;
-  AK::StreamMgr::CAkIOThread::CAkIOThread((AK::StreamMgr::CAkIOThread *)&this->vfptr);
-  v3->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceBase::`vftable;
-  v3->m_listTasks.m_pFirst = 0i64;
-  InitializeCriticalSection(&v3->m_lockTasksList.m_csLock);
-  AK::StreamMgr::CAkIOMemMgr::CAkIOMemMgr(&v3->m_mgrMemIO);
-  v3->m_pLowLevelHook = v2;
-  v3->m_poolStmMemView.m_pFirst = 0i64;
-  v3->m_pStmMemViewMem = 0i64;
+  AK::StreamMgr::CAkIOThread::CAkIOThread(this);
+  this->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceBase::`vftable;
+  this->m_listTasks.m_pFirst = 0i64;
+  InitializeCriticalSection(&this->m_lockTasksList.m_csLock);
+  AK::StreamMgr::CAkIOMemMgr::CAkIOMemMgr(&this->m_mgrMemIO);
+  this->m_pLowLevelHook = in_pLowLevelHook;
+  this->m_poolStmMemView.m_pFirst = 0i64;
+  this->m_pStmMemViewMem = 0i64;
 }
 
 // File Line: 54
 // RVA: 0xAA2920
 void __fastcall AK::StreamMgr::CAkDeviceBase::~CAkDeviceBase(AK::StreamMgr::CAkDeviceBase *this)
 {
-  AK::StreamMgr::CAkDeviceBase *v1; // rbx
-  AK::StreamMgr::CAkIOMemMgr *v2; // rcx
+  AK::StreamMgr::CAkIOMemMgr *p_m_mgrMemIO; // rcx
 
-  v1 = this;
-  v2 = &this->m_mgrMemIO;
-  *(_QWORD *)&v2[-3].m_bUseCache = &AK::StreamMgr::CAkDeviceBase::`vftable;
-  AK::StreamMgr::CAkIOMemMgr::~CAkIOMemMgr(v2);
-  DeleteCriticalSection(&v1->m_lockTasksList.m_csLock);
-  AK::StreamMgr::CAkIOThread::~CAkIOThread((AK::StreamMgr::CAkIOThread *)&v1->vfptr);
+  p_m_mgrMemIO = &this->m_mgrMemIO;
+  *(_QWORD *)&p_m_mgrMemIO[-3].m_bUseCache = &AK::StreamMgr::CAkDeviceBase::`vftable;
+  AK::StreamMgr::CAkIOMemMgr::~CAkIOMemMgr(p_m_mgrMemIO);
+  DeleteCriticalSection(&this->m_lockTasksList.m_csLock);
+  AK::StreamMgr::CAkIOThread::~CAkIOThread(this);
 }
 
 // File Line: 62
 // RVA: 0xAA3E00
-AKRESULT __fastcall AK::StreamMgr::CAkDeviceBase::Init(AK::StreamMgr::CAkDeviceBase *this, AkDeviceSettings *in_settings, unsigned int in_deviceID)
+AKRESULT __fastcall AK::StreamMgr::CAkDeviceBase::Init(
+        AK::StreamMgr::CAkDeviceBase *this,
+        AkDeviceSettings *in_settings,
+        unsigned int in_deviceID)
 {
-  AK::StreamMgr::CAkDeviceBase *v3; // rdi
-  unsigned int v4; // ecx
-  AkDeviceSettings *v5; // rbx
-  AKRESULT result; // eax
-  unsigned int v7; // eax
+  unsigned int uGranularity; // ecx
+  unsigned int uMaxConcurrentIO; // eax
 
-  v3 = this;
-  v4 = in_settings->uGranularity;
-  v5 = in_settings;
-  if ( !v4
+  uGranularity = in_settings->uGranularity;
+  if ( !uGranularity
     || in_settings->uIOMemorySize && in_settings->fTargetAutoStmBufferLength < 0.0
-    || in_settings->uSchedulerTypeFlags & 2 && in_settings->uMaxConcurrentIO - 1 > 0x3FF )
+    || (in_settings->uSchedulerTypeFlags & 2) != 0 && in_settings->uMaxConcurrentIO - 1 > 0x3FF )
   {
     return 31;
   }
-  v3->m_uGranularity = v4;
-  v3->m_fTargetAutoStmBufferLength = in_settings->fTargetAutoStmBufferLength;
-  v7 = in_settings->uMaxConcurrentIO;
-  v3->m_deviceID = in_deviceID;
-  v3->m_uMaxConcurrentIO = v7;
-  if ( AK::StreamMgr::CAkIOMemMgr::Init(&v3->m_mgrMemIO, in_settings) == 1 )
-    result = AK::StreamMgr::CAkIOThread::Init((AK::StreamMgr::CAkIOThread *)&v3->vfptr, &v5->threadProperties);
+  this->m_uGranularity = uGranularity;
+  this->m_fTargetAutoStmBufferLength = in_settings->fTargetAutoStmBufferLength;
+  uMaxConcurrentIO = in_settings->uMaxConcurrentIO;
+  this->m_deviceID = in_deviceID;
+  this->m_uMaxConcurrentIO = uMaxConcurrentIO;
+  if ( AK::StreamMgr::CAkIOMemMgr::Init(&this->m_mgrMemIO, in_settings) == AK_Success )
+    return AK::StreamMgr::CAkIOThread::Init(this, &in_settings->threadProperties);
   else
-    result = 2;
-  return result;
+    return 2;
 }
 
 // File Line: 99
 // RVA: 0xAA3000
 void __fastcall AK::StreamMgr::CAkDeviceBase::Destroy(AK::StreamMgr::CAkDeviceBase *this)
 {
-  AK::StreamMgr::CAkDeviceBase *v1; // rdi
-  AK::StreamMgr::CAkStmMemView *v2; // rax
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rax
   AK::StreamMgr::CAkStmMemView **v3; // rdx
-  AK::StreamMgr::CAkStmMemView *v4; // rcx
+  AK::StreamMgr::CAkStmMemView *pNextView; // rcx
   int v5; // ebx
   __int128 v6; // [rsp+20h] [rbp-38h]
-  __m128i v7; // [rsp+30h] [rbp-28h]
-  __m128i v8; // [rsp+40h] [rbp-18h]
+  __int128 v7; // [rsp+30h] [rbp-28h]
+  __int128 v8; // [rsp+40h] [rbp-18h]
 
-  v1 = this;
-  AK::StreamMgr::CAkIOThread::Term((AK::StreamMgr::CAkIOThread *)&this->vfptr);
-  if ( v1->m_pStmMemViewMem )
+  AK::StreamMgr::CAkIOThread::Term(this);
+  if ( this->m_pStmMemViewMem )
   {
-    if ( v1->m_mgrMemIO.m_bUseCache )
+    if ( this->m_mgrMemIO.m_bUseCache )
     {
-      v2 = v1->m_poolStmMemView.m_pFirst;
+      m_pFirst = this->m_poolStmMemView.m_pFirst;
       v3 = 0i64;
-      if ( v2 )
+      if ( m_pFirst )
       {
         while ( 1 )
         {
-          v4 = v2->pNextView;
-          if ( (*((_DWORD *)v2 + 5) >> 3) & 1 )
+          pNextView = m_pFirst->pNextView;
+          if ( (*((_DWORD *)m_pFirst + 5) & 8) != 0 )
           {
-            v8.m128i_i64[0] = (__int64)v2->pNextView;
-            v8.m128i_i64[1] = (__int64)v3;
-            if ( v2 == v1->m_poolStmMemView.m_pFirst )
-              v1->m_poolStmMemView.m_pFirst = v4;
+            *(_QWORD *)&v8 = m_pFirst->pNextView;
+            *((_QWORD *)&v8 + 1) = v3;
+            if ( m_pFirst == this->m_poolStmMemView.m_pFirst )
+              this->m_poolStmMemView.m_pFirst = pNextView;
             else
-              *v3 = v4;
-            _mm_store_si128((__m128i *)&v6, v8);
+              *v3 = pNextView;
+            v6 = v8;
           }
           else
           {
-            v7.m128i_i64[0] = (__int64)v2->pNextView;
-            v7.m128i_i64[1] = (__int64)v3;
-            if ( v2 == v1->m_poolStmMemView.m_pFirst )
-              v1->m_poolStmMemView.m_pFirst = v4;
+            *(_QWORD *)&v7 = m_pFirst->pNextView;
+            *((_QWORD *)&v7 + 1) = v3;
+            if ( m_pFirst == this->m_poolStmMemView.m_pFirst )
+              this->m_poolStmMemView.m_pFirst = pNextView;
             else
-              *v3 = v4;
-            _mm_store_si128((__m128i *)&v6, v7);
-            if ( v2 )
-              AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, v2);
+              *v3 = pNextView;
+            v6 = v7;
+            if ( m_pFirst )
+              AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, m_pFirst);
           }
-          v2 = (AK::StreamMgr::CAkStmMemView *)v6;
+          m_pFirst = (AK::StreamMgr::CAkStmMemView *)v6;
           if ( !(_QWORD)v6 )
             break;
           v3 = (AK::StreamMgr::CAkStmMemView **)*((_QWORD *)&v6 + 1);
@@ -120,68 +110,63 @@ void __fastcall AK::StreamMgr::CAkDeviceBase::Destroy(AK::StreamMgr::CAkDeviceBa
     }
     else
     {
-      v1->m_poolStmMemView.m_pFirst = 0i64;
+      this->m_poolStmMemView.m_pFirst = 0i64;
     }
-    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, v1->m_pStmMemViewMem);
+    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, this->m_pStmMemViewMem);
   }
-  v1->m_poolStmMemView.m_pFirst = 0i64;
-  AK::StreamMgr::CAkIOMemMgr::Term(&v1->m_mgrMemIO);
+  this->m_poolStmMemView.m_pFirst = 0i64;
+  AK::StreamMgr::CAkIOMemMgr::Term(&this->m_mgrMemIO);
   v5 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-  v1->vfptr->__vecDelDtor((AK::StreamMgr::CAkIOThread *)&v1->vfptr, 0);
-  AK::MemoryMgr::Free(v5, v1);
+  this->vfptr->__vecDelDtor(this, 0i64);
+  AK::MemoryMgr::Free(v5, this);
 }
 
 // File Line: 144
 // RVA: 0xAA2E70
 char __fastcall AK::StreamMgr::CAkDeviceBase::ClearStreams(AK::StreamMgr::CAkDeviceBase *this)
 {
-  AK::StreamMgr::CAkStmTask *v1; // rbx
+  AK::StreamMgr::CAkStmTask *m_pFirst; // rbx
   AK::StreamMgr::CAkStmTask *v2; // rdi
-  AK::StreamMgr::CAkDeviceBase *v3; // rsi
-  AK::StreamMgr::CAkClientThreadAwareVtbl *v4; // rax
-  AK::StreamMgr::CAkStmTask *v5; // rax
-  AK::StreamMgr::CAkClientThreadAwareVtbl *v6; // rax
-  int v7; // edi
-  __m128i v9; // [rsp+20h] [rbp-28h]
-  __m128i v10; // [rsp+30h] [rbp-18h]
+  AK::StreamMgr::CAkClientThreadAwareVtbl *vfptr; // rax
+  AK::StreamMgr::CAkStmTask *pNextLightItem; // rax
+  int v6; // edi
+  AK::StreamMgr::CAkStmTask *v8; // [rsp+20h] [rbp-28h]
+  AK::StreamMgr::CAkStmTask *v9; // [rsp+28h] [rbp-20h]
 
-  v1 = this->m_listTasks.m_pFirst;
+  m_pFirst = this->m_listTasks.m_pFirst;
   v2 = 0i64;
-  v3 = this;
-  while ( v1 )
+  while ( m_pFirst )
   {
-    v4 = v1->vfptr;
-    if ( *((_BYTE *)v1 + 117) & 8 )
+    vfptr = m_pFirst->vfptr;
+    if ( (*((_BYTE *)m_pFirst + 117) & 8) != 0 )
     {
-      if ( ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStmTask *))v4[1].__vecDelDtor)(v1) )
+      if ( ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStmTask *))vfptr[1].__vecDelDtor)(m_pFirst) )
       {
-        v5 = v1->pNextLightItem;
-        v9.m128i_i64[1] = (__int64)v2;
-        v9.m128i_i64[0] = (__int64)v1->pNextLightItem;
-        if ( v1 == v3->m_listTasks.m_pFirst )
-          v3->m_listTasks.m_pFirst = v5;
+        pNextLightItem = m_pFirst->pNextLightItem;
+        v9 = v2;
+        v8 = pNextLightItem;
+        if ( m_pFirst == this->m_listTasks.m_pFirst )
+          this->m_listTasks.m_pFirst = pNextLightItem;
         else
-          v2->pNextLightItem = v5;
-        v6 = v1->vfptr;
-        v7 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-        _mm_store_si128(&v10, v9);
-        v6->__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)&v1->vfptr, 0);
-        AK::MemoryMgr::Free(v7, v1);
-        v2 = (AK::StreamMgr::CAkStmTask *)v10.m128i_i64[1];
-        v1 = (AK::StreamMgr::CAkStmTask *)v10.m128i_i64[0];
+          v2->pNextLightItem = pNextLightItem;
+        v6 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
+        m_pFirst->vfptr->__vecDelDtor(m_pFirst, 0);
+        AK::MemoryMgr::Free(v6, m_pFirst);
+        v2 = v9;
+        m_pFirst = v8;
         continue;
       }
     }
     else
     {
-      ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *))v4[2].__vecDelDtor)(v1);
+      ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *))vfptr[2].__vecDelDtor)(m_pFirst);
     }
-    v2 = v1;
-    v1 = v1->pNextLightItem;
+    v2 = m_pFirst;
+    m_pFirst = m_pFirst->pNextLightItem;
   }
-  if ( v3->m_listTasks.m_pFirst )
+  if ( this->m_listTasks.m_pFirst )
     return 0;
-  v3->m_listTasks.m_pFirst = 0i64;
+  this->m_listTasks.m_pFirst = 0i64;
   return 1;
 }
 
@@ -194,389 +179,355 @@ void __fastcall AK::StreamMgr::CAkDeviceBase::OnThreadStart(AK::StreamMgr::CAkDe
 
 // File Line: 190
 // RVA: 0xAA2E10
-void __fastcall AK::StreamMgr::CAkDeviceBase::AddTask(AK::StreamMgr::CAkDeviceBase *this, AK::StreamMgr::CAkStmTask *in_pStmTask)
+void __fastcall AK::StreamMgr::CAkDeviceBase::AddTask(
+        AK::StreamMgr::CAkDeviceBase *this,
+        AK::StreamMgr::CAkStmTask *in_pStmTask)
 {
-  AK::StreamMgr::CAkDeviceBase *v2; // rsi
-  AK::StreamMgr::CAkStmTask *v3; // rdi
-  AK::StreamMgr::CAkStmTask *v4; // rax
+  AK::StreamMgr::CAkStmTask *m_pFirst; // rax
 
-  v2 = this;
-  v3 = in_pStmTask;
   EnterCriticalSection(&this->m_lockTasksList.m_csLock);
-  v4 = v2->m_listTasks.m_pFirst;
-  if ( v4 )
+  m_pFirst = this->m_listTasks.m_pFirst;
+  if ( m_pFirst )
   {
-    v3->pNextLightItem = v4;
-    v2->m_listTasks.m_pFirst = v3;
+    in_pStmTask->pNextLightItem = m_pFirst;
+    this->m_listTasks.m_pFirst = in_pStmTask;
   }
   else
   {
-    v2->m_listTasks.m_pFirst = v3;
-    v3->pNextLightItem = 0i64;
+    this->m_listTasks.m_pFirst = in_pStmTask;
+    in_pStmTask->pNextLightItem = 0i64;
   }
-  LeaveCriticalSection(&v2->m_lockTasksList.m_csLock);
+  LeaveCriticalSection(&this->m_lockTasksList.m_csLock);
 }
 
 // File Line: 216
 // RVA: 0xAA4500
-AK::StreamMgr::CAkStmTask *__usercall AK::StreamMgr::CAkDeviceBase::SchedulerFindNextTask@<rax>(AK::StreamMgr::CAkDeviceBase *this@<rcx>, float *out_fOpDeadline@<rdx>, float a3@<xmm0>)
+AK::StreamMgr::CAkStmTask *__fastcall AK::StreamMgr::CAkDeviceBase::SchedulerFindNextTask(
+        AK::StreamMgr::CAkDeviceBase *this,
+        float *out_fOpDeadline)
 {
-  AK::StreamMgr::CAkDeviceBase *v3; // r15
-  float *v4; // rdi
-  AK::StreamMgr::CAkStmTask *v5; // r12
-  __int128 v6; // di
-  char v8; // al
-  AK::StreamMgr::CAkStmTask *v9; // rax
+  AK::StreamMgr::CAkStmTask *v4; // r12
+  __int128 m_pFirst; // rdi
+  char v7; // al
+  AK::StreamMgr::CAkStmTask *v8; // rax
+  double v9; // xmm0_8
   __int64 v10; // rbp
   float v11; // xmm6_4
-  char v12; // r14
+  bool v12; // r14
   char v13; // al
   AK::StreamMgr::CAkStmTask *v14; // rax
   int v15; // ebp
-  char v16; // dl
-  float v17; // xmm3_4
-  char v18; // dl
-  char v19; // al
-  char v20; // cl
-  __int64 v21; // rcx
-  __int128 v22; // [rsp+20h] [rbp-78h]
-  __m128i v23; // [rsp+30h] [rbp-68h]
-  float *v24; // [rsp+A8h] [rbp+10h]
+  double v16; // xmm0_8
+  bool v17; // dl
+  char v18; // al
+  char v19; // cl
+  __int128 v20; // [rsp+30h] [rbp-68h]
+  AK::StreamMgr::CAkStmTask *v21; // [rsp+30h] [rbp-68h]
+  __int64 v22; // [rsp+38h] [rbp-60h]
 
-  v24 = out_fOpDeadline;
-  v3 = this;
-  v4 = out_fOpDeadline;
   EnterCriticalSection(&this->m_lockTasksList.m_csLock);
-  QueryPerformanceCounter((LARGE_INTEGER *)&v3->m_time);
-  if ( !v3->m_bDoWaitMemoryChange )
+  QueryPerformanceCounter((LARGE_INTEGER *)&this->m_time);
+  if ( !this->m_bDoWaitMemoryChange )
   {
-    v5 = 0i64;
-    v6 = (unsigned __int64)v3->m_listTasks.m_pFirst;
-    if ( !(_QWORD)v6 )
+    v4 = 0i64;
+    m_pFirst = (unsigned __int64)this->m_listTasks.m_pFirst;
+    if ( !(_QWORD)m_pFirst )
       goto LABEL_3;
     while ( 1 )
     {
-      v8 = *(_BYTE *)(v6 + 117);
-      if ( v8 & 8 )
+      v7 = *(_BYTE *)(m_pFirst + 117);
+      if ( (v7 & 8) != 0 )
       {
-        if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)v6 + 8i64))(v6) )
+        if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)m_pFirst + 8i64))(m_pFirst) )
         {
-          v9 = *(AK::StreamMgr::CAkStmTask **)(v6 + 24);
-          v23.m128i_i64[1] = *((_QWORD *)&v6 + 1);
-          v23.m128i_i64[0] = (__int64)v9;
-          if ( (AK::StreamMgr::CAkStmTask *)v6 == v3->m_listTasks.m_pFirst )
-            v3->m_listTasks.m_pFirst = v9;
+          v8 = *(AK::StreamMgr::CAkStmTask **)(m_pFirst + 24);
+          *((_QWORD *)&v20 + 1) = *((_QWORD *)&m_pFirst + 1);
+          *(_QWORD *)&v20 = v8;
+          if ( (AK::StreamMgr::CAkStmTask *)m_pFirst == this->m_listTasks.m_pFirst )
+            this->m_listTasks.m_pFirst = v8;
           else
-            *(_QWORD *)(*((_QWORD *)&v6 + 1) + 24i64) = v9;
-          a3 = *(float *)v23.m128i_i32;
-          DWORD2(v6) = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-          _mm_store_si128((__m128i *)&v22, v23);
-          if ( (_QWORD)v6 )
-          {
-            (**(void (__fastcall ***)(_QWORD, _QWORD))v6)(v6, 0i64);
-            AK::MemoryMgr::Free(SDWORD2(v6), (void *)v6);
-          }
-          v6 = v22;
-          goto LABEL_17;
+            *(_QWORD *)(*((_QWORD *)&m_pFirst + 1) + 24i64) = v8;
+          DWORD2(m_pFirst) = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
+          (**(void (__fastcall ***)(_QWORD, _QWORD))m_pFirst)(m_pFirst, 0i64);
+          AK::MemoryMgr::Free(SDWORD2(m_pFirst), (void *)m_pFirst);
+          m_pFirst = v20;
+          goto LABEL_15;
         }
       }
-      else if ( v8 & 0x40 )
+      else if ( (v7 & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(_QWORD))(*(_QWORD *)v6 + 48i64))(v6);
-        *((_QWORD *)&v6 + 1) = *(_QWORD *)(v6 + 24);
-        v10 = v6;
-        v11 = a3;
-        v12 = (*(_BYTE *)(v6 + 117) >> 5) & 1;
-        if ( !*((_QWORD *)&v6 + 1) )
+        v9 = (*(double (__fastcall **)(_QWORD))(*(_QWORD *)m_pFirst + 48i64))(m_pFirst);
+        *((_QWORD *)&m_pFirst + 1) = *(_QWORD *)(m_pFirst + 24);
+        v10 = m_pFirst;
+        v11 = *(float *)&v9;
+        v12 = (*(_BYTE *)(m_pFirst + 117) & 0x20) != 0;
+        if ( !*((_QWORD *)&m_pFirst + 1) )
         {
-LABEL_44:
-          *v24 = v11;
+LABEL_40:
+          *out_fOpDeadline = v11;
           if ( !v12 )
             goto LABEL_5;
           goto LABEL_4;
         }
         while ( 2 )
         {
-          v13 = *(_BYTE *)(*((_QWORD *)&v6 + 1) + 117i64);
-          if ( v13 & 8 )
+          v13 = *(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 117i64);
+          if ( (v13 & 8) != 0 )
           {
-            if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(**((_QWORD **)&v6 + 1) + 8i64))(*((_QWORD *)&v6 + 1)) )
+            if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(**((_QWORD **)&m_pFirst + 1) + 8i64))(*((_QWORD *)&m_pFirst + 1)) )
             {
-              v14 = *(AK::StreamMgr::CAkStmTask **)(*((_QWORD *)&v6 + 1) + 24i64);
-              v23.m128i_i64[1] = v10;
-              v23.m128i_i64[0] = (__int64)v14;
-              if ( (AK::StreamMgr::CAkStmTask *)*((_QWORD *)&v6 + 1) == v3->m_listTasks.m_pFirst )
-                v3->m_listTasks.m_pFirst = v14;
+              v14 = *(AK::StreamMgr::CAkStmTask **)(*((_QWORD *)&m_pFirst + 1) + 24i64);
+              v22 = v10;
+              v21 = v14;
+              if ( (AK::StreamMgr::CAkStmTask *)*((_QWORD *)&m_pFirst + 1) == this->m_listTasks.m_pFirst )
+                this->m_listTasks.m_pFirst = v14;
               else
                 *(_QWORD *)(v10 + 24) = v14;
-              a3 = *(float *)v23.m128i_i32;
               v15 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-              _mm_store_si128((__m128i *)&v22, v23);
-              if ( *((_QWORD *)&v6 + 1) )
-              {
-                (***((void (__fastcall ****)(_QWORD, _QWORD))&v6 + 1))(*((_QWORD *)&v6 + 1), 0i64);
-                AK::MemoryMgr::Free(v15, *((void **)&v6 + 1));
-              }
-              v10 = *((_QWORD *)&v22 + 1);
-              *((_QWORD *)&v6 + 1) = v22;
-LABEL_43:
-              if ( !*((_QWORD *)&v6 + 1) )
-                goto LABEL_44;
+              (***((void (__fastcall ****)(_QWORD, _QWORD))&m_pFirst + 1))(*((_QWORD *)&m_pFirst + 1), 0i64);
+              AK::MemoryMgr::Free(v15, *((void **)&m_pFirst + 1));
+              v10 = v22;
+              *((_QWORD *)&m_pFirst + 1) = v21;
+LABEL_39:
+              if ( !*((_QWORD *)&m_pFirst + 1) )
+                goto LABEL_40;
               continue;
             }
-LABEL_42:
-            v10 = *((_QWORD *)&v6 + 1);
-            *((_QWORD *)&v6 + 1) = *(_QWORD *)(*((_QWORD *)&v6 + 1) + 24i64);
-            goto LABEL_43;
+LABEL_38:
+            v10 = *((_QWORD *)&m_pFirst + 1);
+            *((_QWORD *)&m_pFirst + 1) = *(_QWORD *)(*((_QWORD *)&m_pFirst + 1) + 24i64);
+            goto LABEL_39;
           }
           break;
         }
-        if ( !(v13 & 0x40) )
-          goto LABEL_42;
-        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)&v6 + 1) + 48i64))(*((_QWORD *)&v6 + 1));
-        v16 = *(_BYTE *)(*((_QWORD *)&v6 + 1) + 117i64) >> 5;
-        v17 = a3;
+        if ( (v13 & 0x40) == 0 )
+          goto LABEL_38;
+        v16 = (*(double (__fastcall **)(_QWORD))(**((_QWORD **)&m_pFirst + 1) + 48i64))(*((_QWORD *)&m_pFirst + 1));
         if ( v12 )
         {
-          v18 = v16 & 1;
-          if ( !v18 )
-            goto LABEL_42;
+          v17 = (*(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 117i64) & 0x20) != 0;
+          if ( (*(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 117i64) & 0x20) == 0 )
+            goto LABEL_38;
         }
         else
         {
-          v18 = v16 & 1;
-          if ( v18 )
+          v17 = (*(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 117i64) & 0x20) != 0;
+          if ( (*(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 117i64) & 0x20) != 0 )
           {
             v12 = 1;
-            goto LABEL_41;
+            goto LABEL_37;
           }
         }
-        if ( a3 == 0.0 )
+        if ( *(float *)&v16 == 0.0 )
         {
-          v19 = *(_BYTE *)(*((_QWORD *)&v6 + 1) + 116i64);
-          v20 = *(_BYTE *)(v6 + 116);
-          if ( v19 <= v20 && v11 <= 0.0 )
+          v18 = *(_BYTE *)(*((_QWORD *)&m_pFirst + 1) + 116i64);
+          v19 = *(_BYTE *)(m_pFirst + 116);
+          if ( v18 <= v19
+            && v11 <= 0.0
+            && (v18 != v19
+             || (float)((float)(int)(this->m_time - *(_DWORD *)(*((_QWORD *)&m_pFirst + 1) + 88i64))
+                      * (float)(1.0 / AK::g_fFreqRatio)) <= (float)((float)(int)(this->m_time
+                                                                               - *(_DWORD *)(m_pFirst + 88))
+                                                                  * (float)(1.0 / AK::g_fFreqRatio))) )
           {
-            if ( v19 != v20 )
-              goto LABEL_42;
-            v21 = v3->m_time;
-            a3 = (float)(v21 - *(_DWORD *)(v6 + 88)) * (float)(1.0 / AK::g_fFreqRatio);
-            if ( (float)((float)(v21 - *(_DWORD *)(*((_QWORD *)&v6 + 1) + 88i64)) * (float)(1.0 / AK::g_fFreqRatio)) <= a3 )
-              goto LABEL_42;
+            goto LABEL_38;
           }
         }
-        else if ( a3 >= v11 )
+        else if ( *(float *)&v16 >= v11 )
         {
-          goto LABEL_42;
+          goto LABEL_38;
         }
-        v12 = v18;
-LABEL_41:
-        v11 = v17;
-        *(_QWORD *)&v6 = *((_QWORD *)&v6 + 1);
-        goto LABEL_42;
+        v12 = v17;
+LABEL_37:
+        v11 = *(float *)&v16;
+        *(_QWORD *)&m_pFirst = *((_QWORD *)&m_pFirst + 1);
+        goto LABEL_38;
       }
-      *((_QWORD *)&v6 + 1) = v6;
-      *(_QWORD *)&v6 = *(_QWORD *)(v6 + 24);
-LABEL_17:
-      if ( !(_QWORD)v6 )
+      *((_QWORD *)&m_pFirst + 1) = m_pFirst;
+      *(_QWORD *)&m_pFirst = *(_QWORD *)(m_pFirst + 24);
+LABEL_15:
+      if ( !(_QWORD)m_pFirst )
         goto LABEL_3;
     }
   }
-  v5 = AK::StreamMgr::CAkDeviceBase::ScheduleStdStmOnly(v3, v4, a3);
+  v4 = AK::StreamMgr::CAkDeviceBase::ScheduleStdStmOnly(this, out_fOpDeadline);
 LABEL_3:
-  *(_QWORD *)&v6 = v5;
+  *(_QWORD *)&m_pFirst = v4;
 LABEL_4:
-  v5 = (AK::StreamMgr::CAkStmTask *)v6;
+  v4 = (AK::StreamMgr::CAkStmTask *)m_pFirst;
 LABEL_5:
-  LeaveCriticalSection(&v3->m_lockTasksList.m_csLock);
-  return v5;
+  LeaveCriticalSection(&this->m_lockTasksList.m_csLock);
+  return v4;
 }
 
 // File Line: 378
 // RVA: 0xAA42E0
-AK::StreamMgr::CAkStmTask *__usercall AK::StreamMgr::CAkDeviceBase::ScheduleStdStmOnly@<rax>(AK::StreamMgr::CAkDeviceBase *this@<rcx>, float *out_fOpDeadline@<rdx>, float a3@<xmm0>)
+AK::StreamMgr::CAkStmTask *__fastcall AK::StreamMgr::CAkDeviceBase::ScheduleStdStmOnly(
+        AK::StreamMgr::CAkDeviceBase *this,
+        float *out_fOpDeadline)
 {
-  AK::StreamMgr::CAkStmTask *v3; // rbx
-  AK::StreamMgr::CAkStmTask *v4; // rdi
-  float *v5; // r14
-  AK::StreamMgr::CAkDeviceBase *v6; // rbp
-  char v7; // al
-  AK::StreamMgr::CAkStmTask *v8; // rax
-  int v9; // edi
-  __int128 v11; // di
+  AK::StreamMgr::CAkStmTask *m_pFirst; // rbx
+  AK::StreamMgr::CAkStmTask *v3; // rdi
+  char v6; // al
+  AK::StreamMgr::CAkStmTask *pNextLightItem; // rax
+  int v8; // edi
+  double v10; // xmm0_8
+  __int128 v11; // rdi
   float v12; // xmm6_4
   char v13; // al
   AK::StreamMgr::CAkStmTask *v14; // rax
-  float v15; // xmm3_4
+  double v15; // xmm0_8
   char v16; // al
-  char v17; // cl
-  __int64 v18; // rcx
-  __int128 v19; // [rsp+20h] [rbp-58h]
-  __m128i v20; // [rsp+30h] [rbp-48h]
+  char m_priority; // cl
+  AK::StreamMgr::CAkStmTask *v18; // [rsp+30h] [rbp-48h]
+  __int128 v19; // [rsp+30h] [rbp-48h]
+  AK::StreamMgr::CAkStmTask *v20; // [rsp+38h] [rbp-40h]
 
-  v3 = this->m_listTasks.m_pFirst;
-  v4 = 0i64;
-  v5 = out_fOpDeadline;
-  v6 = this;
-  if ( !v3 )
+  m_pFirst = this->m_listTasks.m_pFirst;
+  v3 = 0i64;
+  if ( !m_pFirst )
     return 0i64;
   while ( 1 )
   {
-    v7 = *((_BYTE *)v3 + 117);
-    if ( !(v7 & 8) )
+    v6 = *((_BYTE *)m_pFirst + 117);
+    if ( (v6 & 8) == 0 )
       break;
-    if ( ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStmTask *))v3->vfptr[1].__vecDelDtor)(v3) )
+    if ( ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStmTask *))m_pFirst->vfptr[1].__vecDelDtor)(m_pFirst) )
     {
-      v8 = v3->pNextLightItem;
-      v20.m128i_i64[1] = (__int64)v4;
-      v20.m128i_i64[0] = (__int64)v8;
-      if ( v3 == v6->m_listTasks.m_pFirst )
-        v6->m_listTasks.m_pFirst = v8;
+      pNextLightItem = m_pFirst->pNextLightItem;
+      v20 = v3;
+      v18 = pNextLightItem;
+      if ( m_pFirst == this->m_listTasks.m_pFirst )
+        this->m_listTasks.m_pFirst = pNextLightItem;
       else
-        v4->pNextLightItem = v8;
-      a3 = *(float *)v20.m128i_i32;
-      v9 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-      _mm_store_si128((__m128i *)&v19, v20);
-      if ( v3 )
-      {
-        v3->vfptr->__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)&v3->vfptr, 0);
-        AK::MemoryMgr::Free(v9, v3);
-      }
-      v4 = (AK::StreamMgr::CAkStmTask *)*((_QWORD *)&v19 + 1);
-      v3 = (AK::StreamMgr::CAkStmTask *)v19;
-      goto LABEL_13;
+        v3->pNextLightItem = pNextLightItem;
+      v8 = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
+      m_pFirst->vfptr->__vecDelDtor(m_pFirst, 0);
+      AK::MemoryMgr::Free(v8, m_pFirst);
+      v3 = v20;
+      m_pFirst = v18;
+      goto LABEL_11;
     }
-LABEL_12:
-    v4 = v3;
-    v3 = v3->pNextLightItem;
-LABEL_13:
-    if ( !v3 )
+LABEL_10:
+    v3 = m_pFirst;
+    m_pFirst = m_pFirst->pNextLightItem;
+LABEL_11:
+    if ( !m_pFirst )
       return 0i64;
   }
-  if ( v7 & 1 || !(v7 & 0x40) )
-    goto LABEL_12;
-  ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *))v3->vfptr[6].__vecDelDtor)(v3);
-  *(_QWORD *)&v11 = v3->pNextLightItem;
-  *((_QWORD *)&v11 + 1) = v3;
-  v12 = a3;
+  if ( (v6 & 1) != 0 || (v6 & 0x40) == 0 )
+    goto LABEL_10;
+  v10 = ((double (__fastcall *)(AK::StreamMgr::CAkStmTask *))m_pFirst->vfptr[6].__vecDelDtor)(m_pFirst);
+  *(_QWORD *)&v11 = m_pFirst->pNextLightItem;
+  *((_QWORD *)&v11 + 1) = m_pFirst;
+  v12 = *(float *)&v10;
   while ( (_QWORD)v11 )
   {
     v13 = *(_BYTE *)(v11 + 117);
-    if ( v13 & 8 )
+    if ( (v13 & 8) != 0 )
     {
       if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)v11 + 8i64))(v11) )
       {
         v14 = *(AK::StreamMgr::CAkStmTask **)(v11 + 24);
-        v20.m128i_i64[1] = *((_QWORD *)&v11 + 1);
-        v20.m128i_i64[0] = (__int64)v14;
-        if ( (AK::StreamMgr::CAkStmTask *)v11 == v6->m_listTasks.m_pFirst )
-          v6->m_listTasks.m_pFirst = v14;
+        *((_QWORD *)&v19 + 1) = *((_QWORD *)&v11 + 1);
+        *(_QWORD *)&v19 = v14;
+        if ( (AK::StreamMgr::CAkStmTask *)v11 == this->m_listTasks.m_pFirst )
+          this->m_listTasks.m_pFirst = v14;
         else
           *(_QWORD *)(*((_QWORD *)&v11 + 1) + 24i64) = v14;
-        a3 = *(float *)v20.m128i_i32;
         DWORD2(v11) = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-        _mm_store_si128((__m128i *)&v19, v20);
-        if ( (_QWORD)v11 )
-        {
-          (**(void (__fastcall ***)(_QWORD, _QWORD))v11)(v11, 0i64);
-          AK::MemoryMgr::Free(SDWORD2(v11), (void *)v11);
-        }
+        (**(void (__fastcall ***)(_QWORD, _QWORD))v11)(v11, 0i64);
+        AK::MemoryMgr::Free(SDWORD2(v11), (void *)v11);
         v11 = v19;
         continue;
       }
     }
     else
     {
-      if ( v13 & 1 || !(v13 & 0x40) )
-        goto LABEL_35;
-      (*(void (__fastcall **)(_QWORD))(*(_QWORD *)v11 + 48i64))(v11);
-      v15 = a3;
-      if ( a3 == 0.0 )
+      if ( (v13 & 1) != 0 || (v13 & 0x40) == 0 )
+        goto LABEL_30;
+      v15 = (*(double (__fastcall **)(_QWORD))(*(_QWORD *)v11 + 48i64))(v11);
+      if ( *(float *)&v15 == 0.0 )
       {
         v16 = *(_BYTE *)(v11 + 116);
-        v17 = v3->m_priority;
-        if ( v16 <= v17 && v12 <= 0.0 )
+        m_priority = m_pFirst->m_priority;
+        if ( v16 <= m_priority
+          && v12 <= 0.0
+          && (v16 != m_priority
+           || (float)((float)(int)(this->m_time - *(_DWORD *)(v11 + 88)) * (float)(1.0 / AK::g_fFreqRatio)) <= (float)((float)(int)(this->m_time - LODWORD(m_pFirst->m_iIOStartTime)) * (float)(1.0 / AK::g_fFreqRatio))) )
         {
-          if ( v16 != v17 )
-            goto LABEL_35;
-          v18 = v6->m_time;
-          a3 = (float)(v18 - LODWORD(v3->m_iIOStartTime)) * (float)(1.0 / AK::g_fFreqRatio);
-          if ( (float)((float)(v18 - *(_DWORD *)(v11 + 88)) * (float)(1.0 / AK::g_fFreqRatio)) <= a3 )
-            goto LABEL_35;
+          goto LABEL_30;
         }
-LABEL_34:
-        v3 = (AK::StreamMgr::CAkStmTask *)v11;
-        v12 = v15;
-        goto LABEL_35;
+LABEL_29:
+        m_pFirst = (AK::StreamMgr::CAkStmTask *)v11;
+        v12 = *(float *)&v15;
+        goto LABEL_30;
       }
-      if ( a3 < v12 )
-        goto LABEL_34;
+      if ( *(float *)&v15 < v12 )
+        goto LABEL_29;
     }
-LABEL_35:
+LABEL_30:
     *((_QWORD *)&v11 + 1) = v11;
     *(_QWORD *)&v11 = *(_QWORD *)(v11 + 24);
   }
-  *v5 = v12;
-  return v3;
+  *out_fOpDeadline = v12;
+  return m_pFirst;
 }
 
 // File Line: 498
 // RVA: 0xAA3620
-void __fastcall AK::StreamMgr::CAkDeviceBase::ForceCleanup(AK::StreamMgr::CAkDeviceBase *this, bool in_bKillLowestPriorityTask, char in_priority)
+void __fastcall AK::StreamMgr::CAkDeviceBase::ForceCleanup(
+        AK::StreamMgr::CAkDeviceBase *this,
+        bool in_bKillLowestPriorityTask,
+        char in_priority)
 {
-  AK::StreamMgr::CAkDeviceBase *v3; // rbp
-  char v4; // r15
-  bool v5; // r12
   _BYTE *v6; // r14
-  __int128 v7; // di
+  __int128 m_pFirst; // rdi
   char v8; // cl
   AK::StreamMgr::CAkStmTask *v9; // rax
-  __int128 v10; // [rsp+20h] [rbp-38h]
-  __m128i v11; // [rsp+30h] [rbp-28h]
+  __int128 v10; // [rsp+30h] [rbp-28h]
 
-  v3 = this;
-  v4 = in_priority;
-  v5 = in_bKillLowestPriorityTask;
   EnterCriticalSection(&this->m_lockTasksList.m_csLock);
   v6 = 0i64;
-  v7 = (unsigned __int64)v3->m_listTasks.m_pFirst;
-  if ( !(_QWORD)v7 )
+  m_pFirst = (unsigned __int64)this->m_listTasks.m_pFirst;
+  if ( !(_QWORD)m_pFirst )
     goto LABEL_20;
   do
   {
-    v8 = *(_BYTE *)(v7 + 117);
-    if ( !(v8 & 8) )
+    v8 = *(_BYTE *)(m_pFirst + 117);
+    if ( (v8 & 8) == 0 )
     {
-      if ( v5 && (!v6 || *(_BYTE *)(v7 + 116) < v6[116]) && *(_BYTE *)(v7 + 116) < v4 && v8 & 0x40 )
-        v6 = (_BYTE *)v7;
+      if ( in_bKillLowestPriorityTask
+        && (!v6 || *(_BYTE *)(m_pFirst + 116) < v6[116])
+        && *(char *)(m_pFirst + 116) < in_priority
+        && (v8 & 0x40) != 0 )
+      {
+        v6 = (_BYTE *)m_pFirst;
+      }
 LABEL_16:
-      *((_QWORD *)&v7 + 1) = v7;
-      *(_QWORD *)&v7 = *(_QWORD *)(v7 + 24);
+      *((_QWORD *)&m_pFirst + 1) = m_pFirst;
+      *(_QWORD *)&m_pFirst = *(_QWORD *)(m_pFirst + 24);
       continue;
     }
-    if ( !(*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)v7 + 8i64))(v7) )
+    if ( !(*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)m_pFirst + 8i64))(m_pFirst) )
       goto LABEL_16;
-    v9 = *(AK::StreamMgr::CAkStmTask **)(v7 + 24);
-    v11.m128i_i64[1] = *((_QWORD *)&v7 + 1);
-    v11.m128i_i64[0] = (__int64)v9;
-    if ( (AK::StreamMgr::CAkStmTask *)v7 == v3->m_listTasks.m_pFirst )
-      v3->m_listTasks.m_pFirst = v9;
+    v9 = *(AK::StreamMgr::CAkStmTask **)(m_pFirst + 24);
+    *((_QWORD *)&v10 + 1) = *((_QWORD *)&m_pFirst + 1);
+    *(_QWORD *)&v10 = v9;
+    if ( (AK::StreamMgr::CAkStmTask *)m_pFirst == this->m_listTasks.m_pFirst )
+      this->m_listTasks.m_pFirst = v9;
     else
-      *(_QWORD *)(*((_QWORD *)&v7 + 1) + 24i64) = v9;
-    DWORD2(v7) = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
-    _mm_store_si128((__m128i *)&v10, v11);
-    if ( (_QWORD)v7 )
-    {
-      (**(void (__fastcall ***)(_QWORD, _QWORD))v7)(v7, 0i64);
-      AK::MemoryMgr::Free(SDWORD2(v7), (void *)v7);
-    }
-    v7 = v10;
+      *(_QWORD *)(*((_QWORD *)&m_pFirst + 1) + 24i64) = v9;
+    DWORD2(m_pFirst) = AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId;
+    (**(void (__fastcall ***)(_QWORD, _QWORD))m_pFirst)(m_pFirst, 0i64);
+    AK::MemoryMgr::Free(SDWORD2(m_pFirst), (void *)m_pFirst);
+    m_pFirst = v10;
   }
-  while ( (_QWORD)v7 );
+  while ( (_QWORD)m_pFirst );
   if ( v6 )
     (*(void (__fastcall **)(_BYTE *))(*(_QWORD *)v6 + 16i64))(v6);
 LABEL_20:
-  LeaveCriticalSection(&v3->m_lockTasksList.m_csLock);
+  LeaveCriticalSection(&this->m_lockTasksList.m_csLock);
 }
 
 // File Line: 705
@@ -584,115 +535,117 @@ LABEL_20:
 void __fastcall AK::StreamMgr::CAkStmTask::~CAkStmTask(AK::StreamMgr::CAkStmTask *this)
 {
   bool v1; // zf
-  AK::StreamMgr::CAkStmTask *v2; // rbx
-  AK::StreamMgr::AkDeferredOpenData *v3; // rcx
-  wchar_t *v4; // rdx
-  AkFileDesc *v5; // rdx
+  AK::StreamMgr::AkDeferredOpenData *m_pDeferredOpenData; // rcx
+  wchar_t *m_pszStreamName; // rdx
+  AkFileDesc *m_pFileDesc; // rdx
 
   v1 = (*((_BYTE *)this + 117) & 0x10) == 0;
-  v2 = this;
   this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
   if ( !v1 )
     this->m_pDevice->m_pLowLevelHook->vfptr->Close(this->m_pDevice->m_pLowLevelHook, this->m_pFileDesc);
-  v3 = v2->m_pDeferredOpenData;
-  if ( v3 )
+  m_pDeferredOpenData = this->m_pDeferredOpenData;
+  if ( m_pDeferredOpenData )
   {
-    AK::StreamMgr::AkDeferredOpenData::Destroy(v3);
-    v2->m_pDeferredOpenData = 0i64;
+    AK::StreamMgr::AkDeferredOpenData::Destroy(m_pDeferredOpenData);
+    this->m_pDeferredOpenData = 0i64;
   }
-  v4 = v2->m_pszStreamName;
-  if ( v4 )
-    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, v4);
-  v5 = v2->m_pFileDesc;
-  if ( v5 )
-    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, v5);
-  DeleteCriticalSection(&v2->m_lockStatus.m_csLock);
-  AK::StreamMgr::CAkClientThreadAware::~CAkClientThreadAware((AK::StreamMgr::CAkClientThreadAware *)&v2->vfptr);
+  m_pszStreamName = this->m_pszStreamName;
+  if ( m_pszStreamName )
+    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, m_pszStreamName);
+  m_pFileDesc = this->m_pFileDesc;
+  if ( m_pFileDesc )
+    AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, m_pFileDesc);
+  DeleteCriticalSection(&this->m_lockStatus.m_csLock);
+  AK::StreamMgr::CAkClientThreadAware::~CAkClientThreadAware(this);
 }
 
 // File Line: 729
 // RVA: 0xAA48E0
-__int64 __fastcall AK::StreamMgr::CAkStmTask::SetDeferredFileOpen(AK::StreamMgr::CAkStmTask *this, AkFileDesc *in_pFileDesc, const wchar_t *in_pszFileName, AkFileSystemFlags *in_pFSFlags, AkOpenMode in_eOpenMode)
+__int64 __fastcall AK::StreamMgr::CAkStmTask::SetDeferredFileOpen(
+        AK::StreamMgr::CAkStmTask *this,
+        AkFileDesc *in_pFileDesc,
+        const wchar_t *in_pszFileName,
+        AkFileSystemFlags *in_pFSFlags,
+        AkOpenMode in_eOpenMode)
 {
-  AK::StreamMgr::CAkStmTask *v5; // rbx
   AK::StreamMgr::AkDeferredOpenData *v6; // rax
 
-  *((_BYTE *)this + 117) &= 0xEFu;
+  *((_BYTE *)this + 117) &= ~0x10u;
   this->m_pFileDesc = in_pFileDesc;
-  v5 = this;
   v6 = AK::StreamMgr::AkDeferredOpenData::Create(in_pszFileName, in_pFSFlags, in_eOpenMode);
-  v5->m_pDeferredOpenData = v6;
+  this->m_pDeferredOpenData = v6;
   return 2 - (unsigned int)(v6 != 0i64);
 }
 
 // File Line: 746
 // RVA: 0xAA48A0
-__int64 __fastcall AK::StreamMgr::CAkStmTask::SetDeferredFileOpen(AK::StreamMgr::CAkStmTask *this, AkFileDesc *in_pFileDesc, unsigned int in_fileID, AkFileSystemFlags *in_pFSFlags, AkOpenMode in_eOpenMode)
+__int64 __fastcall AK::StreamMgr::CAkStmTask::SetDeferredFileOpen(
+        AK::StreamMgr::CAkStmTask *this,
+        AkFileDesc *in_pFileDesc,
+        unsigned int in_fileID,
+        AkFileSystemFlags *in_pFSFlags,
+        AkOpenMode in_eOpenMode)
 {
-  AK::StreamMgr::CAkStmTask *v5; // rbx
   AK::StreamMgr::AkDeferredOpenData *v6; // rax
 
-  *((_BYTE *)this + 117) &= 0xEFu;
+  *((_BYTE *)this + 117) &= ~0x10u;
   this->m_pFileDesc = in_pFileDesc;
-  v5 = this;
   v6 = AK::StreamMgr::AkDeferredOpenData::Create(in_fileID, in_pFSFlags, in_eOpenMode);
-  v5->m_pDeferredOpenData = v6;
+  this->m_pDeferredOpenData = v6;
   return 2 - (unsigned int)(v6 != 0i64);
 }
 
 // File Line: 767
 // RVA: 0xAA32C0
-signed __int64 __fastcall AK::StreamMgr::CAkStmTask::EnsureFileIsOpen(AK::StreamMgr::CAkStmTask *this)
+__int64 __fastcall AK::StreamMgr::CAkStmTask::EnsureFileIsOpen(AK::StreamMgr::CAkStmTask *this)
 {
-  AK::StreamMgr::AkDeferredOpenData *v1; // rdx
-  AK::StreamMgr::CAkStmTask *v2; // rbx
+  AK::StreamMgr::AkDeferredOpenData *m_pDeferredOpenData; // rdx
   int v3; // eax
-  signed __int64 v4; // r9
-  __int64 v5; // r8
-  AK::StreamMgr::IAkFileLocationResolverVtbl *v6; // r10
+  AkFileSystemFlags *p_flags; // r9
+  __int64 eOpenMode; // r8
+  AK::StreamMgr::IAkFileLocationResolverVtbl *vfptr; // r10
   AKRESULT v7; // eax
   AKRESULT v8; // edi
   AK::StreamMgr::AkDeferredOpenData *v9; // rcx
-  AkFileDesc *v11; // [rsp+28h] [rbp-10h]
-  char v12; // [rsp+40h] [rbp+8h]
+  AkFileDesc *m_pFileDesc; // [rsp+28h] [rbp-10h]
+  char v12; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = this->m_pDeferredOpenData;
-  v2 = this;
-  if ( !v1 || *((_BYTE *)this + 117) & 8 )
+  m_pDeferredOpenData = this->m_pDeferredOpenData;
+  if ( !m_pDeferredOpenData || (*((_BYTE *)this + 117) & 8) != 0 )
     return 1i64;
   v12 = 1;
-  v3 = *((_DWORD *)v1 + 11);
-  if ( v3 & 2 )
-    v4 = (signed __int64)&v1->flags;
+  v3 = *((_DWORD *)m_pDeferredOpenData + 11);
+  if ( (v3 & 2) != 0 )
+    p_flags = &m_pDeferredOpenData->flags;
   else
-    v4 = 0i64;
-  v5 = (unsigned int)v1->eOpenMode;
-  v6 = AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver->vfptr;
-  v11 = this->m_pFileDesc;
-  if ( v3 & 1 )
-    v7 = (unsigned int)v6->Open(
-                         AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver,
-                         v1->pszFileName,
-                         (AkOpenMode)v5,
-                         (AkFileSystemFlags *)v4,
-                         (bool *)&v12,
-                         v11);
+    p_flags = 0i64;
+  eOpenMode = (unsigned int)m_pDeferredOpenData->eOpenMode;
+  vfptr = AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver->vfptr;
+  m_pFileDesc = this->m_pFileDesc;
+  if ( (v3 & 1) != 0 )
+    v7 = vfptr->Open(
+           AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver,
+           m_pDeferredOpenData->pszFileName,
+           (AkOpenMode)eOpenMode,
+           p_flags,
+           (bool *)&v12,
+           m_pFileDesc);
   else
-    v7 = (unsigned int)v6->Open(
-                         AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver,
-                         v1->fileID,
-                         (AkOpenMode)v5,
-                         (AkFileSystemFlags *)v4,
-                         (bool *)&v12,
-                         v11);
+    v7 = vfptr->Open(
+           AK::StreamMgr::CAkStreamMgr::m_pFileLocationResolver,
+           m_pDeferredOpenData->fileID,
+           (AkOpenMode)eOpenMode,
+           p_flags,
+           (bool *)&v12,
+           m_pFileDesc);
   v8 = v7;
-  if ( v7 == 1 )
-    ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *))v2->vfptr[3].__vecDelDtor)(v2);
-  v9 = v2->m_pDeferredOpenData;
+  if ( v7 == AK_Success )
+    ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *))this->vfptr[3].__vecDelDtor)(this);
+  v9 = this->m_pDeferredOpenData;
   if ( v9 )
   {
     AK::StreamMgr::AkDeferredOpenData::Destroy(v9);
-    v2->m_pDeferredOpenData = 0i64;
+    this->m_pDeferredOpenData = 0i64;
   }
   return (unsigned int)v8;
 }
@@ -701,28 +654,25 @@ signed __int64 __fastcall AK::StreamMgr::CAkStmTask::EnsureFileIsOpen(AK::Stream
 // RVA: 0xAA2830
 void __fastcall AK::StreamMgr::CAkStdStmBase::CAkStdStmBase(AK::StreamMgr::CAkStdStmBase *this)
 {
-  AK::StreamMgr::CAkStdStmBase *v1; // rbx
-
-  v1 = this;
-  AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware((AK::StreamMgr::CAkClientThreadAware *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
-  v1->m_pDeferredOpenData = 0i64;
-  v1->m_pFileDesc = 0i64;
-  InitializeCriticalSection(&v1->m_lockStatus.m_csLock);
-  *((_BYTE *)&v1->0 + 117) &= 0x83u;
-  v1->m_pszStreamName = 0i64;
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
-  v1->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
-  v1->m_memBlock.uPosition = 0i64;
-  v1->m_memBlock.pData = 0i64;
-  v1->m_memBlock.pNextBlock = 0i64;
-  v1->m_memBlock.uAvailableSize = 0;
-  v1->m_memBlock.fileID = -1;
-  v1->m_memBlock.uRefCount = 0;
-  *((_DWORD *)v1 + 44) &= 0xFFFFFFF0;
-  *((_DWORD *)v1 + 44) |= 0x10u;
-  *((_BYTE *)&v1->0 + 117) &= 0xFCu;
-  v1->m_uTotalScheduledSize = 0;
+  AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware(this);
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
+  this->m_pDeferredOpenData = 0i64;
+  this->m_pFileDesc = 0i64;
+  InitializeCriticalSection(&this->m_lockStatus.m_csLock);
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= 0x83u;
+  this->m_pszStreamName = 0i64;
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->AK::IAkStdStream::vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
+  this->m_memBlock.uPosition = 0i64;
+  this->m_memBlock.pData = 0i64;
+  this->m_memBlock.pNextBlock = 0i64;
+  this->m_memBlock.uAvailableSize = 0;
+  this->m_memBlock.fileID = -1;
+  this->m_memBlock.uRefCount = 0;
+  *((_DWORD *)this + 44) &= 0xFFFFFFF0;
+  *((_DWORD *)this + 44) |= 0x10u;
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= 0xFCu;
+  this->m_uTotalScheduledSize = 0;
 }
 
 // File Line: 867
@@ -730,55 +680,47 @@ void __fastcall AK::StreamMgr::CAkStdStmBase::CAkStdStmBase(AK::StreamMgr::CAkSt
 void __fastcall AK::StreamMgr::CAkStdStmBase::~CAkStdStmBase(AK::StreamMgr::CAkStdStmBase *this)
 {
   bool v1; // zf
-  AK::StreamMgr::CAkStdStmBase *v2; // rbx
 
-  v1 = (*((_BYTE *)&this->0 + 117) & 0x20) == 0;
-  v2 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
-  this->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
+  v1 = (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0x20) == 0;
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->AK::IAkStdStream::vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
   if ( !v1 )
-    AK::StreamMgr::CAkIOThread::StdSemDecr((AK::StreamMgr::CAkIOThread *)&this->m_pDevice->vfptr);
-  v2->vfptr = (AK::IAkStdStreamVtbl *)&AK::IAkStdStream::`vftable;
-  AK::StreamMgr::CAkStmTask::~CAkStmTask((AK::StreamMgr::CAkStmTask *)&v2->vfptr);
+    AK::StreamMgr::CAkIOThread::StdSemDecr(this->m_pDevice);
+  this->AK::IAkStdStream::vfptr = (AK::IAkStdStreamVtbl *)&AK::IAkStdStream::`vftable;
+  AK::StreamMgr::CAkStmTask::~CAkStmTask(this);
 }
 
 // File Line: 880
 // RVA: 0xAA3EA0
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Init(AK::StreamMgr::CAkStdStmBase *this, AK::StreamMgr::CAkDeviceBase *in_pDevice, AkFileDesc *in_pFileDesc, __int64 __formal)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::Init(
+        AK::StreamMgr::CAkStdStmBase *this,
+        AK::StreamMgr::CAkDeviceBase *in_pDevice,
+        AkFileDesc *in_pFileDesc,
+        AkOpenMode __formal)
 {
-  AK::StreamMgr::CAkDeviceBase *v4; // rdi
-  AK::StreamMgr::CAkStdStmBase *v5; // rbx
-  signed __int64 result; // rax
   unsigned int v7; // ecx
-  unsigned int v8; // eax
+  unsigned int m_uGranularity; // eax
 
   this->m_pDevice = in_pDevice;
-  v4 = in_pDevice;
-  v5 = this;
   if ( in_pFileDesc->iFileSize >= 0 )
   {
-    v7 = ((__int64 (__fastcall *)(AK::StreamMgr::IAkLowLevelIOHook *, AkFileDesc *, AkFileDesc *, __int64))in_pDevice->m_pLowLevelHook->vfptr->GetBlockSize)(
-           in_pDevice->m_pLowLevelHook,
-           in_pFileDesc,
-           in_pFileDesc,
-           __formal);
-    if ( !v7 || (v8 = v4->m_uGranularity, v7 > v8) || v8 % v7 )
+    v7 = in_pDevice->m_pLowLevelHook->vfptr->GetBlockSize(in_pDevice->m_pLowLevelHook, in_pFileDesc);
+    if ( !v7 || (m_uGranularity = in_pDevice->m_uGranularity, v7 > m_uGranularity) || m_uGranularity % v7 )
     {
-      *((_BYTE *)&v5->0 + 117) = *((_BYTE *)&v5->0 + 117) & 0xBF | 8;
-      result = 2i64;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xB7 | 8;
+      return 2i64;
     }
     else
     {
-      v5->m_uLLBlockSize = v7;
-      result = 1i64;
+      this->m_uLLBlockSize = v7;
+      return 1i64;
     }
   }
   else
   {
-    *((_BYTE *)&this->0 + 117) = *((_BYTE *)&this->0 + 117) & 0xBF | 8;
-    result = 31i64;
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xB7 | 8;
+    return 31i64;
   }
-  return result;
 }
 
 // File Line: 966
@@ -786,18 +728,22 @@ signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Init(AK::StreamMgr::CAkS
 void *__fastcall AK::StreamMgr::CAkStdStmBase::GetPosition(AK::StreamMgr::CAkStdStmBase *this, bool *out_pbEndOfStream)
 {
   if ( out_pbEndOfStream )
-    *out_pbEndOfStream = (*((_BYTE *)&this[-1] + 181) >> 2) & 1;
+    *out_pbEndOfStream = (*((_BYTE *)&this[-1] + 181) & 4) != 0;
   return this->m_hBlockEvent;
 }
 
 // File Line: 988
 // RVA: 0xAA4DA0
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::SetPosition(AK::StreamMgr::CAkStdStmBase *this, __int64 in_iMoveOffset, AkMoveMethod in_eMoveMethod, __int64 *out_piRealOffset)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::SetPosition(
+        AK::StreamMgr::CAkStdStmBase *this,
+        __int64 in_iMoveOffset,
+        AkMoveMethod in_eMoveMethod,
+        __int64 *out_piRealOffset)
 {
   __int64 v4; // r10
-  signed __int64 result; // rax
-  signed __int64 v6; // rdx
-  __int32 v7; // er8
+  __int64 result; // rax
+  __int64 v6; // rdx
+  int v7; // r8d
 
   v4 = in_iMoveOffset;
   if ( out_piRealOffset )
@@ -806,13 +752,13 @@ signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::SetPosition(AK::StreamMg
     return 2i64;
   if ( in_eMoveMethod )
   {
-    if ( in_eMoveMethod == 1 )
+    if ( in_eMoveMethod == AK_MoveCurrent )
     {
       v4 = (__int64)this->m_hBlockEvent + in_iMoveOffset;
     }
     else
     {
-      if ( in_eMoveMethod != 2 )
+      if ( in_eMoveMethod != AK_MoveEnd )
         return 31i64;
       v4 = *(_QWORD *)this[-1].m_pszStreamName + in_iMoveOffset;
     }
@@ -844,14 +790,21 @@ LABEL_20:
   {
     *out_piRealOffset = v4 - (unsigned __int64)this->m_hBlockEvent;
     this->m_hBlockEvent = (void *)v4;
-    result = 1i64;
+    return 1i64;
   }
   return result;
 }
 
 // File Line: 1071
 // RVA: 0xAA4180
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Read(AK::StreamMgr::CAkStdStmBase *this, void *in_pBuffer, unsigned int in_uReqSize, bool in_bWait, char in_priority, float in_fDeadline, unsigned int *out_uSize)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::Read(
+        AK::StreamMgr::CAkStdStmBase *this,
+        void *in_pBuffer,
+        unsigned int in_uReqSize,
+        bool in_bWait,
+        unsigned __int8 in_priority,
+        float in_fDeadline,
+        unsigned int *out_uSize)
 {
   return AK::StreamMgr::CAkStdStmBase::ExecuteOp(
            (AK::StreamMgr::CAkStdStmBase *)((char *)this - 120),
@@ -866,7 +819,14 @@ signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Read(AK::StreamMgr::CAkS
 
 // File Line: 1091
 // RVA: 0xAA5240
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Write(AK::StreamMgr::CAkStdStmBase *this, void *in_pBuffer, unsigned int in_uReqSize, bool in_bWait, char in_priority, float in_fDeadline, unsigned int *out_uSize)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::Write(
+        AK::StreamMgr::CAkStdStmBase *this,
+        void *in_pBuffer,
+        unsigned int in_uReqSize,
+        bool in_bWait,
+        unsigned __int8 in_priority,
+        float in_fDeadline,
+        unsigned int *out_uSize)
 {
   return AK::StreamMgr::CAkStdStmBase::ExecuteOp(
            (AK::StreamMgr::CAkStdStmBase *)((char *)this - 120),
@@ -881,87 +841,91 @@ signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::Write(AK::StreamMgr::CAk
 
 // File Line: 1111
 // RVA: 0xAA3370
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::ExecuteOp(AK::StreamMgr::CAkStdStmBase *this, bool in_bWrite, void *in_pBuffer, unsigned int in_uReqSize, bool in_bWait, char in_priority, float in_fDeadline, unsigned int *out_uSize)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::ExecuteOp(
+        AK::StreamMgr::CAkStdStmBase *this,
+        bool in_bWrite,
+        void *in_pBuffer,
+        unsigned int in_uReqSize,
+        bool in_bWait,
+        unsigned __int8 in_priority,
+        float in_fDeadline,
+        unsigned int *out_uSize)
 {
-  AK::StreamMgr::CAkStdStmBase *v8; // rdi
   int v9; // ebp
   unsigned int v10; // esi
   int v11; // ecx
-  signed __int64 result; // rax
-  unsigned __int64 v13; // rcx
-  unsigned __int64 v14; // rdx
+  unsigned __int64 uPosition; // rcx
+  unsigned __int64 iFileSize; // rdx
   int v15; // eax
 
-  v8 = this;
   v9 = 0;
   v10 = in_uReqSize;
   *out_uSize = 0;
-  *((_BYTE *)&v8->0 + 117) &= 0xFDu;
-  *((_DWORD *)this + 44) &= 0xFFFFFFEF;
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= ~2u;
+  *((_DWORD *)this + 44) &= ~0x10u;
   this->m_fDeadline = in_fDeadline;
   this->m_uTotalScheduledSize = 0;
   v11 = *((_DWORD *)this + 44);
-  v8->m_memBlock.pData = in_pBuffer;
-  v8->m_memBlock.uAvailableSize = in_uReqSize;
-  *((_BYTE *)&v8->0 + 117) |= 2 * in_bWrite;
-  v8->m_priority = in_priority;
-  if ( !in_pBuffer || (unsigned __int8)in_priority > 0x64u || in_fDeadline < 0.0 )
+  this->m_memBlock.pData = in_pBuffer;
+  this->m_memBlock.uAvailableSize = in_uReqSize;
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) |= 2 * in_bWrite;
+  this->m_priority = in_priority;
+  if ( !in_pBuffer || in_priority > 0x64u || in_fDeadline < 0.0 )
     return 31i64;
-  if ( !(((v11 << 28 >> 28) - 2) & 0xFFFFFFFD) )
+  if ( (((v11 << 28 >> 28) - 2) & 0xFFFFFFFD) == 0 )
     return 2i64;
   if ( !in_bWrite )
   {
-    if ( in_uReqSize % v8->m_uLLBlockSize )
+    if ( in_uReqSize % this->m_uLLBlockSize )
       return 2i64;
-    if ( *((_BYTE *)&v8->0 + 117) & 0x10 )
+    if ( (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0x10) != 0 )
     {
-      v13 = v8->m_memBlock.uPosition;
-      v14 = v8->m_pFileDesc->iFileSize;
-      if ( v13 + in_uReqSize > v14 )
+      uPosition = this->m_memBlock.uPosition;
+      iFileSize = this->m_pFileDesc->iFileSize;
+      if ( uPosition + in_uReqSize > iFileSize )
       {
-        if ( v13 >= v14 )
+        if ( uPosition >= iFileSize )
         {
 LABEL_15:
-          EnterCriticalSection(&v8->m_lockStatus.m_csLock);
-          AK::StreamMgr::CAkStdStmBase::SetStatus(v8, AK_StmStatusCompleted);
+          EnterCriticalSection(&this->m_lockStatus.m_csLock);
+          AK::StreamMgr::CAkStdStmBase::SetStatus(this, AK_StmStatusCompleted);
           *out_uSize = 0;
-          LeaveCriticalSection(&v8->m_lockStatus.m_csLock);
+          LeaveCriticalSection(&this->m_lockStatus.m_csLock);
           return 1i64;
         }
-        v10 = v14 - v13;
+        v10 = iFileSize - uPosition;
       }
     }
   }
   if ( !v10 )
     goto LABEL_15;
-  QueryPerformanceCounter((LARGE_INTEGER *)&v8->m_iIOStartTime);
-  EnterCriticalSection(&v8->m_lockStatus.m_csLock);
+  QueryPerformanceCounter((LARGE_INTEGER *)&this->m_iIOStartTime);
+  EnterCriticalSection(&this->m_lockStatus.m_csLock);
   if ( in_bWait )
   {
-    AK::StreamMgr::CAkClientThreadAware::SetBlockedStatus((AK::StreamMgr::CAkClientThreadAware *)&v8->vfptr);
-    AK::StreamMgr::CAkStdStmBase::SetStatus(v8, AK_StmStatusPending);
-    LeaveCriticalSection(&v8->m_lockStatus.m_csLock);
-    AK::StreamMgr::CAkIOThread::WaitForIOCompletion(
-      (AK::StreamMgr::CAkIOThread *)&v8->m_pDevice->vfptr,
-      (AK::StreamMgr::CAkClientThreadAware *)&v8->vfptr);
-    v15 = *((_DWORD *)v8 + 44);
+    AK::StreamMgr::CAkClientThreadAware::SetBlockedStatus(this);
+    AK::StreamMgr::CAkStdStmBase::SetStatus(this, AK_StmStatusPending);
+    LeaveCriticalSection(&this->m_lockStatus.m_csLock);
+    AK::StreamMgr::CAkIOThread::WaitForIOCompletion(this->m_pDevice, this);
+    v15 = *((_DWORD *)this + 44);
     *out_uSize = v10;
     LOBYTE(v9) = (v15 & 0xF) != 1;
-    result = (unsigned int)(v9 + 1);
+    return (unsigned int)(v9 + 1);
   }
   else
   {
-    AK::StreamMgr::CAkStdStmBase::SetStatus(v8, AK_StmStatusPending);
-    LeaveCriticalSection(&v8->m_lockStatus.m_csLock);
+    AK::StreamMgr::CAkStdStmBase::SetStatus(this, AK_StmStatusPending);
+    LeaveCriticalSection(&this->m_lockStatus.m_csLock);
     *out_uSize = v10;
-    result = 1i64;
+    return 1i64;
   }
-  return result;
 }
 
 // File Line: 1211
 // RVA: 0xAA3A50
-void *__fastcall AK::StreamMgr::CAkStdStmBase::GetData(AK::StreamMgr::CAkStdStmBase *this, unsigned int *out_uActualSize)
+void *__fastcall AK::StreamMgr::CAkStdStmBase::GetData(
+        AK::StreamMgr::CAkStdStmBase *this,
+        unsigned int *out_uActualSize)
 {
   *out_uActualSize = (unsigned int)this->m_pDeferredOpenData;
   return *(void **)&this->m_bIsBlocked;
@@ -982,239 +946,229 @@ float __fastcall AK::StreamMgr::CAkStdStmBase::EffectiveDeadline(AK::StreamMgr::
 
   result = 0.0;
   if ( (float)((float)(this->m_fDeadline
-                     / (float)(signed int)((this->m_pDevice->m_uGranularity
-                                          + this->m_memBlock.uAvailableSize
-                                          - this->m_uTotalScheduledSize
-                                          - 1)
-                                         / this->m_pDevice->m_uGranularity))
+                     / (float)(int)((this->m_pDevice->m_uGranularity
+                                   + this->m_memBlock.uAvailableSize
+                                   - this->m_uTotalScheduledSize
+                                   - 1)
+                                  / this->m_pDevice->m_uGranularity))
              - (float)((float)(LODWORD(this->m_pDevice->m_time) - LODWORD(this->m_iIOStartTime)) / AK::g_fFreqRatio)) > 0.0 )
-    result = (float)(this->m_fDeadline
-                   / (float)(signed int)((this->m_pDevice->m_uGranularity
-                                        + this->m_memBlock.uAvailableSize
-                                        - this->m_uTotalScheduledSize
-                                        - 1)
-                                       / this->m_pDevice->m_uGranularity))
-           - (float)((float)(LODWORD(this->m_pDevice->m_time) - LODWORD(this->m_iIOStartTime)) / AK::g_fFreqRatio);
+    return (float)(this->m_fDeadline
+                 / (float)(int)((this->m_pDevice->m_uGranularity
+                               + this->m_memBlock.uAvailableSize
+                               - this->m_uTotalScheduledSize
+                               - 1)
+                              / this->m_pDevice->m_uGranularity))
+         - (float)((float)(LODWORD(this->m_pDevice->m_time) - LODWORD(this->m_iIOStartTime)) / AK::g_fFreqRatio);
   return result;
 }
 
 // File Line: 1247
 // RVA: 0xAA2CE0
-void __fastcall AK::StreamMgr::CAkStdStmBase::AddMemView(AK::StreamMgr::CAkStdStmBase *this, AK::StreamMgr::CAkStmMemView *in_pMemView, bool in_bStoreData)
+void __fastcall AK::StreamMgr::CAkStdStmBase::AddMemView(
+        AK::StreamMgr::CAkStdStmBase *this,
+        AK::StreamMgr::CAkStmMemView *in_pMemView,
+        bool in_bStoreData)
 {
-  AK::StreamMgr::CAkStmMemView *v3; // rdi
-  AK::StreamMgr::CAkStdStmBase *v4; // rbx
   char v5; // dl
   int v6; // ecx
   char v7; // dl
   int v8; // ecx
-  unsigned int v9; // er8
-  AkFileDesc *v10; // r9
-  AK::StreamMgr::CAkDeviceBase *v11; // rbp
-  AK::StreamMgr::AkMemBlock *v12; // r8
+  unsigned int m_uGranularity; // r8d
+  AkFileDesc *m_pFileDesc; // r9
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rbp
+  AK::StreamMgr::AkMemBlock *m_pBlock; // r8
   AK::StreamMgr::CAkDeviceBase *v13; // rsi
-  AK::StreamMgr::CAkStmMemView *v14; // rax
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rax
 
-  v3 = in_pMemView;
-  v4 = this;
   if ( in_bStoreData )
   {
-    v5 = *((_BYTE *)&this->0 + 117);
-    if ( !(v5 & 8) )
+    v5 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v5 & 8) == 0 )
     {
       v6 = *((_DWORD *)this + 44);
       if ( (v6 & 0xF) != 4 )
       {
         v7 = v5 & 0xFB;
         v8 = v6 | 0x10;
-        *((_BYTE *)&v4->0 + 117) = v7;
-        *((_DWORD *)v4 + 44) = v8;
-        v9 = v3->m_pBlock->uAvailableSize - v3->m_uOffsetInBlock;
-        if ( v9 > v4->m_pDevice->m_uGranularity )
+        *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v7;
+        *((_DWORD *)this + 44) = v8;
+        m_uGranularity = in_pMemView->m_pBlock->uAvailableSize - in_pMemView->m_uOffsetInBlock;
+        if ( m_uGranularity > this->m_pDevice->m_uGranularity )
         {
-          v9 = v4->m_pDevice->m_uGranularity;
-          *((_DWORD *)v4 + 44) = v8 & 0xFFFFFFEF;
+          m_uGranularity = this->m_pDevice->m_uGranularity;
+          *((_DWORD *)this + 44) = v8 & 0xFFFFFFEF;
         }
-        if ( !(v7 & 2) )
+        if ( (v7 & 2) == 0 )
         {
-          v10 = v4->m_pFileDesc;
-          if ( v9 >= v10->iFileSize - v3->m_uOffsetInBlock - v3->m_pBlock->uPosition )
+          m_pFileDesc = this->m_pFileDesc;
+          if ( m_uGranularity >= m_pFileDesc->iFileSize
+                               - in_pMemView->m_uOffsetInBlock
+                               - in_pMemView->m_pBlock->uPosition )
           {
-            *((_DWORD *)v4 + 44) |= 0x10u;
-            *((_BYTE *)&v4->0 + 117) = v7 | 4;
-            v4->m_memBlock.uAvailableSize += LODWORD(v10->iFileSize)
-                                           - v3->m_pBlock->uAvailableSize
-                                           - v3->m_pBlock->uPosition;
+            *((_DWORD *)this + 44) |= 0x10u;
+            *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v7 | 4;
+            this->m_memBlock.uAvailableSize += LODWORD(m_pFileDesc->iFileSize)
+                                             - in_pMemView->m_pBlock->uAvailableSize
+                                             - in_pMemView->m_pBlock->uPosition;
           }
         }
       }
     }
   }
-  v11 = v4->m_pDevice;
-  EnterCriticalSection(&v11->m_lockSems.m_csLock);
-  v12 = v3->m_pBlock;
-  v13 = v4->m_pDevice;
-  v3->m_pBlock = 0i64;
-  if ( v12 )
-    AK::StreamMgr::CAkIOMemMgr::DestroyTempBlock(&v13->m_mgrMemIO, &v4->m_memBlock, v12);
-  v14 = v13->m_poolStmMemView.m_pFirst;
-  if ( v14 )
+  m_pDevice = this->m_pDevice;
+  EnterCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+  m_pBlock = in_pMemView->m_pBlock;
+  v13 = this->m_pDevice;
+  in_pMemView->m_pBlock = 0i64;
+  if ( m_pBlock )
+    AK::StreamMgr::CAkIOMemMgr::DestroyTempBlock(&v13->m_mgrMemIO, &this->m_memBlock, m_pBlock);
+  m_pFirst = v13->m_poolStmMemView.m_pFirst;
+  if ( m_pFirst )
   {
-    v3->pNextView = v14;
-    v13->m_poolStmMemView.m_pFirst = v3;
+    in_pMemView->pNextView = m_pFirst;
+    v13->m_poolStmMemView.m_pFirst = in_pMemView;
   }
   else
   {
-    v13->m_poolStmMemView.m_pFirst = v3;
-    v3->pNextView = 0i64;
+    v13->m_poolStmMemView.m_pFirst = in_pMemView;
+    in_pMemView->pNextView = 0i64;
   }
-  LeaveCriticalSection(&v11->m_lockSems.m_csLock);
+  LeaveCriticalSection(&m_pDevice->m_lockSems.m_csLock);
 }
 
 // File Line: 1312
 // RVA: 0xAA5180
-void __fastcall AK::StreamMgr::CAkStdStmBase::UpdateTaskStatus(AK::StreamMgr::CAkStdStmBase *this, AKRESULT in_eIOResult)
+void __fastcall AK::StreamMgr::CAkStdStmBase::UpdateTaskStatus(
+        AK::StreamMgr::CAkStdStmBase *this,
+        AKRESULT in_eIOResult)
 {
-  AK::StreamMgr::CAkStdStmBase *v2; // rbx
-  AK::StreamMgr::CAkClientThreadAwareVtbl *v3; // rax
+  AK::StreamMgr::CAkClientThreadAwareVtbl *vfptr; // rax
   int v4; // ecx
   bool v5; // zf
   char v6; // al
-  AK::StreamMgr::CAkIOThread *v7; // rcx
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rcx
   char v8; // al
-  AK::StreamMgr::CAkIOThread *v9; // rcx
+  AK::StreamMgr::CAkDeviceBase *v9; // rcx
 
-  v2 = this;
-  if ( in_eIOResult == 2 )
+  if ( in_eIOResult == AK_Fail )
   {
     *((_DWORD *)this + 44) &= 0xFFFFFFF4;
     *((_DWORD *)this + 44) |= 4u;
-    if ( !(*((_BYTE *)&this->0 + 117) & 8) )
+    if ( (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 8) == 0 )
       goto LABEL_10;
-    v3 = this->vfptr;
+    vfptr = this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr;
   }
   else
   {
     v4 = *((_DWORD *)this + 44);
-    if ( !(v4 & 0x10) )
+    if ( (v4 & 0x10) == 0 )
       goto LABEL_12;
-    v2->m_memBlock.uPosition += v2->m_memBlock.uAvailableSize;
-    v5 = (*((_BYTE *)&v2->0 + 117) & 8) == 0;
-    *((_DWORD *)v2 + 44) = v4 & 0xFFFFFFF1 | 1;
+    this->m_memBlock.uPosition += this->m_memBlock.uAvailableSize;
+    v5 = (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 8) == 0;
+    *((_DWORD *)this + 44) = v4 & 0xFFFFFFF0 | 1;
     if ( v5 )
       goto LABEL_10;
-    v3 = v2->vfptr;
-    this = v2;
+    vfptr = this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr;
   }
-  if ( ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStdStmBase *))v3[1].__vecDelDtor)(this) )
+  if ( ((unsigned __int8 (*)(void))vfptr[1].__vecDelDtor)() )
   {
-    v6 = *((_BYTE *)&v2->0 + 117);
-    if ( !(v6 & 0x20) )
+    v6 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v6 & 0x20) == 0 )
     {
-      v7 = (AK::StreamMgr::CAkIOThread *)&v2->m_pDevice->vfptr;
-      *((_BYTE *)&v2->0 + 117) = v6 | 0x20;
-      AK::StreamMgr::CAkIOThread::StdSemIncr(v7);
+      m_pDevice = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v6 | 0x20;
+      AK::StreamMgr::CAkIOThread::StdSemIncr(m_pDevice);
     }
     goto LABEL_12;
   }
 LABEL_10:
-  *((_BYTE *)&v2->0 + 117) &= 0xBFu;
-  v8 = *((_BYTE *)&v2->0 + 117);
-  if ( v8 & 0x20 )
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= ~0x40u;
+  v8 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+  if ( (v8 & 0x20) != 0 )
   {
-    v9 = (AK::StreamMgr::CAkIOThread *)&v2->m_pDevice->vfptr;
-    *((_BYTE *)&v2->0 + 117) = v8 & 0xDF;
+    v9 = this->m_pDevice;
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v8 & 0xDF;
     AK::StreamMgr::CAkIOThread::StdSemDecr(v9);
   }
 LABEL_12:
-  if ( v2->m_bIsBlocked )
-  {
-    if ( (*((_DWORD *)v2 + 44) << 28 >> 28) & 0xFFFFFFFD )
-      AK::StreamMgr::CAkIOThread::SignalIOCompleted(
-        (AK::StreamMgr::CAkIOThread *)&v2->m_pDevice->vfptr,
-        (AK::StreamMgr::CAkClientThreadAware *)&v2->vfptr);
-  }
+  if ( this->m_bIsBlocked && (((int)(*((_DWORD *)this + 44) << 28) >> 28) & 0xFFFFFFFD) != 0 )
+    AK::StreamMgr::CAkIOThread::SignalIOCompleted(this->m_pDevice, this);
 }
 
 // File Line: 1344
 // RVA: 0xAA3F90
 void __fastcall AK::StreamMgr::CAkStdStmBase::Kill(AK::StreamMgr::CAkStdStmBase *this)
 {
-  AK::StreamMgr::CAkStdStmBase *v1; // rdi
   char v2; // al
-  AK::StreamMgr::CAkIOThread *v3; // rcx
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rcx
   char v4; // al
-  AK::StreamMgr::CAkIOThread *v5; // rcx
+  AK::StreamMgr::CAkDeviceBase *v5; // rcx
 
-  v1 = this;
   EnterCriticalSection(&this->m_lockStatus.m_csLock);
-  *((_DWORD *)v1 + 44) &= 0xFFFFFFF4;
-  *((_DWORD *)v1 + 44) |= 4u;
-  if ( *((_BYTE *)&v1->0 + 117) & 8
-    && ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStdStmBase *))v1->vfptr[1].__vecDelDtor)(v1) )
+  *((_DWORD *)this + 44) &= 0xFFFFFFF4;
+  *((_DWORD *)this + 44) |= 4u;
+  if ( (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 8) != 0
+    && ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStdStmBase *))this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[1].__vecDelDtor)(this) )
   {
-    v2 = *((_BYTE *)&v1->0 + 117);
-    if ( !(v2 & 0x20) )
+    v2 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v2 & 0x20) == 0 )
     {
-      v3 = (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr;
-      *((_BYTE *)&v1->0 + 117) = v2 | 0x20;
-      AK::StreamMgr::CAkIOThread::StdSemIncr(v3);
+      m_pDevice = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v2 | 0x20;
+      AK::StreamMgr::CAkIOThread::StdSemIncr(m_pDevice);
     }
   }
   else
   {
-    *((_BYTE *)&v1->0 + 117) &= 0xBFu;
-    v4 = *((_BYTE *)&v1->0 + 117);
-    if ( v4 & 0x20 )
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= ~0x40u;
+    v4 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v4 & 0x20) != 0 )
     {
-      v5 = (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr;
-      *((_BYTE *)&v1->0 + 117) = v4 & 0xDF;
+      v5 = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v4 & 0xDF;
       AK::StreamMgr::CAkIOThread::StdSemDecr(v5);
     }
   }
-  if ( v1->m_bIsBlocked && (*((_DWORD *)v1 + 44) << 28 >> 28) & 0xFFFFFFFD )
-    AK::StreamMgr::CAkIOThread::SignalIOCompleted(
-      (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr,
-      (AK::StreamMgr::CAkClientThreadAware *)&v1->vfptr);
-  LeaveCriticalSection(&v1->m_lockStatus.m_csLock);
+  if ( this->m_bIsBlocked && (((int)(*((_DWORD *)this + 44) << 28) >> 28) & 0xFFFFFFFD) != 0 )
+    AK::StreamMgr::CAkIOThread::SignalIOCompleted(this->m_pDevice, this);
+  LeaveCriticalSection(&this->m_lockStatus.m_csLock);
 }
 
 // File Line: 1395
 // RVA: 0xAA4E50
 void __fastcall AK::StreamMgr::CAkStdStmBase::SetStatus(AK::StreamMgr::CAkStdStmBase *this, AkStmStatus in_eStatus)
 {
-  AkStmStatus v2; // edi
-  AK::StreamMgr::CAkStdStmBase *v3; // rbx
   char v4; // al
-  AK::StreamMgr::CAkIOThread *v5; // rcx
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rcx
   char v6; // al
-  AK::StreamMgr::CAkIOThread *v7; // rcx
+  AK::StreamMgr::CAkDeviceBase *v7; // rcx
 
   *((_DWORD *)this + 44) &= 0xFFFFFFF0;
-  v2 = in_eStatus;
-  v3 = this;
   *((_DWORD *)this + 44) |= in_eStatus & 0xF;
-  if ( *((_BYTE *)&this->0 + 117) & 8 && ((unsigned __int8 (*)(void))this->vfptr[1].__vecDelDtor)() )
-    goto LABEL_5;
-  if ( v2 == 2 )
+  if ( (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 8) != 0
+    && ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkStdStmBase *))this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[1].__vecDelDtor)(this) )
   {
-    *((_BYTE *)&v3->0 + 117) |= 0x40u;
+    goto LABEL_5;
+  }
+  if ( in_eStatus == AK_StmStatusPending )
+  {
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) |= 0x40u;
 LABEL_5:
-    v4 = *((_BYTE *)&v3->0 + 117);
-    if ( !(v4 & 0x20) )
+    v4 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v4 & 0x20) == 0 )
     {
-      v5 = (AK::StreamMgr::CAkIOThread *)&v3->m_pDevice->vfptr;
-      *((_BYTE *)&v3->0 + 117) = v4 | 0x20;
-      AK::StreamMgr::CAkIOThread::StdSemIncr(v5);
+      m_pDevice = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v4 | 0x20;
+      AK::StreamMgr::CAkIOThread::StdSemIncr(m_pDevice);
     }
     return;
   }
-  *((_BYTE *)&v3->0 + 117) &= 0xBFu;
-  v6 = *((_BYTE *)&v3->0 + 117);
-  if ( v6 & 0x20 )
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= ~0x40u;
+  v6 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+  if ( (v6 & 0x20) != 0 )
   {
-    v7 = (AK::StreamMgr::CAkIOThread *)&v3->m_pDevice->vfptr;
-    *((_BYTE *)&v3->0 + 117) = v6 & 0xDF;
+    v7 = this->m_pDevice;
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v6 & 0xDF;
     AK::StreamMgr::CAkIOThread::StdSemDecr(v7);
   }
 }
@@ -1223,28 +1177,26 @@ LABEL_5:
 // RVA: 0xAA2720
 void __fastcall AK::StreamMgr::CAkAutoStmBase::CAkAutoStmBase(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rbx
   char v2; // al
 
-  v1 = this;
-  AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware((AK::StreamMgr::CAkClientThreadAware *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
-  v1->m_pDeferredOpenData = 0i64;
-  v1->m_pFileDesc = 0i64;
-  InitializeCriticalSection(&v1->m_lockStatus.m_csLock);
-  *((_BYTE *)&v1->0 + 117) &= 0x83u;
-  v1->m_pszStreamName = 0i64;
-  v1->m_fileID = -1;
-  v1->m_uVirtualBufferingSize = 0;
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
-  v1->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
-  v1->m_listBuffers.m_ulNumListItems = 0;
-  v1->m_listBuffers.m_pFirst = 0i64;
-  v1->m_listBuffers.m_pLast = 0i64;
-  v2 = *((_BYTE *)&v1->0 + 117);
-  *((_BYTE *)v1 + 194) &= 0xFCu;
-  v1->m_uNextToGrant = 0;
-  *((_BYTE *)&v1->0 + 117) = v2 & 0xFD | 1;
+  AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware(this);
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
+  this->m_pDeferredOpenData = 0i64;
+  this->m_pFileDesc = 0i64;
+  InitializeCriticalSection(&this->m_lockStatus.m_csLock);
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= 0x83u;
+  this->m_pszStreamName = 0i64;
+  this->m_fileID = -1;
+  this->m_uVirtualBufferingSize = 0;
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->AK::IAkAutoStream::vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
+  this->m_listBuffers.m_ulNumListItems = 0;
+  this->m_listBuffers.m_pFirst = 0i64;
+  this->m_listBuffers.m_pLast = 0i64;
+  v2 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+  *((_BYTE *)this + 194) &= 0xFCu;
+  this->m_uNextToGrant = 0;
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v2 & 0xFC | 1;
 }
 
 // File Line: 1464
@@ -1252,74 +1204,75 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::CAkAutoStmBase(AK::StreamMgr::CAk
 void __fastcall AK::StreamMgr::CAkAutoStmBase::~CAkAutoStmBase(AK::StreamMgr::CAkAutoStmBase *this)
 {
   bool v1; // zf
-  AK::StreamMgr::CAkAutoStmBase *v2; // rbx
 
-  v1 = (*((_BYTE *)&this->0 + 117) & 0x20) == 0;
-  v2 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
-  this->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
+  v1 = (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0x20) == 0;
+  this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->AK::IAkAutoStream::vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
   if ( !v1 )
-    AK::StreamMgr::CAkIOThread::AutoSemDecr((AK::StreamMgr::CAkIOThread *)&this->m_pDevice->vfptr);
-  v2->vfptr = (AK::IAkAutoStreamVtbl *)&AK::IAkAutoStream::`vftable;
-  AK::StreamMgr::CAkStmTask::~CAkStmTask((AK::StreamMgr::CAkStmTask *)&v2->vfptr);
+    AK::StreamMgr::CAkIOThread::AutoSemDecr(this->m_pDevice);
+  this->AK::IAkAutoStream::vfptr = (AK::IAkAutoStreamVtbl *)&AK::IAkAutoStream::`vftable;
+  AK::StreamMgr::CAkStmTask::~CAkStmTask(this);
 }
 
 // File Line: 1479
 // RVA: 0xAA3CB0
-AKRESULT __fastcall AK::StreamMgr::CAkAutoStmBase::Init(AK::StreamMgr::CAkAutoStmBase *this, AK::StreamMgr::CAkDeviceBase *in_pDevice, AkFileDesc *in_pFileDesc, unsigned int in_fileID, AkAutoStmHeuristics *in_heuristics, AkAutoStmBufSettings *in_pBufferSettings, unsigned int in_uGranularity)
+AKRESULT __fastcall AK::StreamMgr::CAkAutoStmBase::Init(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AK::StreamMgr::CAkDeviceBase *in_pDevice,
+        AkFileDesc *in_pFileDesc,
+        unsigned int in_fileID,
+        AkAutoStmHeuristics *in_heuristics,
+        AkAutoStmBufSettings *in_pBufferSettings,
+        unsigned int in_uGranularity)
 {
-  AkFileDesc *v7; // rdi
-  AK::StreamMgr::CAkAutoStmBase *v8; // rbx
   AKRESULT result; // eax
   unsigned int v10; // eax
-  float v11; // xmm0_4
-  __int64 v12; // rax
-  char v13; // cl
-  char v14; // al
+  float fThroughput; // xmm0_4
+  __int64 uLoopEnd; // rax
+  char uMinNumBuffers; // cl
+  char priority; // al
 
   this->m_pDevice = in_pDevice;
-  v7 = in_pFileDesc;
-  v8 = this;
   if ( in_pFileDesc->iFileSize >= 0 )
   {
     this->m_fileID = in_fileID;
     v10 = in_pDevice->m_pLowLevelHook->vfptr->GetBlockSize(in_pDevice->m_pLowLevelHook, in_pFileDesc);
     if ( !v10 || v10 > in_uGranularity || in_uGranularity % v10 )
     {
-      *((_BYTE *)&v8->0 + 117) = *((_BYTE *)&v8->0 + 117) & 0xBF | 8;
-      result = 2;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xB7 | 8;
+      return 2;
     }
     else
     {
-      v8->m_uLLBlockSize = v10;
-      v8->m_uBufferAlignment = v10;
-      v11 = in_heuristics->fThroughput;
+      this->m_uLLBlockSize = v10;
+      this->m_uBufferAlignment = v10;
+      fThroughput = in_heuristics->fThroughput;
       if ( in_heuristics->fThroughput <= 1.0 )
-        v11 = *(float *)&FLOAT_1_0;
-      v8->m_fThroughput = v11;
-      v8->m_uLoopStart = in_heuristics->uLoopStart - in_heuristics->uLoopStart % v10;
-      v12 = in_heuristics->uLoopEnd;
-      if ( v12 > v7->iFileSize )
-        LODWORD(v12) = v7->iFileSize;
-      v8->m_uLoopEnd = v12;
-      v13 = in_heuristics->uMinNumBuffers;
-      if ( !v13 )
-        v13 = 1;
-      v8->m_uMinNumBuffers = v13;
-      v14 = in_heuristics->priority;
-      v8->m_uNextExpectedUserPosition = 0i64;
-      v8->m_priority = v14;
-      if ( !v7->iFileSize )
-        *((_BYTE *)&v8->0 + 117) = *((_BYTE *)&v8->0 + 117) & 0xBF | 4;
-      result = AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(v8, in_pBufferSettings, in_uGranularity);
-      if ( result != 1 )
-        *((_BYTE *)&v8->0 + 117) = *((_BYTE *)&v8->0 + 117) & 0xBF | 8;
+        fThroughput = *(float *)&FLOAT_1_0;
+      this->m_fThroughput = fThroughput;
+      this->m_uLoopStart = in_heuristics->uLoopStart - in_heuristics->uLoopStart % v10;
+      uLoopEnd = in_heuristics->uLoopEnd;
+      if ( uLoopEnd > in_pFileDesc->iFileSize )
+        LODWORD(uLoopEnd) = in_pFileDesc->iFileSize;
+      this->m_uLoopEnd = uLoopEnd;
+      uMinNumBuffers = in_heuristics->uMinNumBuffers;
+      if ( !uMinNumBuffers )
+        uMinNumBuffers = 1;
+      this->m_uMinNumBuffers = uMinNumBuffers;
+      priority = in_heuristics->priority;
+      this->m_uNextExpectedUserPosition = 0i64;
+      this->m_priority = priority;
+      if ( !in_pFileDesc->iFileSize )
+        *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xBB | 4;
+      result = AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(this, in_pBufferSettings, in_uGranularity);
+      if ( result != AK_Success )
+        *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xB7 | 8;
     }
   }
   else
   {
-    *((_BYTE *)&this->0 + 117) = *((_BYTE *)&this->0 + 117) & 0xBF | 8;
-    result = 31;
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0xB7 | 8;
+    return 31;
   }
   return result;
 }
@@ -1328,7 +1281,7 @@ AKRESULT __fastcall AK::StreamMgr::CAkAutoStmBase::Init(AK::StreamMgr::CAkAutoSt
 // RVA: 0xAA37E0
 __int64 __fastcall Gcd(unsigned int a, unsigned int b)
 {
-  unsigned int k; // er8
+  unsigned int k; // r8d
   unsigned int v3; // edx
   char i; // cl
   bool j; // cf
@@ -1343,14 +1296,14 @@ __int64 __fastcall Gcd(unsigned int a, unsigned int b)
   v3 = a % k;
   if ( a % k )
   {
-    for ( i = 0; !(((unsigned __int8)v3 | (unsigned __int8)k) & 1); ++i )
+    for ( i = 0; (((unsigned __int8)v3 | (unsigned __int8)k) & 1) == 0; ++i )
     {
       k >>= 1;
       v3 >>= 1;
     }
-    for ( ; !(k & 1); k >>= 1 )
+    for ( ; (k & 1) == 0; k >>= 1 )
       ;
-    for ( ; !(v3 & 1); v3 >>= 1 )
+    for ( ; (v3 & 1) == 0; v3 >>= 1 )
       ;
     for ( j = k < v3; k != v3; j = k < v3 )
     {
@@ -1360,7 +1313,7 @@ __int64 __fastcall Gcd(unsigned int a, unsigned int b)
         k = v3;
         v3 = v6;
       }
-      for ( k = (k - v3) >> 1; !(k & 1); k >>= 1 )
+      for ( k = (k - v3) >> 1; (k & 1) == 0; k >>= 1 )
         ;
     }
     k <<= i;
@@ -1370,50 +1323,49 @@ __int64 __fastcall Gcd(unsigned int a, unsigned int b)
 
 // File Line: 1584
 // RVA: 0xAA47A0
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(AK::StreamMgr::CAkAutoStmBase *this, AkAutoStmBufSettings *in_pBufferSettings, unsigned int in_uGranularity)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AkAutoStmBufSettings *in_pBufferSettings,
+        unsigned int in_uGranularity)
 {
-  unsigned int v3; // ebx
-  AkAutoStmBufSettings *v4; // rdi
   AK::StreamMgr::CAkAutoStmBase *v5; // r11
   unsigned int v6; // eax
-  unsigned int v7; // ecx
-  unsigned int v8; // er9
-  unsigned int v9; // er8
-  unsigned int v11; // eax
+  unsigned int m_uBufferAlignment; // ecx
+  unsigned int v8; // r9d
+  unsigned int uBufferSize; // r8d
+  unsigned int uMinBufferSize; // eax
   unsigned int v12; // eax
-  unsigned int v13; // ecx
+  unsigned int m_uLLBlockSize; // ecx
 
-  v3 = in_uGranularity;
-  v4 = in_pBufferSettings;
   v5 = this;
   if ( in_pBufferSettings )
   {
     if ( in_pBufferSettings->uBlockSize )
     {
       v6 = Gcd(this->m_uLLBlockSize, in_pBufferSettings->uBlockSize);
-      v5->m_uBufferAlignment = v5->m_uLLBlockSize * (v4->uBlockSize / v6);
+      v5->m_uBufferAlignment = v5->m_uLLBlockSize * (in_pBufferSettings->uBlockSize / v6);
     }
-    v7 = v5->m_uBufferAlignment;
-    v5->m_uMinBufferSize = v7;
-    v8 = v3 - v3 % v7;
+    m_uBufferAlignment = v5->m_uBufferAlignment;
+    v5->m_uMinBufferSize = m_uBufferAlignment;
+    v8 = in_uGranularity - in_uGranularity % m_uBufferAlignment;
     v5->m_uBufferSize = v8;
-    v9 = v4->uBufferSize;
-    if ( v4->uBufferSize )
+    uBufferSize = in_pBufferSettings->uBufferSize;
+    if ( in_pBufferSettings->uBufferSize )
     {
-      if ( v9 <= v3 && !(v9 % v7) )
+      if ( uBufferSize <= in_uGranularity && !(uBufferSize % m_uBufferAlignment) )
       {
-        v5->m_uBufferSize = v9;
-        v5->m_uMinBufferSize = v4->uBufferSize;
+        v5->m_uBufferSize = uBufferSize;
+        v5->m_uMinBufferSize = in_pBufferSettings->uBufferSize;
         return 1i64;
       }
       return 2i64;
     }
-    v11 = v4->uMinBufferSize;
-    if ( v11 )
+    uMinBufferSize = in_pBufferSettings->uMinBufferSize;
+    if ( uMinBufferSize )
     {
-      if ( v7 < v11 )
+      if ( m_uBufferAlignment < uMinBufferSize )
       {
-        v12 = v7 * ((v7 + v11 - 1) / v7);
+        v12 = m_uBufferAlignment * ((m_uBufferAlignment + uMinBufferSize - 1) / m_uBufferAlignment);
         v5->m_uMinBufferSize = v12;
         if ( v12 > v8 )
           return 2i64;
@@ -1422,9 +1374,9 @@ signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(AK
   }
   else
   {
-    v13 = this->m_uLLBlockSize;
-    v5->m_uMinBufferSize = v13;
-    v5->m_uBufferSize = in_uGranularity - in_uGranularity % v13;
+    m_uLLBlockSize = this->m_uLLBlockSize;
+    v5->m_uMinBufferSize = m_uLLBlockSize;
+    v5->m_uBufferSize = in_uGranularity - in_uGranularity % m_uLLBlockSize;
   }
   return 1i64;
 }
@@ -1433,48 +1385,46 @@ signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(AK
 // RVA: 0xAA2F40
 void __fastcall AK::StreamMgr::CAkAutoStmBase::Destroy(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
-  char v2; // r8
+  char LockSemaphore; // r8
   __int64 **v3; // rax
-  int v4; // er10
+  int m_pDeferredOpenData_high; // r10d
   __int64 *v5; // r9
   __int64 v6; // r11
-  unsigned __int64 v7; // rcx
+  unsigned __int64 pNextLightItem_high; // rcx
   __int64 v8; // rsi
   int v9; // ecx
   bool v10; // zf
 
-  v1 = this;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  *((_BYTE *)&v1[-1] + 197) = *((_BYTE *)&v1[-1] + 197) & 0xBF | 8;
-  v2 = (char)v1->m_lockStatus.m_csLock.LockSemaphore;
-  v3 = *(__int64 ***)&v1->m_lockStatus.m_csLock.LockCount;
-  if ( v2 )
+  *((_BYTE *)&this[-1] + 197) = *((_BYTE *)&this[-1] + 197) & 0xB7 | 8;
+  LockSemaphore = (char)this->m_lockStatus.m_csLock.LockSemaphore;
+  v3 = *(__int64 ***)&this->m_lockStatus.m_csLock.LockCount;
+  if ( LockSemaphore )
   {
-    v4 = HIDWORD(v1->m_pDeferredOpenData);
+    m_pDeferredOpenData_high = HIDWORD(this->m_pDeferredOpenData);
     do
     {
       v5 = v3[1];
       v6 = *((unsigned int *)v3 + 4);
-      v7 = HIDWORD(v1->pNextLightItem);
+      pNextLightItem_high = HIDWORD(this->pNextLightItem);
       v8 = *v5;
-      if ( *v5 + v6 >= v7 || v8 + (unsigned __int64)*((unsigned int *)v5 + 6) <= v7 )
+      if ( *v5 + v6 >= pNextLightItem_high || v8 + (unsigned __int64)*((unsigned int *)v5 + 6) <= pNextLightItem_high )
         v9 = *((_DWORD *)v5 + 6);
       else
-        v9 = v7 - v8;
-      v4 += v9 - v6;
-      v10 = v2-- == 1;
-      LOBYTE(v1->m_lockStatus.m_csLock.LockSemaphore) = v2;
-      HIDWORD(v1->m_pDeferredOpenData) = v4;
+        v9 = pNextLightItem_high - v8;
+      m_pDeferredOpenData_high += v9 - v6;
+      v10 = LockSemaphore-- == 1;
+      LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore) = LockSemaphore;
+      HIDWORD(this->m_pDeferredOpenData) = m_pDeferredOpenData_high;
       v3 = (__int64 **)*v3;
     }
     while ( !v10 );
   }
-  AK::StreamMgr::CAkAutoStmBase::Flush((AK::StreamMgr::CAkAutoStmBase *)((char *)v1 - 120));
-  *(_QWORD *)&v1->m_lockStatus.m_csLock.LockCount = 0i64;
-  v1->m_lockStatus.m_csLock.OwningThread = 0i64;
-  LODWORD(v1->m_lockStatus.m_csLock.DebugInfo) = 0;
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v1[-1].m_uNextExpectedUserPosition);
+  AK::StreamMgr::CAkAutoStmBase::Flush((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+  *(_QWORD *)&this->m_lockStatus.m_csLock.LockCount = 0i64;
+  this->m_lockStatus.m_csLock.OwningThread = 0i64;
+  LODWORD(this->m_lockStatus.m_csLock.DebugInfo) = 0;
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
 }
 
 // File Line: 1683
@@ -1484,136 +1434,132 @@ void __fastcall AK::StreamMgr::CAkStdStmBase::GetInfo(AK::StreamMgr::CAkStdStmBa
   out_info->deviceID = *(_DWORD *)(*(_QWORD *)&this[-1].m_memBlock.uRefCount + 264i64);
   out_info->pszName = *(const wchar_t **)&this[-1].m_uTotalScheduledSize;
   out_info->uSize = *(_QWORD *)this[-1].m_pszStreamName;
-  out_info->bIsOpen = (*((_BYTE *)&this[-1] + 181) >> 4) & 1;
+  out_info->bIsOpen = (*((_BYTE *)&this[-1] + 181) & 0x10) != 0;
 }
 
 // File Line: 1696
 // RVA: 0xAA3A70
-void __fastcall AK::StreamMgr::CAkAutoStmBase::GetHeuristics(AK::StreamMgr::CAkAutoStmBase *this, AkAutoStmHeuristics *out_heuristics)
+void __fastcall AK::StreamMgr::CAkAutoStmBase::GetHeuristics(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AkAutoStmHeuristics *out_heuristics)
 {
   out_heuristics->fThroughput = *((float *)&this->m_bIsBlocked + 1);
-  out_heuristics->uLoopStart = (unsigned int)this->pNextLightItem;
-  out_heuristics->uLoopEnd = HIDWORD(this->pNextLightItem);
+  *(_QWORD *)&out_heuristics->uLoopStart = this->pNextLightItem;
   out_heuristics->uMinNumBuffers = BYTE1(this->m_lockStatus.m_csLock.LockSemaphore);
   out_heuristics->priority = *((_BYTE *)&this[-1] + 196);
 }
 
 // File Line: 1709
 // RVA: 0xAA4920
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetHeuristics(AK::StreamMgr::CAkAutoStmBase *this, AkAutoStmHeuristics *in_heuristics)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetHeuristics(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AkAutoStmHeuristics *in_heuristics)
 {
-  char v2; // al
-  AkAutoStmHeuristics *v3; // rbx
-  AK::StreamMgr::CAkAutoStmBase *v4; // rsi
-  float v5; // xmm6_4
-  AK::IAkAutoStreamVtbl *v6; // rax
-  __int64 v7; // r14
-  char v8; // di
+  char priority; // al
+  float fThroughput; // xmm6_4
+  AK::IAkAutoStreamVtbl *vfptr; // rax
+  __int64 uLoopEnd; // r14
+  char uMinNumBuffers; // di
   char v9; // cl
-  unsigned __int64 v10; // rax
-  unsigned int v11; // er12
-  unsigned __int64 v12; // rbp
+  unsigned __int64 SpinCount; // rax
+  unsigned int v11; // r12d
+  unsigned __int64 m_hBlockEvent; // rbp
   unsigned int *v13; // rcx
-  AK::StreamMgr::CAkStmMemView **v14; // r15
-  __int128 v15; // ax
-  __int64 v16; // r8
+  unsigned int *v14; // rdx
+  __int64 LockSemaphore_low; // r8
+  __int64 v16; // rax
   AK::StreamMgr::CAkStmMemView *v17; // rbx
   __int64 v18; // r8
-  __m128i v19; // xmm0
-  AK::StreamMgr::CAkStmMemView *v20; // r12
+  unsigned int *v19; // rax
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // r12
   AK::StreamMgr::CAkStmMemView *i; // rdx
-  AK::StreamMgr::CAkStmMemView *v22; // r14
-  __int128 v24; // [rsp+20h] [rbp-58h]
-  __m128i v25; // [rsp+30h] [rbp-48h]
+  size_t pNextView; // r14
+  unsigned int *v24; // [rsp+30h] [rbp-48h]
+  AK::StreamMgr::CAkStmMemView *v25; // [rsp+30h] [rbp-48h]
 
-  v2 = in_heuristics->priority;
-  v3 = in_heuristics;
-  v4 = this;
-  if ( (unsigned __int8)v2 > 0x64u )
+  priority = in_heuristics->priority;
+  if ( (unsigned __int8)priority > 0x64u )
     return 31i64;
-  *((_BYTE *)&this[-1] + 196) = v2;
-  v5 = in_heuristics->fThroughput;
+  *((_BYTE *)&this[-1] + 196) = priority;
+  fThroughput = in_heuristics->fThroughput;
   if ( in_heuristics->fThroughput <= 1.0 )
-    v5 = *(float *)&FLOAT_1_0;
-  v6 = this[-1].vfptr;
-  v7 = in_heuristics->uLoopEnd;
-  if ( v7 > (_QWORD)v6->__vecDelDtor && *((_BYTE *)&this[-1] + 197) & 0x10 )
-    LODWORD(v7) = v6->__vecDelDtor;
-  if ( this->pNextLightItem == (AK::StreamMgr::CAkStmTask *)__PAIR__(v7, in_heuristics->uLoopStart) )
+    fThroughput = *(float *)&FLOAT_1_0;
+  vfptr = this[-1].AK::IAkAutoStream::vfptr;
+  uLoopEnd = in_heuristics->uLoopEnd;
+  if ( uLoopEnd > (__int64)vfptr->__vecDelDtor && (*((_BYTE *)&this[-1] + 197) & 0x10) != 0 )
+    LODWORD(uLoopEnd) = vfptr->__vecDelDtor;
+  if ( HIDWORD(this->pNextLightItem) == (_DWORD)uLoopEnd && LODWORD(this->pNextLightItem) == in_heuristics->uLoopStart )
   {
-    v8 = 1;
+    uMinNumBuffers = 1;
     if ( in_heuristics->uMinNumBuffers )
-      v8 = in_heuristics->uMinNumBuffers;
-    if ( v5 != *((float *)&this->m_bIsBlocked + 1) || BYTE1(this->m_lockStatus.m_csLock.LockSemaphore) != v8 )
+      uMinNumBuffers = in_heuristics->uMinNumBuffers;
+    if ( fThroughput != *((float *)&this->m_bIsBlocked + 1)
+      || BYTE1(this->m_lockStatus.m_csLock.LockSemaphore) != uMinNumBuffers )
     {
       EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-      BYTE1(v4->m_lockStatus.m_csLock.LockSemaphore) = v8;
-      *((float *)&v4->m_bIsBlocked + 1) = v5;
-      AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120));
-      LeaveCriticalSection((LPCRITICAL_SECTION)&v4[-1].m_uNextExpectedUserPosition);
+      BYTE1(this->m_lockStatus.m_csLock.LockSemaphore) = uMinNumBuffers;
+      *((float *)&this->m_bIsBlocked + 1) = fThroughput;
+      AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+      LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
     }
   }
   else
   {
     EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-    *((float *)&v4->m_bIsBlocked + 1) = v5;
-    v9 = v3->uMinNumBuffers;
+    *((float *)&this->m_bIsBlocked + 1) = fThroughput;
+    v9 = in_heuristics->uMinNumBuffers;
     if ( !v9 )
       v9 = 1;
-    BYTE1(v4->m_lockStatus.m_csLock.LockSemaphore) = v9;
-    v10 = v4[-1].m_lockStatus.m_csLock.SpinCount;
-    v11 = v3->uLoopStart - v3->uLoopStart % *(_DWORD *)&v4[-1].m_uNextToGrant;
-    LODWORD(v4->pNextLightItem) = v11;
-    (*(void (__fastcall **)(unsigned __int64 *, _QWORD))(v10 + 88))(
-      &v4[-1].m_lockStatus.m_csLock.SpinCount,
-      (unsigned int)v7);
-    v12 = (unsigned __int64)v4->m_hBlockEvent;
-    v13 = *(unsigned int **)&v4->m_lockStatus.m_csLock.LockCount;
+    BYTE1(this->m_lockStatus.m_csLock.LockSemaphore) = v9;
+    SpinCount = this[-1].m_lockStatus.m_csLock.SpinCount;
+    v11 = in_heuristics->uLoopStart - in_heuristics->uLoopStart % *(_DWORD *)&this[-1].m_uNextToGrant;
+    LODWORD(this->pNextLightItem) = v11;
+    (*(void (__fastcall **)(unsigned __int64 *, _QWORD))(SpinCount + 88))(
+      &this[-1].m_lockStatus.m_csLock.SpinCount,
+      (unsigned int)uLoopEnd);
+    m_hBlockEvent = (unsigned __int64)this->m_hBlockEvent;
+    v13 = *(unsigned int **)&this->m_lockStatus.m_csLock.LockCount;
     v14 = 0i64;
-    *((_QWORD *)&v15 + 1) = 0i64;
-    if ( LOBYTE(v4->m_lockStatus.m_csLock.LockSemaphore) )
+    if ( LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore) )
     {
-      v16 = LOBYTE(v4->m_lockStatus.m_csLock.LockSemaphore);
+      LockSemaphore_low = LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore);
       do
       {
-        *(_QWORD *)&v15 = *((_QWORD *)v13 + 1);
-        *((_QWORD *)&v15 + 1) = v13;
+        v16 = *((_QWORD *)v13 + 1);
+        v14 = v13;
         v13 = *(unsigned int **)v13;
-        v12 = *(_QWORD *)v15 + *(unsigned int *)(v15 + 24);
-        --v16;
+        m_hBlockEvent = *(_QWORD *)v16 + *(unsigned int *)(v16 + 24);
+        --LockSemaphore_low;
       }
-      while ( v16 );
+      while ( LockSemaphore_low );
     }
-    if ( (_DWORD)v7 && v12 >= (unsigned int)v7 )
-      v12 = v11;
+    if ( (_DWORD)uLoopEnd && m_hBlockEvent >= (unsigned int)uLoopEnd )
+      m_hBlockEvent = v11;
     v17 = 0i64;
     if ( v13 )
     {
       do
       {
         v18 = *((_QWORD *)v13 + 1);
-        if ( *(_QWORD *)v18 + v13[4] == v12 )
+        if ( *(_QWORD *)v18 + v13[4] == m_hBlockEvent )
         {
-          v12 = *(_QWORD *)v18 + *(unsigned int *)(v18 + 24);
-          if ( (_DWORD)v7 && v12 >= (unsigned int)v7 )
-            v12 = v11;
-          *((_QWORD *)&v15 + 1) = v13;
+          m_hBlockEvent = *(_QWORD *)v18 + *(unsigned int *)(v18 + 24);
+          if ( (_DWORD)uLoopEnd && m_hBlockEvent >= (unsigned int)uLoopEnd )
+            m_hBlockEvent = v11;
+          v14 = v13;
           v13 = *(unsigned int **)v13;
         }
         else
         {
-          *(_QWORD *)&v15 = *(_QWORD *)v13;
-          v25 = (__m128i)v15;
-          if ( v13 == *(unsigned int **)&v4->m_lockStatus.m_csLock.LockCount )
-            *(_QWORD *)&v4->m_lockStatus.m_csLock.LockCount = v15;
+          v19 = *(unsigned int **)v13;
+          v24 = *(unsigned int **)v13;
+          if ( v13 == *(unsigned int **)&this->m_lockStatus.m_csLock.LockCount )
+            *(_QWORD *)&this->m_lockStatus.m_csLock.LockCount = v19;
           else
-            **((_QWORD **)&v15 + 1) = v15;
-          if ( v13 == v4->m_lockStatus.m_csLock.OwningThread )
-            v4->m_lockStatus.m_csLock.OwningThread = (void *)*((_QWORD *)&v15 + 1);
-          v19 = v25;
-          --LODWORD(v4->m_lockStatus.m_csLock.DebugInfo);
-          _mm_store_si128((__m128i *)&v24, v19);
-          *((_QWORD *)&v15 + 1) = *((_QWORD *)&v24 + 1);
+            *(_QWORD *)v14 = v19;
+          if ( v13 == this->m_lockStatus.m_csLock.OwningThread )
+            this->m_lockStatus.m_csLock.OwningThread = v14;
+          --LODWORD(this->m_lockStatus.m_csLock.DebugInfo);
           if ( v17 )
           {
             *(_QWORD *)v13 = v17;
@@ -1624,114 +1570,107 @@ signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetHeuristics(AK::Strea
             v17 = (AK::StreamMgr::CAkStmMemView *)v13;
             *(_QWORD *)v13 = 0i64;
           }
-          v13 = (unsigned int *)v24;
+          v13 = v24;
         }
       }
       while ( v13 );
       if ( v17 )
       {
-        v20 = v4[-1].m_listBuffers.m_pFirst;
-        EnterCriticalSection((LPCRITICAL_SECTION)&v20[1]);
-        for ( i = v17; ; i = (AK::StreamMgr::CAkStmMemView *)v24 )
+        m_pFirst = this[-1].m_listBuffers.m_pFirst;
+        EnterCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
+        for ( i = v17; ; i = v25 )
         {
-          v22 = i->pNextView;
-          v25.m128i_i64[1] = (__int64)v14;
-          v25.m128i_i64[0] = (__int64)v22;
+          pNextView = (size_t)i->pNextView;
+          v25 = i->pNextView;
           if ( i == v17 )
-            v17 = v22;
+            v17 = i->pNextView;
           else
-            *v14 = v22;
-          _mm_store_si128((__m128i *)&v24, v25);
-          AK::StreamMgr::CAkAutoStmBase::DestroyBuffer((AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120), i);
-          if ( !v22 )
+            MEMORY[0] = (size_t)i->pNextView;
+          AK::StreamMgr::CAkAutoStmBase::DestroyBuffer((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120), i);
+          if ( !pNextView )
             break;
-          v14 = (AK::StreamMgr::CAkStmMemView **)*((_QWORD *)&v24 + 1);
         }
-        AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)v4[-1].m_listBuffers.m_pFirst);
-        LeaveCriticalSection((LPCRITICAL_SECTION)&v20[1]);
+        AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)this[-1].m_listBuffers.m_pFirst);
+        LeaveCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
       }
     }
-    (*(void (__fastcall **)(unsigned __int64 *, unsigned __int64))(v4[-1].m_lockStatus.m_csLock.SpinCount + 72))(
-      &v4[-1].m_lockStatus.m_csLock.SpinCount,
-      v12);
-    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120));
-    LeaveCriticalSection((LPCRITICAL_SECTION)&v4[-1].m_uNextExpectedUserPosition);
+    (*(void (__fastcall **)(unsigned __int64 *, unsigned __int64))(this[-1].m_lockStatus.m_csLock.SpinCount + 72))(
+      &this[-1].m_lockStatus.m_csLock.SpinCount,
+      m_hBlockEvent);
+    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+    LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
   }
   return 1i64;
 }
 
 // File Line: 1840
 // RVA: 0xAA4C00
-__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetMinimalBufferSize(AK::StreamMgr::CAkAutoStmBase *this, unsigned int in_uMinBufferSize)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetMinimalBufferSize(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        unsigned int in_uMinBufferSize)
 {
-  unsigned int v2; // er15
-  AK::StreamMgr::CAkAutoStmBase *v3; // rsi
-  unsigned int v4; // er14
+  unsigned int m_pFileDesc; // r15d
   unsigned int v5; // ebp
-  AK::StreamMgr::CAkClientThreadAwareVtbl *v6; // rax
-  AkAutoStmBufSettings in_pBufferSettings; // [rsp+20h] [rbp-28h]
+  AK::StreamMgr::CAkClientThreadAwareVtbl *vfptr; // rax
+  AkAutoStmBufSettings in_pBufferSettings; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = (unsigned int)this->m_pFileDesc;
-  v3 = this;
-  v4 = in_uMinBufferSize;
+  m_pFileDesc = (unsigned int)this->m_pFileDesc;
   in_pBufferSettings.uMinBufferSize = in_uMinBufferSize;
   in_pBufferSettings.uBufferSize = 0;
   in_pBufferSettings.uBlockSize = 0;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
   v5 = AK::StreamMgr::CAkAutoStmBase::SetBufferingSettings(
-         (AK::StreamMgr::CAkAutoStmBase *)((char *)v3 - 120),
+         (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120),
          &in_pBufferSettings,
-         v3[-1].m_listBuffers.m_pFirst[10].m_uOffsetInBlock);
+         this[-1].m_listBuffers.m_pFirst[10].m_uOffsetInBlock);
   if ( v5 == 1 )
   {
-    if ( LODWORD(v3->m_pFileDesc) > v2 )
-      (*(void (__fastcall **)(unsigned __int64 *, _QWORD))(v3[-1].m_lockStatus.m_csLock.SpinCount + 80))(
-        &v3[-1].m_lockStatus.m_csLock.SpinCount,
-        v4);
+    if ( LODWORD(this->m_pFileDesc) > m_pFileDesc )
+      (*(void (__fastcall **)(unsigned __int64 *, _QWORD))(this[-1].m_lockStatus.m_csLock.SpinCount + 80))(
+        &this[-1].m_lockStatus.m_csLock.SpinCount,
+        in_uMinBufferSize);
   }
   else
   {
-    v6 = v3->vfptr;
-    BYTE2(v3->m_lockStatus.m_csLock.LockSemaphore) |= 2u;
-    ((void (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))v6[12].__vecDelDtor)(v3);
-    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)v3 - 120));
-    if ( LOBYTE(v3[-1].m_pDevice) )
+    vfptr = this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr;
+    BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) |= 2u;
+    ((void (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))vfptr[12].__vecDelDtor)(this);
+    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+    if ( LOBYTE(this[-1].m_pDevice) )
       AK::StreamMgr::CAkIOThread::SignalIOCompleted(
-        (AK::StreamMgr::CAkIOThread *)v3[-1].m_listBuffers.m_pFirst,
-        (AK::StreamMgr::CAkClientThreadAware *)&v3[-1].m_lockStatus.m_csLock.SpinCount);
+        (AK::StreamMgr::CAkIOThread *)this[-1].m_listBuffers.m_pFirst,
+        (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
   }
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v3[-1].m_uNextExpectedUserPosition);
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
   return v5;
 }
 
 // File Line: 1873
 // RVA: 0xAA4ED0
-signed __int64 __fastcall AK::StreamMgr::CAkStdStmBase::SetStreamName(AK::StreamMgr::CAkStdStmBase *this, const wchar_t *in_pszStreamName)
+__int64 __fastcall AK::StreamMgr::CAkStdStmBase::SetStreamName(
+        AK::StreamMgr::CAkStdStmBase *this,
+        const wchar_t *in_pszStreamName)
 {
-  const wchar_t *v2; // rdi
   void *v3; // rdx
-  AK::StreamMgr::CAkStdStmBase *v4; // rsi
-  signed __int64 v5; // rbx
+  __int64 v5; // rbx
   unsigned __int64 v6; // rbx
   wchar_t *v7; // rax
 
-  v2 = in_pszStreamName;
   v3 = *(void **)&this[-1].m_uTotalScheduledSize;
-  v4 = this;
   if ( v3 )
     AK::MemoryMgr::Free(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, v3);
-  if ( v2 )
+  if ( in_pszStreamName )
   {
     v5 = -1i64;
     do
       ++v5;
-    while ( v2[v5] );
+    while ( in_pszStreamName[v5] );
     v6 = v5 + 1;
     v7 = (wchar_t *)AK::MemoryMgr::Malloc(AK::StreamMgr::CAkStreamMgr::m_streamMgrPoolId, 2 * v6);
-    *(_QWORD *)&v4[-1].m_uTotalScheduledSize = v7;
+    *(_QWORD *)&this[-1].m_uTotalScheduledSize = v7;
     if ( !v7 )
       return 52i64;
-    AKPLATFORM::SafeStrCpy(v7, v2, v6);
+    AKPLATFORM::SafeStrCpy(v7, in_pszStreamName, v6);
   }
   return 1i64;
 }
@@ -1747,264 +1686,260 @@ __int64 __fastcall AK::StreamMgr::CAkStdStmBase::GetBlockSize(AK::StreamMgr::CAk
 // RVA: 0xAA4F60
 __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::Start(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
   char v2; // dl
-  signed __int64 v3; // rcx
+  unsigned __int64 *p_SpinCount; // rcx
   char v4; // al
-  AK::StreamMgr::CAkStmMemView *v5; // rbx
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rbx
 
-  v1 = this;
-  if ( !(BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 1) )
+  if ( (BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 1) == 0 )
   {
     EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-    v2 = *((_BYTE *)&v1[-1] + 197);
-    BYTE2(v1->m_lockStatus.m_csLock.LockSemaphore) |= 1u;
-    v3 = (signed __int64)&v1[-1].m_lockStatus.m_csLock.SpinCount;
-    v4 = !(v2 & 4) && !(v2 & 8);
-    *(_BYTE *)(v3 + 117) = v2 ^ (v2 ^ (v4 << 6)) & 0x40;
-    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)v3);
-    LeaveCriticalSection((LPCRITICAL_SECTION)&v1[-1].m_uNextExpectedUserPosition);
-    v5 = v1[-1].m_listBuffers.m_pFirst;
-    EnterCriticalSection((LPCRITICAL_SECTION)&v5[1]);
-    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)v1[-1].m_listBuffers.m_pFirst);
-    LeaveCriticalSection((LPCRITICAL_SECTION)&v5[1]);
-    *(_QWORD *)&v1[-1].m_listBuffers.m_ulNumListItems = *(_QWORD *)&v1[-1].m_listBuffers.m_pFirst[4].m_uOffsetInBlock;
+    v2 = *((_BYTE *)&this[-1] + 197);
+    BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) |= 1u;
+    p_SpinCount = &this[-1].m_lockStatus.m_csLock.SpinCount;
+    v4 = (v2 & 4) == 0 && (v2 & 8) == 0;
+    *((_BYTE *)p_SpinCount + 117) = v2 ^ (v2 ^ (v4 << 6)) & 0x40;
+    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)p_SpinCount);
+    LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
+    m_pFirst = this[-1].m_listBuffers.m_pFirst;
+    EnterCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
+    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)this[-1].m_listBuffers.m_pFirst);
+    LeaveCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
+    *(_QWORD *)&this[-1].m_listBuffers.m_ulNumListItems = *(_QWORD *)&this[-1].m_listBuffers.m_pFirst[4].m_uOffsetInBlock;
   }
-  return (unsigned int)((BYTE2(v1->m_lockStatus.m_csLock.LockSemaphore) & 2) != 0) + 1;
+  return (unsigned int)((BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2) != 0) + 1;
 }
 
 // File Line: 1929
 // RVA: 0xAA5000
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::Stop(AK::StreamMgr::CAkAutoStmBase *this)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::Stop(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
-
-  v1 = this;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  BYTE2(v1->m_lockStatus.m_csLock.LockSemaphore) &= 0xFEu;
-  *((_BYTE *)&v1[-1] + 197) &= 0xBFu;
-  AK::StreamMgr::CAkAutoStmBase::Flush((AK::StreamMgr::CAkAutoStmBase *)((char *)v1 - 120));
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v1[-1].m_uNextExpectedUserPosition);
+  BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) &= ~1u;
+  *((_BYTE *)&this[-1] + 197) &= ~0x40u;
+  AK::StreamMgr::CAkAutoStmBase::Flush((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
   return 1i64;
 }
 
 // File Line: 1943
 // RVA: 0xAA3AE0
-void *(__fastcall *__fastcall AK::StreamMgr::CAkAutoStmBase::GetPosition(AK::StreamMgr::CAkAutoStmBase *this, bool *out_pbEndOfStream))(AK::IAkAutoStream *this, unsigned int)
+void *(__fastcall *__fastcall AK::StreamMgr::CAkAutoStmBase::GetPosition(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        bool *out_pbEndOfStream))(AK::IAkAutoStream *this, unsigned int)
 {
-  AK::StreamMgr::CAkAutoStmBase *v2; // rsi
-  bool *v3; // r14
   __int64 v4; // rax
-  void *(__fastcall *v5)(AK::IAkAutoStream *, unsigned int); // rdi
+  void *(__fastcall *m_hBlockEvent)(AK::IAkAutoStream *, unsigned int); // rdi
 
-  v2 = this;
-  v3 = out_pbEndOfStream;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  v4 = *(_QWORD *)&v2->m_lockStatus.m_csLock.LockCount;
+  v4 = *(_QWORD *)&this->m_lockStatus.m_csLock.LockCount;
   if ( v4 )
-    v5 = (void *(__fastcall *)(AK::IAkAutoStream *, unsigned int))(**(_QWORD **)(v4 + 8) + *(unsigned int *)(v4 + 16));
+    m_hBlockEvent = (void *(__fastcall *)(AK::IAkAutoStream *, unsigned int))(**(_QWORD **)(v4 + 8)
+                                                                            + *(unsigned int *)(v4 + 16));
   else
-    v5 = (void *(__fastcall *)(AK::IAkAutoStream *, unsigned int))v2->m_hBlockEvent;
-  if ( v3 )
-    *v3 = (char *)v5 >= (char *)v2[-1].vfptr->__vecDelDtor;
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v2[-1].m_uNextExpectedUserPosition);
-  return v5;
+    m_hBlockEvent = (void *(__fastcall *)(AK::IAkAutoStream *, unsigned int))this->m_hBlockEvent;
+  if ( out_pbEndOfStream )
+    *out_pbEndOfStream = (char *)m_hBlockEvent >= (char *)this[-1].AK::IAkAutoStream::vfptr->__vecDelDtor;
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
+  return m_hBlockEvent;
 }
 
 // File Line: 1966
 // RVA: 0xAA4CC0
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetPosition(AK::StreamMgr::CAkAutoStmBase *this, __int64 in_iMoveOffset, AkMoveMethod in_eMoveMethod, __int64 *out_piRealOffset)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::SetPosition(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        __int64 in_iMoveOffset,
+        AkMoveMethod in_eMoveMethod,
+        __int64 *out_piRealOffset)
 {
-  __int64 *v4; // rsi
-  AkMoveMethod v5; // edi
-  __int64 v6; // rbx
-  AK::StreamMgr::CAkAutoStmBase *v7; // r14
-  signed __int64 v8; // rdx
+  signed __int64 v6; // rbx
+  __int64 v8; // rdx
   int v9; // edi
 
-  v4 = out_piRealOffset;
-  v5 = in_eMoveMethod;
   v6 = in_iMoveOffset;
-  v7 = this;
   if ( out_piRealOffset )
     *out_piRealOffset = 0i64;
   if ( in_eMoveMethod )
   {
-    if ( in_eMoveMethod == 1 )
+    if ( in_eMoveMethod == AK_MoveCurrent )
     {
-      v6 = (__int64)this->vfptr[13].__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)this, 0) + in_iMoveOffset;
+      v6 = (signed __int64)this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[13].__vecDelDtor(
+                             this,
+                             0i64)
+         + in_iMoveOffset;
     }
     else
     {
-      if ( in_eMoveMethod != 2 )
+      if ( in_eMoveMethod != AK_MoveEnd )
         return 31i64;
-      v6 = (__int64)this[-1].vfptr->__vecDelDtor + in_iMoveOffset;
+      v6 = (signed __int64)this[-1].AK::IAkAutoStream::vfptr->__vecDelDtor + in_iMoveOffset;
     }
   }
   if ( v6 < 0 )
     return 31i64;
-  v8 = v6 % *(unsigned int *)&v7[-1].m_uNextToGrant;
+  v8 = v6 % *(unsigned int *)&this[-1].m_uNextToGrant;
   if ( v8 )
     v6 -= v8;
-  if ( v4 )
+  if ( out_piRealOffset )
   {
-    if ( v5 )
+    if ( in_eMoveMethod )
     {
-      v9 = v5 - 1;
+      v9 = in_eMoveMethod - 1;
       if ( v9 )
       {
         if ( v9 == 1 )
-          *v4 = v6 - (unsigned __int64)v7[-1].vfptr->__vecDelDtor;
+          *out_piRealOffset = v6 - (unsigned __int64)this[-1].AK::IAkAutoStream::vfptr->__vecDelDtor;
       }
       else
       {
-        *v4 = v6 - (__int64)v7->vfptr[13].__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)&v7->vfptr, 0);
+        *out_piRealOffset = v6
+                          - (unsigned __int64)this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[13].__vecDelDtor(
+                                                this,
+                                                0i64);
       }
     }
     else
     {
-      *v4 = v6;
+      *out_piRealOffset = v6;
     }
   }
-  AK::StreamMgr::CAkAutoStmBase::ForceFilePosition((AK::StreamMgr::CAkAutoStmBase *)((char *)v7 - 120), v6);
+  AK::StreamMgr::CAkAutoStmBase::ForceFilePosition((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120), v6);
   return 1i64;
 }
 
 // File Line: 2037
 // RVA: 0xAA39C0
-bool __fastcall AK::StreamMgr::CAkAutoStmBase::GetBufferOrReserveCacheBlock(AK::StreamMgr::CAkAutoStmBase *this, void **out_pBuffer, unsigned int *out_uSize)
+bool __fastcall AK::StreamMgr::CAkAutoStmBase::GetBufferOrReserveCacheBlock(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        void **out_pBuffer,
+        unsigned int *out_uSize)
 {
-  unsigned int *v3; // rsi
-  void **v4; // rdi
-  AK::StreamMgr::CAkAutoStmBase *v5; // rbx
-  void *v7; // rax
+  void *Buffer; // rax
 
-  v3 = out_uSize;
-  v4 = out_pBuffer;
-  v5 = this;
-  if ( !(*((_BYTE *)&this->0 + 117) & 0x10) )
+  if ( (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 0x10) == 0 )
     return 0;
-  v7 = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(this, out_uSize);
-  *v4 = v7;
-  if ( v7 )
+  Buffer = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(this, out_uSize);
+  *out_pBuffer = Buffer;
+  if ( Buffer )
     return 1;
-  if ( v5->m_pDevice->vfptr[2].__vecDelDtor((AK::StreamMgr::CAkIOThread *)&v5->m_pDevice->vfptr, (unsigned int)v5) )
-    *v4 = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(v5, v3);
-  return *v4 != 0i64;
+  if ( this->m_pDevice->AK::StreamMgr::CAkStmTask::vfptr[2].__vecDelDtor(this->m_pDevice, this) )
+    *out_pBuffer = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(this, out_uSize);
+  return *out_pBuffer != 0i64;
 }
 
 // File Line: 2071
 // RVA: 0xAA3880
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::GetBuffer(AK::StreamMgr::CAkAutoStmBase *this, void **out_pBuffer, unsigned int *out_uSize, bool in_bWait)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::GetBuffer(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        void **out_pBuffer,
+        unsigned int *out_uSize,
+        bool in_bWait)
 {
-  AK::StreamMgr::CAkAutoStmBase *v4; // rbx
-  bool v5; // r15
-  unsigned int *v6; // r14
-  void **v7; // rsi
-  void *v8; // rax
+  void *Buffer; // rax
   void *v9; // rax
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v4 = this;
   *out_pBuffer = 0i64;
-  v5 = in_bWait;
-  v6 = out_uSize;
   *out_uSize = 0;
-  v7 = out_pBuffer;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  v8 = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer((AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120), v6);
-  *v7 = v8;
-  if ( !v8
-    && !(BYTE2(v4->m_lockStatus.m_csLock.LockSemaphore) & 2)
+  Buffer = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(
+             (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120),
+             out_uSize);
+  *out_pBuffer = Buffer;
+  if ( !Buffer
+    && (BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2) == 0
     && (AK::StreamMgr::CAkAutoStmBase::GetBufferOrReserveCacheBlock(
-          (AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120),
-          v7,
-          v6)
-     || v5)
-    && !*v7 )
+          (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120),
+          out_pBuffer,
+          out_uSize)
+     || in_bWait)
+    && !*out_pBuffer )
   {
     do
     {
-      if ( BYTE2(v4->m_lockStatus.m_csLock.LockSemaphore) & 2
-        || !(*((_BYTE *)&v4[-1] + 197) & 0x20) && !HIDWORD(v4->m_pDeferredOpenData) )
+      if ( (BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2) != 0
+        || (*((_BYTE *)&this[-1] + 197) & 0x20) == 0 && !HIDWORD(this->m_pDeferredOpenData) )
       {
         break;
       }
-      AK::StreamMgr::CAkClientThreadAware::SetBlockedStatus((AK::StreamMgr::CAkClientThreadAware *)&v4[-1].m_lockStatus.m_csLock.SpinCount);
-      LeaveCriticalSection((LPCRITICAL_SECTION)&v4[-1].m_uNextExpectedUserPosition);
+      AK::StreamMgr::CAkClientThreadAware::SetBlockedStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+      LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
       AK::StreamMgr::CAkIOThread::WaitForIOCompletion(
-        (AK::StreamMgr::CAkIOThread *)v4[-1].m_listBuffers.m_pFirst,
-        (AK::StreamMgr::CAkClientThreadAware *)&v4[-1].m_lockStatus.m_csLock.SpinCount);
-      EnterCriticalSection((LPCRITICAL_SECTION)&v4[-1].m_uNextExpectedUserPosition);
-      v9 = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer((AK::StreamMgr::CAkAutoStmBase *)((char *)v4 - 120), v6);
-      *v7 = v9;
+        (AK::StreamMgr::CAkIOThread *)this[-1].m_listBuffers.m_pFirst,
+        (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+      EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
+      v9 = AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(
+             (AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120),
+             out_uSize);
+      *out_pBuffer = v9;
     }
     while ( !v9 );
   }
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v4[-1].m_uNextExpectedUserPosition);
-  if ( BYTE2(v4->m_lockStatus.m_csLock.LockSemaphore) & 2 )
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
+  if ( (BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2) != 0 )
     return 2i64;
-  if ( *v7 )
+  if ( *out_pBuffer )
   {
-    if ( !(*((_BYTE *)&v4[-1] + 197) & 4) || (result = 17i64, v4->m_hBlockEvent < (void *)v4[-1].vfptr->__vecDelDtor) )
-      result = 45i64;
-  }
-  else if ( *((_BYTE *)&v4[-1] + 197) & 4 && v4->m_hBlockEvent >= (void *)v4[-1].vfptr->__vecDelDtor )
-  {
+    if ( (*((_BYTE *)&this[-1] + 197) & 4) == 0 )
+      return 45i64;
     result = 17i64;
+    if ( this->m_hBlockEvent < (void *)this[-1].AK::IAkAutoStream::vfptr->__vecDelDtor )
+      return 45i64;
+  }
+  else if ( (*((_BYTE *)&this[-1] + 197) & 4) != 0
+         && this->m_hBlockEvent >= (void *)this[-1].AK::IAkAutoStream::vfptr->__vecDelDtor )
+  {
+    return 17i64;
   }
   else
   {
-    result = 46i64;
+    return 46i64;
   }
   return result;
 }
 
 // File Line: 2150
 // RVA: 0xAA41D0
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::ReleaseBuffer(AK::StreamMgr::CAkAutoStmBase *this)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::ReleaseBuffer(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  _RTL_CRITICAL_SECTION *v1; // rbx
-  AK::StreamMgr::CAkAutoStmBase *v2; // rdi
+  _RTL_CRITICAL_SECTION *p_m_uNextExpectedUserPosition; // rbx
   AK::StreamMgr::AkMemBlock *v3; // rsi
-  AK::StreamMgr::CAkStmMemView *v4; // r14
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // r14
   _QWORD *v5; // rax
-  AK::StreamMgr::AkMemBlock *v6; // rdx
+  AK::StreamMgr::AkMemBlock *pData; // rdx
   AK::StreamMgr::CAkStmMemView *v7; // rbp
-  AK::StreamMgr::AkMemBlock *v8; // rax
-  signed __int64 result; // rax
+  AK::StreamMgr::AkMemBlock *m_pBlock; // rax
 
-  v1 = (_RTL_CRITICAL_SECTION *)&this[-1].m_uNextExpectedUserPosition;
-  v2 = this;
+  p_m_uNextExpectedUserPosition = (_RTL_CRITICAL_SECTION *)&this[-1].m_uNextExpectedUserPosition;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  if ( LOBYTE(v2->m_lockStatus.m_csLock.LockSemaphore) )
+  if ( LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore) )
   {
-    v3 = *(AK::StreamMgr::AkMemBlock **)&v2->m_lockStatus.m_csLock.LockCount;
-    v4 = v2[-1].m_listBuffers.m_pFirst;
-    EnterCriticalSection((LPCRITICAL_SECTION)&v4[1]);
-    v5 = *(_QWORD **)&v2->m_lockStatus.m_csLock.LockCount;
+    v3 = *(AK::StreamMgr::AkMemBlock **)&this->m_lockStatus.m_csLock.LockCount;
+    m_pFirst = this[-1].m_listBuffers.m_pFirst;
+    EnterCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
+    v5 = *(_QWORD **)&this->m_lockStatus.m_csLock.LockCount;
     if ( v5 )
     {
       if ( *v5 )
       {
-        *(_QWORD *)&v2->m_lockStatus.m_csLock.LockCount = *v5;
+        *(_QWORD *)&this->m_lockStatus.m_csLock.LockCount = *v5;
       }
       else
       {
-        *(_QWORD *)&v2->m_lockStatus.m_csLock.LockCount = 0i64;
-        v2->m_lockStatus.m_csLock.OwningThread = 0i64;
+        *(_QWORD *)&this->m_lockStatus.m_csLock.LockCount = 0i64;
+        this->m_lockStatus.m_csLock.OwningThread = 0i64;
       }
-      --LODWORD(v2->m_lockStatus.m_csLock.DebugInfo);
+      --LODWORD(this->m_lockStatus.m_csLock.DebugInfo);
     }
-    v6 = (AK::StreamMgr::AkMemBlock *)v3->pData;
-    v7 = v2[-1].m_listBuffers.m_pFirst;
+    pData = (AK::StreamMgr::AkMemBlock *)v3->pData;
+    v7 = this[-1].m_listBuffers.m_pFirst;
     v3->pData = 0i64;
-    if ( v6 )
-      AK::StreamMgr::CAkIOMemMgr::ReleaseBlock((AK::StreamMgr::CAkIOMemMgr *)&v7[7], v6);
-    v8 = v7[11].m_pBlock;
-    if ( v8 )
+    if ( pData )
+      AK::StreamMgr::CAkIOMemMgr::ReleaseBlock((AK::StreamMgr::CAkIOMemMgr *)&v7[7], pData);
+    m_pBlock = v7[11].m_pBlock;
+    if ( m_pBlock )
     {
-      v3->uPosition = (unsigned __int64)v8;
+      v3->uPosition = (unsigned __int64)m_pBlock;
       v7[11].m_pBlock = v3;
     }
     else
@@ -2012,64 +1947,61 @@ signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::ReleaseBuffer(AK::Strea
       v7[11].m_pBlock = v3;
       v3->uPosition = 0i64;
     }
-    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)v2[-1].m_listBuffers.m_pFirst);
-    LeaveCriticalSection((LPCRITICAL_SECTION)&v4[1]);
-    --LOBYTE(v2->m_lockStatus.m_csLock.LockSemaphore);
-    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)v2 - 120));
-    LeaveCriticalSection(v1);
-    result = 1i64;
+    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)this[-1].m_listBuffers.m_pFirst);
+    LeaveCriticalSection((LPCRITICAL_SECTION)&m_pFirst[1]);
+    --LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore);
+    AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus((AK::StreamMgr::CAkAutoStmBase *)((char *)this - 120));
+    LeaveCriticalSection(p_m_uNextExpectedUserPosition);
+    return 1i64;
   }
   else
   {
-    LeaveCriticalSection(v1);
-    result = 2i64;
+    LeaveCriticalSection(p_m_uNextExpectedUserPosition);
+    return 2i64;
   }
-  return result;
 }
 
 // File Line: 2190
 // RVA: 0xAA40B0
-signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::QueryBufferingStatus(AK::StreamMgr::CAkAutoStmBase *this, unsigned int *out_uNumBytesAvailable)
+__int64 __fastcall AK::StreamMgr::CAkAutoStmBase::QueryBufferingStatus(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        unsigned int *out_uNumBytesAvailable)
 {
-  unsigned int *v2; // rsi
-  AK::StreamMgr::CAkAutoStmBase *v3; // rdi
-  __int64 v5; // rcx
+  __int64 LockSemaphore_low; // rcx
   __int64 *v6; // rax
   unsigned int v7; // ebp
 
-  v2 = out_uNumBytesAvailable;
-  v3 = this;
-  if ( BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2 )
+  if ( (BYTE2(this->m_lockStatus.m_csLock.LockSemaphore) & 2) != 0 )
     return 2i64;
   EnterCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
-  *v2 = 0;
-  v5 = LOBYTE(v3->m_lockStatus.m_csLock.LockSemaphore);
-  if ( (unsigned int)v5 >= LODWORD(v3->m_lockStatus.m_csLock.DebugInfo) )
+  *out_uNumBytesAvailable = 0;
+  LockSemaphore_low = LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore);
+  if ( (unsigned int)LockSemaphore_low >= LODWORD(this->m_lockStatus.m_csLock.DebugInfo) )
   {
     v7 = 46;
   }
   else
   {
-    v6 = *(__int64 **)&v3->m_lockStatus.m_csLock.LockCount;
+    v6 = *(__int64 **)&this->m_lockStatus.m_csLock.LockCount;
     v7 = 45;
-    if ( LOBYTE(v3->m_lockStatus.m_csLock.LockSemaphore) )
+    if ( LOBYTE(this->m_lockStatus.m_csLock.LockSemaphore) )
     {
       do
       {
         v6 = (__int64 *)*v6;
-        --v5;
+        --LockSemaphore_low;
       }
-      while ( v5 );
+      while ( LockSemaphore_low );
     }
     for ( ; v6; v6 = (__int64 *)*v6 )
-      *v2 += *(_DWORD *)(v6[1] + 24) - *((_DWORD *)v6 + 4);
+      *out_uNumBytesAvailable += *(_DWORD *)(v6[1] + 24) - *((_DWORD *)v6 + 4);
   }
-  if ( !(*((_BYTE *)&v3[-1] + 197) & 0x20) && HIDWORD(v3->m_pDeferredOpenData) <= *v2
-    || LOBYTE(v3[-1].m_listBuffers.m_pFirst[4].m_pBlock) )
+  if ( (*((_BYTE *)&this[-1] + 197) & 0x20) == 0 && HIDWORD(this->m_pDeferredOpenData) <= *out_uNumBytesAvailable
+    || LOBYTE(this[-1].m_listBuffers.m_pFirst[4].m_pBlock) )
   {
     v7 = 17;
   }
-  LeaveCriticalSection((LPCRITICAL_SECTION)&v3[-1].m_uNextExpectedUserPosition);
+  LeaveCriticalSection((LPCRITICAL_SECTION)&this[-1].m_uNextExpectedUserPosition);
   return v7;
 }
 
@@ -2077,60 +2009,59 @@ signed __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::QueryBufferingStatus(AK
 // RVA: 0xAA3AC0
 __int64 __fastcall AK::StreamMgr::CAkAutoStmBase::GetNominalBuffering(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  return (unsigned int)(signed int)(float)(*((float *)&this[-1].m_listBuffers.m_pFirst[10] + 5)
-                                         * *((float *)&this->m_bIsBlocked + 1));
+  return (unsigned int)(int)(float)(*((float *)&this[-1].m_listBuffers.m_pFirst[10] + 5)
+                                  * *((float *)&this->m_bIsBlocked + 1));
 }
 
 // File Line: 2251
 // RVA: 0xAA4040
 void __fastcall AK::StreamMgr::CAkAutoStmBase::OnFileDeferredOpen(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::IAkAutoStreamVtbl *v1; // rax
-  AK::StreamMgr::CAkAutoStmBase *v2; // rbx
-  int *v3; // rcx
-  char v4; // [rsp+20h] [rbp-18h]
-  unsigned int v5; // [rsp+28h] [rbp-10h]
+  AK::IAkAutoStreamVtbl *vfptr; // rax
+  AkFileDesc *m_pFileDesc; // rcx
+  char v4; // [rsp+20h] [rbp-18h] BYREF
+  unsigned int iFileSize; // [rsp+28h] [rbp-10h]
 
-  v1 = this->vfptr;
-  *((_BYTE *)&this->0 + 117) |= 0x10u;
-  v2 = this;
-  v1->GetHeuristics((AK::IAkAutoStream *)&this->vfptr, (AkAutoStmHeuristics *)&v4);
-  v3 = (int *)v2->m_pFileDesc;
-  if ( (signed __int64)v5 > *(_QWORD *)v3 )
+  vfptr = this->AK::IAkAutoStream::vfptr;
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) |= 0x10u;
+  vfptr->GetHeuristics(&this->AK::IAkAutoStream, (AkAutoStmHeuristics *)&v4);
+  m_pFileDesc = this->m_pFileDesc;
+  if ( iFileSize > m_pFileDesc->iFileSize )
   {
-    v5 = *v3;
-    v2->vfptr->SetHeuristics((AK::IAkAutoStream *)&v2->vfptr, (AkAutoStmHeuristics *)&v4);
+    iFileSize = m_pFileDesc->iFileSize;
+    this->AK::IAkAutoStream::vfptr->SetHeuristics(&this->AK::IAkAutoStream, (AkAutoStmHeuristics *)&v4);
   }
 }
 
 // File Line: 2271
 // RVA: 0xAA2C20
-void __fastcall AK::StreamMgr::CAkAutoStmBase::AddMemView(AK::StreamMgr::CAkAutoStmBase *this, AK::StreamMgr::CAkStmMemView *in_pMemView, bool in_bStoreData)
+void __fastcall AK::StreamMgr::CAkAutoStmBase::AddMemView(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AK::StreamMgr::CAkStmMemView *in_pMemView,
+        bool in_bStoreData)
 {
-  AK::StreamMgr::CAkStmMemView *v3; // rsi
-  AK::StreamMgr::CAkAutoStmBase *v4; // rdi
-  AK::StreamMgr::CAkStmMemView *v5; // rax
-  AK::StreamMgr::CAkDeviceBase *v6; // rbx
+  AK::StreamMgr::CAkStmMemView *m_pLast; // rax
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rbx
 
-  v3 = in_pMemView;
-  v4 = this;
-  if ( !in_bStoreData || *((_BYTE *)&this->0 + 117) & 8 || *((_BYTE *)this + 194) & 2 )
+  if ( !in_bStoreData
+    || (*((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) & 8) != 0
+    || (*((_BYTE *)this + 194) & 2) != 0 )
   {
-    v6 = this->m_pDevice;
-    EnterCriticalSection(&v6->m_lockSems.m_csLock);
-    AK::StreamMgr::CAkAutoStmBase::DestroyBuffer(v4, v3);
-    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)&v4->m_pDevice->vfptr);
-    LeaveCriticalSection(&v6->m_lockSems.m_csLock);
+    m_pDevice = this->m_pDevice;
+    EnterCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+    AK::StreamMgr::CAkAutoStmBase::DestroyBuffer(this, in_pMemView);
+    AK::StreamMgr::CAkIOThread::NotifyMemChange(this->m_pDevice);
+    LeaveCriticalSection(&m_pDevice->m_lockSems.m_csLock);
   }
   else
   {
-    *((_DWORD *)in_pMemView + 5) &= 0xFFFFFFFB;
+    *((_DWORD *)in_pMemView + 5) &= ~4u;
     *((_DWORD *)in_pMemView + 5) |= 3u;
     in_pMemView->pNextView = 0i64;
-    v5 = this->m_listBuffers.m_pLast;
-    if ( v5 )
+    m_pLast = this->m_listBuffers.m_pLast;
+    if ( m_pLast )
     {
-      v5->pNextView = in_pMemView;
+      m_pLast->pNextView = in_pMemView;
       ++this->m_listBuffers.m_ulNumListItems;
     }
     else
@@ -2144,143 +2075,134 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::AddMemView(AK::StreamMgr::CAkAuto
 
 // File Line: 2319
 // RVA: 0xAA5130
-void __fastcall AK::StreamMgr::CAkAutoStmBase::UpdateTaskStatus(AK::StreamMgr::CAkAutoStmBase *this, AKRESULT in_eIOResult)
+void __fastcall AK::StreamMgr::CAkAutoStmBase::UpdateTaskStatus(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        AKRESULT in_eIOResult)
 {
-  AK::StreamMgr::CAkAutoStmBase *v2; // rbx
-
-  v2 = this;
-  if ( in_eIOResult == 2 )
+  if ( in_eIOResult == AK_Fail )
   {
     *((_BYTE *)this + 194) |= 2u;
-    this->vfptr->Stop((AK::IAkAutoStream *)&this->vfptr);
+    this->AK::IAkAutoStream::vfptr->Stop(&this->AK::IAkAutoStream);
   }
-  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(v2);
-  if ( v2->m_bIsBlocked )
-    AK::StreamMgr::CAkIOThread::SignalIOCompleted(
-      (AK::StreamMgr::CAkIOThread *)&v2->m_pDevice->vfptr,
-      (AK::StreamMgr::CAkClientThreadAware *)&v2->vfptr);
+  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(this);
+  if ( this->m_bIsBlocked )
+    AK::StreamMgr::CAkIOThread::SignalIOCompleted(this->m_pDevice, this);
 }
 
 // File Line: 2342
 // RVA: 0xAA3F30
 void __fastcall AK::StreamMgr::CAkAutoStmBase::Kill(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
-  AK::IAkAutoStreamVtbl *v2; // rax
+  AK::IAkAutoStreamVtbl *vfptr; // rax
 
-  v1 = this;
   EnterCriticalSection(&this->m_lockStatus.m_csLock);
-  v2 = v1->vfptr;
-  *((_BYTE *)v1 + 194) |= 2u;
-  v2->Stop((AK::IAkAutoStream *)&v1->vfptr);
-  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(v1);
-  if ( v1->m_bIsBlocked )
-    AK::StreamMgr::CAkIOThread::SignalIOCompleted(
-      (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr,
-      (AK::StreamMgr::CAkClientThreadAware *)&v1->vfptr);
-  LeaveCriticalSection(&v1->m_lockStatus.m_csLock);
+  vfptr = this->AK::IAkAutoStream::vfptr;
+  *((_BYTE *)this + 194) |= 2u;
+  vfptr->Stop(&this->AK::IAkAutoStream);
+  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(this);
+  if ( this->m_bIsBlocked )
+    AK::StreamMgr::CAkIOThread::SignalIOCompleted(this->m_pDevice, this);
+  LeaveCriticalSection(&this->m_lockStatus.m_csLock);
 }
 
 // File Line: 2350
 // RVA: 0xAA3230
 float __fastcall AK::StreamMgr::CAkAutoStmBase::EffectiveDeadline(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  return (float)(signed int)this->m_uVirtualBufferingSize / this->m_fThroughput;
+  return (float)(int)this->m_uVirtualBufferingSize / this->m_fThroughput;
 }
 
 // File Line: 2406
 // RVA: 0xAA3740
-void __fastcall AK::StreamMgr::CAkAutoStmBase::ForceFilePosition(AK::StreamMgr::CAkAutoStmBase *this, const unsigned __int64 in_uNewPosition)
+void __fastcall AK::StreamMgr::CAkAutoStmBase::ForceFilePosition(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        unsigned __int64 in_uNewPosition)
 {
-  AK::StreamMgr::CAkAutoStmBase *v2; // rdi
-  unsigned __int64 v3; // rsi
-  unsigned int v4; // ecx
-  AK::StreamMgr::CAkStmMemView *v5; // rax
+  unsigned int m_uNextToGrant; // ecx
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rax
   __int64 v6; // rdx
   AK::StreamMgr::CAkAutoStmBase *v7; // rcx
 
-  v2 = this;
-  v3 = in_uNewPosition;
   EnterCriticalSection(&this->m_lockStatus.m_csLock);
-  v4 = (unsigned __int8)v2->m_uNextToGrant;
-  v2->m_uNextExpectedUserPosition = v3;
-  if ( v4 >= v2->m_listBuffers.m_ulNumListItems )
+  m_uNextToGrant = (unsigned __int8)this->m_uNextToGrant;
+  this->m_uNextExpectedUserPosition = in_uNewPosition;
+  if ( m_uNextToGrant >= this->m_listBuffers.m_ulNumListItems )
   {
-    v2->vfptr[9].__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)&v2->vfptr, v3);
-    v7 = v2;
+    this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[9].__vecDelDtor(this, in_uNewPosition);
+    v7 = this;
 LABEL_8:
     AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(v7);
     goto LABEL_9;
   }
-  v5 = v2->m_listBuffers.m_pFirst;
-  if ( v4 )
+  m_pFirst = this->m_listBuffers.m_pFirst;
+  if ( m_uNextToGrant )
   {
-    v6 = v4;
+    v6 = m_uNextToGrant;
     do
     {
-      v5 = v5->pNextView;
+      m_pFirst = m_pFirst->pNextView;
       --v6;
     }
     while ( v6 );
   }
-  v7 = v2;
-  if ( v5->m_pBlock->uPosition + v5->m_uOffsetInBlock == v3 )
+  v7 = this;
+  if ( m_pFirst->m_pBlock->uPosition + m_pFirst->m_uOffsetInBlock == in_uNewPosition )
     goto LABEL_8;
-  AK::StreamMgr::CAkAutoStmBase::Flush(v2);
+  AK::StreamMgr::CAkAutoStmBase::Flush(this);
 LABEL_9:
-  LeaveCriticalSection(&v2->m_lockStatus.m_csLock);
+  LeaveCriticalSection(&this->m_lockStatus.m_csLock);
 }
 
 // File Line: 2440
 // RVA: 0xAA5050
 void __fastcall AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
-  unsigned __int64 v2; // rbx
+  unsigned __int64 iFileSize; // rbx
   char v3; // al
   char v4; // al
   char v5; // cl
   char v6; // al
   char v7; // al
-  AK::StreamMgr::CAkIOThread *v8; // rcx
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rcx
   char v9; // al
-  AK::StreamMgr::CAkIOThread *v10; // rcx
+  AK::StreamMgr::CAkDeviceBase *v10; // rcx
 
-  v1 = this;
   if ( this->m_uLoopEnd
-    || (v2 = this->m_pFileDesc->iFileSize, ((__int64 (*)(void))this->vfptr[7].__vecDelDtor)() < v2)
-    || (v3 = *((_BYTE *)&v1->0 + 117), !(v3 & 0x10)) )
+    || (iFileSize = this->m_pFileDesc->iFileSize,
+        ((__int64 (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[7].__vecDelDtor)(this) < iFileSize)
+    || (v3 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117), (v3 & 0x10) == 0) )
   {
-    *((_BYTE *)&v1->0 + 117) &= 0xFBu;
-    v5 = *((_BYTE *)&v1->0 + 117);
-    v6 = *((_BYTE *)v1 + 194) & 1 && !(v5 & 8);
+    *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) &= ~4u;
+    v5 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    v6 = (*((_BYTE *)this + 194) & 1) != 0 && (v5 & 8) == 0;
     v4 = v5 ^ (v5 ^ (v6 << 6)) & 0x40;
   }
   else
   {
-    v4 = v3 & 0xBF | 4;
+    v4 = v3 & 0xBB | 4;
   }
-  *((_BYTE *)&v1->0 + 117) = v4;
-  if ( v4 & 0x40
-    && (float)(signed int)v1->m_uVirtualBufferingSize < (float)(v1->m_pDevice->m_fTargetAutoStmBufferLength
-                                                              * v1->m_fThroughput)
-    || v4 & 8 && ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))v1->vfptr[1].__vecDelDtor)(v1) )
+  *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v4;
+  if ( (v4 & 0x40) != 0
+    && (float)(int)this->m_uVirtualBufferingSize < (float)(this->m_pDevice->m_fTargetAutoStmBufferLength
+                                                         * this->m_fThroughput)
+    || (v4 & 8) != 0
+    && ((unsigned __int8 (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[1].__vecDelDtor)(this) )
   {
-    v7 = *((_BYTE *)&v1->0 + 117);
-    if ( !(v7 & 0x20) )
+    v7 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v7 & 0x20) == 0 )
     {
-      v8 = (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr;
-      *((_BYTE *)&v1->0 + 117) = v7 | 0x20;
-      AK::StreamMgr::CAkIOThread::AutoSemIncr(v8);
+      m_pDevice = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v7 | 0x20;
+      AK::StreamMgr::CAkIOThread::AutoSemIncr(m_pDevice);
     }
   }
   else
   {
-    v9 = *((_BYTE *)&v1->0 + 117);
-    if ( v9 & 0x20 )
+    v9 = *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117);
+    if ( (v9 & 0x20) != 0 )
     {
-      v10 = (AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr;
-      *((_BYTE *)&v1->0 + 117) = v9 & 0xDF;
+      v10 = this->m_pDevice;
+      *((_BYTE *)&this->AK::StreamMgr::CAkStmTask + 117) = v9 & 0xDF;
       AK::StreamMgr::CAkIOThread::AutoSemDecr(v10);
     }
   }
@@ -2288,126 +2210,116 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(AK::Stream
 
 // File Line: 2492
 // RVA: 0xAA3B80
-char *__fastcall AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(AK::StreamMgr::CAkAutoStmBase *this, unsigned int *out_uSize)
+char *__fastcall AK::StreamMgr::CAkAutoStmBase::GetReadBuffer(
+        AK::StreamMgr::CAkAutoStmBase *this,
+        unsigned int *out_uSize)
 {
-  unsigned int v2; // er8
-  unsigned int *v3; // rsi
-  AK::StreamMgr::CAkAutoStmBase *v4; // rdi
-  AK::StreamMgr::CAkStmMemView *v5; // rbx
+  unsigned int m_uNextToGrant; // r8d
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rbx
   __int64 v6; // rax
-  char *result; // rax
-  AK::StreamMgr::AkMemBlock *v8; // rdx
-  __int64 v9; // r8
-  unsigned __int64 v10; // r9
-  unsigned __int64 v11; // rcx
-  unsigned int v12; // ecx
+  AK::StreamMgr::AkMemBlock *m_pBlock; // rdx
+  __int64 m_uOffsetInBlock; // r8
+  unsigned __int64 uPosition; // r9
+  unsigned __int64 m_uLoopEnd; // rcx
+  unsigned int uAvailableSize; // ecx
 
-  v2 = (unsigned __int8)this->m_uNextToGrant;
-  v3 = out_uSize;
-  v4 = this;
-  if ( v2 >= this->m_listBuffers.m_ulNumListItems )
+  m_uNextToGrant = (unsigned __int8)this->m_uNextToGrant;
+  if ( m_uNextToGrant >= this->m_listBuffers.m_ulNumListItems )
   {
     *out_uSize = 0;
-    result = 0i64;
+    return 0i64;
   }
   else
   {
-    v5 = this->m_listBuffers.m_pFirst;
+    m_pFirst = this->m_listBuffers.m_pFirst;
     if ( this->m_uNextToGrant )
     {
       v6 = (unsigned __int8)this->m_uNextToGrant;
       do
       {
-        v5 = v5->pNextView;
+        m_pFirst = m_pFirst->pNextView;
         --v6;
       }
       while ( v6 );
     }
-    if ( v5->m_pBlock->uPosition + v5->m_uOffsetInBlock == this->m_uNextExpectedUserPosition )
+    if ( m_pFirst->m_pBlock->uPosition + m_pFirst->m_uOffsetInBlock == this->m_uNextExpectedUserPosition )
     {
-      this->m_uNextToGrant = v2 + 1;
-      this->m_uNextExpectedUserPosition = v5->m_pBlock->uPosition + v5->m_pBlock->uAvailableSize;
-      *out_uSize = v5->m_pBlock->uAvailableSize - v5->m_uOffsetInBlock;
-      v8 = v5->m_pBlock;
-      v9 = v5->m_uOffsetInBlock;
-      v10 = v8->uPosition;
-      v11 = this->m_uLoopEnd;
-      if ( v8->uPosition + v9 >= v11 || v10 + v8->uAvailableSize <= v11 )
-        v12 = v8->uAvailableSize;
+      this->m_uNextToGrant = m_uNextToGrant + 1;
+      this->m_uNextExpectedUserPosition = m_pFirst->m_pBlock->uPosition + m_pFirst->m_pBlock->uAvailableSize;
+      *out_uSize = m_pFirst->m_pBlock->uAvailableSize - m_pFirst->m_uOffsetInBlock;
+      m_pBlock = m_pFirst->m_pBlock;
+      m_uOffsetInBlock = m_pFirst->m_uOffsetInBlock;
+      uPosition = m_pBlock->uPosition;
+      m_uLoopEnd = this->m_uLoopEnd;
+      if ( m_pBlock->uPosition + m_uOffsetInBlock >= m_uLoopEnd || uPosition + m_pBlock->uAvailableSize <= m_uLoopEnd )
+        uAvailableSize = m_pBlock->uAvailableSize;
       else
-        v12 = v11 - v10;
-      v4->m_uVirtualBufferingSize -= v12 - v9;
-      AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(v4);
-      result = (char *)v5->m_pBlock->pData + v5->m_uOffsetInBlock;
+        uAvailableSize = m_uLoopEnd - uPosition;
+      this->m_uVirtualBufferingSize -= uAvailableSize - m_uOffsetInBlock;
+      AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(this);
+      return (char *)m_pFirst->m_pBlock->pData + m_pFirst->m_uOffsetInBlock;
     }
     else
     {
-      this->vfptr[11].__vecDelDtor((AK::StreamMgr::CAkClientThreadAware *)this, 0);
-      AK::StreamMgr::CAkAutoStmBase::Flush(v4);
-      *v3 = 0;
-      result = 0i64;
+      this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[11].__vecDelDtor(this, 0);
+      AK::StreamMgr::CAkAutoStmBase::Flush(this);
+      *out_uSize = 0;
+      return 0i64;
     }
   }
-  return result;
 }
 
 // File Line: 2535
 // RVA: 0xAA3520
 void __fastcall AK::StreamMgr::CAkAutoStmBase::Flush(AK::StreamMgr::CAkAutoStmBase *this)
 {
-  AK::StreamMgr::CAkAutoStmBase *v1; // rdi
-  __int64 v2; // rax
-  AK::StreamMgr::CAkStmMemView *v3; // rbx
+  __int64 m_uNextToGrant; // rax
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rbx
   AK::StreamMgr::CAkStmMemView *v4; // rsi
-  AK::StreamMgr::CAkDeviceBase *v5; // r14
-  AK::StreamMgr::CAkStmMemView *v6; // rbp
-  __m128i v7; // [rsp+20h] [rbp-28h]
-  __m128i v8; // [rsp+30h] [rbp-18h]
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // r14
+  AK::StreamMgr::CAkStmMemView *pNextView; // rbp
+  AK::StreamMgr::CAkStmMemView *v7; // [rsp+20h] [rbp-28h]
 
-  v1 = this;
-  ((void (*)(void))this->vfptr[8].__vecDelDtor)();
-  v2 = (unsigned __int8)v1->m_uNextToGrant;
-  if ( v1->m_listBuffers.m_ulNumListItems > (unsigned int)v2 )
+  ((void (__fastcall *)(AK::StreamMgr::CAkAutoStmBase *))this->AK::StreamMgr::CAkStmTask::AK::StreamMgr::CAkClientThreadAware::vfptr[8].__vecDelDtor)(this);
+  m_uNextToGrant = (unsigned __int8)this->m_uNextToGrant;
+  if ( this->m_listBuffers.m_ulNumListItems > (unsigned int)m_uNextToGrant )
   {
-    v3 = v1->m_listBuffers.m_pFirst;
+    m_pFirst = this->m_listBuffers.m_pFirst;
     v4 = 0i64;
-    if ( (_DWORD)v2 )
+    if ( this->m_uNextToGrant )
     {
       do
       {
-        v4 = v3;
-        v3 = v3->pNextView;
-        --v2;
+        v4 = m_pFirst;
+        m_pFirst = m_pFirst->pNextView;
+        --m_uNextToGrant;
       }
-      while ( v2 );
+      while ( m_uNextToGrant );
     }
-    v5 = v1->m_pDevice;
-    EnterCriticalSection(&v5->m_lockSems.m_csLock);
-    if ( v3 )
+    m_pDevice = this->m_pDevice;
+    EnterCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+    if ( m_pFirst )
     {
       while ( 1 )
       {
-        v6 = v3->pNextView;
-        v7.m128i_i64[1] = (__int64)v4;
-        v7.m128i_i64[0] = (__int64)v3->pNextView;
-        if ( v3 == v1->m_listBuffers.m_pFirst )
-          v1->m_listBuffers.m_pFirst = v6;
+        pNextView = m_pFirst->pNextView;
+        v7 = m_pFirst->pNextView;
+        if ( m_pFirst == this->m_listBuffers.m_pFirst )
+          this->m_listBuffers.m_pFirst = pNextView;
         else
-          v4->pNextView = v6;
-        if ( v3 == v1->m_listBuffers.m_pLast )
-          v1->m_listBuffers.m_pLast = v4;
-        --v1->m_listBuffers.m_ulNumListItems;
-        _mm_store_si128(&v8, v7);
-        AK::StreamMgr::CAkAutoStmBase::DestroyBuffer(v1, v3);
-        if ( !v6 )
+          v4->pNextView = pNextView;
+        if ( m_pFirst == this->m_listBuffers.m_pLast )
+          this->m_listBuffers.m_pLast = v4;
+        --this->m_listBuffers.m_ulNumListItems;
+        AK::StreamMgr::CAkAutoStmBase::DestroyBuffer(this, m_pFirst);
+        if ( !pNextView )
           break;
-        v4 = (AK::StreamMgr::CAkStmMemView *)v8.m128i_i64[1];
-        v3 = (AK::StreamMgr::CAkStmMemView *)v8.m128i_i64[0];
+        m_pFirst = v7;
       }
     }
-    AK::StreamMgr::CAkIOThread::NotifyMemChange((AK::StreamMgr::CAkIOThread *)&v1->m_pDevice->vfptr);
-    LeaveCriticalSection(&v5->m_lockSems.m_csLock);
+    AK::StreamMgr::CAkIOThread::NotifyMemChange(this->m_pDevice);
+    LeaveCriticalSection(&m_pDevice->m_lockSems.m_csLock);
   }
-  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(v1);
+  AK::StreamMgr::CAkAutoStmBase::UpdateSchedulingStatus(this);
 }
 

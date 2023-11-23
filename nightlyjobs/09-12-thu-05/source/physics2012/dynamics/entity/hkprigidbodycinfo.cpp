@@ -35,9 +35,7 @@ void __fastcall hkpRigidBodyCinfo::hkpRigidBodyCinfo(hkpRigidBodyCinfo *this)
 void __fastcall hkpRigidBodyCinfo::setMassProperties(hkpRigidBodyCinfo *this, hkMassProperties *mp)
 {
   this->m_mass = mp->m_mass;
-  this->m_inertiaTensor.m_col0 = mp->m_inertiaTensor.m_col0;
-  this->m_inertiaTensor.m_col1 = mp->m_inertiaTensor.m_col1;
-  this->m_inertiaTensor.m_col2 = mp->m_inertiaTensor.m_col2;
+  this->m_inertiaTensor = mp->m_inertiaTensor;
   this->m_centerOfMass = mp->m_centerOfMass;
 }
 
@@ -45,10 +43,10 @@ void __fastcall hkpRigidBodyCinfo::setMassProperties(hkpRigidBodyCinfo *this, hk
 // RVA: 0xD620D0
 void __fastcall hkpRigidBodyCinfo::setTransform(hkpRigidBodyCinfo *this, hkTransformf *transform)
 {
-  hkQuaternionf *v2; // rcx
+  hkQuaternionf *p_m_rotation; // rcx
 
-  v2 = &this->m_rotation;
-  v2[-1] = (hkQuaternionf)transform->m_translation;
-  hkQuaternionf::set(v2, &transform->m_rotation);
+  p_m_rotation = &this->m_rotation;
+  p_m_rotation[-1] = (hkQuaternionf)transform->m_translation;
+  hkQuaternionf::set(p_m_rotation, &transform->m_rotation);
 }
 

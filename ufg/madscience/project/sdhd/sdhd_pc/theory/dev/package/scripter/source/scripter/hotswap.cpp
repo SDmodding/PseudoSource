@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::HotSwapFileManager::sInstance__()
   stru_142036A10.mNode.mPrev = (UFG::qNode<UFG::FlowController::StateHistory,UFG::FlowController::StateHistory> *)&stru_142036A10;
   stru_142036A10.mNode.mNext = (UFG::qNode<UFG::FlowController::StateHistory,UFG::FlowController::StateHistory> *)&stru_142036A10;
   unk_142036A20 = 0;
-  return atexit(dynamic_atexit_destructor_for__UFG::HotSwapFileManager::sInstance__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::HotSwapFileManager::sInstance__);
 }
 
 // File Line: 98
@@ -43,57 +43,62 @@ UFG::HotSwapFileManager *__fastcall UFG::HotSwapFileManager::Get()
 
 // File Line: 124
 // RVA: 0x13F8B0
-__int64 __fastcall UFG::HotSwapFileManager::ProcessBuildLabOptions(UFG::HotSwapFileManager *this, UFG::BuildLabOptions *buildLabOptions, const char *obfuscateKey, unsigned int obfuscateKeyLength)
+__int64 __fastcall UFG::HotSwapFileManager::ProcessBuildLabOptions(
+        UFG::HotSwapFileManager *this,
+        UFG::BuildLabOptions *buildLabOptions,
+        const char *obfuscateKey,
+        unsigned int obfuscateKeyLength)
 {
-  UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *v4; // rbx
-  UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *v5; // rcx
+  UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *p_mHotSwapSystemList; // rbx
+  UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *mNext; // rcx
   __int64 result; // rax
 
-  v4 = &this->mHotSwapSystemList;
+  p_mHotSwapSystemList = &this->mHotSwapSystemList;
   UFG::qList<UFG::FlowController::StateHistory,UFG::FlowController::StateHistory,1,0>::DeleteNodes((UFG::qList<UFG::FlowController::StateHistory,UFG::FlowController::StateHistory,1,0> *)&this->mHotSwapSystemList);
-  v5 = (UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *)v4->mNode.mNext;
-  for ( result = 0i64; v5 != v4; result = (unsigned int)(result + 1) )
-    v5 = (UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *)v5->mNode.mNext;
+  mNext = (UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *)p_mHotSwapSystemList->mNode.mNext;
+  for ( result = 0i64; mNext != p_mHotSwapSystemList; result = (unsigned int)(result + 1) )
+    mNext = (UFG::qList<UFG::HotSwapSystemInfo,UFG::HotSwapSystemInfo,1,0> *)mNext->mNode.mNext;
   return result;
 }
 
 // File Line: 247
 // RVA: 0x13F900
-_BOOL8 __fastcall UFG::HotSwapFileManager::UnRegisterFile(UFG::HotSwapFileManager *this, const char *file, fastdelegate::FastDelegate1<char const *,void> *callback)
+_BOOL8 __fastcall UFG::HotSwapFileManager::UnRegisterFile(
+        UFG::HotSwapFileManager *this,
+        const char *file,
+        fastdelegate::FastDelegate1<char const *,void> *callback)
 {
-  fastdelegate::FastDelegate1<char const *,void> *v3; // r14
-  UFG::HotSwapFileManager *v4; // rsi
   char v5; // r15
   int v6; // ebp
   UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *i; // rbx
   UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *v8; // rdi
-  UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *v9; // rcx
-  UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *v10; // rax
+  UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *mPrev; // rcx
+  UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *mNext; // rax
   UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *v11; // rdx
   UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *v12; // rax
 
-  v3 = callback;
-  v4 = this;
   v5 = 0;
   v6 = UFG::qStringHashUpper32(file, 0xFFFFFFFF);
-  for ( i = v4->mHotSwapInfoList.mNode.mNext; i != (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)v4; i = i->mNext )
+  for ( i = this->mHotSwapInfoList.mNode.mNext;
+        i != (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)this;
+        i = i->mNext )
   {
     if ( LODWORD(i[3].mNext) == v6
-      && i[4].mPrev == (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)v3->m_Closure.m_pthis
-      && i[4].mNext == (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)v3->m_Closure.m_pFunction )
+      && i[4].mPrev == (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)callback->m_Closure.m_pthis
+      && i[4].mNext == (UFG::qNode<UFG::HotSwapFileInfo,UFG::HotSwapFileInfo> *)callback->m_Closure.m_pFunction )
     {
       v8 = i;
-      if ( v4->mIsUpdating )
+      if ( this->mIsUpdating )
       {
         BYTE1(i[6].mNext) = 1;
       }
       else
       {
         i = i->mPrev;
-        v9 = v8->mPrev;
-        v10 = v8->mNext;
-        v9->mNext = v10;
-        v10->mPrev = v9;
+        mPrev = v8->mPrev;
+        mNext = v8->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
         v8->mPrev = v8;
         v8->mNext = v8;
         UFG::qString::~qString((UFG::qString *)&v8[1]);

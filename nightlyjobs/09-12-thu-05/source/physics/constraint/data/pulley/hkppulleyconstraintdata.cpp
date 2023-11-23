@@ -17,14 +17,19 @@ void __fastcall hkpPulleyConstraintData::hkpPulleyConstraintData(hkpPulleyConstr
 
 // File Line: 24
 // RVA: 0xD4A950
-void __fastcall hkpPulleyConstraintData::getConstraintInfo(hkpPulleyConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpPulleyConstraintData::getConstraintInfo(
+        hkpPulleyConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_translations.m_type, 112, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_translations, 0x70u, infoOut);
 }
 
 // File Line: 29
 // RVA: 0xD4A970
-void __fastcall hkpPulleyConstraintData::getRuntimeInfo(hkpPulleyConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpPulleyConstraintData::getRuntimeInfo(
+        hkpPulleyConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   if ( wantRuntime.m_bool )
   {
@@ -41,24 +46,21 @@ void __fastcall hkpPulleyConstraintData::getRuntimeInfo(hkpPulleyConstraintData 
 // RVA: 0xD4A920
 hkBool *__fastcall hkpPulleyConstraintData::isValid(hkpPulleyConstraintData *this, hkBool *result)
 {
-  hkBool *v2; // rax
-
   if ( this->m_atoms.m_pulley.m_ropeLength <= 0.0 || this->m_atoms.m_pulley.m_leverageOnBodyB <= 0.0 )
   {
     result->m_bool = 0;
-    v2 = result;
+    return result;
   }
   else
   {
     result->m_bool = 1;
-    v2 = result;
+    return result;
   }
-  return v2;
 }
 
 // File Line: 48
 // RVA: 0xD4A910
-signed __int64 __fastcall hkpPulleyConstraintData::getType(hkpPulleyConstraintData *this)
+__int64 __fastcall hkpPulleyConstraintData::getType(hkpPulleyConstraintData *this)
 {
   return 15i64;
 }

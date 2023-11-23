@@ -63,17 +63,17 @@ hkClass *__fastcall hkpVehicleDefaultSuspension::staticClass()
 
 // File Line: 112
 // RVA: 0xE257B0
-void __fastcall finishLoadedObjecthkpVehicleDefaultSuspension(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultSuspension(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSuspension::`vftable;
+    *p = &hkpVehicleDefaultSuspension::`vftable;
 }
 
 // File Line: 118
 // RVA: 0xE257D0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultSuspension(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultSuspension(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 122
@@ -94,8 +94,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultSuspensionTypeInfo__()
   hkpVehicleDefaultSuspensionTypeInfo.m_typeName = "hkpVehicleDefaultSuspension";
   hkpVehicleDefaultSuspensionTypeInfo.m_vtable = result;
   hkpVehicleDefaultSuspensionTypeInfo.m_scopedName = "!hkpVehicleDefaultSuspension";
-  hkpVehicleDefaultSuspensionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultSuspension;
-  hkpVehicleDefaultSuspensionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultSuspension;
+  hkpVehicleDefaultSuspensionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultSuspension;
+  hkpVehicleDefaultSuspensionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultSuspension;
   return result;
 }
 

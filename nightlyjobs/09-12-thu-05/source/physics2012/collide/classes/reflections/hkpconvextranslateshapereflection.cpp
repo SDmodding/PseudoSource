@@ -28,23 +28,26 @@ hkClass *__fastcall hkpConvexTranslateShape::staticClass()
 
 // File Line: 62
 // RVA: 0xCEB640
-void __fastcall finishLoadedObjecthkpConvexTranslateShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexTranslateShape(
+        hkpConvexTranslateShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpConvexTranslateShape::hkpConvexTranslateShape);
+  if ( p )
+    hkpConvexTranslateShape::hkpConvexTranslateShape(p, finishing);
 }
 
 // File Line: 68
 // RVA: 0xCEB660
-void __fastcall cleanupLoadedObjecthkpConvexTranslateShape(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexTranslateShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
 // RVA: 0xCEB670
 hkBaseObjectVtbl *__fastcall getVtablehkpConvexTranslateShape()
 {
-  hkpConvexTranslateShape v1; // [rsp+20h] [rbp-58h]
+  hkpConvexTranslateShape v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkpConvexTranslateShape::hkpConvexTranslateShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpConvexTranslateShapeTypeInfo__()
   hkpConvexTranslateShapeTypeInfo.m_typeName = "hkpConvexTranslateShape";
   hkpConvexTranslateShapeTypeInfo.m_vtable = result;
   hkpConvexTranslateShapeTypeInfo.m_scopedName = "!hkpConvexTranslateShape";
-  hkpConvexTranslateShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexTranslateShape;
-  hkpConvexTranslateShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexTranslateShape;
+  hkpConvexTranslateShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexTranslateShape;
+  hkpConvexTranslateShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexTranslateShape;
   return result;
 }
 

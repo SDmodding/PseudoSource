@@ -13,29 +13,26 @@ void __fastcall hkPaddedAllocator::hkPaddedAllocator(hkPaddedAllocator *this)
 
 // File Line: 17
 // RVA: 0xC7D0F0
-void __fastcall hkPaddedAllocator::init(hkPaddedAllocator *this, hkMemoryAllocator *next, hkPaddedAllocator::Cinfo *cinfoPtr)
+void __fastcall hkPaddedAllocator::init(
+        hkPaddedAllocator *this,
+        hkMemoryAllocator *next,
+        hkPaddedAllocator::Cinfo *cinfoPtr)
 {
   hkPaddedAllocator::Cinfo *v3; // rdx
-  int v4; // [rsp+0h] [rbp-28h]
-  int v5; // [rsp+4h] [rbp-24h]
-  int v6; // [rsp+8h] [rbp-20h]
-  char v7; // [rsp+Ch] [rbp-1Ch]
-  int v8; // [rsp+10h] [rbp-18h]
+  int v4[3]; // [rsp+0h] [rbp-28h] BYREF
+  char v5; // [rsp+Ch] [rbp-1Ch]
+  int v6; // [rsp+10h] [rbp-18h]
 
   this->m_next = next;
-  v4 = 1;
-  v5 = 2147331501;
-  v6 = 2147094796;
-  v7 = 22;
-  v8 = 2147479535;
-  v3 = (hkPaddedAllocator::Cinfo *)&v4;
+  v4[0] = 1;
+  v4[1] = 2147331501;
+  v4[2] = 2147094796;
+  v5 = 22;
+  v6 = 2147479535;
+  v3 = (hkPaddedAllocator::Cinfo *)v4;
   if ( cinfoPtr )
     v3 = cinfoPtr;
-  this->m_cinfo.m_numQuadsPad = v3->m_numQuadsPad;
-  this->m_cinfo.m_padPattern = v3->m_padPattern;
-  this->m_cinfo.m_bodyPattern = v3->m_bodyPattern;
-  *(_DWORD *)&this->m_cinfo.m_alignPattern = *(_DWORD *)&v3->m_alignPattern;
-  this->m_cinfo.m_freePattern = v3->m_freePattern;
+  this->m_cinfo = *v3;
 }
 
 // File Line: 25
@@ -49,68 +46,63 @@ void __fastcall hkPaddedAllocator::quit(hkPaddedAllocator *this)
 // RVA: 0xC7D160
 unsigned int *__fastcall hkPaddedAllocator::blockAlloc(hkPaddedAllocator *this, int numBytes)
 {
-  int v2; // er14
+  int m_numQuadsPad; // r14d
   __int64 v3; // r13
-  hkPaddedAllocator *v4; // rsi
-  unsigned int v5; // er14
-  unsigned int v6; // er12
+  unsigned int v5; // r14d
+  unsigned int v6; // r12d
   __int64 v7; // rax
   unsigned __int64 v8; // rdx
   unsigned int *v9; // rbp
-  unsigned int v10; // eax
+  unsigned int m_padPattern; // eax
   __int64 v11; // rcx
   unsigned int *v12; // rdi
   __int64 v13; // rcx
-  unsigned int v14; // eax
+  unsigned int m_bodyPattern; // eax
   unsigned int *v15; // rdi
-  int v16; // edx
-  int *v17; // rdi
+  unsigned int v16; // edx
+  unsigned int *v17; // rdi
   __int64 v18; // rcx
 
-  v2 = this->m_cinfo.m_numQuadsPad;
+  m_numQuadsPad = this->m_cinfo.m_numQuadsPad;
   v3 = numBytes;
-  v4 = this;
   this->m_inUse += numBytes;
-  v5 = 16 * v2;
+  v5 = 16 * m_numQuadsPad;
   v6 = (numBytes + 15) & 0xFFFFFFF0;
   this->m_allocated += v6 + 2 * v5;
-  v7 = (*((__int64 (**)(void))&this->m_next->vfptr->__vecDelDtor + 1))();
+  v7 = (*((__int64 (__fastcall **)(hkMemoryAllocator *))&this->m_next->vfptr->__vecDelDtor + 1))(this->m_next);
   v8 = (unsigned __int64)(v3 + 3) >> 2;
   v9 = (unsigned int *)v7;
-  if ( (signed int)((v5 >> 2) - 1) >= 0 )
+  if ( (int)((v5 >> 2) - 1) >= 0 )
   {
-    v10 = v4->m_cinfo.m_padPattern;
+    m_padPattern = this->m_cinfo.m_padPattern;
     v11 = v5 >> 2;
     v12 = v9;
     while ( v11 )
     {
-      *v12 = v10;
-      ++v12;
+      *v12++ = m_padPattern;
       --v11;
     }
   }
-  if ( (signed int)v8 - 1 >= 0 )
+  if ( (int)v8 - 1 >= 0 )
   {
     v13 = (unsigned int)v8;
-    v14 = v4->m_cinfo.m_bodyPattern;
+    m_bodyPattern = this->m_cinfo.m_bodyPattern;
     v15 = &v9[v5 / 4];
     while ( v13 )
     {
-      *v15 = v14;
-      ++v15;
+      *v15++ = m_bodyPattern;
       --v13;
     }
   }
-  hkString::memSet((char *)&v9[v5 / 4] + (unsigned int)v3, (unsigned __int8)v4->m_cinfo.m_alignPattern, v6 - v3);
-  v17 = (int *)((char *)&v9[v5 / 4] + v6);
-  if ( (signed int)((v5 >> 2) - 1) >= 0 )
+  hkString::memSet((char *)&v9[v5 / 4] + (unsigned int)v3, (unsigned __int8)this->m_cinfo.m_alignPattern, v6 - v3);
+  v17 = (unsigned int *)((char *)&v9[v5 / 4] + v6);
+  if ( (int)((v5 >> 2) - 1) >= 0 )
   {
     v18 = v5 >> 2;
-    v16 = v4->m_cinfo.m_padPattern + 1;
+    v16 = this->m_cinfo.m_padPattern + 1;
     while ( v18 )
     {
-      *v17 = v16;
-      ++v17;
+      *v17++ = v16;
       --v18;
     }
   }
@@ -119,115 +111,108 @@ unsigned int *__fastcall hkPaddedAllocator::blockAlloc(hkPaddedAllocator *this, 
 
 // File Line: 56
 // RVA: 0xC7D240
-void __fastcall hkPaddedAllocator::blockFree(hkPaddedAllocator *this, void *p, int numBytes)
+void __fastcall hkPaddedAllocator::blockFree(hkPaddedAllocator *this, _BYTE *p, int numBytes)
 {
-  int v3; // er15
-  hkPaddedAllocator *v4; // r9
-  int v5; // ebp
-  signed int v6; // er14
-  __int64 v7; // rcx
-  _BYTE *v8; // r11
-  char *v9; // rax
-  char *v10; // rbx
-  unsigned int v11; // edi
-  signed __int64 v12; // rdx
-  signed __int64 i; // rax
-  __int64 v14; // rcx
-  unsigned int v15; // eax
-  _DWORD *v16; // rdi
+  int m_numQuadsPad; // r15d
+  signed int v5; // r14d
+  __int64 v6; // rcx
+  char *v8; // rax
+  unsigned int *v9; // rbx
+  unsigned int m_padPattern; // edi
+  signed __int64 v11; // rdx
+  __int64 v12; // rax
+  __int64 v13; // rcx
+  unsigned int m_freePattern; // eax
+  unsigned int *v15; // rdi
 
-  v3 = this->m_cinfo.m_numQuadsPad;
-  v4 = this;
-  v5 = 16 * this->m_cinfo.m_numQuadsPad;
-  v6 = (numBytes + 15) & 0xFFFFFFF0;
-  v7 = (unsigned int)(4 * v3);
-  v8 = p;
-  v9 = (char *)p + v6;
-  v10 = (char *)p - v5;
-  if ( (signed int)v7 > 0 )
+  m_numQuadsPad = this->m_cinfo.m_numQuadsPad;
+  v5 = (numBytes + 15) & 0xFFFFFFF0;
+  v6 = (unsigned int)(4 * m_numQuadsPad);
+  v8 = &p[v5];
+  v9 = (unsigned int *)&p[-16 * m_numQuadsPad];
+  if ( (int)v6 > 0 )
   {
-    v11 = v4->m_cinfo.m_padPattern;
-    v12 = v10 - v9;
+    m_padPattern = this->m_cinfo.m_padPattern;
+    v11 = (char *)v9 - v8;
     do
     {
-      if ( *(_DWORD *)&v9[v12] != v11 )
+      if ( *(_DWORD *)&v8[v11] != m_padPattern )
         __debugbreak();
-      if ( *(_DWORD *)v9 != v11 + 1 )
+      if ( *(_DWORD *)v8 != m_padPattern + 1 )
         __debugbreak();
-      v9 += 4;
-      --v7;
+      v8 += 4;
+      --v6;
     }
-    while ( v7 );
+    while ( v6 );
   }
-  for ( i = numBytes; i < v6; ++i )
+  v12 = numBytes;
+  if ( numBytes < (__int64)v5 )
   {
-    if ( v8[i] != v4->m_cinfo.m_alignPattern )
-      __debugbreak();
-  }
-  v4->m_inUse -= numBytes;
-  v4->m_allocated -= v6 + 2 * v5;
-  if ( 8 * v3 - 1 >= 0 )
-  {
-    v14 = (unsigned int)(8 * v3);
-    v15 = v4->m_cinfo.m_freePattern;
-    v16 = v10;
-    while ( v14 )
+    do
     {
-      *v16 = v15;
-      ++v16;
-      --v14;
+      if ( p[v12] != this->m_cinfo.m_alignPattern )
+        __debugbreak();
+      ++v12;
+    }
+    while ( v12 < v5 );
+  }
+  this->m_inUse -= numBytes;
+  this->m_allocated -= v5 + 32 * m_numQuadsPad;
+  if ( 8 * m_numQuadsPad - 1 >= 0 )
+  {
+    v13 = (unsigned int)(8 * m_numQuadsPad);
+    m_freePattern = this->m_cinfo.m_freePattern;
+    v15 = v9;
+    while ( v13 )
+    {
+      *v15++ = m_freePattern;
+      --v13;
     }
   }
-  ((void (__fastcall *)(hkMemoryAllocator *, char *))v4->m_next->vfptr->blockFree)(v4->m_next, v10);
+  ((void (__fastcall *)(hkMemoryAllocator *, unsigned int *))this->m_next->vfptr->blockFree)(this->m_next, v9);
 }
 
 // File Line: 91
 // RVA: 0xC7D330
-signed __int64 __fastcall hkPaddedAllocator::isOk(hkPaddedAllocator *this, const void *p, int numBytes)
+__int64 __fastcall hkPaddedAllocator::isOk(hkPaddedAllocator *this, _BYTE *p, int numBytes)
 {
-  int v3; // er10
+  int m_numQuadsPad; // r10d
   __int64 v4; // rbp
-  _BYTE *v5; // rdi
-  hkPaddedAllocator *v6; // rsi
-  int v7; // eax
-  signed __int64 v8; // rcx
-  __int64 v9; // r11
-  char *v10; // rbx
-  char *v11; // rdx
-  unsigned int v12; // er8
-  signed __int64 v13; // rbx
-  __int64 v14; // rax
+  __int64 v7; // rcx
+  __int64 v8; // r11
+  char *v9; // rbx
+  char *v10; // rdx
+  unsigned int m_padPattern; // r8d
+  __int64 v12; // rbx
+  __int64 v13; // rax
 
-  v3 = this->m_cinfo.m_numQuadsPad;
+  m_numQuadsPad = this->m_cinfo.m_numQuadsPad;
   v4 = numBytes;
-  v5 = p;
-  v6 = this;
-  v7 = -this->m_cinfo.m_numQuadsPad;
-  v8 = 0i64;
-  v9 = (signed int)((numBytes + 15) & 0xFFFFFFF0);
-  v10 = (char *)p + 16 * v7;
-  v11 = (char *)p + v9;
-  if ( 4 * v3 <= 0 )
+  v7 = 0i64;
+  v8 = (int)((numBytes + 15) & 0xFFFFFFF0);
+  v9 = &p[-16 * m_numQuadsPad];
+  v10 = &p[v8];
+  if ( 4 * m_numQuadsPad <= 0 )
   {
 LABEL_6:
-    v14 = v4;
-    if ( v4 >= v9 )
+    v13 = v4;
+    if ( v4 >= v8 )
       return 1i64;
-    while ( v5[v14] == v6->m_cinfo.m_alignPattern )
+    while ( p[v13] == this->m_cinfo.m_alignPattern )
     {
-      if ( ++v14 >= v9 )
+      if ( ++v13 >= v8 )
         return 1i64;
     }
   }
   else
   {
-    v12 = v6->m_cinfo.m_padPattern;
-    v13 = v10 - v11;
-    while ( *(_DWORD *)&v11[v13] == v12 && *(_DWORD *)v11 == v12 + 1 )
+    m_padPattern = this->m_cinfo.m_padPattern;
+    v12 = v9 - v10;
+    while ( *(_DWORD *)&v10[v12] == m_padPattern && *(_DWORD *)v10 == m_padPattern + 1 )
     {
-      ++v8;
-      v11 += 4;
-      if ( v8 >= 4 * v3 )
+      ++v7;
+      v10 += 4;
+      if ( v7 >= 4 * m_numQuadsPad )
         goto LABEL_6;
     }
   }
@@ -238,46 +223,48 @@ LABEL_6:
 // RVA: 0xC7D3F0
 void __fastcall hkPaddedAllocator::getMemoryStatistics(hkPaddedAllocator *this, hkMemoryAllocator::MemoryStatistics *u)
 {
-  hkPaddedAllocator *v2; // rbx
-  hkMemoryAllocator::MemoryStatistics *v3; // rdi
-
-  v2 = this;
-  v3 = u;
-  ((void (*)(void))this->m_next->vfptr->getMemoryStatistics)();
-  v3->m_allocated = v2->m_allocated;
-  v3->m_inUse = v2->m_inUse;
-  v3->m_available = 0i64;
+  ((void (__fastcall *)(hkMemoryAllocator *))this->m_next->vfptr->getMemoryStatistics)(this->m_next);
+  u->m_allocated = this->m_allocated;
+  u->m_inUse = this->m_inUse;
+  u->m_available = 0i64;
 }
 
 // File Line: 132
 // RVA: 0xC7D490
-hkPaddedAllocator::Allocation *__fastcall hkPaddedAllocator::getUnderlyingAllocation(hkPaddedAllocator *this, hkPaddedAllocator::Allocation *result, const void *obj, int numBytes)
+hkPaddedAllocator::Allocation *__fastcall hkPaddedAllocator::getUnderlyingAllocation(
+        hkPaddedAllocator *this,
+        hkPaddedAllocator::Allocation *result,
+        char *obj,
+        int numBytes)
 {
-  int v4; // er10
+  int v4; // r10d
 
   v4 = 16 * this->m_cinfo.m_numQuadsPad;
-  result->address = (char *)obj - 16 * this->m_cinfo.m_numQuadsPad;
+  result->address = &obj[-16 * this->m_cinfo.m_numQuadsPad];
   result->size = ((numBytes + 15) & 0xFFFFFFF0) + 2 * v4;
   return result;
 }
 
 // File Line: 142
 // RVA: 0xC7D440
-__int64 __fastcall hkPaddedAllocator::getAllocatedSize(hkPaddedAllocator *this, const void *obj, int numBytes)
+__int64 __fastcall hkPaddedAllocator::getAllocatedSize(hkPaddedAllocator *this, char *obj, int numBytes)
 {
   int v3; // ebx
 
   v3 = 32 * this->m_cinfo.m_numQuadsPad;
   return (unsigned int)this->m_next->vfptr->getAllocatedSize(
                          this->m_next,
-                         (char *)obj - 16 * this->m_cinfo.m_numQuadsPad,
+                         &obj[-16 * this->m_cinfo.m_numQuadsPad],
                          v3 + ((numBytes + 15) & 0xFFFFFFF0))
        - v3;
 }
 
 // File Line: 150
 // RVA: 0xC7D480
-void __fastcall hkPaddedAllocator::setScrubValues(hkPaddedAllocator *this, unsigned int bodyValue, unsigned int freeValue)
+void __fastcall hkPaddedAllocator::setScrubValues(
+        hkPaddedAllocator *this,
+        unsigned int bodyValue,
+        unsigned int freeValue)
 {
   this->m_cinfo.m_bodyPattern = bodyValue;
   this->m_cinfo.m_freePattern = freeValue;

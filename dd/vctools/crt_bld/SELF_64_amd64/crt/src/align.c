@@ -4,10 +4,10 @@ _QWORD *__fastcall aligned_malloc(unsigned __int64 size, unsigned __int64 alignm
 {
   _QWORD *result; // rax
   unsigned __int64 v3; // rbx
-  signed __int64 v4; // rbx
+  unsigned __int64 v4; // rbx
   void *v5; // rcx
 
-  if ( (alignment - 1) & alignment )
+  if ( ((alignment - 1) & alignment) != 0 )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
@@ -34,9 +34,9 @@ _QWORD *__fastcall aligned_malloc(unsigned __int64 size, unsigned __int64 alignm
 
 // File Line: 459
 // RVA: 0x12AFFDC
-void __fastcall aligned_free(void *memblock)
+void __fastcall aligned_free(unsigned __int64 memblock)
 {
   if ( memblock )
-    free(*(void **)(((unsigned __int64)memblock & 0xFFFFFFFFFFFFFFF8ui64) - 8));
+    free(*(void **)((memblock & 0xFFFFFFFFFFFFFFF8ui64) - 8));
 }
 

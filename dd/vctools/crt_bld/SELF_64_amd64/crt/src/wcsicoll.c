@@ -2,20 +2,16 @@
 // RVA: 0x12B8CB0
 __int64 __fastcall wcsicoll_l(const wchar_t *_string1, const wchar_t *_string2, localeinfo_struct *plocinfo)
 {
-  const wchar_t *v3; // rdi
-  const wchar_t *lpString2; // rbx
   const wchar_t *v5; // rcx
   signed __int64 v6; // rdi
   unsigned __int16 v7; // cx
   wchar_t v8; // dx
   unsigned int v9; // edx
   int v10; // eax
-  _LocaleUpdate v12; // [rsp+30h] [rbp-28h]
+  _LocaleUpdate v12; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = _string1;
-  lpString2 = _string2;
   _LocaleUpdate::_LocaleUpdate(&v12, plocinfo);
-  if ( !v3 || !lpString2 )
+  if ( !_string1 || !_string2 )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
@@ -26,7 +22,7 @@ LABEL_15:
   v5 = v12.localeinfo.locinfo->locale_name[1];
   if ( v5 )
   {
-    v10 = _crtCompareStringW(v5, 0x1001u, v3, -1, lpString2, -1);
+    v10 = _crtCompareStringW(v5, 0x1001u, _string1, -1, _string2, -1);
     if ( !v10 )
     {
       *errno() = 22;
@@ -36,23 +32,23 @@ LABEL_15:
   }
   else
   {
-    v6 = (char *)v3 - (char *)lpString2;
+    v6 = (char *)_string1 - (char *)_string2;
     do
     {
-      v7 = *(const wchar_t *)((char *)lpString2 + v6);
+      v7 = *(const wchar_t *)((char *)_string2 + v6);
       if ( (unsigned __int16)(v7 - 65) <= 0x19u )
         v7 += 32;
-      v8 = *lpString2;
-      if ( (unsigned __int16)(*lpString2 - 65) <= 0x19u )
+      v8 = *_string2;
+      if ( (unsigned __int16)(*_string2 - 65) <= 0x19u )
         v8 += 32;
-      ++lpString2;
+      ++_string2;
     }
     while ( v7 && v7 == v8 );
     v9 = v7 - v8;
   }
 LABEL_17:
   if ( v12.updated )
-    v12.ptd->_ownlocale &= 0xFFFFFFFD;
+    v12.ptd->_ownlocale &= ~2u;
   return v9;
 }
 
@@ -61,7 +57,6 @@ LABEL_17:
 int __fastcall wcsicoll(const wchar_t *_string1, const wchar_t *_string2)
 {
   const wchar_t *v2; // r9
-  int result; // eax
   signed __int64 v4; // r10
   unsigned __int16 v5; // dx
   wchar_t v6; // cx
@@ -83,14 +78,13 @@ int __fastcall wcsicoll(const wchar_t *_string1, const wchar_t *_string2)
       ++v2;
     }
     while ( v5 && v5 == v6 );
-    result = v5 - v6;
+    return v5 - v6;
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 0x7FFFFFFF;
+    return 0x7FFFFFFF;
   }
-  return result;
 }
 

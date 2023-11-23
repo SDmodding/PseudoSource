@@ -3,32 +3,32 @@
 __int64 dynamic_initializer_for__gDefaultCullLayer__()
 {
   CullManager *v0; // rax
-  UFG::qNode<CullLayer,CullLayer> *v1; // rdx
-  UFG::qNode<CullLayer,CullLayer> *v2; // rcx
+  UFG::qNode<CullLayer,CullLayer> *p_mNode; // rdx
+  UFG::qNode<CullLayer,CullLayer> *mPrev; // rcx
 
   gDefaultCullLayer.mFrameCullBuckets.mNode.mPrev = &gDefaultCullLayer.mFrameCullBuckets.mNode;
   gDefaultCullLayer.mFrameCullBuckets.mNode.mNext = &gDefaultCullLayer.mFrameCullBuckets.mNode;
   gDefaultCullLayer.mPersistentCullBuckets.mNode.mPrev = &gDefaultCullLayer.mPersistentCullBuckets.mNode;
   gDefaultCullLayer.mPersistentCullBuckets.mNode.mNext = &gDefaultCullLayer.mPersistentCullBuckets.mNode;
   `eh vector constructor iterator(
-    gDefaultCullLayer.mCullResultBuckets,
+    (char *)gDefaultCullLayer.mCullResultBuckets,
     8ui64,
     16,
     (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
-  gDefaultCullLayer.mType = 0;
+  gDefaultCullLayer.mType = TYPE_CULL;
   gDefaultCullLayer.mName = "Default Cull Layer";
   gDefaultCullLayer.mDrawEnabled = 1;
   *(_QWORD *)&gDefaultCullLayer.pad0 = 0i64;
   gDefaultCullLayer.pad2 = 0;
   v0 = CullManager::Instance();
-  v1 = (UFG::qNode<CullLayer,CullLayer> *)((char *)v0 + 16 * ((signed int)gDefaultCullLayer.mType + 104i64));
-  v2 = v1->mPrev;
-  v2->mNext = (UFG::qNode<CullLayer,CullLayer> *)&gDefaultCullLayer;
-  gDefaultCullLayer.mPrev = v2;
-  gDefaultCullLayer.mNext = v1;
-  v1->mPrev = (UFG::qNode<CullLayer,CullLayer> *)&gDefaultCullLayer;
+  p_mNode = &v0->mCullLayers[gDefaultCullLayer.mType].mNode;
+  mPrev = p_mNode->mPrev;
+  mPrev->mNext = &gDefaultCullLayer;
+  gDefaultCullLayer.mPrev = mPrev;
+  gDefaultCullLayer.mNext = p_mNode;
+  p_mNode->mPrev = &gDefaultCullLayer;
   ++v0->mNumCullLayers;
-  return atexit(dynamic_atexit_destructor_for__gDefaultCullLayer__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gDefaultCullLayer__);
 }
 
 // File Line: 66
@@ -36,42 +36,42 @@ __int64 dynamic_initializer_for__gDefaultCullLayer__()
 __int64 dynamic_initializer_for__gDefaultOcclusionLayer__()
 {
   CullManager *v0; // rax
-  UFG::qNode<CullLayer,CullLayer> *v1; // rdx
-  UFG::qNode<CullLayer,CullLayer> *v2; // rcx
+  UFG::qNode<CullLayer,CullLayer> *p_mNode; // rdx
+  UFG::qNode<CullLayer,CullLayer> *mPrev; // rcx
 
   gDefaultOcclusionLayer.mFrameCullBuckets.mNode.mPrev = &gDefaultOcclusionLayer.mFrameCullBuckets.mNode;
   gDefaultOcclusionLayer.mFrameCullBuckets.mNode.mNext = &gDefaultOcclusionLayer.mFrameCullBuckets.mNode;
   gDefaultOcclusionLayer.mPersistentCullBuckets.mNode.mPrev = &gDefaultOcclusionLayer.mPersistentCullBuckets.mNode;
   gDefaultOcclusionLayer.mPersistentCullBuckets.mNode.mNext = &gDefaultOcclusionLayer.mPersistentCullBuckets.mNode;
   `eh vector constructor iterator(
-    gDefaultOcclusionLayer.mCullResultBuckets,
+    (char *)gDefaultOcclusionLayer.mCullResultBuckets,
     8ui64,
     16,
     (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
-  gDefaultOcclusionLayer.mType = 1;
+  gDefaultOcclusionLayer.mType = TYPE_OCCLUSION;
   gDefaultOcclusionLayer.mName = "Default Occlusion Layer";
   gDefaultOcclusionLayer.mDrawEnabled = 1;
   *(_QWORD *)&gDefaultOcclusionLayer.pad0 = 0i64;
   gDefaultOcclusionLayer.pad2 = 0;
   v0 = CullManager::Instance();
-  v1 = (UFG::qNode<CullLayer,CullLayer> *)((char *)v0 + 16 * ((signed int)gDefaultOcclusionLayer.mType + 104i64));
-  v2 = v1->mPrev;
-  v2->mNext = (UFG::qNode<CullLayer,CullLayer> *)&gDefaultOcclusionLayer;
-  gDefaultOcclusionLayer.mPrev = v2;
-  gDefaultOcclusionLayer.mNext = v1;
-  v1->mPrev = (UFG::qNode<CullLayer,CullLayer> *)&gDefaultOcclusionLayer;
+  p_mNode = &v0->mCullLayers[gDefaultOcclusionLayer.mType].mNode;
+  mPrev = p_mNode->mPrev;
+  mPrev->mNext = &gDefaultOcclusionLayer;
+  gDefaultOcclusionLayer.mPrev = mPrev;
+  gDefaultOcclusionLayer.mNext = p_mNode;
+  p_mNode->mPrev = &gDefaultOcclusionLayer;
   ++v0->mNumCullLayers;
-  return atexit(dynamic_atexit_destructor_for__gDefaultOcclusionLayer__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gDefaultOcclusionLayer__);
 }
 
 // File Line: 80
 // RVA: 0x27450
 void __fastcall TransformAABB(UFG::qMatrix44 *m, UFG::qVector3 *min, UFG::qVector3 *max)
 {
-  float v3; // eax
-  float v4; // xmm2_4
-  float *v5; // rcx
-  float v6; // xmm1_4
+  float x; // eax
+  float z; // xmm2_4
+  float *p_z; // rcx
+  float y; // xmm1_4
   float v7; // xmm0_4
   float v8; // xmm1_4
   float v9; // xmm0_4
@@ -80,49 +80,43 @@ void __fastcall TransformAABB(UFG::qMatrix44 *m, UFG::qVector3 *min, UFG::qVecto
   float v12; // eax
   float v13; // xmm1_4
   __int64 v14; // rax
-  signed __int64 v15; // r9
-  float v16; // xmm0_4
-  float v17; // xmm3_4
-  float v18; // xmm4_4
-  float v19; // xmm1_4
-  float v20; // xmm0_4
-  float v21; // xmm1_4
+  __int64 v15; // r9
+  float v16; // xmm3_4
+  float v17; // xmm4_4
+  float v18; // xmm1_4
+  float v19; // xmm0_4
+  float v20; // xmm1_4
+  float v21; // xmm2_4
   float v22; // xmm2_4
   float v23; // xmm1_4
   float v24; // xmm2_4
-  float v25; // xmm1_4
-  float v26; // xmm2_4
-  float v27; // xmm0_4
-  float v28; // xmm0_4
-  float v29; // xmm2_4
-  float v30; // xmm1_4
-  float v31; // [rsp+0h] [rbp-28h]
-  float v32; // [rsp+4h] [rbp-24h]
-  float v33; // [rsp+8h] [rbp-20h]
-  float v34; // [rsp+10h] [rbp-18h]
-  float v35; // [rsp+14h] [rbp-14h]
-  float v36; // [rsp+18h] [rbp-10h]
+  float v25; // xmm0_4
+  float v26; // xmm0_4
+  float v27; // xmm2_4
+  float v28; // xmm1_4
+  int v29[4]; // [rsp+0h] [rbp-28h]
+  int v30[6]; // [rsp+10h] [rbp-18h]
 
-  v3 = m->v3.x;
-  v4 = m->v3.z;
-  v5 = &m->v0.z;
-  v6 = min->y;
-  v31 = min->x;
-  v33 = min->z;
+  x = m->v3.x;
+  z = m->v3.z;
+  p_z = &m->v0.z;
+  y = min->y;
+  v29[0] = LODWORD(min->x);
+  v29[2] = LODWORD(min->z);
   v7 = max->y;
-  v32 = v6;
+  *(float *)&v29[1] = y;
   v8 = max->x;
-  v35 = v7;
-  v9 = v5[11];
-  v34 = v8;
+  *(float *)&v30[1] = v7;
+  v9 = p_z[11];
+  *(float *)v30 = v8;
   v10 = max->z;
   min->y = v9;
-  min->x = v3;
-  min->z = v4;
-  v11 = v5[11];
-  v36 = v10;
-  v12 = v5[10];
-  v13 = v5[12];
+  min->x = x;
+  min->z = z;
+  v11 = p_z[11];
+  *(float *)&v30[2] = v10;
+  v12 = p_z[10];
+  v13 = p_z[12];
   max->y = v11;
   max->x = v12;
   v14 = 0i64;
@@ -130,44 +124,42 @@ void __fastcall TransformAABB(UFG::qMatrix44 *m, UFG::qVector3 *min, UFG::qVecto
   max->z = v13;
   do
   {
-    v16 = *(v5 - 2);
-    v17 = *(float *)((char *)&v31 + v14);
-    v18 = *(float *)((char *)&v34 + v14);
-    v19 = v16;
-    v20 = v16 * v18;
-    v21 = v19 * v17;
-    if ( v21 >= v20 )
-      v22 = v20;
+    v16 = *(float *)&v29[v14];
+    v17 = *(float *)&v30[v14];
+    v18 = *(p_z - 2);
+    v19 = v18 * v17;
+    v20 = v18 * v16;
+    if ( v20 >= v19 )
+      v21 = v19;
     else
-      v22 = v21;
-    min->x = v22 + min->x;
-    if ( v21 >= v20 )
-      v20 = v21;
-    max->x = v20 + max->x;
-    v23 = *(v5 - 1);
-    v24 = v23;
-    v25 = v23 * v18;
-    v26 = v24 * v17;
-    if ( v26 >= v25 )
-      v27 = v25;
+      v21 = v20;
+    min->x = v21 + min->x;
+    if ( v20 >= v19 )
+      v19 = v20;
+    max->x = v19 + max->x;
+    v22 = *(p_z - 1);
+    v23 = v22 * v17;
+    v24 = v22 * v16;
+    if ( v24 >= v23 )
+      v25 = v23;
     else
-      v27 = v26;
-    min->y = v27 + min->y;
-    if ( v26 >= v25 )
-      v25 = v26;
-    max->y = v25 + max->y;
-    v28 = *v5 * v18;
-    v29 = *v5 * v17;
-    if ( v29 >= v28 )
-      v30 = *v5 * v18;
+      v25 = v24;
+    min->y = v25 + min->y;
+    if ( v24 >= v23 )
+      v23 = v24;
+    max->y = v23 + max->y;
+    v26 = *p_z * v17;
+    v27 = *p_z * v16;
+    if ( v27 >= v26 )
+      v28 = *p_z * v17;
     else
-      v30 = *v5 * v17;
-    min->z = v30 + min->z;
-    if ( v29 >= v28 )
-      v28 = v29;
-    v5 += 4;
-    v14 += 4i64;
-    max->z = v28 + max->z;
+      v28 = *p_z * v16;
+    min->z = v28 + min->z;
+    if ( v27 >= v26 )
+      v26 = v27;
+    p_z += 4;
+    ++v14;
+    max->z = v26 + max->z;
     --v15;
   }
   while ( v15 );
@@ -175,20 +167,18 @@ void __fastcall TransformAABB(UFG::qMatrix44 *m, UFG::qVector3 *min, UFG::qVecto
 
 // File Line: 149
 // RVA: 0x27010
-signed __int64 __fastcall InFrustum(UFG::qVector4 *planes, UFG::qVector3 *point)
+__int64 __fastcall InFrustum(UFG::qVector4 *planes, UFG::qVector3 *point)
 {
-  signed __int64 v2; // rax
-  float *v3; // rcx
+  __int64 v2; // rax
+  float *i; // rcx
 
   v2 = 0i64;
-  v3 = &planes->z;
-  while ( (float)((float)((float)((float)(point->y * *(v3 - 1)) + (float)(point->x * *(v3 - 2)))
-                        + (float)(point->z * *v3))
-                + v3[1]) <= 0.0 )
+  for ( i = &planes->z;
+        (float)((float)((float)((float)(point->y * *(i - 1)) + (float)(point->x * *(i - 2))) + (float)(point->z * *i))
+              + i[1]) <= 0.0;
+        i += 4 )
   {
-    ++v2;
-    v3 += 4;
-    if ( v2 >= 6 )
+    if ( ++v2 >= 6 )
       return 1i64;
   }
   return 0i64;
@@ -198,165 +188,142 @@ signed __int64 __fastcall InFrustum(UFG::qVector4 *planes, UFG::qVector3 *point)
 // RVA: 0x26B40
 float __fastcall DistanceToFrustum(UFG::qVector4 *planes, UFG::qVector3 *point)
 {
-  float v2; // xmm3_4
-  float v3; // xmm5_4
+  float y; // xmm3_4
+  float x; // xmm5_4
   float v4; // xmm2_4
-  float v5; // xmm6_4
+  float z; // xmm6_4
   float v6; // xmm3_4
-  float result; // xmm0_4
 
-  v2 = point->y;
-  v3 = point->x;
+  y = point->y;
+  x = point->x;
   v4 = 0.0;
-  v5 = point->z;
-  if ( (float)((float)((float)((float)(point->y * planes->y) + (float)(point->x * planes->x))
-                     + (float)(point->z * planes->z))
+  z = point->z;
+  if ( (float)((float)((float)((float)(y * planes->y) + (float)(point->x * planes->x)) + (float)(z * planes->z))
              + planes->w) > 0.0 )
     v4 = (float)((float)((float)(point->y * planes->y) + (float)(point->x * planes->x)) + (float)(point->z * planes->z))
        + planes->w;
-  if ( (float)((float)((float)((float)(v2 * planes[1].y) + (float)(v3 * planes[1].x)) + (float)(v5 * planes[1].z))
+  if ( (float)((float)((float)((float)(y * planes[1].y) + (float)(x * planes[1].x)) + (float)(z * planes[1].z))
              + planes[1].w) > v4 )
-    v4 = (float)((float)((float)(v2 * planes[1].y) + (float)(v3 * planes[1].x)) + (float)(v5 * planes[1].z))
-       + planes[1].w;
-  if ( (float)((float)((float)((float)(v2 * planes[2].y) + (float)(v3 * planes[2].x)) + (float)(v5 * planes[2].z))
+    v4 = (float)((float)((float)(y * planes[1].y) + (float)(x * planes[1].x)) + (float)(z * planes[1].z)) + planes[1].w;
+  if ( (float)((float)((float)((float)(y * planes[2].y) + (float)(x * planes[2].x)) + (float)(z * planes[2].z))
              + planes[2].w) > v4 )
-    v4 = (float)((float)((float)(v2 * planes[2].y) + (float)(v3 * planes[2].x)) + (float)(v5 * planes[2].z))
-       + planes[2].w;
-  if ( (float)((float)((float)((float)(v2 * planes[3].y) + (float)(v3 * planes[3].x)) + (float)(v5 * planes[3].z))
+    v4 = (float)((float)((float)(y * planes[2].y) + (float)(x * planes[2].x)) + (float)(z * planes[2].z)) + planes[2].w;
+  if ( (float)((float)((float)((float)(y * planes[3].y) + (float)(x * planes[3].x)) + (float)(z * planes[3].z))
              + planes[3].w) > v4 )
-    v4 = (float)((float)((float)(v2 * planes[3].y) + (float)(v3 * planes[3].x)) + (float)(v5 * planes[3].z))
-       + planes[3].w;
-  if ( (float)((float)((float)((float)(v2 * planes[4].y) + (float)(v3 * planes[4].x)) + (float)(v5 * planes[4].z))
+    v4 = (float)((float)((float)(y * planes[3].y) + (float)(x * planes[3].x)) + (float)(z * planes[3].z)) + planes[3].w;
+  if ( (float)((float)((float)((float)(y * planes[4].y) + (float)(x * planes[4].x)) + (float)(z * planes[4].z))
              + planes[4].w) > v4 )
-    v4 = (float)((float)((float)(v2 * planes[4].y) + (float)(v3 * planes[4].x)) + (float)(v5 * planes[4].z))
-       + planes[4].w;
-  v6 = (float)((float)((float)(v2 * planes[5].y) + (float)(v3 * planes[5].x)) + (float)(v5 * planes[5].z)) + planes[5].w;
+    v4 = (float)((float)((float)(y * planes[4].y) + (float)(x * planes[4].x)) + (float)(z * planes[4].z)) + planes[4].w;
+  v6 = (float)((float)((float)(y * planes[5].y) + (float)(x * planes[5].x)) + (float)(z * planes[5].z)) + planes[5].w;
   if ( v6 <= v4 )
-    result = v4;
+    return v4;
   else
-    result = v6;
-  return result;
+    return v6;
 }
 
 // File Line: 188
 // RVA: 0x25610
 void __fastcall CullLayer::CullLayer(CullLayer *this, CullLayer::CullLayerType type, const char *name)
 {
-  const char *v3; // rdi
-  CullLayer::CullLayerType v4; // ebx
-  CullLayer *v5; // rsi
-  UFG::qList<CullBucket,CullBucket,1,0> *v6; // rax
-  UFG::qList<CullBucket,CullBucket,1,0> *v7; // rax
-  CullManager *v8; // rax
-  UFG::qNode<CullLayer,CullLayer> *v9; // rdx
-  UFG::qNode<CullLayer,CullLayer> *v10; // rcx
+  CullManager *v6; // rax
+  UFG::qNode<CullLayer,CullLayer> *p_mNode; // rdx
+  UFG::qNode<CullLayer,CullLayer> *mPrev; // rcx
 
-  v3 = name;
-  v4 = type;
-  v5 = this;
-  this->mPrev = (UFG::qNode<CullLayer,CullLayer> *)&this->mPrev;
-  this->mNext = (UFG::qNode<CullLayer,CullLayer> *)&this->mPrev;
-  v6 = &this->mFrameCullBuckets;
-  v6->mNode.mPrev = &v6->mNode;
-  v6->mNode.mNext = &v6->mNode;
-  v7 = &this->mPersistentCullBuckets;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
+  this->mPrev = this;
+  this->mNext = this;
+  this->mFrameCullBuckets.mNode.mPrev = &this->mFrameCullBuckets.mNode;
+  this->mFrameCullBuckets.mNode.mNext = &this->mFrameCullBuckets.mNode;
+  this->mPersistentCullBuckets.mNode.mPrev = &this->mPersistentCullBuckets.mNode;
+  this->mPersistentCullBuckets.mNode.mNext = &this->mPersistentCullBuckets.mNode;
   `eh vector constructor iterator(
     this->mCullResultBuckets,
     8ui64,
     16,
     (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
-  v5->mType = v4;
-  v5->mName = v3;
-  v5->mDrawEnabled = 1;
-  *(_QWORD *)&v5->pad0 = 0i64;
-  v5->pad2 = 0;
-  v8 = CullManager::Instance();
-  v9 = (UFG::qNode<CullLayer,CullLayer> *)((char *)v8 + 16 * ((signed int)v5->mType + 104i64));
-  v10 = v9->mPrev;
-  v10->mNext = (UFG::qNode<CullLayer,CullLayer> *)&v5->mPrev;
-  v5->mPrev = v10;
-  v5->mNext = v9;
-  v9->mPrev = (UFG::qNode<CullLayer,CullLayer> *)&v5->mPrev;
-  ++v8->mNumCullLayers;
+  this->mType = type;
+  this->mName = name;
+  this->mDrawEnabled = 1;
+  *(_QWORD *)&this->pad0 = 0i64;
+  this->pad2 = 0;
+  v6 = CullManager::Instance();
+  p_mNode = &v6->mCullLayers[this->mType].mNode;
+  mPrev = p_mNode->mPrev;
+  mPrev->mNext = this;
+  this->mPrev = mPrev;
+  this->mNext = p_mNode;
+  p_mNode->mPrev = this;
+  ++v6->mNumCullLayers;
 }
 
 // File Line: 202
 // RVA: 0x25990
 void __fastcall CullLayer::~CullLayer(CullLayer *this)
 {
-  UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *v1; // rdi
   CullManager *v2; // rax
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v3; // rdx
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v4; // rcx
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v5; // rcx
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v6; // rax
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v7; // rcx
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v8; // rax
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v9; // rcx
-  UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v10; // rax
+  UFG::qNode<CullLayer,CullLayer> *mPrev; // rdx
+  UFG::qNode<CullLayer,CullLayer> *mNext; // rcx
+  UFG::qNode<CullBucket,CullBucket> *v5; // rcx
+  UFG::qNode<CullBucket,CullBucket> *v6; // rax
+  UFG::qNode<CullBucket,CullBucket> *v7; // rcx
+  UFG::qNode<CullBucket,CullBucket> *v8; // rax
+  UFG::qNode<CullLayer,CullLayer> *v9; // rcx
+  UFG::qNode<CullLayer,CullLayer> *v10; // rax
 
-  v1 = (UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)this;
   v2 = CullManager::Instance();
-  if ( v1 )
+  if ( this )
   {
-    v3 = v1->mNode.mPrev;
-    v4 = v1->mNode.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v1->mNode.mPrev = &v1->mNode;
-    v1->mNode.mNext = &v1->mNode;
+    mPrev = this->mPrev;
+    mNext = this->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = this;
+    this->mNext = this;
     --v2->mNumCullLayers;
   }
   `eh vector destructor iterator(
-    &v1[5],
+    this->mCullResultBuckets,
     8ui64,
     16,
     (void (__fastcall *)(void *))UFG::qSList<CullResultBucket,CullResultBucket,1>::~qSList<CullResultBucket,CullResultBucket,1>);
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes(v1 + 4);
-  v5 = v1[4].mNode.mPrev;
-  v6 = v1[4].mNode.mNext;
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&this->mPersistentCullBuckets);
+  v5 = this->mPersistentCullBuckets.mNode.mPrev;
+  v6 = this->mPersistentCullBuckets.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1[4].mNode.mPrev = &v1[4].mNode;
-  v1[4].mNode.mNext = &v1[4].mNode;
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes(v1 + 3);
-  v7 = v1[3].mNode.mPrev;
-  v8 = v1[3].mNode.mNext;
+  this->mPersistentCullBuckets.mNode.mPrev = &this->mPersistentCullBuckets.mNode;
+  this->mPersistentCullBuckets.mNode.mNext = &this->mPersistentCullBuckets.mNode;
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0>::DeleteNodes((UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&this->mFrameCullBuckets);
+  v7 = this->mFrameCullBuckets.mNode.mPrev;
+  v8 = this->mFrameCullBuckets.mNode.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1[3].mNode.mPrev = &v1[3].mNode;
-  v1[3].mNode.mNext = &v1[3].mNode;
-  v9 = v1->mNode.mPrev;
-  v10 = v1->mNode.mNext;
+  this->mFrameCullBuckets.mNode.mPrev = &this->mFrameCullBuckets.mNode;
+  this->mFrameCullBuckets.mNode.mNext = &this->mFrameCullBuckets.mNode;
+  v9 = this->mPrev;
+  v10 = this->mNext;
   v9->mNext = v10;
   v10->mPrev = v9;
-  v1->mNode.mPrev = &v1->mNode;
-  v1->mNode.mNext = &v1->mNode;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 225
 // RVA: 0x256D0
-void __fastcall PersistentCullBucket::PersistentCullBucket(PersistentCullBucket *this, int alloc_results, int num_cull_infos, int sizeof_cull_info)
+void __fastcall PersistentCullBucket::PersistentCullBucket(
+        PersistentCullBucket *this,
+        int alloc_results,
+        unsigned int num_cull_infos,
+        int sizeof_cull_info)
 {
-  int v4; // er13
-  int v5; // er12
-  int v6; // ebx
-  PersistentCullBucket *v7; // rdi
-  char *v8; // rsi
+  CullInfo *v8; // rsi
   unsigned int v9; // ebp
-  unsigned int v10; // er14
-  char *v11; // rbx
+  unsigned int v10; // r14d
+  CullResults *v11; // rbx
   char *v12; // r15
-  char *v13; // rax
+  CullInfoFull *v13; // rax
 
-  v4 = sizeof_cull_info;
-  v5 = num_cull_infos;
-  v6 = alloc_results;
-  v7 = this;
-  this->mPrev = (UFG::qNode<CullBucket,CullBucket> *)&this->mPrev;
-  this->mNext = (UFG::qNode<CullBucket,CullBucket> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   v8 = 0i64;
   this->mCullInfos = 0i64;
   this->mFullCullInfos = 0i64;
@@ -364,109 +331,105 @@ void __fastcall PersistentCullBucket::PersistentCullBucket(PersistentCullBucket 
   *(_QWORD *)&this->mType = 0i64;
   this->mCullInfosAlloced = 0;
   UFG::qFixedAllocator::qFixedAllocator(&this->mFixedAllocator);
-  v9 = ((v5 << 6) + 31) & 0xFFFFFFE0;
-  v10 = v4 * v5;
-  if ( v6 )
-    v11 = UFG::qMalloc(v9, "PersistentCullBucket_mCullResults", 0x2000ui64);
+  v9 = ((num_cull_infos << 6) + 31) & 0xFFFFFFE0;
+  v10 = sizeof_cull_info * num_cull_infos;
+  if ( alloc_results )
+    v11 = (CullResults *)UFG::qMalloc(v9, "PersistentCullBucket_mCullResults", 0x2000ui64);
   else
     v11 = 0i64;
   v12 = UFG::qMalloc(v10, "PersistentCullBucket_mCullInfos", 0x2000ui64);
   if ( v11 )
     UFG::qMemSet(v11, 0, v9);
   UFG::qMemSet(v12, 0, v10);
-  v7->mType = 2;
-  v7->mResults = (CullResults *)v11;
+  this->mType = 2;
+  this->mResults = v11;
   v13 = 0i64;
-  if ( v4 == 128 )
-    v13 = v12;
-  v7->mFullCullInfos = (CullInfoFull *)v13;
-  if ( v4 == 64 )
-    v8 = v12;
-  v7->mCullInfos = (CullInfo *)v8;
-  v7->mMax = v5;
-  v7->mCullInfosAlloced = v5;
-  UFG::qFixedAllocator::Init(&v7->mFixedAllocator, v12, v10, v4, "PersistentCullBucket");
+  if ( sizeof_cull_info == 128 )
+    v13 = (CullInfoFull *)v12;
+  this->mFullCullInfos = v13;
+  if ( sizeof_cull_info == 64 )
+    v8 = (CullInfo *)v12;
+  this->mCullInfos = v8;
+  this->mMax = num_cull_infos;
+  this->mCullInfosAlloced = num_cull_infos;
+  UFG::qFixedAllocator::Init(&this->mFixedAllocator, v12, v10, sizeof_cull_info, "PersistentCullBucket");
 }
 
 // File Line: 253
 // RVA: 0x25A60
 void __fastcall PersistentCullBucket::~PersistentCullBucket(PersistentCullBucket *this)
 {
-  PersistentCullBucket *v1; // rsi
-  CullInfoFull *v2; // rbx
-  CullInfo *v3; // rdi
-  UFG::qNode<CullBucket,CullBucket> *v4; // rcx
-  UFG::qNode<CullBucket,CullBucket> *v5; // rax
+  CullInfoFull *mFullCullInfos; // rbx
+  CullInfo *mCullInfos; // rdi
+  UFG::qNode<CullBucket,CullBucket> *mPrev; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mNext; // rax
 
-  v1 = this;
-  v2 = this->mFullCullInfos;
-  v3 = this->mCullInfos;
+  mFullCullInfos = this->mFullCullInfos;
+  mCullInfos = this->mCullInfos;
   operator delete[](this->mResults);
-  operator delete[](v2);
-  operator delete[](v3);
-  v1->mResults = 0i64;
-  v1->mFullCullInfos = 0i64;
-  v1->mCullInfos = 0i64;
-  UFG::qFixedAllocator::Close(&v1->mFixedAllocator);
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v1->mPrev = (UFG::qNode<CullBucket,CullBucket> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<CullBucket,CullBucket> *)&v1->mPrev;
+  operator delete[](mFullCullInfos);
+  operator delete[](mCullInfos);
+  this->mResults = 0i64;
+  this->mFullCullInfos = 0i64;
+  this->mCullInfos = 0i64;
+  UFG::qFixedAllocator::Close(&this->mFixedAllocator);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 424
 // RVA: 0x27380
-void __fastcall CullManager::CullSettings::SetFromViewSettings(CullManager::CullSettings *this, Render::ViewSettings *view_settings)
+void __fastcall CullManager::CullSettings::SetFromViewSettings(
+        CullManager::CullSettings *this,
+        Render::ViewSettings *view_settings)
 {
-  float v2; // xmm0_4
-  CullManager::CullSettings *v3; // rdi
-  Render::ViewSettings *v4; // rbx
+  float z; // xmm0_4
   float v5; // xmm6_4
   float v6; // xmm7_4
-  float v7; // xmm0_4
-  float v8; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
   float v9; // xmm0_4
   UFG::qMatrix44 *v10; // rax
   UFG::qVector4 v11; // xmm3
   UFG::qVector4 v12; // xmm2
   UFG::qVector4 v13; // xmm1
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-A8h]
-  UFG::qMatrix44 result; // [rsp+60h] [rbp-68h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-A8h] BYREF
+  UFG::qMatrix44 result; // [rsp+60h] [rbp-68h] BYREF
 
-  v2 = view_settings->mProjection.v2.z;
-  v3 = this;
-  v4 = view_settings;
-  v5 = view_settings->mProjection.v3.z / v2;
+  z = view_settings->mProjection.v2.z;
+  v5 = view_settings->mProjection.v3.z / z;
   v6 = (float)(view_settings->mProjection.v3.z - view_settings->mProjection.v3.w)
-     / (float)(v2 - view_settings->mProjection.v2.w);
+     / (float)(z - view_settings->mProjection.v2.w);
   UFG::qInverseAffine(&d, &view_settings->mWorldView);
-  v7 = d.v3.x;
-  v8 = d.v3.y;
-  v3->mFarPlane = v6;
-  v3->mNearPlane = v5;
-  v3->mPixelDensityThreshold = v4->mCullPixelDensityThreshold;
-  v3->mPixelDistanceBias = v4->mCullPixelDistanceBias;
-  v3->mViewWorldPos.x = v7;
+  x = d.v3.x;
+  y = d.v3.y;
+  this->mFarPlane = v6;
+  this->mNearPlane = v5;
+  this->mPixelDensityThreshold = view_settings->mCullPixelDensityThreshold;
+  this->mPixelDistanceBias = view_settings->mCullPixelDistanceBias;
+  this->mViewWorldPos.x = x;
   v9 = d.v3.z;
-  v3->mViewWorldPos.y = v8;
-  v3->mViewWorldPos.z = v9;
-  v10 = UFG::qMatrix44::operator*(&v4->mWorldView, &result, &v4->mProjection);
+  this->mViewWorldPos.y = y;
+  this->mViewWorldPos.z = v9;
+  v10 = UFG::qMatrix44::operator*(&view_settings->mWorldView, &result, &view_settings->mProjection);
   v11 = v10->v1;
   v12 = v10->v2;
   v13 = v10->v3;
-  v3->mWorldViewProjection.v0 = v10->v0;
-  v3->mWorldViewProjection.v1 = v11;
-  v3->mWorldViewProjection.v2 = v12;
-  v3->mWorldViewProjection.v3 = v13;
+  this->mWorldViewProjection.v0 = v10->v0;
+  this->mWorldViewProjection.v1 = v11;
+  this->mWorldViewProjection.v2 = v12;
+  this->mWorldViewProjection.v3 = v13;
 }
 
 // File Line: 460
 // RVA: 0x27210
 CullManager *__fastcall CullManager::Instance()
 {
-  if ( !(_S1_2 & 1) )
+  if ( (_S1_2 & 1) == 0 )
   {
     _S1_2 |= 1u;
     `eh vector constructor iterator(
@@ -486,14 +449,12 @@ CullManager *__fastcall CullManager::Instance()
 // RVA: 0x27080
 void __fastcall CullManager::Init(CullManager *this, UFG::qMemoryPool *texture_pool)
 {
-  CullManager *v2; // r14
-  UFG::qNode<CullLayer,CullLayer> **v3; // rsi
-  signed __int64 v4; // rdi
-  signed __int64 v5; // rbp
+  UFG::qNode<CullLayer,CullLayer> **p_mNext; // rsi
+  UFG::qList<CullLayer,CullLayer,1,0> *mCullLayers; // rdi
+  __int64 v5; // rbp
   UFG::qNode<CullLayer,CullLayer> *i; // rbx
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this;
   *(_QWORD *)this->mViewSlots = 0i64;
   *(_QWORD *)&this->mViewSlots[2] = 0i64;
   *(_QWORD *)&this->mViewSlots[4] = 0i64;
@@ -504,51 +465,49 @@ void __fastcall CullManager::Init(CullManager *this, UFG::qMemoryPool *texture_p
   *(_QWORD *)&this->mViewSlots[14] = 0i64;
   this->mPixelDensityDynamicBias = 1;
   this->mZbuffer1 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
-  v2->mZbuffer2 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
-  v2->mZbuffer3 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
-  v2->mZbuffer4 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
-  v2->mOcclusionDebugTexture = 0i64;
-  *(_WORD *)&v2->mEnableOcclusionCulling = 1;
-  *(_QWORD *)&v2->mDrawCullInfoNum = 0i64;
-  v2->mDrawOcclusionMapScale = 0;
-  v2->mDrawOcclusionMapOpacity = 0.30000001;
-  v2->mDetailedCullInfoIndex = 0;
-  v2->mDetailedCullInfoLocked = 0;
-  v3 = &v2->mCullLayers[0].mNode.mNext;
-  v4 = (signed __int64)v2->mCullLayers;
+  this->mZbuffer2 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
+  this->mZbuffer3 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
+  this->mZbuffer4 = UFG::qMalloc(0x10080ui64, "CullManager::mZbuffer", 0x8000ui64);
+  this->mOcclusionDebugTexture = 0i64;
+  *(_WORD *)&this->mEnableOcclusionCulling = 1;
+  *(_QWORD *)&this->mDrawCullInfoNum = 0i64;
+  this->mDrawOcclusionMapScale = 0;
+  this->mDrawOcclusionMapOpacity = 0.30000001;
+  this->mDetailedCullInfoIndex = 0;
+  this->mDetailedCullInfoLocked = 0;
+  p_mNext = &this->mCullLayers[0].mNode.mNext;
+  mCullLayers = this->mCullLayers;
   v5 = 2i64;
   do
   {
-    for ( i = *v3; i != (UFG::qNode<CullLayer,CullLayer> *)v4; i = i->mNext )
+    for ( i = *p_mNext; i != (UFG::qNode<CullLayer,CullLayer> *)mCullLayers; i = i->mNext )
     {
       UFG::qString::qString(&v7);
-      UFG::qString::Format(&v7, "\\Rendering\\Culling\\Layers\\%s", i[1].mNext);
+      UFG::qString::Format(&v7, "\\Rendering\\Culling\\Layers\\%s", (const char *)i[1].mNext);
       UFG::qString::~qString(&v7);
     }
-    v4 += 16i64;
-    v3 += 2;
+    ++mCullLayers;
+    p_mNext += 2;
     --v5;
   }
   while ( v5 );
-  _((AMD_HD3D *)v2);
+  _((AMD_HD3D *)this);
 }
 
 // File Line: 896
 // RVA: 0x272A0
 __int64 __fastcall CullManager::RegisterView(CullManager *this, CullManager::CullSettings *view_settings)
 {
-  unsigned int v2; // er8
-  CullManager::CullSettings *v3; // r10
-  signed __int64 v4; // rax
+  unsigned int v2; // r8d
+  __int64 v4; // rax
   __int64 result; // rax
   UFG::qVector4 v6; // xmm1
   __int64 v7; // rdx
   UFG::qVector4 v8; // xmm3
   UFG::qVector4 v9; // xmm2
-  float v10; // xmm0_4
+  float y; // xmm0_4
 
   v2 = 0;
-  v3 = view_settings;
   v4 = 0i64;
   while ( this->mViewSlots[v4] )
   {
@@ -559,26 +518,26 @@ __int64 __fastcall CullManager::RegisterView(CullManager *this, CullManager::Cul
   }
   if ( v2 == -1 )
     return 0i64;
-  this->mViewSlots[v2] = 2;
+  this->mViewSlots[v2] = VIEW_SLOT_ALLOCATED;
   v6 = view_settings->mWorldViewProjection.v3;
-  v7 = (signed int)v2;
-  v8 = v3->mWorldViewProjection.v1;
-  v9 = v3->mWorldViewProjection.v2;
-  this->mViewSettings[v7].mWorldViewProjection.v0 = v3->mWorldViewProjection.v0;
+  v7 = (int)v2;
+  v8 = view_settings->mWorldViewProjection.v1;
+  v9 = view_settings->mWorldViewProjection.v2;
+  this->mViewSettings[v7].mWorldViewProjection.v0 = view_settings->mWorldViewProjection.v0;
   this->mViewSettings[v7].mWorldViewProjection.v1 = v8;
   this->mViewSettings[v7].mWorldViewProjection.v2 = v9;
   this->mViewSettings[v7].mWorldViewProjection.v3 = v6;
-  this->mViewSettings[v7].mNearPlane = v3->mNearPlane;
-  this->mViewSettings[v7].mFarPlane = v3->mFarPlane;
-  this->mViewSettings[v7].mPixelDensityThreshold = v3->mPixelDensityThreshold;
+  this->mViewSettings[v7].mNearPlane = view_settings->mNearPlane;
+  this->mViewSettings[v7].mFarPlane = view_settings->mFarPlane;
+  this->mViewSettings[v7].mPixelDensityThreshold = view_settings->mPixelDensityThreshold;
   result = v2;
-  this->mViewSettings[v7].mPixelDistanceBias = v3->mPixelDistanceBias;
-  this->mViewSettings[v7].mViewFlags = v3->mViewFlags;
-  this->mViewSettings[v7].mViewUserFilter = v3->mViewUserFilter;
-  v10 = v3->mViewWorldPos.y;
-  v6.x = v3->mViewWorldPos.z;
-  this->mViewSettings[v7].mViewWorldPos.x = v3->mViewWorldPos.x;
-  this->mViewSettings[v7].mViewWorldPos.y = v10;
+  this->mViewSettings[v7].mPixelDistanceBias = view_settings->mPixelDistanceBias;
+  this->mViewSettings[v7].mViewFlags = view_settings->mViewFlags;
+  this->mViewSettings[v7].mViewUserFilter = view_settings->mViewUserFilter;
+  y = view_settings->mViewWorldPos.y;
+  v6.x = view_settings->mViewWorldPos.z;
+  this->mViewSettings[v7].mViewWorldPos.x = view_settings->mViewWorldPos.x;
+  this->mViewSettings[v7].mViewWorldPos.y = y;
   this->mViewSettings[v7].mViewWorldPos.z = v6.x;
   return result;
 }
@@ -587,18 +546,16 @@ __int64 __fastcall CullManager::RegisterView(CullManager *this, CullManager::Cul
 // RVA: 0x26AE0
 void __fastcall CullManager::DeregisterView(CullManager *this, int view_index)
 {
-  CullManager *v2; // rdi
-  Render::RasterizeZ *v3; // rcx
+  Render::RasterizeZ *mRasterizers; // rcx
   __int64 v4; // rbx
 
   if ( view_index != -1 )
   {
-    v2 = this;
-    v3 = this->mRasterizers;
+    mRasterizers = this->mRasterizers;
     v4 = view_index;
-    *((_DWORD *)&v3[-32] + view_index - 12) = 0;
-    Render::RasterizeZ::Init(&v3[view_index], 0i64, 1u);
-    Render::OcclusionMap::Init(&v2->mOcclusionMaps[v4], 0i64);
+    *((_DWORD *)&mRasterizers[-32] + view_index - 12) = 0;
+    Render::RasterizeZ::Init(&mRasterizers[view_index], 0i64, 1);
+    Render::OcclusionMap::Init(&this->mOcclusionMaps[v4], 0i64);
   }
 }
 
@@ -607,25 +564,25 @@ void __fastcall CullManager::DeregisterView(CullManager *this, int view_index)
 void __fastcall CullManager::DeregisterAllViews(CullManager *this)
 {
   CullManager *v1; // rdi
-  Render::OcclusionMap *v2; // rsi
-  signed int v3; // ebx
-  Render::RasterizeZ *v4; // rbp
+  Render::OcclusionMap *mOcclusionMaps; // rsi
+  int v3; // ebx
+  Render::RasterizeZ *mRasterizers; // rbp
 
   v1 = this;
-  v2 = this->mOcclusionMaps;
+  mOcclusionMaps = this->mOcclusionMaps;
   v3 = 0;
-  v4 = this->mRasterizers;
+  mRasterizers = this->mRasterizers;
   do
   {
     if ( v3 != -1 )
     {
-      v1->mViewSlots[0] = 0;
-      Render::RasterizeZ::Init(v4, 0i64, 1u);
-      Render::OcclusionMap::Init(v2, 0i64);
+      v1->mViewSlots[0] = VIEW_SLOT_AVAILABLE;
+      Render::RasterizeZ::Init(mRasterizers, 0i64, 1);
+      Render::OcclusionMap::Init(mOcclusionMaps, 0i64);
     }
     ++v3;
-    ++v4;
-    ++v2;
+    ++mRasterizers;
+    ++mOcclusionMaps;
     v1 = (CullManager *)((char *)v1 + 4);
   }
   while ( v3 < 16 );
@@ -633,22 +590,18 @@ void __fastcall CullManager::DeregisterAllViews(CullManager *this)
 
 // File Line: 966
 // RVA: 0x26F60
-UFG::qList<CullBucket,CullBucket,1,0> *__fastcall GetEmptyCullBucket(UFG::qList<CullBucket,CullBucket,1,0> *bucket_list, int alloc_results, int max_cull_infos, int sizeof_cull_info)
+UFG::qList<CullBucket,CullBucket,1,0> *__fastcall GetEmptyCullBucket(
+        UFG::qList<CullBucket,CullBucket,1,0> *bucket_list,
+        int alloc_results,
+        unsigned int max_cull_infos,
+        int sizeof_cull_info)
 {
-  int v4; // esi
-  int v5; // ebp
-  int v6; // edi
-  UFG::qList<CullBucket,CullBucket,1,0> *v7; // rbx
   UFG::qList<CullBucket,CullBucket,1,0> *result; // rax
   char *v9; // rax
-  UFG::qList<CullBucket,CullBucket,1,0> **v10; // rax
-  UFG::qList<CullBucket,CullBucket,1,0> **v11; // rcx
-  UFG::qNode<CullBucket,CullBucket> *v12; // rax
+  UFG::qNode<CullBucket,CullBucket> *v10; // rax
+  UFG::qNode<CullBucket,CullBucket> *v11; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mNext; // rax
 
-  v4 = sizeof_cull_info;
-  v5 = max_cull_infos;
-  v6 = alloc_results;
-  v7 = bucket_list;
   result = (UFG::qList<CullBucket,CullBucket,1,0> *)bucket_list->mNode.mNext;
   if ( result != bucket_list )
   {
@@ -664,117 +617,125 @@ UFG::qList<CullBucket,CullBucket,1,0> *__fastcall GetEmptyCullBucket(UFG::qList<
   v9 = UFG::qMalloc(0x70ui64, "PersistentCullBucket", 0x800ui64);
   if ( v9 )
   {
-    PersistentCullBucket::PersistentCullBucket((PersistentCullBucket *)v9, v6, v5, v4);
+    PersistentCullBucket::PersistentCullBucket(
+      (PersistentCullBucket *)v9,
+      alloc_results,
+      max_cull_infos,
+      sizeof_cull_info);
     v11 = v10;
   }
   else
   {
     v11 = 0i64;
   }
-  v12 = v7->mNode.mNext;
-  v7->mNode.mNext = (UFG::qNode<CullBucket,CullBucket> *)v11;
-  *v11 = v7;
-  v11[1] = (UFG::qList<CullBucket,CullBucket,1,0> *)v12;
-  v12->mPrev = (UFG::qNode<CullBucket,CullBucket> *)v11;
+  mNext = bucket_list->mNode.mNext;
+  bucket_list->mNode.mNext = v11;
+  v11->mPrev = &bucket_list->mNode;
+  v11->mNext = mNext;
+  mNext->mPrev = v11;
   return (UFG::qList<CullBucket,CullBucket,1,0> *)v11;
 }
 
 // File Line: 1008
 // RVA: 0x25B90
-void __fastcall CullManager::AllocPersistentCullInfo(CullManager *this, CullResults **cull_result, CullInfo **cull_info, CullLayer *cull_layer, void *cull_info_param0, void *cull_info_param1)
+void __fastcall CullManager::AllocPersistentCullInfo(
+        CullManager *this,
+        CullResults **cull_result,
+        CullInfo **cull_info,
+        CullLayer *cull_layer,
+        void *cull_info_param0,
+        void *cull_info_param1)
 {
-  CullResults **v6; // r15
-  CullInfo **v7; // rbp
   CullLayer *v8; // r13
-  UFG::qList<CullBucket,CullBucket,1,0> *v9; // r14
-  PersistentCullBucket *v10; // rax
+  UFG::qList<CullBucket,CullBucket,1,0> *p_mPersistentCullBuckets; // r14
+  PersistentCullBucket *EmptyCullBucket; // rax
   PersistentCullBucket *v11; // rbx
-  char *v12; // rdi
+  char *mFreeListHead; // rdi
   char *v13; // rcx
-  unsigned int v14; // edx
+  unsigned int mMostSlotsAllocated; // edx
   unsigned __int64 v15; // rdx
-  UFG::qNode<CullBucket,CullBucket> *v16; // rax
-  UFG::qNode<CullBucket,CullBucket> *v17; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mNext; // rax
+  UFG::qNode<CullBucket,CullBucket> *mPrev; // rcx
   UFG::qNode<CullBucket,CullBucket> *v18; // rax
 
   if ( cull_info )
   {
-    v6 = cull_result;
-    v7 = cull_info;
     v8 = &gDefaultCullLayer;
     if ( cull_layer )
       v8 = cull_layer;
-    v9 = &v8->mPersistentCullBuckets;
-    v10 = GetEmptyCullBucket(&v8->mPersistentCullBuckets, cull_result != 0i64, 256, 64);
-    v11 = v10;
-    v12 = v10->mFixedAllocator.mFreeListHead;
-    if ( v12 )
+    p_mPersistentCullBuckets = &v8->mPersistentCullBuckets;
+    EmptyCullBucket = GetEmptyCullBucket(&v8->mPersistentCullBuckets, cull_result != 0i64, 256, 64);
+    v11 = EmptyCullBucket;
+    mFreeListHead = EmptyCullBucket->mFixedAllocator.mFreeListHead;
+    if ( mFreeListHead )
     {
-      v13 = *(char **)v12;
-      v14 = ++v10->mFixedAllocator.mNumSlotsAllocated;
-      v10->mFixedAllocator.mFreeListHead = v13;
-      if ( v10->mFixedAllocator.mMostSlotsAllocated > v14 )
-        v14 = v10->mFixedAllocator.mMostSlotsAllocated;
-      v10->mFixedAllocator.mMostSlotsAllocated = v14;
+      v13 = *(char **)mFreeListHead;
+      mMostSlotsAllocated = ++EmptyCullBucket->mFixedAllocator.mNumSlotsAllocated;
+      EmptyCullBucket->mFixedAllocator.mFreeListHead = v13;
+      if ( EmptyCullBucket->mFixedAllocator.mMostSlotsAllocated > mMostSlotsAllocated )
+        mMostSlotsAllocated = EmptyCullBucket->mFixedAllocator.mMostSlotsAllocated;
+      EmptyCullBucket->mFixedAllocator.mMostSlotsAllocated = mMostSlotsAllocated;
     }
     else
     {
-      UFG::qFixedAllocator::ReportFull(&v10->mFixedAllocator);
+      UFG::qFixedAllocator::ReportFull(&EmptyCullBucket->mFixedAllocator);
     }
-    v15 = (unsigned __int64)(unsigned int)((v12 - v11->mFixedAllocator.mBuffer) / v11->mFixedAllocator.mSlotSize) << 6;
-    *v7 = (CullInfo *)((char *)v11->mCullInfos + v15);
-    if ( v6 )
-      *v6 = (CullResults *)((char *)v11->mResults + v15);
-    *((_QWORD *)v12 + 4) = v8;
-    *((_QWORD *)v12 + 5) = cull_info_param0;
-    *((_QWORD *)v12 + 7) = 0i64;
-    *((_QWORD *)v12 + 6) = cull_info_param1;
+    v15 = (unsigned __int64)(unsigned int)((mFreeListHead - v11->mFixedAllocator.mBuffer)
+                                         / v11->mFixedAllocator.mSlotSize) << 6;
+    *cull_info = (CullInfo *)((char *)v11->mCullInfos + v15);
+    if ( cull_result )
+      *cull_result = (CullResults *)((char *)v11->mResults + v15);
+    *((_QWORD *)mFreeListHead + 4) = v8;
+    *((_QWORD *)mFreeListHead + 5) = cull_info_param0;
+    *((_QWORD *)mFreeListHead + 7) = 0i64;
+    *((_QWORD *)mFreeListHead + 6) = cull_info_param1;
     if ( !v11->mFixedAllocator.mFreeListHead )
     {
-      v16 = v11->mNext;
-      v17 = v11->mPrev;
-      v17->mNext = v16;
-      v16->mPrev = v17;
-      v11->mPrev = (UFG::qNode<CullBucket,CullBucket> *)&v11->mPrev;
-      v11->mNext = (UFG::qNode<CullBucket,CullBucket> *)&v11->mPrev;
-      v18 = v9->mNode.mPrev;
-      v18->mNext = (UFG::qNode<CullBucket,CullBucket> *)&v11->mPrev;
+      mNext = v11->mNext;
+      mPrev = v11->mPrev;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v11->mPrev = v11;
+      v11->mNext = v11;
+      v18 = p_mPersistentCullBuckets->mNode.mPrev;
+      v18->mNext = v11;
       v11->mPrev = v18;
-      v11->mNext = &v9->mNode;
-      v9->mNode.mPrev = (UFG::qNode<CullBucket,CullBucket> *)&v11->mPrev;
+      v11->mNext = &p_mPersistentCullBuckets->mNode;
+      p_mPersistentCullBuckets->mNode.mPrev = v11;
     }
   }
 }
 
 // File Line: 1048
 // RVA: 0x25CC0
-void __fastcall CullManager::AllocPersistentOcclusionInfo(CullManager *this, CullInfoFull **occlusion_info, CullLayer *cull_layer)
+void __fastcall CullManager::AllocPersistentOcclusionInfo(
+        CullManager *this,
+        CullInfoFull **occlusion_info,
+        CullLayer *cull_layer)
 {
-  CullInfoFull **v3; // r12
   CullLayer *v4; // rbp
-  UFG::qList<CullBucket,CullBucket,1,0> *v5; // r14
-  UFG::qList<CullBucket,CullBucket,1,0> *v6; // rsi
+  UFG::qList<CullBucket,CullBucket,1,0> *p_mPersistentCullBuckets; // r14
+  UFG::qList<CullBucket,CullBucket,1,0> *mNext; // rsi
   char *v7; // rax
   char *v8; // rbx
   UFG::qNode<CullBucket,CullBucket> *v9; // rax
   CullInfoFull *v10; // rbx
   unsigned int v11; // ecx
-  UFG::qNode<CullBucket,CullBucket> *v12; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mPrev; // rcx
   UFG::qNode<CullBucket,CullBucket> *v13; // rax
   UFG::qNode<CullBucket,CullBucket> *v14; // rax
 
   if ( occlusion_info )
   {
-    v3 = occlusion_info;
     v4 = &gDefaultOcclusionLayer;
     if ( cull_layer )
       v4 = cull_layer;
-    v5 = &v4->mPersistentCullBuckets;
-    v6 = (UFG::qList<CullBucket,CullBucket,1,0> *)v4->mPersistentCullBuckets.mNode.mNext;
-    if ( v6 == &v4->mPersistentCullBuckets || !v6[5].mNode.mNext )
+    p_mPersistentCullBuckets = &v4->mPersistentCullBuckets;
+    mNext = (UFG::qList<CullBucket,CullBucket,1,0> *)v4->mPersistentCullBuckets.mNode.mNext;
+    if ( mNext == &v4->mPersistentCullBuckets || !mNext[5].mNode.mNext )
     {
       v7 = UFG::qMalloc(0x70ui64, "PersistentCullBucket", 0x800ui64);
-      v6 = (UFG::qList<CullBucket,CullBucket,1,0> *)v7;
+      mNext = (UFG::qList<CullBucket,CullBucket,1,0> *)v7;
       if ( v7 )
       {
         *(_QWORD *)v7 = v7;
@@ -787,52 +748,52 @@ void __fastcall CullManager::AllocPersistentOcclusionInfo(CullManager *this, Cul
         UFG::qFixedAllocator::qFixedAllocator((UFG::qFixedAllocator *)(v7 + 64));
         v8 = UFG::qMalloc(0x8000ui64, "PersistentCullBucket_mCullInfos", 0x2000ui64);
         UFG::qMemSet(v8, 0, 0x8000u);
-        LODWORD(v6[2].mNode.mNext) = 2;
-        v6[2].mNode.mPrev = 0i64;
-        v6[1].mNode.mNext = (UFG::qNode<CullBucket,CullBucket> *)v8;
-        v6[1].mNode.mPrev = 0i64;
-        HIDWORD(v6[2].mNode.mNext) = 256;
-        LODWORD(v6[3].mNode.mPrev) = 256;
-        UFG::qFixedAllocator::Init((UFG::qFixedAllocator *)&v6[4], v8, 0x8000, 128, "PersistentCullBucket");
+        LODWORD(mNext[2].mNode.mNext) = 2;
+        mNext[2].mNode.mPrev = 0i64;
+        mNext[1].mNode.mNext = (UFG::qNode<CullBucket,CullBucket> *)v8;
+        mNext[1].mNode.mPrev = 0i64;
+        HIDWORD(mNext[2].mNode.mNext) = 256;
+        LODWORD(mNext[3].mNode.mPrev) = 256;
+        UFG::qFixedAllocator::Init((UFG::qFixedAllocator *)&mNext[4], v8, 0x8000, 128, "PersistentCullBucket");
       }
       else
       {
-        v6 = 0i64;
+        mNext = 0i64;
       }
       v9 = v4->mPersistentCullBuckets.mNode.mNext;
-      v4->mPersistentCullBuckets.mNode.mNext = &v6->mNode;
-      v6->mNode.mPrev = &v5->mNode;
-      v6->mNode.mNext = v9;
-      v9->mPrev = &v6->mNode;
+      v4->mPersistentCullBuckets.mNode.mNext = &mNext->mNode;
+      mNext->mNode.mPrev = &p_mPersistentCullBuckets->mNode;
+      mNext->mNode.mNext = v9;
+      v9->mPrev = &mNext->mNode;
     }
-    v10 = (CullInfoFull *)v6[5].mNode.mNext;
+    v10 = (CullInfoFull *)mNext[5].mNode.mNext;
     if ( v10 )
     {
-      v6[5].mNode.mNext = *(UFG::qNode<CullBucket,CullBucket> **)v10->mAABBMin;
-      v11 = ++HIDWORD(v6[6].mNode.mPrev);
-      if ( LODWORD(v6[6].mNode.mNext) > v11 )
-        v11 = (unsigned int)v6[6].mNode.mNext;
-      LODWORD(v6[6].mNode.mNext) = v11;
+      mNext[5].mNode.mNext = *(UFG::qNode<CullBucket,CullBucket> **)v10->mAABBMin;
+      v11 = ++HIDWORD(mNext[6].mNode.mPrev);
+      if ( LODWORD(mNext[6].mNode.mNext) > v11 )
+        v11 = (unsigned int)mNext[6].mNode.mNext;
+      LODWORD(mNext[6].mNode.mNext) = v11;
     }
     else
     {
-      UFG::qFixedAllocator::ReportFull((UFG::qFixedAllocator *)&v6[4]);
+      UFG::qFixedAllocator::ReportFull((UFG::qFixedAllocator *)&mNext[4]);
     }
-    *v3 = v10;
+    *occlusion_info = v10;
     v10->mCullLayer = v4;
-    if ( !v6[5].mNode.mNext )
+    if ( !mNext[5].mNode.mNext )
     {
-      v12 = v6->mNode.mPrev;
-      v13 = v6->mNode.mNext;
-      v12->mNext = v13;
-      v13->mPrev = v12;
-      v6->mNode.mPrev = &v6->mNode;
-      v6->mNode.mNext = &v6->mNode;
-      v14 = v5->mNode.mPrev;
-      v14->mNext = &v6->mNode;
-      v6->mNode.mPrev = v14;
-      v6->mNode.mNext = &v5->mNode;
-      v5->mNode.mPrev = &v6->mNode;
+      mPrev = mNext->mNode.mPrev;
+      v13 = mNext->mNode.mNext;
+      mPrev->mNext = v13;
+      v13->mPrev = mPrev;
+      mNext->mNode.mPrev = &mNext->mNode;
+      mNext->mNode.mNext = &mNext->mNode;
+      v14 = p_mPersistentCullBuckets->mNode.mPrev;
+      v14->mNext = &mNext->mNode;
+      mNext->mNode.mPrev = v14;
+      mNext->mNode.mNext = &p_mPersistentCullBuckets->mNode;
+      p_mPersistentCullBuckets->mNode.mPrev = &mNext->mNode;
     }
   }
 }
@@ -841,66 +802,64 @@ void __fastcall CullManager::AllocPersistentOcclusionInfo(CullManager *this, Cul
 // RVA: 0x26D40
 void __fastcall CullManager::FreePersistentCullInfo(CullManager *this, CullResults *cull_result, CullInfo *cull_info)
 {
-  CullLayer *v3; // rsi
-  PersistentCullBucket *v4; // rbx
-  signed __int64 v5; // rsi
-  CullInfo *v6; // rdi
-  CullManager *v7; // rbp
-  unsigned __int64 v8; // rcx
-  signed __int64 v9; // r14
-  CullResults *v10; // rax
+  CullLayer *mCullLayer; // rsi
+  PersistentCullBucket *mNext; // rbx
+  PersistentCullBucket *p_mPersistentCullBuckets; // rsi
+  unsigned __int64 mBuffer; // rcx
+  __int64 v9; // r14
+  CullResults *mResults; // rax
   UFG::qNode<CullBucket,CullBucket> *v11; // rax
-  UFG::qNode<CullBucket,CullBucket> *v12; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mPrev; // rcx
   PersistentCullBucket **v13; // rax
 
   if ( cull_info )
   {
-    v3 = cull_info->mCullLayer;
-    v4 = (PersistentCullBucket *)v3->mPersistentCullBuckets.mNode.mNext;
-    v5 = (signed __int64)&v3->mPersistentCullBuckets;
-    v6 = cull_info;
-    v7 = this;
-    if ( v4 != (PersistentCullBucket *)v5 )
+    mCullLayer = cull_info->mCullLayer;
+    mNext = (PersistentCullBucket *)mCullLayer->mPersistentCullBuckets.mNode.mNext;
+    p_mPersistentCullBuckets = (PersistentCullBucket *)&mCullLayer->mPersistentCullBuckets;
+    if ( mNext != p_mPersistentCullBuckets )
     {
       while ( 1 )
       {
-        v8 = (unsigned __int64)v4->mFixedAllocator.mBuffer;
-        if ( (unsigned __int64)cull_info < v8 + v4->mFixedAllocator.mBufferSize && (unsigned __int64)cull_info >= v8 )
+        mBuffer = (unsigned __int64)mNext->mFixedAllocator.mBuffer;
+        if ( (unsigned __int64)cull_info < mBuffer + mNext->mFixedAllocator.mBufferSize
+          && (unsigned __int64)cull_info >= mBuffer )
+        {
           break;
-        v4 = (PersistentCullBucket *)v4->mNext;
-        if ( v4 == (PersistentCullBucket *)v5 )
+        }
+        mNext = (PersistentCullBucket *)mNext->mNext;
+        if ( mNext == p_mPersistentCullBuckets )
           return;
       }
-      if ( v4 )
+      if ( mNext )
       {
-        v9 = (signed __int64)(signed int)(((char *)cull_info - v4->mFixedAllocator.mBuffer)
-                                        / v4->mFixedAllocator.mSlotSize) << 6;
-        UFG::qMemSet((char *)v4->mCullInfos + v9, 0, 0x40u);
-        v10 = v4->mResults;
-        if ( v10 )
-          UFG::qMemSet(&v10->mViewResult[v9], 0, 0x40u);
-        *(_QWORD *)v6->mAABBMin = v4->mFixedAllocator.mFreeListHead;
-        --v4->mFixedAllocator.mNumSlotsAllocated;
-        v4->mFixedAllocator.mFreeListHead = (char *)v6;
-        if ( v4->mFixedAllocator.mNumSlotsAllocated )
+        v9 = (__int64)(int)((__int64)((__int64)cull_info - mBuffer) / mNext->mFixedAllocator.mSlotSize) << 6;
+        UFG::qMemSet((char *)mNext->mCullInfos + v9, 0, 0x40u);
+        mResults = mNext->mResults;
+        if ( mResults )
+          UFG::qMemSet(&mResults->mViewResult[v9], 0, 0x40u);
+        *(_QWORD *)cull_info->mAABBMin = mNext->mFixedAllocator.mFreeListHead;
+        --mNext->mFixedAllocator.mNumSlotsAllocated;
+        mNext->mFixedAllocator.mFreeListHead = (char *)cull_info;
+        if ( mNext->mFixedAllocator.mNumSlotsAllocated )
         {
-          v11 = v4->mNext;
-          v12 = v4->mPrev;
-          v12->mNext = v11;
-          v11->mPrev = v12;
-          v4->mPrev = (UFG::qNode<CullBucket,CullBucket> *)&v4->mPrev;
-          v4->mNext = (UFG::qNode<CullBucket,CullBucket> *)&v4->mPrev;
-          v13 = *(PersistentCullBucket ***)(v5 + 8);
-          *(_QWORD *)(v5 + 8) = v4;
-          v4->mNext = (UFG::qNode<CullBucket,CullBucket> *)v13;
-          v4->mPrev = (UFG::qNode<CullBucket,CullBucket> *)v5;
-          *v13 = v4;
+          v11 = mNext->mNext;
+          mPrev = mNext->mPrev;
+          mPrev->mNext = v11;
+          v11->mPrev = mPrev;
+          mNext->mPrev = mNext;
+          mNext->mNext = mNext;
+          v13 = (PersistentCullBucket **)p_mPersistentCullBuckets->mNext;
+          p_mPersistentCullBuckets->mNext = mNext;
+          mNext->mNext = (UFG::qNode<CullBucket,CullBucket> *)v13;
+          mNext->mPrev = p_mPersistentCullBuckets;
+          *v13 = mNext;
         }
         else
         {
-          PersistentCullBucket::~PersistentCullBucket(v4);
-          operator delete[](v4);
-          --v7->mNumCullBuckets;
+          PersistentCullBucket::~PersistentCullBucket(mNext);
+          operator delete[](mNext);
+          --this->mNumCullBuckets;
         }
       }
     }
@@ -911,56 +870,52 @@ void __fastcall CullManager::FreePersistentCullInfo(CullManager *this, CullResul
 // RVA: 0x26E70
 void __fastcall CullManager::FreePersistentOcclusionInfo(CullManager *this, CullInfoFull *occlusion_info)
 {
-  CullLayer *v2; // rdi
-  PersistentCullBucket *v3; // rbx
-  signed __int64 v4; // rdi
-  CullInfoFull *v5; // rsi
-  CullManager *v6; // rbp
+  CullLayer *mCullLayer; // rdi
+  PersistentCullBucket *mNext; // rbx
+  PersistentCullBucket *p_mPersistentCullBuckets; // rdi
   UFG::qNode<CullBucket,CullBucket> *v7; // rax
-  UFG::qNode<CullBucket,CullBucket> *v8; // rcx
+  UFG::qNode<CullBucket,CullBucket> *mPrev; // rcx
   PersistentCullBucket **v9; // rax
 
   if ( occlusion_info )
   {
-    v2 = occlusion_info->mCullLayer;
-    v3 = (PersistentCullBucket *)v2->mPersistentCullBuckets.mNode.mNext;
-    v4 = (signed __int64)&v2->mPersistentCullBuckets;
-    v5 = occlusion_info;
-    v6 = this;
-    if ( v3 != (PersistentCullBucket *)v4 )
+    mCullLayer = occlusion_info->mCullLayer;
+    mNext = (PersistentCullBucket *)mCullLayer->mPersistentCullBuckets.mNode.mNext;
+    p_mPersistentCullBuckets = (PersistentCullBucket *)&mCullLayer->mPersistentCullBuckets;
+    if ( mNext != p_mPersistentCullBuckets )
     {
-      while ( (char *)occlusion_info >= &v3->mFixedAllocator.mBuffer[(unsigned __int64)v3->mFixedAllocator.mBufferSize]
-           || (char *)occlusion_info < v3->mFixedAllocator.mBuffer )
+      while ( (char *)occlusion_info >= &mNext->mFixedAllocator.mBuffer[(unsigned __int64)mNext->mFixedAllocator.mBufferSize]
+           || (char *)occlusion_info < mNext->mFixedAllocator.mBuffer )
       {
-        v3 = (PersistentCullBucket *)v3->mNext;
-        if ( v3 == (PersistentCullBucket *)v4 )
+        mNext = (PersistentCullBucket *)mNext->mNext;
+        if ( mNext == p_mPersistentCullBuckets )
           return;
       }
-      if ( v3 )
+      if ( mNext )
       {
         UFG::qMemSet(occlusion_info, 0, 0x80u);
-        *(_QWORD *)v5->mAABBMin = v3->mFixedAllocator.mFreeListHead;
-        --v3->mFixedAllocator.mNumSlotsAllocated;
-        v3->mFixedAllocator.mFreeListHead = (char *)v5;
-        if ( v3->mFixedAllocator.mNumSlotsAllocated )
+        *(_QWORD *)occlusion_info->mAABBMin = mNext->mFixedAllocator.mFreeListHead;
+        --mNext->mFixedAllocator.mNumSlotsAllocated;
+        mNext->mFixedAllocator.mFreeListHead = (char *)occlusion_info;
+        if ( mNext->mFixedAllocator.mNumSlotsAllocated )
         {
-          v7 = v3->mNext;
-          v8 = v3->mPrev;
-          v8->mNext = v7;
-          v7->mPrev = v8;
-          v3->mPrev = (UFG::qNode<CullBucket,CullBucket> *)&v3->mPrev;
-          v3->mNext = (UFG::qNode<CullBucket,CullBucket> *)&v3->mPrev;
-          v9 = *(PersistentCullBucket ***)(v4 + 8);
-          *(_QWORD *)(v4 + 8) = v3;
-          v3->mNext = (UFG::qNode<CullBucket,CullBucket> *)v9;
-          v3->mPrev = (UFG::qNode<CullBucket,CullBucket> *)v4;
-          *v9 = v3;
+          v7 = mNext->mNext;
+          mPrev = mNext->mPrev;
+          mPrev->mNext = v7;
+          v7->mPrev = mPrev;
+          mNext->mPrev = mNext;
+          mNext->mNext = mNext;
+          v9 = (PersistentCullBucket **)p_mPersistentCullBuckets->mNext;
+          p_mPersistentCullBuckets->mNext = mNext;
+          mNext->mNext = (UFG::qNode<CullBucket,CullBucket> *)v9;
+          mNext->mPrev = p_mPersistentCullBuckets;
+          *v9 = mNext;
         }
         else
         {
-          PersistentCullBucket::~PersistentCullBucket(v3);
-          operator delete[](v3);
-          --v6->mNumOcclusionBuckets;
+          PersistentCullBucket::~PersistentCullBucket(mNext);
+          operator delete[](mNext);
+          --this->mNumOcclusionBuckets;
         }
       }
     }
@@ -981,56 +936,57 @@ CullInfo *__fastcall CullManager::AllocFrameCullInfos(CullManager *this, int num
   if ( result )
   {
     UFG::qMemSet(result, 0, v2);
-    result = v4;
+    return v4;
   }
   return result;
 }
 
 // File Line: 1194
 // RVA: 0x25E70
-void __fastcall CullManager::AllocPrebuiltFrameCullInfos(CullManager *this, CullResults **cull_results, int num_infos, CullInfo *prebuilt_cull_infos, CullLayer *cull_layer)
+void __fastcall CullManager::AllocPrebuiltFrameCullInfos(
+        CullManager *this,
+        CullResults **cull_results,
+        int num_infos,
+        CullInfo *prebuilt_cull_infos,
+        CullLayer *cull_layer)
 {
-  CullInfo *v5; // rsi
   __int64 v6; // rbx
-  CullResults **v7; // r14
   CullLayer *v8; // rbp
   unsigned int v9; // edi
-  char *v10; // rax
-  CullResults *v11; // rdi
+  CullResults *v10; // rax
+  __int64 v11; // rdi
   char *v12; // rdx
-  __int64 *v13; // r8
+  __int64 *p_mFrameCullBuckets; // r8
   unsigned int v14; // ecx
   __int64 v15; // rax
   __int64 v16; // rax
 
   if ( num_infos )
   {
-    v5 = prebuilt_cull_infos;
     v6 = num_infos;
-    v7 = cull_results;
     v8 = &gDefaultCullLayer;
     if ( cull_layer )
       v8 = cull_layer;
     if ( cull_results )
     {
       v9 = ((num_infos << 6) + 31) & 0xFFFFFFE0;
-      v10 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, v9, 0x20u);
-      *v7 = (CullResults *)v10;
+      v10 = (CullResults *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, v9, 0x20u);
+      *cull_results = v10;
       if ( !v10 )
         return;
       UFG::qMemSet(v10, 0, v9);
     }
-    if ( v7 )
-      v11 = *v7;
+    if ( cull_results )
+      v11 = (__int64)*cull_results;
     else
       v11 = 0i64;
     v12 = UFG::qLinearAllocator::Malloc(
             Illusion::gEngine.FrameMemory,
-            (unsigned int)((signed __int64)((v6 + 255) & 0xFFFFFFFFFFFFFF00ui64) / 256) << 6,
+            (unsigned int)((__int64)((v6 + 255) & 0xFFFFFFFFFFFFFF00ui64) / 256) << 6,
             0x10u);
     if ( v12 && (_DWORD)v6 )
     {
-      v13 = (__int64 *)&v8->mFrameCullBuckets;
+      p_mFrameCullBuckets = (__int64 *)&v8->mFrameCullBuckets;
       do
       {
         v14 = 256;
@@ -1049,18 +1005,18 @@ void __fastcall CullManager::AllocPrebuiltFrameCullInfos(CullManager *this, Cull
         *((_DWORD *)v12 + 10) = 0;
         *((_DWORD *)v12 + 11) = v14;
         *((_QWORD *)v12 + 4) = v11;
-        *((_QWORD *)v12 + 2) = v5;
+        *((_QWORD *)v12 + 2) = prebuilt_cull_infos;
         *((_DWORD *)v12 + 12) = v14;
-        v15 = *v13;
+        v15 = *p_mFrameCullBuckets;
         *(_QWORD *)(v15 + 8) = v12;
         *(_QWORD *)v12 = v15;
-        *((_QWORD *)v12 + 1) = v13;
-        *v13 = (__int64)v12;
-        v5 += v14;
+        *((_QWORD *)v12 + 1) = p_mFrameCullBuckets;
+        *p_mFrameCullBuckets = (__int64)v12;
+        prebuilt_cull_infos += v14;
         v16 = 0i64;
-        if ( v7 )
+        if ( cull_results )
           v16 = v14;
-        v11 += v16;
+        v11 += v16 << 6;
         v12 += 64;
         LODWORD(v6) = v6 - v14;
       }
@@ -1071,37 +1027,39 @@ void __fastcall CullManager::AllocPrebuiltFrameCullInfos(CullManager *this, Cull
 
 // File Line: 1260
 // RVA: 0x25FF0
-void __fastcall CullManager::AllocPrebuiltFrameOcclusionInfos(CullManager *this, int num_infos, CullInfoFull *prebuilt_occlusion_infos, CullLayer *cull_layer)
+void __fastcall CullManager::AllocPrebuiltFrameOcclusionInfos(
+        CullManager *this,
+        int num_infos,
+        CullInfoFull *prebuilt_occlusion_infos,
+        CullLayer *cull_layer)
 {
-  CullInfoFull *v4; // rdi
   int v5; // ebx
   CullLayer *v6; // rsi
   char *v7; // rdx
-  __int64 *v8; // r8
+  __int64 *p_mFrameCullBuckets; // r8
   float v9; // xmm0_4
   unsigned int v10; // ecx
   __int64 v11; // rax
 
   if ( num_infos )
   {
-    v4 = prebuilt_occlusion_infos;
     v5 = num_infos;
     v6 = &gDefaultOcclusionLayer;
     if ( cull_layer )
       v6 = cull_layer;
     v7 = UFG::qLinearAllocator::Malloc(
            Illusion::gEngine.FrameMemory,
-           (unsigned int)((signed __int64)((num_infos + 255i64) & 0xFFFFFFFFFFFFFF00ui64) / 256) << 6,
+           (unsigned int)((__int64)((num_infos + 255i64) & 0xFFFFFFFFFFFFFF00ui64) / 256) << 6,
            0x10u);
-    if ( v7 && v5 )
+    if ( v7 )
     {
-      v8 = (__int64 *)&v6->mFrameCullBuckets;
+      p_mFrameCullBuckets = (__int64 *)&v6->mFrameCullBuckets;
       do
       {
         v9 = (float)v5;
         if ( (float)v5 >= 256.0 )
           v9 = FLOAT_256_0;
-        v10 = (signed int)v9;
+        v10 = (int)v9;
         if ( v7 )
         {
           *(_QWORD *)v7 = v7;
@@ -1115,14 +1073,14 @@ void __fastcall CullManager::AllocPrebuiltFrameOcclusionInfos(CullManager *this,
         *((_DWORD *)v7 + 10) = 0;
         *((_DWORD *)v7 + 11) = v10;
         *((_QWORD *)v7 + 4) = 0i64;
-        *((_QWORD *)v7 + 3) = v4;
+        *((_QWORD *)v7 + 3) = prebuilt_occlusion_infos;
         *((_DWORD *)v7 + 12) = v10;
-        v11 = *v8;
+        v11 = *p_mFrameCullBuckets;
         *(_QWORD *)(v11 + 8) = v7;
         *(_QWORD *)v7 = v11;
-        *((_QWORD *)v7 + 1) = v8;
-        *v8 = (__int64)v7;
-        v4 += v10;
+        *((_QWORD *)v7 + 1) = p_mFrameCullBuckets;
+        *p_mFrameCullBuckets = (__int64)v7;
+        prebuilt_occlusion_infos += v10;
         v7 += 64;
         v5 -= v10;
       }
@@ -1135,57 +1093,55 @@ void __fastcall CullManager::AllocPrebuiltFrameOcclusionInfos(CullManager *this,
 // RVA: 0x26110
 void __fastcall CullManager::BeginFrame(CullManager *this)
 {
-  CullManager *v1; // r14
-  UFG::qList<CullLayer,CullLayer,1,0> *v2; // rbx
-  signed __int64 i; // rbp
-  UFG::qList<CullLayer,CullLayer,1,0> *v4; // rax
-  UFG::qNode<CullLayer,CullLayer> *v5; // rcx
-  UFG::qList<CullLayer,CullLayer,1,0> *v6; // rdi
-  Render::OcclusionMap *v7; // rdi
-  Render::RasterizeZ *v8; // rbx
-  Render::RasterizeZ v9; // [rsp+20h] [rbp-58h]
+  UFG::qNode<CullLayer,CullLayer> *mNext; // rbx
+  __int64 i; // rbp
+  UFG::qNode<CullLayer,CullLayer> *v4; // rax
+  UFG::qNode<CullLayer,CullLayer> *mPrev; // rcx
+  UFG::qNode<CullLayer,CullLayer> *v6; // rdi
+  Render::OcclusionMap *mOcclusionMaps; // rdi
+  Render::RasterizeZ *mRasterizers; // rbx
+  Render::RasterizeZ v9; // [rsp+20h] [rbp-58h] BYREF
 
-  v1 = this;
   this->mDoCullingTiming = 0.0;
   this->mPrevOcclusionTask = 0i64;
   this->mPrevCullingTask = 0i64;
   UFG::qMemSet(this->mFinalTasks, 0, 0x80u);
-  v2 = (UFG::qList<CullLayer,CullLayer,1,0> *)v1->mCullLayers[0].mNode.mNext;
-  for ( i = 16i64; v2 != v1->mCullLayers; v2 = (UFG::qList<CullLayer,CullLayer,1,0> *)v2->mNode.mNext )
+  mNext = this->mCullLayers[0].mNode.mNext;
+  for ( i = 16i64; mNext != (UFG::qNode<CullLayer,CullLayer> *)this->mCullLayers; mNext = mNext->mNext )
   {
-    memset(&v2[5], 0, 0x80ui64);
-    v4 = (UFG::qList<CullLayer,CullLayer,1,0> *)v2[4].mNode.mNext;
-    if ( v4 != &v2[4] )
+    memset(&mNext[5], 0, 0x80ui64);
+    v4 = mNext[4].mNext;
+    if ( v4 != &mNext[4] )
     {
       do
       {
-        v5 = v4[2].mNode.mPrev;
-        v6 = (UFG::qList<CullLayer,CullLayer,1,0> *)v4->mNode.mNext;
-        if ( v5 )
-          UFG::qMemSet(v5, 0, HIDWORD(v4[2].mNode.mNext) << 6);
+        mPrev = v4[2].mPrev;
+        v6 = v4->mNext;
+        if ( mPrev )
+          UFG::qMemSet(mPrev, 0, HIDWORD(v4[2].mNext) << 6);
         v4 = v6;
       }
-      while ( v6 != &v2[4] );
+      while ( v6 != &mNext[4] );
     }
   }
-  v7 = v1->mOcclusionMaps;
-  v8 = v1->mRasterizers;
+  mOcclusionMaps = this->mOcclusionMaps;
+  mRasterizers = this->mRasterizers;
   do
   {
-    Render::RasterizeZ::Init(v8, 0i64, 1u);
-    Render::OcclusionMap::Init(v7, 0i64);
-    ++v8;
-    ++v7;
+    Render::RasterizeZ::Init(mRasterizers, 0i64, 1);
+    Render::OcclusionMap::Init(mOcclusionMaps, 0i64);
+    ++mRasterizers;
+    ++mOcclusionMaps;
     --i;
   }
   while ( i );
-  Render::RasterizeZ::Init(&v9, v1->mZbuffer1, 0);
+  Render::RasterizeZ::Init(&v9, (unsigned int *)this->mZbuffer1, 0);
   *v9.mZBufferTag = -1;
-  Render::RasterizeZ::Init(&v9, v1->mZbuffer2, 0);
+  Render::RasterizeZ::Init(&v9, (unsigned int *)this->mZbuffer2, 0);
   *v9.mZBufferTag = -1;
-  Render::RasterizeZ::Init(&v9, v1->mZbuffer3, 0);
+  Render::RasterizeZ::Init(&v9, (unsigned int *)this->mZbuffer3, 0);
   *v9.mZBufferTag = -1;
-  Render::RasterizeZ::Init(&v9, v1->mZbuffer4, 0);
+  Render::RasterizeZ::Init(&v9, (unsigned int *)this->mZbuffer4, 0);
   *v9.mZBufferTag = -1;
 }
 
@@ -1193,31 +1149,25 @@ void __fastcall CullManager::BeginFrame(CullManager *this)
 // RVA: 0x26C80
 void __fastcall CullManager::EndFrame(CullManager *this)
 {
-  UFG::qTaskGroup *v1; // rdx
-  CullManager *v2; // rbx
+  UFG::qTaskGroup *mPrevCullingTask; // rdx
   Illusion::eCastShadow *v3; // rcx
   UFG::qNode<CullLayer,CullLayer> *i; // rdx
-  UFG::qNode<CullLayer,CullLayer> *v5; // rax
   UFG::qNode<CullLayer,CullLayer> *j; // rcx
-  UFG::qNode<CullLayer,CullLayer> *v7; // rax
 
-  v1 = this->mPrevCullingTask;
-  v2 = this;
-  if ( v1 )
-    UFG::qTaskManager::Sync(&UFG::gTaskManager, v1);
-  CullManager::DeregisterAllViews(v2);
+  mPrevCullingTask = this->mPrevCullingTask;
+  if ( mPrevCullingTask )
+    UFG::qTaskManager::Sync(&UFG::gTaskManager, mPrevCullingTask);
+  CullManager::DeregisterAllViews(this);
   Illusion::eCastShadow::ClearCastShadowViewFilter(v3);
-  for ( i = v2->mCullLayers[0].mNode.mNext; i != (UFG::qNode<CullLayer,CullLayer> *)v2->mCullLayers; i = i->mNext )
+  for ( i = this->mCullLayers[0].mNode.mNext; i != (UFG::qNode<CullLayer,CullLayer> *)this->mCullLayers; i = i->mNext )
   {
-    v5 = i + 3;
-    v5->mPrev = v5;
-    v5->mNext = v5;
+    i[3].mPrev = i + 3;
+    i[3].mNext = i + 3;
   }
-  for ( j = v2->mCullLayers[1].mNode.mNext; j != (UFG::qNode<CullLayer,CullLayer> *)&v2->mCullLayers[1]; j = j->mNext )
+  for ( j = this->mCullLayers[1].mNode.mNext; j != (UFG::qNode<CullLayer,CullLayer> *)&this->mCullLayers[1]; j = j->mNext )
   {
-    v7 = j + 3;
-    v7->mPrev = v7;
-    v7->mNext = v7;
+    j[3].mPrev = j + 3;
+    j[3].mNext = j + 3;
   }
 }
 
@@ -1225,130 +1175,120 @@ void __fastcall CullManager::EndFrame(CullManager *this)
 // RVA: 0x262B0
 char __fastcall CullManager::BeginView(CullManager *this, int view_index, UFG::qTaskGroup *dependent)
 {
-  signed __int64 v3; // r13
-  CullManager *v4; // rsi
-  char *v6; // r12
-  int v7; // eax
-  signed __int64 v8; // rbp
+  __int64 v3; // r13
+  CullManager::CullSettings *v6; // r12
+  int MaxWorkers; // eax
+  __int64 v8; // rbp
   int v9; // eax
   UFG::qTask *v10; // rbx
-  signed __int64 v11; // r14
-  char *v12; // rbx
+  __int64 v11; // r14
+  unsigned int *v12; // rbx
   char *v13; // rdi
   char *v14; // r15
   char *v15; // rax
-  void *v16; // rcx
-  void *v17; // rdx
-  void *v18; // r8
-  void *v19; // r9
-  __int128 v20; // xmm2
-  __int128 v21; // xmm1
-  __int128 v22; // xmm0
+  void *mZbuffer1; // rcx
+  void *mZbuffer2; // rdx
+  void *mZbuffer3; // r8
+  void *mZbuffer4; // r9
+  UFG::qVector4 v20; // xmm2
+  UFG::qVector4 v21; // xmm1
+  UFG::qVector4 v22; // xmm0
   char *v23; // rax
   UFG::qTaskGroup *v24; // rdi
-  UFG::qList<UFG::qTaskGroup,UFG::qTaskGroup,0,0> *v25; // rcx
-  UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *v26; // rax
-  UFG::qList<UFG::qTask,UFG::qTask,0,0> *v27; // rbx
-  UFG::qNode<CullLayer,CullLayer> *v28; // r14
+  UFG::qList<UFG::qTaskGroup,UFG::qTaskGroup,0,0> *mSingleFrameTaskGroups; // rcx
+  UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *mPrev; // rax
+  UFG::qList<UFG::qTask,UFG::qTask,0,0> *p_mTasks; // rbx
+  UFG::qNode<CullLayer,CullLayer> *mNext; // r14
   char *v29; // rax
   char *v30; // rdx
-  _QWORD *v31; // rcx
-  UFG::qSpuElf *v32; // rax
-  void (__fastcall *v33)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r8
-  void (__fastcall *v34)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r10
-  unsigned int (__fastcall *v35)(void *, void *, void *, void *); // r9
-  char *v36; // rcx
-  UFG::qNode<UFG::qTask,UFG::qTask> *v37; // rax
-  Render::OcclusionMap *v38; // r14
-  void *v39; // rbp
-  char *v40; // rax
-  _QWORD *v41; // rax
-  UFG::qSpuElf *v42; // rax
-  void (__fastcall *v43)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // rdx
-  void (__fastcall *v44)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r9
-  unsigned int (__fastcall *v45)(void *, void *, void *, void *); // r8
-  char *v46; // rcx
-  UFG::qList<UFG::qTask,UFG::qTask,0,0> *v47; // rcx
-  UFG::qNode<UFG::qTask,UFG::qTask> *v48; // rax
-  char *v49; // rax
-  char *v50; // r15
-  __int128 v51; // xmm2
-  __int128 v52; // xmm1
-  __int128 v53; // xmm0
-  UFG::qLinearAllocator *v54; // rcx
+  UFG::qSpuElf *mSpuElf; // rax
+  void (__fastcall *mTaskFunctionSPU)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r8
+  void (__fastcall *mTaskFunctionPPU)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r10
+  unsigned int (__fastcall *mTaskFunctionOffload)(void *, void *, void *, void *); // r9
+  char *mAddress; // rcx
+  UFG::qNode<UFG::qTask,UFG::qTask> *v36; // rax
+  Render::OcclusionMap *v37; // r14
+  void *mOBuffer0; // rbp
+  char *v39; // rax
+  _QWORD *v40; // rax
+  UFG::qSpuElf *v41; // rax
+  void (__fastcall *v42)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // rdx
+  void (__fastcall *v43)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r9
+  unsigned int (__fastcall *v44)(void *, void *, void *, void *); // r8
+  char *v45; // rcx
+  UFG::qList<UFG::qTask,UFG::qTask,0,0> *mSingleFrameTasks; // rcx
+  UFG::qNode<UFG::qTask,UFG::qTask> *v47; // rax
+  char *v48; // rax
+  char *v49; // r15
+  UFG::qVector4 v50; // xmm2
+  UFG::qVector4 v51; // xmm1
+  UFG::qVector4 v52; // xmm0
+  UFG::qLinearAllocator *FrameMemory; // rcx
+  char *v54; // rax
   char *v55; // rax
-  char *v56; // rax
-  UFG::qTaskGroup *v57; // rdi
-  UFG::qList<UFG::qTaskGroup,UFG::qTaskGroup,0,0> *v58; // rcx
-  UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *v59; // rax
-  UFG::qList<UFG::qTask,UFG::qTask,0,0> *v60; // rbx
-  __int64 v61; // rbp
-  UFG::qNode<CullLayer,CullLayer> *v62; // r14
-  char *v63; // rax
-  char *v64; // rdx
-  _QWORD *v65; // rcx
-  UFG::qSpuElf *v66; // rax
-  void (__fastcall *v67)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r8
-  void (__fastcall *v68)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r10
-  unsigned int (__fastcall *v69)(void *, void *, void *, void *); // r9
-  char *v70; // rcx
-  UFG::qNode<UFG::qTask,UFG::qTask> *v71; // rax
-  Render::OcclusionMap *v72; // [rsp+20h] [rbp-68h]
-  CullManager::CullSettings *v73; // [rsp+28h] [rbp-60h]
-  int v74; // [rsp+98h] [rbp+10h]
-  UFG::qTaskGroup *dependenta; // [rsp+A0h] [rbp+18h]
-  int v76; // [rsp+A8h] [rbp+20h]
+  UFG::qTaskGroup *v56; // rdi
+  UFG::qList<UFG::qTaskGroup,UFG::qTaskGroup,0,0> *v57; // rcx
+  UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *v58; // rax
+  UFG::qList<UFG::qTask,UFG::qTask,0,0> *v59; // rbx
+  __int64 v60; // rbp
+  UFG::qNode<CullLayer,CullLayer> *v61; // r14
+  char *v62; // rax
+  char *v63; // rdx
+  UFG::qSpuElf *v64; // rax
+  void (__fastcall *v65)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r8
+  void (__fastcall *v66)(int, UFG::qMemoryStreamer *, void *, void *, void *, void *); // r10
+  unsigned int (__fastcall *v67)(void *, void *, void *, void *); // r9
+  char *v68; // rcx
+  UFG::qNode<UFG::qTask,UFG::qTask> *v69; // rax
+  Render::OcclusionMap *v70; // [rsp+20h] [rbp-68h]
+  int v73; // [rsp+A8h] [rbp+20h]
 
-  dependenta = dependent;
-  v74 = view_index;
   v3 = view_index;
-  v4 = this;
-  if ( view_index == -1 || this->mViewSlots[view_index] != 2 )
+  if ( view_index == -1 || this->mViewSlots[view_index] != VIEW_SLOT_ALLOCATED )
     return 0;
-  v6 = (char *)&this->mViewSettings[view_index];
-  v73 = &this->mViewSettings[view_index];
-  v7 = UFG::qTaskManager::GetMaxWorkers(&UFG::gTaskManager);
-  v8 = (unsigned int)v7;
-  if ( v7 < 1 )
+  v6 = &this->mViewSettings[view_index];
+  MaxWorkers = UFG::qTaskManager::GetMaxWorkers(&UFG::gTaskManager);
+  v8 = (unsigned int)MaxWorkers;
+  if ( MaxWorkers < 1 )
     v8 = 1i64;
   v9 = UFG::qTaskManager::GetMaxWorkers(&UFG::gTaskManager);
   if ( v9 < 1 )
     v9 = 1;
-  v76 = v9;
+  v73 = v9;
   v10 = 0i64;
   v11 = v3;
-  v72 = &v4->mOcclusionMaps[v3];
-  if ( v6[80] & 1 && v4->mEnableOcclusionCulling )
+  v70 = &this->mOcclusionMaps[v3];
+  if ( (v6->mViewFlags & 1) != 0 && this->mEnableOcclusionCulling )
   {
-    v12 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x10080u, 0x20u);
+    v12 = (unsigned int *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x10080u, 0x20u);
     v13 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x9000u, 0x20u);
     if ( v12 == 0i64 || v13 == 0i64 )
       return 0;
-    Render::RasterizeZ::Init(&v4->mRasterizers[v11], v12, 0);
-    *v4->mRasterizers[v11].mZBufferTag = -1;
-    UFG::CoverObjectBase::SetCoverObjectGroup((hkDynamicClassNameRegistry *)&v4->mRasterizers[v11], v6);
-    Render::OcclusionMap::Init(&v4->mOcclusionMaps[v3], v13);
-    Render::OcclusionMap::BeginFrame(&v4->mOcclusionMaps[v3], (UFG::qMatrix44 *)v6);
+    Render::RasterizeZ::Init(&this->mRasterizers[v11], v12, 0);
+    *this->mRasterizers[v11].mZBufferTag = -1;
+    UFG::CoverObjectBase::SetCoverObjectGroup((hkDynamicClassNameRegistry *)&this->mRasterizers[v11], (const char *)v6);
+    Render::OcclusionMap::Init(&this->mOcclusionMaps[v3], v13);
+    Render::OcclusionMap::BeginFrame(&this->mOcclusionMaps[v3], &v6->mWorldViewProjection);
     v14 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x80u, 0x80u);
     v15 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x20u, 0x20u);
-    v16 = v4->mZbuffer1;
-    v17 = v4->mZbuffer2;
-    v18 = v4->mZbuffer3;
-    v19 = v4->mZbuffer4;
+    mZbuffer1 = this->mZbuffer1;
+    mZbuffer2 = this->mZbuffer2;
+    mZbuffer3 = this->mZbuffer3;
+    mZbuffer4 = this->mZbuffer4;
     if ( !v14 || !v15 )
       return 0;
-    v20 = *((_OWORD *)v6 + 1);
-    v21 = *((_OWORD *)v6 + 2);
-    v22 = *((_OWORD *)v6 + 3);
-    *(_OWORD *)v14 = *(_OWORD *)v6;
-    *((_OWORD *)v14 + 1) = v20;
-    *((_OWORD *)v14 + 2) = v21;
-    *((_OWORD *)v14 + 3) = v22;
+    v20 = v6->mWorldViewProjection.v1;
+    v21 = v6->mWorldViewProjection.v2;
+    v22 = v6->mWorldViewProjection.v3;
+    *(UFG::qVector4 *)v14 = v6->mWorldViewProjection.v0;
+    *((UFG::qVector4 *)v14 + 1) = v20;
+    *((UFG::qVector4 *)v14 + 2) = v21;
+    *((UFG::qVector4 *)v14 + 3) = v22;
     *((_QWORD *)v14 + 8) = v12;
-    *((_QWORD *)v14 + 9) = v16;
-    *((_QWORD *)v14 + 10) = v17;
-    *((_QWORD *)v14 + 11) = v18;
-    *((_QWORD *)v14 + 12) = v19;
+    *((_QWORD *)v14 + 9) = mZbuffer1;
+    *((_QWORD *)v14 + 10) = mZbuffer2;
+    *((_QWORD *)v14 + 11) = mZbuffer3;
+    *((_QWORD *)v14 + 12) = mZbuffer4;
     *((_DWORD *)v14 + 26) = v3;
     *((_QWORD *)v14 + 14) = v15;
     *(_DWORD *)v15 = -1;
@@ -1356,234 +1296,231 @@ char __fastcall CullManager::BeginView(CullManager *this, int view_index, UFG::q
     v24 = (UFG::qTaskGroup *)v23;
     if ( v23 )
       UFG::qTaskGroup::qTaskGroup((UFG::qTaskGroup *)v23, "RasterizeBucket");
-    v25 = UFG::gTaskManager.mSingleFrameTaskGroups;
-    v26 = UFG::gTaskManager.mSingleFrameTaskGroups->mNode.mPrev;
-    v26->mNext = (UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *)&v24->mPrev;
-    v24->mPrev = v26;
-    v24->mNext = &v25->mNode;
-    v25->mNode.mPrev = (UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *)&v24->mPrev;
-    if ( (signed int)v8 > 0 )
+    mSingleFrameTaskGroups = UFG::gTaskManager.mSingleFrameTaskGroups;
+    mPrev = UFG::gTaskManager.mSingleFrameTaskGroups->mNode.mPrev;
+    mPrev->mNext = v24;
+    v24->mPrev = mPrev;
+    v24->mNext = &mSingleFrameTaskGroups->mNode;
+    mSingleFrameTaskGroups->mNode.mPrev = v24;
+    if ( (int)v8 > 0 )
     {
-      v27 = &v24->mTasks;
+      p_mTasks = &v24->mTasks;
       do
       {
-        v28 = v4->mCullLayers[1].mNode.mNext;
+        mNext = this->mCullLayers[1].mNode.mNext;
         v29 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x80u, 0x40u);
         v30 = v29;
         if ( v29 )
         {
           *(_QWORD *)v29 = v29;
           *((_QWORD *)v29 + 1) = v29;
-          v31 = v29 + 16;
-          *v31 = v31;
-          v31[1] = v31;
-          v32 = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mSpuElf;
-          v33 = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionSPU;
-          v34 = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionPPU;
-          v35 = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionOffload;
+          *((_QWORD *)v29 + 2) = v29 + 16;
+          *((_QWORD *)v29 + 3) = v29 + 16;
+          mSpuElf = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mSpuElf;
+          mTaskFunctionSPU = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionSPU;
+          mTaskFunctionPPU = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionPPU;
+          mTaskFunctionOffload = Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mTaskFunctionOffload;
           if ( !Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer.mCurrentSPUEnabled )
           {
-            v32 = 0i64;
-            v33 = 0i64;
-            v35 = 0i64;
+            mSpuElf = 0i64;
+            mTaskFunctionSPU = 0i64;
+            mTaskFunctionOffload = 0i64;
           }
           *((_QWORD *)v30 + 6) = v24;
           *((_DWORD *)v30 + 14) = 2;
           *((_QWORD *)v30 + 4) = 0i64;
           *((_QWORD *)v30 + 5) = 0i64;
           *((_QWORD *)v30 + 8) = &Render::gTaskFunctionDeclData_CullManager_RasterizeZBuffer;
-          if ( v32 )
-            v36 = v32->mAddress;
+          if ( mSpuElf )
+            mAddress = mSpuElf->mAddress;
           else
-            v36 = 0i64;
-          *((_QWORD *)v30 + 9) = v36;
-          *((_QWORD *)v30 + 10) = v33;
-          *((_QWORD *)v30 + 11) = v34;
+            mAddress = 0i64;
+          *((_QWORD *)v30 + 9) = mAddress;
+          *((_QWORD *)v30 + 10) = mTaskFunctionSPU;
+          *((_QWORD *)v30 + 11) = mTaskFunctionPPU;
           *((_QWORD *)v30 + 12) = v14;
-          *((_QWORD *)v30 + 13) = v28;
-          *((_QWORD *)v30 + 14) = (char *)v4 + 1680;
+          *((_QWORD *)v30 + 13) = mNext;
+          *((_QWORD *)v30 + 14) = &this->mCullLayers[1];
           *((_QWORD *)v30 + 15) = 0i64;
-          if ( v35 )
+          if ( mTaskFunctionOffload )
           {
             *((_DWORD *)v30 + 14) = 130;
             *((_DWORD *)v30 + 12) = 0;
           }
         }
-        v37 = v27->mNode.mPrev;
-        v37->mNext = (UFG::qNode<UFG::qTask,UFG::qTask> *)v30;
-        *(_QWORD *)v30 = v37;
-        *((_QWORD *)v30 + 1) = v27;
-        v27->mNode.mPrev = (UFG::qNode<UFG::qTask,UFG::qTask> *)v30;
+        v36 = p_mTasks->mNode.mPrev;
+        v36->mNext = (UFG::qNode<UFG::qTask,UFG::qTask> *)v30;
+        *(_QWORD *)v30 = v36;
+        *((_QWORD *)v30 + 1) = p_mTasks;
+        p_mTasks->mNode.mPrev = (UFG::qNode<UFG::qTask,UFG::qTask> *)v30;
         ++v24->mNumTasks;
         *((_DWORD *)v30 + 14) &= 0xFFFFFFF0;
         --v8;
       }
       while ( v8 );
-      LODWORD(v3) = v74;
-      v6 = (char *)v73;
+      LODWORD(v3) = view_index;
     }
-    UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v24, dependenta);
-    UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v24, v4->mPrevCullingTask);
+    UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v24, dependent);
+    UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v24, this->mPrevCullingTask);
     UFG::qTaskManager::Queue(&UFG::gTaskManager, v24);
-    v38 = v72;
-    v39 = v72->mOBuffer0;
-    v40 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x80u, 0x40u);
-    v10 = (UFG::qTask *)v40;
-    if ( v40 )
+    v37 = v70;
+    mOBuffer0 = v70->mOBuffer0;
+    v39 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x80u, 0x40u);
+    v10 = (UFG::qTask *)v39;
+    if ( v39 )
     {
-      *(_QWORD *)v40 = v40;
-      *((_QWORD *)v40 + 1) = v40;
-      v41 = v40 + 16;
-      *v41 = v41;
-      v41[1] = v41;
-      v42 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mSpuElf;
-      v43 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionSPU;
-      v44 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionPPU;
-      v45 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionOffload;
+      *(_QWORD *)v39 = v39;
+      *((_QWORD *)v39 + 1) = v39;
+      v40 = v39 + 16;
+      *v40 = v40;
+      v40[1] = v40;
+      v41 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mSpuElf;
+      v42 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionSPU;
+      v43 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionPPU;
+      v44 = Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mTaskFunctionOffload;
       if ( !Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap.mCurrentSPUEnabled )
       {
+        v41 = 0i64;
         v42 = 0i64;
-        v43 = 0i64;
-        v45 = 0i64;
+        v44 = 0i64;
       }
       v10->mTaskGroup = 0i64;
       v10->mFlags = 2;
       v10->mSyncVars.i64 = 0i64;
       v10->mSyncVars.v.mDependents = 0i64;
       v10->mFunctionDeclData = &Render::gTaskFunctionDeclData_CullManager_CreateOcclusionMap;
-      if ( v42 )
-        v46 = v42->mAddress;
+      if ( v41 )
+        v45 = v41->mAddress;
       else
-        v46 = 0i64;
-      v10->mSPUElfAddress = v46;
-      v10->mSPUFunction = v43;
-      v10->mPPUFunction = v44;
+        v45 = 0i64;
+      v10->mSPUElfAddress = v45;
+      v10->mSPUFunction = v42;
+      v10->mPPUFunction = v43;
       v10->mParam0 = v14;
-      v10->mParam1 = v39;
+      v10->mParam1 = mOBuffer0;
       v10->mParam2 = 0i64;
       v10->mParam3 = 0i64;
-      if ( v45 )
+      if ( v44 )
       {
         v10->mFlags = 130;
         v10->mOffloadThread = 0;
       }
     }
-    v47 = UFG::gTaskManager.mSingleFrameTasks;
-    v48 = UFG::gTaskManager.mSingleFrameTasks->mNode.mPrev;
-    v48->mNext = (UFG::qNode<UFG::qTask,UFG::qTask> *)&v10->mPrev;
-    v10->mPrev = v48;
-    v10->mNext = &v47->mNode;
-    v47->mNode.mPrev = (UFG::qNode<UFG::qTask,UFG::qTask> *)&v10->mPrev;
+    mSingleFrameTasks = UFG::gTaskManager.mSingleFrameTasks;
+    v47 = UFG::gTaskManager.mSingleFrameTasks->mNode.mPrev;
+    v47->mNext = v10;
+    v10->UFG::qNode<UFG::qTask,UFG::qTask>::mPrev = v47;
+    v10->UFG::qNode<UFG::qTask,UFG::qTask>::mNext = &mSingleFrameTasks->mNode;
+    mSingleFrameTasks->mNode.mPrev = v10;
     v10->mFlags &= 0xFFFFFFF0;
     UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v10, v24);
     UFG::qTaskManager::Queue(&UFG::gTaskManager, v10);
   }
   else
   {
-    v38 = &v4->mOcclusionMaps[v3];
+    v37 = &this->mOcclusionMaps[v3];
   }
-  v49 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x98u, 0x10u);
-  v50 = v49;
-  if ( !v49 )
+  v48 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x98u, 0x10u);
+  v49 = v48;
+  if ( !v48 )
     return 0;
-  *((_DWORD *)v49 + 19) = -1;
-  *((_WORD *)v49 + 37) = v3;
-  *((_DWORD *)v49 + 20) = *((_DWORD *)v6 + 18);
-  *((_DWORD *)v49 + 21) = *((_DWORD *)v6 + 19);
-  v51 = *((_OWORD *)v6 + 1);
-  v52 = *((_OWORD *)v6 + 2);
-  v53 = *((_OWORD *)v6 + 3);
-  *(_OWORD *)v49 = *(_OWORD *)v6;
-  *((_OWORD *)v49 + 1) = v51;
-  *((_OWORD *)v49 + 2) = v52;
-  *((_OWORD *)v49 + 3) = v53;
-  *((_DWORD *)v49 + 22) = *((_DWORD *)v6 + 16);
-  *((_DWORD *)v49 + 23) = *((_DWORD *)v6 + 17);
-  *((_QWORD *)v49 + 8) = v38->mOBuffer0;
-  *((_WORD *)v49 + 36) = 128;
-  v54 = Illusion::gEngine.FrameMemory;
-  *((_QWORD *)v49 + 12) = Illusion::gEngine.FrameMemory;
-  v55 = UFG::qLinearAllocator::Malloc(v54, 0x20u, 0x20u);
-  *((_QWORD *)v50 + 13) = v55;
-  *(_DWORD *)v55 = -1;
-  *((_DWORD *)v50 + 34) = *((_DWORD *)v6 + 22);
-  *((_DWORD *)v50 + 35) = *((_DWORD *)v6 + 23);
-  *((_DWORD *)v50 + 36) = *((_DWORD *)v6 + 24);
-  v56 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x140u, 0x40u);
-  v57 = (UFG::qTaskGroup *)v56;
-  if ( v56 )
-    UFG::qTaskGroup::qTaskGroup((UFG::qTaskGroup *)v56, "CullView");
-  v58 = UFG::gTaskManager.mSingleFrameTaskGroups;
-  v59 = UFG::gTaskManager.mSingleFrameTaskGroups->mNode.mPrev;
-  v59->mNext = (UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *)&v57->mPrev;
-  v57->mPrev = v59;
-  v57->mNext = &v58->mNode;
-  v58->mNode.mPrev = (UFG::qNode<UFG::qTaskGroup,UFG::qTaskGroup> *)&v57->mPrev;
-  UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v57, v10);
-  UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v57, v4->mPrevCullingTask);
-  if ( v76 > 0 )
+  *((_DWORD *)v48 + 19) = -1;
+  *((_WORD *)v48 + 37) = v3;
+  *((_DWORD *)v48 + 20) = LODWORD(v6->mPixelDensityThreshold);
+  *((_DWORD *)v48 + 21) = LODWORD(v6->mPixelDistanceBias);
+  v50 = v6->mWorldViewProjection.v1;
+  v51 = v6->mWorldViewProjection.v2;
+  v52 = v6->mWorldViewProjection.v3;
+  *(UFG::qVector4 *)v48 = v6->mWorldViewProjection.v0;
+  *((UFG::qVector4 *)v48 + 1) = v50;
+  *((UFG::qVector4 *)v48 + 2) = v51;
+  *((UFG::qVector4 *)v48 + 3) = v52;
+  *((_DWORD *)v48 + 22) = LODWORD(v6->mNearPlane);
+  *((_DWORD *)v48 + 23) = LODWORD(v6->mFarPlane);
+  *((_QWORD *)v48 + 8) = v37->mOBuffer0;
+  *((_WORD *)v48 + 36) = 128;
+  FrameMemory = Illusion::gEngine.FrameMemory;
+  *((_QWORD *)v48 + 12) = Illusion::gEngine.FrameMemory;
+  v54 = UFG::qLinearAllocator::Malloc(FrameMemory, 0x20u, 0x20u);
+  *((_QWORD *)v49 + 13) = v54;
+  *(_DWORD *)v54 = -1;
+  *((_DWORD *)v49 + 34) = LODWORD(v6->mViewWorldPos.x);
+  *((_DWORD *)v49 + 35) = LODWORD(v6->mViewWorldPos.y);
+  *((_DWORD *)v49 + 36) = LODWORD(v6->mViewWorldPos.z);
+  v55 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x140u, 0x40u);
+  v56 = (UFG::qTaskGroup *)v55;
+  if ( v55 )
+    UFG::qTaskGroup::qTaskGroup((UFG::qTaskGroup *)v55, "CullView");
+  v57 = UFG::gTaskManager.mSingleFrameTaskGroups;
+  v58 = UFG::gTaskManager.mSingleFrameTaskGroups->mNode.mPrev;
+  v58->mNext = v56;
+  v56->mPrev = v58;
+  v56->mNext = &v57->mNode;
+  v57->mNode.mPrev = v56;
+  UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v56, v10);
+  UFG::qTaskManager::AddDependent(&UFG::gTaskManager, v56, this->mPrevCullingTask);
+  if ( v73 > 0 )
   {
-    v60 = &v57->mTasks;
-    v61 = (unsigned int)v76;
+    v59 = &v56->mTasks;
+    v60 = (unsigned int)v73;
     do
     {
-      v62 = v4->mCullLayers[0].mNode.mNext;
-      v63 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x80u, 0x40u);
-      v64 = v63;
-      if ( v63 )
+      v61 = this->mCullLayers[0].mNode.mNext;
+      v62 = UFG::qLinearAllocator::Malloc(UFG::gTaskManager.mAllocator, 0x80u, 0x40u);
+      v63 = v62;
+      if ( v62 )
       {
-        *(_QWORD *)v63 = v63;
-        *((_QWORD *)v63 + 1) = v63;
-        v65 = v63 + 16;
-        *v65 = v65;
-        v65[1] = v65;
-        v66 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mSpuElf;
-        v67 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionSPU;
-        v68 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionPPU;
-        v69 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionOffload;
+        *(_QWORD *)v62 = v62;
+        *((_QWORD *)v62 + 1) = v62;
+        *((_QWORD *)v62 + 2) = v62 + 16;
+        *((_QWORD *)v62 + 3) = v62 + 16;
+        v64 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mSpuElf;
+        v65 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionSPU;
+        v66 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionPPU;
+        v67 = Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mTaskFunctionOffload;
         if ( !Render::gTaskFunctionDeclData_CullManager_CullBucketTask.mCurrentSPUEnabled )
         {
-          v66 = 0i64;
+          v64 = 0i64;
+          v65 = 0i64;
           v67 = 0i64;
-          v69 = 0i64;
         }
-        *((_QWORD *)v64 + 6) = v57;
-        *((_DWORD *)v64 + 14) = 2;
-        *((_QWORD *)v64 + 4) = 0i64;
-        *((_QWORD *)v64 + 5) = 0i64;
-        *((_QWORD *)v64 + 8) = &Render::gTaskFunctionDeclData_CullManager_CullBucketTask;
-        if ( v66 )
-          v70 = v66->mAddress;
+        *((_QWORD *)v63 + 6) = v56;
+        *((_DWORD *)v63 + 14) = 2;
+        *((_QWORD *)v63 + 4) = 0i64;
+        *((_QWORD *)v63 + 5) = 0i64;
+        *((_QWORD *)v63 + 8) = &Render::gTaskFunctionDeclData_CullManager_CullBucketTask;
+        if ( v64 )
+          v68 = v64->mAddress;
         else
-          v70 = 0i64;
-        *((_QWORD *)v64 + 9) = v70;
-        *((_QWORD *)v64 + 10) = v67;
-        *((_QWORD *)v64 + 11) = v68;
-        *((_QWORD *)v64 + 12) = v50;
-        *((_QWORD *)v64 + 13) = v62;
-        *((_QWORD *)v64 + 14) = (char *)v4 + 1664;
-        *((_QWORD *)v64 + 15) = 0i64;
-        if ( v69 )
+          v68 = 0i64;
+        *((_QWORD *)v63 + 9) = v68;
+        *((_QWORD *)v63 + 10) = v65;
+        *((_QWORD *)v63 + 11) = v66;
+        *((_QWORD *)v63 + 12) = v49;
+        *((_QWORD *)v63 + 13) = v61;
+        *((_QWORD *)v63 + 14) = this->mCullLayers;
+        *((_QWORD *)v63 + 15) = 0i64;
+        if ( v67 )
         {
-          *((_DWORD *)v64 + 14) = 130;
-          *((_DWORD *)v64 + 12) = 0;
+          *((_DWORD *)v63 + 14) = 130;
+          *((_DWORD *)v63 + 12) = 0;
         }
       }
-      v71 = v60->mNode.mPrev;
-      v71->mNext = (UFG::qNode<UFG::qTask,UFG::qTask> *)v64;
-      *(_QWORD *)v64 = v71;
-      *((_QWORD *)v64 + 1) = v60;
-      v60->mNode.mPrev = (UFG::qNode<UFG::qTask,UFG::qTask> *)v64;
-      ++v57->mNumTasks;
-      *((_DWORD *)v64 + 14) &= 0xFFFFFFF0;
-      --v61;
+      v69 = v59->mNode.mPrev;
+      v69->mNext = (UFG::qNode<UFG::qTask,UFG::qTask> *)v63;
+      *(_QWORD *)v63 = v69;
+      *((_QWORD *)v63 + 1) = v59;
+      v59->mNode.mPrev = (UFG::qNode<UFG::qTask,UFG::qTask> *)v63;
+      ++v56->mNumTasks;
+      *((_DWORD *)v63 + 14) &= 0xFFFFFFF0;
+      --v60;
     }
-    while ( v61 );
-    LODWORD(v3) = v74;
+    while ( v60 );
+    LODWORD(v3) = view_index;
   }
-  UFG::qTaskManager::Queue(&UFG::gTaskManager, v57);
-  v4->mFinalTasks[(signed int)v3] = v57;
-  v4->mPrevCullingTask = v57;
+  UFG::qTaskManager::Queue(&UFG::gTaskManager, v56);
+  this->mFinalTasks[(int)v3] = v56;
+  this->mPrevCullingTask = v56;
   return 1;
 }
 
@@ -1591,11 +1528,7 @@ char __fastcall CullManager::BeginView(CullManager *this, int view_index, UFG::q
 // RVA: 0x26D10
 void __fastcall CullManager::EndView(CullManager *this, __int64 view_index)
 {
-  if ( (_DWORD)view_index != -1 )
-  {
-    view_index = (signed int)view_index;
-    if ( this->mViewSlots[(signed int)view_index] == 2 )
-      UFG::qTaskManager::Sync(&UFG::gTaskManager, this->mFinalTasks[view_index]);
-  }
+  if ( (_DWORD)view_index != -1 && this->mViewSlots[(int)view_index] == VIEW_SLOT_ALLOCATED )
+    UFG::qTaskManager::Sync(&UFG::gTaskManager, this->mFinalTasks[(int)view_index]);
 }
 

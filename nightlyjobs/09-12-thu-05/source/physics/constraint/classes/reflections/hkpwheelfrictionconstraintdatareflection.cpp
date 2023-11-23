@@ -63,14 +63,14 @@ hkClass *__fastcall hkpWheelFrictionConstraintData::Atoms::staticClass()
 
 // File Line: 107
 // RVA: 0xD448B0
-void __fastcall finishLoadedObjecthkpWheelFrictionConstraintDataAtoms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWheelFrictionConstraintDataAtoms(char *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
     {
-      *(_QWORD *)((char *)p + 164) = 0i64;
-      *(_QWORD *)((char *)p + 172) = 0i64;
+      *(_QWORD *)(p + 164) = 0i64;
+      *(_QWORD *)(p + 172) = 0i64;
     }
   }
 }
@@ -112,37 +112,32 @@ hkClass *__fastcall hkpWheelFrictionConstraintData::staticClass()
 
 // File Line: 161
 // RVA: 0xD448F0
-void __fastcall finishLoadedObjecthkpWheelFrictionConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWheelFrictionConstraintData(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  _QWORD *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v3 = &hkpWheelFrictionConstraintData::`vftable;
-    if ( v2 )
+    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, finishing);
+    *(_QWORD *)p = &hkpWheelFrictionConstraintData::`vftable;
+    if ( finishing.m_finishing )
     {
-      *(_QWORD *)((char *)v3 + 196) = 0i64;
-      *(_QWORD *)((char *)v3 + 204) = 0i64;
+      *(_QWORD *)(p + 196) = 0i64;
+      *(_QWORD *)(p + 204) = 0i64;
     }
   }
 }
 
 // File Line: 167
 // RVA: 0xD44940
-void __fastcall cleanupLoadedObjecthkpWheelFrictionConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpWheelFrictionConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 171
 // RVA: 0xD44950
 void **__fastcall getVtablehkpWheelFrictionConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-E8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-E8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpWheelFrictionConstraintData::`vftable;
@@ -159,8 +154,8 @@ void **dynamic_initializer_for__hkpWheelFrictionConstraintDataTypeInfo__()
   hkpWheelFrictionConstraintDataTypeInfo.m_typeName = "hkpWheelFrictionConstraintData";
   hkpWheelFrictionConstraintDataTypeInfo.m_vtable = result;
   hkpWheelFrictionConstraintDataTypeInfo.m_scopedName = "!hkpWheelFrictionConstraintData";
-  hkpWheelFrictionConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpWheelFrictionConstraintData;
-  hkpWheelFrictionConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpWheelFrictionConstraintData;
+  hkpWheelFrictionConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpWheelFrictionConstraintData;
+  hkpWheelFrictionConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpWheelFrictionConstraintData;
   return result;
 }
 

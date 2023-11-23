@@ -1,44 +1,41 @@
 // File Line: 18
 // RVA: 0xBA4980
-void __fastcall createVertexMap(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkFindUniquePositionsUtil *uniquePosUtil, hkArray<int,hkContainerHeapAllocator> *vertexMap)
+void __fastcall createVertexMap(
+        hkArray<hkVector4f,hkContainerHeapAllocator> *vertices,
+        hkFindUniquePositionsUtil *uniquePosUtil,
+        hkArray<int,hkContainerHeapAllocator> *vertexMap)
 {
-  __int64 v3; // rbx
-  hkArray<int,hkContainerHeapAllocator> *v4; // r14
+  __int64 m_size; // rbx
   int v5; // eax
-  hkFindUniquePositionsUtil *v6; // r12
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // r15
   int v8; // eax
-  int v9; // er9
+  int v9; // r9d
   int v10; // esi
   __int64 v11; // rbp
   __int64 v12; // rdi
   int *v13; // rbx
   int v14; // eax
-  hkResult result; // [rsp+60h] [rbp+8h]
+  hkResult result; // [rsp+60h] [rbp+8h] BYREF
 
-  v3 = vertices->m_size;
-  v4 = vertexMap;
+  m_size = vertices->m_size;
   v5 = vertexMap->m_capacityAndFlags & 0x3FFFFFFF;
-  v6 = uniquePosUtil;
-  v7 = vertices;
-  if ( v5 < (signed int)v3 )
+  if ( v5 < (int)m_size )
   {
     v8 = 2 * v5;
-    v9 = v3;
-    if ( (signed int)v3 < v8 )
+    v9 = vertices->m_size;
+    if ( (int)m_size < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, vertexMap, v9, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, vertexMap, v9, 4);
   }
   v10 = 0;
-  v4->m_size = v3;
-  v11 = v3;
+  vertexMap->m_size = m_size;
+  v11 = m_size;
   v12 = 0i64;
-  if ( (signed int)v3 > 0 )
+  if ( (int)m_size > 0 )
   {
     do
     {
-      v13 = &v4->m_data[v12];
-      v14 = hkFindUniquePositionsUtil::addPosition(v6, &v7->m_data[v10]);
+      v13 = &vertexMap->m_data[v12];
+      v14 = hkFindUniquePositionsUtil::addPosition(uniquePosUtil, &vertices->m_data[v10]);
       ++v12;
       ++v10;
       *v13 = v14;
@@ -52,260 +49,241 @@ void __fastcall createVertexMap(hkArray<hkVector4f,hkContainerHeapAllocator> *ve
 void __fastcall hkaiSelfIntersectBooleanFilter2::hkaiSelfIntersectBooleanFilter2(hkaiSelfIntersectBooleanFilter2 *this)
 {
   this->vfptr = (hkaiBooleanFilterVtbl *)&hkaiSelfIntersectBooleanFilter2::`vftable;
-  this->m_vertexMapA.m_capacityAndFlags = 2147483648;
+  this->m_vertexMapA.m_capacityAndFlags = 0x80000000;
   this->m_vertexMapA.m_data = 0i64;
   this->m_vertexMapA.m_size = 0;
   this->m_vertexMapB.m_data = 0i64;
   this->m_vertexMapB.m_size = 0;
-  this->m_vertexMapB.m_capacityAndFlags = 2147483648;
+  this->m_vertexMapB.m_capacityAndFlags = 0x80000000;
   this->m_face1Results.m_data = 0i64;
   this->m_face1Results.m_size = 0;
-  this->m_face1Results.m_capacityAndFlags = 2147483648;
+  this->m_face1Results.m_capacityAndFlags = 0x80000000;
   hkaiSelfIntersectBooleanFilter2::reset(this);
 }
 
 // File Line: 36
 // RVA: 0xBA4590
-hkResult *__fastcall hkaiSelfIntersectBooleanFilter2::setEdgeGeoms(hkaiSelfIntersectBooleanFilter2 *this, hkResult *result, hkaiEdgeGeometry *geomA, hkaiEdgeGeometry *geomB)
+hkResult *__fastcall hkaiSelfIntersectBooleanFilter2::setEdgeGeoms(
+        hkaiSelfIntersectBooleanFilter2 *this,
+        hkResult *result,
+        hkaiEdgeGeometry *geomA,
+        hkaiEdgeGeometry *geomB)
 {
-  int v4; // edi
-  int v5; // er13
-  hkaiSelfIntersectBooleanFilter2 *v6; // r15
-  hkaiEdgeGeometry *v7; // rsi
+  int m_size; // edi
+  int v5; // r13d
   hkResult *v8; // r14
-  int v9; // eax
-  signed int v10; // er8
+  int SizeInBytesFor; // eax
+  int v10; // r8d
   int v11; // ebx
   void *v12; // rdx
-  int v13; // er9
+  int v13; // eax
   int v14; // eax
-  int v15; // eax
-  __int64 v16; // rdi
+  __int64 v15; // rdi
+  int v16; // eax
   int v17; // eax
-  int v18; // eax
-  hkResultEnum v19; // eax
-  __int64 v20; // rbx
+  hkResultEnum m_enum; // eax
+  __int64 v19; // rbx
+  int v20; // eax
   int v21; // eax
-  int v22; // eax
-  int v23; // er9
-  int v24; // esi
-  __int64 v25; // r13
-  __int64 v26; // r14
-  int *v27; // rbx
-  int v28; // eax
-  __int64 v29; // rbx
+  int v22; // r9d
+  int v23; // esi
+  __int64 v24; // r13
+  __int64 v25; // r14
+  int *v26; // rbx
+  int v27; // eax
+  __int64 v28; // rbx
+  int v29; // eax
   int v30; // eax
-  int v31; // eax
-  int v32; // er9
-  __int64 v33; // r12
-  int v34; // esi
-  __int64 v35; // rdi
-  __int64 v36; // r14
-  int *v37; // rbx
-  int v38; // eax
-  hkResult v40; // [rsp+30h] [rbp-39h]
-  hkResult v41; // [rsp+34h] [rbp-35h]
-  int numPoints; // [rsp+38h] [rbp-31h]
-  void *array; // [rsp+40h] [rbp-29h]
-  int v44; // [rsp+48h] [rbp-21h]
-  int v45; // [rsp+4Ch] [rbp-1Dh]
-  hkFindUniquePositionsUtil v46; // [rsp+50h] [rbp-19h]
-  hkResult resulta; // [rsp+D0h] [rbp+67h]
-  hkResult *v48; // [rsp+D8h] [rbp+6Fh]
-  hkaiEdgeGeometry *v49; // [rsp+E0h] [rbp+77h]
-  hkaiEdgeGeometry *v50; // [rsp+E8h] [rbp+7Fh]
+  int v31; // r9d
+  __int64 v32; // r12
+  int v33; // esi
+  __int64 v34; // rdi
+  __int64 v35; // r14
+  int *v36; // rbx
+  int v37; // eax
+  hkResult v39; // [rsp+30h] [rbp-39h] BYREF
+  hkResult v40; // [rsp+34h] [rbp-35h] BYREF
+  int numPoints; // [rsp+38h] [rbp-31h] BYREF
+  void *array; // [rsp+40h] [rbp-29h] BYREF
+  int v43; // [rsp+48h] [rbp-21h]
+  int v44; // [rsp+4Ch] [rbp-1Dh]
+  hkFindUniquePositionsUtil v45; // [rsp+50h] [rbp-19h] BYREF
+  hkResult resulta; // [rsp+D0h] [rbp+67h] BYREF
+  hkResult *v47; // [rsp+D8h] [rbp+6Fh]
+  hkaiEdgeGeometry *v48; // [rsp+E0h] [rbp+77h] BYREF
+  hkaiEdgeGeometry *v49; // [rsp+E8h] [rbp+7Fh]
 
-  v50 = geomB;
-  v49 = geomA;
-  v48 = result;
+  v49 = geomB;
+  v48 = geomA;
+  v47 = result;
   this->m_geomA = geomA;
   this->m_geomB = geomB;
-  v4 = geomA->m_vertices.m_size;
+  m_size = geomA->m_vertices.m_size;
   v5 = geomB->m_vertices.m_size;
-  v6 = this;
-  v7 = geomA;
   v8 = result;
-  numPoints = v4 + v5;
-  v9 = hkFindUniquePositionsUtil::getSizeInBytesFor(v4 + v5);
-  v10 = 2147483648;
-  v11 = v9;
-  v45 = 2147483648;
+  numPoints = m_size + v5;
+  SizeInBytesFor = hkFindUniquePositionsUtil::getSizeInBytesFor(m_size + v5);
+  v10 = 0x80000000;
+  v11 = SizeInBytesFor;
+  v44 = 0x80000000;
   v12 = 0i64;
   array = 0i64;
-  v44 = 0;
-  if ( v9 <= 0 )
+  v43 = 0;
+  if ( SizeInBytesFor <= 0 )
   {
-    resulta.m_enum = 0;
-LABEL_7:
-    v44 = v11;
-    goto LABEL_8;
+    resulta.m_enum = HK_SUCCESS;
+    goto LABEL_5;
   }
-  v13 = v9;
-  if ( v9 < 0 )
-    v13 = 0;
-  hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v13, 1);
-  v10 = v45;
+  hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &array, SizeInBytesFor, 1);
+  v10 = v44;
   v12 = array;
   if ( resulta.m_enum == HK_SUCCESS )
-    goto LABEL_7;
-LABEL_8:
-  v14 = v6->m_vertexMapA.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v14 >= v4 )
+LABEL_5:
+    v43 = v11;
+  v13 = this->m_vertexMapA.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v13 >= m_size )
   {
-    v16 = 0i64;
-    v41.m_enum = 0;
+    v15 = 0i64;
+    v40.m_enum = HK_SUCCESS;
   }
   else
   {
-    v15 = 2 * v14;
-    if ( v4 < v15 )
-      v4 = v15;
-    hkArrayUtil::_reserve(&v41, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_vertexMapA, v4, 4);
-    v10 = v45;
+    v14 = 2 * v13;
+    if ( m_size < v14 )
+      m_size = v14;
+    hkArrayUtil::_reserve(&v40, &hkContainerHeapAllocator::s_alloc, &this->m_vertexMapA, m_size, 4);
+    v10 = v44;
     v12 = array;
-    v16 = 0i64;
+    v15 = 0i64;
   }
-  v17 = v6->m_vertexMapB.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v17 >= v5 )
+  v16 = this->m_vertexMapB.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v16 >= v5 )
   {
-    v19 = 0;
-    v40.m_enum = 0;
+    m_enum = HK_SUCCESS;
+    v39.m_enum = HK_SUCCESS;
   }
   else
   {
-    v18 = 2 * v17;
-    if ( v5 < v18 )
-      v5 = v18;
-    hkArrayUtil::_reserve(&v40, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_vertexMapB, v5, 4);
-    v10 = v45;
+    v17 = 2 * v16;
+    if ( v5 < v17 )
+      v5 = v17;
+    hkArrayUtil::_reserve(&v39, &hkContainerHeapAllocator::s_alloc, &this->m_vertexMapB, v5, 4);
+    v10 = v44;
     v12 = array;
-    v19 = v40.m_enum;
+    m_enum = v39.m_enum;
   }
-  if ( resulta.m_enum || v41.m_enum || v19 )
+  if ( resulta.m_enum || v40.m_enum || m_enum )
   {
-    v8->m_enum = 1;
-    v44 = 0;
+    v8->m_enum = HK_FAILURE;
+    v43 = 0;
     if ( v10 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v12,
-        v10 & 0x3FFFFFFF);
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v12, v10 & 0x3FFFFFFF);
   }
   else
   {
-    v46.m_positions.m_data = 0i64;
-    v46.m_positions.m_size = 0;
-    v46.m_positions.m_capacityAndFlags = 2147483648;
-    v46.m_hashMap.m_map.m_elem = 0i64;
-    v46.m_hashMap.m_map.m_numElems = 0;
-    v46.m_hashMap.m_map.m_hashMod = -1;
-    v46.m_entries.m_data = 0i64;
-    v46.m_entries.m_size = 0;
-    v46.m_entries.m_capacityAndFlags = 2147483648;
-    hkFindUniquePositionsUtil::setBuffer(&v46, v12, numPoints);
-    v20 = v7->m_vertices.m_size;
-    v21 = v6->m_vertexMapA.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v21 < (signed int)v20 )
+    v45.m_positions.m_data = 0i64;
+    v45.m_positions.m_size = 0;
+    v45.m_positions.m_capacityAndFlags = 0x80000000;
+    v45.m_hashMap.m_map.m_elem = 0i64;
+    v45.m_hashMap.m_map.m_numElems = 0;
+    v45.m_hashMap.m_map.m_hashMod = -1;
+    v45.m_entries.m_data = 0i64;
+    v45.m_entries.m_size = 0;
+    v45.m_entries.m_capacityAndFlags = 0x80000000;
+    hkFindUniquePositionsUtil::setBuffer(&v45, v12, numPoints);
+    v19 = geomA->m_vertices.m_size;
+    v20 = this->m_vertexMapA.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v20 < (int)v19 )
     {
-      v22 = 2 * v21;
-      v23 = v7->m_vertices.m_size;
-      if ( (signed int)v20 < v22 )
-        v23 = v22;
-      hkArrayUtil::_reserve(
-        (hkResult *)&numPoints,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v6->m_vertexMapA,
-        v23,
-        4);
+      v21 = 2 * v20;
+      v22 = geomA->m_vertices.m_size;
+      if ( (int)v19 < v21 )
+        v22 = v21;
+      hkArrayUtil::_reserve((hkResult *)&numPoints, &hkContainerHeapAllocator::s_alloc, &this->m_vertexMapA, v22, 4);
     }
-    v6->m_vertexMapA.m_size = v20;
-    v24 = 0;
-    v25 = v20;
-    if ( (signed int)v20 > 0 )
+    this->m_vertexMapA.m_size = v19;
+    v23 = 0;
+    v24 = v19;
+    if ( (int)v19 > 0 )
     {
-      v26 = (__int64)v49;
+      v25 = (__int64)v48;
       do
       {
-        v27 = &v6->m_vertexMapA.m_data[v16];
-        v28 = hkFindUniquePositionsUtil::addPosition(&v46, (hkVector4f *)(*(_QWORD *)(v26 + 48) + 16i64 * v24));
-        ++v16;
-        ++v24;
-        *v27 = v28;
+        v26 = &this->m_vertexMapA.m_data[v15];
+        v27 = hkFindUniquePositionsUtil::addPosition(&v45, (hkVector4f *)(*(_QWORD *)(v25 + 48) + 16i64 * v23));
+        ++v15;
+        ++v23;
+        *v26 = v27;
       }
-      while ( v16 < v25 );
-      v8 = v48;
+      while ( v15 < v24 );
+      v8 = v47;
     }
-    v29 = v50->m_vertices.m_size;
-    v30 = v6->m_vertexMapB.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v30 < (signed int)v29 )
+    v28 = v49->m_vertices.m_size;
+    v29 = this->m_vertexMapB.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v29 < (int)v28 )
     {
-      v31 = 2 * v30;
-      v32 = v50->m_vertices.m_size;
-      if ( (signed int)v29 < v31 )
-        v32 = v31;
-      hkArrayUtil::_reserve(
-        (hkResult *)&v49,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v6->m_vertexMapB,
-        v32,
-        4);
+      v30 = 2 * v29;
+      v31 = v49->m_vertices.m_size;
+      if ( (int)v28 < v30 )
+        v31 = v30;
+      hkArrayUtil::_reserve((hkResult *)&v48, &hkContainerHeapAllocator::s_alloc, &this->m_vertexMapB, v31, 4);
     }
-    v6->m_vertexMapB.m_size = v29;
-    v33 = v29;
-    v34 = 0;
-    v35 = 0i64;
-    if ( (signed int)v29 > 0 )
+    this->m_vertexMapB.m_size = v28;
+    v32 = v28;
+    v33 = 0;
+    v34 = 0i64;
+    if ( (int)v28 > 0 )
     {
-      v36 = (__int64)v50;
+      v35 = (__int64)v49;
       do
       {
-        v37 = &v6->m_vertexMapB.m_data[v35];
-        v38 = hkFindUniquePositionsUtil::addPosition(&v46, (hkVector4f *)(*(_QWORD *)(v36 + 48) + 16i64 * v34));
-        ++v35;
+        v36 = &this->m_vertexMapB.m_data[v34];
+        v37 = hkFindUniquePositionsUtil::addPosition(&v45, (hkVector4f *)(*(_QWORD *)(v35 + 48) + 16i64 * v33));
         ++v34;
-        *v37 = v38;
+        ++v33;
+        *v36 = v37;
       }
-      while ( v35 < v33 );
-      v8 = v48;
+      while ( v34 < v32 );
+      v8 = v47;
     }
-    hkFindUniquePositionsUtil::~hkFindUniquePositionsUtil(&v46);
-    v44 = 0;
-    if ( v45 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        v45 & 0x3FFFFFFF);
-    v8->m_enum = 0;
+    hkFindUniquePositionsUtil::~hkFindUniquePositionsUtil(&v45);
+    v43 = 0;
+    if ( v44 >= 0 )
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, v44 & 0x3FFFFFFF);
+    v8->m_enum = HK_SUCCESS;
   }
   return v8;
 }
 
 // File Line: 102
 // RVA: 0xBA48B0
-char __fastcall hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(hkaiSelfIntersectBooleanFilter2 *this, int faceA, int faceB)
+char __fastcall hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(
+        hkaiSelfIntersectBooleanFilter2 *this,
+        int faceA,
+        int faceB)
 {
   __int64 v3; // r9
-  hkaiEdgeGeometry::Edge *const **v4; // rdx
-  signed int **v5; // rdi
-  signed int **v6; // r15
+  hkaiEdgeGeometry::Edge *const **m_data; // rdx
+  int **v5; // rdi
+  int **v6; // r15
   hkaiEdgeGeometry::Edge *const **v7; // rdx
   hkaiEdgeGeometry::Edge *const *v8; // rbp
-  signed int **v9; // rbx
+  int **v9; // rbx
   int *v10; // rsi
-  int v11; // er10
-  int v12; // er9
-  signed int **v13; // rax
+  int v11; // r10d
+  int v12; // r9d
+  hkaiEdgeGeometry::Edge *const *v13; // rax
   int *v14; // r11
-  int v15; // er8
+  int v15; // r8d
   int v16; // edx
 
   v3 = faceA;
-  v4 = this->m_faceEdgesA->m_faceStartEdges.m_data;
-  v5 = (signed int **)v4[v3];
-  v6 = (signed int **)v4[v3 + 1];
+  m_data = this->m_faceEdgesA->m_faceStartEdges.m_data;
+  v5 = (int **)m_data[v3];
+  v6 = (int **)m_data[v3 + 1];
   v7 = this->m_faceEdgesB->m_faceStartEdges.m_data;
   v8 = v7[faceB];
-  v9 = (signed int **)v7[faceB + 1];
+  v9 = (int **)v7[faceB + 1];
   if ( v5 == v6 )
     return 1;
   v10 = this->m_vertexMapA.m_data;
@@ -313,93 +291,86 @@ char __fastcall hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(hkaiSelf
   {
     v11 = v10[**v5];
     v12 = v10[(*v5)[1]];
-    v13 = (signed int **)v8;
+    v13 = v8;
     if ( v8 != (hkaiEdgeGeometry::Edge *const *)v9 )
       break;
 LABEL_10:
-    ++v5;
-    if ( v5 == v6 )
+    if ( ++v5 == v6 )
       return 1;
   }
   v14 = this->m_vertexMapB.m_data;
   while ( 1 )
   {
-    v15 = v14[**v13];
-    v16 = v14[(*v13)[1]];
+    v15 = v14[**(int **)v13];
+    v16 = v14[(*v13)->m_b];
     if ( v11 == v16 && v12 == v15 )
       return 0;
     if ( v11 == v15 && v12 == v16 )
       return 0;
-    ++v13;
-    if ( v13 == v9 )
+    if ( ++v13 == (hkaiEdgeGeometry::Edge *const *)v9 )
       goto LABEL_10;
   }
 }
 
 // File Line: 144
 // RVA: 0xBA4420
-bool __fastcall hkaiSelfIntersectBooleanFilter2::canFacesIntersect(hkaiSelfIntersectBooleanFilter2 *this, int faceA, int faceB)
+bool __fastcall hkaiSelfIntersectBooleanFilter2::canFacesIntersect(
+        hkaiSelfIntersectBooleanFilter2 *this,
+        int faceA,
+        int faceB)
 {
-  bool result; // al
-
   if ( faceA == 1 )
-    result = this->m_face1Results.m_data[faceB];
+    return this->m_face1Results.m_data[faceB];
   else
-    result = hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(this, faceA, faceB);
-  return result;
+    return hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(this, faceA, faceB);
 }
 
 // File Line: 178
 // RVA: 0xBA4440
-hkResult *__fastcall hkaiSelfIntersectBooleanFilter2::setFaceEdges(hkaiSelfIntersectBooleanFilter2 *this, hkResult *result, hkaiFaceEdges *faceEdgesA, hkaiFaceEdges *faceEdgesB)
+hkResult *__fastcall hkaiSelfIntersectBooleanFilter2::setFaceEdges(
+        hkaiSelfIntersectBooleanFilter2 *this,
+        hkResult *result,
+        hkaiFaceEdges *faceEdgesA,
+        hkaiFaceEdges *faceEdgesB)
 {
-  hkaiEdgeGeometry *v4; // rax
-  signed __int64 v5; // rbp
-  hkResult *v6; // rsi
+  hkaiEdgeGeometry *m_geomB; // rax
+  __int64 m_size; // rbp
   int v7; // eax
-  hkaiSelfIntersectBooleanFilter2 *v8; // r15
   int v9; // eax
-  int v10; // er9
+  int v10; // r9d
   int v12; // edi
-  signed __int64 i; // rbx
-  hkResult resulta; // [rsp+50h] [rbp+8h]
+  __int64 i; // rbx
+  hkResult resulta; // [rsp+50h] [rbp+8h] BYREF
 
-  v4 = this->m_geomB;
+  m_geomB = this->m_geomB;
   this->m_faceEdgesA = faceEdgesA;
   this->m_faceEdgesB = faceEdgesB;
-  v5 = v4->m_faces.m_size;
-  v6 = result;
+  m_size = m_geomB->m_faces.m_size;
   v7 = this->m_face1Results.m_capacityAndFlags & 0x3FFFFFFF;
-  v8 = this;
-  if ( v7 >= (signed int)v5 )
+  if ( v7 >= (int)m_size )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
     v9 = 2 * v7;
-    v10 = v5;
-    if ( (signed int)v5 < v9 )
+    v10 = m_size;
+    if ( (int)m_size < v9 )
       v10 = v9;
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_face1Results,
-      v10,
-      1);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &this->m_face1Results, v10, 1);
     if ( resulta.m_enum )
     {
-      v6->m_enum = 1;
-      return v6;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
-  v8->m_face1Results.m_size = v5;
+  this->m_face1Results.m_size = m_size;
   v12 = 1;
-  *v8->m_face1Results.m_data = 0;
-  for ( i = 1i64; i < v5; ++v12 )
-    v8->m_face1Results.m_data[++i - 1] = hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(v8, 1, v12);
-  v6->m_enum = 0;
-  return v6;
+  *this->m_face1Results.m_data = 0;
+  for ( i = 1i64; i < m_size; ++v12 )
+    this->m_face1Results.m_data[i++] = hkaiSelfIntersectBooleanFilter2::_canFacesIntersectImpl(this, 1, v12);
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 195

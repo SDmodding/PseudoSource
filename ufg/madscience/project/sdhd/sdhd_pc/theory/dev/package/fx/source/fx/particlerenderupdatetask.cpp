@@ -5,21 +5,22 @@ __int64 Render::_dynamic_initializer_for__gTaskFunctionDecl_ParticleRenderUpdate
   UFG::qTaskFunctionDecl::qTaskFunctionDecl(
     &Render::gTaskFunctionDecl_ParticleRenderUpdateTask,
     &Render::gTaskFunctionDeclData_ParticleRenderUpdateTask);
-  return atexit(Render::_dynamic_atexit_destructor_for__gTaskFunctionDecl_ParticleRenderUpdateTask__);
+  return atexit((int (__fastcall *)())Render::_dynamic_atexit_destructor_for__gTaskFunctionDecl_ParticleRenderUpdateTask__);
 }
 
 // File Line: 48
 // RVA: 0x1E24D0
-void __fastcall Render::ParticleCreator::SetTaskParams(Render::ParticleCreator *this, Render::ParticleRenderUpdateTaskParam *taskParams)
+void __fastcall Render::ParticleCreator::SetTaskParams(
+        Render::ParticleCreator *this,
+        Render::ParticleRenderUpdateTaskParam *taskParams)
 {
   UFG::qVector4 v2; // xmm3
-  Render::ParticleRenderUpdateTaskParam *v3; // r8
   UFG::qVector4 v4; // xmm2
   UFG::qVector4 v5; // xmm1
   float v6; // xmm2_4
-  float v7; // xmm6_4
-  __m128 v8; // xmm5
-  float v9; // xmm7_4
+  float y; // xmm6_4
+  __m128 x_low; // xmm5
+  float z; // xmm7_4
   __m128 v10; // xmm4
   float v11; // xmm1_4
   float v12; // xmm6_4
@@ -31,17 +32,16 @@ void __fastcall Render::ParticleCreator::SetTaskParams(Render::ParticleCreator *
   __m128 v18; // xmm5
   float v19; // xmm7_4
   __m128 v20; // xmm4
-  void *v21; // rdx
-  Render::ParticleEmitterSettings *v22; // rdx
+  void *fxOverride; // rdx
+  Render::ParticleEmitterSettings *pSettings; // rdx
   __m128 v23; // xmm2
-  UFG::qMemoryStreamer *v24; // r9
-  Render::FXqTaskMeshReader *v25; // rbx
-  void *v26; // rax
-  signed int v27; // er10
+  UFG::qMemoryStreamer *mMemoryStreamer; // r9
+  Render::FXqTaskMeshReader *p_mMeshEmitter; // rbx
+  void *modelToEmitFrom; // rax
+  int vertexIndexToStartMeshEmissionFrom; // r10d
 
   this->mTaskParams = taskParams;
   v2 = taskParams->curBasis.v1;
-  v3 = taskParams;
   v4 = taskParams->curBasis.v2;
   v5 = taskParams->curBasis.v3;
   this->mCurBasisNormalized.v0 = taskParams->curBasis.v0;
@@ -49,18 +49,18 @@ void __fastcall Render::ParticleCreator::SetTaskParams(Render::ParticleCreator *
   this->mCurBasisNormalized.v2 = v4;
   v6 = 0.0;
   this->mCurBasisNormalized.v3 = v5;
-  v7 = this->mCurBasisNormalized.v0.y;
-  v8 = (__m128)LODWORD(this->mCurBasisNormalized.v0.x);
-  v10 = v8;
-  v9 = this->mCurBasisNormalized.v0.z;
-  v10.m128_f32[0] = (float)((float)(v8.m128_f32[0] * v8.m128_f32[0]) + (float)(v7 * v7)) + (float)(v9 * v9);
+  y = this->mCurBasisNormalized.v0.y;
+  x_low = (__m128)LODWORD(this->mCurBasisNormalized.v0.x);
+  v10 = x_low;
+  z = this->mCurBasisNormalized.v0.z;
+  v10.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
   if ( v10.m128_f32[0] == 0.0 )
     v11 = 0.0;
   else
-    v11 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v10));
-  this->mCurBasisNormalized.v0.x = v8.m128_f32[0] * v11;
-  this->mCurBasisNormalized.v0.y = v7 * v11;
-  this->mCurBasisNormalized.v0.z = v9 * v11;
+    v11 = 1.0 / _mm_sqrt_ps(v10).m128_f32[0];
+  this->mCurBasisNormalized.v0.x = x_low.m128_f32[0] * v11;
+  this->mCurBasisNormalized.v0.y = y * v11;
+  this->mCurBasisNormalized.v0.z = z * v11;
   this->mCurBasisNormalized.v0.w = 0.0;
   v12 = this->mCurBasisNormalized.v1.y;
   v13 = (__m128)LODWORD(this->mCurBasisNormalized.v1.x);
@@ -70,7 +70,7 @@ void __fastcall Render::ParticleCreator::SetTaskParams(Render::ParticleCreator *
   if ( v15.m128_f32[0] == 0.0 )
     v16 = 0.0;
   else
-    v16 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v15));
+    v16 = 1.0 / _mm_sqrt_ps(v15).m128_f32[0];
   this->mCurBasisNormalized.v1.x = v13.m128_f32[0] * v16;
   this->mCurBasisNormalized.v1.y = v12 * v16;
   this->mCurBasisNormalized.v1.z = v14 * v16;
@@ -81,190 +81,197 @@ void __fastcall Render::ParticleCreator::SetTaskParams(Render::ParticleCreator *
   v20 = v18;
   v20.m128_f32[0] = (float)((float)(v18.m128_f32[0] * v18.m128_f32[0]) + (float)(v17 * v17)) + (float)(v19 * v19);
   if ( v20.m128_f32[0] != 0.0 )
-    v6 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v20));
+    v6 = 1.0 / _mm_sqrt_ps(v20).m128_f32[0];
   this->mCurBasisNormalized.v2.x = v18.m128_f32[0] * v6;
   this->mCurBasisNormalized.v2.y = v17 * v6;
   this->mCurBasisNormalized.v2.z = v19 * v6;
   this->mCurBasisNormalized.v2.w = 0.0;
   this->mSeedBuffer = (int *)this->mSeedStream.mMainMemoryAddress;
-  v21 = taskParams->fxOverride;
-  if ( v21 )
-    this->mFxOverrideStream.mMainMemoryAddress = v21;
-  v22 = (Render::ParticleEmitterSettings *)v3->pSettings;
-  if ( v22 )
+  fxOverride = taskParams->fxOverride;
+  if ( fxOverride )
+    this->mFxOverrideStream.mMainMemoryAddress = fxOverride;
+  pSettings = (Render::ParticleEmitterSettings *)taskParams->pSettings;
+  if ( pSettings )
   {
-    this->mParticleEmitterSettingsStream.mMainMemoryAddress = v22;
-    this->mParticleSettings = v22;
+    this->mParticleEmitterSettingsStream.mMainMemoryAddress = pSettings;
+    this->mParticleSettings = pSettings;
   }
-  v23 = (__m128)LODWORD(v3->curBasis.v0.x);
-  v24 = this->mMemoryStreamer;
-  v25 = &this->mMeshEmitter;
-  v23.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0]) + (float)(v3->curBasis.v0.y * v3->curBasis.v0.y))
-                  + (float)(v3->curBasis.v0.z * v3->curBasis.v0.z);
-  this->mTransformScale = (float)((float)(COERCE_FLOAT(_mm_sqrt_ps(v23)) - 1.0)
+  v23 = (__m128)LODWORD(taskParams->curBasis.v0.x);
+  mMemoryStreamer = this->mMemoryStreamer;
+  p_mMeshEmitter = &this->mMeshEmitter;
+  v23.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0])
+                          + (float)(taskParams->curBasis.v0.y * taskParams->curBasis.v0.y))
+                  + (float)(taskParams->curBasis.v0.z * taskParams->curBasis.v0.z);
+  this->mTransformScale = (float)((float)(_mm_sqrt_ps(v23).m128_f32[0] - 1.0)
                                 * this->mParticleSettings->mUseTransformScaling)
                         + 1.0;
-  this->mSeed = v3->seed;
-  v26 = v3->modelToEmitFrom;
-  v27 = (signed int)v3->vertexIndexToStartMeshEmissionFrom;
-  if ( v26 )
+  this->mSeed = taskParams->seed;
+  modelToEmitFrom = taskParams->modelToEmitFrom;
+  vertexIndexToStartMeshEmissionFrom = (int)taskParams->vertexIndexToStartMeshEmissionFrom;
+  if ( modelToEmitFrom )
   {
     this->mMeshEmitter.mSeed = &this->mSeed;
-    v25->mModelAddrInMainMem = v26;
-    this->mMeshEmitter.mMemoryStreamer = v24;
-    this->mMeshEmitter.mModelStream.mMainMemoryAddress = v26;
-    Render::FXqTaskMeshReader::LoadMesh(&this->mMeshEmitter, 0, (float)v27);
-    v25->mIsInitialized = 1;
+    p_mMeshEmitter->mModelAddrInMainMem = modelToEmitFrom;
+    this->mMeshEmitter.mMemoryStreamer = mMemoryStreamer;
+    this->mMeshEmitter.mModelStream.mMainMemoryAddress = modelToEmitFrom;
+    Render::FXqTaskMeshReader::LoadMesh(&this->mMeshEmitter, 0, (float)vertexIndexToStartMeshEmissionFrom);
+    p_mMeshEmitter->mIsInitialized = 1;
   }
-}er::FXqTaskMeshReader::LoadMesh(&this->mMeshEmitt
+}
 
 // File Line: 67
 // RVA: 0x1DFC30
-float __fastcall Render::ParticleCreator::AddResumeParticles(Render::ParticleCreator *this, Render::GenerateParticleParameters *generateParticleParams, Render::EmitterParticleAttribute *attributeBuffer, unsigned int *currentBufferCount)
+float __fastcall Render::ParticleCreator::AddResumeParticles(
+        Render::ParticleCreator *this,
+        Render::GenerateParticleParameters *generateParticleParams,
+        Render::EmitterParticleAttribute *attributeBuffer,
+        unsigned int *currentBufferCount)
 {
   unsigned int v4; // edi
-  unsigned int *v5; // rsi
-  Render::EmitterParticleAttribute *v6; // r14
-  Render::GenerateParticleParameters *v7; // rbp
-  Render::ParticleCreator *v8; // rbx
-  float v9; // xmm8_4
-  float v10; // xmm7_4
+  float lastExpiry; // xmm8_4
+  float creationSimTime; // xmm7_4
   int *seed; // r15
   float v12; // xmm0_4
-  Render::ParticleEmitterSettings *v13; // rdx
+  Render::ParticleEmitterSettings *mParticleSettings; // rdx
   float v14; // xmm6_4
-  float v15; // xmm0_4
-  float v16; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
   Render::EmitterParticleAttribute *v17; // rax
   Render::ParticleEmitterSettings *v18; // rdx
-  UFG::qVector3 result; // [rsp+30h] [rbp-78h]
+  UFG::qVector3 result; // [rsp+30h] [rbp-78h] BYREF
 
   v4 = 0;
-  v5 = currentBufferCount;
-  v6 = attributeBuffer;
-  v7 = generateParticleParams;
-  v8 = this;
-  v9 = this->mTaskParams->lastExpiry;
-  v10 = this->mTaskParams->creationSimTime;
+  lastExpiry = this->mTaskParams->lastExpiry;
+  creationSimTime = this->mTaskParams->creationSimTime;
   if ( this->mTaskParams->currentAddCount )
   {
     seed = &this->mSeed;
     do
     {
-      v12 = UFG::qRandom(1.0, &UFG::qDefaultSeed);
-      v13 = v8->mParticleSettings;
-      v14 = (float)((float)((float)(v13->mLifeMax - v13->mLifeMin) * v12) + v13->mLifeMin) + v10;
-      Render::CreateTimeUpdateJitterVector(&result, v13, &v8->mCurBasisNormalized, v8->mTransformScale, seed);
-      v15 = result.x;
-      v16 = result.y;
-      v7->start_time = v10;
-      v7->end_time = v14;
-      v7->pos.x = v15;
-      v7->pos.z = result.z;
-      v7->pos.y = v16;
-      v17 = Render::ParticleCreator::AddParticle(v8, v7, v6, *v5);
+      v12 = UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed);
+      mParticleSettings = this->mParticleSettings;
+      v14 = (float)((float)((float)(mParticleSettings->mLifeMax - mParticleSettings->mLifeMin) * v12)
+                  + mParticleSettings->mLifeMin)
+          + creationSimTime;
+      Render::CreateTimeUpdateJitterVector(
+        &result,
+        mParticleSettings,
+        &this->mCurBasisNormalized,
+        this->mTransformScale,
+        seed);
+      x = result.x;
+      y = result.y;
+      generateParticleParams->start_time = creationSimTime;
+      generateParticleParams->end_time = v14;
+      generateParticleParams->pos.x = x;
+      generateParticleParams->pos.z = result.z;
+      generateParticleParams->pos.y = y;
+      v17 = Render::ParticleCreator::AddParticle(this, generateParticleParams, attributeBuffer, *currentBufferCount);
       if ( v17 )
       {
-        v18 = v8->mParticleSettings;
+        v18 = this->mParticleSettings;
         if ( v18->mType != 1 )
           Render::ComputeResumeTimePosAndVel(
             v17,
             v18->mSettings.AnimUVScaleOffset[3],
-            v8->mTaskParams->simTime - v10,
+            this->mTaskParams->simTime - creationSimTime,
             &UFG::qMatrix44::msIdentity,
             &UFG::qMatrix44::msIdentity);
-        ++*v5;
-        if ( v9 < v14 )
-          v9 = v14;
-        v10 = v10 + v8->mTaskParams->resumeTimeSkip;
+        ++*currentBufferCount;
+        if ( lastExpiry < v14 )
+          lastExpiry = v14;
+        creationSimTime = creationSimTime + this->mTaskParams->resumeTimeSkip;
       }
       ++v4;
     }
-    while ( v4 < v8->mTaskParams->currentAddCount );
+    while ( v4 < this->mTaskParams->currentAddCount );
   }
-  return v9;
+  return lastExpiry;
 }
 
 // File Line: 108
 // RVA: 0x1DFE00
-float __fastcall Render::ParticleCreator::AddTimeEmissionParticles(Render::ParticleCreator *this, Render::GenerateParticleParameters *generateParticleParams, Render::EmitterParticleAttribute *attributeBuffer, unsigned int *currentBufferCount)
+float __fastcall Render::ParticleCreator::AddTimeEmissionParticles(
+        Render::ParticleCreator *this,
+        Render::GenerateParticleParameters *generateParticleParams,
+        Render::EmitterParticleAttribute *attributeBuffer,
+        unsigned int *currentBufferCount)
 {
-  Render::ParticleRenderUpdateTaskParam *v4; // rax
+  Render::ParticleRenderUpdateTaskParam *mTaskParams; // rax
   unsigned int v5; // ebx
-  unsigned int *v6; // rsi
-  Render::EmitterParticleAttribute *v7; // r15
-  Render::GenerateParticleParameters *v8; // rbp
-  Render::ParticleCreator *v9; // rdi
-  float v10; // xmm8_4
+  float lastExpiry; // xmm8_4
   int *seed; // r14
-  float v12; // xmm6_4
+  float creationSimTime; // xmm6_4
   float v13; // xmm0_4
-  Render::ParticleEmitterSettings *v14; // rdx
+  Render::ParticleEmitterSettings *mParticleSettings; // rdx
   float v15; // xmm7_4
-  float v16; // xmm0_4
-  float v17; // xmm1_4
-  UFG::qVector3 result; // [rsp+30h] [rbp-68h]
+  float x; // xmm0_4
+  float y; // xmm1_4
+  UFG::qVector3 result; // [rsp+30h] [rbp-68h] BYREF
 
-  v4 = this->mTaskParams;
+  mTaskParams = this->mTaskParams;
   v5 = 0;
-  v6 = currentBufferCount;
-  v7 = attributeBuffer;
-  v8 = generateParticleParams;
-  v9 = this;
-  v10 = this->mTaskParams->lastExpiry;
+  lastExpiry = this->mTaskParams->lastExpiry;
   if ( this->mTaskParams->currentAddCount )
   {
     seed = &this->mSeed;
     do
     {
-      v12 = v4->creationSimTime;
-      v13 = UFG::qRandom(1.0, seed);
-      v14 = v9->mParticleSettings;
-      v15 = (float)((float)((float)(v14->mLifeMax - v14->mLifeMin) * v13) + v14->mLifeMin) + v12;
-      Render::CreateTimeUpdateJitterVector(&result, v14, &v9->mCurBasisNormalized, v9->mTransformScale, seed);
-      v16 = result.x;
-      v17 = result.y;
-      v8->start_time = v12;
-      v8->end_time = v15;
-      v8->pos.x = v16;
-      v8->pos.z = result.z;
-      v8->pos.y = v17;
-      if ( Render::ParticleCreator::AddParticle(v9, v8, v7, *v6) )
+      creationSimTime = mTaskParams->creationSimTime;
+      v13 = UFG::qRandom(1.0, (unsigned int *)seed);
+      mParticleSettings = this->mParticleSettings;
+      v15 = (float)((float)((float)(mParticleSettings->mLifeMax - mParticleSettings->mLifeMin) * v13)
+                  + mParticleSettings->mLifeMin)
+          + creationSimTime;
+      Render::CreateTimeUpdateJitterVector(
+        &result,
+        mParticleSettings,
+        &this->mCurBasisNormalized,
+        this->mTransformScale,
+        seed);
+      x = result.x;
+      y = result.y;
+      generateParticleParams->start_time = creationSimTime;
+      generateParticleParams->end_time = v15;
+      generateParticleParams->pos.x = x;
+      generateParticleParams->pos.z = result.z;
+      generateParticleParams->pos.y = y;
+      if ( Render::ParticleCreator::AddParticle(this, generateParticleParams, attributeBuffer, *currentBufferCount) )
       {
-        ++*v6;
-        if ( v10 < v15 )
-          v10 = v15;
+        ++*currentBufferCount;
+        if ( lastExpiry < v15 )
+          lastExpiry = v15;
       }
-      v4 = v9->mTaskParams;
+      mTaskParams = this->mTaskParams;
       ++v5;
     }
-    while ( v5 < v9->mTaskParams->currentAddCount );
+    while ( v5 < this->mTaskParams->currentAddCount );
   }
-  return v10;
+  return lastExpiry;
 }
 
 // File Line: 138
 // RVA: 0x1DF390
-float __fastcall Render::ParticleCreator::AddDistanceEmissionParticles(Render::ParticleCreator *this, Render::GenerateParticleParameters *generateParticleParams, Render::EmitterParticleAttribute *attributeBuffer, unsigned int *currentBufferCount)
+float __fastcall Render::ParticleCreator::AddDistanceEmissionParticles(
+        Render::ParticleCreator *this,
+        Render::GenerateParticleParameters *generateParticleParams,
+        Render::EmitterParticleAttribute *attributeBuffer,
+        unsigned int *currentBufferCount)
 {
-  Render::ParticleRenderUpdateTaskParam *v4; // r14
-  __m128 v5; // xmm2
+  Render::ParticleRenderUpdateTaskParam *mTaskParams; // r14
+  __m128 y_low; // xmm2
   signed int v6; // edi
-  unsigned int *v7; // rsi
-  Render::EmitterParticleAttribute *v8; // r13
-  Render::GenerateParticleParameters *v9; // r15
   float v10; // xmm1_4
-  Render::ParticleCreator *v11; // rbx
   float v12; // xmm0_4
-  float v13; // xmm11_4
-  float v14; // xmm12_4
-  float v15; // xmm13_4
-  float v16; // xmm0_4
+  float lastExpiry; // xmm11_4
+  float t; // xmm12_4
+  float spacing; // xmm13_4
+  float x; // xmm0_4
   float v17; // xmm3_4
-  float v18; // xmm1_4
+  float w; // xmm1_4
   float v19; // xmm0_4
-  float v20; // xmm1_4
-  float v21; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
   float v22; // xmm1_4
   float v23; // xmm0_4
   float v24; // xmm1_4
@@ -276,52 +283,50 @@ float __fastcall Render::ParticleCreator::AddDistanceEmissionParticles(Render::P
   float v30; // xmm1_4
   int *seed; // r12
   float v32; // xmm14_4
-  float v33; // xmm9_4
+  float creationSimTime; // xmm9_4
   float v34; // xmm0_4
-  Render::ParticleEmitterSettings *v35; // rdx
+  Render::ParticleEmitterSettings *mParticleSettings; // rdx
   float v36; // xmm7_4
   float v37; // xmm8_4
   float v38; // xmm5_4
-  float v39; // xmm10_4
-  float v40; // xmm1_4
-  float v41; // xmm0_4
-  float v42; // xmm3_4
-  float v43; // xmm10_4
-  float v44; // xmm0_4
-  float v45; // xmm1_4
-  UFG::qVector3 result; // [rsp+30h] [rbp-A8h]
-  UFG::qMatrix44 curBasis; // [rsp+40h] [rbp-98h]
+  float v39; // xmm1_4
+  float mLifeMin; // xmm0_4
+  float v41; // xmm10_4
+  float v42; // xmm1_4
+  float v43; // xmm6_4
+  float mTransformScale; // xmm3_4
+  float v45; // xmm10_4
+  float v46; // xmm0_4
+  float v47; // xmm1_4
+  UFG::qVector3 result; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qMatrix44 curBasis; // [rsp+40h] [rbp-98h] BYREF
 
-  v4 = this->mTaskParams;
-  v5 = (__m128)LODWORD(this->mCurBasisNormalized.v3.y);
+  mTaskParams = this->mTaskParams;
+  y_low = (__m128)LODWORD(this->mCurBasisNormalized.v3.y);
   v6 = 0;
-  v7 = currentBufferCount;
-  v8 = attributeBuffer;
-  v9 = generateParticleParams;
   v10 = this->mCurBasisNormalized.v3.x - this->mTaskParams->oldBasis.v3.x;
-  v11 = this;
   v12 = this->mCurBasisNormalized.v3.z - this->mTaskParams->oldBasis.v3.z;
-  v13 = this->mTaskParams->lastExpiry;
-  v14 = this->mTaskParams->t;
-  v15 = this->mTaskParams->spacing;
-  v5.m128_f32[0] = (float)((float)((float)(v5.m128_f32[0] - this->mTaskParams->oldBasis.v3.y)
-                                 * (float)(v5.m128_f32[0] - this->mTaskParams->oldBasis.v3.y))
-                         + (float)(v10 * v10))
-                 + (float)(v12 * v12);
-  v16 = this->mCurBasisNormalized.v0.x;
+  lastExpiry = this->mTaskParams->lastExpiry;
+  t = this->mTaskParams->t;
+  spacing = this->mTaskParams->spacing;
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - this->mTaskParams->oldBasis.v3.y)
+                                    * (float)(y_low.m128_f32[0] - this->mTaskParams->oldBasis.v3.y))
+                            + (float)(v10 * v10))
+                    + (float)(v12 * v12);
+  x = this->mCurBasisNormalized.v0.x;
   curBasis.v0.y = this->mCurBasisNormalized.v0.y;
-  LODWORD(v17) = (unsigned __int128)_mm_sqrt_ps(v5);
-  v18 = this->mCurBasisNormalized.v0.w;
-  curBasis.v0.x = v16;
+  LODWORD(v17) = _mm_sqrt_ps(y_low).m128_u32[0];
+  w = this->mCurBasisNormalized.v0.w;
+  curBasis.v0.x = x;
   curBasis.v0.z = this->mCurBasisNormalized.v0.z;
   v19 = this->mCurBasisNormalized.v1.x;
-  curBasis.v0.w = v18;
-  v20 = this->mCurBasisNormalized.v1.y;
+  curBasis.v0.w = w;
+  y = this->mCurBasisNormalized.v1.y;
   curBasis.v1.x = v19;
-  v21 = this->mCurBasisNormalized.v1.z;
-  curBasis.v1.y = v20;
+  z = this->mCurBasisNormalized.v1.z;
+  curBasis.v1.y = y;
   v22 = this->mCurBasisNormalized.v1.w;
-  curBasis.v1.z = v21;
+  curBasis.v1.z = z;
   v23 = this->mCurBasisNormalized.v2.x;
   curBasis.v1.w = v22;
   v24 = this->mCurBasisNormalized.v2.y;
@@ -339,73 +344,76 @@ float __fastcall Render::ParticleCreator::AddDistanceEmissionParticles(Render::P
   v30 = this->mCurBasisNormalized.v3.w;
   curBasis.v3.z = v29;
   curBasis.v3.w = v30;
-  if ( (signed int)v4->currentAddCount > 0 )
+  if ( (int)mTaskParams->currentAddCount > 0 )
   {
     seed = &this->mSeed;
     v32 = 1.0 / v17;
     do
     {
-      v33 = v11->mTaskParams->creationSimTime;
-      v34 = UFG::qRandom(1.0, seed);
-      v35 = v11->mParticleSettings;
-      v36 = v4->oldBasis.v3.y;
-      v37 = v4->oldBasis.v3.x;
-      v38 = v4->oldBasis.v3.z;
+      creationSimTime = this->mTaskParams->creationSimTime;
+      v34 = UFG::qRandom(1.0, (unsigned int *)seed);
+      mParticleSettings = this->mParticleSettings;
+      v36 = mTaskParams->oldBasis.v3.y;
+      v37 = mTaskParams->oldBasis.v3.x;
+      v38 = mTaskParams->oldBasis.v3.z;
+      v39 = v34;
       curBasis.v3.w = 1.0;
-      v39 = (float)((float)(v35->mLifeMax - v35->mLifeMin) * v34) + v35->mLifeMin;
-      v40 = v11->mCurBasisNormalized.v3.y - v36;
-      v41 = v11->mCurBasisNormalized.v3.z - v38;
-      curBasis.v3.x = (float)((float)(v32 * v14) * (float)(v11->mCurBasisNormalized.v3.x - v37)) + v37;
-      curBasis.v3.y = (float)((float)(v32 * v14) * v40) + v36;
-      v42 = v11->mTransformScale;
-      curBasis.v3.z = (float)((float)(v32 * v14) * v41) + v38;
-      v43 = v39 + v33;
-      Render::CreateTimeUpdateJitterVector(&result, v35, &curBasis, v42, seed);
-      v44 = result.x;
-      v45 = result.y;
-      v9->start_time = v33;
-      v9->end_time = v43;
-      v9->pos.x = v44;
-      v9->pos.z = result.z;
-      v9->pos.y = v45;
-      if ( Render::ParticleCreator::AddParticle(v11, v9, v8, *v7) )
+      mLifeMin = mParticleSettings->mLifeMin;
+      v41 = (float)(mParticleSettings->mLifeMax - mLifeMin) * v39;
+      v42 = this->mCurBasisNormalized.v3.y - v36;
+      v43 = (float)((float)(v32 * t) * (float)(this->mCurBasisNormalized.v3.z - v38)) + v38;
+      curBasis.v3.x = (float)((float)(v32 * t) * (float)(this->mCurBasisNormalized.v3.x - v37)) + v37;
+      curBasis.v3.y = (float)((float)(v32 * t) * v42) + v36;
+      mTransformScale = this->mTransformScale;
+      curBasis.v3.z = v43;
+      v45 = (float)(v41 + mLifeMin) + creationSimTime;
+      Render::CreateTimeUpdateJitterVector(&result, mParticleSettings, &curBasis, mTransformScale, seed);
+      v46 = result.x;
+      v47 = result.y;
+      generateParticleParams->start_time = creationSimTime;
+      generateParticleParams->end_time = v45;
+      generateParticleParams->pos.x = v46;
+      generateParticleParams->pos.z = result.z;
+      generateParticleParams->pos.y = v47;
+      if ( Render::ParticleCreator::AddParticle(this, generateParticleParams, attributeBuffer, *currentBufferCount) )
       {
-        ++*v7;
-        v14 = v14 + v15;
-        if ( v13 < v43 )
-          v13 = v43;
+        ++*currentBufferCount;
+        t = t + spacing;
+        if ( lastExpiry < v45 )
+          lastExpiry = v45;
       }
       ++v6;
     }
-    while ( v6 < (signed int)v11->mTaskParams->currentAddCount );
+    while ( v6 < (signed int)this->mTaskParams->currentAddCount );
   }
-  return v13;
+  return lastExpiry;
 }
 
 // File Line: 180
 // RVA: 0x1DF700
-Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticle(Render::ParticleCreator *this, Render::GenerateParticleParameters *generateParticleParams, Render::EmitterParticleAttribute *attribBuffer, unsigned int currentBufferCount)
+Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticle(
+        Render::ParticleCreator *this,
+        Render::GenerateParticleParameters *generateParticleParams,
+        Render::EmitterParticleAttribute *attribBuffer,
+        unsigned int currentBufferCount)
 {
   bool v4; // zf
-  float v5; // xmm7_4
-  int v6; // edi
-  Render::EmitterParticleAttribute *v7; // r14
-  Render::GenerateParticleParameters *v8; // r12
+  float x; // xmm7_4
   Render::ParticleCreator *v9; // rsi
-  float v10; // xmm8_4
-  float v11; // xmm9_4
-  Render::ParticleEmitterSettings *v12; // rdx
+  float y; // xmm8_4
+  float z; // xmm9_4
+  Render::ParticleEmitterSettings *pfx; // rdx
   unsigned __int64 v13; // rcx
   int v14; // eax
-  signed int *v15; // r15
-  signed __int16 *v16; // rax
+  int *mMainMemoryAddress; // r15
+  __int16 *v16; // rax
   unsigned int cur_index; // ebx
   unsigned int v18; // edi
-  float v19; // xmm6_4
+  float mMeshEmissionVertexSkip; // xmm6_4
   _DWORD *v20; // rcx
   _DWORD *v21; // rbx
   unsigned int v22; // eax
-  float *v23; // rax
+  float *p_x; // rax
   Render::ParticleEmitterSettings *v24; // rcx
   float v26; // xmm4_4
   float v27; // xmm6_4
@@ -414,44 +422,43 @@ Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticl
   float v30; // xmm6_4
   float v31; // xmm1_4
   float v32; // xmm0_4
-  UFG::qVector3 v33; // [rsp+40h] [rbp-98h]
-  UFG::qVector3 v34; // [rsp+50h] [rbp-88h]
-  UFG::qVector3 triangleVertices; // [rsp+60h] [rbp-78h]
-  UFG::qVector3 outPosition; // [rsp+6Ch] [rbp-6Ch]
-  UFG::qVector3 outNormal; // [rsp+78h] [rbp-60h]
-  Render::ParticleGenerator v38; // [rsp+88h] [rbp-50h]
+  UFG::qVector3 v33; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qVector3 v34; // [rsp+50h] [rbp-88h] BYREF
+  UFG::qVector3 triangleVertices; // [rsp+60h] [rbp-78h] BYREF
+  UFG::qVector3 outPosition; // [rsp+6Ch] [rbp-6Ch] BYREF
+  UFG::qVector3 outNormal; // [rsp+78h] [rbp-60h] BYREF
+  Render::ParticleGenerator v38; // [rsp+88h] [rbp-50h] BYREF
   Render::ParticleCreator *v39; // [rsp+158h] [rbp+80h]
   Render::EmitterParticleAttribute *v40; // [rsp+168h] [rbp+90h]
-  int vars0; // [rsp+170h] [rbp+98h]
+  unsigned int vars0; // [rsp+170h] [rbp+98h]
 
-  v4 = this->mMeshEmitter.mIsInitialized == 0;
-  v5 = UFG::qVector3::msZero.x;
-  v6 = currentBufferCount;
-  v7 = attribBuffer;
-  v8 = generateParticleParams;
+  v4 = !this->mMeshEmitter.mIsInitialized;
+  x = UFG::qVector3::msZero.x;
   v9 = this;
   v33 = UFG::qVector3::msZero;
-  v10 = UFG::qVector3::msZero.y;
-  v11 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   if ( v4 )
     goto LABEL_15;
-  v12 = generateParticleParams->pfx;
-  v13 = v12->mBitFields[0];
-  if ( ((unsigned __int8)v13 >> 1) & 1 )
+  pfx = generateParticleParams->pfx;
+  v13 = pfx->mBitFields[0];
+  if ( (v13 & 2) != 0 )
   {
-    v14 = UFG::qRandom(*((_DWORD *)v9->mMeshEmitter.mMeshStream.mMainMemoryAddress + 58), v8->seed);
-    v15 = (signed int *)v9->mMeshEmitter.mMeshStream.mMainMemoryAddress;
-    v16 = (signed __int16 *)(*((_QWORD *)v15 + 10)
-                           + *(_QWORD *)(*((_QWORD *)v15 + 10) + 96i64)
-                           + (unsigned int)(6 * v14)
-                           + 2 * (v15[57] + 48i64));
+    v14 = UFG::qRandom(
+            *((_DWORD *)v9->mMeshEmitter.mMeshStream.mMainMemoryAddress + 58),
+            (unsigned int *)generateParticleParams->seed);
+    mMainMemoryAddress = (int *)v9->mMeshEmitter.mMeshStream.mMainMemoryAddress;
+    v16 = (__int16 *)(*((_QWORD *)mMainMemoryAddress + 10)
+                    + *(_QWORD *)(*((_QWORD *)mMainMemoryAddress + 10) + 96i64)
+                    + (unsigned int)(6 * v14)
+                    + 2 * (mMainMemoryAddress[57] + 48i64));
     cur_index = v16[1];
     v18 = v16[2];
     Render::FXqTaskMeshReader::DecodeVertexPositionAndNormal(
       &v9->mMeshEmitter,
       v9->mMeshEmitter.mpVertexBuffers,
       v9->mMeshEmitter.mpMainMemoryVertexBuffers,
-      v15[14],
+      mMainMemoryAddress[14],
       *v16,
       &triangleVertices,
       &triangleVertices);
@@ -459,7 +466,7 @@ Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticl
       &v9->mMeshEmitter,
       v9->mMeshEmitter.mpVertexBuffers,
       v9->mMeshEmitter.mpMainMemoryVertexBuffers,
-      v15[14],
+      mMainMemoryAddress[14],
       cur_index,
       &outPosition,
       &outPosition);
@@ -467,37 +474,42 @@ Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticl
       &v9->mMeshEmitter,
       v9->mMeshEmitter.mpVertexBuffers,
       v9->mMeshEmitter.mpMainMemoryVertexBuffers,
-      v15[14],
+      mMainMemoryAddress[14],
       v18,
       &outNormal,
       &outNormal);
-    Render::FXqTaskMeshReader::GetRandomPointOnTriangle(&triangleVertices, &triangleVertices, v8->seed, &v34, &v33);
+    Render::FXqTaskMeshReader::GetRandomPointOnTriangle(
+      &triangleVertices,
+      &triangleVertices,
+      generateParticleParams->seed,
+      &v34,
+      &v33);
     v9 = v39;
-    v7 = v40;
+    attribBuffer = v40;
   }
   else
   {
-    if ( ((unsigned __int8)v13 >> 6) & 1 )
+    if ( (v13 & 0x40) != 0 )
     {
-      v19 = v12->mMeshEmissionVertexSkip;
+      mMeshEmissionVertexSkip = pfx->mMeshEmissionVertexSkip;
       v20 = v9->mMeshEmitter.mMeshStream.mMainMemoryAddress;
-      if ( (float)(signed int)v9->mMeshEmitter.mNumVerticesInMesh <= v9->mMeshEmitter.mCurVertexForSequentialEmission )
+      if ( (float)(int)v9->mMeshEmitter.mNumVerticesInMesh <= v9->mMeshEmitter.mCurVertexForSequentialEmission )
         v9->mMeshEmitter.mCurVertexForSequentialEmission = 0.0;
       Render::FXqTaskMeshReader::DecodeVertexPositionAndNormal(
         &v9->mMeshEmitter,
         v9->mMeshEmitter.mpVertexBuffers,
         v9->mMeshEmitter.mpMainMemoryVertexBuffers,
         v20[14],
-        (signed int)v9->mMeshEmitter.mCurVertexForSequentialEmission,
+        (int)v9->mMeshEmitter.mCurVertexForSequentialEmission,
         &v34,
         &v33);
-      v9->mMeshEmitter.mCurVertexForSequentialEmission = (float)(signed int)((signed int)(float)(v19
-                                                                                               + v9->mMeshEmitter.mCurVertexForSequentialEmission)
-                                                                           % v9->mMeshEmitter.mNumVerticesInMesh);
+      v9->mMeshEmitter.mCurVertexForSequentialEmission = (float)(int)((int)(float)(mMeshEmissionVertexSkip
+                                                                                 + v9->mMeshEmitter.mCurVertexForSequentialEmission)
+                                                                    % v9->mMeshEmitter.mNumVerticesInMesh);
       goto LABEL_10;
     }
     v21 = v9->mMeshEmitter.mMeshStream.mMainMemoryAddress;
-    v22 = UFG::qRandom(v9->mMeshEmitter.mNumVerticesInMesh, v9->mMeshEmitter.mSeed);
+    v22 = UFG::qRandom(v9->mMeshEmitter.mNumVerticesInMesh, (unsigned int *)v9->mMeshEmitter.mSeed);
     Render::FXqTaskMeshReader::DecodeVertexPositionAndNormal(
       &v9->mMeshEmitter,
       v9->mMeshEmitter.mpVertexBuffers,
@@ -507,13 +519,13 @@ Render::EmitterParticleAttribute *__fastcall Render::ParticleCreator::AddParticl
       &v34,
       &v33);
   }
-  v6 = vars0;
+  currentBufferCount = vars0;
 LABEL_10:
-  v10 = v33.y;
-  v5 = v33.x;
-  v11 = v33.z;
-  v23 = &v9->mTaskParams->renderMatrix.v0.x;
-  v24 = v8->pfx;
+  y = v33.y;
+  x = v33.x;
+  z = v33.z;
+  p_x = &v9->mTaskParams->renderMatrix.v0.x;
+  v24 = generateParticleParams->pfx;
   if ( (float)((float)((float)((float)((float)((float)((float)(v33.x * v9->mCurBasisNormalized.v0.y)
                                                      + (float)(v33.y * v9->mCurBasisNormalized.v1.y))
                                              + (float)(v33.z * v9->mCurBasisNormalized.v2.y))
@@ -532,47 +544,52 @@ LABEL_10:
     return 0i64;
   if ( v24->mSpace == 1 )
   {
-    v31 = v34.y + v8->pos.y;
-    v8->pos.x = v34.x + v8->pos.x;
+    v31 = v34.y + generateParticleParams->pos.y;
+    generateParticleParams->pos.x = v34.x + generateParticleParams->pos.x;
     v32 = v34.z;
-    v8->pos.y = v31;
-    v8->pos.z = v32 + v8->pos.z;
+    generateParticleParams->pos.y = v31;
+    generateParticleParams->pos.z = v32 + generateParticleParams->pos.z;
   }
   else
   {
-    v26 = (float)(v34.y * v23[21]) + (float)(v34.x * v23[17]);
-    v27 = (float)(v34.y * v23[22]) + (float)(v34.x * v23[18]);
-    v28 = v34.z * v23[25];
-    v29 = v34.z * v23[26];
-    v8->pos.x = (float)((float)((float)(v34.y * v23[20]) + (float)(v34.x * v23[16])) + (float)(v34.z * v23[24]))
-              + v8->pos.x;
-    v30 = (float)(v27 + v29) + v8->pos.z;
-    v8->pos.y = (float)(v26 + v28) + v8->pos.y;
-    v8->pos.z = v30;
+    v26 = (float)(v34.y * p_x[21]) + (float)(v34.x * p_x[17]);
+    v27 = (float)(v34.y * p_x[22]) + (float)(v34.x * p_x[18]);
+    v28 = v34.z * p_x[25];
+    v29 = v34.z * p_x[26];
+    generateParticleParams->pos.x = (float)((float)((float)(v34.y * p_x[20]) + (float)(v34.x * p_x[16]))
+                                          + (float)(v34.z * p_x[24]))
+                                  + generateParticleParams->pos.x;
+    v30 = (float)(v27 + v29) + generateParticleParams->pos.z;
+    generateParticleParams->pos.y = (float)(v26 + v28) + generateParticleParams->pos.y;
+    generateParticleParams->pos.z = v30;
   }
 LABEL_15:
-  v8->meshNormal.x = v5;
-  v8->meshNormal.y = v10;
-  v8->meshNormal.z = v11;
-  v38.mParameters = v8;
-  UFG::qInverseAffine(&v38.mInvBasis, &v8->curBasisNormalized);
-  return Render::ParticleGenerator::Generate(&v38, v7, v6);
+  generateParticleParams->meshNormal.x = x;
+  generateParticleParams->meshNormal.y = y;
+  generateParticleParams->meshNormal.z = z;
+  v38.mParameters = generateParticleParams;
+  UFG::qInverseAffine(&v38.mInvBasis, &generateParticleParams->curBasisNormalized);
+  return Render::ParticleGenerator::Generate(&v38, attribBuffer, currentBufferCount);
 }
 
 // File Line: 305
 // RVA: 0x1E16B0
-UFG::qVector3 *__fastcall Render::ExtrapolatePositionFromOriginalData(UFG::qVector3 *result, Render::EmitterParticleAttribute *attribute, float velocityAlign, float timeElapsed, UFG::qMatrix44 *localWorld, UFG::qMatrix44 *worldLocal)
+UFG::qVector3 *__fastcall Render::ExtrapolatePositionFromOriginalData(
+        UFG::qVector3 *result,
+        Render::EmitterParticleAttribute *attribute,
+        float velocityAlign,
+        float timeElapsed,
+        UFG::qMatrix44 *localWorld,
+        UFG::qMatrix44 *worldLocal)
 {
-  float v6; // xmm1_4
-  UFG::qVector3 *v7; // rdi
-  Render::EmitterParticleAttribute *v8; // rbx
+  float w; // xmm1_4
   float v9; // xmm9_4
   float v10; // xmm0_4
   float v11; // xmm5_4
   float v12; // xmm13_4
-  float v13; // xmm11_4
-  float v14; // xmm12_4
-  float v15; // xmm10_4
+  float y; // xmm11_4
+  float x; // xmm12_4
+  float z; // xmm10_4
   float v16; // xmm14_4
   float v17; // xmm15_4
   float v18; // xmm6_4
@@ -588,24 +605,20 @@ UFG::qVector3 *__fastcall Render::ExtrapolatePositionFromOriginalData(UFG::qVect
   UFG::qVector3 *v28; // rax
   float v29; // xmm0_4
   float v30; // xmm2_4
-  UFG::qVector4 resulta; // [rsp+20h] [rbp-C8h]
+  UFG::qVector4 resulta; // [rsp+20h] [rbp-C8h] BYREF
   float v32; // [rsp+F0h] [rbp+8h]
-  float v33; // [rsp+F8h] [rbp+10h]
-  float v34; // [rsp+100h] [rbp+18h]
-  float v35; // [rsp+108h] [rbp+20h]
+  int v33; // [rsp+100h] [rbp+18h]
+  float v34; // [rsp+108h] [rbp+20h]
   float worldLocala; // [rsp+118h] [rbp+30h]
 
-  v6 = attribute->vPosAndGrav.w;
-  v7 = result;
-  v8 = attribute;
-  v9 = (float)((float)(worldLocal->v1.x + worldLocal->v0.x) * 0.0) + (float)(v6 * worldLocal->v2.x);
-  v33 = (float)((float)(worldLocal->v1.x + worldLocal->v0.x) * 0.0) + (float)(v6 * worldLocal->v2.x);
-  v35 = (float)((float)(worldLocal->v1.y + worldLocal->v0.y) * 0.0) + (float)(v6 * worldLocal->v2.y);
-  worldLocala = (float)((float)(worldLocal->v1.z + worldLocal->v0.z) * 0.0) + (float)(v6 * worldLocal->v2.z);
+  w = attribute->vPosAndGrav.w;
+  v9 = (float)((float)(worldLocal->v1.x + worldLocal->v0.x) * 0.0) + (float)(w * worldLocal->v2.x);
+  v34 = (float)((float)(worldLocal->v1.y + worldLocal->v0.y) * 0.0) + (float)(w * worldLocal->v2.y);
+  worldLocala = (float)((float)(worldLocal->v1.z + worldLocal->v0.z) * 0.0) + (float)(w * worldLocal->v2.z);
   UFG::qHalfVector4::operator UFG::qVector4 const(&attribute->vInitialVel, &resulta);
-  LODWORD(v34) = (((((unsigned int)v8->vVelAndDamp.w.mRep >> 10) & 0x1F) + 112) << 23) & 0x7F800000 | ((v8->vVelAndDamp.w.mRep & 0x3FF | 8 * (v8->vVelAndDamp.w.mRep & 0x8000)) << 13);
-  v10 = v34 * timeElapsed;
-  if ( (float)(v34 * timeElapsed) <= 0.0 )
+  v33 = ((((attribute->vVelAndDamp.w.mRep >> 10) & 0x1F) + 112) << 23) & 0x7F800000 | ((attribute->vVelAndDamp.w.mRep & 0x3FF | (8 * (attribute->vVelAndDamp.w.mRep & 0x8000))) << 13);
+  v10 = *(float *)&v33 * timeElapsed;
+  if ( (float)(*(float *)&v33 * timeElapsed) <= 0.0 )
   {
     v10 = 0.0;
   }
@@ -619,47 +632,53 @@ UFG::qVector3 *__fastcall Render::ExtrapolatePositionFromOriginalData(UFG::qVect
   v11 = v10;
   v32 = v10;
 LABEL_6:
-  v12 = 1.0 / (float)(v34 * v34);
-  v13 = resulta.y;
-  v14 = resulta.x;
-  v15 = resulta.z;
+  v12 = 1.0 / (float)(*(float *)&v33 * *(float *)&v33);
+  y = resulta.y;
+  x = resulta.x;
+  z = resulta.z;
   v16 = UFG::qVector3::msZero.x;
   v17 = UFG::qVector3::msZero.y;
-  v18 = (float)((float)(1.0 / v34) * resulta.y)
-      + (float)((float)(1.0 / (float)(v34 * v34)) * COERCE_FLOAT(LODWORD(v35) ^ _xmm[0]));
-  v19 = (float)((float)(1.0 / v34) * resulta.x) + (float)(v12 * COERCE_FLOAT(LODWORD(v9) ^ _xmm[0]));
-  v20 = (float)((float)(1.0 / v34) * resulta.z) + (float)(v12 * COERCE_FLOAT(LODWORD(worldLocala) ^ _xmm[0]));
+  v18 = (float)((float)(1.0 / *(float *)&v33) * resulta.y) + (float)(v12 * COERCE_FLOAT(LODWORD(v34) ^ _xmm[0]));
+  v19 = (float)((float)(1.0 / *(float *)&v33) * resulta.x) + (float)(v12 * COERCE_FLOAT(LODWORD(v9) ^ _xmm[0]));
+  v20 = (float)((float)(1.0 / *(float *)&v33) * resulta.z) + (float)(v12 * COERCE_FLOAT(LODWORD(worldLocala) ^ _xmm[0]));
   v21 = expf(v11);
-  v22 = (float)((float)(v14 * v34) - (float)(v21 * (float)((float)(v33 * v32) + (float)((float)(v19 * v34) * v34))))
-      - v33;
-  v23 = (float)((float)(v13 * v34) - (float)(v21 * (float)((float)(v35 * v32) + (float)((float)(v18 * v34) * v34))))
-      - v35;
-  v24 = (float)((float)(v15 * v34)
-              - (float)(v21 * (float)((float)(worldLocala * v32) + (float)((float)(v20 * v34) * v34))))
+  v22 = (float)((float)(x * *(float *)&v33)
+              - (float)(v21 * (float)((float)(v9 * v32) + (float)((float)(v19 * *(float *)&v33) * *(float *)&v33))))
+      - v9;
+  v23 = (float)((float)(y * *(float *)&v33)
+              - (float)(v21 * (float)((float)(v34 * v32) + (float)((float)(v18 * *(float *)&v33) * *(float *)&v33))))
+      - v34;
+  v24 = (float)((float)(z * *(float *)&v33)
+              - (float)(v21
+                      * (float)((float)(worldLocala * v32) + (float)((float)(v20 * *(float *)&v33) * *(float *)&v33))))
       - worldLocala;
   v25 = expf(COERCE_FLOAT(LODWORD(v32) ^ _xmm[0]));
   v26 = UFG::qVector3::msZero.z - (float)((float)(v25 * v12) * v24);
   v27 = v17 - (float)((float)(v25 * v12) * v23);
-  v28 = v7;
-  v29 = v8->vPosAndGrav.x + (float)(v16 - (float)((float)(v25 * v12) * v22));
-  v30 = v8->vPosAndGrav.z + v26;
-  v7->y = v8->vPosAndGrav.y + v27;
-  v7->z = v30;
-  v7->x = v29;
+  v28 = result;
+  v29 = attribute->vPosAndGrav.x + (float)(v16 - (float)((float)(v25 * v12) * v22));
+  v30 = attribute->vPosAndGrav.z + v26;
+  result->y = attribute->vPosAndGrav.y + v27;
+  result->z = v30;
+  result->x = v29;
   return v28;
 }
 
 // File Line: 351
 // RVA: 0x1E0F30
-void __fastcall Render::ComputeResumeTimePosAndVel(Render::EmitterParticleAttribute *attribute, float velocityAlign, float timeElapsed, UFG::qMatrix44 *localWorld, UFG::qMatrix44 *worldLocal)
+void __fastcall Render::ComputeResumeTimePosAndVel(
+        Render::EmitterParticleAttribute *attribute,
+        float velocityAlign,
+        float timeElapsed,
+        UFG::qMatrix44 *localWorld,
+        UFG::qMatrix44 *worldLocal)
 {
-  float v5; // xmm3_4
-  Render::EmitterParticleAttribute *v6; // rbx
+  float w; // xmm3_4
   float v7; // xmm11_4
   float v8; // xmm13_4
   float v9; // xmm12_4
-  float v10; // xmm1_4
-  float v11; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
   float v12; // xmm1_4
   int v13; // xmm14_4
   float v14; // xmm7_4
@@ -667,28 +686,33 @@ void __fastcall Render::ComputeResumeTimePosAndVel(Render::EmitterParticleAttrib
   float v16; // xmm9_4
   float v17; // xmm0_4
   float v18; // xmm0_4
-  UFG::qVector3 result; // [rsp+30h] [rbp-A8h]
-  float v20; // [rsp+F0h] [rbp+18h]
+  UFG::qVector4 result; // [rsp+30h] [rbp-A8h] BYREF
+  int v20; // [rsp+F0h] [rbp+18h]
 
-  v5 = attribute->vPosAndGrav.w;
-  v6 = attribute;
-  v7 = (float)((float)(worldLocal->v1.x + worldLocal->v0.x) * 0.0) + (float)(v5 * worldLocal->v2.x);
-  v8 = (float)((float)(worldLocal->v1.z + worldLocal->v0.z) * 0.0) + (float)(v5 * worldLocal->v2.z);
-  v9 = (float)((float)(worldLocal->v1.y + worldLocal->v0.y) * 0.0) + (float)(v5 * worldLocal->v2.y);
-  Render::ExtrapolatePositionFromOriginalData(&result, attribute, velocityAlign, timeElapsed, localWorld, worldLocal);
-  v10 = result.y;
-  v6->vPosAndGrav.x = result.x;
-  v11 = result.z;
-  v6->vPosAndGrav.y = v10;
-  v6->vPosAndGrav.z = v11;
-  UFG::qHalfVector4::operator UFG::qVector4 const(&v6->vVelAndDamp, (UFG::qVector4 *)&result);
-  LODWORD(v20) = (((((unsigned int)v6->vVelAndDamp.w.mRep >> 10) & 0x1F) + 112) << 23) & 0x7F800000 | ((v6->vVelAndDamp.w.mRep & 0x3FF | 8 * (v6->vVelAndDamp.w.mRep & 0x8000)) << 13);
-  v12 = v20 * timeElapsed;
-  v13 = LODWORD(v20) ^ _xmm[0];
-  v14 = (float)(COERCE_FLOAT(LODWORD(v20) ^ _xmm[0]) * result.x) + v7;
-  v15 = (float)(COERCE_FLOAT(LODWORD(v20) ^ _xmm[0]) * result.y) + v9;
-  v16 = (float)(COERCE_FLOAT(LODWORD(v20) ^ _xmm[0]) * result.z) + v8;
-  if ( (float)(v20 * timeElapsed) <= 0.0 )
+  w = attribute->vPosAndGrav.w;
+  v7 = (float)((float)(worldLocal->v1.x + worldLocal->v0.x) * 0.0) + (float)(w * worldLocal->v2.x);
+  v8 = (float)((float)(worldLocal->v1.z + worldLocal->v0.z) * 0.0) + (float)(w * worldLocal->v2.z);
+  v9 = (float)((float)(worldLocal->v1.y + worldLocal->v0.y) * 0.0) + (float)(w * worldLocal->v2.y);
+  Render::ExtrapolatePositionFromOriginalData(
+    (UFG::qVector3 *)&result,
+    attribute,
+    velocityAlign,
+    timeElapsed,
+    localWorld,
+    worldLocal);
+  y = result.y;
+  attribute->vPosAndGrav.x = result.x;
+  z = result.z;
+  attribute->vPosAndGrav.y = y;
+  attribute->vPosAndGrav.z = z;
+  UFG::qHalfVector4::operator UFG::qVector4 const(&attribute->vVelAndDamp, &result);
+  v20 = ((((attribute->vVelAndDamp.w.mRep >> 10) & 0x1F) + 112) << 23) & 0x7F800000 | ((attribute->vVelAndDamp.w.mRep & 0x3FF | (8 * (attribute->vVelAndDamp.w.mRep & 0x8000))) << 13);
+  v12 = *(float *)&v20 * timeElapsed;
+  v13 = v20 ^ _xmm[0];
+  v14 = (float)(COERCE_FLOAT(v20 ^ _xmm[0]) * result.x) + v7;
+  v15 = (float)(COERCE_FLOAT(v20 ^ _xmm[0]) * result.y) + v9;
+  v16 = (float)(COERCE_FLOAT(v20 ^ _xmm[0]) * result.z) + v8;
+  if ( (float)(*(float *)&v20 * timeElapsed) <= 0.0 )
   {
     v12 = 0.0;
   }
@@ -704,28 +728,30 @@ LABEL_6:
   result.x = (float)(1.0 / *(float *)&v13) * (float)((float)(v14 / v18) - v7);
   result.y = (float)(1.0 / *(float *)&v13) * (float)((float)(v15 / v18) - v9);
   result.z = (float)(1.0 / *(float *)&v13) * (float)((float)(v16 / v18) - v8);
-  Render::EmitterParticleAttribute::SetVelocity(v6, &result);
+  Render::EmitterParticleAttribute::SetVelocity(attribute, (UFG::qVector3 *)&result);
 }
 
 // File Line: 369
 // RVA: 0x1E1160
-UFG::qVector3 *__fastcall Render::CreateTimeUpdateJitterVector(UFG::qVector3 *result, Render::ParticleEmitterSettings *pfx, UFG::qMatrix44 *curBasis, float scale, int *seed)
+UFG::qVector3 *__fastcall Render::CreateTimeUpdateJitterVector(
+        UFG::qVector3 *result,
+        Render::ParticleEmitterSettings *pfx,
+        UFG::qMatrix44 *curBasis,
+        float scale,
+        int *seed)
 {
-  UFG::qMatrix44 *v5; // rbp
-  UFG::qVector3 *v6; // rdi
-  Render::ParticleEmitterSettings *v7; // rsi
-  float v8; // xmm7_4
+  float v8; // xmm8_4
   float v9; // xmm9_4
-  float v10; // xmm8_4
-  float v11; // xmm8_4
-  float v12; // xmm9_4
-  float v13; // xmm0_4
+  float v10; // xmm0_4
+  float v11; // xmm9_4
+  float v12; // xmm8_4
+  float v13; // xmm7_4
   float v14; // xmm11_4
   float v15; // xmm10_4
   float v16; // xmm9_4
   float v17; // xmm7_4
   float v18; // xmm6_4
-  float v19; // xmm0_4
+  float v19; // xmm3_4
   float v20; // xmm5_4
   float v21; // xmm2_4
   float v22; // xmm8_4
@@ -740,40 +766,28 @@ UFG::qVector3 *__fastcall Render::CreateTimeUpdateJitterVector(UFG::qVector3 *re
   float v31; // xmm5_4
   float v32; // xmm8_4
 
-  v5 = curBasis;
-  v6 = result;
-  v7 = pfx;
-  if ( pfx->mBitFields[0] & 1 )
+  if ( (pfx->mBitFields[0] & 1) != 0 )
   {
-    if ( (pfx->mBitFields[0] & 1) == 1 )
-    {
-      v11 = UFG::qRandom(1.0, seed);
-      v12 = UFG::qRandom(1.0, seed);
-      v13 = UFG::qRandom(1.0, seed);
-      v9 = (float)(v12 - 0.5) * v7->mJitter.y;
-      v10 = (float)(v11 - 0.5) * v7->mJitter.z;
-      v8 = (float)(v13 - 0.5) * v7->mJitter.x;
-    }
-    else
-    {
-      v8 = 0.0;
-      v9 = 0.0;
-      v10 = 0.0;
-    }
+    v8 = UFG::qRandom(1.0, (unsigned int *)seed);
+    v9 = UFG::qRandom(1.0, (unsigned int *)seed);
+    v10 = UFG::qRandom(1.0, (unsigned int *)seed);
+    v11 = (float)(v9 - 0.5) * pfx->mJitter.y;
+    v12 = (float)(v8 - 0.5) * pfx->mJitter.z;
+    v13 = (float)(v10 - 0.5) * pfx->mJitter.x;
   }
   else
   {
     do
     {
-      v14 = (float)(UFG::qRandom(1.0, seed) * 2.0) - 1.0;
-      v15 = (float)(UFG::qRandom(1.0, seed) * 2.0) - 1.0;
-      v16 = (float)(UFG::qRandom(1.0, seed) * 2.0) - 1.0;
+      v14 = (float)(UFG::qRandom(1.0, (unsigned int *)seed) * 2.0) - 1.0;
+      v15 = (float)(UFG::qRandom(1.0, (unsigned int *)seed) * 2.0) - 1.0;
+      v16 = (float)(UFG::qRandom(1.0, (unsigned int *)seed) * 2.0) - 1.0;
     }
     while ( (float)((float)((float)(v15 * v15) + (float)(v16 * v16)) + (float)(v14 * v14)) >= 1.0 );
-    v17 = UFG::qRandom(1.0, seed);
-    v18 = UFG::qRandom(1.0, seed);
-    v19 = UFG::qRandom(1.0, seed);
-    v20 = (float)((float)(v7->mJitter.z * v17) * 2.0) - v7->mJitter.z;
+    v17 = UFG::qRandom(1.0, (unsigned int *)seed);
+    v18 = UFG::qRandom(1.0, (unsigned int *)seed);
+    v19 = (float)((float)(pfx->mJitter.x * UFG::qRandom(1.0, (unsigned int *)seed)) * 2.0) - pfx->mJitter.x;
+    v20 = (float)((float)(pfx->mJitter.z * v17) * 2.0) - pfx->mJitter.z;
     v21 = (float)((float)(v15 * v15) + (float)(v16 * v16)) + (float)(v14 * v14);
     if ( v21 == 0.0 )
       v22 = 0.0;
@@ -781,59 +795,60 @@ UFG::qVector3 *__fastcall Render::CreateTimeUpdateJitterVector(UFG::qVector3 *re
       v22 = 1.0 / fsqrt(v21);
     v23 = v22 * v16;
     v24 = v22;
-    v8 = v23 * (float)((float)((float)(v7->mJitter.x * v19) * 2.0) - v7->mJitter.x);
-    v10 = (float)(v22 * v14) * v20;
-    v9 = (float)(v24 * v15) * (float)((float)((float)(v7->mJitter.y * v18) * 2.0) - v7->mJitter.y);
+    v13 = v23 * v19;
+    v12 = (float)(v22 * v14) * v20;
+    v11 = (float)(v24 * v15) * (float)((float)((float)(pfx->mJitter.y * v18) * 2.0) - pfx->mJitter.y);
   }
-  v25 = v6;
-  if ( v7->mSpace == 1 )
+  v25 = result;
+  if ( pfx->mSpace == 1 )
   {
-    v6->x = v8;
-    v6->y = v9;
-    v6->z = v10;
+    result->x = v13;
+    result->y = v11;
+    result->z = v12;
   }
   else
   {
-    v26 = v8;
-    v27 = v8;
-    v28 = (float)((float)(v8 * v5->v0.z) + v5->v3.z) + (float)(v9 * v5->v1.z);
-    v29 = (float)((float)(v27 * v5->v0.y) + v5->v3.y) + (float)(v9 * v5->v1.y);
-    v30 = (float)((float)((float)(v26 * v5->v0.x) + v5->v3.x) + (float)(v9 * v5->v1.x)) + (float)(v10 * v5->v2.x);
-    v31 = v10 * v5->v2.y;
-    v32 = v10 * v5->v2.z;
-    v6->x = v30;
-    v6->y = v29 + v31;
-    v6->z = v28 + v32;
+    v26 = v13;
+    v27 = v13;
+    v28 = (float)((float)(v13 * curBasis->v0.z) + curBasis->v3.z) + (float)(v11 * curBasis->v1.z);
+    v29 = (float)((float)(v27 * curBasis->v0.y) + curBasis->v3.y) + (float)(v11 * curBasis->v1.y);
+    v30 = (float)((float)((float)(v26 * curBasis->v0.x) + curBasis->v3.x) + (float)(v11 * curBasis->v1.x))
+        + (float)(v12 * curBasis->v2.x);
+    v31 = v12 * curBasis->v2.y;
+    v32 = v12 * curBasis->v2.z;
+    result->x = v30;
+    result->y = v29 + v31;
+    result->z = v28 + v32;
   }
   return v25;
 }
 
 // File Line: 437
 // RVA: 0x1E1A20
-void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *taskParams, Render::ParticleEmitterSettings *pfx, Render::ParticleLighting *particleLighting, UFG::qMatrix44 *curBasisNormalized)
+void __fastcall Render::GenerateNewParticles(
+        UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *taskParams,
+        Render::ParticleEmitterSettings *pfx,
+        Render::ParticleLighting *particleLighting,
+        UFG::qMatrix44 *curBasisNormalized)
 {
-  UFG::qMatrix44 *v4; // r14
-  Render::ParticleLighting *v5; // r15
-  Render::ParticleEmitterSettings *v6; // r12
-  UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *v7; // rbx
-  float *v8; // r10
-  signed int v9; // edx
+  float *mMainMemoryAddress; // r10
+  int v9; // edx
   __int64 v10; // rcx
-  signed __int64 v11; // ST58_8
-  __int64 v12; // r8
-  __int64 v13; // r9
-  unsigned int v14; // ecx
-  int v15; // esi
-  UFG::qVector4 v16; // xmm2
-  UFG::qVector4 v17; // xmm1
-  UFG::qVector4 v18; // xmm0
-  UFG::qVector4 *v19; // rcx
-  UFG::qVector4 v20; // xmm2
-  UFG::qVector4 v21; // xmm1
-  UFG::qVector4 v22; // xmm0
-  __int64 v23; // rax
-  float v24; // xmm0_4
-  char ptr; // [rsp+68h] [rbp-70h]
+  __int64 v11; // r8
+  __int64 v12; // r9
+  unsigned int v13; // ecx
+  int v14; // esi
+  UFG::qVector4 v15; // xmm2
+  UFG::qVector4 v16; // xmm1
+  UFG::qVector4 v17; // xmm0
+  UFG::qVector4 *v18; // rcx
+  UFG::qVector4 v19; // xmm2
+  UFG::qVector4 v20; // xmm1
+  UFG::qVector4 v21; // xmm0
+  __int64 v22; // rax
+  float v23; // xmm0_4
+  __int64 v24; // [rsp+58h] [rbp-80h]
+  char ptr[8]; // [rsp+68h] [rbp-70h] BYREF
   __int64 v26; // [rsp+70h] [rbp-68h]
   __int64 v27; // [rsp+78h] [rbp-60h]
   __int64 v28; // [rsp+80h] [rbp-58h]
@@ -844,9 +859,9 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
   int v33; // [rsp+A4h] [rbp-34h]
   int *v34; // [rsp+A8h] [rbp-30h]
   __int64 v35; // [rsp+B8h] [rbp-20h]
-  Render::GenerateParticleParameters generateParticleParams; // [rsp+C8h] [rbp-10h]
-  Render::ParticleCreator v37; // [rsp+1A8h] [rbp+D0h]
-  int v38; // [rsp+348h] [rbp+270h]
+  Render::GenerateParticleParameters generateParticleParams; // [rsp+C8h] [rbp-10h] BYREF
+  Render::ParticleCreator v37; // [rsp+1A8h] [rbp+D0h] BYREF
+  int v38[6]; // [rsp+348h] [rbp+270h] BYREF
   void *retaddr; // [rsp+368h] [rbp+290h]
   UFG::qMemoryStreamer *v40; // [rsp+370h] [rbp+298h]
   unsigned int *v41; // [rsp+378h] [rbp+2A0h]
@@ -854,13 +869,9 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
   float *v43; // [rsp+388h] [rbp+2B0h]
 
   v35 = -2i64;
-  v4 = curBasisNormalized;
-  v5 = particleLighting;
-  v6 = pfx;
-  v7 = taskParams;
-  v38 = *((_DWORD *)taskParams->mMainMemoryAddress + 142);
+  v38[0] = *((_DWORD *)taskParams->mMainMemoryAddress + 142);
   `eh vector constructor iterator(
-    &ptr,
+    ptr,
     0x18ui64,
     2,
     (void (__fastcall *)(void *))UFG::qMemoryStream<UFG::AIInterestComponent,432>::qMemoryStream<UFG::AIInterestComponent,432>);
@@ -868,31 +879,31 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
   v31 = 0i64;
   v32 = 0;
   v33 = -1;
-  v8 = (float *)v7->mMainMemoryAddress;
-  v9 = (signed int)v8[146];
-  v10 = *((_QWORD *)v8 + 72);
+  mMainMemoryAddress = (float *)taskParams->mMainMemoryAddress;
+  v9 = (int)mMainMemoryAddress[146];
+  v10 = *((_QWORD *)mMainMemoryAddress + 72);
   if ( v10 )
   {
-    v34 = &v38;
+    v34 = v38;
     v30 = v40;
-    v11 = *(_QWORD *)(v10 + 184) + v10 + 184 + *(unsigned int *)(*(_QWORD *)(v10 + 184) + v10 + 184);
+    v24 = *(_QWORD *)(v10 + 184) + v10 + 184 + *(unsigned int *)(*(_QWORD *)(v10 + 184) + v10 + 184);
     v33 = 0;
-    v12 = *(_QWORD *)(v11 + 112);
-    v26 = v12;
-    v13 = *(_QWORD *)(v11 + 144);
-    v14 = *(_DWORD *)(v12 + 108);
-    HIDWORD(v31) = v14;
-    if ( v14 )
+    v11 = *(_QWORD *)(v24 + 112);
+    v26 = v11;
+    v12 = *(_QWORD *)(v24 + 144);
+    v13 = *(_DWORD *)(v11 + 108);
+    HIDWORD(v31) = v13;
+    if ( v13 )
     {
-      *(float *)&v31 = (float)(signed int)((signed int)(float)v9 % v14);
-      v26 = v12;
-      v28 = *(_QWORD *)(v12 + 96) + v12 + 96;
-      v27 = v13;
-      v29 = *(_QWORD *)(v13 + 96) + v13 + 96;
+      *(float *)&v31 = (float)(int)((int)(float)v9 % v13);
+      v26 = v11;
+      v28 = *(_QWORD *)(v11 + 96) + v11 + 96;
+      v27 = v12;
+      v29 = *(_QWORD *)(v12 + 96) + v12 + 96;
     }
     v32 = 1;
   }
-  v15 = *((_DWORD *)v8 + 139);
+  v14 = *((_DWORD *)mMainMemoryAddress + 139);
   v37.mTaskParams = 0i64;
   v37.mSeedBuffer = 0i64;
   v37.mFxOverride = 0i64;
@@ -909,73 +920,74 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
   v37.mParticleSettings = 0i64;
   v37.mTransformScale = 0.0;
   v37.mMemoryStreamer = v40;
-  Render::ParticleCreator::SetTaskParams(&v37, (Render::ParticleRenderUpdateTaskParam *)v7->mMainMemoryAddress);
-  v16 = v4->v1;
-  v17 = v4->v2;
-  v18 = v4->v3;
-  generateParticleParams.curBasisNormalized.v0 = v4->v0;
-  generateParticleParams.curBasisNormalized.v1 = v16;
-  generateParticleParams.curBasisNormalized.v2 = v17;
-  generateParticleParams.curBasisNormalized.v3 = v18;
-  v19 = (UFG::qVector4 *)v7->mMainMemoryAddress;
-  v17.x = v19[13].w;
-  v16.x = v19[14].x;
-  generateParticleParams.emitterVelocity.x = v19[13].z;
-  generateParticleParams.emitterVelocity.y = v17.x;
-  generateParticleParams.emitterVelocity.z = v16.x;
-  generateParticleParams.pfx = v6;
-  v17.x = v19[12].y;
-  v16.x = v19[12].z;
-  generateParticleParams.cameraPos.x = v19[12].x;
-  generateParticleParams.cameraPos.y = v17.x;
-  generateParticleParams.cameraPos.z = v16.x;
-  generateParticleParams.seed = &v38;
+  Render::ParticleCreator::SetTaskParams(&v37, (Render::ParticleRenderUpdateTaskParam *)taskParams->mMainMemoryAddress);
+  v15 = curBasisNormalized->v1;
+  v16 = curBasisNormalized->v2;
+  v17 = curBasisNormalized->v3;
+  generateParticleParams.curBasisNormalized.v0 = curBasisNormalized->v0;
+  generateParticleParams.curBasisNormalized.v1 = v15;
+  generateParticleParams.curBasisNormalized.v2 = v16;
+  generateParticleParams.curBasisNormalized.v3 = v17;
+  v18 = (UFG::qVector4 *)taskParams->mMainMemoryAddress;
+  v16.x = v18[13].w;
+  v15.x = v18[14].x;
+  generateParticleParams.emitterVelocity.x = v18[13].z;
+  generateParticleParams.emitterVelocity.y = v16.x;
+  generateParticleParams.emitterVelocity.z = v15.x;
+  generateParticleParams.pfx = pfx;
+  v16.x = v18[12].y;
+  v15.x = v18[12].z;
+  generateParticleParams.cameraPos.x = v18[12].x;
+  generateParticleParams.cameraPos.y = v16.x;
+  generateParticleParams.cameraPos.z = v15.x;
+  generateParticleParams.seed = v38;
   generateParticleParams.sizeScale = 1.0;
-  v20 = v19[1];
-  v21 = v19[2];
-  v22 = v19[3];
-  generateParticleParams.renderMatrix.v0 = *v19;
-  generateParticleParams.renderMatrix.v1 = v20;
-  generateParticleParams.renderMatrix.v2 = v21;
-  generateParticleParams.renderMatrix.v3 = v22;
-  generateParticleParams.simTime = v19[33].x;
-  generateParticleParams.particleLighting = v5;
+  v19 = v18[1];
+  v20 = v18[2];
+  v21 = v18[3];
+  generateParticleParams.renderMatrix.v0 = *v18;
+  generateParticleParams.renderMatrix.v1 = v19;
+  generateParticleParams.renderMatrix.v2 = v20;
+  generateParticleParams.renderMatrix.v3 = v21;
+  generateParticleParams.simTime = v18[33].x;
+  generateParticleParams.particleLighting = particleLighting;
   generateParticleParams.velocityScale = 1.0;
   LODWORD(generateParticleParams.transformScale) = (_DWORD)retaddr;
-  v23 = *(_QWORD *)&v19[37].x;
-  if ( v23 )
+  v22 = *(_QWORD *)&v18[37].x;
+  if ( v22 )
   {
-    generateParticleParams.velocityScale = *(float *)(v23 + 76);
-    generateParticleParams.sizeScale = *(float *)(v23 + 84);
+    generateParticleParams.velocityScale = *(float *)(v22 + 76);
+    generateParticleParams.sizeScale = *(float *)(v22 + 84);
   }
-  if ( v15 == 1 )
+  if ( v14 == 1 )
   {
-    v24 = Render::ParticleCreator::AddDistanceEmissionParticles(&v37, &generateParticleParams, v42, v41);
+    v23 = Render::ParticleCreator::AddDistanceEmissionParticles(&v37, &generateParticleParams, v42, v41);
   }
-  else if ( v19[33].z == 0.0 )
+  else if ( v18[33].z == 0.0 )
   {
-    v24 = Render::ParticleCreator::AddTimeEmissionParticles(&v37, &generateParticleParams, v42, v41);
+    v23 = Render::ParticleCreator::AddTimeEmissionParticles(&v37, &generateParticleParams, v42, v41);
   }
   else
   {
-    v24 = Render::ParticleCreator::AddResumeParticles(&v37, &generateParticleParams, v42, v41);
+    v23 = Render::ParticleCreator::AddResumeParticles(&v37, &generateParticleParams, v42, v41);
   }
-  *v43 = v24;
+  *v43 = v23;
   `eh vector destructor iterator(v37.mMeshEmitter.mVertexBuffers, 0x18ui64, 2, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 508
 // RVA: 0x1DD430
-Render::TargetParticleMoverWithBlend *__fastcall Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMoverWithBlend>(Render::TargetParticleMoverWithBlend *result, Render::EmitterParticleAttribute *first, Render::EmitterParticleAttribute *last, Render::TargetParticleMoverWithBlend *f)
+Render::TargetParticleMoverWithBlend *__fastcall Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMoverWithBlend>(
+        Render::TargetParticleMoverWithBlend *result,
+        Render::EmitterParticleAttribute *first,
+        Render::EmitterParticleAttribute *last,
+        Render::TargetParticleMoverWithBlend *f)
 {
-  Render::TargetParticleMoverWithBlend *v4; // rdi
-  Render::EmitterParticleAttribute *v5; // rsi
-  Render::EmitterParticleAttribute *v6; // rbx
-  Render::TargetParticleMoverWithBlend *i; // r14
-  float v8; // eax
-  float v9; // xmm1_4
-  float v10; // xmm2_4
+  Render::EmitterParticleAttribute *i; // rbx
+  float x; // eax
+  float z; // xmm1_4
+  float w; // xmm2_4
   float v11; // eax
   float v12; // xmm1_4
   float v13; // xmm2_4
@@ -986,58 +998,59 @@ Render::TargetParticleMoverWithBlend *__fastcall Render::for_each<Render::Emitte
   float v18; // xmm1_4
   float v19; // xmm2_4
 
-  v4 = f;
-  v5 = last;
-  v6 = first;
-  for ( i = result; v6 != v5; ++v6 )
-    Render::TargetParticleMoverWithBlend::operator()(v4, v6);
-  v8 = v4->mWorldLocal.v0.x;
-  v9 = v4->mWorldLocal.v0.z;
-  v10 = v4->mWorldLocal.v0.w;
-  i->mWorldLocal.v0.y = v4->mWorldLocal.v0.y;
-  i->mWorldLocal.v0.z = v9;
-  i->mWorldLocal.v0.x = v8;
-  i->mWorldLocal.v0.w = v10;
-  v11 = v4->mWorldLocal.v1.x;
-  v12 = v4->mWorldLocal.v1.z;
-  v13 = v4->mWorldLocal.v1.w;
-  i->mWorldLocal.v1.y = v4->mWorldLocal.v1.y;
-  i->mWorldLocal.v1.x = v11;
-  i->mWorldLocal.v1.z = v12;
-  i->mWorldLocal.v1.w = v13;
-  v14 = v4->mWorldLocal.v2.x;
-  v15 = v4->mWorldLocal.v2.z;
-  v16 = v4->mWorldLocal.v2.w;
-  i->mWorldLocal.v2.y = v4->mWorldLocal.v2.y;
-  i->mWorldLocal.v2.x = v14;
-  i->mWorldLocal.v2.z = v15;
-  i->mWorldLocal.v2.w = v16;
-  v17 = v4->mWorldLocal.v3.x;
-  v18 = v4->mWorldLocal.v3.z;
-  v19 = v4->mWorldLocal.v3.w;
-  i->mWorldLocal.v3.y = v4->mWorldLocal.v3.y;
-  i->mWorldLocal.v3.x = v17;
-  i->mWorldLocal.v3.z = v18;
-  i->mWorldLocal.v3.w = v19;
-  i->mSettings = v4->mSettings;
-  i->mParticleLighting = v4->mParticleLighting;
-  i->mTaskParams = v4->mTaskParams;
-  i->mTransformScaleFactor = v4->mTransformScaleFactor;
-  return i;
+  for ( i = first; i != last; ++i )
+    Render::TargetParticleMoverWithBlend::operator()(f, i);
+  x = f->mWorldLocal.v0.x;
+  z = f->mWorldLocal.v0.z;
+  w = f->mWorldLocal.v0.w;
+  result->mWorldLocal.v0.y = f->mWorldLocal.v0.y;
+  result->mWorldLocal.v0.z = z;
+  result->mWorldLocal.v0.x = x;
+  result->mWorldLocal.v0.w = w;
+  v11 = f->mWorldLocal.v1.x;
+  v12 = f->mWorldLocal.v1.z;
+  v13 = f->mWorldLocal.v1.w;
+  result->mWorldLocal.v1.y = f->mWorldLocal.v1.y;
+  result->mWorldLocal.v1.x = v11;
+  result->mWorldLocal.v1.z = v12;
+  result->mWorldLocal.v1.w = v13;
+  v14 = f->mWorldLocal.v2.x;
+  v15 = f->mWorldLocal.v2.z;
+  v16 = f->mWorldLocal.v2.w;
+  result->mWorldLocal.v2.y = f->mWorldLocal.v2.y;
+  result->mWorldLocal.v2.x = v14;
+  result->mWorldLocal.v2.z = v15;
+  result->mWorldLocal.v2.w = v16;
+  v17 = f->mWorldLocal.v3.x;
+  v18 = f->mWorldLocal.v3.z;
+  v19 = f->mWorldLocal.v3.w;
+  result->mWorldLocal.v3.y = f->mWorldLocal.v3.y;
+  result->mWorldLocal.v3.x = v17;
+  result->mWorldLocal.v3.z = v18;
+  result->mWorldLocal.v3.w = v19;
+  result->mSettings = f->mSettings;
+  result->mParticleLighting = f->mParticleLighting;
+  result->mTaskParams = f->mTaskParams;
+  result->mTransformScaleFactor = f->mTransformScaleFactor;
+  return result;
 }
 
 // File Line: 527
 // RVA: 0x1E28C0
-void __fastcall Render::UpdateExistingParticles(UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *taskParams, Render::ParticleEmitterSettings *pfx, UFG::qMatrix44 *curBasisNormalized, unsigned int currentBufferCount, Render::ParticleLighting *particleLighting, float transformScale, Render::EmitterParticleAttribute *attributeBuffer)
+void __fastcall Render::UpdateExistingParticles(
+        UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *taskParams,
+        Render::ParticleEmitterSettings *pfx,
+        UFG::qMatrix44 *curBasisNormalized,
+        unsigned int currentBufferCount,
+        Render::ParticleLighting *particleLighting,
+        float transformScale,
+        Render::EmitterParticleAttribute *attributeBuffer)
 {
-  Render::ParticleEmitterSettings *v7; // rsi
-  UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> *v8; // rbx
   __int64 v9; // r15
-  UFG::qMatrix44 *v10; // rdi
-  void *v11; // r14
+  void *mMainMemoryAddress; // r14
   Render::EmitterParticleAttribute *v12; // rdi
-  float *v13; // rbx
-  unsigned int v14; // eax
+  float *p_fStartTime; // rbx
+  unsigned int mPhysicsType; // eax
   Render::EmitterParticleAttribute *v15; // rbx
   Render::BounceParticleMoverWithLocalToWorldBlend *v16; // rax
   Render::BounceParticleMoverWithLocalToWorldBlend *v17; // rdi
@@ -1049,27 +1062,23 @@ void __fastcall Render::UpdateExistingParticles(UFG::qMemoryStream<Render::Parti
   Render::ParticleRenderUpdateTaskParam *v23; // rdx
   Render::BasicParticleMover *v24; // rax
   Render::EmitterParticleAttribute *v25; // rbx
-  Render::BasicParticleMoverWithLocalToWorldBlend *v26; // rax
-  Render::BasicParticleMoverWithLocalToWorldBlend *v27; // rdi
-  Render::EmitterParticleAttribute *v28; // rsi
-  Render::ParticleRenderUpdateTaskParam *v29; // rdx
-  Render::EmitterParticleAttribute *v30; // rbx
-  Render::TargetParticleMover *v31; // rax
-  Render::TargetParticleMoverWithBlend *v32; // rax
-  UFG::qMatrix44 d; // [rsp+40h] [rbp-C0h]
-  UFG::qColour colour; // [rsp+80h] [rbp-80h]
-  Render::BounceParticleMoverWithLocalToWorldBlend v35; // [rsp+90h] [rbp-70h]
-  UFG::qMatrix44 invOldBasis; // [rsp+170h] [rbp+70h]
-  Render::BounceParticleMoverWithLocalToWorldBlend v37; // [rsp+1B0h] [rbp+B0h]
+  Render::BounceParticleMoverWithLocalToWorldBlend *v26; // rax
+  Render::EmitterParticleAttribute *v27; // rsi
+  Render::ParticleRenderUpdateTaskParam *v28; // rdx
+  Render::EmitterParticleAttribute *v29; // rbx
+  Render::TargetParticleMover *v30; // rax
+  Render::TargetParticleMoverWithBlend *v31; // rax
+  UFG::qMatrix44 d; // [rsp+40h] [rbp-C0h] BYREF
+  UFG::qColour colour; // [rsp+80h] [rbp-80h] BYREF
+  Render::BounceParticleMoverWithLocalToWorldBlend v34; // [rsp+90h] [rbp-70h] BYREF
+  UFG::qMatrix44 invOldBasis; // [rsp+170h] [rbp+70h] BYREF
+  Render::BounceParticleMoverWithLocalToWorldBlend v36; // [rsp+1B0h] [rbp+B0h] BYREF
 
-  v7 = pfx;
-  v8 = taskParams;
   v9 = currentBufferCount;
-  v10 = curBasisNormalized;
   UFG::qInverseAffine(&d, (UFG::qMatrix44 *)taskParams->mMainMemoryAddress);
-  UFG::qInverse(&invOldBasis, (UFG::qMatrix44 *)v8->mMainMemoryAddress + 2);
-  v11 = v8->mMainMemoryAddress;
-  if ( v7->mType == 1 )
+  UFG::qInverse(&invOldBasis, (UFG::qMatrix44 *)taskParams->mMainMemoryAddress + 2);
+  mMainMemoryAddress = taskParams->mMainMemoryAddress;
+  if ( pfx->mType == 1 )
   {
     v12 = &attributeBuffer[(unsigned int)v9];
     if ( attributeBuffer != v12 )
@@ -1077,335 +1086,317 @@ void __fastcall Render::UpdateExistingParticles(UFG::qMemoryStream<Render::Parti
       colour.r = 1.0;
       colour.g = 1.0;
       colour.b = 1.0;
-      v13 = &attributeBuffer->fStartTime;
+      p_fStartTime = &attributeBuffer->fStartTime;
       do
       {
         colour.a = Render::ComputeInterpolatedAlpha(
-                     v7->mSettings.ColorAlphaKeys,
-                     v7->mSettings.AlphaKeyPositions,
-                     (float)(*((float *)v11 + 132) - *v13) / (float)(v13[1] - *v13));
-        Render::EmitterParticleAttribute::SetColour((Render::EmitterParticleAttribute *)(v13 - 15), &colour);
-        v13 += 21;
+                     pfx->mSettings.ColorAlphaKeys,
+                     pfx->mSettings.AlphaKeyPositions,
+                     (float)(*((float *)mMainMemoryAddress + 132) - *p_fStartTime)
+                   / (float)(p_fStartTime[1] - *p_fStartTime));
+        Render::EmitterParticleAttribute::SetColour((Render::EmitterParticleAttribute *)(p_fStartTime - 15), &colour);
+        p_fStartTime += 21;
       }
-      while ( v13 - 15 != (float *)v12 );
+      while ( p_fStartTime - 15 != (float *)v12 );
     }
+    return;
   }
-  else
+  mPhysicsType = pfx->mPhysicsType;
+  if ( mPhysicsType == 1203368722 )
   {
-    v14 = v7->mPhysicsType;
-    switch ( v14 )
+    if ( pfx->mLocalSpaceToWorldSpaceBlend == 0.0 )
     {
-      case 0x47B9F312u:
-        if ( v7->mLocalSpaceToWorldSpaceBlend == 0.0 )
-        {
-          v35.mCurBasisNormalized = d;
-          *(_QWORD *)&v35.mInverseOldBasis.v0.x = v7;
-          *(_QWORD *)&v35.mInverseOldBasis.v0.z = particleLighting;
-          *(_QWORD *)&v35.mInverseOldBasis.v1.x = v11;
-          v35.mInverseOldBasis.v1.z = transformScale;
-          Render::for_each<Render::EmitterParticleAttribute *,Render::BounceParticleMover>(
-            (Render::BounceParticleMover *)&v37,
-            attributeBuffer,
-            &attributeBuffer[v9],
-            (Render::BounceParticleMover *)&v35);
-        }
-        else
-        {
-          Render::BounceParticleMoverWithLocalToWorldBlend::BounceParticleMoverWithLocalToWorldBlend(
-            &v37,
-            (Render::ParticleRenderUpdateTaskParam *)v11,
-            v7,
-            particleLighting,
-            transformScale,
-            v10,
-            &d,
-            &invOldBasis);
-          v15 = attributeBuffer;
-          v17 = v16;
-          v18 = &attributeBuffer[v9];
-          if ( attributeBuffer != v18 )
-          {
-            do
-            {
-              Render::BounceParticleMoverWithLocalToWorldBlend::operator()(v17, v15);
-              ++v15;
-            }
-            while ( v15 != v18 );
-          }
-          Render::BasicParticleMoverWithLocalToWorldBlend::BasicParticleMoverWithLocalToWorldBlend(&v35, v17);
-        }
-        break;
-      case 0x7067EEBCu:
-        Render::FXForceParticleMover::FXForceParticleMover(
-          (Render::FXForceParticleMover *)&v37,
-          (Render::ParticleRenderUpdateTaskParam *)v11,
-          v7,
+      v34.mCurBasisNormalized = d;
+      *(_QWORD *)&v34.mInverseOldBasis.v0.x = pfx;
+      *(_QWORD *)&v34.mInverseOldBasis.v0.z = particleLighting;
+      *(_QWORD *)&v34.mInverseOldBasis.v1.x = mMainMemoryAddress;
+      v34.mInverseOldBasis.v1.z = transformScale;
+      Render::for_each<Render::EmitterParticleAttribute *,Render::BounceParticleMover>(
+        (Render::BounceParticleMover *)&v36,
+        attributeBuffer,
+        &attributeBuffer[v9],
+        (Render::BounceParticleMover *)&v34);
+      return;
+    }
+    Render::BounceParticleMoverWithLocalToWorldBlend::BounceParticleMoverWithLocalToWorldBlend(
+      &v36,
+      (Render::ParticleRenderUpdateTaskParam *)mMainMemoryAddress,
+      pfx,
+      particleLighting,
+      transformScale,
+      curBasisNormalized,
+      &d,
+      &invOldBasis);
+    v15 = attributeBuffer;
+    v17 = v16;
+    v18 = &attributeBuffer[v9];
+    if ( attributeBuffer != v18 )
+    {
+      do
+        Render::BounceParticleMoverWithLocalToWorldBlend::operator()(v17, v15++);
+      while ( v15 != v18 );
+    }
+    goto LABEL_11;
+  }
+  if ( mPhysicsType != 1885859516 )
+  {
+    if ( mPhysicsType == 485300164 || mPhysicsType == -82145175 )
+    {
+      v28 = (Render::ParticleRenderUpdateTaskParam *)taskParams->mMainMemoryAddress;
+      v29 = &attributeBuffer[v9];
+      if ( pfx->mLocalSpaceToWorldSpaceBlend == 0.0 )
+      {
+        Render::TargetParticleMover::TargetParticleMover(
+          (Render::TargetParticleMoverWithBlend *)&v36,
+          v28,
+          pfx,
           particleLighting,
           transformScale,
-          &d,
-          &invOldBasis,
-          *((Render::FXForce **)v11 + 34));
-        v19 = attributeBuffer;
-        v21 = v20;
-        v22 = &attributeBuffer[v9];
-        if ( attributeBuffer != v22 )
-        {
-          do
-          {
-            Render::FXForceParticleMover::operator()(v21, v19);
-            ++v19;
-          }
-          while ( v19 != v22 );
-        }
-        Render::FXForceParticleMover::FXForceParticleMover((Render::FXForceParticleMover *)&v35, v21);
-        break;
-      case 0x1CED17C4u:
-      case 0xFB1A9069:
-        v29 = (Render::ParticleRenderUpdateTaskParam *)v8->mMainMemoryAddress;
-        v30 = &attributeBuffer[v9];
-        if ( v7->mLocalSpaceToWorldSpaceBlend == 0.0 )
-        {
-          Render::TargetParticleMover::TargetParticleMover(
-            (Render::TargetParticleMoverWithBlend *)&v37,
-            v29,
-            v7,
-            particleLighting,
-            transformScale,
-            &d);
-          Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMover>(
-            (Render::TargetParticleMover *)&v35,
-            attributeBuffer,
-            v30,
-            v31);
-        }
-        else
-        {
-          Render::TargetParticleMover::TargetParticleMover(
-            (Render::TargetParticleMoverWithBlend *)&v37,
-            v29,
-            v7,
-            particleLighting,
-            transformScale,
-            &d);
-          Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMoverWithBlend>(
-            (Render::TargetParticleMoverWithBlend *)&v35,
-            attributeBuffer,
-            v30,
-            v32);
-        }
-        break;
-      default:
-        v23 = (Render::ParticleRenderUpdateTaskParam *)v8->mMainMemoryAddress;
-        if ( v7->mLocalSpaceToWorldSpaceBlend == 0.0 )
-        {
-          Render::TargetParticleMover::TargetParticleMover(
-            (Render::TargetParticleMoverWithBlend *)&v37,
-            v23,
-            v7,
-            particleLighting,
-            transformScale,
-            &d);
-          Render::for_each<Render::EmitterParticleAttribute *,Render::BasicParticleMover>(
-            (Render::BasicParticleMover *)&v35,
-            attributeBuffer,
-            &attributeBuffer[v9],
-            v24);
-        }
-        else
-        {
-          Render::BasicParticleMoverWithLocalToWorldBlend::BasicParticleMoverWithLocalToWorldBlend(
-            (Render::BasicParticleMoverWithLocalToWorldBlend *)&v37,
-            v23,
-            v7,
-            particleLighting,
-            transformScale,
-            v10,
-            &d,
-            &invOldBasis);
-          v25 = attributeBuffer;
-          v27 = v26;
-          v28 = &attributeBuffer[v9];
-          if ( attributeBuffer != v28 )
-          {
-            do
-            {
-              Render::BasicParticleMoverWithLocalToWorldBlend::operator()(v27, v25);
-              ++v25;
-            }
-            while ( v25 != v28 );
-          }
-          Render::BasicParticleMoverWithLocalToWorldBlend::BasicParticleMoverWithLocalToWorldBlend(
-            &v35,
-            (Render::BounceParticleMoverWithLocalToWorldBlend *)v27);
-        }
-        break;
+          &d);
+        Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMover>(
+          (Render::TargetParticleMover *)&v34,
+          attributeBuffer,
+          v29,
+          v30);
+      }
+      else
+      {
+        Render::TargetParticleMover::TargetParticleMover(
+          (Render::TargetParticleMoverWithBlend *)&v36,
+          v28,
+          pfx,
+          particleLighting,
+          transformScale,
+          &d);
+        Render::for_each<Render::EmitterParticleAttribute *,Render::TargetParticleMoverWithBlend>(
+          (Render::TargetParticleMoverWithBlend *)&v34,
+          attributeBuffer,
+          v29,
+          v31);
+      }
+      return;
     }
+    v23 = (Render::ParticleRenderUpdateTaskParam *)taskParams->mMainMemoryAddress;
+    if ( pfx->mLocalSpaceToWorldSpaceBlend == 0.0 )
+    {
+      Render::TargetParticleMover::TargetParticleMover(
+        (Render::TargetParticleMoverWithBlend *)&v36,
+        v23,
+        pfx,
+        particleLighting,
+        transformScale,
+        &d);
+      Render::for_each<Render::EmitterParticleAttribute *,Render::BasicParticleMover>(
+        (Render::BasicParticleMover *)&v34,
+        attributeBuffer,
+        &attributeBuffer[v9],
+        v24);
+      return;
+    }
+    Render::BasicParticleMoverWithLocalToWorldBlend::BasicParticleMoverWithLocalToWorldBlend(
+      (Render::BasicParticleMoverWithLocalToWorldBlend *)&v36,
+      v23,
+      pfx,
+      particleLighting,
+      transformScale,
+      curBasisNormalized,
+      &d,
+      &invOldBasis);
+    v25 = attributeBuffer;
+    v17 = v26;
+    v27 = &attributeBuffer[v9];
+    if ( attributeBuffer != v27 )
+    {
+      do
+        Render::BasicParticleMoverWithLocalToWorldBlend::operator()(
+          (Render::BasicParticleMoverWithLocalToWorldBlend *)v17,
+          v25++);
+      while ( v25 != v27 );
+    }
+LABEL_11:
+    Render::BasicParticleMoverWithLocalToWorldBlend::BasicParticleMoverWithLocalToWorldBlend(&v34, v17);
+    return;
   }
+  Render::FXForceParticleMover::FXForceParticleMover(
+    (Render::FXForceParticleMover *)&v36,
+    (Render::ParticleRenderUpdateTaskParam *)mMainMemoryAddress,
+    pfx,
+    particleLighting,
+    transformScale,
+    &d,
+    &invOldBasis,
+    *((Render::FXForce **)mMainMemoryAddress + 34));
+  v19 = attributeBuffer;
+  v21 = v20;
+  v22 = &attributeBuffer[v9];
+  if ( attributeBuffer != v22 )
+  {
+    do
+      Render::FXForceParticleMover::operator()(v21, v19++);
+    while ( v19 != v22 );
+  }
+  Render::FXForceParticleMover::FXForceParticleMover((Render::FXForceParticleMover *)&v34, v21);
 }
 
 // File Line: 589
 // RVA: 0x1DCC80
-void __fastcall Render::ParticleRenderUpdateTask(int worker_id, UFG::qMemoryStreamer *memory_streamer, void *param0, void *param1)
+void __fastcall Render::ParticleRenderUpdateTask(
+        int worker_id,
+        UFG::qMemoryStreamer *memory_streamer,
+        Render::FXManagerLights *param0,
+        _DWORD *param1)
 {
-  _DWORD *v4; // r12
-  void *v5; // rbx
-  UFG::qMemoryStreamer *v6; // rdi
-  Render::ParticleEmitterSettings *v7; // r14
-  __m128 v8; // xmm12
+  Render::ParticleEmitterSettings *culledLightInstances; // r14
+  __m128 numLights; // xmm12
   __m128 v9; // xmm1
   float v10; // xmm8_4
   float v11; // xmm4_4
-  __m128 v12; // xmm5
+  __m128 lightList_high; // xmm5
   float v13; // xmm15_4
-  float v14; // xmm2_4
-  float v15; // xmm0_4
-  __m128 v16; // xmm2
-  float v17; // xmm2_4
-  float v18; // xmm1_4
-  float v19; // xmm0_4
-  __m128 v20; // xmm2
-  float v21; // xmm2_4
-  float v22; // xmm1_4
-  __m128 v23; // xmm2
-  float v24; // xmm3_4
-  float v25; // xmm1_4
-  float v26; // xmm0_4
-  unsigned int v27; // er9
-  void *v28; // rax
-  unsigned int v29; // er15
-  unsigned int v30; // ecx
+  float v14; // xmm0_4
+  __m128 v15; // xmm2
+  float v16; // xmm2_4
+  float v17; // xmm1_4
+  float v18; // xmm0_4
+  __m128 v19; // xmm2
+  float v20; // xmm2_4
+  float v21; // xmm1_4
+  __m128 culledLightInstances_high; // xmm2
+  float v23; // xmm3_4
+  float v24; // xmm1_4
+  float v25; // xmm0_4
+  unsigned int v26; // r9d
+  Render::LightInstance *v27; // rax
+  unsigned int v28; // r15d
   unsigned __int64 main_num_bytes; // rsi
-  void *v32; // rax
-  float v33; // [rsp+50h] [rbp-B0h]
-  UFG::qMatrix44 curBasisNormalized; // [rsp+60h] [rbp-A0h]
-  UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> taskParams; // [rsp+A0h] [rbp-60h]
-  UFG::qVector3 effectPosition; // [rsp+B8h] [rbp-48h]
-  __int64 v37; // [rsp+D0h] [rbp-30h]
-  char ptr; // [rsp+E0h] [rbp-20h]
-  int v39; // [rsp+720h] [rbp+620h]
+  Render::Light **lightList; // rax
+  float v31; // [rsp+50h] [rbp-B0h]
+  UFG::qMatrix44 curBasisNormalized; // [rsp+60h] [rbp-A0h] BYREF
+  UFG::qMemoryStream<Render::ParticleRenderUpdateTaskParam,624> taskParams; // [rsp+A0h] [rbp-60h] BYREF
+  UFG::qVector3 effectPosition; // [rsp+B8h] [rbp-48h] BYREF
+  __int64 v35; // [rsp+D0h] [rbp-30h]
+  Render::ParticleLighting ptr; // [rsp+E0h] [rbp-20h] BYREF
   char *stream_name; // [rsp+730h] [rbp+630h]
-  void *main_mem; // [rsp+738h] [rbp+638h]
-  int v42; // [rsp+740h] [rbp+640h]
-  Render::EmitterParticleAttribute *v43; // [rsp+748h] [rbp+648h]
-  char v44; // [rsp+833h] [rbp+733h]
-  unsigned int currentBufferCount; // [rsp+1350h] [rbp+1250h]
-  float v46; // [rsp+1358h] [rbp+1258h]
+  Render::LightInstance *main_mem; // [rsp+738h] [rbp+638h]
+  int v39; // [rsp+740h] [rbp+640h]
+  Render::EmitterParticleAttribute *v40; // [rsp+748h] [rbp+648h]
+  char v41[2701]; // [rsp+833h] [rbp+733h] BYREF
+  float v42; // [rsp+1358h] [rbp+1258h]
 
-  v37 = -2i64;
-  v4 = param1;
-  v5 = param0;
-  v6 = memory_streamer;
+  v35 = -2i64;
   taskParams.mName = "<unassigned>";
   taskParams.mState = 0;
   taskParams.mMainMemoryAddress = param0;
-  v7 = (Render::ParticleEmitterSettings *)*((_QWORD *)param0 + 33);
-  v8 = (__m128)*((unsigned int *)param0 + 16);
-  v9 = v8;
-  v9.m128_f32[0] = (float)((float)(v8.m128_f32[0] * v8.m128_f32[0])
-                         + (float)(*((float *)param0 + 17) * *((float *)param0 + 17)))
-                 + (float)(*((float *)param0 + 18) * *((float *)param0 + 18));
-  v10 = (float)((float)(COERCE_FLOAT(_mm_sqrt_ps(v9)) - 1.0) * v7->mUseTransformScaling) + 1.0;
-  v11 = *((float *)param0 + 20);
-  v12 = (__m128)*((unsigned int *)param0 + 21);
-  v13 = *((float *)param0 + 28);
-  v46 = *((float *)param0 + 29);
-  v14 = *((float *)param0 + 30);
-  v33 = v14;
-  v15 = *((float *)param0 + 31);
+  culledLightInstances = (Render::ParticleEmitterSettings *)param0[11].culledLightInstances;
+  numLights = (__m128)param0[2].numLights;
+  v9 = numLights;
+  v9.m128_f32[0] = (float)((float)(numLights.m128_f32[0] * numLights.m128_f32[0])
+                         + (float)(*((float *)&param0[2].numLights + 1) * *((float *)&param0[2].numLights + 1)))
+                 + (float)(*(float *)&param0[3].culledLightInstances * *(float *)&param0[3].culledLightInstances);
+  v10 = (float)((float)(_mm_sqrt_ps(v9).m128_f32[0] - 1.0) * culledLightInstances->mUseTransformScaling) + 1.0;
+  v11 = *(float *)&param0[3].lightList;
+  lightList_high = (__m128)HIDWORD(param0[3].lightList);
+  v13 = *(float *)&param0[4].numLights;
+  v42 = *((float *)&param0[4].numLights + 1);
+  v31 = *(float *)&param0[5].culledLightInstances;
+  v14 = *((float *)&param0[5].culledLightInstances + 1);
   curBasisNormalized.v3.x = v13;
-  curBasisNormalized.v3.y = v46;
-  curBasisNormalized.v3.z = v14;
-  curBasisNormalized.v3.w = v15;
-  v16 = (__m128)*((unsigned int *)param0 + 17);
-  v16.m128_f32[0] = (float)((float)(v16.m128_f32[0] * v16.m128_f32[0]) + (float)(v8.m128_f32[0] * v8.m128_f32[0]))
-                  + (float)(*((float *)param0 + 18) * *((float *)param0 + 18));
-  if ( v16.m128_f32[0] == 0.0 )
-    v17 = 0.0;
+  curBasisNormalized.v3.y = v42;
+  curBasisNormalized.v3.z = v31;
+  curBasisNormalized.v3.w = v14;
+  v15 = (__m128)*(&param0[2].numLights + 1);
+  v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] * v15.m128_f32[0])
+                          + (float)(numLights.m128_f32[0] * numLights.m128_f32[0]))
+                  + (float)(*(float *)&param0[3].culledLightInstances * *(float *)&param0[3].culledLightInstances);
+  if ( v15.m128_f32[0] == 0.0 )
+    v16 = 0.0;
   else
-    v17 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v16));
-  v18 = v17 * *((float *)param0 + 18);
-  v19 = v17 * *((float *)param0 + 17);
-  curBasisNormalized.v0.x = v17 * v8.m128_f32[0];
-  curBasisNormalized.v0.y = v19;
-  curBasisNormalized.v0.z = v18;
+    v16 = 1.0 / _mm_sqrt_ps(v15).m128_f32[0];
+  v17 = v16 * *(float *)&param0[3].culledLightInstances;
+  v18 = v16 * *((float *)&param0[2].numLights + 1);
+  curBasisNormalized.v0.x = v16 * numLights.m128_f32[0];
+  curBasisNormalized.v0.y = v18;
+  curBasisNormalized.v0.z = v17;
   curBasisNormalized.v0.w = 0.0;
-  v20 = v12;
-  v20.m128_f32[0] = (float)((float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v11 * v11))
-                  + (float)(*((float *)param0 + 22) * *((float *)param0 + 22));
-  if ( v20.m128_f32[0] == 0.0 )
-    v21 = 0.0;
+  v19 = lightList_high;
+  v19.m128_f32[0] = (float)((float)(lightList_high.m128_f32[0] * lightList_high.m128_f32[0]) + (float)(v11 * v11))
+                  + (float)(*(float *)&param0[3].numLights * *(float *)&param0[3].numLights);
+  if ( v19.m128_f32[0] == 0.0 )
+    v20 = 0.0;
   else
-    v21 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v20));
-  v22 = v21 * *((float *)param0 + 22);
-  curBasisNormalized.v1.x = v21 * v11;
-  curBasisNormalized.v1.y = v21 * v12.m128_f32[0];
-  curBasisNormalized.v1.z = v22;
+    v20 = 1.0 / _mm_sqrt_ps(v19).m128_f32[0];
+  v21 = v20 * *(float *)&param0[3].numLights;
+  curBasisNormalized.v1.x = v20 * v11;
+  curBasisNormalized.v1.y = v20 * lightList_high.m128_f32[0];
+  curBasisNormalized.v1.z = v21;
   curBasisNormalized.v1.w = 0.0;
-  v23 = (__m128)*((unsigned int *)param0 + 25);
-  v23.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0])
-                          + (float)(*((float *)param0 + 24) * *((float *)param0 + 24)))
-                  + (float)(*((float *)param0 + 26) * *((float *)param0 + 26));
-  if ( v23.m128_f32[0] == 0.0 )
-    v24 = 0.0;
+  culledLightInstances_high = (__m128)HIDWORD(param0[4].culledLightInstances);
+  culledLightInstances_high.m128_f32[0] = (float)((float)(culledLightInstances_high.m128_f32[0]
+                                                        * culledLightInstances_high.m128_f32[0])
+                                                + (float)(*(float *)&param0[4].culledLightInstances
+                                                        * *(float *)&param0[4].culledLightInstances))
+                                        + (float)(*(float *)&param0[4].lightList * *(float *)&param0[4].lightList);
+  if ( culledLightInstances_high.m128_f32[0] == 0.0 )
+    v23 = 0.0;
   else
-    v24 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v23));
-  v25 = v24 * *((float *)param0 + 26);
-  v26 = v24 * *((float *)param0 + 25);
-  curBasisNormalized.v2.x = v24 * *((float *)param0 + 24);
-  curBasisNormalized.v2.y = v26;
-  curBasisNormalized.v2.z = v25;
+    v23 = 1.0 / _mm_sqrt_ps(culledLightInstances_high).m128_f32[0];
+  v24 = v23 * *(float *)&param0[4].lightList;
+  v25 = v23 * *((float *)&param0[4].culledLightInstances + 1);
+  curBasisNormalized.v2.x = v23 * *(float *)&param0[4].culledLightInstances;
+  curBasisNormalized.v2.y = v25;
+  curBasisNormalized.v2.z = v24;
   curBasisNormalized.v2.w = 0.0;
-  v27 = 84 * *((_DWORD *)param0 + 137);
-  v28 = (void *)*((_QWORD *)param0 + 30);
+  v26 = 84 * *(&param0[22].numLights + 1);
+  v27 = param0[10].culledLightInstances;
   stream_name = "Input EmitterParticleAttribute";
-  main_mem = v28;
-  v42 = 0;
-  v43 = (Render::EmitterParticleAttribute *)((unsigned __int64)&v44 & 0xFFFFFFFFFFFFFF80ui64);
-  main_mem = (void *)*((_QWORD *)param0 + 30);
+  main_mem = v27;
+  v39 = 0;
+  v40 = (Render::EmitterParticleAttribute *)((unsigned __int64)v41 & 0xFFFFFFFFFFFFFF80ui64);
+  main_mem = param0[10].culledLightInstances;
   UFG::qMemoryStreamer::BeginRawReadPlat(
     memory_streamer,
     "Input EmitterParticleAttribute",
-    (void *)((unsigned __int64)&v44 & 0xFFFFFFFFFFFFFF80ui64),
+    (void *)((unsigned __int64)v41 & 0xFFFFFFFFFFFFFF80ui64),
     0xA80ui64,
     main_mem,
-    v27);
-  *v4 = *((_DWORD *)v5 + 143);
-  v29 = *((_DWORD *)v5 + 136);
-  currentBufferCount = *((_DWORD *)v5 + 136);
+    v26);
+  *param1 = *(&param0[23].numLights + 1);
+  v28 = param0[22].numLights;
   `eh vector constructor iterator(
     &ptr,
     0x18ui64,
     50,
     (void (__fastcall *)(void *))UFG::qMemoryStream<UFG::AIInterestComponent,432>::qMemoryStream<UFG::AIInterestComponent,432>);
-  v39 = 0;
-  if ( v7->mSettings.LightInfo[1] > 0.0 )
+  ptr.mNumLights = 0;
+  if ( culledLightInstances->mSettings.LightInfo[1] > 0.0 )
   {
     effectPosition.x = v13;
-    effectPosition.y = v46;
-    effectPosition.z = v33;
-    Render::ParticleLighting::ReadLightsFromMainMemory(
-      (Render::ParticleLighting *)&ptr,
-      &effectPosition,
-      (Render::FXManagerLights *)v5 + 25,
-      v6);
+    effectPosition.y = v42;
+    effectPosition.z = v31;
+    Render::ParticleLighting::ReadLightsFromMainMemory(&ptr, &effectPosition, param0 + 25, memory_streamer);
   }
   Render::UpdateExistingParticles(
     &taskParams,
-    v7,
+    culledLightInstances,
     &curBasisNormalized,
-    v29,
-    (Render::ParticleLighting *)&ptr,
+    v28,
+    &ptr,
     v10,
-    (Render::EmitterParticleAttribute *)((unsigned __int64)&v44 & 0xFFFFFFFFFFFFFF80ui64),
-    v6);
-  Render::GenerateNewParticles(&taskParams, v7, (Render::ParticleLighting *)&ptr, &curBasisNormalized);
-  v30 = currentBufferCount;
-  v4[1] = currentBufferCount;
-  main_num_bytes = 84 * v30;
-  UFG::qMemoryStreamer::BeginRawWritePlat(v6, stream_name, v43, 0xA80ui64, *((void **)v5 + 30), main_num_bytes);
-  v32 = (void *)*((_QWORD *)v5 + 31);
-  if ( v32 )
-    UFG::qMemoryStreamer::BeginRawWritePlat(v6, stream_name, v43, 0xA80ui64, v32, main_num_bytes);
+    (Render::EmitterParticleAttribute *)((unsigned __int64)v41 & 0xFFFFFFFFFFFFFF80ui64),
+    memory_streamer);
+  Render::GenerateNewParticles(&taskParams, culledLightInstances, &ptr, &curBasisNormalized);
+  param1[1] = v28;
+  main_num_bytes = 84 * v28;
+  UFG::qMemoryStreamer::BeginRawWritePlat(
+    memory_streamer,
+    stream_name,
+    v40,
+    0xA80ui64,
+    param0[10].culledLightInstances,
+    main_num_bytes);
+  lightList = param0[10].lightList;
+  if ( lightList )
+    UFG::qMemoryStreamer::BeginRawWritePlat(memory_streamer, stream_name, v40, 0xA80ui64, lightList, main_num_bytes);
   `eh vector destructor iterator(&ptr, 0x18ui64, 50, (void (__fastcall *)(void *))_);
 }
 
